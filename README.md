@@ -22,7 +22,10 @@ Features
   - Analysis of 3D atomistic model: neutron and x-rays diffraction, rings statistics, chain statistics, bond order, MSD ...
   - Visualization: measures, coordination polyhedras, advanced coloring, advanced design
   - Edition: molecular library, crystal builder, cell edition, surface creation and passivation ...
-  - MD input preparation: Classical MD: DLPOLY and LAMMPS, ab-initio MD: CPMD and CP2K, QM-MM MD: CPMD and CP2K
+  - MD input preparation: 
+	- Classical MD: [DLPOLY][dlpoly] and [LAMMPS][lammps]
+	- ab-initio MD: [CPMD][cpmd] and [CP2K][cp2k]
+	- QM-MM MD: [CPMD][cpmd] and [CP2K][cp2k]
 
 ## Who's behind ***Atomes***
 
