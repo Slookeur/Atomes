@@ -9,9 +9,9 @@ It oﬀers a workspace that allows to have many projects opened simultaneously.
 The different projects in the workspace can exchange data: analysis results, atomic coordinates ...
 Atomes also provides an advanced input preparation system for further calculations using well known molecular dynamics codes:
 
-- Classical MD : DLPOLY and LAMMPS
-- ab-initio MD : CPMD and CP2K
-- QM-MM MD : CPMD and CP2K
+- Classical MD : [DLPOLY][dlpoly] and [LAMMPS][lammps]
+- ab-initio MD : [CPMD][cpmd] and [CP2K][cp2k]
+- QM-MM MD : [CPMD][cpmd] and [CP2K][cp2k]
 
 To prepare the input ﬁlles for these calculations is likely to be the key, and most complicated step towards MD simulations. Atomes offers a user-friendly assistant to help and guide the user step by step to achieve this crucial step.
 Features
@@ -55,3 +55,7 @@ Tutorial are regrouped and hosted on [GitHub][github] here: [Atomes tutorials][a
 [atomes]:https://atomes.ipcms.fr/
 [atomes-doc]:https://slookeur.github.io/Atomes-doc/
 [atomes-tuto]:https://slookeur.github.io/Atomes-tuto/
+[dlpoly]:https://www.scd.stfc.ac.uk/Pages/DL_POLY.aspx
+[lammps]:https://lammps.sandia.gov/
+[cpmd]:http://www.cpmd.org
+[cp2k]:http://cp2k.berlios.de
