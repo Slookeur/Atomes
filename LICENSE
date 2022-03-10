@@ -629,8 +629,8 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    <Atomes: physico-chemical analysis, 3D visualization and edition,
-     and post-processing of atomistic models.>
+    <Atomes: physico-chemical analysis, 3D visualization, 
+     3D edition and post-processing of atomistic models.>
     Copyright (C) <2021>  <Sébastien Le Roux>
 
     Atomes is free software: you can redistribute it and/or modify
