@@ -53,8 +53,12 @@ If not, see <https://www.gnu.org/licenses/> */
 #  define max(a,b) (a>=b?a:b)
 #  define min(a,b) (a<=b?a:b)
 #  include <epoxy/gl.h>
-#  include <GL/glu.h>
-#  include <epoxy/glx.h>
+#  ifdef __APPLE__
+#    include <OpenGL/glu.h>
+#  else
+#    include <GL/glu.h>
+#    include <epoxy/glx.h>
+#  endif
 #endif
 
 #include "math_3d.h"
