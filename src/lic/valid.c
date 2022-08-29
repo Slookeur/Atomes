@@ -31,21 +31,12 @@ If not, see <https://www.gnu.org/licenses/> */
 #  include <netinet/in.h>
 #  include <arpa/inet.h>
 #  include <pwd.h>
-#endif
 
-#ifdef OSX
-#  include <sys/ioctl.h>
-#  include <sys/types.h>
-#  include <sys/socket.h>
-#  include <ifaddrs.h>
-#  include <netinet/in.h>
-#  include <arpa/inet.h>
-#  include <pwd.h>
-#endif
+// Linux only
+#  ifndef __APPLE__
+#    include <linux/if.h>
+#  endif
 
-// Linux
-#ifdef LINUX
-#  include <linux/if.h>
 #endif
 
 #ifdef AF_LINK
@@ -137,6 +128,8 @@ int mac_addr_sys ()
 
 #ifdef LINUX
 
+#  ifndef __APPLE__
+
 /* implementation for Linux using ioctl   */
 /* Only allows acces to active interfaces */
 /*
@@ -217,9 +210,7 @@ int mac_addr_sys ()
   }
   freeifaddrs (ifad);
 
-#endif
-
-#ifdef OSX
+#  else
 
 /* implementation for MacOSX using AF_LINK */
 /* Allows acces to all interfaces          */
@@ -256,6 +247,8 @@ int mac_addr_sys ()
     ifad_next = ifad_next -> ifa_next;
   }
   freeifaddrs (ifad);
+
+#  endif
 
 #endif
 
