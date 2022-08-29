@@ -15,7 +15,7 @@ If not, see <https://www.gnu.org/licenses/> */
 #include <math.h>
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
-#include <cairo/cairo.h>
+#include <cairo.h>
 
 #include "global.h"
 #include "callbacks.h"

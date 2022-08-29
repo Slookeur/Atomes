@@ -16,8 +16,8 @@ If not, see <https://www.gnu.org/licenses/> */
 #endif
 
 #include <gtk/gtk.h>
-#include <cairo/cairo.h>
-#include <cairo/cairo-pdf.h>
+#include <cairo.h>
+#include <cairo-pdf.h>
 #include <cairo-svg.h>
 #include <string.h>
 #include <stdlib.h>

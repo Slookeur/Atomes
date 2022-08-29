@@ -11,7 +11,7 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
-#include <cairo/cairo.h>
+#include <cairo.h>
 #include <math.h>
 
 #include "global.h"
