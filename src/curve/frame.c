@@ -13,7 +13,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include <stdlib.h>
 #include <gdk/gdk.h>
-#include <cairo/cairo.h>
+#include <cairo.h>
 
 #include "global.h"
 #include "curve.h"

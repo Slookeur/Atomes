@@ -13,7 +13,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include <string.h>
 #include <math.h>
-#include <cairo/cairo.h>
+#include <cairo.h>
 #include <pango/pangocairo.h>
 
 #include "global.h"

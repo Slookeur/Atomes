@@ -12,9 +12,9 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 #include <gtk/gtk.h>
-#include <cairo/cairo.h>
-#include <cairo/cairo-pdf.h>
-#include <cairo/cairo-ps.h>
+#include <cairo.h>
+#include <cairo-pdf.h>
+#include <cairo-ps.h>
 #include <cairo-svg.h>
 
 #include "global.h"

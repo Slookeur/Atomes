@@ -12,7 +12,7 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 #include <gtk/gtk.h>
-#include <cairo/cairo.h>
+#include <cairo.h>
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>

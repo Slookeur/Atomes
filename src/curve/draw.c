@@ -15,7 +15,7 @@ If not, see <https://www.gnu.org/licenses/> */
 #include <gdk/gdk.h>
 #include <stdlib.h>
 #include <math.h>
-#include <cairo/cairo.h>
+#include <cairo.h>
 
 #include "global.h"
 #include "curve.h"
