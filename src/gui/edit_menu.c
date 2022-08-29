@@ -1,0 +1,674 @@
+/* This file is part of Atomes.
+
+Atomes is free software: you can redistribute it and/or modify it under the terms
+of the GNU Affero General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version.
+
+Atomes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License along with Atomes.
+If not, see <https://www.gnu.org/licenses/> */
+
+#include "global.h"
+#include "bind.h"
+#include "callbacks.h"
+#include "interface.h"
+#include "project.h"
+#include "workspace.h"
+#include "glwindow.h"
+
+char * box_p[2]={"<b>Edges [&#xC5;]</b>", "<b>Angles [&#xB0;]</b>"};
+char * box_prop[2][3]={{"<b><i>a</i></b>", "<b><i>b</i></b>", "<b><i>c</i></b>"},
+                       {"alpha - &#x3B1;", "beta - &#x3B2;", "gamma - &#x263;"}};
+char * chem_lab[CHEM_PARAMS+2]={"Atom:", "Element:",
+                                "Atomic number", "Atomic mass:", "Radius",
+                                "Neutrons scattering length:", "X-rays scattering length:"};
+char * chem_rad[4]={"Covalent", "Ionic", "van Der Waals", "In crystal"};
+char * chem_unit[4]={" g/mol", " &#xC5;", " fm", " e.u"};
+char * edit_prop[4]={"Chemistry and physics", "Box and periodicity", "Bond cutoffs", "Lattice vectors"};
+char * vect_name[3]={"<i>a</i>", "<i>b</i>", "<i>c</i>"};
+char * vect_comp[3]={"x", "y", "z"};
+GtkWidget * frac_box;
+GtkWidget * spec_box;
+GtkWidget * rad_box;
+GtkWidget * chem_spec[2];
+GtkWidget * chem_entry[CHEM_PARAMS-1];
+GtkWidget * vect_entry[9];
+double * tmp_chem[CHEM_PARAMS];
+double tmp_box[2][3];
+double tmp_vect[3][3];
+int tmp_pbc, tmp_frac;
+int tmp_xcor, tmp_lat;
+dint t_box[9];
+extern double * tmpcut;
+extern void update_cutoffs (struct project * this_proj);
+extern void cut_box (struct project * this_proj, GtkWidget * vbox);
+
+G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)
+{
+  dint * id = (dint *)data;
+  const gchar * m = entry_get_text (entry);
+  double v = atof(m);
+  if (v >= 0.0)
+  {
+    tmp_box[id -> a][id -> b] = v;
+  }
+  update_entry_double (entry, v);
+}
+
+#ifdef GTK4
+G_MODULE_EXPORT void toggle_pbc (GtkCheckButton * Button, gpointer data)
+#else
+G_MODULE_EXPORT void toggle_pbc (GtkToggleButton * Button, gpointer data)
+#endif
+{
+#ifdef GTK4
+  tmp_pbc = gtk_check_button_get_active (Button);
+#else
+  tmp_pbc = gtk_toggle_button_get_active (Button);
+#endif
+}
+
+#ifdef GTK4
+G_MODULE_EXPORT void toggle_frac (GtkCheckButton * Button, gpointer data)
+#else
+G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data)
+#endif
+{
+#ifdef GTK4
+  tmp_frac = gtk_check_button_get_active (Button);
+#else
+  tmp_frac = gtk_toggle_button_get_active (Button);
+#endif
+  /*if (gtk_toggle_button_get_active (Button))
+  {
+    widget_set_sensitive (frac_box, 1);
+    gtk_combo_box_set_active (GTK_COMBO_BOX(frac_box), 0);
+  }
+  else
+  {
+    gtk_combo_box_set_active (GTK_COMBO_BOX(frac_box), -1);
+    widget_set_sensitive (frac_box, 0);
+  }*/
+}
+
+/*G_MODULE_EXPORT void on_frac_changed (GtkWidget * widg, gpointer data)
+{
+  tmp_frac = gtk_combo_box_get_active (GTK_COMBO_BOX(widg)) + 1;
+}*/
+
+G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data)
+{
+  const gchar * m = entry_get_text (entry);
+  double v = atof(m);
+  update_entry_double (entry, v);
+}
+
+G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer data)
+{
+  if (response_id == GTK_RESPONSE_APPLY)
+  {
+    int i, j, k;
+    const gchar * m;
+    double v;
+    i = 0;
+    for (j=0; j<3; j++)
+    {
+      for (k=0; k<3; k++)
+      {
+        m = entry_get_text (GTK_ENTRY(vect_entry[i]));
+        v = atof(m);
+        tmp_vect[j][k] = v;
+        i ++;
+      }
+    }
+  }
+  destroy_this_dialog (win);
+}
+
+G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data)
+{
+  int i, j, k;
+  GtkWidget * win = dialog_cancel_apply (edit_prop[3], MainWindow, FALSE);
+  GtkWidget * table = gtk_grid_new ();
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, dialog_get_content_area (win), table, FALSE, FALSE, 5);
+  k = 0;
+  for (i=0; i<4; i++)
+  {
+    if (i > 0)
+    {
+      gtk_grid_attach (GTK_GRID (table), markup_label(vect_name[i-1], 30, -1, 0.5, 0.5), 0, i, 1, 1);
+    }
+    for (j=0; j<4; j++)
+    {
+      if (j > 0)
+      {
+        if (i == 0)
+        {
+          gtk_grid_attach (GTK_GRID (table), markup_label(vect_comp[j-1], -1, 30, 0.5, 0.5), j, 0, 1, 1);
+        }
+        else
+        {
+          vect_entry[k] = create_entry (G_CALLBACK(update_vect), 100, 15, FALSE, NULL);
+          update_entry_double (GTK_ENTRY(vect_entry[k]), tmp_vect[i-1][j-1]);
+          gtk_grid_attach (GTK_GRID (table), vect_entry[k], j, i, 1, 1);
+          k ++;
+        }
+      }
+    }
+  }
+  run_this_gtk_dialog (win, G_CALLBACK(run_vectors), NULL);
+}
+
+void edit_box (GtkWidget * vbox)
+{
+  int i, j, k;
+  GtkWidget * entry;
+  GtkWidget * hbox;
+  tmp_pbc = active_cell -> pbc;
+  tmp_frac = active_cell -> frac;
+
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox,
+                       check_button ("Apply Periodic Boundary Conditions",
+                                     -1, 40, tmp_pbc, G_CALLBACK(toggle_pbc), NULL), FALSE, FALSE, 0);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox,
+                       check_button ("Fractional coordinates",
+                                     -1, 40, tmp_frac, G_CALLBACK(toggle_frac), NULL), FALSE, FALSE, 0);
+  GtkWidget * table = gtk_grid_new ();
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, table, FALSE, FALSE, 0);
+  k = 0;
+  for (i=0; i<3; i++)
+  {
+    for (j=0; j<3; j++, k++)
+    {
+      if (i < 2) tmp_box[i][j] = active_box -> param[i][j];
+      tmp_vect[i][j] = active_box -> vect[i][j];
+      t_box[k].a = i;
+      t_box[k].b = j;
+    }
+  }
+  tmp_lat = active_cell -> ltype;
+  k = 0;
+  for (i=0; i<2; i++)
+  {
+    gtk_grid_attach (GTK_GRID (table), markup_label(box_p[i], -1, 50, 0.5, 0.5), 1, i+2*i, 1, 1);
+    for (j=0; j<3; j++, k++)
+    {
+      gtk_grid_attach (GTK_GRID (table), markup_label(box_prop[i][j], -1, -1, 0.5, 0.5), j, i+2*i+1, 1, 1);
+      entry = create_entry (G_CALLBACK(update_box), 100, 15, FALSE, (gpointer)& t_box[k]);
+      update_entry_double (GTK_ENTRY(entry), tmp_box[i][j]);
+      gtk_grid_attach (GTK_GRID (table), entry, j, i+2*i+2, 1, 1);
+    }
+  }
+  GtkWidget * but = create_button ("Lattice Vectors", IMG_NONE, NULL, -1, -1, GTK_RELIEF_NORMAL, G_CALLBACK(on_vectors_clicked), NULL);
+  hbox = create_hbox (0);
+  add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, but, FALSE, FALSE, 145);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, FALSE, FALSE, 15);
+}
+
+G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data)
+{
+  int i = gtk_combo_box_get_active (GTK_COMBO_BOX(spec_box));
+  int j = GPOINTER_TO_INT(data);
+  const gchar * m = entry_get_text (entry);
+  double v = atof(m);
+  tmp_chem[j][i] = v;
+  update_entry_double (entry, v);
+}
+
+G_MODULE_EXPORT void on_spec_changed (GtkWidget * widg, gpointer data)
+{
+  int i, j;
+  i = gtk_combo_box_get_active (GTK_COMBO_BOX(widg));
+  gtk_label_set_text (GTK_LABEL(chem_spec[0]), active_chem -> element[i]);
+  gtk_label_set_text (GTK_LABEL(chem_spec[1]), g_strdup_printf("%d", (int)active_chem -> chem_prop[CHEM_Z][i]));
+  for (j=0; j<CHEM_PARAMS-1; j++)
+  {
+    update_entry_double (GTK_ENTRY(chem_entry[j]), tmp_chem[j][i]);
+  }
+  gtk_combo_box_set_active (GTK_COMBO_BOX(rad_box), -1);
+}
+
+G_MODULE_EXPORT void on_rad_changed (GtkWidget * widg, gpointer data)
+{
+  int i, j, k;
+  i = gtk_combo_box_get_active (GTK_COMBO_BOX(widg));
+  if (i != -1)
+  {
+    j = gtk_combo_box_get_active (GTK_COMBO_BOX(spec_box));
+    k = (int)active_chem -> chem_prop[CHEM_Z][j];
+    tmp_chem[1][j] = set_radius_ (& k, & i);
+    update_entry_double (GTK_ENTRY(chem_entry[1]), tmp_chem[1][j]);
+  }
+}
+
+#ifdef GTK4
+G_MODULE_EXPORT void toggle_xcor (GtkCheckButton * but, gpointer data)
+#else
+G_MODULE_EXPORT void toggle_xcor (GtkToggleButton * but, gpointer data)
+#endif
+{
+#ifdef GTK4
+  tmp_xcor = gtk_check_button_get_active (but);
+#else
+  tmp_xcor = gtk_toggle_button_get_active (but);
+#endif
+  widget_set_sensitive (chem_entry[CHEM_PARAMS-2], ! tmp_xcor);
+}
+
+void edit_chem (GtkWidget * vbox)
+{
+  int i, j;
+  spec_box = create_combo();
+  widget_set_sensitive(spec_box, 1);
+  g_signal_connect(G_OBJECT(spec_box), "changed", G_CALLBACK(on_spec_changed), NULL);
+  GtkWidget * table = gtk_grid_new ();
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, table, FALSE, FALSE, 5);
+  GtkWidget * chem_fixed = gtk_fixed_new ();
+  gtk_grid_attach (GTK_GRID (table), chem_fixed, 1, 0, 1, 1);
+  for (i=0; i<CHEM_PARAMS+2; i++)
+  {
+    j = (i == 0) ? i : i + 2;
+    gtk_grid_attach (GTK_GRID (table), markup_label(chem_lab[i], 180, 30, 0.0, 0.5), 0, j, 1, 1);
+    if (i == 0)
+    {
+      for (j=0; j<active_project -> nspec; j++)
+      {
+        combo_text_append (spec_box, active_chem -> label[j]);
+      }
+    }
+    else
+    {
+      if (i > 0 && i < 3)
+      {
+        chem_spec[i-1] = markup_label ("", -1, -1, 0.5, 0.5);
+        gtk_grid_attach (GTK_GRID (table), chem_spec[i-1], 1, i+2, 1, 1);
+      }
+      else
+      {
+        if (i==5)
+        {
+          rad_box = create_combo ();
+          gtk_widget_set_size_request (rad_box, -1, 30);
+          for (j=0; j<4; j++)
+          {
+            combo_text_append (rad_box, chem_rad[j]);
+          }
+          gtk_combo_box_set_active (GTK_COMBO_BOX(rad_box), -1);
+          g_signal_connect(G_OBJECT(rad_box), "changed", G_CALLBACK(on_rad_changed), NULL);
+          gtk_grid_attach (GTK_GRID (table), rad_box, 1, i+1, 1, 1);
+        }
+        tmp_chem[i-3] = g_malloc (active_project -> nspec*sizeof*tmp_chem[i-3]);
+        for (j=0; j<active_project -> nspec; j++)
+        {
+          tmp_chem[i-3][j] =  active_chem -> chem_prop[i-2][j];
+        }
+        chem_entry[i-3] = create_entry (G_CALLBACK(update_chemistry), 120, 15, FALSE, (gpointer)GINT_TO_POINTER(i-3));
+        update_entry_double (GTK_ENTRY(chem_entry[i-3]), tmp_chem[i-3][0]);
+        gtk_grid_attach (GTK_GRID (table), chem_entry[i-3], 2, i+2, 1, 1);
+        if (i==CHEM_PARAMS+1)
+        {
+          tmp_xcor = active_project -> xcor;
+          GtkWidget * chem_xcor = check_button ("= f(Q)", -1, 30, tmp_xcor, G_CALLBACK(toggle_xcor), NULL);
+          widget_set_sensitive (chem_entry[i-3], ! tmp_xcor);
+          gtk_grid_attach (GTK_GRID (table), chem_xcor, 1, i+2, 1, 1);
+        }
+        gtk_grid_attach (GTK_GRID (table), markup_label(chem_unit[i-3], -1, -1, 0.0, 0.5), 3, i+2, 1, 1);
+      }
+    }
+  }
+  gtk_combo_box_set_active (GTK_COMBO_BOX(spec_box), 0);
+  gtk_fixed_put (GTK_FIXED (chem_fixed), spec_box, -1, -1);
+}
+
+gboolean test_vol (double box[2][3], double vect[3][3])
+{
+  int i, j;
+  gboolean val = TRUE;
+  tmp_lat = 0;
+  for (i=0; i<2; i++)
+  {
+    for (j=0; j<3; j++)
+    {
+      if (box[i][j] == 0.0) val = FALSE;
+    }
+  }
+  if (val) tmp_lat = 1;
+  val = TRUE;
+  for (i=0; i<3; i++)
+  {
+    if (vect[i][0] == 0.0 && vect[i][1] == 0.0 && vect[i][2] == 0.0)
+    {
+      val = FALSE;
+    }
+  }
+  if (val) tmp_lat = 2;
+  return (tmp_lat) ? TRUE : FALSE;
+}
+
+gboolean test_pbc (int pbc, int frac, double box[2][3], double vect[3][3])
+{
+  if (! pbc && ! frac)
+  {
+    if (! test_vol (box, vect)) tmp_lat = active_cell -> ltype;
+    return TRUE;
+  }
+  else
+  {
+    return test_vol (box, vect);
+  }
+}
+
+void init_box_calc ()
+{
+  int i;
+  active_cell -> has_a_box = test_vol (active_box -> param, active_box -> vect);
+  if (! active_cell -> has_a_box)
+  {
+    for (i=0; i<4; i++) active_project -> runok[i] = FALSE;
+  }
+  else
+  {
+    for (i=0; i<3; i=i+2)
+    {
+      active_project -> runok[i] = TRUE;
+      active_project -> runok[i+1] = active_project -> visok[i];
+    }
+  }
+  prep_calc_actions ();
+}
+
+gboolean has_box_changed ()
+{
+  int i, j;
+  gboolean changed = FALSE;
+  for (i=0; i<2; i++)
+  {
+    for (j=0; j<3; j++)
+    {
+      if (tmp_box[i][j] != active_box -> param[i][j])
+      {
+        active_box -> param[i][j] = tmp_box[i][j];
+        changed = TRUE;
+      }
+    }
+  }
+  return changed;
+}
+
+gboolean have_vectors_changed ()
+{
+  int i, j;
+  gboolean changed = FALSE;
+  for (i=0; i<3; i++)
+  {
+    for (j=0; j<3; j++)
+    {
+      if (tmp_vect[i][j] != active_box -> vect[i][j])
+      {
+        active_box -> vect[i][j] = tmp_vect[i][j];
+        changed = TRUE;
+      }
+    }
+  }
+  return changed;
+}
+
+void prep_box (int id)
+{
+  int i;
+  // active_project -> run = 1;
+  if (tmp_pbc != active_cell -> pbc) active_project -> run = 0;
+  active_cell -> pbc = tmp_pbc;
+  if (tmp_lat < 2 && tmp_lat != active_cell -> ltype) active_project -> run = 0;
+  if (tmp_lat > 0)
+  {
+    if (has_box_changed())
+    {
+      active_project -> run = 0;
+      tmp_lat = 1;
+    }
+    else if (have_vectors_changed())
+    {
+      active_project -> run = 0;
+      tmp_lat = 2;
+    }
+  }
+  active_cell -> ltype = tmp_lat;
+  init_box_calc ();
+  if (tmp_frac != active_cell -> frac) active_project -> run = 0;
+  active_cell -> frac = tmp_frac;
+  if (id > 1) active_project -> run = 0;
+  if (! active_project -> run)
+  {
+    if (active_project -> modelgl)
+    {
+      for (i=0; i<3; i++) active_project -> modelgl -> cshift[i+3] = 0.0;
+    }
+  }
+}
+
+void test_chem ()
+{
+  int i, j;
+  // gboolean res = FALSE;
+  for (i=1; i<CHEM_PARAMS; i++)
+  {
+    for (j=0; j<active_project -> nspec; j++)
+    {
+      if (tmp_chem[i-1][j] != active_chem -> chem_prop[i][j])
+      {
+        active_chem -> chem_prop[i][j] = tmp_chem[i-1][j];
+        // res = TRUE;
+      }
+    }
+    g_free (tmp_chem[i-1]);
+    tmp_chem[i-1] = NULL;
+  }
+  if (tmp_xcor != active_project -> xcor)
+  {
+    active_project -> xcor = tmp_xcor;
+    // res = TRUE;
+  }
+  // return res;
+}
+
+gboolean test_cutoffs ()
+{
+  int i, j, k;
+  k = 0;
+  for (i=0; i<active_project -> nspec; i++, k++)
+  {
+    if (tmpcut[k] == 0.0 || (active_project -> run && tmpcut[k] > active_project -> max[GR])) return FALSE;
+  }
+  for (i=0; i<active_project -> nspec-1; i++)
+  {
+    for (j=i+1; j<active_project -> nspec; j++, k++)
+    {
+      if (tmpcut[k] == 0.0 || (active_project -> run && tmpcut[k] > active_project -> max[GR])) return FALSE;
+    }
+  }
+  if (tmpcut[k] == 0.0 || (active_project -> run && tmpcut[k] > active_project -> max[GR])) return FALSE;
+  return TRUE;
+}
+
+void edit_bonds (GtkWidget * vbox)
+{
+  gchar * mess = "To define the existence of a bond between two atoms i (&#x3B1;) and j (&#x3B2;)."
+                 "\n\tA bond exits if the two following conditions are verified:\n"
+                 "\n\t\t1) D<sub>ij</sub> &#x3c; first minimum of the total g(r) - r<sub>cut</sub> (Tot.)"
+                 "\n\t\t2) D<sub>ij</sub> &#x3c; first minimum of the partial gr<sub>&#x3B1;,&#x3B2;</sub>(r) - r<sub>cut</sub> (&#x3B1;,&#x3B2;)\n"
+                 "\n\t0.0 &#x3c; r<sub>cut</sub> &#x2264; D<sub>max</sub>";
+  gchar * fin = "\n\tD<sub>max</sub> is the maximum inter-atomic distance in the model\n";
+  gchar * str;
+  if (active_project -> max[0] != 0.0)
+  {
+    str = g_strdup_printf ("%s\twith\tD<sub>max</sub> = %f  &#xC5;%s",
+                           mess, active_project -> max[0], fin);
+  }
+  else
+  {
+    str = g_strdup_printf ("%s%s", mess, fin);
+  }
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label(str, -1, -1, 0.0, 0.5), FALSE, FALSE, 0);
+  g_free (str);
+  GtkWidget * hbox = create_hbox (0);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, FALSE, FALSE, 0);
+  GtkWidget * boxv = create_vbox (BSEP);
+  cut_box (active_project, boxv);
+  add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, boxv, FALSE, FALSE, 50);
+}
+
+G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gpointer data)
+{
+  int id = GPOINTER_TO_INT(data);
+  int i = (id < 2) ? id : (id > 2 && id < 5) ? 1 : 2;
+
+  gboolean done = FALSE;
+  char * errpbc ="To apply PBC or use fractional coordinates\n"
+                 "describe properly the simulation box parameters";
+  switch (response_id)
+  {
+    case GTK_RESPONSE_APPLY:
+      if (i== 0)
+      {
+        test_chem ();
+        done = TRUE;
+      }
+      else if (i == 1)
+      {
+        done = test_pbc (tmp_pbc, tmp_frac, tmp_box, tmp_vect);
+        if (done)
+        {
+          prep_box (i);
+          if (id == 1)
+          {
+            if (! active_project -> run)
+            {
+              run_project ();
+              if (active_glwin) active_glwin -> create_shaders[MDBOX] = TRUE;
+              bonds_update = 1;
+              frag_update = (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
+              mol_update = (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
+              active_project -> runc[0] = FALSE;
+              on_calc_bonds_released (NULL, NULL);
+            }
+          }
+        }
+        else
+        {
+          show_warning (errpbc, GTK_WIDGET(win));
+        }
+      }
+      else
+      {
+        gboolean upc;
+        if (active_project -> modelgl)
+        {
+          if (active_project -> modelgl -> rings || active_project -> modelgl -> chains)
+          {
+            upc = ask_yes_no ("Data can be lost !", "You will lose\n rings statistics and/or chains statistics data\nProceed anyway ?", GTK_MESSAGE_WARNING, GTK_WIDGET(win));
+          }
+          else
+          {
+            upc = TRUE;
+          }
+        }
+        else
+        {
+          upc = TRUE;
+        }
+        if (upc) update_cutoffs (active_project);
+        done = TRUE;
+      }
+      break;
+    default:
+      if (i == 0)
+      {
+        test_chem ();
+        done = TRUE;
+      }
+      else if (i == 1)
+      {
+        done = test_pbc (active_cell -> pbc,
+                         active_cell -> frac,
+                         active_box -> param,
+                         active_box -> vect);
+      }
+      else
+      {
+        done = TRUE;
+      }
+      break;
+  }
+  if (done) destroy_this_dialog (win);
+}
+
+G_MODULE_EXPORT void on_edit_activate (GtkWidget * widg, gpointer data)
+{
+  int i;
+  gboolean skip = FALSE;
+  int id = GPOINTER_TO_INT(data);
+  i = (id < 2) ? id : (id > 2 && id < 5) ? 1 : 2;
+  GtkWidget * win = dialog_cancel_apply (edit_prop[i], MainWindow, FALSE);
+  GtkWidget * box = dialog_get_content_area (win);
+  gtk_box_set_homogeneous (GTK_BOX(box), FALSE);
+  if (i == 0)
+  {
+    edit_chem(box);
+  }
+  else if (i == 1)
+  {
+    edit_box (box);
+    if (id == 3)
+    {
+      skip = test_pbc (tmp_pbc, tmp_frac, tmp_box, tmp_vect);
+      if (skip)
+      {
+        active_cell -> ltype = tmp_lat;
+        init_box_calc ();
+      }
+      active_project -> run = 0;
+    }
+  }
+  else
+  {
+    opengl_project_changed (activep);
+    edit_bonds (box);
+    if (id == 5) skip = test_cutoffs ();
+  }
+  if (! skip && ! silent_input)
+  {
+    run_this_gtk_dialog (win, G_CALLBACK(run_on_edit_activate), data);
+  }
+#ifdef GTK3
+  // GTK3 Menu Action To Check
+  int j, k;
+  if (active_glwin != NULL)
+  {
+    if (active_glwin -> init)
+    {
+      for (i=0; i<2; i++)
+      {
+        if (active_glwin -> ogl_box[i] != NULL)
+        {
+          widget_set_sensitive (active_glwin -> ogl_box[i], active_cell -> ltype);
+          if (i)
+          {
+            j = (active_cell -> ltype && active_project -> steps == 1) ? 1 : 0;
+            for (k=5; k<8; k++) widget_set_sensitive (active_glwin -> ogl_box[k], j);
+          }
+        }
+      }
+    }
+  }
+#endif
+  if (tmpcut)
+  {
+    g_free (tmpcut);
+    tmpcut = NULL;
+  }
+}
+
