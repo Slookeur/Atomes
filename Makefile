@@ -39,17 +39,15 @@ endif
 
 ifeq ($(LINUX),1)
 
-  # Standard macros
-  GCCVER =
-  # /usr/local/bin/
-  ifeq ($(GCCVER),10)
-    FC = gfortran-10
-    CC = gcc-10
-    LD = gcc-10
-  else
+  # Use a specific compiler version
+  ifeq ($(GCCVER),)
     FC = gfortran
     CC = gcc
     LD = gcc
+  else
+    FC = gfortran-$(GCCVER)
+    CC = gcc-$(GCCVER)
+    LD = gcc-$(GCCVER)
   endif
   LIBS = -Wl,--export-dynamic $(LGTK) -lm -lgfortran
 
