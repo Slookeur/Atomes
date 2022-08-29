@@ -234,9 +234,7 @@ PROGRAM = atomes
 
 # The objects which make the executable
 
-OBJECTS_f = $(OBJECTS_f90) $(OBJECTS_F90)
-
-OBJECTS_f90 = $(OBJ)parameters.o $(OBJ)mendeleiev.o \
+OBJECTS_F90 = $(OBJ)parameters.o $(OBJ)mendeleiev.o \
 	$(OBJ)utils.o \
 	$(OBJ)xyz.o $(OBJ)c3d.o $(OBJ)trj.o $(OBJ)vas.o $(OBJ)pdb.o \
 	$(OBJ)lattice.o $(OBJ)allochem.o $(OBJ)chemistry.o \
@@ -249,9 +247,8 @@ OBJECTS_f90 = $(OBJ)parameters.o $(OBJ)mendeleiev.o \
 	$(OBJ)initchains.o $(OBJ)chains.o $(OBJ)chains_ogl.o \
 	$(OBJ)spherical.o \
 	$(OBJ)dvtb.o $(OBJ)dmtx.o $(OBJ)molecules.o \
-	$(OBJ)writedata.o
-
-OBJECTS_F90 = $(OBJ)prepdata.o $(OBJ)init.o
+	$(OBJ)writedata.o \
+        $(OBJ)prepdata.o $(OBJ)init.o
 
 OBJECTS_c = $(OBJ)global.o $(OBJ_LIC) $(OBJ_GUI) $(OBJ_WORK) $(OBJ_PROJ) $(OBJ_CURVE) \
 			$(OBJ_CALC) $(OBJ_POLY) $(OBJ_LAMMPS) $(OBJ_FIELD) $(OBJ_CPMD) $(OBJ_CP2K) $(OBJ_OGL)
@@ -501,11 +498,11 @@ OBJ_OGL = $(OBJ_WIN) $(OBJ_CBUILD) $(OBJ_CEDIT) $(OBJ_AEDIT) $(OBJ_DRAW) $(OBJ_G
 
 ifeq ($(WINDOWS),1)
 
-  OBJECTS = $(WINATOMES) $(OBJECTS_f) $(OBJECTS_c)
+  OBJECTS = $(WINATOMES) $(OBJECTS_F90) $(OBJECTS_c)
 
 else
 
-  OBJECTS = $(OBJECTS_f) $(OBJECTS_c)
+  OBJECTS = $(OBJECTS_F90) $(OBJECTS_c)
 
 endif
 
@@ -590,7 +587,7 @@ cleanc:
 	$(RM) $(RMFLAGS) $(OBJECTS_c) $(BIN)$(PROGRAM)
 
 cleanf:
-	$(RM) $(RMFLAGS) $(OBJECTS_f) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJECTS_F90) $(BIN)$(PROGRAM)
 	$(RM) $(RMFLAGS) *.mod
 	$(RM) $(RMFLAGS) $(OBJ)*.mod
 
@@ -604,86 +601,83 @@ TouchSource:
 	$(TOUCH) $(SOURCES)
 
 $(OBJ)parameters.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)parameters.o $(FOR)parameters.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)parameters.o $(FOR)parameters.F90
 $(OBJ)mendeleiev.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)mendeleiev.o $(FOR)mendeleiev.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)mendeleiev.o $(FOR)mendeleiev.F90
 $(OBJ)utils.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)utils.o $(FOR)utils.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)utils.o $(FOR)utils.F90
 $(OBJ)xyz.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)xyz.o $(FOR)xyz.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)xyz.o $(FOR)xyz.F90
 $(OBJ)c3d.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)c3d.o $(FOR)c3d.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)c3d.o $(FOR)c3d.F90
 $(OBJ)trj.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)trj.o $(FOR)trj.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)trj.o $(FOR)trj.F90
 $(OBJ)vas.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)vas.o $(FOR)vas.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)vas.o $(FOR)vas.F90
 $(OBJ)pdb.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)pdb.o $(FOR)pdb.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)pdb.o $(FOR)pdb.F90
 $(OBJ)lattice.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)lattice.o $(FOR)lattice.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)lattice.o $(FOR)lattice.F90
 $(OBJ)allochem.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)allochem.o $(FOR)allochem.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)allochem.o $(FOR)allochem.F90
 $(OBJ)chemistry.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)chemistry.o $(FOR)chemistry.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)chemistry.o $(FOR)chemistry.F90
 $(OBJ)allocbonds.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)allocbonds.o $(FOR)allocbonds.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)allocbonds.o $(FOR)allocbonds.F90
 $(OBJ)bonds.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)bonds.o $(FOR)bonds.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)bonds.o $(FOR)bonds.F90
 $(OBJ)escs.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)escs.o $(FOR)escs.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)escs.o $(FOR)escs.F90
 $(OBJ)angles.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)angles.o $(FOR)angles.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)angles.o $(FOR)angles.F90
 $(OBJ)threads.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)threads.o $(FOR)threads.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)threads.o $(FOR)threads.F90
 $(OBJ)gr.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)gr.o $(FOR)gr.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)gr.o $(FOR)gr.F90
 $(OBJ)sq.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)sq.o $(FOR)sq.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)sq.o $(FOR)sq.F90
 $(OBJ)fzbt.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)fzbt.o $(FOR)fzbt.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)fzbt.o $(FOR)fzbt.F90
 $(OBJ)cqvf.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)cqvf.o $(FOR)cqvf.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)cqvf.o $(FOR)cqvf.F90
 $(OBJ)sk.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)sk.o $(FOR)sk.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)sk.o $(FOR)sk.F90
 $(OBJ)grfft.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)grfft.o $(FOR)grfft.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)grfft.o $(FOR)grfft.F90
 $(OBJ)allocmsd.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)allocmsd.o $(FOR)allocmsd.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)allocmsd.o $(FOR)allocmsd.F90
 $(OBJ)msd.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)msd.o $(FOR)msd.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)msd.o $(FOR)msd.F90
 $(OBJ)spherical.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)spherical.o $(FOR)spherical.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)spherical.o $(FOR)spherical.F90
 $(OBJ)initrings.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)initrings.o $(FOR)initrings.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)initrings.o $(FOR)initrings.F90
 $(OBJ)rings-king.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)rings-king.o $(FOR)rings-king.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)rings-king.o $(FOR)rings-king.F90
 $(OBJ)rings-guttman.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)rings-guttman.o $(FOR)rings-guttman.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)rings-guttman.o $(FOR)rings-guttman.F90
 $(OBJ)rings-primitive.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)rings-primitive.o $(FOR)rings-primitive.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)rings-primitive.o $(FOR)rings-primitive.F90
 $(OBJ)resrings.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)resrings.o $(FOR)resrings.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)resrings.o $(FOR)resrings.F90
 $(OBJ)rings_ogl.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)rings_ogl.o $(FOR)rings_ogl.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)rings_ogl.o $(FOR)rings_ogl.F90
 $(OBJ)initchains.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)initchains.o $(FOR)initchains.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)initchains.o $(FOR)initchains.F90
 $(OBJ)chains.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)chains.o $(FOR)chains.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)chains.o $(FOR)chains.F90
 $(OBJ)chains_ogl.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)chains_ogl.o $(FOR)chains_ogl.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)chains_ogl.o $(FOR)chains_ogl.F90
 $(OBJ)dvtb.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)dvtb.o $(FOR)dvtb.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)dvtb.o $(FOR)dvtb.F90
 $(OBJ)dmtx.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)dmtx.o $(FOR)dmtx.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)dmtx.o $(FOR)dmtx.F90
 $(OBJ)old-dmtx.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)old-dmtx.o $(FOR)old-dmtx.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)old-dmtx.o $(FOR)old-dmtx.F90
 $(OBJ)molecules.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)molecules.o $(FOR)molecules.f90
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)molecules.o $(FOR)molecules.F90
 $(OBJ)writedata.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)writedata.o $(FOR)writedata.f90
-
-# F90 files:
-
+	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)writedata.o $(FOR)writedata.F90
 $(OBJ)prepdata.o:
 	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)prepdata.o $(FOR)prepdata.F90 $(INC)
 $(OBJ)init.o:
