@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>Pmm2</space-group>
+  <sg-num>25</sg-num>
+  <hm-symbol>P m m 2</hm-symbol>
+  <bravais>Orthorhombic</bravais>
+  <settings num="3">
+    <set name="P_m_m_2" x="a" y="b" z="c">
+    </set>
+    <set name="P_2_m_m" x="c" y="a" z="b">
+    </set>
+    <set name="P_m_2_m" x="b" y="c" z="a">
+    </set>
+  </settings>
+  <wyckoff num="9">
+    <wyck id="1" mul="4" let="i" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="-y" z="z"/>
+      <pos x="x" y="-y" z="z"/>
+      <pos x="-x" y="y" z="z"/>
+    </wyck>
+    <wyck id="2" mul="2" let="h" site="m..">
+      <pos x="1/2" y="y" z="z"/>
+      <pos x="1/2" y="-y" z="z"/>
+    </wyck>
+    <wyck id="3" mul="2" let="g" site="m..">
+      <pos x="0" y="y" z="z"/>
+      <pos x="0" y="-y" z="z"/>
+    </wyck>
+    <wyck id="4" mul="2" let="f" site=".m.">
+      <pos x="x" y="1/2" z="z"/>
+      <pos x="-x" y="1/2" z="z"/>
+    </wyck>
+    <wyck id="5" mul="2" let="e" site=".m.">
+      <pos x="x" y="0" z="z"/>
+      <pos x="-x" y="0" z="z"/>
+    </wyck>
+    <wyck id="6" mul="1" let="d" site="mm2">
+      <pos x="1/2" y="1/2" z="z"/>
+    </wyck>
+    <wyck id="7" mul="1" let="c" site="mm2">
+      <pos x="1/2" y="0" z="z"/>
+    </wyck>
+    <wyck id="8" mul="1" let="b" site="mm2">
+      <pos x="0" y="1/2" z="z"/>
+    </wyck>
+    <wyck id="9" mul="1" let="a" site="mm2">
+      <pos x="0" y="0" z="z"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

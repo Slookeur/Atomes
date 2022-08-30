@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>C2/m</space-group>
+  <sg-num>12</sg-num>
+  <hm-symbol>C 1 2/m 1</hm-symbol>
+  <bravais>Monoclinic</bravais>
+  <settings num="9">
+    <set name="C_1_2sm_1" x="a" y="b" z="c">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="0"/>
+      </points>
+    </set>
+    <set name="A_1_2sm_1" x="-a-c" y="b" z="a">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="0" y="1/2" z="1/2"/>
+      </points>
+    </set>
+    <set name="I_1_2sm_1" x="c" y="b" z="-a-c">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="1/2"/>
+      </points>
+    </set>
+    <set name="A_1_1_2sm" x="c" y="a" z="b">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="0" y="1/2" z="1/2"/>
+      </points>
+    </set>
+    <set name="B_1_1_2sm" x="a" y="-a-c" z="b">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="0" z="1/2"/>
+      </points>
+    </set>
+    <set name="I_1_1_2sm" x="-a-c" y="c" z="b">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="1/2"/>
+      </points>
+    </set>
+    <set name="B_2sm_1_1" x="b" y="c" z="a">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="0" z="1/2"/>
+      </points>
+    </set>
+    <set name="C_2sm_1_1" x="b" y="a" z="-a-c">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="0"/>
+      </points>
+    </set>
+    <set name="I_2sm_1_1" x="b" y="-a-c" z="c">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="1/2"/>
+      </points>
+    </set>
+  </settings>
+  <wyckoff num="10">
+    <wyck id="1" mul="4" let="j" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="y" z="-z"/>
+      <pos x="-x" y="-y" z="-z"/>
+      <pos x="x" y="-y" z="z"/>
+    </wyck>
+    <wyck id="2" mul="2" let="i" site="m">
+      <pos x="x" y="0" z="z"/>
+      <pos x="-x" y="0" z="-z"/>
+    </wyck>
+    <wyck id="3" mul="2" let="h" site="2">
+      <pos x="0" y="y" z="1/2"/>
+      <pos x="0" y="-y" z="1/2"/>
+    </wyck>
+    <wyck id="4" mul="2" let="g" site="2">
+      <pos x="0" y="y" z="0"/>
+      <pos x="0" y="-y" z="0"/>
+    </wyck>
+    <wyck id="5" mul="2" let="f" site="-1">
+      <pos x="1/4" y="1/4" z="1/2"/>
+      <pos x="3/4" y="1/4" z="1/2"/>
+    </wyck>
+    <wyck id="6" mul="2" let="e" site="-1">
+      <pos x="1/4" y="1/4" z="0"/>
+      <pos x="3/4" y="1/4" z="0"/>
+    </wyck>
+    <wyck id="7" mul="1" let="d" site="2/m">
+      <pos x="0" y="1/2" z="1/2"/>
+    </wyck>
+    <wyck id="8" mul="1" let="c" site="2/m">
+      <pos x="0" y="0" z="1/2"/>
+    </wyck>
+    <wyck id="9" mul="1" let="b" site="2/m">
+      <pos x="0" y="1/2" z="0"/>
+    </wyck>
+    <wyck id="10" mul="1" let="a" site="2/m">
+      <pos x="0" y="0" z="0"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

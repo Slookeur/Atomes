@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Force Field Library XML file -->
+<ff-xml>
+  <force-field>CHARMM 36 Nucleid acids</force-field>
+  <!--  data adapted from the file: par_all36_na.prm -->
+  <units>k-calories per mol</units>
+  <ff-data>
+    <atoms dim="5">42</atoms>
+    <bonds-h dim="2" pot="1">89</bonds-h>
+    <bonds-q dim="0" pot="0">0</bonds-q>
+    <bonds-m dim="0" pot="0">0</bonds-m>
+    <angles-h dim="4" pot="-1">226</angles-h>
+    <angles-q dim="0" pot="0">0</angles-q>
+    <dihedrals-c dim="3" pot="1">502</dihedrals-c>
+    <dihedrals-ccc dim="0" pot="0">0</dihedrals-ccc>
+    <impropers dim="3" pot="2">15</impropers>
+    <inversions dim="0" pot="0">0</inversions>
+    <non-bonded dim="4" pot="-1">42</non-bonded>
+  </ff-data>
+  <atoms>
+    <at label="H" mass="1.008000" key="HN1" info="Nucleic acid amine proton"/>
+    <at label="H" mass="1.008000" key="HN2" info="Nucleic acid ring nitrogen proton"/>
+    <at label="H" mass="1.008000" key="HN3" info="Nucleic acid aromatic carbon proton"/>
+    <at label="H" mass="1.008000" key="HN4" info="Nucleic acid phosphate hydroxyl proton"/>
+    <at label="H" mass="1.008000" key="HN5" info="Nucleic acid ribose hydroxyl proton"/>
+    <at label="H" mass="1.008000" key="HN6" info="Nucleic acid ribose aliphatic proton"/>
+    <at label="H" mass="1.008000" key="HN7" info="Nucleic acid proton (equivalent to protein HA)"/>
+    <at label="H" mass="1.008000" key="HN8" info="Bound to CN8 in nucleic acids/model compounds"/>
+    <at label="H" mass="1.008000" key="HN9" info="Bound to CN9 in nucleic acids/model compounds"/>
+    <at label="C" mass="12.011000" key="CN1" info="Nucleic acid carbonyl carbon"/>
+    <at label="C" mass="12.011000" key="CN1T" info="Nucleic acid carbonyl carbon (T/U C2)"/>
+    <at label="C" mass="12.011000" key="CN2" info="Nucleic acid aromatic carbon to amide"/>
+    <at label="C" mass="12.011000" key="CN3" info="Nucleic acid aromatic carbon"/>
+    <at label="C" mass="12.011000" key="CN3T" info="Nucleic acid aromatic carbon, Thy C5"/>
+    <at label="C" mass="12.011000" key="CN4" info="Nucleic acid purine C8 and ADE C2"/>
+    <at label="C" mass="12.011000" key="CN5" info="Nucleic acid purine C4 and C5"/>
+    <at label="C" mass="12.011000" key="CN5G" info="Nucleic acid guanine C5"/>
+    <at label="C" mass="12.011000" key="CN7" info="Nucleic acid carbon (equivalent to protein CT1)"/>
+    <at label="C" mass="12.011000" key="CN7B" info="Nucleic acid aliphatic carbon for C1'"/>
+    <at label="C" mass="12.011000" key="CN8" info="Nucleic acid carbon (equivalent to protein CT2)"/>
+    <at label="C" mass="12.011000" key="CN8B" info="Nucleic acid carbon (equivalent to protein CT2)"/>
+    <at label="C" mass="12.011000" key="CN9" info="Nucleic acid carbon (equivalent to protein CT3)"/>
+    <at label="N" mass="14.007000" key="NN1" info="Nucleic acid amide nitrogen"/>
+    <at label="N" mass="14.007000" key="NN2" info="Nucleic acid protonated ring nitrogen"/>
+    <at label="N" mass="14.007000" key="NN2B" info="From NN2, for N9 in GUA different from ADE"/>
+    <at label="N" mass="14.007000" key="NN2U" info="Nucleic acid protonated ring nitrogen, ura N3"/>
+    <at label="N" mass="14.007000" key="NN2G" info="Nucleic acid protonated ring nitrogen, gua N1"/>
+    <at label="N" mass="14.007000" key="NN3" info="Nucleic acid unprotonated ring nitrogen"/>
+    <at label="N" mass="14.007000" key="NN3A" info="Nucleic acid unprotonated ring nitrogen, ade N1 and N3"/>
+    <at label="N" mass="14.007000" key="NN3G" info="Nucleic acid unprotonated ring nitrogen, gua N3"/>
+    <at label="N" mass="14.007000" key="NN4" info="Nucleic acid purine N7"/>
+    <at label="N" mass="14.007000" key="NN6" info="Nucleic acid sp3 amine nitrogen (equiv to protein nh3)"/>
+    <at label="O" mass="15.999400" key="ON1" info="Nucleic acid carbonyl oxygen"/>
+    <at label="O" mass="15.999400" key="ON1C" info="Nucleic acid carbonyl oxygen, cyt O2"/>
+    <at label="O" mass="15.999400" key="ON2" info="Nucleic acid phosphate ester oxygen"/>
+    <at label="O" mass="15.999400" key="ON3" info="Nucleic acid =O in phosphate"/>
+    <at label="O" mass="15.999400" key="ON4" info="Nucleic acid phosphate hydroxyl oxygen"/>
+    <at label="O" mass="15.999400" key="ON5" info="Nucleic acid ribose hydroxyl oxygen"/>
+    <at label="O" mass="15.999400" key="ON6" info="Nucleic acid deoxyribose ring oxygen"/>
+    <at label="O" mass="15.999400" key="ON6B" info="Nucleic acid ribose ring oxygen"/>
+    <at label="P" mass="30.974000" key="P" info="phosphorus"/>
+    <at label="P" mass="30.974000" key="P2" info="phosphorus, adm, 2011 DNA update"/>
+  </atoms>
+  <bonds-h>
+  <!-- Quadratic bonds:
+
+    V(R) = K x (R - R0)^2
+    With:
+      - K = spring constant (kcal mol^-1 A^-2)
+      - R = bond distance (A)
+      - R0 = equilibrium distance (A)
+   -->
+    <bd-h a="19" b="31" z_a="6" z_b="7" K="200.000000" R_zero="1.480000" info="methylammonium"/>
+    <bd-h a="31" b="0" z_a="7" z_b="1" K="403.000000" R_zero="1.040000" info="methylammonium"/>
+    <bd-h a="38" b="20" z_a="8" z_b="6" K="260.000000" R_zero="1.420000" info="susil"/>
+    <bd-h a="19" b="20" z_a="6" z_b="6" K="222.500000" R_zero="1.528000" info="Alkanes, sacred"/>
+    <bd-h a="9" b="12" z_a="6" z_b="6" K="302.000000" R_zero="1.409000" info="adm jr. 11/97"/>
+    <bd-h a="9" b="13" z_a="6" z_b="6" K="302.000000" R_zero="1.403000" info="adm jr. 11/97"/>
+    <bd-h a="9" b="16" z_a="6" z_b="6" K="302.000000" R_zero="1.360000" info="adm jr. 11/97"/>
+    <bd-h a="9" b="23" z_a="6" z_b="7" K="380.000000" R_zero="1.367000" info="adm jr. 11/97"/>
+    <bd-h a="10" b="24" z_a="6" z_b="7" K="302.000000" R_zero="1.348000" info="adm jr. 11/97"/>
+    <bd-h a="9" b="26" z_a="6" z_b="7" K="340.000000" R_zero="1.396000" info="adm jr. 11/97"/>
+    <bd-h a="9" b="25" z_a="6" z_b="7" K="340.000000" R_zero="1.389000" info="adm jr. 11/97"/>
+    <bd-h a="10" b="25" z_a="6" z_b="7" K="340.000000" R_zero="1.383000" info="adm jr. 11/97"/>
+    <bd-h a="9" b="27" z_a="6" z_b="7" K="350.000000" R_zero="1.335000" info="adm jr. 11/97"/>
+    <bd-h a="10" b="32" z_a="6" z_b="8" K="860.000000" R_zero="1.230000" info="jjp1/adm jr. 7/95"/>
+    <bd-h a="9" b="32" z_a="6" z_b="8" K="660.000000" R_zero="1.234000" info="par_a4 adm jr. 10/2/91"/>
+    <bd-h a="9" b="33" z_a="6" z_b="8" K="620.000000" R_zero="1.245000" info="adm jr. 10/2/91"/>
+    <bd-h a="11" b="12" z_a="6" z_b="6" K="320.000000" R_zero="1.406000" info="adm jr. 11/97"/>
+    <bd-h a="11" b="15" z_a="6" z_b="6" K="360.000000" R_zero="1.358000" info="adm jr. 11/97"/>
+    <bd-h a="11" b="22" z_a="6" z_b="7" K="360.000000" R_zero="1.366000" info="JWK, adm jr. 10/2/91"/>
+    <bd-h a="11" b="26" z_a="6" z_b="7" K="400.000000" R_zero="1.392000" info=" "/>
+    <bd-h a="11" b="27" z_a="6" z_b="7" K="450.000000" R_zero="1.343000" info=" "/>
+    <bd-h a="11" b="28" z_a="6" z_b="7" K="400.000000" R_zero="1.342000" info="adm jr. 11/97"/>
+    <bd-h a="11" b="29" z_a="6" z_b="7" K="320.000000" R_zero="1.326000" info="adm jr. 11/97"/>
+    <bd-h a="12" b="12" z_a="6" z_b="6" K="500.000000" R_zero="1.326000" info="adm jr. 11/97"/>
+    <bd-h a="12" b="13" z_a="6" z_b="6" K="560.000000" R_zero="1.320000" info="adm jr. 11/97"/>
+    <bd-h a="13" b="21" z_a="6" z_b="6" K="230.000000" R_zero="1.478000" info="adm jr. 11/97"/>
+    <bd-h a="12" b="2" z_a="6" z_b="1" K="350.000000" R_zero="1.090000" info="JWK"/>
+    <bd-h a="13" b="2" z_a="6" z_b="1" K="350.000000" R_zero="1.090000" info="JWK"/>
+    <bd-h a="12" b="23" z_a="6" z_b="7" K="302.000000" R_zero="1.343000" info="adm jr. 11/97"/>
+    <bd-h a="12" b="24" z_a="6" z_b="7" K="320.000000" R_zero="1.343000" info="adm jr. 11/97"/>
+    <bd-h a="14" b="2" z_a="6" z_b="1" K="380.000000" R_zero="1.090000" info="JWK par_a7 9/30/91"/>
+    <bd-h a="14" b="23" z_a="6" z_b="7" K="320.000000" R_zero="1.374000" info="adm jr. 11/97"/>
+    <bd-h a="14" b="24" z_a="6" z_b="7" K="300.000000" R_zero="1.378000" info="adm jr. 11/97"/>
+    <bd-h a="14" b="28" z_a="6" z_b="7" K="420.000000" R_zero="1.322000" info="adm jr. 11/97"/>
+    <bd-h a="14" b="30" z_a="6" z_b="7" K="400.000000" R_zero="1.305000" info="adm jr. 11/97"/>
+    <bd-h a="15" b="15" z_a="6" z_b="6" K="310.000000" R_zero="1.361000" info="adm jr. 11/97"/>
+    <bd-h a="15" b="16" z_a="6" z_b="6" K="320.000000" R_zero="1.350000" info="adm jr. 11/97"/>
+    <bd-h a="15" b="23" z_a="6" z_b="7" K="300.000000" R_zero="1.375000" info="adm jr. 11/97"/>
+    <bd-h a="15" b="24" z_a="6" z_b="7" K="302.000000" R_zero="1.375000" info="adm jr. 11/97"/>
+    <bd-h a="15" b="28" z_a="6" z_b="7" K="350.000000" R_zero="1.312000" info="JWK par_a8 9/30/91"/>
+    <bd-h a="15" b="29" z_a="6" z_b="7" K="350.000000" R_zero="1.315000" info="adm jr. 11/97"/>
+    <bd-h a="15" b="30" z_a="6" z_b="7" K="310.000000" R_zero="1.355000" info="adm jr. 11/97"/>
+    <bd-h a="16" b="30" z_a="6" z_b="7" K="310.000000" R_zero="1.365000" info="adm jr. 11/97"/>
+    <bd-h a="19" b="19" z_a="6" z_b="6" K="222.500000" R_zero="1.528000" info="sacred"/>
+    <bd-h a="19" b="21" z_a="6" z_b="6" K="222.500000" R_zero="1.528000" info="sacred"/>
+    <bd-h a="19" b="23" z_a="6" z_b="7" K="400.000000" R_zero="1.460000" info="ADM JR."/>
+    <bd-h a="19" b="37" z_a="6" z_b="8" K="428.000000" R_zero="1.420000" info="MeOH"/>
+    <bd-h a="21" b="8" z_a="6" z_b="1" K="322.000000" R_zero="1.111000" info=" "/>
+    <bd-h a="21" b="34" z_a="6" z_b="8" K="340.000000" R_zero="1.430000" info="ADM Jr."/>
+    <bd-h a="0" b="22" z_a="1" z_b="7" K="488.000000" R_zero="1.000000" info="JWK, adm jr. 7/24/91"/>
+    <bd-h a="1" b="23" z_a="1" z_b="7" K="474.000000" R_zero="1.010000" info="JWK"/>
+    <bd-h a="1" b="24" z_a="1" z_b="7" K="474.000000" R_zero="1.010000" info="adm jr. 11/97"/>
+    <bd-h a="1" b="26" z_a="1" z_b="7" K="471.000000" R_zero="1.010000" info="JWK, par_a12 9/30/91"/>
+    <bd-h a="1" b="25" z_a="1" z_b="7" K="474.000000" R_zero="1.010000" info="JWK, adm jr. 7/24/91"/>
+    <bd-h a="3" b="36" z_a="1" z_b="8" K="545.000000" R_zero="0.960000" info="ADM Jr."/>
+    <bd-h a="34" b="40" z_a="8" z_b="15" K="270.000000" R_zero="1.600000" info="ADM Jr."/>
+    <bd-h a="34" b="41" z_a="8" z_b="15" K="270.000000" R_zero="1.600000" info="ADM Jr., adm, 2011 DNA update"/>
+    <bd-h a="35" b="40" z_a="8" z_b="15" K="580.000000" R_zero="1.480000" info="ADM Jr."/>
+    <bd-h a="35" b="41" z_a="8" z_b="15" K="580.000000" R_zero="1.480000" info="ADM Jr., adm, 2011 DNA update"/>
+    <bd-h a="36" b="40" z_a="8" z_b="15" K="237.000000" R_zero="1.580000" info="ADM Jr."/>
+    <bd-h a="36" b="41" z_a="8" z_b="15" K="237.000000" R_zero="1.580000" info="ADM Jr., adm, 2011 DNA update"/>
+    <bd-h a="18" b="38" z_a="6" z_b="8" K="260.000000" R_zero="1.420000" info="From exp"/>
+    <bd-h a="18" b="19" z_a="6" z_b="6" K="200.000000" R_zero="1.518000" info="From exp"/>
+    <bd-h a="17" b="38" z_a="6" z_b="8" K="240.000000" R_zero="1.446000" info="Fom exp."/>
+    <bd-h a="17" b="17" z_a="6" z_b="6" K="222.500000" R_zero="1.529000" info="From exp"/>
+    <bd-h a="17" b="19" z_a="6" z_b="6" K="222.500000" R_zero="1.516000" info="From exp."/>
+    <bd-h a="17" b="21" z_a="6" z_b="6" K="222.500000" R_zero="1.516000" info="for 5MET, From alkanes"/>
+    <bd-h a="17" b="6" z_a="6" z_b="1" K="309.000000" R_zero="1.111000" info="sacred"/>
+    <bd-h a="19" b="7" z_a="6" z_b="1" K="309.000000" R_zero="1.111000" info="sacred"/>
+    <bd-h a="18" b="6" z_a="6" z_b="1" K="309.000000" R_zero="1.111000" info="From CN8 HN7 (NF)"/>
+    <bd-h a="18" b="39" z_a="6" z_b="8" K="260.000000" R_zero="1.420000" info="From CN7B ON6"/>
+    <bd-h a="17" b="39" z_a="6" z_b="8" K="240.000000" R_zero="1.480000" info="From CN7 ON6"/>
+    <bd-h a="18" b="18" z_a="6" z_b="6" K="200.000000" R_zero="1.450000" info=" "/>
+    <bd-h a="17" b="18" z_a="6" z_b="6" K="222.500000" R_zero="1.460000" info="Specific to RNA"/>
+    <bd-h a="17" b="20" z_a="6" z_b="6" K="222.500000" R_zero="1.512000" info="From exp."/>
+    <bd-h a="20" b="34" z_a="6" z_b="8" K="320.000000" R_zero="1.440000" info="From exp"/>
+    <bd-h a="20" b="37" z_a="6" z_b="8" K="428.000000" R_zero="1.420000" info="CN8 ON2, adm jr., 8/30/98"/>
+    <bd-h a="17" b="34" z_a="6" z_b="8" K="310.000000" R_zero="1.433000" info="From exp"/>
+    <bd-h a="18" b="34" z_a="6" z_b="8" K="310.000000" R_zero="1.433000" info="From exp, for NADPH and bkbmod"/>
+    <bd-h a="17" b="37" z_a="6" z_b="8" K="428.000000" R_zero="1.420000" info="CN8 ON2, adm jr., 8/30/98"/>
+    <bd-h a="21" b="23" z_a="6" z_b="7" K="400.000000" R_zero="1.456000" info="adm jr."/>
+    <bd-h a="19" b="24" z_a="6" z_b="7" K="400.000000" R_zero="1.458000" info="adm jr."/>
+    <bd-h a="21" b="24" z_a="6" z_b="7" K="400.000000" R_zero="1.458000" info="adm jr."/>
+    <bd-h a="18" b="23" z_a="6" z_b="7" K="220.000000" R_zero="1.456000" info=" "/>
+    <bd-h a="18" b="24" z_a="6" z_b="7" K="220.000000" R_zero="1.458000" info=" "/>
+    <bd-h a="20" b="7" z_a="6" z_b="1" K="309.000000" R_zero="1.111000" info="sacred"/>
+    <bd-h a="37" b="4" z_a="8" z_b="1" K="545.000000" R_zero="0.960000" info="MeOH"/>
+    <bd-h a="18" b="37" z_a="6" z_b="8" K="428.000000" R_zero="1.400000" info="check adm jr.,"/>
+    <bd-h a="19" b="34" z_a="6" z_b="8" K="340.000000" R_zero="1.440000" info=" "/>
+  </bonds-h>
+  <angles-h>
+  <!-- Quadratic angles + Urey-Bradley (UB) parameters:
+
+    V(Theta) = K x (Theta - Theta0)^2
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Theta = angle (°)
+      - Theta0 = equilibrium angle(°)
+    V(S) = Kub x (R - Rub)^2
+    With:
+      - Kub = spring constant (kcal mol^-1 A^-2)
+      - S = distance 1-3 (A)
+      - S0 = equilibrium distance 1-3 (A)   -->
+    <ang-h a="17" b="19" c="19" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.600000" Kub="11.160000" S_zero="2.561000" info=" "/>
+    <ang-h a="19" b="17" c="19" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.600000" Kub="11.160000" S_zero="2.561000" info=" "/>
+    <ang-h a="19" b="19" c="19" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.600000" Kub="11.160000" S_zero="2.561000" info=" "/>
+    <ang-h a="0" b="31" c="19" z_a="1" z_b="7" z_c="6" K="30.000000" Theta_zero="109.500000" Kub="20.000000" S_zero="2.074000" info=" "/>
+    <ang-h a="31" b="19" c="7" z_a="7" z_b="6" z_c="1" K="45.000000" Theta_zero="107.500000" Kub="35.000000" S_zero="2.101000" info=" "/>
+    <ang-h a="17" b="19" c="34" z_a="6" z_b="6" z_c="8" K="115.000000" Theta_zero="109.700000" Kub="0.000000" S_zero="0.000000" info="exocyclic angles"/>
+    <ang-h a="31" b="19" c="19" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="0" b="31" c="0" z_a="1" z_b="7" z_c="1" K="44.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="34" b="19" c="19" z_a="8" z_b="6" z_c="6" K="115.000000" Theta_zero="109.700000" Kub="0.000000" S_zero="0.000000" info="exocyclic angles"/>
+    <ang-h a="17" b="38" c="20" z_a="6" z_b="8" z_c="6" K="110.000000" Theta_zero="109.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="38" b="20" c="19" z_a="8" z_b="6" z_c="6" K="90.000000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="20" b="19" c="17" z_a="6" z_b="6" z_c="6" K="80.000000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="38" b="20" c="7" z_a="8" z_b="6" z_c="1" K="45.200000" Theta_zero="107.240000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="7" b="20" c="19" z_a="1" z_b="6" z_c="6" K="34.530000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane"/>
+    <ang-h a="7" b="19" c="20" z_a="1" z_b="6" z_c="6" K="34.530000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane"/>
+    <ang-h a="11" b="28" c="14" z_a="6" z_b="7" z_c="6" K="90.000000" Theta_zero="117.800000" Kub="0.000000" S_zero="0.000000" info="adm jr. 11/97"/>
+    <ang-h a="28" b="14" c="28" z_a="7" z_b="6" z_c="7" K="60.000000" Theta_zero="133.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="14" b="28" c="15" z_a="6" z_b="7" z_c="6" K="90.000000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="15" b="15" c="28" z_a="6" z_b="6" z_c="7" K="60.000000" Theta_zero="127.400000" Kub="0.000000" S_zero="0.000000" info="bridgeC4"/>
+    <ang-h a="11" b="15" c="15" z_a="6" z_b="6" z_c="6" K="60.000000" Theta_zero="121.000000" Kub="0.000000" S_zero="0.000000" info="bridgeC5"/>
+    <ang-h a="15" b="11" c="28" z_a="6" z_b="6" z_c="7" K="60.000000" Theta_zero="110.700000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="15" b="15" c="23" z_a="6" z_b="6" z_c="7" K="100.000000" Theta_zero="105.700000" Kub="0.000000" S_zero="0.000000" info="bridgeC4"/>
+    <ang-h a="15" b="15" c="30" z_a="6" z_b="6" z_c="7" K="100.000000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="bridgeC5"/>
+    <ang-h a="14" b="30" c="15" z_a="6" z_b="7" z_c="6" K="120.000000" Theta_zero="104.600000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="23" b="14" c="30" z_a="7" z_b="6" z_c="7" K="100.000000" Theta_zero="113.400000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="14" b="23" c="15" z_a="6" z_b="7" z_c="6" K="100.000000" Theta_zero="106.300000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="23" b="15" c="28" z_a="7" z_b="6" z_c="7" K="100.000000" Theta_zero="126.900000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="11" b="15" c="30" z_a="6" z_b="6" z_c="7" K="100.000000" Theta_zero="129.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="2" b="14" c="28" z_a="1" z_b="6" z_c="7" K="38.000000" Theta_zero="113.500000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="28" b="11" c="22" z_a="7" z_b="6" z_c="7" K="50.000000" Theta_zero="130.700000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="15" b="11" c="22" z_a="6" z_b="6" z_c="7" K="50.000000" Theta_zero="118.600000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="11" b="22" c="0" z_a="6" z_b="7" z_c="1" K="40.000000" Theta_zero="121.500000" Kub="0.000000" S_zero="0.000000" info="C,A,G"/>
+    <ang-h a="0" b="22" c="0" z_a="1" z_b="7" z_c="1" K="31.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="30" b="14" c="2" z_a="7" z_b="6" z_c="1" K="39.000000" Theta_zero="124.800000" Kub="0.000000" S_zero="0.000000" info="G,A"/>
+    <ang-h a="23" b="14" c="2" z_a="7" z_b="6" z_c="1" K="39.000000" Theta_zero="121.800000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="15" b="23" c="1" z_a="6" z_b="7" z_c="1" K="30.000000" Theta_zero="129.400000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="14" b="23" c="1" z_a="6" z_b="7" z_c="1" K="30.000000" Theta_zero="125.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="9" b="26" c="11" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="131.100000" Kub="0.000000" S_zero="0.000000" info="adm jr. 11/97"/>
+    <ang-h a="26" b="11" c="29" z_a="7" z_b="6" z_c="7" K="70.000000" Theta_zero="122.200000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="11" b="29" c="15" z_a="6" z_b="7" z_c="6" K="90.000000" Theta_zero="109.400000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="16" b="15" c="29" z_a="6" z_b="6" z_c="7" K="70.000000" Theta_zero="129.900000" Kub="0.000000" S_zero="0.000000" info="bridgeC4"/>
+    <ang-h a="9" b="16" c="15" z_a="6" z_b="6" z_c="6" K="70.000000" Theta_zero="119.600000" Kub="0.000000" S_zero="0.000000" info="bridgeC5"/>
+    <ang-h a="16" b="9" c="26" z_a="6" z_b="6" z_c="7" K="70.000000" Theta_zero="107.800000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="16" b="15" c="24" z_a="6" z_b="6" z_c="7" K="100.000000" Theta_zero="104.600000" Kub="0.000000" S_zero="0.000000" info="bridgeC4"/>
+    <ang-h a="15" b="16" c="30" z_a="6" z_b="6" z_c="7" K="100.000000" Theta_zero="111.400000" Kub="0.000000" S_zero="0.000000" info="bridgeC5"/>
+    <ang-h a="14" b="30" c="16" z_a="6" z_b="7" z_c="6" K="120.000000" Theta_zero="103.800000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="24" b="14" c="30" z_a="7" z_b="6" z_c="7" K="100.000000" Theta_zero="113.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="14" b="24" c="15" z_a="6" z_b="7" z_c="6" K="100.000000" Theta_zero="107.200000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="24" b="15" c="29" z_a="7" z_b="6" z_c="7" K="140.000000" Theta_zero="125.500000" Kub="0.000000" S_zero="0.000000" info="bridgeC4"/>
+    <ang-h a="9" b="16" c="30" z_a="6" z_b="6" z_c="7" K="125.000000" Theta_zero="129.000000" Kub="0.000000" S_zero="0.000000" info="bridgeC5"/>
+    <ang-h a="9" b="26" c="1" z_a="6" z_b="7" z_c="1" K="45.000000" Theta_zero="113.300000" Kub="0.000000" S_zero="0.000000" info="h1"/>
+    <ang-h a="11" b="26" c="1" z_a="6" z_b="7" z_c="1" K="45.000000" Theta_zero="115.600000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="22" b="11" c="26" z_a="7" z_b="6" z_c="7" K="95.000000" Theta_zero="115.400000" Kub="0.000000" S_zero="0.000000" info="n2"/>
+    <ang-h a="22" b="11" c="29" z_a="7" z_b="6" z_c="7" K="95.000000" Theta_zero="122.400000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="26" b="9" c="32" z_a="7" z_b="6" z_c="8" K="50.000000" Theta_zero="127.500000" Kub="0.000000" S_zero="0.000000" info="o6"/>
+    <ang-h a="16" b="9" c="32" z_a="6" z_b="6" z_c="8" K="50.000000" Theta_zero="124.700000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="2" b="14" c="24" z_a="1" z_b="6" z_c="7" K="40.000000" Theta_zero="122.200000" Kub="0.000000" S_zero="0.000000" info="h8 (NN4 CN4 HN3 124.8)"/>
+    <ang-h a="14" b="24" c="1" z_a="6" z_b="7" z_c="1" K="30.000000" Theta_zero="124.600000" Kub="0.000000" S_zero="0.000000" info="h9"/>
+    <ang-h a="15" b="24" c="1" z_a="6" z_b="7" z_c="1" K="30.000000" Theta_zero="129.300000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="9" b="23" c="12" z_a="6" z_b="7" z_c="6" K="50.000000" Theta_zero="124.100000" Kub="0.000000" S_zero="0.000000" info="adm jr. 11/97"/>
+    <ang-h a="23" b="9" c="27" z_a="7" z_b="6" z_c="7" K="50.000000" Theta_zero="116.800000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="9" b="27" c="11" z_a="6" z_b="7" z_c="6" K="85.000000" Theta_zero="119.100000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="12" b="11" c="27" z_a="6" z_b="6" z_c="7" K="85.000000" Theta_zero="119.300000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="11" b="12" c="12" z_a="6" z_b="6" z_c="6" K="85.000000" Theta_zero="117.800000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="12" b="12" c="23" z_a="6" z_b="6" z_c="7" K="85.000000" Theta_zero="122.900000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="9" b="23" c="1" z_a="6" z_b="7" z_c="1" K="37.000000" Theta_zero="121.200000" Kub="0.000000" S_zero="0.000000" info="h1"/>
+    <ang-h a="12" b="23" c="1" z_a="6" z_b="7" z_c="1" K="37.000000" Theta_zero="114.700000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="23" b="9" c="33" z_a="7" z_b="6" z_c="8" K="130.000000" Theta_zero="119.400000" Kub="0.000000" S_zero="0.000000" info="o2"/>
+    <ang-h a="27" b="9" c="33" z_a="7" z_b="6" z_c="8" K="130.000000" Theta_zero="123.800000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="27" b="11" c="22" z_a="7" z_b="6" z_c="7" K="81.000000" Theta_zero="122.300000" Kub="0.000000" S_zero="0.000000" info="n4"/>
+    <ang-h a="12" b="11" c="22" z_a="6" z_b="6" z_c="7" K="81.000000" Theta_zero="118.400000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="11" b="12" c="2" z_a="6" z_b="6" z_c="1" K="38.000000" Theta_zero="120.100000" Kub="0.000000" S_zero="0.000000" info="h5"/>
+    <ang-h a="12" b="12" c="2" z_a="6" z_b="6" z_c="1" K="38.000000" Theta_zero="122.100000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="2" b="12" c="23" z_a="1" z_b="6" z_c="7" K="44.000000" Theta_zero="115.000000" Kub="0.000000" S_zero="0.000000" info="h6"/>
+    <ang-h a="10" b="24" c="12" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="122.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 11/97"/>
+    <ang-h a="24" b="10" c="25" z_a="7" z_b="6" z_c="7" K="50.000000" Theta_zero="114.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="10" b="25" c="9" z_a="6" z_b="7" z_c="6" K="50.000000" Theta_zero="130.200000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="25" b="9" c="12" z_a="7" z_b="6" z_c="6" K="70.000000" Theta_zero="112.600000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="9" b="12" c="12" z_a="6" z_b="6" z_c="6" K="100.000000" Theta_zero="117.600000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="12" b="12" c="24" z_a="6" z_b="6" z_c="7" K="100.000000" Theta_zero="123.600000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="10" b="24" c="1" z_a="6" z_b="7" z_c="1" K="40.500000" Theta_zero="122.000000" Kub="0.000000" S_zero="0.000000" info="h1"/>
+    <ang-h a="12" b="24" c="1" z_a="6" z_b="7" z_c="1" K="32.000000" Theta_zero="116.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="24" b="10" c="32" z_a="7" z_b="6" z_c="8" K="100.000000" Theta_zero="121.600000" Kub="0.000000" S_zero="0.000000" info="o2"/>
+    <ang-h a="25" b="10" c="32" z_a="7" z_b="6" z_c="8" K="100.000000" Theta_zero="124.400000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="10" b="25" c="1" z_a="6" z_b="7" z_c="1" K="40.500000" Theta_zero="114.400000" Kub="0.000000" S_zero="0.000000" info="h3"/>
+    <ang-h a="9" b="25" c="1" z_a="6" z_b="7" z_c="1" K="40.500000" Theta_zero="115.400000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="25" b="9" c="32" z_a="7" z_b="6" z_c="8" K="100.000000" Theta_zero="121.900000" Kub="0.000000" S_zero="0.000000" info="o4"/>
+    <ang-h a="12" b="9" c="32" z_a="6" z_b="6" z_c="8" K="100.000000" Theta_zero="125.500000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="9" b="12" c="2" z_a="6" z_b="6" z_c="1" K="30.000000" Theta_zero="120.300000" Kub="0.000000" S_zero="0.000000" info="h5"/>
+    <ang-h a="2" b="12" c="24" z_a="1" z_b="6" z_c="7" K="30.000000" Theta_zero="114.300000" Kub="0.000000" S_zero="0.000000" info="h6"/>
+    <ang-h a="13" b="9" c="25" z_a="6" z_b="6" z_c="7" K="70.000000" Theta_zero="113.500000" Kub="0.000000" S_zero="0.000000" info="adm jr. 11/97"/>
+    <ang-h a="9" b="13" c="12" z_a="6" z_b="6" z_c="6" K="120.000000" Theta_zero="116.700000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="13" b="12" c="24" z_a="6" z_b="6" z_c="7" K="120.000000" Theta_zero="123.600000" Kub="0.000000" S_zero="0.000000" info="!T"/>
+    <ang-h a="13" b="9" c="32" z_a="6" z_b="6" z_c="8" K="100.000000" Theta_zero="124.600000" Kub="0.000000" S_zero="0.000000" info="o4"/>
+    <ang-h a="9" b="13" c="21" z_a="6" z_b="6" z_c="6" K="38.000000" Theta_zero="118.700000" Kub="0.000000" S_zero="0.000000" info="c5 methyl"/>
+    <ang-h a="12" b="13" c="21" z_a="6" z_b="6" z_c="6" K="38.000000" Theta_zero="124.600000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="13" b="12" c="2" z_a="6" z_b="6" z_c="1" K="30.000000" Theta_zero="122.100000" Kub="0.000000" S_zero="0.000000" info="h6"/>
+    <ang-h a="10" b="24" c="21" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="116.000000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="12" b="24" c="21" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="122.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 7/24/91"/>
+    <ang-h a="9" b="23" c="21" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="115.400000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="12" b="23" c="21" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="120.500000" Kub="0.000000" S_zero="0.000000" info="adm jr. 7/24/91"/>
+    <ang-h a="15" b="23" c="21" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="125.900000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="14" b="23" c="21" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="127.800000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="15" b="24" c="21" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="125.900000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="14" b="24" c="21" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="126.900000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="15" b="24" c="19" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="125.900000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="14" b="24" c="19" z_a="6" z_b="7" z_c="6" K="70.000000" Theta_zero="126.900000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="24" b="19" c="21" z_a="7" z_b="6" z_c="6" K="70.000000" Theta_zero="113.700000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="10" b="24" c="18" z_a="6" z_b="7" z_c="6" K="45.000000" Theta_zero="118.400000" Kub="0.000000" S_zero="0.000000" info="FC from A"/>
+    <ang-h a="12" b="24" c="18" z_a="6" z_b="7" z_c="6" K="45.000000" Theta_zero="119.600000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="9" b="23" c="18" z_a="6" z_b="7" z_c="6" K="45.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="FC from A"/>
+    <ang-h a="12" b="23" c="18" z_a="6" z_b="7" z_c="6" K="45.000000" Theta_zero="115.900000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="15" b="23" c="18" z_a="6" z_b="7" z_c="6" K="45.000000" Theta_zero="126.100000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="14" b="23" c="18" z_a="6" z_b="7" z_c="6" K="45.000000" Theta_zero="127.600000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="15" b="24" c="18" z_a="6" z_b="7" z_c="6" K="45.000000" Theta_zero="126.500000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="14" b="24" c="18" z_a="6" z_b="7" z_c="6" K="45.000000" Theta_zero="126.300000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="38" b="18" c="23" z_a="8" z_b="6" z_c="7" K="110.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="DNA"/>
+    <ang-h a="39" b="18" c="23" z_a="8" z_b="6" z_c="7" K="110.000000" Theta_zero="112.000000" Kub="0.000000" S_zero="0.000000" info="RNA"/>
+    <ang-h a="19" b="18" c="23" z_a="6" z_b="6" z_c="7" K="110.000000" Theta_zero="113.700000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="18" b="18" c="23" z_a="6" z_b="6" z_c="7" K="110.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="RNA"/>
+    <ang-h a="38" b="18" c="24" z_a="8" z_b="6" z_c="7" K="110.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="(DNA) FC from A"/>
+    <ang-h a="39" b="18" c="24" z_a="8" z_b="6" z_c="7" K="110.000000" Theta_zero="112.000000" Kub="0.000000" S_zero="0.000000" info="(RNA) FC from A"/>
+    <ang-h a="19" b="18" c="24" z_a="6" z_b="6" z_c="7" K="110.000000" Theta_zero="113.700000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="18" b="18" c="24" z_a="6" z_b="6" z_c="7" K="110.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="RNA"/>
+    <ang-h a="6" b="18" c="23" z_a="1" z_b="6" z_c="7" K="43.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="6" b="18" c="24" z_a="1" z_b="6" z_c="7" K="43.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="HN7 CN7B NN2"/>
+    <ang-h a="21" b="19" c="7" z_a="6" z_b="6" z_c="1" K="34.600000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="Alkanes, sacred"/>
+    <ang-h a="21" b="17" c="6" z_a="6" z_b="6" z_c="1" K="34.600000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="Alkanes, sacred"/>
+    <ang-h a="7" b="19" c="23" z_a="1" z_b="6" z_c="7" K="33.430000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="9-M-ADE(THY), ADM"/>
+    <ang-h a="7" b="19" c="37" z_a="1" z_b="6" z_c="8" K="45.900000" Theta_zero="108.890000" Kub="0.000000" S_zero="0.000000" info="Adm Jr. MeOH"/>
+    <ang-h a="12" b="21" c="8" z_a="6" z_b="6" z_c="1" K="33.430000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="Alkanes, sacred"/>
+    <ang-h a="13" b="21" c="8" z_a="6" z_b="6" z_c="1" K="33.430000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="Alkanes, sacred"/>
+    <ang-h a="19" b="21" c="8" z_a="6" z_b="6" z_c="1" K="34.600000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="Alkanes, sacred"/>
+    <ang-h a="8" b="21" c="17" z_a="1" z_b="6" z_c="6" K="33.430000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="Alkanes, sacred"/>
+    <ang-h a="8" b="21" c="23" z_a="1" z_b="6" z_c="7" K="33.430000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="9-M-A(T), adm jr."/>
+    <ang-h a="8" b="21" c="24" z_a="1" z_b="6" z_c="7" K="33.430000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="9-M-G(C), adm jr."/>
+    <ang-h a="7" b="19" c="24" z_a="1" z_b="6" z_c="7" K="33.430000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="9-E-G, adm jr."/>
+    <ang-h a="8" b="21" c="34" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="ADM Jr."/>
+    <ang-h a="21" b="34" c="40" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="ADM Jr."/>
+    <ang-h a="3" b="36" c="40" z_a="1" z_b="8" z_c="15" K="30.000000" Theta_zero="115.000000" Kub="40.000000" S_zero="2.350000" info="ADM Jr."/>
+    <ang-h a="3" b="36" c="41" z_a="1" z_b="8" z_c="15" K="30.000000" Theta_zero="115.000000" Kub="40.000000" S_zero="2.350000" info="ADM Jr. , adm, 2011 DNA update"/>
+    <ang-h a="4" b="37" c="19" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="Adm Jr. MeOH"/>
+    <ang-h a="4" b="37" c="21" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="Adm Jr. MeOH"/>
+    <ang-h a="34" b="40" c="34" z_a="8" z_b="15" z_c="8" K="80.000000" Theta_zero="104.300000" Kub="0.000000" S_zero="0.000000" info="ADM Jr."/>
+    <ang-h a="34" b="41" c="34" z_a="8" z_b="15" z_c="8" K="80.000000" Theta_zero="104.300000" Kub="0.000000" S_zero="0.000000" info="ADM Jr., adm, 2011 DNA update"/>
+    <ang-h a="34" b="40" c="36" z_a="8" z_b="15" z_c="8" K="48.100000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="ADM Jr."/>
+    <ang-h a="34" b="41" c="36" z_a="8" z_b="15" z_c="8" K="48.100000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="ADM Jr., adm, 2011 DNA update"/>
+    <ang-h a="35" b="40" c="36" z_a="8" z_b="15" z_c="8" K="98.900000" Theta_zero="108.230000" Kub="0.000000" S_zero="0.000000" info="ADM Jr."/>
+    <ang-h a="35" b="41" c="36" z_a="8" z_b="15" z_c="8" K="98.900000" Theta_zero="108.230000" Kub="0.000000" S_zero="0.000000" info="ADM Jr., adm, 2011 DNA update"/>
+    <ang-h a="36" b="40" c="36" z_a="8" z_b="15" z_c="8" K="98.900000" Theta_zero="104.000000" Kub="0.000000" S_zero="0.000000" info="ADM Jr."/>
+    <ang-h a="36" b="41" c="36" z_a="8" z_b="15" z_c="8" K="98.900000" Theta_zero="104.000000" Kub="0.000000" S_zero="0.000000" info="ADM Jr., adm, 2011 DNA update"/>
+    <ang-h a="17" b="19" c="37" z_a="6" z_b="6" z_c="8" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="adm jr. MeOH"/>
+    <ang-h a="8" b="21" c="8" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="108.400000" Kub="5.400000" S_zero="1.802000" info="update, adm jr. 3/2/92"/>
+    <ang-h a="17" b="38" c="18" z_a="6" z_b="8" z_c="6" K="110.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="NF, 11/97, C4'O4'C1'"/>
+    <ang-h a="38" b="18" c="19" z_a="8" z_b="6" z_c="6" K="90.000000" Theta_zero="102.000000" Kub="0.000000" S_zero="0.000000" info="NF, 11/97, C4'O4'C1'"/>
+    <ang-h a="18" b="19" c="17" z_a="6" z_b="6" z_c="6" K="80.000000" Theta_zero="100.000000" Kub="0.000000" S_zero="0.000000" info="NF, 11/97, C1'C2'C3'"/>
+    <ang-h a="19" b="17" c="17" z_a="6" z_b="6" z_c="6" K="60.000000" Theta_zero="102.000000" Kub="8.000000" S_zero="2.561000" info="11/97, C2'C3'C4'"/>
+    <ang-h a="21" b="17" c="17" z_a="6" z_b="6" z_c="6" K="60.000000" Theta_zero="102.000000" Kub="8.000000" S_zero="2.561000" info="5MET, adm jr."/>
+    <ang-h a="17" b="17" c="38" z_a="6" z_b="6" z_c="8" K="100.000000" Theta_zero="104.000000" Kub="0.000000" S_zero="0.000000" info="NF, 11/97, C3'C4'O4'"/>
+    <ang-h a="6" b="17" c="38" z_a="1" z_b="6" z_c="8" K="45.200000" Theta_zero="107.240000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="6" b="18" c="38" z_a="1" z_b="6" z_c="8" K="45.200000" Theta_zero="107.240000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="6" b="17" c="17" z_a="1" z_b="6" z_c="6" K="40.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="18" b="19" c="7" z_a="6" z_b="6" z_c="1" K="33.400000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="following terms directly"/>
+    <ang-h a="19" b="18" c="6" z_a="6" z_b="6" z_c="1" K="33.400000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="from alkanes"/>
+    <ang-h a="6" b="17" c="19" z_a="1" z_b="6" z_c="6" K="34.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info=" "/>
+    <ang-h a="7" b="19" c="17" z_a="1" z_b="6" z_c="6" K="34.530000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info=" "/>
+    <ang-h a="7" b="19" c="19" z_a="1" z_b="6" z_c="6" K="34.530000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info=" "/>
+    <ang-h a="7" b="19" c="7" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="109.000000" Kub="5.400000" S_zero="1.802000" info=" "/>
+    <ang-h a="6" b="17" c="6" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="109.000000" Kub="5.400000" S_zero="1.802000" info=" "/>
+    <ang-h a="17" b="39" c="18" z_a="6" z_b="8" z_c="6" K="110.000000" Theta_zero="115.000000" Kub="0.000000" S_zero="0.000000" info="From CN7 ON6 CN7B"/>
+    <ang-h a="17" b="17" c="39" z_a="6" z_b="6" z_c="8" K="100.000000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="From CN7 CN7 ON6"/>
+    <ang-h a="39" b="18" c="18" z_a="8" z_b="6" z_c="6" K="90.000000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="030998"/>
+    <ang-h a="18" b="18" c="17" z_a="6" z_b="6" z_c="6" K="110.000000" Theta_zero="96.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="18" b="17" c="17" z_a="6" z_b="6" z_c="6" K="60.000000" Theta_zero="100.000000" Kub="8.000000" S_zero="2.561000" info="11/97, C2'C3'C4'"/>
+    <ang-h a="6" b="17" c="39" z_a="1" z_b="6" z_c="8" K="45.200000" Theta_zero="107.240000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="6" b="18" c="39" z_a="1" z_b="6" z_c="8" K="45.200000" Theta_zero="107.240000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="18" b="18" c="6" z_a="6" z_b="6" z_c="1" K="33.400000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="following terms directly"/>
+    <ang-h a="6" b="18" c="6" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="109.000000" Kub="5.400000" S_zero="1.802000" info=" "/>
+    <ang-h a="38" b="17" c="20" z_a="8" z_b="6" z_c="6" K="90.000000" Theta_zero="108.200000" Kub="0.000000" S_zero="0.000000" info="11/97, O4'C4'C5'"/>
+    <ang-h a="38" b="17" c="21" z_a="8" z_b="6" z_c="6" K="90.000000" Theta_zero="108.200000" Kub="0.000000" S_zero="0.000000" info="5MET, adm jr."/>
+    <ang-h a="17" b="17" c="20" z_a="6" z_b="6" z_c="6" K="45.000000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="11/97, C3'C4'C5'"/>
+    <ang-h a="19" b="17" c="20" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.600000" Kub="11.160000" S_zero="2.561000" info="from alkane, 25P1"/>
+    <ang-h a="17" b="20" c="34" z_a="6" z_b="6" z_c="8" K="70.000000" Theta_zero="108.400000" Kub="0.000000" S_zero="0.000000" info="11/97, C4'C5'O5'"/>
+    <ang-h a="17" b="17" c="34" z_a="6" z_b="6" z_c="8" K="115.000000" Theta_zero="109.700000" Kub="0.000000" S_zero="0.000000" info="11/97, C4'C3'O3'"/>
+    <ang-h a="18" b="18" c="34" z_a="6" z_b="6" z_c="8" K="115.000000" Theta_zero="109.700000" Kub="0.000000" S_zero="0.000000" info="11/97, C4'C3'O3' for NADPH and bkbmod"/>
+    <ang-h a="19" b="17" c="34" z_a="6" z_b="6" z_c="8" K="115.000000" Theta_zero="109.700000" Kub="0.000000" S_zero="0.000000" info="11/97, C2'C3'O3'"/>
+    <ang-h a="20" b="34" c="40" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="11/97, C5'O5'P"/>
+    <ang-h a="20" b="34" c="41" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="11/97, C5'O5'P, adm, 2011 DNA update"/>
+    <ang-h a="17" b="34" c="40" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="11/97, C3'O3'P"/>
+    <ang-h a="17" b="34" c="41" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="11/97, C3'O3'P, adm, 2011 DNA update"/>
+    <ang-h a="18" b="34" c="40" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="11/97, C3'O3'P, for NADPH and bkbmod"/>
+    <ang-h a="18" b="34" c="41" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="11/97, C3'O3'P, for NADPH and bkbmod, adm, 2011 DNA update"/>
+    <ang-h a="6" b="17" c="20" z_a="1" z_b="6" z_c="6" K="34.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="From HN7 CN7 CN8"/>
+    <ang-h a="7" b="20" c="34" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="From HN7 CN8 ON2"/>
+    <ang-h a="4" b="37" c="20" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="From HN5 ON5 CN8"/>
+    <ang-h a="7" b="20" c="7" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="109.000000" Kub="5.400000" S_zero="1.802000" info="Alkanes, sacred"/>
+    <ang-h a="7" b="20" c="17" z_a="1" z_b="6" z_c="6" K="34.530000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="Alkanes, sacred"/>
+    <ang-h a="6" b="17" c="34" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="adm jr. from HN7 CN8 ON2"/>
+    <ang-h a="6" b="18" c="34" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="adm jr. from HN7 CN8 ON2, for NADPH and bkbmod"/>
+    <ang-h a="17" b="20" c="37" z_a="6" z_b="6" z_c="8" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="From CN7 CN8B ON5"/>
+    <ang-h a="20" b="17" c="37" z_a="6" z_b="6" z_c="8" K="90.000000" Theta_zero="108.200000" Kub="0.000000" S_zero="0.000000" info="phosphoramidate, carbocyclic"/>
+    <ang-h a="7" b="20" c="37" z_a="1" z_b="6" z_c="8" K="45.900000" Theta_zero="108.890000" Kub="0.000000" S_zero="0.000000" info="From HN7 CN8 ON5"/>
+    <ang-h a="37" b="17" c="19" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="from CHARMM22"/>
+    <ang-h a="37" b="17" c="17" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="6" b="17" c="37" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="4" b="37" c="17" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="109.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="39" b="17" c="20" z_a="8" z_b="6" z_c="6" K="90.000000" Theta_zero="108.200000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="39" b="17" c="21" z_a="8" z_b="6" z_c="6" K="90.000000" Theta_zero="108.200000" Kub="0.000000" S_zero="0.000000" info="for 5MET patch, adm jr."/>
+    <ang-h a="34" b="17" c="18" z_a="8" z_b="6" z_c="6" K="90.000000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="37" b="17" c="18" z_a="8" z_b="6" z_c="6" K="90.000000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="From ON5 CN7 CN8"/>
+    <ang-h a="37" b="18" c="18" z_a="8" z_b="6" z_c="6" K="80.000000" Theta_zero="108.400000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="37" b="18" c="17" z_a="8" z_b="6" z_c="6" K="90.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="6" b="18" c="37" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="4" b="37" c="18" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="109.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="6" b="18" c="17" z_a="1" z_b="6" z_c="6" K="34.530000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info=" "/>
+    <ang-h a="6" b="17" c="18" z_a="1" z_b="6" z_c="6" K="34.530000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info=" "/>
+    <ang-h a="19" b="34" c="40" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="adm jr."/>
+    <ang-h a="19" b="34" c="41" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="adm jr., adm 2011 DNA update"/>
+    <ang-h a="34" b="40" c="35" z_a="8" z_b="15" z_c="8" K="98.900000" Theta_zero="111.600000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="34" b="41" c="35" z_a="8" z_b="15" z_c="8" K="98.900000" Theta_zero="111.600000" Kub="0.000000" S_zero="0.000000" info="adm jr., adm, 2011 DNA update"/>
+    <ang-h a="35" b="40" c="35" z_a="8" z_b="15" z_c="8" K="120.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="35" b="41" c="35" z_a="8" z_b="15" z_c="8" K="120.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="adm jr., adm, 2011 DNA update"/>
+    <ang-h a="7" b="19" c="34" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="adm jr."/>
+    <ang-h a="37" b="40" c="35" z_a="8" z_b="15" z_c="8" K="98.900000" Theta_zero="111.600000" Kub="0.000000" S_zero="0.000000" info="From ON2 P ON3"/>
+    <ang-h a="38" b="18" c="17" z_a="8" z_b="6" z_c="6" K="120.000000" Theta_zero="106.250000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="18" b="17" c="19" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.600000" Kub="11.160000" S_zero="2.561000" info=" "/>
+  </angles-h>
+  <dihedrals-c>
+  <!-- Dihedrals / torsions:
+
+    V(Phi) = K x (1 + cos(n x Phi - Phi0))
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Phi = dihedral angle (°)
+      - n = multiplicity
+      - Phi0 = phase shift angle (°)  -->
+    <dih-c a="-1" b="19" c="34" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="-0.100000" Phi_zero="0.000000" n="3.000000" info="phosphate ester"/>
+    <dih-c a="-1" b="17" c="19" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.200000" Phi_zero="0.000000" n="3.000000" info="alkane"/>
+    <dih-c a="-1" b="19" c="31" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.100000" Phi_zero="0.000000" n="3.000000" info="methylammonium"/>
+    <dih-c a="17" b="38" c="20" d="7" z_a="6" z_b="8" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="38" b="20" c="19" d="7" z_a="8" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="6" b="17" c="38" d="20" z_a="1" z_b="6" z_c="8" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="20" b="19" c="17" d="6" z_a="6" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="7" b="20" c="19" d="7" z_a="1" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="7" b="20" c="19" d="17" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="20" b="17" c="38" d="20" z_a="6" z_b="6" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="5.000000" info="min at 150 310 max at 25 200"/>
+    <dih-c a="20" b="17" c="38" d="20" z_a="6" z_b="6" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="20" b="17" c="38" d="20" z_a="6" z_b="6" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="20" b="19" c="17" d="37" z_a="6" z_b="6" z_c="6" z_d="8" K="0.400000" Phi_zero="0.000000" n="5.000000" info=" "/>
+    <dih-c a="20" b="19" c="17" d="37" z_a="6" z_b="6" z_c="6" z_d="8" K="0.400000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="20" b="19" c="17" d="37" z_a="6" z_b="6" z_c="6" z_d="8" K="0.700000" Phi_zero="0.000000" n="2.000000" info="energy at 0 (c3'endo), adm"/>
+    <dih-c a="20" b="19" c="17" d="37" z_a="6" z_b="6" z_c="6" z_d="8" K="0.500000" Phi_zero="180.000000" n="1.000000" info="energy at 0 (c3'endo), adm"/>
+    <dih-c a="20" b="19" c="17" d="34" z_a="6" z_b="6" z_c="6" z_d="8" K="0.400000" Phi_zero="0.000000" n="5.000000" info="for oligonuclotide"/>
+    <dih-c a="20" b="19" c="17" d="34" z_a="6" z_b="6" z_c="6" z_d="8" K="0.400000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="20" b="19" c="17" d="34" z_a="6" z_b="6" z_c="6" z_d="8" K="0.700000" Phi_zero="0.000000" n="2.000000" info=" "/>
+    <dih-c a="20" b="19" c="17" d="34" z_a="6" z_b="6" z_c="6" z_d="8" K="0.500000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="17" b="38" c="20" d="19" z_a="6" z_b="8" z_c="6" z_d="6" K="0.600000" Phi_zero="180.000000" n="6.000000" info=" "/>
+    <dih-c a="17" b="38" c="20" d="19" z_a="6" z_b="8" z_c="6" z_d="6" K="0.600000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="38" b="20" c="19" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="0.700000" Phi_zero="180.000000" n="5.000000" info="90, shifts c2endo minimum towards 200"/>
+    <dih-c a="38" b="20" c="19" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="4.000000" info="90, shifts c2endo minimum towards 200"/>
+    <dih-c a="38" b="20" c="19" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="180.000000" n="3.000000" info="90, shifts c2endo minimum towards 200"/>
+    <dih-c a="17" b="17" c="19" d="20" z_a="6" z_b="6" z_c="6" z_d="6" K="0.500000" Phi_zero="0.000000" n="4.000000" info=" "/>
+    <dih-c a="17" b="17" c="19" d="20" z_a="6" z_b="6" z_c="6" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="energy in 150 to 250 range"/>
+    <dih-c a="20" b="38" c="17" d="17" z_a="6" z_b="8" z_c="6" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="surface in 200-360 region"/>
+    <dih-c a="34" b="41" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.900000" Phi_zero="180.000000" n="1.000000" info="adm, 2011 DNA update new param, zeta, kat2 set"/>
+    <dih-c a="34" b="41" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.400000" Phi_zero="180.000000" n="2.000000" info="adm, 2011 DNA update new param, zeta, kat2 set"/>
+    <dih-c a="34" b="41" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.200000" Phi_zero="180.000000" n="3.000000" info="adm, 2011 DNA update new param, zeta, kat2 set"/>
+    <dih-c a="34" b="40" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info="DMP, adm jr., RNA"/>
+    <dih-c a="34" b="40" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info="DMP, adm jr., RNA"/>
+    <dih-c a="34" b="40" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info="DMP, adm jr., RNA"/>
+    <dih-c a="34" b="40" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" n="6.000000" info="DMP, adm jr., RNA"/>
+    <dih-c a="34" b="40" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info="DMP, adm jr."/>
+    <dih-c a="34" b="40" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info="DMP, adm jr."/>
+    <dih-c a="34" b="40" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info="DMP, adm jr."/>
+    <dih-c a="34" b="40" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" n="6.000000" info="DMP, adm jr."/>
+    <dih-c a="34" b="41" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info="DMP, adm jr., adm 2011 DNA update"/>
+    <dih-c a="34" b="41" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info="DMP, adm jr., adm 2011 DNA update"/>
+    <dih-c a="34" b="41" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info="DMP, adm jr., adm 2011 DNA update"/>
+    <dih-c a="34" b="41" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" n="6.000000" info="DMP, adm jr., adm 2011 DNA update"/>
+    <dih-c a="34" b="41" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info="DMP, adm jr., adm, 2011 DNA update"/>
+    <dih-c a="34" b="41" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info="DMP, adm jr., adm, 2011 DNA update"/>
+    <dih-c a="34" b="41" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info="DMP, adm jr., adm, 2011 DNA update"/>
+    <dih-c a="34" b="41" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" n="6.000000" info="DMP, adm jr., adm, 2011 DNA update"/>
+    <dih-c a="34" b="40" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info="DMP, adm jr., RNA"/>
+    <dih-c a="34" b="40" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info="DMP, adm jr., RNA"/>
+    <dih-c a="34" b="40" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info="DMP, adm jr., RNA"/>
+    <dih-c a="34" b="40" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" n="6.000000" info="DMP, adm jr., RNA"/>
+    <dih-c a="34" b="40" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="34" b="40" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="34" b="40" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="34" b="40" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" n="6.000000" info=" "/>
+    <dih-c a="34" b="41" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info="adm, 2011 DNA update"/>
+    <dih-c a="34" b="41" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info="adm, 2011 DNA update"/>
+    <dih-c a="34" b="41" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info="adm, 2011 DNA update"/>
+    <dih-c a="34" b="41" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" n="6.000000" info="adm, 2011 DNA update"/>
+    <dih-c a="35" b="40" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="O1P-P-O3'-C3'"/>
+    <dih-c a="35" b="41" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="O1P-P-O3'-C3', adm, 2011 DNA update"/>
+    <dih-c a="35" b="40" c="34" d="18" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="NADPH and bkbmod"/>
+    <dih-c a="35" b="40" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="35" b="41" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="adm 2011 DNA update"/>
+    <dih-c a="35" b="40" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="O1P-P-O5'-C5'"/>
+    <dih-c a="35" b="41" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="O1P-P-O5'-C5', adm, 2011 DNA update"/>
+    <dih-c a="35" b="40" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="35" b="41" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="adm, 2011 DNA update"/>
+    <dih-c a="36" b="40" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="36" b="40" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="adm jr."/>
+    <dih-c a="36" b="41" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="adm jr., adm, 2011 DNA update"/>
+    <dih-c a="36" b="41" c="34" d="17" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="adm jr., adm, 2011 DNA update"/>
+    <dih-c a="36" b="40" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="36" b="40" c="34" d="19" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="adm jr."/>
+    <dih-c a="36" b="40" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="36" b="40" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="adm jr."/>
+    <dih-c a="36" b="41" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="adm jr., adm, 2011 DNA update"/>
+    <dih-c a="36" b="41" c="34" d="20" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="adm jr., adm, 2011 DNA update"/>
+    <dih-c a="36" b="40" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="36" b="40" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="adm jr."/>
+    <dih-c a="36" b="41" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="adm jr., adm, 2011 DNA update"/>
+    <dih-c a="36" b="41" c="34" d="21" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="adm jr., adm, 2011 DNA update"/>
+    <dih-c a="-1" b="36" c="40" d="-1" z_a="-1" z_b="8" z_c="15" z_d="-1" K="0.300000" Phi_zero="0.000000" n="3.000000" info="adm jr."/>
+    <dih-c a="-1" b="36" c="41" d="-1" z_a="-1" z_b="8" z_c="15" z_d="-1" K="0.300000" Phi_zero="0.000000" n="3.000000" info="adm jr., adm, 2011 DNA update"/>
+    <dih-c a="40" b="34" c="17" d="6" z_a="15" z_b="8" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="H-C3'-O3'-P"/>
+    <dih-c a="41" b="34" c="17" d="6" z_a="15" z_b="8" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="H-C3'-O3'-P, adm, 2011 DNA update"/>
+    <dih-c a="40" b="34" c="18" d="6" z_a="15" z_b="8" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="NADPH and bkbmod"/>
+    <dih-c a="40" b="34" c="20" d="7" z_a="15" z_b="8" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="H-C5'-O5'-P"/>
+    <dih-c a="41" b="34" c="20" d="7" z_a="15" z_b="8" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="H-C5'-O5'-P, adm, 2011 DNA update"/>
+    <dih-c a="40" b="34" c="19" d="7" z_a="15" z_b="8" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="40" b="34" c="21" d="8" z_a="15" z_b="8" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="41" b="34" c="21" d="8" z_a="15" z_b="8" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="adm, 2011 DNA update"/>
+    <dih-c a="21" b="19" c="19" d="21" z_a="6" z_b="6" z_c="6" z_d="6" K="0.150000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="21" b="19" c="19" d="19" z_a="6" z_b="6" z_c="6" z_d="6" K="0.150000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="24" b="10" c="25" d="9" z_a="7" z_b="6" z_c="7" z_d="6" K="1.500000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="10" b="25" c="9" d="12" z_a="6" z_b="7" z_c="6" z_d="6" K="1.500000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="25" b="9" c="12" d="12" z_a="7" z_b="6" z_c="6" z_d="6" K="1.500000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="9" b="12" c="12" d="24" z_a="6" z_b="6" z_c="6" z_d="7" K="6.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="12" b="12" c="24" d="10" z_a="6" z_b="6" z_c="7" z_d="6" K="1.500000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="12" b="24" c="10" d="25" z_a="6" z_b="7" z_c="6" z_d="7" K="1.500000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="2" b="12" c="12" d="2" z_a="1" z_b="6" z_c="6" z_d="1" K="3.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="2" b="12" c="9" d="32" z_a="1" z_b="6" z_c="6" z_d="8" K="6.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="32" b="10" c="24" d="1" z_a="8" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="32" b="9" c="25" d="1" z_a="8" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="32" b="10" c="25" d="1" z_a="8" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="1" b="24" c="12" d="2" z_a="1" z_b="7" z_c="6" z_d="1" K="1.500000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="24" b="10" c="25" d="1" z_a="7" z_b="6" z_c="7" z_d="1" K="3.800000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="12" b="9" c="25" d="1" z_a="6" z_b="6" z_c="7" z_d="1" K="3.800000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="12" b="12" c="24" d="1" z_a="6" z_b="6" z_c="7" z_d="1" K="1.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="25" b="10" c="24" d="1" z_a="7" z_b="6" z_c="7" z_d="1" K="1.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="10" b="24" c="12" d="13" z_a="6" z_b="7" z_c="6" z_d="6" K="1.800000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="25" b="9" c="13" d="12" z_a="7" z_b="6" z_c="6" z_d="6" K="1.800000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="9" b="13" c="12" d="24" z_a="6" z_b="6" z_c="6" z_d="7" K="3.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="24" b="9" c="13" d="21" z_a="7" z_b="6" z_c="6" z_d="6" K="5.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="24" b="12" c="13" d="21" z_a="7" z_b="6" z_c="6" z_d="6" K="5.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="9" b="13" c="21" d="8" z_a="6" z_b="6" z_c="6" z_d="1" K="0.460000" Phi_zero="0.000000" n="3.000000" info="adm jr. 11/97"/>
+    <dih-c a="12" b="13" c="21" d="8" z_a="6" z_b="6" z_c="6" z_d="1" K="0.460000" Phi_zero="0.000000" n="3.000000" info="adm jr. 11/97"/>
+    <dih-c a="13" b="9" c="25" d="1" z_a="6" z_b="6" z_c="7" z_d="1" K="4.800000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="12" b="23" c="9" d="27" z_a="6" z_b="7" z_c="6" z_d="7" K="0.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="23" b="9" c="27" d="11" z_a="7" z_b="6" z_c="7" z_d="6" K="0.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="9" b="27" c="11" d="12" z_a="6" z_b="7" z_c="6" z_d="6" K="6.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="27" b="11" c="12" d="12" z_a="7" z_b="6" z_c="6" z_d="6" K="0.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="11" b="12" c="12" d="23" z_a="6" z_b="6" z_c="6" z_d="7" K="6.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="12" b="12" c="23" d="9" z_a="6" z_b="6" z_c="7" z_d="6" K="0.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="27" b="11" c="22" d="0" z_a="7" z_b="6" z_c="7" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="12" b="11" c="22" d="0" z_a="6" z_b="6" z_c="7" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="22" b="11" c="27" d="9" z_a="7" z_b="6" z_c="7" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="22" b="11" c="12" d="12" z_a="7" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="22" b="11" c="12" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="2.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="33" b="9" c="23" d="1" z_a="8" z_b="6" z_c="7" z_d="1" K="3.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="33" b="9" c="27" d="11" z_a="8" z_b="6" z_c="7" z_d="6" K="1.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="33" b="9" c="23" d="12" z_a="8" z_b="6" z_c="7" z_d="6" K="1.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="27" b="11" c="12" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="3.400000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="23" b="12" c="12" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="3.400000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="11" b="12" c="12" d="2" z_a="6" z_b="6" z_c="6" z_d="1" K="4.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="9" b="23" c="12" d="2" z_a="6" z_b="7" z_c="6" z_d="1" K="4.600000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="-1" b="11" c="27" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="2.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="11" b="28" c="14" d="28" z_a="6" z_b="7" z_c="6" z_d="7" K="1.800000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97, 6-mem"/>
+    <dih-c a="28" b="14" c="28" d="15" z_a="7" z_b="6" z_c="7" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="14" b="28" c="15" d="15" z_a="6" z_b="7" z_c="6" z_d="6" K="1.800000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="28" b="15" c="15" d="11" z_a="7" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info="treated 2x"/>
+    <dih-c a="15" b="15" c="11" d="28" z_a="6" z_b="6" z_c="6" z_d="7" K="1.800000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="15" b="11" c="28" d="14" z_a="6" z_b="6" z_c="7" z_d="6" K="10.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="15" b="15" c="30" d="14" z_a="6" z_b="6" z_c="7" z_d="6" K="6.000000" Phi_zero="180.000000" n="2.000000" info="5-mem"/>
+    <dih-c a="15" b="30" c="14" d="23" z_a="6" z_b="7" z_c="6" z_d="7" K="14.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="30" b="14" c="23" d="15" z_a="7" z_b="6" z_c="7" z_d="6" K="6.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="14" b="23" c="15" d="15" z_a="6" z_b="7" z_c="6" z_d="6" K="6.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="23" b="15" c="15" d="30" z_a="7" z_b="6" z_c="6" z_d="7" K="14.000000" Phi_zero="180.000000" n="2.000000" info="treated 2x"/>
+    <dih-c a="11" b="28" c="14" d="2" z_a="6" z_b="7" z_c="6" z_d="1" K="8.500000" Phi_zero="180.000000" n="2.000000" info="H2"/>
+    <dih-c a="15" b="28" c="14" d="2" z_a="6" z_b="7" z_c="6" z_d="1" K="8.500000" Phi_zero="180.000000" n="2.000000" info="H2"/>
+    <dih-c a="15" b="30" c="14" d="2" z_a="6" z_b="7" z_c="6" z_d="1" K="5.200000" Phi_zero="180.000000" n="2.000000" info="H8"/>
+    <dih-c a="15" b="23" c="14" d="2" z_a="6" z_b="7" z_c="6" z_d="1" K="5.200000" Phi_zero="180.000000" n="2.000000" info="H8"/>
+    <dih-c a="15" b="15" c="23" d="1" z_a="6" z_b="6" z_c="7" z_d="1" K="1.200000" Phi_zero="180.000000" n="2.000000" info="H9"/>
+    <dih-c a="30" b="14" c="23" d="1" z_a="7" z_b="6" z_c="7" z_d="1" K="1.200000" Phi_zero="180.000000" n="2.000000" info="H9"/>
+    <dih-c a="1" b="23" c="14" d="2" z_a="1" z_b="7" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="2.000000" info="H8-C-N-H9"/>
+    <dih-c a="14" b="28" c="11" d="22" z_a="6" z_b="7" z_c="6" z_d="7" K="4.000000" Phi_zero="180.000000" n="2.000000" info="N6"/>
+    <dih-c a="15" b="15" c="11" d="22" z_a="6" z_b="6" z_c="6" z_d="7" K="4.000000" Phi_zero="180.000000" n="2.000000" info="N6"/>
+    <dih-c a="30" b="15" c="11" d="22" z_a="7" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="180.000000" n="2.000000" info="N6"/>
+    <dih-c a="15" b="11" c="22" d="0" z_a="6" z_b="6" z_c="7" z_d="1" K="0.500000" Phi_zero="180.000000" n="2.000000" info="6-NH2"/>
+    <dih-c a="28" b="11" c="22" d="0" z_a="7" z_b="6" z_c="7" z_d="1" K="0.500000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="28" b="15" c="15" d="30" z_a="7" z_b="6" z_c="6" z_d="7" K="7.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="11" b="15" c="15" d="23" z_a="6" z_b="6" z_c="6" z_d="7" K="7.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="28" b="11" c="15" d="30" z_a="7" z_b="6" z_c="6" z_d="7" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="11" b="15" c="30" d="14" z_a="6" z_b="6" z_c="7" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="14" b="28" c="15" d="23" z_a="6" z_b="7" z_c="6" z_d="7" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="28" b="15" c="23" d="14" z_a="7" z_b="6" z_c="7" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="9" b="26" c="11" d="29" z_a="6" z_b="7" z_c="6" z_d="7" K="0.200000" Phi_zero="180.000000" n="2.000000" info="jr. 11/97, 6-mem"/>
+    <dih-c a="26" b="11" c="29" d="15" z_a="7" z_b="6" z_c="7" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="11" b="29" c="15" d="16" z_a="6" z_b="7" z_c="6" z_d="6" K="0.200000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="29" b="15" c="16" d="9" z_a="7" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="15" b="16" c="9" d="26" z_a="6" z_b="6" z_c="6" z_d="7" K="0.200000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="16" b="9" c="26" d="11" z_a="6" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="15" b="16" c="30" d="14" z_a="6" z_b="6" z_c="7" z_d="6" K="6.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="16" b="30" c="14" d="24" z_a="6" z_b="7" z_c="6" z_d="7" K="16.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="30" b="14" c="24" d="15" z_a="7" z_b="6" z_c="7" z_d="6" K="6.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="14" b="24" c="15" d="16" z_a="6" z_b="7" z_c="6" z_d="6" K="6.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="24" b="15" c="16" d="30" z_a="7" z_b="6" z_c="6" z_d="7" K="10.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="32" b="9" c="16" d="15" z_a="8" z_b="6" z_c="6" z_d="6" K="14.000000" Phi_zero="180.000000" n="2.000000" info="O6"/>
+    <dih-c a="32" b="9" c="16" d="30" z_a="8" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="32" b="9" c="26" d="11" z_a="8" z_b="6" z_c="7" z_d="6" K="14.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="32" b="9" c="26" d="1" z_a="8" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="22" b="11" c="26" d="9" z_a="7" z_b="6" z_c="7" z_d="6" K="4.000000" Phi_zero="180.000000" n="2.000000" info="N2"/>
+    <dih-c a="22" b="11" c="29" d="15" z_a="7" z_b="6" z_c="7" z_d="6" K="4.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="22" b="11" c="26" d="1" z_a="7" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="26" b="11" c="22" d="0" z_a="7" z_b="6" z_c="7" z_d="1" K="1.200000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="29" b="11" c="22" d="0" z_a="7" z_b="6" z_c="7" z_d="1" K="1.200000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="1" b="26" c="9" d="16" z_a="1" z_b="7" z_c="6" z_d="6" K="3.600000" Phi_zero="180.000000" n="2.000000" info="H1"/>
+    <dih-c a="1" b="26" c="11" d="29" z_a="1" z_b="7" z_c="6" z_d="7" K="3.600000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="2" b="14" c="30" d="16" z_a="1" z_b="6" z_c="7" z_d="6" K="5.600000" Phi_zero="180.000000" n="2.000000" info="H8"/>
+    <dih-c a="2" b="14" c="24" d="15" z_a="1" z_b="6" z_c="7" z_d="6" K="5.600000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="2" b="14" c="24" d="1" z_a="1" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="1" b="24" c="15" d="16" z_a="1" z_b="7" z_c="6" z_d="6" K="1.200000" Phi_zero="180.000000" n="2.000000" info="H9"/>
+    <dih-c a="1" b="24" c="15" d="29" z_a="1" z_b="7" z_c="6" z_d="7" K="1.200000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="1" b="24" c="14" d="30" z_a="1" z_b="7" z_c="6" z_d="7" K="1.200000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="29" b="15" c="16" d="30" z_a="7" z_b="6" z_c="6" z_d="7" K="10.000000" Phi_zero="180.000000" n="2.000000" info="jr. 11/97"/>
+    <dih-c a="9" b="16" c="15" d="23" z_a="6" z_b="6" z_c="6" z_d="7" K="10.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="26" b="9" c="16" d="30" z_a="7" z_b="6" z_c="6" z_d="7" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="9" b="16" c="30" d="14" z_a="6" z_b="6" z_c="7" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="11" b="29" c="15" d="24" z_a="6" z_b="7" z_c="6" z_d="7" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="29" b="15" c="24" d="14" z_a="7" z_b="6" z_c="7" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="9" c="27" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="c22"/>
+    <dih-c a="-1" b="9" c="23" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.900000" Phi_zero="180.000000" n="2.000000" info="c22"/>
+    <dih-c a="-1" b="10" c="24" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.900000" Phi_zero="180.000000" n="2.000000" info="From X CN1 NN2 X, for thymines"/>
+    <dih-c a="-1" b="9" c="26" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.900000" Phi_zero="180.000000" n="2.000000" info="c22"/>
+    <dih-c a="-1" b="9" c="25" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.900000" Phi_zero="180.000000" n="2.000000" info="c22"/>
+    <dih-c a="-1" b="10" c="25" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.900000" Phi_zero="180.000000" n="2.000000" info="c22"/>
+    <dih-c a="-1" b="12" c="23" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="c22"/>
+    <dih-c a="-1" b="12" c="24" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="From X CN3 NN2 X, for thymines"/>
+    <dih-c a="-1" b="12" c="12" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="c22"/>
+    <dih-c a="-1" b="12" c="13" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="-1" b="9" c="12" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="c22"/>
+    <dih-c a="-1" b="9" c="13" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="-1" b="11" c="12" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.800000" Phi_zero="180.000000" n="2.000000" info="c22"/>
+    <dih-c a="-1" b="9" c="16" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="-1" b="11" c="26" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="11" c="15" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="14" c="23" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.500000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="14" c="24" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.500000" Phi_zero="180.000000" n="2.000000" info="From X CN4 NN2 X"/>
+    <dih-c a="-1" b="14" c="28" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="3.500000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="14" c="30" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="2.000000" Phi_zero="180.000000" n="2.000000" info="A,G"/>
+    <dih-c a="-1" b="15" c="15" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="16" c="15" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="-1" b="15" c="23" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.500000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="15" c="24" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.500000" Phi_zero="180.000000" n="2.000000" info="From X CN5 NN2 X"/>
+    <dih-c a="-1" b="15" c="28" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="15" c="29" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="-1" b="15" c="30" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="16" c="30" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="-1" b="11" c="28" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="11" c="29" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. 11/97"/>
+    <dih-c a="9" b="23" c="21" d="8" z_a="6" z_b="7" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="1-M-C"/>
+    <dih-c a="12" b="23" c="21" d="8" z_a="6" z_b="7" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="1-M-C"/>
+    <dih-c a="14" b="23" c="21" d="8" z_a="6" z_b="7" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="9-M-A"/>
+    <dih-c a="15" b="23" c="21" d="8" z_a="6" z_b="7" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="9-M-A"/>
+    <dih-c a="9" b="24" c="21" d="8" z_a="6" z_b="7" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="1-M-U"/>
+    <dih-c a="10" b="24" c="21" d="8" z_a="6" z_b="7" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="1-M-T"/>
+    <dih-c a="12" b="24" c="21" d="8" z_a="6" z_b="7" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="1-M-T/U"/>
+    <dih-c a="14" b="24" c="21" d="8" z_a="6" z_b="7" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="9-M-G"/>
+    <dih-c a="15" b="24" c="21" d="8" z_a="6" z_b="7" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="9-M-G"/>
+    <dih-c a="14" b="24" c="19" d="7" z_a="6" z_b="7" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="9-E-G"/>
+    <dih-c a="15" b="24" c="19" d="7" z_a="6" z_b="7" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="9-E-G"/>
+    <dih-c a="14" b="24" c="19" d="21" z_a="6" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="9-E-G"/>
+    <dih-c a="15" b="24" c="19" d="21" z_a="6" z_b="7" z_c="6" z_d="6" K="0.190000" Phi_zero="0.000000" n="3.000000" info="9-E-G"/>
+    <dih-c a="-1" b="19" c="19" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.150000" Phi_zero="0.000000" n="3.000000" info="Alkanes (0.2 to 0.15)"/>
+    <dih-c a="-1" b="19" c="21" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.150000" Phi_zero="0.000000" n="3.000000" info="Alkanes (0.2 to 0.15)"/>
+    <dih-c a="6" b="18" c="18" d="34" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="3.000000" info="NADPH and bkbmod"/>
+    <dih-c a="34" b="18" c="18" d="23" z_a="8" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info="NADPH and bkbmod"/>
+    <dih-c a="17" b="18" c="38" d="17" z_a="6" z_b="6" z_c="8" z_d="6" K="0.600000" Phi_zero="180.000000" n="6.000000" info=" "/>
+    <dih-c a="18" b="17" c="17" d="17" z_a="6" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="6.000000" info="good for amplitudes"/>
+    <dih-c a="18" b="17" c="17" d="21" z_a="6" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="6.000000" info="good for amplitudes, 5MET"/>
+    <dih-c a="17" b="17" c="17" d="38" z_a="6" z_b="6" z_c="6" z_d="8" K="0.600000" Phi_zero="0.000000" n="6.000000" info=" "/>
+    <dih-c a="17" b="17" c="18" d="38" z_a="6" z_b="6" z_c="6" z_d="8" K="0.600000" Phi_zero="0.000000" n="6.000000" info=" "/>
+    <dih-c a="34" b="17" c="17" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="0.800000" Phi_zero="0.000000" n="6.000000" info=" "/>
+    <dih-c a="34" b="17" c="17" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="5.000000" info="Moves the barrier right"/>
+    <dih-c a="34" b="17" c="17" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="34" b="18" c="17" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="0.800000" Phi_zero="0.000000" n="6.000000" info=" "/>
+    <dih-c a="34" b="18" c="17" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="5.000000" info="Moves the barrier right"/>
+    <dih-c a="34" b="18" c="17" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="0.800000" Phi_zero="0.000000" n="6.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="5.000000" info="Moves the barrier right"/>
+    <dih-c a="37" b="17" c="17" d="17" z_a="8" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="37" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="34" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="34" b="17" c="18" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.500000" Phi_zero="0.000000" n="6.000000" info="for amplitudes"/>
+    <dih-c a="34" b="17" c="18" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.300000" Phi_zero="0.000000" n="5.000000" info="on amplitudes"/>
+    <dih-c a="34" b="17" c="18" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.600000" Phi_zero="180.000000" n="4.000000" info="c2'endo"/>
+    <dih-c a="34" b="17" c="18" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.200000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="17" c="17" d="20" z_a="6" z_b="6" z_c="6" z_d="6" K="0.500000" Phi_zero="180.000000" n="4.000000" info="lowers 180 deg."/>
+    <dih-c a="18" b="23" c="14" d="2" z_a="6" z_b="7" z_c="6" z_d="1" K="0.300000" Phi_zero="180.000000" n="2.000000" info="NF"/>
+    <dih-c a="18" b="23" c="15" d="15" z_a="6" z_b="7" z_c="6" z_d="6" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="18" b="23" c="14" d="30" z_a="6" z_b="7" z_c="6" z_d="7" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="18" b="23" c="14" d="28" z_a="6" z_b="7" z_c="6" z_d="7" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="38" b="18" c="23" d="15" z_a="8" z_b="6" z_c="7" z_d="6" K="1.100000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="38" b="18" c="23" d="14" z_a="8" z_b="6" z_c="7" z_d="6" K="1.100000" Phi_zero="0.000000" n="1.000000" info="NF"/>
+    <dih-c a="39" b="18" c="23" d="15" z_a="8" z_b="6" z_c="7" z_d="6" K="1.100000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="39" b="18" c="23" d="14" z_a="8" z_b="6" z_c="7" z_d="6" K="1.100000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="19" b="18" c="23" d="15" z_a="6" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="19" b="18" c="23" d="14" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="3.000000" info="NF"/>
+    <dih-c a="18" b="18" c="23" d="15" z_a="6" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="18" b="18" c="23" d="14" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="3.000000" info="NF"/>
+    <dih-c a="6" b="18" c="23" d="15" z_a="1" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="6" b="18" c="23" d="14" z_a="1" z_b="6" z_c="7" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="18" b="23" c="12" d="2" z_a="6" z_b="7" z_c="6" z_d="1" K="0.300000" Phi_zero="180.000000" n="2.000000" info="NF"/>
+    <dih-c a="18" b="23" c="9" d="33" z_a="6" z_b="7" z_c="6" z_d="8" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. from A"/>
+    <dih-c a="18" b="23" c="9" d="27" z_a="6" z_b="7" z_c="6" z_d="7" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="18" b="23" c="12" d="12" z_a="6" z_b="7" z_c="6" z_d="6" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="38" b="18" c="23" d="9" z_a="8" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="38" b="18" c="23" d="12" z_a="8" z_b="6" z_c="7" z_d="6" K="1.000000" Phi_zero="0.000000" n="1.000000" info="NF"/>
+    <dih-c a="39" b="18" c="23" d="9" z_a="8" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="39" b="18" c="23" d="12" z_a="8" z_b="6" z_c="7" z_d="6" K="1.000000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="19" b="18" c="23" d="9" z_a="6" z_b="6" z_c="7" z_d="6" K="1.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="19" b="18" c="23" d="12" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="3.000000" info="NF 030697"/>
+    <dih-c a="18" b="18" c="23" d="9" z_a="6" z_b="6" z_c="7" z_d="6" K="1.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="18" b="18" c="23" d="12" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="18" c="23" d="9" z_a="1" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="6" b="18" c="23" d="12" z_a="1" z_b="6" z_c="7" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="18" b="24" c="12" d="2" z_a="6" z_b="7" z_c="6" z_d="1" K="0.300000" Phi_zero="180.000000" n="2.000000" info="NF"/>
+    <dih-c a="18" b="24" c="10" d="32" z_a="6" z_b="7" z_c="6" z_d="8" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. from A"/>
+    <dih-c a="18" b="24" c="10" d="25" z_a="6" z_b="7" z_c="6" z_d="7" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="18" b="24" c="12" d="13" z_a="6" z_b="7" z_c="6" z_d="6" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="38" b="18" c="24" d="9" z_a="8" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="38" b="18" c="24" d="10" z_a="8" z_b="6" z_c="7" z_d="6" K="0.700000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="38" b="18" c="24" d="10" z_a="8" z_b="6" z_c="7" z_d="6" K="0.800000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="38" b="18" c="24" d="12" z_a="8" z_b="6" z_c="7" z_d="6" K="0.900000" Phi_zero="0.000000" n="1.000000" info="NF"/>
+    <dih-c a="39" b="18" c="24" d="9" z_a="8" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="39" b="18" c="24" d="10" z_a="8" z_b="6" z_c="7" z_d="6" K="0.700000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="39" b="18" c="24" d="10" z_a="8" z_b="6" z_c="7" z_d="6" K="0.800000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="39" b="18" c="24" d="12" z_a="8" z_b="6" z_c="7" z_d="6" K="0.900000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="19" b="18" c="24" d="10" z_a="6" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="19" b="18" c="24" d="12" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="3.000000" info="NF"/>
+    <dih-c a="18" b="18" c="24" d="10" z_a="6" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="18" b="18" c="24" d="12" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="18" c="24" d="10" z_a="1" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="6" b="18" c="24" d="12" z_a="1" z_b="6" z_c="7" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="18" b="24" c="14" d="2" z_a="6" z_b="7" z_c="6" z_d="1" K="0.300000" Phi_zero="180.000000" n="2.000000" info="NF"/>
+    <dih-c a="18" b="24" c="14" d="30" z_a="6" z_b="7" z_c="6" z_d="7" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="18" b="24" c="15" d="16" z_a="6" z_b="7" z_c="6" z_d="6" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr. from U"/>
+    <dih-c a="18" b="24" c="15" d="29" z_a="6" z_b="7" z_c="6" z_d="7" K="11.000000" Phi_zero="180.000000" n="2.000000" info="adm jr."/>
+    <dih-c a="38" b="18" c="24" d="15" z_a="8" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="38" b="18" c="24" d="15" z_a="8" z_b="6" z_c="7" z_d="6" K="1.100000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="38" b="18" c="24" d="14" z_a="8" z_b="6" z_c="7" z_d="6" K="1.400000" Phi_zero="0.000000" n="1.000000" info="NF"/>
+    <dih-c a="39" b="18" c="24" d="15" z_a="8" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="39" b="18" c="24" d="15" z_a="8" z_b="6" z_c="7" z_d="6" K="1.100000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="39" b="18" c="24" d="14" z_a="8" z_b="6" z_c="7" z_d="6" K="1.400000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="19" b="18" c="24" d="15" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="19" b="18" c="24" d="14" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="3.000000" info="NF 030697"/>
+    <dih-c a="18" b="18" c="24" d="15" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="18" b="18" c="24" d="14" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="18" c="24" d="15" z_a="1" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="6" b="18" c="24" d="14" z_a="1" z_b="6" z_c="7" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="NF"/>
+    <dih-c a="17" b="38" c="18" d="23" z_a="6" z_b="8" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="38" c="18" d="24" z_a="6" z_b="8" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="39" c="18" d="23" z_a="6" z_b="8" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="39" c="18" d="24" z_a="6" z_b="8" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="19" c="18" d="23" z_a="6" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="19" c="18" d="24" z_a="6" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="7" b="19" c="18" d="23" z_a="1" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="7" b="19" c="18" d="24" z_a="1" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="18" c="18" d="23" z_a="6" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="18" c="18" d="24" z_a="6" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="18" c="18" d="23" z_a="1" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="18" c="18" d="24" z_a="1" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="20" c="34" d="40" z_a="6" z_b="6" z_c="8" z_d="15" K="0.200000" Phi_zero="120.000000" n="1.000000" info="C4'-C5'-O5'-P, adm jr."/>
+    <dih-c a="17" b="20" c="34" d="41" z_a="6" z_b="6" z_c="8" z_d="15" K="0.200000" Phi_zero="120.000000" n="1.000000" info="C4'-C5'-O5'-P, adm jr., adm, 2011 DNA update"/>
+    <dih-c a="17" b="20" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="1.330000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="17" b="20" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="0.180000" Phi_zero="0.000000" n="2.000000" info=" "/>
+    <dih-c a="17" b="20" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="0.320000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="7" b="20" c="37" d="4" z_a="1" z_b="6" z_c="8" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="17" c="20" d="34" z_a="6" z_b="6" z_c="6" z_d="8" K="0.200000" Phi_zero="180.000000" n="4.000000" info="adm jr."/>
+    <dih-c a="17" b="17" c="20" d="34" z_a="6" z_b="6" z_c="6" z_d="8" K="0.800000" Phi_zero="180.000000" n="3.000000" info="C3'-C4'-C5'-O5'"/>
+    <dih-c a="17" b="17" c="20" d="34" z_a="6" z_b="6" z_c="6" z_d="8" K="0.400000" Phi_zero="0.000000" n="2.000000" info=" "/>
+    <dih-c a="17" b="17" c="20" d="34" z_a="6" z_b="6" z_c="6" z_d="8" K="2.500000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="19" b="17" c="20" d="34" z_a="6" z_b="6" z_c="6" z_d="8" K="0.200000" Phi_zero="180.000000" n="3.000000" info="from gam, carbocyclic and 25P1"/>
+    <dih-c a="17" b="17" c="20" d="37" z_a="6" z_b="6" z_c="6" z_d="8" K="0.200000" Phi_zero="180.000000" n="4.000000" info="adm jr."/>
+    <dih-c a="17" b="17" c="20" d="37" z_a="6" z_b="6" z_c="6" z_d="8" K="0.800000" Phi_zero="180.000000" n="3.000000" info="C3'-C4'-C5'-O5'"/>
+    <dih-c a="17" b="17" c="20" d="37" z_a="6" z_b="6" z_c="6" z_d="8" K="0.400000" Phi_zero="0.000000" n="2.000000" info=" "/>
+    <dih-c a="17" b="17" c="20" d="37" z_a="6" z_b="6" z_c="6" z_d="8" K="2.500000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="38" b="17" c="20" d="34" z_a="8" z_b="6" z_c="6" z_d="8" K="3.400000" Phi_zero="180.000000" n="1.000000" info="O4'-C4'-C5'-O5',influences +60"/>
+    <dih-c a="39" b="17" c="20" d="34" z_a="8" z_b="6" z_c="6" z_d="8" K="3.400000" Phi_zero="180.000000" n="1.000000" info="RNA"/>
+    <dih-c a="38" b="17" c="20" d="37" z_a="8" z_b="6" z_c="6" z_d="8" K="3.400000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="39" b="17" c="20" d="37" z_a="8" z_b="6" z_c="6" z_d="8" K="3.400000" Phi_zero="180.000000" n="1.000000" info="RNA"/>
+    <dih-c a="7" b="20" c="17" d="17" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="7" b="20" c="17" d="19" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="1.000000" info="carbocylic, 25P1"/>
+    <dih-c a="7" b="20" c="17" d="38" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="7" b="20" c="17" d="39" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="1.000000" info="RNA"/>
+    <dih-c a="6" b="17" c="20" d="34" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="3.000000" info="H-C4'-C5'-O5'"/>
+    <dih-c a="6" b="17" c="20" d="37" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="7" b="19" c="19" d="38" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="21" b="17" c="17" d="20" z_a="6" z_b="6" z_c="6" z_d="6" K="0.500000" Phi_zero="180.000000" n="4.000000" info="-> CN9"/>
+    <dih-c a="6" b="17" c="21" d="8" z_a="1" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info="-> CN9"/>
+    <dih-c a="17" b="17" c="21" d="8" z_a="6" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info="-> CN9"/>
+    <dih-c a="38" b="17" c="21" d="8" z_a="8" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info="-> CN9"/>
+    <dih-c a="6" b="17" c="17" d="21" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="-> CN9"/>
+    <dih-c a="34" b="17" c="17" d="21" z_a="8" z_b="6" z_c="6" z_d="6" K="0.200000" Phi_zero="0.000000" n="4.000000" info="-> CN9"/>
+    <dih-c a="34" b="17" c="17" d="21" z_a="8" z_b="6" z_c="6" z_d="6" K="0.800000" Phi_zero="180.000000" n="3.000000" info="-> CN9"/>
+    <dih-c a="19" b="17" c="17" d="21" z_a="6" z_b="6" z_c="6" z_d="6" K="0.500000" Phi_zero="180.000000" n="4.000000" info="-> CN9"/>
+    <dih-c a="19" b="17" c="17" d="20" z_a="6" z_b="6" z_c="6" z_d="6" K="0.500000" Phi_zero="180.000000" n="4.000000" info="lowers 180 deg."/>
+    <dih-c a="18" b="17" c="17" d="20" z_a="6" z_b="6" z_c="6" z_d="6" K="0.200000" Phi_zero="180.000000" n="4.000000" info="RNA"/>
+    <dih-c a="34" b="17" c="17" d="20" z_a="8" z_b="6" z_c="6" z_d="6" K="0.200000" Phi_zero="0.000000" n="4.000000" info=" "/>
+    <dih-c a="34" b="17" c="17" d="20" z_a="8" z_b="6" z_c="6" z_d="6" K="0.800000" Phi_zero="180.000000" n="3.000000" info="P [100,250]"/>
+    <dih-c a="37" b="17" c="17" d="20" z_a="8" z_b="6" z_c="6" z_d="6" K="0.200000" Phi_zero="0.000000" n="4.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="20" z_a="8" z_b="6" z_c="6" z_d="6" K="0.800000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="34" b="17" c="17" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.500000" Phi_zero="0.000000" n="6.000000" info="good for amplitudes"/>
+    <dih-c a="34" b="17" c="17" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.300000" Phi_zero="0.000000" n="5.000000" info="impact on amplitudes"/>
+    <dih-c a="34" b="17" c="17" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.600000" Phi_zero="180.000000" n="4.000000" info="increases c2'endo"/>
+    <dih-c a="34" b="17" c="17" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.200000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="34" b="17" c="17" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="0.400000" Phi_zero="0.000000" n="6.000000" info="RNA, good for amplitudes"/>
+    <dih-c a="34" b="17" c="17" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="5.000000" info="RNA, impact on amplitudes"/>
+    <dih-c a="34" b="17" c="17" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="180.000000" n="4.000000" info="RNA, increases c2'endo"/>
+    <dih-c a="34" b="17" c="17" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="1.600000" Phi_zero="0.000000" n="3.000000" info="RNA, increases C2'endo"/>
+    <dih-c a="34" b="18" c="18" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="0.400000" Phi_zero="0.000000" n="6.000000" info="RNA, good for amplitudes"/>
+    <dih-c a="34" b="18" c="18" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="5.000000" info="RNA, impact on amplitudes"/>
+    <dih-c a="34" b="18" c="18" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="180.000000" n="4.000000" info="RNA, increases c2'endo"/>
+    <dih-c a="34" b="18" c="18" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="1.600000" Phi_zero="0.000000" n="3.000000" info="RNA, increases C2'endo"/>
+    <dih-c a="37" b="17" c="17" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.500000" Phi_zero="0.000000" n="6.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.300000" Phi_zero="0.000000" n="5.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.600000" Phi_zero="180.000000" n="4.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="38" z_a="8" z_b="6" z_c="6" z_d="8" K="0.200000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="0.400000" Phi_zero="0.000000" n="6.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="5.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="180.000000" n="4.000000" info=" "/>
+    <dih-c a="37" b="17" c="17" d="39" z_a="8" z_b="6" z_c="6" z_d="8" K="1.600000" Phi_zero="0.000000" n="3.000000" info="increases c2'endo"/>
+    <dih-c a="18" b="38" c="17" d="20" z_a="6" z_b="8" z_c="6" z_d="6" K="0.800000" Phi_zero="0.000000" n="3.000000" info="P [30,80]"/>
+    <dih-c a="18" b="39" c="17" d="20" z_a="6" z_b="8" z_c="6" z_d="6" K="2.000000" Phi_zero="0.000000" n="3.000000" info="To lower barrier in RNA"/>
+    <dih-c a="18" b="39" c="17" d="21" z_a="6" z_b="8" z_c="6" z_d="6" K="2.000000" Phi_zero="0.000000" n="3.000000" info="To lower barrier in RNA, 5MET"/>
+    <dih-c a="34" b="17" c="19" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="0.800000" Phi_zero="0.000000" n="6.000000" info=" "/>
+    <dih-c a="34" b="17" c="19" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="5.000000" info="Moves the barrier right"/>
+    <dih-c a="34" b="17" c="19" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="34" b="17" c="18" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="0.600000" Phi_zero="0.000000" n="6.000000" info="RNA"/>
+    <dih-c a="34" b="17" c="18" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="5.000000" info="RNA c2/c3 endo in RNA"/>
+    <dih-c a="34" b="17" c="18" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="1.600000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="37" b="17" c="19" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="0.800000" Phi_zero="0.000000" n="6.000000" info=" "/>
+    <dih-c a="37" b="17" c="19" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="5.000000" info=" "/>
+    <dih-c a="37" b="17" c="19" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="37" b="17" c="18" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="0.600000" Phi_zero="0.000000" n="6.000000" info="RNA, c2/c3 endo"/>
+    <dih-c a="37" b="17" c="18" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="5.000000" info="RNA"/>
+    <dih-c a="37" b="17" c="18" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="1.600000" Phi_zero="180.000000" n="3.000000" info="RNA"/>
+    <dih-c a="34" b="17" c="19" d="7" z_a="8" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="37" b="17" c="19" d="7" z_a="8" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="34" b="17" c="18" d="6" z_a="8" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info="RNA"/>
+    <dih-c a="37" b="17" c="18" d="6" z_a="8" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="180.000000" n="3.000000" info="RNA"/>
+    <dih-c a="6" b="17" c="17" d="34" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="17" c="17" d="37" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="17" c="34" d="41" z_a="6" z_b="6" z_c="8" z_d="15" K="0.600000" Phi_zero="0.000000" n="5.000000" info="adm, 2011 DNA update"/>
+    <dih-c a="17" b="17" c="34" d="41" z_a="6" z_b="6" z_c="8" z_d="15" K="0.200000" Phi_zero="0.000000" n="4.000000" info="locat of 200 mimima, adm, 2011 DNA update"/>
+    <dih-c a="17" b="17" c="34" d="41" z_a="6" z_b="6" z_c="8" z_d="15" K="0.000000" Phi_zero="180.000000" n="3.000000" info="barE beteen minima, adm, 2011 DNA update"/>
+    <dih-c a="17" b="17" c="34" d="41" z_a="6" z_b="6" z_c="8" z_d="15" K="0.400000" Phi_zero="0.000000" n="2.000000" info="relE of 200 vs 275 min, adm, 2011 DNA update"/>
+    <dih-c a="17" b="17" c="34" d="41" z_a="6" z_b="6" z_c="8" z_d="15" K="1.900000" Phi_zero="180.000000" n="1.000000" info="adm, 2011 DNA update"/>
+    <dih-c a="17" b="17" c="34" d="40" z_a="6" z_b="6" z_c="8" z_d="15" K="0.600000" Phi_zero="0.000000" n="5.000000" info="RNA"/>
+    <dih-c a="17" b="17" c="34" d="40" z_a="6" z_b="6" z_c="8" z_d="15" K="0.200000" Phi_zero="0.000000" n="4.000000" info="locat of 200 mimima, RNA"/>
+    <dih-c a="17" b="17" c="34" d="40" z_a="6" z_b="6" z_c="8" z_d="15" K="0.000000" Phi_zero="180.000000" n="3.000000" info="barE beteen minima, RNA"/>
+    <dih-c a="17" b="17" c="34" d="40" z_a="6" z_b="6" z_c="8" z_d="15" K="0.400000" Phi_zero="0.000000" n="2.000000" info="relE of 200 vs 275 min, RNA"/>
+    <dih-c a="17" b="17" c="34" d="40" z_a="6" z_b="6" z_c="8" z_d="15" K="1.900000" Phi_zero="180.000000" n="1.000000" info="RNA"/>
+    <dih-c a="19" b="17" c="34" d="40" z_a="6" z_b="6" z_c="8" z_d="15" K="2.500000" Phi_zero="180.000000" n="1.000000" info="3-terminal phosphate"/>
+    <dih-c a="19" b="17" c="34" d="41" z_a="6" z_b="6" z_c="8" z_d="15" K="1.900000" Phi_zero="180.000000" n="1.000000" info="adm, 2011 DNA update new param, eps"/>
+    <dih-c a="18" b="17" c="34" d="40" z_a="6" z_b="6" z_c="8" z_d="15" K="2.500000" Phi_zero="180.000000" n="1.000000" info="RNA"/>
+    <dih-c a="18" b="18" c="34" d="40" z_a="6" z_b="6" z_c="8" z_d="15" K="2.500000" Phi_zero="180.000000" n="1.000000" info="NADPH and bkbmod"/>
+    <dih-c a="17" b="18" c="34" d="40" z_a="6" z_b="6" z_c="8" z_d="15" K="2.500000" Phi_zero="180.000000" n="1.000000" info="NADPH and bkbmod"/>
+    <dih-c a="17" b="17" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="0.500000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="17" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="0.300000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="17" b="17" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="1.500000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="19" b="17" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="0.500000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="19" b="17" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="19" b="17" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="0.300000" Phi_zero="0.000000" n="1.000000" info=" "/>
+    <dih-c a="18" b="17" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="0.800000" Phi_zero="0.000000" n="3.000000" info="RNA"/>
+    <dih-c a="18" b="17" c="37" d="4" z_a="6" z_b="6" z_c="8" z_d="1" K="0.500000" Phi_zero="0.000000" n="1.000000" info="RNA"/>
+    <dih-c a="6" b="17" c="37" d="4" z_a="1" z_b="6" z_c="8" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="17" c="20" d="7" z_a="1" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info="H-C4'-C5'-H"/>
+    <dih-c a="6" b="17" c="17" d="20" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="H-C3'-C4'-C5'"/>
+    <dih-c a="19" b="18" c="38" d="17" z_a="6" z_b="6" z_c="8" z_d="6" K="0.600000" Phi_zero="180.000000" n="6.000000" info=" "/>
+    <dih-c a="19" b="17" c="17" d="38" z_a="6" z_b="6" z_c="6" z_d="8" K="1.000000" Phi_zero="0.000000" n="4.000000" info="adm, 2011 DNA update new param, C2'-C3'-C4'-O4'; lowers c3'endo"/>
+    <dih-c a="19" b="17" c="17" d="38" z_a="6" z_b="6" z_c="6" z_d="8" K="0.300000" Phi_zero="180.000000" n="5.000000" info="adm, 2011 DNA update new param, C2'-C3'-C4'-O4'; position of minima"/>
+    <dih-c a="19" b="17" c="17" d="38" z_a="6" z_b="6" z_c="6" z_d="8" K="0.300000" Phi_zero="180.000000" n="6.000000" info="adm, 2011 DNA update new param, C2'-C3'-C4'-O4'; position of minima"/>
+    <dih-c a="18" b="18" c="39" d="17" z_a="6" z_b="6" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" n="6.000000" info="RNA, Lowers barrier"/>
+    <dih-c a="18" b="17" c="17" d="39" z_a="6" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info="RNA"/>
+    <dih-c a="17" b="19" c="18" d="38" z_a="6" z_b="6" z_c="6" z_d="8" K="0.600000" Phi_zero="0.000000" n="6.000000" info="C3'-C2'-C1'-O4', adjust barrier"/>
+    <dih-c a="17" b="18" c="18" d="39" z_a="6" z_b="6" z_c="6" z_d="8" K="0.400000" Phi_zero="0.000000" n="6.000000" info="RNA"/>
+    <dih-c a="18" b="19" c="17" d="17" z_a="6" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="6.000000" info="good for amplitudes"/>
+    <dih-c a="18" b="18" c="17" d="17" z_a="6" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="6.000000" info="RNA"/>
+    <dih-c a="17" b="17" c="38" d="18" z_a="6" z_b="6" z_c="8" z_d="6" K="0.600000" Phi_zero="180.000000" n="6.000000" info="C3'-C4'-O4'-C1'"/>
+    <dih-c a="17" b="17" c="39" d="18" z_a="6" z_b="6" z_c="8" z_d="6" K="0.000000" Phi_zero="180.000000" n="6.000000" info="RNA"/>
+    <dih-c a="6" b="17" c="17" d="19" z_a="1" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="17" c="19" d="18" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="18" c="19" d="17" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="17" c="17" d="38" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="180.000000" n="3.000000" info="useful"/>
+    <dih-c a="7" b="19" c="18" d="38" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="17" c="17" d="6" z_a="1" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="18" c="19" d="7" z_a="1" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="17" c="19" d="7" z_a="1" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="7" b="19" c="17" d="17" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="useful *cccc*"/>
+    <dih-c a="6" b="17" c="38" d="18" z_a="1" z_b="6" z_c="8" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="18" c="38" d="17" z_a="1" z_b="6" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="17" c="17" d="39" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="180.000000" n="3.000000" info="RNA"/>
+    <dih-c a="8" b="21" c="17" d="39" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="180.000000" n="3.000000" info="RNA, 5MET"/>
+    <dih-c a="7" b="19" c="18" d="39" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="3.000000" info="RNA"/>
+    <dih-c a="6" b="18" c="39" d="17" z_a="1" z_b="6" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="RNA"/>
+    <dih-c a="6" b="17" c="39" d="18" z_a="1" z_b="6" z_c="8" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="RNA"/>
+    <dih-c a="6" b="17" c="18" d="18" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="RNA, H-C3'-C2'-C1'"/>
+    <dih-c a="6" b="18" c="18" d="17" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="RNA, H-C1'-C2'-C3'"/>
+    <dih-c a="6" b="18" c="18" d="39" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="3.000000" info="RNA, H-C2'-C1'-O4'"/>
+    <dih-c a="23" b="18" c="18" d="37" z_a="7" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info="Adenine and cytosine"/>
+    <dih-c a="24" b="18" c="18" d="37" z_a="7" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info="Guanine and uracil"/>
+    <dih-c a="37" b="18" c="18" d="6" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="18" c="18" d="6" z_a="1" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="17" b="17" c="18" d="37" z_a="6" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="39" b="18" c="18" d="37" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="37" b="18" c="17" d="34" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="37" b="17" c="18" d="34" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="37" b="18" c="17" d="37" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="6" b="18" c="37" d="4" z_a="1" z_b="6" z_c="8" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="4" b="37" c="18" d="18" z_a="1" z_b="8" z_c="6" z_d="6" K="0.000000" Phi_zero="180.000000" n="6.000000" info="ejd, 2010 RNA update"/>
+    <dih-c a="4" b="37" c="18" d="18" z_a="1" z_b="8" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="3.000000" info="shifts min, ejd, 2010 RNA update"/>
+    <dih-c a="4" b="37" c="18" d="18" z_a="1" z_b="8" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="2.000000" info="ejd, 2010 RNA update"/>
+    <dih-c a="4" b="37" c="18" d="18" z_a="1" z_b="8" z_c="6" z_d="6" K="0.800000" Phi_zero="0.000000" n="1.000000" info="height of right barrier and can shift min, ejd, 2010 RNA update"/>
+    <dih-c a="4" b="37" c="18" d="17" z_a="1" z_b="8" z_c="6" z_d="6" K="0.200000" Phi_zero="0.000000" n="3.000000" info="ejd, 2010 RNA update"/>
+    <dih-c a="4" b="37" c="18" d="17" z_a="1" z_b="8" z_c="6" z_d="6" K="0.000000" Phi_zero="180.000000" n="2.000000" info="ejd, 2010 RNA update"/>
+    <dih-c a="4" b="37" c="18" d="17" z_a="1" z_b="8" z_c="6" z_d="6" K="2.000000" Phi_zero="0.000000" n="1.000000" info="height of left side barrier, ejd, 2010 RNA update"/>
+    <dih-c a="18" b="38" c="17" d="21" z_a="6" z_b="8" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="added for sugar model compounds"/>
+    <dih-c a="6" b="17" c="18" d="37" z_a="1" z_b="6" z_c="6" z_d="8" K="0.195000" Phi_zero="0.000000" n="3.000000" info="for nadp/nadph (NOT!), adm jr."/>
+    <dih-c a="6" b="18" c="17" d="17" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="for nadp/nadph (NOT!), adm jr."/>
+    <dih-c a="6" b="17" c="17" d="18" z_a="1" z_b="6" z_c="6" z_d="6" K="0.195000" Phi_zero="0.000000" n="3.000000" info="for nadp/nadph (NOT!), adm jr."/>
+    <dih-c a="6" b="17" c="18" d="6" z_a="1" z_b="6" z_c="6" z_d="1" K="0.195000" Phi_zero="0.000000" n="3.000000" info="for nadp/nadph (NOT!), adm jr."/>
+  </dihedrals-c>
+  <impropers>
+  <!-- Impropers:  V(Phi) = K x (Phi - Phi0)^2
+
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Phi = angle (°)
+      - Phi0 = equilibrium angle (°)  -->
+    <imp a="1" b="-1" c="-1" d="23" z_a="1" z_b="-1" z_c="-1" z_d="7" K="1.000000" Phi_zero="0.000000" info="adm jr. 11/97"/>
+    <imp a="24" b="14" c="15" d="1" z_a="7" z_b="6" z_c="6" z_d="1" K="7.000000" Phi_zero="0.000000" info="adm jr. 11/97"/>
+    <imp a="0" b="-1" c="-1" d="22" z_a="1" z_b="-1" z_c="-1" z_d="7" K="4.000000" Phi_zero="0.000000" info="adm jr. 11/97"/>
+    <imp a="22" b="11" c="0" d="0" z_a="7" z_b="6" z_c="1" z_d="1" K="6.000000" Phi_zero="0.000000" info="adm jr. 11/97"/>
+    <imp a="9" b="-1" c="-1" d="32" z_a="6" z_b="-1" z_c="-1" z_d="8" K="90.000000" Phi_zero="0.000000" info=" "/>
+    <imp a="10" b="-1" c="-1" d="32" z_a="6" z_b="-1" z_c="-1" z_d="8" K="90.000000" Phi_zero="0.000000" info=" "/>
+    <imp a="9" b="26" c="16" d="32" z_a="6" z_b="7" z_c="6" z_d="8" K="90.000000" Phi_zero="0.000000" info=" "/>
+    <imp a="10" b="24" c="25" d="32" z_a="6" z_b="7" z_c="7" z_d="8" K="110.000000" Phi_zero="0.000000" info="adm jr. 11/97"/>
+    <imp a="9" b="25" c="13" d="32" z_a="6" z_b="7" z_c="6" z_d="8" K="90.000000" Phi_zero="0.000000" info="adm jr. 11/97"/>
+    <imp a="9" b="-1" c="-1" d="33" z_a="6" z_b="-1" z_c="-1" z_d="8" K="80.000000" Phi_zero="0.000000" info="par_32, adm jr. 10/2/91"/>
+    <imp a="11" b="-1" c="-1" d="22" z_a="6" z_b="-1" z_c="-1" z_d="7" K="90.000000" Phi_zero="0.000000" info=" "/>
+    <imp a="11" b="29" c="26" d="22" z_a="6" z_b="7" z_c="7" z_d="7" K="40.000000" Phi_zero="0.000000" info=" "/>
+    <imp a="11" b="28" c="15" d="22" z_a="6" z_b="7" z_c="6" z_d="7" K="40.000000" Phi_zero="0.000000" info=" "/>
+    <imp a="11" b="27" c="12" d="22" z_a="6" z_b="7" z_c="6" z_d="7" K="60.000000" Phi_zero="0.000000" info=" "/>
+    <imp a="21" b="-1" c="-1" d="13" z_a="6" z_b="-1" z_c="-1" z_d="6" K="14.000000" Phi_zero="0.000000" info="adm jr. 11/97"/>
+  </impropers>
+  <non-bonded>
+  <!-- Non-bonded 12-6
+  0= Key_a, 1= Epslion, 2= R0 (A), 3=  FF info
+
+  Non-bonded (12-6): V(rij) =  Epslion(ij) x [(R0(ij)/rij)^12 - 2 x (R0(ij)/rij)^6]
+  With:
+  Epslion(ij) = sqrt(Epslion(i) x Epslion(j))  and Epslion(i) (kcal mol^-1)
+  R0(ij)= (R0(i) + R0(j))/2  and R0(i) (A)
+  -->
+    <non-bd a="0" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="1" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="2" z_a="1" Ei="-0.046000" Ri="1.100000" Eii="0.000000" Rii="0.000000" info="aromatic Hvdw"/>
+    <non-bd a="3" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="4" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="5" z_a="1" Ei="-0.022000" Ri="1.320000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="6" z_a="1" Ei="-0.022000" Ri="1.320000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="7" z_a="1" Ei="-0.028000" Ri="1.340000" Eii="0.000000" Rii="0.000000" info="bound to CN8"/>
+    <non-bd a="8" z_a="1" Ei="-0.024000" Ri="1.340000" Eii="0.000000" Rii="0.000000" info="bound to CN9"/>
+    <non-bd a="22" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="23" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="24" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info="NN2, for N9 in guanines"/>
+    <non-bd a="26" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="25" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="27" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="28" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="29" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="30" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="31" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="32" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="33" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="34" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="35" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="36" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="37" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="38" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="39" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="9" z_a="6" Ei="-0.100000" Ri="1.900000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="10" z_a="6" Ei="-0.100000" Ri="1.900000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="11" z_a="6" Ei="-0.100000" Ri="1.900000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="12" z_a="6" Ei="-0.090000" Ri="1.900000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="13" z_a="6" Ei="-0.090000" Ri="1.900000" Eii="0.000000" Rii="0.000000" info="adm jr."/>
+    <non-bd a="14" z_a="6" Ei="-0.075000" Ri="1.900000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="15" z_a="6" Ei="-0.075000" Ri="1.900000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="16" z_a="6" Ei="-0.075000" Ri="1.900000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="17" z_a="6" Ei="-0.020000" Ri="2.275000" Eii="-0.010000" Rii="1.900000" info="to protein CT1"/>
+    <non-bd a="18" z_a="6" Ei="-0.020000" Ri="2.275000" Eii="-0.010000" Rii="1.900000" info="to protein CT1"/>
+    <non-bd a="19" z_a="6" Ei="-0.056000" Ri="2.010000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="20" z_a="6" Ei="-0.056000" Ri="2.010000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="21" z_a="6" Ei="-0.078000" Ri="2.040000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="40" z_a="15" Ei="-0.585000" Ri="2.150000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="41" z_a="15" Ei="-0.585000" Ri="2.150000" Eii="0.000000" Rii="0.000000" info=" "/>
+  </non-bonded>
+</ff-xml>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P3</space-group>
+  <sg-num>143</sg-num>
+  <hm-symbol>P 3</hm-symbol>
+  <bravais>Trigonal</bravais>
+  <settings num="1">
+    <set name="P_3" x="a" y="b" z="c">
+    </set>
+  </settings>
+  <wyckoff num="4">
+    <wyck id="1" mul="3" let="d" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-y" y="x-y" z="z"/>
+      <pos x="-x+y" y="-x" z="z"/>
+    </wyck>
+    <wyck id="2" mul="1" let="c" site="3..">
+      <pos x="2/3" y="1/3" z="z"/>
+    </wyck>
+    <wyck id="3" mul="1" let="b" site="3..">
+      <pos x="1/3" y="2/3" z="z"/>
+    </wyck>
+    <wyck id="4" mul="1" let="a" site="3..">
+      <pos x="0" y="0" z="z"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

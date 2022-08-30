@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>I41/amd</space-group>
+  <sg-num>141</sg-num>
+  <hm-symbol>I 41/a 2/m 2/d</hm-symbol>
+  <bravais>Tetragonal</bravais>
+  <settings num="2">
+    <set name="I_41sa_m_d" origin="1" x="a" y="b+1/4" z="c-1/8">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="1/2"/>
+      </points>
+    </set>
+    <set name="I_41sa_m_d" origin="2" x="a" y="b" z="c">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="1/2"/>
+      </points>
+    </set>
+  </settings>
+  <wyckoff num="9">
+    <wyck id="1" mul="16" let="i" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x+1/2" y="-y" z="z+1/2"/>
+      <pos x="-y+1/4" y="x+3/4" z="z+1/4"/>
+      <pos x="y+1/4" y="-x+1/4" z="z+3/4"/>
+      <pos x="-x+1/2" y="y" z="-z+1/2"/>
+      <pos x="x" y="-y" z="-z"/>
+      <pos x="y+1/4" y="x+3/4" z="-z+1/4"/>
+      <pos x="-y+1/4" y="-x+1/4" z="-z+3/4"/>
+      <pos x="-x" y="-y" z="-z"/>
+      <pos x="x+1/2" y="y" z="-z+1/2"/>
+      <pos x="y+3/4" y="-x+1/4" z="-z+3/4"/>
+      <pos x="-y+3/4" y="x+3/4" z="-z+1/4"/>
+      <pos x="x+1/2" y="-y" z="z+1/2"/>
+      <pos x="-x" y="y" z="z"/>
+      <pos x="-y+3/4" y="-x+1/4" z="z+3/4"/>
+      <pos x="y+3/4" y="x+3/4" z="z+1/4"/>
+    </wyck>
+    <wyck id="2" mul="8" let="h" site=".m.">
+      <pos x="0" y="y" z="z"/>
+      <pos x="1/2" y="-y" z="z+1/2"/>
+      <pos x="-y+1/4" y="3/4" z="z+1/4"/>
+      <pos x="y+1/4" y="1/4" z="z+3/4"/>
+      <pos x="1/2" y="y" z="-z+1/2"/>
+      <pos x="0" y="-y" z="-z"/>
+      <pos x="y+1/4" y="3/4" z="-z+1/4"/>
+      <pos x="-y+1/4" y="1/4" z="-z+3/4"/>
+    </wyck>
+    <wyck id="3" mul="8" let="g" site="..2">
+      <pos x="x" y="x+1/4" z="7/8"/>
+      <pos x="-x+1/2" y="-x+3/4" z="3/8"/>
+      <pos x="-x" y="x+3/4" z="1/8"/>
+      <pos x="x+1/2" y="-x+1/4" z="5/8"/>
+      <pos x="-x" y="-x+3/4" z="1/8"/>
+      <pos x="x+1/2" y="x+1/4" z="5/8"/>
+      <pos x="x" y="-x+1/4" z="7/8"/>
+      <pos x="-x+1/2" y="x+3/4" z="3/8"/>
+    </wyck>
+    <wyck id="4" mul="8" let="f" site=".2.">
+      <pos x="x" y="0" z="0"/>
+      <pos x="-x+1/2" y="0" z="1/2"/>
+      <pos x="1/4" y="x+3/4" z="1/4"/>
+      <pos x="1/4" y="-x+1/4" z="3/4"/>
+      <pos x="-x" y="0" z="0"/>
+      <pos x="x+1/2" y="0" z="1/2"/>
+      <pos x="3/4" y="-x+1/4" z="3/4"/>
+      <pos x="3/4" y="x+3/4" z="1/4"/>
+    </wyck>
+    <wyck id="5" mul="4" let="e" site="2mm.">
+      <pos x="0" y="1/4" z="z"/>
+      <pos x="0" y="3/4" z="z+1/4"/>
+      <pos x="1/2" y="1/4" z="-z+1/2"/>
+      <pos x="1/2" y="3/4" z="-z+1/4"/>
+    </wyck>
+    <wyck id="6" mul="4" let="d" site=".2/m.">
+      <pos x="0" y="0" z="1/2"/>
+      <pos x="1/2" y="0" z="0"/>
+      <pos x="1/4" y="3/4" z="3/4"/>
+      <pos x="1/4" y="1/4" z="1/4"/>
+    </wyck>
+    <wyck id="7" mul="4" let="c" site=".2/m.">
+      <pos x="0" y="0" z="0"/>
+      <pos x="1/2" y="0" z="1/2"/>
+      <pos x="1/4" y="3/4" z="1/4"/>
+      <pos x="1/4" y="1/4" z="3/4"/>
+    </wyck>
+    <wyck id="8" mul="2" let="b" site="-4m2">
+      <pos x="0" y="1/4" z="3/8"/>
+      <pos x="0" y="3/4" z="5/8"/>
+    </wyck>
+    <wyck id="9" mul="2" let="a" site="-4m2">
+      <pos x="0" y="3/4" z="1/8"/>
+      <pos x="1/2" y="3/4" z="3/8"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

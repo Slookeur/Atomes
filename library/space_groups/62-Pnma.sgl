@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>Pnma</space-group>
+  <sg-num>62</sg-num>
+  <hm-symbol>P 21/n 21/m 21/a</hm-symbol>
+  <bravais>Orthorhombic</bravais>
+  <settings num="6">
+    <set name="P_n_m_a" x="a" y="b" z="c">
+    </set>
+    <set name="P_m_n_b" x="b" y="a" z="-c">
+    </set>
+    <set name="P_b_n_m" x="c" y="a" z="b">
+    </set>
+    <set name="P_c_m_n" x="-c" y="b" z="a">
+    </set>
+    <set name="P_m_c_n" x="b" y="c" z="a">
+    </set>
+    <set name="P_n_a_m" x="a" y="-c" z="b">
+    </set>
+  </settings>
+  <wyckoff num="4">
+    <wyck id="1" mul="8" let="d" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x+1/2" y="-y" z="z+1/2"/>
+      <pos x="-x" y="y+1/2" z="-z"/>
+      <pos x="x+1/2" y="-y+1/2" z="-z+1/2"/>
+      <pos x="-x" y="-y" z="-z"/>
+      <pos x="x+1/2" y="y" z="-z+1/2"/>
+      <pos x="x" y="-y+1/2" z="z"/>
+      <pos x="-x+1/2" y="y+1/2" z="z+1/2"/>
+    </wyck>
+    <wyck id="2" mul="4" let="c" site=".m.">
+      <pos x="x" y="1/4" z="z"/>
+      <pos x="-x+1/2" y="3/4" z="z+1/2"/>
+      <pos x="-x" y="3/4" z="-z"/>
+      <pos x="x+1/2" y="1/4" z="-z+1/2"/>
+    </wyck>
+    <wyck id="3" mul="4" let="b" site="-1">
+      <pos x="0" y="0" z="1/2"/>
+      <pos x="1/2" y="0" z="0"/>
+      <pos x="0" y="1/2" z="1/2"/>
+      <pos x="1/2" y="1/2" z="0"/>
+    </wyck>
+    <wyck id="4" mul="4" let="a" site="-1">
+      <pos x="0" y="0" z="0"/>
+      <pos x="1/2" y="0" z="1/2"/>
+      <pos x="0" y="1/2" z="0"/>
+      <pos x="1/2" y="1/2" z="1/2"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

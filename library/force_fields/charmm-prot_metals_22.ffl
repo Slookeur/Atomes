@@ -1,0 +1,1249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Force Field Library XML file -->
+<ff-xml>
+  <force-field>CHARMM 22 proteins and metals</force-field>
+  <!--  data adapted from the file: par_all22_prot_metals.prm -->
+  <units>k-calories per mol</units>
+  <ff-data>
+    <atoms dim="5">98</atoms>
+    <bonds-h dim="2" pot="1">139</bonds-h>
+    <bonds-q dim="0" pot="0">0</bonds-q>
+    <bonds-m dim="0" pot="0">0</bonds-m>
+    <angles-h dim="4" pot="-1">345</angles-h>
+    <angles-q dim="0" pot="0">0</angles-q>
+    <dihedrals-c dim="3" pot="1">452</dihedrals-c>
+    <dihedrals-ccc dim="0" pot="0">0</dihedrals-ccc>
+    <impropers dim="3" pot="2">43</impropers>
+    <inversions dim="0" pot="0">0</inversions>
+    <non-bonded dim="4" pot="-1">98</non-bonded>
+  </ff-data>
+  <atoms>
+    <at label="H" mass="1.00800" key="H" info="polar H"/>
+    <at label="H" mass="1.00800" key="HC" info="N-ter H"/>
+    <at label="H" mass="1.00800" key="HA" info="nonpolar H"/>
+    <at label="H" mass="1.00800" key="HT" info="TIPS3P WATER HYDROGEN"/>
+    <at label="H" mass="1.00800" key="HP" info="aromatic H"/>
+    <at label="H" mass="1.00800" key="HB" info="backbone H"/>
+    <at label="H" mass="1.00800" key="HR1" info="his he1, (+) his HG,HD2"/>
+    <at label="H" mass="1.00800" key="HR2" info="(+) his HE1"/>
+    <at label="H" mass="1.00800" key="HR3" info="neutral his HG, HD2"/>
+    <at label="H" mass="1.00800" key="HS" info="thiol hydrogen"/>
+    <at label="H" mass="1.00800" key="HE1" info="for alkene; RHC=CR"/>
+    <at label="H" mass="1.00800" key="HE2" info="for alkene; H2C=CR"/>
+    <at label="H" mass="1.00800" key="HA1" info="alkane, CH, new LJ params (see toppar_all22_prot_aliphatic_c27.str)"/>
+    <at label="H" mass="1.00800" key="HA2" info="alkane, CH2, new LJ params (see toppar_all22_prot_aliphatic_c27.str)"/>
+    <at label="H" mass="1.00800" key="HA3" info="alkane, CH3, new LJ params (see toppar_all22_prot_aliphatic_c27.str)"/>
+    <at label="H" mass="1.00800" key="HF1" info="Aliphatic H on fluorinated C (see toppar_all22_prot_fluoro_alkanes.str)"/>
+    <at label="H" mass="1.00800" key="HF2" info="Aliphatic H on fluorinated C (see toppar_all22_prot_fluoro_alkanes.str)"/>
+    <at label="C" mass="12.01100" key="C" info="carbonyl C, peptide backbone"/>
+    <at label="C" mass="12.01100" key="CA" info="aromatic C"/>
+    <at label="C" mass="12.01100" key="CT1" info="aliphatic sp3 C for CH"/>
+    <at label="C" mass="12.01100" key="CT2" info="aliphatic sp3 C for CH2"/>
+    <at label="C" mass="12.01100" key="CT3" info="aliphatic sp3 C for CH3"/>
+    <at label="C" mass="12.01100" key="CPH1" info="his CG and CD2 carbons"/>
+    <at label="C" mass="12.01100" key="CPH2" info="his CE1 carbon"/>
+    <at label="C" mass="12.01100" key="CPT" info="trp C between rings"/>
+    <at label="C" mass="12.01100" key="CY" info="TRP C in pyrrole ring"/>
+    <at label="C" mass="12.01100" key="CP1" info="tetrahedral C (proline CA)"/>
+    <at label="C" mass="12.01100" key="CP2" info="tetrahedral C (proline CB/CG)"/>
+    <at label="C" mass="12.01100" key="CP3" info="tetrahedral C (proline CD)"/>
+    <at label="C" mass="12.01100" key="CC" info="carbonyl C, asn,asp,gln,glu,cter,ct2"/>
+    <at label="C" mass="12.01100" key="CD" info="carbonyl C, pres aspp,glup,ct1"/>
+    <at label="C" mass="12.01100" key="CPA" info="heme alpha-C"/>
+    <at label="C" mass="12.01100" key="CPB" info="heme beta-C"/>
+    <at label="C" mass="12.01100" key="CPM" info="heme meso-C"/>
+    <at label="C" mass="12.01100" key="CM" info="heme CO carbon"/>
+    <at label="C" mass="12.01100" key="CS" info="thiolate carbon"/>
+    <at label="C" mass="12.01100" key="CE1" info="for alkene; RHC=CR"/>
+    <at label="C" mass="12.01100" key="CE2" info="for alkene; H2C=CR"/>
+    <at label="C" mass="12.01100" key="CST" info="CO2 carbon "/>
+    <at label="C" mass="12.01100" key="CT" info="aliphatic sp3 C, new LJ params, no hydrogens (see toppar_all22_prot_aliphatic_c27.str)"/>
+    <at label="C" mass="12.01100" key="CT1x" info="aliphatic sp3 C for CH, new LJ params (see toppar_all22_prot_aliphatic_c27.str)"/>
+    <at label="C" mass="12.01100" key="CT2x" info="aliphatic sp3 C for CH2, new LJ params (see toppar_all22_prot_aliphatic_c27.str)"/>
+    <at label="C" mass="12.01100" key="CT3x" info="aliphatic sp3 C for CH3, new LJ params (see toppar_all22_prot_aliphatic_c27.str)"/>
+    <at label="C" mass="12.01100" key="CN" info="C for cyano group (see toppar_all22_prot_pyridines.str)"/>
+    <at label="C" mass="12.01100" key="CAP" info="aromatic C for pyrimidines (see toppar_all22_prot_pyridines.str)"/>
+    <at label="C" mass="12.01100" key="COA" info="carbonyl C for pyrimidines (see toppar_all22_prot_pyridines.str)"/>
+    <at label="C" mass="12.01100" key="C3" info="cyclopropyl carbon"/>
+    <at label="N" mass="14.00700" key="N" info="proline N"/>
+    <at label="N" mass="14.00700" key="NR1" info="neutral his protonated ring nitrogen"/>
+    <at label="N" mass="14.00700" key="NR2" info="neutral his unprotonated ring nitrogen"/>
+    <at label="N" mass="14.00700" key="NR3" info="charged his ring nitrogen"/>
+    <at label="N" mass="14.00700" key="NH1" info="peptide nitrogen"/>
+    <at label="N" mass="14.00700" key="NH2" info="amide nitrogen"/>
+    <at label="N" mass="14.00700" key="NH3" info="ammonium nitrogen"/>
+    <at label="N" mass="14.00700" key="NC2" info="guanidinium nitroogen"/>
+    <at label="N" mass="14.00700" key="NY" info="TRP N in pyrrole ring"/>
+    <at label="N" mass="14.00700" key="NP" info="Proline ring NH2+ (N-terminal)"/>
+    <at label="N" mass="14.00700" key="NPH" info="heme pyrrole N"/>
+    <at label="N" mass="14.00700" key="NC" info="N for cyano group (see toppar_all22_prot_pyridines.str)"/>
+    <at label="O" mass="15.99900" key="O" info="carbonyl oxygen"/>
+    <at label="O" mass="15.99900" key="OB" info="carbonyl oxygen in acetic acid"/>
+    <at label="O" mass="15.99900" key="OC" info="carboxylate oxygen"/>
+    <at label="O" mass="15.99900" key="OH1" info="hydroxyl oxygen"/>
+    <at label="O" mass="15.99940" key="OS" info="ester oxygen"/>
+    <at label="O" mass="15.99940" key="OT" info="TIPS3P WATER OXYGEN"/>
+    <at label="O" mass="15.99900" key="OM" info="heme CO/O2 oxygen"/>
+    <at label="O" mass="15.99900" key="OST" info="CO2 oxygen"/>
+    <at label="O" mass="15.99900" key="OCA" info="carbonyl O for pyrimidines (see toppar_all22_prot_pyridines.str)"/>
+    <at label="S" mass="32.06000" key="S" info="sulphur"/>
+    <at label="S" mass="32.06000" key="SM" info="sulfur C-S-S-C type"/>
+    <at label="S" mass="32.06000" key="SS" info="thiolate sulfur"/>
+    <at label="He" mass="4.00260" key="HE" info="helium"/>
+    <at label="Ne" mass="20.17970" key="NE" info="neon"/>
+    <at label="C" mass="12.01100" key="CF1" info="monofluoromethyl (see toppar_all22_prot_fluoro_alkanes.str)"/>
+    <at label="C" mass="12.01100" key="CF2" info="difluoromethyl (see toppar_all22_prot_fluoro_alkanes.str)"/>
+    <at label="C" mass="12.01100" key="CF3" info="trifluoromethyl (see toppar_all22_prot_fluoro_alkanes.str)"/>
+    <at label="Fe" mass="55.84700" key="FE" info="heme iron 56"/>
+    <at label="Cl" mass="35.45300" key="CLAL" info="Chlorine Atom (see toppar_all22_prot_aldehydes.str)"/>
+    <at label="F" mass="18.99800" key="FA" info="aromatic flourine (see toppar_all22_prot_pyridines.str)"/>
+    <at label="F" mass="18.99800" key="F1" info="Fluorine, monofluoro (see toppar_all22_prot_fluoro_alkanes.str)"/>
+    <at label="F" mass="18.99800" key="F2" info="Fluorine, difluoro (see toppar_all22_prot_fluoro_alkanes.str)"/>
+    <at label="F" mass="18.99800" key="F3" info="Fluorine, trifluoro (see toppar_all22_prot_fluoro_alkanes.str)"/>
+    <at label="D" mass="0.00000" key="DUM" info="dummy atom"/>
+    <at label="Na" mass="22.989770" key="SOD" info="Sodium Ion"/>
+    <at label="Mg" mass="24.305000" key="MG" info="Magnesium Ion"/>
+    <at label="P" mass="39.102000" key="POT" info="Potassium Ion! check masses"/>
+    <at label="Cs" mass="132.900000" key="CES" info="Cesium Ion"/>
+    <at label="Ca" mass="40.080000" key="CAL" info="Calcium Ion"/>
+    <at label="Cl" mass="35.450000" key="CLA" info="Chloride Ion"/>
+    <at label="Zn" mass="65.370000" key="ZN" info="zinc (II) cation"/>
+    <at label="Ag" mass="107.868200" key="AG" info="Silver metal (HH et al. 2008) "/>
+    <at label="Al" mass="26.981539" key="AL" info="Aluminium metal (HH et al. 2008)"/>
+    <at label="Au" mass="196.966500" key="AU" info="Gold metal (HH et al. 2008)"/>
+    <at label="Cu" mass="63.546000" key="CU" info="Copper metal (HH et al. 2008)"/>
+    <at label="Ni" mass="58.693400" key="NI" info="Nickel metal (HH et al. 2008)"/>
+    <at label="Pb" mass="207.200000" key="PB" info="Lead metal (HH et al. 2008)"/>
+    <at label="Pd" mass="106.420000" key="PD" info="Palladium metal (HH et al. 2008)"/>
+    <at label="Pt" mass="195.084000" key="PT" info="Platinum metal (HH et al. 2008)"/>
+  </atoms>
+  <bonds-h>
+  <!-- Quadratic bonds:
+
+    V(R) = K x (R - R0)^2
+    With:
+      - K = spring constant (kcal mol^-1 A^-2)
+      - R = bond distance (A)
+      - R0 = equilibrium distance (A)
+   -->
+    <bd-h a="38" b="66" z_a="6" z_b="8" K="937.960000" R_zero="1.160000" info="to Sulfate (PSUL) link"/>
+    <bd-h a="70" b="76" z_a="16" z_b="26" K="250.000000" R_zero="2.320000" info="bond length optimized to reproduce "/>
+    <bd-h a="17" b="17" z_a="6" z_b="6" K="600.000000" R_zero="1.335000" info="Heme vinyl substituent (KK, from propene (JCS))"/>
+    <bd-h a="18" b="18" z_a="6" z_b="6" K="305.000000" R_zero="1.375000" info="benzene, JES 8/25/89"/>
+    <bd-h a="36" b="36" z_a="6" z_b="6" K="440.000000" R_zero="1.340000" info="for butene; from propene, yin/adm jr., 12/95"/>
+    <bd-h a="36" b="37" z_a="6" z_b="6" K="500.000000" R_zero="1.342000" info="for propene, yin/adm jr., 12/95"/>
+    <bd-h a="36" b="20" z_a="6" z_b="6" K="365.000000" R_zero="1.502000" info="for butene; from propene, yin/adm jr., 12/95"/>
+    <bd-h a="36" b="21" z_a="6" z_b="6" K="383.000000" R_zero="1.504000" info="for butene, yin/adm jr., 12/95"/>
+    <bd-h a="37" b="37" z_a="6" z_b="6" K="510.000000" R_zero="1.330000" info="for ethene, yin/adm jr., 12/95"/>
+    <bd-h a="26" b="17" z_a="6" z_b="6" K="250.000000" R_zero="1.490000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="26" b="29" z_a="6" z_b="6" K="250.000000" R_zero="1.490000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="26" b="30" z_a="6" z_b="6" K="200.000000" R_zero="1.490000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="27" b="26" z_a="6" z_b="6" K="222.500000" R_zero="1.527000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="27" b="27" z_a="6" z_b="6" K="222.500000" R_zero="1.537000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="28" b="27" z_a="6" z_b="6" K="222.500000" R_zero="1.537000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="32" b="36" z_a="6" z_b="6" K="450.000000" R_zero="1.380000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <bd-h a="32" b="31" z_a="6" z_b="6" K="299.800000" R_zero="1.443200" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <bd-h a="32" b="32" z_a="6" z_b="6" K="340.700000" R_zero="1.346400" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <bd-h a="22" b="22" z_a="6" z_b="6" K="410.000000" R_zero="1.360000" info="histidine, adm jr., 6/27/90"/>
+    <bd-h a="33" b="31" z_a="6" z_b="6" K="360.000000" R_zero="1.371600" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <bd-h a="24" b="18" z_a="6" z_b="6" K="305.000000" R_zero="1.368000" info="adm jr., 12/30/91, for jwk"/>
+    <bd-h a="24" b="24" z_a="6" z_b="6" K="360.000000" R_zero="1.400000" info="jr., 12/30/91, for jwk"/>
+    <bd-h a="19" b="17" z_a="6" z_b="6" K="250.000000" R_zero="1.490000" info="Ala Dipeptide ab initio calc's (LK) fixed from 10/90 (5/91)"/>
+    <bd-h a="19" b="29" z_a="6" z_b="6" K="200.000000" R_zero="1.522000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <bd-h a="19" b="30" z_a="6" z_b="6" K="200.000000" R_zero="1.522000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <bd-h a="19" b="19" z_a="6" z_b="6" K="222.500000" R_zero="1.500000" info="alkane update, adm jr., 3/2/92"/>
+    <bd-h a="20" b="17" z_a="6" z_b="6" K="250.000000" R_zero="1.490000" info="Ala Dipeptide ab initio calc's (LK) fixed from 10/90 (5/91)"/>
+    <bd-h a="20" b="18" z_a="6" z_b="6" K="230.000000" R_zero="1.490000" info="phe,tyr, JES 8/25/89"/>
+    <bd-h a="20" b="29" z_a="6" z_b="6" K="200.000000" R_zero="1.522000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <bd-h a="20" b="30" z_a="6" z_b="6" K="200.000000" R_zero="1.522000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <bd-h a="20" b="32" z_a="6" z_b="6" K="230.000000" R_zero="1.490000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <bd-h a="20" b="22" z_a="6" z_b="6" K="229.630000" R_zero="1.500000" info="his, adm jr., 7/22/89, FC from CT2CT, BL from crystals"/>
+    <bd-h a="20" b="19" z_a="6" z_b="6" K="222.500000" R_zero="1.538000" info="alkane update, adm jr., 3/2/92"/>
+    <bd-h a="20" b="20" z_a="6" z_b="6" K="222.500000" R_zero="1.530000" info="alkane update, adm jr., 3/2/92"/>
+    <bd-h a="21" b="17" z_a="6" z_b="6" K="250.000000" R_zero="1.490000" info="Ala Dipeptide ab initio calc's (LK) fixed from 10/90 (5/91)"/>
+    <bd-h a="21" b="18" z_a="6" z_b="6" K="230.000000" R_zero="1.490000" info="toluene, adm jr. 3/7/92"/>
+    <bd-h a="21" b="29" z_a="6" z_b="6" K="200.000000" R_zero="1.522000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <bd-h a="21" b="30" z_a="6" z_b="6" K="200.000000" R_zero="1.522000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <bd-h a="21" b="32" z_a="6" z_b="6" K="230.000000" R_zero="1.490000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <bd-h a="21" b="22" z_a="6" z_b="6" K="229.630000" R_zero="1.500000" info="his, adm jr., 7/22/89, FC from CT2CT, BL from crystals"/>
+    <bd-h a="21" b="35" z_a="6" z_b="6" K="190.000000" R_zero="1.531000" info="ethylthiolate 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <bd-h a="21" b="19" z_a="6" z_b="6" K="222.500000" R_zero="1.538000" info="alkane update, adm jr., 3/2/92"/>
+    <bd-h a="21" b="20" z_a="6" z_b="6" K="222.500000" R_zero="1.528000" info="alkane update, adm jr., 3/2/92"/>
+    <bd-h a="21" b="21" z_a="6" z_b="6" K="222.500000" R_zero="1.530000" info="alkane update, adm jr., 3/2/92"/>
+    <bd-h a="25" b="18" z_a="6" z_b="6" K="350.000000" R_zero="1.365000" info="jr., 5/08/91, indole CCDB structure search"/>
+    <bd-h a="25" b="24" z_a="6" z_b="6" K="350.000000" R_zero="1.440000" info="jr., 12/30/91, for jwk"/>
+    <bd-h a="25" b="20" z_a="6" z_b="6" K="230.000000" R_zero="1.510000" info="Kb from alkane freq.. b0 from TRP crystal"/>
+    <bd-h a="76" b="34" z_a="26" z_b="6" K="258.000000" R_zero="1.900000" info="Heme (6-liganded): CO ligand (KK 05/13/91)"/>
+    <bd-h a="76" b="33" z_a="26" z_b="6" K="0.000000" R_zero="3.381400" info="Heme (6-liganded): for ic para only (KK 05/13/91)"/>
+    <bd-h a="0" b="30" z_a="1" z_b="6" K="330.000000" R_zero="1.110000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <bd-h a="2" b="18" z_a="1" z_b="6" K="340.000000" R_zero="1.083000" info="trp, adm jr., 10/02/89"/>
+    <bd-h a="2" b="29" z_a="1" z_b="6" K="317.130000" R_zero="1.100000" info="adm jr., 5/13/91, formamide geometry and vibrations"/>
+    <bd-h a="2" b="27" z_a="1" z_b="6" K="309.000000" R_zero="1.111000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="2" b="28" z_a="1" z_b="6" K="309.000000" R_zero="1.111000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="2" b="33" z_a="1" z_b="6" K="367.600000" R_zero="1.090000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <bd-h a="2" b="35" z_a="1" z_b="6" K="300.000000" R_zero="1.111000" info="methylthiolate 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <bd-h a="2" b="19" z_a="1" z_b="6" K="309.000000" R_zero="1.111000" info="alkane update, adm jr., 3/2/92"/>
+    <bd-h a="2" b="20" z_a="1" z_b="6" K="309.000000" R_zero="1.111000" info="alkane update, adm jr., 3/2/92"/>
+    <bd-h a="2" b="21" z_a="1" z_b="6" K="322.000000" R_zero="1.111000" info="alkane update, adm jr., 3/2/92"/>
+    <bd-h a="2" b="25" z_a="1" z_b="6" K="330.000000" R_zero="1.080000" info="JWK 05/14/91 new r0 from indole"/>
+    <bd-h a="10" b="36" z_a="1" z_b="6" K="360.500000" R_zero="1.100000" info="for propene, yin/adm jr., 12/95"/>
+    <bd-h a="11" b="37" z_a="1" z_b="6" K="365.000000" R_zero="1.100000" info="for ethene, yin/adm jr., 12/95"/>
+    <bd-h a="5" b="26" z_a="1" z_b="6" K="330.000000" R_zero="1.080000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="5" b="19" z_a="1" z_b="6" K="330.000000" R_zero="1.080000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <bd-h a="5" b="20" z_a="1" z_b="6" K="330.000000" R_zero="1.080000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <bd-h a="5" b="21" z_a="1" z_b="6" K="330.000000" R_zero="1.080000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <bd-h a="4" b="18" z_a="1" z_b="6" K="340.000000" R_zero="1.080000" info="phe,tyr JES 8/25/89"/>
+    <bd-h a="4" b="25" z_a="1" z_b="6" K="350.000000" R_zero="1.080000" info="jr., 12/30/91, for jwk"/>
+    <bd-h a="6" b="22" z_a="1" z_b="6" K="375.000000" R_zero="1.083000" info="his, adm jr., 6/27/90"/>
+    <bd-h a="6" b="23" z_a="1" z_b="6" K="340.000000" R_zero="1.090000" info="his, adm jr., 6/28/29"/>
+    <bd-h a="7" b="23" z_a="1" z_b="6" K="333.000000" R_zero="1.070000" info="his, adm jr., 6/27/90"/>
+    <bd-h a="8" b="22" z_a="1" z_b="6" K="365.000000" R_zero="1.083000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <bd-h a="3" b="3" z_a="1" z_b="1" K="0.000000" R_zero="1.513900" info="FROM TIPS3P GEOMETRY (FOR SHAKE/W PARAM)"/>
+    <bd-h a="47" b="17" z_a="7" z_b="6" K="260.000000" R_zero="1.300000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="47" b="26" z_a="7" z_b="6" K="320.000000" R_zero="1.434000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="47" b="28" z_a="7" z_b="6" K="320.000000" R_zero="1.455000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="54" b="17" z_a="7" z_b="6" K="463.000000" R_zero="1.365000" info="403.0->463.0, 1.305->1.365 guanidinium (KK)"/>
+    <bd-h a="54" b="20" z_a="7" z_b="6" K="261.000000" R_zero="1.490000" info="arg, (DS)"/>
+    <bd-h a="54" b="21" z_a="7" z_b="6" K="261.000000" R_zero="1.490000" info="methylguanidinium, adm jr., 3/26/92"/>
+    <bd-h a="54" b="1" z_a="7" z_b="1" K="455.000000" R_zero="1.000000" info="405.0->455.0 GUANIDINIUM (KK)"/>
+    <bd-h a="51" b="17" z_a="7" z_b="6" K="370.000000" R_zero="1.345000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <bd-h a="51" b="19" z_a="7" z_b="6" K="320.000000" R_zero="1.430000" info="NMA Gas and Liquid Phase IR Spectra (LK)"/>
+    <bd-h a="51" b="20" z_a="7" z_b="6" K="320.000000" R_zero="1.430000" info="NMA Gas and Liquid Phase IR Spectra (LK)"/>
+    <bd-h a="51" b="21" z_a="7" z_b="6" K="320.000000" R_zero="1.430000" info="NMA Gas and Liquid Phase IR Spectra (LK)"/>
+    <bd-h a="51" b="0" z_a="7" z_b="1" K="440.000000" R_zero="0.997000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <bd-h a="51" b="1" z_a="7" z_b="1" K="405.000000" R_zero="0.980000" info="(DS)"/>
+    <bd-h a="52" b="29" z_a="7" z_b="6" K="430.000000" R_zero="1.360000" info="adm jr. 4/10/91, acetamide"/>
+    <bd-h a="52" b="20" z_a="7" z_b="6" K="240.000000" R_zero="1.455000" info="from NH2 CT3, neutral glycine, adm jr."/>
+    <bd-h a="52" b="21" z_a="7" z_b="6" K="240.000000" R_zero="1.455000" info="methylamine geom/freq, adm jr., 6/2/92"/>
+    <bd-h a="52" b="0" z_a="7" z_b="1" K="480.000000" R_zero="1.000000" info="adm jr. 8/13/90 acetamide geometry and vibrations"/>
+    <bd-h a="52" b="1" z_a="7" z_b="1" K="460.000000" R_zero="1.000000" info="methylamine geom/freq, adm jr., 6/2/92"/>
+    <bd-h a="53" b="19" z_a="7" z_b="6" K="200.000000" R_zero="1.480000" info="new stretch and bend; methylammonium (KK 03/10/92)"/>
+    <bd-h a="53" b="20" z_a="7" z_b="6" K="200.000000" R_zero="1.480000" info="new stretch and bend; methylammonium (KK 03/10/92)"/>
+    <bd-h a="53" b="21" z_a="7" z_b="6" K="200.000000" R_zero="1.480000" info="new stretch and bend; methylammonium (KK 03/10/92)"/>
+    <bd-h a="53" b="1" z_a="7" z_b="1" K="403.000000" R_zero="1.040000" info="new stretch and bend; methylammonium (KK 03/10/92)"/>
+    <bd-h a="56" b="26" z_a="7" z_b="6" K="320.000000" R_zero="1.485000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="56" b="28" z_a="7" z_b="6" K="320.000000" R_zero="1.502000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="56" b="1" z_a="7" z_b="1" K="460.000000" R_zero="1.006000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <bd-h a="57" b="31" z_a="7" z_b="6" K="377.200000" R_zero="1.375700" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <bd-h a="57" b="76" z_a="7" z_b="26" K="270.200000" R_zero="1.958000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <bd-h a="48" b="22" z_a="7" z_b="6" K="400.000000" R_zero="1.380000" info="his, ADM JR., 7/20/89"/>
+    <bd-h a="48" b="23" z_a="7" z_b="6" K="400.000000" R_zero="1.360000" info="his, ADM JR., 7/20/89"/>
+    <bd-h a="48" b="0" z_a="7" z_b="1" K="466.000000" R_zero="1.000000" info="his, ADM JR., 7/20/89"/>
+    <bd-h a="49" b="22" z_a="7" z_b="6" K="400.000000" R_zero="1.380000" info="his, ADM JR., 7/20/89"/>
+    <bd-h a="49" b="23" z_a="7" z_b="6" K="400.000000" R_zero="1.320000" info="his, ADM JR., 7/20/89"/>
+    <bd-h a="49" b="76" z_a="7" z_b="26" K="65.000000" R_zero="2.200000" info="Heme (6-liganded): His ligand (KK 05/13/91)"/>
+    <bd-h a="50" b="22" z_a="7" z_b="6" K="380.000000" R_zero="1.370000" info="his, adm jr., 6/28/90"/>
+    <bd-h a="50" b="23" z_a="7" z_b="6" K="380.000000" R_zero="1.320000" info="his, adm jr., 6/27/90"/>
+    <bd-h a="50" b="0" z_a="7" z_b="1" K="453.000000" R_zero="1.000000" info="his, adm jr., 6/27/90"/>
+    <bd-h a="55" b="18" z_a="7" z_b="6" K="270.000000" R_zero="1.370000" info="jr., 12/30/91, for jwk"/>
+    <bd-h a="55" b="24" z_a="7" z_b="6" K="270.000000" R_zero="1.375000" info="jr., 12/30/91, for jwk"/>
+    <bd-h a="55" b="0" z_a="7" z_b="1" K="465.000000" R_zero="0.976000" info="indole JWK 08/28/89"/>
+    <bd-h a="59" b="17" z_a="8" z_b="6" K="620.000000" R_zero="1.230000" info="Peptide geometry, condensed phase (LK)"/>
+    <bd-h a="59" b="29" z_a="8" z_b="6" K="650.000000" R_zero="1.230000" info="adm jr. 4/10/91, acetamide"/>
+    <bd-h a="60" b="29" z_a="8" z_b="6" K="750.000000" R_zero="1.220000" info="adm jr., 10/17/90, acetic acid vibrations and geom."/>
+    <bd-h a="60" b="30" z_a="8" z_b="6" K="750.000000" R_zero="1.220000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <bd-h a="61" b="18" z_a="8" z_b="6" K="525.000000" R_zero="1.260000" info="adm jr. 8/27/91, phenoxide"/>
+    <bd-h a="61" b="29" z_a="8" z_b="6" K="525.000000" R_zero="1.260000" info="adm jr. 7/23/91, acetic acid"/>
+    <bd-h a="61" b="20" z_a="8" z_b="6" K="450.000000" R_zero="1.330000" info="ethoxide 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <bd-h a="61" b="21" z_a="8" z_b="6" K="450.000000" R_zero="1.330000" info="methoxide 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <bd-h a="62" b="18" z_a="8" z_b="6" K="334.300000" R_zero="1.411000" info="MeOH, EMB 10/10/89,"/>
+    <bd-h a="62" b="30" z_a="8" z_b="6" K="230.000000" R_zero="1.400000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <bd-h a="62" b="19" z_a="8" z_b="6" K="428.000000" R_zero="1.420000" info="methanol vib fit EMB 11/21/89"/>
+    <bd-h a="62" b="20" z_a="8" z_b="6" K="428.000000" R_zero="1.420000" info="methanol vib fit EMB 11/21/89"/>
+    <bd-h a="62" b="21" z_a="8" z_b="6" K="428.000000" R_zero="1.420000" info="methanol vib fit EMB 11/21/89"/>
+    <bd-h a="62" b="0" z_a="8" z_b="1" K="545.000000" R_zero="0.960000" info="EMB 11/21/89 methanol vib fit"/>
+    <bd-h a="65" b="34" z_a="8" z_b="6" K="1115.000000" R_zero="1.128000" info="Heme (6-liganded): CO ligand (KK 05/13/91)"/>
+    <bd-h a="65" b="76" z_a="8" z_b="26" K="250.000000" R_zero="1.800000" info="Heme (6-liganded): O2 ligand (KK 05/13/91)"/>
+    <bd-h a="65" b="65" z_a="8" z_b="8" K="600.000000" R_zero="1.230000" info="Heme (6-liganded): O2 ligand (KK 05/13/91)"/>
+    <bd-h a="63" b="30" z_a="8" z_b="6" K="150.000000" R_zero="1.334000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <bd-h a="63" b="21" z_a="8" z_b="6" K="340.000000" R_zero="1.430000" info="adm jr., 4/05/91, for PRES CT1 from methylacetate"/>
+    <bd-h a="64" b="3" z_a="8" z_b="1" K="450.000000" R_zero="0.957200" info="FROM TIPS3P GEOM"/>
+    <bd-h a="68" b="20" z_a="16" z_b="6" K="198.000000" R_zero="1.818000" info="fitted to C-S s 9/26/92 (FL)"/>
+    <bd-h a="68" b="21" z_a="16" z_b="6" K="240.000000" R_zero="1.816000" info="fitted to C-S s 9/26/92 (FL)"/>
+    <bd-h a="68" b="9" z_a="16" z_b="1" K="275.000000" R_zero="1.325000" info="methanethiol pure solvent, adm jr., 6/22/92"/>
+    <bd-h a="69" b="20" z_a="16" z_b="6" K="214.000000" R_zero="1.816000" info="improved CSSC dihedral in DMDS 5/15/92 (FL)"/>
+    <bd-h a="69" b="21" z_a="16" z_b="6" K="214.000000" R_zero="1.816000" info="improved CSSC dihedral in DMDS 5/15/92 (FL)"/>
+    <bd-h a="69" b="69" z_a="16" z_b="16" K="173.000000" R_zero="2.029000" info="improved CSSC dihedral in DMDS 5/15/92 (FL)"/>
+    <bd-h a="70" b="35" z_a="16" z_b="6" K="205.000000" R_zero="1.836000" info="methylthiolate 6-31+G* geom/freq, adm jr., 6/1/92"/>
+  </bonds-h>
+  <angles-h>
+  <!-- Quadratic angles + Urey-Bradley (UB) parameters:
+
+    V(Theta) = K x (Theta - Theta0)^2
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Theta = angle (°)
+      - Theta0 = equilibrium angle(°)
+    V(S) = Kub x (R - Rub)^2
+    With:
+      - Kub = spring constant (kcal mol^-1 A^-2)
+      - S = distance 1-3 (A)
+      - S0 = equilibrium distance 1-3 (A)   -->
+    <ang-h a="66" b="38" c="66" z_a="8" z_b="6" z_c="8" K="3000.000000" Theta_zero="180.000000" Kub="0.000000" S_zero="0.000000" info="to Sulfate (PSUL) link"/>
+    <ang-h a="35" b="70" c="76" z_a="6" z_b="16" z_c="26" K="50.000000" Theta_zero="100.600000" Kub="0.000000" S_zero="0.000000" info="angle optimized to reproduce"/>
+    <ang-h a="70" b="76" c="57" z_a="16" z_b="26" z_c="7" K="100.000000" Theta_zero="90.000000" Kub="0.000000" S_zero="0.000000" info="jr., 7/01"/>
+    <ang-h a="18" b="18" c="18" z_a="6" z_b="6" z_c="6" K="40.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.416200" info="JES 8/25/89"/>
+    <ang-h a="36" b="36" c="20" z_a="6" z_b="6" z_c="6" K="48.000000" Theta_zero="123.500000" Kub="0.000000" S_zero="0.000000" info="for 2-butene, yin/adm jr., 12/95"/>
+    <ang-h a="36" b="36" c="21" z_a="6" z_b="6" z_c="6" K="48.000000" Theta_zero="123.500000" Kub="0.000000" S_zero="0.000000" info="for 2-butene, yin/adm jr., 12/95"/>
+    <ang-h a="36" b="20" c="21" z_a="6" z_b="6" z_c="6" K="32.000000" Theta_zero="112.200000" Kub="0.000000" S_zero="0.000000" info="for 1-butene; from propene, yin/adm jr., 12/95"/>
+    <ang-h a="37" b="36" c="20" z_a="6" z_b="6" z_c="6" K="48.000000" Theta_zero="126.000000" Kub="0.000000" S_zero="0.000000" info="for 1-butene; from propene, yin/adm jr., 12/95"/>
+    <ang-h a="37" b="36" c="21" z_a="6" z_b="6" z_c="6" K="47.000000" Theta_zero="125.200000" Kub="0.000000" S_zero="0.000000" info="for propene, yin/adm jr., 12/95"/>
+    <ang-h a="26" b="47" c="17" z_a="6" z_b="7" z_c="6" K="60.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="27" b="26" c="17" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="112.300000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="27" b="26" c="29" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="112.300000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="27" b="26" c="30" z_a="6" z_b="6" z_c="6" K="50.000000" Theta_zero="112.300000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="27" b="27" c="26" z_a="6" z_b="6" z_c="6" K="70.000000" Theta_zero="108.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="28" b="27" c="27" z_a="6" z_b="6" z_c="6" K="70.000000" Theta_zero="108.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="28" b="47" c="17" z_a="6" z_b="7" z_c="6" K="60.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="28" b="47" c="26" z_a="6" z_b="7" z_c="6" K="100.000000" Theta_zero="114.200000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="28" b="56" c="26" z_a="6" z_b="7" z_c="6" K="100.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="31" b="32" c="36" z_a="6" z_b="6" z_c="6" K="70.000000" Theta_zero="126.740000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="31" b="33" c="31" z_a="6" z_b="6" z_c="6" K="94.200000" Theta_zero="125.120000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <ang-h a="31" b="57" c="31" z_a="6" z_b="7" z_c="6" K="139.300000" Theta_zero="103.900000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <ang-h a="32" b="36" c="37" z_a="6" z_b="6" z_c="6" K="70.000000" Theta_zero="121.500000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="32" b="32" c="36" z_a="6" z_b="6" z_c="6" K="70.000000" Theta_zero="126.750000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="32" b="32" c="31" z_a="6" z_b="6" z_c="6" K="30.800000" Theta_zero="106.510000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <ang-h a="23" b="48" c="22" z_a="6" z_b="7" z_c="6" K="130.000000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="23" b="49" c="22" z_a="6" z_b="7" z_c="6" K="130.000000" Theta_zero="104.000000" Kub="0.000000" S_zero="0.000000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="23" b="50" c="22" z_a="6" z_b="7" z_c="6" K="145.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/20/89"/>
+    <ang-h a="33" b="31" c="32" z_a="6" z_b="6" z_c="6" K="61.600000" Theta_zero="124.070000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <ang-h a="24" b="18" c="18" z_a="6" z_b="6" z_c="6" K="60.000000" Theta_zero="118.000000" Kub="0.000000" S_zero="0.000000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="24" b="24" c="18" z_a="6" z_b="6" z_c="6" K="60.000000" Theta_zero="122.000000" Kub="0.000000" S_zero="0.000000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="24" b="25" c="18" z_a="6" z_b="6" z_c="6" K="120.000000" Theta_zero="107.400000" Kub="25.000000" S_zero="2.261000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="24" b="55" c="18" z_a="6" z_b="7" z_c="6" K="110.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="19" b="19" c="17" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="19" b="19" c="29" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="19" b="19" c="19" z_a="6" z_b="6" z_c="6" K="53.350000" Theta_zero="111.000000" Kub="8.000000" S_zero="2.561000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="19" b="20" c="18" z_a="6" z_b="6" z_c="6" K="51.800000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="PARALLH19 (JES)"/>
+    <ang-h a="19" b="20" c="29" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="19" b="20" c="30" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="19" b="20" c="22" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/22/89, from CT2CT2CT, U-B omitted"/>
+    <ang-h a="19" b="20" c="19" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="alkane frequencies (MJF), alkane geometries (SF)"/>
+    <ang-h a="19" b="51" c="17" z_a="6" z_b="7" z_c="6" K="50.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="NMA Vib Modes (LK)"/>
+    <ang-h a="20" b="18" c="18" z_a="6" z_b="6" z_c="6" K="45.800000" Theta_zero="122.300000" Kub="0.000000" S_zero="0.000000" info="PARALLH19 (JES)"/>
+    <ang-h a="20" b="32" c="31" z_a="6" z_b="6" z_c="6" K="65.000000" Theta_zero="126.740000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="20" b="32" c="32" z_a="6" z_b="6" z_c="6" K="65.000000" Theta_zero="126.750000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="20" b="22" c="22" z_a="6" z_b="6" z_c="6" K="45.800000" Theta_zero="130.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/22/89, FC=>CT2CA CA,BA=> CRYSTALS"/>
+    <ang-h a="20" b="19" c="17" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="20" b="19" c="29" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="20" b="19" c="30" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="20" b="19" c="19" z_a="6" z_b="6" z_c="6" K="53.350000" Theta_zero="111.000000" Kub="8.000000" S_zero="2.561000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="20" b="20" c="17" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="from CT2 CT1 C, for lactams, adm jr."/>
+    <ang-h a="20" b="20" c="29" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="20" b="20" c="30" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="20" b="20" c="32" z_a="6" z_b="6" z_c="6" K="70.000000" Theta_zero="113.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="20" b="20" c="19" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="alkane frequencies (MJF), alkane geometries (SF)"/>
+    <ang-h a="20" b="20" c="20" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.600000" Kub="11.160000" S_zero="2.561000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="20" b="21" c="19" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="alkane frequencies (MJF), alkane geometries (SF)"/>
+    <ang-h a="20" b="25" c="18" z_a="6" z_b="6" z_c="6" K="45.800000" Theta_zero="129.400000" Kub="0.000000" S_zero="0.000000" info="jr., 5/08/91, indole CCDB structure search"/>
+    <ang-h a="20" b="25" c="24" z_a="6" z_b="6" z_c="6" K="45.800000" Theta_zero="124.000000" Kub="0.000000" S_zero="0.000000" info="jr., 5/08/91, indole CCDB structure search"/>
+    <ang-h a="20" b="54" c="17" z_a="6" z_b="7" z_c="6" K="62.300000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="107.5->120.0 to make planar Arg (KK)"/>
+    <ang-h a="20" b="51" c="17" z_a="6" z_b="7" z_c="6" K="50.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="NMA Vib Modes (LK)"/>
+    <ang-h a="20" b="63" c="30" z_a="6" z_b="8" z_c="6" K="40.000000" Theta_zero="109.600000" Kub="30.000000" S_zero="2.265100" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="21" b="18" c="18" z_a="6" z_b="6" z_c="6" K="45.800000" Theta_zero="122.300000" Kub="0.000000" S_zero="0.000000" info="toluene, adm jr., 3/7/92"/>
+    <ang-h a="21" b="32" c="31" z_a="6" z_b="6" z_c="6" K="65.000000" Theta_zero="126.740000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="21" b="32" c="32" z_a="6" z_b="6" z_c="6" K="65.000000" Theta_zero="126.750000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="21" b="22" c="22" z_a="6" z_b="6" z_c="6" K="45.800000" Theta_zero="130.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/22/89, FC=>CT2CA CA,BA=> CRYSTALS"/>
+    <ang-h a="21" b="19" c="17" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="21" b="19" c="29" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/09/92, for ALA cter"/>
+    <ang-h a="21" b="19" c="19" z_a="6" z_b="6" z_c="6" K="53.350000" Theta_zero="108.500000" Kub="8.000000" S_zero="2.561000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="21" b="19" c="20" z_a="6" z_b="6" z_c="6" K="53.350000" Theta_zero="114.000000" Kub="8.000000" S_zero="2.561000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="21" b="19" c="21" z_a="6" z_b="6" z_c="6" K="53.350000" Theta_zero="114.000000" Kub="8.000000" S_zero="2.561000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="21" b="20" c="18" z_a="6" z_b="6" z_c="6" K="51.800000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="ethylbenzene, adm jr., 3/7/92"/>
+    <ang-h a="21" b="20" c="22" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/22/89, from CT2CT2CT, U-B omitted"/>
+    <ang-h a="21" b="20" c="19" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="alkane frequencies (MJF), alkane geometries (SF)"/>
+    <ang-h a="21" b="20" c="20" z_a="6" z_b="6" z_c="6" K="58.000000" Theta_zero="115.000000" Kub="8.000000" S_zero="2.561000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="21" b="20" c="21" z_a="6" z_b="6" z_c="6" K="53.350000" Theta_zero="114.000000" Kub="8.000000" S_zero="2.561000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="21" b="54" c="17" z_a="6" z_b="7" z_c="6" K="62.300000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="methylguanidinium, adm jr., 3/26/92"/>
+    <ang-h a="21" b="51" c="17" z_a="6" z_b="7" z_c="6" K="50.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="NMA Vib Modes (LK)"/>
+    <ang-h a="21" b="63" c="30" z_a="6" z_b="8" z_c="6" K="40.000000" Theta_zero="109.600000" Kub="30.000000" S_zero="2.265100" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="21" b="68" c="20" z_a="6" z_b="16" z_c="6" K="34.000000" Theta_zero="95.000000" Kub="0.000000" S_zero="0.000000" info="expt. MeEtS, 3/26/92 (FL)"/>
+    <ang-h a="25" b="24" c="18" z_a="6" z_b="6" z_c="6" K="160.000000" Theta_zero="130.600000" Kub="0.000000" S_zero="0.000000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="25" b="24" c="24" z_a="6" z_b="6" z_c="6" K="110.000000" Theta_zero="107.400000" Kub="0.000000" S_zero="0.000000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="25" b="20" c="19" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="114.000000" Kub="0.000000" S_zero="0.000000" info="from TRP crystal, JWK"/>
+    <ang-h a="25" b="20" c="21" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="114.000000" Kub="0.000000" S_zero="0.000000" info="from TRP crystal, JWK"/>
+    <ang-h a="76" b="57" c="31" z_a="26" z_b="7" z_c="6" K="96.150000" Theta_zero="128.050000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <ang-h a="76" b="49" c="22" z_a="26" z_b="7" z_c="6" K="30.000000" Theta_zero="133.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): ligand links (KK 05/13/91)"/>
+    <ang-h a="76" b="49" c="23" z_a="26" z_b="7" z_c="6" K="30.000000" Theta_zero="123.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): ligand links (KK 05/13/91)"/>
+    <ang-h a="0" b="51" c="17" z_a="1" z_b="7" z_c="6" K="34.000000" Theta_zero="123.000000" Kub="0.000000" S_zero="0.000000" info="NMA Vib Modes (LK)"/>
+    <ang-h a="0" b="51" c="19" z_a="1" z_b="7" z_c="6" K="35.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info="NMA Vibrational Modes (LK)"/>
+    <ang-h a="0" b="51" c="20" z_a="1" z_b="7" z_c="6" K="35.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info="NMA Vibrational Modes (LK)"/>
+    <ang-h a="0" b="51" c="21" z_a="1" z_b="7" z_c="6" K="35.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info="NMA Vibrational Modes (LK)"/>
+    <ang-h a="0" b="52" c="29" z_a="1" z_b="7" z_c="6" K="50.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="his, adm jr. 8/13/90 acetamide geometry and vibrations"/>
+    <ang-h a="0" b="52" c="0" z_a="1" z_b="7" z_c="1" K="23.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 8/13/90 acetamide geometry and vibrations"/>
+    <ang-h a="0" b="48" c="22" z_a="1" z_b="7" z_c="6" K="30.000000" Theta_zero="125.500000" Kub="20.000000" S_zero="2.150000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="0" b="48" c="23" z_a="1" z_b="7" z_c="6" K="30.000000" Theta_zero="127.000000" Kub="20.000000" S_zero="2.140000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="0" b="50" c="22" z_a="1" z_b="7" z_c="6" K="25.000000" Theta_zero="126.000000" Kub="15.000000" S_zero="2.130000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="0" b="50" c="23" z_a="1" z_b="7" z_c="6" K="25.000000" Theta_zero="126.000000" Kub="15.000000" S_zero="2.090000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="0" b="55" c="18" z_a="1" z_b="7" z_c="6" K="28.000000" Theta_zero="126.000000" Kub="0.000000" S_zero="0.000000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="0" b="55" c="24" z_a="1" z_b="7" z_c="6" K="28.000000" Theta_zero="126.000000" Kub="0.000000" S_zero="0.000000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="0" b="62" c="18" z_a="1" z_b="8" z_c="6" K="65.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="JES 8/25/89 phenol"/>
+    <ang-h a="0" b="62" c="30" z_a="1" z_b="8" z_c="6" K="55.000000" Theta_zero="115.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="0" b="62" c="19" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="methanol vib fit EMB 11/21/89"/>
+    <ang-h a="0" b="62" c="20" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="methanol vib fit EMB 11/21/89"/>
+    <ang-h a="0" b="62" c="21" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="methanol vib fit EMB 11/21/89"/>
+    <ang-h a="2" b="18" c="18" z_a="1" z_b="6" z_c="6" K="29.000000" Theta_zero="120.000000" Kub="25.000000" S_zero="2.152500" info="trp, adm jr., 10/02/89"/>
+    <ang-h a="2" b="18" c="24" z_a="1" z_b="6" z_c="6" K="41.000000" Theta_zero="122.000000" Kub="0.000000" S_zero="0.000000" info="jr., 5/08/91, indole CCDB structure search"/>
+    <ang-h a="2" b="18" c="25" z_a="1" z_b="6" z_c="6" K="32.000000" Theta_zero="125.000000" Kub="25.000000" S_zero="2.173000" info="JWK 05/14/91 new theta0 and r0UB from indole"/>
+    <ang-h a="2" b="27" c="26" z_a="1" z_b="6" z_c="6" K="33.430000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="2" b="27" c="27" z_a="1" z_b="6" z_c="6" K="26.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="2" b="27" c="28" z_a="1" z_b="6" z_c="6" K="26.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="2" b="27" c="2" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="109.000000" Kub="5.400000" S_zero="1.802000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="2" b="28" c="27" z_a="1" z_b="6" z_c="6" K="26.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="2" b="28" c="2" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="109.000000" Kub="5.400000" S_zero="1.802000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="2" b="33" c="31" z_a="1" z_b="6" z_c="6" K="12.700000" Theta_zero="117.440000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <ang-h a="2" b="33" c="76" z_a="1" z_b="6" z_c="26" K="0.000000" Theta_zero="180.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): for ic para only (KK 05/13/91)"/>
+    <ang-h a="2" b="35" c="21" z_a="1" z_b="6" z_c="6" K="34.600000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="ethylthiolate 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <ang-h a="2" b="35" c="2" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="108.400000" Kub="14.000000" S_zero="1.775000" info="methylthiolate 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <ang-h a="2" b="19" c="17" z_a="1" z_b="6" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="30.000000" S_zero="2.163000" info="alanine dipeptide, LK, replaced, adm jr., 5/09/91"/>
+    <ang-h a="2" b="19" c="30" z_a="1" z_b="6" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="30.000000" S_zero="2.163000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="2" b="19" c="19" z_a="1" z_b="6" z_c="6" K="34.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="2" b="19" c="20" z_a="1" z_b="6" z_c="6" K="34.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="2" b="19" c="21" z_a="1" z_b="6" z_c="6" K="34.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="2" b="19" c="2" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="109.000000" Kub="5.400000" S_zero="1.802000" info="based on HA CT2 HA"/>
+    <ang-h a="2" b="20" c="17" z_a="1" z_b="6" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="30.000000" S_zero="2.163000" info="alanine dipeptide, LK, replaced, adm jr., 5/09/91"/>
+    <ang-h a="2" b="20" c="18" z_a="1" z_b="6" z_c="6" K="49.300000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="PARALLH19 (JES)"/>
+    <ang-h a="2" b="20" c="29" z_a="1" z_b="6" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="30.000000" S_zero="2.163000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="2" b="20" c="30" z_a="1" z_b="6" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="30.000000" S_zero="2.163000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="2" b="20" c="36" z_a="1" z_b="6" z_c="6" K="45.000000" Theta_zero="111.500000" Kub="0.000000" S_zero="0.000000" info="for 1-butene; from propene, yin/adm jr., 12/95"/>
+    <ang-h a="2" b="20" c="32" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="2" b="20" c="22" z_a="1" z_b="6" z_c="6" K="33.430000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/22/89, from CT2CT2HA, U-B OMITTED"/>
+    <ang-h a="2" b="20" c="19" z_a="1" z_b="6" z_c="6" K="33.430000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane frequencies (MJF), alkane geometries (SF)"/>
+    <ang-h a="2" b="20" c="20" z_a="1" z_b="6" z_c="6" K="26.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="2" b="20" c="21" z_a="1" z_b="6" z_c="6" K="34.600000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="2" b="20" c="25" z_a="1" z_b="6" z_c="6" K="33.430000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="ADM JR., 10/02/89, from CT2CT2HA (U-B OMITTED), FOR JOANNA"/>
+    <ang-h a="2" b="20" c="2" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="109.000000" Kub="5.400000" S_zero="1.802000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="2" b="21" c="17" z_a="1" z_b="6" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="30.000000" S_zero="2.163000" info="alanine dipeptide, LK, replaced, adm jr., 5/09/91"/>
+    <ang-h a="2" b="21" c="18" z_a="1" z_b="6" z_c="6" K="49.300000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="toluene, adm jr. 3/7/92"/>
+    <ang-h a="2" b="21" c="29" z_a="1" z_b="6" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="30.000000" S_zero="2.163000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="2" b="21" c="30" z_a="1" z_b="6" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="30.000000" S_zero="2.163000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="2" b="21" c="36" z_a="1" z_b="6" z_c="6" K="42.000000" Theta_zero="111.500000" Kub="0.000000" S_zero="0.000000" info="for 2-butene, yin/adm jr., 12/95"/>
+    <ang-h a="2" b="21" c="32" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="2" b="21" c="22" z_a="1" z_b="6" z_c="6" K="33.430000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/22/89, from CT2CT2HA, U-B OMITTED"/>
+    <ang-h a="2" b="21" c="35" z_a="1" z_b="6" z_c="6" K="34.600000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="ethylthiolate 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <ang-h a="2" b="21" c="19" z_a="1" z_b="6" z_c="6" K="33.430000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane frequencies (MJF), alkane geometries (SF)"/>
+    <ang-h a="2" b="21" c="20" z_a="1" z_b="6" z_c="6" K="34.600000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="2" b="21" c="21" z_a="1" z_b="6" z_c="6" K="37.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="2" b="21" c="2" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="108.400000" Kub="5.400000" S_zero="1.802000" info="alkane update, adm jr., 3/2/92"/>
+    <ang-h a="2" b="25" c="18" z_a="1" z_b="6" z_c="6" K="20.000000" Theta_zero="126.400000" Kub="25.000000" S_zero="2.186000" info="JWK 05/14/91 new theta0 and r0UB from indole"/>
+    <ang-h a="2" b="25" c="24" z_a="1" z_b="6" z_c="6" K="32.000000" Theta_zero="126.400000" Kub="25.000000" S_zero="2.255000" info="JWK 05/14/91 new theta0 and r0UB from indole"/>
+    <ang-h a="10" b="36" c="36" z_a="1" z_b="6" z_c="6" K="52.000000" Theta_zero="119.500000" Kub="0.000000" S_zero="0.000000" info="for 2-butene, yin/adm jr., 12/95"/>
+    <ang-h a="10" b="36" c="37" z_a="1" z_b="6" z_c="6" K="42.000000" Theta_zero="118.000000" Kub="0.000000" S_zero="0.000000" info="for propene, yin/adm jr., 12/95"/>
+    <ang-h a="10" b="36" c="20" z_a="1" z_b="6" z_c="6" K="40.000000" Theta_zero="116.000000" Kub="0.000000" S_zero="0.000000" info="for 1-butene; from propene, yin/adm jr., 12/95"/>
+    <ang-h a="10" b="36" c="21" z_a="1" z_b="6" z_c="6" K="22.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info="for propene, yin/adm jr., 12/95"/>
+    <ang-h a="10" b="36" c="32" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <ang-h a="11" b="37" c="36" z_a="1" z_b="6" z_c="6" K="45.000000" Theta_zero="120.500000" Kub="0.000000" S_zero="0.000000" info="for propene, yin/adm jr., 12/95"/>
+    <ang-h a="11" b="37" c="37" z_a="1" z_b="6" z_c="6" K="55.500000" Theta_zero="120.500000" Kub="0.000000" S_zero="0.000000" info="for ethene, yin/adm jr., 12/95"/>
+    <ang-h a="11" b="37" c="11" z_a="1" z_b="6" z_c="1" K="19.000000" Theta_zero="119.000000" Kub="0.000000" S_zero="0.000000" info="for propene, yin/adm jr., 12/95"/>
+    <ang-h a="5" b="26" c="17" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="112.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="5" b="26" c="29" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="112.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="5" b="26" c="30" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="112.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="5" b="26" c="27" z_a="1" z_b="6" z_c="6" K="35.000000" Theta_zero="118.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="5" b="19" c="17" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="5" b="19" c="29" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="5" b="19" c="30" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="5" b="19" c="19" z_a="1" z_b="6" z_c="6" K="35.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="5" b="19" c="20" z_a="1" z_b="6" z_c="6" K="35.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="5" b="19" c="21" z_a="1" z_b="6" z_c="6" K="35.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="5" b="20" c="17" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="5" b="20" c="29" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="5" b="20" c="30" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="5" b="20" c="5" z_a="1" z_b="6" z_c="1" K="36.000000" Theta_zero="115.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="5" b="21" c="17" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="1" b="54" c="17" z_a="1" z_b="7" z_c="6" K="49.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="35.3->49.0 GUANIDINIUM (KK)"/>
+    <ang-h a="1" b="54" c="20" z_a="1" z_b="7" z_c="6" K="40.400000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="107.5->120.0 to make planar Arg (KK)"/>
+    <ang-h a="1" b="54" c="21" z_a="1" z_b="7" z_c="6" K="40.400000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="methylguanidinium, adm jr., 3/26/92"/>
+    <ang-h a="1" b="54" c="1" z_a="1" z_b="7" z_c="1" K="25.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="40.0->25.0 GUANIDINIUM (KK)"/>
+    <ang-h a="1" b="52" c="20" z_a="1" z_b="7" z_c="6" K="50.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="from HC NH2 CT3, neutral glycine, adm jr."/>
+    <ang-h a="1" b="52" c="21" z_a="1" z_b="7" z_c="6" K="50.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="methylamine geom/freq, adm jr., 6/2/92"/>
+    <ang-h a="1" b="52" c="1" z_a="1" z_b="7" z_c="1" K="39.000000" Theta_zero="106.500000" Kub="0.000000" S_zero="0.000000" info="40.0->25.0 GUANIDINIUM (KK)"/>
+    <ang-h a="1" b="53" c="19" z_a="1" z_b="7" z_c="6" K="30.000000" Theta_zero="109.500000" Kub="20.000000" S_zero="2.074000" info="new stretch and bend; methylammonium (KK 03/10/92)"/>
+    <ang-h a="1" b="53" c="20" z_a="1" z_b="7" z_c="6" K="30.000000" Theta_zero="109.500000" Kub="20.000000" S_zero="2.074000" info="new stretch and bend; methylammonium (KK 03/10/92)"/>
+    <ang-h a="1" b="53" c="21" z_a="1" z_b="7" z_c="6" K="30.000000" Theta_zero="109.500000" Kub="20.000000" S_zero="2.074000" info="new stretch and bend; methylammonium (KK 03/10/92)"/>
+    <ang-h a="1" b="53" c="1" z_a="1" z_b="7" z_c="1" K="44.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="new stretch and bend; methylammonium (KK 03/10/92)"/>
+    <ang-h a="1" b="56" c="26" z_a="1" z_b="7" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="4.000000" S_zero="2.056000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="1" b="56" c="28" z_a="1" z_b="7" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="4.000000" S_zero="2.056000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="1" b="56" c="1" z_a="1" z_b="7" z_c="1" K="51.000000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="4" b="18" c="18" z_a="1" z_b="6" z_c="6" K="30.000000" Theta_zero="120.000000" Kub="22.000000" S_zero="2.152500" info="JES 8/25/89 benzene"/>
+    <ang-h a="4" b="18" c="24" z_a="1" z_b="6" z_c="6" K="30.000000" Theta_zero="122.000000" Kub="22.000000" S_zero="2.146000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="4" b="18" c="25" z_a="1" z_b="6" z_c="6" K="32.000000" Theta_zero="125.000000" Kub="25.000000" S_zero="2.173000" info="JWK 05/14/91 new theta0 and r0UB from indole"/>
+    <ang-h a="4" b="25" c="18" z_a="1" z_b="6" z_c="6" K="32.000000" Theta_zero="126.400000" Kub="25.000000" S_zero="2.186000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="4" b="25" c="24" z_a="1" z_b="6" z_c="6" K="32.000000" Theta_zero="126.400000" Kub="25.000000" S_zero="2.255000" info="JWK 05/14/91 new theta0 and r0UB from indole"/>
+    <ang-h a="6" b="22" c="22" z_a="1" z_b="6" z_c="6" K="22.000000" Theta_zero="130.000000" Kub="15.000000" S_zero="2.215000" info="adm jr., 6/27/90, his"/>
+    <ang-h a="8" b="22" c="22" z_a="1" z_b="6" z_c="6" K="25.000000" Theta_zero="130.000000" Kub="20.000000" S_zero="2.200000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <ang-h a="9" b="68" c="20" z_a="1" z_b="16" z_c="6" K="38.800000" Theta_zero="95.000000" Kub="0.000000" S_zero="0.000000" info="methanethiol pure solvent, adm jr., 6/22/92"/>
+    <ang-h a="9" b="68" c="21" z_a="1" z_b="16" z_c="6" K="43.000000" Theta_zero="95.000000" Kub="0.000000" S_zero="0.000000" info="methanethiol pure solvent, adm jr., 6/22/92"/>
+    <ang-h a="3" b="64" c="3" z_a="1" z_b="8" z_c="1" K="55.000000" Theta_zero="104.520000" Kub="0.000000" S_zero="0.000000" info="TIP3P GEOMETRY, ADM JR."/>
+    <ang-h a="47" b="17" c="26" z_a="7" z_b="6" z_c="6" K="20.000000" Theta_zero="112.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="47" b="17" c="19" z_a="7" z_b="6" z_c="6" K="20.000000" Theta_zero="112.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="47" b="17" c="20" z_a="7" z_b="6" z_c="6" K="20.000000" Theta_zero="112.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="47" b="17" c="21" z_a="7" z_b="6" z_c="6" K="20.000000" Theta_zero="112.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="47" b="26" c="17" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="108.200000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="47" b="26" c="29" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="108.200000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="47" b="26" c="30" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="108.200000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="47" b="26" c="27" z_a="7" z_b="6" z_c="6" K="70.000000" Theta_zero="110.800000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="47" b="26" c="5" z_a="7" z_b="6" z_c="1" K="48.000000" Theta_zero="112.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="47" b="28" c="27" z_a="7" z_b="6" z_c="6" K="70.000000" Theta_zero="110.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="47" b="28" c="2" z_a="7" z_b="6" z_c="1" K="48.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="54" b="17" c="54" z_a="7" z_b="6" z_c="7" K="52.000000" Theta_zero="120.000000" Kub="90.000000" S_zero="2.364200" info="changed from 60.0/120.3 for guanidinium (KK)"/>
+    <ang-h a="54" b="20" c="20" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="arg, (DS)"/>
+    <ang-h a="54" b="20" c="2" z_a="7" z_b="6" z_c="1" K="51.500000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="arg, (DS)"/>
+    <ang-h a="54" b="21" c="2" z_a="7" z_b="6" z_c="1" K="51.500000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="methylguanidinium, adm jr., 3/26/92"/>
+    <ang-h a="51" b="17" c="26" z_a="7" z_b="6" z_c="6" K="80.000000" Theta_zero="116.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="51" b="17" c="19" z_a="7" z_b="6" z_c="6" K="80.000000" Theta_zero="116.500000" Kub="0.000000" S_zero="0.000000" info="NMA Vib Modes (LK)"/>
+    <ang-h a="51" b="17" c="20" z_a="7" z_b="6" z_c="6" K="80.000000" Theta_zero="116.500000" Kub="0.000000" S_zero="0.000000" info="NMA Vib Modes (LK)"/>
+    <ang-h a="51" b="17" c="21" z_a="7" z_b="6" z_c="6" K="80.000000" Theta_zero="116.500000" Kub="0.000000" S_zero="0.000000" info="NMA Vib Modes (LK)"/>
+    <ang-h a="51" b="19" c="17" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="107.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="51" b="19" c="29" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="107.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="51" b="19" c="30" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="107.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="51" b="19" c="19" z_a="7" z_b="6" z_c="6" K="70.000000" Theta_zero="113.500000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="51" b="19" c="20" z_a="7" z_b="6" z_c="6" K="70.000000" Theta_zero="113.500000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="51" b="19" c="21" z_a="7" z_b="6" z_c="6" K="70.000000" Theta_zero="113.500000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="51" b="19" c="5" z_a="7" z_b="6" z_c="1" K="48.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="51" b="20" c="17" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="107.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="51" b="20" c="29" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="107.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 5/20/92, for asn,asp,gln,glu and cters"/>
+    <ang-h a="51" b="20" c="30" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="107.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="51" b="20" c="20" z_a="7" z_b="6" z_c="6" K="70.000000" Theta_zero="113.500000" Kub="0.000000" S_zero="0.000000" info="from NH1 CT1 CT2, for lactams, adm jr."/>
+    <ang-h a="51" b="20" c="2" z_a="7" z_b="6" z_c="1" K="51.500000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="from NH1 CT3 HA, for lactams, adm jr."/>
+    <ang-h a="51" b="20" c="5" z_a="7" z_b="6" z_c="1" K="48.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="51" b="21" c="2" z_a="7" z_b="6" z_c="1" K="51.500000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="NMA crystal (JCS)"/>
+    <ang-h a="52" b="29" c="26" z_a="7" z_b="6" z_c="6" K="80.000000" Theta_zero="112.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="52" b="29" c="19" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="116.500000" Kub="50.000000" S_zero="2.450000" info="adm jr. 8/13/90 acetamide geometry and vibrations"/>
+    <ang-h a="52" b="29" c="20" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="116.500000" Kub="50.000000" S_zero="2.450000" info="adm jr. 8/13/90 acetamide geometry and vibrations"/>
+    <ang-h a="52" b="29" c="21" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="116.500000" Kub="50.000000" S_zero="2.450000" info="adm jr. 8/13/90 acetamide geometry and vibrations"/>
+    <ang-h a="52" b="29" c="2" z_a="7" z_b="6" z_c="1" K="44.000000" Theta_zero="111.000000" Kub="50.000000" S_zero="1.980000" info="adm jr., 5/13/91, formamide geometry and vibrations"/>
+    <ang-h a="52" b="20" c="2" z_a="7" z_b="6" z_c="1" K="38.000000" Theta_zero="109.500000" Kub="50.000000" S_zero="2.140000" info="NH2 CT3 HA, neutral lysine"/>
+    <ang-h a="52" b="20" c="5" z_a="7" z_b="6" z_c="1" K="38.000000" Theta_zero="109.500000" Kub="50.000000" S_zero="2.140000" info="NH2 CT3 HA, neutral glycine, adm jr."/>
+    <ang-h a="52" b="20" c="30" z_a="7" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="CT2 CT2 CD, neutral glycine, adm jr."/>
+    <ang-h a="52" b="20" c="20" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="NH3 CT2 CT2, neutral lysine"/>
+    <ang-h a="52" b="21" c="2" z_a="7" z_b="6" z_c="1" K="38.000000" Theta_zero="109.500000" Kub="50.000000" S_zero="2.140000" info="methylamine geom/freq, adm jr., 6/2/92"/>
+    <ang-h a="53" b="19" c="17" z_a="7" z_b="6" z_c="6" K="43.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="new aliphatics, adm jr., 2/3/92"/>
+    <ang-h a="53" b="19" c="29" z_a="7" z_b="6" z_c="6" K="43.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="53" b="19" c="19" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="new aliphatics, adm jr., 2/3/92"/>
+    <ang-h a="53" b="19" c="20" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="new aliphatics, adm jr., 2/3/92"/>
+    <ang-h a="53" b="19" c="21" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="new aliphatics, adm jr., 2/3/92"/>
+    <ang-h a="53" b="19" c="5" z_a="7" z_b="6" z_c="1" K="51.500000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="new aliphatics, adm jr., 2/3/92"/>
+    <ang-h a="53" b="20" c="17" z_a="7" z_b="6" z_c="6" K="43.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="alanine (JCS)"/>
+    <ang-h a="53" b="20" c="29" z_a="7" z_b="6" z_c="6" K="43.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <ang-h a="53" b="20" c="30" z_a="7" z_b="6" z_c="6" K="43.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="53" b="20" c="20" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="alanine (JCS)"/>
+    <ang-h a="53" b="20" c="2" z_a="7" z_b="6" z_c="1" K="45.000000" Theta_zero="107.500000" Kub="35.000000" S_zero="2.101000" info="new stretch and bend; methylammonium (KK 03/10/92)"/>
+    <ang-h a="53" b="20" c="5" z_a="7" z_b="6" z_c="1" K="51.500000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="for use on NTER -- from NH3 CT2HA (JCS) -- (LK)"/>
+    <ang-h a="53" b="21" c="2" z_a="7" z_b="6" z_c="1" K="45.000000" Theta_zero="107.500000" Kub="35.000000" S_zero="2.101000" info="new stretch and bend; methylammonium (KK 03/10/92)"/>
+    <ang-h a="56" b="26" c="17" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="56" b="26" c="29" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="56" b="26" c="30" z_a="7" z_b="6" z_c="6" K="50.000000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="56" b="26" c="27" z_a="7" z_b="6" z_c="6" K="70.000000" Theta_zero="108.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="56" b="26" c="5" z_a="7" z_b="6" z_c="1" K="51.500000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="56" b="28" c="27" z_a="7" z_b="6" z_c="6" K="70.000000" Theta_zero="108.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="56" b="28" c="2" z_a="7" z_b="6" z_c="1" K="51.500000" Theta_zero="109.150000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="57" b="31" c="32" z_a="7" z_b="6" z_c="6" K="122.000000" Theta_zero="111.540000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <ang-h a="57" b="31" c="33" z_a="7" z_b="6" z_c="6" K="88.000000" Theta_zero="124.390000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <ang-h a="57" b="76" c="34" z_a="7" z_b="26" z_c="6" K="50.000000" Theta_zero="90.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): ligand links (KK 05/13/91)"/>
+    <ang-h a="57" b="76" c="33" z_a="7" z_b="26" z_c="6" K="0.000000" Theta_zero="45.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): for ic para only (KK 05/13/91)"/>
+    <ang-h a="57" b="76" c="57" z_a="7" z_b="26" z_c="7" K="14.390000" Theta_zero="90.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <ang-h a="48" b="22" c="22" z_a="7" z_b="6" z_c="6" K="130.000000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/20/89"/>
+    <ang-h a="48" b="22" c="20" z_a="7" z_b="6" z_c="6" K="45.800000" Theta_zero="124.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/22/89, FC FROM CA CT2CT"/>
+    <ang-h a="48" b="22" c="21" z_a="7" z_b="6" z_c="6" K="45.800000" Theta_zero="124.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/22/89, FC FROM CA CT2CT"/>
+    <ang-h a="48" b="22" c="8" z_a="7" z_b="6" z_c="1" K="25.000000" Theta_zero="124.000000" Kub="20.000000" S_zero="2.140000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <ang-h a="48" b="23" c="6" z_a="7" z_b="6" z_c="1" K="25.000000" Theta_zero="122.500000" Kub="20.000000" S_zero="2.140000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="49" b="22" c="22" z_a="7" z_b="6" z_c="6" K="130.000000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/20/89"/>
+    <ang-h a="49" b="22" c="20" z_a="7" z_b="6" z_c="6" K="45.800000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/22/89, FC FROM CA CT2CT"/>
+    <ang-h a="49" b="22" c="8" z_a="7" z_b="6" z_c="1" K="25.000000" Theta_zero="120.000000" Kub="20.000000" S_zero="2.140000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <ang-h a="49" b="23" c="6" z_a="7" z_b="6" z_c="1" K="25.000000" Theta_zero="125.000000" Kub="20.000000" S_zero="2.120000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="49" b="23" c="48" z_a="7" z_b="6" z_c="7" K="130.000000" Theta_zero="112.500000" Kub="0.000000" S_zero="0.000000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="49" b="76" c="34" z_a="7" z_b="26" z_c="6" K="50.000000" Theta_zero="180.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): ligand links (KK 05/13/91)"/>
+    <ang-h a="49" b="76" c="57" z_a="7" z_b="26" z_c="7" K="50.000000" Theta_zero="90.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): ligand links (KK 05/13/91)"/>
+    <ang-h a="50" b="22" c="22" z_a="7" z_b="6" z_c="6" K="145.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/20/89"/>
+    <ang-h a="50" b="22" c="20" z_a="7" z_b="6" z_c="6" K="45.800000" Theta_zero="122.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/22/89, FC FROM CA CT2CT"/>
+    <ang-h a="50" b="22" c="6" z_a="7" z_b="6" z_c="1" K="22.000000" Theta_zero="122.000000" Kub="15.000000" S_zero="2.180000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="50" b="23" c="7" z_a="7" z_b="6" z_c="1" K="32.000000" Theta_zero="126.000000" Kub="25.000000" S_zero="2.140000" info="his, adm jr., 6/27/90"/>
+    <ang-h a="50" b="23" c="50" z_a="7" z_b="6" z_c="7" K="145.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="his, ADM JR., 7/20/89"/>
+    <ang-h a="55" b="18" c="25" z_a="7" z_b="6" z_c="6" K="120.000000" Theta_zero="110.000000" Kub="25.000000" S_zero="2.240000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="55" b="18" c="2" z_a="7" z_b="6" z_c="1" K="32.000000" Theta_zero="125.000000" Kub="25.000000" S_zero="2.177000" info="JWK 05/14/91 new theta0 and r0UB from indole"/>
+    <ang-h a="55" b="18" c="4" z_a="7" z_b="6" z_c="1" K="32.000000" Theta_zero="125.000000" Kub="25.000000" S_zero="2.177000" info="JWK 05/14/91 new theta0 and r0UB from indole"/>
+    <ang-h a="55" b="24" c="18" z_a="7" z_b="6" z_c="6" K="160.000000" Theta_zero="130.600000" Kub="0.000000" S_zero="0.000000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="55" b="24" c="24" z_a="7" z_b="6" z_c="6" K="110.000000" Theta_zero="107.400000" Kub="0.000000" S_zero="0.000000" info="jr., 12/30/91, for jwk"/>
+    <ang-h a="59" b="17" c="26" z_a="8" z_b="6" z_c="6" K="80.000000" Theta_zero="118.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="59" b="17" c="19" z_a="8" z_b="6" z_c="6" K="80.000000" Theta_zero="121.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="59" b="17" c="20" z_a="8" z_b="6" z_c="6" K="80.000000" Theta_zero="121.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="59" b="17" c="21" z_a="8" z_b="6" z_c="6" K="80.000000" Theta_zero="121.000000" Kub="0.000000" S_zero="0.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <ang-h a="59" b="17" c="0" z_a="8" z_b="6" z_c="1" K="50.000000" Theta_zero="121.700000" Kub="0.000000" S_zero="0.000000" info="acetaldehyde (JCS)"/>
+    <ang-h a="59" b="17" c="47" z_a="8" z_b="6" z_c="7" K="80.000000" Theta_zero="122.500000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="59" b="17" c="51" z_a="8" z_b="6" z_c="7" K="80.000000" Theta_zero="122.500000" Kub="0.000000" S_zero="0.000000" info="NMA Vib Modes (LK)"/>
+    <ang-h a="59" b="29" c="26" z_a="8" z_b="6" z_c="6" K="80.000000" Theta_zero="118.000000" Kub="0.000000" S_zero="0.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="59" b="29" c="19" z_a="8" z_b="6" z_c="6" K="15.000000" Theta_zero="121.000000" Kub="50.000000" S_zero="2.440000" info="adm jr. 4/10/91, acetamide update"/>
+    <ang-h a="59" b="29" c="20" z_a="8" z_b="6" z_c="6" K="15.000000" Theta_zero="121.000000" Kub="50.000000" S_zero="2.440000" info="adm jr. 4/10/91, acetamide update"/>
+    <ang-h a="59" b="29" c="21" z_a="8" z_b="6" z_c="6" K="15.000000" Theta_zero="121.000000" Kub="50.000000" S_zero="2.440000" info="adm jr. 4/10/91, acetamide update"/>
+    <ang-h a="59" b="29" c="2" z_a="8" z_b="6" z_c="1" K="44.000000" Theta_zero="122.000000" Kub="0.000000" S_zero="0.000000" info="adm jr., 5/13/91, formamide geometry and vibrations"/>
+    <ang-h a="59" b="29" c="52" z_a="8" z_b="6" z_c="7" K="75.000000" Theta_zero="122.500000" Kub="50.000000" S_zero="2.370000" info="adm jr. 4/10/91, acetamide update"/>
+    <ang-h a="60" b="30" c="26" z_a="8" z_b="6" z_c="6" K="70.000000" Theta_zero="125.000000" Kub="20.000000" S_zero="2.442000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="60" b="30" c="19" z_a="8" z_b="6" z_c="6" K="70.000000" Theta_zero="125.000000" Kub="20.000000" S_zero="2.442000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="60" b="30" c="20" z_a="8" z_b="6" z_c="6" K="70.000000" Theta_zero="125.000000" Kub="20.000000" S_zero="2.442000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="60" b="30" c="21" z_a="8" z_b="6" z_c="6" K="70.000000" Theta_zero="125.000000" Kub="20.000000" S_zero="2.442000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <ang-h a="61" b="18" c="18" z_a="8" z_b="6" z_c="6" K="40.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="adm jr. 8/27/91, phenoxide"/>
+    <ang-h a="61" b="29" c="26" z_a="8" z_b="6" z_c="6" K="40.000000" Theta_zero="118.000000" Kub="50.000000" S_zero="2.388000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="61" b="29" c="19" z_a="8" z_b="6" z_c="6" K="40.000000" Theta_zero="118.000000" Kub="50.000000" S_zero="2.388000" info="adm jr. 7/23/91, correction, ACETATE (KK)"/>
+    <ang-h a="61" b="29" c="20" z_a="8" z_b="6" z_c="6" K="40.000000" Theta_zero="118.000000" Kub="50.000000" S_zero="2.388000" info="adm jr. 7/23/91, correction, ACETATE (KK)"/>
+    <ang-h a="61" b="29" c="21" z_a="8" z_b="6" z_c="6" K="40.000000" Theta_zero="118.000000" Kub="50.000000" S_zero="2.388000" info="adm jr. 7/23/91, correction, ACETATE (KK)"/>
+    <ang-h a="61" b="29" c="61" z_a="8" z_b="6" z_c="8" K="100.000000" Theta_zero="124.000000" Kub="70.000000" S_zero="2.225000" info="adm jr. 7/23/91, correction, ACETATE (KK)"/>
+    <ang-h a="61" b="20" c="21" z_a="8" z_b="6" z_c="6" K="65.000000" Theta_zero="122.000000" Kub="0.000000" S_zero="0.000000" info="ethoxide 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <ang-h a="61" b="20" c="2" z_a="8" z_b="6" z_c="1" K="65.000000" Theta_zero="118.300000" Kub="0.000000" S_zero="0.000000" info="ethoxide 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <ang-h a="61" b="21" c="2" z_a="8" z_b="6" z_c="1" K="65.000000" Theta_zero="118.300000" Kub="0.000000" S_zero="0.000000" info="methoxide 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <ang-h a="62" b="18" c="18" z_a="8" z_b="6" z_c="6" K="45.200000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="PARALLH19 WITH [122.3] (JES)"/>
+    <ang-h a="62" b="30" c="20" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="110.500000" Kub="0.000000" S_zero="0.000000" info="adm jr, 10/17/90, acetic acid vibrations"/>
+    <ang-h a="62" b="30" c="21" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="110.500000" Kub="0.000000" S_zero="0.000000" info="adm jr, 10/17/90, acetic acid vibrations"/>
+    <ang-h a="62" b="30" c="60" z_a="8" z_b="6" z_c="8" K="50.000000" Theta_zero="123.000000" Kub="210.000000" S_zero="2.262000" info="adm jr, 10/17/90, acetic acid vibrations"/>
+    <ang-h a="62" b="19" c="19" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="MeOH, EMB, 10/10/89"/>
+    <ang-h a="62" b="19" c="21" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="MeOH, EMB, 10/10/89"/>
+    <ang-h a="62" b="19" c="2" z_a="8" z_b="6" z_c="1" K="45.900000" Theta_zero="108.890000" Kub="0.000000" S_zero="0.000000" info="MeOH, EMB, 10/10/89"/>
+    <ang-h a="62" b="20" c="19" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="MeOH, EMB, 10/10/89"/>
+    <ang-h a="62" b="20" c="20" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="MeOH, EMB, 10/10/89"/>
+    <ang-h a="62" b="20" c="21" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="MeOH, EMB, 10/10/89"/>
+    <ang-h a="62" b="20" c="2" z_a="8" z_b="6" z_c="1" K="45.900000" Theta_zero="108.890000" Kub="0.000000" S_zero="0.000000" info="MeOH, EMB, 10/10/89"/>
+    <ang-h a="62" b="21" c="2" z_a="8" z_b="6" z_c="1" K="45.900000" Theta_zero="108.890000" Kub="0.000000" S_zero="0.000000" info="MeOH, EMB, 10/10/89"/>
+    <ang-h a="65" b="34" c="76" z_a="8" z_b="6" z_c="26" K="35.000000" Theta_zero="180.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): ligand links (KK 05/13/91)"/>
+    <ang-h a="65" b="76" c="57" z_a="8" z_b="26" z_c="7" K="5.000000" Theta_zero="90.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): ligand links (KK 05/13/91)"/>
+    <ang-h a="65" b="65" c="76" z_a="8" z_b="8" z_c="26" K="0.000000" Theta_zero="180.000000" Kub="0.000000" S_zero="0.000000" info="Heme (6-liganded): ligand links (KK 05/13/91)"/>
+    <ang-h a="63" b="30" c="26" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="109.000000" Kub="20.000000" S_zero="2.326000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <ang-h a="63" b="30" c="19" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="109.000000" Kub="20.000000" S_zero="2.326000" info="adm jr., 4/05/91, for PRES CT1 from methylacetate"/>
+    <ang-h a="63" b="30" c="20" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="109.000000" Kub="20.000000" S_zero="2.326000" info="adm jr., 4/05/91, for PRES CT1 from methylacetate"/>
+    <ang-h a="63" b="30" c="21" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="109.000000" Kub="20.000000" S_zero="2.326000" info="adm jr., 4/05/91, for PRES CT1 from methylacetate"/>
+    <ang-h a="63" b="30" c="60" z_a="8" z_b="6" z_c="8" K="90.000000" Theta_zero="125.900000" Kub="160.000000" S_zero="2.257600" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <ang-h a="63" b="20" c="2" z_a="8" z_b="6" z_c="1" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for PRES CT1 from methyl acetate"/>
+    <ang-h a="63" b="21" c="2" z_a="8" z_b="6" z_c="1" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="adm jr. 4/05/91, for PRES CT1 from methyl acetate"/>
+    <ang-h a="68" b="20" c="19" z_a="16" z_b="6" z_c="6" K="58.000000" Theta_zero="112.500000" Kub="0.000000" S_zero="0.000000" info="as in expt.MeEtS and DALC crystal, 5/15/92"/>
+    <ang-h a="68" b="20" c="20" z_a="16" z_b="6" z_c="6" K="58.000000" Theta_zero="114.500000" Kub="0.000000" S_zero="0.000000" info="expt. MeEtS, 3/26/92 (FL)"/>
+    <ang-h a="68" b="20" c="21" z_a="16" z_b="6" z_c="6" K="58.000000" Theta_zero="114.500000" Kub="0.000000" S_zero="0.000000" info="expt. MeEtS, 3/26/92 (FL)"/>
+    <ang-h a="68" b="20" c="2" z_a="16" z_b="6" z_c="1" K="46.100000" Theta_zero="111.300000" Kub="0.000000" S_zero="0.000000" info="vib. freq. and HF/6-31G* geo. (DTN) 8/24/90"/>
+    <ang-h a="68" b="21" c="2" z_a="16" z_b="6" z_c="1" K="46.100000" Theta_zero="111.300000" Kub="0.000000" S_zero="0.000000" info="vib. freq. and HF/6-31G* geo. (DTN) 8/24/90"/>
+    <ang-h a="69" b="20" c="19" z_a="16" z_b="6" z_c="6" K="58.000000" Theta_zero="112.500000" Kub="0.000000" S_zero="0.000000" info="as in expt.MeEtS and DALC crystal, 5/15/92"/>
+    <ang-h a="69" b="20" c="2" z_a="16" z_b="6" z_c="1" K="38.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="new S-S atom type 8/24/90"/>
+    <ang-h a="69" b="21" c="2" z_a="16" z_b="6" z_c="1" K="38.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="new S-S atom type 8/24/90"/>
+    <ang-h a="69" b="69" c="20" z_a="16" z_b="16" z_c="6" K="72.500000" Theta_zero="103.300000" Kub="0.000000" S_zero="0.000000" info="expt. dimethyldisulfide, 3/26/92 (FL)"/>
+    <ang-h a="69" b="69" c="21" z_a="16" z_b="16" z_c="6" K="72.500000" Theta_zero="103.300000" Kub="0.000000" S_zero="0.000000" info="expt. dimethyldisulfide, 3/26/92 (FL)"/>
+    <ang-h a="70" b="35" c="21" z_a="16" z_b="6" z_c="6" K="55.000000" Theta_zero="118.000000" Kub="0.000000" S_zero="0.000000" info="ethylthiolate 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <ang-h a="70" b="35" c="2" z_a="16" z_b="6" z_c="1" K="40.000000" Theta_zero="112.300000" Kub="0.000000" S_zero="0.000000" info="methylthiolate 6-31+G* geom/freq, adm jr., 6/1/92"/>
+  </angles-h>
+  <dihedrals-c>
+  <!-- Dihedrals / torsions:
+
+    V(Phi) = K x (1 + cos(n x Phi - Phi0))
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Phi = dihedral angle (°)
+      - n = multiplicity
+      - Phi0 = phase shift angle (°)  -->
+    <dih-c a="-1" b="76" c="70" d="-1" z_a="-1" z_b="26" z_c="16" z_d="-1" K="0.000000" Phi_zero="0.000000" n="4.000000" info="jr., 7/01"/>
+    <dih-c a="-1" b="35" c="70" d="-1" z_a="-1" z_b="6" z_c="16" z_d="-1" K="0.000000" Phi_zero="0.200000" n="3.000000" info="methanethiol, HS S CT3 HA"/>
+    <dih-c a="17" b="19" c="51" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="180.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93c"/>
+    <dih-c a="17" b="20" c="51" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="180.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93c"/>
+    <dih-c a="17" b="47" c="26" d="17" z_a="6" z_b="7" z_c="6" z_d="6" K="0.800000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="18" b="18" c="18" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="3.100000" Phi_zero="180.000000" n="2.000000" info="JES 8/25/89"/>
+    <dih-c a="18" b="24" c="24" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="3.100000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="18" b="20" c="19" d="17" z_a="6" z_b="6" z_c="6" z_d="6" K="0.040000" Phi_zero="0.000000" n="3.000000" info="2.7 kcal/mole CH3 rot in ethylbenzene, adm jr, 3/7/92"/>
+    <dih-c a="18" b="25" c="24" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="18" b="55" c="24" d="18" z_a="6" z_b="7" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="29" b="26" c="47" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="0.800000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="29" b="19" c="20" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="0.040000" Phi_zero="0.000000" n="3.000000" info="2.7 kcal/mole CH3 rot in ethylbenzene, adm jr, 3/7/92"/>
+    <dih-c a="29" b="19" c="51" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="180.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93c"/>
+    <dih-c a="29" b="20" c="51" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="180.000000" n="1.000000" info="Alanine dipeptide; NMA; acetate; etc. adm jr., 3/3/93c"/>
+    <dih-c a="30" b="26" c="47" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="30" b="19" c="51" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="180.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93c"/>
+    <dih-c a="30" b="20" c="51" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="0.200000" Phi_zero="180.000000" n="1.000000" info="Alanine dipeptide; NMA; acetate; etc. backbon adm jr., 3/3/93c"/>
+    <dih-c a="36" b="36" c="21" d="2" z_a="6" z_b="6" z_c="6" z_d="1" K="0.030000" Phi_zero="0.000000" n="3.000000" info="for butene, yin/adm jr., 12/95"/>
+    <dih-c a="37" b="36" c="20" d="21" z_a="6" z_b="6" z_c="6" z_d="6" K="0.500000" Phi_zero="180.000000" n="1.000000" info="1-butene, adm jr., 2/00 update"/>
+    <dih-c a="37" b="36" c="20" d="21" z_a="6" z_b="6" z_c="6" z_d="6" K="1.300000" Phi_zero="180.000000" n="3.000000" info="1-butene, adm jr., 2/00 update"/>
+    <dih-c a="37" b="36" c="20" d="2" z_a="6" z_b="6" z_c="6" z_d="1" K="0.120000" Phi_zero="0.000000" n="3.000000" info="for butene, yin/adm jr., 12/95"/>
+    <dih-c a="37" b="36" c="21" d="2" z_a="6" z_b="6" z_c="6" z_d="1" K="0.050000" Phi_zero="180.000000" n="3.000000" info="for propene, yin/adm jr., 12/95"/>
+    <dih-c a="26" b="17" c="47" d="26" z_a="6" z_b="6" z_c="7" z_d="6" K="2.750000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="26" b="17" c="47" d="26" z_a="6" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="27" b="26" c="47" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="0.800000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="27" b="28" c="47" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="27" b="28" c="47" d="26" z_a="6" z_b="6" z_c="7" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="27" b="28" c="56" d="26" z_a="6" z_b="6" z_c="7" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="28" b="47" c="17" d="26" z_a="6" z_b="7" z_c="6" z_d="6" K="2.750000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="28" b="47" c="17" d="26" z_a="6" z_b="7" z_c="6" z_d="6" K="0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="28" b="47" c="26" d="17" z_a="6" z_b="7" z_c="6" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="28" b="47" c="26" d="29" z_a="6" z_b="7" z_c="6" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="28" b="47" c="26" d="27" z_a="6" z_b="7" z_c="6" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="28" b="56" c="26" d="17" z_a="6" z_b="7" z_c="6" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="28" b="56" c="26" d="29" z_a="6" z_b="7" z_c="6" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="28" b="56" c="26" d="30" z_a="6" z_b="7" z_c="6" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="28" b="56" c="26" d="27" z_a="6" z_b="7" z_c="6" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="23" b="48" c="22" d="22" z_a="6" z_b="7" z_c="6" z_d="6" K="14.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/20/89"/>
+    <dih-c a="23" b="49" c="22" d="22" z_a="6" z_b="7" z_c="6" z_d="6" K="14.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/20/89"/>
+    <dih-c a="23" b="50" c="22" d="22" z_a="6" z_b="7" z_c="6" z_d="6" K="12.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/20/89"/>
+    <dih-c a="24" b="18" c="18" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="3.100000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="24" b="24" c="18" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="3.100000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="24" b="24" c="25" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="4.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="24" b="24" c="55" d="18" z_a="6" z_b="6" z_c="7" z_d="6" K="5.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="19" b="17" c="47" d="26" z_a="6" z_b="6" z_c="7" z_d="6" K="2.750000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="19" b="17" c="47" d="26" z_a="6" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="19" b="17" c="47" d="28" z_a="6" z_b="6" z_c="7" z_d="6" K="2.750000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="19" b="17" c="47" d="28" z_a="6" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="19" b="17" c="51" d="19" z_a="6" z_b="6" z_c="7" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="Revised to adjust NMA cis/trans energy difference. (LK)"/>
+    <dih-c a="19" b="17" c="51" d="19" z_a="6" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="19" b="19" c="51" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="1.800000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93c"/>
+    <dih-c a="19" b="20" c="18" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="0.230000" Phi_zero="180.000000" n="2.000000" info="ethylbenzene ethyl rotation, adm jr. 3/7/92"/>
+    <dih-c a="19" b="20" c="22" d="22" z_a="6" z_b="6" z_c="6" z_d="6" K="0.200000" Phi_zero="0.000000" n="1.000000" info="4-ethylimidazole 4-21G rot bar, adm jr. 3/4/92"/>
+    <dih-c a="19" b="20" c="22" d="22" z_a="6" z_b="6" z_c="6" z_d="6" K="0.270000" Phi_zero="0.000000" n="2.000000" info="4-ethylimidazole 4-21G rot bar, adm jr. 3/4/92"/>
+    <dih-c a="19" b="20" c="22" d="22" z_a="6" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="4-ethylimidazole 4-21G rot bar, adm jr. 3/4/92"/>
+    <dih-c a="19" b="20" c="25" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="0.230000" Phi_zero="180.000000" n="2.000000" info="from ethylbenzene, adm jr., 3/7/92"/>
+    <dih-c a="19" b="20" c="25" d="24" z_a="6" z_b="6" z_c="6" z_d="6" K="0.230000" Phi_zero="180.000000" n="2.000000" info="from ethylbenzene, adm jr., 3/7/92"/>
+    <dih-c a="19" b="51" c="17" d="26" z_a="6" z_b="7" z_c="6" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="19" b="51" c="17" d="26" z_a="6" z_b="7" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="20" b="17" c="47" d="26" z_a="6" z_b="6" z_c="7" z_d="6" K="2.750000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="20" b="17" c="47" d="26" z_a="6" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="20" b="17" c="47" d="28" z_a="6" z_b="6" z_c="7" z_d="6" K="2.750000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="20" b="17" c="47" d="28" z_a="6" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="20" b="17" c="51" d="19" z_a="6" z_b="6" z_c="7" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="Revised to adjust NMA cis/trans energy difference. (LK)"/>
+    <dih-c a="20" b="17" c="51" d="19" z_a="6" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="20" b="17" c="51" d="20" z_a="6" z_b="6" z_c="7" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="Revised to adjust NMA cis/trans energy difference. (LK)"/>
+    <dih-c a="20" b="17" c="51" d="20" z_a="6" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="20" b="17" c="51" d="21" z_a="6" z_b="6" z_c="7" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="from CT2 C NH1 CT2, adm jr. 10/21/96"/>
+    <dih-c a="20" b="17" c="51" d="21" z_a="6" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="from CT2 C NH1 CT2, adm jr. 10/21/96"/>
+    <dih-c a="20" b="18" c="18" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="3.100000" Phi_zero="180.000000" n="2.000000" info="JES 8/25/89 toluene and ethylbenzene"/>
+    <dih-c a="20" b="22" c="48" d="23" z_a="6" z_b="6" z_c="7" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/22/89, FROM HA CPH1 NR1 CPH2"/>
+    <dih-c a="20" b="22" c="49" d="23" z_a="6" z_b="6" z_c="7" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/22/89, FROM HA CPH1 NR2 CPH2"/>
+    <dih-c a="20" b="22" c="50" d="23" z_a="6" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="20" b="19" c="51" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="1.800000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93c"/>
+    <dih-c a="20" b="20" c="22" d="22" z_a="6" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="1.000000" info="4-methylimidazole 4-21G//6-31G* rot bar. ADM JR., 9/4/89"/>
+    <dih-c a="20" b="20" c="20" d="20" z_a="6" z_b="6" z_c="6" z_d="6" K="0.150000" Phi_zero="0.000000" n="1.000000" info="alkane update, adm jr., 3/2/92, butane trans/gauche"/>
+    <dih-c a="20" b="20" c="51" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="1.800000" Phi_zero="0.000000" n="1.000000" info="from CT2 CT1 NH1 C, for lactams, adm jr."/>
+    <dih-c a="20" b="25" c="24" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK"/>
+    <dih-c a="20" b="25" c="24" d="24" z_a="6" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="20" b="51" c="17" d="26" z_a="6" z_b="7" z_c="6" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="20" b="51" c="17" d="26" z_a="6" z_b="7" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="20" b="51" c="17" d="19" z_a="6" z_b="7" z_c="6" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="Revised to adjust NMA cis/trans energy difference. (LK)"/>
+    <dih-c a="20" b="51" c="17" d="19" z_a="6" z_b="7" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="20" b="69" c="69" d="20" z_a="6" z_b="16" z_c="16" z_d="6" K="1.000000" Phi_zero="0.000000" n="1.000000" info="improved CSSC dihedral in DMDS 5/15/92 (FL)"/>
+    <dih-c a="20" b="69" c="69" d="20" z_a="6" z_b="16" z_c="16" z_d="6" K="4.100000" Phi_zero="0.000000" n="2.000000" info="mp 6-311G** dimethyldisulfide, 3/26/92 (FL)"/>
+    <dih-c a="20" b="69" c="69" d="20" z_a="6" z_b="16" z_c="16" z_d="6" K="0.900000" Phi_zero="0.000000" n="3.000000" info="improved CSSC dihedral in DMDS 5/15/92 (FL)"/>
+    <dih-c a="21" b="17" c="47" d="26" z_a="6" z_b="6" z_c="7" z_d="6" K="2.750000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="21" b="17" c="47" d="26" z_a="6" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="21" b="17" c="47" d="28" z_a="6" z_b="6" z_c="7" z_d="6" K="2.750000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="21" b="17" c="47" d="28" z_a="6" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="21" b="17" c="51" d="19" z_a="6" z_b="6" z_c="7" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="Revised to adjust NMA cis/trans energy difference. (LK)"/>
+    <dih-c a="21" b="17" c="51" d="19" z_a="6" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="21" b="17" c="51" d="20" z_a="6" z_b="6" z_c="7" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="for acetylated GLY N-terminus, adm jr."/>
+    <dih-c a="21" b="17" c="51" d="20" z_a="6" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="for acetylated GLY N-terminus, adm jr."/>
+    <dih-c a="21" b="17" c="51" d="21" z_a="6" z_b="6" z_c="7" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="Revised to adjust NMA cis/trans energy difference. (LK)"/>
+    <dih-c a="21" b="17" c="51" d="21" z_a="6" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="21" b="18" c="18" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="3.100000" Phi_zero="180.000000" n="2.000000" info="toluene, adm jr., 3/7/92"/>
+    <dih-c a="21" b="36" c="37" d="11" z_a="6" z_b="6" z_c="6" z_d="1" K="5.200000" Phi_zero="180.000000" n="2.000000" info="for propene, yin/adm jr., 12/95"/>
+    <dih-c a="21" b="22" c="48" d="23" z_a="6" z_b="6" z_c="7" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/22/89, FROM HA CPH1 NR1 CPH2"/>
+    <dih-c a="21" b="19" c="51" d="17" z_a="6" z_b="6" z_c="7" z_d="6" K="1.800000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93c"/>
+    <dih-c a="21" b="20" c="18" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="0.230000" Phi_zero="180.000000" n="2.000000" info="ethylbenzene ethyl rotation, adm jr. 3/7/92"/>
+    <dih-c a="21" b="20" c="22" d="22" z_a="6" z_b="6" z_c="6" z_d="6" K="0.200000" Phi_zero="0.000000" n="1.000000" info="4-ethylimidazole 4-21G rot bar, adm jr. 3/4/92"/>
+    <dih-c a="21" b="20" c="22" d="22" z_a="6" z_b="6" z_c="6" z_d="6" K="0.270000" Phi_zero="0.000000" n="2.000000" info="4-ethylimidazole 4-21G rot bar, adm jr. 3/4/92"/>
+    <dih-c a="21" b="20" c="22" d="22" z_a="6" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="4-ethylimidazole 4-21G rot bar, adm jr. 3/4/92"/>
+    <dih-c a="21" b="20" c="20" d="20" z_a="6" z_b="6" z_c="6" z_d="6" K="0.150000" Phi_zero="0.000000" n="1.000000" info="alkane update, adm jr., 3/2/92, butane trans/gauche"/>
+    <dih-c a="21" b="20" c="20" d="21" z_a="6" z_b="6" z_c="6" z_d="6" K="0.150000" Phi_zero="0.000000" n="1.000000" info="alkane update, adm jr., 3/2/92, butane trans/gauche"/>
+    <dih-c a="21" b="20" c="25" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="0.230000" Phi_zero="180.000000" n="2.000000" info="from ethylbenzene, adm jr., 3/7/92"/>
+    <dih-c a="21" b="20" c="25" d="24" z_a="6" z_b="6" z_c="6" z_d="6" K="0.230000" Phi_zero="180.000000" n="2.000000" info="from ethylbenzene, adm jr., 3/7/92"/>
+    <dih-c a="21" b="20" c="68" d="21" z_a="6" z_b="6" z_c="16" z_d="6" K="0.240000" Phi_zero="180.000000" n="1.000000" info="expt. MeEtS, 3/26/92 (FL)"/>
+    <dih-c a="21" b="20" c="68" d="21" z_a="6" z_b="6" z_c="16" z_d="6" K="0.370000" Phi_zero="0.000000" n="3.000000" info="DTN 8/24/90"/>
+    <dih-c a="21" b="51" c="17" d="26" z_a="6" z_b="7" z_c="6" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="21" b="51" c="17" d="26" z_a="6" z_b="7" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="21" b="51" c="17" d="19" z_a="6" z_b="7" z_c="6" z_d="6" K="1.600000" Phi_zero="0.000000" n="1.000000" info="Revised to adjust NMA cis/trans energy difference. (LK)"/>
+    <dih-c a="21" b="51" c="17" d="19" z_a="6" z_b="7" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="21" b="68" c="20" d="20" z_a="6" z_b="16" z_c="6" z_d="6" K="0.240000" Phi_zero="180.000000" n="1.000000" info="expt. MeEtS, 3/26/92 (FL)"/>
+    <dih-c a="21" b="68" c="20" d="20" z_a="6" z_b="16" z_c="6" z_d="6" K="0.370000" Phi_zero="0.000000" n="3.000000" info="expt. MeEtS, 3/26/92 (FL)"/>
+    <dih-c a="21" b="69" c="69" d="21" z_a="6" z_b="16" z_c="16" z_d="6" K="1.000000" Phi_zero="0.000000" n="1.000000" info="improved CSSC dihedral in DMDS 5/15/92 (FL)"/>
+    <dih-c a="21" b="69" c="69" d="21" z_a="6" z_b="16" z_c="16" z_d="6" K="4.100000" Phi_zero="0.000000" n="2.000000" info="mp 6-311G** dimethyldisulfide, 3/26/92 (FL)"/>
+    <dih-c a="21" b="69" c="69" d="21" z_a="6" z_b="16" z_c="16" z_d="6" K="0.900000" Phi_zero="0.000000" n="3.000000" info="improved CSSC dihedral in DMDS 5/15/92 (FL)"/>
+    <dih-c a="25" b="18" c="55" d="24" z_a="6" z_b="6" z_c="7" z_d="6" K="5.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="25" b="24" c="18" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="25" b="24" c="24" d="18" z_a="6" z_b="6" z_c="6" z_d="6" K="10.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="0" b="51" c="17" d="26" z_a="1" z_b="7" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="0" b="51" c="17" d="19" z_a="1" z_b="7" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="0" b="51" c="17" d="20" z_a="1" z_b="7" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="0" b="51" c="17" d="21" z_a="1" z_b="7" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="0" b="51" c="19" d="17" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="0" b="51" c="19" d="29" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <dih-c a="0" b="51" c="19" d="30" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <dih-c a="0" b="51" c="19" d="19" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="0" b="51" c="19" d="20" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="0" b="51" c="19" d="21" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="0" b="51" c="20" d="17" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="0" b="51" c="20" d="29" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine dipeptide; NMA; acetate; etc. backbone param. RLD 3/22/92"/>
+    <dih-c a="0" b="51" c="20" d="30" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="adm jr. 5/02/91, acetic acid pure solvent"/>
+    <dih-c a="0" b="51" c="20" d="20" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="from H NH1 CT2 CT3, for lactams, adm jr."/>
+    <dih-c a="0" b="51" c="20" d="21" z_a="1" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="0" b="52" c="29" d="19" z_a="1" z_b="7" z_c="6" z_d="6" K="1.400000" Phi_zero="180.000000" n="2.000000" info="adm jr. 4/10/91, acetamide update"/>
+    <dih-c a="0" b="52" c="29" d="20" z_a="1" z_b="7" z_c="6" z_d="6" K="1.400000" Phi_zero="180.000000" n="2.000000" info="adm jr. 4/10/91, acetamide update"/>
+    <dih-c a="0" b="52" c="29" d="21" z_a="1" z_b="7" z_c="6" z_d="6" K="1.400000" Phi_zero="180.000000" n="2.000000" info="adm jr. 4/10/91, acetamide update"/>
+    <dih-c a="0" b="52" c="29" d="26" z_a="1" z_b="7" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="0" b="48" c="22" d="22" z_a="1" z_b="7" z_c="6" z_d="6" K="1.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 7/20/89"/>
+    <dih-c a="0" b="48" c="22" d="20" z_a="1" z_b="7" z_c="6" z_d="6" K="1.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 7/22/89, FROM HA CPH1 NR1 H"/>
+    <dih-c a="0" b="48" c="22" d="21" z_a="1" z_b="7" z_c="6" z_d="6" K="1.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 7/22/89, FROM HA CPH1 NR1 H"/>
+    <dih-c a="0" b="50" c="22" d="22" z_a="1" z_b="7" z_c="6" z_d="6" K="1.400000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="0" b="50" c="22" d="20" z_a="1" z_b="7" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 7/22/89, FROM HC NR3 CPH1 HA"/>
+    <dih-c a="0" b="50" c="22" d="21" z_a="1" z_b="7" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 7/22/89, FROM HC NR3 CPH1 HA"/>
+    <dih-c a="0" b="55" c="18" d="25" z_a="1" z_b="7" z_c="6" z_d="6" K="0.800000" Phi_zero="180.000000" n="2.000000" info="jr., 12/30/91, for jwk"/>
+    <dih-c a="0" b="55" c="24" d="18" z_a="1" z_b="7" z_c="6" z_d="6" K="0.800000" Phi_zero="180.000000" n="2.000000" info="jr., 12/30/91, for jwk"/>
+    <dih-c a="0" b="55" c="24" d="24" z_a="1" z_b="7" z_c="6" z_d="6" K="0.800000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="0" b="62" c="18" d="18" z_a="1" z_b="8" z_c="6" z_d="6" K="0.990000" Phi_zero="180.000000" n="2.000000" info="phenol OH rot bar, 3.37 kcal/mole, adm jr. 3/7/92"/>
+    <dih-c a="0" b="62" c="19" d="19" z_a="1" z_b="8" z_c="6" z_d="6" K="1.330000" Phi_zero="0.000000" n="1.000000" info="2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="19" d="19" z_a="1" z_b="8" z_c="6" z_d="6" K="0.180000" Phi_zero="0.000000" n="2.000000" info="2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="19" d="19" z_a="1" z_b="8" z_c="6" z_d="6" K="0.320000" Phi_zero="0.000000" n="3.000000" info="2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="19" d="21" z_a="1" z_b="8" z_c="6" z_d="6" K="1.330000" Phi_zero="0.000000" n="1.000000" info="2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="19" d="21" z_a="1" z_b="8" z_c="6" z_d="6" K="0.180000" Phi_zero="0.000000" n="2.000000" info="2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="19" d="21" z_a="1" z_b="8" z_c="6" z_d="6" K="0.320000" Phi_zero="0.000000" n="3.000000" info="2-propanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="20" d="19" z_a="1" z_b="8" z_c="6" z_d="6" K="1.300000" Phi_zero="0.000000" n="1.000000" info="ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="20" d="19" z_a="1" z_b="8" z_c="6" z_d="6" K="0.300000" Phi_zero="0.000000" n="2.000000" info="ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="20" d="19" z_a="1" z_b="8" z_c="6" z_d="6" K="0.420000" Phi_zero="0.000000" n="3.000000" info="ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="20" d="20" z_a="1" z_b="8" z_c="6" z_d="6" K="1.300000" Phi_zero="0.000000" n="1.000000" info="ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="20" d="20" z_a="1" z_b="8" z_c="6" z_d="6" K="0.300000" Phi_zero="0.000000" n="2.000000" info="ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="20" d="20" z_a="1" z_b="8" z_c="6" z_d="6" K="0.420000" Phi_zero="0.000000" n="3.000000" info="ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="20" d="21" z_a="1" z_b="8" z_c="6" z_d="6" K="1.300000" Phi_zero="0.000000" n="1.000000" info="ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="20" d="21" z_a="1" z_b="8" z_c="6" z_d="6" K="0.300000" Phi_zero="0.000000" n="2.000000" info="ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="0" b="62" c="20" d="21" z_a="1" z_b="8" z_c="6" z_d="6" K="0.420000" Phi_zero="0.000000" n="3.000000" info="ethanol OH hf/6-31g* torsional surface, adm jr., 3/2/93"/>
+    <dih-c a="2" b="18" c="18" d="18" z_a="1" z_b="6" z_c="6" z_d="6" K="3.500000" Phi_zero="180.000000" n="2.000000" info="adm jr., 10/02/89"/>
+    <dih-c a="2" b="18" c="18" d="24" z_a="1" z_b="6" z_c="6" z_d="6" K="3.500000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="2" b="18" c="18" d="2" z_a="1" z_b="6" z_c="6" z_d="1" K="2.500000" Phi_zero="180.000000" n="2.000000" info="ADM JR., 10/02/89"/>
+    <dih-c a="2" b="18" c="24" d="24" z_a="1" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="TRP (JES)"/>
+    <dih-c a="2" b="18" c="24" d="25" z_a="1" z_b="6" z_c="6" z_d="6" K="4.000000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="2" b="18" c="25" d="24" z_a="1" z_b="6" z_c="6" z_d="6" K="1.200000" Phi_zero="180.000000" n="2.000000" info="JWK"/>
+    <dih-c a="2" b="18" c="25" d="20" z_a="1" z_b="6" z_c="6" z_d="6" K="1.200000" Phi_zero="180.000000" n="2.000000" info="JWK"/>
+    <dih-c a="2" b="18" c="55" d="24" z_a="1" z_b="6" z_c="7" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="2" b="18" c="55" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="2" b="29" c="52" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="1.400000" Phi_zero="180.000000" n="2.000000" info="adm jr. 4/10/91, acetamide update"/>
+    <dih-c a="2" b="28" c="47" d="17" z_a="1" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="180.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="2" b="28" c="47" d="26" z_a="1" z_b="6" z_c="7" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="2" b="28" c="56" d="26" z_a="1" z_b="6" z_c="7" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="2" b="19" c="20" d="18" z_a="1" z_b="6" z_c="6" z_d="6" K="0.040000" Phi_zero="0.000000" n="3.000000" info="2.7 kcal/mole CH3 rot in ethylbenzene, adm jr, 3/7/92"/>
+    <dih-c a="2" b="20" c="22" d="22" z_a="1" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="4-methylimidazole 4-21G//6-31G* rot bar. adm jr., 9/4/89"/>
+    <dih-c a="2" b="20" c="25" d="18" z_a="1" z_b="6" z_c="6" z_d="6" K="0.250000" Phi_zero="180.000000" n="2.000000" info="JWK"/>
+    <dih-c a="2" b="20" c="25" d="24" z_a="1" z_b="6" z_c="6" z_d="6" K="0.250000" Phi_zero="180.000000" n="2.000000" info="JWK"/>
+    <dih-c a="2" b="20" c="51" d="17" z_a="1" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="LK for autogenerate dihe, sp2-methyl, no dihedral potential"/>
+    <dih-c a="2" b="20" c="51" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="LK for autogenerate dihe, sp2-methyl, no dihedral potential"/>
+    <dih-c a="2" b="20" c="68" d="21" z_a="1" z_b="6" z_c="16" z_d="6" K="0.280000" Phi_zero="0.000000" n="3.000000" info="DTN 8/24/90"/>
+    <dih-c a="2" b="21" c="22" d="22" z_a="1" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="4-methylimidazole 4-21G//6-31G* rot bar. adm jr., 9/4/89"/>
+    <dih-c a="2" b="21" c="35" d="2" z_a="1" z_b="6" z_c="6" z_d="1" K="0.160000" Phi_zero="0.000000" n="3.000000" info="ethylthiolate 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <dih-c a="2" b="21" c="20" d="18" z_a="1" z_b="6" z_c="6" z_d="6" K="0.040000" Phi_zero="0.000000" n="3.000000" info="2.7 kcal/mole CH3 rot in ethylbenzene, adm jr, 3/7/92"/>
+    <dih-c a="2" b="21" c="51" d="17" z_a="1" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="3.000000" info="LK for autogenerate dihe, sp2-methyl, no dihedral potential"/>
+    <dih-c a="2" b="21" c="51" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="LK for autogenerate dihe, sp2-methyl, no dihedral potential"/>
+    <dih-c a="2" b="21" c="68" d="20" z_a="1" z_b="6" z_c="16" z_d="6" K="0.280000" Phi_zero="0.000000" n="3.000000" info="DTN 8/24/90"/>
+    <dih-c a="2" b="25" c="18" d="24" z_a="1" z_b="6" z_c="6" z_d="6" K="1.200000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="2" b="25" c="18" d="2" z_a="1" z_b="6" z_c="6" z_d="1" K="1.200000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="2" b="25" c="24" d="18" z_a="1" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="2" b="25" c="24" d="24" z_a="1" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="10" b="36" c="36" d="10" z_a="1" z_b="6" z_c="6" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="2-butene, adm jr., 8/98 update"/>
+    <dih-c a="21" b="36" c="36" d="10" z_a="6" z_b="6" z_c="6" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="2-butene, adm jr., 8/98 update"/>
+    <dih-c a="10" b="36" c="37" d="11" z_a="1" z_b="6" z_c="6" z_d="1" K="5.200000" Phi_zero="180.000000" n="2.000000" info="for propene, yin/adm jr., 12/95"/>
+    <dih-c a="10" b="36" c="20" d="2" z_a="1" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="butene, adm jr., 2/00 update"/>
+    <dih-c a="10" b="36" c="20" d="21" z_a="1" z_b="6" z_c="6" z_d="6" K="0.120000" Phi_zero="0.000000" n="3.000000" info="for butene, yin/adm jr., 12/95"/>
+    <dih-c a="10" b="36" c="21" d="2" z_a="1" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="butene, adm jr., 2/00 update"/>
+    <dih-c a="11" b="37" c="36" d="20" z_a="1" z_b="6" z_c="6" z_d="6" K="5.200000" Phi_zero="180.000000" n="2.000000" info="for butene, yin/adm jr., 12/95"/>
+    <dih-c a="11" b="37" c="36" d="32" z_a="1" z_b="6" z_c="6" z_d="6" K="5.200000" Phi_zero="180.000000" n="2.000000" info="for vinyl, from butene, yin/adm jr., 12/95"/>
+    <dih-c a="5" b="26" c="47" d="17" z_a="1" z_b="6" z_c="7" z_d="6" K="0.800000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="5" b="26" c="47" d="28" z_a="1" z_b="6" z_c="7" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="5" b="26" c="56" d="28" z_a="1" z_b="6" z_c="7" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="5" b="19" c="51" d="17" z_a="1" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="5" b="19" c="51" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="5" b="20" c="51" d="17" z_a="1" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="5" b="20" c="51" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="5" b="21" c="51" d="17" z_a="1" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="5" b="21" c="51" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="1" b="52" c="20" d="20" z_a="1" z_b="7" z_c="6" z_d="6" K="0.110000" Phi_zero="0.000000" n="3.000000" info="X CT3 NH2 X, neutral lysine"/>
+    <dih-c a="1" b="52" c="20" d="2" z_a="1" z_b="7" z_c="6" z_d="1" K="0.110000" Phi_zero="0.000000" n="3.000000" info="X CT3 NH2 X, neutral lysine"/>
+    <dih-c a="1" b="52" c="20" d="5" z_a="1" z_b="7" z_c="6" z_d="1" K="0.110000" Phi_zero="0.000000" n="3.000000" info="X CT3 NH2 X, neutral glycine, adm jr."/>
+    <dih-c a="1" b="52" c="20" d="30" z_a="1" z_b="7" z_c="6" z_d="6" K="0.110000" Phi_zero="0.000000" n="3.000000" info="X CT3 NH2 X, neutral glycine, adm jr."/>
+    <dih-c a="1" b="56" c="26" d="17" z_a="1" z_b="7" z_c="6" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="1" b="56" c="26" d="29" z_a="1" z_b="7" z_c="6" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="1" b="56" c="26" d="30" z_a="1" z_b="7" z_c="6" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="1" b="56" c="26" d="27" z_a="1" z_b="7" z_c="6" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="1" b="56" c="26" d="5" z_a="1" z_b="7" z_c="6" z_d="1" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="1" b="56" c="28" d="27" z_a="1" z_b="7" z_c="6" z_d="6" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="1" b="56" c="28" d="2" z_a="1" z_b="7" z_c="6" z_d="1" K="0.080000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="4" b="18" c="18" d="18" z_a="1" z_b="6" z_c="6" z_d="6" K="4.200000" Phi_zero="180.000000" n="2.000000" info="JES 8/25/89 benzene"/>
+    <dih-c a="4" b="18" c="18" d="24" z_a="1" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="4" b="18" c="18" d="20" z_a="1" z_b="6" z_c="6" z_d="6" K="4.200000" Phi_zero="180.000000" n="2.000000" info="JES 8/25/89 toluene and ethylbenzene"/>
+    <dih-c a="4" b="18" c="18" d="21" z_a="1" z_b="6" z_c="6" z_d="6" K="4.200000" Phi_zero="180.000000" n="2.000000" info="toluene, adm jr., 3/7/92"/>
+    <dih-c a="4" b="18" c="18" d="4" z_a="1" z_b="6" z_c="6" z_d="1" K="2.400000" Phi_zero="180.000000" n="2.000000" info="JES 8/25/89 benzene"/>
+    <dih-c a="4" b="18" c="24" d="24" z_a="1" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK indole 05/14/91"/>
+    <dih-c a="4" b="18" c="24" d="25" z_a="1" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="4" b="18" c="25" d="24" z_a="1" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info="jr., 12/30/91, for jwk"/>
+    <dih-c a="4" b="18" c="25" d="20" z_a="1" z_b="6" z_c="6" z_d="6" K="1.200000" Phi_zero="180.000000" n="2.000000" info="JWK indole 05/14/91"/>
+    <dih-c a="4" b="18" c="55" d="24" z_a="1" z_b="6" z_c="7" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info="jr., 12/30/91, for jwk"/>
+    <dih-c a="4" b="18" c="55" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="0.400000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="4" b="25" c="18" d="4" z_a="1" z_b="6" z_c="6" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="4" b="25" c="24" d="18" z_a="1" z_b="6" z_c="6" z_d="6" K="2.800000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="4" b="25" c="24" d="24" z_a="1" z_b="6" z_c="6" z_d="6" K="2.800000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="6" b="22" c="22" d="20" z_a="1" z_b="6" z_c="6" z_d="6" K="1.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="6" b="22" c="22" d="21" z_a="1" z_b="6" z_c="6" z_d="6" K="1.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="6" b="22" c="22" d="6" z_a="1" z_b="6" z_c="6" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90, his"/>
+    <dih-c a="6" b="22" c="50" d="23" z_a="1" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="6" b="22" c="50" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="6" b="23" c="48" d="22" z_a="1" z_b="6" z_c="7" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="6" b="23" c="48" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="6" b="23" c="49" d="22" z_a="1" z_b="6" z_c="7" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="7" b="23" c="50" d="22" z_a="1" z_b="6" z_c="7" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="7" b="23" c="50" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="0.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90, YES, 0.0"/>
+    <dih-c a="8" b="22" c="22" d="20" z_a="1" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <dih-c a="8" b="22" c="22" d="21" z_a="1" z_b="6" z_c="6" z_d="6" K="2.000000" Phi_zero="180.000000" n="2.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <dih-c a="8" b="22" c="22" d="8" z_a="1" z_b="6" z_c="6" z_d="1" K="2.000000" Phi_zero="180.000000" n="2.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <dih-c a="8" b="22" c="48" d="23" z_a="1" z_b="6" z_c="7" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <dih-c a="8" b="22" c="48" d="0" z_a="1" z_b="6" z_c="7" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <dih-c a="8" b="22" c="49" d="23" z_a="1" z_b="6" z_c="7" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <dih-c a="9" b="68" c="20" d="19" z_a="1" z_b="16" z_c="6" z_d="6" K="0.240000" Phi_zero="0.000000" n="1.000000" info="methanethiol pure solvent, adm jr., 6/22/92"/>
+    <dih-c a="9" b="68" c="20" d="19" z_a="1" z_b="16" z_c="6" z_d="6" K="0.150000" Phi_zero="0.000000" n="2.000000" info="methanethiol pure solvent, adm jr., 6/22/92"/>
+    <dih-c a="9" b="68" c="20" d="19" z_a="1" z_b="16" z_c="6" z_d="6" K="0.270000" Phi_zero="0.000000" n="3.000000" info="methanethiol pure solvent, adm jr., 6/22/92"/>
+    <dih-c a="9" b="68" c="20" d="21" z_a="1" z_b="16" z_c="6" z_d="6" K="0.240000" Phi_zero="0.000000" n="1.000000" info="ethanethiol C-C-S-H surface, adm jr., 4/18/93"/>
+    <dih-c a="9" b="68" c="20" d="21" z_a="1" z_b="16" z_c="6" z_d="6" K="0.150000" Phi_zero="0.000000" n="2.000000" info="ethanethiol C-C-S-H surface, adm jr., 4/18/93"/>
+    <dih-c a="9" b="68" c="20" d="21" z_a="1" z_b="16" z_c="6" z_d="6" K="0.270000" Phi_zero="0.000000" n="3.000000" info="ethanethiol C-C-S-H surface, adm jr., 4/18/93"/>
+    <dih-c a="9" b="68" c="20" d="2" z_a="1" z_b="16" z_c="6" z_d="1" K="0.200000" Phi_zero="0.000000" n="3.000000" info="methanethiol pure solvent, adm jr., 6/22/92"/>
+    <dih-c a="9" b="68" c="21" d="2" z_a="1" z_b="16" z_c="6" z_d="1" K="0.200000" Phi_zero="0.000000" n="3.000000" info="methanethiol pure solvent, adm jr., 6/22/92"/>
+    <dih-c a="47" b="17" c="26" d="27" z_a="7" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="26" d="27" z_a="7" z_b="6" z_c="6" z_d="6" K="0.600000" Phi_zero="0.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="26" d="5" z_a="7" z_b="6" z_c="6" z_d="1" K="0.400000" Phi_zero="180.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="26" d="5" z_a="7" z_b="6" z_c="6" z_d="1" K="0.600000" Phi_zero="0.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="26" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="0.300000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="26" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="-0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="19" d="19" z_a="7" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="19" d="20" z_a="7" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="19" d="21" z_a="7" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="19" d="5" z_a="7" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="20" d="5" z_a="7" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="17" c="21" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="47" b="19" c="20" d="18" z_a="7" z_b="6" z_c="6" z_d="6" K="0.040000" Phi_zero="0.000000" n="3.000000" info="2.7 kcal/mole CH3 rot in ethylbenzene, adm jr, 3/7/92"/>
+    <dih-c a="51" b="17" c="26" d="27" z_a="7" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="51" b="17" c="26" d="27" z_a="7" z_b="6" z_c="6" z_d="6" K="0.600000" Phi_zero="0.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="51" b="17" c="26" d="5" z_a="7" z_b="6" z_c="6" z_d="1" K="0.400000" Phi_zero="180.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="51" b="17" c="26" d="5" z_a="7" z_b="6" z_c="6" z_d="1" K="0.600000" Phi_zero="0.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="51" b="17" c="26" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="0.300000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="51" b="17" c="26" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="-0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="51" b="17" c="19" d="19" z_a="7" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide corrxn for new C VDW Rmin, 4/10/93 (LK)"/>
+    <dih-c a="51" b="17" c="19" d="20" z_a="7" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide corrxn for new C VDW Rmin, 4/10/93 (LK)"/>
+    <dih-c a="51" b="17" c="19" d="21" z_a="7" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide corrxn for new C VDW Rmin, 4/10/93 (LK)"/>
+    <dih-c a="51" b="17" c="19" d="5" z_a="7" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="51" b="17" c="19" d="51" z_a="7" z_b="6" z_c="6" z_d="7" K="0.600000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93"/>
+    <dih-c a="51" b="17" c="20" d="20" z_a="7" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="1.000000" info="from NH1 C CT1 CT2, for lactams, adm jr."/>
+    <dih-c a="51" b="17" c="20" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="LK for autogenerate dihe, sp2-methyl, no dihedral potential"/>
+    <dih-c a="51" b="17" c="20" d="5" z_a="7" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="51" b="17" c="20" d="51" z_a="7" z_b="6" z_c="6" z_d="7" K="0.600000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93"/>
+    <dih-c a="51" b="17" c="21" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="LK for autogenerate dihe, sp2-methyl, no dihedral potential"/>
+    <dih-c a="51" b="19" c="17" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="0.400000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="51" b="20" c="17" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="0.400000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="52" b="29" c="26" d="27" z_a="7" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="52" b="29" c="26" d="27" z_a="7" z_b="6" z_c="6" z_d="6" K="0.600000" Phi_zero="0.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="52" b="29" c="26" d="5" z_a="7" z_b="6" z_c="6" z_d="1" K="0.400000" Phi_zero="180.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="52" b="29" c="26" d="5" z_a="7" z_b="6" z_c="6" z_d="1" K="0.600000" Phi_zero="0.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="52" b="29" c="26" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="0.300000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="52" b="29" c="26" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="-0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="52" b="29" c="20" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="3.000000" info="adm jr., 8/13/90 acetamide geometry and vibrations"/>
+    <dih-c a="53" b="19" c="17" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="0.400000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="53" b="19" c="17" d="51" z_a="7" z_b="6" z_c="6" z_d="7" K="0.600000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93"/>
+    <dih-c a="53" b="19" c="29" d="52" z_a="7" z_b="6" z_c="6" z_d="7" K="0.400000" Phi_zero="0.000000" n="1.000000" info="Alanine dipeptide; NMA; acetate; etc. backbone param. RLD 3/22/92"/>
+    <dih-c a="53" b="20" c="17" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="0.400000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="53" b="20" c="17" d="51" z_a="7" z_b="6" z_c="6" z_d="7" K="0.400000" Phi_zero="0.000000" n="1.000000" info="adm jr. 3/24/92, for PRES GLYP"/>
+    <dih-c a="53" b="20" c="29" d="52" z_a="7" z_b="6" z_c="6" z_d="7" K="0.400000" Phi_zero="0.000000" n="1.000000" info="Alanine dipeptide; NMA; acetate; etc. backbone param. RLD 3/22/92"/>
+    <dih-c a="56" b="26" c="17" d="47" z_a="7" z_b="6" z_c="6" z_d="7" K="0.300000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="56" b="26" c="17" d="51" z_a="7" z_b="6" z_c="6" z_d="7" K="0.300000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="56" b="26" c="29" d="52" z_a="7" z_b="6" z_c="6" z_d="7" K="0.300000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="48" b="22" c="22" d="20" z_a="7" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/22/89, FROM NR1 CPH1 CPH1 HA"/>
+    <dih-c a="48" b="22" c="22" d="21" z_a="7" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/22/89, FROM NR1 CPH1 CPH1 HA"/>
+    <dih-c a="48" b="22" c="22" d="8" z_a="7" z_b="6" z_c="6" z_d="1" K="3.000000" Phi_zero="180.000000" n="2.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <dih-c a="48" b="22" c="20" d="19" z_a="7" z_b="6" z_c="6" z_d="6" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="48" b="22" c="20" d="20" z_a="7" z_b="6" z_c="6" z_d="6" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="48" b="22" c="20" d="21" z_a="7" z_b="6" z_c="6" z_d="6" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="48" b="22" c="20" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="48" b="22" c="21" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="48" b="23" c="49" d="22" z_a="7" z_b="6" z_c="7" z_d="6" K="14.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/20/89"/>
+    <dih-c a="49" b="22" c="22" d="20" z_a="7" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/22/89, FROM NR2 CPH1 CPH1 HA"/>
+    <dih-c a="49" b="22" c="22" d="21" z_a="7" z_b="6" z_c="6" z_d="6" K="3.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/22/89, FROM NR2 CPH1 CPH1 HA"/>
+    <dih-c a="49" b="22" c="22" d="8" z_a="7" z_b="6" z_c="6" z_d="1" K="3.000000" Phi_zero="180.000000" n="2.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <dih-c a="49" b="22" c="22" d="48" z_a="7" z_b="6" z_c="6" z_d="7" K="14.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/20/89"/>
+    <dih-c a="49" b="22" c="20" d="19" z_a="7" z_b="6" z_c="6" z_d="6" K="0.190000" Phi_zero="0.000000" n="3.000000" info="HIS CB-CG TORSION,"/>
+    <dih-c a="49" b="22" c="20" d="20" z_a="7" z_b="6" z_c="6" z_d="6" K="0.190000" Phi_zero="0.000000" n="3.000000" info="HIS CB-CG TORSION,"/>
+    <dih-c a="49" b="22" c="20" d="21" z_a="7" z_b="6" z_c="6" z_d="6" K="0.190000" Phi_zero="0.000000" n="3.000000" info="HIS CB-CG TORSION,"/>
+    <dih-c a="49" b="22" c="20" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="49" b="22" c="21" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="49" b="23" c="48" d="22" z_a="7" z_b="6" z_c="7" z_d="6" K="14.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/20/89"/>
+    <dih-c a="49" b="23" c="48" d="0" z_a="7" z_b="6" z_c="7" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/20/89"/>
+    <dih-c a="50" b="22" c="22" d="20" z_a="7" z_b="6" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="50" b="22" c="22" d="21" z_a="7" z_b="6" z_c="6" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="50" b="22" c="22" d="6" z_a="7" z_b="6" z_c="6" z_d="1" K="2.500000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="50" b="22" c="22" d="50" z_a="7" z_b="6" z_c="6" z_d="7" K="12.000000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="50" b="22" c="20" d="19" z_a="7" z_b="6" z_c="6" z_d="6" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="50" b="22" c="20" d="20" z_a="7" z_b="6" z_c="6" z_d="6" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="50" b="22" c="20" d="21" z_a="7" z_b="6" z_c="6" z_d="6" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="50" b="22" c="20" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="50" b="22" c="21" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="4-METHYLIMIDAZOLE 4-21G//6-31G* ROT BAR. ADM JR., 9/4/89"/>
+    <dih-c a="50" b="23" c="50" d="22" z_a="7" z_b="6" z_c="7" z_d="6" K="12.000000" Phi_zero="180.000000" n="2.000000" info="his, ADM JR., 7/20/89"/>
+    <dih-c a="50" b="23" c="50" d="0" z_a="7" z_b="6" z_c="7" z_d="1" K="1.400000" Phi_zero="180.000000" n="2.000000" info="his, adm jr., 6/27/90"/>
+    <dih-c a="55" b="18" c="25" d="24" z_a="7" z_b="6" z_c="6" z_d="6" K="4.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="55" b="18" c="25" d="20" z_a="7" z_b="6" z_c="6" z_d="6" K="3.500000" Phi_zero="180.000000" n="2.000000" info="JWK"/>
+    <dih-c a="55" b="18" c="25" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="3.500000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="55" b="18" c="25" d="4" z_a="7" z_b="6" z_c="6" z_d="1" K="3.500000" Phi_zero="180.000000" n="2.000000" info="JWK indole 05/14/91"/>
+    <dih-c a="55" b="24" c="18" d="18" z_a="7" z_b="6" z_c="6" z_d="6" K="2.800000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="55" b="24" c="18" d="2" z_a="7" z_b="6" z_c="6" z_d="1" K="4.000000" Phi_zero="180.000000" n="2.000000" info="JWK 09/05/89"/>
+    <dih-c a="55" b="24" c="18" d="4" z_a="7" z_b="6" z_c="6" z_d="1" K="3.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="55" b="24" c="24" d="18" z_a="7" z_b="6" z_c="6" z_d="6" K="10.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="55" b="24" c="24" d="25" z_a="7" z_b="6" z_c="6" z_d="6" K="5.000000" Phi_zero="180.000000" n="2.000000" info="JWK 05/14/91 fit to indole"/>
+    <dih-c a="59" b="17" c="26" d="27" z_a="8" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="180.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="17" c="26" d="27" z_a="8" z_b="6" z_c="6" z_d="6" K="0.600000" Phi_zero="0.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="17" c="26" d="5" z_a="8" z_b="6" z_c="6" z_d="1" K="0.400000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="17" c="26" d="5" z_a="8" z_b="6" z_c="6" z_d="1" K="0.600000" Phi_zero="0.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="17" c="26" d="47" z_a="8" z_b="6" z_c="6" z_d="7" K="-0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="17" c="19" d="19" z_a="8" z_b="6" z_c="6" z_d="6" K="1.400000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93c"/>
+    <dih-c a="59" b="17" c="19" d="20" z_a="8" z_b="6" z_c="6" z_d="6" K="1.400000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93c"/>
+    <dih-c a="59" b="17" c="19" d="21" z_a="8" z_b="6" z_c="6" z_d="6" K="1.400000" Phi_zero="0.000000" n="1.000000" info="ala dipeptide update for new C VDW Rmin, adm jr., 3/3/93c"/>
+    <dih-c a="59" b="17" c="19" d="5" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="59" b="17" c="19" d="51" z_a="8" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="59" b="17" c="19" d="53" z_a="8" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Backbone parameter set made complete RLD 8/8/90"/>
+    <dih-c a="59" b="17" c="20" d="20" z_a="8" z_b="6" z_c="6" z_d="6" K="1.400000" Phi_zero="0.000000" n="1.000000" info="from O C CT1 CT2, for lactams, adm jr."/>
+    <dih-c a="59" b="17" c="20" d="2" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="3.000000" info="adm jr., 8/13/90 acetamide geometry and vibrations"/>
+    <dih-c a="59" b="17" c="20" d="5" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="59" b="17" c="20" d="51" z_a="8" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Alanine Dipeptide ab initio calc's (LK)"/>
+    <dih-c a="59" b="17" c="20" d="53" z_a="8" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" n="1.000000" info="Backbone parameter set made complete RLD 8/8/90"/>
+    <dih-c a="59" b="17" c="21" d="2" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="3.000000" info="adm jr., 8/13/90 acetamide geometry and vibrations"/>
+    <dih-c a="59" b="17" c="47" d="26" z_a="8" z_b="6" z_c="7" z_d="6" K="2.750000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="17" c="47" d="26" z_a="8" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="17" c="47" d="28" z_a="8" z_b="6" z_c="7" z_d="6" K="2.750000" Phi_zero="180.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="17" c="47" d="28" z_a="8" z_b="6" z_c="7" z_d="6" K="0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="17" c="51" d="19" z_a="8" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="59" b="17" c="51" d="20" z_a="8" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="59" b="17" c="51" d="21" z_a="8" z_b="6" z_c="7" z_d="6" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="59" b="17" c="51" d="0" z_a="8" z_b="6" z_c="7" z_d="1" K="2.500000" Phi_zero="180.000000" n="2.000000" info="Gives appropriate NMA cis/trans barrier. (LK)"/>
+    <dih-c a="59" b="29" c="26" d="27" z_a="8" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="180.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="29" c="26" d="27" z_a="8" z_b="6" z_c="6" z_d="6" K="0.600000" Phi_zero="0.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="29" c="26" d="5" z_a="8" z_b="6" z_c="6" z_d="1" K="0.400000" Phi_zero="0.000000" n="1.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="29" c="26" d="5" z_a="8" z_b="6" z_c="6" z_d="1" K="0.600000" Phi_zero="0.000000" n="2.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="29" c="26" d="47" z_a="8" z_b="6" z_c="6" z_d="7" K="-0.300000" Phi_zero="0.000000" n="4.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="59" b="29" c="20" d="2" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="3.000000" info="adm jr. 4/05/91, for asn,asp,gln,glu and cters"/>
+    <dih-c a="59" b="29" c="52" d="0" z_a="8" z_b="6" z_c="7" z_d="1" K="1.400000" Phi_zero="180.000000" n="2.000000" info="adm jr. 4/10/91, acetamide update"/>
+    <dih-c a="60" b="30" c="63" d="20" z_a="8" z_b="6" z_c="8" z_d="6" K="0.965000" Phi_zero="180.000000" n="1.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="60" b="30" c="63" d="20" z_a="8" z_b="6" z_c="8" z_d="6" K="3.850000" Phi_zero="180.000000" n="2.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="60" b="30" c="63" d="21" z_a="8" z_b="6" z_c="8" z_d="6" K="0.965000" Phi_zero="180.000000" n="1.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="60" b="30" c="63" d="21" z_a="8" z_b="6" z_c="8" z_d="6" K="3.850000" Phi_zero="180.000000" n="2.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="61" b="18" c="18" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="3.100000" Phi_zero="180.000000" n="2.000000" info="adm jr. 8/27/91, phenoxide"/>
+    <dih-c a="61" b="18" c="18" d="4" z_a="8" z_b="6" z_c="6" z_d="1" K="4.200000" Phi_zero="180.000000" n="2.000000" info="adm jr. 8/27/91, phenoxide"/>
+    <dih-c a="61" b="29" c="26" d="27" z_a="8" z_b="6" z_c="6" z_d="6" K="0.160000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="61" b="29" c="26" d="5" z_a="8" z_b="6" z_c="6" z_d="1" K="0.160000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="61" b="29" c="26" d="47" z_a="8" z_b="6" z_c="6" z_d="7" K="0.160000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="61" b="29" c="26" d="56" z_a="8" z_b="6" z_c="6" z_d="7" K="0.160000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="61" b="29" c="19" d="53" z_a="8" z_b="6" z_c="6" z_d="7" K="3.200000" Phi_zero="180.000000" n="2.000000" info="adm jr. 4/17/94, zwitterionic glycine"/>
+    <dih-c a="61" b="29" c="20" d="53" z_a="8" z_b="6" z_c="6" z_d="7" K="3.200000" Phi_zero="180.000000" n="2.000000" info="adm jr. 4/17/94, zwitterionic glycine"/>
+    <dih-c a="62" b="18" c="18" d="18" z_a="8" z_b="6" z_c="6" z_d="6" K="3.100000" Phi_zero="180.000000" n="2.000000" info="JES 8/25/89 phenol"/>
+    <dih-c a="62" b="18" c="18" d="4" z_a="8" z_b="6" z_c="6" z_d="1" K="4.200000" Phi_zero="180.000000" n="2.000000" info="JES 8/25/89 phenol"/>
+    <dih-c a="68" b="20" c="20" d="2" z_a="16" z_b="6" z_c="6" z_d="1" K="0.010000" Phi_zero="0.000000" n="3.000000" info="DTN 8/24/90"/>
+    <dih-c a="69" b="20" c="20" d="2" z_a="16" z_b="6" z_c="6" z_d="1" K="0.010000" Phi_zero="0.000000" n="3.000000" info="DTN 8/24/90"/>
+    <dih-c a="69" b="69" c="20" d="19" z_a="16" z_b="16" z_c="6" z_d="6" K="0.310000" Phi_zero="0.000000" n="3.000000" info="S-S for cys-cys, dummy parameter for now ... DTN 9/04/90"/>
+    <dih-c a="69" b="69" c="20" d="20" z_a="16" z_b="16" z_c="6" z_d="6" K="0.310000" Phi_zero="0.000000" n="3.000000" info="S-S for cys-cys, dummy parameter for now ... DTN 9/04/90"/>
+    <dih-c a="69" b="69" c="20" d="2" z_a="16" z_b="16" z_c="6" z_d="1" K="0.158000" Phi_zero="0.000000" n="3.000000" info="expt. dimethyldisulfide, 3/26/92 (FL)"/>
+    <dih-c a="69" b="69" c="21" d="2" z_a="16" z_b="16" z_c="6" z_d="1" K="0.158000" Phi_zero="0.000000" n="3.000000" info="expt. dimethyldisulfide, 3/26/92 (FL)"/>
+    <dih-c a="70" b="35" c="21" d="2" z_a="16" z_b="6" z_c="6" z_d="1" K="0.150000" Phi_zero="0.000000" n="3.000000" info="ethylthiolate 6-31+G* geom/freq, adm jr., 6/1/92"/>
+    <dih-c a="-1" b="17" c="54" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="2.250000" Phi_zero="180.000000" n="2.000000" info="9.0->2.25 GUANIDINIUM (KK)"/>
+    <dih-c a="-1" b="30" c="62" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="2.050000" Phi_zero="180.000000" n="2.000000" info="adm jr, 10/17/90, acetic acid C-Oh rotation barrier"/>
+    <dih-c a="-1" b="30" c="63" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="2.050000" Phi_zero="180.000000" n="2.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="-1" b="36" c="36" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.150000" Phi_zero="0.000000" n="1.000000" info="2-butene, adm jr., 2/00 update"/>
+    <dih-c a="-1" b="36" c="36" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="8.500000" Phi_zero="180.000000" n="2.000000" info="2-butene, adm jr., 2/00 update"/>
+    <dih-c a="-1" b="37" c="37" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="4.900000" Phi_zero="180.000000" n="2.000000" info="for ethene, yin/adm jr., 12/95"/>
+    <dih-c a="-1" b="26" c="17" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="-1" b="26" c="29" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="changed to 0.0 RLD 5/19/92"/>
+    <dih-c a="-1" b="26" c="30" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="Alanine dipeptide; NMA; acetate; etc. backbone param. RLD 3/22/92"/>
+    <dih-c a="-1" b="26" c="27" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.140000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="-1" b="27" c="27" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.160000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="-1" b="28" c="27" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.140000" Phi_zero="0.000000" n="3.000000" info="6-31g* AcProNH2, ProNH2, 6-31g*//3-21g AcProNHCH3 RLD 4/23/93"/>
+    <dih-c a="-1" b="31" c="32" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="0.000000" n="2.000000" info="Heme (6-liganded): dummy for auto dihe (KK 05/13/91)"/>
+    <dih-c a="-1" b="31" c="33" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="0.000000" n="2.000000" info="Heme (6-liganded): dummy for auto dihe (KK 05/13/91)"/>
+    <dih-c a="-1" b="32" c="36" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="3.000000" Phi_zero="180.000000" n="2.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <dih-c a="-1" b="32" c="32" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="0.000000" n="2.000000" info="Heme (6-liganded): dummy for auto dihe (KK 05/13/91)"/>
+    <dih-c a="-1" b="32" c="20" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="0.000000" n="6.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <dih-c a="-1" b="32" c="21" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="0.000000" n="6.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <dih-c a="-1" b="24" c="24" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="180.000000" n="2.000000" info="JWK indole 05/14/91"/>
+    <dih-c a="-1" b="19" c="29" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.050000" Phi_zero="180.000000" n="6.000000" info="For side chains of asp,asn,glu,gln, (n=6) from KK(LK)"/>
+    <dih-c a="-1" b="19" c="30" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="-1" b="19" c="19" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.200000" Phi_zero="0.000000" n="3.000000" info="alkane update, adm jr., 3/2/92"/>
+    <dih-c a="-1" b="19" c="20" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.200000" Phi_zero="0.000000" n="3.000000" info="alkane update, adm jr., 3/2/92"/>
+    <dih-c a="-1" b="19" c="21" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.200000" Phi_zero="0.000000" n="3.000000" info="alkane update, adm jr., 3/2/92"/>
+    <dih-c a="-1" b="19" c="53" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.100000" Phi_zero="0.000000" n="3.000000" info="0.715->0.10 METHYLAMMONIUM (KK)"/>
+    <dih-c a="-1" b="19" c="62" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.140000" Phi_zero="0.000000" n="3.000000" info="EMB 11/21/89 methanol vib fit"/>
+    <dih-c a="-1" b="19" c="63" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="-0.100000" Phi_zero="0.000000" n="3.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="-1" b="20" c="18" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="0.000000" n="6.000000" info="toluene, adm jr., 3/7/92"/>
+    <dih-c a="-1" b="20" c="29" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.050000" Phi_zero="180.000000" n="6.000000" info="For side chains of asp,asn,glu,gln, (n=6) from KK(LK)"/>
+    <dih-c a="-1" b="20" c="30" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="-1" b="20" c="20" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.195000" Phi_zero="0.000000" n="3.000000" info="alkane update, adm jr., 3/2/92"/>
+    <dih-c a="-1" b="20" c="21" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.160000" Phi_zero="0.000000" n="3.000000" info="rotation barrier in Ethane (SF)"/>
+    <dih-c a="-1" b="20" c="54" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="methylguanidinium, adm jr., 3/26/92"/>
+    <dih-c a="-1" b="20" c="53" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.100000" Phi_zero="0.000000" n="3.000000" info="0.715->0.10 METHYLAMMONIUM (KK)"/>
+    <dih-c a="-1" b="20" c="62" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.140000" Phi_zero="0.000000" n="3.000000" info="EMB 11/21/89 methanol vib fit"/>
+    <dih-c a="-1" b="20" c="63" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="-0.100000" Phi_zero="0.000000" n="3.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="-1" b="21" c="18" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="0.000000" n="6.000000" info="toluene, adm jr., 3/7/92"/>
+    <dih-c a="-1" b="21" c="29" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.050000" Phi_zero="180.000000" n="6.000000" info="For side chains of asp,asn,glu,gln, (n=6) from KK(LK)"/>
+    <dih-c a="-1" b="21" c="30" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="-1" b="21" c="21" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.155000" Phi_zero="0.000000" n="3.000000" info="alkane update, adm jr., 3/2/92"/>
+    <dih-c a="-1" b="21" c="54" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="methylguanidinium, adm jr., 3/26/92"/>
+    <dih-c a="-1" b="21" c="52" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.110000" Phi_zero="0.000000" n="3.000000" info="methylamine geom/freq, adm jr., 6/2/92"/>
+    <dih-c a="-1" b="21" c="53" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.090000" Phi_zero="0.000000" n="3.000000" info="fine-tuned to ab initio; METHYLAMMONIUM, KK 03/10/92"/>
+    <dih-c a="-1" b="21" c="62" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.140000" Phi_zero="0.000000" n="3.000000" info="EMB 11/21/89 methanol vib fit"/>
+    <dih-c a="-1" b="21" c="63" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="-0.100000" Phi_zero="0.000000" n="3.000000" info="adm jr. 3/19/92, from lipid methyl acetate"/>
+    <dih-c a="-1" b="76" c="34" d="-1" z_a="-1" z_b="26" z_c="6" z_d="-1" K="0.050000" Phi_zero="0.000000" n="4.000000" info="Heme (6-liganded): ligands (KK 05/13/91)"/>
+    <dih-c a="-1" b="76" c="57" d="-1" z_a="-1" z_b="26" z_c="7" z_d="-1" K="0.000000" Phi_zero="0.000000" n="2.000000" info="Heme (6-liganded): for ic para only (KK 05/13/91)"/>
+    <dih-c a="-1" b="76" c="49" d="-1" z_a="-1" z_b="26" z_c="7" z_d="-1" K="0.050000" Phi_zero="0.000000" n="4.000000" info="Heme (6-liganded): from param19.inp"/>
+    <dih-c a="-1" b="76" c="65" d="-1" z_a="-1" z_b="26" z_c="8" z_d="-1" K="0.000000" Phi_zero="0.000000" n="4.000000" info="Heme (6-liganded): ligands (KK 05/13/91)"/>
+    <dih-c a="-1" b="57" c="31" d="-1" z_a="-1" z_b="7" z_c="6" z_d="-1" K="0.000000" Phi_zero="0.000000" n="2.000000" info="Heme (6-liganded): dummy for auto dihe (KK 05/13/91)"/>
+  </dihedrals-c>
+  <impropers>
+  <!-- Impropers:  V(Phi) = K x (Phi - Phi0)^2
+
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Phi = angle (°)
+      - Phi0 = equilibrium angle (°)  -->
+    <imp a="32" b="31" c="57" d="31" z_a="6" z_b="6" z_c="7" z_d="6" K="20.800000" Phi_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <imp a="32" b="-1" c="-1" d="36" z_a="6" z_b="-1" z_c="-1" z_d="6" K="90.000000" Phi_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <imp a="20" b="-1" c="-1" d="32" z_a="6" z_b="-1" z_c="-1" z_d="6" K="90.000000" Phi_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <imp a="21" b="-1" c="-1" d="32" z_a="6" z_b="-1" z_c="-1" z_d="6" K="90.000000" Phi_zero="0.000000" info="Heme (6-liganded): substituents (KK 05/13/91)"/>
+    <imp a="2" b="31" c="31" d="33" z_a="1" z_b="6" z_c="6" z_d="6" K="29.400000" Phi_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <imp a="11" b="11" c="37" d="37" z_a="1" z_b="1" z_c="6" z_d="6" K="3.000000" Phi_zero="0.000000" info="for ethene, yin/adm jr., 12/95"/>
+    <imp a="6" b="48" c="49" d="23" z_a="1" z_b="7" z_c="7" z_d="6" K="0.500000" Phi_zero="0.000000" info="his, adm jr., 7/05/90"/>
+    <imp a="6" b="49" c="48" d="23" z_a="1" z_b="7" z_c="7" z_d="6" K="0.500000" Phi_zero="0.000000" info="his, adm jr., 7/05/90"/>
+    <imp a="8" b="22" c="48" d="22" z_a="1" z_b="6" z_c="7" z_d="6" K="0.500000" Phi_zero="0.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <imp a="8" b="22" c="49" d="22" z_a="1" z_b="6" z_c="7" z_d="6" K="0.500000" Phi_zero="0.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <imp a="8" b="22" c="50" d="22" z_a="1" z_b="6" z_c="7" z_d="6" K="1.000000" Phi_zero="0.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <imp a="8" b="48" c="22" d="22" z_a="1" z_b="7" z_c="6" z_d="6" K="0.500000" Phi_zero="0.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <imp a="8" b="49" c="22" d="22" z_a="1" z_b="7" z_c="6" z_d="6" K="0.500000" Phi_zero="0.000000" info="adm jr., 3/24/92, maintain old aliphatic H VDW params"/>
+    <imp a="47" b="17" c="26" d="28" z_a="7" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" info="6-31g* AcProNH2 and ProNH2 RLD 5/19/92"/>
+    <imp a="54" b="-1" c="-1" d="17" z_a="7" z_b="-1" z_c="-1" z_d="6" K="40.000000" Phi_zero="0.000000" info="5.75->40.0 GUANIDINIUM (KK)"/>
+    <imp a="51" b="-1" c="-1" d="0" z_a="7" z_b="-1" z_c="-1" z_d="1" K="20.000000" Phi_zero="0.000000" info="NMA Vibrational Modes (LK)"/>
+    <imp a="52" b="-1" c="-1" d="0" z_a="7" z_b="-1" z_c="-1" z_d="1" K="4.000000" Phi_zero="0.000000" info="adm jr., 8/13/90 acetamide geometry and vibrations"/>
+    <imp a="57" b="31" c="31" d="76" z_a="7" z_b="6" z_c="6" z_d="26" K="137.400000" Phi_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <imp a="57" b="31" c="32" d="32" z_a="7" z_b="6" z_c="6" z_d="6" K="40.600000" Phi_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <imp a="57" b="31" c="33" d="31" z_a="7" z_b="6" z_c="6" z_d="6" K="18.300000" Phi_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <imp a="57" b="33" c="32" d="31" z_a="7" z_b="6" z_c="6" z_d="6" K="32.700000" Phi_zero="0.000000" info="Heme (6-liganded): porphyrin macrocycle (KK 05/13/91)"/>
+    <imp a="48" b="22" c="23" d="0" z_a="7" z_b="6" z_c="6" z_d="1" K="0.450000" Phi_zero="0.000000" info="his, adm jr., 7/05/90"/>
+    <imp a="48" b="23" c="22" d="0" z_a="7" z_b="6" z_c="6" z_d="1" K="0.450000" Phi_zero="0.000000" info="his, adm jr., 7/05/90"/>
+    <imp a="50" b="22" c="23" d="0" z_a="7" z_b="6" z_c="6" z_d="1" K="1.200000" Phi_zero="0.000000" info="his, adm jr., 6/27/90"/>
+    <imp a="50" b="23" c="22" d="0" z_a="7" z_b="6" z_c="6" z_d="1" K="1.200000" Phi_zero="0.000000" info="his, adm jr., 6/27/90"/>
+    <imp a="55" b="18" c="25" d="24" z_a="7" z_b="6" z_c="6" z_d="6" K="100.000000" Phi_zero="0.000000" info="jr., 5/15/91, indole 3-21G HE1 out-of-plane surf."/>
+    <imp a="59" b="26" c="52" d="29" z_a="8" z_b="6" z_c="7" z_d="6" K="45.000000" Phi_zero="0.000000" info="6-31g* AcProNH2 and ProNH2 RLD 5/19/92"/>
+    <imp a="59" b="19" c="52" d="29" z_a="8" z_b="6" z_c="7" z_d="6" K="45.000000" Phi_zero="0.000000" info="adm jr., 8/13/90 acetamide geometry and vibrations"/>
+    <imp a="59" b="20" c="52" d="29" z_a="8" z_b="6" z_c="7" z_d="6" K="45.000000" Phi_zero="0.000000" info="adm jr., 8/13/90 acetamide geometry and vibrations"/>
+    <imp a="59" b="21" c="52" d="29" z_a="8" z_b="6" z_c="7" z_d="6" K="45.000000" Phi_zero="0.000000" info="adm jr., 8/13/90 acetamide geometry and vibrations"/>
+    <imp a="59" b="2" c="52" d="29" z_a="8" z_b="1" z_c="7" z_d="6" K="45.000000" Phi_zero="0.000000" info="adm jr., 5/13/91, formamide geometry and vibrations"/>
+    <imp a="59" b="47" c="20" d="29" z_a="8" z_b="7" z_c="6" z_d="6" K="120.000000" Phi_zero="0.000000" info="6-31g* AcProNH2 and ProNH2 RLD 5/19/92"/>
+    <imp a="59" b="52" c="26" d="29" z_a="8" z_b="7" z_c="6" z_d="6" K="45.000000" Phi_zero="0.000000" info="6-31g* AcProNH2 and ProNH2 RLD 5/19/92"/>
+    <imp a="59" b="52" c="19" d="29" z_a="8" z_b="7" z_c="6" z_d="6" K="45.000000" Phi_zero="0.000000" info="adm jr., 8/13/90 acetamide geometry and vibrations"/>
+    <imp a="59" b="52" c="20" d="29" z_a="8" z_b="7" z_c="6" z_d="6" K="45.000000" Phi_zero="0.000000" info="adm jr., 8/13/90 acetamide geometry and vibrations"/>
+    <imp a="59" b="52" c="21" d="29" z_a="8" z_b="7" z_c="6" z_d="6" K="45.000000" Phi_zero="0.000000" info="adm jr., 8/13/90 acetamide geometry and vibrations"/>
+    <imp a="59" b="52" c="2" d="29" z_a="8" z_b="7" z_c="1" z_d="6" K="45.000000" Phi_zero="0.000000" info="adm jr., 5/13/91, formamide geometry and vibrations"/>
+    <imp a="59" b="-1" c="-1" d="17" z_a="8" z_b="-1" z_c="-1" z_d="6" K="120.000000" Phi_zero="0.000000" info="NMA Vibrational Modes (LK)"/>
+    <imp a="60" b="-1" c="-1" d="30" z_a="8" z_b="-1" z_c="-1" z_d="6" K="100.000000" Phi_zero="0.000000" info="adm jr., 10/17/90, acetic acid vibrations"/>
+    <imp a="61" b="-1" c="-1" d="29" z_a="8" z_b="-1" z_c="-1" z_d="6" K="96.000000" Phi_zero="0.000000" info="90.0->96.0 acetate, single impr (KK)"/>
+    <imp a="29" b="-1" c="-1" d="19" z_a="6" z_b="-1" z_c="-1" z_d="6" K="96.000000" Phi_zero="0.000000" info="90.0->96.0 acetate, single impr (KK)"/>
+    <imp a="29" b="-1" c="-1" d="20" z_a="6" z_b="-1" z_c="-1" z_d="6" K="96.000000" Phi_zero="0.000000" info="90.0->96.0 acetate, single impr (KK)"/>
+    <imp a="29" b="-1" c="-1" d="21" z_a="6" z_b="-1" z_c="-1" z_d="6" K="96.000000" Phi_zero="0.000000" info="90.0->96.0 acetate, single impr (KK)"/>
+  </impropers>
+  <non-bonded>
+  <!-- Non-bonded 12-6
+  0= Key_a, 1= Epslion, 2= R0 (A), 3=  FF info
+
+  Non-bonded (12-6): V(rij) =  Epslion(ij) x [(R0(ij)/rij)^12 - 2 x (R0(ij)/rij)^6]
+  With:
+  Epslion(ij) = sqrt(Epslion(i) x Epslion(j))  and Epslion(i) (kcal mol^-1)
+  R0(ij)= (R0(i) + R0(j))/2  and R0(i) (A)
+  -->
+    <non-bd a="17" z_a="6" Ei="-0.110000" Ri="2.000000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="18" z_a="6" Ei="-0.070000" Ri="1.992400" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="29" z_a="6" Ei="-0.070000" Ri="2.000000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="30" z_a="6" Ei="-0.070000" Ri="2.000000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="36" z_a="6" Ei="-0.068000" Ri="2.090000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="37" z_a="6" Ei="-0.064000" Ri="2.080000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="34" z_a="6" Ei="-0.110000" Ri="2.100000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="26" z_a="6" Ei="-0.020000" Ri="2.275000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="27" z_a="6" Ei="-0.055000" Ri="2.175000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="28" z_a="6" Ei="-0.055000" Ri="2.175000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="31" z_a="6" Ei="-0.090000" Ri="1.800000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="32" z_a="6" Ei="-0.090000" Ri="1.800000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="22" z_a="6" Ei="-0.050000" Ri="1.800000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="23" z_a="6" Ei="-0.050000" Ri="1.800000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="33" z_a="6" Ei="-0.090000" Ri="1.800000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="24" z_a="6" Ei="-0.090000" Ri="1.800000" Eii="-0.090000" Rii="1.900000" info=" "/>
+    <non-bd a="35" z_a="6" Ei="-0.110000" Ri="2.200000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="38" z_a="6" Ei="-0.058000" Ri="1.563000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="19" z_a="6" Ei="-0.020000" Ri="2.275000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="20" z_a="6" Ei="-0.055000" Ri="2.175000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="21" z_a="6" Ei="-0.080000" Ri="2.060000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="25" z_a="6" Ei="-0.070000" Ri="1.992400" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="39" z_a="6" Ei="-0.020000" Ri="2.275000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="40" z_a="6" Ei="-0.020000" Ri="2.275000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="41" z_a="6" Ei="-0.056000" Ri="2.010000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="42" z_a="6" Ei="-0.078000" Ri="2.040000" Eii="-0.010000" Rii="1.900000" info=" "/>
+    <non-bd a="0" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="2" z_a="1" Ei="-0.022000" Ri="1.320000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="10" z_a="1" Ei="-0.031000" Ri="1.250000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="11" z_a="1" Ei="-0.026000" Ri="1.260000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="5" z_a="1" Ei="-0.022000" Ri="1.320000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="1" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="4" z_a="1" Ei="-0.030000" Ri="1.358200" Eii="-0.030000" Rii="1.358200" info=" "/>
+    <non-bd a="6" z_a="1" Ei="-0.046000" Ri="0.900000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="7" z_a="1" Ei="-0.046000" Ri="0.700000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="8" z_a="1" Ei="-0.007800" Ri="1.468000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="9" z_a="1" Ei="-0.100000" Ri="0.450000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="3" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="12" z_a="1" Ei="-0.022000" Ri="1.320000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="13" z_a="1" Ei="-0.028000" Ri="1.340000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="14" z_a="1" Ei="-0.024000" Ri="1.340000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="47" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="-0.000100" Rii="1.850000" info=" "/>
+    <non-bd a="54" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="51" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="-0.200000" Rii="1.550000" info=" "/>
+    <non-bd a="52" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="53" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="56" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="57" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="48" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="49" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="50" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="55" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="59" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="-0.120000" Rii="1.400000" info=" "/>
+    <non-bd a="60" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="-0.120000" Rii="1.400000" info=" "/>
+    <non-bd a="61" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="62" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="65" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="63" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="66" z_a="8" Ei="-0.165000" Ri="1.692000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="64" z_a="8" Ei="-0.152100" Ri="1.768200" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="68" z_a="16" Ei="-0.450000" Ri="2.000000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="69" z_a="16" Ei="-0.380000" Ri="1.975000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="70" z_a="16" Ei="-0.470000" Ri="2.200000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="83" z_a="11" Ei="-0.046900" Ri="1.363750" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="85" z_a="15" Ei="-0.087000" Ri="1.763750" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="88" z_a="17" Ei="-0.150000" Ri="2.270000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="87" z_a="20" Ei="-0.120000" Ri="1.367000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="84" z_a="12" Ei="-0.015000" Ri="1.185000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="86" z_a="55" Ei="-0.190000" Ri="2.100000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="89" z_a="30" Ei="-0.250000" Ri="1.090000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="76" z_a="26" Ei="0.000000" Ri="0.650000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="71" z_a="2" Ei="-0.021270" Ri="1.480000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="72" z_a="10" Ei="-0.086000" Ri="1.530000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="77" z_a="17" Ei="-0.030000" Ri="1.908200" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="82" z_a="1" Ei="-0.000000" Ri="0.000000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="90" z_a="47" Ei="-4.560000" Ri="1.477500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="91" z_a="13" Ei="-4.020000" Ri="1.462500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="92" z_a="79" Ei="-5.290000" Ri="1.475500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="93" z_a="29" Ei="-4.720000" Ri="1.308000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="94" z_a="28" Ei="-5.650000" Ri="1.276000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="95" z_a="82" Ei="-2.930000" Ri="1.782500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="96" z_a="46" Ei="-6.150000" Ri="1.409500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="97" z_a="78" Ei="-7.800000" Ri="1.422500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="44" z_a="6" Ei="-0.070000" Ri="1.992400" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="78" z_a="9" Ei="-0.120000" Ri="1.700000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="43" z_a="6" Ei="-0.200000" Ri="1.750000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="58" z_a="7" Ei="-0.600000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="67" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="-0.120000" Rii="1.400000" info=" "/>
+    <non-bd a="45" z_a="6" Ei="-0.110000" Ri="2.000000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="73" z_a="6" Ei="-0.060000" Ri="1.900000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="74" z_a="6" Ei="-0.042000" Ri="2.050000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="75" z_a="6" Ei="-0.020000" Ri="2.300000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="15" z_a="1" Ei="-0.028000" Ri="1.320000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="16" z_a="1" Ei="-0.030000" Ri="1.300000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="79" z_a="9" Ei="-0.135000" Ri="1.630000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="80" z_a="9" Ei="-0.105000" Ri="1.630000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="81" z_a="9" Ei="-0.097000" Ri="1.600000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="46" z_a="6" Ei="-0.020000" Ri="2.275000" Eii="0.000000" Rii="0.000000" info=" "/>
+  </non-bonded>
+</ff-xml>

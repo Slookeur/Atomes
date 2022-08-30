@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P4nc</space-group>
+  <sg-num>104</sg-num>
+  <hm-symbol>P 4 n c</hm-symbol>
+  <bravais>Tetragonal</bravais>
+  <settings num="1">
+    <set name="P_4_n_c" x="a" y="b" z="c">
+    </set>
+  </settings>
+  <wyckoff num="3">
+    <wyck id="1" mul="8" let="c" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="-y" z="z"/>
+      <pos x="-y" y="x" z="z"/>
+      <pos x="y" y="-x" z="z"/>
+      <pos x="x+1/2" y="-y+1/2" z="z+1/2"/>
+      <pos x="-x+1/2" y="y+1/2" z="z+1/2"/>
+      <pos x="-y+1/2" y="-x+1/2" z="z+1/2"/>
+      <pos x="y+1/2" y="x+1/2" z="z+1/2"/>
+    </wyck>
+    <wyck id="2" mul="4" let="b" site="2..">
+      <pos x="0" y="1/2" z="z"/>
+      <pos x="1/2" y="0" z="z"/>
+      <pos x="1/2" y="0" z="z+1/2"/>
+      <pos x="0" y="1/2" z="z+1/2"/>
+    </wyck>
+    <wyck id="3" mul="2" let="a" site="4..">
+      <pos x="0" y="0" z="z"/>
+      <pos x="1/2" y="1/2" z="z+1/2"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P222</space-group>
+  <sg-num>16</sg-num>
+  <hm-symbol>P 2 2 2</hm-symbol>
+  <bravais>Orthorhombic</bravais>
+  <settings num="1">
+    <set name="P_2_2_2" x="a" y="b" z="c">
+    </set>
+  </settings>
+  <wyckoff num="21">
+    <wyck id="1" mul="4" let="u" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="-y" z="z"/>
+      <pos x="-x" y="y" z="-z"/>
+      <pos x="x" y="-y" z="-z"/>
+    </wyck>
+    <wyck id="2" mul="2" let="t" site="..2">
+      <pos x="1/2" y="1/2" z="z"/>
+      <pos x="1/2" y="1/2" z="-z"/>
+    </wyck>
+    <wyck id="3" mul="2" let="s" site="..2">
+      <pos x="0" y="1/2" z="z"/>
+      <pos x="0" y="1/2" z="-z"/>
+    </wyck>
+    <wyck id="4" mul="2" let="r" site="..2">
+      <pos x="1/2" y="0" z="z"/>
+      <pos x="1/2" y="0" z="-z"/>
+    </wyck>
+    <wyck id="5" mul="2" let="q" site="..2">
+      <pos x="0" y="0" z="z"/>
+      <pos x="0" y="0" z="-z"/>
+    </wyck>
+    <wyck id="6" mul="2" let="p" site=".2.">
+      <pos x="1/2" y="y" z="1/2"/>
+      <pos x="1/2" y="-y" z="1/2"/>
+    </wyck>
+    <wyck id="7" mul="2" let="o" site=".2.">
+      <pos x="1/2" y="y" z="0"/>
+      <pos x="1/2" y="-y" z="0"/>
+    </wyck>
+    <wyck id="8" mul="2" let="n" site=".2.">
+      <pos x="0" y="y" z="1/2"/>
+      <pos x="0" y="-y" z="1/2"/>
+    </wyck>
+    <wyck id="9" mul="2" let="m" site=".2.">
+      <pos x="0" y="y" z="0"/>
+      <pos x="0" y="-y" z="0"/>
+    </wyck>
+    <wyck id="10" mul="2" let="l" site="2..">
+      <pos x="x" y="1/2" z="1/2"/>
+      <pos x="-x" y="1/2" z="1/2"/>
+    </wyck>
+    <wyck id="11" mul="2" let="k" site="2..">
+      <pos x="x" y="1/2" z="0"/>
+      <pos x="-x" y="1/2" z="0"/>
+    </wyck>
+    <wyck id="12" mul="2" let="j" site="2..">
+      <pos x="x" y="0" z="1/2"/>
+      <pos x="-x" y="0" z="1/2"/>
+    </wyck>
+    <wyck id="13" mul="2" let="i" site="2..">
+      <pos x="x" y="0" z="0"/>
+      <pos x="-x" y="0" z="0"/>
+    </wyck>
+    <wyck id="14" mul="1" let="h" site="222">
+      <pos x="1/2" y="1/2" z="1/2"/>
+    </wyck>
+    <wyck id="15" mul="1" let="g" site="222">
+      <pos x="0" y="1/2" z="1/2"/>
+    </wyck>
+    <wyck id="16" mul="1" let="f" site="222">
+      <pos x="1/2" y="0" z="1/2"/>
+    </wyck>
+    <wyck id="17" mul="1" let="e" site="222">
+      <pos x="1/2" y="1/2" z="0"/>
+    </wyck>
+    <wyck id="18" mul="1" let="d" site="222">
+      <pos x="0" y="0" z="1/2"/>
+    </wyck>
+    <wyck id="19" mul="1" let="c" site="222">
+      <pos x="0" y="1/2" z="0"/>
+    </wyck>
+    <wyck id="20" mul="1" let="b" site="222">
+      <pos x="1/2" y="0" z="0"/>
+    </wyck>
+    <wyck id="21" mul="1" let="a" site="222">
+      <pos x="0" y="0" z="0"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Force Field Library XML file -->
+<ff-xml>
+  <force-field>CHARMM silicates</force-field>
+  <!--  data adapted from the file: par_all_silicates.prm -->
+  <units>k-calories per mol</units>
+  <ff-data>
+    <atoms dim="5">13</atoms>
+    <bonds-h dim="2" pot="1">14</bonds-h>
+    <bonds-q dim="0" pot="0">0</bonds-q>
+    <bonds-m dim="0" pot="0">0</bonds-m>
+    <angles-h dim="4" pot="-1">27</angles-h>
+    <angles-q dim="0" pot="0">0</angles-q>
+    <dihedrals-c dim="3" pot="1">34</dihedrals-c>
+    <dihedrals-ccc dim="0" pot="0">0</dihedrals-ccc>
+    <impropers dim="0" pot="2">0</impropers>
+    <inversions dim="0" pot="0">0</inversions>
+    <non-bonded dim="4" pot="-1">13</non-bonded>
+  </ff-data>
+  <atoms>
+    <at label="H" mass="1.008000" key="HT" info="TIPS3P WATER HYDROGEN"/>
+    <at label="O" mass="15.99940" key="OT" info="TIPS3P WATER OXYGEN"/>
+    <at label="D" mass="1.008000" key="DUM" info="dummy atom"/>
+    <at label="H" mass="1.008000" key="HSiO" info="Si hydroxyl hydrogen;"/>
+    <at label="H" mass="1.008000" key="HSiA" info="Si aliphatic hydrogen;"/>
+    <at label="H" mass="1.008000" key="HAl" info="Si aliphatic hydrogen;"/>
+    <at label="O" mass="15.999000" key="OSiH" info="Si Hydroxyl Oxygen;"/>
+    <at label="O" mass="15.999000" key="OSiE" info="Si Ester Oxygen;"/>
+    <at label="O" mass="15.999000" key="OSiA" info="Si Ester Oxygen;"/>
+    <at label="O" mass="15.999000" key="OAl" info="Si Hydroxyl Oxygen;"/>
+    <at label="Si" mass="28.085500" key="Si" info="Si Atom;"/>
+    <at label="Si" mass="28.085500" key="SiH3" info="Si Atom;"/>
+    <at label="Al" mass="26.981540" key="Al" info="Aluminum Atom;"/>
+  </atoms>
+  <bonds-h>
+  <!-- Quadratic bonds:
+
+    V(R) = K x (R - R0)^2
+    With:
+      - K = spring constant (kcal mol^-1 A^-2)
+      - R = bond distance (A)
+      - R0 = equilibrium distance (A)
+   -->
+    <bd-h a="10" b="7" z_a="14" z_b="8" K="302.000000" R_zero="1.698000" info=" "/>
+    <bd-h a="12" b="7" z_a="13" z_b="8" K="302.000000" R_zero="1.698000" info=" "/>
+    <bd-h a="10" b="8" z_a="14" z_b="8" K="302.000000" R_zero="1.698000" info=" "/>
+    <bd-h a="10" b="6" z_a="14" z_b="8" K="325.000000" R_zero="1.680000" info=" "/>
+    <bd-h a="12" b="9" z_a="13" z_b="8" K="302.000000" R_zero="2.000000" info=" "/>
+    <bd-h a="11" b="7" z_a="14" z_b="8" K="304.000000" R_zero="1.682000" info=" "/>
+    <bd-h a="3" b="6" z_a="1" z_b="8" K="566.000000" R_zero="0.975000" info=" "/>
+    <bd-h a="5" b="9" z_a="1" z_b="8" K="566.000000" R_zero="0.960000" info=" "/>
+    <bd-h a="12" b="5" z_a="13" z_b="1" K="450.000000" R_zero="0.957200" info=" "/>
+    <bd-h a="10" b="4" z_a="14" z_b="1" K="204.000000" R_zero="1.489000" info=" "/>
+    <bd-h a="4" b="11" z_a="1" z_b="14" K="204.000000" R_zero="1.489000" info=" "/>
+    <bd-h a="10" b="9" z_a="14" z_b="8" K="304.000000" R_zero="1.682000" info=" "/>
+    <bd-h a="0" b="0" z_a="1" z_b="1" K="0.000000" R_zero="1.513900" info="from TIPS3P geometry (for SHAKE w/PARAM)"/>
+    <bd-h a="0" b="1" z_a="1" z_b="8" K="450.000000" R_zero="0.957200" info="from TIPS3P geometry"/>
+  </bonds-h>
+  <angles-h>
+  <!-- Quadratic angles + Urey-Bradley (UB) parameters:
+
+    V(Theta) = K x (Theta - Theta0)^2
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Theta = angle (°)
+      - Theta0 = equilibrium angle(°)
+    V(S) = Kub x (R - Rub)^2
+    With:
+      - Kub = spring constant (kcal mol^-1 A^-2)
+      - S = distance 1-3 (A)
+      - S0 = equilibrium distance 1-3 (A)   -->
+    <ang-h a="7" b="10" c="7" z_a="8" z_b="14" z_c="8" K="30.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="7" b="11" c="7" z_a="8" z_b="14" z_c="8" K="30.000000" Theta_zero="121.500000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="10" b="7" c="11" z_a="14" z_b="8" z_c="14" K="34.000000" Theta_zero="150.500000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="10" b="7" c="10" z_a="14" z_b="8" z_c="14" K="34.000000" Theta_zero="150.000000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="10" b="8" c="10" z_a="14" z_b="8" z_c="14" K="34.000000" Theta_zero="150.000000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="8" b="10" c="6" z_a="8" z_b="14" z_c="8" K="32.000000" Theta_zero="126.000000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="8" b="10" c="8" z_a="8" z_b="14" z_c="8" K="30.000000" Theta_zero="121.500000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="8" b="10" c="7" z_a="8" z_b="14" z_c="8" K="30.000000" Theta_zero="121.500000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="11" b="7" c="11" z_a="14" z_b="8" z_c="14" K="34.000000" Theta_zero="159.000000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="4" b="11" c="4" z_a="1" z_b="14" z_c="1" K="30.000000" Theta_zero="119.000000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="4" b="11" c="7" z_a="1" z_b="14" z_c="8" K="44.000000" Theta_zero="118.000000" Kub="0.000000" S_zero="0.000000" info="from sim1"/>
+    <ang-h a="10" b="6" c="3" z_a="14" z_b="8" z_c="1" K="34.000000" Theta_zero="122.500000" Kub="0.000000" S_zero="0.000000" info="quartz, from sim2"/>
+    <ang-h a="7" b="10" c="6" z_a="8" z_b="14" z_c="8" K="32.000000" Theta_zero="126.000000" Kub="0.000000" S_zero="0.000000" info="from sim2"/>
+    <ang-h a="6" b="10" c="6" z_a="8" z_b="14" z_c="8" K="30.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info="from sim2"/>
+    <ang-h a="12" b="9" c="12" z_a="13" z_b="8" z_c="13" K="30.000000" Theta_zero="98.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="12" b="9" c="10" z_a="13" z_b="8" z_c="14" K="30.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="9" b="10" c="7" z_a="8" z_b="14" z_c="8" K="30.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="5" b="9" c="12" z_a="1" z_b="8" z_c="13" K="35.000000" Theta_zero="93.400000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="9" b="12" c="5" z_a="8" z_b="13" z_c="1" K="35.000000" Theta_zero="93.400000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="9" b="12" c="9" z_a="8" z_b="13" z_c="8" K="30.000000" Theta_zero="90.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="7" b="12" c="7" z_a="8" z_b="13" z_c="8" K="30.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="7" b="12" c="9" z_a="8" z_b="13" z_c="8" K="30.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="7" b="12" c="5" z_a="8" z_b="13" z_c="1" K="30.000000" Theta_zero="119.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="12" b="7" c="10" z_a="13" z_b="8" z_c="14" K="30.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="12" b="7" c="12" z_a="13" z_b="8" z_c="13" K="30.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="7" b="10" c="4" z_a="8" z_b="14" z_c="1" K="44.000000" Theta_zero="118.000000" Kub="0.000000" S_zero="0.000000" info=" "/>
+    <ang-h a="0" b="1" c="0" z_a="1" z_b="8" z_c="1" K="55.000000" Theta_zero="104.520000" Kub="0.000000" S_zero="0.000000" info="FROM TIPS3P GEOMETRY"/>
+  </angles-h>
+  <dihedrals-c>
+  <!-- Dihedrals / torsions:
+
+    V(Phi) = K x (1 + cos(n x Phi - Phi0))
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Phi = dihedral angle (°)
+      - n = multiplicity
+      - Phi0 = phase shift angle (°)  -->
+    <dih-c a="7" b="10" c="7" d="11" z_a="8" z_b="14" z_c="8" z_d="14" K="0.180000" Phi_zero="0.000000" n="5.000000" info="quartz, from sim1"/>
+    <dih-c a="7" b="10" c="7" d="10" z_a="8" z_b="14" z_c="8" z_d="14" K="0.180000" Phi_zero="0.000000" n="5.000000" info="quartz, from sim1"/>
+    <dih-c a="8" b="10" c="8" d="10" z_a="8" z_b="14" z_c="8" z_d="14" K="0.180000" Phi_zero="0.000000" n="5.000000" info="quartz, from sim1"/>
+    <dih-c a="7" b="10" c="8" d="10" z_a="8" z_b="14" z_c="8" z_d="14" K="0.180000" Phi_zero="0.000000" n="5.000000" info="quartz, from sim1"/>
+    <dih-c a="7" b="11" c="7" d="10" z_a="8" z_b="14" z_c="8" z_d="14" K="0.180000" Phi_zero="0.000000" n="5.000000" info="quartz, from sim1"/>
+    <dih-c a="6" b="10" c="7" d="11" z_a="8" z_b="14" z_c="8" z_d="14" K="0.120000" Phi_zero="0.000000" n="5.000000" info="quartz, from sim1"/>
+    <dih-c a="10" b="7" c="10" d="8" z_a="14" z_b="8" z_c="14" z_d="8" K="0.120000" Phi_zero="0.000000" n="5.000000" info="quartz, from sim1"/>
+    <dih-c a="4" b="11" c="7" d="10" z_a="1" z_b="14" z_c="8" z_d="14" K="0.200000" Phi_zero="0.000000" n="3.000000" info="quartz, from sim1"/>
+    <dih-c a="4" b="11" c="7" d="11" z_a="1" z_b="14" z_c="8" z_d="14" K="0.200000" Phi_zero="0.000000" n="3.000000" info="quartz, from sim1"/>
+    <dih-c a="7" b="10" c="6" d="3" z_a="8" z_b="14" z_c="8" z_d="1" K="0.300000" Phi_zero="0.000000" n="3.000000" info="quartz, from sim2"/>
+    <dih-c a="6" b="10" c="6" d="3" z_a="8" z_b="14" z_c="8" z_d="1" K="0.350000" Phi_zero="0.000000" n="3.000000" info="quartz, from sim2"/>
+    <dih-c a="10" b="8" c="10" d="6" z_a="14" z_b="8" z_c="14" z_d="8" K="0.120000" Phi_zero="0.000000" n="5.000000" info="quartz, from sim1"/>
+    <dih-c a="11" b="7" c="11" d="7" z_a="14" z_b="8" z_c="14" z_d="8" K="0.180000" Phi_zero="0.000000" n="5.000000" info="quartz, from sim1"/>
+    <dih-c a="10" b="7" c="10" d="4" z_a="14" z_b="8" z_c="14" z_d="1" K="0.200000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="10" b="7" c="10" d="6" z_a="14" z_b="8" z_c="14" z_d="8" K="0.180000" Phi_zero="0.000000" n="5.000000" info=" "/>
+    <dih-c a="11" b="7" c="10" d="8" z_a="14" z_b="8" z_c="14" z_d="8" K="0.180000" Phi_zero="0.000000" n="5.000000" info=" "/>
+    <dih-c a="8" b="10" c="6" d="3" z_a="8" z_b="14" z_c="8" z_d="1" K="0.350000" Phi_zero="0.000000" n="3.000000" info="quartz, from sim2"/>
+    <dih-c a="9" b="12" c="9" d="5" z_a="8" z_b="13" z_c="8" z_d="1" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="12" b="9" c="10" d="7" z_a="13" z_b="8" z_c="14" z_d="8" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="12" b="9" c="12" d="9" z_a="13" z_b="8" z_c="13" z_d="8" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="12" b="9" c="12" d="5" z_a="13" z_b="8" z_c="13" z_d="1" K="0.300000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="10" b="9" c="12" d="9" z_a="14" z_b="8" z_c="13" z_d="8" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="10" b="7" c="10" d="9" z_a="14" z_b="8" z_c="14" z_d="8" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="10" b="9" c="12" d="5" z_a="14" z_b="8" z_c="13" z_d="1" K="0.300000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="5" b="9" c="12" d="5" z_a="1" z_b="8" z_c="13" z_d="1" K="0.300000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="12" b="7" c="10" d="7" z_a="13" z_b="8" z_c="14" z_d="8" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="12" b="7" c="12" d="7" z_a="13" z_b="8" z_c="13" z_d="8" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="12" b="7" c="12" d="9" z_a="13" z_b="8" z_c="13" z_d="8" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="12" b="9" c="12" d="7" z_a="13" z_b="8" z_c="13" z_d="8" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="12" b="7" c="12" d="5" z_a="13" z_b="8" z_c="13" z_d="1" K="0.300000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="10" b="7" c="12" d="7" z_a="14" z_b="8" z_c="13" z_d="8" K="0.300000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="10" b="7" c="12" d="9" z_a="14" z_b="8" z_c="13" z_d="8" K="0.300000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="10" b="7" c="12" d="5" z_a="14" z_b="8" z_c="13" z_d="1" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="7" b="12" c="9" d="5" z_a="8" z_b="13" z_c="8" z_d="1" K="0.100000" Phi_zero="0.000000" n="3.000000" info=" "/>
+  </dihedrals-c>
+  <non-bonded>
+  <!-- Non-bonded 12-6
+  0= Key_a, 1= Epslion, 2= R0 (A), 3=  FF info
+
+  Non-bonded (12-6): V(rij) =  Epslion(ij) x [(R0(ij)/rij)^12 - 2 x (R0(ij)/rij)^6]
+  With:
+  Epslion(ij) = sqrt(Epslion(i) x Epslion(j))  and Epslion(i) (kcal mol^-1)
+  R0(ij)= (R0(i) + R0(j))/2  and R0(i) (A)
+  -->
+    <non-bd a="3" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info="proteins"/>
+    <non-bd a="4" z_a="1" Ei="-0.022000" Ri="1.320000" Eii="0.000000" Rii="0.000000" info="alkane"/>
+    <non-bd a="5" z_a="1" Ei="-0.022000" Ri="1.320000" Eii="0.000000" Rii="0.000000" info="alkane"/>
+    <non-bd a="12" z_a="13" Ei="-0.650000" Ri="2.200000" Eii="0.000000" Rii="0.000000" info="to Phos"/>
+    <non-bd a="10" z_a="14" Ei="-0.600000" Ri="2.200000" Eii="0.000000" Rii="0.000000" info="to Phos"/>
+    <non-bd a="11" z_a="14" Ei="-0.600000" Ri="2.200000" Eii="0.000000" Rii="0.000000" info="to Phos"/>
+    <non-bd a="6" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info="proteins"/>
+    <non-bd a="7" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info="nucleic acids"/>
+    <non-bd a="8" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info="nucleic acids"/>
+    <non-bd a="9" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info="proteins"/>
+    <non-bd a="0" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info="water"/>
+    <non-bd a="1" z_a="8" Ei="-0.152100" Ri="1.768200" Eii="0.000000" Rii="0.000000" info="water"/>
+    <non-bd a="2" z_a="1" Ei="-0.000000" Ri="0.000000" Eii="0.000000" Rii="0.000000" info="atom"/>
+  </non-bonded>
+</ff-xml>

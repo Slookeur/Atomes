@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>Pm</space-group>
+  <sg-num>6</sg-num>
+  <hm-symbol>P 1 m 1</hm-symbol>
+  <bravais>Monoclinic</bravais>
+  <settings num="3">
+    <set name="P_1_m_1" x="a" y="b" z="c">
+    </set>
+    <set name="P_1_1_m" x="c" y="a" z="b">
+    </set>
+    <set name="P_m_1_1" x="b" y="c" z="a">
+    </set>
+  </settings>
+  <wyckoff num="3">
+    <wyck id="1" mul="2" let="c" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="x" y="-y" z="z"/>
+    </wyck>
+    <wyck id="2" mul="1" let="b" site="m">
+      <pos x="x" y="1/2" z="z"/>
+    </wyck>
+    <wyck id="3" mul="1" let="a" site="m">
+      <pos x="x" y="0" z="z"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

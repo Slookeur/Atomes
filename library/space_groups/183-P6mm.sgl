@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P6mm</space-group>
+  <sg-num>183</sg-num>
+  <hm-symbol>P 6 m m</hm-symbol>
+  <bravais>Hexagonal</bravais>
+  <settings num="1">
+    <set name="P_6_m_m" x="a" y="b" z="c">
+    </set>
+  </settings>
+  <wyckoff num="6">
+    <wyck id="1" mul="12" let="f" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-y" y="x-y" z="z"/>
+      <pos x="-x+y" y="-x" z="z"/>
+      <pos x="-x" y="-y" z="z"/>
+      <pos x="y" y="-x+y" z="z"/>
+      <pos x="x-y" y="x" z="z"/>
+      <pos x="-y" y="-x" z="z"/>
+      <pos x="-x+y" y="y" z="z"/>
+      <pos x="x" y="x-y" z="z"/>
+      <pos x="y" y="x" z="z"/>
+      <pos x="x-y" y="-y" z="z"/>
+      <pos x="-x" y="-x+y" z="z"/>
+    </wyck>
+    <wyck id="2" mul="6" let="e" site=".m.">
+      <pos x="x" y="-x" z="z"/>
+      <pos x="x" y="2x" z="z"/>
+      <pos x="-2x" y="-x" z="z"/>
+      <pos x="-x" y="x" z="z"/>
+      <pos x="-x" y="-2x" z="z"/>
+      <pos x="2x" y="x" z="z"/>
+    </wyck>
+    <wyck id="3" mul="6" let="d" site="..m">
+      <pos x="x" y="0" z="z"/>
+      <pos x="0" y="x" z="z"/>
+      <pos x="-x" y="-x" z="z"/>
+      <pos x="-x" y="0" z="z"/>
+      <pos x="0" y="-x" z="z"/>
+      <pos x="x" y="x" z="z"/>
+    </wyck>
+    <wyck id="4" mul="3" let="c" site="2mm">
+      <pos x="1/2" y="0" z="z"/>
+      <pos x="0" y="1/2" z="z"/>
+      <pos x="1/2" y="1/2" z="z"/>
+    </wyck>
+    <wyck id="5" mul="2" let="b" site="3m.">
+      <pos x="1/3" y="2/3" z="z"/>
+      <pos x="2/3" y="1/3" z="z"/>
+    </wyck>
+    <wyck id="6" mul="1" let="a" site="6mm">
+      <pos x="0" y="0" z="z"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

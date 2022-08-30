@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P43</space-group>
+  <sg-num>78</sg-num>
+  <hm-symbol>P 43</hm-symbol>
+  <bravais>Tetragonal</bravais>
+  <settings num="1">
+    <set name="P_43" x="a" y="b" z="c">
+    </set>
+  </settings>
+  <wyckoff num="1">
+    <wyck id="1" mul="4" let="a" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="-y" z="z+1/2"/>
+      <pos x="-y" y="x" z="z+3/4"/>
+      <pos x="y" y="-x" z="z+1/4"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>
