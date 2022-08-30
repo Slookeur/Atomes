@@ -310,8 +310,8 @@ const GLchar * line_stipple_color = GLSL(
   uniform uint pattern;
   in float line_pos;
   in vec4 v_color;
-  out vec4 fragment_color;
 
+  out vec4 fragment_color;
   void main()
   {
     fragment_color = v_color;
@@ -326,8 +326,8 @@ const GLchar * angle_color = GLSL(
   uniform uint pattern;
   in float line_pos;
   in vec4 v_color;
-  out vec4 fragment_color;
 
+  out vec4 fragment_color;
   void main()
   {
     fragment_color = v_color;
@@ -408,7 +408,7 @@ const GLchar * full_color = GLSL(
   in vec3 surfaceNormal;
   in vec3 surfaceToCamera;
 
-  out vec4 fragment_color;
+  // out vec4 fragment_color;
 
   const float PI = 3.14159265359;
 
@@ -653,11 +653,11 @@ const GLchar * full_color = GLSL(
     }
     if (fog.mode > 0)
     {
-      fragment_color = vec4 (Apply_fog(surfaceColor.xyz*color), alpha);
+      gl_FragColor = vec4 (Apply_fog(surfaceColor.xyz*color), alpha);
     }
     else
     {
-      fragment_color = vec4 (surfaceColor.xyz*color, alpha);
+      gl_FragColor = vec4 (surfaceColor.xyz*color, alpha);
     }
   }
 );
@@ -703,7 +703,7 @@ const GLchar * axis_sphere_vertex = GLSL(
   out vec3 surfaceToCamera;
   void main ()
   {
-    surfaceColor    = vertColor;
+    surfaceColor = vertColor;
     vec4 pos = vec4(vert, 1.0);
     surfacePosition = vec3(m_view * pos);
     surfaceNormal   = mat3(m_view) * vertNormal;
@@ -807,7 +807,6 @@ const GLchar * cone_vertex = GLSL(
     gl_Position = mvp * vec4(pos,1.0);
   }
 );
-
 
 const GLchar * cap_vertex = GLSL(
   uniform mat4 mvp;
@@ -1089,7 +1088,7 @@ const GLchar * polyedron_color = GLSL(
   in vec3 surfaceNormal;
   in vec3 surfaceToCamera;
 
-  out vec4 fragment_color;
+  // out vec4 fragment_color;
 
   const float PI = 3.14159265359;
 
@@ -1334,11 +1333,11 @@ const GLchar * polyedron_color = GLSL(
     }
     if (fog.mode > 0)
     {
-      fragment_color = vec4 (Apply_fog(vertColor.xyz*color), alpha);
+      gl_FragColor = vec4 (Apply_fog(vertColor.xyz*color), alpha);
     }
     else
     {
-      fragment_color = vec4 (vertColor.xyz*color, alpha);
+      gl_FragColor = vec4 (vertColor.xyz*color, alpha);
     }
   }
 );
@@ -1365,7 +1364,6 @@ const GLchar * string_vertex = GLSL(
   out float angle;
 
   out vec2 text_coords;
-
   mat4 translate_this (in vec3 coord)
   {
     mat4 translate;
@@ -1703,7 +1701,6 @@ const GLchar * string_color = GLSL(
   in vec2 text_coords;
 
   out vec4 fragment_color;
-
   void main()
   {
     vec2 coords = text_coords;
