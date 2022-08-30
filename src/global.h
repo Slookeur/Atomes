@@ -39,7 +39,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include <pango/pangoft2.h>
 
-#ifdef OSX
+#ifdef MAC_INTEGRATION
 #  include <gtkosxapplication.h>
 #endif
 

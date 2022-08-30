@@ -381,7 +381,7 @@ G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
   dfi[1]="w";
 #endif
 
-#ifdef OSX
+#ifdef MAC_INTEGRATION
   GtkosxApplication * ProgOSX;
   ProgOSX = g_object_new (GTKOSX_TYPE_APPLICATION, NULL);
   gtkosx_application_set_use_quartz_accelerators (ProgOSX, FALSE);
@@ -449,7 +449,7 @@ G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
     flist = NULL;
     silent_input = FALSE;
   }
-#ifdef OSX
+#ifdef MAC_INTEGRATION
   g_object_unref (ProgOSX);
 #endif
 }
