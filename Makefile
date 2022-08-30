@@ -48,7 +48,7 @@ ifeq ($(LINUX),1)
     CC = gcc-$(GCCVER)
     LD = gcc-$(GCCVER)
   endif
-  LIBS = -Wl,--export-dynamic $(LGTK) -lm -lgfortran
+  LIBS = $(LGTK) -lm -lgfortran
 
   DOS = -DLINUX
   CPPFLAGS =  -DPACKAGE_DATA_DIR=\"\" \
