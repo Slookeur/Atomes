@@ -231,21 +231,10 @@ PROGRAM = atomes
 
 # The objects which make the executable
 
-OBJECTS_F90 = $(OBJ)parameters.o $(OBJ)mendeleiev.o \
-	$(OBJ)utils.o \
-	$(OBJ)xyz.o $(OBJ)c3d.o $(OBJ)trj.o $(OBJ)vas.o $(OBJ)pdb.o \
-	$(OBJ)lattice.o $(OBJ)allochem.o $(OBJ)chemistry.o \
-	$(OBJ)allocbonds.o $(OBJ)bonds.o $(OBJ)escs.o $(OBJ)angles.o \
-	$(OBJ)threads.o $(OBJ)gr.o $(OBJ)sq.o $(OBJ)fzbt.o \
-	$(OBJ)cqvf.o $(OBJ)sk.o $(OBJ)grfft.o \
-	$(OBJ)allocmsd.o $(OBJ)msd.o \
-	$(OBJ)initrings.o $(OBJ)resrings.o $(OBJ)rings_ogl.o \
-	$(OBJ)rings-king.o $(OBJ)rings-guttman.o $(OBJ)rings-primitive.o \
-	$(OBJ)initchains.o $(OBJ)chains.o $(OBJ)chains_ogl.o \
-	$(OBJ)spherical.o \
-	$(OBJ)dvtb.o $(OBJ)dmtx.o $(OBJ)molecules.o \
-	$(OBJ)writedata.o \
-        $(OBJ)prepdata.o $(OBJ)init.o
+SOURCES_F90 := $(wildcard $(FOR)*.F90)
+OBJECTS_F90 := $(patsubst $(FOR)%.F90, $(OBJ)%.o, $(SOURCES_F90))
+MODOBJECTS_F90 := $(OBJ)mendeleiev.o $(OBJ)parameters.o
+
 
 OBJECTS_c = $(OBJ)global.o $(OBJ_LIC) $(OBJ_GUI) $(OBJ_WORK) $(OBJ_PROJ) $(OBJ_CURVE) \
 			$(OBJ_CALC) $(OBJ_POLY) $(OBJ_LAMMPS) $(OBJ_FIELD) $(OBJ_CPMD) $(OBJ_CP2K) $(OBJ_OGL)
@@ -597,88 +586,13 @@ clear:
 TouchSource:
 	$(TOUCH) $(SOURCES)
 
-$(OBJ)parameters.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)parameters.o $(FOR)parameters.F90
-$(OBJ)mendeleiev.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)mendeleiev.o $(FOR)mendeleiev.F90
-$(OBJ)utils.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)utils.o $(FOR)utils.F90
-$(OBJ)xyz.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)xyz.o $(FOR)xyz.F90
-$(OBJ)c3d.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)c3d.o $(FOR)c3d.F90
-$(OBJ)trj.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)trj.o $(FOR)trj.F90
-$(OBJ)vas.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)vas.o $(FOR)vas.F90
-$(OBJ)pdb.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)pdb.o $(FOR)pdb.F90
-$(OBJ)lattice.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)lattice.o $(FOR)lattice.F90
-$(OBJ)allochem.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)allochem.o $(FOR)allochem.F90
-$(OBJ)chemistry.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)chemistry.o $(FOR)chemistry.F90
-$(OBJ)allocbonds.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)allocbonds.o $(FOR)allocbonds.F90
-$(OBJ)bonds.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)bonds.o $(FOR)bonds.F90
-$(OBJ)escs.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)escs.o $(FOR)escs.F90
-$(OBJ)angles.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)angles.o $(FOR)angles.F90
-$(OBJ)threads.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)threads.o $(FOR)threads.F90
-$(OBJ)gr.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)gr.o $(FOR)gr.F90
-$(OBJ)sq.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)sq.o $(FOR)sq.F90
-$(OBJ)fzbt.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)fzbt.o $(FOR)fzbt.F90
-$(OBJ)cqvf.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)cqvf.o $(FOR)cqvf.F90
-$(OBJ)sk.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)sk.o $(FOR)sk.F90
-$(OBJ)grfft.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)grfft.o $(FOR)grfft.F90
-$(OBJ)allocmsd.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)allocmsd.o $(FOR)allocmsd.F90
-$(OBJ)msd.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)msd.o $(FOR)msd.F90
-$(OBJ)spherical.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)spherical.o $(FOR)spherical.F90
-$(OBJ)initrings.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)initrings.o $(FOR)initrings.F90
-$(OBJ)rings-king.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)rings-king.o $(FOR)rings-king.F90
-$(OBJ)rings-guttman.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)rings-guttman.o $(FOR)rings-guttman.F90
-$(OBJ)rings-primitive.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)rings-primitive.o $(FOR)rings-primitive.F90
-$(OBJ)resrings.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)resrings.o $(FOR)resrings.F90
-$(OBJ)rings_ogl.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)rings_ogl.o $(FOR)rings_ogl.F90
-$(OBJ)initchains.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)initchains.o $(FOR)initchains.F90
-$(OBJ)chains.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)chains.o $(FOR)chains.F90
-$(OBJ)chains_ogl.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)chains_ogl.o $(FOR)chains_ogl.F90
-$(OBJ)dvtb.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)dvtb.o $(FOR)dvtb.F90
-$(OBJ)dmtx.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)dmtx.o $(FOR)dmtx.F90
-$(OBJ)old-dmtx.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)old-dmtx.o $(FOR)old-dmtx.F90
-$(OBJ)molecules.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DOMP) $(DEFS) -c -o $(OBJ)molecules.o $(FOR)molecules.F90
-$(OBJ)writedata.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)writedata.o $(FOR)writedata.F90
-$(OBJ)prepdata.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)prepdata.o $(FOR)prepdata.F90 $(INC)
-$(OBJ)init.o:
-	$(FC) $(FCFLAGS) $(FCLIBS) $(DEFS) -c -o $(OBJ)init.o $(FOR)init.F90 $(INC)
+# Fortran sources
+$(OBJ)%.o: $(FOR)%.F90
+	$(FC) $(FCFLAGS) $(DOMP) $(DEFS) $(INC) -c $< -o $@
+
+# Dependency so that Fortran module files are compiled first
+$(filter-out $(MODOBJECTS_F90), $(OBJECTS_F90)): $(MODOBJECTS_F90)
+
 
 # C files:
 $(OBJ)global.o:
