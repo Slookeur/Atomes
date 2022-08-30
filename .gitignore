@@ -1,0 +1,3 @@
+*.mod
+bin/atomes
+obj/*.o
