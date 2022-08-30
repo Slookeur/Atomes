@@ -683,455 +683,455 @@ $(OBJ)init.o:
 
 # C files:
 $(OBJ)global.o:
-	$(CC) -c -MT $(OBJ)global.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)global.o $(SRC)global.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)global.o $(SRC)global.c $(INCLUDES)
 
 # license info:
 $(OBJ)valid.o:
-	$(CC) -c -MT $(OBJ)valid.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)valid.o $(LIC)valid.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)valid.o $(LIC)valid.c $(INCLUDES)
 
 # GUI
 $(OBJ)gtk-misc.o:
-	$(CC) -c -MT $(OBJ)gtk-misc.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)gtk-misc.o $(GUI)gtk-misc.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)gtk-misc.o $(GUI)gtk-misc.c $(INCLUDES)
 $(OBJ)work_menu.o:
-	$(CC) -c -MT $(OBJ)work_menu.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)work_menu.o $(GUI)work_menu.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)work_menu.o $(GUI)work_menu.c $(INCLUDES)
 $(OBJ)edit_menu.o:
-	$(CC) -c -MT $(OBJ)edit_menu.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)edit_menu.o $(GUI)edit_menu.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)edit_menu.o $(GUI)edit_menu.c $(INCLUDES)
 $(OBJ)calc_menu.o:
-	$(CC) -c -MT $(OBJ)calc_menu.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)calc_menu.o $(GUI)calc_menu.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)calc_menu.o $(GUI)calc_menu.c $(INCLUDES)
 $(OBJ)tools.o:
-	$(CC) -c -MT $(OBJ)tools.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)tools.o $(GUI)tools.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)tools.o $(GUI)tools.c $(INCLUDES)
 $(OBJ)gui.o:
-	$(CC) -c -MT $(OBJ)gui.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)gui.o $(GUI)gui.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)gui.o $(GUI)gui.c $(INCLUDES)
 $(OBJ)initc.o:
-	$(CC) -c -MT $(OBJ)initc.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)initc.o $(GUI)initc.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)initc.o $(GUI)initc.c $(INCLUDES)
 
 # Workspace
 $(OBJ)modelinfo.o:
-	$(CC) -c -MT $(OBJ)modelinfo.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)modelinfo.o $(WORK)modelinfo.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)modelinfo.o $(WORK)modelinfo.c $(INCLUDES)
 $(OBJ)expinfo.o:
-	$(CC) -c -MT $(OBJ)expinfo.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)expinfo.o $(WORK)expinfo.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)expinfo.o $(WORK)expinfo.c $(INCLUDES)
 $(OBJ)workinfo.o:
-	$(CC) -c -MT $(OBJ)workinfo.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)workinfo.o $(WORK)workinfo.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)workinfo.o $(WORK)workinfo.c $(INCLUDES)
 $(OBJ)workspace.o:
-	$(CC) -c -MT $(OBJ)workspace.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)workspace.o $(WORK)workspace.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)workspace.o $(WORK)workspace.c $(INCLUDES)
 
 # GUI
 $(OBJ)xmlrw.o:
-	$(CC) -c -MT $(OBJ)xmlrw.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)xmlrw.o $(GUI)xmlrw.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)xmlrw.o $(GUI)xmlrw.c $(INCLUDES)
 $(OBJ)callbacks.o:
-	$(CC) -c -MT $(OBJ)callbacks.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)callbacks.o $(GUI)callbacks.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)callbacks.o $(GUI)callbacks.c $(INCLUDES)
 $(OBJ)interface.o:
-	$(CC) -c -MT $(OBJ)interface.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)interface.o $(GUI)interface.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)interface.o $(GUI)interface.c $(INCLUDES)
 $(OBJ)bdcall.o:
-	$(CC) -c -MT $(OBJ)bdcall.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)bdcall.o $(GUI)bdcall.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)bdcall.o $(GUI)bdcall.c $(INCLUDES)
 $(OBJ)grcall.o:
-	$(CC) -c -MT $(OBJ)grcall.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)grcall.o $(GUI)grcall.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)grcall.o $(GUI)grcall.c $(INCLUDES)
 $(OBJ)sqcall.o:
-	$(CC) -c -MT $(OBJ)sqcall.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)sqcall.o $(GUI)sqcall.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)sqcall.o $(GUI)sqcall.c $(INCLUDES)
 $(OBJ)ringscall.o:
-	$(CC) -c -MT $(OBJ)ringscall.o -MD -MP -MF $(CFLAGS) -DOPENMP $(DEFS) -o $(OBJ)ringscall.o $(GUI)ringscall.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) -DOPENMP $(DEFS) -o $(OBJ)ringscall.o $(GUI)ringscall.c $(INCLUDES)
 $(OBJ)chainscall.o:
-	$(CC) -c -MT $(OBJ)chainscall.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)chainscall.o $(GUI)chainscall.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)chainscall.o $(GUI)chainscall.c $(INCLUDES)
 $(OBJ)msdcall.o:
-	$(CC) -c -MT $(OBJ)msdcall.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)msdcall.o $(GUI)msdcall.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)msdcall.o $(GUI)msdcall.c $(INCLUDES)
 $(OBJ)spcall.o:
-	$(CC) -c -MT $(OBJ)spcall.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)spcall.o $(GUI)spcall.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)spcall.o $(GUI)spcall.c $(INCLUDES)
 $(OBJ)main.o:
-	$(CC) -c -MT $(OBJ)main.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)main.o $(GUI)main.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)main.o $(GUI)main.c $(INCLUDES)
 
 # Project
 $(OBJ)read_cif.o:
-	$(CC) -c -MT $(OBJ)read_cif.o -MD -MP -MF $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_cif.o $(PROJ)readers/read_cif.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_cif.o $(PROJ)readers/read_cif.c $(INCLUDES)
 $(OBJ)read_coord.o:
-	$(CC) -c -MT $(OBJ)read_coord.o -MD -MP -MF $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_coord.o $(PROJ)readers/read_coord.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_coord.o $(PROJ)readers/read_coord.c $(INCLUDES)
 $(OBJ)read_xyz.o:
-	$(CC) -c -MT $(OBJ)read_xyz.o -MD -MP -MF $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_xyz.o $(PROJ)readers/read_xyz.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_xyz.o $(PROJ)readers/read_xyz.c $(INCLUDES)
 $(OBJ)read_c3d.o:
-	$(CC) -c -MT $(OBJ)read_c3d.o -MD -MP -MF $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_c3d.o $(PROJ)readers/read_c3d.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_c3d.o $(PROJ)readers/read_c3d.c $(INCLUDES)
 $(OBJ)read_trj.o:
-	$(CC) -c -MT $(OBJ)read_trj.o -MD -MP -MF $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_trj.o $(PROJ)readers/read_trj.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_trj.o $(PROJ)readers/read_trj.c $(INCLUDES)
 $(OBJ)read_vas.o:
-	$(CC) -c -MT $(OBJ)read_vas.o -MD -MP -MF $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_vas.o $(PROJ)readers/read_vas.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_vas.o $(PROJ)readers/read_vas.c $(INCLUDES)
 $(OBJ)read_pdb.o:
-	$(CC) -c -MT $(OBJ)read_pdb.o -MD -MP -MF $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_pdb.o $(PROJ)readers/read_pdb.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_pdb.o $(PROJ)readers/read_pdb.c $(INCLUDES)
 $(OBJ)read_hist.o:
-	$(CC) -c -MT $(OBJ)read_hist.o -MD -MP -MF $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_hist.o $(PROJ)readers/read_hist.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_hist.o $(PROJ)readers/read_hist.c $(INCLUDES)
 $(OBJ)read_npt.o:
-	$(CC) -c -MT $(OBJ)read_npt.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)read_npt.o $(PROJ)readers/read_npt.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)read_npt.o $(PROJ)readers/read_npt.c $(INCLUDES)
 $(OBJ)update_p.o:
-	$(CC) -c -MT $(OBJ)update_p.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)update_p.o $(PROJ)update_p.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)update_p.o $(PROJ)update_p.c $(INCLUDES)
 $(OBJ)init_p.o:
-	$(CC) -c -MT $(OBJ)init_p.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)init_p.o $(PROJ)init_p.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)init_p.o $(PROJ)init_p.c $(INCLUDES)
 $(OBJ)debugio.o:
-	$(CC) -c -MT $(OBJ)debugio.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)debugio.o $(PROJ)debugio.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)debugio.o $(PROJ)debugio.c $(INCLUDES)
 $(OBJ)read_field.o:
-	$(CC) -c -MT $(OBJ)read_field.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)read_field.o $(PROJ)read_field.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)read_field.o $(PROJ)read_field.c $(INCLUDES)
 $(OBJ)read_qm.o:
-	$(CC) -c -MT $(OBJ)read_qm.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)read_qm.o $(PROJ)read_qm.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)read_qm.o $(PROJ)read_qm.c $(INCLUDES)
 $(OBJ)read_opengl.o:
-	$(CC) -c -MT $(OBJ)read_opengl.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)read_opengl.o $(PROJ)read_opengl.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)read_opengl.o $(PROJ)read_opengl.c $(INCLUDES)
 $(OBJ)read_curve.o:
-	$(CC) -c -MT $(OBJ)read_curve.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)read_curve.o $(PROJ)read_curve.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)read_curve.o $(PROJ)read_curve.c $(INCLUDES)
 $(OBJ)read_mol.o:
-	$(CC) -c -MT $(OBJ)read_mol.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)read_mol.o $(PROJ)read_mol.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)read_mol.o $(PROJ)read_mol.c $(INCLUDES)
 $(OBJ)read_bond.o:
-	$(CC) -c -MT $(OBJ)read_bond.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)read_bond.o $(PROJ)read_bond.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)read_bond.o $(PROJ)read_bond.c $(INCLUDES)
 $(OBJ)open_p.o:
-	$(CC) -c -MT $(OBJ)open_p.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)open_p.o $(PROJ)open_p.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)open_p.o $(PROJ)open_p.c $(INCLUDES)
 $(OBJ)close_p.o:
-	$(CC) -c -MT $(OBJ)close_p.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)close_p.o $(PROJ)close_p.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)close_p.o $(PROJ)close_p.c $(INCLUDES)
 $(OBJ)save_field.o:
-	$(CC) -c -MT $(OBJ)save_field.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)save_field.o $(PROJ)save_field.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)save_field.o $(PROJ)save_field.c $(INCLUDES)
 $(OBJ)save_qm.o:
-	$(CC) -c -MT $(OBJ)save_qm.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)save_qm.o $(PROJ)save_qm.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)save_qm.o $(PROJ)save_qm.c $(INCLUDES)
 $(OBJ)save_opengl.o:
-	$(CC) -c -MT $(OBJ)save_opengl.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)save_opengl.o $(PROJ)save_opengl.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)save_opengl.o $(PROJ)save_opengl.c $(INCLUDES)
 $(OBJ)save_curve.o:
-	$(CC) -c -MT $(OBJ)save_curve.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)save_curve.o $(PROJ)save_curve.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)save_curve.o $(PROJ)save_curve.c $(INCLUDES)
 $(OBJ)save_mol.o:
-	$(CC) -c -MT $(OBJ)save_mol.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)save_mol.o $(PROJ)save_mol.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)save_mol.o $(PROJ)save_mol.c $(INCLUDES)
 $(OBJ)save_bond.o:
-	$(CC) -c -MT $(OBJ)save_bond.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)save_bond.o $(PROJ)save_bond.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)save_bond.o $(PROJ)save_bond.c $(INCLUDES)
 $(OBJ)save_p.o:
-	$(CC) -c -MT $(OBJ)save_p.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)save_p.o $(PROJ)save_p.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)save_p.o $(PROJ)save_p.c $(INCLUDES)
 $(OBJ)project.o:
-	$(CC) -c -MT $(OBJ)project.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)project.o $(PROJ)project.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)project.o $(PROJ)project.c $(INCLUDES)
 
 # calc
 $(OBJ)calc.o:
-	$(CC) -c -MT $(OBJ)calc.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)calc.o $(CALC)calc.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)calc.o $(CALC)calc.c $(INCLUDES)
 
 # Curves
 $(OBJ)tab-1.o:
-	$(CC) -c -MT $(OBJ)tab-1.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)tab-1.o $(CURVE)tab-1.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)tab-1.o $(CURVE)tab-1.c $(INCLUDES)
 $(OBJ)tab-2.o:
-	$(CC) -c -MT $(OBJ)tab-2.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)tab-2.o $(CURVE)tab-2.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)tab-2.o $(CURVE)tab-2.c $(INCLUDES)
 $(OBJ)tab-3.o:
-	$(CC) -c -MT $(OBJ)tab-3.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)tab-3.o $(CURVE)tab-3.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)tab-3.o $(CURVE)tab-3.c $(INCLUDES)
 $(OBJ)tab-4.o:
-	$(CC) -c -MT $(OBJ)tab-4.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)tab-4.o $(CURVE)tab-4.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)tab-4.o $(CURVE)tab-4.c $(INCLUDES)
 $(OBJ)cedit.o:
-	$(CC) -c -MT $(OBJ)cedit.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)cedit.o $(CURVE)cedit.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)cedit.o $(CURVE)cedit.c $(INCLUDES)
 $(OBJ)datab.o:
-	$(CC) -c -MT $(OBJ)datab.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)datab.o $(CURVE)datab.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)datab.o $(CURVE)datab.c $(INCLUDES)
 $(OBJ)cwidget.o:
-	$(CC) -c -MT $(OBJ)cwidget.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)cwidget.o $(CURVE)cwidget.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)cwidget.o $(CURVE)cwidget.c $(INCLUDES)
 $(OBJ)glyph.o:
-	$(CC) -c -MT $(OBJ)glyph.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)glyph.o $(CURVE)glyph.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)glyph.o $(CURVE)glyph.c $(INCLUDES)
 $(OBJ)labels.o:
-	$(CC) -c -MT $(OBJ)labels.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)labels.o $(CURVE)labels.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)labels.o $(CURVE)labels.c $(INCLUDES)
 $(OBJ)title.o:
-	$(CC) -c -MT $(OBJ)title.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)title.o $(CURVE)title.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)title.o $(CURVE)title.c $(INCLUDES)
 $(OBJ)legend.o:
-	$(CC) -c -MT $(OBJ)legend.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)legend.o $(CURVE)legend.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)legend.o $(CURVE)legend.c $(INCLUDES)
 $(OBJ)xaxis.o:
-	$(CC) -c -MT $(OBJ)xaxis.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)xaxis.o $(CURVE)xaxis.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)xaxis.o $(CURVE)xaxis.c $(INCLUDES)
 $(OBJ)yaxis.o:
-	$(CC) -c -MT $(OBJ)yaxis.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)yaxis.o $(CURVE)yaxis.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)yaxis.o $(CURVE)yaxis.c $(INCLUDES)
 $(OBJ)frame.o:
-	$(CC) -c -MT $(OBJ)frame.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)frame.o $(CURVE)frame.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)frame.o $(CURVE)frame.c $(INCLUDES)
 $(OBJ)draw.o:
-	$(CC) -c -MT $(OBJ)draw.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)draw.o $(CURVE)draw.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)draw.o $(CURVE)draw.c $(INCLUDES)
 $(OBJ)show.o:
-	$(CC) -c -MT $(OBJ)show.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)show.o $(CURVE)show.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)show.o $(CURVE)show.c $(INCLUDES)
 $(OBJ)w_data.o:
-	$(CC) -c -MT $(OBJ)w_data.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_data.o $(CURVE)w_data.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_data.o $(CURVE)w_data.c $(INCLUDES)
 $(OBJ)w_img.o:
-	$(CC) -c -MT $(OBJ)w_img.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_img.o $(CURVE)w_img.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_img.o $(CURVE)w_img.c $(INCLUDES)
 $(OBJ)m_curve.o:
-	$(CC) -c -MT $(OBJ)m_curve.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)m_curve.o $(CURVE)m_curve.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)m_curve.o $(CURVE)m_curve.c $(INCLUDES)
 $(OBJ)w_curve.o:
-	$(CC) -c -MT $(OBJ)w_curve.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_curve.o $(CURVE)w_curve.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_curve.o $(CURVE)w_curve.c $(INCLUDES)
 $(OBJ)curve.o:
-	$(CC) -c -MT $(OBJ)curve.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)curve.o $(CURVE)curve.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)curve.o $(CURVE)curve.c $(INCLUDES)
 
 #DL Poly force field
 $(OBJ)dlp_control.o:
-	$(CC) -c -MT $(OBJ)dlp_control.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)dlp_control.o $(DLPOLY)dlp_control.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)dlp_control.o $(DLPOLY)dlp_control.c $(INCLUDES)
 $(OBJ)dlp_init.o:
-	$(CC) -c -MT $(OBJ)dlp_init.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)dlp_init.o $(DLPOLY)dlp_init.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)dlp_init.o $(DLPOLY)dlp_init.c $(INCLUDES)
 $(OBJ)dlp_active.o:
-	$(CC) -c -MT $(OBJ)dlp_active.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)dlp_active.o $(DLPOLY)dlp_active.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)dlp_active.o $(DLPOLY)dlp_active.c $(INCLUDES)
 $(OBJ)dlp_copy.o:
-	$(CC) -c -MT $(OBJ)dlp_copy.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)dlp_copy.o $(DLPOLY)dlp_copy.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)dlp_copy.o $(DLPOLY)dlp_copy.c $(INCLUDES)
 $(OBJ)dlp_comp.o:
-	$(CC) -c -MT $(OBJ)dlp_comp.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)dlp_comp.o $(DLPOLY)dlp_comp.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)dlp_comp.o $(DLPOLY)dlp_comp.c $(INCLUDES)
 $(OBJ)dlp_viz.o:
-	$(CC) -c -MT $(OBJ)dlp_viz.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)dlp_viz.o $(DLPOLY)dlp_viz.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)dlp_viz.o $(DLPOLY)dlp_viz.c $(INCLUDES)
 $(OBJ)dlp_mol.o:
-	$(CC) -c -MT $(OBJ)dlp_mol.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)dlp_mol.o $(DLPOLY)dlp_mol.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)dlp_mol.o $(DLPOLY)dlp_mol.c $(INCLUDES)
 $(OBJ)dlp_atom.o:
-	$(CC) -c -MT $(OBJ)dlp_atom.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)dlp_atom.o $(DLPOLY)dlp_atom.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)dlp_atom.o $(DLPOLY)dlp_atom.c $(INCLUDES)
 $(OBJ)dlp_ff_match.o:
-	$(CC) -c -MT $(OBJ)dlp_ff_match.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)dlp_ff_match.o $(DLPOLY)dlp_ff_match.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)dlp_ff_match.o $(DLPOLY)dlp_ff_match.c $(INCLUDES)
 $(OBJ)dlp_edit.o:
-	$(CC) -c -MT $(OBJ)dlp_edit.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)dlp_edit.o $(DLPOLY)dlp_edit.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)dlp_edit.o $(DLPOLY)dlp_edit.c $(INCLUDES)
 $(OBJ)dlp_print.o:
-	$(CC) -c -MT $(OBJ)dlp_print.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)dlp_print.o $(DLPOLY)dlp_print.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)dlp_print.o $(DLPOLY)dlp_print.c $(INCLUDES)
 $(OBJ)dlp_field.o:
-	$(CC) -c -MT $(OBJ)dlp_field.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)dlp_field.o $(DLPOLY)dlp_field.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)dlp_field.o $(DLPOLY)dlp_field.c $(INCLUDES)
 
 #LAMMPS
 $(OBJ)la_print.o:
-	$(CC) -c -MT $(OBJ)la_print.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)la_print.o $(LAMMPS)la_print.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)la_print.o $(LAMMPS)la_print.c $(INCLUDES)
 
 #Force fields
 $(OBJ)force_fields.o:
-	$(CC) -c -MT $(OBJ)force_fields.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)force_fields.o $(FIELDS)force_fields.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)force_fields.o $(FIELDS)force_fields.c $(INCLUDES)
 $(OBJ)amber94.o:
-	$(CC) -c -MT $(OBJ)amber94.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)amber94.o $(FIELDS)amber94.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)amber94.o $(FIELDS)amber94.c $(INCLUDES)
 $(OBJ)amber96.o:
-	$(CC) -c -MT $(OBJ)amber96.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)amber96.o $(FIELDS)amber96.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)amber96.o $(FIELDS)amber96.c $(INCLUDES)
 $(OBJ)amber98.o:
-	$(CC) -c -MT $(OBJ)amber98.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)amber98.o $(FIELDS)amber98.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)amber98.o $(FIELDS)amber98.c $(INCLUDES)
 $(OBJ)amber99.o:
-	$(CC) -c -MT $(OBJ)amber99.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)amber99.o $(FIELDS)amber99.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)amber99.o $(FIELDS)amber99.c $(INCLUDES)
 $(OBJ)cff91.o:
-	$(CC) -c -MT $(OBJ)cff91.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)cff91.o $(FIELDS)cff91.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)cff91.o $(FIELDS)cff91.c $(INCLUDES)
 $(OBJ)charmm22_prot.o:
-	$(CC) -c -MT $(OBJ)charmm22_prot.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)charmm22_prot.o $(FIELDS)charmm22_prot.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)charmm22_prot.o $(FIELDS)charmm22_prot.c $(INCLUDES)
 $(OBJ)charmm22_prot_metals.o:
-	$(CC) -c -MT $(OBJ)charmm22_prot_metals.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)charmm22_prot_metals.o $(FIELDS)charmm22_prot_metals.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)charmm22_prot_metals.o $(FIELDS)charmm22_prot_metals.c $(INCLUDES)
 $(OBJ)charmm35_ethers.o:
-	$(CC) -c -MT $(OBJ)charmm35_ethers.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)charmm35_ethers.o $(FIELDS)charmm35_ethers.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)charmm35_ethers.o $(FIELDS)charmm35_ethers.c $(INCLUDES)
 $(OBJ)charmm36_carb.o:
-	$(CC) -c -MT $(OBJ)charmm36_carb.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_carb.o $(FIELDS)charmm36_carb.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_carb.o $(FIELDS)charmm36_carb.c $(INCLUDES)
 $(OBJ)charmm36_cgenff.o:
-	$(CC) -c -MT $(OBJ)charmm36_cgenff.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_cgenff.o $(FIELDS)charmm36_cgenff.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_cgenff.o $(FIELDS)charmm36_cgenff.c $(INCLUDES)
 $(OBJ)charmm36_lipid.o:
-	$(CC) -c -MT $(OBJ)charmm36_lipid.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_lipid.o $(FIELDS)charmm36_lipid.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_lipid.o $(FIELDS)charmm36_lipid.c $(INCLUDES)
 $(OBJ)charmm36_na.o:
-	$(CC) -c -MT $(OBJ)charmm36_na.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_na.o $(FIELDS)charmm36_na.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_na.o $(FIELDS)charmm36_na.c $(INCLUDES)
 $(OBJ)charmm36_prot.o:
-	$(CC) -c -MT $(OBJ)charmm36_prot.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_prot.o $(FIELDS)charmm36_prot.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_prot.o $(FIELDS)charmm36_prot.c $(INCLUDES)
 $(OBJ)charmm36_prot_metals.o:
-	$(CC) -c -MT $(OBJ)charmm36_prot_metals.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_prot_metals.o $(FIELDS)charmm36_prot_metals.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)charmm36_prot_metals.o $(FIELDS)charmm36_prot_metals.c $(INCLUDES)
 $(OBJ)charmm_silicates.o:
-	$(CC) -c -MT $(OBJ)charmm_silicates.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)charmm_silicates.o $(FIELDS)charmm_silicates.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)charmm_silicates.o $(FIELDS)charmm_silicates.c $(INCLUDES)
 $(OBJ)compass.o:
-	$(CC) -c -MT $(OBJ)compass.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)compass.o $(FIELDS)compass.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)compass.o $(FIELDS)compass.c $(INCLUDES)
 $(OBJ)cvff.o:
-	$(CC) -c -MT $(OBJ)cvff.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)cvff.o $(FIELDS)cvff.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)cvff.o $(FIELDS)cvff.c $(INCLUDES)
 $(OBJ)cvff_aug.o:
-	$(CC) -c -MT $(OBJ)cvff_aug.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)cvff_aug.o $(FIELDS)cvff_aug.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)cvff_aug.o $(FIELDS)cvff_aug.c $(INCLUDES)
 $(OBJ)oplsaap.o:
-	$(CC) -c -MT $(OBJ)oplsaap.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)oplsaap.o $(FIELDS)oplsaap.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)oplsaap.o $(FIELDS)oplsaap.c $(INCLUDES)
 $(OBJ)oplsaar.o:
-	$(CC) -c -MT $(OBJ)oplsaar.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)oplsaar.o $(FIELDS)oplsaar.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)oplsaar.o $(FIELDS)oplsaar.c $(INCLUDES)
 $(OBJ)pcff.o:
-	$(CC) -c -MT $(OBJ)pcff.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)pcff.o $(FIELDS)pcff.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)pcff.o $(FIELDS)pcff.c $(INCLUDES)
 
 #CPMD input
 $(OBJ)cpmd_print.o:
-	$(CC) -c -MT $(OBJ)cpmd_print.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cpmd_print.o $(CPMD)cpmd_print.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cpmd_print.o $(CPMD)cpmd_print.c $(INCLUDES)
 $(OBJ)cpmd_nose.o:
-	$(CC) -c -MT $(OBJ)cpmd_nose.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cpmd_nose.o $(CPMD)cpmd_nose.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cpmd_nose.o $(CPMD)cpmd_nose.c $(INCLUDES)
 $(OBJ)cpmd_restart.o:
-	$(CC) -c -MT $(OBJ)cpmd_restart.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cpmd_restart.o $(CPMD)cpmd_restart.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cpmd_restart.o $(CPMD)cpmd_restart.c $(INCLUDES)
 $(OBJ)cpmd_atoms.o:
-	$(CC) -c -MT $(OBJ)cpmd_atoms.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cpmd_atoms.o $(CPMD)cpmd_atoms.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cpmd_atoms.o $(CPMD)cpmd_atoms.c $(INCLUDES)
 $(OBJ)cpmd_init.o:
-	$(CC) -c -MT $(OBJ)cpmd_init.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cpmd_init.o $(CPMD)cpmd_init.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cpmd_init.o $(CPMD)cpmd_init.c $(INCLUDES)
 
 #CP2K input
 $(OBJ)cp2k_print.o:
-	$(CC) -c -MT $(OBJ)cp2k_print.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_print.o $(CP2K)cp2k_print.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_print.o $(CP2K)cp2k_print.c $(INCLUDES)
 $(OBJ)cp2k_molopt-basis.o:
-	$(CC) -c -MT $(OBJ)cp2k_molopt-basis.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_molopt-basis.o $(CP2K)cp2k_molopt-basis.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_molopt-basis.o $(CP2K)cp2k_molopt-basis.c $(INCLUDES)
 $(OBJ)cp2k_gth-basis.o:
-	$(CC) -c -MT $(OBJ)cp2k_gth-basis.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_gth-basis.o $(CP2K)cp2k_gth-basis.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_gth-basis.o $(CP2K)cp2k_gth-basis.c $(INCLUDES)
 $(OBJ)cp2k_basis.o:
-	$(CC) -c -MT $(OBJ)cp2k_basis.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_basis.o $(CP2K)cp2k_basis.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_basis.o $(CP2K)cp2k_basis.c $(INCLUDES)
 $(OBJ)cp2k_pot.o:
-	$(CC) -c -MT $(OBJ)cp2k_pot.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_pot.o $(CP2K)cp2k_pot.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_pot.o $(CP2K)cp2k_pot.c $(INCLUDES)
 $(OBJ)cp2k_files.o:
-	$(CC) -c -MT $(OBJ)cp2k_files.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_files.o $(CP2K)cp2k_files.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_files.o $(CP2K)cp2k_files.c $(INCLUDES)
 $(OBJ)cp2k_mol.o:
-	$(CC) -c -MT $(OBJ)cp2k_mol.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_mol.o $(CP2K)cp2k_mol.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_mol.o $(CP2K)cp2k_mol.c $(INCLUDES)
 $(OBJ)cp2k_init.o:
-	$(CC) -c -MT $(OBJ)cp2k_init.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_init.o $(CP2K)cp2k_init.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cp2k_init.o $(CP2K)cp2k_init.c $(INCLUDES)
 
 # OpenGL :: Window and menus
 $(OBJ)color_box.o:
-	$(CC) -c -MT $(OBJ)color_box.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)color_box.o $(GLWIN)color_box.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)color_box.o $(GLWIN)color_box.c $(INCLUDES)
 $(OBJ)m_style.o:
-	$(CC) -c -MT $(OBJ)m_style.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)m_style.o $(GLWIN)m_style.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)m_style.o $(GLWIN)m_style.c $(INCLUDES)
 $(OBJ)m_map.o:
-	$(CC) -c -MT $(OBJ)m_map.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_map.o $(GLWIN)m_map.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_map.o $(GLWIN)m_map.c $(INCLUDES)
 $(OBJ)m_render.o:
-	$(CC) -c -MT $(OBJ)m_render.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_render.o $(GLWIN)m_render.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_render.o $(GLWIN)m_render.c $(INCLUDES)
 $(OBJ)m_quality.o:
-	$(CC) -c -MT $(OBJ)m_quality.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_quality.o $(GLWIN)m_quality.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_quality.o $(GLWIN)m_quality.c $(INCLUDES)
 $(OBJ)m_atoms.o:
-	$(CC) -c -MT $(OBJ)m_atoms.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_atoms.o $(GLWIN)m_atoms.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_atoms.o $(GLWIN)m_atoms.c $(INCLUDES)
 $(OBJ)m_bonds.o:
-	$(CC) -c -MT $(OBJ)m_bonds.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_bonds.o $(GLWIN)m_bonds.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_bonds.o $(GLWIN)m_bonds.c $(INCLUDES)
 $(OBJ)m_clones.o:
-	$(CC) -c -MT $(OBJ)m_clones.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_clones.o $(GLWIN)m_clones.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_clones.o $(GLWIN)m_clones.c $(INCLUDES)
 $(OBJ)m_box.o:
-	$(CC) -c -MT $(OBJ)m_box.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_box.o $(GLWIN)m_box.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_box.o $(GLWIN)m_box.c $(INCLUDES)
 $(OBJ)m_coord.o:
-	$(CC) -c -MT $(OBJ)m_coord.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_coord.o $(GLWIN)m_coord.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_coord.o $(GLWIN)m_coord.c $(INCLUDES)
 $(OBJ)m_poly.o:
-	$(CC) -c -MT $(OBJ)m_poly.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_poly.o $(GLWIN)m_poly.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_poly.o $(GLWIN)m_poly.c $(INCLUDES)
 $(OBJ)m_tools.o:
-	$(CC) -c -MT $(OBJ)m_tools.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_tools.o $(GLWIN)m_tools.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_tools.o $(GLWIN)m_tools.c $(INCLUDES)
 $(OBJ)m_edit.o:
-	$(CC) -c -MT $(OBJ)m_edit.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_edit.o $(GLWIN)m_edit.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_edit.o $(GLWIN)m_edit.c $(INCLUDES)
 $(OBJ)m_rep.o:
-	$(CC) -c -MT $(OBJ)m_rep.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_rep.o $(GLWIN)m_rep.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_rep.o $(GLWIN)m_rep.c $(INCLUDES)
 $(OBJ)m_proj.o:
-	$(CC) -c -MT $(OBJ)m_proj.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_proj.o $(GLWIN)m_proj.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_proj.o $(GLWIN)m_proj.c $(INCLUDES)
 $(OBJ)m_back.o:
-	$(CC) -c -MT $(OBJ)m_back.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_back.o $(GLWIN)m_back.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_back.o $(GLWIN)m_back.c $(INCLUDES)
 $(OBJ)m_axis.o:
-	$(CC) -c -MT $(OBJ)m_axis.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_axis.o $(GLWIN)m_axis.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_axis.o $(GLWIN)m_axis.c $(INCLUDES)
 $(OBJ)m_anim.o:
-	$(CC) -c -MT $(OBJ)m_anim.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)m_anim.o $(GLWIN)m_anim.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)m_anim.o $(GLWIN)m_anim.c $(INCLUDES)
 $(OBJ)menu_bar.o:
-	$(CC) -c -MT $(OBJ)menu_bar.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)menu_bar.o $(GLWIN)menu_bar.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)menu_bar.o $(GLWIN)menu_bar.c $(INCLUDES)
 $(OBJ)w_colors.o:
-	$(CC) -c -MT $(OBJ)w_colors.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_colors.o $(GLWIN)w_colors.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_colors.o $(GLWIN)w_colors.c $(INCLUDES)
 $(OBJ)w_atoms.o:
-	$(CC) -c -MT $(OBJ)w_atoms.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_atoms.o $(GLWIN)w_atoms.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_atoms.o $(GLWIN)w_atoms.c $(INCLUDES)
 $(OBJ)w_labels.o:
-	$(CC) -c -MT $(OBJ)w_labels.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_labels.o $(GLWIN)w_labels.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_labels.o $(GLWIN)w_labels.c $(INCLUDES)
 $(OBJ)w_search.o:
-	$(CC) -c -MT $(OBJ)w_search.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_search.o $(GLWIN)w_search.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_search.o $(GLWIN)w_search.c $(INCLUDES)
 $(OBJ)w_periodic.o:
-	$(CC) -c -MT $(OBJ)w_periodic.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_periodic.o $(GLWIN)w_periodic.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_periodic.o $(GLWIN)w_periodic.c $(INCLUDES)
 $(OBJ)w_library.o:
-	$(CC) -c -MT $(OBJ)w_library.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_library.o $(GLWIN)w_library.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_library.o $(GLWIN)w_library.c $(INCLUDES)
 $(OBJ)w_cutoffs.o:
-	$(CC) -c -MT $(OBJ)w_cutoffs.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_cutoffs.o $(GLWIN)w_cutoffs.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_cutoffs.o $(GLWIN)w_cutoffs.c $(INCLUDES)
 $(OBJ)w_bonds.o:
-	$(CC) -c -MT $(OBJ)w_bonds.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_bonds.o $(GLWIN)w_bonds.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_bonds.o $(GLWIN)w_bonds.c $(INCLUDES)
 $(OBJ)w_rings.o:
-	$(CC) -c -MT $(OBJ)w_rings.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_rings.o $(GLWIN)w_rings.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_rings.o $(GLWIN)w_rings.c $(INCLUDES)
 $(OBJ)w_chains.o:
-	$(CC) -c -MT $(OBJ)w_chains.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_chains.o $(GLWIN)w_chains.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_chains.o $(GLWIN)w_chains.c $(INCLUDES)
 $(OBJ)w_coord.o:
-	$(CC) -c -MT $(OBJ)w_coord.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_coord.o $(GLWIN)w_coord.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_coord.o $(GLWIN)w_coord.c $(INCLUDES)
 $(OBJ)w_box.o:
-	$(CC) -c -MT $(OBJ)w_box.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_box.o $(GLWIN)w_box.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_box.o $(GLWIN)w_box.c $(INCLUDES)
 $(OBJ)w_axis.o:
-	$(CC) -c -MT $(OBJ)w_axis.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_axis.o $(GLWIN)w_axis.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_axis.o $(GLWIN)w_axis.c $(INCLUDES)
 $(OBJ)w_measures.o:
-	$(CC) -c -MT $(OBJ)w_measures.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_measures.o $(GLWIN)w_measures.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_measures.o $(GLWIN)w_measures.c $(INCLUDES)
 $(OBJ)w_volumes.o:
-	$(CC) -c -MT $(OBJ)w_volumes.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_volumes.o $(GLWIN)w_volumes.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_volumes.o $(GLWIN)w_volumes.c $(INCLUDES)
 $(OBJ)w_advance.o:
-	$(CC) -c -MT $(OBJ)w_advance.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)w_advance.o $(GLWIN)w_advance.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)w_advance.o $(GLWIN)w_advance.c $(INCLUDES)
 $(OBJ)w_sequencer.o:
-	$(CC) -c -MT $(OBJ)w_sequencer.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_sequencer.o $(GLWIN)w_sequencer.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_sequencer.o $(GLWIN)w_sequencer.c $(INCLUDES)
 $(OBJ)w_spiner.o:
-	$(CC) -c -MT $(OBJ)w_spiner.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_spiner.o $(GLWIN)w_spiner.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_spiner.o $(GLWIN)w_spiner.c $(INCLUDES)
 $(OBJ)w_encode.o:
-	$(CC) -c -MT $(OBJ)w_encode.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_encode.o $(GLWIN)w_encode.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_encode.o $(GLWIN)w_encode.c $(INCLUDES)
 $(OBJ)w_record.o:
-	$(CC) -c -MT $(OBJ)w_record.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_record.o $(GLWIN)w_record.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)w_record.o $(GLWIN)w_record.c $(INCLUDES)
 $(OBJ)initcoord.o:
-	$(CC) -c -MT $(OBJ)initcoord.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)initcoord.o $(GLWIN)initcoord.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)initcoord.o $(GLWIN)initcoord.c $(INCLUDES)
 $(OBJ)initmol.o:
-	$(CC) -c -MT $(OBJ)initmol.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)initmol.o $(GLWIN)initmol.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)initmol.o $(GLWIN)initmol.c $(INCLUDES)
 $(OBJ)initring.o:
-	$(CC) -c -MT $(OBJ)initring.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)initring.o $(GLWIN)initring.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)initring.o $(GLWIN)initring.c $(INCLUDES)
 $(OBJ)initchain.o:
-	$(CC) -c -MT $(OBJ)initchain.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)initchain.o $(GLWIN)initchain.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)initchain.o $(GLWIN)initchain.c $(INCLUDES)
 $(OBJ)popup.o:
-	$(CC) -c -MT $(OBJ)popup.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)popup.o $(GLWIN)popup.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)popup.o $(GLWIN)popup.c $(INCLUDES)
 $(OBJ)glwindow.o:
-	$(CC) -c -MT $(OBJ)glwindow.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)glwindow.o $(GLWIN)glwindow.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)glwindow.o $(GLWIN)glwindow.c $(INCLUDES)
 
 # OpenGL :: Cell edit
 $(OBJ)cell_shift.o:
-	$(CC) -c -MT $(OBJ)cell_shift.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_shift.o $(GLEDIT)cell_shift.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_shift.o $(GLEDIT)cell_shift.c $(INCLUDES)
 $(OBJ)cell_extra.o:
-	$(CC) -c -MT $(OBJ)cell_extra.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_extra.o $(GLEDIT)cell_extra.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_extra.o $(GLEDIT)cell_extra.c $(INCLUDES)
 $(OBJ)cell_super.o:
-	$(CC) -c -MT $(OBJ)cell_super.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_super.o $(GLEDIT)cell_super.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_super.o $(GLEDIT)cell_super.c $(INCLUDES)
 $(OBJ)cell_density.o:
-	$(CC) -c -MT $(OBJ)cell_density.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_density.o $(GLEDIT)cell_density.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_density.o $(GLEDIT)cell_density.c $(INCLUDES)
 $(OBJ)cell_cut.o:
-	$(CC) -c -MT $(OBJ)cell_cut.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_cut.o $(GLEDIT)cell_cut.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_cut.o $(GLEDIT)cell_cut.c $(INCLUDES)
 $(OBJ)cell_pixel.o:
-	$(CC) -c -MT $(OBJ)cell_pixel.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_pixel.o $(GLEDIT)cell_pixel.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_pixel.o $(GLEDIT)cell_pixel.c $(INCLUDES)
 $(OBJ)cell_edit.o:
-	$(CC) -c -MT $(OBJ)cell_edit.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_edit.o $(GLEDIT)cell_edit.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cell_edit.o $(GLEDIT)cell_edit.c $(INCLUDES)
 
 # OpenGL :: Atom edit
 $(OBJ)atom_action.o:
-	$(CC) -c -MT $(OBJ)atom_action.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_action.o $(GLEDIT)atom_action.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_action.o $(GLEDIT)atom_action.c $(INCLUDES)
 $(OBJ)atom_coord.o:
-	$(CC) -c -MT $(OBJ)atom_coord.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_coord.o $(GLEDIT)atom_coord.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_coord.o $(GLEDIT)atom_coord.c $(INCLUDES)
 $(OBJ)atom_geo.o:
-	$(CC) -c -MT $(OBJ)atom_geo.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_geo.o $(GLEDIT)atom_geo.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_geo.o $(GLEDIT)atom_geo.c $(INCLUDES)
 $(OBJ)atom_insert.o:
-	$(CC) -c -MT $(OBJ)atom_insert.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_insert.o $(GLEDIT)atom_insert.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_insert.o $(GLEDIT)atom_insert.c $(INCLUDES)
 $(OBJ)atom_move.o:
-	$(CC) -c -MT $(OBJ)atom_move.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_move.o $(GLEDIT)atom_move.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_move.o $(GLEDIT)atom_move.c $(INCLUDES)
 $(OBJ)atom_object.o:
-	$(CC) -c -MT $(OBJ)atom_object.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_object.o $(GLEDIT)atom_object.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_object.o $(GLEDIT)atom_object.c $(INCLUDES)
 $(OBJ)atom_remove.o:
-	$(CC) -c -MT $(OBJ)atom_remove.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_remove.o $(GLEDIT)atom_remove.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_remove.o $(GLEDIT)atom_remove.c $(INCLUDES)
 $(OBJ)atom_search.o:
-	$(CC) -c -MT $(OBJ)atom_search.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_search.o $(GLEDIT)atom_search.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_search.o $(GLEDIT)atom_search.c $(INCLUDES)
 $(OBJ)atom_species.o:
-	$(CC) -c -MT $(OBJ)atom_species.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_species.o $(GLEDIT)atom_species.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_species.o $(GLEDIT)atom_species.c $(INCLUDES)
 $(OBJ)atom_edit.o:
-	$(CC) -c -MT $(OBJ)atom_edit.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_edit.o $(GLEDIT)atom_edit.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atom_edit.o $(GLEDIT)atom_edit.c $(INCLUDES)
 
 # OpenGL :: Crystal builder
 $(OBJ)cbuild_action.o:
-	$(CC) -c -MT $(OBJ)cbuild_action.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cbuild_action.o $(GLEDIT)cbuild_action.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cbuild_action.o $(GLEDIT)cbuild_action.c $(INCLUDES)
 $(OBJ)cbuild_sg.o:
-	$(CC) -c -MT $(OBJ)cbuild_sg.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cbuild_sg.o $(GLEDIT)cbuild_sg.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cbuild_sg.o $(GLEDIT)cbuild_sg.c $(INCLUDES)
 $(OBJ)cbuild_info.o:
-	$(CC) -c -MT $(OBJ)cbuild_info.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cbuild_info.o $(GLEDIT)cbuild_info.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cbuild_info.o $(GLEDIT)cbuild_info.c $(INCLUDES)
 $(OBJ)cbuild_edit.o:
-	$(CC) -c -MT $(OBJ)cbuild_edit.o -MD -MP -MF $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cbuild_edit.o $(GLEDIT)cbuild_edit.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)cbuild_edit.o $(GLEDIT)cbuild_edit.c $(INCLUDES)
 
 # OpenGL :: Draw
 $(OBJ)d_bonds.o:
-	$(CC) -c -MT $(OBJ)d_bonds.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)d_bonds.o $(GLDRAW)d_bonds.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)d_bonds.o $(GLDRAW)d_bonds.c $(INCLUDES)
 $(OBJ)d_atoms.o:
-	$(CC) -c -MT $(OBJ)d_atoms.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)d_atoms.o $(GLDRAW)d_atoms.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)d_atoms.o $(GLDRAW)d_atoms.c $(INCLUDES)
 $(OBJ)d_label.o:
-	$(CC) -c -MT $(OBJ)d_label.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)d_label.o $(GLDRAW)d_label.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)d_label.o $(GLDRAW)d_label.c $(INCLUDES)
 $(OBJ)d_selection.o:
-	$(CC) -c -MT $(OBJ)d_selection.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)d_selection.o $(GLDRAW)d_selection.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)d_selection.o $(GLDRAW)d_selection.c $(INCLUDES)
 $(OBJ)d_poly.o:
-	$(CC) -c -MT $(OBJ)d_poly.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)d_poly.o $(GLDRAW)d_poly.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)d_poly.o $(GLDRAW)d_poly.c $(INCLUDES)
 $(OBJ)d_rings.o:
-	$(CC) -c -MT $(OBJ)d_rings.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)d_rings.o $(GLDRAW)d_rings.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)d_rings.o $(GLDRAW)d_rings.c $(INCLUDES)
 $(OBJ)d_box.o:
-	$(CC) -c -MT $(OBJ)d_box.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)d_box.o $(GLDRAW)d_box.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)d_box.o $(GLDRAW)d_box.c $(INCLUDES)
 $(OBJ)d_axis.o:
-	$(CC) -c -MT $(OBJ)d_axis.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)d_axis.o $(GLDRAW)d_axis.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)d_axis.o $(GLDRAW)d_axis.c $(INCLUDES)
 $(OBJ)d_measures.o:
-	$(CC) -c -MT $(OBJ)d_measures.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)d_measures.o $(GLDRAW)d_measures.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)d_measures.o $(GLDRAW)d_measures.c $(INCLUDES)
 $(OBJ)ogl_text.o:
-	$(CC) -c -MT $(OBJ)ogl_text.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)ogl_text.o $(GLDRAW)ogl_text.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)ogl_text.o $(GLDRAW)ogl_text.c $(INCLUDES)
 $(OBJ)movie.o:
-	$(CC) -c -MT $(OBJ)movie.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)movie.o $(GLDRAW)movie.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)movie.o $(GLDRAW)movie.c $(INCLUDES)
 $(OBJ)image.o:
-	$(CC) -c -MT $(OBJ)image.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)image.o $(GLDRAW)image.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)image.o $(GLDRAW)image.c $(INCLUDES)
 
 # OpengGL :: GL
 $(OBJ)glview.o:
-	$(CC) -c -MT $(OBJ)glview.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)glview.o $(OGL)glview.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)glview.o $(OGL)glview.c $(INCLUDES)
 $(OBJ)arcball.o:
-	$(CC) -c -MT $(OBJ)arcball.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)arcball.o $(OGL)arcball.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)arcball.o $(OGL)arcball.c $(INCLUDES)
 $(OBJ)ogl_utils.o:
-	$(CC) -c -MT $(OBJ)ogl_utils.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)ogl_utils.o $(OGL)ogl_utils.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)ogl_utils.o $(OGL)ogl_utils.c $(INCLUDES)
 $(OBJ)ogl_shaders.o:
-	$(CC) -c -MT $(OBJ)ogl_shaders.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)ogl_shaders.o $(OGL)ogl_shaders.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)ogl_shaders.o $(OGL)ogl_shaders.c $(INCLUDES)
 $(OBJ)ogl_shading.o:
-	$(CC) -c -MT $(OBJ)ogl_shading.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)ogl_shading.o $(OGL)ogl_shading.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)ogl_shading.o $(OGL)ogl_shading.c $(INCLUDES)
 $(OBJ)selection.o:
-	$(CC) -c -MT $(OBJ)selection.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)selection.o $(OGL)selection.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)selection.o $(OGL)selection.c $(INCLUDES)
 $(OBJ)ogl_draw.o:
-	$(CC) -c -MT $(OBJ)ogl_draw.o -MD -MP -MF $(CFLAGS) $(DEFS) -o $(OBJ)ogl_draw.o $(OGL)ogl_draw.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)ogl_draw.o $(OGL)ogl_draw.c $(INCLUDES)
 
 
 # Win file:
