@@ -15,7 +15,6 @@
 
 LINUX = 1
 WINDOWS = 0
-OSX = 0
 
 # The next line defines the GTK version !
 GTKV = 3
