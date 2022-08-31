@@ -408,7 +408,7 @@ const GLchar * full_color = GLSL(
   in vec3 surfaceNormal;
   in vec3 surfaceToCamera;
 
-  // out vec4 fragment_color;
+  out vec4 fragment_color;
 
   const float PI = 3.14159265359;
 
@@ -653,11 +653,11 @@ const GLchar * full_color = GLSL(
     }
     if (fog.mode > 0)
     {
-      gl_FragColor = vec4 (Apply_fog(surfaceColor.xyz*color), alpha);
+      fragment_color = vec4 (Apply_fog(surfaceColor.xyz*color), alpha);
     }
     else
     {
-      gl_FragColor = vec4 (surfaceColor.xyz*color, alpha);
+      fragment_color = vec4 (surfaceColor.xyz*color, alpha);
     }
   }
 );
@@ -1088,7 +1088,7 @@ const GLchar * polyedron_color = GLSL(
   in vec3 surfaceNormal;
   in vec3 surfaceToCamera;
 
-  // out vec4 fragment_color;
+  out vec4 fragment_color;
 
   const float PI = 3.14159265359;
 
@@ -1333,11 +1333,11 @@ const GLchar * polyedron_color = GLSL(
     }
     if (fog.mode > 0)
     {
-      gl_FragColor = vec4 (Apply_fog(vertColor.xyz*color), alpha);
+      fragment_color = vec4 (Apply_fog(vertColor.xyz*color), alpha);
     }
     else
     {
-      gl_FragColor = vec4 (vertColor.xyz*color, alpha);
+      fragment_color = vec4 (vertColor.xyz*color, alpha);
     }
   }
 );
