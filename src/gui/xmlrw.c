@@ -350,7 +350,7 @@ int XmlwriterFilename (const char *uri)
       lgt += strfind (active_chem -> label[i]) + strlen("-") + strfind(active_chem -> label[j]);
       ncut = g_malloc0 (lgt*sizeof*ncut);
       strncpy (ncut, active_chem -> label[i], strfind(active_chem -> label[i]));
-      strncat (ncut, "-", strfind("-"));
+      strcat (ncut, "-");
       strncat (ncut, active_chem -> label[j], strfind(active_chem -> label[j]));
       rc = xmlTextWriterWriteFormatElement(writer, BAD_CAST ncut, "%f", active_chem -> cutoffs[i][j]);
       if (rc < 0) return 0;
@@ -955,7 +955,7 @@ int setcutoffs (xmlNodePtr cutnode)
       lgt+=strfind(active_chem -> label[i]) + strlen("-") + strfind(active_chem -> label[j]);
       ncut = g_malloc0 (lgt*sizeof*ncut);
       strncpy (ncut, active_chem -> label[i], strfind(active_chem -> label[i]));
-      strncat (ncut, "-", strfind("-"));
+      strcat (ncut, "-");
       strncat (ncut, active_chem -> label[j], strfind(active_chem -> label[j]));
       cn = findnode(cnode, ncut);
       if (cn == NULL)

@@ -186,7 +186,7 @@ void debugioproj (struct project * this_proj, gchar * iost)
                         this_proj -> cell.box[0].param[1][0], this_proj -> cell.box[0].param[1][1], this_proj -> cell.box[0].param[1][2]);
   g_debug ("IODEBUG::%s: vmod[0]= %f, vmod[1]= %f, vmod[2]= %f", iost,
                         this_proj -> cell.box[0].param[0][0], this_proj -> cell.box[0].param[0][1], this_proj -> cell.box[0].param[0][2]);
-  for (i=0; i<NCALCS; i++)
+  for (i=0; i<NGRAPHS; i++)
   {
     g_debug ("IODEBUG::%s: i= %d, num_delta[i]= %d", iost, i, this_proj -> num_delta[i]);
     g_debug ("IODEBUG::%s: i= %d, delta[i]= %f", iost, i, this_proj -> delta[i]);
