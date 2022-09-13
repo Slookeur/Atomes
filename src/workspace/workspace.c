@@ -72,7 +72,7 @@ void add_project (GtkTreeStore * store, int i)
   {
     tmp = g_strdup_printf ("%s", get_project_by_id(i) -> name);
   }
-  gtk_tree_store_set (store, & piter[i], 0, THETD, 1, tmp, 2, -4, -1);
+  gtk_tree_store_set (store, & piter[i], 0, THETD, 1, tmp, -1);
   prpath[i] = gtk_tree_model_get_path (GTK_TREE_MODEL(store), & piter[i]);
   g_free (tmp);
   gtk_tree_store_append (store, & steplevel, & piter[i]);
@@ -104,7 +104,7 @@ static void fill_workspace (GtkTreeStore * store)
   int i;
 
   gtk_tree_store_append (store, & worklevel, NULL);
-  gtk_tree_store_set (store, & worklevel, 0, THETD, 1, work_menu_items[0], -1);
+  gtk_tree_store_set (store, & worklevel, 0, THETD, 1, work_menu_items[0], 2, -4, -1);
 
   if (piter != NULL) g_free (piter);
   if (prpath != NULL) g_free (prpath);
