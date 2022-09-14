@@ -481,7 +481,7 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
     active_glwin -> adv_bonding[0] = 0;
     active_glwin -> adv_bonding[1] = 0;
   }
-  if (active_glwin) update_glwin_after_bonds (bonding, colm);
+  if (active_glwin && bonds_update) update_glwin_after_bonds (bonding, colm);
   fill_tool_model ();
   if (widg)
   {
