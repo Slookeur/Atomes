@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{4DA2F2FC-AD2D-414A-8197-0DD52F1593D2}
 AppName=Atomes
-AppVerName=Atomes 1.1.1
+AppVerName=Atomes 1.1.2
 AppPublisher=CNRS
 AppPublisherURL=https://atomes.ipcms.fr/
 AppSupportURL=https://atomes.ipcms.fr/
@@ -40,6 +40,10 @@ function InitializeSetup(): Boolean;
 begin
   Result := TRUE;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.0', 'Version') then begin
+    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    Result := FALSE;
+  end;
+  if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.1', 'Version') then begin
     MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
