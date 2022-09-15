@@ -49,7 +49,7 @@ int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
           m = 0;
           for (k=0; k<this_proj -> modelgl -> num_rings[i][s][j]; k++)
           {
-            for (l=0; l<j; l++) if (this_proj -> modelgl -> all_rings[i][s][j][k][l] == a) m ++;
+            for (l=0; l<j+1; l++) if (this_proj -> modelgl -> all_rings[i][s][j][k][l] == a) m ++;
           }
           this_proj -> atoms[s][a].rings[i][j] = allocint(m + 1);
           this_proj -> atoms[s][a].rings[i][j][0] = m;

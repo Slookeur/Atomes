@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "glwindow.h"
 
-void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta])
+void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+1])
 {
   int i;
   active_glwin -> show_rpoly[* id][* st][* ta][* ri] = FALSE;
