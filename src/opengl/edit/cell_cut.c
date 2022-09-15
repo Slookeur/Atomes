@@ -478,9 +478,9 @@ G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
             break;
         }
 #ifdef GTK4
-        select_unselect_atoms (NULL, NULL, & this_proj -> modelgl -> colorp[0][0]);
+//        select_unselect_atoms (NULL, NULL, & this_proj -> modelgl -> colorp[0][0]);
 #else
-        select_unselect_atoms (NULL, & this_proj -> modelgl -> colorp[0][0]);
+//        select_unselect_atoms (NULL, & this_proj -> modelgl -> colorp[0][0]);
 #endif
         if (is_out) restore_ogl_selection (this_proj -> modelgl);
         this_proj -> modelgl -> cell_win -> cut_this_slab = FALSE;
