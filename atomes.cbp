@@ -1213,304 +1213,46 @@
 			<Option target="cleanogl" />
 			<Option target="cleanpoly" />
 		</Unit>
-		<Unit filename="src/fortran/allocbonds.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/allochem.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/allocmsd.f90" />
-		<Unit filename="src/fortran/angles.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-		</Unit>
-		<Unit filename="src/fortran/bonds.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/c3d.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/chains.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-			<Option target="cleancurve" />
-			<Option target="cleancpmd" />
-			<Option target="cleancp2k" />
-		</Unit>
-		<Unit filename="src/fortran/chains_ogl.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-			<Option target="cleancurve" />
-			<Option target="cleancpmd" />
-			<Option target="cleancp2k" />
-		</Unit>
-		<Unit filename="src/fortran/chemistry.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/cqvf.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-			<Option target="cleancurve" />
-		</Unit>
-		<Unit filename="src/fortran/dmtx.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/dvtb.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-		</Unit>
-		<Unit filename="src/fortran/escs.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/fzbt.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-			<Option target="cleancurve" />
-		</Unit>
-		<Unit filename="src/fortran/gr.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-		</Unit>
-		<Unit filename="src/fortran/grfft.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-			<Option target="cleancurve" />
-		</Unit>
-		<Unit filename="src/fortran/init.F90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/initchains.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-			<Option target="cleancurve" />
-			<Option target="cleancpmd" />
-			<Option target="cleancp2k" />
-		</Unit>
-		<Unit filename="src/fortran/initrings.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-		</Unit>
-		<Unit filename="src/fortran/lattice.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/mendeleiev.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/molecules.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-		</Unit>
-		<Unit filename="src/fortran/msd.f90" />
-		<Unit filename="src/fortran/parameters.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-		</Unit>
-		<Unit filename="src/fortran/pdb.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/prepdata.F90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
-		<Unit filename="src/fortran/resrings.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-		</Unit>
-		<Unit filename="src/fortran/rings-guttman.f90" />
-		<Unit filename="src/fortran/rings-king.f90" />
-		<Unit filename="src/fortran/rings-primitive.f90" />
-		<Unit filename="src/fortran/rings_ogl.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-		</Unit>
-		<Unit filename="src/fortran/sk.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-			<Option target="cleancurve" />
-		</Unit>
-		<Unit filename="src/fortran/spherical.f90" />
-		<Unit filename="src/fortran/sq.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-			<Option target="cleancurve" />
-		</Unit>
-		<Unit filename="src/fortran/threads.f90" />
-		<Unit filename="src/fortran/trj.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-		</Unit>
-		<Unit filename="src/fortran/utils.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-		</Unit>
-		<Unit filename="src/fortran/vas.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-		</Unit>
-		<Unit filename="src/fortran/writedata.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-			<Option target="cleanf" />
-			<Option target="cleangui" />
-			<Option target="cleanproj" />
-			<Option target="cleanwork" />
-			<Option target="cleancalc" />
-			<Option target="cleanogl" />
-			<Option target="cleanpoly" />
-		</Unit>
-		<Unit filename="src/fortran/xyz.f90">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
+		<Unit filename="src/fortran/allocbonds.F90" />
+		<Unit filename="src/fortran/allochem.F90" />
+		<Unit filename="src/fortran/allocmsd.F90" />
+		<Unit filename="src/fortran/angles.F90" />
+		<Unit filename="src/fortran/bonds.F90" />
+		<Unit filename="src/fortran/c3d.F90" />
+		<Unit filename="src/fortran/chains.F90" />
+		<Unit filename="src/fortran/chains_ogl.F90" />
+		<Unit filename="src/fortran/chemistry.F90" />
+		<Unit filename="src/fortran/cqvf.F90" />
+		<Unit filename="src/fortran/dmtx.F90" />
+		<Unit filename="src/fortran/dvtb.F90" />
+		<Unit filename="src/fortran/escs.F90" />
+		<Unit filename="src/fortran/fzbt.F90" />
+		<Unit filename="src/fortran/gr.F90" />
+		<Unit filename="src/fortran/grfft.F90" />
+		<Unit filename="src/fortran/init.F90" />
+		<Unit filename="src/fortran/initchains.F90" />
+		<Unit filename="src/fortran/initrings.F90" />
+		<Unit filename="src/fortran/lattice.F90" />
+		<Unit filename="src/fortran/mendeleiev.F90" />
+		<Unit filename="src/fortran/molecules.F90" />
+		<Unit filename="src/fortran/msd.F90" />
+		<Unit filename="src/fortran/parameters.F90" />
+		<Unit filename="src/fortran/pdb.F90" />
+		<Unit filename="src/fortran/prepdata.F90" />
+		<Unit filename="src/fortran/resrings.F90" />
+		<Unit filename="src/fortran/rings-guttman.F90" />
+		<Unit filename="src/fortran/rings-king.F90" />
+		<Unit filename="src/fortran/rings-primitive.F90" />
+		<Unit filename="src/fortran/rings_ogl.F90" />
+		<Unit filename="src/fortran/sk.F90" />
+		<Unit filename="src/fortran/spherical.F90" />
+		<Unit filename="src/fortran/sq.F90" />
+		<Unit filename="src/fortran/threads.F90" />
+		<Unit filename="src/fortran/trj.F90" />
+		<Unit filename="src/fortran/utils.F90" />
+		<Unit filename="src/fortran/vas.F90" />
+		<Unit filename="src/fortran/writedata.F90" />
+		<Unit filename="src/fortran/xyz.F90" />
 		<Unit filename="src/global.c">
 			<Option compilerVar="CC" />
 			<Option target="atomes" />

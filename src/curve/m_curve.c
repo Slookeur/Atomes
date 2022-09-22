@@ -368,6 +368,8 @@ GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_
 void curve_window_add_menu_bar (tint * data)
 {
   struct project * this_proj = get_project_by_id (data -> a);
+  this_proj -> curves[data -> b][data -> c] -> pos = destroy_this_widget (this_proj -> curves[data -> b][data -> c] -> pos);
+  this_proj -> curves[data -> b][data -> c] -> pos = gtk_label_new (" ");
   this_proj -> curves[data -> b][data -> c] -> curve_hbox = destroy_this_widget (this_proj -> curves[data -> b][data -> c] -> curve_hbox);
   this_proj -> curves[data -> b][data -> c] -> curve_hbox = create_hbox (0);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, this_proj -> curves[data -> b][data -> c] -> curve_vbox, this_proj -> curves[data -> b][data -> c] -> curve_hbox, FALSE, FALSE, 0);
@@ -379,8 +381,6 @@ void curve_window_add_menu_bar (tint * data)
 #endif
   g_free (str);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, this_proj -> curves[data -> b][data -> c] -> curve_hbox, menu, TRUE, TRUE, 0);
-  this_proj -> curves[data -> b][data -> c] -> pos = destroy_this_widget (this_proj -> curves[data -> b][data -> c] -> pos);
-  this_proj -> curves[data -> b][data -> c] -> pos = gtk_label_new (" ");
   gtk_label_align (this_proj -> curves[data -> b][data -> c] -> pos, 1.0, 0.5);
   add_box_child_end (this_proj -> curves[data -> b][data -> c] -> curve_hbox, this_proj -> curves[data -> b][data -> c] -> pos, FALSE, FALSE, 0);
   show_the_widgets (this_proj -> curves[data -> b][data -> c] -> curve_hbox);

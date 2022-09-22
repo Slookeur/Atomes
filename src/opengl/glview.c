@@ -336,7 +336,14 @@ void transform (glwin * view, double aspect)
 void reshape (glwin * view, int width, int height)
 {
   double aspect;
-  int scale = gtk_widget_get_scale_factor (view -> win);
+  int scale = 1.0;
+  if (view -> win)
+  {
+    if (GTK_IS_WIDGET(view -> win))
+    {
+      scale = gtk_widget_get_scale_factor (view -> win);
+    }
+  }
   glViewport (0, 0, (GLsizei) scale * width, (GLsizei) scale * height);
   view -> view_port = vec4 (0.0, 0.0, width, height);
   aspect = (double) width / (double) height;

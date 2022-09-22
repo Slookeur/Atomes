@@ -192,8 +192,8 @@ Light init_light_source (int type, float val, float vbl)
   new_light.fix = (type != 1) ? 0 : 1;
   new_light.show = 0;
   new_light.direction = vec3(0.0, 0.0, 0.0);
-  // double intensity = (type == 1) ? 100.0*DEFAULT_INTENSITY : DEFAULT_INTENSITY;
-  double intensity = DEFAULT_INTENSITY;
+  double intensity = (type == 1) ? 100.0*DEFAULT_INTENSITY : DEFAULT_INTENSITY;
+  // double intensity = DEFAULT_INTENSITY;
   if (val != vbl)
   {
     intensity *= exp (val/vbl);

@@ -11,7 +11,7 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
-/* Crystal database window, not in use for the time being */
+/* Crystal database window, project not in use for the time being */
 
 #include "global.h"
 #include "interface.h"
@@ -34,7 +34,7 @@ gchar * sym_list[SYMMETRIES]= {"Triclinic", "Monoclinic", "Orthorhombic", "Tetra
 extern G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data);
 extern gboolean create_3d_model (int p, gboolean load);
 extern G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data);
-extern void init_camera (glwin * view, gboolean get_depth);
+extern void init_camera (struct project * this_proj, gboolean get_depth);
 extern void alloc_proj_data (struct project * this_proj, int cid);
 extern int action_atoms_from_project (struct project * this_proj, atom_search * asearch, int status, gboolean visible);
 extern void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible);
@@ -72,7 +72,7 @@ int cif_preview (const char * filetoread)
 {
   int i, j, k;
   if (cif_proj != NULL) close_project (cif_proj);
-  init_project ();
+  init_project (TRUE);
   cif_proj = active_project;
   cif_proj -> coordfile = g_strdup_print ("%s", filetoread);
   if (open_coordinate_file (6))

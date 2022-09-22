@@ -31,6 +31,7 @@ extern int open_hist_file (int linec);
 extern void allocatoms (struct project * this_proj);
 extern chemical_data * alloc_chem_data (int spec);
 extern int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
+extern const gchar * dfi[2];
 
 FILE * coordf;
 coord_file * this_reader;
@@ -128,7 +129,7 @@ int open_coord_file (gchar * filename, int fti)
   }
   int fsize = status.st_size;
 #endif
-  coordf = fopen (filename, "r");
+  coordf = fopen (filename, dfi[0]);
   if (! coordf)
   {
     add_reader_info ("Error - cannot open coordinates file !");
@@ -157,7 +158,6 @@ int open_coord_file (gchar * filename, int fti)
     }
   }
 #else
-  // This is faster but I do not see how to // it
   gchar * buf = g_malloc0(LINE_SIZE*sizeof*buf);
   head = NULL;
   tail = NULL;

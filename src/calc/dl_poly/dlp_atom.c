@@ -689,5 +689,4 @@ G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GV
   run_this_gtk_dialog (rmol, G_CALLBACK(run_remove_atom_from_field_molecule), NULL);
   field_unselect_all ();
   update_field_trees ();
-  destroy_this_widget (rmol);
 }

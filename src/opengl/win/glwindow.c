@@ -325,6 +325,9 @@ GtkWidget * menu_view (glwin * view, int popm)
 
 void prepare_opengl_menu_bar (glwin * view)
 {
+#ifdef GTK3
+  view -> ogl_coord[0] = destroy_this_widget (view -> ogl_coord[0]);
+#endif
   view -> menu_bar = destroy_this_widget (view -> menu_bar);
 #ifdef GTK3
   view -> menu_bar = gtk_menu_bar_new ();

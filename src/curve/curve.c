@@ -273,8 +273,8 @@ void clean_this_curve_window (int cid, int rid)
 {
   /*if (active_project -> curves[rid][cid] -> window != NULL)
   {
-    active_project -> curves[rid][cid] -> plot = destroy_this_widget (active_project -> curves[rid][cid] -> plot);
     active_project -> curves[rid][cid] -> window = destroy_this_widget (active_project -> curves[rid][cid] -> window);
+    active_project -> curves[rid][cid] -> plot = destroy_this_widget (active_project -> curves[rid][cid] -> plot);
   }*/
   if (active_project -> curves[rid][cid] -> ndata > 0)
   {

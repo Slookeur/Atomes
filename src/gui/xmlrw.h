@@ -19,7 +19,7 @@ If not, see <https://www.gnu.org/licenses/> */
 #include <libxml/xmlreader.h>
 #include <libxml/parser.h>
 
-int strfind (int * ida);
+size_t strfind (int * ida);
 int XmlwriterFilename (const char *uri);
 int write_xml (const char * filetosave);
 gboolean file_exists(const char * filename);
