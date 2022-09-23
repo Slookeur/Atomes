@@ -1999,7 +1999,10 @@ G_MODULE_EXPORT void select_atom (GtkCellRendererToggle * cell_renderer,
   gtk_tree_model_get_iter (model, & iter, path);
   gtk_tree_model_get (model, & iter, IDCOL, & i, -1);
   check_label = FALSE;
-  this_proj -> modelgl -> atom_win -> rebuilt[(asearch -> action == RANMOVE) ? 1 : 0] = FALSE;
+  if (this_proj -> modelgl -> atom_win)
+  {
+    this_proj -> modelgl -> atom_win -> rebuilt[(asearch -> action == RANMOVE) ? 1 : 0] = FALSE;
+  }
   if (i > 0)
   {
     i --;
