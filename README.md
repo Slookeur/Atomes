@@ -37,7 +37,7 @@ To build ***Atomes*** debug version:
 
 > make debug
 
-The later is for debugging purposes only, prints extra information that can be helpful in that case.
+The later is for debugging purposes only, also prints extra information at runtime to help with the process.
 
 ## Who's behind ***Atomes***
 
