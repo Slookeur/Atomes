@@ -27,6 +27,18 @@ Features
 	- ab-initio MD: [CPMD][cpmd] and [CP2K][cp2k]
 	- QM-MM MD: [CPMD][cpmd] and [CP2K][cp2k]
 
+## Build instructions
+
+To build ***Atomes*** standard version: 
+
+> make atomes
+
+To build ***Atomes*** debug version:
+
+> make debug
+
+The later is for debugging purposes only, prints extra information that can be helpful in that case.
+
 ## Who's behind ***Atomes***
 
 
