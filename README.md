@@ -41,6 +41,8 @@ The latter is for debugging purposes only, also prints extra information at runt
 
 ### Build options
 
+#### Building the GTK4 version of ****Atomes***
+
 ***Atomes*** uses the [GTK][gtk] lib for the GUI, by default GTK3 is used, however it is possible to build the GTK4 version (beta), to do that edit the `Makefile` and change:
 
 > GTKV = 3 
@@ -55,7 +57,9 @@ Here are some issues with GTK4 that cannot be sovled for the time being:
   3. Selection in tables is not working properly (see the `Measures` dialog: wrong lines are picked)
   4. No way to moves lines in tables (curves and crystal builder)
 
-1) and 2) are the most sensitives issues so far since ***Atomes*** menus are dynamical and cannot be created by reading a basic XML file. 
+Issues 1) and 2) are the most critical so far since ***Atomes*** menus are dynamical and cannot be created by reading a basic XML file. 
+
+
 
 ## Who's behind ***Atomes***
 
@@ -92,3 +96,4 @@ Tutorial are regrouped and hosted on [GitHub][github] here: [Atomes tutorials][a
 [lammps]:https://lammps.sandia.gov/
 [cpmd]:http://www.cpmd.org
 [cp2k]:http://cp2k.berlios.de
+[gtk]:https://www.gtk.org/
