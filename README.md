@@ -59,7 +59,16 @@ Here are some issues with GTK4 that cannot be sovled for the time being:
 
 Issues 1) and 2) are the most critical so far since ***Atomes*** menus are dynamical and cannot be created by reading a basic XML file. 
 
+#### Building the serial version of ***Atomes***
 
+By default ****Atomes*** uses [OpenMP][openmp] to parallize several calculations over the CPU cores. 
+It is possible to turn this off, and to build a serial version of ***Atomes***, to do that edit the `Makefile`and change:
+
+> OPENMP = 1
+
+to
+
+> OPENMP =
 
 ## Who's behind ***Atomes***
 
