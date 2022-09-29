@@ -61,7 +61,7 @@ Issues 1) and 2) are the most critical so far since ***Atomes*** menus are dynam
 
 #### Building the serial version of ***Atomes***
 
-By default ****Atomes*** uses [OpenMP][openmp] to parallize several calculations over the CPU cores. 
+By default ****Atomes*** uses [OpenMP][openmp] to parallelize several calculations over the CPU cores. 
 It is possible to turn this off, and to build a serial version of ***Atomes***, to do that edit the `Makefile`and change:
 
 > OPENMP = 1
