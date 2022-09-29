@@ -39,6 +39,24 @@ To build ***Atomes*** debug version:
 
 The latter is for debugging purposes only, also prints extra information at runtime to help with the process.
 
+### Build options
+
+***Atomes*** uses the [GTK][gtk] lib for the GUI, by default GTK3 is used, however it is possible to build the GTK4 version (beta), to do that edit the `Makefile` and change:
+
+> GTKV = 3 
+
+to 
+
+> GTKV = 4
+
+Here are some issues with GTK4 that cannot be sovled for the time being:
+  1. No way to use Pango markups in menus
+  2. Add widgets to menus is impossible, ex: color selections
+  3. Selection in tables is not working properly (see the `Measures` dialog: wrong lines are picked)
+  4. No way to moves lines in tables (curves and crystal builder)
+
+1) and 2) are the most sensitives issues so far since ***Atomes*** menus are dynamical and cannot be created by reading a basic XML file. 
+
 ## Who's behind ***Atomes***
 
 
