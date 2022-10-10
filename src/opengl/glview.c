@@ -643,9 +643,9 @@ void glwin_button_event (double event_x, double event_y, guint event_button, gui
       view -> mouseStatus = CLICKED;
       view -> mouseX = event_x;
       view -> mouseY = event_y;
+      clock_gettime (CLOCK_MONOTONIC, & start_time);
       if (event_button == 1 || event_button == 3)
       {
-        view -> to_pick = TRUE;
         save_rotation_quaternion (view);
         arc_ball_init = get_arc_ball_vector (view, view -> mouseX, view -> mouseY);
         view -> nth_copy = 0;
@@ -655,11 +655,20 @@ void glwin_button_event (double event_x, double event_y, guint event_button, gui
 #else
         render_this_gl_window (view, plot, event_button);
 #endif
-
       }
       break;
     case GDK_BUTTON_RELEASE:
       view -> mouseStatus = RELEASED;
+      clock_gettime (CLOCK_MONOTONIC, & stop_time);
+      if (get_calc_time (start_time, stop_time) < 0.4)
+      {
+        view -> to_pick = TRUE;
+#ifdef GTKGLAREA
+        render_this_gl_window (view, GTK_GL_AREA(view -> plot), event_button, event_x, event_y);
+#else
+        render_this_gl_window (view, plot, event_button);
+#endif
+      }
       if (view -> mode == EDITION && view -> mouseAction == MOTION)
       {
         view -> baryc[1] = get_bary (get_project_by_id(view -> proj), 1);

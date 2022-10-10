@@ -923,6 +923,7 @@ int select_from_library (gboolean visible, struct project * this_proj, atom_sear
   if (mol_name != NULL) g_free (mol_name);
   if (lib_proj != NULL) close_project (lib_proj);
   lib_proj = NULL;
+  lib_preview_plot = NULL;
   return lib_res;
 }
 

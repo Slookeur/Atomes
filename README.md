@@ -3,8 +3,10 @@
 ![](https://github.com/Slookeur/Atomes.io/workflows/ns/badge.svg)
 ![](https://www.codefactor.io/repository/github/Slookeur/Atomes/badge)
 
-[Atomes][atomes] is a Free (Open Source) cross-platform toolbox developed to analyze, to visualize and to edit/create three-dimensional atomistic models.
-It oﬀers a workspace that allows to have many projects opened simultaneously.
+[Atomes][atomes] is a Free (Open Source) cross-platform software licensed under the terms 
+of the Affero GPL v3+ license. 
+Atoms is a toolbox developed to analyze, to visualize and to create/edit three-dimensional atomistic models.
+It offers a workspace that allows to have many projects opened simultaneously.
 
 The different projects in the workspace can exchange data: analysis results, atomic coordinates ...
 Atomes also provides an advanced input preparation system for further calculations using well known molecular dynamics codes:
@@ -69,6 +71,10 @@ It is possible to turn this off, and to build a serial version of ***Atomes***, 
 to
 
 > OPENMP =
+
+## Install ***Atomes***
+
+> make install
 
 ## Who's behind ***Atomes***
 

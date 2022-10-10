@@ -392,7 +392,7 @@ void process_the_hits (glwin * view, gint event_button, double ptx, double pty)
   view -> picked = FALSE;
   GLubyte pixel[4];
   GLint viewport[4];
-  int scale = gtk_widget_get_scale_factor (view->win);
+  int scale = gtk_widget_get_scale_factor (view -> win);
   glGetIntegerv (GL_VIEWPORT, viewport);
   glPixelStorei (GL_UNPACK_ALIGNMENT, 1);
   glReadPixels (scale * view -> mouseX, viewport[3] - scale * view -> mouseY, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel);

@@ -64,12 +64,39 @@ int test_this_arg (gchar * arg)
 
 void printhelp()
 {
-  char help[515] = "Usage: ATOMES [OPTION]\n       ATOMES [FILE]\n\n"
-                   "3D model analysis and edition tool\n\n"
+  char * help    = "\nUsage: ATOMES [OPTION]\n"
+                   "       ATOMES [FILE]\n"
+                   "       ATOMES [OPTION] [FILE]\n"
+                   "       ATOMES [FILE1] [FILE2] ...\n"
+                   "       ATOMES [OPTION1] [FILE1] [OPTION2] [FILE2] ...\n\n"
+                   "3D atomistic model analysis, creation/edition and post-processing tool\n\n"
                    "options:\n"
                    "  -v, --version             version information\n"
-                   "  -h, --help                display this help message\n"
-                   "file:\n\n";
+                   "  -h, --help                display this help message\n\n"
+                   "files, any number, in any order, in the following formats:\n\n"
+                   "  Atomes workspace file: .awf:\n"
+                   "  Atomes prject file: .apf\n"
+                   "  XYZ coordinates file: .xyz\n"
+                   "  Chem3D coordinates file: .c3d\n"
+                   "  CPMD trajectory: .trj\n"
+                   "  VASP trajectory: .xdatcar\n"
+                   "  PDB coordinates: .pdb, .ent\n"
+                   "  Crystallographic Information File: .cif\n"
+                   "  DL-POLY history file: .hist\n"
+                   "  ISAACS project file: .ipf\n\n"
+                   " alternatively specify the file format using:\n\n"
+                   " -awf FILE\n"
+                   " -apf FILE\n"
+                   " -xyz FILE\n"
+                   " -c3d FILE\n"
+                   " -trj FILE\n"
+                   " -xdatcar FILE\n"
+                   " -pdb FILE, or, -ent FILE\n"
+                   " -cif FILE\n"
+                   " -hist FILE\n"
+                   " -ipf FILE\n\n"
+                   "ex:\n\n"
+                   " atomes -pdb this.f file.awf -cif that.f *.xyz\n";
   char bug[20] = "\nReport a bug to <";
   char eh[4] = ">\n";
 

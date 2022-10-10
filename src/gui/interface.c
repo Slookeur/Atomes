@@ -117,7 +117,7 @@ G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
 #else
   GdkPixbuf * atomes_logo = gdk_pixbuf_new_from_file (PACKAGE_LAGPL, NULL);
 #endif
-  const gchar *authors[] = {"Dr. Sébastien Le Roux <atomes@ipcms.unistra.fr>", "", NULL};
+  const gchar *authors[] = {"Dr. Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>", "", NULL};
   const gchar * weblabel = "https://atomes.ipcms.fr";
   const gchar * comments = "Welcome to Atomes: visualization, analyzis, creation/edition and post-processing of atomistic models !";
   const gchar * copyrights = "Copyright © 2022 \nDr. Sébastien Le Roux";
