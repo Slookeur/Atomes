@@ -15,9 +15,8 @@ Atomes also provides an advanced input preparation system for further calculatio
 - ab-initio MD : [CPMD][cpmd] and [CP2K][cp2k]
 - QM-MM MD : [CPMD][cpmd] and [CP2K][cp2k]
 
-To prepare the input ﬁlles for these calculations is likely to be the key, and most complicated step towards MD simulations. Atomes offers a user-friendly assistant to help and guide the user step by step to achieve this crucial step.
-Features
-
+To prepare the input ﬁlles for these calculations is likely to be the key, and most complicated step towards MD simulations. 
+Atomes offers a user-friendly assistant to help and guide the user step by step to achieve this crucial step.
 
 ## Features
 
