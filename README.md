@@ -32,11 +32,15 @@ Atomes offers a user-friendly assistant to help and guide the user step by step 
 
 To build ***Atomes*** standard version: 
 
-> make atomes
+```
+make atomes
+```
 
 To build ***Atomes*** debug version:
 
-> make debug
+```
+make debug
+```
 
 The latter is for debugging purposes only, also prints extra information at runtime to help with the process.
 
@@ -71,9 +75,6 @@ to
 
 > OPENMP =
 
-## Install ***Atomes***
-
-> make install
 
 ## Who's behind ***Atomes***
 
