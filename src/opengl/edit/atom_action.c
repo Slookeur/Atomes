@@ -855,7 +855,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
 
   if (asearch -> action == REMOVE)
   {
-    if (! asearch -> update_bonding || passivating)
+    if (asearch -> update_bonding || passivating)
     {
       active_project_changed (activep);
       bonds_update = 1;

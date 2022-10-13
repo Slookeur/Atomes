@@ -225,7 +225,7 @@ G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id
       struct project * this_proj = (struct project *)data;
       this_proj -> projfile = g_strdup_printf ("%s", projfile);
     }
-    else if (osp.a == 2)
+    else if (osp.a == 3)
     {
       workspacefile = g_strdup_printf ("%s", projfile);
     }
