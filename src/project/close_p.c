@@ -70,6 +70,11 @@ void close_project (struct project * to_close)
       to_close -> modelgl -> measure_win -> win = destroy_this_widget (to_close -> modelgl -> measure_win -> win);
       g_free (to_close -> modelgl -> measure_win);
     }
+    if (to_close -> modelgl -> volume_win)
+    {
+      to_close -> modelgl -> volume_win -> win = destroy_this_widget (to_close -> modelgl -> volume_win -> win);
+      g_free (to_close -> modelgl -> volume_win);
+    }
     if (to_close -> modelgl -> player)
     {
       to_close -> modelgl -> player -> win = destroy_this_widget (to_close -> modelgl -> player -> win);
@@ -104,6 +109,14 @@ void close_project (struct project * to_close)
     {
       to_close -> modelgl -> coord_win -> win = destroy_this_widget (to_close -> modelgl -> coord_win -> win);
       g_free (to_close -> modelgl -> coord_win);
+    }
+    for (i=0; i<2; i++)
+    {
+     if (to_close -> modelgl -> model_win[i])
+      {
+        to_close -> modelgl -> model_win[i] -> win = destroy_this_widget (to_close -> modelgl -> model_win[i] -> win);
+        g_free (to_close -> modelgl -> model_win[i]);
+      }
     }
     if (to_close -> modelgl -> opengl_win)
     {

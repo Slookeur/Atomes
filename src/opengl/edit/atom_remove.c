@@ -174,7 +174,7 @@ struct atom * get_atom_pointer (int aid, struct atom * new_list)
 
 void remove_bonds_from_project (struct project * this_proj, int * old_id, int new_atoms, struct atom * new_list, gboolean remove)
 {
-  int i, j, k, l, m;
+  int h, i, j, k, l, m;
   int tmpbond[2];
   int ** tmpbondid[2];
   struct atom * tmp_list;
@@ -183,8 +183,10 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
   int * per_frag;
   int * in_frag;
   int * tmp_vois = NULL;
+  int * id_mod = NULL;
+  int * id_frag = NULL;
 
-  /*tmp_list = new_list;
+  /* tmp_list = new_list;
   while (tmp_list)
   {
     i = tmp_list -> id;
@@ -203,9 +205,16 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
   // The next lines refresh the bonding information without calculating the distance matrix
   tmp_list = new_list;
   tmp_vois = allocint (20);
+  id_mod = allocint (this_proj -> natomes);
+  h = -1;
   while (tmp_list)
   {
     i = tmp_list -> id;
+    if (old_id[i] > 0 || (! remove && old_id[i] < 0))
+    {
+      h ++;
+      id_mod[i] = h;
+    }
     if (tmp_list -> numv > 0)
     {
       k = 0;
@@ -245,6 +254,23 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
     tmp_list = tmp_list -> next;
   }
   g_free (tmp_vois);
+  tmp_list = new_list;
+  while (tmp_list)
+  {
+    i = tmp_list -> id;
+    if (old_id[i] > 0 || (! remove && old_id[i] < 0))
+    {
+      if (tmp_list -> numv > 0)
+      {
+        for (j=0; j<tmp_list -> numv; j++)
+        {
+          k = tmp_list -> vois[j];
+          tmp_list -> vois[j] = id_mod[k];
+        }
+      }
+    }
+    tmp_list = tmp_list -> next;
+  }
 
   if (this_proj -> modelgl -> adv_bonding[0])
   {
@@ -302,9 +328,10 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
       // g_debug ("i= %d, tmpbond[%d]= %d", i, i, tmpbond[i]);
     }
   }
+  gboolean * show_this;
   if (split)
   {
-    gboolean * show_this = duplicate_bool (this_proj -> coord -> totcoord[2], this_proj -> modelgl -> anim -> last -> img -> show_coord[2]);
+    show_this = duplicate_bool (this_proj -> coord -> totcoord[2], this_proj -> modelgl -> anim -> last -> img -> show_coord[2]);
     showfrag = duplicate_bool (this_proj -> coord -> totcoord[2], this_proj -> modelgl -> anim -> last -> img -> show_coord[2]);
     if (! remove)
     {
@@ -373,6 +400,46 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
     g_free (frag_to_test);
     g_free (show_this);
   }
+
+  id_frag = allocint (this_proj -> coord -> totcoord[2]);
+  tmp_list = new_list;
+  i = 0;
+  while (tmp_list)
+  {
+    j = tmp_list -> id;
+    if (old_id[j] > 0 || (! remove && old_id[j] <0))
+    {
+      if (! id_frag[tmp_list -> coord[2]])
+      {
+        id_frag[tmp_list -> coord[2]] = i+1;
+        i ++;
+      }
+    }
+    tmp_list = tmp_list -> next;
+  }
+  if (i < this_proj -> coord -> totcoord[2])
+  {
+    tmp_list = new_list;
+    while (tmp_list)
+    {
+      tmp_list -> coord[2] = id_frag[tmp_list -> coord[2]] - 1;
+      tmp_list = tmp_list -> next;
+    }
+    show_this = allocbool (i);
+    for (j=0; j<this_proj -> coord -> totcoord[2]; j++)
+    {
+      if (id_frag[j]) show_this[id_frag[j]-1] = showfrag[j];
+    }
+    g_free (showfrag);
+    showfrag = duplicate_bool (i, show_this);
+    g_free (show_this);
+    this_proj -> coord -> totcoord[2] = i;
+  }
+  if (id_frag)
+  {
+    g_free (id_frag);
+    id_frag = NULL;
+  }
   struct distance clo;
   for (i=0; i<2; i++)
   {
@@ -391,8 +458,8 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
         this_proj -> modelgl -> bondid[0][i] = allocdint (tmpbond[i], 2);
         for (k=0; k<tmpbond[i]; k++)
         {
-          this_proj -> modelgl -> bondid[0][i][k][0] = tmpbondid[i][k][0];
-          this_proj -> modelgl -> bondid[0][i][k][1] = tmpbondid[i][k][1];
+          this_proj -> modelgl -> bondid[0][i][k][0] = id_mod[tmpbondid[i][k][0]];
+          this_proj -> modelgl -> bondid[0][i][k][1] = id_mod[tmpbondid[i][k][1]];
           //g_debug ("bc:: i= %d, j= %d, a= %d, b= %d", i, k, tmpbondid[i][k][0], tmpbondid[i][k][1]);
           if (i)
           {
@@ -404,52 +471,20 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
             this_proj -> modelgl -> clones[0][k].z = clo.z;
           }
         }
-        if (new_list && old_id)
-        {
-          if (tmpbondid[i])
-          {
-            g_free (tmpbondid[i]);
-            tmpbondid[i] = NULL;
-          }
-          tmpbondid[i] = allocdint (tmpbond[i], 2);
-          tmp_list = new_list;
-          k = 0;
-          while (tmp_list)
-          {
-            if (! remove || old_id[tmp_list -> id] > 0)
-            {
-              for (l=0; l<tmpbond[i]; l++)
-              {
-                if (this_proj -> modelgl -> bondid[0][i][l][0] == tmp_list -> id)
-                {
-                  tmpbondid[i][l][0] = k;
-                  m = 1;
-                }
-                if (this_proj -> modelgl -> bondid[0][i][l][1] == tmp_list -> id)
-                {
-                  tmpbondid[i][l][1] = k;
-                  m = 0;
-                }
-              }
-              k ++;
-            }
-            tmp_list = tmp_list -> next;
-          }
-        }
       }
       this_proj -> modelgl -> bonds[0][i] = tmpbond[i];
       this_proj -> modelgl -> allbonds[i] = tmpbond[i];
     }
-    if (tmpbond[i])
+    if (tmpbondid[i])
     {
-      for (j=0; j<tmpbond[i]; j++)
-      {
-        this_proj -> modelgl -> bondid[0][i][j][0] = tmpbondid[i][j][0];
-        this_proj -> modelgl -> bondid[0][i][j][1] = tmpbondid[i][j][1];
-      }
       g_free (tmpbondid[i]);
       tmpbondid[i] = NULL;
     }
+  }
+  if (id_mod)
+  {
+    g_free (id_mod);
+    id_mod = NULL;
   }
   /*tmp_list = new_list;
   while (tmp_list)

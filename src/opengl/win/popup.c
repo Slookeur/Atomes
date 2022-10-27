@@ -1699,13 +1699,13 @@ G_MODULE_EXPORT void select_action_for_all (GtkWidget * widg, gpointer data)
       edit_in_new_project (NULL, NULL, & opengl_project -> modelgl -> colorp[0][is_selected]);
       break;
     case 9:
-      remove_the_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      remove_the_atoms (action, NULL, & cut_sel);
       break;
     case 10:
-      replace_the_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      replace_the_atoms (action, NULL, & cut_sel);
       break;
     case 11:
-      copy_the_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      copy_the_atoms (action, NULL, & cut_sel);
       break;
     case CONTEXTACT:
       select_unselect_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[1][1]);
@@ -1739,15 +1739,15 @@ G_MODULE_EXPORT void select_action_for_all (GtkWidget * widg, gpointer data)
       break;
     case CONTEXTACT+9:
       is_selected = -1;
-      remove_the_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      remove_the_atoms (action, NULL, & cut_sel);
       break;
     case CONTEXTACT+10:
       is_selected = -1;
-      replace_the_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      replace_the_atoms (action, NULL, & cut_sel);
       break;
     case CONTEXTACT+11:
       is_selected = -1;
-      copy_the_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      copy_the_atoms (action, NULL, & cut_sel);
       break;
     case 2*CONTEXTACT+4:
       is_selected = -1;
@@ -1762,10 +1762,10 @@ G_MODULE_EXPORT void select_action_for_all (GtkWidget * widg, gpointer data)
   switch (i)
   {
     case 0:
-      select_unselect_atoms (NULL, & opengl_project -> modelgl -> colorp[0][1]);
+      select_unselect_atoms (widg, & opengl_project -> modelgl -> colorp[0][1]);
       break;
     case 1:
-      select_unselect_atoms (NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      select_unselect_atoms (widg, & opengl_project -> modelgl -> colorp[0][0]);
       break;
     case 2:
       label_unlabel_atoms (NULL, & opengl_project -> modelgl -> colorp[0][1]);
@@ -1787,13 +1787,13 @@ G_MODULE_EXPORT void select_action_for_all (GtkWidget * widg, gpointer data)
       edit_in_new_project (NULL, & opengl_project -> modelgl -> colorp[0][is_selected]);
       break;
     case 9:
-      remove_the_atoms (NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      remove_the_atoms (widg, & cut_sel);
       break;
     case 10:
-      replace_the_atoms (NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      replace_the_atoms (widg, & cut_sel);
       break;
     case 11:
-      copy_the_atoms (NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      copy_the_atoms (widg, & cut_sel);
       break;
     case CONTEXTACT:
       select_unselect_atoms (NULL, & opengl_project -> modelgl -> colorp[1][1]);
@@ -1827,15 +1827,15 @@ G_MODULE_EXPORT void select_action_for_all (GtkWidget * widg, gpointer data)
       break;
     case CONTEXTACT+9:
       is_selected = -1;
-      remove_the_atoms (NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      remove_the_atoms (widg, & cut_sel);
       break;
     case CONTEXTACT+10:
       is_selected = -1;
-      replace_the_atoms (NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      replace_the_atoms (widg, & cut_sel);
       break;
     case CONTEXTACT+11:
       is_selected = -1;
-      copy_the_atoms (NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      copy_the_atoms (widg, & cut_sel);
       break;
     case 2*CONTEXTACT+4:
       is_selected = -1;

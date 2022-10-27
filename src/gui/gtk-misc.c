@@ -258,6 +258,17 @@ GtkWidget * dialogmodal (gchar * str, GtkWindow * parent)
   return win;
 }
 
+GtkWidget * message_popover (gchar * message, GtkWidget * parent)
+{
+  GtkWidget * popover = gtk_popover_new (parent);
+  // gtk_popover_set_position (GTK_POPOVER (popover), pos);
+  GtkWidget * child = markup_label(message, -1, -1, -1, -1);
+  gtk_widget_show (child);
+  gtk_container_add (GTK_CONTAINER (popover), child);
+  gtk_container_set_border_width (GTK_CONTAINER (popover), 6);
+  return popover;
+}
+
 GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType mtype, GtkButtonsType buttons, GtkWidget * parent)
 {
   GtkWidget * win;

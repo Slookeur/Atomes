@@ -506,9 +506,9 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         is_selected = 1;
         selected_aspec = -1;
 #ifdef GTK4
-        remove_the_atoms (NULL, NULL, & view -> colorp[0][0]);
+        remove_the_atoms (NULL, NULL, & cut_sel);
 #else
-        remove_the_atoms (NULL, & view -> colorp[0][0]);
+        remove_the_atoms (NULL, & cut_sel);
 #endif
       }
       break;
@@ -609,9 +609,9 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
             view -> nth_copy = 1;
             view -> insert_coords = get_insertion_coordinates (view);
 #ifdef GTK4
-            copy_the_atoms (NULL, NULL, & view -> colorp[0][0]);
+            copy_the_atoms (NULL, NULL, & cut_sel);
 #else
-            copy_the_atoms (NULL, & view -> colorp[0][0]);
+            copy_the_atoms (NULL, & cut_sel);
 #endif
             update_insert_combos ();
           }
@@ -689,17 +689,17 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         if (view -> labelled == opengl_project -> natomes*opengl_project -> steps)
         {
 #ifdef GTK4
-          label_unlabel_atoms (NULL, NULL, & view -> colorp[0][0]);
+          label_unlabel_atoms (NULL, NULL, & cut_lab);
 #else
-          label_unlabel_atoms (NULL, & view -> colorp[0][0]);
+          label_unlabel_atoms (NULL, & cut_lab);
 #endif
         }
         else
         {
 #ifdef GTK4
-          label_unlabel_atoms (NULL, NULL, & view -> colorp[0][1]);
+          label_unlabel_atoms (NULL, NULL, & cut_sel);
 #else
-          label_unlabel_atoms (NULL, & view -> colorp[0][1]);
+          label_unlabel_atoms (NULL, & cut_sel);
 #endif
         }
       }
@@ -810,11 +810,11 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
             selected_aspec = -1;
             is_selected = 1;
 #ifdef GTK4
-            copy_the_atoms (NULL, NULL, & view -> colorp[0][0]);
-            remove_the_atoms (NULL, NULL, & view -> colorp[0][0]);
+            copy_the_atoms (NULL, NULL, & cut_sel);
+            remove_the_atoms (NULL, NULL, & cut_sel);
 #else
-            copy_the_atoms (NULL, & view -> colorp[0][0]);
-            remove_the_atoms (NULL, & view -> colorp[0][0]);
+            copy_the_atoms (NULL, & cut_sel);
+            remove_the_atoms (NULL, & cut_sel);
 #endif
           }
         }

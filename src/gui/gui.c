@@ -35,6 +35,8 @@ extern G_MODULE_EXPORT void on_calc_activate (GtkWidget * widg, gpointer data);
 GtkWidget * MainEvent;
 #endif
 
+tint cut_sel;
+tint cut_lab;
 dint davect[9];
 ColRGBA std[6];
 
@@ -841,5 +843,8 @@ GtkWidget * create_main_window (GApplication * atomes)
     object_was_selected[i] = NULL;
     tmp_object_id[i] = NULL;
   }
+  cut_sel.a =  cut_sel.b = cut_sel.c  = 0;
+  cut_sel.a =  cut_sel.b = 0;
+  cut_sel.c  = 1;
   return window;
 }

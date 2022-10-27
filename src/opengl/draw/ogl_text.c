@@ -331,6 +331,7 @@ void render_string (int glsl, int id, struct screen_string * this_string)
   PangoLayout * playout;
   PangoFontDescription * pfont;
   object_3d * string_to_render = NULL;
+  int arr_size = (this_string -> type == 4) ? 5 : (this_string -> type == 5) ? 6 : this_string -> type;
 
   //pcontext = pango_ft2_get_context (PANGO_TEXT_SIZE, PANGO_TEXT_SIZE);
   pcontext = pango_font_map_create_context (pango_ft2_font_map_new ());
@@ -380,12 +381,12 @@ void render_string (int glsl, int id, struct screen_string * this_string)
       if (ogl_texture == GL_TEXTURE_RECTANGLE_ARB)
       {
         wingl -> ogl_glsl[glsl][0][j] = init_shader_program (glsl, GLSL_STRING, (this_string -> type == 3) ? string_vertex : (this_string -> type == 4) ? angstrom_vertex : degree_vertex,
-                                                             NULL, string_color, GL_TRIANGLE_STRIP, this_string -> type, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
+                                                             NULL, string_color, GL_TRIANGLE_STRIP, arr_size, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
       }
       else
       {
         wingl -> ogl_glsl[glsl][0][j] = init_shader_program (glsl, GLSL_STRING, (this_string -> type == 3) ? string_vertex : (this_string -> type == 4) ? angstrom_vertex : degree_vertex,
-                                                             NULL, string_color_2d, GL_TRIANGLE_STRIP, this_string -> type, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
+                                                             NULL, string_color_2d, GL_TRIANGLE_STRIP, arr_size, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
       }
       wingl -> ogl_glsl[glsl][0][j] -> col = duplicate_color(1, & (this_string -> col));
     }
@@ -395,22 +396,22 @@ void render_string (int glsl, int id, struct screen_string * this_string)
       {
         string_to_render -> texture = textures_id[0];
         wingl -> ogl_glsl[glsl][0][j] = init_shader_program (glsl, GLSL_STRING, (this_string -> type == 3) ? string_vertex : (this_string -> type == 4) ? angstrom_vertex : degree_vertex,
-                                                             NULL, string_color, GL_TRIANGLE_STRIP, this_string -> type, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
+                                                             NULL, string_color, GL_TRIANGLE_STRIP, arr_size, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
         wingl -> ogl_glsl[glsl][0][j] -> col = opposite_color(this_string -> col);
         string_to_render -> texture = textures_id[1];
         wingl -> ogl_glsl[glsl][0][j+1] = init_shader_program (glsl, GLSL_STRING, (this_string -> type == 3) ? string_vertex : (this_string -> type == 4) ? angstrom_vertex : degree_vertex,
-                                                               NULL, string_color, GL_TRIANGLE_STRIP, this_string -> type, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
+                                                               NULL, string_color, GL_TRIANGLE_STRIP, arr_size, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
         wingl -> ogl_glsl[glsl][0][j+1] -> col = duplicate_color(1, & (this_string -> col));
       }
       else
       {
         string_to_render -> texture = textures_id[0];
         wingl -> ogl_glsl[glsl][0][j] = init_shader_program (glsl, GLSL_STRING, (this_string -> type == 3) ? string_vertex : (this_string -> type == 4) ? angstrom_vertex : degree_vertex,
-                                                             NULL, string_color_2d, GL_TRIANGLE_STRIP, this_string -> type, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
+                                                             NULL, string_color_2d, GL_TRIANGLE_STRIP, arr_size, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
         wingl -> ogl_glsl[glsl][0][j] -> col = opposite_color(this_string -> col);
         string_to_render -> texture = textures_id[1];
         wingl -> ogl_glsl[glsl][0][j+1] = init_shader_program (glsl, GLSL_STRING, (this_string -> type == 3) ? string_vertex : (this_string -> type == 4) ? angstrom_vertex : degree_vertex,
-                                                               NULL, string_color_2d, GL_TRIANGLE_STRIP, this_string -> type, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
+                                                               NULL, string_color_2d, GL_TRIANGLE_STRIP, arr_size, (this_string -> type == 3) ? 7 : 8, FALSE, string_to_render);
         wingl -> ogl_glsl[glsl][0][j+1] -> col = duplicate_color(1, & (this_string -> col));
       }
     }

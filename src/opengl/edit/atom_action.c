@@ -701,8 +701,8 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   {
     if (! passivating || (passivating && old_id[tmp_new -> id] > 0))
     {
-      if (! asearch -> update_bonding) tmp_new -> numv = 0;
       this_proj -> atoms[0][i] = * duplicate_atom (tmp_new);
+      if (! asearch -> update_bonding) tmp_new -> numv = 0;
       this_proj -> atoms[0][i].id = i;
       spid[this_proj -> atoms[0][i].sp] ++;
       atid[i] = this_proj -> atoms[0][i].sp;
@@ -855,7 +855,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
 
   if (asearch -> action == REMOVE)
   {
-    if (asearch -> update_bonding || passivating)
+    if (! asearch -> update_bonding || passivating)
     {
       active_project_changed (activep);
       bonds_update = 1;

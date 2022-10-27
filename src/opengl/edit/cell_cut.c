@@ -365,8 +365,6 @@ G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
         update_all_selections (this_proj -> modelgl, 0);
         is_selected = 1;
         if (this_proj -> modelgl -> cell_win -> slab_act) invert_selection (this_proj);
-        tint cutp;
-        cutp.a = cutp.b = cutp.c = 0;
         switch (is_out)
         {
           case 0:
@@ -376,9 +374,9 @@ G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
               if (this_proj -> modelgl -> atom_win)
               {
 #ifdef GTK4
-                remove_the_atoms (NULL, NULL, & cutp);
+                remove_the_atoms (NULL, NULL, & cut_sel);
 #else
-                remove_the_atoms (NULL, & cutp);
+                remove_the_atoms (NULL, & cut_sel);
 #endif
                 this_proj -> modelgl -> cell_win -> slab_passivate = FALSE;
                 to_passivate_using_the_objects (this_proj, this_proj -> modelgl -> search_widg[8]);
@@ -388,9 +386,9 @@ G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
             else
             {
 #ifdef GTK4
-              remove_the_atoms (NULL, NULL, & this_proj -> modelgl -> colorp[0][0]);
+              remove_the_atoms (NULL, NULL, & cut_sel);
 #else
-              remove_the_atoms (NULL, & this_proj -> modelgl -> colorp[0][0]);
+              remove_the_atoms (NULL, & cut_sel);
 #endif
             }
             break;
@@ -458,9 +456,9 @@ G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
               update_all_selections (active_glwin, 0);
               if (active_glwin -> cell_win -> slab_act) invert_selection (active_project);
 #ifdef GTK4
-              remove_the_atoms (NULL, NULL, & cutp);
+              remove_the_atoms (NULL, NULL, & cut_sel);
 #else
-              remove_the_atoms (NULL, & cutp);
+              remove_the_atoms (NULL, & cut_sel);
 #endif
               active_glwin -> cell_win -> slab_passivate = FALSE;
               to_passivate_using_the_objects (active_project, active_glwin -> search_widg[8]);
