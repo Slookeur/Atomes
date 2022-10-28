@@ -162,7 +162,7 @@ struct screen_string {
   int type;
   char * word;
   ColRGBA col;
-  float shift[3];
+  float shift[4];
   int num_instances;
   float * instances;
   struct screen_string * prev;
@@ -223,7 +223,7 @@ typedef struct {
   double labels_shift[5][3];
   struct screen_string * labels_list[5];
   // 0 =Element name, 1 = Atomic symbol, 2 = Atomic symbol + ID number, 3 = ID number
-  int labels_format[2];
+  int labels_format[3];
   gboolean mtilt;
   int mpattern;
   int mfactor;

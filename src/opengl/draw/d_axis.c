@@ -23,7 +23,6 @@ extern void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b
 extern void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha);
 extern void setup_triangles (float * vertices, vec3_t sa, vec3_t sb, vec3_t sc);
 extern float poly_alpha;
-extern float alpha;
 extern vec3_t centroid;
 
 extern void clean_labels (int id);
@@ -152,7 +151,7 @@ void init_axis_param ()
 void prepare_axis_data (float * vert_a, float * vert_b, float * vert_c)
 {
   init_axis_param ();
-  alpha = poly_alpha = 1.0;
+  poly_alpha = 1.0;
 
   vec3_t a, b, c, d, e;
   float sa;

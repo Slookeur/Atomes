@@ -34,7 +34,7 @@ void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * 
   int i, j, k, l, m;
   gchar * temp[2]={"TEMPERATURE", "TEMPERATURE ELECTRONS"};
   gchar * tobj[2]={"IONS", "ELECTRONS"};
-  gchar * str;
+  gchar * str = NULL;
 
   if (thermo -> type == 0)
   {

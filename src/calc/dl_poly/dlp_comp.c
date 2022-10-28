@@ -17,7 +17,7 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "dlp_field.h"
 
-struct field_nth_body * new_fbody;
+struct field_nth_body * comp_fbody;
 
 extern void duplicate_nbody_params (struct field_nth_body * new_fbody, struct field_nth_body * old_fbody);
 
@@ -144,5 +144,6 @@ void compare_body (gchar * fatom,
 void compare_non_bonded (gchar * fatom)
 {
   int nbody = init_vdw (FALSE);
-  compare_body (fatom, new_fbody, nbody, tmp_field -> first_body[0], tmp_field -> nbody[0]);
+  // comp_fbody is prepared in init_vdw
+  compare_body (fatom, comp_fbody, nbody, tmp_field -> first_body[0], tmp_field -> nbody[0]);
 }

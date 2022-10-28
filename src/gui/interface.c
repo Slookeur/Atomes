@@ -526,7 +526,7 @@ void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
 
 gchar * textcolor (int i)
 {
-  gchar * col;
+  gchar * col = NULL;
   switch (i - i * (i / 9))
   {
     case 0:

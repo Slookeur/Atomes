@@ -93,7 +93,7 @@ G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
   show = ! g_variant_get_boolean (state);
 #else
   show = check_menu_item_get_active ((gpointer)widg);
-  if (widg != view -> ogl_clones[5]) check_menu_item_set_active ((gpointer)view -> ogl_clones[6], show);
+  if (widg != view -> ogl_clones[5]) check_menu_item_set_active ((gpointer)view -> ogl_clones[5], show);
 #endif
   view -> anim -> last -> img -> cloned_poly = show;
   int shaders[2] = {POLYS, RINGS};

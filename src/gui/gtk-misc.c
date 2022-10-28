@@ -915,7 +915,7 @@ g_menu_item_set_attribute (
 
 GtkWidget * create_image_from_data (int format, gpointer item_image)
 {
-  GtkWidget * icon;
+  GtkWidget * icon = NULL;
   switch (format)
   {
     case IMG_PIXBUF:

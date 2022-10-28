@@ -30,7 +30,7 @@ extern int fetypes[2][16];
 
 extern void clean_up_molecules_info (gboolean usel);
 extern void select_object (int id, int jd, int kd);
-extern void run_add_atom_dialog (GtkWidget * add_dialog);
+extern G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_id, gpointer data);
 extern void field_selection (int i, int viz, int lab, int aid);
 extern void field_unselect_all ();
 extern void compare_non_bonded (gchar * fatom);

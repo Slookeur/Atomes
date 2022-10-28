@@ -203,10 +203,10 @@ G_MODULE_EXPORT void run_on_open_save_active (GtkNativeDialog * info, gint respo
 #else
 G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id, gpointer data)
 {
-  GSList * projlist;
+  GSList * projlist = NULL;
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkWidget *)info);
 #endif
-  FILE * fp;
+  FILE * fp = NULL;
   gchar * err;
   gboolean io = FALSE;
   const gchar * mess[2]={"reading","saving "};
@@ -552,7 +552,7 @@ G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpo
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkWidget *)info);
 #endif
-  gchar * tmp_str;
+  gchar * tmp_str = NULL;
   if (response_id == GTK_RESPONSE_ACCEPT)
   {
     if (osp.a == 0 || nprojects == 0) init_project (TRUE);
@@ -1203,8 +1203,6 @@ G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpoi
             break;
           case 1:
             k = write_c3d_ (active_project -> coordfile, & length, & active_cell -> frac, & car_to_au);
-            break;
-          default:
             break;
         }
         if (k)

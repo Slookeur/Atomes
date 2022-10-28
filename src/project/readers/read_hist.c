@@ -164,7 +164,7 @@ int hist_get_content ()
         }
         else
         {
-          format_error (i+1, j+1, lil[l], k+j*(2+this_reader -> traj));
+          format_error (i+1, j+1, lil[2], k+j*(2+this_reader -> traj));
           res = 0;
           goto enda;
         }
@@ -249,7 +249,7 @@ int hist_get_content ()
         }
         else
         {
-          format_error (i+1, j+1, lil[l], k+j*(2+this_reader -> traj));
+          format_error (i+1, j+1, lil[2], k+j*(2+this_reader -> traj));
           res = 0;
           goto ends;
         }

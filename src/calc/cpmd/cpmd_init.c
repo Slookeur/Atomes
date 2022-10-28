@@ -1059,7 +1059,7 @@ G_MODULE_EXPORT void run_saving_qm (GtkDialog * info, gint response_id, gpointer
   int c = GPOINTER_TO_INT(data);
   gboolean result = FALSE;
   gboolean done = FALSE;
-  GtkTextBuffer * buffer;
+  GtkTextBuffer * buffer = NULL;
   GtkTextIter bStart;
   GtkTextIter bEnd;
   GError * err = NULL;

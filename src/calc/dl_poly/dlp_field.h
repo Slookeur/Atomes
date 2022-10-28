@@ -344,7 +344,7 @@ extern struct field_tethered * tmp_ftet;
 extern struct field_prop * tmp_fprop;
 extern struct field_struct * tmp_fstr;
 extern struct field_nth_body * tmp_fbody;
-extern struct field_nth_body * new_fbody;
+extern struct field_nth_body * comp_fbody;
 extern struct field_external * tmp_fext;
 
 

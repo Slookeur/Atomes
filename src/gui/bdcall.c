@@ -349,7 +349,7 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
   int j, k, l, m;
   int statusb = 0;
   int bonding = 0;
-  int * colm;
+  int * colm = NULL;
   gboolean vis_bd = active_project -> visok[BD];
 
   if (widg) bonds_update = 1;

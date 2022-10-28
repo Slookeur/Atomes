@@ -47,6 +47,7 @@ int cell_get_lattice (int format)
   char * this_word;
   int i, j, k;
   char c;
+  i = 0;
   for (c = getc(cellp); c != EOF; c = getc(cellp))  if (c == '\n') i ++;
   j = (format == 0 || format == 2) ? 1 : (format == 1) ? 2 : 3;
   k = i / j;

@@ -1848,8 +1848,8 @@ int init_vdw (gboolean init)
       }
       else
       {
-        new_fbody = init_field_nth_body (j, 0, vdw_na, vdw_ma, vdw_a);
-        tmp_fbody = new_fbody;
+        comp_fbody = init_field_nth_body (j, 0, vdw_na, vdw_ma, vdw_a);
+        tmp_fbody = comp_fbody;
       }
     }
     else

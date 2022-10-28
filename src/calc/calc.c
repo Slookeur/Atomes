@@ -196,6 +196,7 @@ void preserve_ogl_selection (glwin * view)
   int h, i, j, k, l;
   struct project * this_proj = get_project_by_id (view -> proj);
   h = view -> anim -> last -> img -> step;
+  k = 0;
   for (i=0; i<2; i++)
   {
     view -> tmp_sel[i] = duplicate_ogl_selection (view -> anim -> last -> img -> selected[i]);

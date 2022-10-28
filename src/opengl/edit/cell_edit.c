@@ -57,6 +57,10 @@ GtkWidget * cell_tab (int i, struct project * this_proj)
     default:
       return pixels_tab (this_proj);
       break;
+#else
+    default:
+      return NULL;
+      break;
 #endif
   }
 }

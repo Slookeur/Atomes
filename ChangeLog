@@ -1,3 +1,13 @@
+2022-28-10 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+         Release of version 1.1.9
+         * Bug corrections:
+		glwin.h: float shift[4], label_format[3]
+		m_poly.c: olg_clones[6] -> olg_clones[5]
+		read_bond.c: update_mol
+		edit_menu.c: cshift[i+3] -> cshift[i]
+		gui.c: cut_sel and cut_lab pointers for 3D window actions
+		dlp_atom.c: compare_non_bonded
+
 2022-27-10 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.8
          * Bug corrections:
@@ -20,7 +30,7 @@
 
 2022-10-10 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.6
-         * Bug correction: 
+         * Bug correction: :
 		w_library.c: lib_preview_plot = NULL;
          * Improvements:
 		main.c: -h

@@ -19,7 +19,7 @@ extern int oldnumv;
 extern int error_steps;
 extern gboolean * showfrag;
 extern void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
-                             gboolean * showcoord[2], gboolean * showpoly[2], gboolean update_it, gboolean update_frag);
+                             gboolean * showcoord[2], gboolean * showpoly[2], gboolean update_it, gboolean update_frag, gboolean update_mol);
 
 int read_bonding (FILE * fp)
 {
@@ -156,7 +156,7 @@ int read_bonding (FILE * fp)
     for (i=0; i<10; i++) coord -> totcoord[i] = active_project -> coord -> totcoord[i];
     active_project -> coord -> cmax = coord -> cmax;
     active_project -> coord -> cmin = coord -> cmin;
-    new_coord_menus (active_project, coord, active_project -> nspec, 0, showcoord, showpoly, TRUE, TRUE);
+    new_coord_menus (active_project, coord, active_project -> nspec, 0, showcoord, showpoly, TRUE, TRUE, TRUE);
   }
 
   return OK;

@@ -33,7 +33,7 @@ extern float val;
 extern float * val_at;
 extern void field_selection (int i, int viz, int lab, int aid);
 extern void field_unselect_all ();
-extern void compare_non_bonded (gchar * old_name, gchar * new_name);
+extern void compare_non_bonded (gchar * fatom);
 extern void init_all_impropers_inversions (int stru);
 extern void init_default_shaders (glwin * view);
 
@@ -252,8 +252,6 @@ G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_
                                              a_ato*tmp_fmol -> multi,
                                              -1,
                                              new_at);
-          gchar * old_name = g_strdup_printf ("%s", tmp_fat -> name);
-          gchar * new_name = g_strdup_printf ("%s", tmp_fbt -> next -> name);
           tmp_fbt -> next -> prev = g_malloc (sizeof*tmp_fbt -> next -> prev);
           tmp_fbt -> next -> prev = tmp_fbt;
           tmp_fmol -> atoms ++;
@@ -272,9 +270,7 @@ G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_
             clean_field_struct_list (struct_saved[k]);
           }
           // Update non bonded interactions
-          compare_non_bonded (old_name, new_name);
-          g_free (old_name);
-          g_free (new_name);
+          compare_non_bonded (tmp_fbt -> next -> name);
         }
       }
       break;
@@ -564,8 +560,6 @@ G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint
         {
           done = TRUE;
           merging_atoms (to_merge, at_to_remove, TRUE);
-          gchar * old_name = g_strdup_printf ("%s", at_to_remove -> name);
-          gchar * new_name = g_strdup_printf ("%s", to_merge -> name);
           struct field_struct * struct_saved[8];
           for (k=0; k<8; k++)
           {
@@ -604,9 +598,7 @@ G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint
             clean_field_struct_list (struct_saved[k]);
           }
           // Non-bonded interactions:
-          compare_non_bonded (old_name, new_name);
-          g_free (old_name);
-          g_free (new_name);
+          compare_non_bonded (to_merge -> name);
         }
       }
       break;
