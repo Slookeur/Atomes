@@ -1,3 +1,8 @@
+2022-04-11 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+         Release of version 1.1.10
+         * Bug correction:
+		molecules.F90: m = VOISJ(l,j,i)
+
 2022-28-10 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.9
          * Bug corrections:
@@ -30,7 +35,7 @@
 
 2022-10-10 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.6
-         * Bug correction: :
+         * Bug correction: 
 		w_library.c: lib_preview_plot = NULL;
          * Improvements:
 		main.c: -h

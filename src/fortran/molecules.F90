@@ -302,7 +302,7 @@ do i=1, NS
       goto 002
     else if (MOLCOUNTER.gt.0 .and.TOGL(j).eq.TOTMOL) then
       do l=1, CONTJ(j,i)
-        m = VOISJ(l,j,i) + (i - 1)*NA
+        m = VOISJ(l,j,i)
         if (TOGL(m).eq.0) then
           MOLCOUNTER = 0
           call SETMOL (TMPMOL, TOGL, TMBS, MOLCOUNTER, i, VOISJ(l,j,i), TOTMOL)
