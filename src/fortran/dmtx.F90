@@ -152,10 +152,11 @@ IMPLICIT NONE
 
 INTEGER, INTENT(IN) :: NP, NPS
 INTEGER :: PIA, PIB, PIC, PID
-INTEGER :: TPIXD
+INTEGER :: TPIXD, ADAPT_CUT
 DOUBLE PRECISION :: ICUT, INID
 DOUBLE PRECISION :: MPSIZE
 DOUBLE PRECISION :: TARGETDP
+DOUBLE PRECISION :: RHONUM
 
 if (.not.PBC) then
   do PIA=1, 3
@@ -204,16 +205,27 @@ enddo
 ICUT=sqrt(ICUT)
 ICUT = ICUT + 1.0d0
 ! The pixel size must be larger than the cutoff
-! If the system is large with a low density the pixel box could be too large
-! and it is impossible to allocate the required memory.
+! If the system is large with a low density the pixel box can be too big in number of pixels,
+! and it is not possible to allocate the required memory.
 ! Therefore it is required to increase the cutoff slightly to reduce the number of pixels.
 ! We need to look into the density of atoms per pixel, good target values range between 1.5 and 2.0.
+! With PBC this works providing that you do not have a large box that contains an isolated molecule,
+! That is an extremely low number density, thus we need to check that as well.
 TARGETDP=1.85d0
 MPSIZE=1.0d0
+ADAPT_CUT=2
+if (PBC) then
+! Number density
+  RHONUM=NP
+  do PIA=1, 3
+    RHONUM=RHONUM/(THE_BOX(1)%modv(PIA))
+  enddo
+  if (RHONUM .lt. 0.01) ADAPT_CUT=1
+endif
 
 ! write (6, *) "ICUT= ",ICUT,", NP= ",NP,", NPS= ",NPS
 
-do TPIXD=1, 2
+do TPIXD=1, ADAPT_CUT
 
 ! MPSIZE is the modifier
   CUTF=ICUT*MPSIZE
