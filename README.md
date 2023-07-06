@@ -57,10 +57,9 @@ to
 > GTKV = 4
 
 Here are some issues with GTK4 that cannot be sovled for the time being:
-  1. No way to use Pango markups in menus
-  2. Add widgets to menus is impossible, ex: color selections
-  3. Selection in tables is not working properly (see the `Measures` dialog: wrong lines are picked)
-  4. No way to moves lines in tables (curves and crystal builder)
+  1. Add widgets to menus is impossible, ex: color selections
+  2. Selection in tables is not working properly (see the `Measures` dialog: wrong lines are picked)
+  3. No way to moves lines in tables (curves and crystal builder)
 
 Issues 1) and 2) are the most critical so far since ***Atomes*** menus are dynamical and cannot be created by reading a basic XML file. 
 
