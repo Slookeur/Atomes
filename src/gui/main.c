@@ -637,7 +637,11 @@ int main (int argc, char *argv[])
   {
     // setlocale(LC_ALL,"en_US");
     gtk_disable_setlocale ();
+#if GLIB_MINOR_VERSION < 74
     AtomesApp = gtk_application_new (g_strdup_printf ("atomes.prog-%d", (int)clock()), G_APPLICATION_FLAGS_NONE);
+#else
+    AtomesApp = gtk_application_new (g_strdup_printf ("atomes.prog-%d", (int)clock()), G_APPLICATION_DEFAULT_FLAGS);
+#endif
     g_signal_connect (G_OBJECT(AtomesApp), "activate", G_CALLBACK(run_program), NULL);
     int status = g_application_run (G_APPLICATION (AtomesApp), 0, NULL);
     g_object_unref (AtomesApp);

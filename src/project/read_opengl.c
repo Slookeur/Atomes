@@ -16,9 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "initcoord.h"
 
-extern int ogladvb;
-extern int read_volumes;
-
 int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 {
   if (fread (& this_proj -> atoms[s][a].id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -379,21 +376,14 @@ int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int s
     }
     else
     {
-      if (! ogladvb)
+      if (fread (& j, sizeof(int), 1, fp) != 1) return ERROR_RW;
+      if (j)
       {
-        if (fread (& j, sizeof(int), 1, fp) != 1) return ERROR_RW;
-        if (j)
+        if (j != this_proj -> coord -> totcoord[i])
         {
-          if (j != this_proj -> coord -> totcoord[i])
-          {
-            g_warning ("READING OPENGL:: this should not happen !\n i= %d, totcoord[i]= %d, j= %d", i, this_proj -> coord -> totcoord[i], j);
-            return ERROR_RW;
-          }
-          if (fread (img -> spcolor[i][0], sizeof(ColRGBA), this_proj -> coord -> totcoord[i], fp) != this_proj -> coord -> totcoord[i]) return ERROR_RW;
+          g_warning ("READING OPENGL:: this should not happen !\n i= %d, totcoord[i]= %d, j= %d", i, this_proj -> coord -> totcoord[i], j);
+          return ERROR_RW;
         }
-      }
-      else if (active_glwin -> adv_bonding[i-2] && this_proj -> coord -> totcoord[i])
-      {
         if (fread (img -> spcolor[i][0], sizeof(ColRGBA), this_proj -> coord -> totcoord[i], fp) != this_proj -> coord -> totcoord[i]) return ERROR_RW;
       }
     }
@@ -415,28 +405,52 @@ int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int s
      if (read_rings_chains_data (fp, this_proj -> modelgl, 1, 0, this_proj -> csparam[5], this_proj -> steps) != OK) return ERROR_CHAINS;
   }
 
-  if (read_volumes)
+  if (fread (& i, sizeof(int), 1, fp) != 1) return ERROR_RW;
+  if (i)
   {
+    this_proj -> modelgl -> create_shaders[VOLMS] = TRUE;
+    this_proj -> modelgl -> volumes = TRUE;
+    for (i=0; i<FILLED_STYLES; i++)
+    {
+      this_proj -> modelgl -> atoms_volume[i] = allocdouble (this_proj -> steps);
+      this_proj -> modelgl -> atoms_ppvolume[i] = allocdouble (this_proj -> steps);
+      if (fread (this_proj -> modelgl -> atoms_volume[i], sizeof(double), this_proj -> steps, fp) != this_proj -> steps) return ERROR_RW;
+      if (fread (this_proj -> modelgl -> atoms_ppvolume[i], sizeof(double), this_proj -> steps, fp) != this_proj -> steps) return ERROR_RW;
+      this_proj -> modelgl -> volume_box[i] = allocddouble (this_proj -> steps, 9);
+      for (j=0; j<this_proj -> steps; j++)
+      {
+        if (fread (this_proj -> modelgl -> volume_box[i][j], sizeof(double), 9, fp) != 9) return ERROR_RW;
+      }
+    }
+    if (fread (this_proj -> modelgl -> comp_vol, sizeof(gboolean), FILLED_STYLES, fp) != FILLED_STYLES) return ERROR_RW;
+    if (fread (active_image -> show_vol, sizeof(gboolean), FILLED_STYLES, fp) != FILLED_STYLES) return ERROR_RW;
+    if (fread (active_image -> vol_col, sizeof(ColRGBA), FILLED_STYLES, fp) != FILLED_STYLES) return ERROR_RW;
     if (fread (& i, sizeof(int), 1, fp) != 1) return ERROR_RW;
     if (i)
     {
-      this_proj -> modelgl -> create_shaders[VOLMS] = TRUE;
-      this_proj -> modelgl -> volumes = TRUE;
-      for (i=0; i<FILLED_STYLES; i++)
+      for (j=0; j<FILLED_STYLES; j++)
       {
-        this_proj -> modelgl -> atoms_volume[i] = allocdouble (this_proj -> steps);
-        this_proj -> modelgl -> atoms_ppvolume[i] = allocdouble (this_proj -> steps);
-        if (fread (this_proj -> modelgl -> atoms_volume[i], sizeof(double), this_proj -> steps, fp) != this_proj -> steps) return ERROR_RW;
-        if (fread (this_proj -> modelgl -> atoms_ppvolume[i], sizeof(double), this_proj -> steps, fp) != this_proj -> steps) return ERROR_RW;
-        this_proj -> modelgl -> volume_box[i] = allocddouble (this_proj -> steps, 9);
-        for (j=0; j<this_proj -> steps; j++)
+        if (fread (& k, sizeof(int), 1, fp) != 1) return ERROR_RW;
+        if (k)
         {
-          if (fread (this_proj -> modelgl -> volume_box[i][j], sizeof(double), 9, fp) != 9) return ERROR_RW;
+          this_proj -> modelgl -> frag_mol_volume[0][j] = allocddouble (this_proj -> steps, i);
+          this_proj -> modelgl -> frag_mol_ppvolume[0][j] = allocddouble (this_proj -> steps, i);
+          this_proj -> modelgl -> fm_comp_vol[0][j] = allocdbool (this_proj -> steps, i);
+          active_image -> fm_show_vol[0][j] = allocbool (i);
+          this_proj -> modelgl -> frag_box[j] = alloctdouble (this_proj -> steps, i, 9);
+          for (l=0; l<k; l++)
+          {
+            if (fread (& m, sizeof(int), 1, fp) != 1) return ERROR_RW;
+            if (fread (& n, sizeof(int), 1, fp) != 1) return ERROR_RW;
+            if (fread (& this_proj -> modelgl -> frag_mol_ppvolume[0][j][m][n], sizeof(double), 1, fp) != 1) return ERROR_RW;
+            if (fread (this_proj -> modelgl -> frag_box[j][m][n], sizeof(double), 9, fp) != 9) return ERROR_RW;
+            this_proj -> modelgl -> fm_comp_vol[0][j][m][n] = TRUE;
+          }
+          active_image -> fm_vol_col[0][j] = g_malloc0 (i*sizeof*active_image -> fm_vol_col[0][j]);
+          if (fread (active_image -> fm_show_vol[0][j], sizeof(gboolean), i, fp) != i) return ERROR_RW;
+          if (fread (active_image -> fm_vol_col[0][j], sizeof(ColRGBA), i, fp) != i) return ERROR_RW;
         }
       }
-      if (fread (this_proj -> modelgl -> comp_vol, sizeof(gboolean), FILLED_STYLES, fp) != FILLED_STYLES) return ERROR_RW;
-      if (fread (active_image -> show_vol, sizeof(gboolean), FILLED_STYLES, fp) != FILLED_STYLES) return ERROR_RW;
-      if (fread (active_image -> vol_col, sizeof(ColRGBA), FILLED_STYLES, fp) != FILLED_STYLES) return ERROR_RW;
       if (fread (& i, sizeof(int), 1, fp) != 1) return ERROR_RW;
       if (i)
       {
@@ -445,52 +459,26 @@ int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int s
           if (fread (& k, sizeof(int), 1, fp) != 1) return ERROR_RW;
           if (k)
           {
-            this_proj -> modelgl -> frag_mol_volume[0][j] = allocddouble (this_proj -> steps, i);
-            this_proj -> modelgl -> frag_mol_ppvolume[0][j] = allocddouble (this_proj -> steps, i);
-            this_proj -> modelgl -> fm_comp_vol[0][j] = allocdbool (this_proj -> steps, i);
-            active_image -> fm_show_vol[0][j] = allocbool (i);
-            this_proj -> modelgl -> frag_box[j] = alloctdouble (this_proj -> steps, i, 9);
+            this_proj -> modelgl -> frag_mol_volume[1][j] = allocddouble (this_proj -> steps, i);
+            this_proj -> modelgl -> frag_mol_ppvolume[1][j] = allocddouble (this_proj -> steps, i);
+            this_proj -> modelgl -> fm_comp_vol[1][j] = allocdbool (this_proj -> steps, i);
+            active_image -> fm_show_vol[1][j] = allocbool (i);
             for (l=0; l<k; l++)
             {
               if (fread (& m, sizeof(int), 1, fp) != 1) return ERROR_RW;
               if (fread (& n, sizeof(int), 1, fp) != 1) return ERROR_RW;
-              if (fread (& this_proj -> modelgl -> frag_mol_ppvolume[0][j][m][n], sizeof(double), 1, fp) != 1) return ERROR_RW;
-              if (fread (this_proj -> modelgl -> frag_box[j][m][n], sizeof(double), 9, fp) != 9) return ERROR_RW;
-              this_proj -> modelgl -> fm_comp_vol[0][j][m][n] = TRUE;
+              if (fread (& this_proj -> modelgl -> frag_mol_ppvolume[1][j][m][n], sizeof(double), 1, fp) != 1) return ERROR_RW;
+              this_proj -> modelgl -> fm_comp_vol[1][j][m][n] = TRUE;
             }
-            active_image -> fm_vol_col[0][j] = g_malloc0 (i*sizeof*active_image -> fm_vol_col[0][j]);
-            if (fread (active_image -> fm_show_vol[0][j], sizeof(gboolean), i, fp) != i) return ERROR_RW;
-            if (fread (active_image -> fm_vol_col[0][j], sizeof(ColRGBA), i, fp) != i) return ERROR_RW;
-          }
-        }
-        if (fread (& i, sizeof(int), 1, fp) != 1) return ERROR_RW;
-        if (i)
-        {
-          for (j=0; j<FILLED_STYLES; j++)
-          {
-            if (fread (& k, sizeof(int), 1, fp) != 1) return ERROR_RW;
-            if (k)
-            {
-              this_proj -> modelgl -> frag_mol_volume[1][j] = allocddouble (this_proj -> steps, i);
-              this_proj -> modelgl -> frag_mol_ppvolume[1][j] = allocddouble (this_proj -> steps, i);
-              this_proj -> modelgl -> fm_comp_vol[1][j] = allocdbool (this_proj -> steps, i);
-              active_image -> fm_show_vol[1][j] = allocbool (i);
-              for (l=0; l<k; l++)
-              {
-                if (fread (& m, sizeof(int), 1, fp) != 1) return ERROR_RW;
-                if (fread (& n, sizeof(int), 1, fp) != 1) return ERROR_RW;
-                if (fread (& this_proj -> modelgl -> frag_mol_ppvolume[1][j][m][n], sizeof(double), 1, fp) != 1) return ERROR_RW;
-                this_proj -> modelgl -> fm_comp_vol[1][j][m][n] = TRUE;
-              }
-              if (fread (active_image -> fm_show_vol[1][j], sizeof(gboolean), i, fp) != i) return ERROR_RW;
-              active_image -> fm_vol_col[1][j] = g_malloc0 (i*sizeof*active_image -> fm_vol_col[1][j]);
-              if (fread (active_image -> fm_vol_col[1][j], sizeof(ColRGBA), i, fp) != i) return ERROR_RW;
-            }
+            if (fread (active_image -> fm_show_vol[1][j], sizeof(gboolean), i, fp) != i) return ERROR_RW;
+            active_image -> fm_vol_col[1][j] = g_malloc0 (i*sizeof*active_image -> fm_vol_col[1][j]);
+            if (fread (active_image -> fm_vol_col[1][j], sizeof(ColRGBA), i, fp) != i) return ERROR_RW;
           }
         }
       }
     }
   }
+
   for (i=0; i<this_proj -> steps; i++)
   {
     for (j=0; j< this_proj -> natomes; j++)

@@ -15,8 +15,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "project.h"
 #include "glview.h"
 
-extern int oldnumv;
-extern int error_steps;
 extern gboolean * showfrag;
 extern void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
                              gboolean * showcoord[2], gboolean * showpoly[2], gboolean update_it, gboolean update_frag, gboolean update_mol);
@@ -29,15 +27,7 @@ int read_bonding (FILE * fp)
   coord -> species = active_project -> nspec;
   image * img = active_glwin -> anim -> last -> img;
   gboolean read_bond = FALSE;
-  if (oldnumv && (! active_glwin -> bonding || ! active_glwin -> adv_bonding[1] || active_project -> natomes > 50000 || active_project -> natomes > STEP_LIMIT))
-  {
-    read_bond = TRUE;
-  }
-  else if (error_steps && (! active_glwin -> bonding || ! active_glwin -> adv_bonding[1] || active_project -> natomes > ATOM_LIMIT || active_project -> natomes > STEP_LIMIT))
-  {
-    read_bond = TRUE;
-  }
-  else if (! active_glwin -> bonding || ! active_glwin -> adv_bonding[1] || active_project -> natomes > ATOM_LIMIT || active_project -> steps > STEP_LIMIT)
+  if (! active_glwin -> bonding || ! active_glwin -> adv_bonding[1] || active_project -> natomes > ATOM_LIMIT || active_project -> steps > STEP_LIMIT)
   {
     read_bond = TRUE;
   }
@@ -50,14 +40,11 @@ int read_bonding (FILE * fp)
       for (j=0; j<active_project -> natomes; j++)
       {
         if (fread (active_project -> atoms[i][j].coord, sizeof(int), 5, fp) != 5) return ERROR_COORD;
-        if (! oldnumv)
+        if (fread (& active_project -> atoms[i][j].numv, sizeof(int), 1, fp) != 1) return ERROR_COORD;
+        if (active_project -> atoms[i][j].numv)
         {
-          if (fread (& active_project -> atoms[i][j].numv, sizeof(int), 1, fp) != 1) return ERROR_COORD;
-          if (active_project -> atoms[i][j].numv)
-          {
-            active_project -> atoms[i][j].vois = allocint(active_project -> atoms[i][j].numv);
-            if (fread (active_project -> atoms[i][j].vois, sizeof(int), active_project -> atoms[i][j].numv, fp) != active_project -> atoms[i][j].numv) return ERROR_COORD;
-          }
+          active_project -> atoms[i][j].vois = allocint(active_project -> atoms[i][j].numv);
+          if (fread (active_project -> atoms[i][j].vois, sizeof(int), active_project -> atoms[i][j].numv, fp) != active_project -> atoms[i][j].numv) return ERROR_COORD;
         }
       }
       if (fread (active_glwin -> bonds[i], sizeof(int), 2, fp) != 2) return ERROR_COORD;
@@ -142,8 +129,7 @@ int read_bonding (FILE * fp)
     }
   }
 
-  if ((error_steps && (! active_glwin -> bonding || ! active_glwin -> adv_bonding[1] || active_project -> natomes > ATOM_LIMIT || active_project -> natomes > STEP_LIMIT))
-      || (! active_glwin -> bonding || ! active_glwin -> adv_bonding[1] || active_project -> natomes > ATOM_LIMIT || active_project -> steps > STEP_LIMIT))
+  if (! active_glwin -> bonding || ! active_glwin -> adv_bonding[1] || active_project -> natomes > ATOM_LIMIT || active_project -> steps > STEP_LIMIT)
   {
     showfrag = duplicate_bool (active_project -> coord -> totcoord[2], img -> show_coord[2]);
     gboolean * showcoord[2];

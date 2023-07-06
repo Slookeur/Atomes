@@ -211,13 +211,43 @@ void add_widget_gesture_and_key_action (GtkWidget * widget,
 }
 #endif
 
+#ifdef GTK3
+void gtk_window_change_gdk_visual (GtkWidget * win)
+{
+  // GTK+ > 3.15.1 uses an X11 visual optimized for GTK+'s OpenGL stuff
+  // since revid dae447728d: https://github.com/GNOME/gtk/commit/dae447728d
+  // However, in some cases it simply cannot start an OpenGL context.
+  // This changes to the default X11 visual instead the GTK's default.
+  GdkScreen * screen = gdk_screen_get_default ();
+  GList * visuals = gdk_screen_list_visuals (screen);
+  // printf("n visuals: %u\n", g_list_length(visuals));
+  GdkX11Screen* x11_screen = GDK_X11_SCREEN (screen);
+  g_assert (x11_screen != NULL);
+  Visual * default_xvisual = DefaultVisual (GDK_SCREEN_XDISPLAY(x11_screen), GDK_SCREEN_XNUMBER(x11_screen));
+  GdkVisual * default_visual = NULL;
+  // int i = 0;
+  while (visuals != NULL)
+  {
+    GdkVisual * visual = GDK_X11_VISUAL (visuals -> data);
+    if (default_xvisual -> visualid == gdk_x11_visual_get_xvisual(GDK_X11_VISUAL (visuals -> data)) -> visualid)
+    {
+      // printf("Default visual %d\n", i);
+      default_visual = visual;
+    }
+    // i++;
+    visuals = visuals -> next;
+  }
+  gtk_widget_set_visual(GTK_WIDGET(win), default_visual);
+}
+#endif
+
 GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolean resiz)
 {
   GtkWidget * win;
   win = new_gtk_window ();
   gtk_window_set_title (GTK_WINDOW(win), prepare_for_title(str));
   gtk_window_set_resizable (GTK_WINDOW (win), TRUE);
-#ifndef GTK4
+#ifdef GTK3
   gtk_window_set_attached_to (GTK_WINDOW (win), parent);
   gtk_window_set_icon (GTK_WINDOW (win), THETD);
 #endif
@@ -258,6 +288,7 @@ GtkWidget * dialogmodal (gchar * str, GtkWindow * parent)
   return win;
 }
 
+#ifdef GTK3
 GtkWidget * message_popover (gchar * message, GtkWidget * parent)
 {
   GtkWidget * popover = gtk_popover_new (parent);
@@ -268,6 +299,7 @@ GtkWidget * message_popover (gchar * message, GtkWidget * parent)
   gtk_container_set_border_width (GTK_CONTAINER (popover), 6);
   return popover;
 }
+#endif
 
 GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType mtype, GtkButtonsType buttons, GtkWidget * parent)
 {

@@ -85,50 +85,20 @@ void alloc_proj_data (struct project * this_proj, int cid)
   allocatoms (this_proj);
 }
 
-int ogladvb;
-int oldnumv;
-int error_steps;
-int read_volumes;
-
 int open_project (FILE * fp, int pid)
 {
-  int i, j, k, l, m;
+  int i, j, k;
   gchar * ver;
   // First 2 lines for compatibility issues
   if (fread (& i, sizeof(int), 1, fp) != 1) return ERROR_PROJECT;
   ver = g_malloc0 (i*sizeof*ver);
   if (fread (ver, sizeof(char), i, fp) != i) return ERROR_PROJECT;
-  int oldring;
-  oldnumv = 0;
-  int read_tunit = 1;
-  int read_spherical = 1;
-  read_volumes = 1;
-  ogladvb = oldring = error_steps = 0;
+
   // test on ver for version
-  if (g_strcmp0(ver, "%\n% project file v-2.0\n%\n") == 0)
+  /*if (g_strcmp0(ver, "%\n% project file v-2.5\n%\n") == 0)
   {
-    ogladvb = oldring = oldnumv = error_steps = 1;
-    read_spherical = read_tunit = read_volumes = 0;
-  }
-  else if (g_strcmp0(ver, "%\n% project file v-2.1\n%\n") == 0)
-  {
-    oldnumv = error_steps = 1;
-    read_spherical = read_tunit = read_volumes = 0;
-  }
-  else if (g_strcmp0(ver, "%\n% project file v-2.2\n%\n") == 0)
-  {
-    oldnumv = error_steps = 1;
-    read_volumes = 0;
-  }
-  else if (g_strcmp0(ver, "%\n% project file v-2.3\n%\n") == 0)
-  {
-    error_steps = 1;
-    read_volumes = 0;
-  }
-  else if (g_strcmp0(ver, "%\n% project file v-2.4\n%\n") == 0)
-  {
-    read_volumes = 0;
-  }
+  }*/
+
  #ifdef DEBUG
   g_debug ("%s", ver);
  #endif // DEBUG
@@ -196,23 +166,7 @@ int open_project (FILE * fp, int pid)
   if (fread (active_project -> rsearch, sizeof(int), 2, fp) != 2) return ERROR_PROJECT;
   for (i=0; i<5; i++)
   {
-    if (oldring)
-    {
-      if (fread (active_project -> rsparam[i], sizeof(int), 5, fp) != 5) return ERROR_PROJECT;
-      j = active_project -> rsparam[i][1];
-      k = active_project -> rsparam[i][2];
-      l = active_project -> rsparam[i][3];
-      m = active_project -> rsparam[i][4];
-      active_project -> rsparam[i][1] = l;
-      active_project -> rsparam[i][2] = j;
-      active_project -> rsparam[i][3] = k;
-      active_project -> rsparam[i][4] = 0;
-      active_project -> rsparam[i][5] = m;
-    }
-    else
-    {
-      if (fread (active_project -> rsparam[i], sizeof(int), 6, fp) != 6) return ERROR_PROJECT;
-    }
+    if (fread (active_project -> rsparam[i], sizeof(int), 6, fp) != 6) return ERROR_PROJECT;
     if (fread (active_project -> rsdata[i], sizeof(double), 5, fp) != 5) return ERROR_PROJECT;
   }
   if (fread (& active_project -> csearch, sizeof(int), 1, fp) != 1) return ERROR_PROJECT;
@@ -220,7 +174,7 @@ int open_project (FILE * fp, int pid)
   if (fread (active_project -> csdata, sizeof(double), 2, fp) != 2) return ERROR_PROJECT;
   if (fread (active_project -> min, sizeof(double), NGRAPHS, fp) != NGRAPHS) return ERROR_PROJECT;
   if (fread (active_project -> max, sizeof(double), NGRAPHS, fp) != NGRAPHS) return ERROR_PROJECT;
-  if (read_tunit) if (fread (& active_project -> tunit, sizeof(int), 1, fp) != 1) return ERROR_PROJECT;
+  if (fread (& active_project -> tunit, sizeof(int), 1, fp) != 1) return ERROR_PROJECT;
   if (active_project -> natomes != 0 && active_project -> nspec != 0)
   {
     alloc_proj_data (active_project, 1);
@@ -269,10 +223,7 @@ int open_project (FILE * fp, int pid)
         if (i != 0)
         {
           j = 0;
-          if (read_spherical)
-          {
-            if (fread (& j, sizeof(int), 1, fp) != 1) return ERROR_PROJECT;
-          }
+          if (fread (& j, sizeof(int), 1, fp) != 1) return ERROR_PROJECT;
           if (j)
           {
             active_project -> numc[SP] = j;

@@ -1203,15 +1203,50 @@ void glwin_init_spec_data (struct project * this_proj, int nspec)
   for (i=0; i<nspec; i++) this_proj -> coord -> partial_geo[i] = NULL;
 }
 
-#ifdef GTKGLAREA
-G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data)
-#else
-G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
-#endif
+void init_glwin (glwin * view)
 {
+  struct project * this_proj = get_project_by_id(view -> proj);    // Have to be the active project
+  view -> anim = g_malloc0 (sizeof*view -> anim);
+  struct snapshot * snap = g_malloc0 (sizeof*snap);
+  view -> anim -> first = snap;
+  view -> anim -> last = snap;
+  init_img (this_proj);
+  init_camera (this_proj, FALSE);
+  view -> mouseStatus = RELEASED;
+  view -> mouseAction = ANALYZE;
+  // Warning, if not centered at start-up, dmtx could fail
+  if (! this_proj -> cell.crystal) center_molecule (this_proj);
+
+  view -> bonds = allocdint (this_proj -> steps, 2);
+  view -> bondid = g_malloc0 (this_proj -> steps*sizeof*view -> bondid);
+  view -> clones = g_malloc0 (this_proj -> steps*sizeof*view -> clones);
   int i;
-  glwin * view = (glwin *)data;
-#ifdef GTKGLAREA
+  for (i=0; i < this_proj -> steps; i++)
+  {
+    view -> bondid[i] = g_malloc0 (2*sizeof*view -> bondid[i]);
+    view -> clones[i] = NULL;
+  }
+
+  // Data that depends on the number of chemical species
+  glwin_init_spec_data (this_proj, (this_proj -> nspec) ? this_proj -> nspec : 1);
+
+  view -> stop = TRUE;
+  view -> speed = 100;
+  view -> zoom_factor = ZOOM_FACTOR;
+  view -> mode = ANALYZE;
+  view -> selection_mode = ATOMS;
+  view -> rebuild[0][0] = view -> rebuild[1][0] = (this_proj -> steps > 1) ? FALSE : TRUE;
+  view -> init = TRUE;
+  init_opengl (view);
+  init_shaders (view);
+  this_proj -> initgl = TRUE;
+#ifdef GTK4
+  update_menu_bar (view);
+#endif
+}
+
+GError * init_gtk_gl_area (GtkGLArea * area)
+{
   if (area == NULL)
   {
     area = (GtkGLArea *)gtk_gl_area_new ();
@@ -1222,7 +1257,20 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
   }
   gtk_gl_area_set_has_depth_buffer (area, TRUE);
   gtk_gl_area_set_has_stencil_buffer (area, TRUE);
-  if (gtk_gl_area_get_error (area) == NULL)
+  return gtk_gl_area_get_error (area);
+}
+
+#ifdef GTKGLAREA
+G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data)
+#else
+G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
+#endif
+{
+  glwin * view = (glwin *)data;
+  GError * err;
+#ifdef GTKGLAREA
+  err = init_gtk_gl_area (area);
+  if (err == NULL)
   {
 #else
   GdkWindow * xwin = gtk_widget_get_window (view -> plot);
@@ -1240,50 +1288,32 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
   if (glXMakeCurrent (GDK_WINDOW_XDISPLAY (xwin), GDK_WINDOW_XID (xwin), view -> glcontext))
   {
 #endif
-    struct project * this_proj = get_project_by_id(view -> proj);    // Have to be the active project
-    view -> anim = g_malloc0 (sizeof*view -> anim);
-    struct snapshot * snap = g_malloc0 (sizeof*snap);
-    view -> anim -> first = snap;
-    view -> anim -> last = snap;
-    init_img (this_proj);
-    init_camera (this_proj, FALSE);
-
-    view -> mouseStatus = RELEASED;
-    view -> mouseAction = ANALYZE;
-
-    // Warning, if not centered at start-up, dmtx could fail
-    if (! this_proj -> cell.crystal) center_molecule (this_proj);
-
-    view -> bonds = allocdint (this_proj -> steps, 2);
-    view -> bondid = g_malloc0 (this_proj -> steps*sizeof*view -> bondid);
-    view -> clones = g_malloc0 (this_proj -> steps*sizeof*view -> clones);
-    for (i=0; i < this_proj -> steps; i++)
-    {
-      view -> bondid[i] = g_malloc0 (2*sizeof*view -> bondid[i]);
-      view -> clones[i] = NULL;
-    }
-
-    // Data that depends on the number of chemical species
-    glwin_init_spec_data (this_proj, (this_proj -> nspec) ? this_proj -> nspec : 1);
-
-    view -> stop = TRUE;
-    view -> speed = 100;
-    view -> zoom_factor = ZOOM_FACTOR;
-    view -> mode = ANALYZE;
-    view -> selection_mode = ATOMS;
-    view -> rebuild[0][0] = view -> rebuild[1][0] = (this_proj -> steps > 1) ? FALSE : TRUE;
-    view -> init = TRUE;
-    init_opengl (view);
-    init_shaders (view);
-    this_proj -> initgl = TRUE;
-#ifdef GTK4
-    update_menu_bar (view);
-#endif
+    init_glwin (view);
   }
   else
   {
-    show_error ("Impossible to initialize the OpenGL 3D rendering !", 0, MainWindow);
-    destroy_this_widget (view -> plot);
+#ifdef GTK3
+#ifdef GTKGLAREA
+    gtk_window_change_gdk_visual (view -> win);
+    err = init_gtk_gl_area (area);
+    if (err == NULL)
+    {
+      init_glwin (view);
+    }
+    else
+    {
+#endif
+#endif
+      gchar * errm = g_strdup_printf ("Impossible to initialize the OpenGL 3D rendering ! \n %s\n", err -> message);
+      g_error_free (err);
+      show_error (errm, 0, MainWindow);
+      g_free (errm);
+      destroy_this_widget (view -> plot);
+#ifdef GTK3
+#ifdef GTKGLAREA
+    }
+#endif
+#endif
     //quit_gtk();
   }
 }

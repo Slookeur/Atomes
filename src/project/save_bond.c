@@ -16,14 +16,11 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "initcoord.h"
 
-extern int error_steps;
-
 int save_bonding (FILE * fp, struct project * this_proj)
 {
   int i, j, k;
   image * img = this_proj -> modelgl -> anim -> last -> img;
-  if ((error_steps && (! this_proj -> modelgl -> bonding || ! this_proj -> modelgl -> adv_bonding[1] || active_project -> natomes > ATOM_LIMIT || active_project -> natomes > STEP_LIMIT))
-      || (!this_proj -> modelgl -> bonding || ! this_proj -> modelgl -> adv_bonding[1] || active_project -> natomes > ATOM_LIMIT || active_project -> steps > STEP_LIMIT))
+  if (! this_proj -> modelgl -> bonding || ! this_proj -> modelgl -> adv_bonding[1] || this_proj -> natomes > ATOM_LIMIT || this_proj -> steps > STEP_LIMIT)
   {
     for (i=0; i<this_proj -> steps; i++)
     {

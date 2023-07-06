@@ -36,7 +36,6 @@ int measures_drawing;
 struct selatom * tmp_a, * tmp_b, * tmp_c, * tmp_d;
 struct atom * ta, * tb, * tc, * td, * te, * tf;
 struct distance dist_ba, dist_bc;
-struct angle theta, alpha, beta;
 int * shift;
 double dist;
 
