@@ -584,38 +584,45 @@ void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path)
 }
 
 #ifdef GTK4
-G_MODULE_EXPORT gboolean on_update_press_event (GtkWidget * widget, GdkEvent * event, gpointer data)
+void ff_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
+#else
+void ff_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
+#endif
 {
-
-  if (gdk_event_get_event_type (event) == GDK_BUTTON_PRESS)
+  if (event_type == GDK_BUTTON_PRESS)
   {
     GtkTreePath * path;
     GtkTreeViewColumn * column;
     int i, j;
-    double x, y;
-    gdk_event_get_position (event, & x, & y);
-    gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW(widget), x, y, & path, & column, & i, & j);
+#ifdef GTK4
+    int e_x, e_y;
+    gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW(update_tree), event_x, event_y, & e_x, & e_y);
+    gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW(update_tree), e_x, e_y, & path, & column, & i, & j);
+#else
+    gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW(update_tree), event_x, event_y, & path, & column, & i, & j);
+#endif
     if (path != NULL)
     {
-      get_update_tree_data (widget, data, path);
+      get_update_tree_data (update_tree, data, path);
     }
   }
-  return FALSE;
+}
+
+#ifdef GTK4
+G_MODULE_EXPORT void on_ff_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
+{
+  ff_button_event (x, y, gtk_gesture_single_get_current_button ((GtkGestureSingle * )gesture), GDK_BUTTON_PRESS, gtk_event_controller_get_current_event_time((GtkEventController *)gesture), data);
+}
+
+G_MODULE_EXPORT void on_ff_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
+{
+  ff_button_event (x, y, gtk_gesture_single_get_current_button ((GtkGestureSingle * )gesture), GDK_BUTTON_RELEASE, gtk_event_controller_get_current_event_time((GtkEventController *)gesture), data);
 }
 #else
-G_MODULE_EXPORT gboolean on_update_press_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
+G_MODULE_EXPORT gboolean on_ff_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
-  if (event-> type == GDK_BUTTON_PRESS)
-  {
-    GtkTreePath * path;
-    GtkTreeViewColumn * column;
-    int i, j;
-    gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW(widget), event -> x, event -> y, & path, & column, & i, & j);
-    if (path != NULL)
-    {
-      get_update_tree_data (widget, data, path);
-    }
-  }
+  GdkEventButton * bevent = (GdkEventButton *)event;
+  ff_button_event (event, bevent -> x, bevent -> y, bevent -> button, bevent -> type, bevent -> time, data);
   return FALSE;
 }
 #endif
@@ -742,7 +749,14 @@ GtkWidget * create_update_tree ()
   g_object_unref (update_model);
   GtkTreeSelection * update_select = gtk_tree_view_get_selection (GTK_TREE_VIEW(update_tree));
   gtk_tree_selection_set_mode (update_select, GTK_SELECTION_SINGLE);
-  g_signal_connect (G_OBJECT(update_tree), "button_press_event", G_CALLBACK(on_update_press_event), NULL);
+#ifdef GTK4
+  add_widget_gesture_and_key_action (update_tree, "ff-button-pressed", G_CALLBACK(on_ff_button_pressed), NULL,
+                                                  "ff-button-released", G_CALLBACK(on_ff_button_released), NULL,
+                                                  NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+#else
+  g_signal_connect (G_OBJECT(update_tree), "button_press_event", G_CALLBACK(on_ff_button_event), NULL);
+#endif
   return update_tree;
 }
 

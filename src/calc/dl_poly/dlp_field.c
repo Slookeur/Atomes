@@ -2656,7 +2656,13 @@ void field_button_event (GdkEvent * event, double event_x, double event_y, guint
     GtkTreeViewColumn * column;
     int i, j, k;
     i = GPOINTER_TO_INT(data);
+#ifdef GTK4
+    int e_x, e_y;
+    gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW(field_tree[i]), event_x, event_y, & e_x, & e_y);
+    gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW(field_tree[i]), e_x, e_y, & path, & column, & j, & k);
+#else
     gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW(field_tree[i]), event_x, event_y, & path, & column, & j, & k);
+#endif
     if (path != NULL)
     {
       row_id = get_field_tree_data (field_tree[i], i, path);

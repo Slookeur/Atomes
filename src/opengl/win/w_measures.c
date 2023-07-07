@@ -271,13 +271,18 @@ G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event
     GtkTreePath * path;
     GtkTreeViewColumn * column;
     int i, j;
+#ifdef GTK4
+    int e_x, e_y;
+    gtk_tree_view_convert_widget_to_bin_window_coords (GTK_TREE_VIEW(widget), event_x, event_y, & e_x, & e_y);
+    if (gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW(widget), e_x, e_y, & path, & column, & i, & j))
+#else
     if (gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW(widget), event_x, event_y, & path, & column, & i, & j))
+#endif
     {
       GtkTreeIter row;
       if (gtk_tree_model_get_iter (measure_model, & row, path))
       {
         gtk_tree_model_get (measure_model, & row, 0, & j, -1);
-        g_debug ("Measure tree event:: j= %d", j);
         // select bonds, angles or dihedraks:
         switch (dat -> c)
         {
