@@ -56,11 +56,10 @@ to
 
 > GTKV = 4
 
-Here are some issues with GTK4 that cannot be sovled for the time being:
-  1. Add widgets to menus is impossible, ex: color selections
-  2. No way to moves lines in tables (curves and crystal builder)
+Here is an issue with GTK4 that cannot be sovled for the time being:
 
-Issues 1) and 2) are the most critical so far since ***Atomes*** menus are dynamical and cannot be created by reading a basic XML file. 
+  Add widgets to menus is impossible, ex: color selections
+  This is required since ***Atomes*** menus are dynamical and cannot be created by reading a basic XML file. 
 
 #### Building the serial version of ***Atomes***
 
