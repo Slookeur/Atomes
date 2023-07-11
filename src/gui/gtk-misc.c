@@ -46,6 +46,7 @@ void add_container_child (int type, GtkWidget * widg, GtkWidget * child)
       gtk_window_set_child ((GtkWindow *)widg, child);
       break;
     case CONTAINER_SCR:
+      // Bug in the management of scrolled window child
       gtk_scrolled_window_set_child ((GtkScrolledWindow *)widg, NULL);
       gtk_scrolled_window_set_child ((GtkScrolledWindow *)widg, child);
       break;

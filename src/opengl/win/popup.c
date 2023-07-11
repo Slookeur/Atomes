@@ -2575,7 +2575,7 @@ GtkWidget * selection_menu (glwin * view, int ai, int bi, int ac, int id,
       }
       else
       {
-        strb = g_strdup_printf ("act-all-%d-%d", aid, id);
+        strb = g_strdup_printf ("act-all-%d-%d", aid, id+k);
         append_opengl_item (view, menu, mot[j][i], strb, 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(select_action_for_all), GINT_TO_POINTER(id+k), FALSE, FALSE, FALSE, TRUE);
         g_free (strb);
       }
