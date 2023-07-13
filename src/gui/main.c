@@ -425,7 +425,7 @@ G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
   }
   else
   {
-    g_timeout_add_seconds (2, destroy_func, isplash);
+    g_timeout_add_seconds (1, destroy_func, isplash);
   }
   char * closure = "Starting Atomes <b>demo</b> version:\n"
                    "\n"

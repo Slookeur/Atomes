@@ -1831,7 +1831,7 @@ G_MODULE_EXPORT void changed_energy_unit (GtkComboBox * box, gpointer data)
                                                          GTK_DIALOG_MODAL, "Yes", GTK_RESPONSE_YES, "No", GTK_RESPONSE_NO, NULL);
       gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
       GtkWidget * vbox = dialog_get_content_area (dialog);
-      add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label("Change the energy unit ?\nThe value of all field parameters that are energy related (listed bellow) will be scaled accordingly.", -1, -1, 0.5, 0.5), FALSE, FALSE, 0);
+      add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label("Change the energy unit ?\nThe value of all field parameters that are energy related (listed below) will be scaled accordingly.", -1, -1, 0.5, 0.5), FALSE, FALSE, 0);
       add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label("List of energy related parameters in your FIELD file:\n", -1, -1, 0.5, 0.5), FALSE, FALSE, 0);
       GtkWidget * hbox;
       GtkWidget * vbax, * vbbx;

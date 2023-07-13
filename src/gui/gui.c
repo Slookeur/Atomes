@@ -95,11 +95,9 @@ void view_buffer (GtkTextBuffer * buffer)
   }
   if (add) gtk_container_add (GTK_CONTAINER(MainScrol[1]), MainView);
 #else
-  g_debug ("view buffer 6");
   if (add)
   {
      add_container_child (CONTAINER_SCR, MainScrol[1], MainView);
-     g_debug ("view buffer 7");
   }
 #endif
   show_the_widgets (MainScrol[1]);
@@ -471,7 +469,7 @@ GMenu * project_section (gchar * act, int pop_up, int proj, int calc)
     {
       str = g_strdup_printf ("%s.project.compute", act);
       str_n = g_strdup_printf ("Analyze: %s", work_menu_items[calc+4]);
-      append_menu_item (menu, str_n, (get_project_by_id(proj) -> runok[calc]) ? (const gchar *)str : NULL, NULL, NULL, IMG_FILE, graph_img[calc], FALSE, FALSE, FALSE, NULL);
+      append_menu_item (menu, str_n, (get_project_by_id(proj) -> runok[calc]) ? (const gchar *)str : "None", NULL, NULL, IMG_FILE, graph_img[calc], FALSE, FALSE, FALSE, NULL);
       g_free (str);
       g_free (str_n);
     }

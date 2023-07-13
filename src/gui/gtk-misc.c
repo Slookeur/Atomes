@@ -47,6 +47,10 @@ void add_container_child (int type, GtkWidget * widg, GtkWidget * child)
       break;
     case CONTAINER_SCR:
       // Bug in the management of scrolled window child
+/* Frequently getting warning messages at this point with GTK4
+(atomes:?????): GLib-GObject-CRITICAL **: ??:??:??.???: g_object_set: assertion 'G_IS_OBJECT (object)' failed
+(atomes:?????): Gtk-CRITICAL **: ??:??:??.???: gtk_widget_unparent: assertion 'GTK_IS_WIDGET (widget)' failed
+*/
       gtk_scrolled_window_set_child ((GtkScrolledWindow *)widg, NULL);
       gtk_scrolled_window_set_child ((GtkScrolledWindow *)widg, child);
       break;
