@@ -261,3 +261,67 @@ GtkWidget * color_box (glwin * view, int ideo, int spec, int geo)
   return coltable;
 #endif
 }
+
+#ifdef GTK4
+GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo)
+{
+  int l, m, n, p;
+  p = view -> proj;
+  GtkWidget * but;
+  GtkWidget * coltable = gtk_grid_new ();
+  ColRGBA but_col;
+  struct project * this_proj = get_project_by_id(p);
+  l = 0;
+  for (l=0; l<64; l++)
+  {
+    get_color (& but_col, l);
+    cairo_surface_t * surface = col_surface (but_col.red, but_col.green, but_col.blue, 12, 12);
+    GtkWidget * but_img =  create_image_from_data (IMG_SURFACE, surface);
+    gtk_widget_show (but_img);
+    but = gtk_button_new ();
+    add_container_child (CONTAINER_BUT, but, but_img);
+    gtk_button_set_has_frame ((GtkButton *)but, FALSE);
+    gtk_widget_show (but);
+    cairo_surface_destroy (surface);
+    if (ideo < -2)
+    {
+      g_signal_connect (G_OBJECT (but), "activate", G_CALLBACK(set_rings_color), & view -> gcid[4+spec][geo][l]);
+    }
+    else if (ideo == -2)
+    {
+      g_signal_connect (G_OBJECT (but), "activate", G_CALLBACK(set_back_color), & view -> colorp[l][0]);
+    }
+    else if (ideo == -1)
+    {
+      g_signal_connect (G_OBJECT (but), "activate", G_CALLBACK(set_box_color), & view -> colorp[l][0]);
+    }
+    else if (ideo < this_proj -> nspec*2)
+    {
+      g_signal_connect (G_OBJECT (but), "activate", G_CALLBACK(set_at_color), & view -> colorp[l][ideo]);
+    }
+    else if (ideo < 2*this_proj -> nspec + this_proj -> coord -> totcoord[0])
+    {
+      n = ideo - 2*this_proj -> nspec;
+      g_signal_connect (G_OBJECT (but), "activate", G_CALLBACK(set_total_coord_color), & view -> gcid[0][n][l]);
+    }
+    else if (ideo < 2*this_proj -> nspec + this_proj -> coord -> totcoord[0] + this_proj -> coord -> totcoord[1])
+    {
+      n = ideo - 2*this_proj -> nspec - this_proj -> coord -> totcoord[0];
+      g_signal_connect (G_OBJECT (but), "activate", G_CALLBACK(set_partial_coord_color), & view -> gcid[1][n][l]);
+    }
+    else
+    {
+      n = ideo - 2*this_proj -> nspec;
+      for (m= 0; m<spec; m++)
+      {
+        n -= this_proj -> coord -> totcoord[m];
+      }
+      g_signal_connect (G_OBJECT (but), "activate", G_CALLBACK(set_frag_mol_color), & view -> gcid[spec][n][l]);
+    }
+    m = l/4;
+    gtk_grid_attach (GTK_GRID(coltable), but, l-m*4, m, 1, 1);
+  }
+  show_the_widgets (coltable);
+  return coltable;
+}
+#endif

@@ -505,22 +505,26 @@ GMenu * color_atoms_submenu (glwin * view, int at, gboolean sensitive)
   GMenu * menu = g_menu_new ();
   GMenu * menuc;
   struct project * this_proj = get_project_by_id (view -> proj);
-  gchar * str;
+  gchar * stra, * strb;
   int i;
   for (i=0; i< this_proj -> nspec; i++)
   {
     if (at == 0)
     {
-      str = g_strdup_printf ("%s", this_proj -> chemistry -> label[i]);
+      stra = g_strdup_printf ("%s", this_proj -> chemistry -> label[i]);
     }
     else
     {
-      str = g_strdup_printf ("%s*", this_proj -> chemistry -> label[i]);
+      stra = g_strdup_printf ("%s*", this_proj -> chemistry -> label[i]);
     }
+    strb = g_strdup_printf ("%s", (! at) ? "atom-color" : "clone-color");
     menuc = g_menu_new ();
-    append_opengl_item (view, menuc, "Pick Color", (! at) ? "atom-color" : "clone-color", i, NULL, IMG_NONE, NULL,
+    append_opengl_item (view, menuc, strb, strb, i, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
+    append_opengl_item (view, menuc, "More colors ...", strb, i, NULL, IMG_NONE, NULL,
                         FALSE, G_CALLBACK(to_run_atom_color_window), & view -> colorp[0][i+at*this_proj -> nspec], FALSE, FALSE, FALSE, sensitive);
-    g_menu_append_submenu (menu, str, (GMenuModel*)menuc);
+    g_menu_append_submenu (menu, stra, (GMenuModel*)menuc);
+    g_free (stra);
+    g_free (strb);
     g_object_unref (menuc);
   }
   return menu;

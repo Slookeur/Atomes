@@ -96,7 +96,7 @@ void add_box_child_start (int orientation, GtkWidget * widg, GtkWidget * child, 
     gtk_box_append (GTK_BOX(widg), markup_label (" ", -1, padding/2, 0.0, 0.0));
   }
   gtk_box_append (GTK_BOX(widg), child);
-   if (orientation == GTK_ORIENTATION_HORIZONTAL && padding)
+  if (orientation == GTK_ORIENTATION_HORIZONTAL && padding)
   {
     gtk_box_append (GTK_BOX(widg), markup_label (" ", padding, -1, 0.0, 0.0));
   }

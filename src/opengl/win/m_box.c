@@ -337,8 +337,9 @@ GMenuItem * menu_box_axis (glwin * view, int ab)
   if (ab == 0)
   {
     GMenu * menuc = g_menu_new ();
-    append_opengl_item (view, menuc, "Pick Color", "box-color", 0, NULL, IMG_NONE, NULL,
-                        FALSE, G_CALLBACK(to_run_box_color_window), view, FALSE, FALSE, FALSE, get_project_by_id(view -> proj) -> cell.ltype);
+    append_opengl_item (view, menu, "box-color", "box-color", 0, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
+    append_opengl_item (view, menu, "More colors ...", "box-color", 0, NULL, IMG_NONE, NULL, FALSE,
+                        G_CALLBACK(to_run_box_color_window), view, FALSE, FALSE, FALSE, get_project_by_id(view -> proj) -> cell.ltype);
     g_menu_append_submenu (menu, "Color", (GMenuModel*)menuc);
     g_object_unref (menuc);
     append_opengl_item (view, menu, "Advanced", "box-advanced", 0, NULL, IMG_STOCK, DPROPERTIES, FALSE,
