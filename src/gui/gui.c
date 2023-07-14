@@ -375,21 +375,20 @@ GMenuItem * create_gmenu_item (const gchar * label, const gchar * action, const 
                                gboolean check, gboolean status, gboolean radio, const gchar * rstatus)
 {
   GMenuItem * item;
+  item = g_menu_item_new (label, action);
+  /* GKT4 bug, normally mark-up should be provided using boolean:
+  g_menu_item_set_attribute (item, "use-markup", "b", TRUE, NULL);
+  But it does not work, however it does using a string: */
+  g_menu_item_set_attribute (item, "use-markup", "s", "TRUE", NULL);
   if (custom)
   {
-    item = g_menu_item_new (NULL, NULL);
     g_menu_item_set_attribute (item, "custom", "s", custom, NULL);
     // g_menu_item_set_attribute_value (item, "custom", g_variant_new_string (custom));
-    // GVariant * cust = g_menu_item_get_attribute_value (item, "custom",  g_variant_type_new("s"));
-    // if (cust) g_print ("item custom is:: %s\n", g_variant_get_string  (cust, NULL));
+    GVariant * cust = g_menu_item_get_attribute_value (item, "custom",  g_variant_type_new("s"));
+    if (cust) g_print ("item is:: %s, custom is:: %s\n", label, g_variant_get_string  (cust, NULL));
   }
   else
   {
-    item = g_menu_item_new (label, action);
-    /* GKT4 bug, normally mark-up should be provided using boolean:
-     g_menu_item_set_attribute (item, "use-markup", "b", TRUE, NULL);
-    But it does not work, however it does using a string: */
-    g_menu_item_set_attribute (item, "use-markup", "s", "TRUE", NULL);
     if (accel) g_menu_item_set_attribute (item, "accel", "s", accel, NULL);
     // if (check) g_menu_item_set_attribute (item, "target", "b", status, NULL);
     if (radio) g_menu_item_set_attribute (item, "target", "s", rstatus, NULL);

@@ -19,6 +19,7 @@ If not, see <https://www.gnu.org/licenses/> */
 extern G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data);
 #ifdef GTK4
 extern G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo);
 #endif
 
 gboolean is_coord_in_menu (int id, struct project * this_proj)
@@ -345,14 +346,25 @@ GMenu * color_item (glwin * view, gchar * name, gchar * act, int id, GCallback h
   return menu;
 }
 
+GMenu * new_color_item (glwin * view, gchar * name, gchar * act, int colid, int geoid, int id, GCallback handler, gpointer data)
+{
+  GMenu *  menu = g_menu_new ();
+  append_opengl_item (view, menu, name, act, id, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
+  append_opengl_item (view, menu, "More colors ...", act, id, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
+  return menu;
+}
+
 GMenu * menu_show_coord (glwin * view, int id, int mid)
 {
   GMenu * menu = g_menu_new ();
   GMenu * menus;
+  GMenuItem * item;
   gchar * mty[2]={"s", "c"};
   struct project * this_proj = get_project_by_id (view -> proj);
   gchar * stra,  * strb;
-  int i, j, k;
+  int i, j, k, l;
+  l = 2 * this_proj -> nspec;
+  for (i=0; i<id; i++) l += this_proj -> coord -> totcoord[i];
   for (i=0; i<this_proj -> nspec; i++)
   {
     j = 0;
@@ -384,7 +396,17 @@ GMenu * menu_show_coord (glwin * view, int id, int mid)
           else
           {
             strb = g_strdup_printf ("col-%s-%s", stra, mty[mid]);
-            g_menu_append_submenu (menus, stra, (GMenuModel*)color_item(view, "Pick Color", strb, k+j, G_CALLBACK(window_color_coord), & view -> gcid[id][k+j][id]));
+            gboolean test_new = TRUE;
+            if (test_new)
+            {
+              item = g_menu_item_new_submenu (stra, (GMenuModel*)new_color_item(view, strb, strb, id, l, k+j, G_CALLBACK(window_color_coord), & view -> gcid[id][k+j][id]));
+              g_menu_append_item (menus, item);
+              g_object_unref (item);
+            }
+            else
+            {
+              g_menu_append_submenu (menus, stra, (GMenuModel*)color_item(view, "Pick Color", strb, k+j, G_CALLBACK(window_color_coord), & view -> gcid[id][k+j][id]));
+            }
           }
           g_free (stra);
           g_free (strb);

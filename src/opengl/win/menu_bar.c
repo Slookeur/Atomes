@@ -160,6 +160,15 @@ GtkWidget * opengl_window_create_menu_bar (glwin * view)
   view -> action_group = g_simple_action_group_new ();
   opengl_project = NULL;
   GtkWidget * menu_bar = gtk_popover_menu_bar_new_from_model ((GMenuModel *)opengl_menu_bar(view, str));
+  // Testing the widget insertion, for a CH4 molecule, color selection for partial coordination for H atoms
+  if (gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, gtk_label_new("Test custom"), "set-col-H[C]-c.1"))
+  {
+    g_debug ("Adding child OK");
+  }
+  else
+  {
+    g_debug ("Error adding child");
+  }
   opengl_project_changed (activev);
   gtk_widget_insert_action_group (menu_bar, str, G_ACTION_GROUP(view -> action_group));
   g_free (str);
