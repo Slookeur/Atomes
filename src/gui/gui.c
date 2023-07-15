@@ -385,7 +385,7 @@ GMenuItem * create_gmenu_item (const gchar * label, const gchar * action, const 
     g_menu_item_set_attribute (item, "custom", "s", custom, NULL);
     // g_menu_item_set_attribute_value (item, "custom", g_variant_new_string (custom));
     GVariant * cust = g_menu_item_get_attribute_value (item, "custom",  g_variant_type_new("s"));
-    if (cust) g_print ("item is:: %s, custom is:: %s\n", label, g_variant_get_string  (cust, NULL));
+    if (cust) g_print ("item :: %s, custom :: %s\n", label, g_variant_get_string  (cust, NULL));
   }
   else
   {

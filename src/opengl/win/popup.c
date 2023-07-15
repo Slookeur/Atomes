@@ -44,6 +44,7 @@ extern void duplicate_material_and_lightning (image * new_img, image * old_img);
 #ifdef GTK4
 extern GSimpleActionGroup * view_pop_actions;
 extern G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo);
 #endif
 atom_search * remove_search = NULL;
 atom_search * insert_search = NULL;
@@ -2987,6 +2988,108 @@ GMenu * anim_section (glwin * view)
   g_menu_append_submenu (menu, "Animate", (GMenuModel *)menu_anim(view));
   return menu;
 }
+
+void menu_attach_color_palettes (glwin * view, GtkWidget * menu)
+{
+  /* Here we need to attached color palettes for:
+    - Box
+    - Atoms
+    - Clones
+    - Total coordination(s)
+    - Partial coordination(s)
+    - Fragment(s) and molecule(s)
+    - Ring(s)
+    - Background
+  This is a work in progress since the 'gtk_popover_menu_bar_add_child' to use to insert widget is bugged:
+  https://gitlab.gnome.org/GNOME/gtk/-/issues/5955
+  */
+  int i, j, k, l, m;
+  gchar * str;
+  struct project * this_proj = get_project_by_id (view -> proj);
+  // Box
+  if (! gtk_popover_menu_add_child ((GtkPopoverMenu *)menu, color_palette (view, -1, -1, -1), "set-box-color.0"))
+  {
+    g_debug ("Color palette error: box - custom= set-box-color.0");
+  }
+  // Atom(s) and clone(s)
+  for (i=0; i<2; i++)
+  {
+    for (j=0; j<this_proj -> nspec; j++)
+    {
+      str = g_strdup_printf ("set-%s.%d", (! i) ? "atom-color" : "clone-color", j);
+      if (! gtk_popover_menu_add_child ((GtkPopoverMenu *)menu, color_palette (view, i*this_proj -> nspec+j, -1, -1), (const gchar *)str))
+      {
+        g_debug ("Color palette error: %s - %d - custom= %s", (! i) ? "atom-color" : "clone-color", j+1, str);
+      }
+      g_free (str);
+    }
+  }
+  // Coordinations
+  for (i=0; i<2; i++)
+  {
+    if (this_proj -> coord -> ntg[i])
+    {
+      for (j=0; j<this_proj -> nspec; j++)
+      {
+        for (k=0; k<this_proj -> coord -> ntg[i][j]; k++)
+        {
+          m = 0;
+          for (l=0; l<j; l++)
+          {
+            m += this_proj -> coord -> ntg[i][l];
+          }
+          if (i)
+          {
+            str = g_strdup_printf ("set-%s-c.%d", exact_name (env_name (this_proj, k, j, 1, NULL)), m);
+          }
+          else
+          {
+            str = g_strdup_printf ("set-%d-c.%d", this_proj -> coord -> geolist[i][j][k], m);
+          }
+          m += (i) ? this_proj -> coord -> totcoord[0] : 0;
+          if (! gtk_popover_menu_add_child ((GtkPopoverMenu *)menu, color_palette (view, 2*this_proj -> nspec+m, -1, -1), (const gchar *)str))
+          {
+            g_debug ("Color palette error: %s - spec= %d - coord= %d, custom= %s", (! i) ? "total-coord" : "partial-coord", j+1, k+1, str);
+          }
+          g_free (str);
+        }
+      }
+    }
+  }
+  // Fragment(s) and molecule(s)
+  for (i=2; i<4; i++)
+  {
+    for (j=0; j<this_proj -> coord -> totcoord[i]; j++)
+    {
+      str = g_strdup_printf ("set-%s-%d", (i == 2) ? "fcol" : "mcol", j);
+      k = 2*this_proj -> nspec + this_proj -> coord -> totcoord[0] + this_proj -> coord -> totcoord[1] + j;
+      if (i == 3) k += this_proj -> coord -> totcoord[2];
+      if (! gtk_popover_menu_add_child ((GtkPopoverMenu *)menu, color_palette (view, k, i, 0), (const gchar *)str))
+      {
+        g_debug ("Color palette error: %s - %d, custom= %s", (i == 2) ? "fragment" : "molecule", j+1, str);
+      }
+      g_free (str);
+    }
+  }
+  // Rings
+  for (i=4; i<9; i++)
+  {
+    for (j=0; j<this_proj -> coord -> totcoord[i]; j++)
+    {
+      str = g_strdup_printf ("set-rcol-%d-%d", i, j);
+      if (! gtk_popover_menu_add_child ((GtkPopoverMenu *)menu, color_palette (view, -3, i-4, 0), (const gchar *)str))
+      {
+        g_debug ("Color palette error: rings - %d - %d, custom= %s", i, j+1, str);
+      }
+      g_free (str);
+    }
+  }
+  // Background
+  if (! gtk_popover_menu_add_child ((GtkPopoverMenu *)menu, color_palette (view, -2, -1, -1), "set-back-color.0"))
+  {
+    g_debug ("Color palette error: background - custom= set-back-color.0");
+  }
+}
 #endif
 
 void popup_main_menu (glwin * view, double ptx, double pty)
@@ -3020,6 +3123,8 @@ void popup_main_menu (glwin * view, double ptx, double pty)
   g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_fullscreen(view));
 
   menu = gtk_popover_menu_new_from_model_full ((GMenuModel *)gmenu, GTK_POPOVER_MENU_NESTED);
+  menu_attach_color_palettes (view, menu);
+
   gtk_popover_present ((GtkPopover *)menu);
   gchar * str = g_strdup_printf ("gl-%d", view -> action_id);
   gtk_widget_insert_action_group (menu, str, G_ACTION_GROUP(view_pop_actions));

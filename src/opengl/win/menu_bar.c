@@ -153,7 +153,7 @@ GMenu * opengl_menu_bar (glwin * view, gchar * str)
   return menu;
 }
 
-void attach_color_palettes (glwin * view, GtkWidget * menu_bar)
+void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar)
 {
   /* Here we need to attached color palettes for:
     - Box
@@ -171,20 +171,20 @@ void attach_color_palettes (glwin * view, GtkWidget * menu_bar)
   gchar * str;
   struct project * this_proj = get_project_by_id (view -> proj);
   // Box
-  /* if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, -1, -1, -1), "set-box-color.0"))
+  if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, -1, -1, -1), "set-box-color.0"))
   {
     g_debug ("Color palette error: box - custom= set-box-color.0");
-  } */
+  }
   // Atom(s) and clone(s)
   for (i=0; i<2; i++)
   {
     for (j=0; j<this_proj -> nspec; j++)
     {
       str = g_strdup_printf ("set-%s.%d", (! i) ? "atom-color" : "clone-color", j);
-      /* if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, i*this_proj) -> nspec+j, -1, -1), (const gchar *)str))
+      if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, i*this_proj -> nspec+j, -1, -1), (const gchar *)str))
       {
         g_debug ("Color palette error: %s - %d - custom= %s", (! i) ? "atom-color" : "clone-color", j+1, str);
-      } */
+      }
       g_free (str);
     }
   }
@@ -211,10 +211,10 @@ void attach_color_palettes (glwin * view, GtkWidget * menu_bar)
             str = g_strdup_printf ("set-%d-c.%d", this_proj -> coord -> geolist[i][j][k], m);
           }
           m += (i) ? this_proj -> coord -> totcoord[0] : 0;
-          /* if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, 2*this_proj -> nspec+m, -1, -1), (const gchar *)str);
+          if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, 2*this_proj -> nspec+m, -1, -1), (const gchar *)str))
           {
             g_debug ("Color palette error: %s - spec= %d - coord= %d, custom= %s", (! i) ? "total-coord" : "partial-coord", j+1, k+1, str);
-          } */
+          }
           g_free (str);
         }
       }
@@ -228,10 +228,10 @@ void attach_color_palettes (glwin * view, GtkWidget * menu_bar)
       str = g_strdup_printf ("set-%s-%d", (i == 2) ? "fcol" : "mcol", j);
       k = 2*this_proj -> nspec + this_proj -> coord -> totcoord[0] + this_proj -> coord -> totcoord[1] + j;
       if (i == 3) k += this_proj -> coord -> totcoord[2];
-      /* if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, k, i, 0), (const gchar *)str);
+      if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, k, i, 0), (const gchar *)str))
       {
-        g_debug ("Color palette error: %s - %s %d, custom= %s", (i == 2) ? "fragment" : "molecule", j+1, str);
-      } */
+        g_debug ("Color palette error: %s - %d, custom= %s", (i == 2) ? "fragment" : "molecule", j+1, str);
+      }
       g_free (str);
     }
   }
@@ -241,18 +241,18 @@ void attach_color_palettes (glwin * view, GtkWidget * menu_bar)
     for (j=0; j<this_proj -> coord -> totcoord[i]; j++)
     {
       str = g_strdup_printf ("set-rcol-%d-%d", i, j);
-      /* if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, -3, i-4, 0), (const gchar *)str);
+      if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, -3, i-4, 0), (const gchar *)str))
       {
         g_debug ("Color palette error: rings - %d - %d, custom= %s", i, j+1, str);
-      } */
+      }
       g_free (str);
     }
   }
   // Background
-    /* if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, -2, -1, -1), "set-back-color.0"))
+  if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, -2, -1, -1), "set-back-color.0"))
   {
     g_debug ("Color palette error: background - custom= set-back-color.0");
-  } */
+  }
 }
 
 GtkWidget * opengl_window_create_menu_bar (glwin * view)
@@ -264,7 +264,7 @@ GtkWidget * opengl_window_create_menu_bar (glwin * view)
   opengl_project = NULL;
   GtkWidget * menu_bar = gtk_popover_menu_bar_new_from_model ((GMenuModel *)opengl_menu_bar(view, str));
 
-  attach_color_palettes (view, menu_bar);
+  menu_bar_attach_color_palettes (view, menu_bar);
 
   opengl_project_changed (activev);
   gtk_widget_insert_action_group (menu_bar, str, G_ACTION_GROUP(view -> action_group));
@@ -272,7 +272,6 @@ GtkWidget * opengl_window_create_menu_bar (glwin * view)
 
 
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, view -> menu_box, menu_bar, FALSE, FALSE, 0);
-  show_the_widgets (menu_bar);
 
   show_the_widgets (menu_bar);
   return menu_bar;
