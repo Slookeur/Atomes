@@ -181,14 +181,14 @@ GtkWidget * work_menu (int id, int p, int c)
 #else
   GMenu * popup = create_workspace_menu ("pop", 1, p, c);
   menu = gtk_popover_menu_new_from_model_full (G_MENU_MODEL(popup), GTK_POPOVER_MENU_NESTED);
-  i = (nprojects) ? 90 : 0;
-  gtk_widget_set_size_request (menu, -1, 290 + i);
+  i = (nprojects) ? (p > -1) ? 235 : 80 : 0;
+  gtk_widget_set_size_request (menu, -1, 235 + i);
 /* I need to use the ' gtk_popover_menu_new_from_model_full' command here,
    the menu created using the 'gtk_popover_menu_new_from_model' does not behave properly,
    that might be a bug, some items of the menu having the same name,
    It is not possible to navigate the menu properly and some elements remains inaccessible,
    this was solved with this  '_full' command.
-   // menu = gtk_popover_menu_new_from_model (G_MENU_MODEL(popup)); */
+    menu = gtk_popover_menu_new_from_model (G_MENU_MODEL(popup)); */
 #endif
   gtk_widget_insert_action_group (menu, "pop", G_ACTION_GROUP(action_popup));
   return menu;
