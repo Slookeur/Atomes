@@ -47,7 +47,7 @@ extern GMenu * menu_bonds (glwin * view, int at);
 extern GMenu * menu_clones (glwin * view);
 extern GMenu * axis_box_param (glwin * view, int ab, int style);
 extern GMenuItem * menu_box_axis (glwin * view, int ab);
-extern GMenu * color_item (glwin * view, gchar * name, gchar * act, int id, GCallback handler, gpointer data);
+extern GMenu * color_item (glwin * view, gchar * act, int id, GCallback handler, gpointer data);
 extern GMenu * menu_coord (glwin * view);
 extern GMenu * add_menu_coord (glwin * view, int id);
 extern GMenu * menu_poly (glwin * view);
