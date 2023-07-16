@@ -33,15 +33,6 @@ G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
   int s = obj -> b;
   int c = obj -> c;
   int g = obj -> d;
-#ifdef DEBUG
-  g_debug ("SHOW_HIDE_POLY:: p= %d, s= %d, c= %d, g= %d", this_proj -> id, s, c, g);
-#endif
-#ifdef GTK4
-  GVariant * state = g_action_get_state (G_ACTION (action));
-  show = ! g_variant_get_boolean (state);
-#else
-  show = check_menu_item_get_active ((gpointer)widg);
-#endif
   j = c;
   if (g < 2)
   {
@@ -50,6 +41,23 @@ G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
       j += this_proj -> coord -> ntg[g][i];
     }
   }
+#ifdef DEBUG
+  g_debug ("SHOW_HIDE_POLY:: p= %d, s= %d, c= %d, g= %d", this_proj -> id, s, c, g);
+#endif
+#ifdef GTK4
+  GVariant * state;
+  if (action)
+  {
+    state = g_action_get_state (G_ACTION (action));
+    show = ! g_variant_get_boolean (state);
+  }
+  else
+  {
+    show = this_proj -> modelgl -> anim -> last -> img -> show_poly[g][j];
+  }
+#else
+  show = check_menu_item_get_active ((gpointer)widg);
+#endif
 #ifdef GTK3
   // GTK3 Menu Action To Check
   if (is_coord_in_menu(g, this_proj))
@@ -69,14 +77,16 @@ G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
     }
   }
 #endif
-  g_debug ("show= %d", show);
   this_proj -> modelgl -> anim -> last -> img -> show_poly[g][j] = show;
   int shaders[2] = {POLYS, RINGS};
   re_create_md_shaders (2, shaders, this_proj);
   update (this_proj -> modelgl);
 #ifdef GTK4
-  g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
-  g_variant_unref (state);
+  if (action)
+  {
+    g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
+    g_variant_unref (state);
+  }
 #endif
 }
 

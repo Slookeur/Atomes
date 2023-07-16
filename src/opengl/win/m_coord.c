@@ -48,16 +48,6 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
   s = cid -> b;
   c = cid -> c;
   g = cid -> d;
-#ifdef GTK3
-  show = check_menu_item_get_active ((gpointer)widg);
-#else
-  GVariant * state = g_action_get_state (G_ACTION (action));
-  show = ! g_variant_get_boolean (state);
-#endif
-#ifdef DEBUG
-  g_debug ("SHOW_HIDE_COORD:: p= %d, s= %d, c= %d, g= %d, show= %d", this_proj -> id, s, c, g, show);
-#endif
-
   j = 0;
   if (g < 2)
   {
@@ -67,6 +57,24 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
     }
   }
   j += c;
+#ifdef GTK3
+  show = check_menu_item_get_active ((gpointer)widg);
+#else
+  GVariant * state;
+  if (action)
+  {
+    state = g_action_get_state (G_ACTION (action));
+    show = ! g_variant_get_boolean (state);
+  }
+  else
+  {
+    show = this_proj -> modelgl -> anim -> last -> img -> show_coord[g][j];
+  }
+#endif
+#ifdef DEBUG
+  g_debug ("SHOW_HIDE_COORD:: p= %d, s= %d, c= %d, g= %d, show= %d", this_proj -> id, s, c, g, show);
+#endif
+
 #ifdef GTK3
   // GTK3 Menu Action To Check
   if (is_coord_in_menu(g, this_proj))
@@ -131,8 +139,11 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
   }
   init_default_shaders (this_proj -> modelgl);
 #ifdef GTK4
-  g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
-  g_variant_unref (state);
+  if (action)
+  {
+    g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
+    g_variant_unref (state);
+  }
 #endif
 }
 

@@ -15,6 +15,11 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "project.h"
 #include "glview.h"
 #include "initcoord.h"
+#ifdef GTK4
+G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
+G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
+G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data);
+#endif // GTK4
 
 int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -152,7 +157,7 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
       gboolean * show_rings = duplicate_bool(i, view -> anim -> last -> img -> show_coord[j]);
       init_opengl_coords (4+rid, i, 1);
       k = 0;
-      init_menurings_ (& j, & rid, & i, tmpcoord, & k);
+      init_menurings_ (& j, & rid, & i, tmpcoord);
       g_free (tmpcoo);
       g_free (tmpcoord);
       view -> anim -> last -> img -> show_coord[j] = duplicate_bool(i, show_rings);
@@ -203,7 +208,7 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
       k = 0;
       gboolean * show_chains = duplicate_bool(i, view -> anim -> last -> img -> show_coord[j]);
       init_opengl_coords (j, i, 1);
-      init_menurings_ (& j, & k , & i, tmpcoord, & k);
+      init_menurings_ (& j, & k , & i, tmpcoord);
       g_free (tmpcoo);
       g_free (tmpcoord);
       view -> anim -> last -> img -> show_coord[j] = duplicate_bool(i, show_chains);
@@ -575,6 +580,36 @@ int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int s
   this_proj -> modelgl -> labelled = check_label_numbers (this_proj, 2);
 #ifdef GTK4
   update_menu_bar (this_proj -> modelgl);
+  for (i=0; i<2; i++)
+  {
+    for (j=0; j<sid; j++)
+    {
+      if (! img -> show_atom[i][j])
+      {
+        show_hide_atoms (NULL, NULL, & this_proj -> modelgl -> colorp[i][j]);
+      }
+    }
+  }
+  for (i=0; i<10; i++)
+  {
+    for (j=0; j<this_proj -> coord -> totcoord[i]; j++)
+    {
+      if (i < 2 || (i > 3 && i < 9))
+      {
+        if (img -> show_poly[i][j])
+        {
+          show_hide_poly (NULL, NULL, & this_proj -> modelgl -> gcid[i][j][i]);
+        }
+      }
+    }
+    for (j=0; j<this_proj -> coord -> totcoord[i]; j++)
+    {
+      if (! img -> show_coord[i][j])
+      {
+        show_hide_coord (NULL, NULL, & this_proj -> modelgl -> gcid[i][j][i]);
+      }
+    }
+  }
 #endif
   return OK;
 }
