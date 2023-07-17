@@ -267,6 +267,15 @@ G_MODULE_EXPORT gboolean on_element_focus (GtkWidget * widget, GdkEvent * event,
   return FALSE;
 #endif
 }
+#ifdef GTK4
+G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion, gdouble x, gdouble y, gpointer data)
+{
+  dint * id = (dint *)data;
+  periodic_search -> preview[1] = destroy_this_widget (periodic_search -> preview[1]);
+  periodic_search -> preview[1] = create_el_preview (periodic_search -> proj, periodic_search -> action, id -> a, id -> b);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, periodic_search -> preview[0], periodic_search -> preview[1], FALSE, FALSE, 0);
+}
+#endif
 
 G_MODULE_EXPORT void run_periodic_table (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -418,6 +427,9 @@ GtkWidget * create_css_button (int p, int id, int r, int c)
   GtkEventController * focus = gtk_event_controller_focus_new ();
   g_signal_connect (G_OBJECT (focus), "enter", G_CALLBACK(on_element_focus), & table_p[id-1]);
   gtk_widget_add_controller (but, GTK_EVENT_CONTROLLER (focus));
+  GtkEventController * motion = gtk_event_controller_motion_new ();
+  g_signal_connect (motion, "enter", G_CALLBACK(on_element_motion_enter), & table_p[id-1]);
+  gtk_widget_add_controller (but, GTK_EVENT_CONTROLLER (motion));
 #endif
   gtk_widget_show (but);
   return but;
