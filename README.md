@@ -56,10 +56,9 @@ to
 
 > GTKV = 4
 
-Here is an issue with GTK4 that cannot be sovled for the time being:
-
-  Add widgets to menus is impossible, ex: color selections
-  This is required since ***Atomes*** menus are dynamical and cannot be created by reading a basic XML file. 
+Here are some issues with GTK4 that cannot be sovled for the time being:
+  1. No way to use Pango markups in menu items with sub-menus (https://gitlab.gnome.org/GNOME/gtk/-/issues/5946)
+  2. No way to attach widget to menu items not in the top level of the menu (https://gitlab.gnome.org/GNOME/gtk/-/issues/5955)
 
 #### Building the serial version of ***Atomes***
 
