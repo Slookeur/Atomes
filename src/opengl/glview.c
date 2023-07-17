@@ -1260,6 +1260,36 @@ GError * init_gtk_gl_area (GtkGLArea * area)
   return gtk_gl_area_get_error (area);
 }
 
+#ifdef GTK3
+void gtk_window_change_gdk_visual (GtkWidget * win)
+{
+  // GTK+ > 3.15.1 uses an X11 visual optimized for GTK+'s OpenGL stuff
+  // since revid dae447728d: https://github.com/GNOME/gtk/commit/dae447728d
+  // However, in some cases it simply cannot start an OpenGL context.
+  // This changes to the default X11 visual instead the GTK's default.
+  GdkScreen * screen = gdk_screen_get_default ();
+  GList * visuals = gdk_screen_list_visuals (screen);
+  // printf("n visuals: %u\n", g_list_length(visuals));
+  GdkX11Screen* x11_screen = GDK_X11_SCREEN (screen);
+  g_assert (x11_screen != NULL);
+  Visual * default_xvisual = DefaultVisual (GDK_SCREEN_XDISPLAY(x11_screen), GDK_SCREEN_XNUMBER(x11_screen));
+  GdkVisual * default_visual = NULL;
+  // int i = 0;
+  while (visuals != NULL)
+  {
+    GdkVisual * visual = GDK_X11_VISUAL (visuals -> data);
+    if (default_xvisual -> visualid == gdk_x11_visual_get_xvisual(GDK_X11_VISUAL (visuals -> data)) -> visualid)
+    {
+      // printf("Default visual %d\n", i);
+      default_visual = visual;
+    }
+    // i++;
+    visuals = visuals -> next;
+  }
+  gtk_widget_set_visual(GTK_WIDGET(win), default_visual);
+}
+#endif
+
 #ifdef GTKGLAREA
 G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data)
 #else

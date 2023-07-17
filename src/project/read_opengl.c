@@ -157,7 +157,7 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
       gboolean * show_rings = duplicate_bool(i, view -> anim -> last -> img -> show_coord[j]);
       init_opengl_coords (4+rid, i, 1);
       k = 0;
-      init_menurings_ (& j, & rid, & i, tmpcoord);
+      init_menurings_ (& j, & rid, & i, tmpcoord, & k);
       g_free (tmpcoo);
       g_free (tmpcoord);
       view -> anim -> last -> img -> show_coord[j] = duplicate_bool(i, show_rings);
@@ -208,7 +208,7 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
       k = 0;
       gboolean * show_chains = duplicate_bool(i, view -> anim -> last -> img -> show_coord[j]);
       init_opengl_coords (j, i, 1);
-      init_menurings_ (& j, & k , & i, tmpcoord);
+      init_menurings_ (& j, & k , & i, tmpcoord, & k);
       g_free (tmpcoo);
       g_free (tmpcoord);
       view -> anim -> last -> img -> show_coord[j] = duplicate_bool(i, show_chains);

@@ -18,6 +18,6 @@ void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp]);
 void allocate_partial_geo_ (int * sp, int * ngsp);
 void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp]);
 void init_menu_fragmol_ (int * id);
-void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp]);
+void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init);
 void init_opengl_coords (int id, int nt, int init);
 void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[* num]);

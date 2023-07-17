@@ -415,7 +415,7 @@ void init_menu_fragmol_ (int * id)
 #endif
 }
 
-void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp])
+void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init)
 {
   int j;
 
@@ -434,6 +434,7 @@ void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp])
     if ( * coo < 9)
     {
       color_box (active_glwin, -3, * ids, j);
+      if (* init) active_image -> show_poly[* coo][j] = FALSE;
       active_image -> spcolor[* coo][0][j] = init_color (coordt[j]-3, active_glwin -> ring_max[* ids]);
       active_image -> spcolor[* coo][0][j].alpha = DEFAULT_ALPHA;
     }
@@ -455,7 +456,7 @@ void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp])
     j = 0;
     active_glwin -> oglmc[i][* coo][j] = NULL;
     active_glwin -> oglmc[i][* coo][j] = coord_color_setup (& j, * coo, i);
-    if (! init) active_glwin -> ogl_poly[i][* coo] = g_malloc0 (*ngsp*sizeof*active_glwin -> ogl_poly[i][* coo]);
+    if (! * init) active_glwin -> ogl_poly[i][* coo] = g_malloc0 (*ngsp*sizeof*active_glwin -> ogl_poly[i][* coo]);
     for ( j=0 ; j < * ngsp ; j++ )
     {
       if (i == 0)
@@ -463,6 +464,7 @@ void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp])
         active_image -> show_coord[* coo][j] = TRUE;
         if (* coo < 9)
         {
+          if (* init) active_image -> show_poly[* coo][j] = FALSE;
           active_image -> spcolor[* coo][0][j] = init_color (coordt[j]-3, active_glwin -> ring_max[* ids]);
           active_image -> spcolor[* coo][0][j].alpha = DEFAULT_ALPHA;
         }
