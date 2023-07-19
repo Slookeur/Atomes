@@ -519,9 +519,9 @@ void apply_project (gboolean showtools)
 
 void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible)
 {
-  if (! open_xml (projfile))
+  if (! open_xml (profile))
   {
-    active_project -> name = g_strdup_printf ("%s", substitute_string (projfile, ".ipf", NULL));
+    active_project -> name = g_strdup_printf ("%s", substitute_string (profile, ".ipf", NULL));
     on_edit_activate (NULL, GINT_TO_POINTER(3));
     on_edit_activate (NULL, GINT_TO_POINTER(5));
     active_project_changed (activep);

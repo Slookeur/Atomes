@@ -455,13 +455,25 @@ xmlNodePtr findnode (xmlNodePtr startnode, char * nname)
   return tmp;
 }
 
+int get_spec_from_data (xmlChar * data)
+{
+  int i;
+  for ( i=0 ; i<active_project -> nspec ; i++)
+  {
+    if (g_strcmp0 (exact_name((char *)data), active_chem -> label[i]) == 0)
+    {
+      return i;
+    }
+  }
+  return -1;
+}
+
 int setprop (xmlNodePtr pnode)
 {
-  int i, j, res;
+  int i, res;
   xmlAttrPtr pspec;
   xmlNodePtr idn, ptnode, ptn;
   xmlChar * data;
-  double val;
 
   ptnode=pnode;
   for ( i=0 ; i<active_project -> nspec ; i++)
@@ -475,7 +487,8 @@ int setprop (xmlNodePtr pnode)
     pspec = ptnode -> properties;
     idn = pspec -> children;
     data = xmlNodeGetContent(idn);
-    if (g_strcmp0 ((char *)data, active_chem -> label[i]) != 0)
+    res = get_spec_from_data(data);
+    if (res < 0)
     {
       res=6;
       goto pend;
@@ -488,7 +501,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data = xmlNodeGetContent(ptn);
-    if (g_strcmp0 ((char *)data, active_chem -> element[i]) != 0)
+    if (g_strcmp0 (exact_name((char *)data), active_chem -> element[res]) != 0)
     {
       res=6;
       goto pend;
@@ -500,9 +513,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    val = atof((char *)data);
-    j = val;
-    if ((int)active_chem -> chem_prop[CHEM_Z][i] != j)
+    if ((int)active_chem -> chem_prop[CHEM_Z][res] != (int)atof((char *)data))
     {
       res=6;
       goto pend;
@@ -514,7 +525,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    val = atof((char *)data);
+    active_chem -> chem_prop[CHEM_M][res] = atof((char *)data);
     ptn = findnode(ptnode, "rad");
     if (ptn == NULL)
     {
@@ -522,7 +533,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    val = atof((char *)data);
+    // val = atof((char *)data);
     ptn = findnode(ptnode, "radius");
     if (ptn == NULL)
     {
@@ -530,7 +541,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    val = atof((char *)data);
+    active_chem -> chem_prop[CHEM_R][res] = atof((char *)data);
     ptn = findnode(ptnode, "nscatt");
     if (ptn == NULL)
     {
@@ -538,7 +549,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    val = atof((char *)data);
+    active_chem -> chem_prop[CHEM_N][res] = atof((char *)data);
     ptn = findnode(ptnode, "xscatt");
     if (ptn == NULL)
     {
@@ -546,7 +557,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    val = atof((char *)data);
+    active_chem -> chem_prop[CHEM_X][res] = atof((char *)data);
     ptnode = ptnode -> parent;
     ptnode = ptnode -> next;
   }
@@ -652,6 +663,7 @@ int setchemistry (xmlNodePtr xsnode)
     else
     {
       cs = cs -> children;
+      ats = 0;
       for ( i=0 ; i<active_project -> nspec ; i++)
       {
         cs = findnode(cs, "label");
@@ -661,22 +673,21 @@ int setchemistry (xmlNodePtr xsnode)
           goto xend;
         }
         data = xmlNodeGetContent(cs);
-        if (g_strcmp0 ((char *)data, active_chem -> label[i]) != 0)
+        res = get_spec_from_data (data);
+        if (res < 0)
         {
           res=5;
           goto xend;
         }
-        xspec = cs -> properties;
-        idn = xspec -> children;
-        data = xmlNodeGetContent(idn);
-        val = atof((char *)data);
-        ats = val;
-        if (ats != i)
+        else
         {
-          res=5;
-          goto xend;
+          ats ++;
         }
-        cs = cs -> next;
+      }
+      if (ats != active_project -> nspec)
+      {
+        res=5;
+        goto xend;
       }
       xnode = xsnode -> children;
       res = setprop (xnode);
@@ -1096,7 +1107,7 @@ int check_xml (const char * filetocheck)
             res=3;
             goto end;
           }
-          res=setchemistry(node);
+          res= setchemistry(node);
           if (res != 0)
           {
             goto end;
@@ -1108,7 +1119,7 @@ int check_xml (const char * filetocheck)
             res=3;
             goto end;
           }
-          res=setpbc(node);
+          res=setpbc (node);
           if (res != 0)
           {
              goto end;
@@ -1122,7 +1133,7 @@ int check_xml (const char * filetocheck)
           }
           active_cell -> box = g_malloc0(sizeof*active_cell -> box);
           active_box = & active_cell -> box[0];
-          res=setbox(node);
+          res=setbox (node);
           if (res != 0)
           {
              goto end;
@@ -1198,7 +1209,6 @@ gchar * open_xml (const char * filetoread)
 {
   int oxml;
   oxml = check_xml(filetoread);
-
   switch(oxml)
   {
     case 1:
