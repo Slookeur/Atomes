@@ -393,6 +393,7 @@ void change_color_map (glwin * view, int col)
   set_color_map (view -> color_styles[j], & view -> colorp[j][0]);
   reading_input = was_input;
 #endif
+// TODO GTK4 change color map !
 }
 
 void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state)

@@ -86,6 +86,80 @@ gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct in
   return FALSE;
 }
 
+void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
+{
+  int i, j, k, l;
+  int o_step = this_proj -> modelgl -> anim -> last -> img -> step;
+  int ** old_bid = NULL;
+  old_bid = allocdint (this_proj -> modelgl -> bonds[o_step][0], 2);
+  for (i=0; i<this_proj -> modelgl -> bonds[o_step][0]; i++)
+  {
+     for (j=0; j<2; j++) old_bid[i][j] = this_proj -> modelgl -> bondid[o_step][0][i][j];
+  }
+  g_free (this_proj -> modelgl -> bondid[o_step][0]);
+  this_proj -> modelgl -> bondid[o_step][0] = allocdint (this_proj -> modelgl -> bonds[o_step][0]+ ifcl, 2);
+  for (i=0; i<this_proj -> modelgl -> bonds[o_step][0]; i++)
+  {
+    for (j=0; j<2; j++) this_proj -> modelgl -> bondid[o_step][0][i][j] = old_bid[i][j];
+  }
+  if (old_bid) g_free (old_bid);
+  old_bid = NULL;
+
+  for (i=0; i<ifcl; i++)
+  {
+    j = bcid[i];
+    k = this_proj -> modelgl -> bonds[o_step][0];
+    for (l=0; l<2; l++)
+    {
+      this_proj -> modelgl -> bondid[o_step][0][k][l] = this_proj -> modelgl -> bondid[o_step][1][j][l];
+    }
+    this_proj -> modelgl -> bonds[o_step][0] ++;
+    this_proj -> modelgl -> allbonds[0] ++;
+    this_proj -> modelgl -> bondid[o_step][1][j][0] = -1;
+  }
+
+  vec3_t * old_clo = NULL;
+  i = this_proj -> modelgl -> bonds[o_step][1] - ifcl;
+  l = 0;
+  if (i)
+  {
+    old_clo = g_malloc0 (i*sizeof*old_clo);
+    old_bid = allocdint (i, 2);
+    for (i=0; i<this_proj -> modelgl -> bonds[o_step][1]; i++)
+    {
+      if (this_proj -> modelgl -> bondid[o_step][1][i][0] > -1)
+      {
+        for (k=0; k<2; k++) old_bid[l][k] = this_proj -> modelgl -> bondid[o_step][1][i][k];
+        old_clo[l].x = this_proj -> modelgl -> clones[o_step][i].x;
+        old_clo[l].y = this_proj -> modelgl -> clones[o_step][i].y;
+        old_clo[l].z = this_proj -> modelgl -> clones[o_step][i].z;
+        l ++;
+      }
+    }
+  }
+  g_free (this_proj -> modelgl -> bondid[o_step][1]);
+  this_proj -> modelgl -> bondid[o_step][1] = NULL;
+  g_free (this_proj -> modelgl -> clones[o_step]);
+  this_proj -> modelgl -> clones[o_step] = NULL;
+  this_proj -> modelgl -> bonds[o_step][1] = this_proj -> modelgl -> allbonds[1] = l;
+  if (l)
+  {
+    this_proj -> modelgl -> bondid[o_step][1] = allocdint (l, 2);
+    this_proj -> modelgl -> clones[o_step] = g_malloc0 (l*sizeof*this_proj -> modelgl -> clones[o_step]);
+    for (i=0; i<l; i++)
+    {
+      for (j=0; j<2; j++) this_proj -> modelgl -> bondid[o_step][1][i][j] = old_bid[i][j];
+      this_proj -> modelgl -> clones[o_step][i].x = old_clo[i].x;
+      this_proj -> modelgl -> clones[o_step][i].y = old_clo[i].y;
+      this_proj -> modelgl -> clones[o_step][i].z = old_clo[i].z;
+    }
+    if (old_clo) g_free (old_clo);
+    old_clo = NULL;
+    if (old_bid) g_free (old_bid);
+    old_bid = NULL;
+  }
+}
+
 void reconstruct_coordinates (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 {
   int h, i, j, k;
@@ -123,6 +197,7 @@ void reconstruct_coordinates (struct project * this_proj, struct insert_object *
   correct_pos_and_get_dim (this_object, TRUE);
   if (upcoord)
   {
+    reconstruct_bonds (this_proj, this_object -> ifcl, this_object -> bcid);
     for (i=0; i<this_object -> atoms; i++)
     {
       j = this_object -> at_list[i].id;
@@ -164,46 +239,16 @@ void reconstruct_coordinates_for_object (struct insert_object * this_object, str
   }
 }
 
-void reconstruct_this_object_from_project (struct insert_object * this_object, struct project * this_proj, gboolean upcoord)
-{
-  int i, j, k, l;
-  int ** old_bid = NULL;
-  old_bid = allocdint (this_object -> bonds, 2);
-  for (i=0; i<this_object -> bonds; i++)
-  {
-    for (j=0; j<2; j++) old_bid[i][j] = this_object -> ibonds[i][j];
-  }
-  g_free (this_object -> ibonds);
-  this_object -> ibonds = allocdint (this_object -> bonds + this_object -> ifcl, 2);
-  for (i=0; i<this_object -> bonds; i++)
-  {
-    for (j=0; j<2; j++) this_object -> ibonds[i][j] = old_bid[i][j];
-  }
-  if (old_bid) g_free (old_bid);
-  old_bid = NULL;
-  for (i=0; i<this_object -> ifcl; i++)
-  {
-    j = this_object -> bcid[i];
-    k = this_object -> bonds;
-    for (l=0; l<2; l++)
-    {
-      this_object -> ibonds[k][l] = j;
-    }
-    this_object -> bonds ++;
-  }
-  reconstruct_coordinates_for_object (this_object, this_proj, upcoord);
-}
-
-void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord, gboolean reconstruct)
+void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 {
   if (this_object -> ifcl)
   {
-    if (reconstruct)
+    if (upcoord)
     {
-      reconstruct_this_object_from_project (this_object, this_proj, upcoord);
+      reconstruct_coordinates_for_object (this_object, this_proj, upcoord);
+      this_object -> ifcl = 0;
       g_free (this_object -> bcid);
       this_object -> bcid = NULL;
-      this_object -> ifcl = 0;
     }
     else
     {
@@ -346,7 +391,7 @@ void clean_object_vois (struct project * this_proj, struct insert_object * objec
           l = tmpv[k];
           if (new_id[l])
           {
-            if (! movtion ||  in_object_bond_list(object, i, new_id[l]-1))
+            if (! movtion || in_object_bond_list(object, i, new_id[l]-1))
             {
               object -> at_list[i].vois[j] = new_id[l]-1;
               j ++;
@@ -360,7 +405,7 @@ void clean_object_vois (struct project * this_proj, struct insert_object * objec
   }
 }
 
-void clean_object_bonds (struct project * proj, int o_step, int sid, int cid, struct insert_object * object, int * new_id, gboolean movtion)
+void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion)
 {
   int h, i, j, k, l, m;
   gboolean doit;
@@ -374,8 +419,7 @@ void clean_object_bonds (struct project * proj, int o_step, int sid, int cid, st
     h = 1;
   }
   i = 0;
-  int * bcid = NULL;
-  if (h == 2) bcid = allocint (proj -> modelgl -> bonds[o_step][1]);
+  object -> bcid = allocint (proj -> modelgl -> bonds[o_step][1]);
   for (j=0; j<h; j++)
   {
     for (k=0; k<proj -> modelgl -> bonds[o_step][j]; k++)
@@ -391,27 +435,12 @@ void clean_object_bonds (struct project * proj, int o_step, int sid, int cid, st
         i ++;
         if (j)
         {
-          bcid[k] = 1;
+          object -> bcid[object -> ifcl] = k;
           object -> ifcl ++;
         }
       }
     }
   }
-  if (object -> ifcl)
-  {
-    object -> bcid = allocint (object -> ifcl);
-    k = 0;
-    for (j=0; j<proj -> modelgl -> bonds[o_step][1]; j++)
-    {
-      if (bcid[j])
-      {
-        object -> bcid[k] = new_id[j];
-        k ++;
-      }
-    }
-  }
-  if (bcid) g_free (bcid);
-  bcid = NULL;
   if (i)
   {
     object -> ibonds = allocdint (i, 2);
@@ -427,15 +456,17 @@ void clean_object_bonds (struct project * proj, int o_step, int sid, int cid, st
 }
 
 void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
-                       int status, int cid, int o_step, int numa, int * new_id, gboolean alloc_new_id, atom_search * remove)
+                       int status, int cid, int o_step, int numa, int * old_id, gboolean alloc_new_id, atom_search * remove)
 {
   int i, j, k;
   this_object -> atoms = numa;
   this_object -> at_list = g_malloc0 (this_object -> atoms*sizeof*this_object -> at_list);
   int * tmpsp = allocint (this_proj -> nspec);
+  int * new_id = allocint (this_proj -> natomes);
   for (i=0; i<this_object -> atoms; i++)
   {
-    j = new_id[i]-1;
+    j = old_id[i]-1;
+    new_id[j] = i+1;
     if (remove) remove -> todo[j] = 1;
     k = this_proj -> atoms[o_step][j].sp;
     this_object -> old_z[k] = (int) this_proj -> chemistry -> chem_prop[CHEM_Z][k];
@@ -453,11 +484,12 @@ void add_object_atoms (struct insert_object * this_object, struct project * this
   gboolean movtion = ((object_motion && this_proj -> modelgl -> rebuild[0][0]) || (! object_motion && this_proj -> modelgl -> rebuild[1][0]));
   if (alloc_new_id)
   {
-    clean_object_bonds (this_proj, o_step, status, cid, this_object, new_id, movtion);
+    clean_object_bonds (this_proj, o_step, this_object, new_id, movtion);
+    check_coord_modification (this_proj, NULL, & this_object -> at_list[0], this_object, FALSE, FALSE);
   }
+  g_free (old_id);
   g_free (new_id);
-  check_coord_modification (this_proj, NULL, & this_object -> at_list[0], this_object, FALSE, FALSE);
-  correct_coordinates_for_object (this_proj, this_object, FALSE, movtion);
+  correct_coordinates_for_object (this_proj, this_object, movtion);
 }
 
 struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove)
@@ -536,7 +568,7 @@ struct insert_object * create_object_from_selection (struct project * this_proj)
 
 struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 {
-  int i, j, k, l, m, n;
+  int i, j, k, l, m;
   struct insert_object * this_object =  g_malloc0 (sizeof*this_object);
   gchar * str;
   int o_step = this_proj -> modelgl -> anim -> last -> img -> step;
@@ -578,7 +610,6 @@ struct insert_object * create_object_from_atom_coordination (struct project * th
   this_object -> old_z[j] = (int) this_proj -> chemistry -> chem_prop[CHEM_Z][j];
   this_object -> at_list[0] = * duplicate_atom (& this_proj -> atoms[o_step][aid]);
   if (remove) remove_search -> todo[aid] = 1;
-  struct distance dist;
   gboolean movtion = (object_motion && this_proj -> modelgl -> rebuild[0][0]) || (! object_motion && this_proj -> modelgl -> rebuild[1][0]);
   if (this_proj -> atoms[o_step][aid].numv)
   {
@@ -593,50 +624,11 @@ struct insert_object * create_object_from_atom_coordination (struct project * th
       this_object -> at_list[i+1] = * duplicate_atom (& this_proj -> atoms[o_step][j]);
       k = this_proj -> atoms[o_step][j].sp;
       this_object -> old_z[k] = (int) this_proj -> chemistry -> chem_prop[CHEM_Z][k];
-      if (this_proj -> modelgl -> bonds[o_step][1])
-      {
-        dist = distance_3d (& this_proj -> cell, (this_proj -> cell.npt) ? o_step : 0, & this_proj -> atoms[o_step][aid], & this_proj -> atoms[o_step][j]);
-        if (dist.pbc) this_object -> ifcl ++;
-      }
     }
-    this_object -> ibonds = allocdint (i, 2);
-    for (j=0; j<i; j++)
-    {
-      this_object -> ibonds[j][0] = 0;
-      this_object -> ibonds[j][1] = j+1;
-    }
-    this_object -> bonds = i;
-    if (this_object -> ifcl)
-    {
-      this_object -> bcid = allocint (this_object -> ifcl);
-      n = 0;
-      for (i=0; i<this_proj -> atoms[o_step][aid].numv; i++)
-      {
-        j = this_proj -> atoms[o_step][aid].vois[i];
-        for (k=0; k<this_proj -> modelgl -> bonds[o_step][1]; k++)
-        {
-          l = this_proj -> modelgl -> bondid[o_step][1][k][0];
-          m = this_proj -> modelgl -> bondid[o_step][1][k][1];
-          if ((l==aid && m==j) || (l==j && m==aid))
-          {
-            this_object -> bcid[n] = k;
-            n ++;
-            break;
-          }
-        }
-        if (n == this_object -> ifcl) break;
-      }
-      if (n != this_object -> ifcl) this_object -> ifcl = n;
-      if (! n)
-      {
-        g_free (this_object -> bcid);
-        this_object -> bcid = NULL;
-      }
-    }
-    clean_object_vois (this_proj, this_object, new_id, movtion);
+    clean_object_bonds (this_proj, o_step, this_object, new_id, movtion);
     if (new_id) g_free (new_id);
+    correct_coordinates_for_object (this_proj, this_object, movtion);
   }
-  correct_coordinates_for_object (this_proj, this_object, FALSE, movtion);
   return this_object;
 }
 
@@ -828,11 +820,6 @@ int create_object_from_open_project (struct project * this_proj, int p)
       }
     }
     lib_object -> ifcl = other_proj -> modelgl -> bonds[o_step][1];
-    if (lib_object -> ifcl)
-    {
-      lib_object -> bcid = allocint (lib_object -> ifcl);
-      for (j=0; j<lib_object -> ifcl; j++) lib_object -> bcid[j] = j;
-    }
   }
   else
   {
@@ -853,14 +840,11 @@ int create_object_from_open_project (struct project * this_proj, int p)
         i ++;
       }
     }
-    if (alloc_new_id)
-    {
-      clean_object_bonds (other_proj, o_step, this_proj -> modelgl -> other_status, -1, lib_object, new_id, TRUE);
-      g_free (new_id);
-    }
+    clean_object_bonds (other_proj, o_step, lib_object, new_id, alloc_new_id);
+    g_free (new_id);
     check_coord_modification (other_proj, NULL, & lib_object -> at_list[0], lib_object, FALSE, FALSE);
   }
-  correct_coordinates_for_object (other_proj, lib_object, FALSE, TRUE);
+  correct_coordinates_for_object (other_proj, lib_object, TRUE);
   if (this_proj -> modelgl -> other_status < 2) adjust_object_frag_coord (lib_object);
   return FROM_PROJECT;
 }
@@ -886,7 +870,6 @@ void clean_this_object (int orig, int act, struct project * this_proj, atom_sear
       if (object -> baryc) g_free (object -> baryc);
       if (object -> at_list) g_free (object -> at_list);
       if (object -> coord) g_free (object -> coord);
-      if (object -> bcid) g_free (object -> bcid);
       object -> atoms = object -> bonds = 0;
       asearch -> in_selection --;
       if (object -> prev != NULL)

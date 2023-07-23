@@ -239,7 +239,6 @@ GMenu * create_curve_submenu (GSimpleActionGroup * action_group, gchar * act, ti
   struct project * this_proj;
   GMenu * menu = g_menu_new ();
   int i, j, k;
-  gchar * str;
   gboolean * create_proj = allocbool (nprojects);
   gboolean ** create_menu = allocdbool (nprojects, NCALCS);
   for (i=0; i<nprojects; i++)
