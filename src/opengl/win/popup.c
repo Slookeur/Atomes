@@ -247,7 +247,7 @@ gchar * get_object_from_action (GSimpleAction * action)
       {
         for (j=0; j<3; j++)
         {
-          str = (i < 10) ? g_strdup_printf (".%d.%d", i, j) : g_strdup_printf ("%d.%d", i, j);
+          str = g_strdup_printf ("-%d.%d", j, i);
           if (g_strcmp0(str, act_end) == 0)
           {
             g_free (str);

@@ -770,49 +770,15 @@ void adjust_object_frag_coord (struct insert_object * object)
       k++;
     }
   }
-  g_debug ("Object coord= %d, initproj coord= %d\n", j, object -> coord -> totcoord[2]);
   object -> coord -> totcoord[2] = j;
+
   for (i=0; i<object -> atoms; i++)
   {
     j = corf[object -> at_list[i].coord[2]];
     object -> at_list[i].coord[2] -= j;
+    object -> at_list[i].id = i;
   }
-
-
   remove_bonds_from_project (NULL, object, NULL, object -> atoms, & object -> at_list[0], FALSE);
-
-
-  /*j = object -> coord -> totcoord[2];
-  int * bonds = allocint (2);
-  bonds[0] = object -> bonds;
-  int ** bondid[2];
-  bondid[0] = allocdint (object -> bonds, 2);
-  for (i=0; i<object -> bonds; i++)
-  {
-    bondid[0][i][0] = object -> ibonds[i][0];
-    bondid[0][i][1] = object -> ibonds[i][1];
-  }
-    k = test_this_fragment (object -> atoms, object -> coord -> totcoord[2], i, & object -> at_list[0], bonds, bondid, NULL, FALSE);
-    if (k > 0)
-    {
-      g_free (showfrag);
-      showfrag = allocbool (this_proj -> coord -> totcoord[2]+k);
-       for (m=0; m<this_proj -> coord -> totcoord[2]; m++) showfrag[m] = show_this[m];
-          for (m=this_proj -> coord -> totcoord[2]; m<this_proj -> coord -> totcoord[2]+k; m++) showfrag[m] = show_this[i-l];
-          g_free (show_this);
-          show_this = duplicate_bool (this_proj -> coord -> totcoord[2]+k, showfrag);
-        }
-
-  for (i=0; i<j; i++)
-  {
-    k = test_this_fragment (object -> atoms, object -> coord -> totcoord[2], i, & object -> at_list[0], bonds, bondid, NULL, FALSE);
-    g_debug ("i= %d, Object coord= %d, k\n", i+1, object -> coord -> totcoord[2], k);
-    object -> coord -> totcoord[2] += k;
-  }
-  g_debug ("Object coord= %d\n", object -> coord -> totcoord[2]);
-
-  g_free (bonds);
-  g_free (bondid[0]);*/
 }
 
 int create_object_from_open_project (struct project * this_proj, int p)

@@ -13,8 +13,6 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "atom_edit.h"
 
-gboolean * showfrag;
-
 int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc)
 {
   int i, j, k, l;
@@ -315,7 +313,8 @@ void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
 }
 
 void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
-                      gboolean * showcoord[2], gboolean * showpoly[2], gboolean update_it, gboolean update_frag, gboolean update_mol)
+                      gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
+                      gboolean update_it, gboolean update_frag, gboolean update_mol)
 {
   int i, j, k;
   for (i=0; i<4; i++)
@@ -437,7 +436,7 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
   }
 }
 
-void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean update_frag)
+void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag)
 {
   // Now OpenGL data
   int old_spec = this_proj -> nspec;
@@ -579,5 +578,5 @@ void recover_opengl_data (struct project * this_proj, int nmols, int add, int re
     set_advanced_bonding_menus (this_proj -> modelgl);
 #endif
   }
-  new_coord_menus (this_proj, this_proj -> modelgl -> atom_win -> coord, new_spec, nmols, showcoord, showpoly, update_it, update_frag, (add || rem) ? FALSE : (! nmols) ? TRUE : FALSE);
+  new_coord_menus (this_proj, this_proj -> modelgl -> atom_win -> coord, new_spec, nmols, showcoord, showpoly, showfrag, update_it, update_frag, (add || rem) ? FALSE : (! nmols) ? TRUE : FALSE);
 }

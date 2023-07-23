@@ -28,7 +28,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #define TOLAB 3
 #define TOPIC 4
 
-extern gboolean * showfrag;
 extern GtkWidget * selection_tab (atom_search * asearch, int nats);
 extern G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data);
 extern void save_rotation_quaternion (glwin * view);
@@ -92,7 +91,7 @@ extern G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data);
 
 extern void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object);
 extern void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list);
-extern void remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, int new_atoms, struct atom * new_list, gboolean remove);
+extern gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, int new_atoms, struct atom * new_list, gboolean remove);
 #ifdef GTK4
 extern G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer data);
 #else
@@ -155,7 +154,7 @@ extern void check_coord_modification (struct project * this_proj, int old_id[], 
                                       struct insert_object * this_object, gboolean movtion, gboolean passivating);
 extern void print_coord_info (struct project * this_proj, coord_info * coord);
 extern coord_info * duplicate_coord_info (coord_info * old_coord);
-extern void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean update_frag);
+extern void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag);
 
 extern chemical_data * duplicate_chemical_data (int spec, chemical_data * chem);
 extern int find_spec_id (int s, int z, double * list_z);

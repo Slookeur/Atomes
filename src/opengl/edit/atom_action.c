@@ -420,6 +420,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
 
   struct atom * new_list = NULL;
   struct atom * tmp_new = NULL;
+  gboolean * showfrag;
   int ** tmpgeo[2];
   int new_atoms = 0;
   int * old_id;
@@ -516,8 +517,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     {
       if (asearch -> update_bonding)
       {
-        remove_bonds_from_project (this_proj, NULL, old_id, new_atoms, new_list,
-                                  ((asearch -> action == DISPL) || (asearch -> action == RANMOVE)) ? FALSE : TRUE);
+        showfrag = remove_bonds_from_project (this_proj, NULL, old_id, new_atoms, new_list, ((asearch -> action == DISPL) || (asearch -> action == RANMOVE)) ? FALSE : TRUE);
       }
     }
     else
@@ -536,14 +536,16 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   {
     for (i=0; i<2; i++)
     {
-      j= edit -> coord -> species;
-      showfrag = allocbool(j);
-      tmpgeo[i] = g_malloc (j*sizeof*tmpgeo[i]);
-      for (k=0; k<j; k++)
+      tmpgeo[i] = g_malloc (edit -> coord -> species*sizeof*tmpgeo[i]);
+      for (j=0; j<edit -> coord -> species; j++)
       {
-        showfrag[k] = TRUE;
-        tmpgeo[i][k] = allocint (edit -> coord -> ntg[i][k]);
+        tmpgeo[i][j] = allocint (edit -> coord -> ntg[i][j]);
       }
+    }
+    showfrag = allocbool(edit -> coord -> totcoord[2]);
+    for (j=0; j<edit -> coord -> totcoord[2]; j++)
+    {
+      showfrag[j] = TRUE;
     }
   }
 
@@ -823,7 +825,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     this_proj -> natomes = new_atoms;
   }
   // Active project changes in the next call
-  recover_opengl_data (this_proj, nmols, edit -> add_spec, rem_spec, spid, spdel, tmpgeo, asearch -> update_bonding);
+  recover_opengl_data (this_proj, nmols, edit -> add_spec, rem_spec, spid, spdel, tmpgeo, showfrag, asearch -> update_bonding);
 
 #ifdef DEBUG
   if (this_proj -> natomes)
