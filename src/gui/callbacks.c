@@ -530,7 +530,7 @@ void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible)
     apply_project (TRUE);
     active_project_changed (activep);
     add_project_to_workspace ();
-    if (visible) show_info ("Isaacs project file (XML) successfully opened", 0, MainWindow);
+    if (visible) show_info ("ISAACS project file (XML) successfully opened", 0, MainWindow);
   }
   else
   {

@@ -407,6 +407,17 @@ GMenuItem * create_gmenu_item (const gchar * label, const gchar * action, const 
   return item;
 }
 
+void append_submenu (GMenu * menu, const gchar * label, GMenu * submenu)
+{
+  GMenuItem * item = g_menu_item_new (label, NULL);
+  /* GKT4 bug, normally mark-up should be provided using boolean:
+  g_menu_item_set_attribute (item, "use-markup", "b", TRUE, NULL);
+  But it does not work, however it does using a string: */
+  g_menu_item_set_attribute (item, "use-markup", "s", "TRUE", NULL);
+  g_menu_item_set_submenu (item, (GMenuModel *)submenu);
+  g_menu_append_item (menu, item);
+}
+
 void append_menu_item (GMenu * menu, const gchar * label, const gchar * action, const gchar * accel,
                                      const gchar * custom, int format, const gchar * icon,
                                      gboolean check, gboolean status, gboolean radio, const gchar * rstatus)
@@ -493,7 +504,7 @@ GMenu * project_section (gchar * act, int pop_up, int proj, int calc)
     str = g_strdup_printf ("%s.project.close", act);
     append_menu_item (menu, "Close", (const gchar *)str, NULL, NULL, IMG_STOCK, FCLOSE, FALSE, FALSE, FALSE, NULL);
     g_free (str);
-    g_menu_append_submenu (menu, "Export", (GMenuModel*)port_section(act, pop_up, 0));
+    append_submenu (menu, "Export", port_section(act, pop_up, 0));
   }
   return menu;
 }
@@ -501,7 +512,7 @@ GMenu * project_section (gchar * act, int pop_up, int proj, int calc)
 GMenu * import_section (gchar * act)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Import", (GMenuModel*)port_section(act, 0, 1));
+  append_submenu (menu, "Import", port_section(act, 0, 1));
   return menu;
 }
 
@@ -593,10 +604,10 @@ GMenu * create_help_menu ()
 GMenu * atomes_menu_bar ()
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Workspace", (GMenuModel*)create_workspace_menu("app", 0, -1, -1));
-  g_menu_append_submenu (menu, "Edit", (GMenuModel*)create_edit_menu());
-  g_menu_append_submenu (menu, "Analyze", (GMenuModel*)create_analyze_menu());
-  g_menu_append_submenu (menu, "Help", (GMenuModel*)create_help_menu());
+  append_submenu (menu, "Workspace", create_workspace_menu("app", 0, -1, -1));
+  append_submenu (menu, "Edit", create_edit_menu());
+  append_submenu (menu, "Analyze", create_analyze_menu());
+  append_submenu (menu, "Help", create_help_menu());
   return menu;
 }
 

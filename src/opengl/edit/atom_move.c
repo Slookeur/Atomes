@@ -373,14 +373,13 @@ gboolean rebuild_selection (struct project * this_proj, atom_search * asearch, i
     }
     if (j)
     {
-      reconstruct_this_object (this_proj, j, oifcl);
+      reconstruct_this_object_from_project (object, this_proj, TRUE);
       g_free (oifcl);
       oifcl = NULL;
     }
     object = this_proj -> modelgl -> atom_win -> to_be_moved[i];
     while (object)
     {
-      if (object -> ifcl) reconstruct_coordinates_for_object (this_proj, object);
       if (filter < 3)
       {
         recons = TRUE;

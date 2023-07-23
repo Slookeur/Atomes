@@ -230,8 +230,8 @@ GMenu * menu_edit (glwin * view, int popm)
   struct project * this_proj = get_project_by_id(view -> proj);
   GMenu * menu = g_menu_new ();
   append_opengl_item (view, menu, "Crystal Builder", "cbuilder", 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(crystal_window), & view -> colorp[0][0], FALSE, FALSE, FALSE, TRUE);
-  g_menu_append_submenu (menu, "Cell", (GMenuModel*)menu_cell_edit(view, (this_proj -> cell.ltype && this_proj -> steps == 1) ? 1 : 0));
-  g_menu_append_submenu (menu, "Atom(s)", (GMenuModel*)menu_atom_edit(view, (this_proj -> steps == 1) ? 1 : 0));
+  append_submenu (menu, "Cell", menu_cell_edit(view, (this_proj -> cell.ltype && this_proj -> steps == 1) ? 1 : 0));
+  append_submenu (menu, "Atom(s)", menu_atom_edit(view, (this_proj -> steps == 1) ? 1 : 0));
   if (! popm) g_menu_append_section (menu, NULL, (GMenuModel*)extract_section(view));
   return menu;
 }

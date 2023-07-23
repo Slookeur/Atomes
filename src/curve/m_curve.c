@@ -291,11 +291,10 @@ GMenu * create_curve_submenu (GSimpleActionGroup * action_group, gchar * act, ti
   {
     if (create_proj[i])
     {
-      str = g_strdup_printf ("%s", prepare_for_title(get_project_by_id(i) -> name));
       smenu = g_menu_new ();
-      if (create_menu[i][data -> b]) g_menu_append_submenu (smenu, graph_name[data -> b], (GMenuModel*)curve_section(action_group, act, this_proj -> curves[data -> b][data -> c] -> extrac, add, edit, i, data -> b, data));
-      if (j && create_menu[i][k]) g_menu_append_submenu (smenu, graph_name[k], (GMenuModel*)curve_section(action_group, act, this_proj -> curves[data -> b][data -> c] -> extrac, add, edit, i, k, data));
-      g_menu_append_submenu (menu, str, (GMenuModel *)smenu);
+      if (create_menu[i][data -> b]) append_submenu (smenu, graph_name[data -> b], curve_section(action_group, act, this_proj -> curves[data -> b][data -> c] -> extrac, add, edit, i, data -> b, data));
+      if (j && create_menu[i][k]) append_submenu (smenu, graph_name[k], curve_section(action_group, act, this_proj -> curves[data -> b][data -> c] -> extrac, add, edit, i, k, data));
+      append_submenu (menu, get_project_by_id(i) -> name, smenu);
     }
   }
   g_free (create_proj);
@@ -359,9 +358,9 @@ GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_
 {
   GMenu * menu = g_menu_new ();
   prep_extra_rid (data);
-  g_menu_append_submenu (menu, "Data", (GMenuModel*)create_data_menu(action_group, 0, str, data));
+  append_submenu (menu, "Data", create_data_menu(action_group, 0, str, data));
   g_free (extrarid);
-  g_menu_append_submenu (menu, "Curve", (GMenuModel*)create_curve_menu(str));
+  append_submenu (menu, "Curve", create_curve_menu(str));
   return menu;
 }
 

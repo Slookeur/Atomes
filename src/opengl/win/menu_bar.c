@@ -71,12 +71,12 @@ void append_opengl_item (glwin * view, GMenu * menu, const gchar * name, const g
 GMenu * prepare_opengl_menu (glwin * view)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Style", (GMenuModel*)menu_style(view));
+  append_submenu (menu, "Style", menu_style(view));
   GMenuItem * item = g_menu_item_new ("Color Scheme(s)", (get_project_by_id(view -> proj) -> nspec) ? NULL : "None");
   g_menu_item_set_submenu (item, (GMenuModel*)menu_map(view));
   g_menu_append_item (menu, item);
-  g_menu_append_submenu (menu, "Render", (GMenuModel*)menu_render(view));
-  g_menu_append_submenu (menu, "Quality", (GMenuModel*)menu_quality(view));
+  append_submenu (menu, "Render", menu_render(view));
+  append_submenu (menu, "Quality", menu_quality(view));
   append_opengl_item (view, menu, "Material And Lights", "material", 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_opengl_advanced), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
   append_opengl_item (view, menu, "Render Image", "image", 0, "<CTRL>I", IMG_FILE, PACKAGE_IMG, FALSE, G_CALLBACK(to_render_gl_image), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
   return menu;
@@ -85,9 +85,9 @@ GMenu * prepare_opengl_menu (glwin * view)
 GMenu * prepare_model_menu (glwin * view)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Atom(s)", (GMenuModel*)menu_atoms(view, 0));
-  g_menu_append_submenu (menu, "Bond(s)", (GMenuModel*)menu_bonds(view, 0));
-  g_menu_append_submenu (menu, "Clone(s)", (GMenuModel*)menu_clones(view));
+  append_submenu (menu, "Atom(s)", menu_atoms(view, 0));
+  append_submenu (menu, "Bond(s)", menu_bonds(view, 0));
+  append_submenu (menu, "Clone(s)", menu_clones(view));
   g_menu_append_item (menu, menu_box_axis (view, 0));
   return menu;
 }
@@ -95,11 +95,11 @@ GMenu * prepare_model_menu (glwin * view)
 GMenu * prepare_coord_menu (glwin * view)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Coordination", (GMenuModel*)menu_coord (view));
-  g_menu_append_submenu (menu, "Polyhedra", (GMenuModel*)menu_poly (view));
+  append_submenu (menu, "Coordination", menu_coord (view));
+  append_submenu (menu, "Polyhedra", menu_poly (view));
   if (view -> rings)
   {
-    g_menu_append_submenu (menu, "Rings(s)", (GMenuModel*)menu_rings (view));
+    append_submenu (menu, "Rings(s)", menu_rings (view));
   }
   else
   {
@@ -107,7 +107,7 @@ GMenu * prepare_coord_menu (glwin * view)
   }
   if (view -> chains)
   {
-    g_menu_append_submenu (menu, "Chain(s)", (GMenuModel*)add_menu_coord (view, 9));
+    append_submenu (menu, "Chain(s)", add_menu_coord (view, 9));
   }
   else
   {
@@ -115,7 +115,7 @@ GMenu * prepare_coord_menu (glwin * view)
   }
   if (view -> adv_bonding[0])
   {
-    g_menu_append_submenu (menu, "Fragment(s)", (GMenuModel*)add_menu_coord (view, 2));
+    append_submenu (menu, "Fragment(s)", add_menu_coord (view, 2));
   }
   else
   {
@@ -123,7 +123,7 @@ GMenu * prepare_coord_menu (glwin * view)
   }
   if (view -> adv_bonding[1])
   {
-    g_menu_append_submenu (menu, "Molecule(s)", (GMenuModel*)add_menu_coord (view, 3));
+    append_submenu (menu, "Molecule(s)", add_menu_coord (view, 3));
   }
   else
   {
@@ -136,20 +136,20 @@ GMenu * prepare_coord_menu (glwin * view)
 GMenu * opengl_menu_bar (glwin * view, gchar * str)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "OpenGL", (GMenuModel*)prepare_opengl_menu(view));
+  append_submenu (menu, "OpenGL", prepare_opengl_menu(view));
   if (get_project_by_id(view -> proj) -> natomes)
   {
-    g_menu_append_submenu (menu, "Model", (GMenuModel*)prepare_model_menu(view));
-    g_menu_append_submenu (menu, "Chemistry", (GMenuModel*)prepare_coord_menu(view));
+    append_submenu (menu, "Model", prepare_model_menu(view));
+    append_submenu (menu, "Chemistry", prepare_coord_menu(view));
   }
   else
   {
     append_menu_item (menu, "Model", "None", NULL, NULL, IMG_NONE, NULL, FALSE, FALSE, FALSE, NULL);
     append_menu_item (menu, "Chemistry", "None", NULL, NULL, IMG_NONE, NULL, FALSE, FALSE, FALSE, NULL);
   }
-  g_menu_append_submenu (menu, "Tools", (GMenuModel*)menu_tools(view, 0));
-  g_menu_append_submenu (menu, "View", (GMenuModel*)menu_view(view, 0));
-  g_menu_append_submenu (menu, "Animate", (GMenuModel*)menu_anim(view));
+  append_submenu (menu, "Tools", menu_tools(view, 0));
+  append_submenu (menu, "View", menu_view(view, 0));
+  append_submenu (menu, "Animate", menu_anim(view));
   return menu;
 }
 

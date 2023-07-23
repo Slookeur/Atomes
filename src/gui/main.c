@@ -74,7 +74,7 @@ void printhelp()
                    "  -v, --version             version information\n"
                    "  -h, --help                display this help message\n\n"
                    "files, any number, in any order, in the following formats:\n\n"
-                   "  Atomes workspace file: .awf:\n"
+                   "  Atomes workspace file: .awf\n"
                    "  Atomes prject file: .apf\n"
                    "  XYZ coordinates file: .xyz\n"
                    "  Chem3D coordinates file: .c3d\n"
@@ -108,7 +108,7 @@ void printhelp()
 
 void printversion ()
 {
-  char scanid[80]="\n3D model analysis and edition tool\n";
+  char scanid[80]="\n3D atomistic model analysis, creation/edition and post-processing tool\n";
   char bug[20] = "\nReport a bug to <";
   char eh[4] = ">\n";
 
@@ -260,7 +260,6 @@ void open_this_data_file (int file_type, gchar * file_name)
   DIR * d;
   struct dirent * dir;
 #endif
-
   switch (file_type)
   {
     case 1:

@@ -357,7 +357,7 @@ GMenu * volume_section (glwin * view)
 GMenu * edit_section (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Edit", (GMenuModel*)menu_edit(view, popm));
+  append_submenu (menu, "Edit", menu_edit(view, popm));
   return menu;
 }
 
@@ -435,8 +435,8 @@ GMenu * selection_mode_menu (glwin * view)
 GMenu * modes_section (glwin * view)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Mouse Mode", (GMenuModel*)mouse_mode_menu(view));
-  g_menu_append_submenu (menu, "Selection Mode", (GMenuModel*)selection_mode_menu(view));
+  append_submenu (menu, "Mouse Mode", mouse_mode_menu(view));
+  append_submenu (menu, "Selection Mode", selection_mode_menu(view));
   return menu;
 }
 
@@ -476,7 +476,7 @@ GMenu * inv_menu (glwin * view)
 GMenu * add_section_item_with_menu (glwin * view, gchar * item_name, GMenu * men)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, item_name, (GMenuModel*)men);
+  append_submenu (menu, item_name, men);
   return menu;
 }
 

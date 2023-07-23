@@ -317,7 +317,7 @@ GMenuItem * menu_box_axis (glwin * view, int ab)
   append_opengl_item (view, menu, "Show/Hide", (ab) ? "show-axis" : "show-box", 0, NULL, IMG_NONE, NULL, FALSE,
                       G_CALLBACK(show_hide_box_axis), & view -> colorp[0][ab], TRUE, (i != NONE) ? TRUE : FALSE, FALSE, (ab) ? TRUE : get_project_by_id(view -> proj) -> cell.ltype);
 
-  g_menu_append_submenu (menu, "Style", (GMenuModel*)axis_box_style (view, ab, i));
+  append_submenu (menu, "Style", axis_box_style (view, ab, i));
   GMenuItem * item ;
   if (i == WIREFRAME)
   {
@@ -340,7 +340,7 @@ GMenuItem * menu_box_axis (glwin * view, int ab)
     append_opengl_item (view, menu, "box-color", "box-color", 0, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
     append_opengl_item (view, menu, "More colors ...", "box-color", 0, NULL, IMG_NONE, NULL, FALSE,
                         G_CALLBACK(to_run_box_color_window), view, FALSE, FALSE, FALSE, get_project_by_id(view -> proj) -> cell.ltype);
-    g_menu_append_submenu (menu, "Color", (GMenuModel*)menuc);
+    append_submenu (menu, "Color", menuc);
     g_object_unref (menuc);
     append_opengl_item (view, menu, "Advanced", "box-advanced", 0, NULL, IMG_STOCK, DPROPERTIES, FALSE,
                       G_CALLBACK(box_advanced), (gpointer)view, FALSE, FALSE, FALSE, TRUE);

@@ -516,7 +516,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     {
       if (asearch -> update_bonding)
       {
-        remove_bonds_from_project (this_proj, old_id, new_atoms, new_list,
+        remove_bonds_from_project (this_proj, NULL, old_id, new_atoms, new_list,
                                   ((asearch -> action == DISPL) || (asearch -> action == RANMOVE)) ? FALSE : TRUE);
       }
     }
@@ -524,7 +524,10 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     {
       i = this_proj -> coord -> totcoord[2] + edit -> coord -> totcoord[2];
       showfrag = allocbool (i);
-      for (j=0; j<this_proj -> coord -> totcoord[2]; j++) showfrag[j] = this_proj -> modelgl -> anim -> last -> img -> show_coord[2][j];
+      for (j=0; j<this_proj -> coord -> totcoord[2]; j++)
+      {
+        showfrag[j] = this_proj -> modelgl -> anim -> last -> img -> show_coord[2][j];
+      }
       for (j=this_proj -> coord -> totcoord[2]; j<i; j++) showfrag[j] = TRUE;
     }
     if (! passivating) g_free (old_id);

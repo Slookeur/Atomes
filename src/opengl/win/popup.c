@@ -252,7 +252,7 @@ gchar * get_object_from_action (GSimpleAction * action)
           {
             g_free (str);
             g_free (act_end);
-            return g_strdup_printf ("%s in %s", action_atoms[j], g_strdup_printf ("%s (%d)", prepare_for_title(get_project_by_id(i) -> name), i+1));
+            return g_strdup_printf ("%s in %s", action_atoms[j], g_strdup_printf ("%s (%d)", get_project_by_id(i) -> name, i+1));
           }
           g_free (str);
         }
@@ -2189,7 +2189,7 @@ GMenu * add_edition_sub_menu (glwin * view, gchar * act, int aid, GCallback hand
     if (mol[i].type)
     {
       menus = g_menu_new ();
-      g_menu_append_submenu (menu, mol[i].type, (GMenuModel*)menus);
+      append_submenu (menu, mol[i].type, menus);
 
     }
     if (mol[i].object)
@@ -2218,7 +2218,7 @@ GMenu * add_edition_sub_menu (glwin * view, gchar * act, int aid, GCallback hand
     {
       if (get_project_by_id(i) -> steps == 1 && get_project_by_id(i) -> natomes)
       {
-        name = g_strdup_printf ("%s (%d)", prepare_for_title(get_project_by_id(i) -> name), i+1);
+        name = g_strdup_printf ("%s (%d)", get_project_by_id(i) -> name, i+1);
         menups = g_menu_new ();
         for (j=0; j<3; j++)
         {
@@ -2228,13 +2228,13 @@ GMenu * add_edition_sub_menu (glwin * view, gchar * act, int aid, GCallback hand
           g_free (word);
           g_free (str);
         }
-        g_menu_append_submenu (menup, name, (GMenuModel*)menups);
+        append_submenu (menup, name, menups);
         g_object_unref (menups);
         g_free (name);
       }
     }
     g_free (eact);
-    g_menu_append_submenu (menu, "Import From Project", (GMenuModel*)menup);
+    append_submenu (menu, "Import From Project", menup);
     g_object_unref (menup);
   }
   eact = g_strdup_printf ("cp-%s-%d", act, aid);
@@ -2338,8 +2338,8 @@ void add_edition_sub_menu (GtkWidget * item, GCallback handler, gpointer data)
     {
       if (get_project_by_id(i) -> steps == 1 && get_project_by_id(i) -> natomes)
       {
-        name = g_strdup_printf ("%s (%d)", prepare_for_title(get_project_by_id(i) -> name), i+1);
-        sitem = create_menu_item (TRUE, name);
+        name = g_strdup_printf ("%s (%d)", get_project_by_id(i) -> name, i+1);
+        sitem = create_menu_item_from_widget (markup_label(name, -1, -1, 0.0, 0.5), FALSE, FALSE, FALSE);
         //child = gtk_bin_get_child (GTK_BIN (sitem));
         //gtk_label_set_use_markup (GTK_LABEL(child), 1);
         //g_signal_connect (G_OBJECT (sitem), "activate", handler, data);
@@ -2374,7 +2374,7 @@ GtkWidget * create_selection_item (glwin * view, gchar * str, int id, int ig, in
   if (id == 6)
   {
 #ifdef GTK4
-    g_menu_append_submenu (menu, str, (GMenuModel *)add_style_sub_menu (view, act, aid, handler, data));
+    append_submenu (menu, str, add_style_sub_menu (view, act, aid, handler, data));
 #else
     add_style_sub_menu (sel_item, handler, data);
 #endif
@@ -2385,7 +2385,7 @@ GtkWidget * create_selection_item (glwin * view, gchar * str, int id, int ig, in
     {
       i = get_project_by_id (view -> proj) -> nspec;
 #ifdef GTK4
-      g_menu_append_submenu (menu, str, (GMenuModel*)color_item(view, actc, id, G_CALLBACK(to_run_atom_color_window), & view -> colorp[0][selected_aspec+clone*i]));
+      append_submenu (menu, str, color_item(view, actc, id, G_CALLBACK(to_run_atom_color_window), & view -> colorp[0][selected_aspec+clone*i]));
 #else
       menu_item_set_submenu (sel_item, color_box(view, selected_aspec+clone*i, 0, 0));
 #endif
@@ -2398,7 +2398,7 @@ GtkWidget * create_selection_item (glwin * view, gchar * str, int id, int ig, in
       {
         for (j=0; j<selected_aspec; j++) i += opengl_project -> coord -> ntg[ig][j];
       }
-      g_menu_append_submenu (menu, str, (GMenuModel*)color_item(view, actc, id, G_CALLBACK(window_color_coord), & view -> gcid[ig][i][ig]));
+      append_submenu (menu, str, color_item(view, actc, id, G_CALLBACK(window_color_coord), & view -> gcid[ig][i][ig]));
 #else
       int k;
       j = 2*opengl_project -> nspec;
@@ -2425,7 +2425,7 @@ GtkWidget * create_selection_item (glwin * view, gchar * str, int id, int ig, in
   else if (id == 10)
   {
 #ifdef GTK4
-    g_menu_append_submenu (menu, str, (GMenuModel *)add_edition_sub_menu (view, act, aid, handler, data));
+    append_submenu (menu, str, add_edition_sub_menu (view, act, aid, handler, data));
 #else
     add_edition_sub_menu (sel_item, handler, data);
 #endif
@@ -2480,11 +2480,11 @@ GtkWidget * selection_menu (glwin * view, int ai, int bi, int ac, int id,
 #ifdef GTK4
     if (id == 6)
     {
-      g_menu_append_submenu (menu, str, (GMenuModel *)add_style_sub_menu (view, "tas", aid, handler_a, GINT_TO_POINTER(ai)));
+      append_submenu (menu, str, add_style_sub_menu (view, "tas", aid, handler_a, GINT_TO_POINTER(ai)));
     }
     else if (id == 10)
     {
-      g_menu_append_submenu (menu, str, (GMenuModel *)add_edition_sub_menu (view, "tae", aid, handler_a, GINT_TO_POINTER(ai)));
+      append_submenu (menu, str, add_edition_sub_menu (view, "tae", aid, handler_a, GINT_TO_POINTER(ai)));
     }
     else
     {
@@ -2517,11 +2517,11 @@ GtkWidget * selection_menu (glwin * view, int ai, int bi, int ac, int id,
 #ifdef GTK4
     if (id == 6)
     {
-      g_menu_append_submenu (menu, str, (GMenuModel *)add_style_sub_menu (view, "tb-s", aid, G_CALLBACK(select_action_for_this_bond), GINT_TO_POINTER(id)));
+      append_submenu (menu, str, add_style_sub_menu (view, "tb-s", aid, G_CALLBACK(select_action_for_this_bond), GINT_TO_POINTER(id)));
     }
     else if (id == 10)
     {
-      g_menu_append_submenu (menu, str, (GMenuModel *)add_edition_sub_menu (view, "tb-e", aid, G_CALLBACK(select_action_for_this_bond), GINT_TO_POINTER(id)));
+      append_submenu (menu, str, add_edition_sub_menu (view, "tb-e", aid, G_CALLBACK(select_action_for_this_bond), GINT_TO_POINTER(id)));
     }
     else
     {
@@ -2568,11 +2568,11 @@ GtkWidget * selection_menu (glwin * view, int ai, int bi, int ac, int id,
 #ifdef GTK4
       if (id == 6)
       {
-        g_menu_append_submenu (menu, mot[j][i], (GMenuModel *)add_style_sub_menu (view, "all-s", aid, G_CALLBACK(select_action_for_all), GINT_TO_POINTER(id+k)));
+        append_submenu (menu, mot[j][i], add_style_sub_menu (view, "all-s", aid, G_CALLBACK(select_action_for_all), GINT_TO_POINTER(id+k)));
       }
       else  if (id == 10)
       {
-        g_menu_append_submenu (menu, mot[j][i], (GMenuModel *)add_edition_sub_menu (view, "all-e", aid, G_CALLBACK(select_action_for_all), GINT_TO_POINTER(id+k)));
+        append_submenu (menu, mot[j][i], add_edition_sub_menu (view, "all-e", aid, G_CALLBACK(select_action_for_all), GINT_TO_POINTER(id+k)));
       }
       else
       {
@@ -2965,7 +2965,7 @@ void popup_selection (glwin * view, double ptx, double pty, int se, int pe, int 
     if (go)
     {
 #ifdef GTK4
-      g_menu_append_submenu (menua, menu_names[j], (GMenuModel *)selection_menu (i, view, ai, bi, ac, j, handlers[j][0], handlers[j][1], handlers[j][2]));
+      append_submenu (menua, menu_names[j], selection_menu (i, view, ai, bi, ac, j, handlers[j][0], handlers[j][1], handlers[j][2]));
 #else
       add_menu_child (menu, menu_item_new_with_submenu(menu_names[j], TRUE, selection_menu (view, ai, bi, ac, j, handlers[j][0], handlers[j][1], handlers[j][2])));
 #endif
@@ -3041,14 +3041,14 @@ G_MODULE_EXPORT void to_center_this_molecule (GtkWidget * widg, gpointer data)
 GMenu * tools_section (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Tools", (GMenuModel *)menu_tools(view, popm));
+  append_submenu (menu, "Tools", menu_tools(view, popm));
   return menu;
 }
 
 GMenu * anim_section (glwin * view)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Animate", (GMenuModel *)menu_anim(view));
+  append_submenu (menu, "Animate", menu_anim(view));
   return menu;
 }
 
@@ -3178,7 +3178,7 @@ void popup_main_menu (glwin * view, double ptx, double pty)
   else
   {
     g_menu_append_section (gmenu, NULL, (GMenuModel *)tools_section(view, 1));
-    g_menu_append_submenu (gmenu, "Insert", (GMenuModel *)add_edition_sub_menu (view, "ins", 0, G_CALLBACK(to_add_object), & view -> colorp[0][0]));
+    append_submenu (gmenu, "Insert", add_edition_sub_menu (view, "ins", 0, G_CALLBACK(to_add_object), & view -> colorp[0][0]));
     if (opengl_project -> steps == 1) g_menu_append_section (gmenu, NULL, (GMenuModel *)extract_section(view));
     append_opengl_item (view, gmenu, "Reset Motion", "res-mot", 0, NULL, IMG_STOCK, MEDIA_LOOP, FALSE, G_CALLBACK(reset_coords), view, FALSE, FALSE, FALSE, TRUE);
   }

@@ -2071,7 +2071,7 @@ int get_selected_object_id (gboolean visible, int p, gchar * str, atom_search * 
   }
   for (i=0; i<nprojects; i++)
   {
-    name = g_strdup_printf ("%s (%d)", prepare_for_title(get_project_by_id(i) -> name), i+1);
+    name = g_strdup_printf ("%s (%d)", get_project_by_id(i) -> name, i+1);
     for (j=0; j<3; j++)
     {
       word = g_strdup_printf ("%s in %s", action_atoms[j], name);
@@ -2288,7 +2288,7 @@ GtkTreeModel * replace_combo_tree (gboolean insert, int p)
       if (get_project_by_id(i) -> steps == 1 && get_project_by_id(i) -> natomes)
       {
         gtk_tree_store_append (store, &iter2, &iter);
-        name = g_strdup_printf ("%s (%d)", prepare_for_title(get_project_by_id(i) -> name), i+1);
+        name = g_strdup_printf ("%s (%d)", get_project_by_id(i) -> name, i+1);
         gtk_tree_store_set (store, & iter2, 0, name, -1);
         for (j=0; j<3; j++)
         {

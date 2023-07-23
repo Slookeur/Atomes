@@ -396,14 +396,14 @@ GMenu * menu_show_coord (glwin * view, int id, int mid)
           else
           {
             strb = g_strdup_printf ("%s-c", stra);
-            g_menu_append_submenu (menus, stra, (GMenuModel*)color_item(view, strb, k+j, G_CALLBACK(window_color_coord), & view -> gcid[id][k+j][id]));
+            append_submenu (menus, stra, color_item(view, strb, k+j, G_CALLBACK(window_color_coord), & view -> gcid[id][k+j][id]));
           }
           g_free (stra);
           g_free (strb);
         }
       }
     }
-    g_menu_append_submenu (menu, this_proj -> chemistry -> label[i], (GMenuModel*)menus);
+    append_submenu (menu, this_proj -> chemistry -> label[i], menus);
     g_object_unref (menus);
   }
   return menu;
@@ -433,7 +433,7 @@ GMenu * menu_show_frag_mol (glwin * view, int id, int mid)
       }
       else
       {
-        g_menu_append_submenu (menu, stra, (GMenuModel*)color_item(view, (id == 2) ? "fcol": "mcol", i, G_CALLBACK(window_color_coord), & view -> gcid[id][i][id]));
+        append_submenu (menu, stra, color_item(view, (id == 2) ? "fcol": "mcol", i, G_CALLBACK(window_color_coord), & view -> gcid[id][i][id]));
       }
       g_free (stra);
       g_free (strb);
@@ -450,7 +450,7 @@ GMenu * menu_show_rings (glwin * view, int id, int mid)
   if (! mid)
   {
     menus = g_menu_new ();
-    g_menu_append_submenu (menu, (id < 9) ? "Atoms In Ring(s) of Size " : "Atoms In Chain(s) of Size ", (GMenuModel*)menus);
+    append_submenu (menu, (id < 9) ? "Atoms In Ring(s) of Size " : "Atoms In Chain(s) of Size ", menus);
   }
   struct project * this_proj = get_project_by_id (view -> proj);
   gchar * rin = g_strdup_printf ("rcol-%d", id);
@@ -466,7 +466,7 @@ GMenu * menu_show_rings (glwin * view, int id, int mid)
     }
     else
     {
-      g_menu_append_submenu (menu, str, (GMenuModel*)color_item(view, rin, i, G_CALLBACK(window_color_coord), & view -> gcid[id][i][id]));
+      append_submenu (menu, str, color_item(view, rin, i, G_CALLBACK(window_color_coord), & view -> gcid[id][i][id]));
     }
     g_free (str);
   }
@@ -487,15 +487,15 @@ GMenu * add_menu_coord (glwin * view, int id)
     {
       if (id < 2)
       {
-        g_menu_append_submenu (menu, menu_name[i], (GMenuModel*) menu_show_coord(view, id, i));
+        append_submenu (menu, menu_name[i], menu_show_coord(view, id, i));
       }
       else if (id < 4)
       {
-        g_menu_append_submenu (menu, menu_name[i], (GMenuModel*) menu_show_frag_mol(view, id, i));
+        append_submenu (menu, menu_name[i], menu_show_frag_mol(view, id, i));
       }
       else if (id < 10)
       {
-        g_menu_append_submenu (menu, menu_name[i], (GMenuModel*) menu_show_rings(view, id, i));
+        append_submenu (menu, menu_name[i], menu_show_rings(view, id, i));
       }
     }
     append_opengl_item (view, menu, "Advanced", "adv-c", id, NULL, IMG_STOCK, (gpointer)DPROPERTIES, FALSE,
@@ -507,8 +507,8 @@ GMenu * add_menu_coord (glwin * view, int id)
 GMenu * menu_coord (glwin * view, int id)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Total(s)", (GMenuModel*)add_menu_coord(view, 0));
-  g_menu_append_submenu (menu, "Partial(s)", (GMenuModel*)add_menu_coord(view, 1));
+  append_submenu (menu, "Total(s)", add_menu_coord(view, 0));
+  append_submenu (menu, "Partial(s)", add_menu_coord(view, 1));
   return menu;
 }
 
@@ -522,7 +522,7 @@ GMenu * menu_rings (glwin * view, int id)
     {
       if (view -> ring_max[i])
       {
-        g_menu_append_submenu (menu, rings_type[i], (GMenuModel*)add_menu_coord (view, 4+i));
+        append_submenu (menu, rings_type[i], add_menu_coord (view, 4+i));
       }
     }
   }

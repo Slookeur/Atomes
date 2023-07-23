@@ -291,17 +291,17 @@ GMenu * menu_bonds (glwin * view, int at)
       {
         str = g_strdup_printf ("Cylinder(s) [ %f Å ]", view -> anim -> last -> img -> radall[1]);
       }
-      g_menu_append_submenu (menu, "Cylinder Radius(ii)", (GMenuModel *)create_bond_layout_section (view, str, (at) ? "clone-cyl-rad" : "atom-cyl-rad", 0, G_CALLBACK(window_bonds), & view -> colorp[2+at][0], sensitive));
+      append_submenu (menu, "Cylinder Radius(ii)", create_bond_layout_section (view, str, (at) ? "clone-cyl-rad" : "atom-cyl-rad", 0, G_CALLBACK(window_bonds), & view -> colorp[2+at][0], sensitive));
       g_free (str);
       break;
     case BALL_AND_STICK:
       str = label_cutrab (get_project_by_id(view -> proj), view, 1+at);
-      g_menu_append_submenu (menu, "Radius(ii)", (GMenuModel *)create_bond_layout_section (view, str, (at) ? "clone-rad" : "atom-rad", 1, G_CALLBACK(set_bond_parameter), & view -> colorp[at][0], sensitive));
+      append_submenu (menu, "Radius(ii)", create_bond_layout_section (view, str, (at) ? "clone-rad" : "atom-rad", 1, G_CALLBACK(set_bond_parameter), & view -> colorp[at][0], sensitive));
       g_free (str);
       break;
     case WIREFRAME:
       str = label_cutrab (get_project_by_id(view -> proj), view, 3+at);
-      g_menu_append_submenu (menu, "Line Width(s)", (GMenuModel *)create_bond_layout_section (view, str, (at) ? "clone-line" : "atom-line", 2, G_CALLBACK(set_bond_parameter), & view -> colorp[at][1], sensitive));
+      append_submenu (menu, "Line Width(s)", create_bond_layout_section (view, str, (at) ? "clone-line" : "atom-line", 2, G_CALLBACK(set_bond_parameter), & view -> colorp[at][1], sensitive));
       g_free (str);
       break;
   }
@@ -309,7 +309,7 @@ GMenu * menu_bonds (glwin * view, int at)
   if (! at)
   {
     str = label_cutrab (get_project_by_id(view -> proj), view, 0);
-    g_menu_append_submenu (menu, "Cutoff(s)", (GMenuModel *)create_bond_layout_section (view, str, "bond-cutoffs", 3, G_CALLBACK(window_cuts), & view -> colorp[at][0], sensitive));
+    append_submenu (menu, "Cutoff(s)", create_bond_layout_section (view, str, "bond-cutoffs", 3, G_CALLBACK(window_cuts), & view -> colorp[at][0], sensitive));
     g_free (str);
   }
   return menu;

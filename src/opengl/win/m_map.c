@@ -930,7 +930,7 @@ GMenu * menump (glwin * view, int mid, int cid)
                       FALSE, G_CALLBACK(change_color_radio), (gpointer)view, FALSE, (cid == 1) ? TRUE : FALSE, TRUE, TRUE);
   append_opengl_item (view, menuf, "Partial(s)", mapname[mid], mid*ATOM_MAPS+2, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(change_color_radio), (gpointer)view, FALSE, (cid == 2) ? TRUE : FALSE, TRUE, TRUE);
-  g_menu_append_submenu (menu, "Atomic Coordinations", (GMenuModel*)menuf);
+  append_submenu (menu, "Atomic Coordinations", menuf);
   g_object_unref (menuf);
 
   sensitive = view -> adv_bonding[0];
@@ -951,8 +951,8 @@ GMenu * menump (glwin * view, int mid, int cid)
 GMenu * menu_map (glwin * view)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Atoms & Bonds", (GMenuModel*)menump(view, 0, view -> anim -> last -> img -> color_map[0]));
-  g_menu_append_submenu (menu, "Polyhedra", (GMenuModel*)menump(view, 1, view -> anim -> last -> img -> color_map[1]));
+  append_submenu (menu, "Atoms & Bonds", menump(view, 0, view -> anim -> last -> img -> color_map[0]));
+  append_submenu (menu, "Polyhedra", menump(view, 1, view -> anim -> last -> img -> color_map[1]));
   return menu;
 }
 #endif

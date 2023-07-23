@@ -336,7 +336,7 @@ GMenu * menu_style (glwin * view)
                             FALSE, G_CALLBACK(change_style_radio), (gpointer)view,
                             FALSE, (view -> anim -> last -> img -> style == SPACEFILL && view -> anim -> last -> img -> filled_type == j) ? TRUE : FALSE, TRUE, TRUE);
       }
-      g_menu_append_submenu (menu, "Spacefilled", (GMenuModel*)menus);
+      append_submenu (menu, "Spacefilled", menus);
     }
   }
   return menu;

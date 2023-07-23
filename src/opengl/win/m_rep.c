@@ -355,9 +355,9 @@ GMenu * menu_fullscreen (glwin * view)
 GMenu * menu_view (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Representation", (GMenuModel*)menu_rep(view));
-  g_menu_append_submenu (menu, "Projection", (GMenuModel*)menu_proj(view));
-  g_menu_append_submenu (menu, "Background", (GMenuModel*)menu_back(view));
+  append_submenu (menu, "Representation", menu_rep(view));
+  append_submenu (menu, "Projection", menu_proj(view));
+  append_submenu (menu, "Background", menu_back(view));
   if (get_project_by_id(view -> proj) -> nspec) g_menu_append_item (menu, menu_box_axis (view, 1));
   if (! popm)
   {

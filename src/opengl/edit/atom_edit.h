@@ -92,7 +92,7 @@ extern G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data);
 
 extern void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object);
 extern void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list);
-extern void remove_bonds_from_project (struct project * this_proj, int * old_id, int new_atoms, struct atom * new_list, gboolean remove);
+extern void remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, int new_atoms, struct atom * new_list, gboolean remove);
 #ifdef GTK4
 extern G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer data);
 #else
@@ -105,8 +105,7 @@ extern tint ulam_coord (glwin * view);
 extern void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust);
 extern struct insert_object * duplicate_insert_object (struct insert_object * old_obj);
 extern struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove);
-extern void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object);
-extern void reconstruct_this_object (struct project * this_proj, int ifcl, int * bcid);
+extern void reconstruct_this_object_from_project (struct insert_object * this_object, struct project * this_proj, gboolean upcoord);
 extern struct insert_object * create_object_from_selection (struct project * this_proj);
 extern struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove);
 extern struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove);

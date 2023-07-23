@@ -190,7 +190,7 @@ GMenu * axis_position_submenu (glwin * view)
   gchar * udlab[2] = {"Top", "Bottom"};
   for (i=0; i<2; i++)
   {
-    g_menu_append_submenu (menu, udlab[i], (GMenuModel *)position_submenu(view, i));
+    append_submenu (menu, udlab[i], position_submenu(view, i));
   }
   append_opengl_item (view, menu, "Center", "axis-pos", 4, NULL, IMG_NONE, NULL, FALSE,
                       G_CALLBACK(change_axis_pos_radio), & view -> colorp[4][0],
@@ -204,7 +204,7 @@ void menu_axis (GMenu * menu_ab, glwin * view)
   g_menu_item_set_attribute (item, "custom", "s", "axis-length", NULL);
   g_menu_item_set_submenu (item, (GMenuModel *)axis_box_param (view, AXIS, NONE));
   g_menu_append_item (menu_ab, item);
-  g_menu_append_submenu (menu_ab, "Position", (GMenuModel *)axis_position_submenu(view));
+  append_submenu (menu_ab, "Position", axis_position_submenu(view));
   append_opengl_item (view, menu_ab, "Advanced", "axis-advanced", 0, NULL, IMG_STOCK, DPROPERTIES, FALSE,
                       G_CALLBACK(axis_advanced), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
 }

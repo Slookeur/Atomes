@@ -57,9 +57,9 @@ int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list
       ats_in_frag = allocint(k);
       ats_id = allocint(natomes);
       contacts = allocint(k);
-      togl = allocint(k);
       neighbors = allocdint(k, k);
-      // g_debug ("remove_bonds :: init :: k= %d", k);
+      togl = allocint(k);
+      g_debug ("remove_bonds :: init :: k= %d", k);
     }
     k = 0;
     tmp_list = new_list;
@@ -73,7 +73,7 @@ int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list
           {
             ats_in_frag[k] = tmp_list -> id;
             ats_id[tmp_list -> id] = k;
-            // g_debug ("remove_bonds :: rem :: k= %d, ats_in_frag[%d]= %d, ats_id[%d]= %d", k, k, ats_in_frag[k], tmp_list -> id, ats_id[tmp_list -> id]);
+            g_debug ("remove_bonds :: rem :: k= %d, ats_in_frag[%d]= %d, ats_id[%d]= %d", k, k, ats_in_frag[k], tmp_list -> id, ats_id[tmp_list -> id]);
           }
           k ++;
         }
@@ -82,6 +82,7 @@ int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list
     }
   }
   atoms_in_frag = k;
+  g_debug ("atoms_in_frag= %d", k);
   // Build neighbors map for frag fid
   for (i=0; i<atoms_in_frag; i++)
   {
@@ -172,7 +173,7 @@ struct atom * get_atom_pointer (int aid, struct atom * new_list)
   return NULL;
 }
 
-void remove_bonds_from_project (struct project * this_proj, int * old_id, int new_atoms, struct atom * new_list, gboolean remove)
+void remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, int new_atoms, struct atom * new_list, gboolean remove)
 {
   int h, i, j, k, l, m;
   int tmpbond[2];
@@ -205,86 +206,90 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
   // The next lines refresh the bonding information without calculating the distance matrix
   tmp_list = new_list;
   tmp_vois = allocint (20);
-  id_mod = allocint (this_proj -> natomes);
   h = -1;
-  while (tmp_list)
+  if (this_proj)
   {
-    i = tmp_list -> id;
-    if (old_id[i] > 0 || (! remove && old_id[i] < 0))
+    id_mod = allocint (this_proj -> natomes);
+    while (tmp_list)
     {
-      h ++;
-      id_mod[i] = h;
-    }
-    if (tmp_list -> numv > 0)
-    {
-      k = 0;
-      if (old_id[i] > 0)
+      i = tmp_list -> id;
+      if (old_id[i] > 0 || (! remove && old_id[i] < 0))
       {
-        for (j=0; j<tmp_list -> numv; j++)
-        {
-          l = tmp_list -> vois[j];
-          if (old_id[l] > 0)
-          {
-            tmp_vois[k] = l;
-            k ++;
-          }
-        }
+        h ++;
+        id_mod[i] = h;
       }
-      else if (! remove && old_id[i] < 0)
-      {
-        for (j=0; j<tmp_list -> numv; j++)
-        {
-          l = tmp_list -> vois[j];
-          if (old_id[l] < 0)
-          {
-            tmp_vois[k] = l;
-            k ++;
-          }
-        }
-      }
-      g_free (tmp_list -> vois);
-      tmp_list -> vois = NULL;
-      tmp_list -> numv = k;
-      if (k)
-      {
-        tmp_list -> vois = allocint (k);
-        for (j=0; j<k; j++) tmp_list -> vois[j] = tmp_vois[j];
-      }
-    }
-    tmp_list = tmp_list -> next;
-  }
-  g_free (tmp_vois);
-  tmp_list = new_list;
-  while (tmp_list)
-  {
-    i = tmp_list -> id;
-    if (old_id[i] > 0 || (! remove && old_id[i] < 0))
-    {
       if (tmp_list -> numv > 0)
       {
-        for (j=0; j<tmp_list -> numv; j++)
+        k = 0;
+        if (old_id[i] > 0)
         {
-          k = tmp_list -> vois[j];
-          tmp_list -> vois[j] = id_mod[k];
+          for (j=0; j<tmp_list -> numv; j++)
+          {
+            l = tmp_list -> vois[j];
+            if (old_id[l] > 0)
+            {
+              tmp_vois[k] = l;
+              k ++;
+            }
+          }
+        }
+        else if (! remove && old_id[i] < 0)
+        {
+          for (j=0; j<tmp_list -> numv; j++)
+          {
+            l = tmp_list -> vois[j];
+            if (old_id[l] < 0)
+            {
+              tmp_vois[k] = l;
+              k ++;
+            }
+          }
+        }
+        g_free (tmp_list -> vois);
+        tmp_list -> vois = NULL;
+        tmp_list -> numv = k;
+        if (k)
+        {
+          tmp_list -> vois = allocint (k);
+          for (j=0; j<k; j++) tmp_list -> vois[j] = tmp_vois[j];
         }
       }
+      tmp_list = tmp_list -> next;
     }
-    tmp_list = tmp_list -> next;
-  }
-
-  if (this_proj -> modelgl -> adv_bonding[0])
-  {
-    frag_to_test = allocbool (this_proj -> coord -> totcoord[2] + 1);
-    per_frag = allocint (this_proj -> coord -> totcoord[2] + 1);
-    in_frag = allocint (this_proj -> coord -> totcoord[2] + 1);
-    for (i=0; i<this_proj -> natomes; i++)
+    g_free (tmp_vois);
+    tmp_list = new_list;
+    while (tmp_list)
     {
-      j = this_proj -> atoms[0][i].coord[2];
+      i = tmp_list -> id;
+      if (old_id[i] > 0 || (! remove && old_id[i] < 0))
+      {
+        if (tmp_list -> numv > 0)
+        {
+          for (j=0; j<tmp_list -> numv; j++)
+          {
+            k = tmp_list -> vois[j];
+            tmp_list -> vois[j] = id_mod[k];
+          }
+        }
+      }
+      tmp_list = tmp_list -> next;
+    }
+  }
+  int tcf = (this_proj) ? this_proj -> coord -> totcoord[2] : this_object -> coord -> totcoord[2];
+  int nat = (this_proj) ? this_proj -> natomes : this_object -> atoms;
+  if (tcf)
+  {
+    frag_to_test = allocbool (tcf + 1);
+    per_frag = allocint (tcf + 1);
+    in_frag = allocint (tcf + 1);
+    for (i=0; i<nat; i++)
+    {
+      j = (this_proj) ? this_proj -> atoms[0][i].coord[2] : this_object -> at_list[i].coord[2];
       per_frag[j] ++;
-      if (old_id[i] < 0) in_frag[j] ++;
+      if (this_proj) if (old_id[i] < 0) in_frag[j] ++;
     }
 
-    for (i=0; i<this_proj -> coord -> totcoord[2]; i++)
+    for (i=0; i<tcf; i++)
     {
       // g_debug ("Frag check:: i= %d, per_frag[%d]= %d, in_frag[%d]= %d", i, i, per_frag[i], i, in_frag[i]);
       if (in_frag[i] && (per_frag[i] != in_frag[i]))
@@ -298,63 +303,88 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
       }
     }
   }
-  // for (i=0; i<this_proj -> natomes; i++) g_debug ("at:i= %d old_id[%i]= %d", i, i, old_id[i]);
+
   for (i=0; i<2; i++)
   {
     tmpbondid[i] = NULL;
     tmpbond[i] = 0;
-    if (this_proj -> modelgl -> bonds[0][i])
+  }
+  if (this_proj)
+  {
+    for (i=0; i<2; i++)
     {
-      tmpbondid[i] = allocdint (this_proj -> modelgl -> bonds[0][i], 2);
-      j = 0;
-      for (k=0; k<this_proj -> modelgl -> bonds[0][i]; k++)
+      if (this_proj -> modelgl -> bonds[0][i])
       {
-        l = this_proj -> modelgl -> bondid[0][i][k][0];
-        m = this_proj -> modelgl -> bondid[0][i][k][1];
-        if (old_id[l] > 0 && old_id[m] > 0)
+        tmpbondid[i] = allocdint (this_proj -> modelgl -> bonds[0][i], 2);
+        j = 0;
+        for (k=0; k<this_proj -> modelgl -> bonds[0][i]; k++)
         {
-          tmpbondid[i][j][0] = l;
-          tmpbondid[i][j][1] = m;
-          j ++;
+          l = this_proj -> modelgl -> bondid[0][i][k][0];
+          m = this_proj -> modelgl -> bondid[0][i][k][1];
+          if (old_id[l] > 0 && old_id[m] > 0)
+          {
+            tmpbondid[i][j][0] = l;
+            tmpbondid[i][j][1] = m;
+            j ++;
+          }
+          else if (! remove && (old_id[l] < 0 && old_id[m] < 0))
+          {
+            tmpbondid[i][j][0] = l;
+            tmpbondid[i][j][1] = m;
+            j ++;
+          }
         }
-        else if (! remove && (old_id[l] < 0 && old_id[m] < 0))
-        {
-          tmpbondid[i][j][0] = l;
-          tmpbondid[i][j][1] = m;
-          j ++;
-        }
+        tmpbond[i] = j;
+        // g_debug ("i= %d, tmpbond[%d]= %d", i, i, tmpbond[i]);
       }
-      tmpbond[i] = j;
-      // g_debug ("i= %d, tmpbond[%d]= %d", i, i, tmpbond[i]);
+    }
+  }
+  else
+  {
+    tmpbond[0] = this_object -> bonds;
+    tmpbondid[0] = allocdint (this_object -> bonds, 2);
+    for (i=0; i<this_object -> bonds; i++)
+    {
+      tmpbondid[0][i][0] = this_object -> ibonds[i][0];
+      tmpbondid[0][i][1] = this_object -> ibonds[i][1];
     }
   }
   gboolean * show_this;
   if (split)
   {
-    show_this = duplicate_bool (this_proj -> coord -> totcoord[2], this_proj -> modelgl -> anim -> last -> img -> show_coord[2]);
-    showfrag = duplicate_bool (this_proj -> coord -> totcoord[2], this_proj -> modelgl -> anim -> last -> img -> show_coord[2]);
+    if (this_proj)
+    {
+      show_this = duplicate_bool (this_proj -> coord -> totcoord[2], this_proj -> modelgl -> anim -> last -> img -> show_coord[2]);
+      showfrag = duplicate_bool (this_proj -> coord -> totcoord[2], this_proj -> modelgl -> anim -> last -> img -> show_coord[2]);
+    }
     if (! remove)
     {
-      tmp_list = new_list;
-      while (tmp_list)
+      if (this_proj)
       {
-        j = tmp_list -> id;
-        if (old_id[j] < 0)
+        tmp_list = new_list;
+        while (tmp_list)
         {
-          tmp_list -> coord[2] = this_proj -> coord -> totcoord[2];
+          j = tmp_list -> id;
+          if (old_id[j] < 0)
+          {
+            tmp_list -> coord[2] = this_proj -> coord -> totcoord[2];
+          }
+          tmp_list = tmp_list -> next;
         }
-        tmp_list = tmp_list -> next;
       }
-      frag_to_test[this_proj -> coord -> totcoord[2]] = TRUE;
-      this_proj -> coord -> totcoord[2] ++;
-      g_free (showfrag);
-      showfrag = allocbool (this_proj -> coord -> totcoord[2]);
-      for (m=0; m<this_proj -> coord -> totcoord[2]-1; m++) showfrag[m] = show_this[m];
-      showfrag[m] = TRUE;
-      g_free (show_this);
-      show_this = duplicate_bool (this_proj -> coord -> totcoord[2], showfrag);
+      frag_to_test[tcf] = TRUE;
+      tcf ++;
+      if (this_proj)
+      {
+        g_free (showfrag);
+        showfrag = allocbool (tcf);
+        for (m=0; m<tcf-1; m++) showfrag[m] = show_this[m];
+        showfrag[m] = TRUE;
+        g_free (show_this);
+        show_this = duplicate_bool (tcf, showfrag);
+      }
     }
-    j = this_proj -> coord -> totcoord[2];
+    j = tcf;
     l = 0;
     for (i=0; i<j; i++)
     {
@@ -373,41 +403,48 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
           }
           tmp_list = tmp_list -> next;
         }
-        g_free (showfrag);
-        showfrag = allocbool (this_proj -> coord -> totcoord[2]-1);
-        for (m=0; m<i-l; m++) showfrag[m] = show_this[m];
-        for (m=i-l+1; m<this_proj -> coord -> totcoord[2]; m++) showfrag[m-1] = show_this[m];
-        g_free (show_this);
-        show_this = duplicate_bool (this_proj -> coord -> totcoord[2]-1, showfrag);
+        if (this_proj)
+        {
+          g_free (showfrag);
+          showfrag = allocbool (tcf-1);
+          for (m=0; m<i-l; m++) showfrag[m] = show_this[m];
+          for (m=i-l+1; m<tcf; m++) showfrag[m-1] = show_this[m];
+          g_free (show_this);
+          show_this = duplicate_bool (tcf-1, showfrag);
+        }
         k = -1;
         l ++;
       }
       else if (frag_to_test[i])
       {
-        k = test_this_fragment (this_proj -> natomes, this_proj -> coord -> totcoord[2], i-l, new_list, tmpbond, tmpbondid, old_id, remove);
+        k = test_this_fragment (nat, tcf, i-l, new_list, tmpbond, tmpbondid, old_id, remove);
         if (k > 0)
         {
-          g_free (showfrag);
-          showfrag = allocbool (this_proj -> coord -> totcoord[2]+k);
-          for (m=0; m<this_proj -> coord -> totcoord[2]; m++) showfrag[m] = show_this[m];
-          for (m=this_proj -> coord -> totcoord[2]; m<this_proj -> coord -> totcoord[2]+k; m++) showfrag[m] = show_this[i-l];
-          g_free (show_this);
-          show_this = duplicate_bool (this_proj -> coord -> totcoord[2]+k, showfrag);
+          if (this_proj)
+          {
+            g_free (showfrag);
+            showfrag = allocbool (tcf+k);
+            for (m=0; m<tcf; m++) showfrag[m] = show_this[m];
+            for (m=tcf; m<tcf+k; m++) showfrag[m] = show_this[i-l];
+            g_free (show_this);
+            show_this = duplicate_bool (tcf+k, showfrag);
+          }
         }
       }
-      this_proj -> coord -> totcoord[2] += k;
+      tcf += k;
     }
     g_free (frag_to_test);
     g_free (show_this);
   }
 
-  id_frag = allocint (this_proj -> coord -> totcoord[2]);
+  id_frag = allocint (tcf);
   tmp_list = new_list;
   i = 0;
   while (tmp_list)
   {
     j = tmp_list -> id;
-    if (old_id[j] > 0 || (! remove && old_id[j] <0))
+
+    if ((this_proj && (old_id[j] > 0 || (! remove && old_id[j] <0))) || this_object)
     {
       if (! id_frag[tmp_list -> coord[2]])
       {
@@ -417,7 +454,7 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
     }
     tmp_list = tmp_list -> next;
   }
-  if (i < this_proj -> coord -> totcoord[2])
+  if (i < tcf)
   {
     tmp_list = new_list;
     while (tmp_list)
@@ -426,20 +463,31 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
       tmp_list = tmp_list -> next;
     }
     show_this = allocbool (i);
-    for (j=0; j<this_proj -> coord -> totcoord[2]; j++)
+    for (j=0; j<tcf; j++)
     {
       if (id_frag[j]) show_this[id_frag[j]-1] = showfrag[j];
     }
     g_free (showfrag);
     showfrag = duplicate_bool (i, show_this);
     g_free (show_this);
-    this_proj -> coord -> totcoord[2] = i;
+    if (this_proj)
+    {
+      this_proj -> coord -> totcoord[2] = i;
+    }
+    else
+    {
+      this_object -> coord -> totcoord[2] = i;
+    }
   }
   if (id_frag)
   {
     g_free (id_frag);
     id_frag = NULL;
   }
+
+  if (this_proj)
+  {
+
   struct distance clo;
   for (i=0; i<2; i++)
   {
@@ -480,6 +528,7 @@ void remove_bonds_from_project (struct project * this_proj, int * old_id, int ne
       g_free (tmpbondid[i]);
       tmpbondid[i] = NULL;
     }
+  }
   }
   if (id_mod)
   {

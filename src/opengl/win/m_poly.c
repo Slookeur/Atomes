@@ -262,7 +262,7 @@ GMenu * menu_show_coord_poly (glwin * view, int id)
         }
       }
     }
-    g_menu_append_submenu (menu, this_proj -> chemistry -> label[i], (GMenuModel*)menus);
+    append_submenu (menu, this_proj -> chemistry -> label[i], menus);
     g_object_unref (menus);
   }
   return menu;
@@ -294,11 +294,11 @@ GMenu * add_menu_poly (glwin * view, int id)
   GMenu * menu = g_menu_new ();
   if (id < 2)
   {
-    g_menu_append_submenu (menu, "Show/Hide", (GMenuModel*)menu_show_coord_poly (view, id));
+    append_submenu (menu, "Show/Hide", menu_show_coord_poly (view, id));
   }
   else
   {
-    g_menu_append_submenu (menu, "Show/Hide", (GMenuModel*)menu_show_rings_poly (view, id));
+    append_submenu (menu, "Show/Hide", menu_show_rings_poly (view, id));
   }
   append_opengl_item (view, menu, "Advanced", "adv-p", id, NULL, IMG_STOCK, (gpointer)DPROPERTIES, FALSE,
                       G_CALLBACK(to_coord_properties), & view -> colorp[id][0], FALSE, FALSE, FALSE, TRUE);
@@ -313,7 +313,7 @@ GMenu * menu_poly_rings (glwin * view)
   {
     if (view -> ring_max[i])
     {
-       g_menu_append_submenu (menu, rings_type[i], (GMenuModel*)add_menu_poly(view, 4+i));
+       append_submenu (menu, rings_type[i], add_menu_poly(view, 4+i));
     }
   }
   return menu;
@@ -322,11 +322,11 @@ GMenu * menu_poly_rings (glwin * view)
 GMenu * menu_poly (glwin * view)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Total Coordination(s)", (GMenuModel*)add_menu_poly (view, 0));
-  g_menu_append_submenu (menu, "Partial Coordination(s)", (GMenuModel*)add_menu_poly (view, 1));
+  append_submenu (menu, "Total Coordination(s)", add_menu_poly (view, 0));
+  append_submenu (menu, "Partial Coordination(s)", add_menu_poly (view, 1));
   if (view -> rings)
   {
-    g_menu_append_submenu (menu, "Rings(s)", (GMenuModel*)menu_poly_rings (view));
+    append_submenu (menu, "Rings(s)", menu_poly_rings (view));
   }
   else
   {

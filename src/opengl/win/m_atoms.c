@@ -504,7 +504,7 @@ GMenu * label_atoms_submenu (glwin * view, int at, gboolean sensitive)
                         FALSE, G_CALLBACK(show_hide_labels), & view -> colorp[at][i],
                         TRUE, view -> anim -> last -> img -> show_label[at][i], FALSE, sensitive);
   }
-  g_menu_append_submenu (menu, "Show", (GMenuModel*)smenu);
+  append_submenu (menu, "Show", smenu);
   append_opengl_item (view, menu, "Select atom(s)", (! at) ? "atom-select" : "clone-select", 0, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(atom_properties), & view -> colorp[at][2], FALSE, FALSE, FALSE, sensitive);
   append_opengl_item (view, menu, "Advanced", (! at) ? "atom-lab-adv" : "clone-lab-adv", 0, NULL, IMG_STOCK, DPROPERTIES,
@@ -534,7 +534,7 @@ GMenu * color_atoms_submenu (glwin * view, int at, gboolean sensitive)
     append_opengl_item (view, menuc, strb, strb, i, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
     append_opengl_item (view, menuc, "More colors ...", strb, i, NULL, IMG_NONE, NULL,
                         FALSE, G_CALLBACK(to_run_atom_color_window), & view -> colorp[0][i+at*this_proj -> nspec], FALSE, FALSE, FALSE, sensitive);
-    g_menu_append_submenu (menu, stra, (GMenuModel*)menuc);
+    append_submenu (menu, stra, menuc);
     g_free (stra);
     g_free (strb);
     g_object_unref (menuc);
@@ -572,9 +572,9 @@ GMenu * menu_atoms (glwin * view, int at)
   gboolean sensitive = (at) ? view -> anim -> last -> img -> draw_clones : TRUE;
 
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Show", (GMenuModel*) show_atoms_submenu(view, at, sensitive));
-  g_menu_append_submenu (menu, "Color(s)", (GMenuModel*) color_atoms_submenu (view, at, sensitive));
-  g_menu_append_submenu (menu, "Label(s)", (GMenuModel*) label_atoms_submenu (view, at, sensitive));
+  append_submenu (menu, "Show", show_atoms_submenu(view, at, sensitive));
+  append_submenu (menu, "Color(s)", color_atoms_submenu (view, at, sensitive));
+  append_submenu (menu, "Label(s)", label_atoms_submenu (view, at, sensitive));
   GMenuItem * item;
   if (i == SPHERES || i == BALL_AND_STICK)
   {

@@ -86,10 +86,10 @@ GMenu * menu_clones (glwin * view)
   GMenu * menu = g_menu_new ();
   append_opengl_item (view, menu, "Show/Hide", "show-clones", 0, NULL, IMG_NONE, NULL, FALSE,
                       G_CALLBACK(show_hide_clones), (gpointer)view, TRUE, view -> anim -> last -> img -> draw_clones, FALSE, (view -> allbonds[1]) ? TRUE : FALSE);
-  g_menu_append_submenu (menu, "Atom(s)", (GMenuModel*)menu_atoms(view, 1));
+  append_submenu (menu, "Atom(s)", menu_atoms(view, 1));
   if (view -> anim -> last -> img -> style != SPHERES && view -> anim -> last -> img -> style != PUNT)
   {
-    g_menu_append_submenu (menu, "Bonds(s)", (GMenuModel*)menu_bonds(view, 1));
+    append_submenu (menu, "Bonds(s)", menu_bonds(view, 1));
   }
   return menu;
 }

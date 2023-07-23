@@ -317,7 +317,7 @@ GMenu * insert_place ()
 GMenu * insert_data ()
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_submenu (menu, "Insert Row(s)", (GMenuModel*)insert_place());
+  append_submenu (menu, "Insert Row(s)", insert_place());
   return menu;
 }
 
