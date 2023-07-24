@@ -890,69 +890,92 @@ G_MODULE_EXPORT void change_color_radio (GSimpleAction * action, GVariant * para
 {
   glwin * view = (glwin *)data;
   const gchar * color = g_variant_get_string (parameter, NULL);
-  gchar * color_name = NULL;
-  int i;
-  for (i=0; i<ATOM_MAPS; i++)
+  int lgt = strlen (color);
+  gchar * name = g_strdup_printf ("%c%c", color[lgt-2], color[lgt-1]);
+  if (g_strcmp0(name, ".1") == 0)
   {
-    color_name = g_strdup_printf ("set-amap.%d", i);
-    if (g_strcmp0(color, (const gchar *)color_name) == 0)
+    g_free (name);
+    name = g_strdup_printf ("%8s", color);
+    if (g_strcmp0(name, "set-amap"))
     {
-      set_color_map (NULL, & view -> colorp[i][0]);
-      g_free (color_name);
-      color_name = NULL;
-      break;
+      g_free (name);
+      name = g_strdup_printf ("%.*s.0", lgt-2, color);
+      g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-amap", g_variant_new_string((const gchar *)name));
     }
-    g_free (color_name);
-    color_name = NULL;
-    color_name = g_strdup_printf ("set-pmap.%d", i);
-    if (g_strcmp0(color, (const gchar *)color_name) == 0)
+    else
     {
-      set_color_map (NULL, & view -> colorp[ATOM_MAPS+i][0]);
-      g_free (color_name);
-      color_name = NULL;
-      break;
+      g_free (name);
+      name = g_strdup_printf ("%.*s.0", lgt-2, color);
+      g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-pmap", g_variant_new_string((const gchar *)name));
     }
-    g_free (color_name);
-    color_name = NULL;
+    g_free (name);
   }
-  g_action_change_state (G_ACTION (action), parameter);
+  else
+  {
+    gchar * color_name = NULL;
+    int i;
+    for (i=0; i<ATOM_MAPS*2; i++)
+    {
+      color_name = g_strdup_printf ("set-amap.%d.0", i);
+      if (g_strcmp0(color, (const gchar *)color_name) == 0)
+      {
+        set_color_map (NULL, & view -> colorp[i][0]);
+        g_free (color_name);
+        color_name = NULL;
+        break;
+      }
+      g_free (color_name);
+      color_name = NULL;
+      color_name = g_strdup_printf ("set-pmap.%d.0", i);
+      if (g_strcmp0(color, (const gchar *)color_name) == 0)
+      {
+        set_color_map (NULL, & view -> colorp[ATOM_MAPS+i][0]);
+        g_free (color_name);
+        color_name = NULL;
+        break;
+      }
+      g_free (color_name);
+      color_name = NULL;
+    }
+    g_action_change_state (G_ACTION (action), parameter);
+  }
 }
 
-GMenu * menump (glwin * view, int mid, int cid)
+GMenu * menump (glwin * view, int popm, int mid, int cid)
 {
   gchar * mapname[2] = {"amap", "pmap"};
   gboolean sensitive;
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, "Atomic Species", mapname[mid], mid*ATOM_MAPS, NULL, IMG_NONE, NULL,
+  append_opengl_item (view, menu, "Atomic Species", mapname[mid], popm, mid*ATOM_MAPS, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(change_color_radio), (gpointer)view, FALSE, (cid == 0) ? TRUE : FALSE, TRUE, TRUE);
   GMenu * menuf = g_menu_new ();
-  append_opengl_item (view, menuf, "Total(s)", mapname[mid], mid*ATOM_MAPS+1, NULL, IMG_NONE, NULL,
+  append_opengl_item (view, menuf, "Total(s)", mapname[mid], popm, mid*ATOM_MAPS+1, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(change_color_radio), (gpointer)view, FALSE, (cid == 1) ? TRUE : FALSE, TRUE, TRUE);
-  append_opengl_item (view, menuf, "Partial(s)", mapname[mid], mid*ATOM_MAPS+2, NULL, IMG_NONE, NULL,
+  append_opengl_item (view, menuf, "Partial(s)", mapname[mid], popm, mid*ATOM_MAPS+2, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(change_color_radio), (gpointer)view, FALSE, (cid == 2) ? TRUE : FALSE, TRUE, TRUE);
   append_submenu (menu, "Atomic Coordinations", menuf);
   g_object_unref (menuf);
 
   sensitive = view -> adv_bonding[0];
-  append_opengl_item (view, menu, "Fragment(s)", mapname[mid], mid*ATOM_MAPS+3, NULL, IMG_NONE, NULL,
+  append_opengl_item (view, menu, "Fragment(s)", mapname[mid], popm, mid*ATOM_MAPS+3, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(change_color_radio), (gpointer)view, FALSE, (cid == 3) ? TRUE : FALSE, TRUE, sensitive);
   sensitive = view -> adv_bonding[1];
-  append_opengl_item (view, menu, "Molecule(s)", mapname[mid], mid*ATOM_MAPS+4, NULL, IMG_NONE, NULL,
+  append_opengl_item (view, menu, "Molecule(s)", mapname[mid], popm, mid*ATOM_MAPS+4, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(change_color_radio), (gpointer)view, FALSE, (cid == 4) ? TRUE : FALSE, TRUE, sensitive);
   sensitive = (get_project_by_id(view -> proj) -> force_field[0]) ? TRUE : FALSE;
-  append_opengl_item (view, menu, "Force Field (DL_POLY)", mapname[mid], mid*ATOM_MAPS+5, NULL, IMG_NONE, NULL,
+  append_opengl_item (view, menu, "Force Field (DL_POLY)", mapname[mid], popm, mid*ATOM_MAPS+5, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(change_color_radio), (gpointer)view, FALSE, (cid == 5) ? TRUE : FALSE, TRUE, sensitive);
   sensitive = (! mid) ? TRUE : (view -> custom_map) ? TRUE : FALSE;
-  append_opengl_item (view, menu, (! mid) ? "Custom" : "Use Atom(s) Custom Map", mapname[mid], mid*ATOM_MAPS+6, NULL, IMG_NONE, NULL,
+  append_opengl_item (view, menu, (! mid) ? "Custom" : "Use Atom(s) Custom Map", mapname[mid], popm, mid*ATOM_MAPS+6, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(change_color_radio), (gpointer)view, FALSE, (cid == 6) ? TRUE : FALSE, TRUE, sensitive);
   return menu;
 }
 
-GMenu * menu_map (glwin * view)
+GMenu * menu_map (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Atoms & Bonds", menump(view, 0, view -> anim -> last -> img -> color_map[0]));
-  append_submenu (menu, "Polyhedra", menump(view, 1, view -> anim -> last -> img -> color_map[1]));
+  append_submenu (menu, "Atoms & Bonds", menump(view, popm, 0, view -> anim -> last -> img -> color_map[0]));
+  append_submenu (menu, "Polyhedra", menump(view, popm, 1, view -> anim -> last -> img -> color_map[1]));
   return menu;
 }
 #endif

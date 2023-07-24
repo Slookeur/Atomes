@@ -268,14 +268,14 @@ GtkWidget * menu_bonds (glwin * view, int id, int at)
   return menub;
 }
 #else
-GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int id, GCallback handler, gpointer data, gboolean sensitive)
+GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int popm, int id, GCallback handler, gpointer data, gboolean sensitive)
 {
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, str, key, id, NULL,  IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, sensitive);
+  append_opengl_item (view, menu, str, key, popm, id, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, sensitive);
   return  menu;
 }
 
-GMenu * menu_bonds (glwin * view, int at)
+GMenu * menu_bonds (glwin * view, int popm, int at)
 {
   gchar * str;
   gboolean sensitive = (at == 1 && ! view -> anim -> last -> img -> draw_clones) ? FALSE : TRUE;
@@ -291,17 +291,17 @@ GMenu * menu_bonds (glwin * view, int at)
       {
         str = g_strdup_printf ("Cylinder(s) [ %f Å ]", view -> anim -> last -> img -> radall[1]);
       }
-      append_submenu (menu, "Cylinder Radius(ii)", create_bond_layout_section (view, str, (at) ? "clone-cyl-rad" : "atom-cyl-rad", 0, G_CALLBACK(window_bonds), & view -> colorp[2+at][0], sensitive));
+      append_submenu (menu, "Cylinder Radius(ii)", create_bond_layout_section (view, str, (at) ? "clone-cyl-rad" : "atom-cyl-rad", popm, at, G_CALLBACK(window_bonds), & view -> colorp[2+at][0], sensitive));
       g_free (str);
       break;
     case BALL_AND_STICK:
       str = label_cutrab (get_project_by_id(view -> proj), view, 1+at);
-      append_submenu (menu, "Radius(ii)", create_bond_layout_section (view, str, (at) ? "clone-rad" : "atom-rad", 1, G_CALLBACK(set_bond_parameter), & view -> colorp[at][0], sensitive));
+      append_submenu (menu, "Radius(ii)", create_bond_layout_section (view, str, (at) ? "clone-rad" : "atom-rad", popm, at+1, G_CALLBACK(set_bond_parameter), & view -> colorp[at][0], sensitive));
       g_free (str);
       break;
     case WIREFRAME:
       str = label_cutrab (get_project_by_id(view -> proj), view, 3+at);
-      append_submenu (menu, "Line Width(s)", create_bond_layout_section (view, str, (at) ? "clone-line" : "atom-line", 2, G_CALLBACK(set_bond_parameter), & view -> colorp[at][1], sensitive));
+      append_submenu (menu, "Line Width(s)", create_bond_layout_section (view, str, (at) ? "clone-line" : "atom-line", popm, at+2, G_CALLBACK(set_bond_parameter), & view -> colorp[at][1], sensitive));
       g_free (str);
       break;
   }
@@ -309,7 +309,7 @@ GMenu * menu_bonds (glwin * view, int at)
   if (! at)
   {
     str = label_cutrab (get_project_by_id(view -> proj), view, 0);
-    append_submenu (menu, "Cutoff(s)", create_bond_layout_section (view, str, "bond-cutoffs", 3, G_CALLBACK(window_cuts), & view -> colorp[at][0], sensitive));
+    append_submenu (menu, "Cutoff(s)", create_bond_layout_section (view, str, "bond-cutoffs", popm, at+3, G_CALLBACK(window_cuts), & view -> colorp[at][0], sensitive));
     g_free (str);
   }
   return menu;

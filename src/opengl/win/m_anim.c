@@ -73,12 +73,12 @@ G_MODULE_EXPORT void to_rec (GSimpleAction * action, GVariant * parameter, gpoin
   window_recorder (NULL, data);
 }
 
-GMenu * menu_anim (glwin * view)
+GMenu * menu_anim (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, "Spin", "spin", 0, NULL, IMG_STOCK, (gpointer)MEDIA_LOOP, FALSE, G_CALLBACK(to_spin), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
-  append_opengl_item (view, menu, "Sequencer", "seq", 0, NULL, IMG_STOCK, (gpointer)MEDIA_PLAY, FALSE, G_CALLBACK(to_seq), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
-  append_opengl_item (view, menu, "Recorder", "rec", 0, "<CTRL>R", IMG_STOCK, (gpointer)RECORD, FALSE, G_CALLBACK(to_rec), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Spin", "spin", popm, popm, NULL, IMG_STOCK, (gpointer)MEDIA_LOOP, FALSE, G_CALLBACK(to_spin), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Sequencer", "seq", popm, popm, NULL, IMG_STOCK, (gpointer)MEDIA_PLAY, FALSE, G_CALLBACK(to_seq), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Recorder", "rec", popm, popm, "<CTRL>R", IMG_STOCK, (gpointer)RECORD, FALSE, G_CALLBACK(to_rec), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
 
   return menu;
 }

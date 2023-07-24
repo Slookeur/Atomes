@@ -392,8 +392,10 @@ void change_color_map (glwin * view, int col)
   check_menu_item_set_active ((gpointer)view -> color_styles[j], TRUE);
   set_color_map (view -> color_styles[j], & view -> colorp[j][0]);
   reading_input = was_input;
-#endif
+#else
 // TODO GTK4 change color map !
+
+#endif
 }
 
 void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state)

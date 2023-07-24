@@ -275,65 +275,71 @@ G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * para
 {
   glwin * view = (glwin *)data;
   const gchar * style = g_variant_get_string (parameter, NULL);
-  gchar * style_name = NULL;
-  int i, j;
-  for (i=0; i<OGL_STYLES; i++)
+  int lgt = strlen (style);
+  gchar * name = g_strdup_printf ("%c%c", style[lgt-2], style[lgt-1]);
+  if (g_strcmp0(name, ".1") == 0)
   {
-    if (i != SPACEFILL)
+    g_free (name);
+    name = g_strdup_printf ("%.*s.0", lgt-2, style);
+    g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-style", g_variant_new_string((const gchar *)name));
+    g_free (name);
+  }
+  else
+  {
+    gchar * style_name = NULL;
+    int i;
+    for (i=0; i<OGL_STYLES+FILLED_STYLES; i++)
     {
-      style_name = g_strdup_printf ("set-style.%d", i);
+      style_name = g_strdup_printf ("set-style.%d.0", i);
       if (g_strcmp0(style, (const gchar *)style_name) == 0)
       {
-        set_style (NULL, & view -> colorp[i][0]);
+        if (i < SPACEFILL)
+        {
+          set_style (NULL, & view -> colorp[i][0]);
+        }
+        else if (i < SPACEFILL + FILLED_STYLES)
+        {
+          i -= SPACEFILL;
+          set_style (NULL, & view -> colorp[OGL_STYLES+i][0]);
+        }
+        else
+        {
+          i -= FILLED_STYLES;
+          set_style (NULL, & view -> colorp[i][0]);
+        }
+        g_free (style_name);
+        style_name = NULL;
         break;
       }
       g_free (style_name);
       style_name = NULL;
     }
-    else
-    {
-      for (j=0; j < FILLED_STYLES; j++)
-      {
-        style_name = g_strdup_printf ("set-style.%d", OGL_STYLES+j);
-        if (g_strcmp0(style, (const gchar *)style_name) == 0)
-        {
-          set_style (NULL, & view -> colorp[OGL_STYLES+j][0]);
-          break;
-        }
-        g_free (style_name);
-        style_name = NULL;
-      }
-    }
-    if (style_name)
-    {
-      g_free (style_name);
-      break;
-    }
+    g_action_change_state (G_ACTION (action), parameter);
   }
-  g_action_change_state (G_ACTION (action), parameter);
 }
 
-GMenu * menu_style (glwin * view)
+GMenu * menu_style (glwin * view, int popm)
 {
-  int i, j;
+  int i, j, k;
   GMenu * menu = g_menu_new ();
-  for (i=0; i<OGL_STYLES; i++)
+  k = 0;
+  for (i=0; i<OGL_STYLES; i++, k++)
   {
     if (i != SPACEFILL)
     {
-      append_opengl_item (view, menu, text_styles[i], "style", i,
-                          NULL, IMG_NONE, NULL,
-                          FALSE, G_CALLBACK(change_style_radio), (gpointer)view,
+      append_opengl_item (view, menu, text_styles[i], "style", popm, k,
+                          NULL, IMG_NONE, NULL, FALSE,
+                          G_CALLBACK(change_style_radio), (gpointer)view,
                           FALSE, (view -> anim -> last -> img -> style == i) ? TRUE : FALSE, TRUE, TRUE);
     }
     else
     {
       GMenu * menus = g_menu_new ();
-      for (j=0; j < FILLED_STYLES; j++)
+      for (j=0; j < FILLED_STYLES; j++, k++)
       {
-        append_opengl_item (view, menus, text_filled[j], "style", OGL_STYLES+j,
-                            NULL, IMG_NONE, NULL,
-                            FALSE, G_CALLBACK(change_style_radio), (gpointer)view,
+        append_opengl_item (view, menus, text_filled[j], "style", popm, k,
+                            NULL, IMG_NONE, NULL, FALSE,
+                            G_CALLBACK(change_style_radio), (gpointer)view,
                             FALSE, (view -> anim -> last -> img -> style == SPACEFILL && view -> anim -> last -> img -> filled_type == j) ? TRUE : FALSE, TRUE, TRUE);
       }
       append_submenu (menu, "Spacefilled", menus);

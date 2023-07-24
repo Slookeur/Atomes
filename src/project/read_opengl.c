@@ -15,11 +15,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "project.h"
 #include "glview.h"
 #include "initcoord.h"
-#ifdef GTK4
-G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
-G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data);
-#endif // GTK4
 
 int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 {

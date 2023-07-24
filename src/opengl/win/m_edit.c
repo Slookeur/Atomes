@@ -153,7 +153,7 @@ GtkWidget * menu_edit (glwin * view, int id)
   return menu;
 }
 #else
-GMenu * menu_cell_edit (glwin * view, int sensitive)
+GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 {
   GMenu * menu = g_menu_new ();
   gboolean sens;
@@ -174,19 +174,19 @@ GMenu * menu_cell_edit (glwin * view, int sensitive)
     act = g_strdup_printf ("ceed-%d", i);
     if (i == 0 || i == 3)
     {
-      append_opengl_item (view, menu, edit_names[i],  act, 0, NULL, IMG_NONE, NULL, FALSE, edit_handler[j], (gpointer)view, FALSE, FALSE, FALSE, sens);
+      append_opengl_item (view, menu, edit_names[i], act, popm, i, NULL, IMG_NONE, NULL, FALSE, edit_handler[j], (gpointer)view, FALSE, FALSE, FALSE, sens);
     }
     else
     {
       k = (i < 3) ? i-1 : i-2;
-      append_opengl_item (view, menu, edit_names[i], act, 0, NULL, IMG_NONE, NULL, FALSE, edit_handler[j], & view -> colorp[k][0], FALSE, FALSE, FALSE, sens);
+      append_opengl_item (view, menu, edit_names[i], act, popm, i, NULL, IMG_NONE, NULL, FALSE, edit_handler[j], & view -> colorp[k][0], FALSE, FALSE, FALSE, sens);
     }
     g_free (act);
   }
   return menu;
 }
 
-GMenu * menu_atom_edit (glwin * view, int sensitive)
+GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
 {
   GMenu * menu = g_menu_new ();
   gchar * act;
@@ -196,7 +196,7 @@ GMenu * menu_atom_edit (glwin * view, int sensitive)
   for (i=0; i<5; i++)
   {
     act = g_strdup_printf ("ated-%d", i);
-    append_opengl_item (view, menu, action_name[i], act, 0, NULL, IMG_NONE, NULL, FALSE,
+    append_opengl_item (view, menu, action_name[i], act, popm, 0, NULL, IMG_NONE, NULL, FALSE,
                         G_CALLBACK(action_window), & view -> colorp[i][0], FALSE, FALSE, FALSE, (i == 3) ? j : (this_proj -> natomes) ? j : 0);
     g_free (act);
   }
@@ -205,13 +205,30 @@ GMenu * menu_atom_edit (glwin * view, int sensitive)
 
 G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
+  tint * dat =(tint *)data;
+  glwin * view = get_project_by_id(dat -> a) -> modelgl;
+  gboolean doit = TRUE;
   GVariant * state = g_action_get_state (G_ACTION (action));
-  turn_rebuild (NULL, NULL, data);
-  g_action_change_state (G_ACTION (action), g_variant_new_boolean (! g_variant_get_boolean (state)));
-  g_variant_unref (state);
+  const gchar * rebuild = g_action_get_name ((GAction *)action);
+  int lgt = strlen (rebuild);
+  gchar * name = g_strdup_printf ("%c%c", rebuild[lgt-2], rebuild[lgt-1]);
+  if (g_strcmp0(name, ".1") == 0)
+  {
+    g_free (name);
+    name = g_strdup_printf ("%.*s.0", lgt-2, rebuild);
+    g_action_group_activate_action ((GActionGroup *)view -> action_group, (const gchar *)name, NULL);
+    g_free (name);
+    doit = FALSE;
+  }
+  if (doit)
+  {
+    turn_rebuild (NULL, NULL, data);
+    g_action_change_state (G_ACTION (action), g_variant_new_boolean (! g_variant_get_boolean (state)));
+    g_variant_unref (state);
+  }
 }
 
-GMenu * extract_section (glwin * view)
+GMenu * extract_section (glwin * view, int popm)
 {
   int i;
   struct project * this_proj = get_project_by_id(view -> proj);
@@ -219,7 +236,7 @@ GMenu * extract_section (glwin * view)
   gchar * rtext[2] = {"Extract/Rebuild on Motion", "Extract/Rebuild on Copy"};
   for (i=0; i<2; i++)
   {
-    append_opengl_item (view, menu, rtext[i], "aext", i, NULL, IMG_STOCK, (gpointer)ECUT, FALSE, G_CALLBACK(to_run_rebuild), & view -> colorp[i][0],
+    append_opengl_item (view, menu, rtext[i], "aext", popm, i, NULL, IMG_STOCK, (gpointer)ECUT, FALSE, G_CALLBACK(to_run_rebuild), & view -> colorp[i][0],
                         TRUE, view -> rebuild[i][0], FALSE, (this_proj -> steps == 1) ? 1 : 0);
   }
   return menu;
@@ -229,10 +246,10 @@ GMenu * menu_edit (glwin * view, int popm)
 {
   struct project * this_proj = get_project_by_id(view -> proj);
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, "Crystal Builder", "cbuilder", 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(crystal_window), & view -> colorp[0][0], FALSE, FALSE, FALSE, TRUE);
-  append_submenu (menu, "Cell", menu_cell_edit(view, (this_proj -> cell.ltype && this_proj -> steps == 1) ? 1 : 0));
-  append_submenu (menu, "Atom(s)", menu_atom_edit(view, (this_proj -> steps == 1) ? 1 : 0));
-  if (! popm) g_menu_append_section (menu, NULL, (GMenuModel*)extract_section(view));
+  append_opengl_item (view, menu, "Crystal Builder", "cbuilder", popm, popm, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(crystal_window), & view -> colorp[0][0], FALSE, FALSE, FALSE, TRUE);
+  append_submenu (menu, "Cell", menu_cell_edit(view, popm, (this_proj -> cell.ltype && this_proj -> steps == 1) ? 1 : 0));
+  append_submenu (menu, "Atom(s)", menu_atom_edit(view, popm, (this_proj -> steps == 1) ? 1 : 0));
+  if (! popm) g_menu_append_section (menu, NULL, (GMenuModel*)extract_section(view, popm));
   return menu;
 }
 #endif

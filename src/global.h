@@ -957,11 +957,37 @@ extern GtkWidget * dialog_get_content_area (GtkWidget * widg);
 extern void layout_add_widget (GtkWidget * layout, GtkWidget * child, int x_pos, int y_pos);
 extern GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_y);
 extern GtkWidget * create_layout (int x, int y);
-#ifdef GTK3
+
+#ifdef GTK4
+extern G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern void add_widget_gesture_and_key_action (GtkWidget * widget,
+                                               gchar * cp_name, GCallback cp_handler, gpointer cp_data,
+                                               gchar * cr_name, GCallback cr_handler, gpointer cr_data,
+                                               gchar * kp_name, GCallback kp_handler, gpointer kp_data,
+                                               gchar * mo_name, GCallback mo_handler, gpointer mo_data,
+                                               gchar * sc_name, GCallback sc_handler, gpointer sc_data);
+extern void menu_item_set_submenu (GMenu * menu, GMenu * sub_menu);
+extern G_MODULE_EXPORT gboolean destroy_this_window (GtkWindow * win, gpointer data);
+extern G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data);
+extern GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name);
+extern void pop_menu_at_pointer (GtkWidget * pop, double x, double y);
+GListModel * file_chooser_get_file_names (GtkFileChooser * chooser);
+extern void update_menu_bar (glwin * view);
+#else
+extern G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data);
+extern G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data);
 extern GtkWidget * create_menu_item (gboolean add_mnemo, gchar * action);
 extern GtkWidget * create_menu_item_from_widget (GtkWidget * widg, gboolean check, gboolean radio, gboolean status);
 extern GtkWidget * menu_item_new_with_submenu (gchar * name, gboolean active, GtkWidget * sub_menu);
 extern void add_menu_separator (GtkWidget * menu);
+extern void menu_item_set_submenu (GtkWidget * item, GtkWidget * sub_menu);
+extern G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event, gpointer data);
+extern G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data);
+extern GtkWidget * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name);
+extern void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event);
+GSList * file_chooser_get_file_names (GtkFileChooser * chooser);
 #endif
 
 extern const gchar * entry_get_text (GtkEntry * entry);
@@ -1037,14 +1063,6 @@ extern GtkWidget * fbox (GtkWidget * box, char * lab);
 extern GtkWidget * create_scroll (GtkWidget * box, int dimx, int dimy, int shadow);
 extern GtkWidget * create_expander (gchar * name, gchar * file_img, int i);
 
-#ifdef GTK4
-extern void add_widget_gesture_and_key_action (GtkWidget * widget,
-                                               gchar * cp_name, GCallback cp_handler, gpointer cp_data,
-                                               gchar * cr_name, GCallback cr_handler, gpointer cr_data,
-                                               gchar * kp_name, GCallback kp_handler, gpointer kp_data,
-                                               gchar * mo_name, GCallback mo_handler, gpointer mo_data,
-                                               gchar * sc_name, GCallback sc_handler, gpointer sc_data);
-#endif
 extern GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolean resiz);
 
 extern void widget_add_action (GSimpleActionGroup * action_group, const gchar * act, GCallback handler, gpointer data,
@@ -1052,45 +1070,21 @@ extern void widget_add_action (GSimpleActionGroup * action_group, const gchar * 
 extern void append_menu_item (GMenu * menu, const gchar * label, const gchar * action, const gchar * accel,
                               const gchar * custom, int format, const gchar * icon,
                               gboolean check, gboolean status, gboolean radio, const gchar * rstatus);
-
+extern void append_submenu (GMenu * menu, const gchar * label, GMenu * submenu);
 extern void check_menu_item_set_active (gpointer item, gboolean active);
 extern gboolean check_menu_item_get_active (gpointer item);
 
-#ifdef GTK4
-extern void menu_item_set_submenu (GMenu * menu, GMenu * sub_menu);
-#else
-extern void menu_item_set_submenu (GtkWidget * item, GtkWidget * sub_menu);
-#endif
 extern GtkWidget * destroy_this_widget (GtkWidget * widg);
 extern void destroy_this_dialog (GtkDialog * dialog);
 extern void destroy_this_native_dialog (GtkNativeDialog * dialog);
 extern G_MODULE_EXPORT void run_destroy_dialog (GtkDialog * dialog, gint response_id, gpointer data);
 
-#ifdef GTK4
-extern G_MODULE_EXPORT gboolean destroy_this_window (GtkWindow * win, gpointer data);
-extern G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data);
-#else
-extern G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event, gpointer data);
-extern G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data);
-#endif
 extern void add_gtk_close_event (GtkWidget * widg, GCallback handler, gpointer data);
 
-#ifdef GTK4
-GListModel * file_chooser_get_file_names (GtkFileChooser * chooser);
-#else
-GSList * file_chooser_get_file_names (GtkFileChooser * chooser);
-#endif
 gchar * file_chooser_get_file_name (GtkFileChooser * chooser);
 gchar * file_chooser_get_current_folder (GtkFileChooser * chooser);
 extern gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename);
 extern void file_chooser_set_current_folder (GtkFileChooser * chooser);
-#ifdef GTK4
-extern GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name);
-extern void pop_menu_at_pointer (GtkWidget * pop, double x, double y);
-#else
-extern GtkWidget * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name);
-extern void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event);
-#endif
 
 extern GtkWidget * get_top_level (GtkWidget * widg);
 
@@ -1102,9 +1096,5 @@ typedef struct {
   GCallback handler;
   gpointer data;
 } focus_data;
-
-#ifdef GTK4
-extern void update_menu_bar (glwin * view);
-#endif
 
 #endif  // GLOBAL_H_

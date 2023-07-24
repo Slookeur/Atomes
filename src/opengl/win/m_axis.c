@@ -137,37 +137,48 @@ void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
 #else
 G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
-  const gchar * style = g_variant_get_string (parameter, NULL);
-  gchar * str = NULL;
-  g_debug ("style= %s", style);
   /* TOP_RIGHT = 0,
-  TOP_LEFT = 1,
-  BOTTOM_RIGHT = 2,
-  BOTTOM_LEFT = 3,
-  CENTER = 4 */
+     TOP_LEFT = 1,
+     BOTTOM_RIGHT = 2,
+     BOTTOM_LEFT = 3,
+     CENTER = 4 */
   tint * the_data = (tint *)data;
   glwin * view = get_project_by_id(the_data -> a) -> modelgl;
-  int i;
-  for (i=0; i<5; i++)
+  const gchar * pos = g_variant_get_string (parameter, NULL);
+  int lgt = strlen (pos);
+  gchar * name = g_strdup_printf ("%c%c", pos[lgt-2], pos[lgt-1]);
+  if (g_strcmp0(name, ".1") == 0)
   {
-    str = g_strdup_printf ("set-axis-pos.%d", i);
-    if (g_strcmp0(style, (const gchar *)str) == 0)
-    {
-      view -> anim -> last -> img -> axispos = i;
-      g_free (str);
-      str = NULL;
-      break;
-    }
-    g_free (str);
-    str = NULL;
+    g_free (name);
+    name = g_strdup_printf ("%.*s.0", lgt-2, pos);
+    g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-axis-pos", g_variant_new_string((const gchar *)name));
+    g_free (name);
   }
-  g_action_change_state (G_ACTION (action), parameter);
-  view -> create_shaders[MAXIS] = TRUE;
-  update (view);
-  update_menu_bar (view);
+  else
+  {
+    int i;
+    gchar * pos_name = NULL;
+    for (i=0; i<5; i++)
+    {
+      pos_name = g_strdup_printf ("set-axis-pos.%d.0", i);
+      if (g_strcmp0(pos, (const gchar *)pos_name) == 0)
+      {
+        view -> anim -> last -> img -> axispos = i;
+        g_free (pos_name);
+        pos_name = NULL;
+        break;
+      }
+      g_free (pos_name);
+      pos_name = NULL;
+    }
+    g_action_change_state (G_ACTION (action), parameter);
+    view -> create_shaders[MAXIS] = TRUE;
+    update (view);
+    g_action_change_state (G_ACTION (action), parameter);
+  }
 }
 
-GMenu * position_submenu (glwin * view, int pos)
+GMenu * position_submenu (glwin * view, int popm, int pos)
 {
   GMenu * menu = g_menu_new ();
   gchar * lrlab[2] = {"Right Corner", "Left Corner"};
@@ -175,7 +186,7 @@ GMenu * position_submenu (glwin * view, int pos)
   i = pos*2;
   for (j=0; j<2; j++)
   {
-    append_opengl_item (view, menu, lrlab[j], "axis-pos", i, NULL, IMG_NONE, NULL, FALSE,
+    append_opengl_item (view, menu, lrlab[j], "axis-pos", popm, i, NULL, IMG_NONE, NULL, FALSE,
                         G_CALLBACK(change_axis_pos_radio), & view -> colorp[i][0],
                         FALSE, (view -> anim -> last -> img -> axispos == i) ? TRUE: FALSE, TRUE, TRUE);
     i ++;
@@ -183,29 +194,29 @@ GMenu * position_submenu (glwin * view, int pos)
   return menu;
 }
 
-GMenu * axis_position_submenu (glwin * view)
+GMenu * axis_position_submenu (glwin * view, int popm)
 {
   int i;
   GMenu * menu = g_menu_new ();
   gchar * udlab[2] = {"Top", "Bottom"};
   for (i=0; i<2; i++)
   {
-    append_submenu (menu, udlab[i], position_submenu(view, i));
+    append_submenu (menu, udlab[i], position_submenu(view, popm, i));
   }
-  append_opengl_item (view, menu, "Center", "axis-pos", 4, NULL, IMG_NONE, NULL, FALSE,
+  append_opengl_item (view, menu, "Center", "axis-pos", popm, 4, NULL, IMG_NONE, NULL, FALSE,
                       G_CALLBACK(change_axis_pos_radio), & view -> colorp[4][0],
                       FALSE, (view -> anim -> last -> img -> axispos == 4) ? TRUE: FALSE, TRUE, TRUE);
   return menu;
 }
 
-void menu_axis (GMenu * menu_ab, glwin * view)
+void menu_axis (GMenu * menu_ab, glwin * view, int popm)
 {
   GMenuItem * item = g_menu_item_new ("Length", (view -> anim -> last -> img -> box_axis[AXIS]) != NONE ? NULL : "None");
   g_menu_item_set_attribute (item, "custom", "s", "axis-length", NULL);
-  g_menu_item_set_submenu (item, (GMenuModel *)axis_box_param (view, AXIS, NONE));
+  g_menu_item_set_submenu (item, (GMenuModel *)axis_box_param (view, popm, AXIS, NONE));
   g_menu_append_item (menu_ab, item);
-  append_submenu (menu_ab, "Position", axis_position_submenu(view));
-  append_opengl_item (view, menu_ab, "Advanced", "axis-advanced", 0, NULL, IMG_STOCK, DPROPERTIES, FALSE,
+  append_submenu (menu_ab, "Position", axis_position_submenu(view, popm));
+  append_opengl_item (view, menu_ab, "Advanced", "axis-advanced", popm, popm, NULL, IMG_STOCK, DPROPERTIES, FALSE,
                       G_CALLBACK(axis_advanced), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
 }
 #endif

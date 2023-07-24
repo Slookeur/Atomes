@@ -223,17 +223,35 @@ G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * para
 {
   tint * the_data = (tint *)data;
   glwin * view = get_project_by_id(the_data -> a) -> modelgl;
-  if (view -> anim -> last -> img -> box_axis[the_data -> c] != NONE)
+  const gchar * name = g_action_get_name ((GAction *)action);
+  int lgt = strlen (name);
+  gchar * str = g_strdup_printf ("%c%c", name[lgt-2], name[lgt-1]);
+  if (g_strcmp0(str, ".1") == 0)
   {
-    view -> anim -> last -> img -> box_axis[the_data -> c] = NONE;
+    g_free (str);
+    str = g_strdup_printf ("%.*s.0.0", lgt-4, name);
+    g_action_group_activate_action ((GActionGroup *)view -> action_group, (const gchar *)str, NULL);
+    g_free (str);
   }
   else
   {
-    view -> anim -> last -> img -> box_axis[the_data -> c] = WIREFRAME;
+    GVariant * state;
+    gboolean show;
+    state = g_action_get_state (G_ACTION (action));
+    show = ! g_variant_get_boolean (state);
+    if (show)
+    {
+      view -> anim -> last -> img -> box_axis[the_data -> c] = WIREFRAME;
+    }
+    else
+    {
+      view -> anim -> last -> img -> box_axis[the_data -> c] = NONE;
+    }
+    view -> create_shaders[the_data -> c+MDBOX] = TRUE;
+    update (view);
+    g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
+    g_variant_unref (state);
   }
-  view -> create_shaders[the_data -> c+MDBOX] = TRUE;
-  update (view);
-  update_menu_bar (view);
 }
 
 G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -243,47 +261,57 @@ G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * p
   i = the_data -> c;
   glwin * view = get_project_by_id (the_data -> a) -> modelgl;
   const gchar * style = g_variant_get_string (parameter, NULL);
-  gchar * str = g_strdup_printf ("set-%s-style", (i) ? "axis" : "box");
-  gchar * style_name = NULL;
-  for (j=0; j<2; j++)
+  int lgt = strlen (style);
+  gchar * name = g_strdup_printf ("%c%c", style[lgt-2], style[lgt-1]);
+  if (g_strcmp0(name, ".1") == 0)
   {
-    style_name = g_strdup_printf ("%s.%d", str, j);
-    if (g_strcmp0(style, (const gchar *)style_name) == 0)
-    {
-      view -> anim -> last -> img -> box_axis[i] = (j == 0) ? WIREFRAME : CYLINDERS;
-      g_free (style_name);
-      style_name = NULL;
-      break;
-    }
-    if (style_name)
-    {
-      g_free (style_name);
-      style_name = NULL;
-    }
+    name = g_strdup_printf ("%.*s.0", lgt-2, style);
+    gchar * str = g_strdup_printf ("set-%s-style", (i) ? "axis" : "box");
+    g_action_group_activate_action ((GActionGroup *)view -> action_group, (const gchar *)str, g_variant_new_string((const gchar *)name));
+    g_free (str);
+    g_free (name);
   }
-  g_action_change_state (G_ACTION (action), parameter);
-  view -> create_shaders[i+MDBOX] = TRUE;
-  update (view);
-  update_menu_bar (view);
+  else
+  {
+    gchar * style_name = NULL;
+    gchar * str = g_strdup_printf ("set-%s-style", (i) ? "axis" : "box");
+    for (j=0; j<2; j++)
+    {
+      style_name = g_strdup_printf ("%s.%d.0", str, j);
+      if (g_strcmp0(style, (const gchar *)style_name) == 0)
+      {
+        view -> anim -> last -> img -> box_axis[i] = (j == 0) ? WIREFRAME : CYLINDERS;
+        view -> create_shaders[i+MDBOX] = TRUE;
+        update (view);
+        g_free (style_name);
+        style_name = NULL;
+        break;
+      }
+      g_free (style_name);
+      style_name = NULL;
+    }
+    g_free (str);
+    g_action_change_state (G_ACTION (action), parameter);
+  }
 }
 
-GMenu * axis_box_style (glwin * view, int ab, int abs)
+GMenu * axis_box_style (glwin * view, int popm, int ab, int abs)
 {
   GMenu * menu = g_menu_new ();
   gchar * str = g_strdup_printf ("%s-style", (ab) ? "axis" : "box");
-  append_opengl_item (view, menu, text_styles[1], str, 0, NULL, IMG_NONE, NULL, FALSE,
+  append_opengl_item (view, menu, text_styles[1], str, popm, 0, NULL, IMG_NONE, NULL, FALSE,
                       G_CALLBACK(change_box_axis_radio), & view -> colorp[1][ab], FALSE, (abs == WIREFRAME) ? TRUE : FALSE,
                       TRUE, (abs != NONE) ? TRUE : FALSE);
   g_free (str);
   str = g_strdup_printf ("%s-style", (ab) ? "axis" : "box");
-  append_opengl_item (view, menu, text_styles[4], str, 1, NULL, IMG_NONE, NULL, FALSE,
+  append_opengl_item (view, menu, text_styles[4], str, popm, 1, NULL, IMG_NONE, NULL, FALSE,
                       G_CALLBACK(change_box_axis_radio), & view -> colorp[4][ab], FALSE, (abs == CYLINDERS) ? TRUE : FALSE,
                       TRUE, (abs != NONE) ? TRUE : FALSE);
   g_free (str);
   return menu;
 }
 
-GMenu * axis_box_param (glwin * view, int ab, int style)
+GMenu * axis_box_param (glwin * view, int popm, int ab, int style)
 {
   gchar * str, * key;
   if (style == WIREFRAME)
@@ -302,52 +330,52 @@ GMenu * axis_box_param (glwin * view, int ab, int style)
     key = g_strdup_printf ("axis-legnth");
   }
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, str, key, 0, NULL, IMG_NONE, NULL, FALSE,
+  append_opengl_item (view, menu, str, key, popm, ab, NULL, IMG_NONE, NULL, FALSE,
                       G_CALLBACK(window_bonds), & view -> colorp[style][ab], FALSE, FALSE, FALSE, TRUE);
   g_free (str);
   g_free (key);
   return menu;
 }
 
-GMenuItem * menu_box_axis (glwin * view, int ab)
+GMenuItem * menu_box_axis (glwin * view, int popm, int ab)
 {
   GMenuItem * ab_item = g_menu_item_new ((ab) ? "Axis" : "Box", (ab) ? NULL : (get_project_by_id(view -> proj) -> cell.ltype) ? NULL : "None");
   int i = view -> anim -> last -> img -> box_axis[ab];
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, "Show/Hide", (ab) ? "show-axis" : "show-box", 0, NULL, IMG_NONE, NULL, FALSE,
+  append_opengl_item (view, menu, "Show/Hide", (ab) ? "show-axis" : "show-box", popm, popm, NULL, IMG_NONE, NULL, FALSE,
                       G_CALLBACK(show_hide_box_axis), & view -> colorp[0][ab], TRUE, (i != NONE) ? TRUE : FALSE, FALSE, (ab) ? TRUE : get_project_by_id(view -> proj) -> cell.ltype);
 
-  append_submenu (menu, "Style", axis_box_style (view, ab, i));
+  append_submenu (menu, "Style", axis_box_style (view, popm, ab, i));
   GMenuItem * item ;
   if (i == WIREFRAME)
   {
     item = g_menu_item_new ("Lines", (view -> anim -> last -> img -> box_axis[ab]) != NONE ? NULL : "None");
     g_menu_item_set_attribute (item, "custom", "s", (ab) ? "axis-lines" : "box-lines", NULL);
-    g_menu_item_set_submenu (item, (GMenuModel *)axis_box_param (view, ab, WIREFRAME));
+    g_menu_item_set_submenu (item, (GMenuModel *)axis_box_param (view, popm, ab, WIREFRAME));
     g_menu_append_item (menu, item);
   }
   if (i == CYLINDERS)
   {
     item = g_menu_item_new ("Cylinders", (view -> anim -> last -> img -> box_axis[ab]) != NONE ? NULL : "None");
     g_menu_item_set_attribute (item, "custom", "s", (ab) ? "axis-cylinders" : "box-cylinders", NULL);
-    g_menu_item_set_submenu (item, (GMenuModel *)axis_box_param (view, ab, CYLINDERS));
+    g_menu_item_set_submenu (item, (GMenuModel *)axis_box_param (view, popm, ab, CYLINDERS));
     g_menu_append_item (menu, item);
   }
 
   if (ab == 0)
   {
     GMenu * menuc = g_menu_new ();
-    append_opengl_item (view, menu, "box-color", "box-color", 0, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
-    append_opengl_item (view, menu, "More colors ...", "box-color", 0, NULL, IMG_NONE, NULL, FALSE,
+    append_opengl_item (view, menu, "box-color", "box-color", popm, popm, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
+    append_opengl_item (view, menu, "More colors ...", "box-color", popm, popm, NULL, IMG_NONE, NULL, FALSE,
                         G_CALLBACK(to_run_box_color_window), view, FALSE, FALSE, FALSE, get_project_by_id(view -> proj) -> cell.ltype);
     append_submenu (menu, "Color", menuc);
     g_object_unref (menuc);
-    append_opengl_item (view, menu, "Advanced", "box-advanced", 0, NULL, IMG_STOCK, DPROPERTIES, FALSE,
+    append_opengl_item (view, menu, "Advanced", "box-advanced", popm, popm, NULL, IMG_STOCK, DPROPERTIES, FALSE,
                       G_CALLBACK(box_advanced), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
   }
   else
   {
-    menu_axis (menu, view);
+    menu_axis (menu, view, popm);
   }
   g_menu_item_set_submenu (ab_item, (GMenuModel *)menu);
   return ab_item;

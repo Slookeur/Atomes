@@ -37,14 +37,14 @@ G_MODULE_EXPORT void to_render_gl_image (GSimpleAction * action, GVariant * para
   render_gl_image (NULL, data);
 }
 
-void append_opengl_item (glwin * view, GMenu * menu, const gchar * name, const gchar * key, int item_id,
+void append_opengl_item (glwin * view, GMenu * menu, const gchar * name, const gchar * key, int mpop, int item_id,
                          gchar * accel, int image_format, gpointer icon,
                          gboolean custom, GCallback handler, gpointer data,
                          gboolean check, gboolean status, gboolean radio, gboolean sensitive)
 {
   gchar * str_a, * str_b, * str_c;
   str_a = g_strdup_printf ("set-%s", key);
-  str_b = g_strdup_printf ("%s.%d", str_a, item_id);
+  str_b = g_strdup_printf ("%s.%d.%d", str_a, item_id, mpop);
   str_c = (sensitive) ? g_strdup_printf ("gl-%d.%s", view -> action_id, (radio) ? str_a : str_b) : g_strdup_printf ("None");
   append_menu_item (menu, name, (const gchar *) str_c, accel, (custom) ? (const gchar *) str_b : NULL, image_format, icon, check, status, radio, (radio) ? (const gchar *)str_b : NULL);
   if (handler)
@@ -68,38 +68,38 @@ void append_opengl_item (glwin * view, GMenu * menu, const gchar * name, const g
   g_free (str_c);
 }
 
-GMenu * prepare_opengl_menu (glwin * view)
+GMenu * prepare_opengl_menu (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Style", menu_style(view));
+  append_submenu (menu, "Style", menu_style(view, popm));
   GMenuItem * item = g_menu_item_new ("Color Scheme(s)", (get_project_by_id(view -> proj) -> nspec) ? NULL : "None");
-  g_menu_item_set_submenu (item, (GMenuModel*)menu_map(view));
+  g_menu_item_set_submenu (item, (GMenuModel*)menu_map(view, popm));
   g_menu_append_item (menu, item);
-  append_submenu (menu, "Render", menu_render(view));
-  append_submenu (menu, "Quality", menu_quality(view));
-  append_opengl_item (view, menu, "Material And Lights", "material", 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_opengl_advanced), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
-  append_opengl_item (view, menu, "Render Image", "image", 0, "<CTRL>I", IMG_FILE, PACKAGE_IMG, FALSE, G_CALLBACK(to_render_gl_image), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_submenu (menu, "Render", menu_render(view, popm));
+  append_submenu (menu, "Quality", menu_quality(view, popm));
+  append_opengl_item (view, menu, "Material And Lights", "material", popm, popm, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_opengl_advanced), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Render Image", "image", popm, popm, "<CTRL>I", IMG_FILE, PACKAGE_IMG, FALSE, G_CALLBACK(to_render_gl_image), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
   return menu;
 }
 
-GMenu * prepare_model_menu (glwin * view)
+GMenu * prepare_model_menu (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Atom(s)", menu_atoms(view, 0));
-  append_submenu (menu, "Bond(s)", menu_bonds(view, 0));
-  append_submenu (menu, "Clone(s)", menu_clones(view));
-  g_menu_append_item (menu, menu_box_axis (view, 0));
+  append_submenu (menu, "Atom(s)", menu_atoms(view, popm, 0));
+  append_submenu (menu, "Bond(s)", menu_bonds(view, popm, 0));
+  append_submenu (menu, "Clone(s)", menu_clones(view, popm));
+  g_menu_append_item (menu, menu_box_axis (view, popm, 0));
   return menu;
 }
 
-GMenu * prepare_coord_menu (glwin * view)
+GMenu * prepare_coord_menu (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Coordination", menu_coord (view));
-  append_submenu (menu, "Polyhedra", menu_poly (view));
+  append_submenu (menu, "Coordination", menu_coord (view, popm));
+  append_submenu (menu, "Polyhedra", menu_poly (view, popm));
   if (view -> rings)
   {
-    append_submenu (menu, "Rings(s)", menu_rings (view));
+    append_submenu (menu, "Rings(s)", menu_rings (view, popm));
   }
   else
   {
@@ -107,7 +107,7 @@ GMenu * prepare_coord_menu (glwin * view)
   }
   if (view -> chains)
   {
-    append_submenu (menu, "Chain(s)", add_menu_coord (view, 9));
+    append_submenu (menu, "Chain(s)", add_menu_coord (view, popm, 9));
   }
   else
   {
@@ -115,7 +115,7 @@ GMenu * prepare_coord_menu (glwin * view)
   }
   if (view -> adv_bonding[0])
   {
-    append_submenu (menu, "Fragment(s)", add_menu_coord (view, 2));
+    append_submenu (menu, "Fragment(s)", add_menu_coord (view, popm, 2));
   }
   else
   {
@@ -123,24 +123,24 @@ GMenu * prepare_coord_menu (glwin * view)
   }
   if (view -> adv_bonding[1])
   {
-    append_submenu (menu, "Molecule(s)", add_menu_coord (view, 3));
+    append_submenu (menu, "Molecule(s)", add_menu_coord (view, popm, 3));
   }
   else
   {
     append_menu_item (menu, "Molecule(s)", "None", NULL, NULL, IMG_NONE, NULL, FALSE, FALSE, FALSE, NULL);
   }
-  append_opengl_item (view, menu, "Advanced", "adv-all", 0, "<CTRL>E", IMG_STOCK, (gpointer)DPROPERTIES, FALSE, G_CALLBACK(to_coord_properties), & view -> colorp[30][0], FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Advanced", "adv-all", popm, popm, "<CTRL>E", IMG_STOCK, (gpointer)DPROPERTIES, FALSE, G_CALLBACK(to_coord_properties), & view -> colorp[30][0], FALSE, FALSE, FALSE, TRUE);
   return menu;
 }
 
 GMenu * opengl_menu_bar (glwin * view, gchar * str)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "OpenGL", prepare_opengl_menu(view));
+  append_submenu (menu, "OpenGL", prepare_opengl_menu(view, 0));
   if (get_project_by_id(view -> proj) -> natomes)
   {
-    append_submenu (menu, "Model", prepare_model_menu(view));
-    append_submenu (menu, "Chemistry", prepare_coord_menu(view));
+    append_submenu (menu, "Model", prepare_model_menu(view, 0));
+    append_submenu (menu, "Chemistry", prepare_coord_menu(view, 0));
   }
   else
   {
@@ -149,7 +149,7 @@ GMenu * opengl_menu_bar (glwin * view, gchar * str)
   }
   append_submenu (menu, "Tools", menu_tools(view, 0));
   append_submenu (menu, "View", menu_view(view, 0));
-  append_submenu (menu, "Animate", menu_anim(view));
+  append_submenu (menu, "Animate", menu_anim(view, 0));
   return menu;
 }
 

@@ -43,6 +43,7 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
   qint * cid = (qint *)data;
   int i, j, k;
   int c, g, s;
+  gboolean doit = TRUE;
   gboolean show;
   struct project * this_proj = get_project_by_id(cid -> a);
   s = cid -> b;
@@ -65,6 +66,16 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
   {
     state = g_action_get_state (G_ACTION (action));
     show = ! g_variant_get_boolean (state);
+    const gchar * coord = g_action_get_name ((GAction *)action);
+    int lgt = strlen (coord);
+    gchar * name = g_strdup_printf ("%c%c", coord[lgt-2], coord[lgt-1]);
+    if (g_strcmp0(name, ".1") == 0)
+    {
+      name = g_strdup_printf ("%.*s.0", lgt-2, coord);
+      g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
+      g_free (name);
+      doit = FALSE;
+    }
   }
   else
   {
@@ -94,57 +105,60 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
     }
   }
 #endif
-  this_proj -> modelgl -> anim -> last -> img -> show_coord[g][j] = show;
-  for (i=0; i<this_proj -> steps; i++)
+  if (doit)
   {
-    for (j=0; j<this_proj -> natomes; j++)
+    this_proj -> modelgl -> anim -> last -> img -> show_coord[g][j] = show;
+    for (i=0; i<this_proj -> steps; i++)
     {
-      if (g < 2)
+      for (j=0; j<this_proj -> natomes; j++)
       {
-        if (this_proj -> atoms[i][j].sp == s && this_proj -> atoms[i][j].coord[g] == c)
+        if (g < 2)
         {
-          this_proj -> atoms[i][j].show[0] = this_proj -> atoms[i][j].show[1] = show;
-        }
-      }
-      else if (g < 4)
-      {
-        if (this_proj -> atoms[i][j].coord[g] == c)
-        {
-          this_proj -> atoms[i][j].show[0] = this_proj -> atoms[i][j].show[1] = show;
-        }
-      }
-      else if (g < 9)
-      {
-        k = this_proj -> coord -> geolist[g][0][c] - 1;
-        if (this_proj -> atoms[i][j].rings[s][k] != NULL)
-        {
-          if (this_proj -> atoms[i][j].rings[s][k][0])
+          if (this_proj -> atoms[i][j].sp == s && this_proj -> atoms[i][j].coord[g] == c)
           {
             this_proj -> atoms[i][j].show[0] = this_proj -> atoms[i][j].show[1] = show;
           }
         }
-      }
-      else
-      {
-        k = this_proj -> coord -> geolist[g][0][c] - 1;
-        if (this_proj -> atoms[i][j].chain[k] != NULL)
+        else if (g < 4)
         {
-          if (this_proj -> atoms[i][j].chain[k][0])
+          if (this_proj -> atoms[i][j].coord[g] == c)
           {
             this_proj -> atoms[i][j].show[0] = this_proj -> atoms[i][j].show[1] = show;
+          }
+        }
+        else if (g < 9)
+        {
+          k = this_proj -> coord -> geolist[g][0][c] - 1;
+          if (this_proj -> atoms[i][j].rings[s][k] != NULL)
+          {
+            if (this_proj -> atoms[i][j].rings[s][k][0])
+            {
+              this_proj -> atoms[i][j].show[0] = this_proj -> atoms[i][j].show[1] = show;
+            }
+          }
+        }
+        else
+        {
+          k = this_proj -> coord -> geolist[g][0][c] - 1;
+          if (this_proj -> atoms[i][j].chain[k] != NULL)
+          {
+            if (this_proj -> atoms[i][j].chain[k][0])
+            {
+              this_proj -> atoms[i][j].show[0] = this_proj -> atoms[i][j].show[1] = show;
+            }
           }
         }
       }
     }
-  }
-  init_default_shaders (this_proj -> modelgl);
+    init_default_shaders (this_proj -> modelgl);
 #ifdef GTK4
-  if (action)
-  {
-    g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
-    g_variant_unref (state);
-  }
+    if (action)
+    {
+      g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
+      g_variant_unref (state);
+    }
 #endif
+  }
 }
 
 #ifdef GTK3
@@ -350,15 +364,15 @@ GtkWidget * menu_rings (glwin * view, int id, int jd)
   return menuco;
 }
 #else
-GMenu * color_item (glwin * view, gchar * act, int id, GCallback handler, gpointer data)
+GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handler, gpointer data)
 {
   GMenu *  menu = g_menu_new ();
-  append_opengl_item (view, menu, act, act, id, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
-  append_opengl_item (view, menu, "More colors ...", act, id, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, act, act, popm, id, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
+  append_opengl_item (view, menu, "More colors ...", act, popm, id, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
   return menu;
 }
 
-GMenu * menu_show_coord (glwin * view, int id, int mid)
+GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
 {
   GMenu * menu = g_menu_new ();
   GMenu * menus;
@@ -390,13 +404,13 @@ GMenu * menu_show_coord (glwin * view, int id, int mid)
           if (! mid)
           {
             strb = g_strdup_printf ("%s-s", stra);
-            append_opengl_item (view, menus, stra, strb, k+j, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_coord), & view -> gcid[id][k+j][id],
+            append_opengl_item (view, menus, stra, strb, popm, k+j, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_coord), & view -> gcid[id][k+j][id],
                                 TRUE, view -> anim -> last -> img -> show_coord[id][k+j], FALSE, TRUE);
           }
           else
           {
             strb = g_strdup_printf ("%s-c", stra);
-            append_submenu (menus, stra, color_item(view, strb, k+j, G_CALLBACK(window_color_coord), & view -> gcid[id][k+j][id]));
+            append_submenu (menus, stra, color_item(view, strb, popm, k+j, G_CALLBACK(window_color_coord), & view -> gcid[id][k+j][id]));
           }
           g_free (stra);
           g_free (strb);
@@ -414,7 +428,7 @@ G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * par
   coord_properties (NULL, data);
 }
 
-GMenu * menu_show_frag_mol (glwin * view, int id, int mid)
+GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
 {
   GMenu * menu = g_menu_new ();
   struct project * this_proj = get_project_by_id (view -> proj);
@@ -428,22 +442,22 @@ GMenu * menu_show_frag_mol (glwin * view, int id, int mid)
       strb = g_strdup_printf ("%s-%d", (id == 2) ? "frag" : "mol", i+1);
       if (! mid)
       {
-        append_opengl_item (view, menu, stra, strb, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_coord), & view -> gcid[id][i][id],
+        append_opengl_item (view, menu, stra, strb, popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_coord), & view -> gcid[id][i][id],
                             TRUE, view -> anim -> last -> img -> show_coord[id][i], FALSE, TRUE);
       }
       else
       {
-        append_submenu (menu, stra, color_item(view, (id == 2) ? "fcol": "mcol", i, G_CALLBACK(window_color_coord), & view -> gcid[id][i][id]));
+        append_submenu (menu, stra, color_item(view, (id == 2) ? "fcol": "mcol", popm, i, G_CALLBACK(window_color_coord), & view -> gcid[id][i][id]));
       }
       g_free (stra);
       g_free (strb);
     }
   }
-  // append_opengl_item (view, menu, "All", "all-fm", id, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_coord_properties), & view -> colorp[id][1], FALSE, FALSE, FALSE, TRUE);
+  // append_opengl_item (view, menu, "All", "all-fm", popm, id, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_coord_properties), & view -> colorp[id][1], FALSE, FALSE, FALSE, TRUE);
   return menu;
 }
 
-GMenu * menu_show_rings (glwin * view, int id, int mid)
+GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
 {
   GMenu * menu = g_menu_new ();
   GMenu * menus;
@@ -461,12 +475,12 @@ GMenu * menu_show_rings (glwin * view, int id, int mid)
     str = g_strdup_printf ("%d", this_proj -> coord -> geolist[id][0][i]);
     if (! mid)
     {
-      append_opengl_item (view, menus, str, str, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_coord), & view -> gcid[id][i][id],
+      append_opengl_item (view, menus, str, str, popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_coord), & view -> gcid[id][i][id],
                           TRUE, view -> anim -> last -> img -> show_coord[id][i], FALSE, TRUE);
     }
     else
     {
-      append_submenu (menu, str, color_item(view, rin, i, G_CALLBACK(window_color_coord), & view -> gcid[id][i][id]));
+      append_submenu (menu, str, color_item(view, rin, popm, i, G_CALLBACK(window_color_coord), & view -> gcid[id][i][id]));
     }
     g_free (str);
   }
@@ -475,7 +489,7 @@ GMenu * menu_show_rings (glwin * view, int id, int mid)
   return menu;
 }
 
-GMenu * add_menu_coord (glwin * view, int id)
+GMenu * add_menu_coord (glwin * view, int popm, int id)
 {
   GMenu * menu = g_menu_new ();
   struct project * this_proj = get_project_by_id (view -> proj);
@@ -487,32 +501,32 @@ GMenu * add_menu_coord (glwin * view, int id)
     {
       if (id < 2)
       {
-        append_submenu (menu, menu_name[i], menu_show_coord(view, id, i));
+        append_submenu (menu, menu_name[i], menu_show_coord(view, popm, id, i));
       }
       else if (id < 4)
       {
-        append_submenu (menu, menu_name[i], menu_show_frag_mol(view, id, i));
+        append_submenu (menu, menu_name[i], menu_show_frag_mol(view, popm, id, i));
       }
       else if (id < 10)
       {
-        append_submenu (menu, menu_name[i], menu_show_rings(view, id, i));
+        append_submenu (menu, menu_name[i], menu_show_rings(view, popm, id, i));
       }
     }
-    append_opengl_item (view, menu, "Advanced", "adv-c", id, NULL, IMG_STOCK, (gpointer)DPROPERTIES, FALSE,
+    append_opengl_item (view, menu, "Advanced", "adv-c", popm, id, NULL, IMG_STOCK, (gpointer)DPROPERTIES, FALSE,
                         G_CALLBACK(to_coord_properties), & view -> colorp[id][1], FALSE, FALSE, FALSE, TRUE);
   }
   return menu;
 }
 
-GMenu * menu_coord (glwin * view, int id)
+GMenu * menu_coord (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Total(s)", add_menu_coord(view, 0));
-  append_submenu (menu, "Partial(s)", add_menu_coord(view, 1));
+  append_submenu (menu, "Total(s)", add_menu_coord(view, popm, 0));
+  append_submenu (menu, "Partial(s)", add_menu_coord(view, popm, 1));
   return menu;
 }
 
-GMenu * menu_rings (glwin * view, int id)
+GMenu * menu_rings (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
   if (view -> rings)
@@ -522,7 +536,7 @@ GMenu * menu_rings (glwin * view, int id)
     {
       if (view -> ring_max[i])
       {
-        append_submenu (menu, rings_type[i], add_menu_coord (view, 4+i));
+        append_submenu (menu, rings_type[i], add_menu_coord (view, popm, 4+i));
       }
     }
   }

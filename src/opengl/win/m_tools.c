@@ -335,10 +335,10 @@ G_MODULE_EXPORT void to_window_measures (GSimpleAction * action, GVariant * para
   window_measures (NULL, data);
 }
 
-GMenu * measure_section (glwin * view)
+GMenu * measure_section (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, "Measures", "measures", 0, "<CTRL>M", IMG_NONE, NULL, FALSE, G_CALLBACK(to_window_measures), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Measures", "measures", popm, popm, "<CTRL>M", IMG_NONE, NULL, FALSE, G_CALLBACK(to_window_measures), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
   return menu;
 }
 
@@ -347,10 +347,10 @@ G_MODULE_EXPORT void to_window_volumes (GSimpleAction * action, GVariant * param
   window_volumes (NULL, data);
 }
 
-GMenu * volume_section (glwin * view)
+GMenu * volume_section (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, "Volumes", "volumes", 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_window_volumes), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Volumes", "volumes", popm, popm, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_window_volumes), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
   return menu;
 }
 
@@ -365,25 +365,37 @@ G_MODULE_EXPORT void change_mouse_mode_radio (GSimpleAction * action, GVariant *
 {
   glwin * view = (glwin *)data;
   const gchar * mode = g_variant_get_string (parameter, NULL);
-  gchar * mode_name = NULL;
-  int i;
-  for (i=0; i<2; i++)
+  int lgt = strlen (mode);
+  gchar * name = g_strdup_printf ("%c%c", mode[lgt-2], mode[lgt-1]);
+  if (g_strcmp0(name, ".1") == 0)
   {
-    mode_name = g_strdup_printf ("set-mouse-mode.%d", i);
-    if (g_strcmp0(mode, (const gchar *)mode_name) == 0)
+    g_free (name);
+    name = g_strdup_printf ("%.*s.0", lgt-2, mode);
+    g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-mouse-mode", g_variant_new_string((const gchar *)name));
+    g_free (name);
+  }
+  else
+  {
+    gchar * mode_name = NULL;
+    int i;
+    for (i=0; i<2; i++)
     {
-      set_mode (NULL, & view -> colorp[i][0]);
+      mode_name = g_strdup_printf ("set-mouse-mode.%d.0", i);
+      if (g_strcmp0(mode, (const gchar *)mode_name) == 0)
+      {
+        set_mode (NULL, & view -> colorp[i][0]);
+        g_free (mode_name);
+        mode_name = NULL;
+        break;
+      }
       g_free (mode_name);
       mode_name = NULL;
-      break;
     }
-    g_free (mode_name);
-    mode_name = NULL;
+    g_action_change_state (G_ACTION (action), parameter);
   }
-  g_action_change_state (G_ACTION (action), parameter);
 }
 
-GMenu * mouse_mode_menu (glwin * view)
+GMenu * mouse_mode_menu (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
   gchar * accel[3] = {"<ALT>A", "<ALT>E", "<ALT>I"};
@@ -391,7 +403,7 @@ GMenu * mouse_mode_menu (glwin * view)
   j = (get_project_by_id(view -> proj) -> steps > 1) ? 0 : 1;
   for (i=0; i<2; i++)
   {
-    append_opengl_item (view, menu, modes[i], "mouse-mode", i, accel[i], IMG_NONE, NULL, FALSE,
+    append_opengl_item (view, menu, modes[i], "mouse-mode", popm, i, accel[i], IMG_NONE, NULL, FALSE,
                         G_CALLBACK(change_mouse_mode_radio), (gpointer)view, FALSE, (i == view -> mode) ? TRUE : FALSE, TRUE, j);
   }
   return menu;
@@ -401,42 +413,54 @@ G_MODULE_EXPORT void change_sel_mode_radio (GSimpleAction * action, GVariant * p
 {
   glwin * view = (glwin *)data;
   const gchar * mode = g_variant_get_string (parameter, NULL);
-  gchar * mode_name = NULL;
-  int i;
-  for (i=0; i<NSELECTION; i++)
+  int lgt = strlen (mode);
+  gchar * name = g_strdup_printf ("%c%c", mode[lgt-2], mode[lgt-1]);
+  if (g_strcmp0(name, ".1") == 0)
   {
-    mode_name = g_strdup_printf ("set-sel-mode.%d", i);
-    if (g_strcmp0(mode, (const gchar *)mode_name) == 0)
+    g_free (name);
+    name = g_strdup_printf ("%.*s.0", lgt-2, mode);
+    g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-sel-mode", g_variant_new_string((const gchar *)name));
+    g_free (name);
+  }
+  else
+  {
+    gchar * mode_name = NULL;
+    int i;
+    for (i=0; i<NSELECTION; i++)
     {
-      set_selection_mode (NULL, & view -> colorp[i][0]);
+      mode_name = g_strdup_printf ("set-sel-mode.%d.0", i);
+      if (g_strcmp0(mode, (const gchar *)mode_name) == 0)
+      {
+        set_selection_mode (NULL, & view -> colorp[i][0]);
+        g_free (mode_name);
+        mode_name = NULL;
+        break;
+      }
       g_free (mode_name);
       mode_name = NULL;
-      break;
     }
-    g_free (mode_name);
-    mode_name = NULL;
+    g_action_change_state (G_ACTION (action), parameter);
   }
-  g_action_change_state (G_ACTION (action), parameter);
 }
 
-GMenu * selection_mode_menu (glwin * view)
+GMenu * selection_mode_menu (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
   int i, j;
   for (i=0; i<NSELECTION; i++)
   {
     j = (i == NSELECTION-1) ? (view -> mode == EDITION) ? 1 : 0 : TRUE;
-    append_opengl_item (view, menu, smodes[i], "sel-mode", i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(change_sel_mode_radio), (gpointer)view,
+    append_opengl_item (view, menu, smodes[i], "sel-mode", popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(change_sel_mode_radio), (gpointer)view,
                         FALSE, (i == view -> selection_mode) ? TRUE : FALSE, TRUE, j);
   }
   return menu;
 }
 
-GMenu * modes_section (glwin * view)
+GMenu * modes_section (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Mouse Mode", mouse_mode_menu(view));
-  append_submenu (menu, "Selection Mode", selection_mode_menu(view));
+  append_submenu (menu, "Mouse Mode", mouse_mode_menu(view, popm));
+  append_submenu (menu, "Selection Mode", selection_mode_menu(view, popm));
   return menu;
 }
 
@@ -445,13 +469,13 @@ G_MODULE_EXPORT void to_create_field (GSimpleAction * action, GVariant * paramet
   create_field (NULL, data);
 }
 
-GMenu * md_menu (glwin * view)
+GMenu * md_menu (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
   int i;
   for (i=0; i<NINPUTS; i++)
   {
-    append_opengl_item (view, menu, input_types[i], "md", i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_create_field), & view -> colorp[i][0],
+    append_opengl_item (view, menu, input_types[i], "md", popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_create_field), & view -> colorp[i][0],
                         FALSE, FALSE, FALSE, (i < 2) ? view -> adv_bonding[1] : (i > 3) ? FALSE : TRUE);
   }
   return menu;
@@ -462,13 +486,13 @@ G_MODULE_EXPORT void to_invert_this (GSimpleAction * action, GVariant * paramete
   invert_this (NULL, data);
 }
 
-GMenu * inv_menu (glwin * view)
+GMenu * inv_menu (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
   int i;
   for (i=0; i<2; i++)
   {
-    append_opengl_item (view, menu, invl[i], "inv", i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_invert_this), & view -> colorp[i][0], FALSE, FALSE, FALSE, TRUE);
+    append_opengl_item (view, menu, invl[i], "inv", popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_invert_this), & view -> colorp[i][0], FALSE, FALSE, FALSE, TRUE);
   }
   return menu;
 }
@@ -483,12 +507,12 @@ GMenu * add_section_item_with_menu (glwin * view, gchar * item_name, GMenu * men
 GMenu * menu_tools (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  g_menu_append_section (menu, NULL, (GMenuModel*)measure_section(view));
-  g_menu_append_section (menu, NULL, (GMenuModel*)volume_section(view));
+  g_menu_append_section (menu, NULL, (GMenuModel*)measure_section(view, popm));
+  g_menu_append_section (menu, NULL, (GMenuModel*)volume_section(view, popm));
   g_menu_append_section (menu, NULL, (GMenuModel*)edit_section(view, popm));
-  g_menu_append_section (menu, NULL, (GMenuModel*)modes_section(view));
-  g_menu_append_section (menu, NULL, (GMenuModel*)add_section_item_with_menu(view, "Molecular Dynamics", md_menu(view)));
-  g_menu_append_section (menu, NULL, (GMenuModel*)add_section_item_with_menu(view, "Invert", inv_menu(view)));
+  g_menu_append_section (menu, NULL, (GMenuModel*)modes_section(view, popm));
+  g_menu_append_section (menu, NULL, (GMenuModel*)add_section_item_with_menu(view, "Molecular Dynamics", md_menu(view, popm)));
+  g_menu_append_section (menu, NULL, (GMenuModel*)add_section_item_with_menu(view, "Invert", inv_menu(view, popm)));
   return menu;
 }
 #endif

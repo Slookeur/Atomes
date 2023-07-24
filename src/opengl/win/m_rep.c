@@ -296,22 +296,35 @@ G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parame
 {
   glwin * view = (glwin *)data;
   const gchar * rep = g_variant_get_string (parameter, NULL);
-  gchar * rep_name = NULL;
-  int i;
-  for (i=0; i<NSELECTION; i++)
+  int lgt = strlen (rep);
+  gchar * name = g_strdup_printf ("%c%c", rep[lgt-2], rep[lgt-1]);
+  if (g_strcmp0(name, ".1") == 0)
   {
-    rep_name = g_strdup_printf ("set-rep.%d", i);
-    if (g_strcmp0(rep, (const gchar *)rep_name) == 0)
+    g_free (name);
+    name = g_strdup_printf ("%.*s.0", lgt-2, rep);
+    g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-rep", g_variant_new_string((const gchar *)name));
+    g_free (name);
+  }
+  else
+  {
+    const gchar * rep = g_variant_get_string (parameter, NULL);
+    gchar * rep_name = NULL;
+    int i;
+    for (i=0; i<OGL_REPS; i++)
     {
-      set_rep (NULL, & view -> colorp[i][0]);
+      rep_name = g_strdup_printf ("set-rep.%d.0", i);
+      if (g_strcmp0(rep, (const gchar *)rep_name) == 0)
+      {
+        set_rep (NULL, & view -> colorp[i][0]);
+        g_free (rep_name);
+        rep_name = NULL;
+        break;
+      }
       g_free (rep_name);
       rep_name = NULL;
-      break;
     }
-    g_free (rep_name);
-    rep_name = NULL;
+    g_action_change_state (G_ACTION (action), parameter);
   }
-  g_action_change_state (G_ACTION (action), parameter);
 }
 
 G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -319,16 +332,16 @@ G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * paramet
   representation_advanced (NULL, data);
 }
 
-GMenu * menu_rep (glwin * view)
+GMenu * menu_rep (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
   int i, j;
-  j = view -> anim -> last -> img -> rep;
-  for (i=0; i<OGL_REPS; i++)
+  i = view -> anim -> last -> img -> rep;
+  for (j=0; j<OGL_REPS; j++)
   {
-    append_opengl_item (view, menu, text_reps[i], "rep", i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(change_rep_radio), (gpointer)view, FALSE, (i == j) ? TRUE : FALSE, TRUE, TRUE);
+    append_opengl_item (view, menu, text_reps[j], "rep", popm, j, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(change_rep_radio), (gpointer)view, FALSE, (i == j) ? TRUE : FALSE, TRUE, TRUE);
   }
-  append_opengl_item (view, menu, "Advanced", "rep-adv", 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_rep_advanced), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Advanced", "rep-adv", popm, j, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_rep_advanced), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
   return menu;
 }
 
@@ -337,32 +350,32 @@ G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * para
   center_this_molecule (data);
 }
 
-GMenu * menu_reset (glwin * view)
+GMenu * menu_reset (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, "Reset view", "reset-view", 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_reset_view), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
-  append_opengl_item (view, menu, "Center molecule", "center-mol", 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_center_molecule), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Reset view", "reset-view", popm, popm, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_reset_view), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Center molecule", "center-mol", popm, popm, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_center_molecule), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
   return menu;
 }
 
-GMenu * menu_fullscreen (glwin * view)
+GMenu * menu_fullscreen (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, "Fullscreen", "full", 0, "<CTRL>F", IMG_STOCK, (gpointer)FULLSCREEN, FALSE, G_CALLBACK(set_full_screen), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, "Fullscreen", "full", popm, popm, "<CTRL>F", IMG_STOCK, (gpointer)FULLSCREEN, FALSE, G_CALLBACK(set_full_screen), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
   return menu;
 }
 
 GMenu * menu_view (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Representation", menu_rep(view));
-  append_submenu (menu, "Projection", menu_proj(view));
-  append_submenu (menu, "Background", menu_back(view));
-  if (get_project_by_id(view -> proj) -> nspec) g_menu_append_item (menu, menu_box_axis (view, 1));
+  append_submenu (menu, "Representation", menu_rep(view, popm));
+  append_submenu (menu, "Projection", menu_proj(view, popm));
+  append_submenu (menu, "Background", menu_back(view, popm));
+  if (get_project_by_id(view -> proj) -> nspec) g_menu_append_item (menu, menu_box_axis (view, popm, 1));
   if (! popm)
   {
-    g_menu_append_section (menu, NULL, (GMenuModel*)menu_reset(view));
-    g_menu_append_section (menu, NULL, (GMenuModel*)menu_fullscreen(view));
+    g_menu_append_section (menu, NULL, (GMenuModel*)menu_reset(view, popm));
+    g_menu_append_section (menu, NULL, (GMenuModel*)menu_fullscreen(view, popm));
   }
   return menu;
 }

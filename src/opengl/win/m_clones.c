@@ -75,21 +75,44 @@ GtkWidget * menu_clones (glwin * view, int id)
 G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   glwin * view = (glwin *)data;
-  view -> anim -> last -> img -> draw_clones = ! view -> anim -> last -> img -> draw_clones;
-  init_default_shaders (view);
-  update (view);
-  update_menu_bar (view);
+  const gchar * name = g_action_get_name ((GAction *)action);
+  if (g_strcmp0(name, "set-show-clones.1.1") == 0)
+  {
+    g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-show-clones.0.0", NULL);
+  }
+  else
+  {
+    GVariant * state;
+    gboolean show;
+    if (action)
+    {
+      state = g_action_get_state (G_ACTION (action));
+      show = ! g_variant_get_boolean (state);
+    }
+    else
+    {
+      show = ! view -> anim -> last -> img -> draw_clones;
+    }
+    view -> anim -> last -> img -> draw_clones = show;
+    init_default_shaders (view);
+    update (view);
+    if (action)
+    {
+      g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
+      g_variant_unref (state);
+    }
+  }
 }
 
-GMenu * menu_clones (glwin * view)
+GMenu * menu_clones (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, "Show/Hide", "show-clones", 0, NULL, IMG_NONE, NULL, FALSE,
+  append_opengl_item (view, menu, "Show/Hide", "show-clones", popm, popm, NULL, IMG_NONE, NULL, FALSE,
                       G_CALLBACK(show_hide_clones), (gpointer)view, TRUE, view -> anim -> last -> img -> draw_clones, FALSE, (view -> allbonds[1]) ? TRUE : FALSE);
-  append_submenu (menu, "Atom(s)", menu_atoms(view, 1));
+  append_submenu (menu, "Atom(s)", menu_atoms(view, popm, 1));
   if (view -> anim -> last -> img -> style != SPHERES && view -> anim -> last -> img -> style != PUNT)
   {
-    append_submenu (menu, "Bonds(s)", menu_bonds(view, 1));
+    append_submenu (menu, "Bonds(s)", menu_bonds(view, popm, 1));
   }
   return menu;
 }

@@ -391,78 +391,108 @@ G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * paramet
   int j = the_data -> b;
   int k = the_data -> c;
   int l, m;
-  struct project * this_proj = get_project_by_id(the_data -> a);
-  GVariant * state;
+  gboolean doit = TRUE;
   gboolean show;
+  struct project * this_proj = get_project_by_id (the_data -> a);
+  GVariant * state;
   if (action)
   {
     state = g_action_get_state (G_ACTION (action));
     show = ! g_variant_get_boolean (state);
+    const gchar * atom = g_action_get_name ((GAction *)action);
+    int lgt = strlen (atom);
+    gchar * name = g_strdup_printf ("%c%c", atom[lgt-2], atom[lgt-1]);
+    if (g_strcmp0(name, ".1") == 0)
+    {
+      g_free (name);
+      name = g_strdup_printf ("%.*s.0", lgt-2, atom);
+      g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
+      g_free (name);
+      doit = FALSE;
+    }
   }
   else
   {
     show = this_proj -> modelgl -> anim -> last -> img -> show_atom[j][k];
   }
-
-  for (l=0; l<this_proj -> steps; l++)
+  if (doit)
   {
-    for (m=0; m<this_proj -> natomes; m++)
+    for (l=0; l<this_proj -> steps; l++)
     {
-      if (this_proj -> atoms[l][m].sp == k) this_proj -> atoms[l][m].show[j] = show;
+      for (m=0; m<this_proj -> natomes; m++)
+      {
+        if (this_proj -> atoms[l][m].sp == k) this_proj -> atoms[l][m].show[j] = show;
+      }
     }
-  }
-  this_proj -> modelgl -> anim -> last -> img -> show_atom[j][k] = show;
-  init_default_shaders (this_proj -> modelgl);
-  if (action)
-  {
-    g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
-    g_variant_unref (state);
+    this_proj -> modelgl -> anim -> last -> img -> show_atom[j][k] = show;
+    init_default_shaders (this_proj -> modelgl);
+    if (action)
+    {
+      g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
+      g_variant_unref (state);
+    }
   }
 }
 
 G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
-  int j, k, l, m;
-  tint * id = (tint *) data;
-  j = id -> b;
-  k = id -> c;
+  tint * the_data = (tint *) data;
+  int j = the_data -> b;
+  int k = the_data -> c;
+  gboolean doit = TRUE;
   gboolean show;
+  struct project * this_proj = get_project_by_id (the_data -> a);
   GVariant * state;
-  struct project * this_proj = get_project_by_id(id -> a);
   if (action)
   {
     state = g_action_get_state (G_ACTION (action));
     show = ! g_variant_get_boolean (state);
+    const gchar * label = g_action_get_name ((GAction *)action);
+    int lgt = strlen (label);
+    gchar * name = g_strdup_printf ("%c%c", label[lgt-2], label[lgt-1]);
+    if (g_strcmp0(name, ".1") == 0)
+    {
+      g_free (name);
+      name = g_strdup_printf ("%.*s.0", lgt-2, label);
+      g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
+      g_free (name);
+      doit = FALSE;
+    }
   }
   else
   {
     show = ! this_proj -> modelgl -> anim -> last -> img -> show_label[j][k];
   }
-  for (l=0; l<this_proj -> steps; l++)
+  if (doit)
   {
-    for (m=0; m<this_proj -> natomes; m++)
+    int l, m;
+    for (l=0; l<this_proj -> steps; l++)
     {
-      if (this_proj -> atoms[l][m].sp == k)
+      for (m=0; m<this_proj -> natomes; m++)
       {
-        if (this_proj -> atoms[l][m].label[j] != show)
+        if (this_proj -> atoms[l][m].sp == k)
         {
-          this_proj -> atoms[l][m].label[j] = show;
+          if (this_proj -> atoms[l][m].label[j] != show)
+          {
+            this_proj -> atoms[l][m].label[j] = show;
+          }
         }
       }
     }
-  }
-  this_proj -> modelgl -> labelled = check_label_numbers (this_proj, j);
-  this_proj -> modelgl -> create_shaders[LABEL] = TRUE;
-  update (this_proj -> modelgl);
-  if (action)
-  {
-    g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
-    g_variant_unref (state);
+    this_proj -> modelgl -> labelled = check_label_numbers (this_proj, j);
+    this_proj -> modelgl -> create_shaders[LABEL] = TRUE;
+    update (this_proj -> modelgl);
+    if (action)
+    {
+      g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
+      g_variant_unref (state);
+    }
   }
 }
 
 G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
+  // Neither check, nor radio
   tint * id = (tint *) data;
   int i, j, k;
   struct project * this_proj = get_project_by_id(id -> a);
@@ -481,10 +511,10 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant
   update_menu_bar (this_proj -> modelgl);
 }
 
-GMenu * label_atoms_submenu (glwin * view, int at, gboolean sensitive)
+GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
   GMenu * menu = g_menu_new ();
-  append_opengl_item (view, menu, "Show/Hide All", (at) ? "clones-labels-all" : "atoms-labels-all", 0, NULL, IMG_NONE, NULL,
+  append_opengl_item (view, menu, "Show/Hide All", (at) ? "clones-labels-all" : "atoms-labels-all", popm, popm, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(show_hide_all_atom_labels), & view -> colorp[at][0], FALSE, FALSE, FALSE, sensitive);
   GMenu * smenu = g_menu_new ();
   struct project * this_proj = get_project_by_id (view -> proj);
@@ -500,19 +530,19 @@ GMenu * label_atoms_submenu (glwin * view, int at, gboolean sensitive)
     {
       str = g_strdup_printf ("%s*", this_proj -> chemistry -> label[i]);
     }
-    append_opengl_item (view, smenu, str, (! at) ? "atom-label" : "clone-label", i, NULL, IMG_NONE, NULL,
+    append_opengl_item (view, smenu, str, (! at) ? "atom-label" : "clone-label", popm, i, NULL, IMG_NONE, NULL,
                         FALSE, G_CALLBACK(show_hide_labels), & view -> colorp[at][i],
                         TRUE, view -> anim -> last -> img -> show_label[at][i], FALSE, sensitive);
   }
   append_submenu (menu, "Show", smenu);
-  append_opengl_item (view, menu, "Select atom(s)", (! at) ? "atom-select" : "clone-select", 0, NULL, IMG_NONE, NULL,
+  append_opengl_item (view, menu, "Select atom(s)", (! at) ? "atom-select" : "clone-select", popm, i, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(atom_properties), & view -> colorp[at][2], FALSE, FALSE, FALSE, sensitive);
-  append_opengl_item (view, menu, "Advanced", (! at) ? "atom-lab-adv" : "clone-lab-adv", 0, NULL, IMG_STOCK, DPROPERTIES,
+  append_opengl_item (view, menu, "Advanced", (! at) ? "atom-lab-adv" : "clone-lab-adv", popm, i, NULL, IMG_STOCK, DPROPERTIES,
                       FALSE, G_CALLBACK(atom_properties), & view -> colorp[at][1], FALSE, FALSE, FALSE, sensitive);
   return menu;
 }
 
-GMenu * color_atoms_submenu (glwin * view, int at, gboolean sensitive)
+GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
   GMenu * menu = g_menu_new ();
   GMenu * menuc;
@@ -531,8 +561,8 @@ GMenu * color_atoms_submenu (glwin * view, int at, gboolean sensitive)
     }
     strb = g_strdup_printf ("%s", (! at) ? "atom-color" : "clone-color");
     menuc = g_menu_new ();
-    append_opengl_item (view, menuc, strb, strb, i, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
-    append_opengl_item (view, menuc, "More colors ...", strb, i, NULL, IMG_NONE, NULL,
+    append_opengl_item (view, menuc, strb, strb, popm, i, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
+    append_opengl_item (view, menuc, "More colors ...", strb, popm, i, NULL, IMG_NONE, NULL,
                         FALSE, G_CALLBACK(to_run_atom_color_window), & view -> colorp[0][i+at*this_proj -> nspec], FALSE, FALSE, FALSE, sensitive);
     append_submenu (menu, stra, menuc);
     g_free (stra);
@@ -542,13 +572,13 @@ GMenu * color_atoms_submenu (glwin * view, int at, gboolean sensitive)
   return menu;
 }
 
-GMenu * show_atoms_submenu (glwin * view, int at, gboolean sensitive)
+GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
   GMenu * menu = g_menu_new ();
   gchar * str;
   struct project * this_proj = get_project_by_id (view -> proj);
   int i;
-  for (i=0; i< this_proj -> nspec; i++)
+  for (i=0; i<this_proj -> nspec; i++)
   {
     if (at == 0)
     {
@@ -558,7 +588,7 @@ GMenu * show_atoms_submenu (glwin * view, int at, gboolean sensitive)
     {
       str = g_strdup_printf ("%s*", this_proj -> chemistry -> label[i]);
     }
-    append_opengl_item (view, menu, str, (! at) ? "show-atom" : "show-clone", i, NULL, IMG_NONE, NULL,
+    append_opengl_item (view, menu, str, (! at) ? "show-atom" : "show-clone", popm, i, NULL, IMG_NONE, NULL,
                         FALSE, G_CALLBACK(show_hide_atoms), & view -> colorp[at][i],
                         TRUE, view -> anim -> last -> img -> show_atom[at][i], FALSE, sensitive);
     g_free (str);
@@ -566,15 +596,15 @@ GMenu * show_atoms_submenu (glwin * view, int at, gboolean sensitive)
   return menu;
 }
 
-GMenu * menu_atoms (glwin * view, int at)
+GMenu * menu_atoms (glwin * view, int popm, int at)
 {
   int i = view -> anim -> last -> img -> style;
   gboolean sensitive = (at) ? view -> anim -> last -> img -> draw_clones : TRUE;
 
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Show", show_atoms_submenu(view, at, sensitive));
-  append_submenu (menu, "Color(s)", color_atoms_submenu (view, at, sensitive));
-  append_submenu (menu, "Label(s)", label_atoms_submenu (view, at, sensitive));
+  append_submenu (menu, "Show", show_atoms_submenu(view, popm, at, sensitive));
+  append_submenu (menu, "Color(s)", color_atoms_submenu (view, popm, at, sensitive));
+  append_submenu (menu, "Label(s)", label_atoms_submenu (view, popm, at, sensitive));
   GMenuItem * item;
   if (i == SPHERES || i == BALL_AND_STICK)
   {
@@ -588,7 +618,7 @@ GMenu * menu_atoms (glwin * view, int at)
     g_menu_item_set_attribute (item, "custom", "s", (at) ? "clone-pts" : "atom-pts", NULL);
     g_menu_append_item (menu, item);
   }
-  append_opengl_item (view, menu, "Advanced", (! at) ? "atom-advanced" : "clone-advanced", 0, NULL, IMG_STOCK, DPROPERTIES,
+  append_opengl_item (view, menu, "Advanced", (! at) ? "atom-advanced" : "clone-advanced", popm, popm, NULL, IMG_STOCK, DPROPERTIES,
                       FALSE, G_CALLBACK(atom_properties), & view -> colorp[at][0],
                       FALSE, FALSE, FALSE, sensitive);
   return menu;

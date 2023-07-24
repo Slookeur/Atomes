@@ -100,14 +100,14 @@ G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * param
   set_camera_pos (NULL, data);
 }
 
-GMenu * menu_proj (glwin * view)
+GMenu * menu_proj (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
   gchar * projection[6]={"Right [1, 0, 0]", "Left [-1, 0, 0]", "Top [0, 1, 0]", "Bottom [0, -1, 0]", "Front [0, 0, 1]", "Back [0, 0, -1]"};
   int i;
   for (i=0; i<6; i++)
   {
-    append_opengl_item (view, menu, projection[i], "proj", 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_set_camera_pos), & view -> colorp[i][0], FALSE, FALSE, FALSE, TRUE);
+    append_opengl_item (view, menu, projection[i], "proj", popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_set_camera_pos), & view -> colorp[i][0], FALSE, FALSE, FALSE, TRUE);
   }
   return menu;
 }

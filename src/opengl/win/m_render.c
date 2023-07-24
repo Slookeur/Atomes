@@ -88,32 +88,44 @@ G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * par
 {
   glwin * view = (glwin *)data;
   const gchar * render = g_variant_get_string (parameter, NULL);
-  gchar * render_name = NULL;
-  int i;
-  for (i=0; i<OGL_RENDERS; i++)
+  int lgt = strlen (render);
+  gchar * name = g_strdup_printf ("%c%c", render[lgt-2], render[lgt-1]);
+  if (g_strcmp0(name, ".1") == 0)
   {
-    render_name = g_strdup_printf ("set-render.%d", i);
-    if (g_strcmp0(render, (const gchar *)render_name) == 0)
+    g_free (name);
+    name = g_strdup_printf ("%.*s.0", lgt-2, render);
+    g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-render", g_variant_new_string((const gchar *)name));
+    g_free (name);
+  }
+  else
+  {
+    gchar * render_name = NULL;
+    int i;
+    for (i=0; i<OGL_RENDERS*2; i++)
     {
-      set_render (NULL, & view -> colorp[i][0]);
+      render_name = g_strdup_printf ("set-render.%d.0", i);
+      if (g_strcmp0(render, (const gchar *)render_name) == 0)
+      {
+        set_render (NULL, & view -> colorp[i][0]);
+        g_free (render_name);
+        render_name = NULL;
+        break;
+      }
       g_free (render_name);
       render_name = NULL;
-      break;
     }
-    g_free (render_name);
-    render_name = NULL;
+    g_action_change_state (G_ACTION (action), parameter);
   }
-  g_action_change_state (G_ACTION (action), parameter);
 }
 
-GMenu * menu_render (glwin * view)
+GMenu * menu_render (glwin * view, int popm)
 {
   int i;
   GMenu * menu = g_menu_new ();
   // gboolean sensitive = (view -> anim -> last -> img -> style == WIREFRAME || view -> anim -> last -> img -> style == PUNT) ? FALSE : TRUE;
   for (i=0; i<OGL_RENDERS; i++)
   {
-    append_opengl_item (view, menu, text_renders[i], "render", i,
+    append_opengl_item (view, menu, text_renders[i], "render", popm, i,
                         NULL, IMG_NONE, NULL,
                         FALSE, G_CALLBACK(change_render_radio), (gpointer)view,
                         FALSE, (view -> anim -> last -> img -> render == i) ? TRUE : FALSE, TRUE, TRUE);

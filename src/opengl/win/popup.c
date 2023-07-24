@@ -2194,7 +2194,7 @@ GMenu * add_edition_sub_menu (glwin * view, gchar * act, int aid, GCallback hand
     }
     if (mol[i].object)
     {
-      append_opengl_item (view, menus, mol[i].object, eact, i, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
+      append_opengl_item (view, menus, mol[i].object, eact, 1, i, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
     }
   }
   g_free (eact);
@@ -2224,7 +2224,7 @@ GMenu * add_edition_sub_menu (glwin * view, gchar * act, int aid, GCallback hand
         {
           word = g_strdup_printf ("%s in %s", action_atoms[j], name);
           str = g_strdup_printf ("%s-%d", eact, j);
-          append_opengl_item (view, menups, word, str, i, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
+          append_opengl_item (view, menups, word, str, 1, i, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
           g_free (word);
           g_free (str);
         }
@@ -2238,7 +2238,7 @@ GMenu * add_edition_sub_menu (glwin * view, gchar * act, int aid, GCallback hand
     g_object_unref (menup);
   }
   eact = g_strdup_printf ("cp-%s-%d", act, aid);
-  append_opengl_item (view, menu, "Copied Data", eact, 0, "<CTRL>V", IMG_NONE, NULL, FALSE, G_CALLBACK(add_object), data, FALSE, FALSE, FALSE, (copied_object) ? TRUE : FALSE);
+  append_opengl_item (view, menu, "Copied Data", eact, 1, 0, "<CTRL>V", IMG_NONE, NULL, FALSE, G_CALLBACK(add_object), data, FALSE, FALSE, FALSE, (copied_object) ? TRUE : FALSE);
   g_free (eact);
   return menu;
 }
@@ -2250,7 +2250,7 @@ GMenu * add_style_sub_menu (glwin * view, gchar * act, int aid, GCallback handle
   int i;
   for (i=0; i<OGL_STYLES; i++)
   {
-    append_opengl_item (view, menu, text_styles[i], actc, i, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
+    append_opengl_item (view, menu, text_styles[i], actc, 1, i, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
   }
   g_free (actc);
   return menu;
@@ -2433,7 +2433,7 @@ GtkWidget * create_selection_item (glwin * view, gchar * str, int id, int ig, in
   else
   {
 #ifdef GTK4
-    append_opengl_item (view, menu, str, actc, 0, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
+    append_opengl_item (view, menu, str, actc, 1, 0, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
 #else
     g_signal_connect (G_OBJECT (sel_item), "activate", handler, data);
 #endif
@@ -2489,7 +2489,7 @@ GtkWidget * selection_menu (glwin * view, int ai, int bi, int ac, int id,
     else
     {
       strb = g_strdup_printf ("act-%d-%d", aid, id);
-      append_opengl_item (view, menu, str, strb, 0, NULL, IMG_NONE, NULL, FALSE, handler_a, GINT_TO_POINTER(ai), FALSE, FALSE, FALSE, TRUE);
+      append_opengl_item (view, menu, str, strb, 1, 0, NULL, IMG_NONE, NULL, FALSE, handler_a, GINT_TO_POINTER(ai), FALSE, FALSE, FALSE, TRUE);
       g_free (strb);
     }
 #else
@@ -2526,7 +2526,7 @@ GtkWidget * selection_menu (glwin * view, int ai, int bi, int ac, int id,
     else
     {
       strb = g_strdup_printf ("act-%d-%d", aid, id);
-      append_opengl_item (view, menu, str, strb, 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(select_action_for_this_bond), GINT_TO_POINTER(id), FALSE, FALSE, FALSE, TRUE);
+      append_opengl_item (view, menu, str, strb, 1, 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(select_action_for_this_bond), GINT_TO_POINTER(id), FALSE, FALSE, FALSE, TRUE);
       g_free (strb);
     }
 #else
@@ -2577,7 +2577,7 @@ GtkWidget * selection_menu (glwin * view, int ai, int bi, int ac, int id,
       else
       {
         strb = g_strdup_printf ("act-all-%d-%d", aid, id+k);
-        append_opengl_item (view, menu, mot[j][i], strb, 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(select_action_for_all), GINT_TO_POINTER(id+k), FALSE, FALSE, FALSE, TRUE);
+        append_opengl_item (view, menu, mot[j][i], strb, 1, 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(select_action_for_all), GINT_TO_POINTER(id+k), FALSE, FALSE, FALSE, TRUE);
         g_free (strb);
       }
 #else
@@ -2694,7 +2694,7 @@ GtkWidget * selection_menu (glwin * view, int ai, int bi, int ac, int id,
     gchar * mat[2]={"All Hidden Atom(s)/Bond(s)", "All Visible Atom(s)/Bond(s)"};
 #ifdef GTK4
     strb = g_strdup_printf ("all-hv-%d-%d", aid, id);
-    append_opengl_item (view, menu, mat[id%2], strb, 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(select_action_for_all), GINT_TO_POINTER(id+2*CONTEXTACT), FALSE, FALSE, FALSE, TRUE);
+    append_opengl_item (view, menu, mat[id%2], strb, 1, 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(select_action_for_all), GINT_TO_POINTER(id+2*CONTEXTACT), FALSE, FALSE, FALSE, TRUE);
     g_free (strb);
 #else
     gtk3_menu_item (menu, mat[id%2], IMG_NONE, NULL, G_CALLBACK(select_action_for_all), GINT_TO_POINTER(id+2*CONTEXTACT), FALSE, 0, 0, FALSE, FALSE, FALSE);
@@ -2844,7 +2844,7 @@ void popup_selection (glwin * view, double ptx, double pty, int se, int pe, int 
       strp = g_strdup_printf ("<b>%s \t d= %.3f Å</b>", str, dist.length);
     }
 #ifdef GTK4
-    append_opengl_item (view, gmenu, strp, "w-dist", 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
+    append_opengl_item (view, gmenu, strp, "w-dist", 1, 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
 #else
     sel = create_menu_item_from_widget (markup_label (strp, -1, -1, 0.0, 0.5), FALSE, FALSE, FALSE);
     add_menu_child (menu, sel);
@@ -2857,7 +2857,7 @@ void popup_selection (glwin * view, double ptx, double pty, int se, int pe, int 
         j = opengl_project -> atoms[s][ai].coord[2+i] + 1;
         str = (! i) ? g_strdup_printf ("Fragment N°:\t<b>%d</b>", j) : g_strdup_printf ("Molecule N°:\t<b>%d</b>", j);
 #ifdef GTK4
-        append_opengl_item (view, gmenu, str, "w-dist-fm", 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
+        append_opengl_item (view, gmenu, str, "w-dist-fm", 1, 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
 #else
         sel = create_menu_item_from_widget (markup_label (str, -1, -1, 0.0, 0.5), FALSE, FALSE, FALSE);
         add_menu_child (menu, sel);
@@ -2877,7 +2877,7 @@ void popup_selection (glwin * view, double ptx, double pty, int se, int pe, int 
       str = g_strdup_printf ("<b>%s<sub>%d</sub><sup>*</sup></b>", exact_name(opengl_project -> chemistry -> label[selected_aspec]), ai+1);
     }
 #ifdef GTK4
-    append_opengl_item (view, gmenu, str, "w-ac", 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
+    append_opengl_item (view, gmenu, str, "w-ac", 1, 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
 #else
     sel = create_menu_item_from_widget (markup_label (str, -1, -1, 0.0, 0.5), FALSE, FALSE, FALSE);
     add_menu_child (menu, sel);
@@ -2886,7 +2886,7 @@ void popup_selection (glwin * view, double ptx, double pty, int se, int pe, int 
     str = g_strdup_printf ("\tx : <b>%f</b>\n\ty : <b>%f</b>\n\tz : <b>%f</b>",
                            opengl_project -> atoms[s][ai].x, opengl_project -> atoms[s][ai].y, opengl_project -> atoms[s][ai].z);
 #ifdef GTK4
-    append_opengl_item (view, gmenu, str, "xyz", 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
+    append_opengl_item (view, gmenu, str, "xyz", 1, 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
 #else
     sel = create_menu_item_from_widget (markup_label (str, -1, -1, 0.0, 0.5), FALSE, FALSE, FALSE);
     add_menu_child (menu, sel);
@@ -2897,7 +2897,7 @@ void popup_selection (glwin * view, double ptx, double pty, int se, int pe, int 
       i = opengl_project -> atoms[s][ai].coord[0];
       str = g_strdup_printf ("Total Coordination:  <b>%d</b>", opengl_project -> coord -> geolist[0][selected_aspec][i]);
 #ifdef GTK4
-      append_opengl_item (view, gmenu, str, "w-tc", 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
+      append_opengl_item (view, gmenu, str, "w-tc", 1, 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
 #else
       sel = create_menu_item_from_widget (markup_label (str, -1, -1, 0.0, 0.5), FALSE, FALSE, FALSE);
       add_menu_child (menu, sel);
@@ -2907,7 +2907,7 @@ void popup_selection (glwin * view, double ptx, double pty, int se, int pe, int 
       str = g_strdup_printf ("Partial Coordination: <b>%s</b>",
                              env_name (opengl_project, i, selected_aspec, 1, NULL));
 #ifdef GTK4
-      append_opengl_item (view, gmenu, str, "w-pc", 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
+      append_opengl_item (view, gmenu, str, "w-pc", 1, 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
 #else
       sel = create_menu_item_from_widget (markup_label (str, -1, -1, 0.0, 0.5), FALSE, FALSE, FALSE);
       add_menu_child (menu, sel);
@@ -2921,7 +2921,7 @@ void popup_selection (glwin * view, double ptx, double pty, int se, int pe, int 
         j = opengl_project -> atoms[s][ai].coord[2+i] + 1;
         str = (! i) ? g_strdup_printf ("Fragment N°:\t<b>%d</b>", j) : g_strdup_printf ("Molecule N°:\t<b>%d</b>", j);
 #ifdef GTK4
-        append_opengl_item (view, gmenu, str, "w-fm", 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
+        append_opengl_item (view, gmenu, str, "w-fm", 1, 0, NULL, IMG_NONE, NULL, FALSE, NULL, NULL, FALSE, FALSE, FALSE, TRUE);
 #else
         sel = create_menu_item_from_widget (markup_label (str, -1, -1, 0.0, 0.5), FALSE, FALSE, FALSE);
         add_menu_child (menu, sel);
@@ -3038,17 +3038,17 @@ G_MODULE_EXPORT void to_center_this_molecule (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
-GMenu * tools_section (glwin * view, int popm)
+GMenu * tools_section (glwin * view)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Tools", menu_tools(view, popm));
+  append_submenu (menu, "Tools", menu_tools(view, 1));
   return menu;
 }
 
 GMenu * anim_section (glwin * view)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Animate", menu_anim(view));
+  append_submenu (menu, "Animate", menu_anim(view, 1));
   return menu;
 }
 
@@ -3165,25 +3165,25 @@ void popup_main_menu (glwin * view, double ptx, double pty)
   GMenu * gmenu = g_menu_new ();
   if (view -> mode == ANALYZE)
   {
-    g_menu_append_section (gmenu, NULL, (GMenuModel *)prepare_opengl_menu(view));
+    g_menu_append_section (gmenu, NULL, (GMenuModel *)prepare_opengl_menu(view, 1));
     if (get_project_by_id(view -> proj) -> natomes)
     {
-      g_menu_append_section (gmenu, NULL, (GMenuModel *)prepare_model_menu(view));
-      g_menu_append_section (gmenu, NULL, (GMenuModel *)prepare_coord_menu(view));
+      g_menu_append_section (gmenu, NULL, (GMenuModel *)prepare_model_menu(view, 1));
+      g_menu_append_section (gmenu, NULL, (GMenuModel *)prepare_coord_menu(view, 1));
     }
-    g_menu_append_section (gmenu, NULL, (GMenuModel *)tools_section(view, 0));
+    g_menu_append_section (gmenu, NULL, (GMenuModel *)tools_section(view));
     g_menu_append_section (gmenu, NULL, (GMenuModel *)menu_view(view, 1));
     g_menu_append_section (gmenu, NULL, (GMenuModel *)anim_section(view));
   }
   else
   {
-    g_menu_append_section (gmenu, NULL, (GMenuModel *)tools_section(view, 1));
+    g_menu_append_section (gmenu, NULL, (GMenuModel *)tools_section(view));
     append_submenu (gmenu, "Insert", add_edition_sub_menu (view, "ins", 0, G_CALLBACK(to_add_object), & view -> colorp[0][0]));
-    if (opengl_project -> steps == 1) g_menu_append_section (gmenu, NULL, (GMenuModel *)extract_section(view));
-    append_opengl_item (view, gmenu, "Reset Motion", "res-mot", 0, NULL, IMG_STOCK, MEDIA_LOOP, FALSE, G_CALLBACK(reset_coords), view, FALSE, FALSE, FALSE, TRUE);
+    if (opengl_project -> steps == 1) g_menu_append_section (gmenu, NULL, (GMenuModel *)extract_section(view, 1));
+    append_opengl_item (view, gmenu, "Reset Motion", "res-mot", 1, 0, NULL, IMG_STOCK, MEDIA_LOOP, FALSE, G_CALLBACK(reset_coords), view, FALSE, FALSE, FALSE, TRUE);
   }
-  g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_reset(view));
-  g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_fullscreen(view));
+  g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_reset(view, 1));
+  g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_fullscreen(view, 1));
 
   menu = gtk_popover_menu_new_from_model_full ((GMenuModel *)gmenu, GTK_POPOVER_MENU_NESTED);
   if (view -> mode == ANALYZE) analyze_menu_attach_color_palettes (view, menu);

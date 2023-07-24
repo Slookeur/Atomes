@@ -13,7 +13,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern void prep_model (int p);
 
-extern void append_opengl_item (glwin * view, GMenu * menu, const gchar * name, gchar * key, int item_id,
+extern void append_opengl_item (glwin * view, GMenu * menu, const gchar * name, gchar * key, int mpop, int item_id,
                                 gchar * accel, int image_format, gpointer icon,
                                 gboolean custom, GCallback handler, gpointer data,
                                 gboolean check, gboolean status, gboolean radio, gboolean sensitive);

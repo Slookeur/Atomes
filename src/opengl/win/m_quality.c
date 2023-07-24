@@ -84,11 +84,11 @@ G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * param
   window_quality (NULL, data);
 }
 
-GMenu * menu_quality (glwin * view)
+GMenu * menu_quality (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
   gchar * str = g_strdup_printf ("Quality: %d", view -> anim -> last -> img -> quality);
-  append_opengl_item (view, menu, str, "quality", 0, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_window_quality), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  append_opengl_item (view, menu, str, "quality", popm, popm, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(to_window_quality), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
   g_free (str);
   return menu;
 }
