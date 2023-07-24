@@ -34,17 +34,6 @@ extern void save_rotation_quaternion (glwin * view);
 extern void center_molecule (struct project * this_proj);
 extern vec3_t get_arc_ball_vector (glwin * view, int x, int y);
 extern void update_search_tree (atom_search * asearch);
-#ifdef GTK4
-extern G_MODULE_EXPORT void select_unselect_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-#else
-extern G_MODULE_EXPORT void select_unselect_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_atoms (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_atoms (GtkWidget * widg, gpointer data);
-#endif
 extern int selected_aspec;
 extern int is_selected;
 extern chemical_data * alloc_chem_data (int spec);

@@ -472,7 +472,7 @@ GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
   int i;
   for (i=0; i < this_proj -> coord -> totcoord[id]; i++)
   {
-    str = g_strdup_printf ("%d", this_proj -> coord -> geolist[id][0][i]);
+    str = g_strdup_printf ("rshow-%d", this_proj -> coord -> geolist[id][0][i]);
     if (! mid)
     {
       append_opengl_item (view, menus, str, str, popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_coord), & view -> gcid[id][i][id],

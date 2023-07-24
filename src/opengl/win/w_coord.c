@@ -20,11 +20,6 @@ If not, see <https://www.gnu.org/licenses/> */
 extern cairo_surface_t * col_surface (double r, double g, double b, int x, int y);
 extern G_MODULE_EXPORT void set_color_map (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void show_hide_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_coord (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_coord (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void show_hide_the_coord (GtkWidget * widg, gpointer data);
 extern int selected_aspec;
 extern GtkWidget * rings_tab (glwin * view, int g);
 extern GtkWidget * chains_tab (glwin * view);
@@ -44,7 +39,7 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
 #endif
 {
   qint * the_data = (qint *)data;
-  int i, j;
+  int i, j, k;
   int s, g, c;
   struct project * this_proj = get_project_by_id(the_data -> a);
   s = the_data -> b;
@@ -62,17 +57,42 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
     }
   }
   j += c;
-#ifdef GTK4
-  // int k = (widg) ? gtk_check_button_get_active (widg) : frag_mol_status;
-#else
-  int k = (widg) ? gtk_toggle_button_get_active (widg) : frag_mol_status;
-#endif
+
   if (is_coord_in_menu(g, this_proj))
   {
 #ifdef GTK4
-
+    k = gtk_check_button_get_active (widg);
+    if (k != this_proj -> modelgl -> anim -> last -> img -> show_coord[g][j])
+    {
+      gchar * name;
+      gchar * str;
+      if (g < 2)
+      {
+        if (g)
+        {
+          str = exact_name (env_name (this_proj, c, s, 1, NULL));
+        }
+        else
+        {
+          str = g_strdup_printf ("%d", this_proj -> coord -> geolist[g][s][c]);
+        }
+        name = g_strdup_printf ("set-%s-s.%d.0", str, j);
+        g_free (str);
+      }
+      else if (g > 1 && g < 4)
+      {
+        name = g_strdup_printf ("set-%s-%d.%d.0", (g == 2) ? "frag" : "mol", c+1, c);
+      }
+      else if (g > 3 && g < 9)
+      {
+        name = g_strdup_printf ("set-rshow-%d.%d.0", this_proj -> coord -> geolist[g][0][c], j);
+      }
+      g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
+      g_free (name);
+    }
 #else
     // GTK3 Menu Action To Check
+    k = (widg) ? gtk_toggle_button_get_active (widg) : frag_mol_status;
     check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_geom[0][g][j], k);
 #endif
   }
@@ -82,7 +102,11 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
     pointer.a = g;
     pointer.b = c;
     pointer.c = frag_mol_status;
+#ifdef GTK4
+    show_hide_the_coord (NULL, NULL, & pointer);
+#else
     show_hide_the_coord (NULL, & pointer);
+#endif // GTK4
   }
   init_default_shaders (this_proj -> modelgl);
 }
@@ -107,7 +131,11 @@ G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkToggleButton * widg, gpoint
   g_debug ("Toggle label/unlabel coord:: s= %d, g= %d, c= %d, selec_sp= %d", pointer.a, pointer.b, pointer.c, selected_aspec);
 #endif
   opengl_project_changed (the_data -> a);
+#ifdef GTK4
+  label_unlabel_coord (NULL, NULL, & pointer);
+#else
   label_unlabel_coord (NULL, & pointer);
+#endif // GTK4
 }
 
 #ifdef GTK4
@@ -130,7 +158,11 @@ G_MODULE_EXPORT void toggled_select_unselect_coord (GtkToggleButton * widg, gpoi
   g_debug ("Toggle select/unselect coord:: s= %d, g= %d, c= %d, selec_sp= %d", pointer.a, pointer.b, pointer.c, selected_aspec);
 #endif
   opengl_project_changed (the_data -> a);
+#ifdef GTK4
+  select_unselect_coord (NULL, NULL, & pointer);
+#else
   select_unselect_coord (NULL, & pointer);
+#endif
 }
 
 #ifdef GTK4
@@ -156,6 +188,30 @@ G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer da
   }
 #ifdef GTK4
   k = gtk_check_button_get_active (widg);
+  if (k != this_proj -> modelgl -> anim -> last -> img -> show_poly[g][j])
+  {
+    gchar * str;
+    gchar * name;
+    if (g < 2)
+    {
+      if (g)
+      {
+        str = exact_name (env_name (this_proj, c, s, 1, NULL));
+      }
+      else
+      {
+        str = g_strdup_printf ("%d", this_proj -> coord -> geolist[g][s][c]);
+      }
+      name = g_strdup_printf ("set-%s-%d-p.%d.0", str, g, j);
+      g_free (str);
+    }
+    else if (g > 3 && g < 9)
+    {
+      name = g_strdup_printf ("set-%d-p.%d.0", this_proj -> coord -> geolist[g][0][c], j);
+    }
+    g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
+    g_free (name);
+  }
 #else
   // GTK3 Menu Action To Check
   k = gtk_toggle_button_get_active (widg);
@@ -163,11 +219,11 @@ G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer da
   {
     check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_poly[0][g][j], k);
   }
-#endif
   this_proj -> modelgl -> anim -> last -> img -> show_poly[g][j] = k;
   int shaders[2] = {POLYS, RINGS};
   re_create_md_shaders (2, shaders, this_proj);
   update (this_proj -> modelgl);
+#endif
 }
 
 G_MODULE_EXPORT void set_color_frag_mol (GtkColorChooser * colob, gpointer data)
@@ -729,7 +785,9 @@ G_MODULE_EXPORT void set_atom_color_map_box (GtkComboBox * box, gpointer data)
   int i = gtk_combo_box_get_active (box);
   int j = view -> cmap[i];
 #ifdef GTK4
-   set_color_map (NULL, & view -> colorp[j][0]);
+  gchar * variant = g_strdup_printf ("set-amap.%d.0", j);
+  g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-amap", g_variant_new_string((const gchar *)variant));
+  g_free (variant);
 #else
   // GTK3 Menu Action To Check
   check_menu_item_set_active ((gpointer)view -> color_styles[j], TRUE);
@@ -742,7 +800,9 @@ G_MODULE_EXPORT void set_poly_color_map_box (GtkComboBox * box, gpointer data)
   int i = gtk_combo_box_get_active (box);
   int j = view -> cmap[i] + ATOM_MAPS;
 #ifdef GTK4
-   set_color_map (NULL, & view -> colorp[j][0]);
+  gchar * variant = g_strdup_printf ("set-pmap.%d.0", j);
+  g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-pmap", g_variant_new_string((const gchar *)variant));
+  g_free (variant);
 #else
   // GTK3 Menu Action To Check
   check_menu_item_set_active ((gpointer)view -> color_styles[j], TRUE);
@@ -758,9 +818,10 @@ G_MODULE_EXPORT void on_cloned_poly_toggled (GtkToggleButton * Button, gpointer 
   glwin * view = (glwin *)data;
 #ifdef GTK4
    view -> anim -> last -> img -> cloned_poly = gtk_check_button_get_active (Button);
-   int shaders[2] = {POLYS, RINGS};
+   g_action_group_activate_action ((GActionGroup *)view -> action_group, "set-cloned-poly.0.0", NULL);
+   /* int shaders[2] = {POLYS, RINGS};
    re_create_md_shaders (2, shaders, get_project_by_id(view -> proj));
-   update (view);
+   update (view); */
 #else
   // GTK3 Menu Action To Check
   check_menu_item_set_active ((gpointer)view -> ogl_clones[5], gtk_toggle_button_get_active (Button));

@@ -21,13 +21,6 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern GtkWidget * coord_menu (glwin * view);
 extern cairo_surface_t * col_surface (double r, double g, double b, int x, int y);
-#ifdef GTK3
-extern G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data);
-#else
-extern G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
-#endif
 extern G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data);
 extern void setup_molecules ();
 extern int * duplicate_int (int num, int * old_val);

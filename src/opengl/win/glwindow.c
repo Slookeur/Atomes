@@ -356,7 +356,6 @@ void prepare_opengl_menu_bar (glwin * view)
 
 void change_color_map (glwin * view, int col)
 {
-#ifdef GTK3
   int i, j;
   i = ATOM_MAPS-1;
   if (view -> custom_map) i++;
@@ -389,13 +388,15 @@ void change_color_map (glwin * view, int col)
   }
   gboolean was_input = reading_input;
   reading_input = TRUE;
+#ifdef GTK3
   check_menu_item_set_active ((gpointer)view -> color_styles[j], TRUE);
   set_color_map (view -> color_styles[j], & view -> colorp[j][0]);
-  reading_input = was_input;
 #else
-// TODO GTK4 change color map !
-
+  gchar * variant = g_strdup_printf ("set-%s.%d.0", (col) ? "pmap" : "amap", j);
+  g_action_group_activate_action ((GActionGroup *)view -> action_group, (col) ? "set-pmap" : "set-amap", g_variant_new_string((const gchar *)variant));
+  g_free (variant);
 #endif
+  reading_input = was_input;
 }
 
 void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state)

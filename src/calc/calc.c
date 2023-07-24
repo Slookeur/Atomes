@@ -21,17 +21,6 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern void create_classical_force_field (int p, int f);
 extern void create_qm_input_file (int c, int p, int s);
-#ifdef GTK4
-extern G_MODULE_EXPORT void select_unselect_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-#else
-extern G_MODULE_EXPORT void select_unselect_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_atoms (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_atoms (GtkWidget * widg, gpointer data);
-#endif
 extern void create_new_project_using_data (struct atom_selection * selection);
 extern int selected_aspec;
 extern int num_bonds (int i);

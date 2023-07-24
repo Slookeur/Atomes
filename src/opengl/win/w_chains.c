@@ -16,8 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "glwindow.h"
 
-extern G_MODULE_EXPORT void select_unselect_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void show_hide_this_atom (GtkWidget * widg, gpointer data);
 extern void rings_set_visible (GtkTreeViewColumn * col,
                                GtkCellRenderer   * renderer,
                                GtkTreeModel      * mod,
@@ -66,7 +64,11 @@ G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer,
       for (u=0; u<i; u++)
       {
         a = opengl_project -> modelgl -> all_chains[s][i-1][j-1][u];
+#ifdef GTK4
+        if (opengl_project -> atoms[s][a].show[0] != v) show_hide_this_atom (NULL, NULL, GINT_TO_POINTER(a));
+#else
         if (opengl_project -> atoms[s][a].show[0] != v) show_hide_this_atom (NULL, GINT_TO_POINTER(a));
+#endif // GTK4
       }
       break;
     case 3:
@@ -85,7 +87,11 @@ G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer,
         a = opengl_project -> modelgl -> all_chains[s][i-1][j-1][u];
         saved_label[0] = opengl_project -> atoms[s][a].label[0];
         saved_label[1] = opengl_project -> atoms[s][a].label[1];
+#ifdef GTK4
+        if (opengl_project -> atoms[s][a].pick[0] != v) select_unselect_this_atom (NULL, NULL, GINT_TO_POINTER(a));
+#else
         if (opengl_project -> atoms[s][a].pick[0] != v) select_unselect_this_atom (NULL, GINT_TO_POINTER(a));
+#endif // GTK4
         opengl_project -> atoms[s][a].label[0] = saved_label[0];
         opengl_project -> atoms[s][a].label[1] = saved_label[1];
       }

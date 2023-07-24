@@ -959,9 +959,24 @@ extern GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_
 extern GtkWidget * create_layout (int x, int y);
 
 #ifdef GTK4
+extern G_MODULE_EXPORT void select_unselect_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void select_unselect_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void select_unselect_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+extern G_MODULE_EXPORT void label_unlabel_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void label_unlabel_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void label_unlabel_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+extern G_MODULE_EXPORT void show_hide_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
 extern G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void show_hide_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
 extern G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
 extern G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+extern G_MODULE_EXPORT void remove_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void replace_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void edit_in_new_project (GSimpleAction * action, GVariant * parameter, gpointer data);
 extern void add_widget_gesture_and_key_action (GtkWidget * widget,
                                                gchar * cp_name, GCallback cp_handler, gpointer cp_data,
                                                gchar * cr_name, GCallback cr_handler, gpointer cr_data,
@@ -975,9 +990,27 @@ extern GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindo
 extern void pop_menu_at_pointer (GtkWidget * pop, double x, double y);
 GListModel * file_chooser_get_file_names (GtkFileChooser * chooser);
 extern void update_menu_bar (glwin * view);
+
 #else
+
+extern G_MODULE_EXPORT void select_unselect_this_atom (GtkWidget * widg, gpointer data);
+extern G_MODULE_EXPORT void select_unselect_atoms (GtkWidget * widg, gpointer data);
+extern G_MODULE_EXPORT void select_unselect_coord (GtkWidget * widg, gpointer data);
+
+extern G_MODULE_EXPORT void label_unlabel_this_atom (GtkWidget * widg, gpointer data);
+extern G_MODULE_EXPORT void label_unlabel_atoms (GtkWidget * widg, gpointer data);
+extern G_MODULE_EXPORT void label_unlabel_coord (GtkWidget * widg, gpointer data);
+
+extern G_MODULE_EXPORT void show_hide_this_atom (GtkWidget * widg, gpointer data);
+extern G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data);
+extern G_MODULE_EXPORT void show_hide_the_coord (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data);
+extern G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data);
+
+extern G_MODULE_EXPORT void remove_the_atoms (GtkWidget * widg, gpointer data);
+extern G_MODULE_EXPORT void replace_the_atoms (GtkWidget * widg, gpointer data);
+extern G_MODULE_EXPORT void edit_in_new_project (GtkWidget * widg, gpointer data);
 extern GtkWidget * create_menu_item (gboolean add_mnemo, gchar * action);
 extern GtkWidget * create_menu_item_from_widget (GtkWidget * widg, gboolean check, gboolean radio, gboolean status);
 extern GtkWidget * menu_item_new_with_submenu (gchar * name, gboolean active, GtkWidget * sub_menu);

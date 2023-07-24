@@ -21,13 +21,6 @@ extern void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store);
 extern void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store);
 extern void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store);
 extern void update_label_selection (glwin * view, int pi);
-#ifdef GTK4
-extern G_MODULE_EXPORT void select_unselect_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
-#else
-G_MODULE_EXPORT void select_unselect_atoms (GtkWidget * widg, gpointer data);
-G_MODULE_EXPORT void select_unselect_coord (GtkWidget * widg, gpointer data);
-#endif
 extern int selected_aspec;
 extern int get_to_be_selected (glwin * view);
 

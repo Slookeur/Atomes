@@ -282,7 +282,7 @@ GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
           {
             stra = g_strdup_printf ("%d", this_proj -> coord -> geolist[id][i][k]);
           }
-          strb = g_strdup_printf ("%s-%d-0", stra, id);
+          strb = g_strdup_printf ("%s-%d-p", stra, id);
           append_opengl_item (view, menus, stra, strb, popm, k+j, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_poly), & view -> gcid[id][k+j][id],
                               TRUE, view -> anim -> last -> img -> show_poly[id][k+j], FALSE, TRUE);
           g_free (stra);
@@ -307,7 +307,7 @@ GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
     for (i=0; i<this_proj -> coord -> totcoord[id]; i++)
     {
       stra = g_strdup_printf ("%d", this_proj -> coord -> geolist[id][0][i]);
-      strb = g_strdup_printf ("%s-0", stra);
+      strb = g_strdup_printf ("%s-p", stra);
       append_opengl_item (view, menu, stra, strb, popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_poly), & view -> gcid[id][i][id],
                           TRUE, view -> anim -> last -> img -> show_poly[id][i], FALSE, TRUE);
       g_free (stra);

@@ -895,8 +895,8 @@ G_MODULE_EXPORT void change_color_radio (GSimpleAction * action, GVariant * para
   if (g_strcmp0(name, ".1") == 0)
   {
     g_free (name);
-    name = g_strdup_printf ("%8s", color);
-    if (g_strcmp0(name, "set-amap"))
+    name = g_strdup_printf ("%.*s", 8, color);
+    if (g_strcmp0(name, "set-amap") == 0)
     {
       g_free (name);
       name = g_strdup_printf ("%.*s.0", lgt-2, color);
@@ -912,31 +912,21 @@ G_MODULE_EXPORT void change_color_radio (GSimpleAction * action, GVariant * para
   }
   else
   {
-    gchar * color_name = NULL;
     int i;
-    for (i=0; i<ATOM_MAPS*2; i++)
+    gchar * dot = g_strdup_printf ("%c", color[lgt-4]);
+    gchar * col;
+    if (g_strcmp0(dot, ".") == 0)
     {
-      color_name = g_strdup_printf ("set-amap.%d.0", i);
-      if (g_strcmp0(color, (const gchar *)color_name) == 0)
-      {
-        set_color_map (NULL, & view -> colorp[i][0]);
-        g_free (color_name);
-        color_name = NULL;
-        break;
-      }
-      g_free (color_name);
-      color_name = NULL;
-      color_name = g_strdup_printf ("set-pmap.%d.0", i);
-      if (g_strcmp0(color, (const gchar *)color_name) == 0)
-      {
-        set_color_map (NULL, & view -> colorp[ATOM_MAPS+i][0]);
-        g_free (color_name);
-        color_name = NULL;
-        break;
-      }
-      g_free (color_name);
-      color_name = NULL;
+      col = g_strdup_printf ("%c", color[lgt-3]);
     }
+    else
+    {
+      col = g_strdup_printf ("%c%c", color[lgt-4], color[lgt-3]);
+    }
+    i = (int)atof(col);
+    set_color_map (NULL, & view -> colorp[i][0]);
+    g_free (dot);
+    g_free (col);
     g_action_change_state (G_ACTION (action), parameter);
   }
 }

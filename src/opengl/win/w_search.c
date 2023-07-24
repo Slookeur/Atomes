@@ -14,22 +14,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "atom_edit.h"
 
 extern int check_label_numbers (struct project * this_proj, int types);
-#ifdef GTK4
-extern G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
-#else
-extern G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_atoms (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_coord (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_coord (GtkWidget * widg, gpointer data);
-#endif
-
 extern int selected_aspec;
 extern int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch);
 extern struct atom_selection * preserve_ogl_selection (glwin * view);

@@ -23,13 +23,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #ifndef CELL_EDIT_H_
 #define CELL_EDIT_H_
 
-#ifdef GTK4
-extern G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data);
-#else
-extern G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data);
-#endif
 extern gchar * axis[3];
 extern char * box_prop[2][3];
 extern void allocatoms (struct project * this_proj);
@@ -39,24 +32,6 @@ extern gchar * mot[2][2];
 extern GtkWidget * advanced_coord_properties (glwin * view, int page);
 extern gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb);
 extern void translate (struct project * this_proj, int status, int axis, vec3_t trans);
-#ifdef GTK4
-extern G_MODULE_EXPORT void select_unselect_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void remove_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void replace_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
-extern G_MODULE_EXPORT void edit_in_new_project (GSimpleAction * action, GVariant * parameter, gpointer data);
-#else
-extern G_MODULE_EXPORT void select_unselect_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void select_unselect_atoms (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_this_atom (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void label_unlabel_atoms (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void remove_the_atoms (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void replace_the_atoms (GtkWidget * widg, gpointer data);
-extern G_MODULE_EXPORT void edit_in_new_project (GtkWidget * widg, gpointer data);
-#endif
-
 extern void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi);
 extern void preserve_ogl_selection (glwin * view);
 extern void restore_ogl_selection (glwin * view);
