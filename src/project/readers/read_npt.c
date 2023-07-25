@@ -11,6 +11,23 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_npt.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int cell_get_lattice (int format);
+  int open_cell_file (int format, gchar * filename);
+
+  void add_cell_info (gchar * info);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "interface.h"
@@ -34,11 +51,25 @@ typedef struct {
 
 cell_file * this_cell;
 
+/*
+*  void add_cell_info (gchar * info)
+*
+*  Usage: 
+*
+*  gchar * info : 
+*/
 void add_cell_info (gchar * info)
 {
   this_cell -> info = (this_cell -> info) ? g_strdup_printf ("%s\n%s", this_cell -> info, info) : g_strdup_printf ("%s", info);
 }
 
+/*
+*  int cell_get_lattice (int format)
+*
+*  Usage: 
+*
+*  int format : 
+*/
 int cell_get_lattice (int format)
 {
   size_t length = 0;
@@ -181,6 +212,14 @@ int cell_get_lattice (int format)
   return 1;
 }
 
+/*
+*  int open_cell_file (int format, gchar * filename)
+*
+*  Usage: 
+*
+*  int format       : 
+*  gchar * filename : 
+*/
 int open_cell_file (int format, gchar * filename)
 {
   int res;

@@ -11,6 +11,32 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'ogl_draw.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void print_matrices ();
+  void setup_camera (void);
+  void unrotate_camera (void);
+  void duplicate_material_and_lightning (image * new_img, image * old_img);
+  void add_image (void);
+  void at_shift (struct atom * at, float * shift);
+  void at_unshift (struct atom * at, float * shift);
+  void draw (glwin * view);
+
+  struct screen_string * duplicate_screen_string (struct screen_string * old_s);
+  struct atom * duplicate_atom (struct atom * at);
+
+  image * duplicate_image (image * old_img);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "dlp_field.h"
@@ -49,6 +75,13 @@ extern void create_light_lists ();
 extern void create_slab_lists (struct project * this_proj);
 extern void create_volumes_lists ();
 
+/*
+*  void print_matrices ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void print_matrices ()
 {
   g_debug ("*** Print Matrices ***");
@@ -72,6 +105,13 @@ void print_matrices ()
   m4_print (wingl -> proj_model_view_matrix);
 }
 
+/*
+*  void setup_camera (void)
+*
+*  Usage: 
+*
+*  void : 
+*/
 void setup_camera (void)
 {
   wingl -> model_position         = vec3 (0.0, 0.0, -plot -> p_depth);
@@ -90,6 +130,13 @@ void setup_camera (void)
   // print_matrices();
 }
 
+/*
+*  void unrotate_camera (void)
+*
+*  Usage: 
+*
+*  void : 
+*/
 void unrotate_camera (void)
 {
   vec4_t quat;
@@ -98,6 +145,13 @@ void unrotate_camera (void)
   wingl -> model_view_matrix = m4_mul (wingl -> model_view_matrix, m4_quat_rotation (quat));
 }
 
+/*
+*  struct screen_string * duplicate_screen_string (struct screen_string * old_s)
+*
+*  Usage: 
+*
+*  struct screen_string * old_s : 
+*/
 struct screen_string * duplicate_screen_string (struct screen_string * old_s)
 {
   struct screen_string * new_s = g_malloc0 (sizeof*new_s);
@@ -112,6 +166,14 @@ struct screen_string * duplicate_screen_string (struct screen_string * old_s)
   return new_s;
 }
 
+/*
+*  void duplicate_material_and_lightning (image * new_img, image * old_img)
+*
+*  Usage: 
+*
+*  image * new_img : 
+*  image * old_img : 
+*/
 void duplicate_material_and_lightning (image * new_img, image * old_img)
 {
   new_img -> quality = old_img -> quality;
@@ -129,6 +191,13 @@ void duplicate_material_and_lightning (image * new_img, image * old_img)
   new_img -> f_g.color = old_img -> f_g.color;
 }
 
+/*
+*  image * duplicate_image (image * old_img)
+*
+*  Usage: 
+*
+*  image * old_img : 
+*/
 image * duplicate_image (image * old_img)
 {
   int i, j, k, l, m;
@@ -284,6 +353,13 @@ image * duplicate_image (image * old_img)
   return new_img;
 }
 
+/*
+*  void add_image (void)
+*
+*  Usage: 
+*
+*  void : 
+*/
 void add_image (void)
 {
   struct snapshot * nextsnap = g_malloc0 (sizeof*nextsnap);
@@ -311,6 +387,13 @@ void add_image (void)
 
 extern void update_gl_pick_colors ();
 
+/*
+*  struct atom * duplicate_atom (struct atom * at)
+*
+*  Usage: 
+*
+*  struct atom * at : 
+*/
 struct atom * duplicate_atom (struct atom * at)
 {
   struct atom * bt = g_malloc0 (sizeof*bt);
@@ -339,6 +422,14 @@ struct atom * duplicate_atom (struct atom * at)
   return bt;
 }
 
+/*
+*  void at_shift (struct atom * at, float * shift)
+*
+*  Usage: 
+*
+*  struct atom * at : 
+*  float * shift    : 
+*/
 void at_shift (struct atom * at, float * shift)
 {
   at -> x += shift[0];
@@ -346,6 +437,14 @@ void at_shift (struct atom * at, float * shift)
   at -> z += shift[2];
 }
 
+/*
+*  void at_unshift (struct atom * at, float * shift)
+*
+*  Usage: 
+*
+*  struct atom * at : 
+*  float * shift    : 
+*/
 void at_unshift (struct atom * at, float * shift)
 {
   at -> x -= shift[0];
@@ -353,6 +452,13 @@ void at_unshift (struct atom * at, float * shift)
   at -> z -= shift[2];
 }
 
+/*
+*  void draw (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void draw (glwin * view)
 {
   wingl = view;

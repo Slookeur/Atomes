@@ -11,6 +11,20 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'labels.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj);
+
+*/
+
 #include <string.h>
 #include <math.h>
 #include <cairo.h>
@@ -19,6 +33,17 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "curve.h"
 
+/*
+*  void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
+*
+*  Usage: 
+*
+*  cairo_t * cr               : 
+*  double val                 : 
+*  int axe                    : 
+*  int p                      : 
+*  struct project * this_proj : 
+*/
 void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
 {
   gchar * label;

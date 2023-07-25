@@ -11,6 +11,30 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cpmd_print.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void print_info_section (GtkTextBuffer * buf);
+  void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf);
+  void print_thermostat (GtkTextBuffer * buf);
+  void print_restart (GtkTextBuffer * buf);
+  void print_cpmd_section (GtkTextBuffer * buf);
+  void print_dft_section (GtkTextBuffer * buf);
+  void print_vdw_section (GtkTextBuffer * buf);
+  void print_prop_section (GtkTextBuffer * buf);
+  void print_system_section (GtkTextBuffer * buf);
+  void print_atoms_section (GtkTextBuffer * buf);
+  void print_the_section (int s, int p, GtkTextBuffer * buffer);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "calc.h"
@@ -20,6 +44,13 @@ extern struct dummy_atom * get_active_dummy (int id);
 
 int cpmd_sym[NSYM] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 14};
 
+/*
+*  void print_info_section (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_info_section (GtkTextBuffer * buf)
 {
   gchar * str = g_strdup_printf ("  This input was prepared using %s\n\n", PACKAGE);
@@ -29,6 +60,15 @@ void print_info_section (GtkTextBuffer * buf)
   print_info ("\n\n", NULL, buf);
 }
 
+/*
+*  void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  struct thermostat * thermo : 
+*  int id                     : 
+*  GtkTextBuffer * buf        : 
+*/
 void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf)
 {
   int i, j, k, l, m;
@@ -118,6 +158,13 @@ void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * 
   }
 }
 
+/*
+*  void print_thermostat (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_thermostat (GtkTextBuffer * buf)
 {
   gchar * str;
@@ -151,6 +198,13 @@ void print_thermostat (GtkTextBuffer * buf)
   }
 }
 
+/*
+*  void print_restart (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_restart (GtkTextBuffer * buf)
 {
   gchar * str;
@@ -174,6 +228,13 @@ void print_restart (GtkTextBuffer * buf)
   }
 }
 
+/*
+*  void print_cpmd_section (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_cpmd_section (GtkTextBuffer * buf)
 {
   gchar * str = g_strdup_printf ("  %s", calc_kw[tmp_cpmd -> calc_type]);
@@ -310,6 +371,13 @@ void print_cpmd_section (GtkTextBuffer * buf)
   print_info ("\n\n", NULL, buf);
 }
 
+/*
+*  void print_dft_section (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_dft_section (GtkTextBuffer * buf)
 {
   gchar * str = g_strdup_printf ("  FUNCTIONAL %s", default_keywords[0][(int)tmp_cpmd -> default_opts[DEFDF]]);
@@ -320,6 +388,13 @@ void print_dft_section (GtkTextBuffer * buf)
   g_free (str);
 }
 
+/*
+*  void print_vdw_section (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_vdw_section (GtkTextBuffer * buf)
 {
   gchar * str = g_strdup_printf ("  EMPIRICAL CORRECTION\n"
@@ -332,11 +407,25 @@ void print_vdw_section (GtkTextBuffer * buf)
   g_free (str);
 }
 
+/*
+*  void print_prop_section (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_prop_section (GtkTextBuffer * buf)
 {
 
 }
 
+/*
+*  void print_system_section (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_system_section (GtkTextBuffer * buf)
 {
   double u, v;
@@ -444,6 +533,13 @@ void print_system_section (GtkTextBuffer * buf)
   g_free (str);
 }
 
+/*
+*  void print_atoms_section (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_atoms_section (GtkTextBuffer * buf)
 {
   int i, j, k, l, m;
@@ -578,6 +674,15 @@ void print_atoms_section (GtkTextBuffer * buf)
   }
 }
 
+/*
+*  void print_the_section (int s, int p, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  int s                  : 
+*  int p                  : 
+*  GtkTextBuffer * buffer : 
+*/
 void print_the_section (int s, int p, GtkTextBuffer * buffer)
 {
   int i;

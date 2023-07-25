@@ -11,6 +11,36 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'd_poly.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int is_atom_cloned (int at);
+
+  float normal_direction (vec3_t v1, vec3_t v2, vec3_t v3);
+
+  gboolean is_inside (vec3_t p, float * mi, float * ma);
+  gboolean is_in_triangle (vec3_t p, vec3_t a, vec3_t b, vec3_t c);
+  gboolean check_it (int i, int j, int k, int l);
+
+  void setup_summit (float * vertices, vec3_t s, vec3_t n);
+  void setup_triangles (float * vertices, vec3_t sa, vec3_t sb, vec3_t sc);
+  void setup_polyhedron (float * vertices, GLfloat ** xyz, int s);
+  void setup_tetra (float * vertices, vec3_t a, vec3_t b, vec3_t c, vec3_t d);
+  void setup_tetrahedron (float * vertices, GLfloat ** xyz);
+  void get_centroid (GLfloat ** xyz, int id);
+  void check_triangles (int s, GLfloat ** xyz);
+  void prepare_poly_gl (float * vertices, struct atom at, int c);
+  void create_poly_lists ();
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "color_box.h"
@@ -25,6 +55,15 @@ extern int nbs, nbl, nba;
 float the_sign;
 float poly_alpha;
 
+/*
+*  void setup_summit (float * vertices, vec3_t s, vec3_t n)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  vec3_t s         : 
+*  vec3_t n         : 
+*/
 void setup_summit (float * vertices, vec3_t s, vec3_t n)
 {
   int val = nba*POLY_BUFF_SIZE;
@@ -41,6 +80,15 @@ void setup_summit (float * vertices, vec3_t s, vec3_t n)
   nba ++;
 }
 
+/*
+*  float normal_direction (vec3_t v1, vec3_t v2, vec3_t v3)
+*
+*  Usage: 
+*
+*  vec3_t v1 : 
+*  vec3_t v2 : 
+*  vec3_t v3 : 
+*/
 float normal_direction (vec3_t v1, vec3_t v2, vec3_t v3)
 {
   vec3_t edge_a = v3_sub(v3, v1);
@@ -71,6 +119,16 @@ vec3_t get_triangle_normal (vec3_t v1, vec3_t v2, vec3_t v3)
   return v3_muls (normal, sign);
 }
 
+/*
+*  void setup_triangles (float * vertices, vec3_t sa, vec3_t sb, vec3_t sc)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  vec3_t sa        : 
+*  vec3_t sb        : 
+*  vec3_t sc        : 
+*/
 void setup_triangles (float * vertices, vec3_t sa, vec3_t sb, vec3_t sc)
 {
   //float dir;
@@ -90,6 +148,15 @@ void setup_triangles (float * vertices, vec3_t sa, vec3_t sb, vec3_t sc)
   return v3_norm(v3_add(ta, v3_add(tb, tc)));
 }*/
 
+/*
+*  void setup_polyhedron (float * vertices, GLfloat ** xyz, int s)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  GLfloat ** xyz   : 
+*  int s            : 
+*/
 void setup_polyhedron (float * vertices, GLfloat ** xyz, int s)
 {
   int i, j, k, l, n, o, p, q, r;
@@ -138,6 +205,17 @@ void setup_polyhedron (float * vertices, GLfloat ** xyz, int s)
   }
 }
 
+/*
+*  void setup_tetra (float * vertices, vec3_t a, vec3_t b, vec3_t c, vec3_t d)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  vec3_t a         : 
+*  vec3_t b         : 
+*  vec3_t c         : 
+*  vec3_t d         : 
+*/
 void setup_tetra (float * vertices, vec3_t a, vec3_t b, vec3_t c, vec3_t d)
 {
   setup_triangles (vertices, a, b, c);
@@ -146,6 +224,14 @@ void setup_tetra (float * vertices, vec3_t a, vec3_t b, vec3_t c, vec3_t d)
   setup_triangles (vertices, a, b, d);
 }
 
+/*
+*  void setup_tetrahedron (float * vertices, GLfloat ** xyz)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  GLfloat ** xyz   : 
+*/
 void setup_tetrahedron (float * vertices, GLfloat ** xyz)
 {
   int n, o, p, q, r;
@@ -178,6 +264,14 @@ void setup_tetrahedron (float * vertices, GLfloat ** xyz)
   }
 }
 
+/*
+*  void get_centroid (GLfloat ** xyz, int id)
+*
+*  Usage: 
+*
+*  GLfloat ** xyz : 
+*  int id         : 
+*/
 void get_centroid (GLfloat ** xyz, int id)
 {
   int i;
@@ -191,6 +285,15 @@ void get_centroid (GLfloat ** xyz, int id)
   centroid = v3_divs (centroid, id);
 }
 
+/*
+*  gboolean is_inside (vec3_t p, float * mi, float * ma)
+*
+*  Usage: 
+*
+*  vec3_t p   : 
+*  float * mi : 
+*  float * ma : 
+*/
 gboolean is_inside (vec3_t p, float * mi, float * ma)
 {
   if (p.x > mi[0] && p.x < ma[0])
@@ -206,6 +309,16 @@ gboolean is_inside (vec3_t p, float * mi, float * ma)
   return FALSE;
 }
 
+/*
+*  gboolean is_in_triangle (vec3_t p, vec3_t a, vec3_t b, vec3_t c)
+*
+*  Usage: 
+*
+*  vec3_t p : 
+*  vec3_t a : 
+*  vec3_t b : 
+*  vec3_t c : 
+*/
 gboolean is_in_triangle (vec3_t p, vec3_t a, vec3_t b, vec3_t c)
 {
   float area = 0.5 * v3_length(v3_cross(v3_sub(a, b), v3_sub(a, c)));
@@ -222,6 +335,16 @@ gboolean is_in_triangle (vec3_t p, vec3_t a, vec3_t b, vec3_t c)
   }
 }
 
+/*
+*  gboolean check_it (int i, int j, int k, int l)
+*
+*  Usage: 
+*
+*  int i : 
+*  int j : 
+*  int k : 
+*  int l : 
+*/
 gboolean check_it (int i, int j, int k, int l)
 {
   if (l != i && l != j && l != k)
@@ -236,6 +359,14 @@ gboolean check_it (int i, int j, int k, int l)
 
 // int summits[50];
 
+/*
+*  void check_triangles (int s, GLfloat ** xyz)
+*
+*  Usage: 
+*
+*  int s          : 
+*  GLfloat ** xyz : 
+*/
 void check_triangles (int s, GLfloat ** xyz)
 {
   int h, i, j, k, l, m, n;
@@ -382,6 +513,15 @@ void check_triangles (int s, GLfloat ** xyz)
   }
 }
 
+/*
+*  void prepare_poly_gl (float * vertices, struct atom at, int c)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  struct atom at   : 
+*  int c            : 
+*/
 void prepare_poly_gl (float * vertices, struct atom at, int c)
 {
   int j, k, l;
@@ -473,6 +613,13 @@ void prepare_poly_gl (float * vertices, struct atom at, int c)
   xyz = NULL;
 }
 
+/*
+*  int is_atom_cloned (int at)
+*
+*  Usage: 
+*
+*  int at : 
+*/
 int is_atom_cloned (int at)
 {
   int i, j, k;
@@ -485,6 +632,13 @@ int is_atom_cloned (int at)
   return i;
 }
 
+/*
+*  void create_poly_lists ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void create_poly_lists ()
 {
   // The order to draw the polyhedra could be based on the alpha channel

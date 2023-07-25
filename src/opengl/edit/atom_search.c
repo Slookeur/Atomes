@@ -11,8 +11,44 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'atom_search.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void set_status_for_all (struct project * this_proj, int * data, int status, int start, int stop);
+
+  G_MODULE_EXPORT void turn_rebuild_on (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void turn_rebuild_on (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void turn_bonding_on (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data);
+
+  GtkWidget * create_search_box (int aid, struct project * this_proj);
+  GtkWidget * create_action_combo (int id, struct project * this_proj);
+  GtkWidget * action_tab (int aid, struct project * this_proj);
+
+*/
+
 #include "atom_edit.h"
 
+/*
+*  void set_status_for_all (struct project * this_proj, int * data, int status, int start, int stop)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int * data                 : 
+*  int status                 : 
+*  int start                  : 
+*  int stop                   : 
+*/
 void set_status_for_all (struct project * this_proj, int * data, int status, int start, int stop)
 {
   int i, j;
@@ -29,8 +65,24 @@ void set_status_for_all (struct project * this_proj, int * data, int status, int
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void turn_rebuild_on (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void turn_rebuild_on (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void turn_rebuild_on (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void turn_rebuild_on (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -46,8 +98,24 @@ G_MODULE_EXPORT void turn_rebuild_on (GtkToggleButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void turn_bonding_on (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void turn_bonding_on (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -61,6 +129,14 @@ G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data)
   asearch -> update_bonding = i;
 }
 
+/*
+*  GtkWidget * create_search_box (int aid, struct project * this_proj)
+*
+*  Usage: 
+*
+*  int aid                    : 
+*  struct project * this_proj : 
+*/
 GtkWidget * create_search_box (int aid, struct project * this_proj)
 {
   gchar * appl[5] = {" Move atom(s)", " Replace atom(s)", " Remove atom(s)", " Insert atom(s)", " Move atom(s)"};
@@ -116,6 +192,14 @@ GtkWidget * create_search_box (int aid, struct project * this_proj)
   return vbox;
 }
 
+/*
+*  G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
 {
   tint * id = (tint *)data;
@@ -139,6 +223,14 @@ G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
   update_search_tree (this_proj -> modelgl -> search_widg[id -> c]);
 }
 
+/*
+*  GtkWidget * create_action_combo (int id, struct project * this_proj)
+*
+*  Usage: 
+*
+*  int id                     : 
+*  struct project * this_proj : 
+*/
 GtkWidget * create_action_combo (int id, struct project * this_proj)
 {
   GtkWidget * combo;
@@ -171,6 +263,14 @@ GtkWidget * create_action_combo (int id, struct project * this_proj)
   return combo;
 }
 
+/*
+*  G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * exp : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
 {
   tint * dat = (tint *)data;
@@ -188,6 +288,14 @@ G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * action_tab (int aid, struct project * this_proj)
+*
+*  Usage: 
+*
+*  int aid                    : 
+*  struct project * this_proj : 
+*/
 GtkWidget * action_tab (int aid, struct project * this_proj)
 {
   gchar * action[7] = {"moved", "replaced", "removed", "inserted", "moved randomly", " ", "passivated"};

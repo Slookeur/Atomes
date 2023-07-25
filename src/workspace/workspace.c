@@ -11,6 +11,38 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'workspace.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int find_calc_by_path (GtkTreeView * treeview, GtkTreePath * path);
+  int find_proj_by_path (GtkTreePath * path);
+
+  G_MODULE_EXPORT gboolean on_workspace_button_event (GtkWidget * widget, GdkEventButton * event, gpointer data);
+
+  void add_project (GtkTreeStore * store, int i);
+  void correct_this_window_title (GtkWidget * win, gchar * str);
+  void workspace_menu (GtkWidget * tree, gpointer event, double x, double y);
+  void create_workspace ();
+  void add_project_to_workspace ();
+  void remove_project_from_workspace (int id);
+
+  static void fill_workspace (GtkTreeStore * store);
+
+  G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata);
+  G_MODULE_EXPORT void workspace_popup (GtkGesture * gesture, int n_press, double x, double y, gpointer data);
+
+  GtkWidget * create_workspace_tree ();
+
+*/
+
 #include "global.h"
 #include "callbacks.h"
 #include "interface.h"
@@ -57,6 +89,14 @@ char * work_menu_items[NITEMS-2] = {"Workspace                ",
                                     "Spherical harmonics      ",
                                     "Mean Square Displacement "};
 
+/*
+*  void add_project (GtkTreeStore * store, int i)
+*
+*  Usage: 
+*
+*  GtkTreeStore * store : 
+*  int i                : 
+*/
 void add_project (GtkTreeStore * store, int i)
 {
   int j;
@@ -99,6 +139,13 @@ void add_project (GtkTreeStore * store, int i)
   projects_in_workspace ++;
 }
 
+/*
+*  static void fill_workspace (GtkTreeStore * store)
+*
+*  Usage: 
+*
+*  GtkTreeStore * store : 
+*/
 static void fill_workspace (GtkTreeStore * store)
 {
   int i;
@@ -119,6 +166,14 @@ static void fill_workspace (GtkTreeStore * store)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data)
 {
   int id = GPOINTER_TO_INT (data);
@@ -134,6 +189,14 @@ G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data)
   g_free (tmp);
 }
 
+/*
+*  int find_calc_by_path (GtkTreeView * treeview, GtkTreePath * path)
+*
+*  Usage: 
+*
+*  GtkTreeView * treeview : 
+*  GtkTreePath * path     : 
+*/
 int find_calc_by_path (GtkTreeView * treeview, GtkTreePath * path)
 {
   int i;
@@ -148,6 +211,13 @@ int find_calc_by_path (GtkTreeView * treeview, GtkTreePath * path)
 }
 
 
+/*
+*  int find_proj_by_path (GtkTreePath * path)
+*
+*  Usage: 
+*
+*  GtkTreePath * path : 
+*/
 int find_proj_by_path (GtkTreePath * path)
 {
   int i, j;
@@ -230,6 +300,14 @@ G_MODULE_IMPORT void workspace_ondc (GtkTreeView * treeview,
 #define MOUSE_ACTIONS 2
 extern char * window_mouse[MOUSE_ACTIONS];
 
+/*
+*  void correct_this_window_title (GtkWidget * win, gchar * str)
+*
+*  Usage: 
+*
+*  GtkWidget * win : 
+*  gchar * str     : 
+*/
 void correct_this_window_title (GtkWidget * win, gchar * str)
 {
   if (win)
@@ -242,6 +320,14 @@ void correct_this_window_title (GtkWidget * win, gchar * str)
   if (str) g_free (str);
 }
 
+/*
+*  G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata)
+*
+*  Usage: 
+*
+*  GtkWidget * wid : 
+*  gpointer edata  : 
+*/
 G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata)
 {
   int i, j, k;
@@ -329,6 +415,16 @@ G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata)
   }
 }
 
+/*
+*  void workspace_menu (GtkWidget * tree, gpointer event, double x, double y)
+*
+*  Usage: 
+*
+*  GtkWidget * tree : 
+*  gpointer event   : 
+*  double x         : 
+*  double y         : 
+*/
 void workspace_menu (GtkWidget * tree, gpointer event, double x, double y)
 {
   GtkWidget * menu;
@@ -354,6 +450,17 @@ void workspace_menu (GtkWidget * tree, gpointer event, double x, double y)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void workspace_popup (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
+*
+*  Usage: 
+*
+*  GtkGesture * gesture : 
+*  int n_press          : 
+*  double x             : 
+*  double y             : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void workspace_popup (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
   if (gtk_gesture_single_get_current_button ((GtkGestureSingle * )gesture) == GDK_BUTTON_SECONDARY)
@@ -362,6 +469,15 @@ G_MODULE_EXPORT void workspace_popup (GtkGesture * gesture, int n_press, double 
   }
 }
 #else
+/*
+*  G_MODULE_EXPORT gboolean on_workspace_button_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widget     : 
+*  GdkEventButton * event : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT gboolean on_workspace_button_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
   if (event -> type == GDK_BUTTON_PRESS && event -> button == 3)
@@ -381,6 +497,13 @@ void workspace_set_visible (GtkTreeViewColumn * col,
   gtk_cell_renderer_set_visible (renderer, FALSE);
 }
 
+/*
+*  GtkWidget * create_workspace_tree ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_workspace_tree ()
 {
   GtkTreeViewColumn * col;
@@ -426,6 +549,13 @@ GtkWidget * create_workspace_tree ()
   return worktree;
 }
 
+/*
+*  void create_workspace ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void create_workspace ()
 {
   add_container_child (CONTAINER_SCR, MainScrol[0], create_workspace_tree ());
@@ -435,6 +565,13 @@ void create_workspace ()
   show_the_widgets (MainScrol[0]);
 }
 
+/*
+*  void add_project_to_workspace ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void add_project_to_workspace ()
 {
   if (worktree != NULL && workstore != NULL && nprojects > 0)
@@ -484,6 +621,13 @@ void add_project_to_workspace ()
   }
 }
 
+/*
+*  void remove_project_from_workspace (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 void remove_project_from_workspace (int id)
 {
   int i, j;

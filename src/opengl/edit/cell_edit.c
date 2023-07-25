@@ -11,10 +11,41 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cell_edit.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data);
+  G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data);
+
+  G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data);
+
+  GtkWidget * cell_tab (int i, struct project * this_proj);
+  GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox);
+  GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data);
+
+*/
+
 #include "cell_edit.h"
 
 gchar * edit_names[7] = {"Wrap All Atoms in", "Shift Center", "Add Extra(s)", "Create Super-Cell", "Adjust Density", "Cut Slab", "PBC Pixels Debug"};
 
+/*
+*  G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
 {
   struct project * this_proj = (struct project *)data;
@@ -28,8 +59,25 @@ G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWindow * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  GdkEvent * event : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
 {
@@ -37,6 +85,14 @@ G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointe
   return FALSE;
 }
 
+/*
+*  GtkWidget * cell_tab (int i, struct project * this_proj)
+*
+*  Usage: 
+*
+*  int i                      : 
+*  struct project * this_proj : 
+*/
 GtkWidget * cell_tab (int i, struct project * this_proj)
 {
   switch (i)
@@ -65,6 +121,14 @@ GtkWidget * cell_tab (int i, struct project * this_proj)
   }
 }
 
+/*
+*  GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  GtkWidget * vbox           : 
+*/
 GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
 {
   GtkWidget * notebook = gtk_notebook_new ();
@@ -98,6 +162,14 @@ GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
   return notebook;
 }
 
+/*
+*  GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  gpointer data              : 
+*/
 GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data)
 {
   gchar * str = g_strdup_printf ("Cell edition - %s", this_proj -> name);
@@ -121,8 +193,25 @@ GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer dat
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data)
 #endif
 {

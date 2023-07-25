@@ -11,6 +11,44 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'glwindow.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gboolean create_3d_model (int p, gboolean load);
+
+  G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data);
+  G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data);
+
+  void update_all_menus (glwin * view, int nats);
+  void menu_items_opengl (GtkWidget * menu, glwin * view, int pop);
+  void menu_items_model (GtkWidget * menu, glwin * view, int pop);
+  void menu_items_view (GtkWidget * menu, glwin * view, int popm);
+  void prepare_opengl_menu_bar (glwin * view);
+  void change_color_map (glwin * view, int col);
+  void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state);
+  void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data);
+  void prep_model (int p);
+
+  G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data);
+
+  GtkWidget * prep_rings_menu (glwin * view, int id, int ri);
+  GtkWidget * coord_menu (glwin * view);
+  GtkWidget * menu_opengl (glwin * view, int pop);
+  GtkWidget * menu_model (glwin * view, int pop);
+  GtkWidget * menu_view (glwin * view, int popm);
+
+  mat4_t insert_projection (glwin * view);
+
+*/
+
 #include "global.h"
 #include "project.h"
 #include "calc.h"
@@ -68,6 +106,15 @@ extern gchar * action_atoms[3];
 extern int get_measure_type (glwin * view);
 
 #ifdef GTK3
+/*
+*  GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*  int ri       : 
+*/
 GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 {
   if (id == 0)
@@ -80,6 +127,13 @@ GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
   }
 }
 
+/*
+*  GtkWidget * coord_menu (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 GtkWidget * coord_menu (glwin * view)
 {
   int i, j, k;
@@ -163,6 +217,14 @@ GtkWidget * coord_menu (glwin * view)
 }
 #endif
 
+/*
+*  void update_all_menus (glwin * view, int nats)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int nats     : 
+*/
 void update_all_menus (glwin * view, int nats)
 {
 #ifdef GTK3
@@ -247,6 +309,14 @@ void update_all_menus (glwin * view, int nats)
 #endif
 }
 
+/*
+*  G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -255,6 +325,15 @@ G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
 
 #ifdef GTK3
 
+/*
+*  void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
+*
+*  Usage: 
+*
+*  GtkWidget * menu : 
+*  glwin * view     : 
+*  int pop          : 
+*/
 void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 {
 #ifdef MENU_ICONS
@@ -270,6 +349,14 @@ void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
   gtk3_menu_item (menu, "Render Image", IMG_FILE, (gpointer)PACKAGE_IMG, G_CALLBACK(render_gl_image), (gpointer)view, FALSE, 0, 0, FALSE, FALSE, FALSE);
 }
 
+/*
+*  GtkWidget * menu_opengl (glwin * view, int pop)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pop      : 
+*/
 GtkWidget * menu_opengl (glwin * view, int pop)
 {
   GtkWidget * menu = gtk_menu_new ();
@@ -277,6 +364,15 @@ GtkWidget * menu_opengl (glwin * view, int pop)
   return menu;
 }
 
+/*
+*  void menu_items_model (GtkWidget * menu, glwin * view, int pop)
+*
+*  Usage: 
+*
+*  GtkWidget * menu : 
+*  glwin * view     : 
+*  int pop          : 
+*/
 void menu_items_model (GtkWidget * menu, glwin * view, int pop)
 {
   if (get_project_by_id(view -> proj) -> nspec)
@@ -288,6 +384,14 @@ void menu_items_model (GtkWidget * menu, glwin * view, int pop)
   }
 }
 
+/*
+*  GtkWidget * menu_model (glwin * view, int pop)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pop      : 
+*/
 GtkWidget * menu_model (glwin * view, int pop)
 {
   GtkWidget * menu = gtk_menu_new ();
@@ -295,6 +399,15 @@ GtkWidget * menu_model (glwin * view, int pop)
   return menu;
 }
 
+/*
+*  void menu_items_view (GtkWidget * menu, glwin * view, int popm)
+*
+*  Usage: 
+*
+*  GtkWidget * menu : 
+*  glwin * view     : 
+*  int popm         : 
+*/
 void menu_items_view (GtkWidget * menu, glwin * view, int popm)
 {
   add_menu_child (menu, menu_item_new_with_submenu ("Representation", TRUE, menu_rep (view, popm)));
@@ -315,6 +428,14 @@ void menu_items_view (GtkWidget * menu, glwin * view, int popm)
   }
 }
 
+/*
+*  GtkWidget * menu_view (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GtkWidget * menu_view (glwin * view, int popm)
 {
   GtkWidget * menu = gtk_menu_new ();
@@ -323,6 +444,13 @@ GtkWidget * menu_view (glwin * view, int popm)
 }
 #endif
 
+/*
+*  void prepare_opengl_menu_bar (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void prepare_opengl_menu_bar (glwin * view)
 {
 #ifdef GTK3
@@ -354,6 +482,14 @@ void prepare_opengl_menu_bar (glwin * view)
 #endif
 }
 
+/*
+*  void change_color_map (glwin * view, int col)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int col      : 
+*/
 void change_color_map (glwin * view, int col)
 {
   int i, j;
@@ -399,6 +535,18 @@ void change_color_map (glwin * view, int col)
   reading_input = was_input;
 }
 
+/*
+*  void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state)
+*
+*  Usage: 
+*
+*  glwin * view          : 
+*  int axis              : 
+*  int da                : 
+*  int db                : 
+*  gboolean UpDown       : 
+*  GdkModifierType state : 
+*/
 void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state)
 {
   if (state & GDK_CONTROL_MASK)
@@ -451,6 +599,13 @@ void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkMod
   }
 }
 
+/*
+*  mat4_t insert_projection (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 mat4_t insert_projection (glwin * view)
 {
   GLdouble w, h;
@@ -487,6 +642,15 @@ vec3_t get_insertion_coordinates (glwin * view)
   return v3_un_project (pos, view -> view_port, insert_pmv_matrix);
 }
 
+/*
+*  void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
+*
+*  Usage: 
+*
+*  guint keyval          : 
+*  GdkModifierType state : 
+*  gpointer data         : 
+*/
 void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -840,6 +1004,15 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 }
 
 #ifdef GTK3
+/*
+*  G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg    : 
+*  GdkEventKey * event : 
+*  gpointer data       : 
+*/
 G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data)
 {
   if (event -> type == GDK_KEY_PRESS)
@@ -849,6 +1022,17 @@ G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, 
   return FALSE;
 }
 #else
+/*
+*  G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEventControllerKey * self : 
+*  guint keyval                 : 
+*  guint keycode                : 
+*  GdkModifierType state        : 
+*  gpointer data                : 
+*/
 G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
 {
   glwin_key_pressed (keyval, state, data);
@@ -856,6 +1040,14 @@ G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, gui
 }
 #endif
 
+/*
+*  G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -873,6 +1065,14 @@ G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
   }
 }
 
+/*
+*  gboolean create_3d_model (int p, gboolean load)
+*
+*  Usage: 
+*
+*  int p         : 
+*  gboolean load : 
+*/
 gboolean create_3d_model (int p, gboolean load)
 {
 /*
@@ -988,6 +1188,13 @@ gboolean create_3d_model (int p, gboolean load)
   }
 }
 
+/*
+*  void prep_model (int p)
+*
+*  Usage: 
+*
+*  int p : 
+*/
 void prep_model (int p)
 {
   struct project * this_proj = get_project_by_id (p);

@@ -11,6 +11,28 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'calc.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void field_question (gchar * question, GCallback handler, gpointer data);
+  void unselect_all_atoms (glwin * view);
+  void restore_ogl_selection (glwin * view);
+  void preserve_ogl_selection (glwin * view);
+
+  G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gpointer data);
+  G_MODULE_EXPORT void create_field (GtkWidget * widg, gpointer data);
+
+  struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "project.h"
@@ -41,12 +63,30 @@ int icomb;
 
 gboolean selection_confirmed;
 
+/*
+*  G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * dialog : 
+*  gint response_id   : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gpointer data)
 {
   selection_confirmed = (response_id == GTK_RESPONSE_YES) ? TRUE : FALSE;
   destroy_this_dialog (dialog);
 }
 
+/*
+*  void field_question (gchar * question, GCallback handler, gpointer data)
+*
+*  Usage: 
+*
+*  gchar * question  : 
+*  GCallback handler : 
+*  gpointer data     : 
+*/
 void field_question (gchar * question, GCallback handler, gpointer data)
 {
   GtkWidget * dialog;
@@ -56,6 +96,13 @@ void field_question (gchar * question, GCallback handler, gpointer data)
   run_this_gtk_dialog (dialog, handler, data);
 }
 
+/*
+*  struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel)
+*
+*  Usage: 
+*
+*  struct atom_selection * old_sel : 
+*/
 struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel)
 {
   int i, j;
@@ -112,6 +159,13 @@ struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel
   return new_sel;
 }
 
+/*
+*  void unselect_all_atoms (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void unselect_all_atoms (glwin * view)
 {
   int i, j, k;
@@ -141,6 +195,13 @@ void unselect_all_atoms (glwin * view)
   init_default_shaders (view);
 }
 
+/*
+*  void restore_ogl_selection (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void restore_ogl_selection (glwin * view)
 {
   int i, j, k, l;
@@ -180,6 +241,13 @@ void restore_ogl_selection (glwin * view)
   }
 }
 
+/*
+*  void preserve_ogl_selection (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void preserve_ogl_selection (glwin * view)
 {
   int h, i, j, k, l;
@@ -216,6 +284,14 @@ void preserve_ogl_selection (glwin * view)
 
 extern char * input_types[NINPUTS];
 
+/*
+*  G_MODULE_EXPORT void create_field (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void create_field (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *)data;

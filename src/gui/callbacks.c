@@ -11,6 +11,55 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'callbacks.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int open_save (FILE * fp, int i, int pid, int aid, int npi, gchar * pfile);
+  int open_save_workspace (FILE * fp, int act);
+  int prep_chem_data ();
+  int to_read_trj_or_vas (int ff);
+  int read_npt_data ();
+  int open_coordinate_file (int id);
+
+  void quit_gtk ();
+  void open_this_proj (gpointer data, gpointer user_data);
+  void run_project ();
+  void apply_project (gboolean showtools);
+  void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible);
+  void to_read_pos ();
+  void check_read_sa ();
+  void update_sa_info (int sid);
+  void prepare_sp_box ();
+  void cell_data_from_pdb_ (float * a, float * b, float * c, float * alp, float * bet, float * gam);
+  void open_this_coordinate_file (int format);
+
+  G_MODULE_EXPORT void on_close_workspace (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void run_on_open_save_active (GtkNativeDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void on_open_save_activate (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void on_save_as_activate (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void run_on_isaacs_port (GtkNativeDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void on_isaacs_port (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void update_sa (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void changed_spec_combo (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void update_at_sp (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void run_to_read_trj_or_vas (GtkDialog * dialog, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_read_npt_data (GtkNativeDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_read_npt_data (GtkDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_on_coord_port (GtkNativeDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void on_coord_port (GtkWidget * widg, gpointer data);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "callbacks.h"
@@ -36,12 +85,27 @@ extern int open_history_file (gchar * filename);
 extern int open_cell_file (int format, gchar * filename);
 extern double get_z_from_periodic_table (gchar * lab);
 
+/*
+*  void quit_gtk ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void quit_gtk ()
 {
   profree_ ();
   g_application_quit (G_APPLICATION(AtomesApp));
 }
 
+/*
+*  G_MODULE_EXPORT void on_close_workspace (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_close_workspace (GtkWidget * widg, gpointer data)
 {
   int i, j;
@@ -71,6 +135,18 @@ G_MODULE_EXPORT void on_close_workspace (GtkWidget * widg, gpointer data)
 
 gboolean save = TRUE;
 
+/*
+*  int open_save (FILE * fp, int i, int pid, int aid, int npi, gchar * pfile)
+*
+*  Usage: 
+*
+*  FILE * fp     : 
+*  int i         : 
+*  int pid       : 
+*  int aid       : 
+*  int npi       : 
+*  gchar * pfile : 
+*/
 int open_save (FILE * fp, int i, int pid, int aid, int npi, gchar * pfile)
 {
   int j;
@@ -123,6 +199,14 @@ int open_save (FILE * fp, int i, int pid, int aid, int npi, gchar * pfile)
   return j;
 }
 
+/*
+*  int open_save_workspace (FILE * fp, int act)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*  int act   : 
+*/
 int open_save_workspace (FILE * fp, int act)
 {
   int i, j, k, l, m;
@@ -182,6 +266,14 @@ int open_save_workspace (FILE * fp, int act)
   }
 }
 
+/*
+*  void open_this_proj (gpointer data, gpointer user_data)
+*
+*  Usage: 
+*
+*  gpointer data      : 
+*  gpointer user_data : 
+*/
 void open_this_proj (gpointer data, gpointer user_data)
 {
   FILE * fp = fopen (data, dfi[0]);
@@ -196,11 +288,29 @@ tint osp;
 gboolean run_os;
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void run_on_open_save_active (GtkNativeDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkNativeDialog * info : 
+*  gint response_id       : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void run_on_open_save_active (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GListModel * projlist;
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
+/*
+*  G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * info : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id, gpointer data)
 {
   GSList * projlist = NULL;
@@ -278,6 +388,14 @@ G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id
   }
 }
 
+/*
+*  G_MODULE_EXPORT void on_open_save_activate (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_open_save_activate (GtkWidget * widg, gpointer data)
 {
   int i, j, k;
@@ -474,6 +592,14 @@ G_MODULE_EXPORT void on_open_save_activate (GtkWidget * widg, gpointer data)
   end:;
 }
 
+/*
+*  G_MODULE_EXPORT void on_save_as_activate (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_save_as_activate (GtkWidget * widg, gpointer data)
 {
   save = FALSE;
@@ -481,6 +607,13 @@ G_MODULE_EXPORT void on_save_as_activate (GtkWidget * widg, gpointer data)
   save = TRUE;
 }
 
+/*
+*  void run_project ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void run_project ()
 {
   if (! active_project -> run)
@@ -506,6 +639,13 @@ void run_project ()
   if (active_cell -> frac) active_cell -> frac = 0;
 }
 
+/*
+*  void apply_project (gboolean showtools)
+*
+*  Usage: 
+*
+*  gboolean showtools : 
+*/
 void apply_project (gboolean showtools)
 {
   if (active_project -> natomes)
@@ -517,6 +657,15 @@ void apply_project (gboolean showtools)
   if (showtools) gtk_widget_show (curvetoolbox);
 }
 
+/*
+*  void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible)
+*
+*  Usage: 
+*
+*  gchar * profile  : 
+*  int ptoc         : 
+*  gboolean visible : 
+*/
 void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible)
 {
   if (! open_xml (profile))
@@ -539,10 +688,28 @@ void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void run_on_isaacs_port (GtkNativeDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkNativeDialog * info : 
+*  gint response_id       : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void run_on_isaacs_port (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
+/*
+*  G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * info : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkWidget *)info);
@@ -585,6 +752,14 @@ G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpo
   }
 }
 
+/*
+*  G_MODULE_EXPORT void on_isaacs_port (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_isaacs_port (GtkWidget * widg, gpointer data)
 {
   int i, j;
@@ -639,6 +814,13 @@ G_MODULE_EXPORT void on_isaacs_port (GtkWidget * widg, gpointer data)
   end:;
 }
 
+/*
+*  void to_read_pos ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void to_read_pos ()
 {
   int i, j, k;
@@ -683,6 +865,13 @@ GtkWidget * sa_entry[2];
 GtkWidget * read_this;
 int read_spec;
 
+/*
+*  void check_read_sa ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void check_read_sa ()
 {
   int i, j, k;
@@ -702,6 +891,13 @@ void check_read_sa ()
   }
 }
 
+/*
+*  void update_sa_info (int sid)
+*
+*  Usage: 
+*
+*  int sid : 
+*/
 void update_sa_info (int sid)
 {
   gchar * str = g_strdup_printf ("Label of atomic spec. N° %d:", sid+1);
@@ -730,6 +926,14 @@ void update_sa_info (int sid)
   read_spec = sid;
 }
 
+/*
+*  G_MODULE_EXPORT void update_sa (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void update_sa (GtkEntry * res, gpointer data)
 {
   int i, v;
@@ -754,11 +958,26 @@ G_MODULE_EXPORT void update_sa (GtkEntry * res, gpointer data)
   check_read_sa ();
 }
 
+/*
+*  G_MODULE_EXPORT void changed_spec_combo (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void changed_spec_combo (GtkComboBox * box, gpointer data)
 {
   update_sa_info (gtk_combo_box_get_active (box));
 }
 
+/*
+*  void prepare_sp_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void prepare_sp_box ()
 {
   int i;
@@ -805,6 +1024,14 @@ void prepare_sp_box ()
   update_sa_info (0);
 }
 
+/*
+*  G_MODULE_EXPORT void update_at_sp (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void update_at_sp (GtkEntry * res, gpointer data)
 {
   int i, v;
@@ -840,6 +1067,13 @@ G_MODULE_EXPORT void update_at_sp (GtkEntry * res, gpointer data)
 
 int reading_vas_trj;
 
+/*
+*  int prep_chem_data ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int prep_chem_data ()
 {
   int i;
@@ -853,6 +1087,15 @@ int prep_chem_data ()
   return 1;
 }
 
+/*
+*  G_MODULE_EXPORT void run_to_read_trj_or_vas (GtkDialog * dialog, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * dialog : 
+*  gint response_id   : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void run_to_read_trj_or_vas (GtkDialog * dialog, gint response_id, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
@@ -875,6 +1118,13 @@ G_MODULE_EXPORT void run_to_read_trj_or_vas (GtkDialog * dialog, gint response_i
   destroy_this_dialog (dialog);
 }
 
+/*
+*  int to_read_trj_or_vas (int ff)
+*
+*  Usage: 
+*
+*  int ff : 
+*/
 int to_read_trj_or_vas (int ff)
 {
   int i;
@@ -900,6 +1150,18 @@ int to_read_trj_or_vas (int ff)
   return reading_vas_trj;
 }
 
+/*
+*  void cell_data_from_pdb_ (float * a, float * b, float * c, float * alp, float * bet, float * gam)
+*
+*  Usage: 
+*
+*  float * a   : 
+*  float * b   : 
+*  float * c   : 
+*  float * alp : 
+*  float * bet : 
+*  float * gam : 
+*/
 void cell_data_from_pdb_ (float * a, float * b, float * c, float * alp, float * bet, float * gam)
 {
   active_box -> param[0][0] = * a;
@@ -918,10 +1180,28 @@ int npt_selection;
 gchar * npt_file;
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void run_read_npt_data (GtkNativeDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkNativeDialog * info : 
+*  gint response_id       : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void run_read_npt_data (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
+/*
+*  G_MODULE_EXPORT void run_read_npt_data (GtkDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * info : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_read_npt_data (GtkDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkWidget *)info);
@@ -942,6 +1222,13 @@ G_MODULE_EXPORT void run_read_npt_data (GtkDialog * info, gint response_id, gpoi
 #endif
 }
 
+/*
+*  int read_npt_data ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int read_npt_data ()
 {
   GtkFileFilter * filter[2];
@@ -972,6 +1259,13 @@ int read_npt_data ()
   return (npt_selection < 0) ? 0 : open_cell_file (npt_selection, npt_file);
 }
 
+/*
+*  int open_coordinate_file (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 int open_coordinate_file (int id)
 {
   struct timespec sta_time;
@@ -1086,6 +1380,13 @@ int open_coordinate_file (int id)
 GtkFileFilter * filter[NCFORMATS+1];
 int pactive;
 
+/*
+*  void open_this_coordinate_file (int format)
+*
+*  Usage: 
+*
+*  int format : 
+*/
 void open_this_coordinate_file (int format)
 {
   active_project -> newproj = FALSE;
@@ -1129,10 +1430,28 @@ void open_this_coordinate_file (int format)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void run_on_coord_port (GtkNativeDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkNativeDialog * info : 
+*  gint response_id       : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void run_on_coord_port (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
+/*
+*  G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * info : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkWidget *)info);
@@ -1223,6 +1542,14 @@ G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpoi
   }
 }
 
+/*
+*  G_MODULE_EXPORT void on_coord_port (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_coord_port (GtkWidget * widg, gpointer data)
 {
   int i, j;

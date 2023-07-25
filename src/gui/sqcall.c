@@ -11,6 +11,25 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'sqcall.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void initsq (int r, int s);
+  void update_sq_view (struct project * this_proj, int sqk);
+  void save_xsk_ (int * interv, double datacurve[* interv]);
+
+  G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void on_calc_sk_released (GtkWidget * widg, gpointer data);
+
+*/
+
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdlib.h>
@@ -22,6 +41,14 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "project.h"
 #include "curve.h"
 
+/*
+*  void initsq (int r, int s)
+*
+*  Usage: 
+*
+*  int r : 
+*  int s : 
+*/
 void initsq (int r, int s)
 {
   int i, j, k;
@@ -77,6 +104,14 @@ void initsq (int r, int s)
   active_project -> initok[r] = TRUE;
 }
 
+/*
+*  void update_sq_view (struct project * this_proj, int sqk)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int sqk                    : 
+*/
 void update_sq_view (struct project * this_proj, int sqk)
 {
   gchar * str;
@@ -138,6 +173,14 @@ void update_sq_view (struct project * this_proj, int sqk)
   print_info (calculation_time(TRUE, this_proj -> calc_time[sqk]), NULL, this_proj -> text_buffer[sqk+OT]);
 }
 
+/*
+*  G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data)
 {
   int i;
@@ -166,6 +209,14 @@ G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data)
   for (i=1; i<3; i++) update_after_calc (i);
 }
 
+/*
+*  void save_xsk_ (int * interv, double datacurve[* interv])
+*
+*  Usage: 
+*
+*  int * interv               : 
+*  double datacurve[* interv] : 
+*/
 void save_xsk_ (int * interv, double datacurve[* interv])
 {
   if (* interv != 0)
@@ -174,6 +225,14 @@ void save_xsk_ (int * interv, double datacurve[* interv])
   }
 }
 
+/*
+*  G_MODULE_EXPORT void on_calc_sk_released (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_calc_sk_released (GtkWidget * widg, gpointer data)
 {
   int i, j;

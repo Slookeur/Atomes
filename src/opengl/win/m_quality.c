@@ -11,12 +11,42 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_quality.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void set_quality (int q, glwin * view);
+
+  G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data);
+  G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * menu_quality (glwin * view, int id);
+
+  GMenu * menu_quality (glwin * view, int popm);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "project.h"
 #include "glwindow.h"
 #include "glview.h"
 
+/*
+*  void set_quality (int q, glwin * view)
+*
+*  Usage: 
+*
+*  int q        : 
+*  glwin * view : 
+*/
 void set_quality (int q, glwin * view)
 {
   view -> anim -> last -> img -> quality = q;
@@ -29,6 +59,14 @@ void set_quality (int q, glwin * view)
 #endif
 }
 
+/*
+*  G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkSpinButton * res : 
+*  gpointer data       : 
+*/
 G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -36,6 +74,14 @@ G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
   update_entry_int (GTK_ENTRY(res), view -> anim -> last -> img -> quality);
 }
 
+/*
+*  G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -59,6 +105,14 @@ G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
+/*
+*  GtkWidget * menu_quality (glwin * view, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*/
 GtkWidget * menu_quality (glwin * view, int id)
 {
   GtkWidget * menuq = gtk_menu_new ();
@@ -79,11 +133,28 @@ GtkWidget * menu_quality (glwin * view, int id)
   return menuq;
 }
 #else
+/*
+*  G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   window_quality (NULL, data);
 }
 
+/*
+*  GMenu * menu_quality (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_quality (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();

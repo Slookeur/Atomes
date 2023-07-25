@@ -11,6 +11,20 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'dlp_comp.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void compare_non_bonded (gchar * fatom);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glwindow.h"
@@ -141,6 +155,13 @@ void compare_body (gchar * fatom,
   tmp_field -> nbody[0] = n_body;
 }
 
+/*
+*  void compare_non_bonded (gchar * fatom)
+*
+*  Usage: 
+*
+*  gchar * fatom : 
+*/
 void compare_non_bonded (gchar * fatom)
 {
   int nbody = init_vdw (FALSE);

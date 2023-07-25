@@ -11,6 +11,34 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'valid.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int mac_addr_sys ();
+  int valid ();
+  int valimac ();
+
+  gboolean validate ();
+  gboolean saving_option ();
+
+  G_MODULE_EXPORT gboolean validask ();
+
+  void runvalidnum();
+  void compkeys (gchar * mot);
+  void record (gchar * vmad);
+
+  G_MODULE_EXPORT void set_key (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void run_validask (GtkDialog * dial, gint response_id, gpointer data);
+
+*/
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -73,6 +101,13 @@ gboolean firstrun=TRUE;
 GtkWidget * ok;
 GtkWidget * entrya;
 
+/*
+*  int mac_addr_sys ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int mac_addr_sys ()
 {
   size_t sizead;
@@ -276,6 +311,13 @@ int mac_addr_sys ()
   return 2;
 }
 
+/*
+*  void runvalidnum()
+*
+*  Usage: 
+*
+*   : 
+*/
 void runvalidnum()
 {
   int i, j, k, l;
@@ -311,6 +353,14 @@ void runvalidnum()
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_key (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_key (GtkEntry * entry, gpointer data)
 {
   if (strcmp ((char *)entry_get_text (entry), (char *)"") != 0)
@@ -320,6 +370,13 @@ G_MODULE_EXPORT void set_key (GtkEntry * entry, gpointer data)
   }
 }
 
+/*
+*  void compkeys (gchar * mot)
+*
+*  Usage: 
+*
+*  gchar * mot : 
+*/
 void compkeys (gchar * mot)
 {
   double id;
@@ -353,6 +410,13 @@ void compkeys (gchar * mot)
 #endif
 }
 
+/*
+*  int valid ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int valid ()
 {
   double vd;
@@ -440,6 +504,13 @@ int valid ()
   }
 }
 
+/*
+*  void record (gchar * vmad)
+*
+*  Usage: 
+*
+*  gchar * vmad : 
+*/
 void record (gchar * vmad)
 {
   FILE *fp;
@@ -467,6 +538,13 @@ void record (gchar * vmad)
   fclose(fp);
 }
 
+/*
+*  int valimac ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int valimac ()
 {
   int i;
@@ -501,6 +579,15 @@ int valimac ()
 
 gboolean validated;
 
+/*
+*  G_MODULE_EXPORT void run_validask (GtkDialog * dial, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * dial : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_validask (GtkDialog * dial, gint response_id, gpointer data)
 {
   char * thanks = "<b>Thank you for supporting the Atomes program.</b>\n"
@@ -542,6 +629,13 @@ G_MODULE_EXPORT void run_validask (GtkDialog * dial, gint response_id, gpointer 
   }
 }
 
+/*
+*  G_MODULE_EXPORT gboolean validask ()
+*
+*  Usage: 
+*
+*   : 
+*/
 G_MODULE_EXPORT gboolean validask ()
 {
   GtkWidget *iask, *atombut;
@@ -593,6 +687,13 @@ G_MODULE_EXPORT gboolean validask ()
   return validated;
 }
 
+/*
+*  gboolean validate ()
+*
+*  Usage: 
+*
+*   : 
+*/
 gboolean validate ()
 {
   if (valimac () == 1)
@@ -618,6 +719,13 @@ gboolean validate ()
   }
 }
 
+/*
+*  gboolean saving_option ()
+*
+*  Usage: 
+*
+*   : 
+*/
 gboolean saving_option ()
 {
   if (! registered_atomes)

@@ -11,12 +11,38 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'yaxis.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void autoscale_axis (struct project * this_proj, int rid, int cid, int aid);
+  void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid);
+  void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it);
+
+*/
+
 #include <math.h>
 #include <cairo.h>
 
 #include "global.h"
 #include "curve.h"
 
+/*
+*  void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int rid                    : 
+*  int cid                    : 
+*  int aid                    : 
+*/
 void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
 {
   int i, j, k, l, m, n;
@@ -73,6 +99,16 @@ void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
   }
 }
 
+/*
+*  void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
+*
+*  Usage: 
+*
+*  cairo_t * cr               : 
+*  struct project * this_proj : 
+*  int rid                    : 
+*  int cid                    : 
+*/
 void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {
   int k, i;
@@ -174,6 +210,17 @@ void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int 
   }
 }
 
+/*
+*  void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
+*
+*  Usage: 
+*
+*  cairo_t * cr               : 
+*  struct project * this_proj : 
+*  int rid                    : 
+*  int cid                    : 
+*  gboolean draw_it           : 
+*/
 void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
 {
   int i, k, l;

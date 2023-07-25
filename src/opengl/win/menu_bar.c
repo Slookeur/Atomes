@@ -11,6 +11,31 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'menu_bar.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar);
+  void update_menu_bar (glwin * view);
+
+  G_MODULE_EXPORT void to_opengl_advanced (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void to_render_gl_image (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * opengl_window_create_menu_bar (glwin * view);
+
+  GMenu * prepare_opengl_menu (glwin * view, int popm);
+  GMenu * prepare_model_menu (glwin * view, int popm);
+  GMenu * prepare_coord_menu (glwin * view, int popm);
+  GMenu * opengl_menu_bar (glwin * view, gchar * str);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "project.h"
@@ -27,11 +52,29 @@ extern G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data);
 GSimpleActionGroup * view_pop_actions;
 
+/*
+*  G_MODULE_EXPORT void to_opengl_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_opengl_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   opengl_advanced (NULL, data);
 }
 
+/*
+*  G_MODULE_EXPORT void to_render_gl_image (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_render_gl_image (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   render_gl_image (NULL, data);
@@ -68,6 +111,14 @@ void append_opengl_item (glwin * view, GMenu * menu, const gchar * name, const g
   g_free (str_c);
 }
 
+/*
+*  GMenu * prepare_opengl_menu (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * prepare_opengl_menu (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
@@ -82,6 +133,14 @@ GMenu * prepare_opengl_menu (glwin * view, int popm)
   return menu;
 }
 
+/*
+*  GMenu * prepare_model_menu (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * prepare_model_menu (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
@@ -92,6 +151,14 @@ GMenu * prepare_model_menu (glwin * view, int popm)
   return menu;
 }
 
+/*
+*  GMenu * prepare_coord_menu (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * prepare_coord_menu (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
@@ -133,6 +200,14 @@ GMenu * prepare_coord_menu (glwin * view, int popm)
   return menu;
 }
 
+/*
+*  GMenu * opengl_menu_bar (glwin * view, gchar * str)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  gchar * str  : 
+*/
 GMenu * opengl_menu_bar (glwin * view, gchar * str)
 {
   GMenu * menu = g_menu_new ();
@@ -153,6 +228,14 @@ GMenu * opengl_menu_bar (glwin * view, gchar * str)
   return menu;
 }
 
+/*
+*  void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar)
+*
+*  Usage: 
+*
+*  glwin * view         : 
+*  GtkWidget * menu_bar : 
+*/
 void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar)
 {
   /* Here we need to attached color palettes for:
@@ -255,6 +338,13 @@ void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar)
   }
 }
 
+/*
+*  GtkWidget * opengl_window_create_menu_bar (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 GtkWidget * opengl_window_create_menu_bar (glwin * view)
 {
   view -> menu_bar = destroy_this_widget (view -> menu_bar);
@@ -277,6 +367,13 @@ GtkWidget * opengl_window_create_menu_bar (glwin * view)
   return menu_bar;
 }
 
+/*
+*  void update_menu_bar (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void update_menu_bar (glwin * view)
 {
   view -> menu_bar = opengl_window_create_menu_bar (view);

@@ -11,6 +11,23 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cp2k_mol.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void cp2k_fix_molecule ();
+
+  G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "cp2k.h"
@@ -74,6 +91,15 @@ void frag_set_color (GtkTreeViewColumn * col,
 
 gboolean sel_and_conf;
 
+/*
+*  G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * dialog : 
+*  gint response_id   : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data)
 {
   int i;
@@ -95,6 +121,15 @@ G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint respons
   destroy_this_dialog (dialog);
 }
 
+/*
+*  G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * dial : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data)
 {
   gchar * str;
@@ -166,6 +201,13 @@ G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, 
   if (done) destroy_this_dialog (dial);
 }
 
+/*
+*  void cp2k_fix_molecule ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void cp2k_fix_molecule ()
 {
   int i, j, k;

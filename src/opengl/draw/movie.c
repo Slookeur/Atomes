@@ -11,6 +11,37 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'movie.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, int ogl_q);
+  gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile);
+
+  void convert_rgb_pixbuf_to_yuv (GdkPixbuf * pixbuf, AVFrame * picture, int w, int h);
+  void fill_image (VideoStream * vs, int width, int height, glwin * view);
+  void set_old_cmap (image * img, int stp, int id);
+  void init_frame_buffer (int x, int y);
+  void close_frame_buffer ();
+  void save_movie (glwin * view, video_options * vopts);
+
+  static void ffmpeg_encoder_set_frame_yuv_from_rgb (uint8_t * rgb, VideoStream * vs);
+  static void write_video_frame (AVFormatContext * f_context, VideoStream * vs, int frame_id, glwin * view);
+  static void close_stream (AVFormatContext * fc, VideoStream * vs);
+
+  G_MODULE_EXPORT void run_save_movie (GtkNativeDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointer data);
+
+  VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_options * vopts);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "project.h"
@@ -80,6 +111,16 @@ int video_outbuf_size;
 int num_frames;
 int frame_start;
 
+/*
+*  void convert_rgb_pixbuf_to_yuv (GdkPixbuf * pixbuf, AVFrame * picture, int w, int h)
+*
+*  Usage: 
+*
+*  GdkPixbuf * pixbuf : 
+*  AVFrame * picture  : 
+*  int w              : 
+*  int h              : 
+*/
 void convert_rgb_pixbuf_to_yuv (GdkPixbuf * pixbuf, AVFrame * picture, int w, int h)
 {
   gint x, y, location, location2;
@@ -163,6 +204,14 @@ void convert_rgb_pixbuf_to_yuv (GdkPixbuf * pixbuf, AVFrame * picture, int w, in
   }
 }
 
+/*
+*  static void ffmpeg_encoder_set_frame_yuv_from_rgb (uint8_t * rgb, VideoStream * vs)
+*
+*  Usage: 
+*
+*  uint8_t * rgb    : 
+*  VideoStream * vs : 
+*/
 static void ffmpeg_encoder_set_frame_yuv_from_rgb (uint8_t * rgb, VideoStream * vs)
 {
   const int in_linesize = 4 * vs -> cc -> width;
@@ -192,6 +241,16 @@ static GLubyte * capture_opengl_image (unsigned int width, unsigned int height)
 }
 //#endif
 
+/*
+*  void fill_image (VideoStream * vs, int width, int height, glwin * view)
+*
+*  Usage: 
+*
+*  VideoStream * vs : 
+*  int width        : 
+*  int height       : 
+*  glwin * view     : 
+*/
 void fill_image (VideoStream * vs, int width, int height, glwin * view)
 {
   // opengl call is here !!!
@@ -214,6 +273,16 @@ void fill_image (VideoStream * vs, int width, int height, glwin * view)
   g_free (image);
 }
 
+/*
+*  static void write_video_frame (AVFormatContext * f_context, VideoStream * vs, int frame_id, glwin * view)
+*
+*  Usage: 
+*
+*  AVFormatContext * f_context : 
+*  VideoStream * vs            : 
+*  int frame_id                : 
+*  glwin * view                : 
+*/
 static void write_video_frame (AVFormatContext * f_context, VideoStream * vs, int frame_id, glwin * view)
 {
   int out_size = 0;
@@ -335,6 +404,15 @@ AVCodecContext * add_codec_context (AVFormatContext * fc, const AVCodec * vc, vi
   return cc;
 }
 
+/*
+*  VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_options * vopts)
+*
+*  Usage: 
+*
+*  AVFormatContext * fc  : 
+*  const AVCodec * vc    : 
+*  video_options * vopts : 
+*/
 VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_options * vopts)
 {
   VideoStream * stream = g_malloc0 (sizeof*stream);
@@ -361,6 +439,14 @@ VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_
   return stream;
 }
 
+/*
+*  static void close_stream (AVFormatContext * fc, VideoStream * vs)
+*
+*  Usage: 
+*
+*  AVFormatContext * fc : 
+*  VideoStream * vs     : 
+*/
 static void close_stream (AVFormatContext * fc, VideoStream * vs)
 {
   avcodec_free_context(& vs -> cc);
@@ -371,11 +457,30 @@ static void close_stream (AVFormatContext * fc, VideoStream * vs)
 
 int * old_cmap[2];
 
+/*
+*  void set_old_cmap (image * img, int stp, int id)
+*
+*  Usage: 
+*
+*  image * img : 
+*  int stp     : 
+*  int id      : 
+*/
 void set_old_cmap (image * img, int stp, int id)
 {
   old_cmap[id][stp] = img -> color_map[id];
 }
 
+/*
+*  gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, int ogl_q)
+*
+*  Usage: 
+*
+*  glwin * view  : 
+*  image * img_a : 
+*  image * img_b : 
+*  int ogl_q     : 
+*/
 gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, int ogl_q)
 {
   gboolean shaders = FALSE;
@@ -789,6 +894,15 @@ typedef struct{
   int video_res[2];
 } video_options;
 */
+/*
+*  gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
+*
+*  Usage: 
+*
+*  glwin * view          : 
+*  video_options * vopts : 
+*  gchar * videofile     : 
+*/
 gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
 {
   int q;
@@ -951,6 +1065,14 @@ gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
 static GLuint fbo;
 static GLuint rbo_color;
 static GLuint rbo_depth;
+/*
+*  void init_frame_buffer (int x, int y)
+*
+*  Usage: 
+*
+*  int x : 
+*  int y : 
+*/
 void init_frame_buffer (int x, int y)
 {
   glGenFramebuffers (1, & fbo);
@@ -974,6 +1096,13 @@ void init_frame_buffer (int x, int y)
   glReadBuffer (GL_COLOR_ATTACHMENT0);
 }
 
+/*
+*  void close_frame_buffer ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void close_frame_buffer ()
 {
   glDeleteFramebuffers (1, &fbo);
@@ -982,10 +1111,28 @@ void close_frame_buffer ()
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void run_save_movie (GtkNativeDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkNativeDialog * info : 
+*  gint response_id       : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void run_save_movie (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
+/*
+*  G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * info : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkWidget *)info);
@@ -1033,6 +1180,14 @@ G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointe
   }
 }
 
+/*
+*  void save_movie (glwin * view, video_options * vopts)
+*
+*  Usage: 
+*
+*  glwin * view          : 
+*  video_options * vopts : 
+*/
 void save_movie (glwin * view, video_options * vopts)
 {
   GtkFileFilter * filter;

@@ -11,6 +11,26 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'atom_remove.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list, int tmpbond[2], int ** tmpbondid[2], int * old_id, gboolean remove);
+
+  void set_mol_data (int the_atom, int the_mol);
+  void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch);
+  void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch);
+
+  struct atom * get_atom_pointer (int aid, struct atom * new_list);
+
+*/
+
 #include "atom_edit.h"
 
 int tmbs;
@@ -24,6 +44,14 @@ int ** neighbors;
 
 extern atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize);
 
+/*
+*  void set_mol_data (int the_atom, int the_mol)
+*
+*  Usage: 
+*
+*  int the_atom : 
+*  int the_mol  : 
+*/
 void set_mol_data (int the_atom, int the_mol)
 {
   int ac, ad;
@@ -46,6 +74,20 @@ void set_mol_data (int the_atom, int the_mol)
   end:;
 }
 
+/*
+*  int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list, int tmpbond[2], int ** tmpbondid[2], int * old_id, gboolean remove)
+*
+*  Usage: 
+*
+*  int natomes            : 
+*  int fcoord             : 
+*  int fid                : 
+*  struct atom * new_list : 
+*  int tmpbond[2]         : 
+*  int tmpbond[2]         : 
+*  int tmpbond[2]         : 
+*  int tmpbond[2]         : 
+*/
 int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list, int tmpbond[2], int ** tmpbondid[2], int * old_id, gboolean remove)
 {
   int i, j, k, l, m, n;
@@ -169,6 +211,14 @@ int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list
   return  l-1;
 }
 
+/*
+*  struct atom * get_atom_pointer (int aid, struct atom * new_list)
+*
+*  Usage: 
+*
+*  int aid                : 
+*  struct atom * new_list : 
+*/
 struct atom * get_atom_pointer (int aid, struct atom * new_list)
 {
   struct atom * tmp_list;
@@ -575,6 +625,14 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   return showfrag;
 }
 
+/*
+*  void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  atom_search * asearch      : 
+*/
 void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch)
 {
   int i, j;
@@ -637,6 +695,14 @@ void to_remove_this_list_of_objects (struct project * this_proj, atom_search * a
   remove_search -> in_selection = i;
 }
 
+/*
+*  void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  atom_search * asearch      : 
+*/
 void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch)
 {
   int i, j, k, l, m;

@@ -11,8 +11,48 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cell_shift.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT gboolean scroll_shift_coord (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
+
+  void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density);
+  void shift_it (vec3_t shift, int refresh, int proj);
+  void adjust_it (int refresh, int proj);
+  void shift_has_changed (gpointer data, double val);
+  void wrapping (glwin * view);
+
+  G_MODULE_EXPORT void set_shift (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void shift_coord (GtkRange * range, gpointer data);
+  G_MODULE_EXPORT void wrap_coord (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void wrap_coord (GtkToggleButton * but, gpointer data);
+
+  GtkWidget * create_cell_entries (struct project * this_proj, int i);
+  GtkWidget * create_shift_box (struct project * this_proj);
+  GtkWidget * shift_center_tab (struct project * this_proj);
+
+*/
+
 #include "cell_edit.h"
 
+/*
+*  void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  mat4_t * dlat              : 
+*  mat4_t * drec              : 
+*  int refresh                : 
+*  int density                : 
+*/
 void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density)
 {
   vec3_t pos;
@@ -141,6 +181,15 @@ void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, m
   }
 }
 
+/*
+*  void shift_it (vec3_t shift, int refresh, int proj)
+*
+*  Usage: 
+*
+*  vec3_t shift : 
+*  int refresh  : 
+*  int proj     : 
+*/
 void shift_it (vec3_t shift, int refresh, int proj)
 {
   struct project * this_proj = get_project_by_id (proj);
@@ -149,6 +198,14 @@ void shift_it (vec3_t shift, int refresh, int proj)
 }
 
 
+/*
+*  void adjust_it (int refresh, int proj)
+*
+*  Usage: 
+*
+*  int refresh : 
+*  int proj    : 
+*/
 void adjust_it (int refresh, int proj)
 {
   int i, j;
@@ -178,6 +235,14 @@ void adjust_it (int refresh, int proj)
                    this_proj -> cell.density, this_proj -> natomes/this_proj -> cell.volume);
 }
 
+/*
+*  void shift_has_changed (gpointer data, double val)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*  double val    : 
+*/
 void shift_has_changed (gpointer data, double val)
 {
   tint * dat = (tint *)data;
@@ -269,6 +334,14 @@ void shift_has_changed (gpointer data, double val)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_shift (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_shift (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
@@ -276,17 +349,43 @@ G_MODULE_EXPORT void set_shift (GtkEntry * res, gpointer data)
   shift_has_changed (data, v);
 }
 
+/*
+*  G_MODULE_EXPORT gboolean scroll_shift_coord (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
+*
+*  Usage: 
+*
+*  GtkRange * range     : 
+*  GtkScrollType scroll : 
+*  gdouble value        : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT gboolean scroll_shift_coord (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
   shift_has_changed (data, value);
   return FALSE;
 }
 
+/*
+*  G_MODULE_EXPORT void shift_coord (GtkRange * range, gpointer data)
+*
+*  Usage: 
+*
+*  GtkRange * range : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void shift_coord (GtkRange * range, gpointer data)
 {
   shift_has_changed (data, gtk_range_get_value (range));
 }
 
+/*
+*  GtkWidget * create_cell_entries (struct project * this_proj, int i)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int i                      : 
+*/
 GtkWidget * create_cell_entries (struct project * this_proj, int i)
 {
   int j, k, l, m;
@@ -357,6 +456,13 @@ GtkWidget * create_cell_entries (struct project * this_proj, int i)
   return vbox;
 }
 
+/*
+*  GtkWidget * create_shift_box (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 GtkWidget * create_shift_box (struct project * this_proj)
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -369,6 +475,13 @@ GtkWidget * create_shift_box (struct project * this_proj)
   return vbox;
 }
 
+/*
+*  void wrapping (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void wrapping (glwin * view)
 {
   gchar * text = "You are about to put all the atoms back inside the model box\n"
@@ -398,8 +511,24 @@ void wrapping (glwin * view)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void wrap_coord (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void wrap_coord (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void wrap_coord (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void wrap_coord (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -408,6 +537,13 @@ G_MODULE_EXPORT void wrap_coord (GtkToggleButton * but, gpointer data)
   widget_set_sensitive (GTK_WIDGET(but), ! view -> wrapped);
 }
 
+/*
+*  GtkWidget * shift_center_tab (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 GtkWidget * shift_center_tab (struct project * this_proj)
 {
   GtkWidget * layout = create_layout (350, 250);

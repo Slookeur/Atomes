@@ -11,6 +11,64 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'callbacks.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  curve/cedit.c
+  curve/curve.c
+  curve/datab.c
+  curve/m_curve.c
+  curve/tab-1.c
+  curve/tab-2.c
+  curve/tab-3.c
+  curve/tab-4.c
+  curve/w_curve.c
+  gui/bdcall.c
+  gui/calc_menu.c
+  gui/callbacks.c
+  gui/chainscall.c
+  gui/edit_menu.c
+  gui/grcall.c
+  gui/gui.c
+  gui/initc.c
+  gui/interface.c
+  gui/main.c
+  gui/msdcall.c
+  gui/ringscall.c
+  gui/spcall.c
+  gui/sqcall.c
+  gui/tools.c
+  gui/work_menu.c
+  gui/xmlrw.c
+  project/close_p.c
+  project/init_p.c
+  project/open_p.c
+  project/project.c
+  project/update_p.c
+  workspace/workspace.c
+  calc/cp2k/cp2k_files.c
+  calc/cp2k/cp2k_init.c
+  calc/cpmd/cpmd_init.c
+  calc/cpmd/cpmd_restart.c
+  calc/dl_poly/dlp_control.c
+  calc/dl_poly/dlp_field.c
+  opengl/edit/cbuild_action.c
+  opengl/win/popup.c
+  opengl/win/w_sequencer.c
+  opengl/win/w_volumes.c
+  project/readers/read_c3d.c
+  project/readers/read_coord.c
+  project/readers/read_pdb.c
+  project/readers/read_trj.c
+  project/readers/read_vas.c
+  project/readers/read_xyz.c
+
+*/
+
 #ifndef CALLBACKS_H_
 #define CALLBACKS_H_
 

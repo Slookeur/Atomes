@@ -11,9 +11,136 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'gtk-misc.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int to_gdk_col (float val);
+
+  float gdk_to_col (float val);
+
+  gboolean check_menu_item_get_active (gpointer item);
+  gboolean is_the_widget_visible (GtkWidget * widg);
+  gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename);
+
+  G_MODULE_EXPORT gboolean to_activate_entry (GtkWidget * widg, GdkEventFocus * event, gpointer data);
+  G_MODULE_EXPORT gboolean destroy_this_window (GtkWindow * win, gpointer data);
+  G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event, gpointer data);
+  G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data);
+  G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data);
+
+  gchar * file_chooser_get_file_name (GtkFileChooser * chooser);
+  gchar * file_chooser_get_current_folder (GtkFileChooser * chooser);
+
+  const gchar * entry_get_text (GtkEntry * entry);
+
+  void show_the_widgets (GtkWidget * widg);
+  void widget_set_sensitive (GtkWidget * widg, gboolean sensitive);
+  void add_container_child (int type, GtkWidget * widg, GtkWidget * child);
+  void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding);
+  void add_box_child_start (int orientation, GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding);
+  void check_menu_item_set_active (gpointer item, gboolean active);
+  void add_menu_child (GtkWidget * widg, GtkWidget * child);
+  void menu_item_set_submenu (GtkWidget * item, GtkWidget * sub_menu);
+  void add_item_child (GtkWidget * widg, GtkWidget * child);
+  void run_this_gtk_native_dialog (GtkNativeDialog * dial, GCallback handler, gpointer data);
+  void run_this_gtk_dialog (GtkWidget * dial, GCallback handler, gpointer data);
+  void resize_this_window (GtkWidget * window, int x, int y);
+  void update_entry_int (GtkEntry * entry, int intval);
+  void update_entry_double (GtkEntry * entry, double doubleval);
+  void update_entry_long_double (GtkEntry * entry, double doubleval);
+  void update_entry_text (GtkEntry * entry, gchar * text);
+  void text_view_set_monospace (GtkWidget * view);
+  void gtk_label_align (GtkWidget * lab, float ax, float ay);
+  void layout_add_widget (GtkWidget * layout, GtkWidget * child, int x_pos, int y_pos);
+  void combo_text_append (GtkWidget * combo, gchar * text);
+  void combo_text_prepend (GtkWidget * combo, gchar * text);
+  void setup_text_tags (GtkTextBuffer * buffer);
+  void add_menu_separator (GtkWidget * menu);
+  void set_renderer_color (int tocol, GtkCellRenderer * renderer, ColRGBA col);
+  void button_set_image (GtkButton * but, gchar * text, int format, gpointer image);
+  void adjust_label (GtkWidget * lab, int dimx, int dimy, float ax, float ay);
+  void set_image_from_icon_name (GtkWidget * widg, gchar * icon);
+  void provide_gtk_css (gchar * css);
+  void destroy_this_dialog (GtkDialog * dialog);
+  void destroy_this_native_dialog (GtkNativeDialog * dialog);
+  void file_chooser_set_current_folder (GtkFileChooser * chooser);
+  void set_color_chooser_color (GtkWidget * color_win, ColRGBA col);
+  void pop_menu_at_pointer (GtkWidget * pop, double x, double y);
+  void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event);
+  void add_gtk_close_event (GtkWidget * widg, GCallback handler, gpointer data);
+
+  G_MODULE_EXPORT void to_activate_entry (GtkEventControllerFocus * focus, gpointer data);
+  G_MODULE_EXPORT void run_destroy_dialog (GtkDialog * dialog, gint response_id, gpointer data);
+
+  GtkWidget * menu_item_new_with_submenu (gchar * name, gboolean active, GtkWidget * sub_menu);
+  GtkWidget * new_gtk_window ();
+  GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolean resiz);
+  GtkWidget * dialogmodal (gchar * str, GtkWindow * parent);
+  GtkWidget * message_popover (gchar * message, GtkWidget * parent);
+  GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType mtype, GtkButtonsType buttons, GtkWidget * parent);
+  GtkWidget * dialog_cancel_apply (gchar * title, GtkWidget * parent, gboolean resiz);
+  GtkWidget * create_hsep ();
+  GtkWidget * create_hpaned ();
+  GtkWidget * create_vbox (int spacing);
+  GtkWidget * create_hbox (int spacing);
+  GtkWidget * dialog_get_content_area (GtkWidget * widg);
+  GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_y);
+  GtkWidget * create_layout (int x, int y);
+  GtkWidget * create_combo ();
+  GtkWidget * create_entry (GCallback handler, int dim, int cdim, gboolean key_release, gpointer data);
+  GtkWidget * stock_image (const gchar * stock_id);
+  GtkWidget * create_menu_item (gboolean add_mnemo, gchar * name);
+  GtkWidget * create_menu_item_from_widget (GtkWidget * widg, gboolean check, gboolean radio, gboolean status);
+  GtkWidget * create_image_from_data (int format, gpointer item_image);
+  GtkWidget * add_advanced_item (GtkWidget * menu, GCallback handler, gpointer data, gboolean accel, guint key, GdkModifierType mod);
+  GtkWidget * abox (GtkWidget * box, char * lab, int vspace);
+  GtkWidget * bbox (GtkWidget * box, char * lab);
+  GtkWidget * cbox (GtkWidget * box, char * lab);
+  GtkWidget * fbox (GtkWidget * box, char * lab);
+  GtkWidget * create_scroll (GtkWidget * box, int dimx, int dimy, int shadow);
+  GtkWidget * create_expander (gchar * name, gchar * file_img, int i);
+  GtkWidget * destroy_this_widget (GtkWidget * widg);
+  GtkWidget * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name);
+  GtkWidget * get_top_level (GtkWidget * widg);
+
+  GtkTextBuffer * add_buffer (GCallback handler, gpointer data, gchar * text);
+
+  GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name);
+
+  GMenuItem * create_menu_item (gboolean add_mnemo, gchar * name, gchar * action);
+
+  GMenuItem * create_menu_item (gboolean add_mnemo, gchar * name, gchar * action);
+
+  GListModel * file_chooser_get_file_names (GtkFileChooser * chooser);
+
+  GListModel * file_chooser_get_file_names (GtkFileChooser * chooser);
+
+  ColRGBA * duplicate_color (int num, ColRGBA * col);
+  ColRGBA gdkrgba_to_rgba (GdkRGBA colgdk);
+  ColRGBA get_button_color (GtkColorChooser * colob);
+  ColRGBA get_window_color (GtkWidget * color_win);
+
+  GdkRGBA colrgba_togtkrgba (ColRGBA col);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 
+/*
+*  void show_the_widgets (GtkWidget * widg)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*/
 void show_the_widgets (GtkWidget * widg)
 {
 #ifdef GTK4
@@ -23,6 +150,14 @@ void show_the_widgets (GtkWidget * widg)
 #endif
 }
 
+/*
+*  void widget_set_sensitive (GtkWidget * widg, gboolean sensitive)
+*
+*  Usage: 
+*
+*  GtkWidget * widg   : 
+*  gboolean sensitive : 
+*/
 void widget_set_sensitive (GtkWidget * widg, gboolean sensitive)
 {
   if (widg != NULL)
@@ -34,6 +169,15 @@ void widget_set_sensitive (GtkWidget * widg, gboolean sensitive)
   }
 }
 
+/*
+*  void add_container_child (int type, GtkWidget * widg, GtkWidget * child)
+*
+*  Usage: 
+*
+*  int type          : 
+*  GtkWidget * widg  : 
+*  GtkWidget * child : 
+*/
 void add_container_child (int type, GtkWidget * widg, GtkWidget * child)
 {
 #ifdef GTK3
@@ -74,6 +218,17 @@ void add_container_child (int type, GtkWidget * widg, GtkWidget * child)
 #endif
 }
 
+/*
+*  void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding)
+*
+*  Usage: 
+*
+*  GtkWidget * widg  : 
+*  GtkWidget * child : 
+*  gboolean expand   : 
+*  gboolean fill     : 
+*  int padding       : 
+*/
 void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding)
 {
 #ifdef GTK4
@@ -84,6 +239,18 @@ void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gb
 #endif
 }
 
+/*
+*  void add_box_child_start (int orientation, GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding)
+*
+*  Usage: 
+*
+*  int orientation   : 
+*  GtkWidget * widg  : 
+*  GtkWidget * child : 
+*  gboolean expand   : 
+*  gboolean fill     : 
+*  int padding       : 
+*/
 void add_box_child_start (int orientation, GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding)
 {
 #ifdef GTK4
@@ -109,6 +276,14 @@ void add_box_child_start (int orientation, GtkWidget * widg, GtkWidget * child, 
 #endif
 }
 
+/*
+*  void check_menu_item_set_active (gpointer item, gboolean active)
+*
+*  Usage: 
+*
+*  gpointer item   : 
+*  gboolean active : 
+*/
 void check_menu_item_set_active (gpointer item, gboolean active)
 {
 #ifdef GTK3
@@ -118,6 +293,13 @@ void check_menu_item_set_active (gpointer item, gboolean active)
 #endif
 }
 
+/*
+*  gboolean check_menu_item_get_active (gpointer item)
+*
+*  Usage: 
+*
+*  gpointer item : 
+*/
 gboolean check_menu_item_get_active (gpointer item)
 {
 #ifdef GTK4
@@ -128,16 +310,41 @@ gboolean check_menu_item_get_active (gpointer item)
 }
 
 #ifdef GTK3
+/*
+*  void add_menu_child (GtkWidget * widg, GtkWidget * child)
+*
+*  Usage: 
+*
+*  GtkWidget * widg  : 
+*  GtkWidget * child : 
+*/
 void add_menu_child (GtkWidget * widg, GtkWidget * child)
 {
   gtk_menu_shell_append (GTK_MENU_SHELL(widg), child);
 }
 
+/*
+*  void menu_item_set_submenu (GtkWidget * item, GtkWidget * sub_menu)
+*
+*  Usage: 
+*
+*  GtkWidget * item     : 
+*  GtkWidget * sub_menu : 
+*/
 void menu_item_set_submenu (GtkWidget * item, GtkWidget * sub_menu)
 {
   gtk_menu_item_set_submenu (GTK_MENU_ITEM(item), sub_menu);
 }
 
+/*
+*  GtkWidget * menu_item_new_with_submenu (gchar * name, gboolean active, GtkWidget * sub_menu)
+*
+*  Usage: 
+*
+*  gchar * name         : 
+*  gboolean active      : 
+*  GtkWidget * sub_menu : 
+*/
 GtkWidget * menu_item_new_with_submenu (gchar * name, gboolean active, GtkWidget * sub_menu)
 {
    GtkWidget * item =  create_menu_item (FALSE, name);
@@ -147,6 +354,14 @@ GtkWidget * menu_item_new_with_submenu (gchar * name, gboolean active, GtkWidget
 }
 #endif
 
+/*
+*  void add_item_child (GtkWidget * widg, GtkWidget * child)
+*
+*  Usage: 
+*
+*  GtkWidget * widg  : 
+*  GtkWidget * child : 
+*/
 void add_item_child (GtkWidget * widg, GtkWidget * child)
 {
 #ifdef GTK4
@@ -156,6 +371,13 @@ void add_item_child (GtkWidget * widg, GtkWidget * child)
 #endif
 }
 
+/*
+*  GtkWidget * new_gtk_window ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * new_gtk_window ()
 {
 #ifdef GTK4
@@ -216,6 +438,16 @@ void add_widget_gesture_and_key_action (GtkWidget * widget,
 }
 #endif
 
+/*
+*  GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolean resiz)
+*
+*  Usage: 
+*
+*  gchar * str        : 
+*  GtkWidget * parent : 
+*  gboolean modal     : 
+*  gboolean resiz     : 
+*/
 GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolean resiz)
 {
   GtkWidget * win;
@@ -233,6 +465,15 @@ GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolea
   return win;
 }
 
+/*
+*  void run_this_gtk_native_dialog (GtkNativeDialog * dial, GCallback handler, gpointer data)
+*
+*  Usage: 
+*
+*  GtkNativeDialog * dial : 
+*  GCallback handler      : 
+*  gpointer data          : 
+*/
 void run_this_gtk_native_dialog (GtkNativeDialog * dial, GCallback handler, gpointer data)
 {
   gtk_native_dialog_set_modal (dial, TRUE);
@@ -243,6 +484,15 @@ void run_this_gtk_native_dialog (GtkNativeDialog * dial, GCallback handler, gpoi
   g_main_loop_run (Event_loop[dialog_id]);
 }
 
+/*
+*  void run_this_gtk_dialog (GtkWidget * dial, GCallback handler, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * dial  : 
+*  GCallback handler : 
+*  gpointer data     : 
+*/
 void run_this_gtk_dialog (GtkWidget * dial, GCallback handler, gpointer data)
 {
   gtk_window_set_modal (GTK_WINDOW(dial), TRUE);
@@ -253,6 +503,14 @@ void run_this_gtk_dialog (GtkWidget * dial, GCallback handler, gpointer data)
   g_main_loop_run (Event_loop[dialog_id]);
 }
 
+/*
+*  GtkWidget * dialogmodal (gchar * str, GtkWindow * parent)
+*
+*  Usage: 
+*
+*  gchar * str        : 
+*  GtkWindow * parent : 
+*/
 GtkWidget * dialogmodal (gchar * str, GtkWindow * parent)
 {
   GtkWidget * win = gtk_dialog_new_with_buttons (str, parent, GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT, _("_Close"), GTK_RESPONSE_CLOSE, NULL);
@@ -264,6 +522,14 @@ GtkWidget * dialogmodal (gchar * str, GtkWindow * parent)
 }
 
 #ifdef GTK3
+/*
+*  GtkWidget * message_popover (gchar * message, GtkWidget * parent)
+*
+*  Usage: 
+*
+*  gchar * message    : 
+*  GtkWidget * parent : 
+*/
 GtkWidget * message_popover (gchar * message, GtkWidget * parent)
 {
   GtkWidget * popover = gtk_popover_new (parent);
@@ -276,6 +542,17 @@ GtkWidget * message_popover (gchar * message, GtkWidget * parent)
 }
 #endif
 
+/*
+*  GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType mtype, GtkButtonsType buttons, GtkWidget * parent)
+*
+*  Usage: 
+*
+*  gchar * message        : 
+*  gchar * title          : 
+*  GtkMessageType mtype   : 
+*  GtkButtonsType buttons : 
+*  GtkWidget * parent     : 
+*/
 GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType mtype, GtkButtonsType buttons, GtkWidget * parent)
 {
   GtkWidget * win;
@@ -297,6 +574,15 @@ GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType 
   return win;
 }
 
+/*
+*  GtkWidget * dialog_cancel_apply (gchar * title, GtkWidget * parent, gboolean resiz)
+*
+*  Usage: 
+*
+*  gchar * title      : 
+*  GtkWidget * parent : 
+*  gboolean resiz     : 
+*/
 GtkWidget * dialog_cancel_apply (gchar * title, GtkWidget * parent, gboolean resiz)
 {
   GtkWidget * dca = gtk_dialog_new_with_buttons (title, GTK_WINDOW(parent), GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -308,6 +594,15 @@ GtkWidget * dialog_cancel_apply (gchar * title, GtkWidget * parent, gboolean res
   return dca;
 }
 
+/*
+*  void resize_this_window (GtkWidget * window, int x, int y)
+*
+*  Usage: 
+*
+*  GtkWidget * window : 
+*  int x              : 
+*  int y              : 
+*/
 void resize_this_window (GtkWidget * window, int x, int y)
 {
 #ifdef GTK3
@@ -317,6 +612,13 @@ void resize_this_window (GtkWidget * window, int x, int y)
 #endif
 }
 
+/*
+*  const gchar * entry_get_text (GtkEntry * entry)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*/
 const gchar * entry_get_text (GtkEntry * entry)
 {
 #ifdef GTK4
@@ -326,6 +628,14 @@ const gchar * entry_get_text (GtkEntry * entry)
 #endif
 }
 
+/*
+*  void update_entry_int (GtkEntry * entry, int intval)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  int intval       : 
+*/
 void update_entry_int (GtkEntry * entry, int intval)
 {
   gchar * value = g_strdup_printf("%d", intval);
@@ -337,6 +647,14 @@ void update_entry_int (GtkEntry * entry, int intval)
   g_free (value);
 }
 
+/*
+*  void update_entry_double (GtkEntry * entry, double doubleval)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  double doubleval : 
+*/
 void update_entry_double (GtkEntry * entry, double doubleval)
 {
   gchar * value = g_strdup_printf("%f", doubleval);
@@ -348,6 +666,14 @@ void update_entry_double (GtkEntry * entry, double doubleval)
   g_free (value);
 }
 
+/*
+*  void update_entry_long_double (GtkEntry * entry, double doubleval)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  double doubleval : 
+*/
 void update_entry_long_double (GtkEntry * entry, double doubleval)
 {
   gchar * value = g_strdup_printf("%15.10lf", doubleval);
@@ -359,6 +685,14 @@ void update_entry_long_double (GtkEntry * entry, double doubleval)
 #endif
 }
 
+/*
+*  void update_entry_text (GtkEntry * entry, gchar * text)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gchar * text     : 
+*/
 void update_entry_text (GtkEntry * entry, gchar * text)
 {
 #ifdef GTK4
@@ -368,17 +702,40 @@ void update_entry_text (GtkEntry * entry, gchar * text)
 #endif
 }
 
+/*
+*  void text_view_set_monospace (GtkWidget * view)
+*
+*  Usage: 
+*
+*  GtkWidget * view : 
+*/
 void text_view_set_monospace (GtkWidget * view)
 {
   gtk_text_view_set_monospace (GTK_TEXT_VIEW(view), TRUE);
 }
 
+/*
+*  void gtk_label_align (GtkWidget * lab, float ax, float ay)
+*
+*  Usage: 
+*
+*  GtkWidget * lab : 
+*  float ax        : 
+*  float ay        : 
+*/
 void gtk_label_align (GtkWidget * lab, float ax, float ay)
 {
   gtk_label_set_xalign (GTK_LABEL (lab), ax);
   gtk_label_set_yalign (GTK_LABEL (lab), ay);
 }
 
+/*
+*  gboolean is_the_widget_visible (GtkWidget * widg)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*/
 gboolean is_the_widget_visible (GtkWidget * widg)
 {
   if (GTK_IS_WIDGET(widg))
@@ -423,26 +780,61 @@ GtkWidget * create_vscale (float min, float max, float delta,
   return vscale;
 }
 
+/*
+*  GtkWidget * create_hsep ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_hsep ()
 {
   return gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
 }
 
+/*
+*  GtkWidget * create_hpaned ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_hpaned ()
 {
   return gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
 }
 
+/*
+*  GtkWidget * create_vbox (int spacing)
+*
+*  Usage: 
+*
+*  int spacing : 
+*/
 GtkWidget * create_vbox (int spacing)
 {
   return gtk_box_new (GTK_ORIENTATION_VERTICAL, spacing);
 }
 
+/*
+*  GtkWidget * create_hbox (int spacing)
+*
+*  Usage: 
+*
+*  int spacing : 
+*/
 GtkWidget * create_hbox (int spacing)
 {
   return gtk_box_new (GTK_ORIENTATION_HORIZONTAL, spacing);
 }
 
+/*
+*  GtkWidget * dialog_get_content_area (GtkWidget * widg)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*/
 GtkWidget * dialog_get_content_area (GtkWidget * widg)
 {
 #ifdef GTK3
@@ -454,6 +846,16 @@ GtkWidget * dialog_get_content_area (GtkWidget * widg)
 #endif
 }
 
+/*
+*  void layout_add_widget (GtkWidget * layout, GtkWidget * child, int x_pos, int y_pos)
+*
+*  Usage: 
+*
+*  GtkWidget * layout : 
+*  GtkWidget * child  : 
+*  int x_pos          : 
+*  int y_pos          : 
+*/
 void layout_add_widget (GtkWidget * layout, GtkWidget * child, int x_pos, int y_pos)
 {
 #ifdef GTK3
@@ -463,6 +865,15 @@ void layout_add_widget (GtkWidget * layout, GtkWidget * child, int x_pos, int y_
 #endif
 }
 
+/*
+*  GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_y)
+*
+*  Usage: 
+*
+*  GtkWidget * layout : 
+*  int size_x         : 
+*  int size_y         : 
+*/
 GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_y)
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -471,6 +882,14 @@ GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_y)
   return vbox;
 }
 
+/*
+*  GtkWidget * create_layout (int x, int y)
+*
+*  Usage: 
+*
+*  int x : 
+*  int y : 
+*/
 GtkWidget * create_layout (int x, int y)
 {
   GtkWidget * layout;
@@ -483,21 +902,51 @@ GtkWidget * create_layout (int x, int y)
   return layout;
 }
 
+/*
+*  void combo_text_append (GtkWidget * combo, gchar * text)
+*
+*  Usage: 
+*
+*  GtkWidget * combo : 
+*  gchar * text      : 
+*/
 void combo_text_append (GtkWidget * combo, gchar * text)
 {
   gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT(combo), text);
 }
 
+/*
+*  void combo_text_prepend (GtkWidget * combo, gchar * text)
+*
+*  Usage: 
+*
+*  GtkWidget * combo : 
+*  gchar * text      : 
+*/
 void combo_text_prepend (GtkWidget * combo, gchar * text)
 {
   gtk_combo_box_text_prepend_text (GTK_COMBO_BOX_TEXT(combo), text);
 }
 
+/*
+*  GtkWidget * create_combo ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_combo ()
 {
   return gtk_combo_box_text_new ();
 }
 
+/*
+*  void setup_text_tags (GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buffer : 
+*/
 void setup_text_tags (GtkTextBuffer * buffer)
 {
   GtkTextTagTable * textags = gtk_text_buffer_get_tag_table(buffer);
@@ -725,6 +1174,15 @@ void setup_text_tags (GtkTextBuffer * buffer)
   g_object_unref (tag);
 }
 
+/*
+*  GtkTextBuffer * add_buffer (GCallback handler, gpointer data, gchar * text)
+*
+*  Usage: 
+*
+*  GCallback handler : 
+*  gpointer data     : 
+*  gchar * text      : 
+*/
 GtkTextBuffer * add_buffer (GCallback handler, gpointer data, gchar * text)
 {
   GtkTextBuffer * buffer;
@@ -805,18 +1263,46 @@ GdkPixbuf * convert_to_pixbuf (cairo_surface_t * surf)
 }
 
 #ifdef GTK3
+/*
+*  G_MODULE_EXPORT gboolean to_activate_entry (GtkWidget * widg, GdkEventFocus * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg      : 
+*  GdkEventFocus * event : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT gboolean to_activate_entry (GtkWidget * widg, GdkEventFocus * event, gpointer data)
 {
   g_signal_emit_by_name (G_OBJECT(widg), "activate", data);
   return FALSE;
 }
 #else
+/*
+*  G_MODULE_EXPORT void to_activate_entry (GtkEventControllerFocus * focus, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEventControllerFocus * focus : 
+*  gpointer data                   : 
+*/
 G_MODULE_EXPORT void to_activate_entry (GtkEventControllerFocus * focus, gpointer data)
 {
   g_signal_emit_by_name (G_OBJECT(gtk_event_controller_get_widget((GtkEventController *)focus)), "activate", data);
 }
 #endif
 
+/*
+*  GtkWidget * create_entry (GCallback handler, int dim, int cdim, gboolean key_release, gpointer data)
+*
+*  Usage: 
+*
+*  GCallback handler    : 
+*  int dim              : 
+*  int cdim             : 
+*  gboolean key_release : 
+*  gpointer data        : 
+*/
 GtkWidget * create_entry (GCallback handler, int dim, int cdim, gboolean key_release, gpointer data)
 {
   GtkWidget * entry = gtk_entry_new ();
@@ -860,6 +1346,13 @@ GtkWidget * create_entry (GCallback handler, int dim, int cdim, gboolean key_rel
   return entry;
 }
 
+/*
+*  GtkWidget * stock_image (const gchar * stock_id)
+*
+*  Usage: 
+*
+*  const gchar * stock_id : 
+*/
 GtkWidget * stock_image (const gchar * stock_id)
 {
 #ifdef GTK4
@@ -870,11 +1363,33 @@ GtkWidget * stock_image (const gchar * stock_id)
 }
 
 #ifdef GTK4
+/*
+*
+*
+*  Usage: 
+*
+*   : 
+*/
+/*
+*
+*
+*  Usage: 
+*
+*   : 
+*/
 GMenuItem * create_menu_item (gboolean add_mnemo, gchar * name, gchar * action)
 {
   return g_menu_item_new (name, action);
 }
 #else
+/*
+*  GtkWidget * create_menu_item (gboolean add_mnemo, gchar * name)
+*
+*  Usage: 
+*
+*  gboolean add_mnemo : 
+*  gchar * name       : 
+*/
 GtkWidget * create_menu_item (gboolean add_mnemo, gchar * name)
 {
   return (add_mnemo) ? gtk_menu_item_new_with_mnemonic (name) : gtk_menu_item_new_with_label (name);
@@ -882,6 +1397,16 @@ GtkWidget * create_menu_item (gboolean add_mnemo, gchar * name)
 #endif
 
 #ifdef GTK3
+/*
+*  GtkWidget * create_menu_item_from_widget (GtkWidget * widg, gboolean check, gboolean radio, gboolean status)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gboolean check   : 
+*  gboolean radio   : 
+*  gboolean status  : 
+*/
 GtkWidget * create_menu_item_from_widget (GtkWidget * widg, gboolean check, gboolean radio, gboolean status)
 {
   GtkWidget * item;
@@ -920,6 +1445,14 @@ g_menu_item_set_attribute (
   ...
 ) */
 
+/*
+*  GtkWidget * create_image_from_data (int format, gpointer item_image)
+*
+*  Usage: 
+*
+*  int format          : 
+*  gpointer item_image : 
+*/
 GtkWidget * create_image_from_data (int format, gpointer item_image)
 {
   GtkWidget * icon = NULL;
@@ -1014,11 +1547,30 @@ GtkWidget * gtk3_image_menu_item (gchar * name, int icon_format, gpointer item_i
   return item;
 }
 
+/*
+*  GtkWidget * add_advanced_item (GtkWidget * menu, GCallback handler, gpointer data, gboolean accel, guint key, GdkModifierType mod)
+*
+*  Usage: 
+*
+*  GtkWidget * menu    : 
+*  GCallback handler   : 
+*  gpointer data       : 
+*  gboolean accel      : 
+*  guint key           : 
+*  GdkModifierType mod : 
+*/
 GtkWidget * add_advanced_item (GtkWidget * menu, GCallback handler, gpointer data, gboolean accel, guint key, GdkModifierType mod)
 {
   return gtk3_menu_item (menu, "Advanced", IMG_STOCK, (gpointer)DPROPERTIES, handler, data, accel, key, mod, FALSE, FALSE, FALSE);
 }
 
+/*
+*  void add_menu_separator (GtkWidget * menu)
+*
+*  Usage: 
+*
+*  GtkWidget * menu : 
+*/
 void add_menu_separator (GtkWidget * menu)
 {
   add_menu_child (menu, gtk_separator_menu_item_new ());
@@ -1036,16 +1588,38 @@ GtkWidget * markup_label (gchar * text,
   return lab;
 }
 
+/*
+*  float gdk_to_col (float val)
+*
+*  Usage: 
+*
+*  float val : 
+*/
 float gdk_to_col (float val)
 {
   return ((float) (val)) / 65535.0;
 }
 
+/*
+*  int to_gdk_col (float val)
+*
+*  Usage: 
+*
+*  float val : 
+*/
 int to_gdk_col (float val)
 {
   return (int) (val * 65535.0);
 }
 
+/*
+*  ColRGBA * duplicate_color (int num, ColRGBA * col)
+*
+*  Usage: 
+*
+*  int num       : 
+*  ColRGBA * col : 
+*/
 ColRGBA * duplicate_color (int num, ColRGBA * col)
 {
   ColRGBA * new_col = g_malloc0 (num*sizeof*new_col);
@@ -1054,6 +1628,13 @@ ColRGBA * duplicate_color (int num, ColRGBA * col)
   return new_col;
 }
 
+/*
+*  ColRGBA gdkrgba_to_rgba (GdkRGBA colgdk)
+*
+*  Usage: 
+*
+*  GdkRGBA colgdk : 
+*/
 ColRGBA gdkrgba_to_rgba (GdkRGBA colgdk)
 {
   ColRGBA col;
@@ -1064,6 +1645,13 @@ ColRGBA gdkrgba_to_rgba (GdkRGBA colgdk)
   return col;
 }
 
+/*
+*  GdkRGBA colrgba_togtkrgba (ColRGBA col)
+*
+*  Usage: 
+*
+*  ColRGBA col : 
+*/
 GdkRGBA colrgba_togtkrgba (ColRGBA col)
 {
   GdkRGBA colo;
@@ -1074,6 +1662,15 @@ GdkRGBA colrgba_togtkrgba (ColRGBA col)
   return colo;
 }
 
+/*
+*  void set_renderer_color (int tocol, GtkCellRenderer * renderer, ColRGBA col)
+*
+*  Usage: 
+*
+*  int tocol                  : 
+*  GtkCellRenderer * renderer : 
+*  ColRGBA col                : 
+*/
 void set_renderer_color (int tocol, GtkCellRenderer * renderer, ColRGBA col)
 {
   if (tocol)
@@ -1088,6 +1685,16 @@ void set_renderer_color (int tocol, GtkCellRenderer * renderer, ColRGBA col)
   }
 }
 
+/*
+*  void button_set_image (GtkButton * but, gchar * text, int format, gpointer image)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gchar * text    : 
+*  int format      : 
+*  gpointer image  : 
+*/
 void button_set_image (GtkButton * but, gchar * text, int format, gpointer image)
 {
 #ifdef GTK4
@@ -1150,6 +1757,17 @@ GtkWidget * spin_button (GCallback handler_a,
   return spin;
 }
 
+/*
+*  void adjust_label (GtkWidget * lab, int dimx, int dimy, float ax, float ay)
+*
+*  Usage: 
+*
+*  GtkWidget * lab : 
+*  int dimx        : 
+*  int dimy        : 
+*  float ax        : 
+*  float ay        : 
+*/
 void adjust_label (GtkWidget * lab, int dimx, int dimy, float ax, float ay)
 {
   gtk_label_set_xalign (GTK_LABEL(lab), ax);
@@ -1233,6 +1851,14 @@ GtkWidget * create_button (gchar * text,
   return but;
 }
 
+/*
+*  void set_image_from_icon_name (GtkWidget * widg, gchar * icon)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gchar * icon     : 
+*/
 void set_image_from_icon_name (GtkWidget * widg, gchar * icon)
 {
 #ifdef GTK4
@@ -1242,6 +1868,15 @@ void set_image_from_icon_name (GtkWidget * widg, gchar * icon)
 #endif
 }
 
+/*
+*  GtkWidget * abox (GtkWidget * box, char * lab, int vspace)
+*
+*  Usage: 
+*
+*  GtkWidget * box : 
+*  char * lab      : 
+*  int vspace      : 
+*/
 GtkWidget * abox (GtkWidget * box, char * lab, int vspace)
 {
   GtkWidget * hbox = create_hbox (0);
@@ -1251,6 +1886,14 @@ GtkWidget * abox (GtkWidget * box, char * lab, int vspace)
   return hbox;
 }
 
+/*
+*  GtkWidget * bbox (GtkWidget * box, char * lab)
+*
+*  Usage: 
+*
+*  GtkWidget * box : 
+*  char * lab      : 
+*/
 GtkWidget * bbox (GtkWidget * box, char * lab)
 {
   GtkWidget * hbox = create_hbox (0);
@@ -1261,6 +1904,14 @@ GtkWidget * bbox (GtkWidget * box, char * lab)
   return hhbox;
 }
 
+/*
+*  GtkWidget * cbox (GtkWidget * box, char * lab)
+*
+*  Usage: 
+*
+*  GtkWidget * box : 
+*  char * lab      : 
+*/
 GtkWidget * cbox (GtkWidget * box, char * lab)
 {
   GtkWidget * hbox = create_hbox (0);
@@ -1271,6 +1922,14 @@ GtkWidget * cbox (GtkWidget * box, char * lab)
   return hhbox;
 }
 
+/*
+*  GtkWidget * fbox (GtkWidget * box, char * lab)
+*
+*  Usage: 
+*
+*  GtkWidget * box : 
+*  char * lab      : 
+*/
 GtkWidget * fbox (GtkWidget * box, char * lab)
 {
   GtkWidget * hbox = create_hbox (0);
@@ -1280,6 +1939,16 @@ GtkWidget * fbox (GtkWidget * box, char * lab)
   return hbox;
 }
 
+/*
+*  GtkWidget * create_scroll (GtkWidget * box, int dimx, int dimy, int shadow)
+*
+*  Usage: 
+*
+*  GtkWidget * box : 
+*  int dimx        : 
+*  int dimy        : 
+*  int shadow      : 
+*/
 GtkWidget * create_scroll (GtkWidget * box, int dimx, int dimy, int shadow)
 {
   GtkWidget * scroll;
@@ -1296,6 +1965,15 @@ GtkWidget * create_scroll (GtkWidget * box, int dimx, int dimy, int shadow)
   return scroll;
 }
 
+/*
+*  GtkWidget * create_expander (gchar * name, gchar * file_img, int i)
+*
+*  Usage: 
+*
+*  gchar * name     : 
+*  gchar * file_img : 
+*  int i            : 
+*/
 GtkWidget * create_expander (gchar * name, gchar * file_img, int i)
 {
   GtkWidget * expand = gtk_expander_new (name);
@@ -1311,6 +1989,13 @@ GtkWidget * create_expander (gchar * name, gchar * file_img, int i)
   return expand;
 }
 
+/*
+*  void provide_gtk_css (gchar * css)
+*
+*  Usage: 
+*
+*  gchar * css : 
+*/
 void provide_gtk_css (gchar * css)
 {
   GtkCssProvider * provider = gtk_css_provider_new ();
@@ -1328,6 +2013,13 @@ void provide_gtk_css (gchar * css)
   g_object_unref (provider);
 }
 
+/*
+*  GtkWidget * destroy_this_widget (GtkWidget * widg)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*/
 GtkWidget * destroy_this_widget (GtkWidget * widg)
 {
   if (widg != NULL)
@@ -1352,6 +2044,13 @@ GtkWidget * destroy_this_widget (GtkWidget * widg)
   return NULL;
 }
 
+/*
+*  void destroy_this_dialog (GtkDialog * dialog)
+*
+*  Usage: 
+*
+*  GtkDialog * dialog : 
+*/
 void destroy_this_dialog (GtkDialog * dialog)
 {
 #ifdef GTK4
@@ -1364,6 +2063,13 @@ void destroy_this_dialog (GtkDialog * dialog)
   dialog_id --;
 }
 
+/*
+*  void destroy_this_native_dialog (GtkNativeDialog * dialog)
+*
+*  Usage: 
+*
+*  GtkNativeDialog * dialog : 
+*/
 void destroy_this_native_dialog (GtkNativeDialog * dialog)
 {
   gtk_native_dialog_destroy (dialog);
@@ -1373,12 +2079,35 @@ void destroy_this_native_dialog (GtkNativeDialog * dialog)
   dialog_id --;
 }
 
+/*
+*  G_MODULE_EXPORT void run_destroy_dialog (GtkDialog * dialog, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * dialog : 
+*  gint response_id   : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void run_destroy_dialog (GtkDialog * dialog, gint response_id, gpointer data)
 {
   destroy_this_dialog (dialog);
 }
 
 #ifdef GTK4
+/*
+*
+*
+*  Usage: 
+*
+*   : 
+*/
+/*
+*
+*
+*  Usage: 
+*
+*   : 
+*/
 GListModel * file_chooser_get_file_names (GtkFileChooser * chooser)
 {
   return gtk_file_chooser_get_files (chooser);
@@ -1390,6 +2119,13 @@ GSList * file_chooser_get_file_names (GtkFileChooser * chooser)
 }
 #endif
 
+/*
+*  gchar * file_chooser_get_file_name (GtkFileChooser * chooser)
+*
+*  Usage: 
+*
+*  GtkFileChooser * chooser : 
+*/
 gchar * file_chooser_get_file_name (GtkFileChooser * chooser)
 {
 #ifdef GTK4
@@ -1399,6 +2135,13 @@ gchar * file_chooser_get_file_name (GtkFileChooser * chooser)
 #endif
 }
 
+/*
+*  gchar * file_chooser_get_current_folder (GtkFileChooser * chooser)
+*
+*  Usage: 
+*
+*  GtkFileChooser * chooser : 
+*/
 gchar * file_chooser_get_current_folder (GtkFileChooser * chooser)
 {
 #ifdef GTK4
@@ -1408,6 +2151,14 @@ gchar * file_chooser_get_current_folder (GtkFileChooser * chooser)
 #endif
 }
 
+/*
+*  gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename)
+*
+*  Usage: 
+*
+*  GtkFileChooser * chooser : 
+*  gchar * filename         : 
+*/
 gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename)
 {
   GFile * default_file_for_saving = g_file_new_for_path (filename);
@@ -1420,6 +2171,13 @@ gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename)
   return res;
 }
 
+/*
+*  void file_chooser_set_current_folder (GtkFileChooser * chooser)
+*
+*  Usage: 
+*
+*  GtkFileChooser * chooser : 
+*/
 void file_chooser_set_current_folder (GtkFileChooser * chooser)
 {
 #ifdef GTK4
@@ -1430,17 +2188,44 @@ void file_chooser_set_current_folder (GtkFileChooser * chooser)
 }
 
 #ifdef GTK4
+/*
+*  GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name)
+*
+*  Usage: 
+*
+*  const gchar * title      : 
+*  GtkWindow * parent       : 
+*  GtkFileChooserAction act : 
+*  const gchar * act_name   : 
+*/
 GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name)
 {
   return gtk_file_chooser_native_new (title, parent, act, act_name, "Cancel");
 }
 #else
+/*
+*  GtkWidget * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name)
+*
+*  Usage: 
+*
+*  const gchar * title      : 
+*  GtkWindow * parent       : 
+*  GtkFileChooserAction act : 
+*  const gchar * act_name   : 
+*/
 GtkWidget * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name)
 {
   return gtk_file_chooser_dialog_new (title, parent, act, "Cancel", GTK_RESPONSE_CANCEL, act_name, GTK_RESPONSE_ACCEPT, NULL);
 }
 #endif
 
+/*
+*  ColRGBA get_button_color (GtkColorChooser * colob)
+*
+*  Usage: 
+*
+*  GtkColorChooser * colob : 
+*/
 ColRGBA get_button_color (GtkColorChooser * colob)
 {
   GdkRGBA col;
@@ -1448,6 +2233,13 @@ ColRGBA get_button_color (GtkColorChooser * colob)
   return gdkrgba_to_rgba (col);
 }
 
+/*
+*  ColRGBA get_window_color (GtkWidget * color_win)
+*
+*  Usage: 
+*
+*  GtkWidget * color_win : 
+*/
 ColRGBA get_window_color (GtkWidget * color_win)
 {
   GdkRGBA col;
@@ -1455,6 +2247,14 @@ ColRGBA get_window_color (GtkWidget * color_win)
   return gdkrgba_to_rgba (col);
 }
 
+/*
+*  void set_color_chooser_color (GtkWidget * color_win, ColRGBA col)
+*
+*  Usage: 
+*
+*  GtkWidget * color_win : 
+*  ColRGBA col           : 
+*/
 void set_color_chooser_color (GtkWidget * color_win, ColRGBA col)
 {
   GdkRGBA colo = colrgba_togtkrgba(col);
@@ -1462,6 +2262,15 @@ void set_color_chooser_color (GtkWidget * color_win, ColRGBA col)
 }
 
 #ifdef GTK4
+/*
+*  void pop_menu_at_pointer (GtkWidget * pop, double x, double y)
+*
+*  Usage: 
+*
+*  GtkWidget * pop : 
+*  double x        : 
+*  double y        : 
+*/
 void pop_menu_at_pointer (GtkWidget * pop, double x, double y)
 {
   GdkRectangle rect;
@@ -1474,6 +2283,14 @@ void pop_menu_at_pointer (GtkWidget * pop, double x, double y)
   gtk_popover_popup (GTK_POPOVER(pop));
 }
 #else
+/*
+*  void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  GdkEvent * event : 
+*/
 void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event)
 {
   show_the_widgets (widg);
@@ -1481,6 +2298,13 @@ void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event)
 }
 #endif
 
+/*
+*  GtkWidget * get_top_level (GtkWidget * widg)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*/
 GtkWidget * get_top_level (GtkWidget * widg)
 {
 #ifdef GTK4
@@ -1491,8 +2315,25 @@ GtkWidget * get_top_level (GtkWidget * widg)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT gboolean destroy_this_window (GtkWindow * win, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWindow * win : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT gboolean destroy_this_window (GtkWindow * win, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * win  : 
+*  GdkEvent * event : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
 #endif
 {
@@ -1501,8 +2342,25 @@ G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event,
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWindow * win : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * win  : 
+*  GdkEvent * event : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
 #endif
 {
@@ -1510,6 +2368,15 @@ G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gp
   return TRUE;
 }
 
+/*
+*  void add_gtk_close_event (GtkWidget * widg, GCallback handler, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg  : 
+*  GCallback handler : 
+*  gpointer data     : 
+*/
 void add_gtk_close_event (GtkWidget * widg, GCallback handler, gpointer data)
 {
 #ifdef GTK4

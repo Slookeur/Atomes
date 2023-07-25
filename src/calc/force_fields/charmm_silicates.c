@@ -12,6 +12,16 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 /*
+* This file: 'charmm_silicates.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*/
+
+/*
   CHARMM-charmm_silicates force field, data from taken from:
        - the file: 'charmm_silicates'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'

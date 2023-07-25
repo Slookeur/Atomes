@@ -11,11 +11,34 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_back.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  GtkWidget * menu_back (glwin * view);
+
+  GMenu * menu_back (glwin * view, int popm);
+
+*/
+
 #include "global.h"
 #include "color_box.h"
 #include "glwindow.h"
 
 #ifdef GTK3
+/*
+*  GtkWidget * menu_back (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 GtkWidget * menu_back (glwin * view)
 {
   GtkWidget * menub = gtk_menu_new ();
@@ -25,6 +48,14 @@ GtkWidget * menu_back (glwin * view)
   return menub;
 }
 #else
+/*
+*  GMenu * menu_back (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_back (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();

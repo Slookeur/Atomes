@@ -11,9 +11,32 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'save_p.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int save_this_string (FILE * fp, gchar * string);
+  int save_project (FILE * fp, struct project * this_proj, int npi);
+
+*/
+
 #include "global.h"
 #include "project.h"
 
+/*
+*  int save_this_string (FILE * fp, gchar * string)
+*
+*  Usage: 
+*
+*  FILE * fp      : 
+*  gchar * string : 
+*/
 int save_this_string (FILE * fp, gchar * string)
 {
   int i;
@@ -40,6 +63,15 @@ int save_this_string (FILE * fp, gchar * string)
   return OK;
 }
 
+/*
+*  int save_project (FILE * fp, struct project * this_proj, int npi)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*  int npi                    : 
+*/
 int save_project (FILE * fp, struct project * this_proj, int npi)
 {
   int i, j, k;

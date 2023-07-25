@@ -11,6 +11,34 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'main.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int test_this_arg (gchar * arg);
+  int main (int argc, char *argv[]);
+
+  gboolean destroy_func (gpointer user_data);
+
+  G_MODULE_EXPORT gboolean splashdraw (GtkWidget * widget, cairo_t * cr, gpointer data);
+
+  void printhelp();
+  void printversion ();
+  void read_this_file (int file_type, gchar * this_file);
+  void open_this_data_file (int file_type, gchar * file_name);
+
+  G_MODULE_EXPORT void run_program (GApplication * app, gpointer data);
+
+  GtkWidget * create_splash_window ();
+
+*/
+
 #include <libavcodec/avcodec.h>
 #include <libavutil/avutil.h>
 #include <libavformat/avformat.h>
@@ -47,6 +75,13 @@ struct file_list * flist = NULL;
 struct file_list * ftmp = NULL;
 gboolean with_workspace = FALSE;
 
+/*
+*  int test_this_arg (gchar * arg)
+*
+*  Usage: 
+*
+*  gchar * arg : 
+*/
 int test_this_arg (gchar * arg)
 {
   char * fext[14]={"-awf", "-apf", " -xyz", "NULL", "-c3d", "-trj", "NULL", "-xdatcar", "NULL", "-pdb", "-ent", "-cif", "-hist", "-ipf"};
@@ -62,6 +97,13 @@ int test_this_arg (gchar * arg)
   return 0;
 }
 
+/*
+*  void printhelp()
+*
+*  Usage: 
+*
+*   : 
+*/
 void printhelp()
 {
   char * help    = "\nUsage: ATOMES [OPTION]\n"
@@ -106,6 +148,13 @@ void printhelp()
   printf("%s\n", eh);
 }
 
+/*
+*  void printversion ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void printversion ()
 {
   char scanid[80]="\n3D atomistic model analysis, creation/edition and post-processing tool\n";
@@ -180,6 +229,13 @@ void printversion ()
   printf ("%s\n", eh);
 }
 
+/*
+*  gboolean destroy_func (gpointer user_data)
+*
+*  Usage: 
+*
+*  gpointer user_data : 
+*/
 gboolean destroy_func (gpointer user_data)
 {
   GtkWidget * splashi = (GtkWidget*) user_data;
@@ -188,6 +244,15 @@ gboolean destroy_func (gpointer user_data)
 }
 
 #ifdef GTK3
+/*
+*  G_MODULE_EXPORT gboolean splashdraw (GtkWidget * widget, cairo_t * cr, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widget : 
+*  cairo_t * cr       : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT gboolean splashdraw (GtkWidget * widget, cairo_t * cr, gpointer data)
 {
   cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 0.0); /* transparent */
@@ -196,6 +261,13 @@ G_MODULE_EXPORT gboolean splashdraw (GtkWidget * widget, cairo_t * cr, gpointer 
 }
 #endif
 
+/*
+*  GtkWidget * create_splash_window ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_splash_window ()
 {
   GtkWidget * splash_window = new_gtk_window ();
@@ -226,6 +298,14 @@ GtkWidget * create_splash_window ()
   return splash_window;
 }
 
+/*
+*  void read_this_file (int file_type, gchar * this_file)
+*
+*  Usage: 
+*
+*  int file_type     : 
+*  gchar * this_file : 
+*/
 void read_this_file (int file_type, gchar * this_file)
 {
   FILE * fp = fopen (this_file, dfi[0]);
@@ -247,6 +327,14 @@ void read_this_file (int file_type, gchar * this_file)
   fclose (fp);
 }
 
+/*
+*  void open_this_data_file (int file_type, gchar * file_name)
+*
+*  Usage: 
+*
+*  int file_type     : 
+*  gchar * file_name : 
+*/
 void open_this_data_file (int file_type, gchar * file_name)
 {
   gchar * end;
@@ -390,6 +478,14 @@ void open_this_data_file (int file_type, gchar * file_name)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
+*
+*  Usage: 
+*
+*  GApplication * app : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
 {
 #ifdef GTK3
@@ -480,6 +576,14 @@ G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
 #endif
 }
 
+/*
+*  int main (int argc, char *argv[])
+*
+*  Usage: 
+*
+*  int argc     : 
+*  char *argv[] : 
+*/
 int main (int argc, char *argv[])
 {
   gboolean RUNC = FALSE;

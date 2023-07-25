@@ -11,6 +11,29 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_style.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void clean_atom_style (struct project * this_proj);
+  void update_menus (glwin * view);
+
+  G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int filled, GtkWidget * menu, tint * data);
+  GtkWidget * menu_style (glwin * view, int id);
+
+  GMenu * menu_style (glwin * view, int popm);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "project.h"
@@ -19,6 +42,13 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern gchar * label_atpts (struct project * this_proj, glwin * view, int id);
 
+/*
+*  void clean_atom_style (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void clean_atom_style (struct project * this_proj)
 {
   int i, j;
@@ -33,6 +63,13 @@ void clean_atom_style (struct project * this_proj)
 
 #ifdef GTK3
 // GTK3 Menu Action To Check
+/*
+*  void update_menus (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void update_menus (glwin * view)
 {
   int i, j;
@@ -102,6 +139,14 @@ void update_menus (glwin * view)
 }
 #endif
 
+/*
+*  G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *)data;
@@ -190,12 +235,33 @@ G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
+/*
+*  GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int filled, GtkWidget * menu, tint * data)
+*
+*  Usage: 
+*
+*  char * name      : 
+*  int val          : 
+*  int style        : 
+*  int vbl          : 
+*  int filled       : 
+*  GtkWidget * menu : 
+*  tint * data      : 
+*/
 GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int filled, GtkWidget * menu, tint * data)
 {
   GtkWidget * style_widget = gtk3_menu_item (menu, name, IMG_NONE, NULL, G_CALLBACK(set_style), data, FALSE, 0, 0, TRUE, TRUE, (style == val && filled == vbl) ? TRUE : FALSE);
   return style_widget;
 }
 
+/*
+*  GtkWidget * menu_style (glwin * view, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*/
 GtkWidget * menu_style (glwin * view, int id)
 {
   int i, j;
@@ -271,6 +337,15 @@ GtkWidget * menu_style (glwin * view, int id)
   return menus;
 }
 #else
+/*
+*  G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -318,6 +393,14 @@ G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * para
   }
 }
 
+/*
+*  GMenu * menu_style (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_style (glwin * view, int popm)
 {
   int i, j, k;

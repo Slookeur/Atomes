@@ -11,6 +11,25 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'ringscall.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void initrng (int s);
+  void update_rings_menus (glwin * view);
+  void update_rings_view (struct project * this_proj, int c);
+  void clean_rings_data (int rid, glwin * view);
+
+  G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data);
+
+*/
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -38,6 +57,13 @@ extern G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * p
 #endif
 gboolean toggled_rings;
 
+/*
+*  void initrng (int s)
+*
+*  Usage: 
+*
+*  int s : 
+*/
 void initrng (int s)
 {
   int i, j, k, l;
@@ -65,6 +91,13 @@ void initrng (int s)
   active_project -> initok[RI] = TRUE;
 }
 
+/*
+*  void update_rings_menus (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void update_rings_menus (glwin * view)
 {
 #ifdef GTK4
@@ -93,6 +126,14 @@ void update_rings_menus (glwin * view)
 #endif
 }
 
+/*
+*  void update_rings_view (struct project * this_proj, int c)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int c                      : 
+*/
 void update_rings_view (struct project * this_proj, int c)
 {
   int i, j, k;
@@ -310,6 +351,14 @@ void update_rings_view (struct project * this_proj, int c)
   }
 }
 
+/*
+*  void clean_rings_data (int rid, glwin * view)
+*
+*  Usage: 
+*
+*  int rid      : 
+*  glwin * view : 
+*/
 void clean_rings_data (int rid, glwin * view)
 {
   struct project * this_proj = get_project_by_id(view -> proj);
@@ -367,6 +416,14 @@ void clean_rings_data (int rid, glwin * view)
 #endif
 }
 
+/*
+*  G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
 {
   int search = active_project -> rsearch[0];

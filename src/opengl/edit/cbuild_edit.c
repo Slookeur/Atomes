@@ -11,6 +11,69 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cbuild_edit.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_bravais_id (int spg);
+  int get_bravais_img_id (int spg);
+  int get_sg_num (GtkComboBox * box);
+  int read_space_group (builder_edition * cbuilder, int spg);
+  int get_group_id_from_name (gchar * sg_name);
+
+  G_MODULE_EXPORT gboolean delete_build (GtkWindow * widg, gpointer data);
+  G_MODULE_EXPORT gboolean delete_build (GtkWidget * widg, GdkEvent * event, gpointer data);
+
+  gchar * frac_string (gchar * init);
+  gchar * get_num_string (gchar * str);
+  gchar * get_so_string (space_group * spg, int id);
+
+  void adjust_lattice_parameters (builder_edition * cbuilder);
+  void adjust_so_combo (builder_edition * cbuilder);
+  void adjust_bv_img (builder_edition * cbuilder);
+  void adjust_lattice_constraints (builder_edition * cbuilder);
+  void adjust_sg_combo (builder_edition * cbuilder, int cs, int bl);
+  void prepare_crystal_builder (gpointer data);
+
+  G_MODULE_EXPORT void update_cb_vect (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void update_cb_box (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void set_lattice (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void set_so (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_sg (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_bl (GtkComboBox * combo, gpointer data);
+  G_MODULE_EXPORT void set_cs (GtkComboBox * combo, gpointer data);
+  G_MODULE_EXPORT void set_wr (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void set_wr (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_shc (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void set_shc (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void add_cryst_cell (GtkSpinButton * res, gpointer data);
+  G_MODULE_EXPORT void apply_build (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void close_build (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void toggle_occ (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void toggle_occ (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void toggle_overlap (GtkCheckButton * Button, gpointer data);
+  G_MODULE_EXPORT void toggle_overlap (GtkToggleButton * Button, gpointer data);
+  G_MODULE_EXPORT void adjust_occupancy (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void crystal_window (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void crystal_window (GtkWidget * widg, gpointer data);
+
+  GtkWidget * prepare_lattice_grid (int type, builder_edition * cbuilder, glwin * glview);
+  GtkWidget * sg_info (int sg, gpointer data);
+  GtkWidget * create_bl_combo (int cs, gpointer data);
+  GtkWidget * builder_win (struct project * this_proj, gpointer data);
+
+  GtkTreeModel * so_combo_tree (space_group * spg);
+  GtkTreeModel * sg_combo_tree (int csid, int bvid);
+  GtkTreeModel * la_combo_tree ();
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -45,6 +108,13 @@ gchar * latt_info[7]={"<i>a</i> &#x2260; <i>b</i> &#x2260; <i>c</i>\n&#x3B1; &#x
 int nsg_bv[7]={2, 13, 59, 68,  25,  27,  36};
 int min_bv[7]={0,  2, 15, 74, 142, 167, 194};
 
+/*
+*  int get_bravais_id (int spg)
+*
+*  Usage: 
+*
+*  int spg : 
+*/
 int get_bravais_id (int spg)
 {
   if (spg < 3)
@@ -84,6 +154,13 @@ int get_bravais_id (int spg)
   }
 }
 
+/*
+*  int get_bravais_img_id (int spg)
+*
+*  Usage: 
+*
+*  int spg : 
+*/
 int get_bravais_img_id (int spg)
 {
   if (spg < 3)
@@ -163,6 +240,13 @@ int get_bravais_img_id (int spg)
   }
 }
 
+/*
+*  gchar * frac_string (gchar * init)
+*
+*  Usage: 
+*
+*  gchar * init : 
+*/
 gchar * frac_string (gchar * init)
 {
  gchar * end = substitute_string (init, "1/2", "&#189;");
@@ -179,6 +263,13 @@ gchar * frac_string (gchar * init)
  return g_strdup_printf ("%s", end);
 }
 
+/*
+*  gchar * get_num_string (gchar * str)
+*
+*  Usage: 
+*
+*  gchar * str : 
+*/
 gchar * get_num_string (gchar * str)
 {
   str = replace_markup (str, "65", "6<sub>5</sub>");
@@ -194,6 +285,14 @@ gchar * get_num_string (gchar * str)
   return substitute_string (str, "21", "2<sub>1</sub>");
 }
 
+/*
+*  gchar * get_so_string (space_group * spg, int id)
+*
+*  Usage: 
+*
+*  space_group * spg : 
+*  int id            : 
+*/
 gchar * get_so_string (space_group * spg, int id)
 {
   gchar * str = replace_markup (spg -> settings[id].name, "s", "/");
@@ -206,6 +305,13 @@ gchar * get_so_string (space_group * spg, int id)
   return str;
 }
 
+/*
+*  GtkTreeModel * so_combo_tree (space_group * spg)
+*
+*  Usage: 
+*
+*  space_group * spg : 
+*/
 GtkTreeModel * so_combo_tree (space_group * spg)
 {
   GtkTreeIter iter;
@@ -229,6 +335,14 @@ GtkTreeModel * so_combo_tree (space_group * spg)
   return GTK_TREE_MODEL (store);
 }
 
+/*
+*  GtkTreeModel * sg_combo_tree (int csid, int bvid)
+*
+*  Usage: 
+*
+*  int csid : 
+*  int bvid : 
+*/
 GtkTreeModel * sg_combo_tree (int csid, int bvid)
 {
   GtkTreeIter iter;
@@ -281,6 +395,13 @@ GtkTreeModel * sg_combo_tree (int csid, int bvid)
   return GTK_TREE_MODEL (store);
 }
 
+/*
+*  GtkTreeModel * la_combo_tree ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkTreeModel * la_combo_tree ()
 {
   GtkTreeIter iter;
@@ -296,6 +417,13 @@ GtkTreeModel * la_combo_tree ()
   return GTK_TREE_MODEL (store);
 }
 
+/*
+*  int get_sg_num (GtkComboBox * box)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*/
 int get_sg_num (GtkComboBox * box)
 {
   GValue val = {0, };
@@ -319,6 +447,13 @@ int get_sg_num (GtkComboBox * box)
   return i;
 }
 
+/*
+*  void adjust_lattice_parameters (builder_edition * cbuilder)
+*
+*  Usage: 
+*
+*  builder_edition * cbuilder : 
+*/
 void adjust_lattice_parameters (builder_edition * cbuilder)
 {
   int i, j, k;
@@ -446,6 +581,14 @@ void adjust_lattice_parameters (builder_edition * cbuilder)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void update_cb_vect (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void update_cb_vect (GtkEntry * entry, gpointer data)
 {
   tint * id = (tint *)data;
@@ -455,6 +598,14 @@ G_MODULE_EXPORT void update_cb_vect (GtkEntry * entry, gpointer data)
   update_entry_double (entry, v);
 }
 
+/*
+*  G_MODULE_EXPORT void update_cb_box (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void update_cb_box (GtkEntry * entry, gpointer data)
 {
   tint * id = (tint *)data;
@@ -467,6 +618,15 @@ G_MODULE_EXPORT void update_cb_box (GtkEntry * entry, gpointer data)
   update_entry_double (entry, v);
 }
 
+/*
+*  GtkWidget * prepare_lattice_grid (int type, builder_edition * cbuilder, glwin * glview)
+*
+*  Usage: 
+*
+*  int type                   : 
+*  builder_edition * cbuilder : 
+*  glwin * glview             : 
+*/
 GtkWidget * prepare_lattice_grid (int type, builder_edition * cbuilder, glwin * glview)
 {
   GtkWidget * table = gtk_grid_new ();
@@ -531,6 +691,14 @@ GtkWidget * prepare_lattice_grid (int type, builder_edition * cbuilder, glwin * 
   return table;
 }
 
+/*
+*  G_MODULE_EXPORT void set_lattice (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_lattice (GtkWidget * widg, gpointer data)
 {
   tint * id = (tint *) data;
@@ -542,6 +710,14 @@ G_MODULE_EXPORT void set_lattice (GtkWidget * widg, gpointer data)
   show_the_widgets (cbuilder -> lattice_grid);
 }
 
+/*
+*  G_MODULE_EXPORT void set_so (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_so (GtkComboBox * box, gpointer data)
 {
   tint * id = (tint *) data;
@@ -559,6 +735,14 @@ G_MODULE_EXPORT void set_so (GtkComboBox * box, gpointer data)
   get_origin (cbuilder -> cell.sp_group);
 }
 
+/*
+*  GtkWidget * sg_info (int sg, gpointer data)
+*
+*  Usage: 
+*
+*  int sg        : 
+*  gpointer data : 
+*/
 GtkWidget * sg_info (int sg, gpointer data)
 {
   gchar * str = g_strdup_printf ("%s group info", groups[sg]);
@@ -569,6 +753,14 @@ GtkWidget * sg_info (int sg, gpointer data)
   return mbut;
 }
 
+/*
+*  int read_space_group (builder_edition * cbuilder, int spg)
+*
+*  Usage: 
+*
+*  builder_edition * cbuilder : 
+*  int spg                    : 
+*/
 int read_space_group (builder_edition * cbuilder, int spg)
 {
   // Read file
@@ -595,6 +787,13 @@ int read_space_group (builder_edition * cbuilder, int spg)
   return res;
 }
 
+/*
+*  int get_group_id_from_name (gchar * sg_name)
+*
+*  Usage: 
+*
+*  gchar * sg_name : 
+*/
 int get_group_id_from_name (gchar * sg_name)
 {
   int i;
@@ -605,6 +804,13 @@ int get_group_id_from_name (gchar * sg_name)
   return 0;
 }
 
+/*
+*  void adjust_so_combo (builder_edition * cbuilder)
+*
+*  Usage: 
+*
+*  builder_edition * cbuilder : 
+*/
 void adjust_so_combo (builder_edition * cbuilder)
 {
   GtkTreeModel * model = so_combo_tree (cbuilder -> cell.sp_group);
@@ -621,6 +827,13 @@ void adjust_so_combo (builder_edition * cbuilder)
   if (cbuilder -> cell.sp_group) get_origin (cbuilder -> cell.sp_group);
 }
 
+/*
+*  void adjust_bv_img (builder_edition * cbuilder)
+*
+*  Usage: 
+*
+*  builder_edition * cbuilder : 
+*/
 void adjust_bv_img (builder_edition * cbuilder)
 {
   if (cbuilder -> bv_img) cbuilder -> bv_img = destroy_this_widget(cbuilder -> bv_img);
@@ -633,6 +846,13 @@ void adjust_bv_img (builder_edition * cbuilder)
   add_box_child_start (GTK_ORIENTATION_VERTICAL, cbuilder -> bv_box[1], cbuilder -> bv_img, FALSE, FALSE, 5);
 }
 
+/*
+*  void adjust_lattice_constraints (builder_edition * cbuilder)
+*
+*  Usage: 
+*
+*  builder_edition * cbuilder : 
+*/
 void adjust_lattice_constraints (builder_edition * cbuilder)
 {
   if (cbuilder -> ltc_cons) cbuilder -> ltc_cons = destroy_this_widget(cbuilder -> ltc_cons);
@@ -642,6 +862,14 @@ void adjust_lattice_constraints (builder_edition * cbuilder)
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, cbuilder -> ltc_box, cbuilder -> ltc_cons, FALSE, FALSE, 5);
 }
 
+/*
+*  G_MODULE_EXPORT void set_sg (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_sg (GtkComboBox * box, gpointer data)
 {
   tint * id = (tint *) data;
@@ -668,6 +896,15 @@ G_MODULE_EXPORT void set_sg (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  void adjust_sg_combo (builder_edition * cbuilder, int cs, int bl)
+*
+*  Usage: 
+*
+*  builder_edition * cbuilder : 
+*  int cs                     : 
+*  int bl                     : 
+*/
 void adjust_sg_combo (builder_edition * cbuilder, int cs, int bl)
 {
   GtkTreeModel * model = sg_combo_tree (cs, bl);
@@ -682,6 +919,14 @@ void adjust_sg_combo (builder_edition * cbuilder, int cs, int bl)
   adjust_lattice_parameters (cbuilder);
 }
 
+/*
+*  G_MODULE_EXPORT void set_bl (GtkComboBox * combo, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * combo : 
+*  gpointer data       : 
+*/
 G_MODULE_EXPORT void set_bl (GtkComboBox * combo, gpointer data)
 {
   builder_edition * cbuilder = (builder_edition *)data;
@@ -691,6 +936,14 @@ G_MODULE_EXPORT void set_bl (GtkComboBox * combo, gpointer data)
   adjust_sg_combo (cbuilder, i, j);
 }
 
+/*
+*  GtkWidget * create_bl_combo (int cs, gpointer data)
+*
+*  Usage: 
+*
+*  int cs        : 
+*  gpointer data : 
+*/
 GtkWidget * create_bl_combo (int cs, gpointer data)
 {
   GtkWidget * cbox = create_combo();
@@ -708,6 +961,14 @@ GtkWidget * create_bl_combo (int cs, gpointer data)
   return cbox;
 }
 
+/*
+*  G_MODULE_EXPORT void set_cs (GtkComboBox * combo, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * combo : 
+*  gpointer data       : 
+*/
 G_MODULE_EXPORT void set_cs (GtkComboBox * combo, gpointer data)
 {
   builder_edition * cbuilder = (builder_edition *)data;
@@ -720,8 +981,24 @@ G_MODULE_EXPORT void set_cs (GtkComboBox * combo, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void set_wr (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void set_wr (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void set_wr (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void set_wr (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -734,8 +1011,24 @@ G_MODULE_EXPORT void set_wr (GtkToggleButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void set_shc (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void set_shc (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void set_shc (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void set_shc (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -747,6 +1040,14 @@ G_MODULE_EXPORT void set_shc (GtkToggleButton * but, gpointer data)
 #endif
 }
 
+/*
+*  G_MODULE_EXPORT void add_cryst_cell (GtkSpinButton * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkSpinButton * res : 
+*  gpointer data       : 
+*/
 G_MODULE_EXPORT void add_cryst_cell (GtkSpinButton * res, gpointer data)
 {
   tint * bid = (tint *)data;
@@ -754,6 +1055,14 @@ G_MODULE_EXPORT void add_cryst_cell (GtkSpinButton * res, gpointer data)
   cbuilder -> cell.cextra[bid -> b] = gtk_spin_button_get_value_as_int(res);
 }
 
+/*
+*  G_MODULE_EXPORT void apply_build (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void apply_build (GtkButton * but, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
@@ -765,6 +1074,14 @@ G_MODULE_EXPORT void apply_build (GtkButton * but, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void close_build (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void close_build (GtkButton * but, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
@@ -776,8 +1093,25 @@ G_MODULE_EXPORT void close_build (GtkButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT gboolean delete_build (GtkWindow * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWindow * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT gboolean delete_build (GtkWindow * widg, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT gboolean delete_build (GtkWidget * widg, GdkEvent * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  GdkEvent * event : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT gboolean delete_build (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
 {
@@ -788,8 +1122,24 @@ G_MODULE_EXPORT gboolean delete_build (GtkWidget * widg, GdkEvent * event, gpoin
 dint occp[5];
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void toggle_occ (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void toggle_occ (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void toggle_occ (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void toggle_occ (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -798,8 +1148,24 @@ G_MODULE_EXPORT void toggle_occ (GtkToggleButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void toggle_overlap (GtkCheckButton * Button, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * Button : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void toggle_overlap (GtkCheckButton * Button, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void toggle_overlap (GtkToggleButton * Button, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * Button : 
+*  gpointer data            : 
+*/
 G_MODULE_EXPORT void toggle_overlap (GtkToggleButton * Button, gpointer data)
 #endif
 {
@@ -811,6 +1177,14 @@ G_MODULE_EXPORT void toggle_overlap (GtkToggleButton * Button, gpointer data)
 #endif
 }
 
+/*
+*  G_MODULE_EXPORT void adjust_occupancy (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void adjust_occupancy (GtkButton * but, gpointer data)
 {
   struct project * this_proj = (struct project *)data;
@@ -888,6 +1262,14 @@ G_MODULE_EXPORT void adjust_occupancy (GtkButton * but, gpointer data)
   run_this_gtk_dialog (info, G_CALLBACK(run_destroy_dialog), NULL);
 }
 
+/*
+*  GtkWidget * builder_win (struct project * this_proj, gpointer data)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  gpointer data              : 
+*/
 GtkWidget * builder_win (struct project * this_proj, gpointer data)
 {
   int  i, j;
@@ -1053,6 +1435,13 @@ GtkWidget * builder_win (struct project * this_proj, gpointer data)
   return win;
 }
 
+/*
+*  void prepare_crystal_builder (gpointer data)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*/
 void prepare_crystal_builder (gpointer data)
 {
   tint * id = (tint *) data;
@@ -1069,8 +1458,25 @@ void prepare_crystal_builder (gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void crystal_window (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void crystal_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void crystal_window (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void crystal_window (GtkWidget * widg, gpointer data)
 #endif
 {

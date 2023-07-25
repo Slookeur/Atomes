@@ -11,6 +11,39 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_atoms.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gchar * label_atpts (struct project * this_proj, glwin * view, int id);
+
+  G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget * menu, GCallback handler, tint * data);
+  GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, int val, int vb, tint * data);
+  GtkWidget * show_atoms_submenu (glwin * view, int id, int at);
+  GtkWidget * color_atoms_submenu (glwin * view, int id, int at);
+  GtkWidget * label_atoms_submenu (glwin * view, int id, int at);
+  GtkWidget * menu_atoms (glwin * view, int id, int at);
+
+  GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive);
+  GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive);
+  GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive);
+  GMenu * menu_atoms (glwin * view, int popm, int at);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "glwindow.h"
@@ -18,6 +51,15 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data);
 
+/*
+*  gchar * label_atpts (struct project * this_proj, glwin * view, int id)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  glwin * view               : 
+*  int id                     : 
+*/
 gchar * label_atpts (struct project * this_proj, glwin * view, int id)
 {
   int i;
@@ -65,6 +107,14 @@ gchar * label_atpts (struct project * this_proj, glwin * view, int id)
 extern G_MODULE_EXPORT void set_show_hide_all_atom_labels (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void atom_properties (GtkWidget * widg, gpointer data);
 
+/*
+*  G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *) data;
@@ -88,6 +138,14 @@ G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
   init_default_shaders (this_proj -> modelgl);
 }
 
+/*
+*  G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
 {
   int l, m;
@@ -118,6 +176,14 @@ G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
   update (this_proj -> modelgl);
 }
 
+/*
+*  G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
 {
   tint * id = (tint *) data;
@@ -135,6 +201,18 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget * menu, GCallback handler, tint * data)
+*
+*  Usage: 
+*
+*  char * name       : 
+*  gboolean va       : 
+*  gboolean vb       : 
+*  GtkWidget * menu  : 
+*  GCallback handler : 
+*  tint * data       : 
+*/
 GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget * menu, GCallback handler, tint * data)
 {
   GtkWidget * spec_widget = gtk3_menu_item (menu, name, IMG_NONE, NULL, handler, data, FALSE, 0, 0, TRUE, FALSE, va);
@@ -142,6 +220,17 @@ GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget *
   return spec_widget;
 }
 
+/*
+*  GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, int val, int vb, tint * data)
+*
+*  Usage: 
+*
+*  gchar * str      : 
+*  GtkWidget * widg : 
+*  int val          : 
+*  int vb           : 
+*  tint * data      : 
+*/
 GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, int val, int vb, tint * data)
 {
   GtkWidget * menu = gtk_menu_new ();
@@ -152,6 +241,15 @@ GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, int val, i
   return layout;
 }
 
+/*
+*  GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*  int at       : 
+*/
 GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
 {
   GtkWidget * mshow = gtk_menu_new ();
@@ -196,6 +294,15 @@ GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
   return mshow;
 }
 
+/*
+*  GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*  int at       : 
+*/
 GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
 {
   GtkWidget * menuc = gtk_menu_new ();
@@ -230,6 +337,15 @@ GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
   return menuc;
 }
 
+/*
+*  GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*  int at       : 
+*/
 GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
 {
   GtkWidget * menul = gtk_menu_new ();
@@ -298,6 +414,15 @@ GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
   return menul;
 }
 
+/*
+*  GtkWidget * menu_atoms (glwin * view, int id, int at)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*  int at       : 
+*/
 GtkWidget * menu_atoms (glwin * view, int id, int at)
 {
   int i;
@@ -385,6 +510,15 @@ GtkWidget * menu_atoms (glwin * view, int id, int at)
 
 extern G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * state, gpointer data);
 
+/*
+*  G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   tint * the_data = (tint *) data;
@@ -434,6 +568,15 @@ G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * paramet
   }
 }
 
+/*
+*  G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   tint * the_data = (tint *) data;
@@ -490,6 +633,15 @@ G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parame
   }
 }
 
+/*
+*  G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   // Neither check, nor radio
@@ -511,6 +663,16 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant
   update_menu_bar (this_proj -> modelgl);
 }
 
+/*
+*  GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
+*
+*  Usage: 
+*
+*  glwin * view       : 
+*  int popm           : 
+*  int at             : 
+*  gboolean sensitive : 
+*/
 GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
   GMenu * menu = g_menu_new ();
@@ -542,6 +704,16 @@ GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
   return menu;
 }
 
+/*
+*  GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
+*
+*  Usage: 
+*
+*  glwin * view       : 
+*  int popm           : 
+*  int at             : 
+*  gboolean sensitive : 
+*/
 GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
   GMenu * menu = g_menu_new ();
@@ -572,6 +744,16 @@ GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
   return menu;
 }
 
+/*
+*  GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
+*
+*  Usage: 
+*
+*  glwin * view       : 
+*  int popm           : 
+*  int at             : 
+*  gboolean sensitive : 
+*/
 GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
   GMenu * menu = g_menu_new ();
@@ -596,6 +778,15 @@ GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
   return menu;
 }
 
+/*
+*  GMenu * menu_atoms (glwin * view, int popm, int at)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int at       : 
+*/
 GMenu * menu_atoms (glwin * view, int popm, int at)
 {
   int i = view -> anim -> last -> img -> style;

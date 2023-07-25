@@ -11,12 +11,40 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_clones.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, glwin * view);
+  GtkWidget * menu_clones (glwin * view, int id);
+
+  GMenu * menu_clones (glwin * view, int popm);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "glwindow.h"
 #include "submenus.h"
 
 #ifdef GTK3
+/*
+*  G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -46,6 +74,16 @@ G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
   update (view);
 }
 
+/*
+*  GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, glwin * view)
+*
+*  Usage: 
+*
+*  char * name      : 
+*  gboolean clone   : 
+*  GtkWidget * menu : 
+*  glwin * view     : 
+*/
 GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, glwin * view)
 {
   GtkWidget * clone_widget = gtk3_menu_item (menu, name, IMG_NONE, NULL, G_CALLBACK(show_hide_clones), view, FALSE, 0, 0, TRUE, FALSE, clone);
@@ -53,6 +91,14 @@ GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, 
   return clone_widget;
 }
 
+/*
+*  GtkWidget * menu_clones (glwin * view, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*/
 GtkWidget * menu_clones (glwin * view, int id)
 {
   GtkWidget * menu = gtk_menu_new ();
@@ -72,6 +118,15 @@ GtkWidget * menu_clones (glwin * view, int id)
   return menu;
 }
 #else
+/*
+*  G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -104,6 +159,14 @@ G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parame
   }
 }
 
+/*
+*  GMenu * menu_clones (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_clones (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();

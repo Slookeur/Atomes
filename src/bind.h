@@ -11,6 +11,57 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'bind.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  gui/bdcall.c
+  gui/calc_menu.c
+  gui/callbacks.c
+  gui/chainscall.c
+  gui/edit_menu.c
+  gui/grcall.c
+  gui/initc.c
+  gui/interface.c
+  gui/main.c
+  gui/msdcall.c
+  gui/ringscall.c
+  gui/spcall.c
+  gui/sqcall.c
+  opengl/glview.c
+  project/close_p.c
+  project/init_p.c
+  project/open_p.c
+  project/project.c
+  project/update_p.c
+  calc/dl_poly/dlp_control.c
+  calc/dl_poly/dlp_field.c
+  opengl/edit/cbuild_action.c
+  opengl/edit/cbuild_edit.c
+  opengl/win/initchain.c
+  opengl/win/initcoord.c
+  opengl/win/initmol.c
+  opengl/win/m_style.c
+  opengl/win/popup.c
+  opengl/win/w_coord.c
+  opengl/win/w_crystal.c
+  opengl/win/w_library.c
+  opengl/win/w_volumes.c
+  project/readers/read_c3d.c
+  project/readers/read_cif.c
+  project/readers/read_coord.c
+  project/readers/read_hist.c
+  project/readers/read_npt.c
+  project/readers/read_pdb.c
+  project/readers/read_trj.c
+  project/readers/read_vas.c
+  project/readers/read_xyz.c
+
+*/
+
 #ifndef BIND_H_
 #define BIND_H_
 

@@ -11,6 +11,42 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_library.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader);
+  int sml_preview (const char * filetoread);
+  int get_family (gchar * str);
+  int get_sml_files ();
+  int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch);
+  int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch);
+
+  double get_z_from_periodic_table (gchar * lab);
+
+  gchar * replace_markup (char * init, char * key, char * rep);
+  gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif);
+  gchar * check_xml_string (gchar * init);
+  gchar * open_sml_file (const char * filetoread, int fam);
+
+  void sort_files (int num_f);
+  void fill_molecule_tree (GtkListStore * store);
+  void fill_family_tree (GtkListStore * store);
+  void insert_preview ();
+  void prepare_preview (int active, int id, gboolean visible);
+
+  G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id, gpointer data);
+
+  GtkWidget * library_tree (GtkListStore * store, int id, gchar * name);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "interface.h"
@@ -240,6 +276,13 @@ gchar * other_name[5];
 int o_names;
 int inserted_from_lib;
 
+/*
+*  double get_z_from_periodic_table (gchar * lab)
+*
+*  Usage: 
+*
+*  gchar * lab : 
+*/
 double get_z_from_periodic_table (gchar * lab)
 {
   int i;
@@ -250,6 +293,14 @@ double get_z_from_periodic_table (gchar * lab)
   return 0.0;
 }
 
+/*
+*  int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader)
+*
+*  Usage: 
+*
+*  xmlDoc * doc            : 
+*  xmlTextReaderPtr reader : 
+*/
 int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader)
 {
   xmlFreeDoc(doc);
@@ -258,6 +309,15 @@ int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader)
   return 0;
 }
 
+/*
+*  gchar * replace_markup (char * init, char * key, char * rep)
+*
+*  Usage: 
+*
+*  char * init : 
+*  char * key  : 
+*  char * rep  : 
+*/
 gchar * replace_markup (char * init, char * key, char * rep)
 {
   char * buffer = NULL;
@@ -282,6 +342,15 @@ gchar * replace_markup (char * init, char * key, char * rep)
   return g_strdup_printf ("%s", buffer);
 }
 
+/*
+*  gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
+*
+*  Usage: 
+*
+*  gchar * init    : 
+*  gchar * o_motif : 
+*  gchar * n_motif : 
+*/
 gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
 {
   gchar * str_a, * str_b;
@@ -296,6 +365,13 @@ gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
   return str_a;
 }
 
+/*
+*  gchar * check_xml_string (gchar * init)
+*
+*  Usage: 
+*
+*  gchar * init : 
+*/
 gchar * check_xml_string (gchar * init)
 {
   gchar * str = g_strdup_printf ("%s", substitute_string (init, "--i--", "<i>"));
@@ -308,6 +384,13 @@ gchar * check_xml_string (gchar * init)
   return str;
 }
 
+/*
+*  int sml_preview (const char * filetoread)
+*
+*  Usage: 
+*
+*  const char * filetoread : 
+*/
 int sml_preview (const char * filetoread)
 {
   int i, j, k;
@@ -435,6 +518,14 @@ int sml_preview (const char * filetoread)
   return 1;
 }
 
+/*
+*  gchar * open_sml_file (const char * filetoread, int fam)
+*
+*  Usage: 
+*
+*  const char * filetoread : 
+*  int fam                 : 
+*/
 gchar * open_sml_file (const char * filetoread, int fam)
 {
   xmlDoc * doc;
@@ -488,6 +579,13 @@ gchar * open_sml_file (const char * filetoread, int fam)
   }
 }
 
+/*
+*  int get_family (gchar * str)
+*
+*  Usage: 
+*
+*  gchar * str : 
+*/
 int get_family (gchar * str)
 {
   int i;
@@ -498,6 +596,13 @@ int get_family (gchar * str)
   return -1;
 }
 
+/*
+*  void sort_files (int num_f)
+*
+*  Usage: 
+*
+*  int num_f : 
+*/
 void sort_files (int num_f)
 {
   int i, j;
@@ -523,6 +628,13 @@ void sort_files (int num_f)
   }
 }
 
+/*
+*  int get_sml_files ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int get_sml_files ()
 {
   int val = 0;
@@ -639,6 +751,13 @@ int get_sml_files ()
   return val;
 }
 
+/*
+*  void fill_molecule_tree (GtkListStore * store)
+*
+*  Usage: 
+*
+*  GtkListStore * store : 
+*/
 void fill_molecule_tree (GtkListStore * store)
 {
   GtkTreeIter mol_level;
@@ -658,6 +777,13 @@ void fill_molecule_tree (GtkListStore * store)
   }
 }
 
+/*
+*  void fill_family_tree (GtkListStore * store)
+*
+*  Usage: 
+*
+*  GtkListStore * store : 
+*/
 void fill_family_tree (GtkListStore * store)
 {
   GtkTreeIter family_level;
@@ -677,6 +803,13 @@ void fill_family_tree (GtkListStore * store)
   }
 }
 
+/*
+*  void insert_preview ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void insert_preview ()
 {
   gchar * str;
@@ -751,6 +884,15 @@ void insert_preview ()
   show_the_widgets (lib_preview_box);
 }
 
+/*
+*  void prepare_preview (int active, int id, gboolean visible)
+*
+*  Usage: 
+*
+*  int active       : 
+*  int id           : 
+*  gboolean visible : 
+*/
 void prepare_preview (int active, int id, gboolean visible)
 {
   if (sml_file_name != NULL)
@@ -831,6 +973,15 @@ void set_library_markup (GtkTreeViewColumn * col,
   g_free (str);
 }
 
+/*
+*  GtkWidget * library_tree (GtkListStore * store, int id, gchar * name)
+*
+*  Usage: 
+*
+*  GtkListStore * store : 
+*  int id               : 
+*  gchar * name         : 
+*/
 GtkWidget * library_tree (GtkListStore * store, int id, gchar * name)
 {
   GtkWidget * scrol = create_scroll (NULL, 150, 300, GTK_SHADOW_ETCHED_IN);
@@ -854,6 +1005,15 @@ GtkWidget * library_tree (GtkListStore * store, int id, gchar * name)
 gboolean lib_res;
 gboolean lib_visible;
 
+/*
+*  G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * lib  : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id, gpointer data)
 {
   gboolean done = FALSE;
@@ -891,6 +1051,15 @@ G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id,
   if (done) destroy_this_dialog (lib);
 }
 
+/*
+*  int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch)
+*
+*  Usage: 
+*
+*  gboolean visible           : 
+*  struct project * this_proj : 
+*  atom_search * asearch      : 
+*/
 int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch)
 {
   int active = activep;
@@ -927,6 +1096,16 @@ int select_from_library (gboolean visible, struct project * this_proj, atom_sear
   return lib_res;
 }
 
+/*
+*  int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch)
+*
+*  Usage: 
+*
+*  int id                     : 
+*  gboolean visible           : 
+*  struct project * this_proj : 
+*  atom_search * asearch      : 
+*/
 int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch)
 {
   sml_file_name = mol_name = NULL;

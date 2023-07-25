@@ -11,6 +11,20 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'legend.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid);
+
+*/
+
 #include <stdlib.h>
 #include <cairo.h>
 #include <pango/pangocairo.h>
@@ -20,6 +34,16 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern DataLayout * get_extra_layout (int i);
 
+/*
+*  void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid)
+*
+*  Usage: 
+*
+*  cairo_t * cr               : 
+*  struct project * this_proj : 
+*  int rid                    : 
+*  int cid                    : 
+*/
 void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {
   double x, y, z;

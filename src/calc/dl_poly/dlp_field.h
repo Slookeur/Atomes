@@ -11,6 +11,40 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'dlp_field.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  gui/bdcall.c
+  opengl/ogl_draw.c
+  opengl/ogl_utils.c
+  project/read_field.c
+  project/save_field.c
+  calc/dl_poly/dlp_active.c
+  calc/dl_poly/dlp_atom.c
+  calc/dl_poly/dlp_comp.c
+  calc/dl_poly/dlp_control.c
+  calc/dl_poly/dlp_copy.c
+  calc/dl_poly/dlp_edit.c
+  calc/dl_poly/dlp_ff_match.c
+  calc/dl_poly/dlp_field.c
+  calc/dl_poly/dlp_init.c
+  calc/dl_poly/dlp_mol.c
+  calc/dl_poly/dlp_print.c
+  calc/dl_poly/dlp_viz.c
+  calc/force_fields/force_fields.c
+  calc/lammps/la_print.c
+  opengl/draw/d_atoms.c
+  opengl/draw/d_bonds.c
+  opengl/draw/d_label.c
+  opengl/draw/d_poly.c
+  opengl/draw/d_selection.c
+
+*/
+
 #ifndef DLP_FIELD_H_
 #define DLP_FIELD_H_
 

@@ -11,6 +11,25 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'chainscall.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void initchn (int s);
+  void update_chains_menus (glwin * view);
+  void update_chains_view (struct project * this_proj);
+  void clean_chains_data (glwin * view);
+
+  G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data);
+
+*/
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -31,6 +50,13 @@ If not, see <https://www.gnu.org/licenses/> */
 extern gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb);
 extern void clean_coord_window (struct project * this_proj);
 
+/*
+*  void initchn (int s)
+*
+*  Usage: 
+*
+*  int s : 
+*/
 void initchn (int s)
 {
   int i;
@@ -43,6 +69,13 @@ void initchn (int s)
   active_project -> initok[CH] = TRUE;
 }
 
+/*
+*  void update_chains_menus (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void update_chains_menus (glwin * view)
 {
 #ifdef GTK3
@@ -58,6 +91,13 @@ void update_chains_menus (glwin * view)
 #endif
 }
 
+/*
+*  void update_chains_view (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void update_chains_view (struct project * this_proj)
 {
   int i, j, k, l;
@@ -201,6 +241,13 @@ void update_chains_view (struct project * this_proj)
   }
 }
 
+/*
+*  void clean_chains_data (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void clean_chains_data (glwin * view)
 {
   struct project * this_proj = get_project_by_id(view -> proj);
@@ -234,6 +281,14 @@ void clean_chains_data (glwin * view)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
 {
   int j, k;

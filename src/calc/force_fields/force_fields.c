@@ -11,6 +11,66 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'force_fields.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_pdim(int fid, int prop, int col);
+  int get_fkey(int fid, int prop, int col);
+  int find_atom_id (int print, char * keyw);
+  int find_atom_z (char * keyw);
+  int get_z (int faid);
+  int get_atoms (int z);
+  int get_bond (int faid, int bid);
+  int get_angle (int faid, int aid);
+  int get_apex (int faid, int aid);
+  int get_torsion (int faid, int tid, int a, int b);
+  int get_improper (int faid, int a, int b);
+  int get_vdw (int faid);
+  int get_bi (int faid);
+  int field_find_atoms ();
+
+  float get_force_field_atom_mass (int sp, int num);
+
+  gboolean not_done (int eid, int a, int b);
+  gboolean not_done_an (int eid, int a, int b, int c);
+  gboolean is_a_match (int * data, int num, int val[4]);
+
+  gchar * find_atom_key (int fid, int prop, char * keyw);
+  gchar * open_field_file (int field);
+
+  void associate_pointers_to_field_data (int id);
+  void print_object_dim_and_key_tables (int fid);
+  void set_data (int pid, int obj, int oid, int faid);
+  void field_has_element (int aid);
+  void print_atom_table (int fid);
+  void print_this_bond (int eid, int h, int fid, int inum, char * at_a, char * at_b, char ** the_bond);
+  void print_bond_table (int fid, int inum);
+  void print_this_angle (int eid, int h, int fid, int inum, int ub, char * at_a, char * at_b, char * at_c, char ** the_angle);
+  void print_angle_table (int fid, int inum);
+  void print_dihedral_table (int fid, int inum);
+  void print_improper_table (int fid, int inum);
+  void print_inversion_table (int fid, int inum);
+  void print_vdw_table (int fid, int inum);
+  void print_increment_table (int fid, int inum);
+  void find_object_ijkl (int hid, int foid, int oid, int sa, int za, int sb, int zb, int sc, int zc, int sd, int zd);
+  void field_find_bonds ();
+  void field_find_angles ();
+  void field_find_dihedrals (int id);
+  void field_find_vdw ();
+  void print_all (int oid);
+  void clean_this_field_data (xmlDoc * doc, xmlTextReaderPtr reader);
+
+  G_MODULE_EXPORT void setup_this_force_field (int id);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "dlp_field.h"
@@ -207,6 +267,15 @@ int ffpot[N_FIELDS][10]={{1, 0, 0, 1, 0, 1, 0, 1, 0, 1},
                         {1, 0, 0, 1, 0, 1, 0, 1, 0, 1}};
 
 
+/*
+*  int get_pdim(int fid, int prop, int col)
+*
+*  Usage: 
+*
+*  int fid  : 
+*  int prop : 
+*  int col  : 
+*/
 int get_pdim(int fid, int prop, int col)
 {
   if (prop == 0) return field_dim[0];
@@ -216,6 +285,15 @@ int get_pdim(int fid, int prop, int col)
   return ffdim[prop][col];
 }
 
+/*
+*  int get_fkey(int fid, int prop, int col)
+*
+*  Usage: 
+*
+*  int fid  : 
+*  int prop : 
+*  int col  : 
+*/
 int get_fkey(int fid, int prop, int col)
 {
   return ffdim[prop][col];
@@ -381,6 +459,13 @@ void allocate_field_data (int * objects, int * dim,
   }
 }
 
+/*
+*  void associate_pointers_to_field_data (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 void associate_pointers_to_field_data (int id)
 {
   switch (id)
@@ -506,6 +591,14 @@ void associate_pointers_to_field_data (int id)
 }
 #endif
 
+/*
+*  int find_atom_id (int print, char * keyw)
+*
+*  Usage: 
+*
+*  int print   : 
+*  char * keyw : 
+*/
 int find_atom_id (int print, char * keyw)
 {
   int i;
@@ -521,6 +614,15 @@ int find_atom_id (int print, char * keyw)
   return -10;
 }
 
+/*
+*  gchar * find_atom_key (int fid, int prop, char * keyw)
+*
+*  Usage: 
+*
+*  int fid     : 
+*  int prop    : 
+*  char * keyw : 
+*/
 gchar * find_atom_key (int fid, int prop, char * keyw)
 {
   if (fid > CHARMMSI && fid < OPLSAAP)
@@ -555,6 +657,13 @@ gchar * find_atom_key (int fid, int prop, char * keyw)
   }
 }
 
+/*
+*  int find_atom_z (char * keyw)
+*
+*  Usage: 
+*
+*  char * keyw : 
+*/
 int find_atom_z (char * keyw)
 {
   int i, j;
@@ -580,6 +689,13 @@ int find_atom_z (char * keyw)
   return -10;
 }
 
+/*
+*  void print_object_dim_and_key_tables (int fid)
+*
+*  Usage: 
+*
+*  int fid : 
+*/
 void print_object_dim_and_key_tables (int fid)
 {
   gchar * nodes[11]={"atoms", "bonds-h", "bonds-q", "bonds-m", "angles-h", "angles-q",
@@ -627,6 +743,16 @@ void print_object_dim_and_key_tables (int fid)
 struct object_match ** all_data[10];
 struct object_match * om_tmp;
 
+/*
+*  void set_data (int pid, int obj, int oid, int faid)
+*
+*  Usage: 
+*
+*  int pid  : 
+*  int obj  : 
+*  int oid  : 
+*  int faid : 
+*/
 void set_data (int pid, int obj, int oid, int faid)
 {
   if (all_data[pid][faid] == NULL)
@@ -644,6 +770,13 @@ void set_data (int pid, int obj, int oid, int faid)
   om_tmp -> oid = oid;
 }
 
+/*
+*  int get_z (int faid)
+*
+*  Usage: 
+*
+*  int faid : 
+*/
 int get_z (int faid)
 {
   int i;
@@ -654,6 +787,13 @@ int get_z (int faid)
   return -1;
 }
 
+/*
+*  int get_atoms (int z)
+*
+*  Usage: 
+*
+*  int z : 
+*/
 int get_atoms (int z)
 {
   int i, j;
@@ -669,6 +809,14 @@ int get_atoms (int z)
   return j;
 }
 
+/*
+*  int get_bond (int faid, int bid)
+*
+*  Usage: 
+*
+*  int faid : 
+*  int bid  : 
+*/
 int get_bond (int faid, int bid)
 {
   int i, j;
@@ -687,6 +835,14 @@ int get_bond (int faid, int bid)
   return j;
 }
 
+/*
+*  int get_angle (int faid, int aid)
+*
+*  Usage: 
+*
+*  int faid : 
+*  int aid  : 
+*/
 int get_angle (int faid, int aid)
 {
   int i, j;
@@ -705,6 +861,14 @@ int get_angle (int faid, int aid)
   return j;
 }
 
+/*
+*  int get_apex (int faid, int aid)
+*
+*  Usage: 
+*
+*  int faid : 
+*  int aid  : 
+*/
 int get_apex (int faid, int aid)
 {
   int i, j;
@@ -723,6 +887,16 @@ int get_apex (int faid, int aid)
   return j;
 }
 
+/*
+*  int get_torsion (int faid, int tid, int a, int b)
+*
+*  Usage: 
+*
+*  int faid : 
+*  int tid  : 
+*  int a    : 
+*  int b    : 
+*/
 int get_torsion (int faid, int tid, int a, int b)
 {
   int i, j;
@@ -741,6 +915,15 @@ int get_torsion (int faid, int tid, int a, int b)
   return j;
 }
 
+/*
+*  int get_improper (int faid, int a, int b)
+*
+*  Usage: 
+*
+*  int faid : 
+*  int a    : 
+*  int b    : 
+*/
 int get_improper (int faid, int a, int b)
 {
   int i, j;
@@ -759,6 +942,13 @@ int get_improper (int faid, int a, int b)
   return j;
 }
 
+/*
+*  int get_vdw (int faid)
+*
+*  Usage: 
+*
+*  int faid : 
+*/
 int get_vdw (int faid)
 {
   int i, j;
@@ -777,6 +967,13 @@ int get_vdw (int faid)
   return j;
 }
 
+/*
+*  int get_bi (int faid)
+*
+*  Usage: 
+*
+*  int faid : 
+*/
 int get_bi (int faid)
 {
   int i, j;
@@ -795,6 +992,13 @@ int get_bi (int faid)
   return j;
 }
 
+/*
+*  void field_has_element (int aid)
+*
+*  Usage: 
+*
+*  int aid : 
+*/
 void field_has_element (int aid)
 {
   int h, i, j, k, l, m, n, o, p, q, r, s;
@@ -820,6 +1024,13 @@ void field_has_element (int aid)
   fprintf (fp, "{%3i,%3i,%3i,%3i,%3i,%3i,%3i,%3i,%3i,%3i}", j, k, l, m, n, o, p, q, r, s);
 }
 
+/*
+*  void print_atom_table (int fid)
+*
+*  Usage: 
+*
+*  int fid : 
+*/
 void print_atom_table (int fid)
 {
   int i, j;
@@ -848,6 +1059,15 @@ struct bond{
 struct bond * the_bonds[2];
 struct bond * tmpbd;
 
+/*
+*  gboolean not_done (int eid, int a, int b)
+*
+*  Usage: 
+*
+*  int eid : 
+*  int a   : 
+*  int b   : 
+*/
 gboolean not_done (int eid, int a, int b)
 {
   tmpbd = the_bonds[eid];
@@ -860,6 +1080,19 @@ gboolean not_done (int eid, int a, int b)
   return TRUE;
 }
 
+/*
+*  void print_this_bond (int eid, int h, int fid, int inum, char * at_a, char * at_b, char ** the_bond)
+*
+*  Usage: 
+*
+*  int eid          : 
+*  int h            : 
+*  int fid          : 
+*  int inum         : 
+*  char * at_a      : 
+*  char * at_b      : 
+*  char ** the_bond : 
+*/
 void print_this_bond (int eid, int h, int fid, int inum, char * at_a, char * at_b, char ** the_bond)
 {
   int j;
@@ -928,6 +1161,14 @@ void print_this_bond (int eid, int h, int fid, int inum, char * at_a, char * at_
   g_free (bbb);
 }
 
+/*
+*  void print_bond_table (int fid, int inum)
+*
+*  Usage: 
+*
+*  int fid  : 
+*  int inum : 
+*/
 void print_bond_table (int fid, int inum)
 {
   int h, i;//, j, k, l, m;
@@ -1057,6 +1298,16 @@ struct angl{
 struct angl * the_angles[2];
 struct angl * tmpan;
 
+/*
+*  gboolean not_done_an (int eid, int a, int b, int c)
+*
+*  Usage: 
+*
+*  int eid : 
+*  int a   : 
+*  int b   : 
+*  int c   : 
+*/
 gboolean not_done_an (int eid, int a, int b, int c)
 {
   tmpan = the_angles[eid];
@@ -1069,6 +1320,21 @@ gboolean not_done_an (int eid, int a, int b, int c)
   return TRUE;
 }
 
+/*
+*  void print_this_angle (int eid, int h, int fid, int inum, int ub, char * at_a, char * at_b, char * at_c, char ** the_angle)
+*
+*  Usage: 
+*
+*  int eid           : 
+*  int h             : 
+*  int fid           : 
+*  int inum          : 
+*  int ub            : 
+*  char * at_a       : 
+*  char * at_b       : 
+*  char * at_c       : 
+*  char ** the_angle : 
+*/
 void print_this_angle (int eid, int h, int fid, int inum, int ub, char * at_a, char * at_b, char * at_c, char ** the_angle)
 {
   int j;
@@ -1141,6 +1407,14 @@ void print_this_angle (int eid, int h, int fid, int inum, int ub, char * at_a, c
   g_free (ccc);
 }
 
+/*
+*  void print_angle_table (int fid, int inum)
+*
+*  Usage: 
+*
+*  int fid  : 
+*  int inum : 
+*/
 void print_angle_table (int fid, int inum)
 {
   int h, i;//, j, k, l;
@@ -1383,6 +1657,14 @@ void print_angle_table (int fid, int inum)
   }
 }
 
+/*
+*  void print_dihedral_table (int fid, int inum)
+*
+*  Usage: 
+*
+*  int fid  : 
+*  int inum : 
+*/
 void print_dihedral_table (int fid, int inum)
 {
   int h, i, j;
@@ -1444,6 +1726,14 @@ void print_dihedral_table (int fid, int inum)
   }
 }
 
+/*
+*  void print_improper_table (int fid, int inum)
+*
+*  Usage: 
+*
+*  int fid  : 
+*  int inum : 
+*/
 void print_improper_table (int fid, int inum)
 {
   int i, j;
@@ -1499,6 +1789,14 @@ void print_improper_table (int fid, int inum)
   }
 }
 
+/*
+*  void print_inversion_table (int fid, int inum)
+*
+*  Usage: 
+*
+*  int fid  : 
+*  int inum : 
+*/
 void print_inversion_table (int fid, int inum)
 {
   int i;
@@ -1532,6 +1830,14 @@ void print_inversion_table (int fid, int inum)
   }
 }
 
+/*
+*  void print_vdw_table (int fid, int inum)
+*
+*  Usage: 
+*
+*  int fid  : 
+*  int inum : 
+*/
 void print_vdw_table (int fid, int inum)
 {
   int i, j, k, l;
@@ -1614,6 +1920,14 @@ void print_vdw_table (int fid, int inum)
   }
 }
 
+/*
+*  void print_increment_table (int fid, int inum)
+*
+*  Usage: 
+*
+*  int fid  : 
+*  int inum : 
+*/
 void print_increment_table (int fid, int inum)
 {
 
@@ -1639,6 +1953,13 @@ int * ff_dim;
 int * ff_info;
 int * ff_key;
 
+/*
+*  int field_find_atoms ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int field_find_atoms ()
 {
   int i, j, k, l;
@@ -1685,6 +2006,15 @@ int field_find_atoms ()
 
 int is_extra;
 
+/*
+*  gboolean is_a_match (int * data, int num, int val[4])
+*
+*  Usage: 
+*
+*  int * data : 
+*  int num    : 
+*  int val[4] : 
+*/
 gboolean is_a_match (int * data, int num, int val[4])
 {
   int i;
@@ -1696,6 +2026,23 @@ gboolean is_a_match (int * data, int num, int val[4])
   return TRUE;
 }
 
+/*
+*  void find_object_ijkl (int hid, int foid, int oid, int sa, int za, int sb, int zb, int sc, int zc, int sd, int zd)
+*
+*  Usage: 
+*
+*  int hid  : 
+*  int foid : 
+*  int oid  : 
+*  int sa   : 
+*  int za   : 
+*  int sb   : 
+*  int zb   : 
+*  int sc   : 
+*  int zc   : 
+*  int sd   : 
+*  int zd   : 
+*/
 void find_object_ijkl (int hid, int foid, int oid, int sa, int za, int sb, int zb, int sc, int zc, int sd, int zd)
 {
   int h, i;
@@ -1784,6 +2131,13 @@ void find_object_ijkl (int hid, int foid, int oid, int sa, int za, int sb, int z
   }
 }
 
+/*
+*  void field_find_bonds ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void field_find_bonds ()
 {
   int i, j, k, l;
@@ -1813,6 +2167,13 @@ void field_find_bonds ()
   }
 }
 
+/*
+*  void field_find_angles ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void field_find_angles ()
 {
   int i, j, k, l, m, n;
@@ -1840,6 +2201,13 @@ void field_find_angles ()
   }
 }
 
+/*
+*  void field_find_dihedrals (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 void field_find_dihedrals (int id)
 {
   int i, j, k, l, m, n, o, p, q;
@@ -1875,6 +2243,13 @@ void field_find_dihedrals (int id)
   }
 }
 
+/*
+*  void field_find_vdw ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void field_find_vdw ()
 {
   int i, j;
@@ -1888,6 +2263,13 @@ void field_find_vdw ()
   }
 }
 
+/*
+*  void print_all (int oid)
+*
+*  Usage: 
+*
+*  int oid : 
+*/
 void print_all (int oid)
 {
   gchar * prop[7] =  {"atom", "bond", "angle", "dihedral", "improper", "inversion", "vdw"};
@@ -1903,6 +2285,14 @@ void print_all (int oid)
   }
 }
 
+/*
+*  float get_force_field_atom_mass (int sp, int num)
+*
+*  Usage: 
+*
+*  int sp  : 
+*  int num : 
+*/
 float get_force_field_atom_mass (int sp, int num)
 {
   g_debug ("sp= %d, atoms_id[%d]= %d, num= %d", sp, sp, atoms_id[sp], num);
@@ -1920,6 +2310,14 @@ float get_force_field_atom_mass (int sp, int num)
 
 gchar * filetoread;
 
+/*
+*  void clean_this_field_data (xmlDoc * doc, xmlTextReaderPtr reader)
+*
+*  Usage: 
+*
+*  xmlDoc * doc            : 
+*  xmlTextReaderPtr reader : 
+*/
 void clean_this_field_data (xmlDoc * doc, xmlTextReaderPtr reader)
 {
   clean_xml_data (doc, reader);
@@ -1972,6 +2370,13 @@ void clean_this_field_data (xmlDoc * doc, xmlTextReaderPtr reader)
   }
 }
 
+/*
+*  gchar * open_field_file (int field)
+*
+*  Usage: 
+*
+*  int field : 
+*/
 gchar * open_field_file (int field)
 {
   int i, j;
@@ -2415,6 +2820,13 @@ gchar * open_field_file (int field)
 
 #endif
 
+/*
+*  G_MODULE_EXPORT void setup_this_force_field (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 G_MODULE_EXPORT void setup_this_force_field (int id)
 {
 #ifdef USE_ATOMS

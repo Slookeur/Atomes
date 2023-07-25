@@ -11,6 +11,22 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'project.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void send_steps_ (int * steps);
+
+  struct project * get_project_by_id (int p);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "callbacks.h"
@@ -66,11 +82,25 @@ void save_pos_ (int * nat,
   }
 }
 
+/*
+*  void send_steps_ (int * steps)
+*
+*  Usage: 
+*
+*  int * steps : 
+*/
 void send_steps_ (int * steps)
 {
   active_project -> steps = * steps;
 }
 
+/*
+*  struct project * get_project_by_id (int p)
+*
+*  Usage: 
+*
+*  int p : 
+*/
 struct project * get_project_by_id (int p)
 {
   struct project * tmp = workzone.first;

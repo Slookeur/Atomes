@@ -11,6 +11,32 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'curve.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  double scale (double axe);
+
+  void prep_plot (struct project * this_proj, int rid, int cid);
+  void clean_this_curve_window (int cid, int rid);
+  void set_curve_data_zero (int rid, int cid, int interv);
+  void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid);
+  void hide_curves (struct project * this_proj, int c);
+  void remove_this_curve_from_extras (int a, int b, int c);
+  void erase_curves (struct project * this_proj, int c);
+  void update_curves ();
+  void update_curve (gpointer data);
+
+  thedash * selectdash (int iddash);
+
+*/
+
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdlib.h>
@@ -89,6 +115,13 @@ int len9 = sizeof(dashed9) / sizeof(dashed9[0]);;
 const double pdashed[] = {1.0};
 int lenp = 1;
 
+/*
+*  thedash * selectdash (int iddash)
+*
+*  Usage: 
+*
+*  int iddash : 
+*/
 thedash * selectdash (int iddash)
 {
   thedash * dashtab;
@@ -152,6 +185,13 @@ thedash * selectdash (int iddash)
   return (dashtab);
 }
 
+/*
+*  double scale (double axe)
+*
+*  Usage: 
+*
+*  double axe : 
+*/
 double scale (double axe)
 {
   double xs;
@@ -254,6 +294,15 @@ double scale (double axe)
   return (xs);
 }
 
+/*
+*  void prep_plot (struct project * this_proj, int rid, int cid)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int rid                    : 
+*  int cid                    : 
+*/
 void prep_plot (struct project * this_proj, int rid, int cid)
 {
   x_min = resol[0] * this_proj -> curves[rid][cid] -> frame_pos[0][0];
@@ -269,6 +318,14 @@ void prep_plot (struct project * this_proj, int rid, int cid)
   YDRAW = y_max - y_min;
 }
 
+/*
+*  void clean_this_curve_window (int cid, int rid)
+*
+*  Usage: 
+*
+*  int cid : 
+*  int rid : 
+*/
 void clean_this_curve_window (int cid, int rid)
 {
   /*if (active_project -> curves[rid][cid] -> window != NULL)
@@ -291,6 +348,15 @@ void clean_this_curve_window (int cid, int rid)
   active_project -> curves[rid][cid] -> ndata = 0;
 }
 
+/*
+*  void set_curve_data_zero (int rid, int cid, int interv)
+*
+*  Usage: 
+*
+*  int rid    : 
+*  int cid    : 
+*  int interv : 
+*/
 void set_curve_data_zero (int rid, int cid, int interv)
 {
   active_project -> curves[rid][cid] -> ndata = interv;
@@ -302,6 +368,16 @@ void set_curve_data_zero (int rid, int cid, int interv)
   }
 }
 
+/*
+*  void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
+*
+*  Usage: 
+*
+*  int * interv               : 
+*  double datacurve[* interv] : 
+*  double datacurve[* interv] : 
+*  double datacurve[* interv] : 
+*/
 void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
 {
   int i, j;
@@ -355,6 +431,14 @@ void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid
   }
 }
 
+/*
+*  void hide_curves (struct project * this_proj, int c)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int c                      : 
+*/
 void hide_curves (struct project * this_proj, int c)
 {
   int i;
@@ -377,6 +461,15 @@ void hide_curves (struct project * this_proj, int c)
   }
 }
 
+/*
+*  void remove_this_curve_from_extras (int a, int b, int c)
+*
+*  Usage: 
+*
+*  int a : 
+*  int b : 
+*  int c : 
+*/
 void remove_this_curve_from_extras (int a, int b, int c)
 {
   int i, j, k, l;
@@ -413,6 +506,14 @@ void remove_this_curve_from_extras (int a, int b, int c)
   }
 }
 
+/*
+*  void erase_curves (struct project * this_proj, int c)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int c                      : 
+*/
 void erase_curves (struct project * this_proj, int c)
 {
   int i, j;
@@ -441,6 +542,13 @@ void erase_curves (struct project * this_proj, int c)
   }
 }
 
+/*
+*  void update_curves ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void update_curves ()
 {
   int i, j, k;
@@ -464,6 +572,13 @@ void update_curves ()
   }
 }
 
+/*
+*  void update_curve (gpointer data)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*/
 void update_curve (gpointer data)
 {
   tint * cd = (tint *)data;

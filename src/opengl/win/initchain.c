@@ -11,6 +11,22 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'initchain.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta]);
+  void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num]);
+  void allocate_all_chains_ (int * st, int * ta, int * nring);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "gui.h"
@@ -18,6 +34,16 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "color_box.h"
 #include "glwindow.h"
 
+/*
+*  void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
+*
+*  Usage: 
+*
+*  int * st         : 
+*  int * ta         : 
+*  int * ri         : 
+*  int nchain[* ta] : 
+*/
 void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
 {
   int i;
@@ -27,6 +53,17 @@ void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
   }
 }
 
+/*
+*  void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
+*
+*  Usage: 
+*
+*  int * st          : 
+*  int * at          : 
+*  int * ta          : 
+*  int * num         : 
+*  int nchain[* num] : 
+*/
 void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
 {
   if (nchain != NULL)
@@ -41,6 +78,15 @@ void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int n
   }
 }
 
+/*
+*  void allocate_all_chains_ (int * st, int * ta, int * nring)
+*
+*  Usage: 
+*
+*  int * st    : 
+*  int * ta    : 
+*  int * nring : 
+*/
 void allocate_all_chains_ (int * st, int * ta, int * nring)
 {
   active_glwin -> all_chains[* st][* ta - 1] = allocdint (* nring, * ta);

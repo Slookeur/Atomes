@@ -11,6 +11,25 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_proj.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * menu_proj (glwin * view);
+
+  GMenu * menu_proj (glwin * view, int popm);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "glwindow.h"
@@ -24,6 +43,14 @@ enum position {
   BACK = 5,
 };
 
+/*
+*  G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 {
   tint * id = (tint *)data;
@@ -70,6 +97,13 @@ G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
+/*
+*  GtkWidget * menu_proj (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 GtkWidget * menu_proj (glwin * view)
 {
   GtkWidget * menup = gtk_menu_new ();
@@ -95,11 +129,28 @@ GtkWidget * menu_proj (glwin * view)
   return menup;
 }
 #else
+/*
+*  G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   set_camera_pos (NULL, data);
 }
 
+/*
+*  GMenu * menu_proj (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_proj (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();

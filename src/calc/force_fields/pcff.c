@@ -12,6 +12,16 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 /*
+* This file: 'pcff.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*/
+
+/*
   PCFF force field, data from taken from the 'PCFF.frc' file
 
   This file contains several tables:

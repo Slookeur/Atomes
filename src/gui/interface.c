@@ -11,6 +11,53 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'interface.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int dummy_ask_ (char * question);
+  int iask (char * question, char * lab, int id, GtkWidget * win);
+
+  gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg);
+
+  G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data);
+  G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event, gpointer data);
+
+  gchar * exact_name (gchar * name);
+  gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win);
+  gchar * textcolor (int i);
+  gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer);
+
+  void show_web (GtkWidget * dialog, int id);
+  void show_info (char * information, int val, GtkWidget * win);
+  void show_info_ (double * valdij);
+  void show_warning (char * warning, GtkWidget * win);
+  void show_warning_ (char * warning, char * sub, char * tab);
+  void show_error (char * error, int val, GtkWidget * win);
+  void show_error_ (char * error, char * sub, char * tab);
+  void init_data_ (int * nats, int * nspc, int * stps, int * cid);
+  void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer);
+  void send_chem_info_ (int prop[active_project -> nspec]);
+  void set_progress_ (gdouble * prog);
+  void update_after_calc (int calc);
+
+  G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer data);
+  G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data);
+
+  GtkWidget * addweb (int id);
+  GtkWidget * show_pop (char * pop, GtkWidget * pwin);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "callbacks.h"
@@ -79,6 +126,13 @@ extern void display_cheminfo_ (int * s,
   g_free (url);
 } */
 
+/*
+*  GtkWidget * addweb (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 GtkWidget * addweb (int id)
 {
   GtkWidget * web;
@@ -109,6 +163,14 @@ GtkWidget * addweb (int id)
   return (vbox);
 }
 
+/*
+*  G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
 {
   GtkWidget * aboutdialog;
@@ -142,6 +204,14 @@ G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
   run_this_gtk_dialog (aboutdialog,  G_CALLBACK(destroy_this_dialog), NULL);
 }
 
+/*
+*  void show_web (GtkWidget * dialog, int id)
+*
+*  Usage: 
+*
+*  GtkWidget * dialog : 
+*  int id             : 
+*/
 void show_web (GtkWidget * dialog, int id)
 {
   GtkWidget * box  = dialog_get_content_area (dialog);
@@ -151,6 +221,15 @@ void show_web (GtkWidget * dialog, int id)
   show_the_widgets (box);
 }
 
+/*
+*  void show_info (char * information, int val, GtkWidget * win)
+*
+*  Usage: 
+*
+*  char * information : 
+*  int val            : 
+*  GtkWidget * win    : 
+*/
 void show_info (char * information, int val, GtkWidget * win)
 {
   gchar * info=NULL;
@@ -169,6 +248,13 @@ void show_info (char * information, int val, GtkWidget * win)
   g_free (info);
 }
 
+/*
+*  void show_info_ (double * valdij)
+*
+*  Usage: 
+*
+*  double * valdij : 
+*/
 void show_info_ (double * valdij)
 {
   /* This function is called from fortran 90 */
@@ -181,12 +267,29 @@ void show_info_ (double * valdij)
   g_free (itot);
 }
 
+/*
+*  void show_warning (char * warning, GtkWidget * win)
+*
+*  Usage: 
+*
+*  char * warning  : 
+*  GtkWidget * win : 
+*/
 void show_warning (char * warning, GtkWidget * win)
 {
   GtkWidget * dialog = message_dialogmodal (warning,  "Warning", GTK_MESSAGE_WARNING, GTK_BUTTONS_OK, win);
   run_this_gtk_dialog (dialog, G_CALLBACK(run_destroy_dialog), NULL);
 }
 
+/*
+*  void show_warning_ (char * warning, char * sub, char * tab)
+*
+*  Usage: 
+*
+*  char * warning : 
+*  char * sub     : 
+*  char * tab     : 
+*/
 void show_warning_ (char * warning, char * sub, char * tab)
 {
   /* This function is called from fortran 90 */
@@ -196,6 +299,15 @@ void show_warning_ (char * warning, char * sub, char * tab)
   g_free (wtot);
 }
 
+/*
+*  void show_error (char * error, int val, GtkWidget * win)
+*
+*  Usage: 
+*
+*  char * error    : 
+*  int val         : 
+*  GtkWidget * win : 
+*/
 void show_error (char * error, int val, GtkWidget * win)
 {
   gchar * etot=NULL;
@@ -214,6 +326,15 @@ void show_error (char * error, int val, GtkWidget * win)
   g_free (etot);
 }
 
+/*
+*  void show_error_ (char * error, char * sub, char * tab)
+*
+*  Usage: 
+*
+*  char * error : 
+*  char * sub   : 
+*  char * tab   : 
+*/
 void show_error_ (char * error, char * sub, char * tab)
 {
   /* This function is called from fortran 90 */
@@ -225,12 +346,31 @@ void show_error_ (char * error, char * sub, char * tab)
 
 gboolean res_yes_no;
 
+/*
+*  G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * dial : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer data)
 {
   res_yes_no = (response_id == GTK_RESPONSE_YES) ? TRUE : FALSE;
   destroy_this_dialog (dial);
 }
 
+/*
+*  gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
+*
+*  Usage: 
+*
+*  gchar * title    : 
+*  gchar * text     : 
+*  int type         : 
+*  GtkWidget * widg : 
+*/
 gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
 {
   GtkWidget * dialog = message_dialogmodal (text, title, type, GTK_BUTTONS_YES_NO, widg);
@@ -238,6 +378,13 @@ gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
   return res_yes_no;
 }
 
+/*
+*  gchar * exact_name (gchar * name)
+*
+*  Usage: 
+*
+*  gchar * name : 
+*/
 gchar * exact_name (gchar * name)
 {
   gchar * exact_name = NULL;
@@ -260,6 +407,14 @@ gchar * exact_name (gchar * name)
   return exact_name;
 }
 
+/*
+*  GtkWidget * show_pop (char * pop, GtkWidget * pwin)
+*
+*  Usage: 
+*
+*  char * pop       : 
+*  GtkWidget * pwin : 
+*/
 GtkWidget * show_pop (char * pop, GtkWidget * pwin)
 {
   GtkWidget * wpop = create_win ("Information", pwin, TRUE, FALSE);
@@ -276,8 +431,25 @@ GtkWidget * show_pop (char * pop, GtkWidget * pwin)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWindow * widget : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widget : 
+*  GdkEvent * event   : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event, gpointer data)
 #endif
 {
@@ -292,6 +464,13 @@ G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event,
   return TRUE;
 }
 
+/*
+*  int dummy_ask_ (char * question)
+*
+*  Usage: 
+*
+*  char * question : 
+*/
 int dummy_ask_ (char * question)
 {
   GtkWidget * dask = message_dialogmodal (question, "Parameter required", GTK_MESSAGE_INFO, GTK_BUTTONS_YES_NO, MainWindow);
@@ -312,6 +491,14 @@ gchar * npt_info[3]={"1 line by step, as many lines as MD steps",
                      "3 lines by step, three times as many lines as MD steps"};
 GtkWidget * answer_info;
 
+/*
+*  G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
 {
   int i, j;
@@ -322,6 +509,15 @@ G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
 
 int res_int;
 
+/*
+*  G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * iask : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data)
 {
   int i = GPOINTER_TO_INT(data);
@@ -355,6 +551,16 @@ G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data
   if (done) destroy_this_dialog (iask);
 }
 
+/*
+*  int iask (char * question, char * lab, int id, GtkWidget * win)
+*
+*  Usage: 
+*
+*  char * question : 
+*  char * lab      : 
+*  int id          : 
+*  GtkWidget * win : 
+*/
 int iask (char * question, char * lab, int id, GtkWidget * win)
 {
   GtkWidget * iask;
@@ -421,6 +627,15 @@ int iask (char * question, char * lab, int id, GtkWidget * win)
 
 gchar * res_char;
 
+/*
+*  G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * cask : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data)
 {
   int i = GPOINTER_TO_INT(data);
@@ -451,6 +666,17 @@ G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data
   if (done) destroy_this_dialog (cask);
 }
 
+/*
+*  gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
+*
+*  Usage: 
+*
+*  char * question : 
+*   char * lab     : 
+*  int id          : 
+*  char * old      : 
+*  GtkWidget * win : 
+*/
 gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
 {
   GtkWidget * cask;
@@ -478,6 +704,16 @@ gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
   return (res_char);
 }
 
+/*
+*  void init_data_ (int * nats, int * nspc, int * stps, int * cid)
+*
+*  Usage: 
+*
+*  int * nats : 
+*  int * nspc : 
+*  int * stps : 
+*  int * cid  : 
+*/
 void init_data_ (int * nats, int * nspc, int * stps, int * cid)
 {
   active_project -> natomes = * nats;
@@ -506,6 +742,15 @@ void spec_data_ (int * status, int * ind, int * atd, int * nsp,
   }
 }
 
+/*
+*  void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  gchar * str            : 
+*  gchar * stag           : 
+*  GtkTextBuffer * buffer : 
+*/
 void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
 {
   GtkTextIter bEnd;
@@ -524,6 +769,13 @@ void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
   }
 }
 
+/*
+*  gchar * textcolor (int i)
+*
+*  Usage: 
+*
+*  int i : 
+*/
 gchar * textcolor (int i)
 {
   gchar * col = NULL;
@@ -606,6 +858,13 @@ void lattice_info_ (int * bid, double * volume, double * density,
   }
 }
 
+/*
+*  void send_chem_info_ (int prop[active_project -> nspec])
+*
+*  Usage: 
+*
+*  int prop[active_project -> nspec] : 
+*/
 void send_chem_info_ (int prop[active_project -> nspec])
 {
   int i;
@@ -615,6 +874,13 @@ void send_chem_info_ (int prop[active_project -> nspec])
   }
 }
 
+/*
+*  void set_progress_ (gdouble * prog)
+*
+*  Usage: 
+*
+*  gdouble * prog : 
+*/
 void set_progress_ (gdouble * prog)
 {
 #ifdef GTK3
@@ -623,6 +889,17 @@ void set_progress_ (gdouble * prog)
 #endif
 }
 
+/*
+*  gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int g                      : 
+*  int s                      : 
+*  int f                      : 
+*  GtkTextBuffer * buffer     : 
+*/
 gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
 {
   int l, m;
@@ -704,6 +981,13 @@ gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer
   return strb;
 }
 
+/*
+*  void update_after_calc (int calc)
+*
+*  Usage: 
+*
+*  int calc : 
+*/
 void update_after_calc (int calc)
 {
   int i, j;

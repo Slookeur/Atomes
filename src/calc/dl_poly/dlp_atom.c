@@ -11,6 +11,27 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'dlp_atom.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void clean_old_atom (struct field_atom * at, int atos, int * atid);
+  void adjust_field_struct (int oid, int k, struct field_struct * olds);
+  void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda);
+
+  G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint response_id, gpointer data);
+  G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+*/
+
 #include "dlp_field.h"
 #include "calc.h"
 #include "interface.h"
@@ -111,6 +132,15 @@ G_MODULE_EXPORT void select_field_atom (GtkCellRendererToggle * cell_renderer,
   gtk_label_set_use_markup (GTK_LABEL(remove_label), TRUE);
 }
 
+/*
+*  void clean_old_atom (struct field_atom * at, int atos, int * atid)
+*
+*  Usage: 
+*
+*  struct field_atom * at : 
+*  int atos               : 
+*  int * atid             : 
+*/
 void clean_old_atom (struct field_atom * at, int atos, int * atid)
 {
   int h, i, j, k, l, m;
@@ -157,6 +187,15 @@ void clean_old_atom (struct field_atom * at, int atos, int * atid)
 }
 
 // extern void print_all_field_struct (struct field_molecule * mol, int str);
+/*
+*  void adjust_field_struct (int oid, int k, struct field_struct * olds)
+*
+*  Usage: 
+*
+*  int oid                    : 
+*  int k                      : 
+*  struct field_struct * olds : 
+*/
 void adjust_field_struct (int oid, int k, struct field_struct * olds)
 {
   int i, j;
@@ -209,6 +248,15 @@ void adjust_field_struct (int oid, int k, struct field_struct * olds)
   g_free (aids);
 }
 
+/*
+*  G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * add_dialog : 
+*  gint response_id       : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_id, gpointer data)
 {
   gboolean done = FALSE;
@@ -286,6 +334,15 @@ G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_
   }
 }
 
+/*
+*  G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * select_dialog : 
+*  gint response_id          : 
+*  gpointer data             : 
+*/
 G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint response_id, gpointer data)
 {
   int sid = GPOINTER_TO_INT (data);
@@ -473,6 +530,15 @@ G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint res
   }
 }
 
+/*
+*  void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda)
+*
+*  Usage: 
+*
+*  struct field_atom * to_merge  : 
+*  struct field_atom * to_remove : 
+*  gboolean upda                 : 
+*/
 void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda)
 {
   int * tmp_ato = allocint (to_merge -> num + to_remove -> num);
@@ -539,6 +605,15 @@ void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove,
   }
 }
 
+/*
+*  G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * rmol : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint response_id, gpointer data)
 {
   int i, j, k;
@@ -609,6 +684,15 @@ G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint
   if (done) destroy_this_dialog (rmol);
 }
 
+/*
+*  G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   at_to_remove = (struct field_atom *) data;

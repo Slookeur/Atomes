@@ -11,8 +11,39 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'atom_coord.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc);
+
+  void print_coord_info (struct project * this_proj, coord_info * coord);
+  void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag);
+
+  coord_info * duplicate_coord_info (coord_info * old_coord);
+
+*/
+
 #include "atom_edit.h"
 
+/*
+*  int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int spec                   : 
+*  int gid                    : 
+*  int cid                    : 
+*  int minc                   : 
+*  int maxc                   : 
+*/
 int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc)
 {
   int i, j, k, l;
@@ -30,6 +61,14 @@ int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int
   return l;
 }
 
+/*
+*  void print_coord_info (struct project * this_proj, coord_info * coord)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  coord_info * coord         : 
+*/
 void print_coord_info (struct project * this_proj, coord_info * coord)
 {
   int * min_bs, * max_bs;
@@ -119,6 +158,13 @@ void print_coord_info (struct project * this_proj, coord_info * coord)
   }
 }
 
+/*
+*  coord_info * duplicate_coord_info (coord_info * old_coord)
+*
+*  Usage: 
+*
+*  coord_info * old_coord : 
+*/
 coord_info * duplicate_coord_info (coord_info * old_coord)
 {
   coord_info * new_coord = g_malloc0 (sizeof*new_coord);
@@ -436,6 +482,19 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
   }
 }
 
+/*
+*  void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int nmols                  : 
+*  int add                    : 
+*  int rem                    : 
+*  int * num                  : 
+*  int * rec                  : 
+*  int *** tmpgeo             : 
+*/
 void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag)
 {
   // Now OpenGL data

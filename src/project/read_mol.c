@@ -11,6 +11,22 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_mol.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int read_atom_m (FILE * fp, int s, int a);
+  int read_this_mol (FILE * fp, struct molecule * tmp);
+  int read_mol (FILE * fp);
+
+*/
+
 #include "global.h"
 #include "project.h"
 #include "initcoord.h"
@@ -18,6 +34,15 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern void duplicate_molecule (struct molecule * new_mol, struct molecule * old_mol);
 
+/*
+*  int read_atom_m (FILE * fp, int s, int a)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*  int s     : 
+*  int a     : 
+*/
 int read_atom_m (FILE * fp, int s, int a)
 {
   if (fread (& active_project -> atoms[s][a].coord[2], sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -25,6 +50,14 @@ int read_atom_m (FILE * fp, int s, int a)
   return OK;
 }
 
+/*
+*  int read_this_mol (FILE * fp, struct molecule * tmp)
+*
+*  Usage: 
+*
+*  FILE * fp             : 
+*  struct molecule * tmp : 
+*/
 int read_this_mol (FILE * fp, struct molecule * tmp)
 {
   if (fread (& tmp -> id, sizeof(int), 1, fp) != 1) return 0;
@@ -40,6 +73,13 @@ int read_this_mol (FILE * fp, struct molecule * tmp)
   return 1;
 }
 
+/*
+*  int read_mol (FILE * fp)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*/
 int read_mol (FILE * fp)
 {
   int i, j;

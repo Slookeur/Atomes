@@ -11,6 +11,17 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'regdata.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  lic/valid.c
+
+*/
+
 #define REGUSER "Sebastien Le Roux"
 // Demo
 //#define THEMAC "se-bi-ss-og-oo-od"

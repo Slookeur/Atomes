@@ -11,6 +11,35 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'dlp_viz.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_field_objects (int id, int jd);
+
+  gboolean show_field_object (int id, int jd, int kd);
+
+  void field_selection (int i, int viz, int lab, int aid);
+  void viz_fragment (struct field_molecule * fmol, int id, int viz);
+  void field_unselect_all ();
+  void visualize_body (int viz, int bd, struct field_nth_body * body);
+  void select_object (int id, int jd, int kd);
+  void visualize_single_struct (int id, int jd, int kd, int * ids);
+  void visualize_object (int id, int jd, int kd);
+  void check_to_visualize_properties_for_this_field_mol (int pid, int mol);
+  void check_to_visualize_properties (int pid);
+  void update_mol_tree (int a, int b);
+
+  G_MODULE_EXPORT void visualize_or_select_all_elements (GtkTreeViewColumn * col, gpointer data);
+
+*/
+
 #include "dlp_field.h"
 #include "project.h"
 #include "glwindow.h"
@@ -22,6 +51,16 @@ extern int is_special[MAXDATA][11];
 extern void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add);
 extern void init_default_shaders (glwin * view);
 
+/*
+*  void field_selection (int i, int viz, int lab, int aid)
+*
+*  Usage: 
+*
+*  int i   : 
+*  int viz : 
+*  int lab : 
+*  int aid : 
+*/
 void field_selection (int i, int viz, int lab, int aid)
 {
   if (viz && tmp_proj -> atoms[0][i].pick[0] != viz)
@@ -37,6 +76,15 @@ void field_selection (int i, int viz, int lab, int aid)
   tmp_proj -> atoms[0][i].coord[4] = aid;
 }
 
+/*
+*  void viz_fragment (struct field_molecule * fmol, int id, int viz)
+*
+*  Usage: 
+*
+*  struct field_molecule * fmol : 
+*  int id                       : 
+*  int viz                      : 
+*/
 void viz_fragment (struct field_molecule * fmol, int id, int viz)
 {
   int i;
@@ -47,6 +95,13 @@ void viz_fragment (struct field_molecule * fmol, int id, int viz)
   init_default_shaders (tmp_view);
 }
 
+/*
+*  void field_unselect_all ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void field_unselect_all ()
 {
   int i;
@@ -190,6 +245,15 @@ void visualize_imp_inv (int viz, int dih, int iid,
   }
 }
 
+/*
+*  void visualize_body (int viz, int bd, struct field_nth_body * body)
+*
+*  Usage: 
+*
+*  int viz                      : 
+*  int bd                       : 
+*  struct field_nth_body * body : 
+*/
 void visualize_body (int viz, int bd, struct field_nth_body * body)
 {
   int h, i, j, k, l;
@@ -208,6 +272,14 @@ void visualize_body (int viz, int bd, struct field_nth_body * body)
   }
 }
 
+/*
+*  int get_field_objects (int id, int jd)
+*
+*  Usage: 
+*
+*  int id : 
+*  int jd : 
+*/
 int get_field_objects (int id, int jd)
 {
   int kd;
@@ -257,6 +329,15 @@ int get_field_objects (int id, int jd)
   return kd;
 }
 
+/*
+*  void select_object (int id, int jd, int kd)
+*
+*  Usage: 
+*
+*  int id : 
+*  int jd : 
+*  int kd : 
+*/
 void select_object (int id, int jd, int kd)
 {
   int i;
@@ -310,6 +391,16 @@ void select_object (int id, int jd, int kd)
   }
 }
 
+/*
+*  void visualize_single_struct (int id, int jd, int kd, int * ids)
+*
+*  Usage: 
+*
+*  int id    : 
+*  int jd    : 
+*  int kd    : 
+*  int * ids : 
+*/
 void visualize_single_struct (int id, int jd, int kd, int * ids)
 {
   int i, j, k, l, m, n, o, p;
@@ -365,6 +456,15 @@ void visualize_single_struct (int id, int jd, int kd, int * ids)
   }
 }
 
+/*
+*  void visualize_object (int id, int jd, int kd)
+*
+*  Usage: 
+*
+*  int id : 
+*  int jd : 
+*  int kd : 
+*/
 void visualize_object (int id, int jd, int kd)
 {
   int l, m, n, o, p, q, r, s;
@@ -542,6 +642,14 @@ void visualize_object (int id, int jd, int kd)
   }
 }
 
+/*
+*  void check_to_visualize_properties_for_this_field_mol (int pid, int mol)
+*
+*  Usage: 
+*
+*  int pid : 
+*  int mol : 
+*/
 void check_to_visualize_properties_for_this_field_mol (int pid, int mol)
 {
   int h, i, j;
@@ -566,6 +674,13 @@ void check_to_visualize_properties_for_this_field_mol (int pid, int mol)
   toviz.c = h;
 }
 
+/*
+*  void check_to_visualize_properties (int pid)
+*
+*  Usage: 
+*
+*  int pid : 
+*/
 void check_to_visualize_properties (int pid)
 {
   int i, j;
@@ -577,6 +692,14 @@ void check_to_visualize_properties (int pid)
   init_default_shaders (tmp_view);
 }
 
+/*
+*  void update_mol_tree (int a, int b)
+*
+*  Usage: 
+*
+*  int a : 
+*  int b : 
+*/
 void update_mol_tree (int a, int b)
 {
   int i, j;
@@ -747,6 +870,15 @@ G_MODULE_EXPORT void on_toggle_visualize_or_select_object (GtkCellRendererToggle
   }
 }
 
+/*
+*  gboolean show_field_object (int id, int jd, int kd)
+*
+*  Usage: 
+*
+*  int id : 
+*  int jd : 
+*  int kd : 
+*/
 gboolean show_field_object (int id, int jd, int kd)
 {
   gboolean show = FALSE;
@@ -790,6 +922,14 @@ gboolean show_field_object (int id, int jd, int kd)
   return show;
 }
 
+/*
+*  G_MODULE_EXPORT void visualize_or_select_all_elements (GtkTreeViewColumn * col, gpointer data)
+*
+*  Usage: 
+*
+*  GtkTreeViewColumn * col : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void visualize_or_select_all_elements (GtkTreeViewColumn * col, gpointer data)
 {
   int i, j, k, l;

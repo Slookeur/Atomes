@@ -11,11 +11,50 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cell_cut.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
+
+  void create_slab_info (struct project * this_proj);
+  void slab_alpha_has_changed (gpointer data, GLfloat v);
+  void invert_selection (struct project * this_proj);
+
+  G_MODULE_EXPORT void setup_passivate (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void set_slab_property (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void set_slab_property (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_slab_option (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_slab_type (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_slab_alpha (GtkRange * range, gpointer data);
+  G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data);
+
+  GtkWidget * prepare_slab_box (int sid, struct project * this_proj);
+  GtkWidget * create_slab_param_combo (int sid, struct project * this_proj);
+  GtkWidget * cut_in_model (struct project * this_proj);
+
+*/
+
 #include "cell_edit.h"
 #include "atom_edit.h"
 
 extern G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data);
 
+/*
+*  G_MODULE_EXPORT void setup_passivate (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void setup_passivate (GtkButton * but, gpointer data)
 {
   struct project * this_proj = (struct project *)data;
@@ -51,6 +90,13 @@ G_MODULE_EXPORT void setup_passivate (GtkButton * but, gpointer data)
   this_proj -> modelgl -> search_widg[8] -> passivating = FALSE;
 }
 
+/*
+*  void create_slab_info (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void create_slab_info (struct project * this_proj)
 {
   this_proj -> modelgl -> cell_win -> slab_info = destroy_this_widget (this_proj -> modelgl -> cell_win -> slab_info);
@@ -86,8 +132,24 @@ void create_slab_info (struct project * this_proj)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void set_slab_property (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void set_slab_property (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void set_slab_property (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void set_slab_property (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -146,6 +208,14 @@ G_MODULE_EXPORT void set_slab_property (GtkToggleButton * but, gpointer data)
   update (view);
 }
 
+/*
+*  GtkWidget * prepare_slab_box (int sid, struct project * this_proj)
+*
+*  Usage: 
+*
+*  int sid                    : 
+*  struct project * this_proj : 
+*/
 GtkWidget * prepare_slab_box (int sid, struct project * this_proj)
 {
   gchar * option[6]={"- Position the center of the slab: ", // 6, 7, 8
@@ -181,6 +251,14 @@ GtkWidget * prepare_slab_box (int sid, struct project * this_proj)
   return vbox;
 }
 
+/*
+*  G_MODULE_EXPORT void set_slab_option (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_slab_option (GtkComboBox * box, gpointer data)
 {
   struct project * this_proj = (struct project *)data;
@@ -211,6 +289,14 @@ G_MODULE_EXPORT void set_slab_option (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * create_slab_param_combo (int sid, struct project * this_proj)
+*
+*  Usage: 
+*
+*  int sid                    : 
+*  struct project * this_proj : 
+*/
 GtkWidget * create_slab_param_combo (int sid, struct project * this_proj)
 {
   GtkWidget * combo = create_combo ();
@@ -227,6 +313,14 @@ GtkWidget * create_slab_param_combo (int sid, struct project * this_proj)
   return combo;
 }
 
+/*
+*  G_MODULE_EXPORT void set_slab_type (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_slab_type (GtkComboBox * box, gpointer data)
 {
   struct project * this_proj = (struct project *)data;
@@ -243,6 +337,14 @@ G_MODULE_EXPORT void set_slab_type (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  void slab_alpha_has_changed (gpointer data, GLfloat v)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*  GLfloat v     : 
+*/
 void slab_alpha_has_changed (gpointer data, GLfloat v)
 {
   glwin * view = (glwin *)data;
@@ -254,17 +356,42 @@ void slab_alpha_has_changed (gpointer data, GLfloat v)
   }
 }
 
+/*
+*  G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
+*
+*  Usage: 
+*
+*  GtkRange * range     : 
+*  GtkScrollType scroll : 
+*  gdouble value        : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
   slab_alpha_has_changed (data, (GLfloat) value);
   return FALSE;
 }
 
+/*
+*  G_MODULE_EXPORT void set_slab_alpha (GtkRange * range, gpointer data)
+*
+*  Usage: 
+*
+*  GtkRange * range : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_slab_alpha (GtkRange * range, gpointer data)
 {
   slab_alpha_has_changed (data, (GLfloat) gtk_range_get_value (range));
 }
 
+/*
+*  void invert_selection (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void invert_selection (struct project * this_proj)
 {
   save_all_selections (this_proj -> modelgl, 0);
@@ -315,6 +442,14 @@ void invert_selection (struct project * this_proj)
   re_create_md_shaders (1, shaders, this_proj);
 }
 
+/*
+*  G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data)
 {
   struct project * this_proj = (struct project *)data;
@@ -338,6 +473,14 @@ G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data)
   update (this_proj -> modelgl);
 }
 
+/*
+*  G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
 {
   struct project * this_proj = (struct project *)data;
@@ -497,6 +640,13 @@ G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * cut_in_model (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 GtkWidget * cut_in_model (struct project * this_proj)
 {
   int i;

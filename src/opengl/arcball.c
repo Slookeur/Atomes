@@ -11,6 +11,20 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'arcball.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void arc_ball_rotation (glwin * view, int x, int y);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 
@@ -38,6 +52,15 @@ vec3_t get_arc_ball_vector (glwin * view, int x, int y)
   return v3_norm (vect);
 }
 
+/*
+*  void arc_ball_rotation (glwin * view, int x, int y)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int x        : 
+*  int y        : 
+*/
 void arc_ball_rotation (glwin * view, int x, int y)
 {
   arc_ball_new = get_arc_ball_vector (view, x, y);

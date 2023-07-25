@@ -11,8 +11,34 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'atom_geo.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z);
+
+  gboolean is_in_atom_list (int aid, struct atom * new_list);
+
+  void sort_partial_geo (int ** geom, int num_a);
+
+*/
+
 #include "atom_edit.h"
 
+/*
+*  void sort_partial_geo (int ** geom, int num_a)
+*
+*  Usage: 
+*
+*  int ** geom : 
+*  int num_a   : 
+*/
 void sort_partial_geo (int ** geom, int num_a)
 {
   int i, j, k, l;
@@ -35,6 +61,20 @@ void sort_partial_geo (int ** geom, int num_a)
 }
 
 // The geo, (0= tot, 1 = part), the new object coord, the object z list, the atom old geo, the atom old sp, the atom new sp, the global coord, the new z list
+/*
+*  int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
+*
+*  Usage: 
+*
+*  int id             : 
+*  coord_info * obj   : 
+*  int * old_z        : 
+*  int old_geo        : 
+*  int old_sp         : 
+*  int new_sp         : 
+*  coord_info * coord : 
+*  double * new_z     : 
+*/
 int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
 {
   int i, j, k, l, m, n;
@@ -151,6 +191,14 @@ int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int
   return i;
 }
 
+/*
+*  gboolean is_in_atom_list (int aid, struct atom * new_list)
+*
+*  Usage: 
+*
+*  int aid                : 
+*  struct atom * new_list : 
+*/
 gboolean is_in_atom_list (int aid, struct atom * new_list)
 {
   struct atom * tmp_new;

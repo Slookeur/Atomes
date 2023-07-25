@@ -11,6 +11,29 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'workspace.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  gui/calc_menu.c
+  gui/callbacks.c
+  gui/edit_menu.c
+  gui/gui.c
+  gui/main.c
+  gui/tools.c
+  gui/work_menu.c
+  lic/valid.c
+  project/close_p.c
+  project/update_p.c
+  opengl/edit/cbuild_action.c
+  opengl/edit/cbuild_edit.c
+  opengl/win/popup.c
+
+*/
+
 #ifndef WORKSPACE_H_
 #define WORKSPACE_H_
 

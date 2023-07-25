@@ -11,10 +11,37 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'save_opengl.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int save_atom_a (FILE * fp, struct project * this_proj, int s, int a);
+  int save_atom_b (FILE * fp, struct project * this_proj, int s, int a);
+  int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_max, int ** num_data, gboolean *** show, int **** all_data);
+  int save_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid);
+
+*/
+
 #include "global.h"
 #include "project.h"
 #include "glwin.h"
 
+/*
+*  int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*  int s                      : 
+*  int a                      : 
+*/
 int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 {
   if (fwrite (& this_proj -> atoms[s][a].id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -27,6 +54,16 @@ int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
   return OK;
 }
 
+/*
+*  int save_atom_b (FILE * fp, struct project * this_proj, int s, int a)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*  int s                      : 
+*  int a                      : 
+*/
 int save_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 {
   if (fwrite (this_proj -> atoms[s][a].show, sizeof(gboolean), 2, fp) != 2) return ERROR_RW;
@@ -35,6 +72,19 @@ int save_atom_b (FILE * fp, struct project * this_proj, int s, int a)
   return OK;
 }
 
+/*
+*  int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_max, int ** num_data, gboolean *** show, int **** all_data)
+*
+*  Usage: 
+*
+*  FILE * fp         : 
+*  int type          : 
+*  int size          : 
+*  int steps         : 
+*  int data_max      : 
+*  int ** num_data   : 
+*  gboolean *** show : 
+*/
 int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_max, int ** num_data, gboolean *** show, int **** all_data)
 {
   int i, j, k;
@@ -61,6 +111,16 @@ int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_m
   return OK;
 }
 
+/*
+*  int save_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*  image * img                : 
+*  int sid                    : 
+*/
 int save_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
 {
   int i, j, k, l;

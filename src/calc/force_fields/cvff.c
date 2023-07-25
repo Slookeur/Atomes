@@ -12,6 +12,16 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 /*
+* This file: 'cvff.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*/
+
+/*
   CVFF force field, data from taken from the 'CVFF.frc' file
 
   This file contains several tables:

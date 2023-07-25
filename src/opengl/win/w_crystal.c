@@ -11,6 +11,39 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_crystal.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int cif_preview (const char * filetoread);
+  int get_cgroup (gchar * str);
+  int get_cif_files ();
+  int get_num_cif ();
+  int get_num_group ();
+  int get_cif_info_from_cif_node (xmlNodePtr * cnode);
+  int open_cif_database (gchar * filetoread);
+  int prepare_data_base (int db);
+  int build_crystal_from_cif_database (struct project * this_proj);
+
+  void sort_files (int num_f);
+  void fill_cif_tree (GtkListStore * store);
+  void fill_group_tree (GtkListStore * store);
+  void fill_symmetry_tree (GtkListStore * store);
+  void fill_database_tree (GtkListStore * store);
+  void insert_cif_preview ();
+  void prepare_cif_preview (int id);
+  void prepare_cif_list (int dba, int sym, int spg);
+
+  GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name);
+
+*/
+
 /* Crystal database window, project not in use for the time being */
 
 #include "global.h"
@@ -68,6 +101,13 @@ typdef struct cif_data{
   int species;
 };
 
+/*
+*  int cif_preview (const char * filetoread)
+*
+*  Usage: 
+*
+*  const char * filetoread : 
+*/
 int cif_preview (const char * filetoread)
 {
   int i, j, k;
@@ -83,6 +123,13 @@ int cif_preview (const char * filetoread)
   return 1;
 }
 
+/*
+*  int get_cgroup (gchar * str)
+*
+*  Usage: 
+*
+*  gchar * str : 
+*/
 int get_cgroup (gchar * str)
 {
   int i;
@@ -93,6 +140,13 @@ int get_cgroup (gchar * str)
   return -1;
 }
 
+/*
+*  void sort_files (int num_f)
+*
+*  Usage: 
+*
+*  int num_f : 
+*/
 void sort_files (int num_f)
 {
   int i, j;
@@ -118,6 +172,13 @@ void sort_files (int num_f)
   }
 }
 
+/*
+*  int get_cif_files ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int get_cif_files ()
 {
   int val = 0;
@@ -238,16 +299,37 @@ int get_cif_files ()
   return val;
 }
 
+/*
+*  int get_num_cif ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int get_num_cif ()
 {
   return num_cif[the_symmetry][the_group];
 }
 
+/*
+*  int get_num_group ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int get_num_group ()
 {
   return num_group[the_symmetry];
 }
 
+/*
+*  void fill_cif_tree (GtkListStore * store)
+*
+*  Usage: 
+*
+*  GtkListStore * store : 
+*/
 void fill_cif_tree (GtkListStore * store)
 {
   GtkTreeIter cif_level;
@@ -267,6 +349,13 @@ void fill_cif_tree (GtkListStore * store)
   }
 }
 
+/*
+*  void fill_group_tree (GtkListStore * store)
+*
+*  Usage: 
+*
+*  GtkListStore * store : 
+*/
 void fill_group_tree (GtkListStore * store)
 {
   GtkTreeIter group_level;
@@ -286,6 +375,13 @@ void fill_group_tree (GtkListStore * store)
   }
 }
 
+/*
+*  void fill_symmetry_tree (GtkListStore * store)
+*
+*  Usage: 
+*
+*  GtkListStore * store : 
+*/
 void fill_symmetry_tree (GtkListStore * store)
 {
   GtkTreeIter symmetry_level;
@@ -305,6 +401,13 @@ void fill_symmetry_tree (GtkListStore * store)
   }
 }
 
+/*
+*  void fill_database_tree (GtkListStore * store)
+*
+*  Usage: 
+*
+*  GtkListStore * store : 
+*/
 void fill_database_tree (GtkListStore * store)
 {
   GtkTreeIter database_level;
@@ -324,6 +427,13 @@ void fill_database_tree (GtkListStore * store)
   }
 }
 
+/*
+*  void insert_cif_preview ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void insert_cif_preview ()
 {
   gchar * str;
@@ -370,6 +480,13 @@ void insert_cif_preview ()
   gtk_widget_show_all (cif_preview_box);
 }
 
+/*
+*  void prepare_cif_preview (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 void prepare_cif_preview (int id)
 {
   if (cif_file_name != NULL)
@@ -394,12 +511,28 @@ void prepare_cif_preview (int id)
   }
 }
 
+/*
+*  int get_cif_info_from_cif_node (xmlNodePtr * cnode)
+*
+*  Usage: 
+*
+*  xmlNodePtr * cnode : 
+*/
 int get_cif_info_from_cif_node (xmlNodePtr * cnode)
 {
 
   return 1;
 }
 
+/*
+*  void prepare_cif_list (int dba, int sym, int spg)
+*
+*  Usage: 
+*
+*  int dba : 
+*  int sym : 
+*  int spg : 
+*/
 void prepare_cif_list (int dba, int sym, int spg)
 {
 #ifdef G_OS_WIN32
@@ -442,6 +575,13 @@ void prepare_cif_list (int dba, int sym, int spg)
   }
 }
 
+/*
+*  int open_cif_database (gchar * filetoread)
+*
+*  Usage: 
+*
+*  gchar * filetoread : 
+*/
 int open_cif_database (gchar * filetoread)
 {
   xmlDoc * doc;
@@ -516,6 +656,13 @@ int open_cif_database (gchar * filetoread)
   }
 }
 
+/*
+*  int prepare_data_base (int db)
+*
+*  Usage: 
+*
+*  int db : 
+*/
 int prepare_data_base (int db)
 {
 #ifdef G_OS_WIN32
@@ -585,6 +732,15 @@ extern void set_library_markup (GtkTreeViewColumn * col,
                                 gpointer          data);
 
 
+/*
+*  GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
+*
+*  Usage: 
+*
+*  GtkListStore * store : 
+*  int id               : 
+*  gchar * name         : 
+*/
 GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
 {
   GtkWidget * scrol = create_scroll (NULL, 150, 300, GTK_SHADOW_ETCHED_IN, 0);
@@ -605,6 +761,13 @@ GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
   return scrol;
 }
 
+/*
+*  int build_crystal_from_cif_database (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 int build_crystal_from_cif_database (struct project * this_proj)
 {
   int active = activep;

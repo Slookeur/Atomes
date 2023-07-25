@@ -11,6 +11,38 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'xmlrw.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int XmlwriterFilename (const char *uri);
+  int write_xml (const char * filetosave);
+  int get_spec_from_data (xmlChar * data);
+  int setprop (xmlNodePtr pnode);
+  int testopening (char * tdata, char * tfichier);
+  int setchemistry (xmlNodePtr xsnode);
+  int setbox (xmlNodePtr boxnode);
+  int setpbc (xmlNodePtr pbcnode);
+  int setcutoffs (xmlNodePtr cutnode);
+  int settime(xmlNodePtr timenode);
+  int check_xml (const char * filetocheck);
+
+  size_t strfind (char * ida);
+
+  gboolean file_exists(const char * filename);
+
+  gchar * open_xml (const char * filetoread);
+
+  xmlNodePtr findnode (xmlNodePtr startnode, char * nname);
+
+*/
+
 #include <libxml/encoding.h>
 #include <libxml/xmlwriter.h>
 #include <libxml/xmlreader.h>
@@ -34,6 +66,13 @@ char * reg_types[NFORMATS] = {"XYZ file",
                               "multiple Chem3D file",
                               "PDB file"};
 
+/*
+*  size_t strfind (char * ida)
+*
+*  Usage: 
+*
+*  char * ida : 
+*/
 size_t strfind (char * ida)
 {
   size_t a, b, c;
@@ -50,6 +89,13 @@ size_t strfind (char * ida)
   return b;
 }
 
+/*
+*  int XmlwriterFilename (const char *uri)
+*
+*  Usage: 
+*
+*  const char *uri : 
+*/
 int XmlwriterFilename (const char *uri)
 {
   int rc;
@@ -413,6 +459,13 @@ int XmlwriterFilename (const char *uri)
   return 1;
 }
 
+/*
+*  int write_xml (const char * filetosave)
+*
+*  Usage: 
+*
+*  const char * filetosave : 
+*/
 int write_xml (const char * filetosave)
 {
   /* first, the file version */
@@ -428,6 +481,13 @@ int write_xml (const char * filetosave)
   return res;
 }
 
+/*
+*  gboolean file_exists(const char * filename)
+*
+*  Usage: 
+*
+*  const char * filename : 
+*/
 gboolean file_exists(const char * filename)
 {
   FILE * file;
@@ -439,6 +499,14 @@ gboolean file_exists(const char * filename)
   return FALSE;
 }
 
+/*
+*  xmlNodePtr findnode (xmlNodePtr startnode, char * nname)
+*
+*  Usage: 
+*
+*  xmlNodePtr startnode : 
+*  char * nname         : 
+*/
 xmlNodePtr findnode (xmlNodePtr startnode, char * nname)
 {
   xmlNodePtr tmp;
@@ -455,6 +523,13 @@ xmlNodePtr findnode (xmlNodePtr startnode, char * nname)
   return tmp;
 }
 
+/*
+*  int get_spec_from_data (xmlChar * data)
+*
+*  Usage: 
+*
+*  xmlChar * data : 
+*/
 int get_spec_from_data (xmlChar * data)
 {
   int i;
@@ -468,6 +543,13 @@ int get_spec_from_data (xmlChar * data)
   return -1;
 }
 
+/*
+*  int setprop (xmlNodePtr pnode)
+*
+*  Usage: 
+*
+*  xmlNodePtr pnode : 
+*/
 int setprop (xmlNodePtr pnode)
 {
   int i, res;
@@ -566,6 +648,14 @@ pend:
   return res;
 }
 
+/*
+*  int testopening (char * tdata, char * tfichier)
+*
+*  Usage: 
+*
+*  char * tdata    : 
+*  char * tfichier : 
+*/
 int testopening (char * tdata, char * tfichier)
 {
   int i, j;
@@ -611,6 +701,13 @@ int testopening (char * tdata, char * tfichier)
   }
 }
 
+/*
+*  int setchemistry (xmlNodePtr xsnode)
+*
+*  Usage: 
+*
+*  xmlNodePtr xsnode : 
+*/
 int setchemistry (xmlNodePtr xsnode)
 {
   xmlNodePtr idn, cs, xnode;
@@ -698,6 +795,13 @@ xend:
   return res;
 }
 
+/*
+*  int setbox (xmlNodePtr boxnode)
+*
+*  Usage: 
+*
+*  xmlNodePtr boxnode : 
+*/
 int setbox (xmlNodePtr boxnode)
 {
   int box;
@@ -884,6 +988,13 @@ bend:
   return box;
 }
 
+/*
+*  int setpbc (xmlNodePtr pbcnode)
+*
+*  Usage: 
+*
+*  xmlNodePtr pbcnode : 
+*/
 int setpbc (xmlNodePtr pbcnode)
 {
   int pbc;//, j;
@@ -931,6 +1042,13 @@ pend:
   return pbc;
 }
 
+/*
+*  int setcutoffs (xmlNodePtr cutnode)
+*
+*  Usage: 
+*
+*  xmlNodePtr cutnode : 
+*/
 int setcutoffs (xmlNodePtr cutnode)
 {
   int cut;
@@ -987,6 +1105,13 @@ cend:
   return cut;
 }
 
+/*
+*  int settime(xmlNodePtr timenode)
+*
+*  Usage: 
+*
+*  xmlNodePtr timenode : 
+*/
 int settime(xmlNodePtr timenode)
 {
   int i, j;
@@ -1040,6 +1165,13 @@ tend:
   return tps;
 }
 
+/*
+*  int check_xml (const char * filetocheck)
+*
+*  Usage: 
+*
+*  const char * filetocheck : 
+*/
 int check_xml (const char * filetocheck)
 {
   int res;
@@ -1205,6 +1337,13 @@ end:
   return res;
 }
 
+/*
+*  gchar * open_xml (const char * filetoread)
+*
+*  Usage: 
+*
+*  const char * filetoread : 
+*/
 gchar * open_xml (const char * filetoread)
 {
   int oxml;

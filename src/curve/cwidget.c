@@ -11,6 +11,24 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cwidget.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void curve_default_scale (int rid, int cid);
+  void initcurve (struct project * pid, int rid, int cid);
+  void addcurwidgets (int pid, int rid, int str);
+
+  DataLayout * curve_default_layout (struct project * pid, int rid, int cid);
+
+*/
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 
@@ -18,6 +36,15 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "interface.h"
 #include "curve.h"
 
+/*
+*  DataLayout * curve_default_layout (struct project * pid, int rid, int cid)
+*
+*  Usage: 
+*
+*  struct project * pid : 
+*  int rid              : 
+*  int cid              : 
+*/
 DataLayout * curve_default_layout (struct project * pid, int rid, int cid)
 {
   DataLayout * layout = g_malloc0 (sizeof*layout);
@@ -67,6 +94,14 @@ DataLayout * curve_default_layout (struct project * pid, int rid, int cid)
   return layout;
 }
 
+/*
+*  void curve_default_scale (int rid, int cid)
+*
+*  Usage: 
+*
+*  int rid : 
+*  int cid : 
+*/
 void curve_default_scale (int rid, int cid)
 {
   if (rid < RI || rid == MS)
@@ -100,6 +135,15 @@ void curve_default_scale (int rid, int cid)
   }
 }
 
+/*
+*  void initcurve (struct project * pid, int rid, int cid)
+*
+*  Usage: 
+*
+*  struct project * pid : 
+*  int rid              : 
+*  int cid              : 
+*/
 void initcurve (struct project * pid, int rid, int cid)
 {
   int k;
@@ -194,6 +238,15 @@ void initcurve (struct project * pid, int rid, int cid)
   activer = rid;
 }
 
+/*
+*  void addcurwidgets (int pid, int rid, int str)
+*
+*  Usage: 
+*
+*  int pid : 
+*  int rid : 
+*  int str : 
+*/
 void addcurwidgets (int pid, int rid, int str)
 {
   int j, k, l;

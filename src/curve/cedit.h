@@ -11,6 +11,23 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'cedit.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  curve/curve.c
+  curve/m_curve.c
+  curve/tab-1.c
+  curve/tab-2.c
+  curve/tab-3.c
+  curve/tab-4.c
+  curve/w_curve.c
+
+*/
+
 #ifndef CEDIT_H_
 #define CEDIT_H_
 

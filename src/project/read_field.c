@@ -11,10 +11,43 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_field.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int read_field_atom (FILE * fp);
+  int read_field_shell (FILE * fp);
+  int read_field_constraint (FILE * fp);
+  int read_field_pmf (FILE * fp);
+  int read_field_rigid (FILE * fp);
+  int read_field_tethered (FILE * fp, int fid);
+  int read_field_prop (FILE * fp, int fid, int pid);
+  int read_field_struct (FILE * fp, int fid);
+  int read_field_molecule (FILE * fp, int fid);
+  int read_field_body (FILE * fp, int fid);
+  int read_field_external (FILE * fp, int fid);
+  int read_dlp_field_data (FILE * fp, struct project * this_proj);
+  int read_lmp_field_data (FILE * fp, struct project * this_proj);
+
+*/
+
 #include "global.h"
 #include "project.h"
 #include "dlp_field.h"
 
+/*
+*  int read_field_atom (FILE * fp)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*/
 int read_field_atom (FILE * fp)
 {
   if (fread (& tmp_fat -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -38,6 +71,13 @@ int read_field_atom (FILE * fp)
   return OK;
 }
 
+/*
+*  int read_field_shell (FILE * fp)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*/
 int read_field_shell (FILE * fp)
 {
   if (fread (& tmp_fshell -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -52,6 +92,13 @@ int read_field_shell (FILE * fp)
   return OK;
 }
 
+/*
+*  int read_field_constraint (FILE * fp)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*/
 int read_field_constraint (FILE * fp)
 {
   if (fread (& tmp_fcons -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -63,6 +110,13 @@ int read_field_constraint (FILE * fp)
   return OK;
 }
 
+/*
+*  int read_field_pmf (FILE * fp)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*/
 int read_field_pmf (FILE * fp)
 {
   if (fread (& tmp_fpmf -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -82,6 +136,13 @@ int read_field_pmf (FILE * fp)
   return OK;
 }
 
+/*
+*  int read_field_rigid (FILE * fp)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*/
 int read_field_rigid (FILE * fp)
 {
   if (fread (& tmp_frig -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -93,6 +154,14 @@ int read_field_rigid (FILE * fp)
   return OK;
 }
 
+/*
+*  int read_field_tethered (FILE * fp, int fid)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*  int fid   : 
+*/
 int read_field_tethered (FILE * fp, int fid)
 {
   if (fread (& tmp_ftet -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -106,6 +175,15 @@ int read_field_tethered (FILE * fp, int fid)
   return OK;
 }
 
+/*
+*  int read_field_prop (FILE * fp, int fid, int pid)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*  int fid   : 
+*  int pid   : 
+*/
 int read_field_prop (FILE * fp, int fid, int pid)
 {
   if (fread (& tmp_fprop -> pid, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -122,6 +200,14 @@ int read_field_prop (FILE * fp, int fid, int pid)
   return OK;
 }
 
+/*
+*  int read_field_struct (FILE * fp, int fid)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*  int fid   : 
+*/
 int read_field_struct (FILE * fp, int fid)
 {
   if (fread (& tmp_fstr -> st, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -153,6 +239,14 @@ int read_field_struct (FILE * fp, int fid)
   return OK;
 }
 
+/*
+*  int read_field_molecule (FILE * fp, int fid)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*  int fid   : 
+*/
 int read_field_molecule (FILE * fp, int fid)
 {
   if (fread (& tmp_fmol -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -288,6 +382,14 @@ int read_field_molecule (FILE * fp, int fid)
   return OK;
 }
 
+/*
+*  int read_field_body (FILE * fp, int fid)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*  int fid   : 
+*/
 int read_field_body (FILE * fp, int fid)
 {
   if (fread (& tmp_fbody -> bd, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -319,6 +421,14 @@ int read_field_body (FILE * fp, int fid)
   return OK;
 }
 
+/*
+*  int read_field_external (FILE * fp, int fid)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*  int fid   : 
+*/
 int read_field_external (FILE * fp, int fid)
 {
   if (fread (& tmp_fext -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -330,6 +440,14 @@ int read_field_external (FILE * fp, int fid)
   return OK;
 }
 
+/*
+*  int read_dlp_field_data (FILE * fp, struct project * this_proj)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*/
 int read_dlp_field_data (FILE * fp, struct project * this_proj)
 {
   int i, j, k, l, m, n;
@@ -441,6 +559,14 @@ int read_dlp_field_data (FILE * fp, struct project * this_proj)
   return OK;
 }
 
+/*
+*  int read_lmp_field_data (FILE * fp, struct project * this_proj)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*/
 int read_lmp_field_data (FILE * fp, struct project * this_proj)
 {
   int i;

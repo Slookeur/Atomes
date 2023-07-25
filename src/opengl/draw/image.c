@@ -11,6 +11,23 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'image.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void render_image (glwin * view, video_options * iopts);
+
+  G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "project.h"
@@ -43,10 +60,28 @@ extern void init_frame_buffer (int x, int y);
 extern void close_frame_buffer ();
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkNativeDialog * info : 
+*  gint response_id       : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
+/*
+*  G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * info : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkWidget *)info);
@@ -109,6 +144,14 @@ G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpoin
   }
 }
 
+/*
+*  void render_image (glwin * view, video_options * iopts)
+*
+*  Usage: 
+*
+*  glwin * view          : 
+*  video_options * iopts : 
+*/
 void render_image (glwin * view, video_options * iopts)
 {
   GtkFileFilter * filter;

@@ -11,6 +11,38 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'd_bonds.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int cylinder_vertices (int qual);
+  int cylinder_indices (int qual);
+  int cap_vertices (int qual);
+  int cap_indices (int qual);
+  int find_bond_vertices (gboolean to_pick, int sty, int sa, int sb, int bi, int cap);
+  int create_bond_lists (gboolean to_pick);
+
+  float get_bond_radius (int sty, int ac, int at, int bt, int sel);
+
+  void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float alpha);
+  void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha, float delta);
+  void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha);
+  void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float al, float * vertices);
+  void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, struct atom * at, struct atom * bt, float * vertices);
+  void setup_all_cylinder_vertices (int style, gboolean to_pick, int cap, int bi, float * vertices);
+  void setup_line_vertices (int style, int cap, int bi, int sa, int sb, float * vertices);
+
+  object_3d * draw_cylinder (int quality, float ra, float rb);
+  object_3d * draw_cylinder_cap (int quality, float rad, gboolean picked);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "dlp_field.h"
@@ -24,16 +56,39 @@ struct bond_rotation {
   double angle;
 };
 
+/*
+*  int cylinder_vertices (int qual)
+*
+*  Usage: 
+*
+*  int qual : 
+*/
 int cylinder_vertices (int qual)
 {
   return 2*qual;
 }
 
+/*
+*  int cylinder_indices (int qual)
+*
+*  Usage: 
+*
+*  int qual : 
+*/
 int cylinder_indices (int qual)
 {
   return 2*(qual + 1);
 }
 
+/*
+*  object_3d * draw_cylinder (int quality, float ra, float rb)
+*
+*  Usage: 
+*
+*  int quality : 
+*  float ra    : 
+*  float rb    : 
+*/
 object_3d * draw_cylinder (int quality, float ra, float rb)
 {
   int i, j;
@@ -72,16 +127,39 @@ object_3d * draw_cylinder (int quality, float ra, float rb)
   return new_cylinder;
 }
 
+/*
+*  int cap_vertices (int qual)
+*
+*  Usage: 
+*
+*  int qual : 
+*/
 int cap_vertices (int qual)
 {
   return qual + 1;
 }
 
+/*
+*  int cap_indices (int qual)
+*
+*  Usage: 
+*
+*  int qual : 
+*/
 int cap_indices (int qual)
 {
   return qual + 2;
 }
 
+/*
+*  object_3d * draw_cylinder_cap (int quality, float rad, gboolean picked)
+*
+*  Usage: 
+*
+*  int quality     : 
+*  float rad       : 
+*  gboolean picked : 
+*/
 object_3d * draw_cylinder_cap (int quality, float rad, gboolean picked)
 {
   int i, j;
@@ -133,6 +211,17 @@ vec4_t rotate_bond (vec3_t a, vec3_t b)
   return axis_to_quat (raxis, rangle);
 }
 
+/*
+*  float get_bond_radius (int sty, int ac, int at, int bt, int sel)
+*
+*  Usage: 
+*
+*  int sty : 
+*  int ac  : 
+*  int at  : 
+*  int bt  : 
+*  int sel : 
+*/
 float get_bond_radius (int sty, int ac, int at, int bt, int sel)
 {
   if (sty == BALL_AND_STICK)
@@ -149,6 +238,16 @@ float get_bond_radius (int sty, int ac, int at, int bt, int sel)
   }
 }
 
+/*
+*  void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float alpha)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  vec3_t pos       : 
+*  ColRGBA col      : 
+*  float alpha      : 
+*/
 void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float alpha)
 {
   int s = nbs*LINE_BUFF_SIZE;
@@ -162,6 +261,19 @@ void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float alpha)
   nbs ++;
 }
 
+/*
+*  void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha, float delta)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  vec3_t pos_a     : 
+*  vec3_t pos_b     : 
+*  ColRGBA col      : 
+*  float rad        : 
+*  float alpha      : 
+*  float delta      : 
+*/
 void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha, float delta)
 {
   int s = nbs*CYLI_BUFF_SIZE;
@@ -182,6 +294,18 @@ void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRG
   nbs ++;
 }
 
+/*
+*  void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  vec3_t pos_a     : 
+*  vec3_t pos_b     : 
+*  ColRGBA col      : 
+*  float rad        : 
+*  float alpha      : 
+*/
 void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha)
 {
   int s = nbs*CAPS_BUFF_SIZE;
@@ -203,6 +327,22 @@ void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA co
 
 int vs_bid;
 
+/*
+*  void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float al, float * vertices)
+*
+*  Usage: 
+*
+*  int sty          : 
+*  gboolean to_pick : 
+*  gboolean picked  : 
+*  int cap          : 
+*  int bi           : 
+*  int pi           : 
+*  struct atom * at : 
+*  struct atom * bt : 
+*  float al         : 
+*  float * vertices : 
+*/
 void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float al, float * vertices)
 {
   float alpha = 1.0;
@@ -269,6 +409,22 @@ void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int b
   }
 }
 
+/*
+*  void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, struct atom * at, struct atom * bt, float * vertices)
+*
+*  Usage: 
+*
+*  int sty          : 
+*  gboolean to_pick : 
+*  gboolean picked  : 
+*  int cap          : 
+*  int bi           : 
+*  int pi           : 
+*  int bid          : 
+*  struct atom * at : 
+*  struct atom * bt : 
+*  float * vertices : 
+*/
 void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, struct atom * at, struct atom * bt, float * vertices)
 {
   if (bi == 0)
@@ -314,6 +470,18 @@ void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, 
   }
 }
 
+/*
+*  int find_bond_vertices (gboolean to_pick, int sty, int sa, int sb, int bi, int cap)
+*
+*  Usage: 
+*
+*  gboolean to_pick : 
+*  int sty          : 
+*  int sa           : 
+*  int sb           : 
+*  int bi           : 
+*  int cap          : 
+*/
 int find_bond_vertices (gboolean to_pick, int sty, int sa, int sb, int bi, int cap)
 {
   int i, j, k, l, m, n;
@@ -369,6 +537,17 @@ int find_bond_vertices (gboolean to_pick, int sty, int sa, int sb, int bi, int c
   return 2*l;
 }
 
+/*
+*  void setup_all_cylinder_vertices (int style, gboolean to_pick, int cap, int bi, float * vertices)
+*
+*  Usage: 
+*
+*  int style        : 
+*  gboolean to_pick : 
+*  int cap          : 
+*  int bi           : 
+*  float * vertices : 
+*/
 void setup_all_cylinder_vertices (int style, gboolean to_pick, int cap, int bi, float * vertices)
 {
   int i, j, k, l, m;
@@ -416,6 +595,18 @@ void setup_all_cylinder_vertices (int style, gboolean to_pick, int cap, int bi, 
   }
 }
 
+/*
+*  void setup_line_vertices (int style, int cap, int bi, int sa, int sb, float * vertices)
+*
+*  Usage: 
+*
+*  int style        : 
+*  int cap          : 
+*  int bi           : 
+*  int sa           : 
+*  int sb           : 
+*  float * vertices : 
+*/
 void setup_line_vertices (int style, int cap, int bi, int sa, int sb, float * vertices)
 {
   int i, j, k, l, m;
@@ -455,6 +646,13 @@ void setup_line_vertices (int style, int cap, int bi, int sa, int sb, float * ve
   }
 }
 
+/*
+*  int create_bond_lists (gboolean to_pick)
+*
+*  Usage: 
+*
+*  gboolean to_pick : 
+*/
 int create_bond_lists (gboolean to_pick)
 {
   int nshaders = 0;

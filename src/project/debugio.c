@@ -11,9 +11,37 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'debugio.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void debugiocurve (struct project * this_proj, gboolean win, int rid, int cid, gchar * iost);
+  void debug_lattice_info (struct project * this_proj, gchar * iost);
+  void debugioproj (struct project * this_proj, gchar * iost);
+  void debug_chemical_information (struct project * this_proj);
+
+*/
+
 #include "global.h"
 #include "project.h"
 
+/*
+*  void debugiocurve (struct project * this_proj, gboolean win, int rid, int cid, gchar * iost)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  gboolean win               : 
+*  int rid                    : 
+*  int cid                    : 
+*  gchar * iost               : 
+*/
 void debugiocurve (struct project * this_proj, gboolean win, int rid, int cid, gchar * iost)
 {
   g_debug (" ");
@@ -135,6 +163,14 @@ void debugiocurve (struct project * this_proj, gboolean win, int rid, int cid, g
   }
 }
 
+/*
+*  void debug_lattice_info (struct project * this_proj, gchar * iost)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  gchar * iost               : 
+*/
 void debug_lattice_info (struct project * this_proj, gchar * iost)
 {
   g_debug ("IODEBUG::%s:: lattice debug", iost);
@@ -153,6 +189,14 @@ void debug_lattice_info (struct project * this_proj, gchar * iost)
   }
 }
 
+/*
+*  void debugioproj (struct project * this_proj, gchar * iost)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  gchar * iost               : 
+*/
 void debugioproj (struct project * this_proj, gchar * iost)
 {
   int i, j;
@@ -227,6 +271,13 @@ void debugioproj (struct project * this_proj, gchar * iost)
   debug_lattice_info (this_proj, iost);
 }
 
+/*
+*  void debug_chemical_information (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void debug_chemical_information (struct project * this_proj)
 {
   g_debug ("Number of species: %d", this_proj -> nspec);

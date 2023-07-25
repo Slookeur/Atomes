@@ -11,6 +11,38 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cbuild_action.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int test_lattice (builder_edition * cbuilder);
+  int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos);
+  int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
+
+  double get_val_from_setting (gchar * pos, gchar * sval);
+  double get_value_from_pos (gchar * pos);
+  double get_val_from_wyckoff (gchar * pos, gchar * wval);
+  double get_pos_from_wyckoff (vec3_t pos, vec4_t wyck, double point);
+
+  gboolean same_coords (float a, float b);
+  gboolean are_equal_vectors (vec3_t u, vec3_t v);
+  gboolean pos_not_taken (int pos, int dim, int * tab);
+  gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_cell);
+
+  void get_origin (space_group * spg);
+  void compute_lattice_properties (cell_info * cell);
+  void clean_this_proj (struct project * this_proj, gboolean newp);
+
+  space_group * duplicate_space_group (space_group * spg);
+
+*/
+
 #include "global.h"
 #include "callbacks.h"
 #include "interface.h"
@@ -26,6 +58,14 @@ extern int get_bravais_id (int spg);
 
 gchar * tmp_pos = NULL;
 
+/*
+*  double get_val_from_setting (gchar * pos, gchar * sval)
+*
+*  Usage: 
+*
+*  gchar * pos  : 
+*  gchar * sval : 
+*/
 double get_val_from_setting (gchar * pos, gchar * sval)
 {
   if (! strstr(sval, pos))
@@ -58,6 +98,13 @@ double get_val_from_setting (gchar * pos, gchar * sval)
   }
 }
 
+/*
+*  double get_value_from_pos (gchar * pos)
+*
+*  Usage: 
+*
+*  gchar * pos : 
+*/
 double get_value_from_pos (gchar * pos)
 {
   if (strstr(pos, "/"))
@@ -76,6 +123,13 @@ double get_value_from_pos (gchar * pos)
   }
 }
 
+/*
+*  void get_origin (space_group * spg)
+*
+*  Usage: 
+*
+*  space_group * spg : 
+*/
 void get_origin (space_group * spg)
 {
   char * vinit[3]={"a", "b", "c"};
@@ -116,6 +170,13 @@ void get_origin (space_group * spg)
 #endif
 }
 
+/*
+*  void compute_lattice_properties (cell_info * cell)
+*
+*  Usage: 
+*
+*  cell_info * cell : 
+*/
 void compute_lattice_properties (cell_info * cell)
 {
   int i;
@@ -227,6 +288,13 @@ void compute_lattice_properties (cell_info * cell)
 #endif
 }
 
+/*
+*  int test_lattice (builder_edition * cbuilder)
+*
+*  Usage: 
+*
+*  builder_edition * cbuilder : 
+*/
 int test_lattice (builder_edition * cbuilder)
 {
   int i, j;
@@ -305,6 +373,14 @@ int test_lattice (builder_edition * cbuilder)
   return 1;
 }
 
+/*
+*  double get_val_from_wyckoff (gchar * pos, gchar * wval)
+*
+*  Usage: 
+*
+*  gchar * pos  : 
+*  gchar * wval : 
+*/
 double get_val_from_wyckoff (gchar * pos, gchar * wval)
 {
   if (! strstr(wval, pos))
@@ -336,6 +412,14 @@ double get_val_from_wyckoff (gchar * pos, gchar * wval)
   }
 }
 
+/*
+*  void clean_this_proj (struct project * this_proj, gboolean newp)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  gboolean newp              : 
+*/
 void clean_this_proj (struct project * this_proj, gboolean newp)
 {
   int i, j;
@@ -358,6 +442,14 @@ void clean_this_proj (struct project * this_proj, gboolean newp)
   }
 }
 
+/*
+*  gboolean same_coords (float a, float b)
+*
+*  Usage: 
+*
+*  float a : 
+*  float b : 
+*/
 gboolean same_coords (float a, float b)
 {
   int i;
@@ -365,6 +457,14 @@ gboolean same_coords (float a, float b)
   return FALSE;
 }
 
+/*
+*  gboolean are_equal_vectors (vec3_t u, vec3_t v)
+*
+*  Usage: 
+*
+*  vec3_t u : 
+*  vec3_t v : 
+*/
 gboolean are_equal_vectors (vec3_t u, vec3_t v)
 {
   if (same_coords(u.x, v.x) && same_coords(u.y, v.y) && same_coords(u.z, v.z))
@@ -374,6 +474,15 @@ gboolean are_equal_vectors (vec3_t u, vec3_t v)
   return FALSE;
 }
 
+/*
+*  int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos)
+*
+*  Usage: 
+*
+*  vec3_t * all_pos : 
+*  int num_pos      : 
+*  vec3_t pos       : 
+*/
 int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos)
 {
   int i;
@@ -384,11 +493,27 @@ int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos)
   return 1;
 }
 
+/*
+*  double get_pos_from_wyckoff (vec3_t pos, vec4_t wyck, double point)
+*
+*  Usage: 
+*
+*  vec3_t pos   : 
+*  vec4_t wyck  : 
+*  double point : 
+*/
 double get_pos_from_wyckoff (vec3_t pos, vec4_t wyck, double point)
 {
   return pos.x*wyck.w + pos.y*wyck.x + pos.z*wyck.y + wyck.z + point;
 }
 
+/*
+*  space_group * duplicate_space_group (space_group * spg)
+*
+*  Usage: 
+*
+*  space_group * spg : 
+*/
 space_group * duplicate_space_group (space_group * spg)
 {
   space_group * new_spg = g_malloc0(sizeof*new_spg);
@@ -464,6 +589,15 @@ crystal_data * free_crystal_data (crystal_data * cryst)
   return NULL;
 }
 
+/*
+*  gboolean pos_not_taken (int pos, int dim, int * tab)
+*
+*  Usage: 
+*
+*  int pos   : 
+*  int dim   : 
+*  int * tab : 
+*/
 gboolean pos_not_taken (int pos, int dim, int * tab)
 {
   int i;
@@ -471,6 +605,15 @@ gboolean pos_not_taken (int pos, int dim, int * tab)
   return TRUE;
 }
 
+/*
+*  gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_cell)
+*
+*  Usage: 
+*
+*  crystal_data * cryst : 
+*  int occupying        : 
+*  int tot_cell         : 
+*/
 gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_cell)
 {
   int h, i, j, k, l, m, n, o, p, q, r, s, t;
@@ -701,6 +844,18 @@ gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_c
   return low_occ;
 }
 
+/*
+*  int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
+*
+*  Usage: 
+*
+*  gboolean visible           : 
+*  struct project * this_proj : 
+*  gboolean to_wrap           : 
+*  gboolean show_clones       : 
+*  cell_info * cell           : 
+*  GtkWidget * widg           : 
+*/
 int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
 {
   int h, i, j, k, l, m, n, o, p, q;

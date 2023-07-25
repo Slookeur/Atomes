@@ -11,6 +11,92 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'project.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  calc/calc.c
+  curve/cedit.c
+  curve/curve.c
+  curve/datab.c
+  curve/tab-1.c
+  curve/tab-2.c
+  curve/tab-3.c
+  curve/tab-4.c
+  gui/bdcall.c
+  gui/calc_menu.c
+  gui/callbacks.c
+  gui/chainscall.c
+  gui/edit_menu.c
+  gui/grcall.c
+  gui/gui.c
+  gui/initc.c
+  gui/interface.c
+  gui/main.c
+  gui/msdcall.c
+  gui/ringscall.c
+  gui/spcall.c
+  gui/sqcall.c
+  gui/tools.c
+  gui/work_menu.c
+  opengl/glview.c
+  project/close_p.c
+  project/debugio.c
+  project/init_p.c
+  project/open_p.c
+  project/read_bond.c
+  project/read_curve.c
+  project/read_field.c
+  project/read_mol.c
+  project/read_opengl.c
+  project/read_qm.c
+  project/save_bond.c
+  project/save_curve.c
+  project/save_field.c
+  project/save_mol.c
+  project/save_opengl.c
+  project/save_p.c
+  project/save_qm.c
+  project/update_p.c
+  workspace/workinfo.c
+  workspace/workspace.c
+  calc/cp2k/cp2k_files.c
+  calc/cp2k/cp2k_init.c
+  calc/cpmd/cpmd_init.c
+  calc/dl_poly/dlp_control.c
+  calc/dl_poly/dlp_field.c
+  calc/dl_poly/dlp_viz.c
+  opengl/draw/image.c
+  opengl/draw/movie.c
+  opengl/edit/cbuild_action.c
+  opengl/edit/cbuild_edit.c
+  opengl/win/color_box.c
+  opengl/win/glwindow.c
+  opengl/win/menu_bar.c
+  opengl/win/m_map.c
+  opengl/win/m_quality.c
+  opengl/win/m_style.c
+  opengl/win/popup.c
+  opengl/win/w_colors.c
+  opengl/win/w_crystal.c
+  opengl/win/w_cutoffs.c
+  opengl/win/w_library.c
+  opengl/win/w_volumes.c
+  project/readers/read_c3d.c
+  project/readers/read_cif.c
+  project/readers/read_coord.c
+  project/readers/read_hist.c
+  project/readers/read_npt.c
+  project/readers/read_pdb.c
+  project/readers/read_trj.c
+  project/readers/read_vas.c
+  project/readers/read_xyz.c
+
+*/
+
 #ifndef PROJECT_H_
 #define PROJECT_H_
 

@@ -11,6 +11,22 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'd_rings.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean go);
+
+  void create_ring_lists ();
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "color_box.h"
@@ -23,6 +39,18 @@ extern void get_centroid (GLfloat ** xyz, int id);
 extern void check_triangles (int s, GLfloat ** xyz);
 //extern int summit[50];
 
+/*
+*  int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean go)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  int se           : 
+*  int ge           : 
+*  int ta           : 
+*  int id           : 
+*  gboolean go      : 
+*/
 int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean go)
 {
   int i, j, k, l, m;
@@ -127,6 +155,13 @@ int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean
   return 0;
 }
 
+/*
+*  void create_ring_lists ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void create_ring_lists ()
 {
   // The order to draw the polyhedra could be based on the alpha channel

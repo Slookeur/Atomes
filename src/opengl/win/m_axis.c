@@ -11,6 +11,29 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_axis.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void menu_axis (GtkWidget * menu_ab, glwin * view, int id);
+  void menu_axis (GMenu * menu_ab, glwin * view, int popm);
+
+  G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * axis_position_submenu (glwin * view, int id);
+
+  GMenu * position_submenu (glwin * view, int popm, int pos);
+  GMenu * axis_position_submenu (glwin * view, int popm);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "glwindow.h"
@@ -24,6 +47,14 @@ extern G_MODULE_EXPORT void axis_advanced (GtkWidget * widg, gpointer data);
 extern GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab, gpointer data);
 
 #ifdef GTK3
+/*
+*  G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
 {
 /* TOP_RIGHT = 0,
@@ -59,6 +90,14 @@ G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * axis_position_submenu (glwin * view, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*/
 GtkWidget * axis_position_submenu (glwin * view, int id)
 {
   int i, j, k;
@@ -106,6 +145,15 @@ GtkWidget * axis_position_submenu (glwin * view, int id)
   return menup;
 }
 
+/*
+*  void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
+*
+*  Usage: 
+*
+*  GtkWidget * menu_ab : 
+*  glwin * view        : 
+*  int id              : 
+*/
 void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
 {
   GtkWidget * widg = create_menu_item (FALSE, "Length");
@@ -135,6 +183,15 @@ void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
   add_advanced_item (menu_ab, G_CALLBACK(axis_advanced), (gpointer)view, FALSE, 0, 0);
 }
 #else
+/*
+*  G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   /* TOP_RIGHT = 0,
@@ -178,6 +235,15 @@ G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * p
   }
 }
 
+/*
+*  GMenu * position_submenu (glwin * view, int popm, int pos)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int pos      : 
+*/
 GMenu * position_submenu (glwin * view, int popm, int pos)
 {
   GMenu * menu = g_menu_new ();
@@ -194,6 +260,14 @@ GMenu * position_submenu (glwin * view, int popm, int pos)
   return menu;
 }
 
+/*
+*  GMenu * axis_position_submenu (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * axis_position_submenu (glwin * view, int popm)
 {
   int i;
@@ -209,6 +283,15 @@ GMenu * axis_position_submenu (glwin * view, int popm)
   return menu;
 }
 
+/*
+*  void menu_axis (GMenu * menu_ab, glwin * view, int popm)
+*
+*  Usage: 
+*
+*  GMenu * menu_ab : 
+*  glwin * view    : 
+*  int popm        : 
+*/
 void menu_axis (GMenu * menu_ab, glwin * view, int popm)
 {
   GMenuItem * item = g_menu_item_new ("Length", (view -> anim -> last -> img -> box_axis[AXIS]) != NONE ? NULL : "None");

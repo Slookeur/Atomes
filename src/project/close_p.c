@@ -11,6 +11,24 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'close_p.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void update_insert_combos ();
+  void close_project (struct project * to_close);
+
+  G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * this_proj);
+  G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "gui.h"
@@ -24,6 +42,13 @@ If not, see <https://www.gnu.org/licenses/> */
 extern GtkTreeStore * tool_model;
 extern GtkTreeModel * replace_combo_tree (gboolean insert, int p);
 
+/*
+*  void update_insert_combos ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void update_insert_combos ()
 {
   GtkTreeModel * model;
@@ -53,6 +78,13 @@ void update_insert_combos ()
   }
 }
 
+/*
+*  void close_project (struct project * to_close)
+*
+*  Usage: 
+*
+*  struct project * to_close : 
+*/
 void close_project (struct project * to_close)
 {
   int i, j, k, l;
@@ -258,6 +290,14 @@ void close_project (struct project * to_close)
   update_insert_combos ();
 }
 
+/*
+*  G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * this_proj)
+*
+*  Usage: 
+*
+*  int to_activate            : 
+*  struct project * this_proj : 
+*/
 G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * this_proj)
 {
   if (nprojects > 0) close_project (this_proj);
@@ -273,6 +313,14 @@ G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * th
   }
 }
 
+/*
+*  G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer cdata   : 
+*/
 G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata)
 {
   if (nprojects > 0)

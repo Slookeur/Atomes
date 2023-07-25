@@ -11,6 +11,37 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'd_atoms.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int sphere_vertices (int qual);
+  int sphere_indices (int qual);
+  int find_atom_vertices (gboolean to_pick);
+  int find_clone_vertices (gboolean to_pick);
+
+  float get_sphere_radius (int style, int sp, int ac, int sel);
+
+  void setup_sphere_vertice (float * vertices, vec3_t pos, ColRGBA col, float rad, float alpha);
+  void setup_this_atom (int style, gboolean to_pick, gboolean picked, struct atom * at, int ac, float * vert, float al);
+  void setup_atom_vertices (int style, gboolean to_pick, float * vertices);
+  void prepare_clone (int style, gboolean to_pick, int picked, struct atom at, struct atom bt, float x, float y, float z, float * vertices);
+  void setup_clone_vertices (int style, gboolean to_pick, float * vertices);
+  void atom_positions_colors_and_sizes (int style, gboolean to_pick, float * instances);
+  void create_atom_lists (gboolean to_pick);
+
+  ColRGBA get_atom_color (int i, int j, double al, int picked, gboolean to_pick);
+
+  object_3d * draw_sphere (int quality);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "ogl_shading.h"
@@ -20,6 +51,17 @@ int atom_id;
 int gColorID[3];
 int all_styles[NUM_STYLES];
 
+/*
+*  ColRGBA get_atom_color (int i, int j, double al, int picked, gboolean to_pick)
+*
+*  Usage: 
+*
+*  int i            : 
+*  int j            : 
+*  double al        : 
+*  int picked       : 
+*  gboolean to_pick : 
+*/
 ColRGBA get_atom_color (int i, int j, double al, int picked, gboolean to_pick)
 {
   // i = atom spec, j = atom id (for coordination maps), al = alpha
@@ -124,16 +166,37 @@ ColRGBA get_atom_color (int i, int j, double al, int picked, gboolean to_pick)
 
 int nbs, nbl, nba;
 
+/*
+*  int sphere_vertices (int qual)
+*
+*  Usage: 
+*
+*  int qual : 
+*/
 int sphere_vertices (int qual)
 {
   return qual * qual;
 }
 
+/*
+*  int sphere_indices (int qual)
+*
+*  Usage: 
+*
+*  int qual : 
+*/
 int sphere_indices (int qual)
 {
   return 2 * qual * (qual - 1);
 }
 
+/*
+*  object_3d * draw_sphere (int quality)
+*
+*  Usage: 
+*
+*  int quality : 
+*/
 object_3d * draw_sphere (int quality)
 {
   float theta, phi;
@@ -196,6 +259,16 @@ object_3d * draw_sphere (int quality)
   return new_sphere;
 }
 
+/*
+*  float get_sphere_radius (int style, int sp, int ac, int sel)
+*
+*  Usage: 
+*
+*  int style : 
+*  int sp    : 
+*  int ac    : 
+*  int sel   : 
+*/
 float get_sphere_radius (int style, int sp, int ac, int sel)
 {
   if (style == WIREFRAME || style == PUNT)
@@ -216,6 +289,17 @@ float get_sphere_radius (int style, int sp, int ac, int sel)
   }
 }
 
+/*
+*  void setup_sphere_vertice (float * vertices, vec3_t pos, ColRGBA col, float rad, float alpha)
+*
+*  Usage: 
+*
+*  float * vertices : 
+*  vec3_t pos       : 
+*  ColRGBA col      : 
+*  float rad        : 
+*  float alpha      : 
+*/
 void setup_sphere_vertice (float * vertices, vec3_t pos, ColRGBA col, float rad, float alpha)
 {
   int l;
@@ -231,6 +315,19 @@ void setup_sphere_vertice (float * vertices, vec3_t pos, ColRGBA col, float rad,
   nbl ++;
 }
 
+/*
+*  void setup_this_atom (int style, gboolean to_pick, gboolean picked, struct atom * at, int ac, float * vert, float al)
+*
+*  Usage: 
+*
+*  int style        : 
+*  gboolean to_pick : 
+*  gboolean picked  : 
+*  struct atom * at : 
+*  int ac           : 
+*  float * vert     : 
+*  float al         : 
+*/
 void setup_this_atom (int style, gboolean to_pick, gboolean picked, struct atom * at, int ac, float * vert, float al)
 {
   int i, j, k;
@@ -257,6 +354,13 @@ void setup_this_atom (int style, gboolean to_pick, gboolean picked, struct atom 
   }
 }
 
+/*
+*  int find_atom_vertices (gboolean to_pick)
+*
+*  Usage: 
+*
+*  gboolean to_pick : 
+*/
 int find_atom_vertices (gboolean to_pick)
 {
   int i, j;
@@ -297,6 +401,15 @@ int find_atom_vertices (gboolean to_pick)
   return j;
 }
 
+/*
+*  void setup_atom_vertices (int style, gboolean to_pick, float * vertices)
+*
+*  Usage: 
+*
+*  int style        : 
+*  gboolean to_pick : 
+*  float * vertices : 
+*/
 void setup_atom_vertices (int style, gboolean to_pick, float * vertices)
 {
   int i;
@@ -317,6 +430,21 @@ void setup_atom_vertices (int style, gboolean to_pick, float * vertices)
   }
 }
 
+/*
+*  void prepare_clone (int style, gboolean to_pick, int picked, struct atom at, struct atom bt, float x, float y, float z, float * vertices)
+*
+*  Usage: 
+*
+*  int style        : 
+*  gboolean to_pick : 
+*  int picked       : 
+*  struct atom at   : 
+*  struct atom bt   : 
+*  float x          : 
+*  float y          : 
+*  float z          : 
+*  float * vertices : 
+*/
 void prepare_clone (int style, gboolean to_pick, int picked, struct atom at, struct atom bt, float x, float y, float z, float * vertices)
 {
   struct atom * tmp_a = duplicate_atom (& bt);
@@ -338,6 +466,13 @@ void prepare_clone (int style, gboolean to_pick, int picked, struct atom at, str
   g_free (tmp_a);
 }
 
+/*
+*  int find_clone_vertices (gboolean to_pick)
+*
+*  Usage: 
+*
+*  gboolean to_pick : 
+*/
 int find_clone_vertices (gboolean to_pick)
 {
   int i, j, k, l;
@@ -404,6 +539,15 @@ int find_clone_vertices (gboolean to_pick)
   return l;
 }
 
+/*
+*  void setup_clone_vertices (int style, gboolean to_pick, float * vertices)
+*
+*  Usage: 
+*
+*  int style        : 
+*  gboolean to_pick : 
+*  float * vertices : 
+*/
 void setup_clone_vertices (int style, gboolean to_pick, float * vertices)
 {
   int i, j, k;
@@ -427,6 +571,15 @@ void setup_clone_vertices (int style, gboolean to_pick, float * vertices)
   }
 }
 
+/*
+*  void atom_positions_colors_and_sizes (int style, gboolean to_pick, float * instances)
+*
+*  Usage: 
+*
+*  int style         : 
+*  gboolean to_pick  : 
+*  float * instances : 
+*/
 void atom_positions_colors_and_sizes (int style, gboolean to_pick, float * instances)
 {
   setup_atom_vertices (style, to_pick, instances);
@@ -438,6 +591,13 @@ void atom_positions_colors_and_sizes (int style, gboolean to_pick, float * insta
   }
 }
 
+/*
+*  void create_atom_lists (gboolean to_pick)
+*
+*  Usage: 
+*
+*  gboolean to_pick : 
+*/
 void create_atom_lists (gboolean to_pick)
 {
   int i, j, k;

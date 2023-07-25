@@ -11,6 +11,34 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'la_print.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_mol_id_from_model_id (int at);
+  int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_struct * dh);
+  int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struct * an);
+  int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct * bd);
+  int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_check);
+  int get_type_struct_to_print (struct field_molecule * tfmol, int sid);
+  int get_different_atoms ();
+
+  gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * bt);
+
+  void print_lammps_mass (GtkTextBuffer * buf);
+  void print_lammps_atoms (GtkTextBuffer * buf);
+  void print_lammps_atom_file (GtkTextBuffer * buf);
+
+  struct field_atom * get_print_atom (int aid);
+
+*/
+
 #include "dlp_field.h"
 #include "interface.h"
 
@@ -49,6 +77,13 @@ extern gboolean are_identical_prop (int ti, int ai, struct field_prop * pro_a, s
 extern void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda);
 extern char * vect_comp[3];
 
+/*
+*  int get_mol_id_from_model_id (int at)
+*
+*  Usage: 
+*
+*  int at : 
+*/
 int get_mol_id_from_model_id (int at)
 {
   int i;
@@ -72,6 +107,16 @@ int get_mol_id_from_model_id (int at)
 
 struct field_prop * print_prop[8];
 
+/*
+*  int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_struct * dh)
+*
+*  Usage: 
+*
+*  int did                  : 
+*  int di                   : 
+*  GtkTextBuffer * buf      : 
+*  struct field_struct * dh : 
+*/
 int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_struct * dh)
 {
   int a, c, i, j, k, l, m, n, o, p;
@@ -131,6 +176,16 @@ int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_st
   return did;
 }
 
+/*
+*  int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struct * an)
+*
+*  Usage: 
+*
+*  int aid                  : 
+*  int ai                   : 
+*  GtkTextBuffer * buf      : 
+*  struct field_struct * an : 
+*/
 int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struct * an)
 {
   int i, j, k, l, m, o, p, q;
@@ -183,6 +238,16 @@ int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struc
   return aid;
 }
 
+/*
+*  int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct * bd)
+*
+*  Usage: 
+*
+*  int bid                  : 
+*  int bi                   : 
+*  GtkTextBuffer * buf      : 
+*  struct field_struct * bd : 
+*/
 int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct * bd)
 {
   int i, j, k, l, m, n;
@@ -226,6 +291,15 @@ int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct
   return bid;
 }
 
+/*
+*  int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_check)
+*
+*  Usage: 
+*
+*  int sid                      : 
+*  struct field_prop * init     : 
+*  struct field_prop * to_check : 
+*/
 int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_check)
 {
   struct field_prop * tmp_pr = init;
@@ -254,6 +328,14 @@ int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_
   return (add_prop) ? 1 : 0;
 }
 
+/*
+*  int get_type_struct_to_print (struct field_molecule * tfmol, int sid)
+*
+*  Usage: 
+*
+*  struct field_molecule * tfmol : 
+*  int sid                       : 
+*/
 int get_type_struct_to_print (struct field_molecule * tfmol, int sid)
 {
   int pid = 0;
@@ -299,6 +381,14 @@ int get_type_struct_to_print (struct field_molecule * tfmol, int sid)
 
 struct field_atom * all_at;
 
+/*
+*  gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * bt)
+*
+*  Usage: 
+*
+*  struct field_atom * at : 
+*  struct field_atom * bt : 
+*/
 gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * bt)
 {
   if (g_strcmp0(at -> name, bt -> name) != 0) return TRUE;
@@ -308,6 +398,13 @@ gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * 
   return FALSE;
 }
 
+/*
+*  int get_different_atoms ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int get_different_atoms ()
 {
   int numat = 0;
@@ -353,6 +450,13 @@ int get_different_atoms ()
   return numat;
 }
 
+/*
+*  void print_lammps_mass (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_lammps_mass (GtkTextBuffer * buf)
 {
   gchar * str;
@@ -367,6 +471,13 @@ void print_lammps_mass (GtkTextBuffer * buf)
   }
 }
 
+/*
+*  struct field_atom * get_print_atom (int aid)
+*
+*  Usage: 
+*
+*  int aid : 
+*/
 struct field_atom * get_print_atom (int aid)
 {
   int i;
@@ -382,6 +493,13 @@ struct field_atom * get_print_atom (int aid)
   return NULL;
 }
 
+/*
+*  void print_lammps_atoms (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_lammps_atoms (GtkTextBuffer * buf)
 {
   int i; //, j, k;
@@ -483,6 +601,13 @@ void print_lammps_atoms (GtkTextBuffer * buf)
   }
 }
 
+/*
+*  void print_lammps_atom_file (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_lammps_atom_file (GtkTextBuffer * buf)
 {
   int i, j; //, k, l;

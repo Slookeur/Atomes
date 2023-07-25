@@ -11,12 +11,39 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'glyph.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp);
+  void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size);
+
+*/
+
 #include <cairo.h>
 #include <math.h>
 
 #include "global.h"
 #include "curve.h"
 
+/*
+*  void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp)
+*
+*  Usage: 
+*
+*  cairo_t * to : 
+*  double x     : 
+*  double y     : 
+*  double size  : 
+*  double step  : 
+*  double initp : 
+*/
 void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp)
 {
   double px, py;
@@ -37,6 +64,18 @@ void draw_poly (cairo_t * to, double x, double y, double size, double step, doub
   }
 }
 
+/*
+*  void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size)
+*
+*  Usage: 
+*
+*  cairo_t * in   : 
+*  int theglyph   : 
+*  double x       : 
+*  double y       : 
+*  ColRGBA gcolor : 
+*  double size    : 
+*/
 void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size)
 {
   double step;

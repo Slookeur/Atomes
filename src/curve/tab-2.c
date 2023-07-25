@@ -11,6 +11,42 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'tab-2.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void set_data_style (gpointer data);
+
+  static void fill_org_model (GtkListStore * store, gpointer data);
+
+  G_MODULE_EXPORT void set_data_glyph (GtkComboBox * gbox, gpointer data);
+  G_MODULE_EXPORT void set_data_dash (GtkComboBox * gbox, gpointer data);
+  G_MODULE_EXPORT void set_data_color (GtkColorChooser * colob, gpointer data);
+  G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data);
+  G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data);
+  G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void set_data_hist_pos (GtkComboBox * gbox, gpointer data);
+  G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data);
+  G_MODULE_EXPORT void choose_set (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_data_aspect (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void move_back_front (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data);
+  G_MODULE_EXPORT void set_bshift (GtkCheckButton * shift, gpointer data);
+  G_MODULE_EXPORT void set_bshift (GtkToggleButton * shift, gpointer data);
+
+  GtkWidget * create_org_list (gpointer data);
+  GtkWidget * create_tab_2 (gpointer data);
+
+  DataLayout * get_extra_layout (int i);
+
+*/
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -125,6 +161,13 @@ cairo_surface_t * draw_surface (int aspect, double hwidth, double hopac, int da,
   return cst;
 }
 
+/*
+*  DataLayout * get_extra_layout (int i)
+*
+*  Usage: 
+*
+*  int i : 
+*/
 DataLayout * get_extra_layout (int i)
 {
   int j;
@@ -136,6 +179,13 @@ DataLayout * get_extra_layout (int i)
   return ctmp -> layout;
 }
 
+/*
+*  void set_data_style (gpointer data)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*/
 void set_data_style (gpointer data)
 {
   int i;
@@ -175,6 +225,14 @@ void set_data_style (gpointer data)
   update_curve (data);
 }
 
+/*
+*  G_MODULE_EXPORT void set_data_glyph (GtkComboBox * gbox, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * gbox : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void set_data_glyph (GtkComboBox * gbox, gpointer data)
 {
   int i, j;
@@ -205,6 +263,14 @@ G_MODULE_EXPORT void set_data_glyph (GtkComboBox * gbox, gpointer data)
   set_data_style (data);
 }
 
+/*
+*  G_MODULE_EXPORT void set_data_dash (GtkComboBox * gbox, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * gbox : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void set_data_dash (GtkComboBox * gbox, gpointer data)
 {
   int i, j;
@@ -233,6 +299,14 @@ G_MODULE_EXPORT void set_data_dash (GtkComboBox * gbox, gpointer data)
   set_data_style (data);
 }
 
+/*
+*  G_MODULE_EXPORT void set_data_color (GtkColorChooser * colob, gpointer data)
+*
+*  Usage: 
+*
+*  GtkColorChooser * colob : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void set_data_color (GtkColorChooser * colob, gpointer data)
 {
   int i;
@@ -253,6 +327,14 @@ G_MODULE_EXPORT void set_data_color (GtkColorChooser * colob, gpointer data)
   set_data_style (data);
 }
 
+/*
+*  G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * thickd : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
 {
   int i;
@@ -293,6 +375,14 @@ G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * glsize : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
 {
   int i;
@@ -333,6 +423,14 @@ G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
 {
   int i;
@@ -373,6 +471,14 @@ G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
 {
   int i;
@@ -413,6 +519,14 @@ G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_data_hist_pos (GtkComboBox * gbox, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * gbox : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void set_data_hist_pos (GtkComboBox * gbox, gpointer data)
 {
   int i, j;
@@ -433,6 +547,14 @@ G_MODULE_EXPORT void set_data_hist_pos (GtkComboBox * gbox, gpointer data)
   set_data_style (data);
 }
 
+/*
+*  G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * glfreq : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
 {
   int i, j;
@@ -472,6 +594,14 @@ G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void choose_set (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void choose_set (GtkComboBox * box, gpointer data)
 {
   int i, j, k, l;
@@ -507,6 +637,14 @@ G_MODULE_EXPORT void choose_set (GtkComboBox * box, gpointer data)
   set_data_style (& ad);
 }
 
+/*
+*  G_MODULE_EXPORT void set_data_aspect (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_data_aspect (GtkComboBox * box, gpointer data)
 {
   int i, j;
@@ -541,6 +679,14 @@ G_MODULE_EXPORT void set_data_aspect (GtkComboBox * box, gpointer data)
   update_curve (data);
 }
 
+/*
+*  static void fill_org_model (GtkListStore * store, gpointer data)
+*
+*  Usage: 
+*
+*  GtkListStore * store : 
+*  gpointer data        : 
+*/
 static void fill_org_model (GtkListStore * store, gpointer data)
 {
   GtkTreeIter curvelevel;
@@ -583,6 +729,15 @@ static void fill_org_model (GtkListStore * store, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void move_back_front (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data)
+*
+*  Usage: 
+*
+*  GtkTreeModel * tree_model : 
+*  GtkTreePath * path        : 
+*  gpointer data             : 
+*/
 G_MODULE_EXPORT void move_back_front (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data)
 {
   tint * cid = (tint *) data;
@@ -706,6 +861,13 @@ G_MODULE_EXPORT void move_back_front (GtkTreeModel * tree_model, GtkTreePath * p
   update_curve (data);
 }
 
+/*
+*  GtkWidget * create_org_list (gpointer data)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*/
 GtkWidget * create_org_list (gpointer data)
 {
   int i;
@@ -741,8 +903,24 @@ GtkWidget * create_org_list (gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void set_bshift (GtkCheckButton * shift, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * shift : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void set_bshift (GtkCheckButton * shift, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void set_bshift (GtkToggleButton * shift, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * shift : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void set_bshift (GtkToggleButton * shift, gpointer data)
 #endif
 {
@@ -759,6 +937,13 @@ G_MODULE_EXPORT void set_bshift (GtkToggleButton * shift, gpointer data)
   update_curve (data);
 }
 
+/*
+*  GtkWidget * create_tab_2 (gpointer data)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*/
 GtkWidget * create_tab_2 (gpointer data)
 {
   GtkWidget * databox;

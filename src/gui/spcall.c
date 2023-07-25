@@ -11,6 +11,23 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'spcall.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void initsh (int str);
+  void update_spherical_view (struct project * this_proj);
+
+  G_MODULE_EXPORT void on_calc_sph_released (GtkWidget * widg, gpointer data);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "interface.h"
@@ -21,6 +38,13 @@ If not, see <https://www.gnu.org/licenses/> */
 extern void alloc_curves (int c);
 extern gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb);
 
+/*
+*  void initsh (int str)
+*
+*  Usage: 
+*
+*  int str : 
+*/
 void initsh (int str)
 {
   int i, j, k;
@@ -58,6 +82,13 @@ void initsh (int str)
   }
 }
 
+/*
+*  void update_spherical_view (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void update_spherical_view (struct project * this_proj)
 {
   int i, j, k, l, m;
@@ -137,6 +168,14 @@ void update_spherical_view (struct project * this_proj)
   print_info (calculation_time(TRUE, this_proj -> calc_time[SP]), NULL, this_proj -> text_buffer[SP+OT]);
 }
 
+/*
+*  G_MODULE_EXPORT void on_calc_sph_released (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_calc_sph_released (GtkWidget * widg, gpointer data)
 {
   int i, j, k, l, m;

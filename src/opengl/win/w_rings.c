@@ -11,6 +11,30 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_rings.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_rmin (struct project * this_proj, int g, int s);
+  int get_rmax (struct project * this_proj, int g, int s);
+
+  void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g);
+  void add_this_ring_to_search_tree (struct project * this_proj, int g);
+
+  G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data);
+
+  GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_this);
+  GtkWidget * create_rings_search (struct project * this_proj, int g);
+  GtkWidget * rings_tab (glwin * view, int g);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -193,6 +217,15 @@ void rings_set_visible (GtkTreeViewColumn * col,
   }
 }
 
+/*
+*  void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
+*
+*  Usage: 
+*
+*  GtkTreeStore * store       : 
+*  struct project * this_proj : 
+*  int g                      : 
+*/
 void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
 {
   GtkTreeIter step_level, size_level, ring_level;
@@ -265,6 +298,15 @@ void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
   }
 }
 
+/*
+*  GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_this)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int g                      : 
+*  gboolean fill_this         : 
+*/
 GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_this)
 {
   int i, j, k;
@@ -299,6 +341,14 @@ GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_
   return rings_tree;
 }
 
+/*
+*  void add_this_ring_to_search_tree (struct project * this_proj, int g)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int g                      : 
+*/
 void add_this_ring_to_search_tree (struct project * this_proj, int g)
 {
   GtkTreeIter step_level, size_level, ring_level;
@@ -602,6 +652,15 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
   }
 }
 
+/*
+*  int get_rmin (struct project * this_proj, int g, int s)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int g                      : 
+*  int s                      : 
+*/
 int get_rmin (struct project * this_proj, int g, int s)
 {
   int i, j;
@@ -613,6 +672,15 @@ int get_rmin (struct project * this_proj, int g, int s)
   return j;
 }
 
+/*
+*  int get_rmax (struct project * this_proj, int g, int s)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int g                      : 
+*  int s                      : 
+*/
 int get_rmax (struct project * this_proj, int g, int s)
 {
   int i, j;
@@ -624,6 +692,14 @@ int get_rmax (struct project * this_proj, int g, int s)
   return j;
 }
 
+/*
+*  G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
 {
   tint * dat = (tint * )data;
@@ -740,6 +816,14 @@ G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * create_rings_search (struct project * this_proj, int g)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int g                      : 
+*/
 GtkWidget * create_rings_search (struct project * this_proj, int g)
 {
   GtkWidget * rings_search = create_vbox (BSEP);
@@ -785,6 +869,14 @@ GtkWidget * create_rings_search (struct project * this_proj, int g)
   return rings_search;
 }
 
+/*
+*  GtkWidget * rings_tab (glwin * view, int g)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int g        : 
+*/
 GtkWidget * rings_tab (glwin * view, int g)
 {
   GtkWidget * rings = create_scroll(NULL, -1, -1, GTK_SHADOW_NONE);

@@ -11,6 +11,25 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_box.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data);
+  G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -27,6 +46,14 @@ gchar * box_style[BOX_STYLES] = {"Wireframe", "Cylinders"};
 GtkWidget * box_data;
 
 
+/*
+*  G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 {
   int i = gtk_combo_box_get_active (GTK_COMBO_BOX(widg));
@@ -58,8 +85,24 @@ G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -88,6 +131,14 @@ G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
   widget_set_sensitive (box_data, val);
 }
 
+/*
+*  G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
+*
+*  Usage: 
+*
+*  GtkColorChooser * colob : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 {
   opengl_project -> modelgl -> anim -> last -> img -> box_color = get_button_color (colob);
@@ -96,8 +147,25 @@ G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
 #endif
 {

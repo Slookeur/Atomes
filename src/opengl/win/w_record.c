@@ -11,11 +11,37 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_record.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void prepare_edition_windows (glwin * view, int status);
+
+  G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 
 extern void window_encode (glwin * view, gboolean video);
 
+/*
+*  void prepare_edition_windows (glwin * view, int status)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int status   : 
+*/
 void prepare_edition_windows (glwin * view, int status)
 {
   GtkWidget * widg;
@@ -55,6 +81,14 @@ void prepare_edition_windows (glwin * view, int status)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -74,6 +108,14 @@ G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -90,6 +132,14 @@ G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
   prepare_edition_windows (view, 1);
 }
 
+/*
+*  G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data)
 {
   glwin * view = (glwin *) data;

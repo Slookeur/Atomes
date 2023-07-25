@@ -11,6 +11,28 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'grcall.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int recup_data_ (int * cd, int * rd);
+
+  void initgr (int r, int s);
+  void update_rdf_view (struct project * this_proj, int rdf);
+  void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc]);
+
+  G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * Button);
+  G_MODULE_EXPORT void on_calc_gq_released (GtkWidget * widg, gpointer data);
+
+*/
+
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdlib.h>
@@ -24,6 +46,14 @@ If not, see <https://www.gnu.org/licenses/> */
 
 int fitc = 0;
 
+/*
+*  void initgr (int r, int s)
+*
+*  Usage: 
+*
+*  int r : 
+*  int s : 
+*/
 void initgr (int r, int s)
 {
   int i, j, k;
@@ -79,6 +109,14 @@ void initgr (int r, int s)
   active_project -> initok[r] = TRUE;
 }
 
+/*
+*  void update_rdf_view (struct project * this_proj, int rdf)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int rdf                    : 
+*/
 void update_rdf_view (struct project * this_proj, int rdf)
 {
   gchar * str;
@@ -142,6 +180,14 @@ void update_rdf_view (struct project * this_proj, int rdf)
   print_info (calculation_time(TRUE, this_proj -> calc_time[rdf]), NULL, this_proj -> text_buffer[rdf+OT]);
 }
 
+/*
+*  G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
 {
   int i;
@@ -169,6 +215,15 @@ G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
   for (i=0; i<4; i=i+3) update_after_calc (i);
 }
 
+/*
+*  void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
+*
+*  Usage: 
+*
+*  int * nc                 : 
+*  double * totc            : 
+*  double partc[* nc][* nc] : 
+*/
 void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
 {
   int i, j;
@@ -184,6 +239,13 @@ void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
   active_project -> dmtx = FALSE;
 }
 
+/*
+*  G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * Button)
+*
+*  Usage: 
+*
+*  GtkToggleButton * Button : 
+*/
 G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * Button)
 {
   gboolean status;
@@ -198,6 +260,14 @@ G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * Button)
   }
 }
 
+/*
+*  int recup_data_ (int * cd, int * rd)
+*
+*  Usage: 
+*
+*  int * cd : 
+*  int * rd : 
+*/
 int recup_data_ (int * cd, int * rd)
 {
   if (* rd == 0)
@@ -218,6 +288,14 @@ int recup_data_ (int * cd, int * rd)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void on_calc_gq_released (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_calc_gq_released (GtkWidget * widg, gpointer data)
 {
   int i;

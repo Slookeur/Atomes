@@ -11,6 +11,40 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'selection.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id);
+  int find_selected_bond (struct project * this_proj, int id);
+  int find_selected_atom (struct project * this_proj, int id);
+  int num_bonds (int i);
+  int num_angles (int i);
+  int num_dihedrals (int i);
+
+  void save_dihedral_selection (glwin * view, int pi);
+  void update_dihedral_selection (glwin * view, int pi);
+  void save_angle_selection (glwin * view, int pi);
+  void update_angle_selection (glwin * view, int pi);
+  void save_bond_selection (glwin * view, int pi);
+  void update_bond_selection (glwin * view, int pi);
+  void save_all_selections (glwin * view, int pi);
+  void update_all_selections (glwin * view, int pi);
+  void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add);
+  void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi);
+  void process_selection (struct project * this_proj, glwin * view, int id, int ac, int se, int pi);
+  void process_the_hits (glwin * view, gint event_button, double ptx, double pty);
+
+  struct selatom * new_selatom (int id, int sp);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -24,6 +58,17 @@ extern void update_label_selection (glwin * view, int pi);
 extern int selected_aspec;
 extern int get_to_be_selected (glwin * view);
 
+/*
+*  int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int i                      : 
+*  int j                      : 
+*  int b                      : 
+*  int id                     : 
+*/
 int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id)
 {
   int k, l, m;
@@ -49,6 +94,14 @@ int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id)
   return -i;
 }
 
+/*
+*  int find_selected_bond (struct project * this_proj, int id)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int id                     : 
+*/
 int find_selected_bond (struct project * this_proj, int id)
 {
   int i, j, k;
@@ -78,6 +131,14 @@ int find_selected_bond (struct project * this_proj, int id)
   }
 }
 
+/*
+*  int find_selected_atom (struct project * this_proj, int id)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int id                     : 
+*/
 int find_selected_atom (struct project * this_proj, int id)
 {
   int i, j, k, l, m;
@@ -103,16 +164,37 @@ int find_selected_atom (struct project * this_proj, int id)
   return -1;
 }
 
+/*
+*  int num_bonds (int i)
+*
+*  Usage: 
+*
+*  int i : 
+*/
 int num_bonds (int i)
 {
   return i*(i-1)/2;
 }
 
+/*
+*  int num_angles (int i)
+*
+*  Usage: 
+*
+*  int i : 
+*/
 int num_angles (int i)
 {
   return i*(i-1)*(i-2)/2;
 }
 
+/*
+*  int num_dihedrals (int i)
+*
+*  Usage: 
+*
+*  int i : 
+*/
 int num_dihedrals (int i)
 {
   return i*(i-1)*(i-2)*(i-3)/2;
@@ -122,6 +204,14 @@ int objects[3] = {0, 0, 0};
 int * object_was_selected[3] = {NULL, NULL, NULL};
 int ** tmp_object_id[3] = {NULL, NULL, NULL};
 
+/*
+*  void save_dihedral_selection (glwin * view, int pi)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*/
 void save_dihedral_selection (glwin * view, int pi)
 {
   int i, j;
@@ -141,6 +231,14 @@ void save_dihedral_selection (glwin * view, int pi)
   }
 }
 
+/*
+*  void update_dihedral_selection (glwin * view, int pi)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*/
 void update_dihedral_selection (glwin * view, int pi)
 {
   int i;
@@ -153,6 +251,14 @@ void update_dihedral_selection (glwin * view, int pi)
   }
 }
 
+/*
+*  void save_angle_selection (glwin * view, int pi)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*/
 void save_angle_selection (glwin * view, int pi)
 {
   int i, j;
@@ -172,6 +278,14 @@ void save_angle_selection (glwin * view, int pi)
   }
 }
 
+/*
+*  void update_angle_selection (glwin * view, int pi)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*/
 void update_angle_selection (glwin * view, int pi)
 {
   int i;
@@ -184,6 +298,14 @@ void update_angle_selection (glwin * view, int pi)
   }
 }
 
+/*
+*  void save_bond_selection (glwin * view, int pi)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*/
 void save_bond_selection (glwin * view, int pi)
 {
   int i, j;
@@ -203,6 +325,14 @@ void save_bond_selection (glwin * view, int pi)
   }
 }
 
+/*
+*  void update_bond_selection (glwin * view, int pi)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*/
 void update_bond_selection (glwin * view, int pi)
 {
   int i;
@@ -222,6 +352,14 @@ void update_bond_selection (glwin * view, int pi)
   }
 }
 
+/*
+*  void save_all_selections (glwin * view, int pi)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*/
 void save_all_selections (glwin * view, int pi)
 {
   save_bond_selection (view, pi);
@@ -229,6 +367,14 @@ void save_all_selections (glwin * view, int pi)
   save_dihedral_selection (view, pi);
 }
 
+/*
+*  void update_all_selections (glwin * view, int pi)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*/
 void update_all_selections (glwin * view, int pi)
 {
   update_bond_selection (view, pi);
@@ -262,6 +408,14 @@ void update_all_selections (glwin * view, int pi)
   }
 }
 
+/*
+*  struct selatom * new_selatom (int id, int sp)
+*
+*  Usage: 
+*
+*  int id : 
+*  int sp : 
+*/
 struct selatom * new_selatom (int id, int sp)
 {
   struct selatom *  new_sel = g_malloc0 (sizeof*new_sel);
@@ -270,6 +424,15 @@ struct selatom * new_selatom (int id, int sp)
   return new_sel;
 }
 
+/*
+*  void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add)
+*
+*  Usage: 
+*
+*  struct atom_selection * at_list : 
+*  struct atom * at                : 
+*  gboolean add                    : 
+*/
 void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add)
 {
   int i;
@@ -327,6 +490,18 @@ void update_selection_list (struct atom_selection * at_list, struct atom * at, g
   }
 }
 
+/*
+*  void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  glwin * view               : 
+*  int id                     : 
+*  int ac                     : 
+*  int se                     : 
+*  int pi                     : 
+*/
 void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
 {
   int i;
@@ -361,6 +536,18 @@ void process_selected_atom (struct project * this_proj, glwin * view, int id, in
   }
 }
 
+/*
+*  void process_selection (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  glwin * view               : 
+*  int id                     : 
+*  int ac                     : 
+*  int se                     : 
+*  int pi                     : 
+*/
 void process_selection (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
 {
   int i, j, k;
@@ -379,6 +566,16 @@ void process_selection (struct project * this_proj, glwin * view, int id, int ac
   }
 }
 
+/*
+*  void process_the_hits (glwin * view, gint event_button, double ptx, double pty)
+*
+*  Usage: 
+*
+*  glwin * view      : 
+*  gint event_button : 
+*  double ptx        : 
+*  double pty        : 
+*/
 void process_the_hits (glwin * view, gint event_button, double ptx, double pty)
 {
   int i, j, k, l, m, n, o, p, q;

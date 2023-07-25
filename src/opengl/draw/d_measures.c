@@ -11,6 +11,30 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'd_measures.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int prepare_measure_shaders (int type, int shaders);
+
+  void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int pi);
+  void set_measure_color (int selected, int id, int num);
+  void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi);
+  void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store);
+  void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store);
+  void draw_bond_label (struct atom * at, struct atom * bt, int pi);
+  void setup_this_measured_bond (int s, int sa, int sb, int pi);
+  void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store);
+  void create_measures_lists ();
+
+*/
+
 #include "global.h"
 #include "glview.h"
 
@@ -44,6 +68,16 @@ object_3d * measure;
 ColRGBA col;
 ColRGBA col_gdk;
 
+/*
+*  void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int pi)
+*
+*  Usage: 
+*
+*  struct atom * at : 
+*  struct atom * bt : 
+*  struct atom * ct : 
+*  int pi           : 
+*/
 void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int pi)
 {
   struct angle real_theta = angle_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt, ct);
@@ -62,6 +96,15 @@ void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int
   g_free (str);
 }
 
+/*
+*  void set_measure_color (int selected, int id, int num)
+*
+*  Usage: 
+*
+*  int selected : 
+*  int id       : 
+*  int num      : 
+*/
 void set_measure_color (int selected, int id, int num)
 {
   if (selected)
@@ -77,6 +120,17 @@ void set_measure_color (int selected, int id, int num)
   }
 }
 
+/*
+*  void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
+*
+*  Usage: 
+*
+*  int s  : 
+*  int sa : 
+*  int sb : 
+*  int sc : 
+*  int pi : 
+*/
 void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
 {
   float alpha = 1.0;
@@ -123,6 +177,16 @@ void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
   }
 }
 
+/*
+*  void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
+*
+*  Usage: 
+*
+*  glwin * view         : 
+*  int id               : 
+*  int pi               : 
+*  GtkTreeStore * store : 
+*/
 void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 {
   int i, j, k, l, m;
@@ -223,6 +287,16 @@ void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
   g_free (did_it);
 }
 
+/*
+*  void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
+*
+*  Usage: 
+*
+*  glwin * view         : 
+*  int id               : 
+*  int pi               : 
+*  GtkTreeStore * store : 
+*/
 void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 {
   int i, j, k, l, m;
@@ -333,6 +407,15 @@ void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
   g_free (did_it);
 }
 
+/*
+*  void draw_bond_label (struct atom * at, struct atom * bt, int pi)
+*
+*  Usage: 
+*
+*  struct atom * at : 
+*  struct atom * bt : 
+*  int pi           : 
+*/
 void draw_bond_label (struct atom * at, struct atom * bt, int pi)
 {
   struct distance dist = distance_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt);
@@ -359,6 +442,16 @@ void draw_bond_label (struct atom * at, struct atom * bt, int pi)
   g_free (str);
 }
 
+/*
+*  void setup_this_measured_bond (int s, int sa, int sb, int pi)
+*
+*  Usage: 
+*
+*  int s  : 
+*  int sa : 
+*  int sb : 
+*  int pi : 
+*/
 void setup_this_measured_bond (int s, int sa, int sb, int pi)
 {
   float alpha = 1.0;
@@ -400,6 +493,16 @@ void setup_this_measured_bond (int s, int sa, int sb, int pi)
   }
 }
 
+/*
+*  void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store)
+*
+*  Usage: 
+*
+*  glwin * view         : 
+*  int id               : 
+*  int pi               : 
+*  GtkTreeStore * store : 
+*/
 void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 {
   int i, j;
@@ -470,6 +573,14 @@ void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store)
   g_free (did_it);
 }
 
+/*
+*  int prepare_measure_shaders (int type, int shaders)
+*
+*  Usage: 
+*
+*  int type    : 
+*  int shaders : 
+*/
 int prepare_measure_shaders (int type, int shaders)
 {
   int nshaders = 0;
@@ -530,6 +641,13 @@ int prepare_measure_shaders (int type, int shaders)
   return nshaders;
 }
 
+/*
+*  void create_measures_lists ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void create_measures_lists ()
 {
   // First we draw all lines/angles displayed on screen

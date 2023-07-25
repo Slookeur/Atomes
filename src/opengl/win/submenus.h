@@ -11,6 +11,26 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'submenus.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  gui/chainscall.c
+  project/read_mol.c
+  opengl/win/glwindow.c
+  opengl/win/m_axis.c
+  opengl/win/m_box.c
+  opengl/win/m_clones.c
+  opengl/win/menu_bar.c
+  opengl/win/m_rep.c
+  opengl/win/m_tools.c
+  opengl/win/popup.c
+
+*/
+
 #ifndef SUBMENUS_H_
 #define SUBMENUS_H_
 

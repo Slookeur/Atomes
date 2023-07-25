@@ -11,8 +11,36 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'atom_insert.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list);
+  void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object);
+  void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible);
+
+  G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data);
+
+*/
+
 #include "atom_edit.h"
 
+/*
+*  void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int removed                : 
+*  int nbd                    : 
+*  int ** new_bond_list       : 
+*/
 void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list)
 {
   int i, j;
@@ -44,6 +72,16 @@ void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int
   }
 }
 
+/*
+*  void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object)
+*
+*  Usage: 
+*
+*  int ** new_bond_list          : 
+*  int nat                       : 
+*  int nbd                       : 
+*  struct insert_object * object : 
+*/
 void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object)
 {
   int i;
@@ -57,12 +95,30 @@ void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_ob
   }
 }
 
+/*
+*  void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible)
+*
+*  Usage: 
+*
+*  gchar * key                : 
+*  struct project * this_proj : 
+*  atom_search * asearch      : 
+*  gboolean visible           : 
+*/
 void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible)
 {
   int i = get_selected_object_id (visible, this_proj -> id,  key, asearch);
   if (i == FROM_PROJECT || i == FROM_DATA || i > 0) to_insert_in_project (i, -1, this_proj, asearch, visible);
 }
 
+/*
+*  G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data)
 {
   GValue val = {0, };

@@ -11,6 +11,59 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_coord.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_page_from_geo_coord (glwin * view, int geo, int coord);
+
+  gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j);
+
+  G_MODULE_EXPORT gboolean scroll_set_poly_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
+  G_MODULE_EXPORT gboolean close_event_coord (GtkWindow * widg, gpointer data);
+  G_MODULE_EXPORT gboolean close_event_coord (GtkWidget * widg, GdkEvent * event, gpointer data);
+
+  void poly_alpha_has_changed (gpointer data, GLfloat v);
+  void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRGBA col);
+  void add_this_frag_mol_to_search_tree (struct project * this_proj, int g, int id);
+  void set_this_frag_mol_color (gpointer data, GtkTreePath * path);
+
+  G_MODULE_EXPORT void toggled_show_hide_coord (GtkCheckButton * widg, gpointer data);
+  G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer data);
+  G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkCheckButton * widg, gpointer data);
+  G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkToggleButton * widg, gpointer data);
+  G_MODULE_EXPORT void toggled_select_unselect_coord (GtkCheckButton * widg, gpointer data);
+  G_MODULE_EXPORT void toggled_select_unselect_coord (GtkToggleButton * widg, gpointer data);
+  G_MODULE_EXPORT void toggled_show_hide_poly (GtkCheckButton * widg, gpointer data);
+  G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer data);
+  G_MODULE_EXPORT void set_color_frag_mol (GtkColorChooser * colob, gpointer data);
+  G_MODULE_EXPORT void set_color_coord (GtkColorChooser * colob, gpointer data);
+  G_MODULE_EXPORT void set_poly_alpha (GtkRange * range, gpointer data);
+  G_MODULE_EXPORT void run_set_this_frag_mol_color (GtkDialog * win, gint response_id, gpointer data);
+  G_MODULE_EXPORT void to_set_this_frag_mol_color (GtkTreeView * tree_view, GtkTreePath * path, GtkTreeViewColumn * column, gpointer data);
+  G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void set_atom_color_map_box (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_poly_color_map_box (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void on_cloned_poly_toggled (GtkCheckButton * Button, gpointer data);
+  G_MODULE_EXPORT void on_cloned_poly_toggled (GtkToggleButton * Button, gpointer data);
+  G_MODULE_EXPORT void close_coord (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data);
+
+  GtkWidget * coord_tab (glwin * view, int g, int poly);
+  GtkWidget * create_frag_mol_tree (struct project * this_proj, int g);
+  GtkWidget * create_frag_mol_search (struct project * this_proj, int g);
+  GtkWidget * fragmol_tab (glwin * view, int g);
+  GtkWidget * param_tab (glwin * view);
+  GtkWidget * advanced_coord_properties (glwin * view, int page);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -33,8 +86,24 @@ char * text_maps[ATOM_MAPS] = {"Atomic species",
 int frag_mol_status;
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void toggled_show_hide_coord (GtkCheckButton * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * widg : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void toggled_show_hide_coord (GtkCheckButton * widg, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * widg : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer data)
 #endif
 {
@@ -112,8 +181,24 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkCheckButton * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * widg : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkCheckButton * widg, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkToggleButton * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * widg : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkToggleButton * widg, gpointer data)
 #endif
 {
@@ -139,8 +224,24 @@ G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkToggleButton * widg, gpoint
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void toggled_select_unselect_coord (GtkCheckButton * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * widg : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void toggled_select_unselect_coord (GtkCheckButton * widg, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void toggled_select_unselect_coord (GtkToggleButton * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * widg : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void toggled_select_unselect_coord (GtkToggleButton * widg, gpointer data)
 #endif
 {
@@ -166,8 +267,24 @@ G_MODULE_EXPORT void toggled_select_unselect_coord (GtkToggleButton * widg, gpoi
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void toggled_show_hide_poly (GtkCheckButton * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * widg : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void toggled_show_hide_poly (GtkCheckButton * widg, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * widg : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer data)
 #endif
 {
@@ -226,6 +343,14 @@ G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer da
 #endif
 }
 
+/*
+*  G_MODULE_EXPORT void set_color_frag_mol (GtkColorChooser * colob, gpointer data)
+*
+*  Usage: 
+*
+*  GtkColorChooser * colob : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void set_color_frag_mol (GtkColorChooser * colob, gpointer data)
 {
   qint * cid = (qint *)data;
@@ -239,6 +364,14 @@ G_MODULE_EXPORT void set_color_frag_mol (GtkColorChooser * colob, gpointer data)
   update (this_proj -> modelgl);
 }
 
+/*
+*  G_MODULE_EXPORT void set_color_coord (GtkColorChooser * colob, gpointer data)
+*
+*  Usage: 
+*
+*  GtkColorChooser * colob : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void set_color_coord (GtkColorChooser * colob, gpointer data)
 {
   qint * cid = (qint *)data;
@@ -254,6 +387,14 @@ G_MODULE_EXPORT void set_color_coord (GtkColorChooser * colob, gpointer data)
   update (this_proj -> modelgl);
 }
 
+/*
+*  void poly_alpha_has_changed (gpointer data, GLfloat v)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*  GLfloat v     : 
+*/
 void poly_alpha_has_changed (gpointer data, GLfloat v)
 {
   qint * cid = (qint *)data;
@@ -269,17 +410,46 @@ void poly_alpha_has_changed (gpointer data, GLfloat v)
   update (this_proj -> modelgl);
 }
 
+/*
+*  G_MODULE_EXPORT gboolean scroll_set_poly_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
+*
+*  Usage: 
+*
+*  GtkRange * range     : 
+*  GtkScrollType scroll : 
+*  gdouble value        : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT gboolean scroll_set_poly_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
   poly_alpha_has_changed (data, (GLfloat) value);
   return FALSE;
 }
 
+/*
+*  G_MODULE_EXPORT void set_poly_alpha (GtkRange * range, gpointer data)
+*
+*  Usage: 
+*
+*  GtkRange * range : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_poly_alpha (GtkRange * range, gpointer data)
 {
   poly_alpha_has_changed (data, (GLfloat) gtk_range_get_value (range));
 }
 
+/*
+*  gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j)
+*
+*  Usage: 
+*
+*  int poly                   : 
+*  struct project * this_proj : 
+*  int g                      : 
+*  int i                      : 
+*  int j                      : 
+*/
 gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j)
 {
   if (! poly)
@@ -344,6 +514,15 @@ gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j)
   }
 }
 
+/*
+*  GtkWidget * coord_tab (glwin * view, int g, int poly)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int g        : 
+*  int poly     : 
+*/
 GtkWidget * coord_tab (glwin * view, int g, int poly)
 {
   int i, j, k, l, m, n;
@@ -526,6 +705,15 @@ G_MODULE_EXPORT void on_select_frag_mol (GtkCellRendererToggle * cell_renderer,
   }
 }
 
+/*
+*  void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRGBA col)
+*
+*  Usage: 
+*
+*  GtkListStore * store : 
+*  GtkTreeIter iter     : 
+*  ColRGBA col          : 
+*/
 void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRGBA col)
 {
   cairo_surface_t * surface;
@@ -539,6 +727,15 @@ void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRG
   gtk_list_store_set (store, & iter, 2, pix, -1);
 }
 
+/*
+*  void add_this_frag_mol_to_search_tree (struct project * this_proj, int g, int id)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int g                      : 
+*  int id                     : 
+*/
 void add_this_frag_mol_to_search_tree (struct project * this_proj, int g, int id)
 {
   GtkTreeIter id_level;
@@ -594,6 +791,15 @@ void add_this_frag_mol_to_search_tree (struct project * this_proj, int g, int id
 
 GtkTreeIter fm_iter;
 
+/*
+*  G_MODULE_EXPORT void run_set_this_frag_mol_color (GtkDialog * win, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * win  : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_set_this_frag_mol_color (GtkDialog * win, gint response_id, gpointer data)
 {
   tint * dat = (tint * )data;
@@ -610,6 +816,14 @@ G_MODULE_EXPORT void run_set_this_frag_mol_color (GtkDialog * win, gint response
   destroy_this_dialog (win);
 }
 
+/*
+*  void set_this_frag_mol_color (gpointer data, GtkTreePath * path)
+*
+*  Usage: 
+*
+*  gpointer data      : 
+*  GtkTreePath * path : 
+*/
 void set_this_frag_mol_color (gpointer data, GtkTreePath * path)
 {
   int i, g;
@@ -629,6 +843,16 @@ void set_this_frag_mol_color (gpointer data, GtkTreePath * path)
   set_frag_mol_cell_background ((GtkListStore *) coord -> frag_mol_model[g-2], iter, opengl_project -> modelgl -> anim -> last -> img -> spcolor[g][0][i-1]);
 }
 
+/*
+*  G_MODULE_EXPORT void to_set_this_frag_mol_color (GtkTreeView * tree_view, GtkTreePath * path, GtkTreeViewColumn * column, gpointer data)
+*
+*  Usage: 
+*
+*  GtkTreeView * tree_view    : 
+*  GtkTreePath * path         : 
+*  GtkTreeViewColumn * column : 
+*  gpointer data              : 
+*/
 G_MODULE_EXPORT void to_set_this_frag_mol_color (GtkTreeView * tree_view, GtkTreePath * path, GtkTreeViewColumn * column, gpointer data)
 {
   gchar * title;
@@ -639,6 +863,14 @@ G_MODULE_EXPORT void to_set_this_frag_mol_color (GtkTreeView * tree_view, GtkTre
   }
 }
 
+/*
+*  GtkWidget * create_frag_mol_tree (struct project * this_proj, int g)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int g                      : 
+*/
 GtkWidget * create_frag_mol_tree (struct project * this_proj, int g)
 {
   int i;
@@ -675,6 +907,14 @@ GtkWidget * create_frag_mol_tree (struct project * this_proj, int g)
   return frag_mol_tree;
 }
 
+/*
+*  G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data)
 {
   tint * dat = (tint * )data;
@@ -692,6 +932,14 @@ G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * create_frag_mol_search (struct project * this_proj, int g)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int g                      : 
+*/
 GtkWidget * create_frag_mol_search (struct project * this_proj, int g)
 {
   GtkWidget * frag_mol_search = create_vbox (BSEP);
@@ -719,6 +967,14 @@ GtkWidget * create_frag_mol_search (struct project * this_proj, int g)
   return frag_mol_search;
 }
 
+/*
+*  GtkWidget * fragmol_tab (glwin * view, int g)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int g        : 
+*/
 GtkWidget * fragmol_tab (glwin * view, int g)
 {
   int i, j;
@@ -779,6 +1035,14 @@ GtkWidget * fragmol_tab (glwin * view, int g)
   return box;
 }
 
+/*
+*  G_MODULE_EXPORT void set_atom_color_map_box (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_atom_color_map_box (GtkComboBox * box, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -794,6 +1058,14 @@ G_MODULE_EXPORT void set_atom_color_map_box (GtkComboBox * box, gpointer data)
 #endif
 }
 
+/*
+*  G_MODULE_EXPORT void set_poly_color_map_box (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_poly_color_map_box (GtkComboBox * box, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -810,8 +1082,24 @@ G_MODULE_EXPORT void set_poly_color_map_box (GtkComboBox * box, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void on_cloned_poly_toggled (GtkCheckButton * Button, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * Button : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void on_cloned_poly_toggled (GtkCheckButton * Button, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void on_cloned_poly_toggled (GtkToggleButton * Button, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * Button : 
+*  gpointer data            : 
+*/
 G_MODULE_EXPORT void on_cloned_poly_toggled (GtkToggleButton * Button, gpointer data)
 #endif
 {
@@ -828,6 +1116,13 @@ G_MODULE_EXPORT void on_cloned_poly_toggled (GtkToggleButton * Button, gpointer 
 #endif
 }
 
+/*
+*  GtkWidget * param_tab (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 GtkWidget * param_tab (glwin * view)
 {
   int i, j, k, l;
@@ -940,6 +1235,14 @@ GtkWidget * param_tab (glwin * view)
   return vbox;
 }
 
+/*
+*  G_MODULE_EXPORT void close_coord (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void close_coord (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -949,8 +1252,25 @@ G_MODULE_EXPORT void close_coord (GtkButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT gboolean close_event_coord (GtkWindow * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWindow * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT gboolean close_event_coord (GtkWindow * widg, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT gboolean close_event_coord (GtkWidget * widg, GdkEvent * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  GdkEvent * event : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT gboolean close_event_coord (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
 {
@@ -958,6 +1278,14 @@ G_MODULE_EXPORT gboolean close_event_coord (GtkWidget * widg, GdkEvent * event, 
   return FALSE;
 }
 
+/*
+*  GtkWidget * advanced_coord_properties (glwin * view, int page)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int page     : 
+*/
 GtkWidget * advanced_coord_properties (glwin * view, int page)
 {
   gchar * str = g_strdup_printf ("Environments configuration - %s", get_project_by_id(view -> proj)->name);
@@ -1059,6 +1387,15 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
   return win;
 }
 
+/*
+*  int get_page_from_geo_coord (glwin * view, int geo, int coord)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int geo      : 
+*  int coord    : 
+*/
 int get_page_from_geo_coord (glwin * view, int geo, int coord)
 {
   int i, j;
@@ -1110,6 +1447,14 @@ int get_page_from_geo_coord (glwin * view, int geo, int coord)
   return i;
 }
 
+/*
+*  G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data)
 {
   tint * id = (tint *) data;

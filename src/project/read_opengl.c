@@ -11,11 +11,38 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_opengl.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int read_atom_a (FILE * fp, struct project * this_proj, int s, int a);
+  int read_atom_b (FILE * fp, struct project * this_proj, int s, int a);
+  int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size, int steps);
+  int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid);
+
+*/
+
 #include "global.h"
 #include "project.h"
 #include "glview.h"
 #include "initcoord.h"
 
+/*
+*  int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*  int s                      : 
+*  int a                      : 
+*/
 int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 {
   if (fread (& this_proj -> atoms[s][a].id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -28,6 +55,16 @@ int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
   return OK;
 }
 
+/*
+*  int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*  int s                      : 
+*  int a                      : 
+*/
 int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 {
   if (fread (this_proj -> atoms[s][a].show, sizeof(gboolean), 2, fp) != 2) return ERROR_RW;
@@ -99,6 +136,18 @@ int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
   return OK;
 }
 
+/*
+*  int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size, int steps)
+*
+*  Usage: 
+*
+*  FILE * fp    : 
+*  glwin * view : 
+*  int type     : 
+*  int rid      : 
+*  int size     : 
+*  int steps    : 
+*/
 int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size, int steps)
 {
   int i, j, k;
@@ -213,6 +262,16 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
   return OK;
 }
 
+/*
+*  int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*  image * img                : 
+*  int sid                    : 
+*/
 int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
 {
   int i, j, k, l, m, n;

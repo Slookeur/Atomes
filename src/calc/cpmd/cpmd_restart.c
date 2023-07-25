@@ -11,6 +11,25 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cpmd_restart.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void update_restart_parameter (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void update_restart_check (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void update_restart_check (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void changed_restart_box (GtkComboBox * box, gpointer data);
+
+  GtkWidget * restart_box ();
+
+*/
+
 #include "global.h"
 #include "callbacks.h"
 #include "interface.h"
@@ -20,6 +39,14 @@ If not, see <https://www.gnu.org/licenses/> */
 extern void print_the_section (int s, int p, GtkTextBuffer * buffer);
 extern GtkWidget * cpmd_box (GtkWidget * box, gchar * lab, int v_space, int h_space, int dim);
 
+/*
+*  G_MODULE_EXPORT void update_restart_parameter (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void update_restart_parameter (GtkEntry * res, gpointer data)
 {
   int i, j;
@@ -39,8 +66,24 @@ GtkWidget * sace[2];
 GtkWidget * trap_box[2];
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void update_restart_check (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void update_restart_check (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void update_restart_check (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void update_restart_check (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -61,6 +104,14 @@ G_MODULE_EXPORT void update_restart_check (GtkToggleButton * but, gpointer data)
   for (i=1; i<4; i++) print_the_section (i, 0, qmbuffer[i]);
 }
 
+/*
+*  G_MODULE_EXPORT void changed_restart_box (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void changed_restart_box (GtkComboBox * box, gpointer data)
 {
   tmp_cpmd -> restart[0] = gtk_combo_box_get_active (box);
@@ -68,6 +119,13 @@ G_MODULE_EXPORT void changed_restart_box (GtkComboBox * box, gpointer data)
   for (i=1; i<4; i++) print_the_section (i, 0, qmbuffer[i]);
 }
 
+/*
+*  GtkWidget * restart_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * restart_box ()
 {
   int i;

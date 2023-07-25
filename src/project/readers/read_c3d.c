@@ -11,6 +11,21 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_c3d.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int c3d_get_atom_coordinates ();
+  int open_c3d_file (int linec);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "callbacks.h"
@@ -23,6 +38,13 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern void check_for_species (double v, int ato);
 
+/*
+*  int c3d_get_atom_coordinates ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int c3d_get_atom_coordinates ()
 {
   int i, j, k;
@@ -264,6 +286,13 @@ int c3d_get_atom_coordinates ()
   return 0;
 }
 
+/*
+*  int open_c3d_file (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 int open_c3d_file (int linec)
 {
   int res;

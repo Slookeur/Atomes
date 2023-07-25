@@ -11,6 +11,24 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'valid.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  curve/w_data.c
+  curve/w_img.c
+  gui/callbacks.c
+  gui/gui.c
+  gui/main.c
+  calc/cpmd/cpmd_init.c
+  calc/dl_poly/dlp_field.c
+  opengl/win/w_encode.c
+
+*/
+
 #ifndef VALID_H_
 #define VALID_H_
 extern gboolean saving_option ();

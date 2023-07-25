@@ -11,6 +11,37 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'initcoord.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void set_color_map_sensitive (glwin * view);
+  void set_advanced_bonding_menus (glwin * view);
+  void prep_all_coord_menus (glwin * view);
+  void gcid_spcolor_setup (int sp, int id);
+  void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp]);
+  void allocate_partial_geo_ (int * sp, int * ngsp);
+  void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp]);
+  void init_menu_fragmol_ (int * id);
+  void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init);
+  void init_opengl_coords (int id, int nt, int init);
+  void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[* num]);
+
+  GtkWidget * coord_view_setup (int * sp, int id, int jd);
+  GtkWidget * coord_color_setup (int * sp, int id, int jd);
+  GtkWidget * poly_show_setup (int * sp, int id, int jd);
+  GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu, qint * data);
+
+  ColRGBA init_color (int id, int numid);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "gui.h"
@@ -27,6 +58,14 @@ extern int * duplicate_int (int num, int * old_val);
 
 int ** idgeo = NULL;
 
+/*
+*  ColRGBA init_color (int id, int numid)
+*
+*  Usage: 
+*
+*  int id    : 
+*  int numid : 
+*/
 ColRGBA init_color (int id, int numid)
 {
   float a, b;
@@ -71,6 +110,13 @@ ColRGBA init_color (int id, int numid)
 
 #ifdef GTK3
 // GTK3 Menu Action To Check
+/*
+*  void set_color_map_sensitive (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void set_color_map_sensitive (glwin * view)
 {
   int i, j;
@@ -85,6 +131,13 @@ void set_color_map_sensitive (glwin * view)
   }
 }
 
+/*
+*  void set_advanced_bonding_menus (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void set_advanced_bonding_menus (glwin * view)
 {
   int i;
@@ -97,6 +150,13 @@ void set_advanced_bonding_menus (glwin * view)
 }
 #endif
 
+/*
+*  void prep_all_coord_menus (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void prep_all_coord_menus (glwin * view)
 {
 #ifdef GTK3
@@ -111,6 +171,15 @@ void prep_all_coord_menus (glwin * view)
 }
 
 #ifdef GTK3
+/*
+*  GtkWidget * coord_view_setup (int * sp, int id, int jd)
+*
+*  Usage: 
+*
+*  int * sp : 
+*  int id   : 
+*  int jd   : 
+*/
 GtkWidget * coord_view_setup (int * sp, int id, int jd)
 {
   GtkWidget * menuv = gtk_menu_new ();
@@ -124,6 +193,14 @@ GtkWidget * coord_view_setup (int * sp, int id, int jd)
 }
 #endif
 
+/*
+*  void gcid_spcolor_setup (int sp, int id)
+*
+*  Usage: 
+*
+*  int sp : 
+*  int id : 
+*/
 void gcid_spcolor_setup (int sp, int id)
 {
   int i;
@@ -139,6 +216,15 @@ void gcid_spcolor_setup (int sp, int id)
 }
 
 #ifdef GTK3
+/*
+*  GtkWidget * coord_color_setup (int * sp, int id, int jd)
+*
+*  Usage: 
+*
+*  int * sp : 
+*  int id   : 
+*  int jd   : 
+*/
 GtkWidget * coord_color_setup (int * sp, int id, int jd)
 {
   if (! jd) gcid_spcolor_setup (* sp, id);
@@ -153,6 +239,15 @@ GtkWidget * coord_color_setup (int * sp, int id, int jd)
   return menuc;
 }
 
+/*
+*  GtkWidget * poly_show_setup (int * sp, int id, int jd)
+*
+*  Usage: 
+*
+*  int * sp : 
+*  int id   : 
+*  int jd   : 
+*/
 GtkWidget * poly_show_setup (int * sp, int id, int jd)
 {
   GtkWidget * menup = gtk_menu_new ();
@@ -169,6 +264,17 @@ GtkWidget * poly_show_setup (int * sp, int id, int jd)
   return menup;
 }
 
+/*
+*  GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu, qint * data)
+*
+*  Usage: 
+*
+*  int p            : 
+*  char * name      : 
+*  gboolean va      : 
+*  GtkWidget * menu : 
+*  qint * data      : 
+*/
 GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu, qint * data)
 {
   GtkWidget * coord_widget = gtk3_menu_item (menu, name, IMG_NONE, NULL, NULL, NULL, FALSE, 0,  0, TRUE, FALSE, va);
@@ -184,11 +290,29 @@ GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu
 }
 #endif
 
+/*
+*  void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp])
+*
+*  Usage: 
+*
+*  int * sp          : 
+*  int * id          : 
+*  int * ngsp        : 
+*  int coord[* ngsp] : 
+*/
 void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp])
 {
   active_coord -> partial_geo[* sp][* id] = duplicate_int (* ngsp, coord);
 }
 
+/*
+*  void allocate_partial_geo_ (int * sp, int * ngsp)
+*
+*  Usage: 
+*
+*  int * sp   : 
+*  int * ngsp : 
+*/
 void allocate_partial_geo_ (int * sp, int * ngsp)
 {
   if (active_coord -> partial_geo[* sp] != NULL)
@@ -199,6 +323,16 @@ void allocate_partial_geo_ (int * sp, int * ngsp)
   active_coord -> partial_geo[* sp] = g_malloc (* ngsp * sizeof*active_coord -> partial_geo[* sp]);
 }
 
+/*
+*  void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp])
+*
+*  Usage: 
+*
+*  int * id           : 
+*  int * sp           : 
+*  int * ngsp         : 
+*  int coordt[* ngsp] : 
+*/
 void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp])
 {
   int i, j, k, l, m, n, o;
@@ -328,6 +462,13 @@ void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp
 #endif
 }
 
+/*
+*  void init_menu_fragmol_ (int * id)
+*
+*  Usage: 
+*
+*  int * id : 
+*/
 void init_menu_fragmol_ (int * id)
 {
 #ifdef DEBUG
@@ -409,6 +550,17 @@ void init_menu_fragmol_ (int * id)
 #endif
 }
 
+/*
+*  void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init)
+*
+*  Usage: 
+*
+*  int * coo          : 
+*  int * ids          : 
+*  int * ngsp         : 
+*  int coordt[* ngsp] : 
+*  int coordt[* ngsp] : 
+*/
 void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init)
 {
   int j;
@@ -489,6 +641,15 @@ void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int 
 #endif
 }
 
+/*
+*  void init_opengl_coords (int id, int nt, int init)
+*
+*  Usage: 
+*
+*  int id   : 
+*  int nt   : 
+*  int init : 
+*/
 void init_opengl_coords (int id, int nt, int init)
 {
   int k;
@@ -535,6 +696,18 @@ void init_opengl_coords (int id, int nt, int init)
   }
 }
 
+/*
+*  void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[* num])
+*
+*  Usage: 
+*
+*  int * id         : 
+*  int * num        : 
+*  int * cmin       : 
+*  int * cmax       : 
+*  int * nt         : 
+*  int coord[* num] : 
+*/
 void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[* num])
 {
   int i, j, k;

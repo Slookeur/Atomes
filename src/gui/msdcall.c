@@ -11,6 +11,23 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'msdcall.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void initmsd (int s);
+  void update_msd_view (struct project * this_proj);
+
+  G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data);
+
+*/
+
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdlib.h>
@@ -22,6 +39,13 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "curve.h"
 #include "project.h"
 
+/*
+*  void initmsd (int s)
+*
+*  Usage: 
+*
+*  int s : 
+*/
 void initmsd (int s)
 {
   int i, j;
@@ -80,6 +104,13 @@ void initmsd (int s)
   active_project -> initok[MS]=TRUE;
 }
 
+/*
+*  void update_msd_view (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void update_msd_view (struct project * this_proj)
 {
   gchar * str;
@@ -104,6 +135,14 @@ void update_msd_view (struct project * this_proj)
   print_info (calculation_time(TRUE, this_proj -> calc_time[MS]), NULL, this_proj -> text_buffer[MS+OT]);
 }
 
+/*
+*  G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data)
 {
   int i;

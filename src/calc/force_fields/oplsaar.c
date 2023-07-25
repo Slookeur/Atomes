@@ -12,6 +12,16 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 /*
+* This file: 'oplsaar.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*/
+
+/*
   OPLSAAR force field
 
   This file contains several tables:

@@ -11,6 +11,38 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_coord.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gboolean is_coord_in_menu (int id, struct project * this_proj);
+
+  void detach_frag_mol_menu (glwin * view, int id, int jd);
+
+  G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * add_menu_coord (glwin * view, int id, int jd);
+  GtkWidget * menu_coord (glwin * view, int id);
+  GtkWidget * menu_rings (glwin * view, int id, int jd);
+
+  GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handler, gpointer data);
+  GMenu * menu_show_coord (glwin * view, int popm, int id, int mid);
+  GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid);
+  GMenu * menu_show_rings (glwin * view, int popm, int id, int mid);
+  GMenu * add_menu_coord (glwin * view, int popm, int id);
+  GMenu * menu_coord (glwin * view, int popm);
+  GMenu * menu_rings (glwin * view, int popm);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -22,6 +54,14 @@ extern G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant
 extern GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo);
 #endif
 
+/*
+*  gboolean is_coord_in_menu (int id, struct project * this_proj)
+*
+*  Usage: 
+*
+*  int id                     : 
+*  struct project * this_proj : 
+*/
 gboolean is_coord_in_menu (int id, struct project * this_proj)
 {
   if (((id == 2 || id == 3) && this_proj -> coord -> totcoord[id] <= COORD_MAX_MENU) || id < 2 || id > 3)
@@ -35,8 +75,25 @@ gboolean is_coord_in_menu (int id, struct project * this_proj)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
 #endif
 {
@@ -162,6 +219,15 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
+/*
+*  void detach_frag_mol_menu (glwin * view, int id, int jd)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*  int jd       : 
+*/
 void detach_frag_mol_menu (glwin * view, int id, int jd)
 {
   GtkWidget * widg;
@@ -197,6 +263,15 @@ void detach_frag_mol_menu (glwin * view, int id, int jd)
   }
 }
 
+/*
+*  GtkWidget * add_menu_coord (glwin * view, int id, int jd)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*  int jd       : 
+*/
 GtkWidget * add_menu_coord (glwin * view, int id, int jd)
 {
   int i, j;
@@ -328,6 +403,14 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
   return menuct;
 }
 
+/*
+*  GtkWidget * menu_coord (glwin * view, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*/
 GtkWidget * menu_coord (glwin * view, int id)
 {
   GtkWidget * menuco = create_menu_item (FALSE, "Coordination");
@@ -339,6 +422,15 @@ GtkWidget * menu_coord (glwin * view, int id)
   return menuco;
 }
 
+/*
+*  GtkWidget * menu_rings (glwin * view, int id, int jd)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*  int jd       : 
+*/
 GtkWidget * menu_rings (glwin * view, int id, int jd)
 {
   GtkWidget * menuco = gtk_menu_new ();
@@ -364,6 +456,18 @@ GtkWidget * menu_rings (glwin * view, int id, int jd)
   return menuco;
 }
 #else
+/*
+*  GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handler, gpointer data)
+*
+*  Usage: 
+*
+*  glwin * view      : 
+*  gchar * act       : 
+*  int popm          : 
+*  int id            : 
+*  GCallback handler : 
+*  gpointer data     : 
+*/
 GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handler, gpointer data)
 {
   GMenu *  menu = g_menu_new ();
@@ -372,6 +476,16 @@ GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handl
   return menu;
 }
 
+/*
+*  GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int id       : 
+*  int mid      : 
+*/
 GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
 {
   GMenu * menu = g_menu_new ();
@@ -423,11 +537,30 @@ GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
   return menu;
 }
 
+/*
+*  G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   coord_properties (NULL, data);
 }
 
+/*
+*  GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int id       : 
+*  int mid      : 
+*/
 GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
 {
   GMenu * menu = g_menu_new ();
@@ -457,6 +590,16 @@ GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
   return menu;
 }
 
+/*
+*  GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int id       : 
+*  int mid      : 
+*/
 GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
 {
   GMenu * menu = g_menu_new ();
@@ -489,6 +632,15 @@ GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
   return menu;
 }
 
+/*
+*  GMenu * add_menu_coord (glwin * view, int popm, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int id       : 
+*/
 GMenu * add_menu_coord (glwin * view, int popm, int id)
 {
   GMenu * menu = g_menu_new ();
@@ -518,6 +670,14 @@ GMenu * add_menu_coord (glwin * view, int popm, int id)
   return menu;
 }
 
+/*
+*  GMenu * menu_coord (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_coord (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
@@ -526,6 +686,14 @@ GMenu * menu_coord (glwin * view, int popm)
   return menu;
 }
 
+/*
+*  GMenu * menu_rings (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_rings (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();

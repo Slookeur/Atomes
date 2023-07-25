@@ -11,6 +11,26 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'readers.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  gui/callbacks.c
+  opengl/edit/cbuild_action.c
+  opengl/edit/cbuild_edit.c
+  project/readers/read_c3d.c
+  project/readers/read_cif.c
+  project/readers/read_hist.c
+  project/readers/read_pdb.c
+  project/readers/read_trj.c
+  project/readers/read_vas.c
+  project/readers/read_xyz.c
+
+*/
+
 #ifndef READERS_H_
 
 #define READERS_H_

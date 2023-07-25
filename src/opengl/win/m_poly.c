@@ -11,6 +11,33 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_poly.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void cloned_poly (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data);
+
+  GtkWidget * mpoly (glwin * view, int jd, int id);
+  GtkWidget * menupoly (glwin * view, int jd, int id, int hd, gchar * poln);
+  GtkWidget * menu_poly (glwin * view, int id);
+
+  GMenu * menu_show_coord_poly (glwin * view, int popm, int id);
+  GMenu * menu_show_rings_poly (glwin * view, int popm, int id);
+  GMenu * add_menu_poly (glwin * view, int popm, int aid);
+  GMenu * menu_poly_rings (glwin * view, int popm);
+  GMenu * menu_poly (glwin * view, int popm);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -21,8 +48,25 @@ extern G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data);
 #ifdef GTK4
 extern G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data);
 
+/*
+*  G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
 #endif
 {
@@ -106,8 +150,25 @@ G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void cloned_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void cloned_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
 #endif
 {
@@ -145,6 +206,15 @@ G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
 
 
 #ifdef GTK3
+/*
+*  GtkWidget * mpoly (glwin * view, int jd, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int jd       : 
+*  int id       : 
+*/
 GtkWidget * mpoly (glwin * view, int jd, int id)
 {
   int i, j;
@@ -192,6 +262,17 @@ GtkWidget * mpoly (glwin * view, int jd, int id)
   return menup;
 }
 
+/*
+*  GtkWidget * menupoly (glwin * view, int jd, int id, int hd, gchar * poln)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int jd       : 
+*  int id       : 
+*  int hd       : 
+*  gchar * poln : 
+*/
 GtkWidget * menupoly (glwin * view, int jd, int id, int hd, gchar * poln)
 {
   int i;
@@ -230,6 +311,14 @@ GtkWidget * menupoly (glwin * view, int jd, int id, int hd, gchar * poln)
   }
 }
 
+/*
+*  GtkWidget * menu_poly (glwin * view, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*/
 GtkWidget * menu_poly (glwin * view, int id)
 {
   GtkWidget * menup = gtk_menu_new ();
@@ -253,6 +342,15 @@ GtkWidget * menu_poly (glwin * view, int id)
   return menup;
 }
 #else
+/*
+*  GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int id       : 
+*/
 GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
 {
   GMenu * menu = g_menu_new ();
@@ -296,6 +394,15 @@ GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
   return menu;
 }
 
+/*
+*  GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int id       : 
+*/
 GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
 {
   GMenu * menu = g_menu_new ();
@@ -317,6 +424,15 @@ GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
   return menu;
 }
 
+/*
+*  GMenu * add_menu_poly (glwin * view, int popm, int aid)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int aid      : 
+*/
 GMenu * add_menu_poly (glwin * view, int popm, int aid)
 {
   GMenu * menu = g_menu_new ();
@@ -333,6 +449,14 @@ GMenu * add_menu_poly (glwin * view, int popm, int aid)
   return menu;
 }
 
+/*
+*  GMenu * menu_poly_rings (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_poly_rings (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
@@ -347,6 +471,14 @@ GMenu * menu_poly_rings (glwin * view, int popm)
   return menu;
 }
 
+/*
+*  GMenu * menu_poly (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_poly (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();

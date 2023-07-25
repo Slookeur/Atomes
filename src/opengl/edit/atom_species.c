@@ -11,8 +11,33 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'atom_species.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int find_spec_id (int s, int z, double * list_z);
+  int search_for_new_spec (atom_edition * edit, struct insert_object * object);
+
+  chemical_data * duplicate_chemical_data (int spec, chemical_data * chem);
+
+*/
+
 #include "atom_edit.h"
 
+/*
+*  chemical_data * duplicate_chemical_data (int spec, chemical_data * chem)
+*
+*  Usage: 
+*
+*  int spec             : 
+*  chemical_data * chem : 
+*/
 chemical_data * duplicate_chemical_data (int spec, chemical_data * chem)
 {
   chemical_data * newchem = g_malloc0 (sizeof*chem);
@@ -37,6 +62,15 @@ chemical_data * duplicate_chemical_data (int spec, chemical_data * chem)
   return newchem;
 }
 
+/*
+*  int find_spec_id (int s, int z, double * list_z)
+*
+*  Usage: 
+*
+*  int s           : 
+*  int z           : 
+*  double * list_z : 
+*/
 int find_spec_id (int s, int z, double * list_z)
 {
   int i;
@@ -53,6 +87,14 @@ int find_spec_id (int s, int z, double * list_z)
   return -1;
 }
 
+/*
+*  int search_for_new_spec (atom_edition * edit, struct insert_object * object)
+*
+*  Usage: 
+*
+*  atom_edition * edit           : 
+*  struct insert_object * object : 
+*/
 int search_for_new_spec (atom_edition * edit, struct insert_object * object)
 {
   double * tmpnzid;

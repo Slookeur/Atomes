@@ -11,6 +11,21 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_trj.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int trj_get_atom_coordinates ();
+  int open_trj_file (int linec);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "callbacks.h"
@@ -21,6 +36,13 @@ If not, see <https://www.gnu.org/licenses/> */
 #include <omp.h>
 #include "readers.h"
 
+/*
+*  int trj_get_atom_coordinates ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int trj_get_atom_coordinates ()
 {
   int i, j, k, l;
@@ -211,6 +233,13 @@ int trj_get_atom_coordinates ()
   return 0;
 }
 
+/*
+*  int open_trj_file (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 int open_trj_file (int linec)
 {
   if (linec%(this_reader -> natomes) != 0) return 2;

@@ -11,6 +11,24 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'initc.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void clean_curves_data (int calc, int start, int end);
+  void alloc_curves (int c);
+  void initcwidgets ();
+  void initcnames (int w, int s);
+  void prepostcalc (GtkWidget * widg, gboolean status, int run, int adv, double opc);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "callbacks.h"
@@ -26,6 +44,15 @@ extern void initchn (int s);
 extern void initmsd (int s);
 extern void initsh (int s);
 
+/*
+*  void clean_curves_data (int calc, int start, int end)
+*
+*  Usage: 
+*
+*  int calc  : 
+*  int start : 
+*  int end   : 
+*/
 void clean_curves_data (int calc, int start, int end)
 {
   int i;
@@ -38,6 +65,13 @@ void clean_curves_data (int calc, int start, int end)
   }
 }
 
+/*
+*  void alloc_curves (int c)
+*
+*  Usage: 
+*
+*  int c : 
+*/
 void alloc_curves (int c)
 {
   int i;
@@ -63,6 +97,13 @@ void alloc_curves (int c)
   }
 }
 
+/*
+*  void initcwidgets ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void initcwidgets ()
 {
   int i, j;
@@ -102,6 +143,14 @@ void initcwidgets ()
   }
 }
 
+/*
+*  void initcnames (int w, int s)
+*
+*  Usage: 
+*
+*  int w : 
+*  int s : 
+*/
 void initcnames (int w, int s)
 {
   switch (w)
@@ -139,6 +188,17 @@ void initcnames (int w, int s)
   }
 }
 
+/*
+*  void prepostcalc (GtkWidget * widg, gboolean status, int run, int adv, double opc)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gboolean status  : 
+*  int run          : 
+*  int adv          : 
+*  double opc       : 
+*/
 void prepostcalc (GtkWidget * widg, gboolean status, int run, int adv, double opc)
 {
   //int i;

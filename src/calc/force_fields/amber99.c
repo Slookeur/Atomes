@@ -12,6 +12,16 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 /*
+* This file: 'amber99.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*/
+
+/*
   Amber-99 force field, data from taken from:
        - the file: 'parm99'
 

@@ -11,6 +11,30 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cedit.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int numi (int r, int c);
+
+  void prepbox (tint * cd);
+  void set_set (int a, int b, int c);
+
+  static void fill_proj_model (GtkTreeStore * store);
+
+  G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointer data);
+  G_MODULE_EXPORT void edit_curve (GtkWidget * curve, gpointer data);
+
+  GtkWidget * create_projects_tree ();
+
+*/
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -56,6 +80,13 @@ GtkWidget * xyp[2];
 
 char * lapos[2]={"x: ", "y: "};
 
+/*
+*  void prepbox (tint * cd)
+*
+*  Usage: 
+*
+*  tint * cd : 
+*/
 void prepbox (tint * cd)
 {
   int i, k, l;
@@ -95,6 +126,15 @@ void prepbox (tint * cd)
   g_signal_connect (G_OBJECT(setcolorbox), "changed", G_CALLBACK(choose_set), NULL);
 }
 
+/*
+*  void set_set (int a, int b, int c)
+*
+*  Usage: 
+*
+*  int a : 
+*  int b : 
+*  int c : 
+*/
 void set_set (int a, int b, int c)
 {
   setcolorbox = destroy_this_widget (setcolorbox);
@@ -111,6 +151,14 @@ void set_set (int a, int b, int c)
   widget_set_sensitive (orgtree, get_project_by_id(activeg) -> curves[activer][activec] -> extrac -> extras);
 }
 
+/*
+*  int numi (int r, int c)
+*
+*  Usage: 
+*
+*  int r : 
+*  int c : 
+*/
 int numi (int r, int c)
 {
   if (activer == 3 && activec > 0 && r == 3)
@@ -123,6 +171,13 @@ int numi (int r, int c)
   }
 }
 
+/*
+*  static void fill_proj_model (GtkTreeStore * store)
+*
+*  Usage: 
+*
+*  GtkTreeStore * store : 
+*/
 static void fill_proj_model (GtkTreeStore * store)
 {
   GtkTreeIter projlevel;
@@ -227,6 +282,13 @@ void set_visible_data (GtkTreeViewColumn * col,
   gtk_cell_renderer_set_visible (renderer, m);
 }
 
+/*
+*  GtkWidget * create_projects_tree ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_projects_tree ()
 {
   int i;
@@ -260,6 +322,15 @@ GtkWidget * create_projects_tree ()
   return projtree;
 }
 
+/*
+*  G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * dial : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointer data)
 {
   destroy_this_dialog (dial);
@@ -268,6 +339,14 @@ G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointe
   axischoice = NULL;
 }
 
+/*
+*  G_MODULE_EXPORT void edit_curve (GtkWidget * curve, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * curve : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void edit_curve (GtkWidget * curve, gpointer data)
 {
   GtkWidget * edit_box;

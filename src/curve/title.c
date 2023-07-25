@@ -11,6 +11,22 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'title.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  const gchar * default_title (int ax, int c);
+
+  void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid);
+
+*/
+
 #include <gtk/gtk.h>
 #include <cairo.h>
 #include <pango/pangocairo.h>
@@ -18,6 +34,14 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "curve.h"
 
+/*
+*  const gchar * default_title (int ax, int c)
+*
+*  Usage: 
+*
+*  int ax : 
+*  int c  : 
+*/
 const gchar * default_title (int ax, int c)
 {
   if (ax == 0)
@@ -61,6 +85,16 @@ const gchar * default_title (int ax, int c)
   }
 }
 
+/*
+*  void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
+*
+*  Usage: 
+*
+*  cairo_t * cr               : 
+*  struct project * this_proj : 
+*  int rid                    : 
+*  int cid                    : 
+*/
 void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {
   double x, y;

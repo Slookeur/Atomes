@@ -11,6 +11,18 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'ogl_shading.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  opengl/ogl_shading.c
+  opengl/draw/d_atoms.c
+
+*/
+
 #ifndef OGL_SHADING_H_
 #define OGL_SHADING_H_
 

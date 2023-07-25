@@ -11,6 +11,17 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'affero.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  gui/interface.c
+
+*/
+
 gchar * affero_license="\n"
 " GNU AFFERO GENERAL PUBLIC LICENSE\n\n"
 " Version 3, 19 November 2007\n"

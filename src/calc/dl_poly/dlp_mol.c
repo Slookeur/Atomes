@@ -11,6 +11,31 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'dlp_mol.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gchar * remove_text (int i, int j, gchar * str);
+
+  void clean_up_molecules_info (gboolean usel);
+  void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol);
+  void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart);
+
+  G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data);
+  G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data);
+  G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol);
+
+*/
+
 #include "dlp_field.h"
 #include "calc.h"
 #include "interface.h"
@@ -31,6 +56,15 @@ extern void find_atom_id_in_field_molecule (struct field_molecule * fmol);
 extern void viz_fragment (struct field_molecule * fmol, int id, int viz);
 extern void check_to_visualize_properties (int id);
 
+/*
+*  gchar * remove_text (int i, int j, gchar * str)
+*
+*  Usage: 
+*
+*  int i       : 
+*  int j       : 
+*  gchar * str : 
+*/
 gchar * remove_text (int i, int j, gchar * str)
 {
   switch (i)
@@ -67,6 +101,13 @@ gchar * remove_text (int i, int j, gchar * str)
   }
 }
 
+/*
+*  void clean_up_molecules_info (gboolean usel)
+*
+*  Usage: 
+*
+*  gboolean usel : 
+*/
 void clean_up_molecules_info (gboolean usel)
 {
   int i;
@@ -146,6 +187,16 @@ G_MODULE_EXPORT void select_mol (GtkCellRendererToggle * cell_renderer,
 
 dint ** atomd_id_save;
 
+/*
+*  void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol)
+*
+*  Usage: 
+*
+*  struct field_molecule * fmol : 
+*  struct field_atom * at       : 
+*  int mols                     : 
+*  int * mol                    : 
+*/
 void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol)
 {
   int i, j, k, l;
@@ -221,6 +272,15 @@ void molecule_set_color (GtkTreeViewColumn * col,
   set_renderer_color (j, renderer, init_color (i-1, num_field_objects));
 }
 
+/*
+*  G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * dialog : 
+*  gint response_id   : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data)
 {
   int i, j, k;
@@ -364,6 +424,15 @@ G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint respons
   }
 }
 
+/*
+*  G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   int i;
@@ -423,6 +492,14 @@ G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * p
   run_this_gtk_dialog (amol, G_CALLBACK(run_add_molecule_to_field), NULL);
 }
 
+/*
+*  void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
+*
+*  Usage: 
+*
+*  struct field_molecule * new_mol : 
+*  int mstart                      : 
+*/
 void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
 {
   struct field_atom * fat, * fbt;
@@ -484,6 +561,14 @@ void prepare_atoms_to_merge (struct field_atom * at,
   g_free (saved_frozen_id);
 }
 
+/*
+*  struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
+*
+*  Usage: 
+*
+*  int id                       : 
+*  struct field_molecule * fmol : 
+*/
 struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
 {
   struct field_atom * fat, * fbt;
@@ -509,6 +594,15 @@ struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
   return fat;
 }
 
+/*
+*  G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * rmol : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data)
 {
   int i, j;
@@ -605,6 +699,15 @@ G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint resp
   if (done) destroy_this_dialog (rmol);
 }
 
+/*
+*  G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   to_remove = (struct field_molecule *) data;

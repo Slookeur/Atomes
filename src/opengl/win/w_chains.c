@@ -11,6 +11,31 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_chains.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_cmin (struct project * this_proj, int s);
+  int get_cmax (struct project * this_proj, int s);
+  int get_chain_size_index (struct project * this_proj, int s, int r);
+
+  void fill_chains_model (GtkTreeStore * store, struct project * this_proj);
+  void add_this_chain_to_search_tree (struct project * this_proj);
+
+  G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data);
+
+  GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this);
+  GtkWidget * create_chains_search (struct project * this_proj);
+  GtkWidget * chains_tab (glwin * view);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -100,6 +125,14 @@ G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer,
   update (opengl_project -> modelgl);
 }
 
+/*
+*  void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
+*
+*  Usage: 
+*
+*  GtkTreeStore * store       : 
+*  struct project * this_proj : 
+*/
 void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
 {
   GtkTreeIter step_level, size_level, chain_level;
@@ -167,6 +200,14 @@ void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
   }
 }
 
+/*
+*  GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  gboolean fill_this         : 
+*/
 GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
 {
   int i, j, k;
@@ -201,6 +242,13 @@ GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
   return chains_tree;
 }
 
+/*
+*  void add_this_chain_to_search_tree (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void add_this_chain_to_search_tree (struct project * this_proj)
 {
   GtkTreeIter step_level, size_level, chain_level;
@@ -486,6 +534,14 @@ void add_this_chain_to_search_tree (struct project * this_proj)
   }
 }
 
+/*
+*  int get_cmin (struct project * this_proj, int s)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int s                      : 
+*/
 int get_cmin (struct project * this_proj, int s)
 {
   int i, j;
@@ -497,6 +553,14 @@ int get_cmin (struct project * this_proj, int s)
   return j;
 }
 
+/*
+*  int get_cmax (struct project * this_proj, int s)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int s                      : 
+*/
 int get_cmax (struct project * this_proj, int s)
 {
   int i, j;
@@ -508,6 +572,15 @@ int get_cmax (struct project * this_proj, int s)
   return j;
 }
 
+/*
+*  int get_chain_size_index (struct project * this_proj, int s, int r)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int s                      : 
+*  int r                      : 
+*/
 int get_chain_size_index (struct project * this_proj, int s, int r)
 {
   int i, j;
@@ -519,6 +592,14 @@ int get_chain_size_index (struct project * this_proj, int s, int r)
   return i;
 }
 
+/*
+*  G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
 {
   tint * dat = (tint * )data;
@@ -628,6 +709,13 @@ G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * create_chains_search (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 GtkWidget * create_chains_search (struct project * this_proj)
 {
   GtkWidget * chains_search = create_vbox (BSEP);
@@ -674,6 +762,13 @@ GtkWidget * create_chains_search (struct project * this_proj)
 }
 
 
+/*
+*  GtkWidget * chains_tab (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 GtkWidget * chains_tab (glwin * view)
 {
   GtkWidget * chains = create_scroll(NULL, -1, -1, GTK_SHADOW_NONE);

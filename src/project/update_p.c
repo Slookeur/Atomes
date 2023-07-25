@@ -11,6 +11,24 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'update_p.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int update_project ();
+
+  void prep_calc_actions ();
+  void active_project_changed (int id);
+  void opengl_project_changed (int id);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "interface.h"
@@ -21,6 +39,13 @@ If not, see <https://www.gnu.org/licenses/> */
 extern GtkWidget * work_menu (int id, int p, int c);
 extern GtkTreeStore * tool_model;
 
+/*
+*  void prep_calc_actions ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void prep_calc_actions ()
 {
   int i;
@@ -52,6 +77,13 @@ void prep_calc_actions ()
   }
 }
 
+/*
+*  int update_project ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int update_project ()
 {
 #ifdef DEBUG
@@ -125,6 +157,13 @@ int update_project ()
   return 1;
 }
 
+/*
+*  void active_project_changed (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 void active_project_changed (int id)
 {
   char * errp = NULL;
@@ -189,6 +228,13 @@ void active_project_changed (int id)
   activew = activep;
 }
 
+/*
+*  void opengl_project_changed (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 void opengl_project_changed (int id)
 {
   activev = id;

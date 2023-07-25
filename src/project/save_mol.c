@@ -11,6 +11,22 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'save_mol.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int save_atom_m (FILE * fp, struct project * this_proj, int s, int a);
+  int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp);
+  int save_mol (FILE * fp, struct project * this_proj);
+
+*/
+
 #include "global.h"
 #include "project.h"
 
@@ -32,6 +48,16 @@ If not, see <https://www.gnu.org/licenses/> */
   struct molecule * prev;
 };*/
 
+/*
+*  int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*  int s                      : 
+*  int a                      : 
+*/
 int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
 {
   if (fwrite (& this_proj -> atoms[s][a].coord[2], sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -39,6 +65,15 @@ int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
   return OK;
 }
 
+/*
+*  int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*  struct molecule * tmp      : 
+*/
 int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
 {
   if (fwrite (& tmp -> id, sizeof(int), 1, fp) != 1) return 0;
@@ -51,6 +86,14 @@ int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
   return 1;
 }
 
+/*
+*  int save_mol (FILE * fp, struct project * this_proj)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct project * this_proj : 
+*/
 int save_mol (FILE * fp, struct project * this_proj)
 {
   int i, j;

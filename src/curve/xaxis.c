@@ -11,12 +11,38 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'xaxis.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it);
+  void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid);
+
+*/
+
 #include <math.h>
 #include <cairo.h>
 
 #include "global.h"
 #include "curve.h"
 
+/*
+*  void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
+*
+*  Usage: 
+*
+*  cairo_t * cr               : 
+*  struct project * this_proj : 
+*  int rid                    : 
+*  int cid                    : 
+*  gboolean draw_it           : 
+*/
 void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
 {
   int i, k, l;
@@ -149,6 +175,16 @@ void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid
   }
 }
 
+/*
+*  void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
+*
+*  Usage: 
+*
+*  cairo_t * cr               : 
+*  struct project * this_proj : 
+*  int rid                    : 
+*  int cid                    : 
+*/
 void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {
   int k;

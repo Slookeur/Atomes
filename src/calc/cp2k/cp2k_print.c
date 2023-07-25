@@ -11,6 +11,31 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cp2k_print.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gchar * cp2kbool (double opt);
+
+  void print_cp2k_var (gchar * var, GtkTextBuffer * buffer);
+  void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer);
+  void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer);
+  void print_motion_cp2k (int m, GtkTextBuffer * buffer);
+  void print_coord_cp2k (GtkTextBuffer * buffer);
+  void print_subsys_cp2k (GtkTextBuffer * buffer);
+  void print_variables_cp2k (GtkTextBuffer * buffer);
+  void print_global_cp2k (GtkTextBuffer * buffer);
+  void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer * buffer);
+  void print_cp2k (int f, GtkTextBuffer * buffer);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "calc.h"
@@ -330,6 +355,14 @@ gchar * cp2k_fix[4] = {"    &FIXED_ATOMS\n      COMPONENTS_TO_FIX ",
                        "      LIST", "      MOLNAME",
                        "\n    &END FIXED_ATOMS\n"};
 
+/*
+*  void print_cp2k_var (gchar * var, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  gchar * var            : 
+*  GtkTextBuffer * buffer : 
+*/
 void print_cp2k_var (gchar * var, GtkTextBuffer * buffer)
 {
   print_info ("${", "bold", buffer);
@@ -337,6 +370,15 @@ void print_cp2k_var (gchar * var, GtkTextBuffer * buffer)
   print_info ("}", "bold", buffer);
 }
 
+/*
+*  void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  int num                : 
+*  gchar ** section       : 
+*  GtkTextBuffer * buffer : 
+*/
 void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer)
 {
   int i;
@@ -353,6 +395,13 @@ void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer)
   }
 }
 
+/*
+*  gchar * cp2kbool (double opt)
+*
+*  Usage: 
+*
+*  double opt : 
+*/
 gchar * cp2kbool (double opt)
 {
   if (opt == 1.0)
@@ -367,6 +416,14 @@ gchar * cp2kbool (double opt)
 
 extern int v_thermo[2][CP2NTHERM];
 
+/*
+*  void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  int n_thermo           : 
+*  GtkTextBuffer * buffer : 
+*/
 void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
 {
   int i, j, k, l, m;
@@ -442,6 +499,14 @@ void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
   print_info (thermostat[3], NULL, buffer);
 }
 
+/*
+*  void print_motion_cp2k (int m, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  int m                  : 
+*  GtkTextBuffer * buffer : 
+*/
 void print_motion_cp2k (int m, GtkTextBuffer * buffer)
 {
   gchar * intro = "!\n"
@@ -524,6 +589,13 @@ void print_motion_cp2k (int m, GtkTextBuffer * buffer)
   print_info (cp2kmotion[3][0], NULL, buffer);
 }
 
+/*
+*  void print_coord_cp2k (GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buffer : 
+*/
 void print_coord_cp2k (GtkTextBuffer * buffer)
 {
   gchar * str;
@@ -560,6 +632,13 @@ void print_coord_cp2k (GtkTextBuffer * buffer)
   }
 }
 
+/*
+*  void print_subsys_cp2k (GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buffer : 
+*/
 void print_subsys_cp2k (GtkTextBuffer * buffer)
 {
   print_var_section (3, cp2ksyst[0], buffer);
@@ -600,6 +679,13 @@ void print_subsys_cp2k (GtkTextBuffer * buffer)
   print_info ("&END SUBSYS", NULL, buffer);
 }
 
+/*
+*  void print_variables_cp2k (GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buffer : 
+*/
 void print_variables_cp2k (GtkTextBuffer * buffer)
 {
   int i, j, k, l;
@@ -870,6 +956,13 @@ void print_variables_cp2k (GtkTextBuffer * buffer)
   print_info ("\n", NULL, buffer);
 }
 
+/*
+*  void print_global_cp2k (GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buffer : 
+*/
 void print_global_cp2k (GtkTextBuffer * buffer)
 {
   print_variables_cp2k (buffer);
@@ -902,6 +995,17 @@ void print_global_cp2k (GtkTextBuffer * buffer)
   }
 }
 
+/*
+*  void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  gchar * spaces         : 
+*  gchar * info           : 
+*  int i                  : 
+*  int j                  : 
+*  GtkTextBuffer * buffer : 
+*/
 void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer * buffer)
 {
   print_info (spaces, NULL, buffer);
@@ -929,6 +1033,14 @@ void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer
   print_info ("\n", NULL, buffer);
 }
 
+/*
+*  void print_cp2k (int f, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  int f                  : 
+*  GtkTextBuffer * buffer : 
+*/
 void print_cp2k (int f, GtkTextBuffer * buffer)
 {
   int i;

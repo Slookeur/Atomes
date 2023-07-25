@@ -11,8 +11,32 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cell_extra.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data);
+
+  GtkWidget * add_extra_cell_tab (glwin * view);
+
+*/
+
 #include "cell_edit.h"
 
+/*
+*  G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkSpinButton * res : 
+*  gpointer data       : 
+*/
 G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
 {
   tint * dat = (tint *)data;
@@ -38,6 +62,13 @@ G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
   sens_superbut (this_proj);
 }
 
+/*
+*  GtkWidget * add_extra_cell_tab (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 GtkWidget * add_extra_cell_tab (glwin * view)
 {
   GtkWidget * layout = create_layout (350, 150);

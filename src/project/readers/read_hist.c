@@ -11,6 +11,22 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_hist.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int hist_get_data (int linec);
+  int hist_get_content ();
+  int open_hist_file (int linec);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "interface.h"
@@ -22,6 +38,13 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern void check_for_species (double v, int ato);
 
+/*
+*  int hist_get_data (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 int hist_get_data (int linec)
 {
   int i;
@@ -58,6 +81,13 @@ int hist_get_data (int linec)
   return 1;
 }
 
+/*
+*  int hist_get_content ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int hist_get_content ()
 {
   gchar * lil[3] = {"ii", "iii", "iv"};
@@ -391,6 +421,13 @@ int hist_get_content ()
   return 1;
 }
 
+/*
+*  int open_hist_file (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 int open_hist_file (int linec)
 {
   int res;

@@ -11,6 +11,46 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_cif.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_atom_wyckoff (gchar * line, int wid);
+  int cif_file_get_data_in_loop (int linec, int lid);
+  int cif_file_get_number_of_atoms (int linec, int lid, int nelem);
+  int num_key (gchar * keyw, int linec);
+  int get_loop_line_id (int linec, int lid);
+  int get_loop_line_for_key (gchar * key_a, gchar * key_b, int linec);
+  int get_space_group_from_hm (gchar * hmk);
+  int get_setting_from_hm (gchar * hmk, int end);
+  int group_info_from_hm_key (int spg, gchar * key_hm);
+  int open_cif_file (int linec);
+
+  float get_atom_coord (gchar * line, int mid);
+
+  gboolean get_missing_z_from_user ();
+  gboolean cif_file_get_atoms_data (int lin, int cid[8]);
+  gboolean cif_get_atomic_coordinates (int linec);
+  gboolean cif_get_cell_data (int linec);
+  gboolean cif_get_space_group (int linec);
+
+  gchar * get_cif_word (gchar * mot);
+  gchar * get_atom_label (gchar * line, int lid);
+  gchar * get_string_from_origin (space_group * spg);
+
+  void file_get_to_line (int line_id);
+  void check_for_to_lab (int ato, gchar * stlab);
+
+  G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "interface.h"
@@ -129,6 +169,13 @@ gchar * cif_coord_opts[40][2] = {{"b1", "Monoclinic unique axis b, cell choice 1
   }
 #endif // G_OS_WIN_32
 
+/*
+*  gchar * get_cif_word (gchar * mot)
+*
+*  Usage: 
+*
+*  gchar * mot : 
+*/
 gchar * get_cif_word (gchar * mot)
 {
   gchar * word = substitute_string (mot, "\n", NULL);
@@ -136,6 +183,14 @@ gchar * get_cif_word (gchar * mot)
   return word;
 }
 
+/*
+*  float get_atom_coord (gchar * line, int mid)
+*
+*  Usage: 
+*
+*  gchar * line : 
+*  int mid      : 
+*/
 float get_atom_coord (gchar * line, int mid)
 {
   gchar * co_line = g_strdup_printf ("%s", line);
@@ -151,6 +206,14 @@ float get_atom_coord (gchar * line, int mid)
   return v;
 }
 
+/*
+*  gchar * get_atom_label (gchar * line, int lid)
+*
+*  Usage: 
+*
+*  gchar * line : 
+*  int lid      : 
+*/
 gchar * get_atom_label (gchar * line, int lid)
 {
   gchar * at_line = g_strdup_printf ("%s", line);
@@ -171,6 +234,14 @@ gchar * get_atom_label (gchar * line, int lid)
   return g_strdup_printf ("%c%c", at_word[0], tolower(at_word[1]));
 }
 
+/*
+*  int get_atom_wyckoff (gchar * line, int wid)
+*
+*  Usage: 
+*
+*  gchar * line : 
+*  int wid      : 
+*/
 int get_atom_wyckoff (gchar * line, int wid)
 {
   gchar * wy_line = g_strdup_printf ("%s", line);
@@ -194,6 +265,14 @@ int get_atom_wyckoff (gchar * line, int wid)
 GtkWidget ** img_cif;
 atom_search * cif_search;
 
+/*
+*  G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data)
 {
   int i, j;
@@ -221,6 +300,13 @@ G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data)
   g_free (strb);
 }
 
+/*
+*  gboolean get_missing_z_from_user ()
+*
+*  Usage: 
+*
+*   : 
+*/
 gboolean get_missing_z_from_user ()
 {
   this_reader -> lmislab = allocint (this_reader -> stolab);
@@ -259,6 +345,13 @@ gboolean get_missing_z_from_user ()
 }
 
 #ifndef OPENMP
+/*
+*  void file_get_to_line (int line_id)
+*
+*  Usage: 
+*
+*  int line_id : 
+*/
 void file_get_to_line (int line_id)
 {
   int i;
@@ -415,6 +508,14 @@ int cif_get_value (gchar * kroot, gchar * keyw, int linec, int lstart, gchar ** 
   return res;
 }
 
+/*
+*  int cif_file_get_data_in_loop (int linec, int lid)
+*
+*  Usage: 
+*
+*  int linec : 
+*  int lid   : 
+*/
 int cif_file_get_data_in_loop (int linec, int lid)
 {
   gboolean res = FALSE;
@@ -467,6 +568,15 @@ int cif_file_get_data_in_loop (int linec, int lid)
   return i;
 }
 
+/*
+*  int cif_file_get_number_of_atoms (int linec, int lid, int nelem)
+*
+*  Usage: 
+*
+*  int linec : 
+*  int lid   : 
+*  int nelem : 
+*/
 int cif_file_get_number_of_atoms (int linec, int lid, int nelem)
 {
   gboolean res = FALSE;
@@ -521,6 +631,14 @@ int cif_file_get_number_of_atoms (int linec, int lid, int nelem)
   return i;
 }
 
+/*
+*  int num_key (gchar * keyw, int linec)
+*
+*  Usage: 
+*
+*  gchar * keyw : 
+*  int linec    : 
+*/
 int num_key (gchar * keyw, int linec)
 {
   int res = 0;
@@ -588,6 +706,14 @@ int num_key (gchar * keyw, int linec)
   return res;
 }
 
+/*
+*  void check_for_to_lab (int ato, gchar * stlab)
+*
+*  Usage: 
+*
+*  int ato       : 
+*  gchar * stlab : 
+*/
 void check_for_to_lab (int ato, gchar * stlab)
 {
   int i, j;
@@ -628,6 +754,14 @@ void check_for_to_lab (int ato, gchar * stlab)
   }
 }
 
+/*
+*  gboolean cif_file_get_atoms_data (int lin, int cid[8])
+*
+*  Usage: 
+*
+*  int lin    : 
+*  int cid[8] : 
+*/
 gboolean cif_file_get_atoms_data (int lin, int cid[8])
 {
   int i, j, k, l;
@@ -734,6 +868,14 @@ gboolean cif_file_get_atoms_data (int lin, int cid[8])
   return done;
 }
 
+/*
+*  int get_loop_line_id (int linec, int lid)
+*
+*  Usage: 
+*
+*  int linec : 
+*  int lid   : 
+*/
 int get_loop_line_id (int linec, int lid)
 {
   int i;
@@ -780,6 +922,15 @@ int get_loop_line_id (int linec, int lid)
   return 0;
 }
 
+/*
+*  int get_loop_line_for_key (gchar * key_a, gchar * key_b, int linec)
+*
+*  Usage: 
+*
+*  gchar * key_a : 
+*  gchar * key_b : 
+*  int linec     : 
+*/
 int get_loop_line_for_key (gchar * key_a, gchar * key_b, int linec)
 {
   int i;
@@ -788,6 +939,13 @@ int get_loop_line_for_key (gchar * key_a, gchar * key_b, int linec)
   return (i) ? get_loop_line_id (linec, i) : 0;
 }
 
+/*
+*  gboolean cif_get_atomic_coordinates (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 gboolean cif_get_atomic_coordinates (int linec)
 {
   gchar * labkeys[2] = {"type_symbol", "label"};
@@ -956,6 +1114,13 @@ gboolean cif_get_atomic_coordinates (int linec)
   return TRUE;
 }
 
+/*
+*  int get_space_group_from_hm (gchar * hmk)
+*
+*  Usage: 
+*
+*  gchar * hmk : 
+*/
 int get_space_group_from_hm (gchar * hmk)
 {
   int i;
@@ -1003,6 +1168,13 @@ int get_space_group_from_hm (gchar * hmk)
   return 0;
 }
 
+/*
+*  gchar * get_string_from_origin (space_group * spg)
+*
+*  Usage: 
+*
+*  space_group * spg : 
+*/
 gchar * get_string_from_origin (space_group * spg)
 {
   gchar * str = NULL;
@@ -1025,6 +1197,14 @@ gchar * get_string_from_origin (space_group * spg)
   return str;
 }
 
+/*
+*  int get_setting_from_hm (gchar * hmk, int end)
+*
+*  Usage: 
+*
+*  gchar * hmk : 
+*  int end     : 
+*/
 int get_setting_from_hm (gchar * hmk, int end)
 {
   int i, j;
@@ -1105,6 +1285,14 @@ int get_setting_from_hm (gchar * hmk, int end)
   }
 }
 
+/*
+*  int group_info_from_hm_key (int spg, gchar * key_hm)
+*
+*  Usage: 
+*
+*  int spg        : 
+*  gchar * key_hm : 
+*/
 int group_info_from_hm_key (int spg, gchar * key_hm)
 {
   int i, j;
@@ -1180,6 +1368,13 @@ int group_info_from_hm_key (int spg, gchar * key_hm)
   return (spg) ? (j) ? j : spg : j;
 }
 
+/*
+*  gboolean cif_get_cell_data (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 gboolean cif_get_cell_data (int linec)
 {
   gchar * cellkeys[3] = {"length_a", "length_b", "length_c"};
@@ -1218,6 +1413,13 @@ gboolean cif_get_cell_data (int linec)
   return TRUE;
 }
 
+/*
+*  gboolean cif_get_space_group (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 gboolean cif_get_space_group (int linec)
 {
   gchar * symkey[2] = {"int_tables_number", "group_it_number"};
@@ -1433,6 +1635,13 @@ gboolean cif_get_space_group (int linec)
   return res;
 }
 
+/*
+*  int open_cif_file (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 int open_cif_file (int linec)
 {
   int res;

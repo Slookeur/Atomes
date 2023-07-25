@@ -11,6 +11,33 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_box.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * menu, tint * data);
+  GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va, int vb);
+  GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab, gpointer data);
+  GtkWidget * menu_box_axis (glwin * view, int id, int ab);
+
+  GMenuItem * menu_box_axis (glwin * view, int popm, int ab);
+
+  GMenu * axis_box_style (glwin * view, int popm, int ab, int abs);
+  GMenu * axis_box_param (glwin * view, int popm, int ab, int style);
+  GMenuItem * menu_box_axis (glwin * view, int popm, int ab);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "glwindow.h"
@@ -28,6 +55,14 @@ extern G_MODULE_EXPORT void window_lines (GtkWidget * widg, gpointer data);
 
 #ifdef GTK3
 // GTK3 Menu Action To Check
+/*
+*  G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *)data;
@@ -77,6 +112,17 @@ G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data)
   update (this_proj -> modelgl);
 }
 
+/*
+*  GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * menu, tint * data)
+*
+*  Usage: 
+*
+*  char * name      : 
+*  int val          : 
+*  int box          : 
+*  GtkWidget * menu : 
+*  tint * data      : 
+*/
 GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * menu, tint * data)
 {
   GtkWidget * box_widget = gtk3_menu_item (menu, name, IMG_NONE, NULL, G_CALLBACK(set_box_axis_style), data,
@@ -91,6 +137,16 @@ GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * men
   return box_widget;
 }
 
+/*
+*  GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va, int vb)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  glwin * view     : 
+*  int va           : 
+*  int vb           : 
+*/
 GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va, int vb)
 {
   GtkWidget * color_widget = color_box(view, -1, 0, 0);
@@ -102,6 +158,17 @@ GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va, int vb)
   return color_widget;
 }
 
+/*
+*  GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab, gpointer data)
+*
+*  Usage: 
+*
+*  gchar * str      : 
+*  GtkWidget * menu : 
+*  int vl           : 
+*  int vab          : 
+*  gpointer data    : 
+*/
 GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab, gpointer data)
 {
   GtkWidget * layout = create_menu_item (TRUE, str);
@@ -111,6 +178,15 @@ GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab
   return layout;
 }
 
+/*
+*  GtkWidget * menu_box_axis (glwin * view, int id, int ab)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*  int ab       : 
+*/
 GtkWidget * menu_box_axis (glwin * view, int id, int ab)
 {
   GtkWidget * widg;
@@ -219,6 +295,15 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
   }
 }
 #else
+/*
+*  G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   tint * the_data = (tint *)data;
@@ -254,6 +339,15 @@ G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * para
   }
 }
 
+/*
+*  G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   tint * the_data = (tint *)data;
@@ -295,6 +389,16 @@ G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * p
   }
 }
 
+/*
+*  GMenu * axis_box_style (glwin * view, int popm, int ab, int abs)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int ab       : 
+*  int abs      : 
+*/
 GMenu * axis_box_style (glwin * view, int popm, int ab, int abs)
 {
   GMenu * menu = g_menu_new ();
@@ -311,6 +415,16 @@ GMenu * axis_box_style (glwin * view, int popm, int ab, int abs)
   return menu;
 }
 
+/*
+*  GMenu * axis_box_param (glwin * view, int popm, int ab, int style)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*  int ab       : 
+*  int style    : 
+*/
 GMenu * axis_box_param (glwin * view, int popm, int ab, int style)
 {
   gchar * str, * key;
@@ -337,6 +451,20 @@ GMenu * axis_box_param (glwin * view, int popm, int ab, int style)
   return menu;
 }
 
+/*
+*
+*
+*  Usage: 
+*
+*   : 
+*/
+/*
+*
+*
+*  Usage: 
+*
+*   : 
+*/
 GMenuItem * menu_box_axis (glwin * view, int popm, int ab)
 {
   GMenuItem * ab_item = g_menu_item_new ((ab) ? "Axis" : "Box", (ab) ? NULL : (get_project_by_id(view -> proj) -> cell.ltype) ? NULL : "None");

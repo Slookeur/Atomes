@@ -11,12 +11,39 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_render.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * menu_render (glwin * view, int id);
+
+  GMenu * menu_render (glwin * view, int popm);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "glwindow.h"
 
 gchar * text_renders[OGL_RENDERS] = {"Filled", "Lines", "Points"};
 
+/*
+*  G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *)data;
@@ -50,6 +77,14 @@ G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
+/*
+*  GtkWidget * menu_render (glwin * view, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*/
 GtkWidget * menu_render (glwin * view, int id)
 {
   int i, j;
@@ -84,6 +119,15 @@ GtkWidget * menu_render (glwin * view, int id)
 }
 #else
 
+/*
+*  G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -118,6 +162,14 @@ G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * par
   }
 }
 
+/*
+*  GMenu * menu_render (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_render (glwin * view, int popm)
 {
   int i;

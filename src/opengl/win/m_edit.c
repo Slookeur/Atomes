@@ -11,6 +11,30 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_edit.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * menu_cell_edit (glwin * view , int id, int j);
+  GtkWidget * menu_edit (glwin * view, int id);
+
+  GMenu * menu_cell_edit (glwin * view, int popm, int sensitive);
+  GMenu * menu_atom_edit (glwin * view, int popm, int sensitive);
+  GMenu * extract_section (glwin * view, int popm);
+  GMenu * menu_edit (glwin * view, int popm);
+
+*/
+
 #include "cell_edit.h"
 #include "atom_edit.h"
 
@@ -23,8 +47,25 @@ extern G_MODULE_EXPORT void turn_rebuild (GtkWidget * widg, gpointer data);
 #endif
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 #endif
 {
@@ -33,6 +74,15 @@ G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
+/*
+*  GtkWidget * menu_cell_edit (glwin * view , int id, int j)
+*
+*  Usage: 
+*
+*  glwin * view  : 
+*  int id        : 
+*  int j         : 
+*/
 GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 {
   int i, k, l;
@@ -98,6 +148,14 @@ GtkWidget * menu_cell_edit (glwin * view , int id, int j)
   return menu;
 }
 
+/*
+*  GtkWidget * menu_edit (glwin * view, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*/
 GtkWidget * menu_edit (glwin * view, int id)
 {
   int i, j;
@@ -153,6 +211,15 @@ GtkWidget * menu_edit (glwin * view, int id)
   return menu;
 }
 #else
+/*
+*  GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
+*
+*  Usage: 
+*
+*  glwin * view  : 
+*  int popm      : 
+*  int sensitive : 
+*/
 GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 {
   GMenu * menu = g_menu_new ();
@@ -186,6 +253,15 @@ GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
   return menu;
 }
 
+/*
+*  GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
+*
+*  Usage: 
+*
+*  glwin * view  : 
+*  int popm      : 
+*  int sensitive : 
+*/
 GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
 {
   GMenu * menu = g_menu_new ();
@@ -203,6 +279,15 @@ GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
   return menu;
 }
 
+/*
+*  G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   tint * dat =(tint *)data;
@@ -228,6 +313,14 @@ G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * paramete
   }
 }
 
+/*
+*  GMenu * extract_section (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * extract_section (glwin * view, int popm)
 {
   int i;
@@ -242,6 +335,14 @@ GMenu * extract_section (glwin * view, int popm)
   return menu;
 }
 
+/*
+*  GMenu * menu_edit (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_edit (glwin * view, int popm)
 {
   struct project * this_proj = get_project_by_id(view -> proj);

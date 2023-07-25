@@ -11,6 +11,23 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'save_qm.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int save_thermo (FILE * fp, struct thermostat * thermo);
+  int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord);
+  int save_cpmd_data (FILE * fp, int cid, struct project * this_proj);
+  int save_cp2k_data (FILE * fp, int cid, struct project * this_proj);
+
+*/
+
 #include "global.h"
 #include "project.h"
 
@@ -77,6 +94,14 @@ typedef struct {
 } cp2k;
 */
 
+/*
+*  int save_thermo (FILE * fp, struct thermostat * thermo)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  struct thermostat * thermo : 
+*/
 int save_thermo (FILE * fp, struct thermostat * thermo)
 {
   if (fwrite (& thermo -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -88,6 +113,16 @@ int save_thermo (FILE * fp, struct thermostat * thermo)
   return OK;
 }
 
+/*
+*  int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
+*
+*  Usage: 
+*
+*  FILE * fp       : 
+*  int fixatoms    : 
+*  int * fixlist   : 
+*  int ** fixcoord : 
+*/
 int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
 {
   int i;
@@ -116,6 +151,15 @@ int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
   return OK;
 }
 
+/*
+*  int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  int cid                    : 
+*  struct project * this_proj : 
+*/
 int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 {
   int i;
@@ -178,6 +222,15 @@ int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
   return save_this_string (fp, this_proj -> cpmd_input[cid] -> info);
 }
 
+/*
+*  int save_cp2k_data (FILE * fp, int cid, struct project * this_proj)
+*
+*  Usage: 
+*
+*  FILE * fp                  : 
+*  int cid                    : 
+*  struct project * this_proj : 
+*/
 int save_cp2k_data (FILE * fp, int cid, struct project * this_proj)
 {
   int i, j;

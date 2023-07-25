@@ -11,6 +11,50 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'dlp_print.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_num_struct_to_print (struct field_molecule * fmol, int sid);
+
+  gboolean print_this_imp_inv (struct imp_inv * inv, int di, int a, int b, int c, int d);
+  gboolean member_of_atom (struct field_atom * fat, int id);
+  gboolean get_pbc ();
+  gboolean print_ana ();
+
+  void print_field_prop (struct field_prop * pro, int st, struct field_molecule * mol);
+  void print_field_struct (struct field_struct * stru, struct field_molecule * mol);
+  void print_all_field_struct (struct field_molecule * mol, int str);
+  void print_dlp_rigid (GtkTextBuffer * buf, struct field_rigid * rig);
+  void print_dlp_tet (GtkTextBuffer * buf, struct field_tethered * tet);
+  void print_dlp_pmf (GtkTextBuffer * buf, struct field_pmf * pmf);
+  void print_dlp_cons (GtkTextBuffer * buf, struct field_constraint * cons);
+  void print_dlp_shell (GtkTextBuffer * buf, struct field_molecule * fmol, struct field_shell * shell);
+  void print_dlp_atom (GtkTextBuffer * buf, int at, int numat);
+  void print_dlp_molecule (GtkTextBuffer * buf, struct field_molecule * fmol);
+  void print_dlp_body (GtkTextBuffer * buf, int nbd, struct field_nth_body * body);
+  void print_dlp_tersoff (GtkTextBuffer * buf, struct field_nth_body * body);
+  void print_dlp_field (GtkTextBuffer * buf);
+  void print_dlp_config (GtkTextBuffer * buf);
+  void print_int (GtkTextBuffer * buf, int data);
+  void print_control_int (GtkTextBuffer * buf, int data, gchar * info_a, gchar * info_b, gchar * key);
+  void print_float (GtkTextBuffer * buf, double data);
+  void print_control_float (GtkTextBuffer * buf, double data, gchar * info_a, gchar * info_b, gchar * key);
+  void print_sci (GtkTextBuffer * buf, double data);
+  void print_control_sci (GtkTextBuffer * buf, double data, gchar * info_a, gchar * info_b, gchar * key);
+  void print_string (GtkTextBuffer * buf, gchar * string);
+  void print_control_string (GtkTextBuffer * buf, gchar * string, gchar * info_a, gchar * info_b, gchar * key);
+  void print_control_key (GtkTextBuffer * buf, gchar * info, gchar * key);
+  void print_dlp_control (GtkTextBuffer * buf);
+
+*/
+
 #include "dlp_field.h"
 #include "interface.h"
 
@@ -18,6 +62,15 @@ extern gboolean in_bond (int at, int bd[2]);
 extern int get_num_vdw_max ();
 extern gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd);
 
+/*
+*  void print_field_prop (struct field_prop * pro, int st, struct field_molecule * mol)
+*
+*  Usage: 
+*
+*  struct field_prop * pro     : 
+*  int st                      : 
+*  struct field_molecule * mol : 
+*/
 void print_field_prop (struct field_prop * pro, int st, struct field_molecule * mol)
 {
   int i, j, k, u, v, w;
@@ -69,6 +122,14 @@ void print_field_prop (struct field_prop * pro, int st, struct field_molecule * 
 #endif
 }
 
+/*
+*  void print_field_struct (struct field_struct * stru, struct field_molecule * mol)
+*
+*  Usage: 
+*
+*  struct field_struct * stru  : 
+*  struct field_molecule * mol : 
+*/
 void print_field_struct (struct field_struct * stru, struct field_molecule * mol)
 {
   int i;
@@ -102,6 +163,14 @@ void print_field_struct (struct field_struct * stru, struct field_molecule * mol
   }
 }
 
+/*
+*  void print_all_field_struct (struct field_molecule * mol, int str)
+*
+*  Usage: 
+*
+*  struct field_molecule * mol : 
+*  int str                     : 
+*/
 void print_all_field_struct (struct field_molecule * mol, int str)
 {
   int i;
@@ -132,6 +201,18 @@ struct imp_inv{
   struct imp_inv * prev;
 };
 
+/*
+*  gboolean print_this_imp_inv (struct imp_inv * inv, int di, int a, int b, int c, int d)
+*
+*  Usage: 
+*
+*  struct imp_inv * inv : 
+*  int di               : 
+*  int a                : 
+*  int b                : 
+*  int c                : 
+*  int d                : 
+*/
 gboolean print_this_imp_inv (struct imp_inv * inv, int di, int a, int b, int c, int d)
 {
   if (! inv) return TRUE;
@@ -162,6 +243,14 @@ gboolean print_this_imp_inv (struct imp_inv * inv, int di, int a, int b, int c, 
   return TRUE;
 }
 
+/*
+*  gboolean member_of_atom (struct field_atom * fat, int id)
+*
+*  Usage: 
+*
+*  struct field_atom * fat : 
+*  int id                  : 
+*/
 gboolean member_of_atom (struct field_atom * fat, int id)
 {
   int i, j;
@@ -715,6 +804,14 @@ void print_dlp_bond (int bi, GtkTextBuffer * buf,
   if (same_atom) g_free (already_done);
 }
 
+/*
+*  void print_dlp_rigid (GtkTextBuffer * buf, struct field_rigid * rig)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf      : 
+*  struct field_rigid * rig : 
+*/
 void print_dlp_rigid (GtkTextBuffer * buf, struct field_rigid * rig)
 {
   gchar * str;
@@ -745,6 +842,14 @@ void print_dlp_rigid (GtkTextBuffer * buf, struct field_rigid * rig)
   g_free (str);
 }
 
+/*
+*  void print_dlp_tet (GtkTextBuffer * buf, struct field_tethered * tet)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf         : 
+*  struct field_tethered * tet : 
+*/
 void print_dlp_tet (GtkTextBuffer * buf, struct field_tethered * tet)
 {
   gchar * str;
@@ -761,6 +866,14 @@ void print_dlp_tet (GtkTextBuffer * buf, struct field_tethered * tet)
   print_info ("\n", NULL, buf);
 }
 
+/*
+*  void print_dlp_pmf (GtkTextBuffer * buf, struct field_pmf * pmf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf    : 
+*  struct field_pmf * pmf : 
+*/
 void print_dlp_pmf (GtkTextBuffer * buf, struct field_pmf * pmf)
 {
   gchar * str;
@@ -783,6 +896,14 @@ void print_dlp_pmf (GtkTextBuffer * buf, struct field_pmf * pmf)
   }
 }
 
+/*
+*  void print_dlp_cons (GtkTextBuffer * buf, struct field_constraint * cons)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf            : 
+*  struct field_constraint * cons : 
+*/
 void print_dlp_cons (GtkTextBuffer * buf, struct field_constraint * cons)
 {
   gchar * str;
@@ -791,6 +912,15 @@ void print_dlp_cons (GtkTextBuffer * buf, struct field_constraint * cons)
   g_free (str);
 }
 
+/*
+*  void print_dlp_shell (GtkTextBuffer * buf, struct field_molecule * fmol, struct field_shell * shell)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf          : 
+*  struct field_molecule * fmol : 
+*  struct field_shell * shell   : 
+*/
 void print_dlp_shell (GtkTextBuffer * buf, struct field_molecule * fmol, struct field_shell * shell)
 {
   gchar * str;
@@ -799,6 +929,15 @@ void print_dlp_shell (GtkTextBuffer * buf, struct field_molecule * fmol, struct 
   g_free (str);
 }
 
+/*
+*  void print_dlp_atom (GtkTextBuffer * buf, int at, int numat)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*  int at              : 
+*  int numat           : 
+*/
 void print_dlp_atom (GtkTextBuffer * buf, int at, int numat)
 {
   gchar * str;
@@ -814,6 +953,14 @@ void print_dlp_atom (GtkTextBuffer * buf, int at, int numat)
   g_free (str);
 }
 
+/*
+*  int get_num_struct_to_print (struct field_molecule * fmol, int sid)
+*
+*  Usage: 
+*
+*  struct field_molecule * fmol : 
+*  int sid                      : 
+*/
 int get_num_struct_to_print (struct field_molecule * fmol, int sid)
 {
   int i = 0;
@@ -838,6 +985,14 @@ int get_num_struct_to_print (struct field_molecule * fmol, int sid)
   return i;
 }
 
+/*
+*  void print_dlp_molecule (GtkTextBuffer * buf, struct field_molecule * fmol)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf          : 
+*  struct field_molecule * fmol : 
+*/
 void print_dlp_molecule (GtkTextBuffer * buf, struct field_molecule * fmol)
 {
   gchar * str;
@@ -1064,6 +1219,15 @@ void print_dlp_molecule (GtkTextBuffer * buf, struct field_molecule * fmol)
   print_info ("FINISH\n", "bold_orange", buf);
 }
 
+/*
+*  void print_dlp_body (GtkTextBuffer * buf, int nbd, struct field_nth_body * body)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf          : 
+*  int nbd                      : 
+*  struct field_nth_body * body : 
+*/
 void print_dlp_body (GtkTextBuffer * buf, int nbd, struct field_nth_body * body)
 {
   gchar * str;
@@ -1108,6 +1272,14 @@ void print_dlp_tersoff_cross (GtkTextBuffer * buf,
   print_info ("\n", NULL, buf);
 }
 
+/*
+*  void print_dlp_tersoff (GtkTextBuffer * buf, struct field_nth_body * body)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf          : 
+*  struct field_nth_body * body : 
+*/
 void print_dlp_tersoff (GtkTextBuffer * buf, struct field_nth_body * body)
 {
   gchar * str;
@@ -1151,6 +1323,13 @@ void print_dlp_tersoff (GtkTextBuffer * buf, struct field_nth_body * body)
   }
 }
 
+/*
+*  void print_dlp_field (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_dlp_field (GtkTextBuffer * buf)
 {
   int i, j, k, l;
@@ -1286,6 +1465,13 @@ void print_dlp_field (GtkTextBuffer * buf)
   print_info ("CLOSE", "bold", buf);
 }
 
+/*
+*  gboolean get_pbc ()
+*
+*  Usage: 
+*
+*   : 
+*/
 gboolean get_pbc ()
 {
   box_info * box = & tmp_proj -> cell.box[0];
@@ -1318,6 +1504,13 @@ gboolean get_pbc ()
   }
 }
 
+/*
+*  void print_dlp_config (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_dlp_config (GtkTextBuffer * buf)
 {
   int h, i, j, k, l, m, n;
@@ -1412,6 +1605,13 @@ gchar * md_text[4]={"# Target temperature in K\n", "# Number of MD steps\n", "# 
 gchar * min_key[3]={"force", "energy", "distance"};
 //gchar * md_legend[3]={"# Target temperature", "# Number of MD steps", "# MD time step d(t)"};
 
+/*
+*  gboolean print_ana ()
+*
+*  Usage: 
+*
+*   : 
+*/
 gboolean print_ana ()
 {
   if ((int)tmp_field -> ana_opts[0] || (int)tmp_field -> ana_opts[4] || (int)tmp_field -> ana_opts[8] || (int)tmp_field -> ana_opts[11] || (int)tmp_field -> ana_opts[14])
@@ -1464,6 +1664,14 @@ gchar * io_meth[4]={"mpiio", "direct", "master", "netcdf"};
 gchar * io_pec[2]={"off", "on"};
 gchar * io_typ[2]={"sorted", "unsorted"};
 
+/*
+*  void print_int (GtkTextBuffer * buf, int data)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*  int data            : 
+*/
 void print_int (GtkTextBuffer * buf, int data)
 {
   gchar * str = g_strdup_printf (" %d", data);
@@ -1471,6 +1679,17 @@ void print_int (GtkTextBuffer * buf, int data)
   g_free (str);
 }
 
+/*
+*  void print_control_int (GtkTextBuffer * buf, int data, gchar * info_a, gchar * info_b, gchar * key)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*  int data            : 
+*  gchar * info_a      : 
+*  gchar * info_b      : 
+*  gchar * key         : 
+*/
 void print_control_int (GtkTextBuffer * buf, int data, gchar * info_a, gchar * info_b, gchar * key)
 {
   gchar * str = g_strdup_printf ("%d", data);
@@ -1483,6 +1702,14 @@ void print_control_int (GtkTextBuffer * buf, int data, gchar * info_a, gchar * i
   print_int (buf, data);
 }
 
+/*
+*  void print_float (GtkTextBuffer * buf, double data)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*  double data         : 
+*/
 void print_float (GtkTextBuffer * buf, double data)
 {
   gchar * str = g_strdup_printf (" %f", data);
@@ -1490,6 +1717,17 @@ void print_float (GtkTextBuffer * buf, double data)
   g_free (str);
 }
 
+/*
+*  void print_control_float (GtkTextBuffer * buf, double data, gchar * info_a, gchar * info_b, gchar * key)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*  double data         : 
+*  gchar * info_a      : 
+*  gchar * info_b      : 
+*  gchar * key         : 
+*/
 void print_control_float (GtkTextBuffer * buf, double data, gchar * info_a, gchar * info_b, gchar * key)
 {
   gchar * str = g_strdup_printf ("%f", data);
@@ -1502,6 +1740,14 @@ void print_control_float (GtkTextBuffer * buf, double data, gchar * info_a, gcha
   print_float (buf, data);
 }
 
+/*
+*  void print_sci (GtkTextBuffer * buf, double data)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*  double data         : 
+*/
 void print_sci (GtkTextBuffer * buf, double data)
 {
   gchar * str = g_strdup_printf (" %e", data);
@@ -1509,6 +1755,17 @@ void print_sci (GtkTextBuffer * buf, double data)
   g_free (str);
 }
 
+/*
+*  void print_control_sci (GtkTextBuffer * buf, double data, gchar * info_a, gchar * info_b, gchar * key)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*  double data         : 
+*  gchar * info_a      : 
+*  gchar * info_b      : 
+*  gchar * key         : 
+*/
 void print_control_sci (GtkTextBuffer * buf, double data, gchar * info_a, gchar * info_b, gchar * key)
 {
   gchar * str = g_strdup_printf ("%e", data);
@@ -1521,12 +1778,31 @@ void print_control_sci (GtkTextBuffer * buf, double data, gchar * info_a, gchar 
   g_free (str);
 }
 
+/*
+*  void print_string (GtkTextBuffer * buf, gchar * string)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*  gchar * string      : 
+*/
 void print_string (GtkTextBuffer * buf, gchar * string)
 {
   print_info (" ", NULL, buf);
   print_info (string, "bold_green", buf);
 }
 
+/*
+*  void print_control_string (GtkTextBuffer * buf, gchar * string, gchar * info_a, gchar * info_b, gchar * key)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*  gchar * string      : 
+*  gchar * info_a      : 
+*  gchar * info_b      : 
+*  gchar * key         : 
+*/
 void print_control_string (GtkTextBuffer * buf, gchar * string, gchar * info_a, gchar * info_b, gchar * key)
 {
   if (info_a != NULL) print_info (info_a, NULL, buf);
@@ -1536,6 +1812,15 @@ void print_control_string (GtkTextBuffer * buf, gchar * string, gchar * info_a, 
   if (string) print_string (buf, string);
 }
 
+/*
+*  void print_control_key (GtkTextBuffer * buf, gchar * info, gchar * key)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*  gchar * info        : 
+*  gchar * key         : 
+*/
 void print_control_key (GtkTextBuffer * buf, gchar * info, gchar * key)
 {
   if (info != NULL) print_info (info, NULL, buf);
@@ -1543,6 +1828,13 @@ void print_control_key (GtkTextBuffer * buf, gchar * info, gchar * key)
 }
 
 
+/*
+*  void print_dlp_control (GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * buf : 
+*/
 void print_dlp_control (GtkTextBuffer * buf)
 {
   int i, j, k;

@@ -12,6 +12,16 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 /*
+* This file: 'charmm35_ethers.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*/
+
+/*
   CHARMM-charmm35_ethers force field, data from taken from:
        - the file: 'charmm35_ethers'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'

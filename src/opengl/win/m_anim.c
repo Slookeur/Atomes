@@ -11,6 +11,26 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_anim.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void to_spin (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void to_seq (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void to_rec (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * menu_anim (glwin * view, int id);
+
+  GMenu * menu_anim (glwin * view, int popm);
+
+*/
+
 #include "global.h"
 #include "glwindow.h"
 
@@ -19,6 +39,14 @@ extern G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data);
 
 #ifdef GTK3
+/*
+*  GtkWidget * menu_anim (glwin * view, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int id       : 
+*/
 GtkWidget * menu_anim (glwin * view, int id)
 {
   GtkWidget * menuanim = create_menu_item (FALSE, "Animate");
@@ -58,21 +86,56 @@ GtkWidget * menu_anim (glwin * view, int id)
   return (menuanim);
 }
 #else
+/*
+*  G_MODULE_EXPORT void to_spin (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_spin (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   window_spinner (NULL, data);
 }
 
+/*
+*  G_MODULE_EXPORT void to_seq (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_seq (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   window_sequencer (NULL, data);
 }
 
+/*
+*  G_MODULE_EXPORT void to_rec (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_rec (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   window_recorder (NULL, data);
 }
 
+/*
+*  GMenu * menu_anim (glwin * view, int popm)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int popm     : 
+*/
 GMenu * menu_anim (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();

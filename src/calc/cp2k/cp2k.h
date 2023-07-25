@@ -11,6 +11,22 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'cp2k.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  calc/cp2k/cp2k_files.c
+  calc/cp2k/cp2k_init.c
+  calc/cp2k/cp2k_mol.c
+  calc/cp2k/cp2k_print.c
+  calc/cpmd/cpmd_init.c
+  calc/cpmd/cpmd_nose.c
+
+*/
+
 #ifndef CP2K_H_
 #define CP2K_H_
 

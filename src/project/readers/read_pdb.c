@@ -11,6 +11,23 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_pdb.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int pdb_get_atoms_data (int linec);
+  int open_pdb_file (int linec);
+
+  double get_z_from_pdb_name (char * name);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "callbacks.h"
@@ -23,12 +40,26 @@ If not, see <https://www.gnu.org/licenses/> */
 #include <omp.h>
 #include <ctype.h>
 
+/*
+*  double get_z_from_pdb_name (char * name)
+*
+*  Usage: 
+*
+*  char * name : 
+*/
 double get_z_from_pdb_name (char * name)
 {
   if (strlen(name) == 2) name[1] = tolower ((unsigned char)name[1]);
   return get_z_from_periodic_table (name);
 }
 
+/*
+*  int pdb_get_atoms_data (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 int pdb_get_atoms_data (int linec)
 {
   int h, i, j, k, l;
@@ -165,6 +196,13 @@ int pdb_get_atoms_data (int linec)
   return active_project -> natomes;
 }
 
+/*
+*  int open_pdb_file (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 int open_pdb_file (int linec)
 {
   if (! pdb_get_atoms_data (linec)) return 2;

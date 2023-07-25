@@ -11,6 +11,29 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'open_p.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int open_project (FILE * fp, int pid);
+
+  char * read_string (int i, FILE * fp);
+
+  gchar * read_this_string (FILE * fp);
+
+  void allocatoms (struct project * this_proj);
+  void alloc_proj_data (struct project * this_proj, int cid);
+
+  chemical_data * alloc_chem_data (int spec);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "interface.h"
@@ -23,6 +46,14 @@ extern void alloc_curves (int c);
 extern void init_box_calc ();
 extern void set_color_map_sensitive (glwin * view);
 
+/*
+*  char * read_string (int i, FILE * fp)
+*
+*  Usage: 
+*
+*  int i     : 
+*  FILE * fp : 
+*/
 char * read_string (int i, FILE * fp)
 {
   char * tmp = NULL;
@@ -36,6 +67,13 @@ char * read_string (int i, FILE * fp)
   return tmp;
 }
 
+/*
+*  gchar * read_this_string (FILE * fp)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*/
 gchar * read_this_string (FILE * fp)
 {
   int i;
@@ -48,6 +86,13 @@ gchar * read_this_string (FILE * fp)
   return NULL;
 }
 
+/*
+*  void allocatoms (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void allocatoms (struct project * this_proj)
 {
   int i, j;
@@ -67,6 +112,13 @@ void allocatoms (struct project * this_proj)
   }
 }
 
+/*
+*  chemical_data * alloc_chem_data (int spec)
+*
+*  Usage: 
+*
+*  int spec : 
+*/
 chemical_data * alloc_chem_data (int spec)
 {
   chemical_data * chem = g_malloc0 (sizeof*chem);
@@ -79,12 +131,28 @@ chemical_data * alloc_chem_data (int spec)
   return chem;
 }
 
+/*
+*  void alloc_proj_data (struct project * this_proj, int cid)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int cid                    : 
+*/
 void alloc_proj_data (struct project * this_proj, int cid)
 {
   if (cid) this_proj -> chemistry = alloc_chem_data (this_proj -> nspec);
   allocatoms (this_proj);
 }
 
+/*
+*  int open_project (FILE * fp, int pid)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*  int pid   : 
+*/
 int open_project (FILE * fp, int pid)
 {
   int i, j, k;

@@ -11,6 +11,26 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'cell_edit.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  gui/callbacks.c
+  opengl/edit/cell_cut.c
+  opengl/edit/cell_density.c
+  opengl/edit/cell_edit.c
+  opengl/edit/cell_extra.c
+  opengl/edit/cell_pixel.c
+  opengl/edit/cell_shift.c
+  opengl/edit/cell_super.c
+  opengl/win/m_edit.c
+  opengl/win/m_tools.c
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "callbacks.h"

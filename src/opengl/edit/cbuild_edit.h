@@ -11,6 +11,24 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This header file: 'cbuild_edit.h'
+*
+*  Contains: 
+
+*  Called by: 
+
+  opengl/edit/cbuild_action.c
+  opengl/edit/cbuild_edit.c
+  opengl/edit/cbuild_info.c
+  opengl/edit/cbuild_sg.c
+  project/readers/read_cif.c
+  project/readers/read_coord.c
+  project/readers/read_hist.c
+  project/readers/read_npt.c
+
+*/
+
 #ifndef CBUILD_EDIT_H_
 #define CBUILD_EDIT_H_
 

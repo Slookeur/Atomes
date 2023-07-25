@@ -12,6 +12,16 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 /*
+* This file: 'compass.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*/
+
+/*
   Compass force field, data from taken from the 'Compass.frc' file
 
   This file contains several tables:

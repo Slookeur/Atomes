@@ -11,8 +11,37 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cell_density.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void display_density (cell_edition * cell, double vol, double dens, double adens);
+
+  G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data);
+
+  GtkWidget * adjust_density_tab (struct project * this_proj);
+
+*/
+
 #include "cell_edit.h"
 
+/*
+*  void display_density (cell_edition * cell, double vol, double dens, double adens)
+*
+*  Usage: 
+*
+*  cell_edition * cell : 
+*  double vol          : 
+*  double dens         : 
+*  double adens        : 
+*/
 void display_density (cell_edition * cell, double vol, double dens, double adens)
 {
   cell -> density = destroy_this_widget (cell -> density);
@@ -41,8 +70,24 @@ void display_density (cell_edition * cell, double vol, double dens, double adens
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -55,6 +100,13 @@ G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
   widget_set_sensitive (view -> cell_win -> shift_box[1], view -> cell_win -> homo_density);
 }
 
+/*
+*  GtkWidget * adjust_density_tab (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 GtkWidget * adjust_density_tab (struct project * this_proj)
 {
   GtkWidget * layout = create_layout (350, 400);

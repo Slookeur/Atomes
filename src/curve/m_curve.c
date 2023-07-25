@@ -11,6 +11,45 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'm_curve.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gboolean was_not_added (ExtraSets * sets, int a, int b, int c);
+
+  void add_extra (ExtraSets * sets, tint * id);
+  void remove_extra (ExtraSets * sets, struct cextra * ctmp);
+  void prep_extra_rid (tint * data);
+  void curve_window_add_menu_bar (tint * data);
+
+  G_MODULE_EXPORT void autoscale (GtkWidget * but, gpointer data);
+  G_MODULE_EXPORT void action_to_plot (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void curve_edit_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void curve_add_remove_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void curve_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data);
+
+  GtkWidget * curve_popup_menu (gpointer data);
+
+  GMenu * curve_section (GSimpleActionGroup * action_group, gchar * act, ExtraSets * sets, gboolean add, int edit, int a, int b, tint * data);
+  GMenu * create_curve_submenu (GSimpleActionGroup * action_group, gchar * act, tint * data, gboolean add, int edit);
+  GMenu * create_curve_menu (gchar * str);
+  GMenu * edit_data_section (GSimpleActionGroup * action_group, gchar * str, tint * data);
+  GMenu * curve_close_section (gchar * str);
+  GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * str, tint * data);
+  GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data);
+  GMenu * create_add_remove_section (GSimpleActionGroup * action_group, gchar * act, int num, tint * data);
+  GMenu * autoscale_section (gchar * str);
+
+  struct cextra * init_extra (tint * id);
+
+*/
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 
@@ -24,6 +63,14 @@ extern DataLayout * curve_default_layout (struct project * pid, int rid, int cid
 int ** extrarid;
 // gchar * curve_act[3]={"edit", "add", "rem"};
 
+/*
+*  G_MODULE_EXPORT void autoscale (GtkWidget * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void autoscale (GtkWidget * but, gpointer data)
 {
   tint * id = (tint *)data;
@@ -32,6 +79,13 @@ G_MODULE_EXPORT void autoscale (GtkWidget * but, gpointer data)
   update_curve (data);
 }
 
+/*
+*  struct cextra * init_extra (tint * id)
+*
+*  Usage: 
+*
+*  tint * id : 
+*/
 struct cextra * init_extra (tint * id)
 {
   struct cextra * ctmp = g_malloc0 (sizeof*ctmp);
@@ -45,6 +99,14 @@ struct cextra * init_extra (tint * id)
   return ctmp;
 }
 
+/*
+*  void add_extra (ExtraSets * sets, tint * id)
+*
+*  Usage: 
+*
+*  ExtraSets * sets : 
+*  tint * id        : 
+*/
 void add_extra (ExtraSets * sets, tint * id)
 {
   if (sets -> extras == 0)
@@ -61,6 +123,14 @@ void add_extra (ExtraSets * sets, tint * id)
   sets -> extras ++;
 }
 
+/*
+*  void remove_extra (ExtraSets * sets, struct cextra * ctmp)
+*
+*  Usage: 
+*
+*  ExtraSets * sets     : 
+*  struct cextra * ctmp : 
+*/
 void remove_extra (ExtraSets * sets, struct cextra * ctmp)
 {
   if (sets -> extras == 1)
@@ -96,6 +166,13 @@ void remove_extra (ExtraSets * sets, struct cextra * ctmp)
 
 void curve_window_add_menu_bar (tint * data);
 
+/*
+*  void prep_extra_rid (tint * data)
+*
+*  Usage: 
+*
+*  tint * data : 
+*/
 void prep_extra_rid (tint * data)
 {
   int i;
@@ -112,6 +189,14 @@ void prep_extra_rid (tint * data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void action_to_plot (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void action_to_plot (GtkWidget * widg, gpointer data)
 {
   int i;
@@ -147,16 +232,43 @@ G_MODULE_EXPORT void action_to_plot (GtkWidget * widg, gpointer data)
   update_curve ((gpointer)& this_proj -> idcc[activer][activec]);
 }
 
+/*
+*  G_MODULE_EXPORT void curve_edit_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void curve_edit_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   edit_data (NULL, data);
 }
 
+/*
+*  G_MODULE_EXPORT void curve_add_remove_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void curve_add_remove_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   action_to_plot (NULL, data);
 }
 
+/*
+*  G_MODULE_EXPORT void curve_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void curve_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   gchar * name = g_strdup_printf ("%s", g_action_get_name(G_ACTION(action)));
@@ -182,6 +294,16 @@ G_MODULE_EXPORT void curve_menu_bar_action (GSimpleAction * action, GVariant * p
   }
 }
 
+/*
+*  gboolean was_not_added (ExtraSets * sets, int a, int b, int c)
+*
+*  Usage: 
+*
+*  ExtraSets * sets : 
+*  int a            : 
+*  int b            : 
+*  int c            : 
+*/
 gboolean was_not_added (ExtraSets * sets, int a, int b, int c)
 {
   int i, j;
@@ -200,6 +322,20 @@ gboolean was_not_added (ExtraSets * sets, int a, int b, int c)
   return TRUE;
 }
 
+/*
+*  GMenu * curve_section (GSimpleActionGroup * action_group, gchar * act, ExtraSets * sets, gboolean add, int edit, int a, int b, tint * data)
+*
+*  Usage: 
+*
+*  GSimpleActionGroup * action_group : 
+*  gchar * act                       : 
+*  ExtraSets * sets                  : 
+*  gboolean add                      : 
+*  int edit                          : 
+*  int a                             : 
+*  int b                             : 
+*  tint * data                       : 
+*/
 GMenu * curve_section (GSimpleActionGroup * action_group, gchar * act, ExtraSets * sets, gboolean add, int edit, int a, int b, tint * data)
 {
   GMenu * menu = g_menu_new ();
@@ -234,6 +370,17 @@ GMenu * curve_section (GSimpleActionGroup * action_group, gchar * act, ExtraSets
   return menu;
 }
 
+/*
+*  GMenu * create_curve_submenu (GSimpleActionGroup * action_group, gchar * act, tint * data, gboolean add, int edit)
+*
+*  Usage: 
+*
+*  GSimpleActionGroup * action_group : 
+*  gchar * act                       : 
+*  tint * data                       : 
+*  gboolean add                      : 
+*  int edit                          : 
+*/
 GMenu * create_curve_submenu (GSimpleActionGroup * action_group, gchar * act, tint * data, gboolean add, int edit)
 {
   struct project * this_proj;
@@ -303,6 +450,13 @@ GMenu * create_curve_submenu (GSimpleActionGroup * action_group, gchar * act, ti
 
 extern GIcon * get_gicon_from_data (int format, const gchar * icon);
 
+/*
+*  GMenu * create_curve_menu (gchar * str)
+*
+*  Usage: 
+*
+*  gchar * str : 
+*/
 GMenu * create_curve_menu (gchar * str)
 {
   GMenu * menu = g_menu_new ();
@@ -315,6 +469,15 @@ GMenu * create_curve_menu (gchar * str)
   return menu;
 }
 
+/*
+*  GMenu * edit_data_section (GSimpleActionGroup * action_group, gchar * str, tint * data)
+*
+*  Usage: 
+*
+*  GSimpleActionGroup * action_group : 
+*  gchar * str                       : 
+*  tint * data                       : 
+*/
 GMenu * edit_data_section (GSimpleActionGroup * action_group, gchar * str, tint * data)
 {
   GMenu * menu = g_menu_new ();
@@ -333,6 +496,13 @@ GMenu * edit_data_section (GSimpleActionGroup * action_group, gchar * str, tint 
   return menu;
 }
 
+/*
+*  GMenu * curve_close_section (gchar * str)
+*
+*  Usage: 
+*
+*  gchar * str : 
+*/
 GMenu * curve_close_section (gchar * str)
 {
   GMenu * menu = g_menu_new ();
@@ -342,6 +512,16 @@ GMenu * curve_close_section (gchar * str)
   return menu;
 }
 
+/*
+*  GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * str, tint * data)
+*
+*  Usage: 
+*
+*  GSimpleActionGroup * action_group : 
+*  int pop                           : 
+*  gchar * str                       : 
+*  tint * data                       : 
+*/
 GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * str, tint * data)
 {
   GMenu * menu = g_menu_new ();
@@ -353,6 +533,16 @@ GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * st
   return menu;
 }
 
+/*
+*  GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data)
+*
+*  Usage: 
+*
+*  struct project * this_proj        : 
+*  GSimpleActionGroup * action_group : 
+*  gchar * str                       : 
+*  tint * data                       : 
+*/
 GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data)
 {
   GMenu * menu = g_menu_new ();
@@ -363,6 +553,13 @@ GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_
   return menu;
 }
 
+/*
+*  void curve_window_add_menu_bar (tint * data)
+*
+*  Usage: 
+*
+*  tint * data : 
+*/
 void curve_window_add_menu_bar (tint * data)
 {
   struct project * this_proj = get_project_by_id (data -> a);
@@ -384,6 +581,16 @@ void curve_window_add_menu_bar (tint * data)
   show_the_widgets (this_proj -> curves[data -> b][data -> c] -> curve_hbox);
 }
 
+/*
+*  GMenu * create_add_remove_section (GSimpleActionGroup * action_group, gchar * act, int num, tint * data)
+*
+*  Usage: 
+*
+*  GSimpleActionGroup * action_group : 
+*  gchar * act                       : 
+*  int num                           : 
+*  tint * data                       : 
+*/
 GMenu * create_add_remove_section (GSimpleActionGroup * action_group, gchar * act, int num, tint * data)
 {
   GMenu * menu = g_menu_new ();
@@ -424,6 +631,13 @@ GMenu * create_add_remove_section (GSimpleActionGroup * action_group, gchar * ac
   return menu;
 }
 
+/*
+*  GMenu * autoscale_section (gchar * str)
+*
+*  Usage: 
+*
+*  gchar * str : 
+*/
 GMenu * autoscale_section (gchar * str)
 {
   GMenu * menu = g_menu_new ();
@@ -433,6 +647,13 @@ GMenu * autoscale_section (gchar * str)
   return menu;
 }
 
+/*
+*  GtkWidget * curve_popup_menu (gpointer data)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*/
 GtkWidget * curve_popup_menu (gpointer data)
 {
   GtkWidget * curve_pop_menu;

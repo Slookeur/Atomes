@@ -11,6 +11,24 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'modelinfo.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void print_spg_name (gchar * str , GtkTextBuffer * buffer);
+  void print_spg_setting (gchar * init, GtkTextBuffer * buffer);
+  void model_info (struct project * this_proj, GtkTextBuffer * buffer);
+  void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf);
+  void opengl_info (struct project * this_proj, GtkTextBuffer * buf);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 
@@ -19,6 +37,14 @@ extern char * vect_comp[3];
 extern gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif);
 extern gchar * get_num_string (gchar * str);
 
+/*
+*  void print_spg_name (gchar * str , GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  gchar * str            : 
+*  GtkTextBuffer * buffer : 
+*/
 void print_spg_name (gchar * str , GtkTextBuffer * buffer)
 {
   str = substitute_string (str, "</", "y");
@@ -50,6 +76,14 @@ void print_spg_name (gchar * str , GtkTextBuffer * buffer)
   g_free (str);
 }
 
+/*
+*  void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  gchar * init           : 
+*  GtkTextBuffer * buffer : 
+*/
 void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
 {
   gchar * str = g_strdup_printf ("%s", init);
@@ -59,6 +93,14 @@ void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
   print_spg_name (str, buffer);
 }
 
+/*
+*  void model_info (struct project * this_proj, GtkTextBuffer * buffer)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  GtkTextBuffer * buffer     : 
+*/
 void model_info (struct project * this_proj, GtkTextBuffer * buffer)
 {
   int i, j, k;
@@ -270,6 +312,15 @@ void model_info (struct project * this_proj, GtkTextBuffer * buffer)
   }
 }
 
+/*
+*  void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  gchar * text        : 
+*  GLenum name         : 
+*  GtkTextBuffer * buf : 
+*/
 void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
 {
   int i;
@@ -281,6 +332,14 @@ void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
   g_free (str);
 }
 
+/*
+*  void opengl_info (struct project * this_proj, GtkTextBuffer * buf)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  GtkTextBuffer * buf        : 
+*/
 void opengl_info (struct project * this_proj, GtkTextBuffer * buf)
 {
   int i, j, k, l;

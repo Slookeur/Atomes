@@ -11,6 +11,38 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'd_box.c'
+*
+*  Contains:
+*
+*
+*
+*
+*  List of subroutines:
+
+  int create_box_lists ();
+
+  double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t cpos, double paral[3][3], ColRGBA col, double slab_alpha);
+
+  gboolean are_identical_vec3 (vec3_t va, vec3_t vb);
+  gboolean not_in_already (vec3_t a, vec3_t b, float * vertices);
+  gboolean not_in_corners (vec3_t a, float * vertices);
+
+  void setup_extra_box_vertices (vec3_t a, vec3_t b, int id, float * c_vert, float * s_vert);
+  void setup_box_vertices (vec3_t ax, vec3_t bx, int id, float * c_vert, float * s_vert);
+  void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, int, float *, float *), float * verts, float * serts, int id);
+  void setup_cuboid_vertices (vec3_t a, vec3_t b, int id);
+  void prepare_cuboid (vec3_t position, int id);
+  void create_light_lists ();
+  void cuboid_slab (mat4_t rot);
+  void cylinder_slab (mat4_t rot);
+  void spherical_slab ();
+  void create_slab_lists (struct project * this_proj);
+  void create_volumes_lists ();
+
+*/
+
 #include "global.h"
 #include "glview.h"
 
@@ -27,6 +59,14 @@ extern ColRGBA pcol;
 
 int BOX_BUFF_SIZE;
 
+/*
+*  gboolean are_identical_vec3 (vec3_t va, vec3_t vb)
+*
+*  Usage:
+*
+*  vec3_t va :
+*  vec3_t vb :
+*/
 gboolean are_identical_vec3 (vec3_t va, vec3_t vb)
 {
 
@@ -40,6 +80,15 @@ gboolean are_identical_vec3 (vec3_t va, vec3_t vb)
   }
 }
 
+/*
+*  gboolean not_in_already (vec3_t a, vec3_t b, float * vertices)
+*
+*  Usage:
+*
+*  vec3_t a         :
+*  vec3_t b         :
+*  float * vertices :
+*/
 gboolean not_in_already (vec3_t a, vec3_t b, float * vertices)
 {
   int i, j, k;
@@ -62,6 +111,14 @@ gboolean not_in_already (vec3_t a, vec3_t b, float * vertices)
   return TRUE;
 }
 
+/*
+*  gboolean not_in_corners (vec3_t a, float * vertices)
+*
+*  Usage:
+*
+*  vec3_t a         :
+*  float * vertices :
+*/
 gboolean not_in_corners (vec3_t a, float * vertices)
 {
   int i, j;
@@ -78,6 +135,17 @@ gboolean not_in_corners (vec3_t a, float * vertices)
   return TRUE;
 }
 
+/*
+*  void setup_extra_box_vertices (vec3_t a, vec3_t b, int id, float * c_vert, float * s_vert)
+*
+*  Usage:
+*
+*  vec3_t a       :
+*  vec3_t b       :
+*  int id         :
+*  float * c_vert :
+*  float * s_vert :
+*/
 void setup_extra_box_vertices (vec3_t a, vec3_t b, int id, float * c_vert, float * s_vert)
 {
   float j;
@@ -121,6 +189,17 @@ void setup_extra_box_vertices (vec3_t a, vec3_t b, int id, float * c_vert, float
   }
 }
 
+/*
+*  void setup_box_vertices (vec3_t ax, vec3_t bx, int id, float * c_vert, float * s_vert)
+*
+*  Usage:
+*
+*  vec3_t ax      :
+*  vec3_t bx      :
+*  int id         :
+*  float * c_vert :
+*  float * s_vert :
+*/
 void setup_box_vertices (vec3_t ax, vec3_t bx, int id, float * c_vert, float * s_vert)
 {
   float j;
@@ -153,6 +232,20 @@ void setup_box_vertices (vec3_t ax, vec3_t bx, int id, float * c_vert, float * s
   }
 }
 
+/*
+*  void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, int, float *, float *), float * verts, float * serts, int id)
+*
+*  Usage:
+*
+*  vec3_t        :
+*  vec3_t        :
+*  int           :
+*  float *       :
+*  float *       :
+*  float * verts :
+*  float * serts :
+*  int id)       :
+*/
 void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, int, float *, float *), float * verts, float * serts, int id)
 {
   int i;
@@ -184,6 +277,13 @@ void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, int, float *, float *)
   }
 }
 
+/*
+*  int create_box_lists ()
+*
+*  Usage:
+*
+*   :
+*/
 int create_box_lists ()
 {
   int vertex = 8;
@@ -255,6 +355,15 @@ int create_box_lists ()
 
 /*vec3_t center;
 
+/ *
+*  void setup_cuboid_vertices (vec3_t a, vec3_t b, int id)
+*
+*  Usage:
+*
+*  vec3_t a :
+*  vec3_t b :
+*  int id   :
+* /
 void setup_cuboid_vertices (vec3_t a, vec3_t b, int id)
 {
   float j;
@@ -310,6 +419,14 @@ GLfloat cuboid_vertices[] = {
         -1.0f,  1.0f, -1.0f,  0.0f,  1.0f,  0.0f,
     };
 
+/*
+*  void prepare_cuboid (vec3_t position, int id)
+*
+*  Usage:
+*
+*  vec3_t position :
+*  int id          :
+*/
 void prepare_cuboid (vec3_t position, int id)
 {
   float lgt = 1.0;
@@ -339,6 +456,13 @@ void prepare_cuboid (vec3_t position, int id)
   g_free (light);
 }
 
+/*
+*  void create_light_lists ()
+*
+*  Usage:
+*
+*   :
+*/
 void create_light_lists ()
 {
   int i, j;
@@ -380,6 +504,20 @@ vec3_t get_normal (vec3_t v1, vec3_t v2, vec3_t v3)
   return v3_norm (v3_cross(edge_a, edge_b));
 }
 
+/*
+*  double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t cpos, double paral[3][3], ColRGBA col, double slab_alpha)
+*
+*  Usage:
+*
+*  gboolean draw      :
+*  int SHADID         :
+*  int shadnum        :
+*  mat4_t rot         :
+*  vec3_t cpos        :
+*  double paral[3][3] :
+*  double paral[3][3] :
+*  double paral[3][3] :
+*/
 double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t cpos, double paral[3][3], ColRGBA col, double slab_alpha)
 {
   int i, j, k, l, m, n, o;
@@ -452,6 +590,13 @@ double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t c
   return cvol;
 }
 
+/*
+*  void cuboid_slab (mat4_t rot)
+*
+*  Usage:
+*
+*  mat4_t rot :
+*/
 void cuboid_slab (mat4_t rot)
 {
   int i, j, k, l, m;
@@ -574,6 +719,13 @@ void cuboid_slab (mat4_t rot)
   }
 }
 
+/*
+*  void cylinder_slab (mat4_t rot)
+*
+*  Usage:
+*
+*  mat4_t rot :
+*/
 void cylinder_slab (mat4_t rot)
 {
   int i, j, k;
@@ -672,6 +824,13 @@ void cylinder_slab (mat4_t rot)
   }
 }
 
+/*
+*  void spherical_slab ()
+*
+*  Usage:
+*
+*   :
+*/
 void spherical_slab ()
 {
   int i, j, k, l;
@@ -729,6 +888,13 @@ void spherical_slab ()
   }
 }
 
+/*
+*  void create_slab_lists (struct project * this_proj)
+*
+*  Usage:
+*
+*  struct project * this_proj :
+*/
 void create_slab_lists (struct project * this_proj)
 {
   wingl = this_proj -> modelgl;
@@ -765,6 +931,13 @@ void create_slab_lists (struct project * this_proj)
   wingl -> create_shaders[SLABS] = FALSE;
 }
 
+/*
+*  void create_volumes_lists ()
+*
+*  Usage:
+*
+*   :
+*/
 void create_volumes_lists ()
 {
   cleaning_shaders (wingl, VOLMS);

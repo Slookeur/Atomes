@@ -11,6 +11,47 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_volumes.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  double cap_volume (double ht, double dh);
+  double get_sphere_caps_volume (double dab, double rad, double rbd);
+  double sphere_volume (double rad);
+  double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, int gcid);
+  double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang);
+  double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int gid);
+
+  void clean_volumes_data (glwin * view);
+  void adjust_vol_md_step (struct project * this_proj, int geo);
+  void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin * view, int geo);
+
+  G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void show_volumes (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void fm_show_volumes (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data);
+  G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data);
+  G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data);
+  G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data);
+
+  GtkWidget * frag_mol_volume_search (struct project * this_proj, int g);
+  GtkWidget * frag_mol_volume_tab (glwin * view, int geo);
+  GtkWidget * mol_model_tab (glwin * view);
+  GtkWidget * vol_model_tab (glwin * view);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "interface.h"
@@ -22,6 +63,13 @@ If not, see <https://www.gnu.org/licenses/> */
 extern void center_this_molecule (glwin * view);
 extern double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t cpos, double paral[3][3], ColRGBA col, double slab_alpha);
 
+/*
+*  void clean_volumes_data (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void clean_volumes_data (glwin * view)
 {
   if (view -> volume_win)
@@ -70,11 +118,28 @@ void clean_volumes_data (glwin * view)
   re_create_md_shaders (1, shaders, get_project_by_id(view -> proj));
 }
 
+/*
+*  double cap_volume (double ht, double dh)
+*
+*  Usage: 
+*
+*  double ht : 
+*  double dh : 
+*/
 double cap_volume (double ht, double dh)
 {
   return (pi/3.0)*ht*ht*(3*dh-ht);
 }
 
+/*
+*  double get_sphere_caps_volume (double dab, double rad, double rbd)
+*
+*  Usage: 
+*
+*  double dab : 
+*  double rad : 
+*  double rbd : 
+*/
 double get_sphere_caps_volume (double dab, double rad, double rbd)
 {
   double h1, h2;
@@ -88,11 +153,29 @@ double get_sphere_caps_volume (double dab, double rad, double rbd)
   return cap_volume (h1, rma) + cap_volume (h2, rmi);
 }
 
+/*
+*  double sphere_volume (double rad)
+*
+*  Usage: 
+*
+*  double rad : 
+*/
 double sphere_volume (double rad)
 {
   return ((4.0*pi)/3.0)*rad*rad*rad;
 }
 
+/*
+*  double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, int gcid)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int rid                    : 
+*  int sid                    : 
+*  int gid                    : 
+*  int gcid                   : 
+*/
 double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, int gcid)
 {
   int i, j, k, l, m, n, o;
@@ -160,6 +243,19 @@ double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, 
 
 double vamin[3], vamax[3];
 
+/*
+*  double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang)
+*
+*  Usage: 
+*
+*  int nats              : 
+*  struct atom * ats_vol : 
+*  double baryc[3]       : 
+*  double baryc[3]       : 
+*  double baryc[3]       : 
+*  double baryc[3]       : 
+*  double baryc[3]       : 
+*/
 double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang)
 {
   double paral[3][3];
@@ -206,6 +302,17 @@ double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], doubl
   return draw_cuboid (FALSE, VOLMS, 0, m4_identity (), vec3(0.0,0.0,0.0), paral, null, 1.0);
 }
 
+/*
+*  double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int gid)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int rid                    : 
+*  int sid                    : 
+*  int geo                    : 
+*  int gid                    : 
+*/
 double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int gid)
 {
   int i, j;
@@ -317,6 +424,14 @@ double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int
   return vbl;
 }
 
+/*
+*  G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
 {
   tint * dat = (tint *)data;
@@ -339,6 +454,14 @@ G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
   this_proj -> modelgl -> volumes = TRUE;
 }
 
+/*
+*  void adjust_vol_md_step (struct project * this_proj, int geo)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int geo                    : 
+*/
 void adjust_vol_md_step (struct project * this_proj, int geo)
 {
   int i, j, k;
@@ -391,6 +514,14 @@ void adjust_vol_md_step (struct project * this_proj, int geo)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
 {
   int i, j;
@@ -439,8 +570,24 @@ G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void show_volumes (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void show_volumes (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -457,8 +604,24 @@ G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void fm_show_volumes (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void fm_show_volumes (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -474,6 +637,14 @@ G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
   update (this_proj -> modelgl);
 }
 
+/*
+*  G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
+*
+*  Usage: 
+*
+*  GtkColorChooser * colob : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
 {
   tint * id = (tint *) data;
@@ -484,6 +655,14 @@ G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
   update (this_proj -> modelgl);
 }
 
+/*
+*  G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data)
+*
+*  Usage: 
+*
+*  GtkColorChooser * colob : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data)
 {
   qint * dat = (qint *)data;
@@ -494,6 +673,14 @@ G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data
   update (this_proj -> modelgl);
 }
 
+/*
+*  G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkSpinButton * res : 
+*  gpointer data       : 
+*/
 G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
 {
   qint * dat = (qint *)data;
@@ -502,6 +689,16 @@ G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
   adjust_vol_md_step (this_proj, dat -> b);
 }
 
+/*
+*  void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin * view, int geo)
+*
+*  Usage: 
+*
+*  GtkWidget * vbox           : 
+*  struct project * this_proj : 
+*  glwin * view               : 
+*  int geo                    : 
+*/
 void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin * view, int geo)
 {
   gchar * name_geo[2] = {"fragment", "molecule"};
@@ -604,6 +801,14 @@ void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin 
   }
 }
 
+/*
+*  G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
 {
   tint * dat = (tint * )data;
@@ -649,6 +854,14 @@ G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int g                      : 
+*/
 GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
 {
   GtkWidget * frag_mol_search = create_vbox (BSEP);
@@ -674,6 +887,14 @@ GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
   return frag_mol_search;
 }
 
+/*
+*  GtkWidget * frag_mol_volume_tab (glwin * view, int geo)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int geo      : 
+*/
 GtkWidget * frag_mol_volume_tab (glwin * view, int geo)
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -757,6 +978,13 @@ GtkWidget * frag_mol_volume_tab (glwin * view, int geo)
   return vbox;
 }
 
+/*
+*  GtkWidget * mol_model_tab (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 GtkWidget * mol_model_tab (glwin * view)
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -764,6 +992,14 @@ GtkWidget * mol_model_tab (glwin * view)
   return vbox;
 }
 
+/*
+*  G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -799,6 +1035,13 @@ G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * vol_model_tab (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 GtkWidget * vol_model_tab (glwin * view)
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -881,6 +1124,14 @@ GtkWidget * vol_model_tab (glwin * view)
   return vbox;
 }
 
+/*
+*  G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data)
 {
   glwin * view = (glwin *) data;

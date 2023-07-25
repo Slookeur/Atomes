@@ -11,6 +11,41 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_measures.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_measure_type (glwin * view);
+
+  G_MODULE_EXPORT gboolean measure_tree_selection_event (GtkWidget * widget, GdkEventButton * event, gpointer data);
+  G_MODULE_EXPORT gboolean close_measure_event (GtkWindow * widg, gpointer data);
+  G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event, gpointer data);
+
+  gchar * create_measure_label (glwin * view, int pi);
+
+  void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store);
+  void fill_angle_model_row (int p, int a, int b, int c, GtkTreeStore * store);
+  void fill_dihedral_model_row (int p, int a, int b, int c, int d, GtkTreeStore * store);
+  void update_selection_tree (glwin * view, int pi, int id);
+  void update_label_selection (glwin * view, int pi);
+
+  G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event_x, double event_y, guint event_button, gpointer data);
+  G_MODULE_EXPORT void measure_tree_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data);
+  G_MODULE_EXPORT void close_ml (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data);
+
+  GtkWidget * create_selection_tree (glwin * view, int pi, int id);
+  GtkWidget * measurment_tab (glwin * view, int pi, int id);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 
@@ -25,6 +60,13 @@ int bond_id;
 int angle_id;
 int dihedral_id;
 
+/*
+*  int get_measure_type (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 int get_measure_type (glwin * view)
 {
   if (view -> mode == EDITION && view -> selection_mode == NSELECTION-1)
@@ -41,6 +83,16 @@ int get_measure_type (glwin * view)
   }
 }
 
+/*
+*  void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store)
+*
+*  Usage: 
+*
+*  int p                : 
+*  int a                : 
+*  int b                : 
+*  GtkTreeStore * store : 
+*/
 void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store)
 {
   GtkTreeIter bond_level;
@@ -79,6 +131,17 @@ void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store)
   g_free (str_c);
 }
 
+/*
+*  void fill_angle_model_row (int p, int a, int b, int c, GtkTreeStore * store)
+*
+*  Usage: 
+*
+*  int p                : 
+*  int a                : 
+*  int b                : 
+*  int c                : 
+*  GtkTreeStore * store : 
+*/
 void fill_angle_model_row (int p, int a, int b, int c, GtkTreeStore * store)
 {
   GtkTreeIter angle_level;
@@ -122,6 +185,18 @@ void fill_angle_model_row (int p, int a, int b, int c, GtkTreeStore * store)
   g_free (str_d);
 }
 
+/*
+*  void fill_dihedral_model_row (int p, int a, int b, int c, int d, GtkTreeStore * store)
+*
+*  Usage: 
+*
+*  int p                : 
+*  int a                : 
+*  int b                : 
+*  int c                : 
+*  int d                : 
+*  GtkTreeStore * store : 
+*/
 void fill_dihedral_model_row (int p, int a, int b, int c, int d, GtkTreeStore * store)
 {
   GtkTreeIter dihedral_level;
@@ -251,6 +326,15 @@ void measure_set_color_and_markup (GtkTreeViewColumn * col,
 
 GtkWidget * create_selection_tree (glwin * view, int pi, int id);
 
+/*
+*  void update_selection_tree (glwin * view, int pi, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*  int id       : 
+*/
 void update_selection_tree (glwin * view, int pi, int id)
 {
   GtkWidget * cont = gtk_widget_get_parent (view -> measure_win -> selection_tree[id]);
@@ -260,6 +344,17 @@ void update_selection_tree (glwin * view, int pi, int id)
   show_the_widgets (cont);
 }
 
+/*
+*  G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event_x, double event_y, guint event_button, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widget : 
+*  double event_x     : 
+*  double event_y     : 
+*  guint event_button : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event_x, double event_y, guint event_button, gpointer data)
 {
   if (event_button == 1)
@@ -304,6 +399,15 @@ G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event
 }
 
 #ifdef GTK3
+/*
+*  G_MODULE_EXPORT gboolean measure_tree_selection_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widget     : 
+*  GdkEventButton * event : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT gboolean measure_tree_selection_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
   if (event -> type == GDK_BUTTON_PRESS)
@@ -314,12 +418,32 @@ G_MODULE_EXPORT gboolean measure_tree_selection_event (GtkWidget * widget, GdkEv
   return FALSE;
 }
 #else
+/*
+*  G_MODULE_EXPORT void measure_tree_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
+*
+*  Usage: 
+*
+*  GtkGesture * gesture : 
+*  int n_press          : 
+*  double x             : 
+*  double y             : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void measure_tree_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
   measure_tree_button_event (gtk_event_controller_get_widget ((GtkEventController*)gesture), x, y, gtk_gesture_single_get_current_button ((GtkGestureSingle * )gesture), data);
 }
 #endif
 
+/*
+*  GtkWidget * create_selection_tree (glwin * view, int pi, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*  int id       : 
+*/
 GtkWidget * create_selection_tree (glwin * view, int pi, int id)
 {
   int i, j;
@@ -430,6 +554,15 @@ GtkWidget * create_selection_tree (glwin * view, int pi, int id)
   return selection_tree;
 }
 
+/*
+*  GtkWidget * measurment_tab (glwin * view, int pi, int id)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*  int id       : 
+*/
 GtkWidget * measurment_tab (glwin * view, int pi, int id)
 {
   GtkWidget * scrollsets = create_scroll (NULL, 350+50*id, 350, GTK_SHADOW_NONE);
@@ -438,6 +571,14 @@ GtkWidget * measurment_tab (glwin * view, int pi, int id)
   return scrollsets;
 }
 
+/*
+*  gchar * create_measure_label (glwin * view, int pi)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*/
 gchar * create_measure_label (glwin * view, int pi)
 {
   gchar * str;
@@ -453,6 +594,14 @@ gchar * create_measure_label (glwin * view, int pi)
   return str;
 }
 
+/*
+*  void update_label_selection (glwin * view, int pi)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int pi       : 
+*/
 void update_label_selection (glwin * view, int pi)
 {
   gtk_label_set_text (GTK_LABEL(view -> measure_win -> label), create_measure_label(view, pi));
@@ -461,11 +610,27 @@ void update_label_selection (glwin * view, int pi)
 
 extern GtkWidget * labels_tab (glwin * view, int id);
 
+/*
+*  G_MODULE_EXPORT void close_ml (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void close_ml (GtkButton * but, gpointer data)
 {
   destroy_this_widget (GTK_WIDGET(data));
 }
 
+/*
+*  G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -486,8 +651,25 @@ G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT gboolean close_measure_event (GtkWindow * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWindow * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT gboolean close_measure_event (GtkWindow * widg, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  GdkEvent * event : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
 {
@@ -503,6 +685,14 @@ G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event
   return FALSE;
 }
 
+/*
+*  G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data)
 {
   glwin * view = (glwin *) data;

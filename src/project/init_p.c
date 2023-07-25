@@ -11,6 +11,21 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'init_p.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void init_curves_and_calc (struct project * this_proj);
+  void init_project (gboolean alloc_box);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "gui.h"
@@ -21,6 +36,13 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "glwindow.h"
 
+/*
+*  void init_curves_and_calc (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void init_curves_and_calc (struct project * this_proj)
 {
   int i;
@@ -32,6 +54,13 @@ void init_curves_and_calc (struct project * this_proj)
   }
 }
 
+/*
+*  void init_project (gboolean alloc_box)
+*
+*  Usage: 
+*
+*  gboolean alloc_box : 
+*/
 void init_project (gboolean alloc_box)
 {
   int i;

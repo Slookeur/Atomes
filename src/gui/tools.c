@@ -11,6 +11,26 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'tools.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gchar * prepare_for_title (gchar * init);
+
+  void fill_tool_model ();
+  void adjust_tool_model (int calc, int curve, gchar * string_path);
+
+  GtkWidget * tooltree ();
+  GtkWidget * curvetbox (void);
+
+*/
+
 #include "global.h"
 #include "callbacks.h"
 #include "interface.h"
@@ -24,6 +44,13 @@ GtkTreeStore * tool_model = NULL;
 GtkWidget * tool_tree = NULL;
 GtkWidget * toolscroll = NULL;
 
+/*
+*  gchar * prepare_for_title (gchar * init)
+*
+*  Usage: 
+*
+*  gchar * init : 
+*/
 gchar * prepare_for_title (gchar * init)
 {
   gchar * str = g_strdup_printf ("%s", substitute_string (init, "<sub>", NULL));
@@ -35,6 +62,13 @@ gchar * prepare_for_title (gchar * init)
   return str;
 }
 
+/*
+*  void fill_tool_model ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void fill_tool_model ()
 {
   GtkTreeIter calc_level, curve_level;
@@ -141,6 +175,15 @@ void tool_set_visible (GtkTreeViewColumn * col,
   }
 }
 
+/*
+*  void adjust_tool_model (int calc, int curve, gchar * string_path)
+*
+*  Usage: 
+*
+*  int calc            : 
+*  int curve           : 
+*  gchar * string_path : 
+*/
 void adjust_tool_model (int calc, int curve, gchar * string_path)
 {
   GtkTreeIter iter;
@@ -191,6 +234,13 @@ G_MODULE_EXPORT void toggle_show_hide_curve (GtkCellRendererToggle * cell_render
   gtk_tree_store_set (tool_model, & iter, 4, ! k, -1);
 }
 
+/*
+*  GtkWidget * tooltree ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * tooltree ()
 {
   GtkTreeViewColumn * tool_col[3];
@@ -226,6 +276,13 @@ GtkWidget * tooltree ()
   return tool_tree;
 }
 
+/*
+*  GtkWidget * curvetbox (void)
+*
+*  Usage: 
+*
+*  void : 
+*/
 GtkWidget * curvetbox (void)
 {
   GtkWidget * ctbox;

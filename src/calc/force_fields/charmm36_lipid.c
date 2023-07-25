@@ -12,6 +12,16 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 /*
+* This file: 'charmm36_lipid.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*/
+
+/*
   CHARMM-charmm36_lipid force field, data from taken from:
        - the file: 'charmm36_lipid'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'

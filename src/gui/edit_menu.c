@@ -11,6 +11,47 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'edit_menu.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gboolean test_vol (double box[2][3], double vect[3][3]);
+  gboolean test_pbc (int pbc, int frac, double box[2][3], double vect[3][3]);
+  gboolean has_box_changed ();
+  gboolean have_vectors_changed ();
+  gboolean test_cutoffs ();
+
+  void edit_box (GtkWidget * vbox);
+  void edit_chem (GtkWidget * vbox);
+  void init_box_calc ();
+  void prep_box (int id);
+  void test_chem ();
+  void edit_bonds (GtkWidget * vbox);
+
+  G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void toggle_pbc (GtkCheckButton * Button, gpointer data);
+  G_MODULE_EXPORT void toggle_pbc (GtkToggleButton * Button, gpointer data);
+  G_MODULE_EXPORT void toggle_frac (GtkCheckButton * Button, gpointer data);
+  G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data);
+  G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer data);
+  G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void on_spec_changed (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void on_rad_changed (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void toggle_xcor (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void toggle_xcor (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gpointer data);
+  G_MODULE_EXPORT void on_edit_activate (GtkWidget * widg, gpointer data);
+
+*/
+
 #include "global.h"
 #include "bind.h"
 #include "callbacks.h"
@@ -46,6 +87,14 @@ extern double * tmpcut;
 extern void update_cutoffs (struct project * this_proj);
 extern void cut_box (struct project * this_proj, GtkWidget * vbox);
 
+/*
+*  G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)
 {
   dint * id = (dint *)data;
@@ -59,8 +108,24 @@ G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void toggle_pbc (GtkCheckButton * Button, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * Button : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void toggle_pbc (GtkCheckButton * Button, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void toggle_pbc (GtkToggleButton * Button, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * Button : 
+*  gpointer data            : 
+*/
 G_MODULE_EXPORT void toggle_pbc (GtkToggleButton * Button, gpointer data)
 #endif
 {
@@ -72,8 +137,24 @@ G_MODULE_EXPORT void toggle_pbc (GtkToggleButton * Button, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void toggle_frac (GtkCheckButton * Button, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * Button : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void toggle_frac (GtkCheckButton * Button, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * Button : 
+*  gpointer data            : 
+*/
 G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data)
 #endif
 {
@@ -99,6 +180,14 @@ G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data)
   tmp_frac = gtk_combo_box_get_active (GTK_COMBO_BOX(widg)) + 1;
 }*/
 
+/*
+*  G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data)
 {
   const gchar * m = entry_get_text (entry);
@@ -106,6 +195,15 @@ G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data)
   update_entry_double (entry, v);
 }
 
+/*
+*  G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * win  : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer data)
 {
   if (response_id == GTK_RESPONSE_APPLY)
@@ -128,6 +226,14 @@ G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer da
   destroy_this_dialog (win);
 }
 
+/*
+*  G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data)
 {
   int i, j, k;
@@ -162,6 +268,13 @@ G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data)
   run_this_gtk_dialog (win, G_CALLBACK(run_vectors), NULL);
 }
 
+/*
+*  void edit_box (GtkWidget * vbox)
+*
+*  Usage: 
+*
+*  GtkWidget * vbox : 
+*/
 void edit_box (GtkWidget * vbox)
 {
   int i, j, k;
@@ -208,6 +321,14 @@ void edit_box (GtkWidget * vbox)
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, FALSE, FALSE, 15);
 }
 
+/*
+*  G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data)
 {
   int i = gtk_combo_box_get_active (GTK_COMBO_BOX(spec_box));
@@ -218,6 +339,14 @@ G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data)
   update_entry_double (entry, v);
 }
 
+/*
+*  G_MODULE_EXPORT void on_spec_changed (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_spec_changed (GtkWidget * widg, gpointer data)
 {
   int i, j;
@@ -231,6 +360,14 @@ G_MODULE_EXPORT void on_spec_changed (GtkWidget * widg, gpointer data)
   gtk_combo_box_set_active (GTK_COMBO_BOX(rad_box), -1);
 }
 
+/*
+*  G_MODULE_EXPORT void on_rad_changed (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_rad_changed (GtkWidget * widg, gpointer data)
 {
   int i, j, k;
@@ -245,8 +382,24 @@ G_MODULE_EXPORT void on_rad_changed (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void toggle_xcor (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void toggle_xcor (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void toggle_xcor (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void toggle_xcor (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -258,6 +411,13 @@ G_MODULE_EXPORT void toggle_xcor (GtkToggleButton * but, gpointer data)
   widget_set_sensitive (chem_entry[CHEM_PARAMS-2], ! tmp_xcor);
 }
 
+/*
+*  void edit_chem (GtkWidget * vbox)
+*
+*  Usage: 
+*
+*  GtkWidget * vbox : 
+*/
 void edit_chem (GtkWidget * vbox)
 {
   int i, j;
@@ -323,6 +483,14 @@ void edit_chem (GtkWidget * vbox)
   gtk_fixed_put (GTK_FIXED (chem_fixed), spec_box, -1, -1);
 }
 
+/*
+*  gboolean test_vol (double box[2][3], double vect[3][3])
+*
+*  Usage: 
+*
+*  double box[2][3] : 
+*  double box[2][3] : 
+*/
 gboolean test_vol (double box[2][3], double vect[3][3])
 {
   int i, j;
@@ -348,6 +516,16 @@ gboolean test_vol (double box[2][3], double vect[3][3])
   return (tmp_lat) ? TRUE : FALSE;
 }
 
+/*
+*  gboolean test_pbc (int pbc, int frac, double box[2][3], double vect[3][3])
+*
+*  Usage: 
+*
+*  int pbc          : 
+*  int frac         : 
+*  double box[2][3] : 
+*  double box[2][3] : 
+*/
 gboolean test_pbc (int pbc, int frac, double box[2][3], double vect[3][3])
 {
   if (! pbc && ! frac)
@@ -361,6 +539,13 @@ gboolean test_pbc (int pbc, int frac, double box[2][3], double vect[3][3])
   }
 }
 
+/*
+*  void init_box_calc ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void init_box_calc ()
 {
   int i;
@@ -380,6 +565,13 @@ void init_box_calc ()
   prep_calc_actions ();
 }
 
+/*
+*  gboolean has_box_changed ()
+*
+*  Usage: 
+*
+*   : 
+*/
 gboolean has_box_changed ()
 {
   int i, j;
@@ -398,6 +590,13 @@ gboolean has_box_changed ()
   return changed;
 }
 
+/*
+*  gboolean have_vectors_changed ()
+*
+*  Usage: 
+*
+*   : 
+*/
 gboolean have_vectors_changed ()
 {
   int i, j;
@@ -416,6 +615,13 @@ gboolean have_vectors_changed ()
   return changed;
 }
 
+/*
+*  void prep_box (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 void prep_box (int id)
 {
   int i;
@@ -448,6 +654,13 @@ void prep_box (int id)
   }
 }
 
+/*
+*  void test_chem ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void test_chem ()
 {
   int i, j;
@@ -473,6 +686,13 @@ void test_chem ()
   // return res;
 }
 
+/*
+*  gboolean test_cutoffs ()
+*
+*  Usage: 
+*
+*   : 
+*/
 gboolean test_cutoffs ()
 {
   int i, j, k;
@@ -492,6 +712,13 @@ gboolean test_cutoffs ()
   return TRUE;
 }
 
+/*
+*  void edit_bonds (GtkWidget * vbox)
+*
+*  Usage: 
+*
+*  GtkWidget * vbox : 
+*/
 void edit_bonds (GtkWidget * vbox)
 {
   gchar * mess = "To define the existence of a bond between two atoms i (&#x3B1;) and j (&#x3B2;)."
@@ -519,6 +746,15 @@ void edit_bonds (GtkWidget * vbox)
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, boxv, FALSE, FALSE, 50);
 }
 
+/*
+*  G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * win  : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
@@ -604,6 +840,14 @@ G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gp
   if (done) destroy_this_dialog (win);
 }
 
+/*
+*  G_MODULE_EXPORT void on_edit_activate (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_edit_activate (GtkWidget * widg, gpointer data)
 {
   int i;

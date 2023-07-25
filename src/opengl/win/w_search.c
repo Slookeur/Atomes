@@ -11,6 +11,77 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_search.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_asearch_num_objects (atom_search * asearch);
+  int get_asearch_object (atom_search * asearch);
+  int get_asearch_filter (atom_search * asearch);
+  int get_selected_object_id (gboolean visible, int p, gchar * str, atom_search * asearch);
+  int get_todo_size (atom_search * asearch);
+
+  gboolean get_asearch_is_object (atom_search * asearch);
+  gboolean fill_for_action (atom_search * asearch, int i, int j, struct project * this_proj);
+  gboolean append (atom_search * asearch, struct project * this_proj, int i, int j);
+  gboolean update_this_search (atom_search * asearch);
+
+  gchar * adjust_picked (gchar * picked, struct insert_object * object, gboolean init);
+  gchar * get_node_name (int node, atom_search * asearch, struct project * this_proj);
+
+  void check_tree_for_this_search (struct project * this_proj, atom_search * asearch);
+  void check_all_trees (struct project * this_proj);
+  void motion_to_zero (atom_search * asearch);
+  void adjust_object_to_move (struct project * this_proj, atom_search * asearch, int mv, int id);
+  void append_to_model (GtkTreeIter * atom_level, atom_search * asearch, gboolean is_object, int h, int i, struct project * this_proj);
+  void fill_atom_model (atom_search * asearch, struct project * this_proj);
+  void update_search_tree (atom_search * asearch);
+  void clear_fields (atom_search * asearch);
+  void re_populate_tree_search (atom_search * asearch);
+  void adjust_search_param (atom_search * asearch, struct project * this_proj, int a, int s, int c, gboolean status);
+  void adjust_this_tree_branch (atom_search * asearch, struct project * this_proj, int oid, int sid, GtkTreeIter iter);
+  void adjust_this_tree_leave (atom_search * asearch, struct project * this_proj, int oid, int aid, int new_status, GtkTreeIter iter);
+  void adjust_data_model_to_replace (struct project * this_proj, atom_search * asearch, int sid, int vid);
+  void get_coord_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * widg);
+  void allocate_todo (atom_search * asearch, int tsize);
+  void clean_todo (atom_search * asearch);
+  void clean_picked_and_labelled (atom_search * asearch);
+  void add_random_column (atom_search * asearch);
+  void prep_search_box (GtkWidget * vbox, GtkWidget * lab, GtkWidget * combo);
+
+  G_MODULE_EXPORT void set_atom (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void remove_atom (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void add_atom (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void set_id (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void set_occupancy (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void set_i_coord (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void set_max_msd (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void set_max_action (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void set_max_msd_for_all (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void select_all_atoms (GtkTreeViewColumn * col, gpointer data);
+  G_MODULE_EXPORT void move_up_down (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data);
+  G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_object_changed (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_search_mode (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_search_digit (GtkEntry * res, gpointer data);
+
+  GtkWidget * create_atoms_tree (atom_search * asearch, struct project * this_proj, int nats);
+  GtkWidget * prepare_box_too_much (atom_search * asearch);
+  GtkWidget * selection_tab (atom_search * asearch, int nats);
+
+  GtkTreeModel * replace_combo_tree (gboolean insert, int p);
+
+  struct insert_object * get_insert_object_by_origin (struct insert_object * first, int oid, int aid);
+
+*/
+
 #include "atom_edit.h"
 
 extern int check_label_numbers (struct project * this_proj, int types);
@@ -21,6 +92,13 @@ extern void create_slab_lists (struct project * this_proj);
 extern int get_to_be_selected (glwin * view);
 extern void restore_ogl_selection (glwin * view);
 
+/*
+*  int get_asearch_num_objects (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 int get_asearch_num_objects (atom_search * asearch)
 {
   int filter = get_asearch_filter (asearch);
@@ -38,6 +116,13 @@ int get_asearch_num_objects (atom_search * asearch)
   }
 }
 
+/*
+*  int get_asearch_object (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 int get_asearch_object (atom_search * asearch)
 {
   if (asearch -> object < 0) return 0;
@@ -52,6 +137,13 @@ int get_asearch_object (atom_search * asearch)
   }
 }
 
+/*
+*  int get_asearch_filter (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 int get_asearch_filter (atom_search * asearch)
 {
   if (asearch -> object < 0 || asearch -> filter < 0) return 0;
@@ -69,6 +161,13 @@ int get_asearch_filter (atom_search * asearch)
   }
 }
 
+/*
+*  gboolean get_asearch_is_object (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 gboolean get_asearch_is_object (atom_search * asearch)
 {
   if (asearch -> passivating)
@@ -81,6 +180,14 @@ gboolean get_asearch_is_object (atom_search * asearch)
   }
 }
 
+/*
+*  void check_tree_for_this_search (struct project * this_proj, atom_search * asearch)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  atom_search * asearch      : 
+*/
 void check_tree_for_this_search (struct project * this_proj, atom_search * asearch)
 {
   int j, k, l, m, n, o, p;
@@ -299,6 +406,13 @@ void check_tree_for_this_search (struct project * this_proj, atom_search * asear
   }
 }
 
+/*
+*  void check_all_trees (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void check_all_trees (struct project * this_proj)
 {
   int i;
@@ -381,6 +495,15 @@ gboolean atom_is_in_model (GtkTreeModel * model,
   return FALSE;
 }
 
+/*
+*  struct insert_object * get_insert_object_by_origin (struct insert_object * first, int oid, int aid)
+*
+*  Usage: 
+*
+*  struct insert_object * first : 
+*  int oid                      : 
+*  int aid                      : 
+*/
 struct insert_object * get_insert_object_by_origin (struct insert_object * first, int oid, int aid)
 {
   struct insert_object * object = first;
@@ -393,6 +516,13 @@ struct insert_object * get_insert_object_by_origin (struct insert_object * first
   return NULL;
 }
 
+/*
+*  void motion_to_zero (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 void motion_to_zero (atom_search * asearch)
 {
   struct project * this_proj = get_project_by_id (asearch -> proj);
@@ -413,6 +543,16 @@ void motion_to_zero (atom_search * asearch)
   }
 }
 
+/*
+*  void adjust_object_to_move (struct project * this_proj, atom_search * asearch, int mv, int id)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  atom_search * asearch      : 
+*  int mv                     : 
+*  int id                     : 
+*/
 void adjust_object_to_move (struct project * this_proj, atom_search * asearch, int mv, int id)
 {
   gboolean adjust_mv = FALSE;
@@ -521,6 +661,18 @@ void adjust_object_to_move (struct project * this_proj, atom_search * asearch, i
   if (adjust_mv && ! mv && this_proj -> modelgl -> atom_win) motion_to_zero (asearch);
 }
 
+/*
+*  void append_to_model (GtkTreeIter * atom_level, atom_search * asearch, gboolean is_object, int h, int i, struct project * this_proj)
+*
+*  Usage: 
+*
+*  GtkTreeIter * atom_level   : 
+*  atom_search * asearch      : 
+*  gboolean is_object         : 
+*  int h                      : 
+*  int i                      : 
+*  struct project * this_proj : 
+*/
 void append_to_model (GtkTreeIter * atom_level, atom_search * asearch, gboolean is_object, int h, int i, struct project * this_proj)
 {
   int j, k, l;
@@ -590,6 +742,16 @@ void append_to_model (GtkTreeIter * atom_level, atom_search * asearch, gboolean 
   }
 }
 
+/*
+*  gboolean fill_for_action (atom_search * asearch, int i, int j, struct project * this_proj)
+*
+*  Usage: 
+*
+*  atom_search * asearch      : 
+*  int i                      : 
+*  int j                      : 
+*  struct project * this_proj : 
+*/
 gboolean fill_for_action (atom_search * asearch, int i, int j, struct project * this_proj)
 {
   gboolean append = FALSE;
@@ -614,6 +776,16 @@ gboolean fill_for_action (atom_search * asearch, int i, int j, struct project * 
   return append;
 }
 
+/*
+*  gboolean append (atom_search * asearch, struct project * this_proj, int i, int j)
+*
+*  Usage: 
+*
+*  atom_search * asearch      : 
+*  struct project * this_proj : 
+*  int i                      : 
+*  int j                      : 
+*/
 gboolean append (atom_search * asearch, struct project * this_proj, int i, int j)
 {
   int k;
@@ -662,6 +834,15 @@ gboolean append (atom_search * asearch, struct project * this_proj, int i, int j
   return append;
 }
 
+/*
+*  gchar * adjust_picked (gchar * picked, struct insert_object * object, gboolean init)
+*
+*  Usage: 
+*
+*  gchar * picked                : 
+*  struct insert_object * object : 
+*  gboolean init                 : 
+*/
 gchar * adjust_picked (gchar * picked, struct insert_object * object, gboolean init)
 {
   if (object)
@@ -688,6 +869,15 @@ gchar * adjust_picked (gchar * picked, struct insert_object * object, gboolean i
   }
 }
 
+/*
+*  gchar * get_node_name (int node, atom_search * asearch, struct project * this_proj)
+*
+*  Usage: 
+*
+*  int node                   : 
+*  atom_search * asearch      : 
+*  struct project * this_proj : 
+*/
 gchar * get_node_name (int node, atom_search * asearch, struct project * this_proj)
 {
   int i, j, k, l;
@@ -725,6 +915,14 @@ gchar * get_node_name (int node, atom_search * asearch, struct project * this_pr
   return str;
 }
 
+/*
+*  void fill_atom_model (atom_search * asearch, struct project * this_proj)
+*
+*  Usage: 
+*
+*  atom_search * asearch      : 
+*  struct project * this_proj : 
+*/
 void fill_atom_model (atom_search * asearch, struct project * this_proj)
 {
   GtkTreeIter spec_level, atom_level;
@@ -1121,6 +1319,13 @@ void fill_atom_model (atom_search * asearch, struct project * this_proj)
 G_MODULE_EXPORT void move_up_down (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data);
 void add_random_column (atom_search * asearch);
 
+/*
+*  void update_search_tree (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 void update_search_tree (atom_search * asearch)
 {
   if (asearch -> pointer[0].c == 7 && asearch -> obj_model)
@@ -1138,6 +1343,13 @@ void update_search_tree (atom_search * asearch)
   //if (asearch -> action) gtk_tree_view_expand_all (GTK_TREE_VIEW(asearch -> atom_tree));
 }
 
+/*
+*  gboolean update_this_search (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 gboolean update_this_search (atom_search * asearch)
 {
   int object = get_asearch_object (asearch);
@@ -1157,6 +1369,14 @@ gboolean update_this_search (atom_search * asearch)
   return FALSE;
 }
 
+/*
+*  G_MODULE_EXPORT void set_atom (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_atom (GtkEntry * entry, gpointer data)
 {
   atom_search * asearch = (atom_search *)data;
@@ -1190,6 +1410,13 @@ G_MODULE_EXPORT void set_atom (GtkEntry * entry, gpointer data)
   }
 }
 
+/*
+*  void clear_fields (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 void clear_fields (atom_search * asearch)
 {
   int i = gtk_combo_box_get_active (GTK_COMBO_BOX(asearch -> atom_box));
@@ -1206,6 +1433,14 @@ void clear_fields (atom_search * asearch)
   set_image_from_icon_name (asearch -> img_b, DIAL_ERROR);
 }
 
+/*
+*  G_MODULE_EXPORT void remove_atom (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void remove_atom (GtkButton * but, gpointer data)
 {
   atom_search * asearch = (atom_search *)data;
@@ -1214,6 +1449,14 @@ G_MODULE_EXPORT void remove_atom (GtkButton * but, gpointer data)
   clear_fields (asearch);
 }
 
+/*
+*  G_MODULE_EXPORT void add_atom (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void add_atom (GtkButton * but, gpointer data)
 {
   atom_search * asearch = (atom_search *)data;
@@ -1309,6 +1552,13 @@ G_MODULE_EXPORT void add_atom (GtkButton * but, gpointer data)
   clear_fields (asearch);
 }
 
+/*
+*  void re_populate_tree_search (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 void re_populate_tree_search (atom_search * asearch)
 {
   struct project * this_proj = get_project_by_id (asearch -> proj);
@@ -1390,6 +1640,14 @@ void re_populate_tree_search (atom_search * asearch)
   asearch -> int_b = s_int_b;
 }
 
+/*
+*  G_MODULE_EXPORT void set_id (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_id (GtkEntry * entry, gpointer data)
 {
   atom_search * asearch = (atom_search *)data;
@@ -1426,6 +1684,18 @@ G_MODULE_EXPORT void set_id (GtkEntry * entry, gpointer data)
   }
 }
 
+/*
+*  void adjust_search_param (atom_search * asearch, struct project * this_proj, int a, int s, int c, gboolean status)
+*
+*  Usage: 
+*
+*  atom_search * asearch      : 
+*  struct project * this_proj : 
+*  int a                      : 
+*  int s                      : 
+*  int c                      : 
+*  gboolean status            : 
+*/
 void adjust_search_param (atom_search * asearch, struct project * this_proj, int a, int s, int c, gboolean status)
 {
   int i, j, k, l, m;
@@ -1501,6 +1771,17 @@ void adjust_search_param (atom_search * asearch, struct project * this_proj, int
 
 G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data);
 
+/*
+*  void adjust_this_tree_branch (atom_search * asearch, struct project * this_proj, int oid, int sid, GtkTreeIter iter)
+*
+*  Usage: 
+*
+*  atom_search * asearch      : 
+*  struct project * this_proj : 
+*  int oid                    : 
+*  int sid                    : 
+*  GtkTreeIter iter           : 
+*/
 void adjust_this_tree_branch (atom_search * asearch, struct project * this_proj, int oid, int sid, GtkTreeIter iter)
 {
   int k, l, m, n, o, p, q;
@@ -1892,6 +2173,18 @@ void adjust_this_tree_branch (atom_search * asearch, struct project * this_proj,
   if (asearch -> todo_size < 10000 || asearch -> passivating || (object == 2 && filter > 2)) update_search_tree (asearch);
 }
 
+/*
+*  void adjust_this_tree_leave (atom_search * asearch, struct project * this_proj, int oid, int aid, int new_status, GtkTreeIter iter)
+*
+*  Usage: 
+*
+*  atom_search * asearch      : 
+*  struct project * this_proj : 
+*  int oid                    : 
+*  int aid                    : 
+*  int new_status             : 
+*  GtkTreeIter iter           : 
+*/
 void adjust_this_tree_leave (atom_search * asearch, struct project * this_proj, int oid, int aid, int new_status, GtkTreeIter iter)
 {
   int status;
@@ -2024,6 +2317,16 @@ G_MODULE_EXPORT void select_atom (GtkCellRendererToggle * cell_renderer,
   update (this_proj -> modelgl);
 }
 
+/*
+*  int get_selected_object_id (gboolean visible, int p, gchar * str, atom_search * asearch)
+*
+*  Usage: 
+*
+*  gboolean visible      : 
+*  int p                 : 
+*  gchar * str           : 
+*  atom_search * asearch : 
+*/
 int get_selected_object_id (gboolean visible, int p, gchar * str, atom_search * asearch)
 {
   int i, j;
@@ -2079,6 +2382,16 @@ int get_selected_object_id (gboolean visible, int p, gchar * str, atom_search * 
   return 0;
 }
 
+/*
+*  void adjust_data_model_to_replace (struct project * this_proj, atom_search * asearch, int sid, int vid)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  atom_search * asearch      : 
+*  int sid                    : 
+*  int vid                    : 
+*/
 void adjust_data_model_to_replace (struct project * this_proj, atom_search * asearch, int sid, int vid)
 {
   int i, j, k, l;
@@ -2227,6 +2540,14 @@ G_MODULE_EXPORT void changed_action_renderer (GtkCellRendererCombo * combo,
   }
 }
 
+/*
+*  GtkTreeModel * replace_combo_tree (gboolean insert, int p)
+*
+*  Usage: 
+*
+*  gboolean insert : 
+*  int p           : 
+*/
 GtkTreeModel * replace_combo_tree (gboolean insert, int p)
 {
   GtkTreeIter iter, iter2, iter3;
@@ -2322,6 +2643,14 @@ void search_set_visible (GtkTreeViewColumn * col,
 int atom_to_edit;
 atom_search * csearch;
 
+/*
+*  G_MODULE_EXPORT void set_occupancy (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_occupancy (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
@@ -2334,6 +2663,14 @@ G_MODULE_EXPORT void set_occupancy (GtkEntry * res, gpointer data)
   update_entry_double (res, object -> occ);
 }
 
+/*
+*  G_MODULE_EXPORT void set_i_coord (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_i_coord (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
@@ -2346,6 +2683,14 @@ G_MODULE_EXPORT void set_i_coord (GtkEntry * res, gpointer data)
   update_entry_double (res, object -> baryc[ax]);
 }
 
+/*
+*  G_MODULE_EXPORT void set_max_msd (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_max_msd (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
@@ -2424,6 +2769,14 @@ G_MODULE_EXPORT void set_max_msd (GtkEntry * res, gpointer data)
 
 int max_random;
 
+/*
+*  G_MODULE_EXPORT void set_max_action (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_max_action (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
@@ -2436,6 +2789,15 @@ G_MODULE_EXPORT void set_max_action (GtkEntry * res, gpointer data)
   update_entry_int (res, csearch -> todo[-ax-1]);
 }
 
+/*
+*  void get_coord_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * widg)
+*
+*  Usage: 
+*
+*  gchar * path_string : 
+*  gpointer data       : 
+*  GtkWidget * widg    : 
+*/
 void get_coord_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * widg)
 {
   tint * cid = (tint *)data;
@@ -2799,6 +3161,14 @@ G_MODULE_EXPORT void markup_action_renderer (GtkCellRendererCombo * cell,
   }*/
 }
 
+/*
+*  G_MODULE_EXPORT void set_max_msd_for_all (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_max_msd_for_all (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
@@ -2849,6 +3219,14 @@ gboolean update_search_model (GtkTreeModel * model,
   return FALSE;
 }
 
+/*
+*  G_MODULE_EXPORT void select_all_atoms (GtkTreeViewColumn * col, gpointer data)
+*
+*  Usage: 
+*
+*  GtkTreeViewColumn * col : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void select_all_atoms (GtkTreeViewColumn * col, gpointer data)
 {
   tint * dat = (tint *)data;
@@ -3014,6 +3392,15 @@ G_MODULE_EXPORT void select_all_atoms (GtkTreeViewColumn * col, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void move_up_down (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data)
+*
+*  Usage: 
+*
+*  GtkTreeModel * tree_model : 
+*  GtkTreePath * path        : 
+*  gpointer data             : 
+*/
 G_MODULE_EXPORT void move_up_down (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data)
 {
   atom_search * asearch = (atom_search *)data;
@@ -3065,6 +3452,15 @@ G_MODULE_EXPORT void move_up_down (GtkTreeModel * tree_model, GtkTreePath * path
   }
 }
 
+/*
+*  GtkWidget * create_atoms_tree (atom_search * asearch, struct project * this_proj, int nats)
+*
+*  Usage: 
+*
+*  atom_search * asearch      : 
+*  struct project * this_proj : 
+*  int nats                   : 
+*/
 GtkWidget * create_atoms_tree (atom_search * asearch, struct project * this_proj, int nats)
 {
   int i, j, k, l;
@@ -3155,6 +3551,13 @@ GtkWidget * create_atoms_tree (atom_search * asearch, struct project * this_proj
   return asearch -> atom_tree;
 }
 
+/*
+*  int get_todo_size (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 int get_todo_size (atom_search * asearch)
 {
   int object = get_asearch_object (asearch);
@@ -3183,12 +3586,27 @@ int get_todo_size (atom_search * asearch)
   return tsize;
 }
 
+/*
+*  void allocate_todo (atom_search * asearch, int tsize)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*  int tsize             : 
+*/
 void allocate_todo (atom_search * asearch, int tsize)
 {
   asearch -> todo = allocint (tsize);
   asearch -> todo_size = tsize;
 }
 
+/*
+*  void clean_todo (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 void clean_todo (atom_search * asearch)
 {
   struct project * this_proj = get_project_by_id (asearch -> proj);
@@ -3242,6 +3660,13 @@ void clean_todo (atom_search * asearch)
   }
 }
 
+/*
+*  void clean_picked_and_labelled (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 void clean_picked_and_labelled (atom_search * asearch)
 {
   struct project * this_proj;
@@ -3272,6 +3697,14 @@ void clean_picked_and_labelled (atom_search * asearch)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data)
 {
   atom_search * asearch = (atom_search *) data;
@@ -3293,6 +3726,14 @@ G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data)
 {
   atom_search * asearch = (atom_search *) data;
@@ -3311,6 +3752,14 @@ G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data)
   set_spec_changed (GTK_COMBO_BOX(asearch -> atom_box), asearch);
 }
 
+/*
+*  G_MODULE_EXPORT void set_object_changed (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_object_changed (GtkComboBox * box, gpointer data)
 {
   atom_search * asearch = (atom_search *) data;
@@ -3384,6 +3833,13 @@ G_MODULE_EXPORT void set_object_changed (GtkComboBox * box, gpointer data)
   set_filter_changed (GTK_COMBO_BOX(asearch -> filter_box), asearch);
 }
 
+/*
+*  void add_random_column (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 void add_random_column (atom_search * asearch)
 {
   int i = 8 - asearch -> action;
@@ -3395,6 +3851,14 @@ void add_random_column (atom_search * asearch)
   gtk_tree_view_append_column(GTK_TREE_VIEW(asearch -> atom_tree), num_c);
 }
 
+/*
+*  G_MODULE_EXPORT void set_search_mode (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_search_mode (GtkComboBox * box, gpointer data)
 {
   atom_search * asearch = (atom_search *)data;
@@ -3453,6 +3917,14 @@ G_MODULE_EXPORT void set_search_mode (GtkComboBox * box, gpointer data)
   set_object_changed (GTK_COMBO_BOX(asearch -> object_box), asearch);
 }
 
+/*
+*  G_MODULE_EXPORT void set_search_digit (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_search_digit (GtkEntry * res, gpointer data)
 {
   atom_search * asearch = (atom_search *) data;
@@ -3471,6 +3943,15 @@ G_MODULE_EXPORT void set_search_digit (GtkEntry * res, gpointer data)
   set_spec_changed (GTK_COMBO_BOX(asearch -> atom_box), data);
 }
 
+/*
+*  void prep_search_box (GtkWidget * vbox, GtkWidget * lab, GtkWidget * combo)
+*
+*  Usage: 
+*
+*  GtkWidget * vbox  : 
+*  GtkWidget * lab   : 
+*  GtkWidget * combo : 
+*/
 void prep_search_box (GtkWidget * vbox, GtkWidget * lab, GtkWidget * combo)
 {
   GtkWidget * hbox = create_hbox (0);
@@ -3482,6 +3963,13 @@ void prep_search_box (GtkWidget * vbox, GtkWidget * lab, GtkWidget * combo)
   gtk_fixed_put (GTK_FIXED(fixed), combo, 0, 0);
 }
 
+/*
+*  GtkWidget * prepare_box_too_much (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 GtkWidget * prepare_box_too_much (atom_search * asearch)
 {
   GtkWidget * box;
@@ -3510,6 +3998,14 @@ GtkWidget * prepare_box_too_much (atom_search * asearch)
   return too_box;
 }
 
+/*
+*  GtkWidget * selection_tab (atom_search * asearch, int nats)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*  int nats              : 
+*/
 GtkWidget * selection_tab (atom_search * asearch, int nats)
 {
   struct project * this_proj = get_project_by_id (asearch -> proj);

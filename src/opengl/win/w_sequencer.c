@@ -11,12 +11,52 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_sequencer.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  static gboolean animate (gpointer data);
+  static gboolean seq_wait_for_stop (gpointer data);
+
+  void set_player_title (glwin * view);
+  void update_selection (glwin * view, int o_step);
+  void show_step (glwin * view);
+  void sequence (glwin * view, int o_step, int n_step);
+
+  G_MODULE_EXPORT void seq_go_previous (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void seq_go_next (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void seq_go_first (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void seq_go_last (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void seq_jump (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void seq_play (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void seq_stop (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void seq_loop (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void seq_faster (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void seq_slower (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "callbacks.h"
 #include "glview.h"
 #include "glwindow.h"
 
+/*
+*  void set_player_title (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void set_player_title (glwin * view)
 {
   int step = view -> anim -> last -> img -> step + 1;
@@ -25,6 +65,14 @@ void set_player_title (glwin * view)
   g_free (str);
 }
 
+/*
+*  void update_selection (glwin * view, int o_step)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int o_step   : 
+*/
 void update_selection (glwin * view, int o_step)
 {
   int i, j, k;
@@ -51,6 +99,13 @@ void update_selection (glwin * view, int o_step)
   }
 }
 
+/*
+*  void show_step (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void show_step (glwin * view)
 {
   if (view -> anim -> last -> img -> step == get_project_by_id(view -> proj) -> steps - 1)
@@ -76,6 +131,15 @@ void show_step (glwin * view)
   }
 }
 
+/*
+*  void sequence (glwin * view, int o_step, int n_step)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  int o_step   : 
+*  int n_step   : 
+*/
 void sequence (glwin * view, int o_step, int n_step)
 {
   int i;
@@ -92,6 +156,14 @@ void sequence (glwin * view, int o_step, int n_step)
   update (view);
 }
 
+/*
+*  G_MODULE_EXPORT void seq_go_previous (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void seq_go_previous (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -101,6 +173,14 @@ G_MODULE_EXPORT void seq_go_previous (GtkButton * but, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void seq_go_next (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void seq_go_next (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -111,18 +191,42 @@ G_MODULE_EXPORT void seq_go_next (GtkButton * but, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void seq_go_first (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void seq_go_first (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
   sequence (view, view -> anim -> last -> img -> step, 0);
 }
 
+/*
+*  G_MODULE_EXPORT void seq_go_last (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void seq_go_last (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
   sequence (view, view -> anim -> last -> img -> step, get_project_by_id(view -> proj) -> steps - 1);
 }
 
+/*
+*  G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -136,6 +240,14 @@ G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data)
   update_entry_int (res, this_proj -> modelgl -> anim -> last -> img -> step+1);
 }
 
+/*
+*  G_MODULE_EXPORT void seq_jump (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void seq_jump (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -152,6 +264,13 @@ G_MODULE_EXPORT void seq_jump (GtkButton * but, gpointer data)
   run_this_gtk_dialog (win, G_CALLBACK(run_destroy_dialog), NULL);
 }
 
+/*
+*  static gboolean animate (gpointer data)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*/
 static gboolean animate (gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -179,6 +298,14 @@ static gboolean animate (gpointer data)
   return view -> play;
 }
 
+/*
+*  G_MODULE_EXPORT void seq_play (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void seq_play (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -190,12 +317,28 @@ G_MODULE_EXPORT void seq_play (GtkButton * but, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void seq_stop (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void seq_stop (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
   view -> play = FALSE;
 }
 
+/*
+*  G_MODULE_EXPORT void seq_loop (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void seq_loop (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -212,6 +355,13 @@ G_MODULE_EXPORT void seq_loop (GtkButton * but, gpointer data)
   show_the_widgets (GTK_WIDGET(but));
 }
 
+/*
+*  static gboolean seq_wait_for_stop (gpointer data)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*/
 static gboolean seq_wait_for_stop (gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -227,6 +377,14 @@ static gboolean seq_wait_for_stop (gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void seq_faster (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void seq_faster (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -247,6 +405,14 @@ G_MODULE_EXPORT void seq_faster (GtkButton * but, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void seq_slower (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void seq_slower (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -267,6 +433,14 @@ G_MODULE_EXPORT void seq_slower (GtkButton * but, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data)
 {
   //int p;

@@ -11,6 +11,35 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'initmol.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_b]);
+
+  gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_molecule * mol_b);
+
+  void duplicate_molecule (struct molecule * new_mol, struct search_molecule * old_mol);
+  void allocate_mol_for_step_ (int * sid, int * mol_in_step);
+  void allocate_mol_data_ ();
+  void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[* nvs]);
+  void update_mol_details (struct search_molecule * mol, int at, int sp, int cp);
+  void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_mol[* sps], int atom_in_mol[* ats]);
+  void free_search_molecule_data (struct search_molecule * smol);
+  void setup_molecules_ (int * stepid);
+  void setup_menu_molecules_ ();
+  void setup_fragments_ (int * sid, int coord[active_project -> natomes]);
+
+  struct search_molecule * duplicate_search_molecule (struct search_molecule * old_mol);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "gui.h"
@@ -42,6 +71,14 @@ struct search_molecule * tmp_search = NULL;
 struct search_molecule ** in_calc_mol = NULL;
 extern struct molecule * tmp_mol;
 
+/*
+*  void duplicate_molecule (struct molecule * new_mol, struct search_molecule * old_mol)
+*
+*  Usage: 
+*
+*  struct molecule * new_mol        : 
+*  struct search_molecule * old_mol : 
+*/
 void duplicate_molecule (struct molecule * new_mol, struct search_molecule * old_mol)
 {
   new_mol -> id = old_mol -> id;
@@ -53,6 +90,13 @@ void duplicate_molecule (struct molecule * new_mol, struct search_molecule * old
   new_mol -> species = duplicate_int (active_project -> nspec, old_mol -> species);
 }
 
+/*
+*  struct search_molecule * duplicate_search_molecule (struct search_molecule * old_mol)
+*
+*  Usage: 
+*
+*  struct search_molecule * old_mol : 
+*/
 struct search_molecule * duplicate_search_molecule (struct search_molecule * old_mol)
 {
   struct search_molecule * new_mol = g_malloc0(sizeof*new_mol);
@@ -98,12 +142,27 @@ struct search_molecule * duplicate_search_molecule (struct search_molecule * old
   return new_mol;
 }
 
+/*
+*  void allocate_mol_for_step_ (int * sid, int * mol_in_step)
+*
+*  Usage: 
+*
+*  int * sid         : 
+*  int * mol_in_step : 
+*/
 void allocate_mol_for_step_ (int * sid, int * mol_in_step)
 {
   in_calc_mol[* sid -1] = g_malloc0(* mol_in_step*sizeof*in_calc_mol[* sid -1]);
   active_project -> modelfc -> mol_by_step[* sid - 1] = * mol_in_step;
 }
 
+/*
+*  void allocate_mol_data_ ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void allocate_mol_data_ ()
 {
   int i;
@@ -132,6 +191,17 @@ void allocate_mol_data_ ()
   }
 }
 
+/*
+*  void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[* nvs])
+*
+*  Usage: 
+*
+*  int * stp        : 
+*  int * mol        : 
+*  int * aid        : 
+*  int * nvs        : 
+*  int neigh[* nvs] : 
+*/
 void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[* nvs])
 {
   int i, j, k, l, m, n, o, p, q, r, s, t, u;
@@ -168,6 +238,16 @@ void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[
   }
 }
 
+/*
+*  void update_mol_details (struct search_molecule * mol, int at, int sp, int cp)
+*
+*  Usage: 
+*
+*  struct search_molecule * mol : 
+*  int at                       : 
+*  int sp                       : 
+*  int cp                       : 
+*/
 void update_mol_details (struct search_molecule * mol, int at, int sp, int cp)
 {
   int i, j, k, l, m;
@@ -191,6 +271,18 @@ void update_mol_details (struct search_molecule * mol, int at, int sp, int cp)
   }
 }
 
+/*
+*  void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_mol[* sps], int atom_in_mol[* ats])
+*
+*  Usage: 
+*
+*  int * stp              : 
+*  int * mol              : 
+*  int * ats              : 
+*  int * sps              : 
+*  int spec_in_mol[* sps] : 
+*  int spec_in_mol[* sps] : 
+*/
 void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_mol[* sps], int atom_in_mol[* ats])
 {
   int i, j, k, l;
@@ -224,6 +316,14 @@ void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_
   tmp_mol -> nangles /= 2;
 }
 
+/*
+*  gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_molecule * mol_b)
+*
+*  Usage: 
+*
+*  struct search_molecule * mol_a : 
+*  struct search_molecule * mol_b : 
+*/
 gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_molecule * mol_b)
 {
   int i, j, k;
@@ -279,6 +379,16 @@ gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_
   return TRUE;
 }
 
+/*
+*  int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_b])
+*
+*  Usage: 
+*
+*  int val_a          : 
+*  int val_b          : 
+*  int table_a[val_a] : 
+*  int table_a[val_a] : 
+*/
 int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_b])
 {
   int * p_data;
@@ -296,6 +406,13 @@ int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_
   return p_data;
 }
 
+/*
+*  void free_search_molecule_data (struct search_molecule * smol)
+*
+*  Usage: 
+*
+*  struct search_molecule * smol : 
+*/
 void free_search_molecule_data (struct search_molecule * smol)
 {
   int i, j;
@@ -320,6 +437,13 @@ void free_search_molecule_data (struct search_molecule * smol)
   g_free (smol -> fragments);
 }
 
+/*
+*  void setup_molecules_ (int * stepid)
+*
+*  Usage: 
+*
+*  int * stepid : 
+*/
 void setup_molecules_ (int * stepid)
 {
   int i, j, k, l, m, n;
@@ -391,6 +515,13 @@ void setup_molecules_ (int * stepid)
   g_free (first_mol);
 }
 
+/*
+*  void setup_menu_molecules_ ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void setup_menu_molecules_ ()
 {
   int i, j;
@@ -408,6 +539,14 @@ void setup_menu_molecules_ ()
   init_menu_fragmol_ (& i);
 }
 
+/*
+*  void setup_fragments_ (int * sid, int coord[active_project -> natomes])
+*
+*  Usage: 
+*
+*  int * sid                            : 
+*  int coord[active_project -> natomes] : 
+*/
 void setup_fragments_ (int * sid, int coord[active_project -> natomes])
 {
   int i;

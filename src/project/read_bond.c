@@ -11,6 +11,20 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_bond.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int read_bonding (FILE * fp);
+
+*/
+
 #include "global.h"
 #include "project.h"
 #include "glview.h"
@@ -19,6 +33,13 @@ extern void new_coord_menus (struct project * this_proj, coord_info * coord, int
                              gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
                              gboolean update_it, gboolean update_frag, gboolean update_mol);
 
+/*
+*  int read_bonding (FILE * fp)
+*
+*  Usage: 
+*
+*  FILE * fp : 
+*/
 int read_bonding (FILE * fp)
 {
   int i, j, k, l, m;

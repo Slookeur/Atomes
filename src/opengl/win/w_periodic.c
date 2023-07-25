@@ -11,6 +11,37 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_periodic.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int is_in_table (int i, int j);
+  int get_atom_id_from_periodic_table (atom_search * asearch);
+
+  G_MODULE_EXPORT gboolean on_element_focus (GtkWidget * widget, GdkEvent * event, gpointer data);
+
+  gchar * get_electronic_structure (int r, int c);
+
+  G_MODULE_EXPORT void on_element_focus (GtkEventControllerFocus * focus, gpointer data);
+  G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion, gdouble x, gdouble y, gpointer data);
+  G_MODULE_EXPORT void run_periodic_table (GtkDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void get_element (GtkButton * but, gpointer data);
+
+  GtkWidget * create_el_preview (int p, int a, int r, int c);
+  GtkWidget * el_preview (int p, int a);
+  GtkWidget * create_css_button (int p, int id, int r, int c);
+  GtkWidget * create_css_group (int p, int i);
+  GtkWidget * css_element (int p, int i, int j);
+  GtkWidget * periodic_table (int p, int a);
+
+*/
+
 #include "global.h"
 
 extern struct insertion mol[];
@@ -33,6 +64,14 @@ ColRGBA rtcolo[11] = {{142, 255, 142, 1.0}, // #8EFF8E
                       {95, 192, 176, 1.0}}; // #5FC0B0
 gchar * ptcolo[11] = {"#8EFF8E", "#F5FF53", "#FFB853", "#FF6C7D", "#F4A7FF", "#408538", "#B15EFF", "#8EE3FF", "#505DFD", "#7EFFEB", "#5FC0B0"};
 
+/*
+*  gchar * get_electronic_structure (int r, int c)
+*
+*  Usage: 
+*
+*  int r : 
+*  int c : 
+*/
 gchar * get_electronic_structure (int r, int c)
 {
   gchar * str = NULL;
@@ -133,6 +172,14 @@ gchar * get_electronic_structure (int r, int c)
   return str;
 }
 
+/*
+*  int is_in_table (int i, int j)
+*
+*  Usage: 
+*
+*  int i : 
+*  int j : 
+*/
 int is_in_table (int i, int j)
 {
   if (i == 7) return 0;
@@ -162,6 +209,16 @@ int is_in_table (int i, int j)
   return -1;
 }
 
+/*
+*  GtkWidget * create_el_preview (int p, int a, int r, int c)
+*
+*  Usage: 
+*
+*  int p : 
+*  int a : 
+*  int r : 
+*  int c : 
+*/
 GtkWidget * create_el_preview (int p, int a, int r, int c)
 {
   GtkWidget * preview = create_vbox (5);
@@ -230,6 +287,14 @@ GtkWidget * create_el_preview (int p, int a, int r, int c)
   return preview;
 }
 
+/*
+*  GtkWidget * el_preview (int p, int a)
+*
+*  Usage: 
+*
+*  int p : 
+*  int a : 
+*/
 GtkWidget * el_preview (int p, int a)
 {
   GtkWidget * preview = create_vbox (BSEP);
@@ -254,8 +319,25 @@ GtkWidget * el_preview (int p, int a)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void on_element_focus (GtkEventControllerFocus * focus, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEventControllerFocus * focus : 
+*  gpointer data                   : 
+*/
 G_MODULE_EXPORT void on_element_focus (GtkEventControllerFocus * focus, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT gboolean on_element_focus (GtkWidget * widget, GdkEvent * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widget : 
+*  GdkEvent * event   : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT gboolean on_element_focus (GtkWidget * widget, GdkEvent * event, gpointer data)
 #endif
 {
@@ -268,6 +350,16 @@ G_MODULE_EXPORT gboolean on_element_focus (GtkWidget * widget, GdkEvent * event,
 #endif
 }
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion, gdouble x, gdouble y, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEventControllerMotion * motion : 
+*  gdouble x                         : 
+*  gdouble y                         : 
+*  gpointer data                     : 
+*/
 G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion, gdouble x, gdouble y, gpointer data)
 {
   dint * id = (dint *)data;
@@ -277,11 +369,28 @@ G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion,
 }
 #endif
 
+/*
+*  G_MODULE_EXPORT void run_periodic_table (GtkDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * info : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_periodic_table (GtkDialog * info, gint response_id, gpointer data)
 {
   destroy_this_dialog (info);
 }
 
+/*
+*  G_MODULE_EXPORT void get_element (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void get_element (GtkButton * but, gpointer data)
 {
   element = GPOINTER_TO_INT(data);
@@ -289,6 +398,16 @@ G_MODULE_EXPORT void get_element (GtkButton * but, gpointer data)
   // g_signal_emit_by_name (G_OBJECT(get_top_level(but)), "activate", data);
 }
 
+/*
+*  GtkWidget * create_css_button (int p, int id, int r, int c)
+*
+*  Usage: 
+*
+*  int p  : 
+*  int id : 
+*  int r  : 
+*  int c  : 
+*/
 GtkWidget * create_css_button (int p, int id, int r, int c)
 {
   int i;
@@ -435,6 +554,14 @@ GtkWidget * create_css_button (int p, int id, int r, int c)
   return but;
 }
 
+/*
+*  GtkWidget * create_css_group (int p, int i)
+*
+*  Usage: 
+*
+*  int p : 
+*  int i : 
+*/
 GtkWidget * create_css_group (int p, int i)
 {
   gchar * backcol = g_strdup_printf ("label#group-%d-%d {\n"
@@ -457,6 +584,15 @@ GtkWidget * create_css_group (int p, int i)
   return lab;
 }
 
+/*
+*  GtkWidget * css_element (int p, int i, int j)
+*
+*  Usage: 
+*
+*  int p : 
+*  int i : 
+*  int j : 
+*/
 GtkWidget * css_element (int p, int i, int j)
 {
   int k = is_in_table (i, j);
@@ -474,6 +610,14 @@ GtkWidget * css_element (int p, int i, int j)
   }
 }
 
+/*
+*  GtkWidget * periodic_table (int p, int a)
+*
+*  Usage: 
+*
+*  int p : 
+*  int a : 
+*/
 GtkWidget * periodic_table (int p, int a)
 {
   GtkWidget * ptable = gtk_grid_new ();
@@ -507,6 +651,13 @@ GtkWidget * periodic_table (int p, int a)
   return ptable;
 }
 
+/*
+*  int get_atom_id_from_periodic_table (atom_search * asearch)
+*
+*  Usage: 
+*
+*  atom_search * asearch : 
+*/
 int get_atom_id_from_periodic_table (atom_search * asearch)
 {
   GtkWidget * win = gtk_dialog_new ();

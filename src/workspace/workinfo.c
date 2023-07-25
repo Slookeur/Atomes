@@ -11,6 +11,20 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'workinfo.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void workinfo (struct project * this_proj, int i);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "project.h"
@@ -25,6 +39,14 @@ extern void update_msd_view (struct project * this_proj);
 extern void model_info (struct project * this_proj, GtkTextBuffer * buf);
 extern void opengl_info (struct project * this_proj, GtkTextBuffer * buf);
 
+/*
+*  void workinfo (struct project * this_proj, int i)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int i                      : 
+*/
 void workinfo (struct project * this_proj, int i)
 {
   gchar * str;

@@ -11,6 +11,40 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_axis.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
+
+  void activate_pos_box (glwin * view, gboolean val);
+  void init_axis_colors (glwin * view);
+  void axis_position_has_changed (gpointer data, double v);
+
+  G_MODULE_EXPORT void set_axis_template (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_show_axis_toggle (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void use_axis_default_positions (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void use_axis_default_colors (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void use_axis_default_colors (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_axis_color (GtkColorChooser * colob, gpointer data);
+  G_MODULE_EXPORT void set_axis_position (GtkRange * range, gpointer data);
+  G_MODULE_EXPORT void set_axis_labels (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void set_axis_labels (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data);
+  G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void axis_advanced (GtkWidget * widg, gpointer data);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -45,6 +79,14 @@ GtkWidget * radius_box;
 GtkWidget * axis_color_title[3];
 GtkWidget * ax_title[3];
 
+/*
+*  void activate_pos_box (glwin * view, gboolean val)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*  gboolean val : 
+*/
 void activate_pos_box (glwin * view, gboolean val)
 {
   int i;
@@ -60,6 +102,14 @@ void activate_pos_box (glwin * view, gboolean val)
   widget_set_sensitive (templates, val);
 }
 
+/*
+*  G_MODULE_EXPORT void set_axis_template (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_axis_template (GtkComboBox * box, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -74,6 +124,14 @@ G_MODULE_EXPORT void set_axis_template (GtkComboBox * box, gpointer data)
 #endif
 }
 
+/*
+*  G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
 {
   glwin * view = (glwin *)data;
@@ -105,8 +163,24 @@ G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void set_show_axis_toggle (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void set_show_axis_toggle (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -147,8 +221,24 @@ G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void use_axis_default_positions (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void use_axis_default_positions (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -187,6 +277,13 @@ G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer
   // Update menu_bar
 }
 
+/*
+*  void init_axis_colors (glwin * view)
+*
+*  Usage: 
+*
+*  glwin * view : 
+*/
 void init_axis_colors (glwin * view)
 {
   int i;
@@ -202,8 +299,24 @@ void init_axis_colors (glwin * view)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void use_axis_default_colors (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void use_axis_default_colors (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void use_axis_default_colors (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void use_axis_default_colors (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -234,6 +347,14 @@ G_MODULE_EXPORT void use_axis_default_colors (GtkToggleButton * but, gpointer da
   update (view);
 }
 
+/*
+*  G_MODULE_EXPORT void set_axis_color (GtkColorChooser * colob, gpointer data)
+*
+*  Usage: 
+*
+*  GtkColorChooser * colob : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void set_axis_color (GtkColorChooser * colob, gpointer data)
 {
   tint * dat = (tint *)data;
@@ -243,6 +364,14 @@ G_MODULE_EXPORT void set_axis_color (GtkColorChooser * colob, gpointer data)
   update (view);
 }
 
+/*
+*  void axis_position_has_changed (gpointer data, double v)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*  double v      : 
+*/
 void axis_position_has_changed (gpointer data, double v)
 {
   tint * dat = (tint *)data;
@@ -252,20 +381,54 @@ void axis_position_has_changed (gpointer data, double v)
   update (view);
 }
 
+/*
+*  G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
+*
+*  Usage: 
+*
+*  GtkRange * range     : 
+*  GtkScrollType scroll : 
+*  gdouble value        : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
   axis_position_has_changed (data, value);
   return FALSE;
 }
 
+/*
+*  G_MODULE_EXPORT void set_axis_position (GtkRange * range, gpointer data)
+*
+*  Usage: 
+*
+*  GtkRange * range : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_axis_position (GtkRange * range, gpointer data)
 {
   axis_position_has_changed (data, gtk_range_get_value (range));
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void set_axis_labels (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void set_axis_labels (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void set_axis_labels (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void set_axis_labels (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -283,6 +446,14 @@ G_MODULE_EXPORT void set_axis_labels (GtkToggleButton * but, gpointer data)
   update (view);
 }
 
+/*
+*  G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * entry : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
 {
   tint * dat = (tint *)data;
@@ -295,8 +466,25 @@ G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void axis_advanced (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void axis_advanced (GtkWidget * widg, gpointer data)
 #endif
 {

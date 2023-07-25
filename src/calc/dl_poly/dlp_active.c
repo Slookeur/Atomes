@@ -11,8 +11,42 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'dlp_active.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid);
+  struct field_molecule * get_active_field_molecule (int a);
+  struct field_nth_body * get_active_body (int a, int b);
+  struct field_external * get_active_external (int a);
+  struct field_atom * get_active_atom (int a, int b);
+  struct field_shell * get_active_shell (int a, int b);
+  struct field_constraint * get_active_constraint (int a, int b);
+  struct field_pmf * get_active_pmf (int a, int b);
+  struct field_rigid * get_active_rigid (int a, int b);
+  struct field_tethered * get_active_tethered (int a, int b);
+  struct field_prop * get_active_prop (struct  field_prop * pr, int a);
+  struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids);
+  struct field_struct * get_active_struct (int s, int a, int b);
+
+*/
+
 #include "dlp_field.h"
 
+/*
+*  struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int aid                    : 
+*/
 struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid)
 {
   int i;
@@ -34,6 +68,13 @@ struct field_molecule * get_active_field_molecule_from_model_id (struct project 
   return NULL;
 }
 
+/*
+*  struct field_molecule * get_active_field_molecule (int a)
+*
+*  Usage: 
+*
+*  int a : 
+*/
 struct field_molecule * get_active_field_molecule (int a)
 {
   int i;
@@ -45,6 +86,14 @@ struct field_molecule * get_active_field_molecule (int a)
   return tfmol;
 }
 
+/*
+*  struct field_nth_body * get_active_body (int a, int b)
+*
+*  Usage: 
+*
+*  int a : 
+*  int b : 
+*/
 struct field_nth_body * get_active_body (int a, int b)
 {
   int i;
@@ -57,6 +106,13 @@ struct field_nth_body * get_active_body (int a, int b)
   return body;
 }
 
+/*
+*  struct field_external * get_active_external (int a)
+*
+*  Usage: 
+*
+*  int a : 
+*/
 struct field_external * get_active_external (int a)
 {
   int i;
@@ -69,6 +125,14 @@ struct field_external * get_active_external (int a)
   return external;
 }
 
+/*
+*  struct field_atom * get_active_atom (int a, int b)
+*
+*  Usage: 
+*
+*  int a : 
+*  int b : 
+*/
 struct field_atom * get_active_atom (int a, int b)
 {
   int i;
@@ -81,6 +145,14 @@ struct field_atom * get_active_atom (int a, int b)
   return ato;
 }
 
+/*
+*  struct field_shell * get_active_shell (int a, int b)
+*
+*  Usage: 
+*
+*  int a : 
+*  int b : 
+*/
 struct field_shell * get_active_shell (int a, int b)
 {
   int i;
@@ -93,6 +165,14 @@ struct field_shell * get_active_shell (int a, int b)
   return shl;
 }
 
+/*
+*  struct field_constraint * get_active_constraint (int a, int b)
+*
+*  Usage: 
+*
+*  int a : 
+*  int b : 
+*/
 struct field_constraint * get_active_constraint (int a, int b)
 {
   int i;
@@ -105,6 +185,14 @@ struct field_constraint * get_active_constraint (int a, int b)
   return cons;
 }
 
+/*
+*  struct field_pmf * get_active_pmf (int a, int b)
+*
+*  Usage: 
+*
+*  int a : 
+*  int b : 
+*/
 struct field_pmf * get_active_pmf (int a, int b)
 {
   int i;
@@ -117,6 +205,14 @@ struct field_pmf * get_active_pmf (int a, int b)
   return pmf;
 }
 
+/*
+*  struct field_rigid * get_active_rigid (int a, int b)
+*
+*  Usage: 
+*
+*  int a : 
+*  int b : 
+*/
 struct field_rigid * get_active_rigid (int a, int b)
 {
   int i;
@@ -129,6 +225,14 @@ struct field_rigid * get_active_rigid (int a, int b)
   return rig;
 }
 
+/*
+*  struct field_tethered * get_active_tethered (int a, int b)
+*
+*  Usage: 
+*
+*  int a : 
+*  int b : 
+*/
 struct field_tethered * get_active_tethered (int a, int b)
 {
   int i;
@@ -141,6 +245,14 @@ struct field_tethered * get_active_tethered (int a, int b)
   return tet;
 }
 
+/*
+*  struct field_prop * get_active_prop (struct  field_prop * pr, int a)
+*
+*  Usage: 
+*
+*  struct  field_prop * pr : 
+*  int a                   : 
+*/
 struct field_prop * get_active_prop (struct  field_prop * pr, int a)
 {
   struct field_prop * prop;
@@ -153,6 +265,15 @@ struct field_prop * get_active_prop (struct  field_prop * pr, int a)
   return prop;
 }
 
+/*
+*  struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids)
+*
+*  Usage: 
+*
+*  struct  field_prop * pr : 
+*  int ti                  : 
+*  int * ids               : 
+*/
 struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids)
 {
   struct field_prop * prop = NULL;
@@ -176,6 +297,15 @@ struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti
   return prop;
 }
 
+/*
+*  struct field_struct * get_active_struct (int s, int a, int b)
+*
+*  Usage: 
+*
+*  int s : 
+*  int a : 
+*  int b : 
+*/
 struct field_struct * get_active_struct (int s, int a, int b)
 {
   int i;

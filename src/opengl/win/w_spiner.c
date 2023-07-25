@@ -11,12 +11,39 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_spiner.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gboolean spin (gpointer data);
+
+  static gboolean spin_wait_for_stop (gpointer data);
+
+  G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void window_spinner (GtkWidget * widg, gpointer data);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 
 extern void save_rotation_quaternion (glwin * view);
 extern void rotate_x_y (glwin * view, double angle_x, double angle_y);
 
+/*
+*  gboolean spin (gpointer data)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*/
 gboolean spin (gpointer data)
 {
   tint * val = (tint *) data;
@@ -40,6 +67,13 @@ gboolean spin (gpointer data)
   }
 }
 
+/*
+*  static gboolean spin_wait_for_stop (gpointer data)
+*
+*  Usage: 
+*
+*  gpointer data : 
+*/
 static gboolean spin_wait_for_stop (gpointer data)
 {
   tint * val = (tint *) data;
@@ -53,6 +87,14 @@ static gboolean spin_wait_for_stop (gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
 {
   tint * val = (tint *) data;
@@ -76,6 +118,14 @@ G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
@@ -88,6 +138,14 @@ G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
   //set_sensitive_coord_menu (view, TRUE);
 }
 
+/*
+*  G_MODULE_EXPORT void window_spinner (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void window_spinner (GtkWidget * widg, gpointer data)
 {
   glwin * view = (glwin *) data;

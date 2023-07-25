@@ -11,6 +11,29 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cp2k_files.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int cp2k_is_basis_in_database (int sp);
+  int cp2k_is_pseudo_in_database (int sp);
+  int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, char * bp_elem[n_basis_pseudo]);
+
+  gchar * get_nth_elem (int sp, int id, int obj);
+  gchar * get_nth_key (int sp, int id, int obj);
+
+  G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data);
+
+  GtkWidget * prepare_basis_combo (int sp, int obj);
+
+*/
+
 #include "global.h"
 #include "callbacks.h"
 #include "interface.h"
@@ -22,6 +45,15 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern GtkWidget * cp2k_spec_combo;
 
+/*
+*  gchar * get_nth_elem (int sp, int id, int obj)
+*
+*  Usage: 
+*
+*  int sp  : 
+*  int id  : 
+*  int obj : 
+*/
 gchar * get_nth_elem (int sp, int id, int obj)
 {
   int i, j;
@@ -79,6 +111,15 @@ gchar * get_nth_elem (int sp, int id, int obj)
   return NULL;
 }
 
+/*
+*  gchar * get_nth_key (int sp, int id, int obj)
+*
+*  Usage: 
+*
+*  int sp  : 
+*  int id  : 
+*  int obj : 
+*/
 gchar * get_nth_key (int sp, int id, int obj)
 {
   int i, j;
@@ -136,6 +177,13 @@ gchar * get_nth_key (int sp, int id, int obj)
   return NULL;
 }
 
+/*
+*  int cp2k_is_basis_in_database (int sp)
+*
+*  Usage: 
+*
+*  int sp : 
+*/
 int cp2k_is_basis_in_database (int sp)
 {
   int i;
@@ -154,6 +202,13 @@ int cp2k_is_basis_in_database (int sp)
   return -1;
 }
 
+/*
+*  int cp2k_is_pseudo_in_database (int sp)
+*
+*  Usage: 
+*
+*  int sp : 
+*/
 int cp2k_is_pseudo_in_database (int sp)
 {
   int i;
@@ -164,6 +219,16 @@ int cp2k_is_pseudo_in_database (int sp)
   return -1;
 }
 
+/*
+*  int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, char * bp_elem[n_basis_pseudo])
+*
+*  Usage: 
+*
+*  int sp                         : 
+*  int * sp_id                    : 
+*  int n_basis_pseudo             : 
+*  char * bp_elem[n_basis_pseudo] : 
+*/
 int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, char * bp_elem[n_basis_pseudo])
 {
   int i, j;
@@ -179,6 +244,14 @@ int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, cha
   return j;
 }
 
+/*
+*  G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data)
 {
   int i, j, k;
@@ -196,6 +269,14 @@ G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * prepare_basis_combo (int sp, int obj)
+*
+*  Usage: 
+*
+*  int sp  : 
+*  int obj : 
+*/
 GtkWidget * prepare_basis_combo (int sp, int obj)
 {
   int i, j;

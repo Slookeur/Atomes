@@ -11,11 +11,51 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'dlp_copy.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gboolean check_this_other_prop (int oid, int nat, struct field_prop * other);
+
+  void duplicate_other_prop (int oid, struct field_struct * old_fstr, struct field_struct * new_fstr);
+  void duplicate_nbody_params (struct field_nth_body * new_fbody, struct field_nth_body * old_fbody);
+
+  struct field_atom * duplicate_field_atom (struct field_atom * old_fat);
+  struct field_neighbor * duplicate_field_neighbor (struct field_neighbor * old_ngb);
+  struct field_shell * duplicate_field_shell (struct field_shell * old_shell);
+  struct field_constraint * duplicate_field_constraint (struct field_constraint * old_cons);
+  struct field_pmf * duplicate_field_pmf (struct field_pmf * old_pmf);
+  struct field_rigid * duplicate_field_rigid (struct field_rigid * old_rig);
+  struct field_tethered * duplicate_field_tethered (struct field_tethered * old_tet);
+  struct field_prop * duplicate_field_prop (struct field_prop * old_prop, int ti);
+  struct field_struct * duplicate_field_struct (struct field_struct * old_fstr);
+  struct field_struct * duplicate_field_struct_list (struct field_struct * list_str, gboolean init);
+  struct field_nth_body * duplicate_field_nth_body (struct field_nth_body * old_fbody);
+  struct field_external * duplicate_field_external (struct field_external * old_fext);
+  struct field_molecule * duplicate_field_molecule (struct field_molecule * old_fmol);
+
+  classical_field * duplicate_classical_field (classical_field * init_field);
+
+*/
+
 #include "dlp_field.h"
 #include "global.h"
 
 extern void print_all_field_struct (struct field_molecule * mol, int str);
 
+/*
+*  struct field_atom * duplicate_field_atom (struct field_atom * old_fat)
+*
+*  Usage: 
+*
+*  struct field_atom * old_fat : 
+*/
 struct field_atom * duplicate_field_atom (struct field_atom * old_fat)
 {
   struct field_atom * new_fat;
@@ -43,6 +83,13 @@ struct field_atom * duplicate_field_atom (struct field_atom * old_fat)
   return new_fat;
 }
 
+/*
+*  struct field_neighbor * duplicate_field_neighbor (struct field_neighbor * old_ngb)
+*
+*  Usage: 
+*
+*  struct field_neighbor * old_ngb : 
+*/
 struct field_neighbor * duplicate_field_neighbor (struct field_neighbor * old_ngb)
 {
   struct field_neighbor * new_ngb = g_malloc0(sizeof*new_ngb);
@@ -52,6 +99,13 @@ struct field_neighbor * duplicate_field_neighbor (struct field_neighbor * old_ng
   return new_ngb;
 }
 
+/*
+*  struct field_shell * duplicate_field_shell (struct field_shell * old_shell)
+*
+*  Usage: 
+*
+*  struct field_shell * old_shell : 
+*/
 struct field_shell * duplicate_field_shell (struct field_shell * old_shell)
 {
   struct field_shell * new_shell;
@@ -71,6 +125,13 @@ struct field_shell * duplicate_field_shell (struct field_shell * old_shell)
   return new_shell;
 }
 
+/*
+*  struct field_constraint * duplicate_field_constraint (struct field_constraint * old_cons)
+*
+*  Usage: 
+*
+*  struct field_constraint * old_cons : 
+*/
 struct field_constraint * duplicate_field_constraint (struct field_constraint * old_cons)
 {
   struct field_constraint * new_cons;
@@ -86,6 +147,13 @@ struct field_constraint * duplicate_field_constraint (struct field_constraint * 
   return new_cons;
 }
 
+/*
+*  struct field_pmf * duplicate_field_pmf (struct field_pmf * old_pmf)
+*
+*  Usage: 
+*
+*  struct field_pmf * old_pmf : 
+*/
 struct field_pmf * duplicate_field_pmf (struct field_pmf * old_pmf)
 {
   struct field_pmf * new_pmf;
@@ -106,6 +174,13 @@ struct field_pmf * duplicate_field_pmf (struct field_pmf * old_pmf)
   return new_pmf;
 }
 
+/*
+*  struct field_rigid * duplicate_field_rigid (struct field_rigid * old_rig)
+*
+*  Usage: 
+*
+*  struct field_rigid * old_rig : 
+*/
 struct field_rigid * duplicate_field_rigid (struct field_rigid * old_rig)
 {
   struct field_rigid * new_rig;
@@ -120,6 +195,13 @@ struct field_rigid * duplicate_field_rigid (struct field_rigid * old_rig)
   return new_rig;
 }
 
+/*
+*  struct field_tethered * duplicate_field_tethered (struct field_tethered * old_tet)
+*
+*  Usage: 
+*
+*  struct field_tethered * old_tet : 
+*/
 struct field_tethered * duplicate_field_tethered (struct field_tethered * old_tet)
 {
   struct field_tethered * new_tet;
@@ -133,6 +215,14 @@ struct field_tethered * duplicate_field_tethered (struct field_tethered * old_te
   return new_tet;
 }
 
+/*
+*  struct field_prop * duplicate_field_prop (struct field_prop * old_prop, int ti)
+*
+*  Usage: 
+*
+*  struct field_prop * old_prop : 
+*  int ti                       : 
+*/
 struct field_prop * duplicate_field_prop (struct field_prop * old_prop, int ti)
 {
   struct field_prop * new_prop;
@@ -153,6 +243,15 @@ struct field_prop * duplicate_field_prop (struct field_prop * old_prop, int ti)
   return new_prop;
 }
 
+/*
+*  gboolean check_this_other_prop (int oid, int nat, struct field_prop * other)
+*
+*  Usage: 
+*
+*  int oid                   : 
+*  int nat                   : 
+*  struct field_prop * other : 
+*/
 gboolean check_this_other_prop (int oid, int nat, struct field_prop * other)
 {
   if (oid > -1)
@@ -166,6 +265,15 @@ gboolean check_this_other_prop (int oid, int nat, struct field_prop * other)
   return TRUE;
 }
 
+/*
+*  void duplicate_other_prop (int oid, struct field_struct * old_fstr, struct field_struct * new_fstr)
+*
+*  Usage: 
+*
+*  int oid                        : 
+*  struct field_struct * old_fstr : 
+*  struct field_struct * new_fstr : 
+*/
 void duplicate_other_prop (int oid, struct field_struct * old_fstr, struct field_struct * new_fstr)
 {
   int i = struct_id(new_fstr -> st+7);
@@ -190,6 +298,13 @@ void duplicate_other_prop (int oid, struct field_struct * old_fstr, struct field
   }
 }
 
+/*
+*  struct field_struct * duplicate_field_struct (struct field_struct * old_fstr)
+*
+*  Usage: 
+*
+*  struct field_struct * old_fstr : 
+*/
 struct field_struct * duplicate_field_struct (struct field_struct * old_fstr)
 {
   struct field_struct * new_fstr;
@@ -207,6 +322,14 @@ struct field_struct * duplicate_field_struct (struct field_struct * old_fstr)
   return new_fstr;
 }
 
+/*
+*  struct field_struct * duplicate_field_struct_list (struct field_struct * list_str, gboolean init)
+*
+*  Usage: 
+*
+*  struct field_struct * list_str : 
+*  gboolean init                  : 
+*/
 struct field_struct * duplicate_field_struct_list (struct field_struct * list_str, gboolean init)
 {
   struct field_struct * str_list = duplicate_field_struct (list_str);
@@ -224,6 +347,14 @@ struct field_struct * duplicate_field_struct_list (struct field_struct * list_st
   return str_list;
 }
 
+/*
+*  void duplicate_nbody_params (struct field_nth_body * new_fbody, struct field_nth_body * old_fbody)
+*
+*  Usage: 
+*
+*  struct field_nth_body * new_fbody : 
+*  struct field_nth_body * old_fbody : 
+*/
 void duplicate_nbody_params (struct field_nth_body * new_fbody, struct field_nth_body * old_fbody)
 {
   new_fbody -> key = old_fbody -> key;
@@ -232,6 +363,13 @@ void duplicate_nbody_params (struct field_nth_body * new_fbody, struct field_nth
   new_fbody -> use = old_fbody -> use;
 }
 
+/*
+*  struct field_nth_body * duplicate_field_nth_body (struct field_nth_body * old_fbody)
+*
+*  Usage: 
+*
+*  struct field_nth_body * old_fbody : 
+*/
 struct field_nth_body * duplicate_field_nth_body (struct field_nth_body * old_fbody)
 {
   struct field_nth_body * new_fbody;
@@ -272,6 +410,13 @@ struct field_nth_body * duplicate_field_nth_body (struct field_nth_body * old_fb
   return new_fbody;
 }
 
+/*
+*  struct field_external * duplicate_field_external (struct field_external * old_fext)
+*
+*  Usage: 
+*
+*  struct field_external * old_fext : 
+*/
 struct field_external * duplicate_field_external (struct field_external * old_fext)
 {
   struct field_external * new_fext;
@@ -289,6 +434,13 @@ struct field_external * duplicate_field_external (struct field_external * old_fe
   return new_fext;
 }
 
+/*
+*  struct field_molecule * duplicate_field_molecule (struct field_molecule * old_fmol)
+*
+*  Usage: 
+*
+*  struct field_molecule * old_fmol : 
+*/
 struct field_molecule * duplicate_field_molecule (struct field_molecule * old_fmol)
 {
   int i, j;
@@ -365,6 +517,13 @@ struct field_molecule * duplicate_field_molecule (struct field_molecule * old_fm
   return new_fmol;
 }
 
+/*
+*  classical_field * duplicate_classical_field (classical_field * init_field)
+*
+*  Usage: 
+*
+*  classical_field * init_field : 
+*/
 classical_field * duplicate_classical_field (classical_field * init_field)
 {
   classical_field * new_field = NULL;

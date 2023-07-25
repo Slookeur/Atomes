@@ -11,6 +11,54 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'dlp_ff_match.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int this_body_has_atom (struct field_nth_body * body, char * name);
+
+  gboolean is_this_object_a_match (int fsid, int nat, int * ffc, int * fpar);
+
+  static gboolean update_rend (GtkTreeModel * model, GtkTreeIter * iter, gpointer  data);
+
+  G_MODULE_EXPORT gboolean on_ff_button_event (GtkWidget * widget, GdkEvent * event, gpointer data);
+
+  gchar * get_this_prop_param (int sid, int key, int calc, int newp, float * val);
+  gchar * get_this_prop_string (int sid, int oid, int type, int calc);
+
+  void update_result_list (int sid, struct object_match * new_match);
+  void fill_update_model (GtkTreeStore * store);
+  void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path);
+  void ff_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data);
+  void ff_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data);
+  void win_update_tree (GtkWidget * vbx);
+  void look_up_this_field_object (int fsid, int fpid, int ssid, int nat, int * fsp, int * fat);
+  void check_this_fprop (int fsid, int fpid, int ssid, int * fat, int * fsp);
+  void check_atom_for_updates ();
+
+  G_MODULE_EXPORT void on_ff_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data);
+  G_MODULE_EXPORT void on_ff_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data);
+  G_MODULE_EXPORT void run_check_atom_for_updates (GtkDialog * dialog, gint response_id, gpointer data);
+  G_MODULE_EXPORT void changed_field_prop_combo (GtkComboBox * box, gpointer data);
+
+  GtkWidget * create_update_tree ();
+  GtkWidget * create_field_prop_combo (int f, int is_moy);
+
+  GtkTreeModel * global_render_tree ();
+
+  struct field_data * get_ff_data (int i, int j);
+  struct object_match * duplicate_match (struct object_match * old_m);
+
+  dint get_visible (gboolean result, gchar * the_name);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glwindow.h"
@@ -57,6 +105,16 @@ struct object_match * tmp_res[9];
 dint pup[2];
 gboolean vdw_same_atom;
 
+/*
+*  gboolean is_this_object_a_match (int fsid, int nat, int * ffc, int * fpar)
+*
+*  Usage: 
+*
+*  int fsid   : 
+*  int nat    : 
+*  int * ffc  : 
+*  int * fpar : 
+*/
 gboolean is_this_object_a_match (int fsid, int nat, int * ffc, int * fpar)
 {
   int i, j;
@@ -141,6 +199,14 @@ gboolean is_this_object_a_match (int fsid, int nat, int * ffc, int * fpar)
   return TRUE;
 }
 
+/*
+*  struct field_data * get_ff_data (int i, int j)
+*
+*  Usage: 
+*
+*  int i : 
+*  int j : 
+*/
 struct field_data * get_ff_data (int i, int j)
 {
   switch (i/2)
@@ -171,6 +237,17 @@ struct field_data * get_ff_data (int i, int j)
   }
 }
 
+/*
+*  gchar * get_this_prop_param (int sid, int key, int calc, int newp, float * val)
+*
+*  Usage: 
+*
+*  int sid     : 
+*  int key     : 
+*  int calc    : 
+*  int newp    : 
+*  float * val : 
+*/
 gchar * get_this_prop_param (int sid, int key, int calc, int newp, float * val)
 {
   char ** vars;
@@ -226,6 +303,16 @@ gchar * get_this_prop_param (int sid, int key, int calc, int newp, float * val)
                           parameters_info ((sid > 7) ? 9 : sid+1, key, vars, val));
 }
 
+/*
+*  gchar * get_this_prop_string (int sid, int oid, int type, int calc)
+*
+*  Usage: 
+*
+*  int sid  : 
+*  int oid  : 
+*  int type : 
+*  int calc : 
+*/
 gchar * get_this_prop_string (int sid, int oid, int type, int calc)
 {
   gchar * str;
@@ -269,6 +356,13 @@ gchar * get_this_prop_string (int sid, int oid, int type, int calc)
   return str;
 }
 
+/*
+*  struct object_match * duplicate_match (struct object_match * old_m)
+*
+*  Usage: 
+*
+*  struct object_match * old_m : 
+*/
 struct object_match * duplicate_match (struct object_match * old_m)
 {
   struct object_match * new_m = g_malloc0 (sizeof*new_m);
@@ -280,6 +374,14 @@ struct object_match * duplicate_match (struct object_match * old_m)
   return new_m;
 }
 
+/*
+*  void update_result_list (int sid, struct object_match * new_match)
+*
+*  Usage: 
+*
+*  int sid                         : 
+*  struct object_match * new_match : 
+*/
 void update_result_list (int sid, struct object_match * new_match)
 {
   if (tmp_res[sid])
@@ -325,6 +427,13 @@ void update_result_list (int sid, struct object_match * new_match)
   }
 }
 
+/*
+*  void fill_update_model (GtkTreeStore * store)
+*
+*  Usage: 
+*
+*  GtkTreeStore * store : 
+*/
 void fill_update_model (GtkTreeStore * store)
 {
   GtkTreeIter prop_level, struct_level;
@@ -479,6 +588,13 @@ void fill_update_model (GtkTreeStore * store)
   }
 }
 
+/*
+*  GtkTreeModel * global_render_tree ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkTreeModel * global_render_tree ()
 {
   int i, j;
@@ -508,6 +624,14 @@ GtkTreeModel * global_render_tree ()
   return gtk_tree_model_filter_new(GTK_TREE_MODEL (store), NULL);
 }
 
+/*
+*  dint get_visible (gboolean result, gchar * the_name)
+*
+*  Usage: 
+*
+*  gboolean result  : 
+*  gchar * the_name : 
+*/
 dint get_visible (gboolean result, gchar * the_name)
 {
   dint vis;
@@ -571,6 +695,15 @@ G_MODULE_EXPORT void changed_update_renderer (GtkCellRendererCombo * combo,
   }
 }
 
+/*
+*  void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path)
+*
+*  Usage: 
+*
+*  GtkWidget * tree   : 
+*  gpointer data      : 
+*  GtkTreePath * path : 
+*/
 void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path)
 {
   GtkTreeModel * tmodel = gtk_tree_view_get_model (GTK_TREE_VIEW(tree));
@@ -584,8 +717,33 @@ void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path)
 }
 
 #ifdef GTK4
+/*
+*  void ff_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
+*
+*  Usage: 
+*
+*  double event_x     : 
+*  double event_y     : 
+*  guint event_button : 
+*  guint event_type   : 
+*  guint32 event_time : 
+*  gpointer data      : 
+*/
 void ff_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 #else
+/*
+*  void ff_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
+*
+*  Usage: 
+*
+*  GdkEvent * event   : 
+*  double event_x     : 
+*  double event_y     : 
+*  guint event_button : 
+*  guint event_type   : 
+*  guint32 event_time : 
+*  gpointer data      : 
+*/
 void ff_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 #endif
 {
@@ -609,16 +767,47 @@ void ff_button_event (GdkEvent * event, double event_x, double event_y, guint ev
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void on_ff_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
+*
+*  Usage: 
+*
+*  GtkGesture * gesture : 
+*  int n_press          : 
+*  double x             : 
+*  double y             : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void on_ff_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
   ff_button_event (x, y, gtk_gesture_single_get_current_button ((GtkGestureSingle * )gesture), GDK_BUTTON_PRESS, gtk_event_controller_get_current_event_time((GtkEventController *)gesture), data);
 }
 
+/*
+*  G_MODULE_EXPORT void on_ff_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
+*
+*  Usage: 
+*
+*  GtkGesture * gesture : 
+*  int n_press          : 
+*  double x             : 
+*  double y             : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void on_ff_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
   ff_button_event (x, y, gtk_gesture_single_get_current_button ((GtkGestureSingle * )gesture), GDK_BUTTON_RELEASE, gtk_event_controller_get_current_event_time((GtkEventController *)gesture), data);
 }
 #else
+/*
+*  G_MODULE_EXPORT gboolean on_ff_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widget : 
+*  GdkEvent * event   : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT gboolean on_ff_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
   GdkEventButton * bevent = (GdkEventButton *)event;
@@ -656,6 +845,15 @@ G_MODULE_EXPORT void on_toggle_update (GtkCellRendererToggle * cell_renderer,
   }
 }
 
+/*
+*  static gboolean update_rend (GtkTreeModel * model, GtkTreeIter * iter, gpointer  data)
+*
+*  Usage: 
+*
+*  GtkTreeModel * model : 
+*  GtkTreeIter * iter   : 
+*  gpointer  data       : 
+*/
 static gboolean update_rend (GtkTreeModel * model, GtkTreeIter * iter, gpointer  data)
 {
   GtkTreeIter upiter;
@@ -695,6 +893,13 @@ void field_set_markup_and_visible (GtkTreeViewColumn * col,
   }
 }
 
+/*
+*  GtkWidget * create_update_tree ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_update_tree ()
 {
   int i;
@@ -760,6 +965,13 @@ GtkWidget * create_update_tree ()
   return update_tree;
 }
 
+/*
+*  void win_update_tree (GtkWidget * vbx)
+*
+*  Usage: 
+*
+*  GtkWidget * vbx : 
+*/
 void win_update_tree (GtkWidget * vbx)
 {
   int i;
@@ -815,6 +1027,18 @@ void win_update_tree (GtkWidget * vbx)
   }
 }
 
+/*
+*  void look_up_this_field_object (int fsid, int fpid, int ssid, int nat, int * fsp, int * fat)
+*
+*  Usage: 
+*
+*  int fsid  : 
+*  int fpid  : 
+*  int ssid  : 
+*  int nat   : 
+*  int * fsp : 
+*  int * fat : 
+*/
 void look_up_this_field_object (int fsid, int fpid, int ssid, int nat, int * fsp, int * fat)
 {
   int i, j;
@@ -849,6 +1073,17 @@ void look_up_this_field_object (int fsid, int fpid, int ssid, int nat, int * fsp
   }
 }
 
+/*
+*  void check_this_fprop (int fsid, int fpid, int ssid, int * fat, int * fsp)
+*
+*  Usage: 
+*
+*  int fsid  : 
+*  int fpid  : 
+*  int ssid  : 
+*  int * fat : 
+*  int * fsp : 
+*/
 void check_this_fprop (int fsid, int fpid, int ssid, int * fat, int * fsp)
 {
   int i, j, k;
@@ -888,6 +1123,14 @@ void check_this_fprop (int fsid, int fpid, int ssid, int * fat, int * fsp)
   }
 }
 
+/*
+*  int this_body_has_atom (struct field_nth_body * body, char * name)
+*
+*  Usage: 
+*
+*  struct field_nth_body * body : 
+*  char * name                  : 
+*/
 int this_body_has_atom (struct field_nth_body * body, char * name)
 {
   int i, j, k, l , m;
@@ -904,6 +1147,15 @@ int this_body_has_atom (struct field_nth_body * body, char * name)
   return m;
 }
 
+/*
+*  G_MODULE_EXPORT void run_check_atom_for_updates (GtkDialog * dialog, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * dialog : 
+*  gint response_id   : 
+*  gpointer data      : 
+*/
 G_MODULE_EXPORT void run_check_atom_for_updates (GtkDialog * dialog, gint response_id, gpointer data)
 {
   int i, j, k, l, m;
@@ -1024,6 +1276,13 @@ G_MODULE_EXPORT void run_check_atom_for_updates (GtkDialog * dialog, gint respon
   destroy_this_dialog (dialog);
 }
 
+/*
+*  void check_atom_for_updates ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void check_atom_for_updates ()
 {
   int i, j, k, l;
@@ -1127,6 +1386,14 @@ void check_atom_for_updates ()
   }
 }
 
+/*
+*  G_MODULE_EXPORT void changed_field_prop_combo (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void changed_field_prop_combo (GtkComboBox * box, gpointer data)
 {
   int i, j;
@@ -1233,6 +1500,14 @@ G_MODULE_EXPORT void changed_field_prop_combo (GtkComboBox * box, gpointer data)
   show_the_widgets (param_box);
 }
 
+/*
+*  GtkWidget * create_field_prop_combo (int f, int is_moy)
+*
+*  Usage: 
+*
+*  int f      : 
+*  int is_moy : 
+*/
 GtkWidget * create_field_prop_combo (int f, int is_moy)
 {
   int h, i, j, k, l, m, n;

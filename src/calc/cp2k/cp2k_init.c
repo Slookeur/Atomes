@@ -11,6 +11,50 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cp2k_init.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int find_cp2k_sym ();
+
+  gboolean cp2k_with_motion (void);
+
+  gchar * cp_section_name (int p);
+  gchar * page_name_cp2k (int p);
+
+  void print_start_buffer ();
+  void create_mol_selection_button (GtkWidget * box, int id);
+  void cp2k_option_box (GtkWidget * box, int id);
+  void add_cp2k_pages (int p);
+
+  G_MODULE_EXPORT void update_cp2k_option (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void update_cp2k_option_check (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void update_cp2k_option_check (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void changed_cp2k_option_box (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void mol_selection_button (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget *but, gpointer data);
+  G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void update_cp2k_check (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void update_cp2k_check (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void cp2k_file_info (GtkTextBuffer * textbuf, gpointer data);
+  G_MODULE_EXPORT void changed_cp2k_box (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void select_input_type (GtkToggleButton * but, gpointer data);
+
+  GtkWidget * create_vdw_box (int id);
+  GtkWidget * create_cp2k_spec_box (int spec);
+  GtkWidget * cp2k_section_box (int s);
+  GtkWidget * vbox_cp2k (int s);
+  GtkWidget * file_info (int id);
+  GtkWidget * init_cp2k ();
+
+*/
+
 #include "global.h"
 #include "callbacks.h"
 #include "interface.h"
@@ -183,6 +227,13 @@ GtkWidget * cp2k_spec_combo;
 GtkWidget * spec_data_combo[2];
 GtkWidget * cp2k_thermo_box;
 
+/*
+*  void print_start_buffer ()
+*
+*  Usage: 
+*
+*   : 
+*/
 void print_start_buffer ()
 {
   if (qmbuffer[0])
@@ -196,6 +247,14 @@ void print_start_buffer ()
   }
 }
 
+/*
+*  G_MODULE_EXPORT void update_cp2k_option (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void update_cp2k_option (GtkEntry * res, gpointer data)
 {
   int i;
@@ -221,8 +280,24 @@ G_MODULE_EXPORT void update_cp2k_option (GtkEntry * res, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void update_cp2k_option_check (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void update_cp2k_option_check (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void update_cp2k_option_check (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void update_cp2k_option_check (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -238,6 +313,14 @@ G_MODULE_EXPORT void update_cp2k_option_check (GtkToggleButton * but, gpointer d
 
 GtkWidget * create_vdw_box (int id);
 
+/*
+*  G_MODULE_EXPORT void changed_cp2k_option_box (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void changed_cp2k_option_box (GtkComboBox * box, gpointer data)
 {
   int i, j, k;
@@ -262,6 +345,13 @@ G_MODULE_EXPORT void changed_cp2k_option_box (GtkComboBox * box, gpointer data)
   print_start_buffer ();
 }
 
+/*
+*  GtkWidget * create_vdw_box (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 GtkWidget * create_vdw_box (int id)
 {
   GtkWidget * vbox, * hbox;
@@ -298,6 +388,14 @@ GtkWidget * create_vdw_box (int id)
   return vbox;
 }
 
+/*
+*  G_MODULE_EXPORT void mol_selection_button (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void mol_selection_button (GtkButton * but, gpointer data)
 {
   cp2k_fix_molecule ();
@@ -318,6 +416,14 @@ G_MODULE_EXPORT void mol_selection_button (GtkButton * but, gpointer data)
   g_free (strb);
 }
 
+/*
+*  void create_mol_selection_button (GtkWidget * box, int id)
+*
+*  Usage: 
+*
+*  GtkWidget * box : 
+*  int id          : 
+*/
 void create_mol_selection_button (GtkWidget * box, int id)
 {
   GtkWidget * hbox = cpmd_box (box, "Molecule(s)<sup>*</sup> selection <sup>**</sup>:", 5, 20, 220);
@@ -341,6 +447,14 @@ void create_mol_selection_button (GtkWidget * box, int id)
   add_box_child_start (GTK_ORIENTATION_VERTICAL, box, markup_label("** requires to compute the bonding properties", -1, -1, 0.1, 0.5), FALSE, FALSE, 5);
 }
 
+/*
+*  G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget *but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget *but : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget *but, gpointer data)
 {
   int i, j;
@@ -416,6 +530,14 @@ G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget *but, gpointer data)
   run_this_gtk_dialog (dial, G_CALLBACK(run_destroy_dialog), NULL);
 }
 
+/*
+*  G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data)
 {
   int i;
@@ -438,8 +560,24 @@ G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void update_cp2k_check (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void update_cp2k_check (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void update_cp2k_check (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void update_cp2k_check (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -479,6 +617,14 @@ G_MODULE_EXPORT void update_cp2k_check (GtkToggleButton * but, gpointer data)
   print_start_buffer ();
 }
 
+/*
+*  G_MODULE_EXPORT void cp2k_file_info (GtkTextBuffer * textbuf, gpointer data)
+*
+*  Usage: 
+*
+*  GtkTextBuffer * textbuf : 
+*  gpointer data           : 
+*/
 G_MODULE_EXPORT void cp2k_file_info (GtkTextBuffer * textbuf, gpointer data)
 {
   int i, j, k;
@@ -514,6 +660,13 @@ G_MODULE_EXPORT void cp2k_file_info (GtkTextBuffer * textbuf, gpointer data)
   print_start_buffer ();
 }
 
+/*
+*  GtkWidget * create_cp2k_spec_box (int spec)
+*
+*  Usage: 
+*
+*  int spec : 
+*/
 GtkWidget * create_cp2k_spec_box (int spec)
 {
   gchar * info[2] = {"<b>-</b> Select and use set of parameters from the database: ",
@@ -560,6 +713,14 @@ gboolean cp2k_with_motion (void);
 GtkWidget * vbox_cp2k (int s);
 gchar * page_name_cp2k (int p);
 
+/*
+*  G_MODULE_EXPORT void changed_cp2k_box (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void changed_cp2k_box (GtkComboBox * box, gpointer data)
 {
   int i, j;
@@ -619,6 +780,14 @@ G_MODULE_EXPORT void changed_cp2k_box (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  void cp2k_option_box (GtkWidget * box, int id)
+*
+*  Usage: 
+*
+*  GtkWidget * box : 
+*  int id          : 
+*/
 void cp2k_option_box (GtkWidget * box, int id)
 {
   optionb ++;
@@ -633,6 +802,13 @@ void cp2k_option_box (GtkWidget * box, int id)
   widget_set_sensitive (option_box[optionb], (int)tmp_cp2k -> opts[id]);
 }
 
+/*
+*  GtkWidget * cp2k_section_box (int s)
+*
+*  Usage: 
+*
+*  int s : 
+*/
 GtkWidget * cp2k_section_box (int s)
 {
   int i, j, k;
@@ -776,6 +952,13 @@ GtkWidget * cp2k_section_box (int s)
   return vbox;
 }
 
+/*
+*  gchar * cp_section_name (int p)
+*
+*  Usage: 
+*
+*  int p : 
+*/
 gchar * cp_section_name (int p)
 {
   if (p < 4)
@@ -788,6 +971,13 @@ gchar * cp_section_name (int p)
   }
 }
 
+/*
+*  GtkWidget * vbox_cp2k (int s)
+*
+*  Usage: 
+*
+*  int s : 
+*/
 GtkWidget * vbox_cp2k (int s)
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -797,6 +987,14 @@ GtkWidget * vbox_cp2k (int s)
   return vbox;
 }
 
+/*
+*  G_MODULE_EXPORT void select_input_type (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void select_input_type (GtkToggleButton * but, gpointer data)
 {
   tmp_cp2k -> input_type = GPOINTER_TO_INT (data);
@@ -805,6 +1003,13 @@ G_MODULE_EXPORT void select_input_type (GtkToggleButton * but, gpointer data)
   print_start_buffer ();
 }
 
+/*
+*  GtkWidget * file_info (int id)
+*
+*  Usage: 
+*
+*  int id : 
+*/
 GtkWidget * file_info (int id)
 {
   GtkWidget * main_box;
@@ -869,6 +1074,13 @@ GtkWidget * file_info (int id)
   return main_box;
 }
 
+/*
+*  GtkWidget * init_cp2k ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * init_cp2k ()
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -913,6 +1125,13 @@ GtkWidget * init_cp2k ()
   return vbox;
 }
 
+/*
+*  gchar * page_name_cp2k (int p)
+*
+*  Usage: 
+*
+*  int p : 
+*/
 gchar * page_name_cp2k (int p)
 {
   if (p == 0)
@@ -933,6 +1152,13 @@ gchar * page_name_cp2k (int p)
   }
 }
 
+/*
+*  gboolean cp2k_with_motion (void)
+*
+*  Usage: 
+*
+*  void : 
+*/
 gboolean cp2k_with_motion (void)
 {
   if (GTK_IS_WIDGET(motion_box[0])) gtk_widget_hide (motion_box[0]);
@@ -949,6 +1175,13 @@ gboolean cp2k_with_motion (void)
   }
 }
 
+/*
+*  void add_cp2k_pages (int p)
+*
+*  Usage: 
+*
+*  int p : 
+*/
 void add_cp2k_pages (int p)
 {
   int i;
@@ -989,6 +1222,13 @@ void add_cp2k_pages (int p)
   gtk_assistant_update_buttons_state (assist);
 }
 
+/*
+*  int find_cp2k_sym ()
+*
+*  Usage: 
+*
+*   : 
+*/
 int find_cp2k_sym ()
 {
   box_info * box = & qm_proj -> cell.box[0];

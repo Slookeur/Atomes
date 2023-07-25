@@ -11,6 +11,26 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_bonds.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void bonds_input_win (GtkWidget * win, struct project * this_proj, int s, int id, double ** val);
+
+  G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void window_bonds (GtkWidget * widg, gpointer data);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -19,6 +39,14 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern gchar * label_cutrab (struct project * this_proj, glwin * view, int id);
 
+/*
+*  G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
@@ -201,6 +229,17 @@ G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
   update (opengl_project -> modelgl);
 }
 
+/*
+*  void bonds_input_win (GtkWidget * win, struct project * this_proj, int s, int id, double ** val)
+*
+*  Usage: 
+*
+*  GtkWidget * win            : 
+*  struct project * this_proj : 
+*  int s                      : 
+*  int id                     : 
+*  double ** val              : 
+*/
 void bonds_input_win (GtkWidget * win, struct project * this_proj, int s, int id, double ** val)
 {
   int i, j, k, l, m, n;
@@ -254,8 +293,25 @@ void bonds_input_win (GtkWidget * win, struct project * this_proj, int s, int id
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 #endif
 {
@@ -286,8 +342,25 @@ G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void window_bonds (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void window_bonds (GtkWidget * widg, gpointer data)
 #endif
 {

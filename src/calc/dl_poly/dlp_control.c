@@ -11,6 +11,84 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'dlp_control.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void set_order (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_thermo_param (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void check_nvs (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void check_semi (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void check_semi (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_thermostat (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_ensemble (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_md_param (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void show_advance_time_step (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void set_md_combo (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void check_impact (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void check_impact (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void show_impact_dialog (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void set_equi_combo (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_equi_param (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void check_equi (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void check_equi (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_out_param (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void check_out (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void check_out (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_print_level (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_ana_param (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void check_ana (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void check_ana (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_io_param (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void check_io (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void check_io (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_io_method (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void set_elec_param (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void adjust_precision (GtkSpinButton * res, gpointer data);
+  G_MODULE_EXPORT void set_elec_eval (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void check_elec (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void check_elec (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_vdw_param (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void set_vdw_mix (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void check_vdw (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void check_vdw (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void check_met (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void check_met (GtkToggleButton * but, gpointer data);
+  G_MODULE_EXPORT void set_sys_param (GtkEntry * res, gpointer data);
+  G_MODULE_EXPORT void set_sys_restart (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void check_sys (GtkCheckButton * but, gpointer data);
+  G_MODULE_EXPORT void check_sys (GtkToggleButton * but, gpointer data);
+
+  GtkWidget * create_thermo_options (int ensemble, int thermo);
+  GtkWidget * create_thermo_box (int ensemble);
+  GtkWidget * create_ensemble_box ();
+  GtkWidget * create_md_box ();
+  GtkWidget * create_equi_box ();
+  GtkWidget * create_traj_box ();
+  GtkWidget * create_dump_box ();
+  GtkWidget * create_out_box ();
+  GtkWidget * create_overall_box ();
+  GtkWidget * create_analyze_box ();
+  GtkWidget * create_system_box ();
+  GtkWidget * create_job_box ();
+  GtkWidget * create_io_box ();
+  GtkWidget * create_misc_box ();
+  GtkWidget * create_elec_param_box ();
+  GtkWidget * create_electro_box ();
+  GtkWidget * create_vdws_box ();
+  GtkWidget * create_metal_box ();
+  GtkWidget * create_sys_box ();
+  GtkWidget * create_restart_box ();
+  GtkWidget * vbox_control (int f);
+
+*/
+
 #include "dlp_field.h"
 #include "callbacks.h"
 #include "interface.h"
@@ -90,11 +168,27 @@ GtkWidget * ens_box;
 GtkWidget * bath_box;
 GtkWidget * thermo_option_box;
 
+/*
+*  G_MODULE_EXPORT void set_order (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_order (GtkComboBox * box, gpointer data)
 {
   tmp_field -> thermo_opts[0] = gtk_combo_box_get_active (box);
 }
 
+/*
+*  G_MODULE_EXPORT void set_thermo_param (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_thermo_param (GtkEntry * res, gpointer data)
 {
   int i;
@@ -120,6 +214,14 @@ G_MODULE_EXPORT void set_thermo_param (GtkEntry * res, gpointer data)
   update_entry_double(res, tmp_field -> thermo_opts[i]);
 }
 
+/*
+*  G_MODULE_EXPORT void check_nvs (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_nvs (GtkToggleButton * but, gpointer data)
 {
   int i, j;
@@ -159,8 +261,24 @@ G_MODULE_EXPORT void check_nvs (GtkToggleButton * but, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void check_semi (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void check_semi (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void check_semi (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_semi (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -175,6 +293,14 @@ G_MODULE_EXPORT void check_semi (GtkToggleButton * but, gpointer data)
   if (i == 6) widget_set_sensitive (bath_box, j);
 }
 
+/*
+*  GtkWidget * create_thermo_options (int ensemble, int thermo)
+*
+*  Usage: 
+*
+*  int ensemble : 
+*  int thermo   : 
+*/
 GtkWidget * create_thermo_options (int ensemble, int thermo)
 {
   GtkWidget * vbox = create_vbox (5);
@@ -271,6 +397,14 @@ GtkWidget * create_thermo_options (int ensemble, int thermo)
   return vbox;
 }
 
+/*
+*  G_MODULE_EXPORT void set_thermostat (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_thermostat (GtkComboBox * box, gpointer data)
 {
   int i, j;
@@ -294,6 +428,13 @@ G_MODULE_EXPORT void set_thermostat (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * create_thermo_box (int ensemble)
+*
+*  Usage: 
+*
+*  int ensemble : 
+*/
 GtkWidget * create_thermo_box (int ensemble)
 {
   GtkWidget * vbox = create_vbox (5);
@@ -319,6 +460,14 @@ GtkWidget * create_thermo_box (int ensemble)
   return vbox;
 }
 
+/*
+*  G_MODULE_EXPORT void set_ensemble (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_ensemble (GtkComboBox * box, gpointer data)
 {
   int i;
@@ -342,6 +491,13 @@ G_MODULE_EXPORT void set_ensemble (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * create_ensemble_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_ensemble_box ()
 {
   GtkWidget * vbox = create_vbox (5);
@@ -406,6 +562,14 @@ gchar * dt_data[3] = {"Maximum time step:", "Maximum distance allowed:", "Minimu
 gchar * dt_unit[3] = {"<b>ps</b>", "<b>&#xC5;</b>", "<b>&#xC5;</b>"};
 gchar * md_combo[2][2] = {{"Velocity", "Leapfrog"}, {"Fixed", "Variable"}};
 
+/*
+*  G_MODULE_EXPORT void set_md_param (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_md_param (GtkEntry * res, gpointer data)
 {
   int i;
@@ -433,6 +597,14 @@ G_MODULE_EXPORT void set_md_param (GtkEntry * res, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void show_advance_time_step (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void show_advance_time_step (GtkButton * but, gpointer data)
 {
   GtkWidget * dialog = dialogmodal ("Variable time step information", GTK_WINDOW(field_assistant));
@@ -454,6 +626,14 @@ G_MODULE_EXPORT void show_advance_time_step (GtkButton * but, gpointer data)
   run_this_gtk_dialog (dialog, G_CALLBACK(run_destroy_dialog), NULL);
 }
 
+/*
+*  G_MODULE_EXPORT void set_md_combo (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_md_combo (GtkComboBox * box, gpointer data)
 {
   int i, j;
@@ -476,8 +656,24 @@ GtkWidget * impact_but;
 gchar * imp_dir[3] = {"on x:", "on y:", "on z:"};
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void check_impact (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void check_impact (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void check_impact (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_impact (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -491,6 +687,14 @@ G_MODULE_EXPORT void check_impact (GtkToggleButton * but, gpointer data)
   widget_set_sensitive (impact_but, i);
 }
 
+/*
+*  G_MODULE_EXPORT void show_impact_dialog (GtkButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkButton * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void show_impact_dialog (GtkButton * but, gpointer data)
 {
   GtkWidget * dialog = dialogmodal ("Initiate impact on particle", GTK_WINDOW(field_assistant));
@@ -551,6 +755,13 @@ G_MODULE_EXPORT void show_impact_dialog (GtkButton * but, gpointer data)
   run_this_gtk_dialog (dialog, G_CALLBACK(run_destroy_dialog), NULL);
 }
 
+/*
+*  GtkWidget * create_md_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_md_box ()
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -673,6 +884,14 @@ gchar * equi_minu[3]= {"<b>k<sub><i>B</i></sub>T / &#xC5;</b>", "", "<b>&#xC5;</
 double equi_lim[2][3] = {{1.0, 0.0, 0.000001}, {1000.0, 0.01, 0.1}};
 float init_minop[3]={50.0, 0.005, 0.005};
 
+/*
+*  G_MODULE_EXPORT void set_equi_combo (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_equi_combo (GtkComboBox * box, gpointer data)
 {
   int i, j, k;
@@ -687,6 +906,14 @@ G_MODULE_EXPORT void set_equi_combo (GtkComboBox * box, gpointer data)
   gtk_label_set_use_markup (GTK_LABEL(equi_lab[4*k+1]), TRUE);
 }
 
+/*
+*  G_MODULE_EXPORT void set_equi_param (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_equi_param (GtkEntry * res, gpointer data)
 {
   int i, j;
@@ -723,8 +950,24 @@ G_MODULE_EXPORT void set_equi_param (GtkEntry * res, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void check_equi (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void check_equi (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void check_equi (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_equi (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -741,6 +984,13 @@ G_MODULE_EXPORT void check_equi (GtkToggleButton * but, gpointer data)
   if (i < 6) widget_set_sensitive (equi_box[i], j);
 }
 
+/*
+*  GtkWidget * create_equi_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_equi_box ()
 {
   GtkWidget * vbox = create_vbox (5);
@@ -855,6 +1105,14 @@ gchar * out_print[3]={"Radial distribution functions (RDFs):",
 GtkWidget * out_hbox[11];
 GtkWidget * out_entry[3];
 
+/*
+*  G_MODULE_EXPORT void set_out_param (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_out_param (GtkEntry * res, gpointer data)
 {
   int i;
@@ -885,8 +1143,24 @@ G_MODULE_EXPORT void set_out_param (GtkEntry * res, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void check_out (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void check_out (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void check_out (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_out (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -916,11 +1190,26 @@ G_MODULE_EXPORT void check_out (GtkToggleButton * but, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_print_level (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_print_level (GtkComboBox * box, gpointer data)
 {
   tmp_field -> out_opts[12] =  gtk_combo_box_get_active (box);
 }
 
+/*
+*  GtkWidget * create_traj_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_traj_box ()
 {
   GtkWidget * vbox = create_vbox (5);
@@ -973,6 +1262,13 @@ GtkWidget * create_traj_box ()
   return vbox;
 }
 
+/*
+*  GtkWidget * create_dump_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_dump_box ()
 {
   GtkWidget * vbox = create_vbox (5);
@@ -996,6 +1292,13 @@ gchar * out_data[3] = {"Print system data:",
 
 gchar * out_info[3] = {"Every:", "Every:", " "};
 
+/*
+*  GtkWidget * create_out_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_out_box ()
 {
   GtkWidget * vbox = create_vbox (5);
@@ -1022,6 +1325,13 @@ GtkWidget * create_out_box ()
   return vbox;
 }
 
+/*
+*  GtkWidget * create_overall_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_overall_box ()
 {
   GtkWidget * vbox = create_vbox (5);
@@ -1084,6 +1394,14 @@ GtkWidget * ana_box[5];
 gchar * ana_info[5]={"All:", "Bonds:", "Angles:", "Dihedrals:", "Inversions:"};
 gchar * ana_param[3]={"Every:", "Num. δ", "Cutoff = "};
 
+/*
+*  G_MODULE_EXPORT void set_ana_param (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_ana_param (GtkEntry * res, gpointer data)
 {
   int i;
@@ -1105,8 +1423,24 @@ G_MODULE_EXPORT void set_ana_param (GtkEntry * res, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void check_ana (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void check_ana (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void check_ana (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_ana (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -1134,6 +1468,13 @@ G_MODULE_EXPORT void check_ana (GtkToggleButton * but, gpointer data)
   widget_set_sensitive (ana_box[k], j);
 }
 
+/*
+*  GtkWidget * create_analyze_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_analyze_box ()
 {
   GtkWidget * vbox = create_vbox (5);
@@ -1201,6 +1542,13 @@ GtkWidget * create_analyze_box ()
   return vbox;
 }
 
+/*
+*  GtkWidget * create_system_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_system_box ()
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -1228,6 +1576,14 @@ gchar * io_type[2] = {"Sorted", "Unsorted"};
 GtkWidget * io_hp[2][4];
 GtkWidget * check_e[2];
 
+/*
+*  G_MODULE_EXPORT void set_io_param (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_io_param (GtkEntry * res, gpointer data)
 {
   int i;
@@ -1290,8 +1646,24 @@ G_MODULE_EXPORT void set_io_param (GtkEntry * res, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void check_io (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void check_io (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void check_io (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_io (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -1323,6 +1695,14 @@ G_MODULE_EXPORT void check_io (GtkToggleButton * but, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_io_method (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_io_method (GtkComboBox * box, gpointer data)
 {
   int i, j, k;
@@ -1345,6 +1725,13 @@ G_MODULE_EXPORT void set_io_method (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * create_job_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_job_box ()
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -1369,6 +1756,13 @@ GtkWidget * create_job_box ()
   return vbox;
 }
 
+/*
+*  GtkWidget * create_io_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_io_box ()
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -1444,6 +1838,13 @@ GtkWidget * create_io_box ()
   return vbox;
 }
 
+/*
+*  GtkWidget * create_misc_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_misc_box ()
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -1485,6 +1886,14 @@ gchar * eval_m[10] = {"Direct Coulomb sum", "Distance dependent dielectric Coulo
                       "Force-shifted Coulomb sum", "Force-shifted Coulomb sum with Fennel damping",
                       "Force-shifted Coulomb sum with Fennel damping (auto)"};
 
+/*
+*  G_MODULE_EXPORT void set_elec_param (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_elec_param (GtkEntry * res, gpointer data)
 {
   int i;
@@ -1572,6 +1981,14 @@ G_MODULE_EXPORT void set_elec_param (GtkEntry * res, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void adjust_precision (GtkSpinButton * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkSpinButton * res : 
+*  gpointer data       : 
+*/
 G_MODULE_EXPORT void adjust_precision (GtkSpinButton * res, gpointer data)
 {
   int powa = gtk_spin_button_get_value_as_int(res);
@@ -1584,6 +2001,13 @@ G_MODULE_EXPORT void adjust_precision (GtkSpinButton * res, gpointer data)
   tmp_field -> elec_opts[6] = v * pow(10, powa);
 }
 
+/*
+*  GtkWidget * create_elec_param_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_elec_param_box ()
 {
   GtkWidget * vbox, * vvbox;
@@ -1665,6 +2089,14 @@ GtkWidget * create_elec_param_box ()
   return vvbox;
 }
 
+/*
+*  G_MODULE_EXPORT void set_elec_eval (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_elec_eval (GtkComboBox * box, gpointer data)
 {
   tmp_field -> elec_opts[5] =  gtk_combo_box_get_active (box);
@@ -1675,8 +2107,24 @@ G_MODULE_EXPORT void set_elec_eval (GtkComboBox * box, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void check_elec (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void check_elec (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void check_elec (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_elec (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -1692,6 +2140,13 @@ G_MODULE_EXPORT void check_elec (GtkToggleButton * but, gpointer data)
   if (i == 2) widget_set_sensitive (elec_box[1], j);
 }
 
+/*
+*  GtkWidget * create_electro_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_electro_box ()
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -1744,6 +2199,14 @@ GtkWidget * vdw_box[2];
 gchar * eval_vdw[6] = {"Lorentz-Berthelot", "Fender-Halsey", "Hogervorst",
                        "Halgren HHG", "Tang-Toennies", "Functional"};
 
+/*
+*  G_MODULE_EXPORT void set_vdw_param (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_vdw_param (GtkEntry * res, gpointer data)
 {
   int i;
@@ -1764,14 +2227,38 @@ G_MODULE_EXPORT void set_vdw_param (GtkEntry * res, gpointer data)
   update_entry_double (GTK_ENTRY(res), tmp_field -> vdw_opts[i]);
 }
 
+/*
+*  G_MODULE_EXPORT void set_vdw_mix (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_vdw_mix (GtkComboBox * box, gpointer data)
 {
   tmp_field -> vdw_opts[5] =  gtk_combo_box_get_active (box);
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void check_vdw (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void check_vdw (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void check_vdw (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_vdw (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -1787,6 +2274,13 @@ G_MODULE_EXPORT void check_vdw (GtkToggleButton * but, gpointer data)
   if (j == 4) widget_set_sensitive (vdw_box[1], i);
 }
 
+/*
+*  GtkWidget * create_vdws_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_vdws_box ()
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -1839,8 +2333,24 @@ GtkWidget * create_vdws_box ()
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void check_met (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void check_met (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void check_met (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_met (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -1854,6 +2364,13 @@ G_MODULE_EXPORT void check_met (GtkToggleButton * but, gpointer data)
   tmp_field -> met_opts[j] = (double)i;
 }
 
+/*
+*  GtkWidget * create_metal_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_metal_box ()
 {
   GtkWidget * vbox = create_vbox (BSEP);
@@ -1872,6 +2389,14 @@ GtkWidget * create_metal_box ()
   return vbox;
 }
 
+/*
+*  G_MODULE_EXPORT void set_sys_param (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_sys_param (GtkEntry * res, gpointer data)
 {
   int i;
@@ -1915,14 +2440,38 @@ gchar * sys_opts[10] = {"Relative dielectric constant &#949;<sub>r</sub>",
                         "Create an expanded version of the current model:",
                         "Restart calculation:"};
 
+/*
+*  G_MODULE_EXPORT void set_sys_restart (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_sys_restart (GtkComboBox * box, gpointer data)
 {
   tmp_field -> sys_opts[15] =  gtk_combo_box_get_active (box);
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void check_sys (GtkCheckButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkCheckButton * but : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void check_sys (GtkCheckButton * but, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void check_sys (GtkToggleButton * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkToggleButton * but : 
+*  gpointer data         : 
+*/
 G_MODULE_EXPORT void check_sys (GtkToggleButton * but, gpointer data)
 #endif
 {
@@ -1943,6 +2492,13 @@ G_MODULE_EXPORT void check_sys (GtkToggleButton * but, gpointer data)
   }
 }
 
+/*
+*  GtkWidget * create_sys_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_sys_box ()
 {
   GtkWidget * vbox;
@@ -2000,6 +2556,13 @@ GtkWidget * create_sys_box ()
   return hhbox;
 }
 
+/*
+*  GtkWidget * create_restart_box ()
+*
+*  Usage: 
+*
+*   : 
+*/
 GtkWidget * create_restart_box ()
 {
   GtkWidget * vbox = create_vbox (5);
@@ -2023,6 +2586,13 @@ GtkWidget * create_restart_box ()
 }
 
 
+/*
+*  GtkWidget * vbox_control (int f)
+*
+*  Usage: 
+*
+*  int f : 
+*/
 GtkWidget * vbox_control (int f)
 {
   GtkWidget * vbox;

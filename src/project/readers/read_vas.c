@@ -11,6 +11,21 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'read_vas.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int vas_get_atom_coordinates (int sli);
+  int open_vas_file (int linec);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 #include "callbacks.h"
@@ -21,6 +36,13 @@ If not, see <https://www.gnu.org/licenses/> */
 #include <omp.h>
 #include "readers.h"
 
+/*
+*  int vas_get_atom_coordinates (int sli)
+*
+*  Usage: 
+*
+*  int sli : 
+*/
 int vas_get_atom_coordinates (int sli)
 {
   int i, j, k, l;
@@ -202,6 +224,13 @@ int vas_get_atom_coordinates (int sli)
   return 0;
 }
 
+/*
+*  int open_vas_file (int linec)
+*
+*  Usage: 
+*
+*  int linec : 
+*/
 int open_vas_file (int linec)
 {
   int i, j;

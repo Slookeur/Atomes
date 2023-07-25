@@ -11,6 +11,33 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'ogl_text.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int * paint_bitmap (vec4_t color, GLfloat a, int cw, int ch, unsigned char * buff);
+
+  void render_string (int glsl, int id, struct screen_string * this_string);
+  void debug_string (struct screen_string  * this_string);
+  void render_all_strings (int glsl, int id);
+
+  static void normalize_text_size (GLenum texture,  int * width, int * height);
+
+  struct screen_string * was_not_rendered_already (char * word, struct screen_string * list);
+
+  ColRGBA * opposite_color (ColRGBA col);
+
+  object_3d * create_string_texture (int cwidth, int cheight, int * pixels);
+  object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, struct screen_string * this_string);
+
+*/
+
 #include "global.h"
 #include "glview.h"
 
@@ -40,6 +67,15 @@ const int OUTLINE_BRUSH[2*OUTLINE_WIDTH+1][2*OUTLINE_WIDTH+1]
    { 30, 65,  85,  100,  85, 65,  30 },
    { 10, 30,  45,  50,  45,  30,  10 }};
 
+/*
+*  static void normalize_text_size (GLenum texture,  int * width, int * height)
+*
+*  Usage: 
+*
+*  GLenum texture : 
+*   int * width   : 
+*  int * height   : 
+*/
 static void normalize_text_size (GLenum texture,  int * width, int * height)
 {
   // if the texture target is GL_TEXTURE_2D, that means that
@@ -56,6 +92,17 @@ static void normalize_text_size (GLenum texture,  int * width, int * height)
   }
 }
 
+/*
+*  int * paint_bitmap (vec4_t color, GLfloat a, int cw, int ch, unsigned char * buff)
+*
+*  Usage: 
+*
+*  vec4_t color         : 
+*  GLfloat a            : 
+*  int cw               : 
+*  int ch               : 
+*  unsigned char * buff : 
+*/
 int * paint_bitmap (vec4_t color, GLfloat a, int cw, int ch, unsigned char * buff)
 {
   int i;
@@ -113,6 +160,15 @@ int * paint_bitmap (vec4_t color, GLfloat a, int cw, int ch, unsigned char * buf
 
 gboolean render_format;
 
+/*
+*  object_3d * create_string_texture (int cwidth, int cheight, int * pixels)
+*
+*  Usage: 
+*
+*  int cwidth   : 
+*  int cheight  : 
+*  int * pixels : 
+*/
 object_3d * create_string_texture (int cwidth, int cheight, int * pixels)
 {
   int i, j, n;
@@ -218,6 +274,16 @@ object_3d * create_string_texture (int cwidth, int cheight, int * pixels)
   return new_string;
 }
 
+/*
+*  object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, struct screen_string * this_string)
+*
+*  Usage: 
+*
+*  PangoLayout * layout               : 
+*  GLenum texture                     : 
+*  int id                             : 
+*  struct screen_string * this_string : 
+*/
 object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, struct screen_string * this_string)
 {
   FT_Bitmap bitmap;
@@ -312,6 +378,13 @@ object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id
   return new_string;
 }
 
+/*
+*  ColRGBA * opposite_color (ColRGBA col)
+*
+*  Usage: 
+*
+*  ColRGBA col : 
+*/
 ColRGBA * opposite_color (ColRGBA col)
 {
   ColRGBA * ocol = g_malloc0 (sizeof*ocol);
@@ -322,6 +395,15 @@ ColRGBA * opposite_color (ColRGBA col)
   return ocol;
 }
 
+/*
+*  void render_string (int glsl, int id, struct screen_string * this_string)
+*
+*  Usage: 
+*
+*  int glsl                           : 
+*  int id                             : 
+*  struct screen_string * this_string : 
+*/
 void render_string (int glsl, int id, struct screen_string * this_string)
 {
   int j, k, l;
@@ -422,6 +504,13 @@ void render_string (int glsl, int id, struct screen_string * this_string)
   g_object_unref (G_OBJECT(playout));
 }
 
+/*
+*  void debug_string (struct screen_string  * this_string)
+*
+*  Usage: 
+*
+*  struct screen_string  * this_string : 
+*/
 void debug_string (struct screen_string  * this_string)
 {
   g_debug ("STRING:: id= %d, text:: %s", this_string -> id, this_string -> word);
@@ -438,6 +527,14 @@ void debug_string (struct screen_string  * this_string)
   g_debug ("STRING:: show :: %f",  this_string -> shift[3]);
 }
 
+/*
+*  void render_all_strings (int glsl, int id)
+*
+*  Usage: 
+*
+*  int glsl : 
+*  int id   : 
+*/
 void render_all_strings (int glsl, int id)
 {
   if (plot -> labels_list[id] != NULL)
@@ -452,6 +549,14 @@ void render_all_strings (int glsl, int id)
   }
 }
 
+/*
+*  struct screen_string * was_not_rendered_already (char * word, struct screen_string * list)
+*
+*  Usage: 
+*
+*  char * word                 : 
+*  struct screen_string * list : 
+*/
 struct screen_string * was_not_rendered_already (char * word, struct screen_string * list)
 {
   if (list != NULL)

@@ -11,6 +11,25 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'work_menu.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void leaving_from_menu (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data);
+
+  GtkWidget * this_work_menu (int id, int p, int c);
+  GtkWidget * work_menu (int id, int p, int c);
+
+*/
+
 #include "global.h"
 #include "callbacks.h"
 #include "interface.h"
@@ -21,6 +40,14 @@ If not, see <https://www.gnu.org/licenses/> */
 extern G_MODULE_EXPORT void on_calc_activate (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data);
 
+/*
+*  G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data)
 {
   init_project (TRUE);
@@ -37,6 +64,14 @@ G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data)
   prep_calc_actions ();
 }
 
+/*
+*  G_MODULE_EXPORT void leaving_from_menu (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void leaving_from_menu (GtkWidget * widg, gpointer data)
 {
 #ifdef GTK4
@@ -48,6 +83,14 @@ G_MODULE_EXPORT void leaving_from_menu (GtkWidget * widg, gpointer data)
 
 int calc_to_compute;
 
+/*
+*  G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data)
 {
   activate_project (NULL, data);
@@ -55,6 +98,15 @@ G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
+/*
+*  GtkWidget * this_work_menu (int id, int p, int c)
+*
+*  Usage: 
+*
+*  int id : 
+*  int p  : 
+*  int c  : 
+*/
 GtkWidget * this_work_menu (int id, int p, int c)
 {
   GtkWidget * menu;
@@ -129,6 +181,15 @@ extern void atomes_menu_bar_action (GSimpleAction * action, GVariant * parameter
 extern GMenu * create_workspace_menu (gchar * act, int pop_up, int proj, int calc);
 extern GSimpleAction * pop_act[7];
 
+/*
+*  GtkWidget * work_menu (int id, int p, int c)
+*
+*  Usage: 
+*
+*  int id : 
+*  int p  : 
+*  int c  : 
+*/
 GtkWidget * work_menu (int id, int p, int c)
 {
   GtkWidget * menu;

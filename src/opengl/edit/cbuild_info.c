@@ -11,6 +11,34 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cbuild_info.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  gchar * get_bravais (int spg);
+  gchar * get_frac (float val);
+
+  void get_wyck_char (float val, int ax, int bx);
+  void get_extra_val (float val, int ax);
+  void get_wyck_names (space_group * spg, int i, int j);
+
+  static void fill_wyckoff_model (GtkTreeStore * store, space_group * spg);
+
+  G_MODULE_EXPORT void set_so_info (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void show_sg_info (GtkWidget * but, gpointer data);
+
+  GtkWidget * create_wyckoff_tree (space_group * spg);
+  GtkWidget * create_setting_info (space_group * spg, int sid);
+  GtkWidget * create_wyck_pts_info (space_group * spg, int sid);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "glview.h"
@@ -37,6 +65,13 @@ GtkWidget * info_wyck_tree;
 
 gchar * wnpos[3] = {NULL, NULL, NULL};
 
+/*
+*  gchar * get_bravais (int spg)
+*
+*  Usage: 
+*
+*  int spg : 
+*/
 gchar * get_bravais (int spg)
 {
   if (groups[spg-1][0] == 'A' || groups[spg-1][0] == 'C')
@@ -65,6 +100,13 @@ gchar * get_bravais (int spg)
   }
 }
 
+/*
+*  gchar * get_frac (float val)
+*
+*  Usage: 
+*
+*  float val : 
+*/
 gchar * get_frac (float val)
 {
   float vallist[12] = {1.0, 1.0/2.0, 1.0/4.0, 3.0/4.0, 1.0/8.0, 3.0/8.0, 5.0/8.0, 7.0/8.0, 1.0/3.0, 2.0/3.0, 1.0/6.0, 5.0/6.0};
@@ -77,6 +119,15 @@ gchar * get_frac (float val)
   return NULL;
 }
 
+/*
+*  void get_wyck_char (float val, int ax, int bx)
+*
+*  Usage: 
+*
+*  float val : 
+*  int ax    : 
+*  int bx    : 
+*/
 void get_wyck_char (float val, int ax, int bx)
 {
   if (wnpos[ax])
@@ -131,6 +182,14 @@ void get_wyck_char (float val, int ax, int bx)
   }
 }
 
+/*
+*  void get_extra_val (float val, int ax)
+*
+*  Usage: 
+*
+*  float val : 
+*  int ax    : 
+*/
 void get_extra_val (float val, int ax)
 {
   if (val)
@@ -155,6 +214,15 @@ void get_extra_val (float val, int ax)
   }
 }
 
+/*
+*  void get_wyck_names (space_group * spg, int i, int j)
+*
+*  Usage: 
+*
+*  space_group * spg : 
+*  int i             : 
+*  int j             : 
+*/
 void get_wyck_names (space_group * spg, int i, int j)
 {
   int k, l;
@@ -213,6 +281,14 @@ void get_wyck_names (space_group * spg, int i, int j)
 }
 
 
+/*
+*  static void fill_wyckoff_model (GtkTreeStore * store, space_group * spg)
+*
+*  Usage: 
+*
+*  GtkTreeStore * store : 
+*  space_group * spg    : 
+*/
 static void fill_wyckoff_model (GtkTreeStore * store, space_group * spg)
 {
   GtkTreeIter wlevel;
@@ -265,6 +341,13 @@ void set_wisible (GtkTreeViewColumn * col,
   gtk_cell_renderer_set_visible (renderer, (i<5) ? j : ! j);
 }
 
+/*
+*  GtkWidget * create_wyckoff_tree (space_group * spg)
+*
+*  Usage: 
+*
+*  space_group * spg : 
+*/
 GtkWidget * create_wyckoff_tree (space_group * spg)
 {
   int i;
@@ -288,6 +371,14 @@ GtkWidget * create_wyckoff_tree (space_group * spg)
   return wtree;
 }
 
+/*
+*  GtkWidget * create_setting_info (space_group * spg, int sid)
+*
+*  Usage: 
+*
+*  space_group * spg : 
+*  int sid           : 
+*/
 GtkWidget * create_setting_info (space_group * spg, int sid)
 {
   gchar * sxyz[3];
@@ -305,6 +396,14 @@ GtkWidget * create_setting_info (space_group * spg, int sid)
   return label;
 }
 
+/*
+*  GtkWidget * create_wyck_pts_info (space_group * spg, int sid)
+*
+*  Usage: 
+*
+*  space_group * spg : 
+*  int sid           : 
+*/
 GtkWidget * create_wyck_pts_info (space_group * spg, int sid)
 {
   int i, j;
@@ -338,6 +437,14 @@ GtkWidget * create_wyck_pts_info (space_group * spg, int sid)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void set_so_info (GtkComboBox * box, gpointer data)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer data     : 
+*/
 G_MODULE_EXPORT void set_so_info (GtkComboBox * box, gpointer data)
 {
   builder_edition * cbuilder = (builder_edition *)data;
@@ -366,6 +473,14 @@ G_MODULE_EXPORT void set_so_info (GtkComboBox * box, gpointer data)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void show_sg_info (GtkWidget * but, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * but : 
+*  gpointer data   : 
+*/
 G_MODULE_EXPORT void show_sg_info (GtkWidget * but, gpointer data)
 {
   tint * id = (tint *) data;

@@ -11,6 +11,23 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cbuild_sg.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  int get_this_group_data (space_group * spg,  xmlNodePtr racine);
+
+  space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader);
+  space_group * read_sg_xml_file (const char * filetoread);
+
+*/
+
 #include "global.h"
 #include "cbuild_edit.h"
 
@@ -476,6 +493,14 @@ gchar * hmsymbols[230] = {"P 1",
                           "I 4/m -3 2/m",
                           "I 41/a -3 2/d"};
 
+/*
+*  space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader)
+*
+*  Usage: 
+*
+*  xmlDoc * doc            : 
+*  xmlTextReaderPtr reader : 
+*/
 space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader)
 {
   xmlFreeDoc(doc);
@@ -484,6 +509,14 @@ space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader)
   return NULL;
 }
 
+/*
+*  int get_this_group_data (space_group * spg,  xmlNodePtr racine)
+*
+*  Usage: 
+*
+*  space_group * spg  : 
+*   xmlNodePtr racine : 
+*/
 int get_this_group_data (space_group * spg,  xmlNodePtr racine)
 {
   xmlNodePtr node, num_node;
@@ -600,6 +633,13 @@ int get_this_group_data (space_group * spg,  xmlNodePtr racine)
   return 1;
 }
 
+/*
+*  space_group * read_sg_xml_file (const char * filetoread)
+*
+*  Usage: 
+*
+*  const char * filetoread : 
+*/
 space_group * read_sg_xml_file (const char * filetoread)
 {
   int i, j;

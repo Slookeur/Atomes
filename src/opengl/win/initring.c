@@ -11,9 +11,36 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'initring.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+1]);
+  void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * num, int ring[* num]);
+  void allocate_all_rings_ (int * id, int * st, int * ta, int * nring);
+
+*/
+
 #include "global.h"
 #include "glwindow.h"
 
+/*
+*  void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+1])
+*
+*  Usage: 
+*
+*  int * id          : 
+*  int * st          : 
+*  int * ta          : 
+*  int * ri          : 
+*  int nring[* ta+1] : 
+*/
 void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+1])
 {
   int i;
@@ -24,6 +51,18 @@ void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+
   }
 }
 
+/*
+*  void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * num, int ring[* num])
+*
+*  Usage: 
+*
+*  int * st        : 
+*  int * at        : 
+*  int * id        : 
+*  int * ta        : 
+*  int * num       : 
+*  int ring[* num] : 
+*/
 void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * num, int ring[* num])
 {
   if (ring != NULL)
@@ -38,6 +77,16 @@ void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * n
   }
 }
 
+/*
+*  void allocate_all_rings_ (int * id, int * st, int * ta, int * nring)
+*
+*  Usage: 
+*
+*  int * id    : 
+*  int * st    : 
+*  int * ta    : 
+*  int * nring : 
+*/
 void allocate_all_rings_ (int * id, int * st, int * ta, int * nring)
 {
   active_glwin -> all_rings[* id][* st][* ta - 1] = allocdint (* nring, * ta);

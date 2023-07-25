@@ -11,6 +11,31 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_colors.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void window_color (struct project * this_proj, glwin * view, int id);
+
+  G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data);
+  G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, gpointer data);
+  G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
+  G_MODULE_EXPORT void window_color_coord (GtkWidget * widg, gpointer data);
+
+*/
+
 #include "global.h"
 #include "interface.h"
 #include "project.h"
@@ -20,6 +45,15 @@ If not, see <https://www.gnu.org/licenses/> */
 
 int wc_cid;
 
+/*
+*  G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * win  : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data)
 {
   struct project * this_proj = (struct project *)data;
@@ -50,6 +84,15 @@ G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpoint
   destroy_this_dialog (win);
 }
 
+/*
+*  void window_color (struct project * this_proj, glwin * view, int id)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  glwin * view               : 
+*  int id                     : 
+*/
 void window_color (struct project * this_proj, glwin * view, int id)
 {
   gchar * str;
@@ -86,8 +129,25 @@ void window_color (struct project * this_proj, glwin * view, int id)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
 #endif
 {
@@ -97,8 +157,25 @@ G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
 #endif
 {
@@ -109,8 +186,25 @@ G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
 #endif
 {
@@ -124,6 +218,15 @@ G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
   update (this_proj -> modelgl);
 }
 
+/*
+*  G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * win  : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, gpointer data)
 {
   qint * cid = (qint *)data;
@@ -144,8 +247,25 @@ G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, 
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
+*
+*  Usage: 
+*
+*  GSimpleAction * action : 
+*  GVariant * parameter   : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
+/*
+*  G_MODULE_EXPORT void window_color_coord (GtkWidget * widg, gpointer data)
+*
+*  Usage: 
+*
+*  GtkWidget * widg : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void window_color_coord (GtkWidget * widg, gpointer data)
 #endif
 {

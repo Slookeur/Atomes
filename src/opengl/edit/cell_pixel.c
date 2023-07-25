@@ -11,10 +11,41 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'cell_pixel.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void pix_info_ (int * na, int * nb, int * nc);
+  void send_pix_info_ (int * p, int listp[27], int * ngb);
+  void update_pix_table (struct project * this_proj);
+
+  G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data);
+
+  GtkWidget * create_css_label (gchar * str, int id);
+  GtkWidget * attach_grid (struct project * this_proj, int init);
+  GtkWidget * pixels_tab (struct project * this_proj);
+
+*/
+
 #ifdef DEBUG
 
 #include "cell_edit.h"
 
+/*
+*  void pix_info_ (int * na, int * nb, int * nc)
+*
+*  Usage: 
+*
+*  int * na : 
+*  int * nb : 
+*  int * nc : 
+*/
 void pix_info_ (int * na, int * nb, int * nc)
 {
   active_project -> pix[0] = *na;
@@ -23,6 +54,15 @@ void pix_info_ (int * na, int * nb, int * nc)
   active_project -> pixels = allocdint (active_project -> pix[0]*active_project -> pix[1]*active_project -> pix[2],27);
 }
 
+/*
+*  void send_pix_info_ (int * p, int listp[27], int * ngb)
+*
+*  Usage: 
+*
+*  int * p       : 
+*  int listp[27] : 
+*  int listp[27] : 
+*/
 void send_pix_info_ (int * p, int listp[27], int * ngb)
 {
   int i;
@@ -32,6 +72,14 @@ void send_pix_info_ (int * p, int listp[27], int * ngb)
   }
 }
 
+/*
+*  GtkWidget * create_css_label (gchar * str, int id)
+*
+*  Usage: 
+*
+*  gchar * str : 
+*  int id      : 
+*/
 GtkWidget * create_css_label (gchar * str, int id)
 {
   gchar * colo[2] = {"white", "yellow"};
@@ -47,6 +95,14 @@ GtkWidget * create_css_label (gchar * str, int id)
   return lab;
 }
 
+/*
+*  GtkWidget * attach_grid (struct project * this_proj, int init)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*  int init                   : 
+*/
 GtkWidget * attach_grid (struct project * this_proj, int init)
 {
   GtkWidget * table = gtk_grid_new ();
@@ -92,6 +148,13 @@ GtkWidget * attach_grid (struct project * this_proj, int init)
   return table;
 }
 
+/*
+*  void update_pix_table (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 void update_pix_table (struct project * this_proj)
 {
   int i;
@@ -137,6 +200,14 @@ void update_pix_table (struct project * this_proj)
   show_the_widgets (this_proj -> pix_box);
 }
 
+/*
+*  G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * res : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
 {
   int id = GPOINTER_TO_INT (data);
@@ -153,6 +224,13 @@ G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
   update_pix_table (this_proj);
 }
 
+/*
+*  GtkWidget * pixels_tab (struct project * this_proj)
+*
+*  Usage: 
+*
+*  struct project * this_proj : 
+*/
 GtkWidget * pixels_tab (struct project * this_proj)
 {
   GtkWidget * layout = create_layout (700, 750);

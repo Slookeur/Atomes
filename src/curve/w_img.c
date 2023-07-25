@@ -11,6 +11,29 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with Atomes.
 If not, see <https://www.gnu.org/licenses/> */
 
+/*
+* This file: 'w_img.c'
+*
+*  Contains: 
+*
+*
+*
+*
+*  List of subroutines: 
+
+  void write_image (gpointer curetow);
+
+  G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data);
+  G_MODULE_EXPORT void set_background (GtkCheckButton * backb);
+  G_MODULE_EXPORT void set_background (GtkToggleButton * backb);
+  G_MODULE_EXPORT void choose_format (GtkComboBox * box, gpointer cid);
+  G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpointer data);
+  G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpointer data);
+  G_MODULE_EXPORT void save_image (GtkWidget * curve, gpointer cdata);
+
+*/
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 
@@ -23,6 +46,14 @@ double back_alpha;
 dwidget thedata;
 int forme;
 
+/*
+*  G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
+*
+*  Usage: 
+*
+*  GtkEntry * val : 
+*  gpointer data  : 
+*/
 G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
 {
   const gchar * m;
@@ -45,8 +76,22 @@ G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
 }
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void set_background (GtkCheckButton * backb)
+*
+*  Usage: 
+*
+*  GtkCheckButton * backb : 
+*/
 G_MODULE_EXPORT void set_background (GtkCheckButton * backb)
 #else
+/*
+*  G_MODULE_EXPORT void set_background (GtkToggleButton * backb)
+*
+*  Usage: 
+*
+*  GtkToggleButton * backb : 
+*/
 G_MODULE_EXPORT void set_background (GtkToggleButton * backb)
 #endif
 {
@@ -64,6 +109,14 @@ G_MODULE_EXPORT void set_background (GtkToggleButton * backb)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void choose_format (GtkComboBox * box, gpointer cid)
+*
+*  Usage: 
+*
+*  GtkComboBox * box : 
+*  gpointer cid      : 
+*/
 G_MODULE_EXPORT void choose_format (GtkComboBox * box, gpointer cid)
 {
   forme = gtk_combo_box_get_active (box);
@@ -111,10 +164,28 @@ gchar * i_pattern[4]={"*.png",
                       "*.eps"};
 
 #ifdef GTK4
+/*
+*  G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkNativeDialog * info : 
+*  gint response_id       : 
+*  gpointer data          : 
+*/
 G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
+/*
+*  G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * info : 
+*  gint response_id : 
+*  gpointer data    : 
+*/
 G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkWidget *)info);
@@ -140,6 +211,13 @@ G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpoint
 #endif
 }
 
+/*
+*  void write_image (gpointer curetow)
+*
+*  Usage: 
+*
+*  gpointer curetow : 
+*/
 void write_image (gpointer curetow)
 {
   int a, b, c;
@@ -188,6 +266,15 @@ void write_image (gpointer curetow)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpointer data)
+*
+*  Usage: 
+*
+*  GtkDialog * save_img : 
+*  gint response_id     : 
+*  gpointer data        : 
+*/
 G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpointer data)
 {
   gboolean done = FALSE;
@@ -214,6 +301,14 @@ G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpo
   if (done) destroy_this_dialog (save_img);
 }
 
+/*
+*  G_MODULE_EXPORT void save_image (GtkWidget * curve, gpointer cdata)
+*
+*  Usage: 
+*
+*  GtkWidget * curve : 
+*  gpointer cdata    : 
+*/
 G_MODULE_EXPORT void save_image (GtkWidget * curve, gpointer cdata)
 {
   GtkWidget * save_img;
