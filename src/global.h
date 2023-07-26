@@ -14,11 +14,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'global.h'
 *
-*  Contains: 
+*  Contains:
 
-*  Called by: 
-
-  All files !
+ - Global variable definitions
+ - Global data structure definitions
 
 */
 
@@ -359,8 +358,6 @@ extern struct insert_object * copied_object;
 
 extern GMainLoop * Event_loop[5];
 
-extern gboolean registered_atomes;
-extern gboolean testing_atomes;
 extern gboolean in_movie_encoding;
 extern gboolean newspace;
 extern gboolean reading_input;

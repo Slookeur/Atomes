@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_data.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - Write / output curve data
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, gpointer data);
   G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpointer data);
@@ -34,7 +35,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "interface.h"
 #include "curve.h"
-#include "valid.h"
 
 void save_to_file_ (int *, char *, int *, double *, double *, int *, int *, int *, double *, int *, int *, int *, int *, char *);
 void prep_file_ (int *, char *, int *, int *, int *, double *, int *, int *);
@@ -46,11 +46,11 @@ GtkFileFilter * filter1, * filter2;
 /*
 *  G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkNativeDialog * info : 
-*  gint response_id       : 
-*  gpointer data          : 
+*  GtkNativeDialog * info :
+*  gint response_id       :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -59,11 +59,11 @@ G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, 
 /*
 *  G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * info : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * info :
+*  gint response_id :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -148,15 +148,13 @@ G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpoint
 /*
 *  G_MODULE_EXPORT void write_curve (GtkWidget * butcurve, gpointer idata)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * butcurve : 
-*  gpointer idata       : 
+*  GtkWidget * butcurve :
+*  gpointer idata       :
 */
 G_MODULE_EXPORT void write_curve (GtkWidget * butcurve, gpointer idata)
 {
-  if (! saving_option ()) goto end;
-
 #ifdef GTK4
   GtkFileChooserNative * info;
 #else

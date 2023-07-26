@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'tab-1.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The 1st tab of the curve edition dialog
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void set_frame_style (gpointer data);
 
@@ -80,10 +81,10 @@ int a, b, c, d;
 /*
 *  G_MODULE_EXPORT void set_window_size (GtkEntry * maj, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * maj : 
-*  gpointer data  : 
+*  GtkEntry * maj :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_window_size (GtkEntry * maj, gpointer data)
 {
@@ -123,6 +124,25 @@ G_MODULE_EXPORT void set_window_size (GtkEntry * maj, gpointer data)
   update_entry_int (maj, this_proj -> curves[b][c] -> wsize[d]);
 }
 
+/*
+*  cairo_surface_t * draw_frame_surface (int tf,
+                                         int da,
+                                         double ti,
+                                         double x[2],
+                                         double y[2],
+                                         ColRGBA dcol,
+                                         ColRGBA bcol)
+*
+*  Usage:
+*
+*  int tf       :
+*  int da       :
+*  double ti    :
+*  double x[2]  :
+*  double y[2]  :
+*  ColRGBA dcol :
+*  ColRGBA bcol :
+*/
 cairo_surface_t * draw_frame_surface (int tf,
                                       int da,
                                       double ti,
@@ -149,20 +169,20 @@ cairo_surface_t * draw_frame_surface (int tf,
 /*
 *  G_MODULE_EXPORT void set_title (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void set_title (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void set_title (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void set_title (GtkToggleButton * but, gpointer data)
 #endif
@@ -185,20 +205,20 @@ G_MODULE_EXPORT void set_title (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_title_default (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void set_title_default (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void set_title_default (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void set_title_default (GtkToggleButton * but, gpointer data)
 #endif
@@ -226,10 +246,10 @@ G_MODULE_EXPORT void set_title_default (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_title_custom (GtkEntry * tit, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * tit : 
-*  gpointer data  : 
+*  GtkEntry * tit :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_title_custom (GtkEntry * tit, gpointer data)
 {
@@ -247,10 +267,10 @@ G_MODULE_EXPORT void set_title_custom (GtkEntry * tit, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_title_font (GtkFontButton * fontb, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkFontButton * fontb : 
-*  gpointer data         : 
+*  GtkFontButton * fontb :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void set_title_font (GtkFontButton * fontb, gpointer data)
 {
@@ -267,10 +287,10 @@ G_MODULE_EXPORT void set_title_font (GtkFontButton * fontb, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_title_color (GtkColorChooser * colob, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkColorChooser * colob : 
-*  gpointer data           : 
+*  GtkColorChooser * colob :
+*  gpointer data           :
 */
 G_MODULE_EXPORT void set_title_color (GtkColorChooser * colob, gpointer data)
 {
@@ -286,10 +306,10 @@ G_MODULE_EXPORT void set_title_color (GtkColorChooser * colob, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_title_pos (GtkEntry * entry, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * entry : 
-*  gpointer data    : 
+*  GtkEntry * entry :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_title_pos (GtkEntry * entry, gpointer data)
 {
@@ -322,9 +342,9 @@ G_MODULE_EXPORT void set_title_pos (GtkEntry * entry, gpointer data)
 /*
 *  void set_frame_style (gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  gpointer data : 
+*  gpointer data :
 */
 void set_frame_style (gpointer data)
 {
@@ -357,20 +377,20 @@ void set_frame_style (gpointer data)
 /*
 *  G_MODULE_EXPORT void set_show_frame (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void set_show_frame (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void set_show_frame (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void set_show_frame (GtkToggleButton * but, gpointer data)
 #endif
@@ -392,10 +412,10 @@ G_MODULE_EXPORT void set_show_frame (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_background_color (GtkColorChooser * colob, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkColorChooser * colob : 
-*  gpointer data           : 
+*  GtkColorChooser * colob :
+*  gpointer data           :
 */
 G_MODULE_EXPORT void set_background_color (GtkColorChooser * colob, gpointer data)
 {
@@ -411,10 +431,10 @@ G_MODULE_EXPORT void set_background_color (GtkColorChooser * colob, gpointer dat
 /*
 *  G_MODULE_EXPORT void set_frame_type (GtkComboBox * fbox, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * fbox : 
-*  gpointer data      : 
+*  GtkComboBox * fbox :
+*  gpointer data      :
 */
 G_MODULE_EXPORT void set_frame_type (GtkComboBox * fbox, gpointer data)
 {
@@ -429,10 +449,10 @@ G_MODULE_EXPORT void set_frame_type (GtkComboBox * fbox, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_frame_line (GtkComboBox * fbox, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * fbox : 
-*  gpointer data      : 
+*  GtkComboBox * fbox :
+*  gpointer data      :
 */
 G_MODULE_EXPORT void set_frame_line (GtkComboBox * fbox, gpointer data)
 {
@@ -447,10 +467,10 @@ G_MODULE_EXPORT void set_frame_line (GtkComboBox * fbox, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_frame_thickness (GtkEntry * entry, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * entry : 
-*  gpointer data    : 
+*  GtkEntry * entry :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_frame_thickness (GtkEntry * entry, gpointer data)
 {
@@ -469,10 +489,10 @@ G_MODULE_EXPORT void set_frame_thickness (GtkEntry * entry, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_frame_color (GtkColorChooser * colob, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkColorChooser * colob : 
-*  gpointer data           : 
+*  GtkColorChooser * colob :
+*  gpointer data           :
 */
 G_MODULE_EXPORT void set_frame_color (GtkColorChooser * colob, gpointer data)
 {
@@ -488,10 +508,10 @@ G_MODULE_EXPORT void set_frame_color (GtkColorChooser * colob, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_frame_pos (GtkEntry * fen, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * fen : 
-*  gpointer data  : 
+*  GtkEntry * fen :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_frame_pos (GtkEntry * fen, gpointer data)
 {
@@ -568,9 +588,9 @@ G_MODULE_EXPORT void set_frame_pos (GtkEntry * fen, gpointer data)
 /*
 *  GtkWidget * create_tab_1 (gpointer data)
 *
-*  Usage: 
+*  Usage: handle the creation of the 1st tab of the curve edition dialog
 *
-*  gpointer data : 
+*  gpointer data :
 */
 GtkWidget * create_tab_1 (gpointer data)
 {

@@ -14,19 +14,21 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'work_menu.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The workspace menu GTK3 version
+ - Callbacks for the workspace menu
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void leaving_from_menu (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data);
 
-  GtkWidget * this_work_menu (int id, int p, int c);
-  GtkWidget * work_menu (int id, int p, int c);
+  GtkWidget * this_work_menu (int p, int c);
+  GtkWidget * work_menu (int p, int c);
 
 */
 
@@ -43,10 +45,10 @@ extern G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data);
 /*
 *  G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: create a new project
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data)
 {
@@ -67,10 +69,10 @@ G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void leaving_from_menu (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: leaving atomes ?
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void leaving_from_menu (GtkWidget * widg, gpointer data)
 {
@@ -86,10 +88,10 @@ int calc_to_compute;
 /*
 *  G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: to compute the 'calc_to_compute'
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data)
 {
@@ -99,15 +101,14 @@ G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data)
 
 #ifdef GTK3
 /*
-*  GtkWidget * this_work_menu (int id, int p, int c)
+*  GtkWidget * this_work_menu (int p, int c)
 *
-*  Usage: 
+*  Usage: create the workspace menu GTK3 version with icons
 *
-*  int id : 
-*  int p  : 
-*  int c  : 
+*  int p  : Project id, or -1
+*  int c  : Calculation id, or -1
 */
-GtkWidget * this_work_menu (int id, int p, int c)
+GtkWidget * this_work_menu (int p, int c)
 {
   GtkWidget * menu;
   GtkWidget * port;
@@ -182,15 +183,14 @@ extern GMenu * create_workspace_menu (gchar * act, int pop_up, int proj, int cal
 extern GSimpleAction * pop_act[7];
 
 /*
-*  GtkWidget * work_menu (int id, int p, int c)
+*  GtkWidget * work_menu (int p, int c)
 *
-*  Usage: 
+*  Usage: create the workspace popup menu
 *
-*  int id : 
-*  int p  : 
-*  int c  : 
+*  int p  : Project id, or -1
+*  int c  : Calculation id, or -1
 */
-GtkWidget * work_menu (int id, int p, int c)
+GtkWidget * work_menu (int p, int c)
 {
   GtkWidget * menu;
 
@@ -236,7 +236,7 @@ GtkWidget * work_menu (int id, int p, int c)
 
   calc_to_compute = (c < AN) ? c : c - 1;
 #ifdef GTK3
-  menu = this_work_menu (1, p, c);
+  menu = this_work_menu (p, c);
   // GMenu * popup = create_workspace_menu ("pop", 1, p, c);
   // gtk_menu_new_from_model (G_MENU_MODEL(popup));
 #else

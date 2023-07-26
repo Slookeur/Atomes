@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'workspace.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int find_calc_by_path (GtkTreeView * treeview, GtkTreePath * path);
   int find_proj_by_path (GtkTreePath * path);
@@ -50,7 +50,7 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glwindow.h"
 
 extern void workinfo (struct project * this_proj, int i);
-extern GtkWidget * work_menu (int id, int p, int c);
+extern GtkWidget * work_menu (int p, int c);
 
 GdkPixbuf * pix = NULL;
 GtkWidget * img = NULL;
@@ -92,10 +92,10 @@ char * work_menu_items[NITEMS-2] = {"Workspace                ",
 /*
 *  void add_project (GtkTreeStore * store, int i)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeStore * store : 
-*  int i                : 
+*  GtkTreeStore * store :
+*  int i                :
 */
 void add_project (GtkTreeStore * store, int i)
 {
@@ -142,9 +142,9 @@ void add_project (GtkTreeStore * store, int i)
 /*
 *  static void fill_workspace (GtkTreeStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeStore * store : 
+*  GtkTreeStore * store :
 */
 static void fill_workspace (GtkTreeStore * store)
 {
@@ -169,10 +169,10 @@ static void fill_workspace (GtkTreeStore * store)
 /*
 *  G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data)
 {
@@ -192,10 +192,10 @@ G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data)
 /*
 *  int find_calc_by_path (GtkTreeView * treeview, GtkTreePath * path)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeView * treeview : 
-*  GtkTreePath * path     : 
+*  GtkTreeView * treeview :
+*  GtkTreePath * path     :
 */
 int find_calc_by_path (GtkTreeView * treeview, GtkTreePath * path)
 {
@@ -214,9 +214,9 @@ int find_calc_by_path (GtkTreeView * treeview, GtkTreePath * path)
 /*
 *  int find_proj_by_path (GtkTreePath * path)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreePath * path : 
+*  GtkTreePath * path :
 */
 int find_proj_by_path (GtkTreePath * path)
 {
@@ -303,10 +303,10 @@ extern char * window_mouse[MOUSE_ACTIONS];
 /*
 *  void correct_this_window_title (GtkWidget * win, gchar * str)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * win : 
-*  gchar * str     : 
+*  GtkWidget * win :
+*  gchar * str     :
 */
 void correct_this_window_title (GtkWidget * win, gchar * str)
 {
@@ -323,10 +323,10 @@ void correct_this_window_title (GtkWidget * win, gchar * str)
 /*
 *  G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * wid : 
-*  gpointer edata  : 
+*  GtkWidget * wid :
+*  gpointer edata  :
 */
 G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata)
 {
@@ -408,8 +408,7 @@ G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata)
     }
     if (activep == i)
     {
-      correct_this_window_title (MainWindow, (registered_atomes) ? g_strdup_printf ("%s - %s", PACKAGE, prepare_for_title(active_project -> name)) :
-                                                                   g_strdup_printf ("%s - %s - demo version", PACKAGE, prepare_for_title(active_project -> name)));
+      correct_this_window_title (MainWindow, g_strdup_printf ("%s - %s", PACKAGE, prepare_for_title(active_project -> name)));
       correct_this_window_title (curvetoolbox, g_strdup_printf ("Toolboxes - %s", prepare_for_title(active_project -> name)));
     }
   }
@@ -418,12 +417,12 @@ G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata)
 /*
 *  void workspace_menu (GtkWidget * tree, gpointer event, double x, double y)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * tree : 
-*  gpointer event   : 
-*  double x         : 
-*  double y         : 
+*  GtkWidget * tree :
+*  gpointer event   :
+*  double x         :
+*  double y         :
 */
 void workspace_menu (GtkWidget * tree, gpointer event, double x, double y)
 {
@@ -440,7 +439,7 @@ void workspace_menu (GtkWidget * tree, gpointer event, double x, double y)
   {
     activew = activep;
   }
-  menu = work_menu (1, activew, this_calc);
+  menu = work_menu (activew, this_calc);
 #ifdef GTK3
   pop_menu_at_pointer (menu, (GdkEvent *)event);
 #else
@@ -453,13 +452,13 @@ void workspace_menu (GtkWidget * tree, gpointer event, double x, double y)
 /*
 *  G_MODULE_EXPORT void workspace_popup (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
-*  gpointer data        : 
+*  GtkGesture * gesture :
+*  int n_press          :
+*  double x             :
+*  double y             :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void workspace_popup (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -472,11 +471,11 @@ G_MODULE_EXPORT void workspace_popup (GtkGesture * gesture, int n_press, double 
 /*
 *  G_MODULE_EXPORT gboolean on_workspace_button_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widget     : 
-*  GdkEventButton * event : 
-*  gpointer data          : 
+*  GtkWidget * widget     :
+*  GdkEventButton * event :
+*  gpointer data          :
 */
 G_MODULE_EXPORT gboolean on_workspace_button_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
@@ -500,9 +499,9 @@ void workspace_set_visible (GtkTreeViewColumn * col,
 /*
 *  GtkWidget * create_workspace_tree ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 GtkWidget * create_workspace_tree ()
 {
@@ -552,9 +551,9 @@ GtkWidget * create_workspace_tree ()
 /*
 *  void create_workspace ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void create_workspace ()
 {
@@ -568,9 +567,9 @@ void create_workspace ()
 /*
 *  void add_project_to_workspace ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void add_project_to_workspace ()
 {
@@ -624,9 +623,9 @@ void add_project_to_workspace ()
 /*
 *  void remove_project_from_workspace (int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id : 
+*  int id :
 */
 void remove_project_from_workspace (int id)
 {

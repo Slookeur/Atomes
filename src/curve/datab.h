@@ -16,11 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  curve/m_curve.c
-  curve/w_curve.c
-
 */
 
 #ifndef DATAB_H_

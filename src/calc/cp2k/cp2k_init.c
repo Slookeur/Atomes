@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_init.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The initialization of the CP2K input assistant
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int find_cp2k_sym ();
 
@@ -230,9 +231,8 @@ GtkWidget * cp2k_thermo_box;
 /*
 *  void print_start_buffer ()
 *
-*  Usage: 
+*  Usage: live display of the CP2K input creation
 *
-*   : 
 */
 void print_start_buffer ()
 {
@@ -250,10 +250,10 @@ void print_start_buffer ()
 /*
 *  G_MODULE_EXPORT void update_cp2k_option (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage: update a value in a GtkEntry while creating a CP2K input file
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry the signal is coming from
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_cp2k_option (GtkEntry * res, gpointer data)
 {
@@ -283,20 +283,20 @@ G_MODULE_EXPORT void update_cp2k_option (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void update_cp2k_option_check (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage: update check/toggle button while creating a CP2K input file
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void update_cp2k_option_check (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void update_cp2k_option_check (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage: update check/toggle button while creating a CP2K input file
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void update_cp2k_option_check (GtkToggleButton * but, gpointer data)
 #endif
@@ -316,10 +316,10 @@ GtkWidget * create_vdw_box (int id);
 /*
 *  G_MODULE_EXPORT void changed_cp2k_option_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage: change a GtkComboBox while creating a CP2K input file
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_cp2k_option_box (GtkComboBox * box, gpointer data)
 {
@@ -348,9 +348,9 @@ G_MODULE_EXPORT void changed_cp2k_option_box (GtkComboBox * box, gpointer data)
 /*
 *  GtkWidget * create_vdw_box (int id)
 *
-*  Usage: 
+*  Usage: build an interface to present/receive VdW info
 *
-*  int id : 
+*  int id :
 */
 GtkWidget * create_vdw_box (int id)
 {
@@ -391,10 +391,10 @@ GtkWidget * create_vdw_box (int id)
 /*
 *  G_MODULE_EXPORT void mol_selection_button (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void mol_selection_button (GtkButton * but, gpointer data)
 {
@@ -419,10 +419,10 @@ G_MODULE_EXPORT void mol_selection_button (GtkButton * but, gpointer data)
 /*
 *  void create_mol_selection_button (GtkWidget * box, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * box : 
-*  int id          : 
+*  GtkWidget * box :
+*  int id          :
 */
 void create_mol_selection_button (GtkWidget * box, int id)
 {
@@ -450,10 +450,10 @@ void create_mol_selection_button (GtkWidget * box, int id)
 /*
 *  G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget *but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget *but : 
-*  gpointer data  : 
+*  GtkWidget *but :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget *but, gpointer data)
 {
@@ -533,10 +533,10 @@ G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget *but, gpointer data)
 /*
 *  G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data)
 {
@@ -563,20 +563,20 @@ G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void update_cp2k_check (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void update_cp2k_check (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void update_cp2k_check (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void update_cp2k_check (GtkToggleButton * but, gpointer data)
 #endif
@@ -620,10 +620,10 @@ G_MODULE_EXPORT void update_cp2k_check (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void cp2k_file_info (GtkTextBuffer * textbuf, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTextBuffer * textbuf : 
-*  gpointer data           : 
+*  GtkTextBuffer * textbuf :
+*  gpointer data           :
 */
 G_MODULE_EXPORT void cp2k_file_info (GtkTextBuffer * textbuf, gpointer data)
 {
@@ -663,9 +663,9 @@ G_MODULE_EXPORT void cp2k_file_info (GtkTextBuffer * textbuf, gpointer data)
 /*
 *  GtkWidget * create_cp2k_spec_box (int spec)
 *
-*  Usage: 
+*  Usage:
 *
-*  int spec : 
+*  int spec :
 */
 GtkWidget * create_cp2k_spec_box (int spec)
 {
@@ -716,10 +716,10 @@ gchar * page_name_cp2k (int p);
 /*
 *  G_MODULE_EXPORT void changed_cp2k_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void changed_cp2k_box (GtkComboBox * box, gpointer data)
 {
@@ -783,10 +783,10 @@ G_MODULE_EXPORT void changed_cp2k_box (GtkComboBox * box, gpointer data)
 /*
 *  void cp2k_option_box (GtkWidget * box, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * box : 
-*  int id          : 
+*  GtkWidget * box :
+*  int id          :
 */
 void cp2k_option_box (GtkWidget * box, int id)
 {
@@ -805,9 +805,9 @@ void cp2k_option_box (GtkWidget * box, int id)
 /*
 *  GtkWidget * cp2k_section_box (int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s : 
+*  int s :
 */
 GtkWidget * cp2k_section_box (int s)
 {
@@ -955,9 +955,9 @@ GtkWidget * cp2k_section_box (int s)
 /*
 *  gchar * cp_section_name (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 gchar * cp_section_name (int p)
 {
@@ -974,9 +974,9 @@ gchar * cp_section_name (int p)
 /*
 *  GtkWidget * vbox_cp2k (int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s : 
+*  int s :
 */
 GtkWidget * vbox_cp2k (int s)
 {
@@ -990,10 +990,10 @@ GtkWidget * vbox_cp2k (int s)
 /*
 *  G_MODULE_EXPORT void select_input_type (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage: select the input file type
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void select_input_type (GtkToggleButton * but, gpointer data)
 {
@@ -1006,9 +1006,9 @@ G_MODULE_EXPORT void select_input_type (GtkToggleButton * but, gpointer data)
 /*
 *  GtkWidget * file_info (int id)
 *
-*  Usage: 
+*  Usage: create the assistant page that present the input file(s) properties
 *
-*  int id : 
+*  int id :
 */
 GtkWidget * file_info (int id)
 {
@@ -1077,9 +1077,8 @@ GtkWidget * file_info (int id)
 /*
 *  GtkWidget * init_cp2k ()
 *
-*  Usage: 
+*  Usage: initialize the CP2K input creation assistant
 *
-*   : 
 */
 GtkWidget * init_cp2k ()
 {
@@ -1128,9 +1127,9 @@ GtkWidget * init_cp2k ()
 /*
 *  gchar * page_name_cp2k (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 gchar * page_name_cp2k (int p)
 {
@@ -1155,9 +1154,9 @@ gchar * page_name_cp2k (int p)
 /*
 *  gboolean cp2k_with_motion (void)
 *
-*  Usage: 
+*  Usage:
 *
-*  void : 
+*  void :
 */
 gboolean cp2k_with_motion (void)
 {
@@ -1178,9 +1177,9 @@ gboolean cp2k_with_motion (void)
 /*
 *  void add_cp2k_pages (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 void add_cp2k_pages (int p)
 {
@@ -1225,9 +1224,8 @@ void add_cp2k_pages (int p)
 /*
 *  int find_cp2k_sym ()
 *
-*  Usage: 
+*  Usage: find the CP2K symmetry parameter based on the cell properties
 *
-*   : 
 */
 int find_cp2k_sym ()
 {

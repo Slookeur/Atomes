@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'init_p.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void init_curves_and_calc (struct project * this_proj);
   void init_project (gboolean alloc_box);
@@ -28,7 +28,6 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "global.h"
 #include "bind.h"
-#include "gui.h"
 #include "callbacks.h"
 #include "interface.h"
 #include "project.h"
@@ -39,9 +38,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void init_curves_and_calc (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void init_curves_and_calc (struct project * this_proj)
 {
@@ -57,9 +56,9 @@ void init_curves_and_calc (struct project * this_proj)
 /*
 *  void init_project (gboolean alloc_box)
 *
-*  Usage: 
+*  Usage:
 *
-*  gboolean alloc_box : 
+*  gboolean alloc_box :
 */
 void init_project (gboolean alloc_box)
 {

@@ -16,19 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  gui/bdcall.c
-  gui/chainscall.c
-  gui/ringscall.c
-  opengl/glview.c
-  project/read_mol.c
-  project/read_opengl.c
-  project/save_bond.c
-  opengl/win/glwindow.c
-  opengl/win/initmol.c
-  opengl/win/menu_bar.c
-
 */
 
 void set_advanced_bonding_menus (glwin * view);

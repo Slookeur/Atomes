@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'glyph.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - Curve glyph drawing subroutines
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp);
   void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size);
@@ -35,14 +36,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp)
 *
-*  Usage: 
+*  Usage:
 *
-*  cairo_t * to : 
-*  double x     : 
-*  double y     : 
-*  double size  : 
-*  double step  : 
-*  double initp : 
+*  cairo_t * to :
+*  double x     :
+*  double y     :
+*  double size  :
+*  double step  :
+*  double initp :
 */
 void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp)
 {
@@ -67,14 +68,14 @@ void draw_poly (cairo_t * to, double x, double y, double size, double step, doub
 /*
 *  void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size)
 *
-*  Usage: 
+*  Usage:
 *
-*  cairo_t * in   : 
-*  int theglyph   : 
-*  double x       : 
-*  double y       : 
-*  ColRGBA gcolor : 
-*  double size    : 
+*  cairo_t * in   :
+*  int theglyph   :
+*  double x       :
+*  double y       :
+*  ColRGBA gcolor :
+*  double size    :
 */
 void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size)
 {

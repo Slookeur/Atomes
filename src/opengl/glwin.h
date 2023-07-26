@@ -16,10 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  project/save_opengl.c
-
 */
 
 #ifndef GLWIN_H_

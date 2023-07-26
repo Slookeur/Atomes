@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'initmol.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_b]);
 
@@ -42,7 +42,6 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "global.h"
 #include "interface.h"
-#include "gui.h"
 #include "bind.h"
 #include "color_box.h"
 #include "glwindow.h"
@@ -74,10 +73,10 @@ extern struct molecule * tmp_mol;
 /*
 *  void duplicate_molecule (struct molecule * new_mol, struct search_molecule * old_mol)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct molecule * new_mol        : 
-*  struct search_molecule * old_mol : 
+*  struct molecule * new_mol        :
+*  struct search_molecule * old_mol :
 */
 void duplicate_molecule (struct molecule * new_mol, struct search_molecule * old_mol)
 {
@@ -93,9 +92,9 @@ void duplicate_molecule (struct molecule * new_mol, struct search_molecule * old
 /*
 *  struct search_molecule * duplicate_search_molecule (struct search_molecule * old_mol)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct search_molecule * old_mol : 
+*  struct search_molecule * old_mol :
 */
 struct search_molecule * duplicate_search_molecule (struct search_molecule * old_mol)
 {
@@ -145,10 +144,10 @@ struct search_molecule * duplicate_search_molecule (struct search_molecule * old
 /*
 *  void allocate_mol_for_step_ (int * sid, int * mol_in_step)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * sid         : 
-*  int * mol_in_step : 
+*  int * sid         :
+*  int * mol_in_step :
 */
 void allocate_mol_for_step_ (int * sid, int * mol_in_step)
 {
@@ -159,9 +158,9 @@ void allocate_mol_for_step_ (int * sid, int * mol_in_step)
 /*
 *  void allocate_mol_data_ ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void allocate_mol_data_ ()
 {
@@ -194,13 +193,13 @@ void allocate_mol_data_ ()
 /*
 *  void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[* nvs])
 *
-*  Usage: 
+*  Usage:
 *
-*  int * stp        : 
-*  int * mol        : 
-*  int * aid        : 
-*  int * nvs        : 
-*  int neigh[* nvs] : 
+*  int * stp        :
+*  int * mol        :
+*  int * aid        :
+*  int * nvs        :
+*  int neigh[* nvs] :
 */
 void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[* nvs])
 {
@@ -241,12 +240,12 @@ void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[
 /*
 *  void update_mol_details (struct search_molecule * mol, int at, int sp, int cp)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct search_molecule * mol : 
-*  int at                       : 
-*  int sp                       : 
-*  int cp                       : 
+*  struct search_molecule * mol :
+*  int at                       :
+*  int sp                       :
+*  int cp                       :
 */
 void update_mol_details (struct search_molecule * mol, int at, int sp, int cp)
 {
@@ -274,14 +273,14 @@ void update_mol_details (struct search_molecule * mol, int at, int sp, int cp)
 /*
 *  void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_mol[* sps], int atom_in_mol[* ats])
 *
-*  Usage: 
+*  Usage:
 *
-*  int * stp              : 
-*  int * mol              : 
-*  int * ats              : 
-*  int * sps              : 
-*  int spec_in_mol[* sps] : 
-*  int spec_in_mol[* sps] : 
+*  int * stp              :
+*  int * mol              :
+*  int * ats              :
+*  int * sps              :
+*  int spec_in_mol[* sps] :
+*  int spec_in_mol[* sps] :
 */
 void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_mol[* sps], int atom_in_mol[* ats])
 {
@@ -319,10 +318,10 @@ void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_
 /*
 *  gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_molecule * mol_b)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct search_molecule * mol_a : 
-*  struct search_molecule * mol_b : 
+*  struct search_molecule * mol_a :
+*  struct search_molecule * mol_b :
 */
 gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_molecule * mol_b)
 {
@@ -382,12 +381,12 @@ gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_
 /*
 *  int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_b])
 *
-*  Usage: 
+*  Usage:
 *
-*  int val_a          : 
-*  int val_b          : 
-*  int table_a[val_a] : 
-*  int table_a[val_a] : 
+*  int val_a          :
+*  int val_b          :
+*  int table_a[val_a] :
+*  int table_a[val_a] :
 */
 int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_b])
 {
@@ -409,9 +408,9 @@ int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_
 /*
 *  void free_search_molecule_data (struct search_molecule * smol)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct search_molecule * smol : 
+*  struct search_molecule * smol :
 */
 void free_search_molecule_data (struct search_molecule * smol)
 {
@@ -440,9 +439,9 @@ void free_search_molecule_data (struct search_molecule * smol)
 /*
 *  void setup_molecules_ (int * stepid)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * stepid : 
+*  int * stepid :
 */
 void setup_molecules_ (int * stepid)
 {
@@ -518,9 +517,9 @@ void setup_molecules_ (int * stepid)
 /*
 *  void setup_menu_molecules_ ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void setup_menu_molecules_ ()
 {
@@ -542,10 +541,10 @@ void setup_menu_molecules_ ()
 /*
 *  void setup_fragments_ (int * sid, int coord[active_project -> natomes])
 *
-*  Usage: 
+*  Usage:
 *
-*  int * sid                            : 
-*  int coord[active_project -> natomes] : 
+*  int * sid                            :
+*  int coord[active_project -> natomes] :
 */
 void setup_fragments_ (int * sid, int coord[active_project -> natomes])
 {

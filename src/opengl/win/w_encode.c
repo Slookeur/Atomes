@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_encode.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void clean_animation (glwin * view);
   void set_sensitive_widgets (gboolean video, int i);
@@ -40,7 +40,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "interface.h"
 #include "glview.h"
 #include "movie.h"
-#include "valid.h"
 
 int video_res[2];
 int framesec;
@@ -56,10 +55,10 @@ extern gboolean spin (gpointer data);
 /*
 *  G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
 {
@@ -77,10 +76,10 @@ G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
 {
@@ -98,10 +97,10 @@ G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
 {
@@ -120,9 +119,9 @@ G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_video_codec (GtkComboBox *ComboBoxGtk)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox *ComboBoxGtk : 
+*  GtkComboBox *ComboBoxGtk :
 */
 G_MODULE_EXPORT void set_video_codec (GtkComboBox *ComboBoxGtk)
 {
@@ -132,10 +131,10 @@ G_MODULE_EXPORT void set_video_codec (GtkComboBox *ComboBoxGtk)
 /*
 *  G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
 {
@@ -150,10 +149,10 @@ G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
 {
@@ -171,9 +170,9 @@ G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
 /*
 *  void clean_animation (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 void clean_animation (glwin * view)
 {
@@ -207,10 +206,10 @@ GtkWidget * cod;
 /*
 *  void set_sensitive_widgets (gboolean video, int i)
 *
-*  Usage: 
+*  Usage:
 *
-*  gboolean video : 
-*  int i          : 
+*  gboolean video :
+*  int i          :
 */
 void set_sensitive_widgets (gboolean video, int i)
 {
@@ -230,10 +229,10 @@ GtkWidget * form;
 /*
 *  G_MODULE_EXPORT void set_image_format (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void set_image_format (GtkComboBox * box, gpointer data)
 {
@@ -261,23 +260,17 @@ gboolean encode_video;
 /*
 *  G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * win  : 
-*  GtkDialog * win  : 
-*  GtkDialog * win  : 
+*  GtkDialog * win  :
+*  GtkDialog * win  :
+*  GtkDialog * win  :
 */
 G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpointer data)
 {
   glwin * view = (glwin *)data;
   if (response_id == GTK_RESPONSE_APPLY)
   {
-    if (! registered_atomes)
-    {
-      show_warning ("Saving features are only available in the registered version of Atomes", MainWindow);
-      registered_atomes = validate ();
-      if (! registered_atomes) goto end;
-    }
     set_sensitive_widgets (encode_video, 0);
     video_options * vopts = g_malloc0(sizeof*vopts);
     vopts -> proj = view -> proj;
@@ -299,7 +292,6 @@ G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpoin
     g_free (vopts -> video_res);
     g_free (vopts);
     set_sensitive_widgets (encode_video, 1);
-    end:;
   }
   else
   {
@@ -310,10 +302,10 @@ G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpoin
 /*
 *  void window_encode (glwin * view, gboolean video)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view   : 
-*  gboolean video : 
+*  glwin * view   :
+*  gboolean video :
 */
 void window_encode (glwin * view, gboolean video)
 {

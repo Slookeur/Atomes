@@ -16,23 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  calc/cp2k/cp2k_files.c
-  calc/cp2k/cp2k_init.c
-  calc/cp2k/cp2k_mol.c
-  calc/cp2k/cp2k_print.c
-  calc/cpmd/cpmd_atoms.c
-  calc/cpmd/cpmd_init.c
-  calc/cpmd/cpmd_nose.c
-  calc/cpmd/cpmd_print.c
-  calc/cpmd/cpmd_restart.c
-  calc/dl_poly/dlp_atom.c
-  calc/dl_poly/dlp_edit.c
-  calc/dl_poly/dlp_field.c
-  calc/dl_poly/dlp_mol.c
-  opengl/win/glwindow.c
-  opengl/win/menu_bar.c
 
 */
 

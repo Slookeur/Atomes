@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'tab-4.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The 4th tab of the curve edition dialog
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int get_active_axis ();
 
@@ -107,9 +108,7 @@ extern int a, b, c, d;
 /*
 *  int get_active_axis ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage:
 */
 int get_active_axis ()
 {
@@ -119,10 +118,10 @@ int get_active_axis ()
 /*
 *  G_MODULE_EXPORT void set_axis_min (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_axis_min (GtkEntry * res, gpointer data)
 {
@@ -152,10 +151,10 @@ G_MODULE_EXPORT void set_axis_min (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis_max (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_axis_max (GtkEntry * res, gpointer data)
 {
@@ -182,10 +181,10 @@ G_MODULE_EXPORT void set_axis_max (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_max_div (GtkEntry * maj, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * maj : 
-*  gpointer data  : 
+*  GtkEntry * maj :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_max_div (GtkEntry * maj, gpointer data)
 {
@@ -214,10 +213,10 @@ G_MODULE_EXPORT void set_max_div (GtkEntry * maj, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_min_div_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_min_div_spin (GtkSpinButton * res, gpointer data)
 {
@@ -237,10 +236,10 @@ G_MODULE_EXPORT void set_min_div_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_ticks_size_major_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_ticks_size_major_spin (GtkSpinButton * res, gpointer data)
 {
@@ -260,10 +259,10 @@ G_MODULE_EXPORT void set_ticks_size_major_spin (GtkSpinButton * res, gpointer da
 /*
 *  G_MODULE_EXPORT void set_ticks_size_minor_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_ticks_size_minor_spin (GtkSpinButton * res, gpointer data)
 {
@@ -285,10 +284,10 @@ G_MODULE_EXPORT void set_ticks_size_minor_spin (GtkSpinButton * res, gpointer da
 /*
 *  G_MODULE_EXPORT void set_lab_digit_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_lab_digit_spin (GtkSpinButton * res, gpointer data)
 {
@@ -310,10 +309,10 @@ G_MODULE_EXPORT void set_lab_digit_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_lab_shift_x_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_lab_shift_x_spin (GtkSpinButton * res, gpointer data)
 {
@@ -335,10 +334,10 @@ G_MODULE_EXPORT void set_lab_shift_x_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_lab_shift_y_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_lab_shift_y_spin (GtkSpinButton * res, gpointer data)
 {
@@ -360,10 +359,10 @@ G_MODULE_EXPORT void set_lab_shift_y_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis_title_x_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_axis_title_x_spin (GtkSpinButton * res, gpointer data)
 {
@@ -383,10 +382,10 @@ G_MODULE_EXPORT void set_axis_title_x_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis_title_y_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_axis_title_y_spin (GtkSpinButton * res, gpointer data)
 {
@@ -406,10 +405,10 @@ G_MODULE_EXPORT void set_axis_title_y_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_io_ticks (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void set_io_ticks (GtkComboBox * box, gpointer data)
 {
@@ -425,10 +424,10 @@ G_MODULE_EXPORT void set_io_ticks (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_pos_ticks (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void set_pos_ticks (GtkComboBox * box, gpointer data)
 {
@@ -444,10 +443,10 @@ G_MODULE_EXPORT void set_pos_ticks (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_pos_labels (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void set_pos_labels (GtkComboBox * box, gpointer data)
 {
@@ -463,10 +462,10 @@ G_MODULE_EXPORT void set_pos_labels (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_ticks_labels_font (GtkFontButton * fontb, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkFontButton * fontb : 
-*  gpointer data         : 
+*  GtkFontButton * fontb :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void set_ticks_labels_font (GtkFontButton * fontb, gpointer data)
 {
@@ -484,10 +483,10 @@ G_MODULE_EXPORT void set_ticks_labels_font (GtkFontButton * fontb, gpointer data
 /*
 *  void ticks_angle_has_changed (gpointer data, double value)
 *
-*  Usage: 
+*  Usage:
 *
-*  gpointer data : 
-*  double value  : 
+*  gpointer data :
+*  double value  :
 */
 void ticks_angle_has_changed (gpointer data, double value)
 {
@@ -503,12 +502,12 @@ void ticks_angle_has_changed (gpointer data, double value)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_ticks_angle (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkRange * range     : 
-*  GtkScrollType scroll : 
-*  gdouble value        : 
-*  gpointer data        : 
+*  GtkRange * range     :
+*  GtkScrollType scroll :
+*  gdouble value        :
+*  gpointer data        :
 */
 G_MODULE_EXPORT gboolean scroll_set_ticks_angle (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -519,10 +518,10 @@ G_MODULE_EXPORT gboolean scroll_set_ticks_angle (GtkRange * range, GtkScrollType
 /*
 *  G_MODULE_EXPORT void set_ticks_angle (GtkRange * range, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkRange * range : 
-*  gpointer data    : 
+*  GtkRange * range :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_ticks_angle (GtkRange * range, gpointer data)
 {
@@ -533,20 +532,20 @@ G_MODULE_EXPORT void set_ticks_angle (GtkRange * range, gpointer data)
 /*
 *  G_MODULE_EXPORT void to_axis_title (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void to_axis_title (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void to_axis_title (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void to_axis_title (GtkToggleButton * but, gpointer data)
 #endif
@@ -579,20 +578,20 @@ G_MODULE_EXPORT void to_axis_title (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_grid (GtkCheckButton * grid, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * grid : 
-*  gpointer data         : 
+*  GtkCheckButton * grid :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void set_grid (GtkCheckButton * grid, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void set_grid (GtkToggleButton * grid, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * grid : 
-*  gpointer data          : 
+*  GtkToggleButton * grid :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void set_grid (GtkToggleButton * grid, gpointer data)
 #endif
@@ -613,10 +612,10 @@ G_MODULE_EXPORT void set_grid (GtkToggleButton * grid, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_autoscale (GtkButton * autosc, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * autosc : 
-*  gpointer data      : 
+*  GtkButton * autosc :
+*  gpointer data      :
 */
 G_MODULE_EXPORT void set_autoscale (GtkButton * autosc, gpointer data)
 {
@@ -633,20 +632,20 @@ G_MODULE_EXPORT void set_autoscale (GtkButton * autosc, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis (GtkCheckButton * axis, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * axis : 
-*  gpointer data         : 
+*  GtkCheckButton * axis :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void set_axis (GtkCheckButton * axis, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void set_axis (GtkToggleButton * axis, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * axis : 
-*  gpointer data          : 
+*  GtkToggleButton * axis :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void set_axis (GtkToggleButton * axis, gpointer data)
 #endif
@@ -667,10 +666,10 @@ G_MODULE_EXPORT void set_axis (GtkToggleButton * axis, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis_legend (GtkEntry * xtit, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * xtit : 
-*  gpointer data   : 
+*  GtkEntry * xtit :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void set_axis_legend (GtkEntry * xtit, gpointer data)
 {
@@ -688,10 +687,10 @@ G_MODULE_EXPORT void set_axis_legend (GtkEntry * xtit, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis_title_font (GtkFontButton * fontb, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkFontButton * fontb : 
-*  gpointer data         : 
+*  GtkFontButton * fontb :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void set_axis_title_font (GtkFontButton * fontb, gpointer data)
 {
@@ -709,10 +708,10 @@ G_MODULE_EXPORT void set_axis_title_font (GtkFontButton * fontb, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_scale (GtkComboBox * sbox, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * sbox : 
-*  gpointer data      : 
+*  GtkComboBox * sbox :
+*  gpointer data      :
 */
 G_MODULE_EXPORT void set_scale (GtkComboBox * sbox, gpointer data)
 {
@@ -734,10 +733,10 @@ int handler_id;
 /*
 *  G_MODULE_EXPORT void update_axis (GtkComboBox * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * widg : 
-*  gpointer data      : 
+*  GtkComboBox * widg :
+*  gpointer data      :
 */
 G_MODULE_EXPORT void update_axis (GtkComboBox * widg, gpointer data)
 {
@@ -805,10 +804,10 @@ G_MODULE_EXPORT void update_axis (GtkComboBox * widg, gpointer data)
 
 /*
 *  GtkWidget * create_tab_4 (gpointer data)
+
+*  Usage: handle the creation of the 4th tab of the curve edition dialog
 *
-*  Usage: 
-*
-*  gpointer data : 
+*  gpointer data :
 */
 GtkWidget * create_tab_4 (gpointer data)
 {

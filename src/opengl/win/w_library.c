@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_library.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader);
   int sml_preview (const char * filetoread);
@@ -279,9 +279,9 @@ int inserted_from_lib;
 /*
 *  double get_z_from_periodic_table (gchar * lab)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * lab : 
+*  gchar * lab :
 */
 double get_z_from_periodic_table (gchar * lab)
 {
@@ -296,10 +296,10 @@ double get_z_from_periodic_table (gchar * lab)
 /*
 *  int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader)
 *
-*  Usage: 
+*  Usage:
 *
-*  xmlDoc * doc            : 
-*  xmlTextReaderPtr reader : 
+*  xmlDoc * doc            :
+*  xmlTextReaderPtr reader :
 */
 int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader)
 {
@@ -312,11 +312,11 @@ int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader)
 /*
 *  gchar * replace_markup (char * init, char * key, char * rep)
 *
-*  Usage: 
+*  Usage:
 *
-*  char * init : 
-*  char * key  : 
-*  char * rep  : 
+*  char * init :
+*  char * key  :
+*  char * rep  :
 */
 gchar * replace_markup (char * init, char * key, char * rep)
 {
@@ -345,11 +345,11 @@ gchar * replace_markup (char * init, char * key, char * rep)
 /*
 *  gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
 *
-*  Usage: 
+*  Usage: replace pattern in string
 *
-*  gchar * init    : 
-*  gchar * o_motif : 
-*  gchar * n_motif : 
+*  gchar * init    : The initial string
+*  gchar * o_motif : The initial pattern
+*  gchar * n_motif : The new pattern
 */
 gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
 {
@@ -368,9 +368,9 @@ gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
 /*
 *  gchar * check_xml_string (gchar * init)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * init : 
+*  gchar * init :
 */
 gchar * check_xml_string (gchar * init)
 {
@@ -387,9 +387,9 @@ gchar * check_xml_string (gchar * init)
 /*
 *  int sml_preview (const char * filetoread)
 *
-*  Usage: 
+*  Usage:
 *
-*  const char * filetoread : 
+*  const char * filetoread :
 */
 int sml_preview (const char * filetoread)
 {
@@ -521,10 +521,10 @@ int sml_preview (const char * filetoread)
 /*
 *  gchar * open_sml_file (const char * filetoread, int fam)
 *
-*  Usage: 
+*  Usage:
 *
-*  const char * filetoread : 
-*  int fam                 : 
+*  const char * filetoread :
+*  int fam                 :
 */
 gchar * open_sml_file (const char * filetoread, int fam)
 {
@@ -582,9 +582,9 @@ gchar * open_sml_file (const char * filetoread, int fam)
 /*
 *  int get_family (gchar * str)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * str : 
+*  gchar * str :
 */
 int get_family (gchar * str)
 {
@@ -599,9 +599,9 @@ int get_family (gchar * str)
 /*
 *  void sort_files (int num_f)
 *
-*  Usage: 
+*  Usage:
 *
-*  int num_f : 
+*  int num_f :
 */
 void sort_files (int num_f)
 {
@@ -631,9 +631,9 @@ void sort_files (int num_f)
 /*
 *  int get_sml_files ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 int get_sml_files ()
 {
@@ -754,9 +754,9 @@ int get_sml_files ()
 /*
 *  void fill_molecule_tree (GtkListStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkListStore * store : 
+*  GtkListStore * store :
 */
 void fill_molecule_tree (GtkListStore * store)
 {
@@ -780,9 +780,9 @@ void fill_molecule_tree (GtkListStore * store)
 /*
 *  void fill_family_tree (GtkListStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkListStore * store : 
+*  GtkListStore * store :
 */
 void fill_family_tree (GtkListStore * store)
 {
@@ -806,9 +806,9 @@ void fill_family_tree (GtkListStore * store)
 /*
 *  void insert_preview ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void insert_preview ()
 {
@@ -887,11 +887,11 @@ void insert_preview ()
 /*
 *  void prepare_preview (int active, int id, gboolean visible)
 *
-*  Usage: 
+*  Usage:
 *
-*  int active       : 
-*  int id           : 
-*  gboolean visible : 
+*  int active       :
+*  int id           :
+*  gboolean visible :
 */
 void prepare_preview (int active, int id, gboolean visible)
 {
@@ -976,11 +976,11 @@ void set_library_markup (GtkTreeViewColumn * col,
 /*
 *  GtkWidget * library_tree (GtkListStore * store, int id, gchar * name)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkListStore * store : 
-*  int id               : 
-*  gchar * name         : 
+*  GtkListStore * store :
+*  int id               :
+*  gchar * name         :
 */
 GtkWidget * library_tree (GtkListStore * store, int id, gchar * name)
 {
@@ -1008,11 +1008,11 @@ gboolean lib_visible;
 /*
 *  G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * lib  : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * lib  :
+*  gint response_id :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id, gpointer data)
 {
@@ -1054,11 +1054,11 @@ G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id,
 /*
 *  int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch)
 *
-*  Usage: 
+*  Usage:
 *
-*  gboolean visible           : 
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
+*  gboolean visible           :
+*  struct project * this_proj :
+*  atom_search * asearch      :
 */
 int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch)
 {
@@ -1099,12 +1099,12 @@ int select_from_library (gboolean visible, struct project * this_proj, atom_sear
 /*
 *  int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id                     : 
-*  gboolean visible           : 
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
+*  int id                     :
+*  gboolean visible           :
+*  struct project * this_proj :
+*  atom_search * asearch      :
 */
 int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch)
 {

@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'labels.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - Curve labels drawing subroutines
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj);
 
@@ -36,13 +37,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  cairo_t * cr               : 
-*  double val                 : 
-*  int axe                    : 
-*  int p                      : 
-*  struct project * this_proj : 
+*  cairo_t * cr               :
+*  double val                 :
+*  int axe                    :
+*  int p                      :
+*  struct project * this_proj :
 */
 void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
 {

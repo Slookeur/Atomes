@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'initcoord.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void set_color_map_sensitive (glwin * view);
   void set_advanced_bonding_menus (glwin * view);
@@ -44,7 +44,6 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "global.h"
 #include "interface.h"
-#include "gui.h"
 #include "bind.h"
 #include "color_box.h"
 #include "glwindow.h"
@@ -61,10 +60,10 @@ int ** idgeo = NULL;
 /*
 *  ColRGBA init_color (int id, int numid)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id    : 
-*  int numid : 
+*  int id    :
+*  int numid :
 */
 ColRGBA init_color (int id, int numid)
 {
@@ -113,9 +112,9 @@ ColRGBA init_color (int id, int numid)
 /*
 *  void set_color_map_sensitive (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 void set_color_map_sensitive (glwin * view)
 {
@@ -134,9 +133,9 @@ void set_color_map_sensitive (glwin * view)
 /*
 *  void set_advanced_bonding_menus (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 void set_advanced_bonding_menus (glwin * view)
 {
@@ -153,9 +152,9 @@ void set_advanced_bonding_menus (glwin * view)
 /*
 *  void prep_all_coord_menus (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 void prep_all_coord_menus (glwin * view)
 {
@@ -174,11 +173,11 @@ void prep_all_coord_menus (glwin * view)
 /*
 *  GtkWidget * coord_view_setup (int * sp, int id, int jd)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * sp : 
-*  int id   : 
-*  int jd   : 
+*  int * sp :
+*  int id   :
+*  int jd   :
 */
 GtkWidget * coord_view_setup (int * sp, int id, int jd)
 {
@@ -196,10 +195,10 @@ GtkWidget * coord_view_setup (int * sp, int id, int jd)
 /*
 *  void gcid_spcolor_setup (int sp, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sp : 
-*  int id : 
+*  int sp :
+*  int id :
 */
 void gcid_spcolor_setup (int sp, int id)
 {
@@ -219,11 +218,11 @@ void gcid_spcolor_setup (int sp, int id)
 /*
 *  GtkWidget * coord_color_setup (int * sp, int id, int jd)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * sp : 
-*  int id   : 
-*  int jd   : 
+*  int * sp :
+*  int id   :
+*  int jd   :
 */
 GtkWidget * coord_color_setup (int * sp, int id, int jd)
 {
@@ -242,11 +241,11 @@ GtkWidget * coord_color_setup (int * sp, int id, int jd)
 /*
 *  GtkWidget * poly_show_setup (int * sp, int id, int jd)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * sp : 
-*  int id   : 
-*  int jd   : 
+*  int * sp :
+*  int id   :
+*  int jd   :
 */
 GtkWidget * poly_show_setup (int * sp, int id, int jd)
 {
@@ -267,13 +266,13 @@ GtkWidget * poly_show_setup (int * sp, int id, int jd)
 /*
 *  GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu, qint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p            : 
-*  char * name      : 
-*  gboolean va      : 
-*  GtkWidget * menu : 
-*  qint * data      : 
+*  int p            :
+*  char * name      :
+*  gboolean va      :
+*  GtkWidget * menu :
+*  qint * data      :
 */
 GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu, qint * data)
 {
@@ -293,12 +292,12 @@ GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu
 /*
 *  void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp])
 *
-*  Usage: 
+*  Usage:
 *
-*  int * sp          : 
-*  int * id          : 
-*  int * ngsp        : 
-*  int coord[* ngsp] : 
+*  int * sp          :
+*  int * id          :
+*  int * ngsp        :
+*  int coord[* ngsp] :
 */
 void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp])
 {
@@ -308,10 +307,10 @@ void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp])
 /*
 *  void allocate_partial_geo_ (int * sp, int * ngsp)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * sp   : 
-*  int * ngsp : 
+*  int * sp   :
+*  int * ngsp :
 */
 void allocate_partial_geo_ (int * sp, int * ngsp)
 {
@@ -326,12 +325,12 @@ void allocate_partial_geo_ (int * sp, int * ngsp)
 /*
 *  void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp])
 *
-*  Usage: 
+*  Usage:
 *
-*  int * id           : 
-*  int * sp           : 
-*  int * ngsp         : 
-*  int coordt[* ngsp] : 
+*  int * id           :
+*  int * sp           :
+*  int * ngsp         :
+*  int coordt[* ngsp] :
 */
 void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp])
 {
@@ -465,9 +464,9 @@ void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp
 /*
 *  void init_menu_fragmol_ (int * id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * id : 
+*  int * id :
 */
 void init_menu_fragmol_ (int * id)
 {
@@ -553,13 +552,13 @@ void init_menu_fragmol_ (int * id)
 /*
 *  void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * coo          : 
-*  int * ids          : 
-*  int * ngsp         : 
-*  int coordt[* ngsp] : 
-*  int coordt[* ngsp] : 
+*  int * coo          :
+*  int * ids          :
+*  int * ngsp         :
+*  int coordt[* ngsp] :
+*  int coordt[* ngsp] :
 */
 void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init)
 {
@@ -644,11 +643,11 @@ void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int 
 /*
 *  void init_opengl_coords (int id, int nt, int init)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id   : 
-*  int nt   : 
-*  int init : 
+*  int id   :
+*  int nt   :
+*  int init :
 */
 void init_opengl_coords (int id, int nt, int init)
 {
@@ -699,14 +698,14 @@ void init_opengl_coords (int id, int nt, int init)
 /*
 *  void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[* num])
 *
-*  Usage: 
+*  Usage:
 *
-*  int * id         : 
-*  int * num        : 
-*  int * cmin       : 
-*  int * cmax       : 
-*  int * nt         : 
-*  int coord[* num] : 
+*  int * id         :
+*  int * num        :
+*  int * cmin       :
+*  int * cmax       :
+*  int * nt         :
+*  int coord[* num] :
 */
 void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[* num])
 {

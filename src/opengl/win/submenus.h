@@ -16,19 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  gui/chainscall.c
-  project/read_mol.c
-  opengl/win/glwindow.c
-  opengl/win/m_axis.c
-  opengl/win/m_box.c
-  opengl/win/m_clones.c
-  opengl/win/menu_bar.c
-  opengl/win/m_rep.c
-  opengl/win/m_tools.c
-  opengl/win/popup.c
-
 */
 
 #ifndef SUBMENUS_H_

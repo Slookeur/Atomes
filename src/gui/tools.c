@@ -14,17 +14,26 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'tools.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ -
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   gchar * prepare_for_title (gchar * init);
 
   void fill_tool_model ();
+  void tool_set_visible (GtkTreeViewColumn * col,
+                         GtkCellRenderer * renderer,
+                         GtkTreeModel * mod,
+                         GtkTreeIter * iter,
+                         gpointer data);
   void adjust_tool_model (int calc, int curve, gchar * string_path);
+
+  G_MODULE_EXPORT void toggle_show_hide_curve (GtkCellRendererToggle * cell_renderer,
+                                                gchar * string_path, gpointer data);
 
   GtkWidget * tooltree ();
   GtkWidget * curvetbox (void);
@@ -47,9 +56,9 @@ GtkWidget * toolscroll = NULL;
 /*
 *  gchar * prepare_for_title (gchar * init)
 *
-*  Usage: 
+*  Usage: prepare a string for a window title, getting rid of all markup
 *
-*  gchar * init : 
+*  gchar * init : The initial string
 */
 gchar * prepare_for_title (gchar * init)
 {
@@ -65,9 +74,7 @@ gchar * prepare_for_title (gchar * init)
 /*
 *  void fill_tool_model ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: fill the tool window tree model
 */
 void fill_tool_model ()
 {
@@ -146,11 +153,25 @@ void fill_tool_model ()
   }
 }
 
+/* void tool_set_visible (GtkTreeViewColumn * col,
+                          GtkCellRenderer * renderer,
+                          GtkTreeModel * mod,
+                          GtkTreeIter * iter,
+                          gpointer data)
+*
+*  Usage: show/hide and sensitive/not a GtkCellRenderer
+*
+*  GtkTreeViewColumn * col    : The column
+*  GtkCellRenderer * renderer : The cell renderer
+*  GtkTreeModel * mod         : The model
+*  GtkTreeIter  * iter        : The iter
+*  gpointer data              : The associated data pointer
+*/
 void tool_set_visible (GtkTreeViewColumn * col,
-                       GtkCellRenderer   * renderer,
-                       GtkTreeModel      * mod,
-                       GtkTreeIter       * iter,
-                       gpointer          data)
+                       GtkCellRenderer * renderer,
+                       GtkTreeModel * mod,
+                       GtkTreeIter * iter,
+                       gpointer data)
 {
   int i, j, k;
   i = GPOINTER_TO_INT(data);
@@ -178,11 +199,11 @@ void tool_set_visible (GtkTreeViewColumn * col,
 /*
 *  void adjust_tool_model (int calc, int curve, gchar * string_path)
 *
-*  Usage: 
+*  Usage: adjust the content of the tool box tree model
 *
-*  int calc            : 
-*  int curve           : 
-*  gchar * string_path : 
+*  int calc            : The calculation
+*  int curve           : The curve
+*  gchar * string_path : The path in the tree view
 */
 void adjust_tool_model (int calc, int curve, gchar * string_path)
 {
@@ -202,6 +223,16 @@ void adjust_tool_model (int calc, int curve, gchar * string_path)
   }
 }
 
+/*
+*  G_MODULE_EXPORT void toggle_show_hide_curve (GtkCellRendererToggle * cell_renderer,
+                                                gchar * string_path, gpointer data)
+*
+*  Usage: To show/hide a curve by clicking in the tree view
+*
+*  GtkCellRendererToggle * cell_renderer : The renderer toggled
+*  gchar * string_path                   : The path in the tree view
+*  gpointer data                         : The associated data pointer
+*/
 G_MODULE_EXPORT void toggle_show_hide_curve (GtkCellRendererToggle * cell_renderer,
                                              gchar * string_path, gpointer data)
 {
@@ -237,9 +268,7 @@ G_MODULE_EXPORT void toggle_show_hide_curve (GtkCellRendererToggle * cell_render
 /*
 *  GtkWidget * tooltree ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: create the toolbox tree view
 */
 GtkWidget * tooltree ()
 {
@@ -277,13 +306,11 @@ GtkWidget * tooltree ()
 }
 
 /*
-*  GtkWidget * curvetbox (void)
+*  GtkWidget * curvetbox ()
 *
-*  Usage: 
-*
-*  void : 
+*  Usage: create the curve tool box window
 */
-GtkWidget * curvetbox (void)
+GtkWidget * curvetbox ()
 {
   GtkWidget * ctbox;
   ctbox = create_win ("Toolboxes", MainWindow, FALSE, FALSE);

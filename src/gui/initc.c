@@ -14,44 +14,35 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'initc.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - Curve data initialization
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void clean_curves_data (int calc, int start, int end);
-  void alloc_curves (int c);
+  void alloc_curves (int rid);
   void initcwidgets ();
-  void initcnames (int w, int s);
   void prepostcalc (GtkWidget * widg, gboolean status, int run, int adv, double opc);
 
 */
 
 #include "global.h"
-#include "bind.h"
 #include "callbacks.h"
 #include "project.h"
 
 extern void clean_this_curve_window (int cid, int rid);
-extern void initgr (int r, int s);
-extern void initsq (int r, int s);
-extern void initbd (int s);
-extern void initang (int s);
-extern void initrng (int s);
-extern void initchn (int s);
-extern void initmsd (int s);
-extern void initsh (int s);
 
 /*
 *  void clean_curves_data (int calc, int start, int end)
 *
-*  Usage: 
+*  Usage: clean curve data on a range of curve id
 *
-*  int calc  : 
-*  int start : 
-*  int end   : 
+*  int calc  : The calculation
+*  int start : The starting value
+*  int end   : The ending value
 */
 void clean_curves_data (int calc, int start, int end)
 {
@@ -66,43 +57,41 @@ void clean_curves_data (int calc, int start, int end)
 }
 
 /*
-*  void alloc_curves (int c)
+*  void alloc_curves (int rid)
 *
-*  Usage: 
+*  Usage: allocating curve data
 *
-*  int c : 
+*  int rid : analysis id
 */
-void alloc_curves (int c)
+void alloc_curves (int rid)
 {
   int i;
-  if (active_project -> idcc[c] != NULL)
+  if (active_project -> idcc[rid] != NULL)
   {
-    g_free (active_project -> idcc[c]);
-    active_project -> idcc[c] = NULL;
+    g_free (active_project -> idcc[rid]);
+    active_project -> idcc[rid] = NULL;
   }
-  active_project -> idcc[c] = g_malloc0 (active_project -> numc[c]*sizeof*active_project -> idcc[c]);
-  if (active_project -> curves[c] != NULL)
+  active_project -> idcc[rid] = g_malloc0 (active_project -> numc[rid]*sizeof*active_project -> idcc[rid]);
+  if (active_project -> curves[rid] != NULL)
   {
-    g_free (active_project -> curves[c]);
-    active_project -> curves[c] = NULL;
+    g_free (active_project -> curves[rid]);
+    active_project -> curves[rid] = NULL;
   }
-  active_project -> curves[c] = g_malloc (active_project -> numc[c]*sizeof*active_project -> curves);
-  for (i = 0; i < active_project -> numc[c]; i++)
+  active_project -> curves[rid] = g_malloc (active_project -> numc[rid]*sizeof*active_project -> curves);
+  for (i = 0; i < active_project -> numc[rid]; i++)
   {
-    active_project -> curves[c][i] = g_malloc0 (sizeof*active_project -> curves[c][i]);
-    active_project -> curves[c][i] -> cfile = NULL;
-    active_project -> curves[c][i] -> name = NULL;
-    active_project -> curves[c][i] -> axis_title[0] = NULL;
-    active_project -> curves[c][i] -> axis_title[1] = NULL;
+    active_project -> curves[rid][i] = g_malloc0 (sizeof*active_project -> curves[rid][i]);
+    active_project -> curves[rid][i] -> cfile = NULL;
+    active_project -> curves[rid][i] -> name = NULL;
+    active_project -> curves[rid][i] -> axis_title[0] = NULL;
+    active_project -> curves[rid][i] -> axis_title[1] = NULL;
   }
 }
 
 /*
 *  void initcwidgets ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: initializing curve values
 */
 void initcwidgets ()
 {
@@ -144,60 +133,15 @@ void initcwidgets ()
 }
 
 /*
-*  void initcnames (int w, int s)
-*
-*  Usage: 
-*
-*  int w : 
-*  int s : 
-*/
-void initcnames (int w, int s)
-{
-  switch (w)
-  {
-    case GR:
-      initgr (w, s);
-      break;
-    case SQ:
-      initsq (w, s);
-      break;
-    case SK:
-      initsq (w, s);
-      break;
-    case GK:
-      initgr (w, s);
-      break;
-    case BD:
-      initbd (s);
-      break;
-    case AN:
-      initang (s);
-      break;
-    case RI:
-      initrng (s);
-      break;
-    case CH:
-      initchn (s);
-      break;
-    case SP:
-      initsh (s);
-      break;
-    default:
-      initmsd (s);
-      break;
-  }
-}
-
-/*
 *  void prepostcalc (GtkWidget * widg, gboolean status, int run, int adv, double opc)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gboolean status  : 
-*  int run          : 
-*  int adv          : 
-*  double opc       : 
+*  GtkWidget * widg :
+*  gboolean status  :
+*  int run          :
+*  int adv          :
+*  double opc       :
 */
 void prepostcalc (GtkWidget * widg, gboolean status, int run, int adv, double opc)
 {
@@ -207,7 +151,7 @@ void prepostcalc (GtkWidget * widg, gboolean status, int run, int adv, double op
   if (run < NGRAPHS && run > -1) active_project -> visok[run] = adv;
   if (! status)
   {
-#ifndef GTK4
+#ifdef GTK3
     if (widg != NULL) gdk_window_set_opacity (gtk_widget_get_window(widg), opc);
 #endif
 /*    if (adv)
@@ -229,7 +173,7 @@ void prepostcalc (GtkWidget * widg, gboolean status, int run, int adv, double op
       //gtk_statusbar_remove (statusbar, run, statusval);
       //destroy_this_widget(pop);
     }
-#ifndef GTK4
+#ifdef GTK3
     if (widg != NULL) gdk_window_set_opacity (gtk_widget_get_window(widg), opc);
 #endif
   }

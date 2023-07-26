@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'curve.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - curve management utilities
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   double scale (double axe);
 
@@ -118,9 +119,9 @@ int lenp = 1;
 /*
 *  thedash * selectdash (int iddash)
 *
-*  Usage: 
+*  Usage:
 *
-*  int iddash : 
+*  int iddash :
 */
 thedash * selectdash (int iddash)
 {
@@ -188,9 +189,9 @@ thedash * selectdash (int iddash)
 /*
 *  double scale (double axe)
 *
-*  Usage: 
+*  Usage:
 *
-*  double axe : 
+*  double axe :
 */
 double scale (double axe)
 {
@@ -297,11 +298,11 @@ double scale (double axe)
 /*
 *  void prep_plot (struct project * this_proj, int rid, int cid)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int rid                    : 
-*  int cid                    : 
+*  struct project * this_proj :
+*  int rid                    :
+*  int cid                    :
 */
 void prep_plot (struct project * this_proj, int rid, int cid)
 {
@@ -321,10 +322,10 @@ void prep_plot (struct project * this_proj, int rid, int cid)
 /*
 *  void clean_this_curve_window (int cid, int rid)
 *
-*  Usage: 
+*  Usage:
 *
-*  int cid : 
-*  int rid : 
+*  int cid :
+*  int rid :
 */
 void clean_this_curve_window (int cid, int rid)
 {
@@ -351,11 +352,11 @@ void clean_this_curve_window (int cid, int rid)
 /*
 *  void set_curve_data_zero (int rid, int cid, int interv)
 *
-*  Usage: 
+*  Usage:
 *
-*  int rid    : 
-*  int cid    : 
-*  int interv : 
+*  int rid    :
+*  int cid    :
+*  int interv :
 */
 void set_curve_data_zero (int rid, int cid, int interv)
 {
@@ -371,12 +372,12 @@ void set_curve_data_zero (int rid, int cid, int interv)
 /*
 *  void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * interv               : 
-*  double datacurve[* interv] : 
-*  double datacurve[* interv] : 
-*  double datacurve[* interv] : 
+*  int * interv               :
+*  double datacurve[* interv] :
+*  double datacurve[* interv] :
+*  double datacurve[* interv] :
 */
 void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
 {
@@ -434,10 +435,10 @@ void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid
 /*
 *  void hide_curves (struct project * this_proj, int c)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int c                      : 
+*  struct project * this_proj :
+*  int c                      :
 */
 void hide_curves (struct project * this_proj, int c)
 {
@@ -464,11 +465,11 @@ void hide_curves (struct project * this_proj, int c)
 /*
 *  void remove_this_curve_from_extras (int a, int b, int c)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
-*  int b : 
-*  int c : 
+*  int a :
+*  int b :
+*  int c :
 */
 void remove_this_curve_from_extras (int a, int b, int c)
 {
@@ -509,10 +510,10 @@ void remove_this_curve_from_extras (int a, int b, int c)
 /*
 *  void erase_curves (struct project * this_proj, int c)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int c                      : 
+*  struct project * this_proj :
+*  int c                      :
 */
 void erase_curves (struct project * this_proj, int c)
 {
@@ -545,9 +546,9 @@ void erase_curves (struct project * this_proj, int c)
 /*
 *  void update_curves ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void update_curves ()
 {
@@ -575,9 +576,9 @@ void update_curves ()
 /*
 *  void update_curve (gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  gpointer data : 
+*  gpointer data :
 */
 void update_curve (gpointer data)
 {

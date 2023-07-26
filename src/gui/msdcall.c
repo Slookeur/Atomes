@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'msdcall.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The callbacks for the MSD calculation dialog
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void initmsd (int s);
   void update_msd_view (struct project * this_proj);
@@ -42,9 +43,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void initmsd (int s)
 *
-*  Usage: 
+*  Usage: initialize the curve widgets for the MSD
 *
-*  int s : 
+*  int s :
 */
 void initmsd (int s)
 {
@@ -107,9 +108,9 @@ void initmsd (int s)
 /*
 *  void update_msd_view (struct project * this_proj)
 *
-*  Usage: 
+*  Usage: update the project text view for the MSD calculation
 *
-*  struct project * this_proj : 
+*  struct project * this_proj : the project
 */
 void update_msd_view (struct project * this_proj)
 {
@@ -138,10 +139,10 @@ void update_msd_view (struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: compute MSD
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data)
 {

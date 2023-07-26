@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'bdcall.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The callbacks for the bond properties calculation dialog
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int * save_color_map (glwin * view);
 
@@ -57,14 +58,13 @@ If not, see <https://www.gnu.org/licenses/> */
 extern G_MODULE_EXPORT void set_color_map (GtkWidget * widg, gpointer data);
 extern void clean_coord_window (struct project * this_proj);
 extern G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data);
-extern gchar * calculation_time (gboolean modelv, double ctime);
 
 /*
 *  int * save_color_map (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 int * save_color_map (glwin * view)
 {
@@ -77,10 +77,10 @@ int * save_color_map (glwin * view)
 /*
 *  void restore_color_map (glwin * view, int * colm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int * colm   : 
+*  glwin * view :
+*  int * colm   :
 */
 void restore_color_map (glwin * view, int * colm)
 {
@@ -109,10 +109,10 @@ void restore_color_map (glwin * view, int * colm)
 /*
 *  void recup_dmin_dmax_ (double * min, double * max)
 *
-*  Usage: 
+*  Usage:
 *
-*  double * min : 
-*  double * max : 
+*  double * min :
+*  double * max :
 */
 void recup_dmin_dmax_ (double * min, double * max)
 {
@@ -123,9 +123,9 @@ void recup_dmin_dmax_ (double * min, double * max)
 /*
 *  void initbd (int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s : 
+*  int s :
 */
 void initbd (int s)
 {
@@ -149,9 +149,9 @@ void initbd (int s)
 /*
 *  void initang (int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s : 
+*  int s :
 */
 void initang (int s)
 {
@@ -195,10 +195,10 @@ void initang (int s)
 /*
 *  void initcutoffs (chemical_data * chem, int species)
 *
-*  Usage: 
+*  Usage:
 *
-*  chemical_data * chem : 
-*  int species          : 
+*  chemical_data * chem :
+*  int species          :
 */
 void initcutoffs (chemical_data * chem, int species)
 {
@@ -234,9 +234,9 @@ void initcutoffs (chemical_data * chem, int species)
 /*
 *  void cutoffsend (void)
 *
-*  Usage: 
+*  Usage:
 *
-*  void : 
+*  void :
 */
 void cutoffsend (void)
 {
@@ -263,9 +263,9 @@ void cutoffsend (void)
 /*
 *  void prep_ogl_bonds ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void prep_ogl_bonds ()
 {
@@ -301,11 +301,11 @@ void prep_ogl_bonds ()
 /*
 *  gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  int calc         : 
-*  int up_ngb       : 
+*  GtkWidget * widg :
+*  int calc         :
+*  int up_ngb       :
 */
 gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb)
 {
@@ -356,9 +356,9 @@ gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb)
 /*
 *  void update_ang_view (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj : the project
 */
 void update_ang_view (struct project * this_proj)
 {
@@ -384,10 +384,10 @@ void update_ang_view (struct project * this_proj)
 /*
 *  void update_glwin_after_bonds (int bonding, int * colm)
 *
-*  Usage: 
+*  Usage:
 *
-*  int bonding : 
-*  int * colm  : 
+*  int bonding :
+*  int * colm  :
 */
 void update_glwin_after_bonds (int bonding, int * colm)
 {
@@ -463,10 +463,10 @@ void update_glwin_after_bonds (int bonding, int * colm)
 /*
 *  G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
 {
@@ -623,11 +623,11 @@ double bdtc;
 /*
 *  void coordination_info (int sp, double sac, double ssac[active_project -> nspec])
 *
-*  Usage: 
+*  Usage:
 *
-*  int sp                               : 
-*  double sac                           : 
-*  double ssac[active_project -> nspec] : 
+*  int sp                               :
+*  double sac                           :
+*  double ssac[active_project -> nspec] :
 */
 void coordination_info (int sp, double sac, double ssac[active_project -> nspec])
 {
@@ -715,12 +715,12 @@ void coordination_info (int sp, double sac, double ssac[active_project -> nspec]
 /*
 *  void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * sid                            : 
-*  double * sac                         : 
-*  double ssac[active_project -> nspec] : 
-*  double ssac[active_project -> nspec] : 
+*  int * sid                            :
+*  double * sac                         :
+*  double ssac[active_project -> nspec] :
+*  double ssac[active_project -> nspec] :
 */
 void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa)
 {
@@ -780,12 +780,12 @@ void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], i
 /*
 *  void env_info (int sp, int totgsa, int numgsa[totgsa], int listgsa[totgsa])
 *
-*  Usage: 
+*  Usage:
 *
-*  int sp             : 
-*  int totgsa         : 
-*  int numgsa[totgsa] : 
-*  int numgsa[totgsa] : 
+*  int sp             :
+*  int totgsa         :
+*  int numgsa[totgsa] :
+*  int numgsa[totgsa] :
 */
 void env_info (int sp, int totgsa, int numgsa[totgsa], int listgsa[totgsa])
 {
@@ -862,9 +862,9 @@ void env_info (int sp, int totgsa, int numgsa[totgsa], int listgsa[totgsa])
 /*
 *  void update_angle_view (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void update_angle_view (struct project * this_proj)
 {
@@ -885,12 +885,12 @@ void update_angle_view (struct project * this_proj)
 /*
 *  void envout_ (int * sid, int * totgsa, int numgsa[* totgsa], int listegsa[* totgsa])
 *
-*  Usage: 
+*  Usage:
 *
-*  int * sid            : 
-*  int * totgsa         : 
-*  int numgsa[* totgsa] : 
-*  int numgsa[* totgsa] : 
+*  int * sid            :
+*  int * totgsa         :
+*  int numgsa[* totgsa] :
+*  int numgsa[* totgsa] :
 */
 void envout_ (int * sid, int * totgsa, int numgsa[* totgsa], int listegsa[* totgsa])
 {

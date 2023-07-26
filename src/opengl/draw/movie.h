@@ -16,12 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  opengl/draw/image.c
-  opengl/draw/movie.c
-  opengl/win/w_encode.c
-
 */
 
 #ifndef MOVIE_H_

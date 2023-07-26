@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'legend.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - Curve legend drawing subroutines
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid);
 
@@ -37,12 +38,12 @@ extern DataLayout * get_extra_layout (int i);
 /*
 *  void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid)
 *
-*  Usage: 
+*  Usage:
 *
-*  cairo_t * cr               : 
-*  struct project * this_proj : 
-*  int rid                    : 
-*  int cid                    : 
+*  cairo_t * cr               :
+*  struct project * this_proj :
+*  int rid                    :
+*  int cid                    :
 */
 void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {

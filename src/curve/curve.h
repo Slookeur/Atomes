@@ -16,41 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  curve/cedit.c
-  curve/curve.c
-  curve/cwidget.c
-  curve/datab.c
-  curve/draw.c
-  curve/frame.c
-  curve/glyph.c
-  curve/labels.c
-  curve/legend.c
-  curve/m_curve.c
-  curve/show.c
-  curve/tab-1.c
-  curve/tab-2.c
-  curve/tab-3.c
-  curve/tab-4.c
-  curve/title.c
-  curve/w_curve.c
-  curve/w_data.c
-  curve/w_img.c
-  curve/xaxis.c
-  curve/yaxis.c
-  gui/bdcall.c
-  gui/chainscall.c
-  gui/grcall.c
-  gui/interface.c
-  gui/msdcall.c
-  gui/ringscall.c
-  gui/spcall.c
-  gui/sqcall.c
-  project/close_p.c
-  project/init_p.c
-  project/open_p.c
-  opengl/edit/atom_action.c
 
 */
 

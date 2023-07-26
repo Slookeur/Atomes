@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'calc_menu.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The creation of the calculation menu
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   gboolean test_gr (int gr);
   gboolean test_sq (int sq);
@@ -82,9 +83,9 @@ int search_type;
 /*
 *  GtkWidget * calc_window (int i)
 *
-*  Usage: 
+*  Usage: create a calculation window
 *
-*  int i : 
+*  int i : the calculation id
 */
 GtkWidget * calc_window (int i)
 {
@@ -100,10 +101,10 @@ GtkWidget * calc_window (int i)
 /*
 *  G_MODULE_EXPORT void set_max (GtkEntry * entry, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * entry : 
-*  gpointer data    : 
+*  GtkEntry * entry :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_max (GtkEntry * entry, gpointer data)
 {
@@ -126,10 +127,10 @@ GtkWidget * rings_box[2];
 /*
 *  G_MODULE_EXPORT void set_delta (GtkEntry * entry, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * entry : 
-*  gpointer data    : 
+*  GtkEntry * entry :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_delta (GtkEntry * entry, gpointer data)
 {
@@ -201,10 +202,10 @@ G_MODULE_EXPORT void set_delta (GtkEntry * entry, gpointer data)
 /*
 *  G_MODULE_EXPORT void combox_tunit_changed (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void combox_tunit_changed (GtkComboBox * box, gpointer data)
 {
@@ -214,9 +215,9 @@ G_MODULE_EXPORT void combox_tunit_changed (GtkComboBox * box, gpointer data)
 /*
 *  void calc_sph (GtkWidget * vbox)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * vbox : 
+*  GtkWidget * vbox :
 */
 void calc_sph (GtkWidget * vbox)
 {
@@ -234,9 +235,9 @@ void calc_sph (GtkWidget * vbox)
 /*
 *  void calc_msd (GtkWidget * vbox)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * vbox : 
+*  GtkWidget * vbox :
 */
 void calc_msd (GtkWidget * vbox)
 {
@@ -281,10 +282,10 @@ void calc_msd (GtkWidget * vbox)
 /*
 *  G_MODULE_EXPORT void set_numa (GtkEntry * entry, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * entry : 
-*  gpointer data    : 
+*  GtkEntry * entry :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_numa (GtkEntry * entry, gpointer data)
 {
@@ -315,12 +316,12 @@ G_MODULE_EXPORT void set_numa (GtkEntry * entry, gpointer data)
 /*
 *  GtkWidget * combox_rings (gchar * str, int num, gchar * list_item[num], int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * str            : 
-*  int num                : 
-*  gchar * list_item[num] : 
-*  gchar * list_item[num] : 
+*  gchar * str            :
+*  int num                :
+*  gchar * list_item[num] :
+*  gchar * list_item[num] :
 */
 GtkWidget * combox_rings (gchar * str, int num, gchar * list_item[num], int id)
 {
@@ -341,10 +342,10 @@ GtkWidget * combox_rings (gchar * str, int num, gchar * list_item[num], int id)
 /*
 *  G_MODULE_EXPORT void combox_rings_changed (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void combox_rings_changed (GtkComboBox * box, gpointer data)
 {
@@ -386,20 +387,20 @@ G_MODULE_EXPORT void combox_rings_changed (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void toggle_rings (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void toggle_rings (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void toggle_rings (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void toggle_rings (GtkToggleButton * but, gpointer data)
 #endif
@@ -456,9 +457,9 @@ G_MODULE_EXPORT void toggle_rings (GtkToggleButton * but, gpointer data)
 /*
 *  void calc_rings (GtkWidget * vbox)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * vbox : 
+*  GtkWidget * vbox :
 */
 void calc_rings (GtkWidget * vbox)
 {
@@ -541,11 +542,11 @@ void calc_rings (GtkWidget * vbox)
 /*
 *  G_MODULE_EXPORT void run_toggle_bond (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkNativeDialog * info : 
-*  gint response_id       : 
-*  gpointer data          : 
+*  GtkNativeDialog * info :
+*  gint response_id       :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void run_toggle_bond (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -554,11 +555,11 @@ G_MODULE_EXPORT void run_toggle_bond (GtkNativeDialog * info, gint response_id, 
 /*
 *  G_MODULE_EXPORT void run_toggle_bond (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * info : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * info :
+*  gint response_id :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void run_toggle_bond (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -587,20 +588,20 @@ G_MODULE_EXPORT void run_toggle_bond (GtkDialog * info, gint response_id, gpoint
 /*
 *  G_MODULE_EXPORT void toggle_bond (GtkCheckButton * Button, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * Button : 
-*  gpointer data           : 
+*  GtkCheckButton * Button :
+*  gpointer data           :
 */
 G_MODULE_EXPORT void toggle_bond (GtkCheckButton * Button, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void toggle_bond (GtkToggleButton * Button, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * Button : 
-*  gpointer data            : 
+*  GtkToggleButton * Button :
+*  gpointer data            :
 */
 G_MODULE_EXPORT void toggle_bond (GtkToggleButton * Button, gpointer data)
 #endif
@@ -657,9 +658,9 @@ G_MODULE_EXPORT void toggle_bond (GtkToggleButton * Button, gpointer data)
 /*
 *  gboolean test_gr (int gr)
 *
-*  Usage: 
+*  Usage: is it safe to compute g(r) ?
 *
-*  int gr : 
+*  int gr : type of g(r): real space (GR) or FFT (GK)
 */
 gboolean test_gr (int gr)
 {
@@ -684,9 +685,9 @@ gboolean test_gr (int gr)
 /*
 *  gboolean test_sq (int sq)
 *
-*  Usage: 
+*  Usage: is it safe to compute s(q) ?
 *
-*  int sq : 
+*  int sq : type of s(q): FFT (1) or direct (SK)
 */
 gboolean test_sq (int sq)
 {
@@ -711,9 +712,7 @@ gboolean test_sq (int sq)
 /*
 *  gboolean test_bonds ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: is it safe to compute bond properties ?
 */
 gboolean test_bonds ()
 {
@@ -739,9 +738,7 @@ gboolean test_bonds ()
 /*
 *  gboolean test_rings ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: is it safe to compute ring statistics ?
 */
 gboolean test_rings ()
 {
@@ -779,9 +776,7 @@ gboolean test_rings ()
 /*
 *  gboolean test_msd ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: is it safe to compute MSD ?
 */
 gboolean test_msd ()
 {
@@ -825,9 +820,7 @@ gboolean test_msd ()
 /*
 *  gboolean test_sph ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: is it safe to compute spherical harmonics ?
 */
 gboolean test_sph ()
 {
@@ -845,9 +838,9 @@ gboolean test_sph ()
 /*
 *  void calc_bonds (GtkWidget * vbox)
 *
-*  Usage: 
+*  Usage: creation of the bond calculation dialog
 *
-*  GtkWidget * vbox : 
+*  GtkWidget * vbox : the widget that will receive the data
 */
 void calc_bonds (GtkWidget * vbox)
 {
@@ -878,16 +871,16 @@ void calc_bonds (GtkWidget * vbox)
   }
   GtkWidget * checkbd = check_button (val_b[i], -1, 40, FALSE, G_CALLBACK(toggle_bond), (gpointer)GINT_TO_POINTER(i));
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, checkbd, FALSE, FALSE, 0);
-  widget_set_sensitive (checkbd, (registered_atomes || ! testing_atomes) ? 0 : 1);
+  widget_set_sensitive (checkbd, 1);
 }
 
 /*
 *  GtkWidget * hbox_note (int i, double val)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i      : 
-*  double val : 
+*  int i      :
+*  double val :
 */
 GtkWidget * hbox_note (int i, double val)
 {
@@ -910,10 +903,10 @@ int avsize;
 /*
 *  G_MODULE_EXPORT void expand_opt (GtkWidget * exp, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * exp : 
-*  gpointer data   : 
+*  GtkWidget * exp :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void expand_opt (GtkWidget * exp, gpointer data)
 {
@@ -952,10 +945,10 @@ G_MODULE_EXPORT void expand_opt (GtkWidget * exp, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_advanced_sq (GtkEntry * entry, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * entry : 
-*  gpointer data    : 
+*  GtkEntry * entry :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_advanced_sq (GtkEntry * entry, gpointer data)
 {
@@ -983,10 +976,10 @@ G_MODULE_EXPORT void set_advanced_sq (GtkEntry * entry, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_sfact (GtkEntry * entry, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * entry : 
-*  gpointer data    : 
+*  GtkEntry * entry :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_sfact (GtkEntry * entry, gpointer data)
 {
@@ -1008,10 +1001,10 @@ G_MODULE_EXPORT void set_sfact (GtkEntry * entry, gpointer data)
 /*
 *  G_MODULE_EXPORT void on_show_curve_toolbox (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void on_show_curve_toolbox (GtkWidget * widg, gpointer data)
 {
@@ -1028,10 +1021,10 @@ G_MODULE_EXPORT void on_show_curve_toolbox (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void on_smoother_released (GtkButton * button, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * button : 
-*  gpointer data      : 
+*  GtkButton * button :
+*  gpointer data      :
 */
 G_MODULE_EXPORT void on_smoother_released (GtkButton * button, gpointer data)
 {
@@ -1174,10 +1167,10 @@ G_MODULE_EXPORT void on_smoother_released (GtkButton * button, gpointer data)
 /*
 *  void calc_gr_sq (GtkWidget * box, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * box : 
-*  int id          : 
+*  GtkWidget * box :
+*  int id          :
 */
 void calc_gr_sq (GtkWidget * box, int id)
 {
@@ -1294,11 +1287,11 @@ void calc_gr_sq (GtkWidget * box, int id)
 /*
 *  G_MODULE_EXPORT void run_on_calc_activate (GtkDialog * dial, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * dial : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * dial :
+*  gint response_id :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void run_on_calc_activate (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -1367,10 +1360,10 @@ G_MODULE_EXPORT void run_on_calc_activate (GtkDialog * dial, gint response_id, g
 /*
 *  G_MODULE_EXPORT void on_calc_activate (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: open a calculation dialog
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void on_calc_activate (GtkWidget * widg, gpointer data)
 {

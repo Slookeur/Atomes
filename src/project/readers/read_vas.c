@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_vas.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int vas_get_atom_coordinates (int sli);
   int open_vas_file (int linec);
@@ -31,7 +31,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "callbacks.h"
 #include "interface.h"
 #include "project.h"
-#include "gui.h"
 #include "bind.h"
 #include <omp.h>
 #include "readers.h"
@@ -39,9 +38,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int vas_get_atom_coordinates (int sli)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sli : 
+*  int sli :
 */
 int vas_get_atom_coordinates (int sli)
 {
@@ -227,9 +226,9 @@ int vas_get_atom_coordinates (int sli)
 /*
 *  int open_vas_file (int linec)
 *
-*  Usage: 
+*  Usage:
 *
-*  int linec : 
+*  int linec :
 */
 int open_vas_file (int linec)
 {

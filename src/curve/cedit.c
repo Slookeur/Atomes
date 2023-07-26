@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cedit.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+- The initialization of the curve edition dialog
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int numi (int r, int c);
 
@@ -83,9 +84,9 @@ char * lapos[2]={"x: ", "y: "};
 /*
 *  void prepbox (tint * cd)
 *
-*  Usage: 
+*  Usage: prepare the curve selection combo box
 *
-*  tint * cd : 
+*  tint * cd : the associated data pointer
 */
 void prepbox (tint * cd)
 {
@@ -129,11 +130,11 @@ void prepbox (tint * cd)
 /*
 *  void set_set (int a, int b, int c)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
-*  int b : 
-*  int c : 
+*  int a :
+*  int b :
+*  int c :
 */
 void set_set (int a, int b, int c)
 {
@@ -154,10 +155,10 @@ void set_set (int a, int b, int c)
 /*
 *  int numi (int r, int c)
 *
-*  Usage: 
+*  Usage:
 *
-*  int r : 
-*  int c : 
+*  int r :
+*  int c :
 */
 int numi (int r, int c)
 {
@@ -174,9 +175,9 @@ int numi (int r, int c)
 /*
 *  static void fill_proj_model (GtkTreeStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeStore * store : 
+*  GtkTreeStore * store : the GtkTreeStore to fill
 */
 static void fill_proj_model (GtkTreeStore * store)
 {
@@ -257,9 +258,16 @@ static void fill_proj_model (GtkTreeStore * store)
 
 GtkTreeStore * projmodel;
 
-G_MODULE_EXPORT void toggle_curve (GtkCellRendererToggle * cell_renderer,
-                                   gchar * string_path,
-                                   gpointer data)
+/*
+*  void toggle_curve (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+*
+*  Usage:
+*
+*  GtkCellRendererToggle * cell_renderer :
+*  gchar * string_path                   :
+*  gpointer data              :
+*/
+G_MODULE_EXPORT void toggle_curve (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
   int i, j, k;
   gboolean status;
@@ -271,11 +279,20 @@ G_MODULE_EXPORT void toggle_curve (GtkCellRendererToggle * cell_renderer,
   set_set (i, j, k);
 }
 
-void set_visible_data (GtkTreeViewColumn * col,
-                       GtkCellRenderer   * renderer,
-                       GtkTreeModel      * mod,
-                       GtkTreeIter       * iter,
-                       gpointer          data)
+/*
+*  void set_visible_data (GtkTreeViewColumn * col, GtkCellRenderer * renderer,
+                          GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage:
+*
+*  GtkTreeViewColumn * col    :
+*  GtkCellRenderer * renderer :
+*  GtkTreeModel * mod         :
+*  GtkTreeIter * iter         :
+*  gpointer data              :
+*/
+void set_visible_data (GtkTreeViewColumn * col, GtkCellRenderer * renderer,
+                       GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int m;
   gtk_tree_model_get (mod, iter, 0, & m, -1);
@@ -285,9 +302,9 @@ void set_visible_data (GtkTreeViewColumn * col,
 /*
 *  GtkWidget * create_projects_tree ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 GtkWidget * create_projects_tree ()
 {
@@ -325,11 +342,11 @@ GtkWidget * create_projects_tree ()
 /*
 *  G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * dial : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * dial :
+*  gint response_id :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -342,10 +359,10 @@ G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointe
 /*
 *  G_MODULE_EXPORT void edit_curve (GtkWidget * curve, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * curve : 
-*  gpointer data     : 
+*  GtkWidget * curve :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void edit_curve (GtkWidget * curve, gpointer data)
 {

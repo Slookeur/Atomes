@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'title.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The curve title drawing subroutines
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   const gchar * default_title (int ax, int c);
 
@@ -37,10 +38,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  const gchar * default_title (int ax, int c)
 *
-*  Usage: 
+*  Usage:
 *
-*  int ax : 
-*  int c  : 
+*  int ax :
+*  int c  :
 */
 const gchar * default_title (int ax, int c)
 {
@@ -88,12 +89,12 @@ const gchar * default_title (int ax, int c)
 /*
 *  void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
 *
-*  Usage: 
+*  Usage:
 *
-*  cairo_t * cr               : 
-*  struct project * this_proj : 
-*  int rid                    : 
-*  int cid                    : 
+*  cairo_t * cr               :
+*  struct project * this_proj :
+*  int rid                    :
+*  int cid                    :
 */
 void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {

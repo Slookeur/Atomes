@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_trj.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int trj_get_atom_coordinates ();
   int open_trj_file (int linec);
@@ -31,7 +31,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "callbacks.h"
 #include "interface.h"
 #include "project.h"
-#include "gui.h"
 #include "bind.h"
 #include <omp.h>
 #include "readers.h"
@@ -39,9 +38,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int trj_get_atom_coordinates ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 int trj_get_atom_coordinates ()
 {
@@ -236,9 +235,9 @@ int trj_get_atom_coordinates ()
 /*
 *  int open_trj_file (int linec)
 *
-*  Usage: 
+*  Usage:
 *
-*  int linec : 
+*  int linec :
 */
 int open_trj_file (int linec)
 {

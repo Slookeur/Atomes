@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'dlp_field.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int struct_id (int f);
   int body_at (int b);
@@ -101,7 +101,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glwindow.h"
 #include "glview.h"
 #include "bind.h"
-#include "valid.h"
 
 gboolean append_pages;
 extern GtkWidget * extra_vbox[2];
@@ -963,9 +962,9 @@ extern void print_lammps_atom_file (GtkTextBuffer * buf);
 /*
 *  int struct_id (int f)
 *
-*  Usage: 
+*  Usage:
 *
-*  int f : 
+*  int f :
 */
 int struct_id (int f)
 {
@@ -986,9 +985,9 @@ int struct_id (int f)
 /*
 *  int body_at (int b)
 *
-*  Usage: 
+*  Usage:
 *
-*  int b : 
+*  int b :
 */
 int body_at (int b)
 {
@@ -1011,9 +1010,9 @@ model example;
 /*
 *  void set_mol_num_label (void)
 *
-*  Usage: 
+*  Usage:
 *
-*  void : 
+*  void :
 */
 void set_mol_num_label (void)
 {
@@ -1033,9 +1032,9 @@ void set_mol_num_label (void)
 /*
 *  void setup_cs_labels (int i)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i : 
+*  int i :
 */
 void setup_cs_labels (int i)
 {
@@ -1060,10 +1059,10 @@ gchar *** is_var;
 /*
 *  void get_is_energy (int i, int l)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i : 
-*  int l : 
+*  int i :
+*  int l :
 */
 void get_is_energy (int i, int l)
 {
@@ -1163,11 +1162,11 @@ void get_is_energy (int i, int l)
 /*
 *  gboolean field_file_has_energy_parameters (gboolean scale, int sca, int scb)
 *
-*  Usage: 
+*  Usage:
 *
-*  gboolean scale : 
-*  int sca        : 
-*  int scb        : 
+*  gboolean scale :
+*  int sca        :
+*  int scb        :
 */
 gboolean field_file_has_energy_parameters (gboolean scale, int sca, int scb)
 {
@@ -1294,12 +1293,12 @@ gboolean field_file_has_energy_parameters (gboolean scale, int sca, int scb)
 /*
 *  gchar * parameters_info (int obj, int key,  gchar ** words, float * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  int obj         : 
-*  int key         : 
-*   gchar ** words : 
-*  float * data    : 
+*  int obj         :
+*  int key         :
+*   gchar ** words :
+*  float * data    :
 */
 gchar * parameters_info (int obj, int key,  gchar ** words, float * data)
 {
@@ -1323,11 +1322,11 @@ extern void print_all_field_struct (struct field_molecule * mol, int str);
 /*
 *  void fill_field_struct (GtkTreeStore * store, int id, int mo)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeStore * store : 
-*  int id               : 
-*  int mo               : 
+*  GtkTreeStore * store :
+*  int id               :
+*  int mo               :
 */
 void fill_field_struct (GtkTreeStore * store, int id, int mo)
 {
@@ -1408,10 +1407,10 @@ void fill_field_struct (GtkTreeStore * store, int id, int mo)
 /*
 *  void fill_field_body (GtkTreeStore * store, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeStore * store : 
-*  int id               : 
+*  GtkTreeStore * store :
+*  int id               :
 */
 void fill_field_body (GtkTreeStore * store, int id)
 {
@@ -1462,11 +1461,11 @@ void fill_field_body (GtkTreeStore * store, int id)
 /*
 *  void fill_field_model (GtkTreeStore * store, int f, int m)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeStore * store : 
-*  int f                : 
-*  int m                : 
+*  GtkTreeStore * store :
+*  int f                :
+*  int m                :
 */
 void fill_field_model (GtkTreeStore * store, int f, int m)
 {
@@ -1764,20 +1763,20 @@ void fill_field_model (GtkTreeStore * store, int f, int m)
 /*
 *  G_MODULE_EXPORT void toggle_field_params (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void toggle_field_params (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void toggle_field_params (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void toggle_field_params (GtkToggleButton * but, gpointer data)
 #endif
@@ -1806,9 +1805,9 @@ G_MODULE_EXPORT void toggle_field_params (GtkToggleButton * but, gpointer data)
 /*
 *  gboolean set_nbd_but_sensitive (int nbid)
 *
-*  Usage: 
+*  Usage:
 *
-*  int nbid : 
+*  int nbid :
 */
 gboolean set_nbd_but_sensitive (int nbid)
 {
@@ -1835,10 +1834,10 @@ gboolean set_nbd_but_sensitive (int nbid)
 /*
 *  gchar * set_field_label (int f, int m)
 *
-*  Usage: 
+*  Usage:
 *
-*  int f : 
-*  int m : 
+*  int f :
+*  int m :
 */
 gchar * set_field_label (int f, int m)
 {
@@ -1969,10 +1968,10 @@ gchar * set_field_label (int f, int m)
 /*
 *  G_MODULE_EXPORT void changed_mol_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void changed_mol_box (GtkComboBox * box, gpointer data)
 {
@@ -1988,9 +1987,9 @@ G_MODULE_EXPORT void changed_mol_box (GtkComboBox * box, gpointer data)
 /*
 *  void update_field_trees ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void update_field_trees ()
 {
@@ -2017,11 +2016,11 @@ void update_field_trees ()
 /*
 *  G_MODULE_EXPORT void run_changed_energy_unit (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * dialog : 
-*  gint response_id   : 
-*  gpointer data      : 
+*  GtkDialog * dialog :
+*  gint response_id   :
+*  gpointer data      :
 */
 G_MODULE_EXPORT void run_changed_energy_unit (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -2040,10 +2039,10 @@ G_MODULE_EXPORT void run_changed_energy_unit (GtkDialog * dialog, gint response_
 /*
 *  G_MODULE_EXPORT void changed_energy_unit (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void changed_energy_unit (GtkComboBox * box, gpointer data)
 {
@@ -2158,9 +2157,9 @@ G_MODULE_EXPORT void changed_energy_unit (GtkComboBox * box, gpointer data)
 /*
 *  GtkWidget * vbox_init (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 GtkWidget * vbox_init (int p)
 {
@@ -2249,11 +2248,11 @@ GtkWidget * vbox_init (int p)
 /*
 *  int get_field_tree_data (GtkWidget * tree, int treeid, GtkTreePath * path)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * tree   : 
-*  int treeid         : 
-*  GtkTreePath * path : 
+*  GtkWidget * tree   :
+*  int treeid         :
+*  GtkTreePath * path :
 */
 int get_field_tree_data (GtkWidget * tree, int treeid, GtkTreePath * path)
 {
@@ -2277,10 +2276,10 @@ int get_field_tree_data (GtkWidget * tree, int treeid, GtkTreePath * path)
 /*
 *  int get_field_data_id (int k, gchar * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  int k        : 
-*  gchar * data : 
+*  int k        :
+*  gchar * data :
 */
 int get_field_data_id (int k, gchar * data)
 {
@@ -2440,9 +2439,9 @@ G_MODULE_EXPORT void changed_field_key_renderer (GtkCellRendererCombo * combo,
 /*
 *  GtkWidget * create_combo_mol (int f)
 *
-*  Usage: 
+*  Usage:
 *
-*  int f : 
+*  int f :
 */
 GtkWidget * create_combo_mol (int f)
 {
@@ -2469,10 +2468,10 @@ int actel;
 /*
 *  gchar * pop_info (int i, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i  : 
-*  int id : 
+*  int i  :
+*  int id :
 */
 gchar * pop_info (int i, int id)
 {
@@ -2632,9 +2631,9 @@ gchar * pop_info (int i, int id)
 /*
 *  gchar * pop_edit (int i)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i : 
+*  int i :
 */
 gchar * pop_edit (int i)
 {
@@ -2654,9 +2653,9 @@ gchar * pop_edit (int i)
 /*
 *  gchar * pop_add (int i)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i : 
+*  int i :
 */
 gchar * pop_add (int i)
 {
@@ -2668,9 +2667,9 @@ gchar * pop_add (int i)
 /*
 *  gchar * pop_remove (int i)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i : 
+*  int i :
 */
 gchar * pop_remove (int i)
 {
@@ -2682,11 +2681,11 @@ gchar * pop_remove (int i)
 /*
 *  G_MODULE_EXPORT void to_select_atom_id_from_fied_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_select_atom_id_from_fied_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -2722,25 +2721,25 @@ void append_field_item (GMenu * menu, const gchar * name, const gchar * key, int
 /*
 *  void pop_up_field_context_menu (int id, GtkWidget * widget, double event_x, double event_y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id             : 
-*  GtkWidget * widget : 
-*  double event_x     : 
-*  double event_y     : 
-*  gpointer data      : 
+*  int id             :
+*  GtkWidget * widget :
+*  double event_x     :
+*  double event_y     :
+*  gpointer data      :
 */
 void pop_up_field_context_menu (int id, GtkWidget * widget, double event_x, double event_y, gpointer data)
 #else
 /*
 *  void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id             : 
-*  GtkWidget * widget : 
-*  GdkEvent * event   : 
-*  gpointer data      : 
+*  int id             :
+*  GtkWidget * widget :
+*  GdkEvent * event   :
+*  gpointer data      :
 */
 void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gpointer data)
 #endif
@@ -2956,10 +2955,10 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
 /*
 *  G_MODULE_EXPORT gboolean on_pop_up_field (GtkWidget * widget, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widget : 
-*  gpointer data      : 
+*  GtkWidget * widget :
+*  gpointer data      :
 */
 G_MODULE_EXPORT gboolean on_pop_up_field (GtkWidget * widget, gpointer data)
 {
@@ -2972,29 +2971,29 @@ G_MODULE_EXPORT gboolean on_pop_up_field (GtkWidget * widget, gpointer data)
 /*
 *  void field_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  double event_x     : 
-*  double event_y     : 
-*  guint event_button : 
-*  guint event_type   : 
-*  guint32 event_time : 
-*  gpointer data      : 
+*  double event_x     :
+*  double event_y     :
+*  guint event_button :
+*  guint event_type   :
+*  guint32 event_time :
+*  gpointer data      :
 */
 void field_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 #else
 /*
 *  void field_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GdkEvent * event   : 
-*  double event_x     : 
-*  double event_y     : 
-*  guint event_button : 
-*  guint event_type   : 
-*  guint32 event_time : 
-*  gpointer data      : 
+*  GdkEvent * event   :
+*  double event_x     :
+*  double event_y     :
+*  guint event_button :
+*  guint event_type   :
+*  guint32 event_time :
+*  gpointer data      :
 */
 void field_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 #endif
@@ -3035,13 +3034,13 @@ void field_button_event (GdkEvent * event, double event_x, double event_y, guint
 /*
 *  G_MODULE_EXPORT void on_field_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
-*  gpointer data        : 
+*  GtkGesture * gesture :
+*  int n_press          :
+*  double x             :
+*  double y             :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void on_field_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -3051,13 +3050,13 @@ G_MODULE_EXPORT void on_field_button_pressed (GtkGesture * gesture, int n_press,
 /*
 *  G_MODULE_EXPORT void on_field_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
-*  gpointer data        : 
+*  GtkGesture * gesture :
+*  int n_press          :
+*  double x             :
+*  double y             :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void on_field_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -3067,11 +3066,11 @@ G_MODULE_EXPORT void on_field_button_released (GtkGesture * gesture, int n_press
 /*
 *  G_MODULE_EXPORT gboolean on_field_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widget : 
-*  GdkEvent * event   : 
-*  gpointer data      : 
+*  GtkWidget * widget :
+*  GdkEvent * event   :
+*  gpointer data      :
 */
 G_MODULE_EXPORT gboolean on_field_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
@@ -3336,11 +3335,11 @@ G_MODULE_EXPORT void edit_field_cell (GtkCellRendererText * cell,
 /*
 *  void get_field_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * widg)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * path_string : 
-*  gpointer data       : 
-*  GtkWidget * widg    : 
+*  gchar * path_string :
+*  gpointer data       :
+*  GtkWidget * widg    :
 */
 void get_field_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * widg)
 {
@@ -3385,9 +3384,9 @@ G_MODULE_EXPORT void on_field_row_activated (GtkTreeView * treeview,
 /*
 *  GtkWidget * create_field_tree (int f)
 *
-*  Usage: 
+*  Usage:
 *
-*  int f : 
+*  int f :
 */
 GtkWidget * create_field_tree (int f)
 {
@@ -3535,10 +3534,10 @@ GtkWidget * create_field_tree (int f)
 /*
 *  void create_field_list (GtkWidget * vbx, int f)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * vbx : 
-*  int f           : 
+*  GtkWidget * vbx :
+*  int f           :
 */
 void create_field_list (GtkWidget * vbx, int f)
 {
@@ -3583,9 +3582,9 @@ void create_field_list (GtkWidget * vbx, int f)
 /*
 *  GtkWidget * create_mol_box (int f)
 *
-*  Usage: 
+*  Usage:
 *
-*  int f : 
+*  int f :
 */
 GtkWidget * create_mol_box (int f)
 {
@@ -3600,9 +3599,9 @@ GtkWidget * create_mol_box (int f)
 /*
 *  GtkWidget * vbox_field (int f)
 *
-*  Usage: 
+*  Usage:
 *
-*  int f : 
+*  int f :
 */
 GtkWidget * vbox_field (int f)
 {
@@ -3763,9 +3762,9 @@ int saved_label_position[2];
 /*
 *  void close_the_assistant (GtkAssistant * assistant)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkAssistant * assistant : 
+*  GtkAssistant * assistant :
 */
 void close_the_assistant (GtkAssistant * assistant)
 {
@@ -3810,10 +3809,10 @@ void close_the_assistant (GtkAssistant * assistant)
 /*
 *  G_MODULE_EXPORT void on_assistant_cancel (GtkAssistant * assistant, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkAssistant * assistant : 
-*  gpointer data            : 
+*  GtkAssistant * assistant :
+*  gpointer data            :
 */
 G_MODULE_EXPORT void on_assistant_cancel (GtkAssistant * assistant, gpointer data)
 {
@@ -3824,21 +3823,21 @@ G_MODULE_EXPORT void on_assistant_cancel (GtkAssistant * assistant, gpointer dat
 /*
 *  G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWindow * assistant, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWindow * assistant : 
-*  gpointer data         : 
+*  GtkWindow * assistant :
+*  gpointer data         :
 */
 G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWindow * assistant, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWidget * assistant, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * assistant : 
-*  GdkEvent * event      : 
-*  gpointer data         : 
+*  GtkWidget * assistant :
+*  GdkEvent * event      :
+*  gpointer data         :
 */
 G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWidget * assistant, GdkEvent * event, gpointer data)
 #endif
@@ -3850,10 +3849,10 @@ G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWidget * assistant, GdkEv
 /*
 *  G_MODULE_EXPORT void on_assistant_close (GtkAssistant * assistant, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkAssistant * assistant : 
-*  gpointer data            : 
+*  GtkAssistant * assistant :
+*  gpointer data            :
 */
 G_MODULE_EXPORT void on_assistant_close (GtkAssistant * assistant, gpointer data)
 {
@@ -3863,10 +3862,10 @@ G_MODULE_EXPORT void on_assistant_close (GtkAssistant * assistant, gpointer data
 /*
 *  G_MODULE_EXPORT gint on_assistant_go_forward (gint current_page, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  gint current_page : 
-*  gpointer data     : 
+*  gint current_page :
+*  gpointer data     :
 */
 G_MODULE_EXPORT gint on_assistant_go_forward (gint current_page, gpointer data)
 {
@@ -3918,10 +3917,10 @@ G_MODULE_EXPORT gint on_assistant_go_forward (gint current_page, gpointer data)
 /*
 *  G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkAssistant * assistant : 
-*  GtkWidget * page         : 
+*  GtkAssistant * assistant :
+*  GtkWidget * page         :
 */
 G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page)
 {
@@ -3964,12 +3963,12 @@ G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget *
 /*
 *  void hide_show_this_pages (int start, int end, int status, int delta)
 *
-*  Usage: 
+*  Usage:
 *
-*  int start  : 
-*  int end    : 
-*  int status : 
-*  int delta  : 
+*  int start  :
+*  int end    :
+*  int status :
+*  int delta  :
 */
 void hide_show_this_pages (int start, int end, int status, int delta)
 {
@@ -3989,9 +3988,9 @@ void hide_show_this_pages (int start, int end, int status, int delta)
 /*
 *  void remove_classical_assistant_pages (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 void remove_classical_assistant_pages (int p)
 {
@@ -4008,11 +4007,11 @@ void remove_classical_assistant_pages (int p)
 /*
 *  G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * dial : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * dial :
+*  gint response_id :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -4068,20 +4067,20 @@ G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpoint
 /*
 *  G_MODULE_EXPORT void clean_field (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void clean_field (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void clean_field (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void clean_field (GtkToggleButton * but, gpointer data)
 #endif
@@ -4105,20 +4104,20 @@ G_MODULE_EXPORT void clean_field (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void select_field_action (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void select_field_action (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void select_field_action (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void select_field_action (GtkToggleButton * but, gpointer data)
 #endif
@@ -4148,9 +4147,9 @@ G_MODULE_EXPORT void select_field_action (GtkToggleButton * but, gpointer data)
 /*
 *  void add_classical_assistant_pages (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 void add_classical_assistant_pages (int p)
 {
@@ -4205,10 +4204,10 @@ gchar * field_init[3]={"Atomic species as field atom(s)",
 /*
 *  void create_ff_structure (int ai, int type)
 *
-*  Usage: 
+*  Usage:
 *
-*  int ai   : 
-*  int type : 
+*  int ai   :
+*  int type :
 */
 void create_ff_structure (int ai, int type)
 {
@@ -4256,10 +4255,10 @@ void create_ff_structure (int ai, int type)
 /*
 *  G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
 {
@@ -4312,10 +4311,10 @@ G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
 {
@@ -4334,7 +4333,6 @@ G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
       j ++;
       scrollsets = create_scroll (NULL, 700, 350, GTK_SHADOW_ETCHED_IN);
       aview = create_text_view (-1, -1, 0, 1, NULL, NULL, NULL);
-      if (! registered_atomes || testing_atomes) widget_set_sensitive (aview, TRUE);
       add_container_child (CONTAINER_SCR, scrollsets, aview);
       if (! activef)
       {
@@ -4375,11 +4373,11 @@ G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void run_on_assistant_apply (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkNativeDialog * info : 
-*  gint response_id       : 
-*  gpointer data          : 
+*  GtkNativeDialog * info :
+*  gint response_id       :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void run_on_assistant_apply (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -4388,11 +4386,11 @@ G_MODULE_EXPORT void run_on_assistant_apply (GtkNativeDialog * info, gint respon
 /*
 *  G_MODULE_EXPORT void run_on_assistant_apply (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * info : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * info :
+*  gint response_id :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void run_on_assistant_apply (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -4481,10 +4479,10 @@ G_MODULE_EXPORT void run_on_assistant_apply (GtkDialog * info, gint response_id,
 /*
 *  void on_assistant_apply (GtkAssistant * assistant, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkAssistant * assistant : 
-*  gpointer data            : 
+*  GtkAssistant * assistant :
+*  gpointer data            :
 */
 void on_assistant_apply (GtkAssistant * assistant, gpointer data)
 {
@@ -4496,8 +4494,6 @@ void on_assistant_apply (GtkAssistant * assistant, gpointer data)
 #endif
   gchar * ff_type[2] = {"DL-POLY", "LAMMPS"};
 
-  if (! saving_option ()) goto end;
-
   text = g_strdup_printf ("Saving %s input file(s)", ff_type[activef]);
   info = create_file_chooser (text,
                               GTK_WINDOW(assistant),
@@ -4508,9 +4504,6 @@ void on_assistant_apply (GtkAssistant * assistant, gpointer data)
   run_this_gtk_native_dialog ((GtkNativeDialog *)info, G_CALLBACK(run_on_assistant_apply), NULL);
 #else
   run_this_gtk_dialog (info, G_CALLBACK(run_on_assistant_apply), NULL);
-#endif
-  end:;
-#ifdef GTK3
   // GTK3 Menu Action To Check
   gboolean i = (tmp_proj -> force_field[activef]) ? TRUE : FALSE;
   widget_set_sensitive (tmp_view -> color_styles[5], i);
@@ -4521,10 +4514,10 @@ void on_assistant_apply (GtkAssistant * assistant, gpointer data)
 /*
 *  void create_classical_force_field (int p, int f)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
-*  int f : 
+*  int p :
+*  int f :
 */
 void create_classical_force_field (int p, int f)
 {

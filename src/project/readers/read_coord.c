@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_coord.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int open_coord_file (gchar * filename, int fti);
 
@@ -35,7 +35,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "callbacks.h"
 #include "interface.h"
 #include "project.h"
-#include "gui.h"
 #include "bind.h"
 #include <omp.h>
 #include "cbuild_edit.h"
@@ -63,9 +62,9 @@ struct line_node * tail = NULL;
 /*
 *  void add_reader_info (gchar * info)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * info : 
+*  gchar * info :
 */
 void add_reader_info (gchar * info)
 {
@@ -75,11 +74,11 @@ void add_reader_info (gchar * info)
 /*
 *  void reader_info (gchar * type, gchar * sinf, int val)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * type : 
-*  gchar * sinf : 
-*  int val      : 
+*  gchar * type :
+*  gchar * sinf :
+*  int val      :
 */
 void reader_info (gchar * type, gchar * sinf, int val)
 {
@@ -89,12 +88,12 @@ void reader_info (gchar * type, gchar * sinf, int val)
 /*
 *  void format_error (int stp, int ato, gchar * mot, int line)
 *
-*  Usage: 
+*  Usage:
 *
-*  int stp     : 
-*  int ato     : 
-*  gchar * mot : 
-*  int line    : 
+*  int stp     :
+*  int ato     :
+*  gchar * mot :
+*  int line    :
 */
 void format_error (int stp, int ato, gchar * mot, int line)
 {
@@ -118,10 +117,10 @@ void format_error (int stp, int ato, gchar * mot, int line)
 /*
 *  void check_for_species (double v, int ato)
 *
-*  Usage: 
+*  Usage:
 *
-*  double v : 
-*  int ato  : 
+*  double v :
+*  int ato  :
 */
 void check_for_species (double v, int ato)
 {
@@ -172,10 +171,10 @@ void check_for_species (double v, int ato)
 /*
 *  int open_coord_file (gchar * filename, int fti)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * filename : 
-*  int fti          : 
+*  gchar * filename :
+*  int fti          :
 */
 int open_coord_file (gchar * filename, int fti)
 {

@@ -16,17 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  opengl/edit/cbuild_action.c
-  opengl/edit/cbuild_edit.c
-  opengl/edit/cbuild_info.c
-  opengl/edit/cbuild_sg.c
-  project/readers/read_cif.c
-  project/readers/read_coord.c
-  project/readers/read_hist.c
-  project/readers/read_npt.c
-
 */
 
 #ifndef CBUILD_EDIT_H_

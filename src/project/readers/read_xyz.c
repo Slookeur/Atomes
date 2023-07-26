@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_xyz.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int xyz_get_atom_coordinates ();
   int open_xyz_file (int linec);
@@ -31,7 +31,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "callbacks.h"
 #include "interface.h"
 #include "project.h"
-#include "gui.h"
 #include "bind.h"
 #include <omp.h>
 #include "readers.h"
@@ -39,9 +38,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int xyz_get_atom_coordinates ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 int xyz_get_atom_coordinates ()
 {
@@ -270,9 +269,9 @@ int xyz_get_atom_coordinates ()
 /*
 *  int open_xyz_file (int linec)
 *
-*  Usage: 
+*  Usage:
 *
-*  int linec : 
+*  int linec :
 */
 int open_xyz_file (int linec)
 {

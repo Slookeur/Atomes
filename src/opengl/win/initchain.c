@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'initchain.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta]);
   void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num]);
@@ -29,7 +29,6 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "global.h"
 #include "interface.h"
-#include "gui.h"
 #include "bind.h"
 #include "color_box.h"
 #include "glwindow.h"
@@ -37,12 +36,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
 *
-*  Usage: 
+*  Usage:
 *
-*  int * st         : 
-*  int * ta         : 
-*  int * ri         : 
-*  int nchain[* ta] : 
+*  int * st         :
+*  int * ta         :
+*  int * ri         :
+*  int nchain[* ta] :
 */
 void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
 {
@@ -56,13 +55,13 @@ void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
 /*
 *  void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
 *
-*  Usage: 
+*  Usage:
 *
-*  int * st          : 
-*  int * at          : 
-*  int * ta          : 
-*  int * num         : 
-*  int nchain[* num] : 
+*  int * st          :
+*  int * at          :
+*  int * ta          :
+*  int * num         :
+*  int nchain[* num] :
 */
 void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
 {
@@ -81,11 +80,11 @@ void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int n
 /*
 *  void allocate_all_chains_ (int * st, int * ta, int * nring)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * st    : 
-*  int * ta    : 
-*  int * nring : 
+*  int * st    :
+*  int * ta    :
+*  int * nring :
 */
 void allocate_all_chains_ (int * st, int * ta, int * nring)
 {

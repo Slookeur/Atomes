@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_pdb.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int pdb_get_atoms_data (int linec);
   int open_pdb_file (int linec);
@@ -33,7 +33,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "callbacks.h"
 #include "interface.h"
 #include "project.h"
-#include "gui.h"
 #include "bind.h"
 #include "readers.h"
 
@@ -43,9 +42,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  double get_z_from_pdb_name (char * name)
 *
-*  Usage: 
+*  Usage:
 *
-*  char * name : 
+*  char * name :
 */
 double get_z_from_pdb_name (char * name)
 {
@@ -56,9 +55,9 @@ double get_z_from_pdb_name (char * name)
 /*
 *  int pdb_get_atoms_data (int linec)
 *
-*  Usage: 
+*  Usage:
 *
-*  int linec : 
+*  int linec :
 */
 int pdb_get_atoms_data (int linec)
 {
@@ -199,9 +198,9 @@ int pdb_get_atoms_data (int linec)
 /*
 *  int open_pdb_file (int linec)
 *
-*  Usage: 
+*  Usage:
 *
-*  int linec : 
+*  int linec :
 */
 int open_pdb_file (int linec)
 {

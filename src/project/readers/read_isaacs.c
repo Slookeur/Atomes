@@ -12,14 +12,15 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 /*
-* This file: 'xmlrw.c'
+* This file: 'read_isaacs.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The reader subroutines for the ISAACS XML file
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int XmlwriterFilename (const char *uri);
   int write_xml (const char * filetosave);
@@ -69,9 +70,9 @@ char * reg_types[NFORMATS] = {"XYZ file",
 /*
 *  size_t strfind (char * ida)
 *
-*  Usage: 
+*  Usage:
 *
-*  char * ida : 
+*  char * ida :
 */
 size_t strfind (char * ida)
 {
@@ -92,9 +93,9 @@ size_t strfind (char * ida)
 /*
 *  int XmlwriterFilename (const char *uri)
 *
-*  Usage: 
+*  Usage: write ISAACS XML file
 *
-*  const char *uri : 
+*  const char *uri : The file name
 */
 int XmlwriterFilename (const char *uri)
 {
@@ -122,7 +123,7 @@ int XmlwriterFilename (const char *uri)
 
 
   strcpy((char *)intro, isaacinfo);
-  strcat((char *)intro, VERSION);
+  strcat((char *)intro, "1.0");
   strcat((char *)intro, xmlinfo);
   rc = xmlTextWriterWriteComment(writer, intro);
   if (rc < 0) return 0;
@@ -140,7 +141,33 @@ int XmlwriterFilename (const char *uri)
   if (rc < 0) return 0;
   rc = xmlTextWriterStartElement(writer, BAD_CAST (const xmlChar *)"data");
   if (rc < 0) return 0;
-  rc = xmlTextWriterWriteFormatElement(writer, BAD_CAST (const xmlChar *)"type", "%s", reg_types[active_project -> tfile]);
+  int reg = 0;
+  if (active_project -> tfile < 2)
+  {
+    reg = (active_project -> steps > 1) ? 4 : 0;
+  }
+  else if (active_project -> tfile == 2)
+  {
+    reg = (active_project -> steps > 1) ? 5 : 1;
+  }
+  else if (active_project -> tfile < 5)
+  {
+    reg = 2;
+  }
+  else if (active_project -> tfile  < 6)
+  {
+    reg = 3;
+  }
+  else if (active_project -> tfile  < 9)
+  {
+    reg = 6;
+  }
+  else
+  {
+    return 0;
+  }
+
+  rc = xmlTextWriterWriteFormatElement(writer, BAD_CAST (const xmlChar *)"type", "%s", reg_types[reg]);
   if (rc < 0) return 0;
   rc = xmlTextWriterWriteFormatElement(writer, BAD_CAST (const xmlChar *)"file", "%s", active_project -> coordfile);
   if (rc < 0) return 0;
@@ -276,6 +303,8 @@ int XmlwriterFilename (const char *uri)
     if (rc < 0) return 0;
     rc = xmlTextWriterWriteFormatElement(writer, BAD_CAST (const xmlChar *)"c", "%f", 0.0);
     if (rc < 0) return 0;
+    rc = xmlTextWriterEndElement(writer);
+    if (rc < 0) return 0;
     rc = xmlTextWriterStartElement(writer, BAD_CAST (const xmlChar *)"angles");
     if (rc < 0) return 0;
     rc = xmlTextWriterWriteFormatElement(writer, BAD_CAST (const xmlChar *)"alpha", "%f", 0.0);
@@ -335,7 +364,6 @@ int XmlwriterFilename (const char *uri)
   if (rc < 0) return 0;
   rc = xmlTextWriterEndElement(writer);
   if (rc < 0) return 0;
-
  /* Start the "pbc" element.
   <pbc>
     <apply></apply>
@@ -462,9 +490,9 @@ int XmlwriterFilename (const char *uri)
 /*
 *  int write_xml (const char * filetosave)
 *
-*  Usage: 
+*  Usage: write XML file
 *
-*  const char * filetosave : 
+*  const char * filetosave : File to write
 */
 int write_xml (const char * filetosave)
 {
@@ -484,9 +512,9 @@ int write_xml (const char * filetosave)
 /*
 *  gboolean file_exists(const char * filename)
 *
-*  Usage: 
+*  Usage: file exists ?
 *
-*  const char * filename : 
+*  const char * filename : File name
 */
 gboolean file_exists(const char * filename)
 {
@@ -502,10 +530,10 @@ gboolean file_exists(const char * filename)
 /*
 *  xmlNodePtr findnode (xmlNodePtr startnode, char * nname)
 *
-*  Usage: 
+*  Usage: find XML node
 *
-*  xmlNodePtr startnode : 
-*  char * nname         : 
+*  xmlNodePtr startnode : Starting node
+*  char * nname         : Node name to find
 */
 xmlNodePtr findnode (xmlNodePtr startnode, char * nname)
 {
@@ -526,9 +554,9 @@ xmlNodePtr findnode (xmlNodePtr startnode, char * nname)
 /*
 *  int get_spec_from_data (xmlChar * data)
 *
-*  Usage: 
+*  Usage: get atomic species from data
 *
-*  xmlChar * data : 
+*  xmlChar * data : The data
 */
 int get_spec_from_data (xmlChar * data)
 {
@@ -546,9 +574,9 @@ int get_spec_from_data (xmlChar * data)
 /*
 *  int setprop (xmlNodePtr pnode)
 *
-*  Usage: 
+*  Usage: read chemical properties from XML node
 *
-*  xmlNodePtr pnode : 
+*  xmlNodePtr pnode : The XML node
 */
 int setprop (xmlNodePtr pnode)
 {
@@ -651,31 +679,55 @@ pend:
 /*
 *  int testopening (char * tdata, char * tfichier)
 *
-*  Usage: 
+*  Usage: test atomic coordinates file opening
 *
-*  char * tdata    : 
-*  char * tfichier : 
+*  char * tdata    : Type of coordinates
+*  char * tfichier : File name
 */
 int testopening (char * tdata, char * tfichier)
 {
   int i, j;
   char * err;
 
-  j=-2;
+  j = -1;
   for ( i=0 ; i<NFORMATS ; i ++ )
   {
-    if (g_strcmp0 (reg_types[i], tdata) == 0) j=i;
+    if (g_strcmp0 (reg_types[i], tdata) == 0)
+    {
+      j = i;
+      break;
+    }
   }
-  if (j == 4) j=0;
-  if (j == 5) j=2;
-  if (j == 6) j=4;
-  if (j != -2)
+  if (j > -1)
   {
     if (file_exists (tfichier))
     {
-      active_project -> tfile = NCFORMATS;
+      switch (j)
+      {
+        case 0:
+          active_project -> tfile = 0;
+          break;
+        case 1:
+          active_project -> tfile = 2;
+          break;
+        case 2:
+          active_project -> tfile = 3;
+          break;
+        case 3:
+          active_project -> tfile = 5;
+          break;
+        case 4:
+          active_project -> tfile = 0;
+          break;
+        case 5:
+          active_project -> tfile = 2;
+          break;
+        case 6:
+          active_project -> tfile = 7;
+          break;
+      }
       active_project -> coordfile = tfichier;
-      if (open_coordinate_file (j) == 0)
+      if (open_coordinate_file (active_project -> tfile) == 0)
       {
         return 0;
       }
@@ -704,9 +756,9 @@ int testopening (char * tdata, char * tfichier)
 /*
 *  int setchemistry (xmlNodePtr xsnode)
 *
-*  Usage: 
+*  Usage: read chemistry data from node
 *
-*  xmlNodePtr xsnode : 
+*  xmlNodePtr xsnode : The XML node
 */
 int setchemistry (xmlNodePtr xsnode)
 {
@@ -798,9 +850,9 @@ xend:
 /*
 *  int setbox (xmlNodePtr boxnode)
 *
-*  Usage: 
+*  Usage: read box properties from node
 *
-*  xmlNodePtr boxnode : 
+*  xmlNodePtr boxnode : The XML node
 */
 int setbox (xmlNodePtr boxnode)
 {
@@ -991,9 +1043,9 @@ bend:
 /*
 *  int setpbc (xmlNodePtr pbcnode)
 *
-*  Usage: 
+*  Usage: read the PBC information from node
 *
-*  xmlNodePtr pbcnode : 
+*  xmlNodePtr pbcnode : The XML node
 */
 int setpbc (xmlNodePtr pbcnode)
 {
@@ -1045,9 +1097,9 @@ pend:
 /*
 *  int setcutoffs (xmlNodePtr cutnode)
 *
-*  Usage: 
+*  Usage: read bond cutoffs from node
 *
-*  xmlNodePtr cutnode : 
+*  xmlNodePtr cutnode : The XML node
 */
 int setcutoffs (xmlNodePtr cutnode)
 {
@@ -1108,9 +1160,9 @@ cend:
 /*
 *  int settime(xmlNodePtr timenode)
 *
-*  Usage: 
+*  Usage: read MD information from node
 *
-*  xmlNodePtr timenode : 
+*  xmlNodePtr timenode : The XML node
 */
 int settime(xmlNodePtr timenode)
 {
@@ -1168,9 +1220,9 @@ tend:
 /*
 *  int check_xml (const char * filetocheck)
 *
-*  Usage: 
+*  Usage: check the opening of ISAACS XML file
 *
-*  const char * filetocheck : 
+*  const char * filetocheck : File name
 */
 int check_xml (const char * filetocheck)
 {
@@ -1340,9 +1392,9 @@ end:
 /*
 *  gchar * open_xml (const char * filetoread)
 *
-*  Usage: 
+*  Usage: Open ISAACS XML file
 *
-*  const char * filetoread : 
+*  const char * filetoread : File name
 */
 gchar * open_xml (const char * filetoread)
 {

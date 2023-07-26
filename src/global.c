@@ -14,14 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'global.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
+
  - Global variables declarations
- - Conveniency global subroutines
+ - Convenience global subroutines
+
 *
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int StringLength (char * str);
   int * allocint (int  val);
@@ -230,8 +230,6 @@ double * xsk = NULL;
 
 GMainLoop * Event_loop[5];
 
-gboolean registered_atomes = TRUE;
-gboolean testing_atomes = FALSE;
 gboolean in_movie_encoding = FALSE;
 gboolean newspace = TRUE;
 gboolean reading_input;
@@ -294,9 +292,9 @@ GdkPixbuf * RUN = NULL;
 /*
 *  int StringLength (char * str)
 *
-*  Usage: 
+*  Usage: return the length of a string
 *
-*  char * str : 
+*  char * str : string to measure
 */
 int StringLength (char * str)
 {
@@ -312,9 +310,9 @@ int StringLength (char * str)
 /*
 *  gboolean * allocbool (int  val)
 *
-*  Usage: 
+*  Usage: allocate a gboolean * pointer
 *
-*  int  val : 
+*  int  val : size of the pointer to allocate
 */
 gboolean * allocbool (int  val)
 {
@@ -327,10 +325,10 @@ gboolean * allocbool (int  val)
 /*
 *  gboolean ** allocdbool (int xal, int yal)
 *
-*  Usage: 
+*  Usage: allocate a gboolean ** pointer
 *
-*  int xal : 
-*  int yal : 
+*  int xal : 1st dimension size of the pointer to allocate
+*  int yal : 2nd dimension size of the pointer to allocate
 */
 gboolean ** allocdbool (int xal, int yal)
 {
@@ -349,11 +347,11 @@ gboolean ** allocdbool (int xal, int yal)
 /*
 *  gboolean *** alloctbool (int xal, int yal, int zal)
 *
-*  Usage: 
+*  Usage: allocate a gboolean *** pointer
 *
-*  int xal : 
-*  int yal : 
-*  int zal : 
+*  int xal : 1st dimension size of the pointer to allocate
+*  int yal : 2nd dimension size of the pointer to allocate
+*  int zal : 3rd dimension size of the pointer to allocate
 */
 gboolean *** alloctbool (int xal, int yal, int zal)
 {
@@ -372,9 +370,9 @@ gboolean *** alloctbool (int xal, int yal, int zal)
 /*
 *  int * allocint (int  val)
 *
-*  Usage: 
+*  Usage: allocate an int * pointer
 *
-*  int  val : 
+*  int val : size of the pointer to allocate
 */
 int * allocint (int  val)
 {
@@ -387,10 +385,10 @@ int * allocint (int  val)
 /*
 *  int ** allocdint (int xal, int yal)
 *
-*  Usage: 
+*  Usage: allocate an int ** pointer
 *
-*  int xal : 
-*  int yal : 
+*  int xal : 1st dimension size of the pointer to allocate
+*  int yal : 2nd dimension size of the pointer to allocate
 */
 int ** allocdint (int xal, int yal)
 {
@@ -409,11 +407,11 @@ int ** allocdint (int xal, int yal)
 /*
 *  int *** alloctint (int xal, int yal, int zal)
 *
-*  Usage: 
+*  Usage: allocate an int *** pointer
 *
-*  int xal : 
-*  int yal : 
-*  int zal : 
+*  int xal : 1st dimension size of the pointer to allocate
+*  int yal : 2nd dimension size of the pointer to allocate
+*  int zal : 3rd dimension size of the pointer to allocate
 */
 int *** alloctint (int xal, int yal, int zal)
 {
@@ -432,12 +430,12 @@ int *** alloctint (int xal, int yal, int zal)
 /*
 *  int **** allocqint (int wal, int xal, int yal, int zal)
 *
-*  Usage: 
+*  Usage: allocate an int **** pointer
 *
-*  int wal : 
-*  int xal : 
-*  int yal : 
-*  int zal : 
+*  int wal : 1st dimension size of the pointer to allocate
+*  int xal : 2nd dimension size of the pointer to allocate
+*  int yal : 3rd dimension size of the pointer to allocate
+*  int zal : 4th dimension size of the pointer to allocate
 */
 int **** allocqint (int wal, int xal, int yal, int zal)
 {
@@ -456,9 +454,9 @@ int **** allocqint (int wal, int xal, int yal, int zal)
 /*
 *  float * allocfloat (int  val)
 *
-*  Usage: 
+*  Usage: allocate a float * pointer
 *
-*  int  val : 
+*  int  val : size of the pointer to allocate
 */
 float * allocfloat (int  val)
 {
@@ -471,10 +469,10 @@ float * allocfloat (int  val)
 /*
 *  float ** allocdfloat (int xal, int yal)
 *
-*  Usage: 
+*  Usage: allocate a float ** pointer
 *
-*  int xal : 
-*  int yal : 
+*  int wal : 1st dimension size of the pointer to allocate
+*  int xal : 2nd dimension size of the pointer to allocate
 */
 float ** allocdfloat (int xal, int yal)
 {
@@ -493,11 +491,11 @@ float ** allocdfloat (int xal, int yal)
 /*
 *  float *** alloctfloat (int xal, int yal, int zal)
 *
-*  Usage: 
+*  Usage: allocate a float *** pointer
 *
-*  int xal : 
-*  int yal : 
-*  int zal : 
+*  int xal : 1st dimension size of the pointer to allocate
+*  int yal : 2nd dimension size of the pointer to allocate
+*  int zal : 3rd dimension size of the pointer to allocate
 */
 float *** alloctfloat (int xal, int yal, int zal)
 {
@@ -517,9 +515,9 @@ float *** alloctfloat (int xal, int yal, int zal)
 /*
 *  double * allocdouble (int val)
 *
-*  Usage: 
+*  Usage: allocate a double * pointer
 *
-*  int val : 
+*  int val : size of the pointer to allocate
 */
 double * allocdouble (int val)
 {
@@ -532,10 +530,10 @@ double * allocdouble (int val)
 /*
 *  double ** allocddouble (int xal, int yal)
 *
-*  Usage: 
+*  Usage: allocate a double ** pointer
 *
-*  int xal : 
-*  int yal : 
+*  int xal : 1st dimension size of the pointer to allocate
+*  int yal : 2nd dimension size of the pointer to allocate
 */
 double ** allocddouble (int xal, int yal)
 {
@@ -554,11 +552,11 @@ double ** allocddouble (int xal, int yal)
 /*
 *  double *** alloctdouble (int xal, int yal, int zal)
 *
-*  Usage: 
+*  Usage: allocate a double *** pointer
 *
-*  int xal : 
-*  int yal : 
-*  int zal : 
+*  int xal : 1st dimension size of the pointer to allocate
+*  int yal : 2nd dimension size of the pointer to allocate
+*  int zal : 3rd dimension size of the pointer to allocate
 */
 double *** alloctdouble (int xal, int yal, int zal)
 {
@@ -577,12 +575,12 @@ double *** alloctdouble (int xal, int yal, int zal)
 /*
 *  double **** allocqdouble (int wal, int xal, int yal, int zal)
 *
-*  Usage: 
+*  Usage: allocate a double **** pointer
 *
-*  int wal : 
-*  int xal : 
-*  int yal : 
-*  int zal : 
+*  int wal : 1st dimension size of the pointer to allocate
+*  int xal : 2nd dimension size of the pointer to allocate
+*  int yal : 3rd dimension size of the pointer to allocate
+*  int zal : 4th dimension size of the pointer to allocate
 */
 double **** allocqdouble (int wal, int xal, int yal, int zal)
 {
@@ -601,10 +599,10 @@ double **** allocqdouble (int wal, int xal, int yal, int zal)
 /*
 *  gchar ** duplicate_strings (int num, gchar ** old_val)
 *
-*  Usage: 
+*  Usage: copy a list of strings
 *
-*  int num          : 
-*  gchar ** old_val : 
+*  int num          : number of elements in the list
+*  gchar ** old_val : the list to copy
 */
 gchar ** duplicate_strings (int num, gchar ** old_val)
 {
@@ -617,10 +615,10 @@ gchar ** duplicate_strings (int num, gchar ** old_val)
 /*
 *  int * duplicate_int (int num, int * old_val)
 *
-*  Usage: 
+*  Usage: copy a list of int
 *
-*  int num       : 
-*  int * old_val : 
+*  int num       : number of elements in the list
+*  int * old_val : the list to copy
 */
 int * duplicate_int (int num, int * old_val)
 {
@@ -633,10 +631,10 @@ int * duplicate_int (int num, int * old_val)
 /*
 *  gboolean * duplicate_bool (int num, gboolean * old_val)
 *
-*  Usage: 
+*  Usage: copy a list of gboolean
 *
-*  int num            : 
-*  gboolean * old_val : 
+*  int num       : number of elements in the list
+*  int * old_val : the list to copy
 */
 gboolean * duplicate_bool (int num, gboolean * old_val)
 {
@@ -649,10 +647,10 @@ gboolean * duplicate_bool (int num, gboolean * old_val)
 /*
 *  float * duplicate_float (int num, float * old_val)
 *
-*  Usage: 
+*  Usage: copy a list of float
 *
-*  int num         : 
-*  float * old_val : 
+*  int num       : number of elements in the list
+*  int * old_val : the list to copy
 */
 float * duplicate_float (int num, float * old_val)
 {
@@ -665,10 +663,10 @@ float * duplicate_float (int num, float * old_val)
 /*
 *  double * duplicate_double (int num, double * old_val)
 *
-*  Usage: 
+*  Usage: copy a list of double
 *
-*  int num          : 
-*  double * old_val : 
+*  int num       : number of elements in the list
+*  int * old_val : the list to copy
 */
 double * duplicate_double (int num, double * old_val)
 {
@@ -681,10 +679,10 @@ double * duplicate_double (int num, double * old_val)
 /*
 *  double get_calc_time (struct timespec start, struct timespec stop)
 *
-*  Usage: 
+*  Usage: get calculation time in s
 *
-*  struct timespec start : 
-*  struct timespec stop  : 
+*  struct timespec start : the initial time
+*  struct timespec stop  : the final time
 */
 double get_calc_time (struct timespec start, struct timespec stop)
 {
@@ -694,10 +692,10 @@ double get_calc_time (struct timespec start, struct timespec stop)
 /*
 *  gchar * calculation_time (gboolean modelv, double ctime)
 *
-*  Usage: 
+*  Usage: get calculation time, human readable
 *
-*  gboolean modelv : 
-*  double ctime    : 
+*  gboolean modelv : was an analysis performed ?
+*  double ctime    : the calculation time
 */
 gchar * calculation_time (gboolean modelv, double ctime)
 {

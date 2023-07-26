@@ -14,17 +14,25 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'ringscall.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The callbacks for the ring statistics calculation dialog
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void initrng (int s);
   void update_rings_menus (glwin * view);
   void update_rings_view (struct project * this_proj, int c);
   void clean_rings_data (int rid, glwin * view);
+  void save_rings_data_ (int * taille,
+                         double ectrc[* taille],
+                         double ectpna[* taille],
+                         double ectmax[* taille],
+                         double ectmin[* taille],
+                         double * rpstep, double * ectrpst,
+                         double * nampat, double * ectampat);
 
   G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data);
 
@@ -60,9 +68,9 @@ gboolean toggled_rings;
 /*
 *  void initrng (int s)
 *
-*  Usage: 
+*  Usage: initialize the curve widgets for the ring statistics
 *
-*  int s : 
+*  int s :
 */
 void initrng (int s)
 {
@@ -94,9 +102,9 @@ void initrng (int s)
 /*
 *  void update_rings_menus (glwin * view)
 *
-*  Usage: 
+*  Usage: update the ring(s) menu for the glview
 *
-*  glwin * view : 
+*  glwin * view : The glview
 */
 void update_rings_menus (glwin * view)
 {
@@ -129,10 +137,10 @@ void update_rings_menus (glwin * view)
 /*
 *  void update_rings_view (struct project * this_proj, int c)
 *
-*  Usage: 
+*  Usage: update the text view for ring statistics
 *
-*  struct project * this_proj : 
-*  int c                      : 
+*  struct project * this_proj : The project
+*  int c                      : The ring type
 */
 void update_rings_view (struct project * this_proj, int c)
 {
@@ -354,10 +362,10 @@ void update_rings_view (struct project * this_proj, int c)
 /*
 *  void clean_rings_data (int rid, glwin * view)
 *
-*  Usage: 
+*  Usage: clean a ring type data for a glview
 *
-*  int rid      : 
-*  glwin * view : 
+*  int rid      : Rings type
+*  glwin * view : The glview
 */
 void clean_rings_data (int rid, glwin * view)
 {
@@ -419,10 +427,10 @@ void clean_rings_data (int rid, glwin * view)
 /*
 *  G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: compute ring statistics
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
 {
@@ -536,6 +544,27 @@ G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
   if (search > 2 && active_cell -> pbc) active_project -> dmtx = FALSE;
 }
 
+/*
+*  void save_rings_data_ (int * taille,
+                          double ectrc[* taille],
+                          double ectpna[* taille],
+                          double ectmax[* taille],
+                          double ectmin[* taille],
+                          double * rpstep, double * ectrpst,
+                          double * nampat, double * ectampat)
+*
+*  Usage : retrieving ring data from Fortran90
+*
+*  int * taille            :
+*  double ectrc[* taille]  :
+*  double ectpna[* taille] :
+*  double ectmax[* taille] :
+*  double ectmin[* taille] :
+*  double * rpstep         :
+*  double * ectrpst        :
+*  double * nampat         :
+*  double * ectampat       :
+*/
 void save_rings_data_ (int * taille,
                        double ectrc[* taille],
                        double ectpna[* taille],

@@ -16,16 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  curve/curve.c
-  curve/m_curve.c
-  curve/tab-1.c
-  curve/tab-2.c
-  curve/tab-3.c
-  curve/tab-4.c
-  curve/w_curve.c
-
 */
 
 #ifndef CEDIT_H_

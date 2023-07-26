@@ -14,26 +14,15 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'readers.h'
 *
-*  Contains: 
-
-*  Called by: 
-
-  gui/callbacks.c
-  opengl/edit/cbuild_action.c
-  opengl/edit/cbuild_edit.c
-  project/readers/read_c3d.c
-  project/readers/read_cif.c
-  project/readers/read_hist.c
-  project/readers/read_pdb.c
-  project/readers/read_trj.c
-  project/readers/read_vas.c
-  project/readers/read_xyz.c
+*  Contains:
 
 */
 
 #ifndef READERS_H_
 
 #define READERS_H_
+
+#include "read_isaacs.h"
 
 extern double get_z_from_periodic_table (gchar * lab);
 extern void allocatoms (struct project * this_proj);

@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_curve.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The widget of the graph/curve(s) window
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int get_curve_shift (struct project * this_proj, int b, int c);
 
@@ -70,10 +71,10 @@ int activer = 0;
 /*
 *  G_MODULE_EXPORT gboolean view_curve_popup (GtkWidget * widget, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widget : 
-*  gpointer data      : 
+*  GtkWidget * widget :
+*  gpointer data      :
 */
 G_MODULE_EXPORT gboolean view_curve_popup (GtkWidget * widget, gpointer data)
 {
@@ -85,12 +86,12 @@ G_MODULE_EXPORT gboolean view_curve_popup (GtkWidget * widget, gpointer data)
 /*
 *  void curve_zoom_in_out (gboolean state, gdouble event_x, gdouble event_y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  gboolean state  : 
-*  gdouble event_x : 
-*  gdouble event_y : 
-*  gpointer data   : 
+*  gboolean state  :
+*  gdouble event_x :
+*  gdouble event_y :
+*  gpointer data   :
 */
 void curve_zoom_in_out (gboolean state, gdouble event_x, gdouble event_y, gpointer data)
 {
@@ -267,11 +268,11 @@ void curve_zoom_in_out (gboolean state, gdouble event_x, gdouble event_y, gpoint
 /*
 *  G_MODULE_EXPORT gboolean on_motion_notify_event (GtkWidget * widget, GdkEventMotion * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widget     : 
-*  GdkEventMotion * event : 
-*  gpointer data          : 
+*  GtkWidget * widget     :
+*  GdkEventMotion * event :
+*  gpointer data          :
 */
 G_MODULE_EXPORT gboolean on_motion_notify_event (GtkWidget * widget, GdkEventMotion * event, gpointer data)
 {
@@ -282,12 +283,12 @@ G_MODULE_EXPORT gboolean on_motion_notify_event (GtkWidget * widget, GdkEventMot
 /*
 *  static void on_curve_pointer_motion (GtkEventControllerMotion * motion, gdouble x, gdouble y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEventControllerMotion * motion : 
-*  gdouble x                         : 
-*  gdouble y                         : 
-*  gpointer data                     : 
+*  GtkEventControllerMotion * motion :
+*  gdouble x                         :
+*  gdouble y                         :
+*  gpointer data                     :
 */
 static void on_curve_pointer_motion (GtkEventControllerMotion * motion, gdouble x, gdouble y, gpointer data)
 {
@@ -299,29 +300,29 @@ static void on_curve_pointer_motion (GtkEventControllerMotion * motion, gdouble 
 /*
 *  void curve_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  double event_x     : 
-*  double event_y     : 
-*  guint event_button : 
-*  guint event_type   : 
-*  guint32 event_time : 
-*  gpointer data      : 
+*  double event_x     :
+*  double event_y     :
+*  guint event_button :
+*  guint event_type   :
+*  guint32 event_time :
+*  gpointer data      :
 */
 void curve_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 #else
 /*
 *  void curve_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GdkEvent * event   : 
-*  double event_x     : 
-*  double event_y     : 
-*  guint event_button : 
-*  guint event_type   : 
-*  guint32 event_time : 
-*  gpointer data      : 
+*  GdkEvent * event   :
+*  double event_x     :
+*  double event_y     :
+*  guint event_button :
+*  guint event_type   :
+*  guint32 event_time :
+*  gpointer data      :
 */
 void curve_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 #endif
@@ -438,13 +439,13 @@ void curve_button_event (GdkEvent * event, double event_x, double event_y, guint
 /*
 *  G_MODULE_EXPORT void on_curve_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
-*  gpointer data        : 
+*  GtkGesture * gesture :
+*  int n_press          :
+*  double x             :
+*  double y             :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void on_curve_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -454,13 +455,13 @@ G_MODULE_EXPORT void on_curve_button_pressed (GtkGesture * gesture, int n_press,
 /*
 *  G_MODULE_EXPORT void on_curve_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
-*  gpointer data        : 
+*  GtkGesture * gesture :
+*  int n_press          :
+*  double x             :
+*  double y             :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void on_curve_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -470,11 +471,11 @@ G_MODULE_EXPORT void on_curve_button_released (GtkGesture * gesture, int n_press
 /*
 *  G_MODULE_EXPORT gboolean on_curve_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widget : 
-*  GdkEvent * event   : 
-*  gpointer data      : 
+*  GtkWidget * widget :
+*  GdkEvent * event   :
+*  gpointer data      :
 */
 G_MODULE_EXPORT gboolean on_curve_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
@@ -487,11 +488,11 @@ G_MODULE_EXPORT gboolean on_curve_button_event (GtkWidget * widget, GdkEvent * e
 /*
 *  void curve_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  guint keyval          : 
-*  GdkModifierType state : 
-*  gpointer data         : 
+*  guint keyval          :
+*  GdkModifierType state :
+*  gpointer data         :
 */
 void curve_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 {
@@ -522,11 +523,11 @@ void curve_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean on_curve_key_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg    : 
-*  GdkEventKey * event : 
-*  gpointer data       : 
+*  GtkWidget * widg    :
+*  GdkEventKey * event :
+*  gpointer data       :
 */
 G_MODULE_EXPORT gboolean on_curve_key_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data)
 {
@@ -542,13 +543,13 @@ G_MODULE_EXPORT gboolean on_curve_key_pressed (GtkWidget * widg, GdkEventKey * e
 /*
 *  G_MODULE_EXPORT gboolean on_curve_key_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEventControllerKey * self : 
-*  guint keyval                 : 
-*  guint keycode                : 
-*  GdkModifierType state        : 
-*  gpointer data                : 
+*  GtkEventControllerKey * self :
+*  guint keyval                 :
+*  guint keycode                :
+*  GdkModifierType state        :
+*  gpointer data                :
 */
 G_MODULE_EXPORT gboolean on_curve_key_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
 {
@@ -561,22 +562,22 @@ G_MODULE_EXPORT gboolean on_curve_key_pressed (GtkEventControllerKey * self, gui
 /*
 *  G_MODULE_EXPORT gboolean curve_configure_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widget : 
-*  GdkEvent * event   : 
-*  gpointer data      : 
+*  GtkWidget * widget :
+*  GdkEvent * event   :
+*  gpointer data      :
 */
 G_MODULE_EXPORT gboolean curve_configure_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT gboolean curve_configure_event (GtkWidget * widget, GdkEventConfigure * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widget        : 
-*  GdkEventConfigure * event : 
-*  gpointer data             : 
+*  GtkWidget * widget        :
+*  GdkEventConfigure * event :
+*  gpointer data             :
 */
 G_MODULE_EXPORT gboolean curve_configure_event (GtkWidget * widget, GdkEventConfigure * event, gpointer data)
 #endif
@@ -604,11 +605,11 @@ G_MODULE_EXPORT gboolean curve_configure_event (GtkWidget * widget, GdkEventConf
 /*
 *  int get_curve_shift (struct project * this_proj, int b, int c)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int b                      : 
-*  int c                      : 
+*  struct project * this_proj :
+*  int b                      :
+*  int c                      :
 */
 int get_curve_shift (struct project * this_proj, int b, int c)
 {
@@ -618,10 +619,10 @@ int get_curve_shift (struct project * this_proj, int b, int c)
 /*
 *  G_MODULE_EXPORT void on_curve_realize (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void on_curve_realize (GtkWidget * widg, gpointer data)
 {
@@ -635,9 +636,9 @@ G_MODULE_EXPORT void on_curve_realize (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * create_curve (tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  tint * data : 
+*  tint * data :
 */
 GtkWidget * create_curve (tint * data)
 {

@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'sqcall.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The callbacks for the s(q) / s(k) calculation dialog
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void initsq (int r, int s);
   void update_sq_view (struct project * this_proj, int sqk);
@@ -44,10 +45,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void initsq (int r, int s)
 *
-*  Usage: 
+*  Usage: initialize the curve widgets for the s(q) / s(k) calculation
 *
-*  int r : 
-*  int s : 
+*  int r : s(q) (SQ) or s(k) (SK)
+*  int s :
 */
 void initsq (int r, int s)
 {
@@ -107,10 +108,10 @@ void initsq (int r, int s)
 /*
 *  void update_sq_view (struct project * this_proj, int sqk)
 *
-*  Usage: 
+*  Usage: update the text view for s(q) / s(k) calculation
 *
-*  struct project * this_proj : 
-*  int sqk                    : 
+*  struct project * this_proj : The project
+*  int sqk                    : s(q) (SQ) or s(k) (SK)
 */
 void update_sq_view (struct project * this_proj, int sqk)
 {
@@ -176,10 +177,10 @@ void update_sq_view (struct project * this_proj, int sqk)
 /*
 *  G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: compute s(q) / s(k)
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data)
 {
@@ -212,10 +213,10 @@ G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data)
 /*
 *  void save_xsk_ (int * interv, double datacurve[* interv])
 *
-*  Usage: 
+*  Usage:
 *
-*  int * interv               : 
-*  double datacurve[* interv] : 
+*  int * interv               :
+*  double datacurve[* interv] :
 */
 void save_xsk_ (int * interv, double datacurve[* interv])
 {
@@ -228,10 +229,10 @@ void save_xsk_ (int * interv, double datacurve[* interv])
 /*
 *  G_MODULE_EXPORT void on_calc_sk_released (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void on_calc_sk_released (GtkWidget * widg, gpointer data)
 {

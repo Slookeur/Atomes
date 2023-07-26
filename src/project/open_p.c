@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'open_p.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int open_project (FILE * fp, int pid);
 
@@ -27,6 +27,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
   gchar * read_this_string (FILE * fp);
 
+  void initcnames (int w, int s);
   void allocatoms (struct project * this_proj);
   void alloc_proj_data (struct project * this_proj, int cid);
 
@@ -45,14 +46,22 @@ If not, see <https://www.gnu.org/licenses/> */
 extern void alloc_curves (int c);
 extern void init_box_calc ();
 extern void set_color_map_sensitive (glwin * view);
+extern void initgr (int r, int s);
+extern void initsq (int r, int s);
+extern void initbd (int s);
+extern void initang (int s);
+extern void initrng (int s);
+extern void initchn (int s);
+extern void initmsd (int s);
+extern void initsh (int s);
 
 /*
 *  char * read_string (int i, FILE * fp)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i     : 
-*  FILE * fp : 
+*  int i     :
+*  FILE * fp :
 */
 char * read_string (int i, FILE * fp)
 {
@@ -70,9 +79,9 @@ char * read_string (int i, FILE * fp)
 /*
 *  gchar * read_this_string (FILE * fp)
 *
-*  Usage: 
+*  Usage:
 *
-*  FILE * fp : 
+*  FILE * fp :
 */
 gchar * read_this_string (FILE * fp)
 {
@@ -86,12 +95,58 @@ gchar * read_this_string (FILE * fp)
   return NULL;
 }
 
+
+/*
+*  void initcnames (int w, int s)
+*
+*  Usage:
+*
+*  int w : calculation id
+*  int s :
+*/
+void initcnames (int w, int s)
+{
+  switch (w)
+  {
+    case GR:
+      initgr (w, s);
+      break;
+    case SQ:
+      initsq (w, s);
+      break;
+    case SK:
+      initsq (w, s);
+      break;
+    case GK:
+      initgr (w, s);
+      break;
+    case BD:
+      initbd (s);
+      break;
+    case AN:
+      initang (s);
+      break;
+    case RI:
+      initrng (s);
+      break;
+    case CH:
+      initchn (s);
+      break;
+    case SP:
+      initsh (s);
+      break;
+    default:
+      initmsd (s);
+      break;
+  }
+}
+
 /*
 *  void allocatoms (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void allocatoms (struct project * this_proj)
 {
@@ -115,9 +170,9 @@ void allocatoms (struct project * this_proj)
 /*
 *  chemical_data * alloc_chem_data (int spec)
 *
-*  Usage: 
+*  Usage:
 *
-*  int spec : 
+*  int spec :
 */
 chemical_data * alloc_chem_data (int spec)
 {
@@ -134,10 +189,10 @@ chemical_data * alloc_chem_data (int spec)
 /*
 *  void alloc_proj_data (struct project * this_proj, int cid)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int cid                    : 
+*  struct project * this_proj :
+*  int cid                    :
 */
 void alloc_proj_data (struct project * this_proj, int cid)
 {
@@ -148,10 +203,10 @@ void alloc_proj_data (struct project * this_proj, int cid)
 /*
 *  int open_project (FILE * fp, int pid)
 *
-*  Usage: 
+*  Usage:
 *
-*  FILE * fp : 
-*  int pid   : 
+*  FILE * fp :
+*  int pid   :
 */
 int open_project (FILE * fp, int pid)
 {

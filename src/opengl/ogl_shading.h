@@ -16,11 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  opengl/ogl_shading.c
-  opengl/draw/d_atoms.c
-
 */
 
 #ifndef OGL_SHADING_H_

@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'interface.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ -
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int dummy_ask_ (char * question);
   int iask (char * question, char * lab, int id, GtkWidget * win);
@@ -36,15 +37,16 @@ If not, see <https://www.gnu.org/licenses/> */
 
   void show_web (GtkWidget * dialog, int id);
   void show_info (char * information, int val, GtkWidget * win);
-  void show_info_ (double * valdij);
   void show_warning (char * warning, GtkWidget * win);
   void show_warning_ (char * warning, char * sub, char * tab);
   void show_error (char * error, int val, GtkWidget * win);
   void show_error_ (char * error, char * sub, char * tab);
   void init_data_ (int * nats, int * nspc, int * stps, int * cid);
   void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer);
+  void lattice_info_ (int * bid, double * volume, double * density,
+                       double dvects[3][3], double rvects[3][3], double mod[3], double ang[3],
+                       double f_to_c[3][3], double c_to_f[3][3]);
   void send_chem_info_ (int prop[active_project -> nspec]);
-  void set_progress_ (gdouble * prog);
   void update_after_calc (int calc);
 
   G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data);
@@ -65,20 +67,9 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "curve.h"
 #include "affero.h"
 
+extern gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif);
+
 GtkWidget * answer;
-
-extern void initview_ (int * natomes,
-                       int * nspc,
-                       int * steps);
-
-extern void cheminfo_ (int prop[active_project -> nspec],
-                       double * volume,
-                       double * density);
-
-extern void display_cheminfo_ (int * s,
-                               int * is,
-                               double * xs,
-                               double * vs);
 
 /* Old version to make url/email in about dialog clickable */
 /* void about_dialog_handle_url (GtkAboutDialog * dialog, const gchar * link, gpointer data)
@@ -129,9 +120,9 @@ extern void display_cheminfo_ (int * s,
 /*
 *  GtkWidget * addweb (int id)
 *
-*  Usage: 
+*  Usage: create a widget to present
 *
-*  int id : 
+*  int id : Add contact info (1) or not (0)
 */
 GtkWidget * addweb (int id)
 {
@@ -146,9 +137,11 @@ GtkWidget * addweb (int id)
   {
     web = gtk_link_button_new_with_label (ATOMES_URL, "Visit the project's website");
   }
-  eseb = gtk_link_button_new_with_label ("mailto:atomes@ipcms.unistra.fr",
-                                         "<atomes@ipcms.unistra.fr>");
-
+  gchar * mailto = g_strdup_printf ("mailo:%s", PACKAGE_BUGREPORT);
+  gchar * mailsh = g_strdup_printf ("<%s>",PACKAGE_BUGREPORT);
+  eseb = gtk_link_button_new_with_label (mailto, mailsh);
+  g_free (mailto);
+  g_free (mailsh);
   vbox = create_vbox (BSEP);
   if (id) add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, gtk_label_new (contact), FALSE, FALSE, 0);
   hbox = create_hbox (0);
@@ -166,10 +159,10 @@ GtkWidget * addweb (int id)
 /*
 *  G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: create the about dialog
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
 {
@@ -190,7 +183,7 @@ G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
   aboutdialog = gtk_about_dialog_new ();
   gtk_about_dialog_set_logo (GTK_ABOUT_DIALOG(aboutdialog), atomes_logo);
   gtk_about_dialog_set_version (GTK_ABOUT_DIALOG(aboutdialog), VERSION);
-  gchar * str = (registered_atomes) ? g_strdup_printf ("%s", PACKAGE) : g_strdup_printf ("%s - demo version", PACKAGE);
+  gchar * str = g_strdup_printf ("%s", PACKAGE);
   gtk_about_dialog_set_program_name (GTK_ABOUT_DIALOG(aboutdialog), str);
   g_free (str);
   gtk_about_dialog_set_comments (GTK_ABOUT_DIALOG(aboutdialog), comments);
@@ -207,10 +200,10 @@ G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
 /*
 *  void show_web (GtkWidget * dialog, int id)
 *
-*  Usage: 
+*  Usage: add / show web information to widget
 *
-*  GtkWidget * dialog : 
-*  int id             : 
+*  GtkWidget * dialog : The GtkWidget to modify
+*  int id             : Add contact info (1) or not (0)
 */
 void show_web (GtkWidget * dialog, int id)
 {
@@ -224,11 +217,11 @@ void show_web (GtkWidget * dialog, int id)
 /*
 *  void show_info (char * information, int val, GtkWidget * win)
 *
-*  Usage: 
+*  Usage: add / show information message to widget
 *
-*  char * information : 
-*  int val            : 
-*  GtkWidget * win    : 
+*  char * information : Message
+*  int val            : Add contact info (1) or not (0)
+*  GtkWidget * win    : The GtkWidget to modify
 */
 void show_info (char * information, int val, GtkWidget * win)
 {
@@ -249,31 +242,12 @@ void show_info (char * information, int val, GtkWidget * win)
 }
 
 /*
-*  void show_info_ (double * valdij)
-*
-*  Usage: 
-*
-*  double * valdij : 
-*/
-void show_info_ (double * valdij)
-{
-  /* This function is called from fortran 90 */
-  gchar * itot;
-  char * deb = "No bond length distribution to be displayed\n"
-               "Only one inter-atomic distance in the system\n"
-               "\tat D<sub>ij</sub> = ";
-  itot = g_strdup_printf("%s%f &#xC5;", deb, * valdij);
-  show_info (itot, -1, MainWindow);
-  g_free (itot);
-}
-
-/*
 *  void show_warning (char * warning, GtkWidget * win)
 *
-*  Usage: 
+*  Usage: show warning
 *
-*  char * warning  : 
-*  GtkWidget * win : 
+*  char * warning  : Message
+*  GtkWidget * win : Parent GtkWidget, if any
 */
 void show_warning (char * warning, GtkWidget * win)
 {
@@ -284,11 +258,11 @@ void show_warning (char * warning, GtkWidget * win)
 /*
 *  void show_warning_ (char * warning, char * sub, char * tab)
 *
-*  Usage: 
+*  Usage: show warning from Fortran90
 *
-*  char * warning : 
-*  char * sub     : 
-*  char * tab     : 
+*  char * warning : Message
+*  char * sub     : Fortan90 subroutine
+*  char * tab     : Fortran90 pointer
 */
 void show_warning_ (char * warning, char * sub, char * tab)
 {
@@ -302,11 +276,11 @@ void show_warning_ (char * warning, char * sub, char * tab)
 /*
 *  void show_error (char * error, int val, GtkWidget * win)
 *
-*  Usage: 
+*  Usage: show error message
 *
-*  char * error    : 
-*  int val         : 
-*  GtkWidget * win : 
+*  char * error    : Message
+*  int val         : Add contact info (1) or not (0)
+*  GtkWidget * win : Parent GtkWidget, if any
 */
 void show_error (char * error, int val, GtkWidget * win)
 {
@@ -329,11 +303,11 @@ void show_error (char * error, int val, GtkWidget * win)
 /*
 *  void show_error_ (char * error, char * sub, char * tab)
 *
-*  Usage: 
+*  Usage: show error from Fortran90
 *
-*  char * error : 
-*  char * sub   : 
-*  char * tab   : 
+*  char * error : Message
+*  char * sub   : Fortan90 subroutine
+*  char * tab   : Fortran90 pointer
 */
 void show_error_ (char * error, char * sub, char * tab)
 {
@@ -349,11 +323,11 @@ gboolean res_yes_no;
 /*
 *  G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage: ask yes or no for something: running dialog
 *
-*  GtkDialog * dial : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * dial : The GtkDialog sending the signal
+*  gint response_id : The response id
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -364,12 +338,12 @@ G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer da
 /*
 *  gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
 *
-*  Usage: 
+*  Usage: ask yes or no for something: prepare dialog
 *
-*  gchar * title    : 
-*  gchar * text     : 
-*  int type         : 
-*  GtkWidget * widg : 
+*  gchar * title    : Title
+*  gchar * text     : Message
+*  int type         : The type of message window
+*  GtkWidget * widg : The parent GtkWidget, if any
 */
 gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
 {
@@ -381,39 +355,22 @@ gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
 /*
 *  gchar * exact_name (gchar * name)
 *
-*  Usage: 
+*  Usage: short cut to print string without spaces
 *
-*  gchar * name : 
+*  gchar * name : The initial string
 */
 gchar * exact_name (gchar * name)
 {
-  gchar * exact_name = NULL;
-  int i, j;
-  i = StringLength(name);
-  for (j=0; j<i; j++)
-  {
-    if (name[j] != ' ')
-    {
-      if (exact_name == NULL)
-      {
-        exact_name = g_strdup_printf ("%c", name[j]);
-      }
-      else
-      {
-        exact_name = g_strdup_printf ("%s%c", exact_name, name[j]);
-      }
-    }
-  }
-  return exact_name;
+  return substitute_string (name, " ", NULL);
 }
 
 /*
 *  GtkWidget * show_pop (char * pop, GtkWidget * pwin)
 *
-*  Usage: 
+*  Usage: display pop information window
 *
-*  char * pop       : 
-*  GtkWidget * pwin : 
+*  char * pop       : Message
+*  GtkWidget * pwin : Parent widget, if any
 */
 GtkWidget * show_pop (char * pop, GtkWidget * pwin)
 {
@@ -434,21 +391,21 @@ GtkWidget * show_pop (char * pop, GtkWidget * pwin)
 /*
 *  G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data)
 *
-*  Usage: 
+*  Usage: Leaving atomes ?
 *
-*  GtkWindow * widget : 
-*  gpointer data      : 
+*  GtkWindow * widget : The GtkWidget sending the signal
+*  gpointer data      : The associated data pointer
 */
 G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage: Leaving atomes ?
 *
-*  GtkWidget * widget : 
-*  GdkEvent * event   : 
-*  gpointer data      : 
+*  GtkWidget * widget : The GtkWidget sending the signal
+*  GdkEvent * event   : The associated GdkEvent
+*  gpointer data      : The associated data pointer
 */
 G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event, gpointer data)
 #endif
@@ -467,9 +424,9 @@ G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event,
 /*
 *  int dummy_ask_ (char * question)
 *
-*  Usage: 
+*  Usage: Ask to use dummy atoms or not from Fortran90
 *
-*  char * question : 
+*  char * question : Message
 */
 int dummy_ask_ (char * question)
 {
@@ -494,10 +451,10 @@ GtkWidget * answer_info;
 /*
 *  G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
 {
@@ -512,11 +469,11 @@ int res_int;
 /*
 *  G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage: enter an integer value: running the dialog
 *
-*  GtkDialog * iask : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * iask : The GtkDialog sending the signal
+*  gint response_id : The response id
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data)
 {
@@ -554,12 +511,12 @@ G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data
 /*
 *  int iask (char * question, char * lab, int id, GtkWidget * win)
 *
-*  Usage: 
+*  Usage: enter an integer value: prepare the dialog
 *
-*  char * question : 
-*  char * lab      : 
-*  int id          : 
-*  GtkWidget * win : 
+*  char * question : Message
+*  char * lab      : Text to use for label
+*  int id          : The required parameter id
+*  GtkWidget * win : The parent GtkWidget, if any
 */
 int iask (char * question, char * lab, int id, GtkWidget * win)
 {
@@ -630,11 +587,11 @@ gchar * res_char;
 /*
 *  G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage: enter a string: running the dialog
 *
-*  GtkDialog * cask : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * cask : The GtkDialog sending the signal
+*  gint response_id : The response id
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data)
 {
@@ -669,13 +626,13 @@ G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data
 /*
 *  gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
 *
-*  Usage: 
+*  Usage: enter a string: prepare the dialog
 *
-*  char * question : 
-*   char * lab     : 
-*  int id          : 
-*  char * old      : 
-*  GtkWidget * win : 
+*  char * question : Message
+*  char * lab      : Text to use for label
+*  int id          : The required parameter id
+*  char * old      : The initial value for the string
+*  GtkWidget * win : The parent GtkWidget, if any
 */
 gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
 {
@@ -707,12 +664,12 @@ gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
 /*
 *  void init_data_ (int * nats, int * nspc, int * stps, int * cid)
 *
-*  Usage: 
+*  Usage: update project data using information from Fortran90
 *
-*  int * nats : 
-*  int * nspc : 
-*  int * stps : 
-*  int * cid  : 
+*  int * nats : number of atoms
+*  int * nspc : number of species
+*  int * stps : number of steps
+*  int * cid  : allocate chemistry data (1) or not (0)
 */
 void init_data_ (int * nats, int * nspc, int * stps, int * cid)
 {
@@ -723,6 +680,25 @@ void init_data_ (int * nats, int * nspc, int * stps, int * cid)
   if (* cid) active_chem = active_project -> chemistry;
 }
 
+/*
+*  void spec_data_ (int * status, int * ind, int * atd, int * nsp,
+*                   char * lbel, char * el_nme,
+*                   double * amss, double * rdus,
+*                   double * nscatt, double * xscatt)
+*
+*  Usage: update project data using information from Fortran90
+*
+*  int * status    : Update data (1) or not (0)
+*  int * ind       : The chemical species
+*  int * atd       : Z
+*  int * nsp       : Number of atoms of this species
+*  char * lbel     : Symbol
+*  char * el_nme   : Element
+*  double * amss   : M
+*  double * rdus   : Radius
+*  double * nscatt : Neutron scattering length
+*  double * xscatt : X scattering length
+*/
 void spec_data_ (int * status, int * ind, int * atd, int * nsp,
                  char * lbel, char * el_nme,
                  double * amss, double * rdus,
@@ -745,11 +721,11 @@ void spec_data_ (int * status, int * ind, int * atd, int * nsp,
 /*
 *  void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage: print information in GtkTextBuffer
 *
-*  gchar * str            : 
-*  gchar * stag           : 
-*  GtkTextBuffer * buffer : 
+*  gchar * str            : The text
+*  gchar * stag           : The tags
+*  GtkTextBuffer * buffer : The GtkTextBuffer to print to
 */
 void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
 {
@@ -772,9 +748,9 @@ void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
 /*
 *  gchar * textcolor (int i)
 *
-*  Usage: 
+*  Usage: setup text color keyword
 *
-*  int i : 
+*  int i : color id
 */
 gchar * textcolor (int i)
 {
@@ -812,6 +788,23 @@ gchar * textcolor (int i)
   return col;
 }
 
+/*
+*  void lattice_info_ (int * bid, double * volume, double * density,
+                       double dvects[3][3], double rvects[3][3], double mod[3], double ang[3],
+                       double f_to_c[3][3], double c_to_f[3][3])
+*
+*  Usage: lattice data from Fortran90
+*
+*  int * bid           : 0 or MD step if NPT
+*  double * volume     : volume
+*  double * density    : density
+*  double dvects[3][3] : direct space lattice vectors
+*  double rvects[3][3] : reciprocal lattice vectors
+*  double mod[3]       : modulus of lattice vectors (a,b,c)
+*  double ang[3]       : lattice angles (alpha, beta, gamma)
+*  double f_to_c[3][3] : fractional to cartesian matrix
+*  double c_to_f[3][3] : cartesian to fractional matrix
+*/
 void lattice_info_ (int * bid, double * volume, double * density,
                     double dvects[3][3], double rvects[3][3], double mod[3], double ang[3],
                     double f_to_c[3][3], double c_to_f[3][3])
@@ -861,9 +854,9 @@ void lattice_info_ (int * bid, double * volume, double * density,
 /*
 *  void send_chem_info_ (int prop[active_project -> nspec])
 *
-*  Usage: 
+*  Usage:
 *
-*  int prop[active_project -> nspec] : 
+*  int prop[active_project -> nspec] :
 */
 void send_chem_info_ (int prop[active_project -> nspec])
 {
@@ -875,30 +868,15 @@ void send_chem_info_ (int prop[active_project -> nspec])
 }
 
 /*
-*  void set_progress_ (gdouble * prog)
-*
-*  Usage: 
-*
-*  gdouble * prog : 
-*/
-void set_progress_ (gdouble * prog)
-{
-#ifdef GTK3
-  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR(progressbar), * prog);
-  while (gtk_events_pending()) gtk_main_iteration();
-#endif
-}
-
-/*
 *  gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage: ouput the name of a coordination sphere
 *
-*  struct project * this_proj : 
-*  int g                      : 
-*  int s                      : 
-*  int f                      : 
-*  GtkTextBuffer * buffer     : 
+*  struct project * this_proj : The project
+*  int g                      : The coordination (0 = total, 1 = partial)
+*  int s                      : The chemical species
+*  int f                      : With markup or not
+*  GtkTextBuffer * buffer     : Output in a GtkTextBuffer, or not if NULL
 */
 gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
 {
@@ -984,9 +962,9 @@ gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer
 /*
 *  void update_after_calc (int calc)
 *
-*  Usage: 
+*  Usage: To update all curve plots in the workspace after a calculation
 *
-*  int calc : 
+*  int calc : Analysis id
 */
 void update_after_calc (int calc)
 {

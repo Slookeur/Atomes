@@ -16,24 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  opengl/draw/d_poly.c
-  opengl/draw/d_rings.c
-  opengl/win/color_box.c
-  opengl/win/glwindow.c
-  opengl/win/initchain.c
-  opengl/win/initcoord.c
-  opengl/win/initmol.c
-  opengl/win/m_atoms.c
-  opengl/win/m_back.c
-  opengl/win/m_box.c
-  opengl/win/menu_bar.c
-  opengl/win/popup.c
-  opengl/win/w_atoms.c
-  opengl/win/w_bonds.c
-  opengl/win/w_colors.c
-
 */
 
 typedef struct {

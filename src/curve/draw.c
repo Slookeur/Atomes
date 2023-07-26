@@ -14,10 +14,11 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'draw.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
+
+- The curve draw main instructions
+
 *
 */
 
@@ -30,6 +31,49 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "curve.h"
 
+/*
+*  void draw_curve (cairo_t * cr,
+                    int cid,
+                    int rid,
+                    struct project * this_proj,
+                    int points,
+                    ColRGBA withcolor,
+                    int xscale,
+                    int yscale,
+                    int asp,
+                    int vdash,
+                    double thick,
+                    int glyp,
+                    double gize,
+                    int freq,
+                    double hwidth,
+                    double hopac,
+                    int hpos,
+                   int extra,
+                    int pid)
+*
+*  Usage:
+*
+*  cairo_t * cr               :
+*  int cid                    :
+*  int rid                    :
+*  struct project * this_proj :
+*  int points                 :
+*  ColRGBA withcolor          :
+*  int xscale                 :
+*  int yscale                 :
+*  int asp                    :
+*  int vdash                  :
+*  double thick               :
+*  int glyp                   :
+*  double gize                :
+*  int freq                   :
+*  double hwidth              :
+*  double hopac               :
+*  int hpos                   :
+*  int extra                  :
+*  int pid                    :
+*/
 void draw_curve (cairo_t * cr,
                  int cid,
                  int rid,

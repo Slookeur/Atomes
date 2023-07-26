@@ -16,10 +16,8 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-
 */
+
 /* The following was adapted from the file Math 3D v1.0
 By Stephan Soller <stephan.soller@helionweb.de> and Tobias Malmsheimer
 The original file was modified and completed to match Atomes needs.

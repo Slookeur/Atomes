@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'update_p.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int update_project ();
 
@@ -36,15 +36,15 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "project.h"
 #include "workspace.h"
 
-extern GtkWidget * work_menu (int id, int p, int c);
+extern GtkWidget * work_menu (int p, int c);
 extern GtkTreeStore * tool_model;
 
 /*
 *  void prep_calc_actions ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void prep_calc_actions ()
 {
@@ -80,9 +80,9 @@ void prep_calc_actions ()
 /*
 *  int update_project ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 int update_project ()
 {
@@ -160,9 +160,9 @@ int update_project ()
 /*
 *  void active_project_changed (int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id : 
+*  int id :
 */
 void active_project_changed (int id)
 {
@@ -220,8 +220,7 @@ void active_project_changed (int id)
       add_action (edition_actions[2]);
       fill_tool_model ();
       correct_this_window_title (curvetoolbox, g_strdup_printf ("Toolboxes - %s", prepare_for_title(active_project -> name)));
-      correct_this_window_title (MainWindow, (registered_atomes) ? g_strdup_printf ("%s - %s", PACKAGE, prepare_for_title (active_project -> name))
-                                                                 : g_strdup_printf ("%s - %s - demo version", PACKAGE, prepare_for_title (active_project -> name)));
+      correct_this_window_title (MainWindow, g_strdup_printf ("%s - %s", PACKAGE, prepare_for_title (active_project -> name)));
     }
     inactep = activep;
   }
@@ -231,9 +230,9 @@ void active_project_changed (int id)
 /*
 *  void opengl_project_changed (int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id : 
+*  int id :
 */
 void opengl_project_changed (int id)
 {

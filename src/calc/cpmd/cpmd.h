@@ -16,15 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  calc/cp2k/cp2k_init.c
-  calc/cpmd/cpmd_atoms.c
-  calc/cpmd/cpmd_init.c
-  calc/cpmd/cpmd_nose.c
-  calc/cpmd/cpmd_print.c
-  calc/cpmd/cpmd_restart.c
-
 */
 
 #define NCPMDCALC 7

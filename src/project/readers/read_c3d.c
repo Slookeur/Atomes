@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_c3d.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int c3d_get_atom_coordinates ();
   int open_c3d_file (int linec);
@@ -31,7 +31,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "callbacks.h"
 #include "interface.h"
 #include "project.h"
-#include "gui.h"
 #include "bind.h"
 #include <omp.h>
 #include "readers.h"
@@ -41,9 +40,9 @@ extern void check_for_species (double v, int ato);
 /*
 *  int c3d_get_atom_coordinates ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 int c3d_get_atom_coordinates ()
 {
@@ -289,9 +288,9 @@ int c3d_get_atom_coordinates ()
 /*
 *  int open_c3d_file (int linec)
 *
-*  Usage: 
+*  Usage:
 *
-*  int linec : 
+*  int linec :
 */
 int open_c3d_file (int linec)
 {

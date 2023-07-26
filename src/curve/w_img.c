@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_img.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - Save screenshot from graph / curve(s)
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void write_image (gpointer curetow);
 
@@ -40,7 +41,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "interface.h"
 #include "curve.h"
-#include "valid.h"
 
 double back_alpha;
 dwidget thedata;
@@ -49,10 +49,10 @@ int forme;
 /*
 *  G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * val : 
-*  gpointer data  : 
+*  GtkEntry * val :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
 {
@@ -79,18 +79,18 @@ G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_background (GtkCheckButton * backb)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * backb : 
+*  GtkCheckButton * backb :
 */
 G_MODULE_EXPORT void set_background (GtkCheckButton * backb)
 #else
 /*
 *  G_MODULE_EXPORT void set_background (GtkToggleButton * backb)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * backb : 
+*  GtkToggleButton * backb :
 */
 G_MODULE_EXPORT void set_background (GtkToggleButton * backb)
 #endif
@@ -112,10 +112,10 @@ G_MODULE_EXPORT void set_background (GtkToggleButton * backb)
 /*
 *  G_MODULE_EXPORT void choose_format (GtkComboBox * box, gpointer cid)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer cid      : 
+*  GtkComboBox * box :
+*  gpointer cid      :
 */
 G_MODULE_EXPORT void choose_format (GtkComboBox * box, gpointer cid)
 {
@@ -167,11 +167,11 @@ gchar * i_pattern[4]={"*.png",
 /*
 *  G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkNativeDialog * info : 
-*  gint response_id       : 
-*  gpointer data          : 
+*  GtkNativeDialog * info :
+*  gint response_id       :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -180,11 +180,11 @@ G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, 
 /*
 *  G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * info : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * info :
+*  gint response_id :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -214,9 +214,9 @@ G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpoint
 /*
 *  void write_image (gpointer curetow)
 *
-*  Usage: 
+*  Usage:
 *
-*  gpointer curetow : 
+*  gpointer curetow :
 */
 void write_image (gpointer curetow)
 {
@@ -269,11 +269,11 @@ void write_image (gpointer curetow)
 /*
 *  G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * save_img : 
-*  gint response_id     : 
-*  gpointer data        : 
+*  GtkDialog * save_img :
+*  gint response_id     :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpointer data)
 {
@@ -304,10 +304,10 @@ G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpo
 /*
 *  G_MODULE_EXPORT void save_image (GtkWidget * curve, gpointer cdata)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * curve : 
-*  gpointer cdata    : 
+*  GtkWidget * curve :
+*  gpointer cdata    :
 */
 G_MODULE_EXPORT void save_image (GtkWidget * curve, gpointer cdata)
 {

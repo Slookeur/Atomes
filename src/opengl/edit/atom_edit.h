@@ -16,28 +16,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  gui/callbacks.c
-  opengl/selection.c
-  opengl/edit/atom_action.c
-  opengl/edit/atom_coord.c
-  opengl/edit/atom_edit.c
-  opengl/edit/atom_geo.c
-  opengl/edit/atom_insert.c
-  opengl/edit/atom_move.c
-  opengl/edit/atom_object.c
-  opengl/edit/atom_remove.c
-  opengl/edit/atom_search.c
-  opengl/edit/atom_species.c
-  opengl/edit/cell_cut.c
-  opengl/edit/cell_super.c
-  opengl/win/m_edit.c
-  opengl/win/m_tools.c
-  opengl/win/popup.c
-  opengl/win/w_search.c
-  opengl/win/w_volumes.c
-
 */
 
 #include "global.h"

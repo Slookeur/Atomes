@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cpmd_init.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT gint on_qm_assistant_go_forward (gint current_page, gpointer data);
 
@@ -73,7 +73,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "calc.h"
 #include "cpmd.h"
 #include "cp2k.h"
-#include "valid.h"
 
 extern void print_cp2k (int f, GtkTextBuffer * buffer);
 extern void add_cp2k_pages (int p);
@@ -229,13 +228,13 @@ gboolean is_cpmd;
 /*
 *  GtkWidget * cpmd_box (GtkWidget * box, gchar * lab, int v_space, int h_space, int dim)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * box : 
-*  gchar * lab     : 
-*  int v_space     : 
-*  int h_space     : 
-*  int dim         : 
+*  GtkWidget * box :
+*  gchar * lab     :
+*  int v_space     :
+*  int h_space     :
+*  int dim         :
 */
 GtkWidget * cpmd_box (GtkWidget * box, gchar * lab, int v_space, int h_space, int dim)
 {
@@ -248,9 +247,9 @@ GtkWidget * cpmd_box (GtkWidget * box, gchar * lab, int v_space, int h_space, in
 /*
 *  void print_all_sections (GtkTextBuffer * buf)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTextBuffer * buf : 
+*  GtkTextBuffer * buf :
 */
 void print_all_sections (GtkTextBuffer * buf)
 {
@@ -296,10 +295,10 @@ void print_all_sections (GtkTextBuffer * buf)
 /*
 *  G_MODULE_EXPORT void toggle_cpmd_params (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void toggle_cpmd_params (GtkToggleButton * but, gpointer data)
 {
@@ -311,10 +310,10 @@ G_MODULE_EXPORT void toggle_cpmd_params (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void update_cpmd_parameter (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void update_cpmd_parameter (GtkEntry * res, gpointer data)
 {
@@ -338,20 +337,20 @@ G_MODULE_EXPORT void update_cpmd_parameter (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void update_cpmd_check (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void update_cpmd_check (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void update_cpmd_check (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void update_cpmd_check (GtkToggleButton * but, gpointer data)
 #endif
@@ -374,10 +373,10 @@ G_MODULE_EXPORT void update_cpmd_check (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void changed_opt_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void changed_opt_box (GtkComboBox * box, gpointer data)
 {
@@ -430,9 +429,9 @@ G_MODULE_EXPORT void changed_opt_box (GtkComboBox * box, gpointer data)
 /*
 *  GtkWidget * prepare_qm_option_box (int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s : 
+*  int s :
 */
 GtkWidget * prepare_qm_option_box (int s)
 {
@@ -578,10 +577,10 @@ GtkWidget * prepare_qm_option_box (int s)
 /*
 *  G_MODULE_EXPORT void update_calc_parameter (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void update_calc_parameter (GtkEntry * res, gpointer data)
 {
@@ -613,10 +612,10 @@ G_MODULE_EXPORT void update_calc_parameter (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void changed_calc_opt_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void changed_calc_opt_box (GtkComboBox * box, gpointer data)
 {
@@ -634,20 +633,20 @@ G_MODULE_EXPORT void changed_calc_opt_box (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void update_calc_check (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void update_calc_check (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void update_calc_check (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void update_calc_check (GtkToggleButton * but, gpointer data)
 #endif
@@ -664,9 +663,9 @@ G_MODULE_EXPORT void update_calc_check (GtkToggleButton * but, gpointer data)
 /*
 *  GtkWidget * calc_qm_option_box (int c)
 *
-*  Usage: 
+*  Usage:
 *
-*  int c : 
+*  int c :
 */
 GtkWidget * calc_qm_option_box (int c)
 {
@@ -749,10 +748,10 @@ GtkWidget * calc_qm_option_box (int c)
 /*
 *  G_MODULE_EXPORT void changed_calc_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void changed_calc_box (GtkComboBox * box, gpointer data)
 {
@@ -780,10 +779,10 @@ G_MODULE_EXPORT void changed_calc_box (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void changed_info (GtkTextBuffer * textbuf, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTextBuffer * textbuf : 
-*  gpointer data           : 
+*  GtkTextBuffer * textbuf :
+*  gpointer data           :
 */
 G_MODULE_EXPORT void changed_info (GtkTextBuffer * textbuf, gpointer data)
 {
@@ -799,9 +798,9 @@ G_MODULE_EXPORT void changed_info (GtkTextBuffer * textbuf, gpointer data)
 /*
 *  GtkWidget * info_box ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 GtkWidget * info_box ()
 {
@@ -820,9 +819,9 @@ GtkWidget * info_box ()
 /*
 *  GtkWidget * section_box (int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s : 
+*  int s :
 */
 GtkWidget * section_box (int s)
 {
@@ -890,11 +889,11 @@ GtkWidget * section_box (int s)
 /*
 *  GtkWidget * preview_box (int c, int s, int l)
 *
-*  Usage: 
+*  Usage:
 *
-*  int c : 
-*  int s : 
-*  int l : 
+*  int c :
+*  int s :
+*  int l :
 */
 GtkWidget * preview_box (int c, int s, int l)
 {
@@ -918,9 +917,9 @@ GtkWidget * preview_box (int c, int s, int l)
 /*
 *  gchar * section_name (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 gchar * section_name (int p)
 {
@@ -941,9 +940,9 @@ gchar * section_name (int p)
 /*
 *  GtkWidget * vbox_cpmd (int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s : 
+*  int s :
 */
 GtkWidget * vbox_cpmd (int s)
 {
@@ -964,9 +963,9 @@ GtkWidget * vbox_cpmd (int s)
 /*
 *  gchar * page_name (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 gchar * page_name (int p)
 {
@@ -998,9 +997,9 @@ gchar * page_name (int p)
 /*
 *  void add_cpmd_pages (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 void add_cpmd_pages (int p)
 {
@@ -1039,9 +1038,9 @@ void add_cpmd_pages (int p)
 /*
 *  void proj_unselect_all_atoms ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void proj_unselect_all_atoms ()
 {
@@ -1061,10 +1060,10 @@ void proj_unselect_all_atoms ()
 /*
 *  G_MODULE_EXPORT void on_qm_assistant_cancel (GtkAssistant * assistant, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkAssistant * assistant : 
-*  gpointer data            : 
+*  GtkAssistant * assistant :
+*  gpointer data            :
 */
 G_MODULE_EXPORT void on_qm_assistant_cancel (GtkAssistant * assistant, gpointer data)
 {
@@ -1078,21 +1077,21 @@ G_MODULE_EXPORT void on_qm_assistant_cancel (GtkAssistant * assistant, gpointer 
 /*
 *  G_MODULE_EXPORT gboolean on_qm_assistant_cancel_event (GtkWindow * assistant, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWindow * assistant : 
-*  gpointer data         : 
+*  GtkWindow * assistant :
+*  gpointer data         :
 */
 G_MODULE_EXPORT gboolean on_qm_assistant_cancel_event (GtkWindow * assistant, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT gboolean on_qm_assistant_cancel_event (GtkWidget * assistant, GdkEvent  * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * assistant : 
-*  GdkEvent  * event     : 
-*  gpointer data         : 
+*  GtkWidget * assistant :
+*  GdkEvent  * event     :
+*  gpointer data         :
 */
 G_MODULE_EXPORT gboolean on_qm_assistant_cancel_event (GtkWidget * assistant, GdkEvent  * event, gpointer data)
 #endif
@@ -1104,10 +1103,10 @@ G_MODULE_EXPORT gboolean on_qm_assistant_cancel_event (GtkWidget * assistant, Gd
 /*
 *  G_MODULE_EXPORT void on_qm_assistant_close (GtkAssistant * assistant, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkAssistant * assistant : 
-*  gpointer data            : 
+*  GtkAssistant * assistant :
+*  gpointer data            :
 */
 G_MODULE_EXPORT void on_qm_assistant_close (GtkAssistant * assistant, gpointer data)
 {
@@ -1124,10 +1123,10 @@ G_MODULE_EXPORT void on_qm_assistant_close (GtkAssistant * assistant, gpointer d
 /*
 *  G_MODULE_EXPORT gint on_qm_assistant_go_forward (gint current_page, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  gint current_page : 
-*  gpointer data     : 
+*  gint current_page :
+*  gpointer data     :
 */
 G_MODULE_EXPORT gint on_qm_assistant_go_forward (gint current_page, gpointer data)
 {
@@ -1211,11 +1210,11 @@ G_MODULE_EXPORT void on_qm_assistant_prepare (GtkAssistant * assistant,
 /*
 *  gboolean go_for_it (int i, int j, gboolean print[2])
 *
-*  Usage: 
+*  Usage:
 *
-*  int i             : 
-*  int j             : 
-*  gboolean print[2] : 
+*  int i             :
+*  int j             :
+*  gboolean print[2] :
 */
 gboolean go_for_it (int i, int j, gboolean print[2])
 {
@@ -1229,10 +1228,10 @@ gboolean go_for_it (int i, int j, gboolean print[2])
 /*
 *  G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
 {
@@ -1299,7 +1298,6 @@ G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
     {
       k ++;
       aview = create_text_view (-1, -1, 0, 1, NULL, NULL, NULL);
-      if (! registered_atomes || testing_atomes) widget_set_sensitive (aview, FALSE);
       if (c)
       {
         scrollsets = create_scroll (NULL, 700, 350, GTK_SHADOW_ETCHED_IN);
@@ -1339,11 +1337,11 @@ G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void run_saving_qm (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkNativeDialog * info : 
-*  gint response_id       : 
-*  gpointer data          : 
+*  GtkNativeDialog * info :
+*  gint response_id       :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void run_saving_qm (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -1352,11 +1350,11 @@ G_MODULE_EXPORT void run_saving_qm (GtkNativeDialog * info, gint response_id, gp
 /*
 *  G_MODULE_EXPORT void run_saving_qm (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * info : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * info :
+*  gint response_id :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void run_saving_qm (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -1511,10 +1509,10 @@ G_MODULE_EXPORT void run_saving_qm (GtkDialog * info, gint response_id, gpointer
 /*
 *  G_MODULE_EXPORT void on_qm_assistant_apply (GtkAssistant * assistant, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkAssistant * assistant : 
-*  gpointer data            : 
+*  GtkAssistant * assistant :
+*  gpointer data            :
 */
 G_MODULE_EXPORT void on_qm_assistant_apply (GtkAssistant * assistant, gpointer data)
 {
@@ -1529,8 +1527,6 @@ G_MODULE_EXPORT void on_qm_assistant_apply (GtkAssistant * assistant, gpointer d
   gchar * qm_type[2] = {"CPMD", "CP2K"};
   const gchar * qm_name[2] = {"CPMD input file (*.in)", "CP2K input file (*.inp)"};
   const gchar * qm_ext[2] = {".in", ".inp"};
-
-  if (! saving_option ()) goto end;
 
   text = g_strdup_printf ("Saving %s input file(s)", qm_type[c]);
   info = create_file_chooser (text,
@@ -1562,17 +1558,16 @@ G_MODULE_EXPORT void on_qm_assistant_apply (GtkAssistant * assistant, gpointer d
 #else
   run_this_gtk_dialog (info, G_CALLBACK(run_saving_qm), data);
 #endif
-  end:;
 }
 
 /*
 *  void create_qm_input_file (int c, int p, int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  int c : 
-*  int p : 
-*  int s : 
+*  int c :
+*  int p :
+*  int s :
 */
 void create_qm_input_file (int c, int p, int s)
 {

@@ -14,14 +14,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_basis.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CP2K basis set, as delivered with CP2K v9.1
 
   This file contains 3 tables:
@@ -29,6 +24,7 @@ If not, see <https://www.gnu.org/licenses/> */
   basis_elem -> the list of chemical elements
   basis_keys -> the list of keywords
   cp2k_basis -> finally the complete basis set
+
 */
 
 #include "global.h"

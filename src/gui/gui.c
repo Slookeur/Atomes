@@ -14,12 +14,15 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'gui.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The GUI of the main window
+ - The menu elements of the workspace menu
+ - Creation of menu items, actions, used in all atomes
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT gboolean pop_menu (GtkWidget * widget, GdkEventButton * event, gpointer data);
   G_MODULE_EXPORT gboolean on_atomes_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data);
@@ -34,7 +37,6 @@ If not, see <https://www.gnu.org/licenses/> */
   void append_submenu (GMenu * menu, const gchar * label, GMenu * submenu);
 
   G_MODULE_EXPORT void show_periodic_table (GtkWidget * widg, gpointer data);
-  G_MODULE_EXPORT void register_atomes (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data);
   G_MODULE_EXPORT void change_radio_state (GSimpleAction * action, GVariant * state, gpointer data);
   G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, double x, double y, gpointer data);
@@ -62,13 +64,12 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "interface.h"
 #include "project.h"
 #include "workspace.h"
-#include "valid.h"
 
 extern int objects[3];
 extern int * object_was_selected[3];
 extern int ** tmp_object_id[3];
 extern GtkWidget * curvetbox (void);
-extern GtkWidget * work_menu (int id, int p, int c);
+extern GtkWidget * work_menu (int p, int c);
 
 extern G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data);
@@ -90,17 +91,17 @@ ColRGBA std[6];
 /*
 *  G_MODULE_EXPORT gboolean pop_menu (GtkWidget * widget, GdkEventButton * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widget     : 
-*  GdkEventButton * event : 
-*  gpointer data          : 
+*  GtkWidget * widget     :
+*  GdkEventButton * event :
+*  gpointer data          :
 */
 G_MODULE_EXPORT gboolean pop_menu (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
   if (event -> button == 3)
   {
-    pop_menu_at_pointer (work_menu (1, -1, -1), (GdkEvent *)event);
+    pop_menu_at_pointer (work_menu (-1, -1), (GdkEvent *)event);
   }
   return FALSE;
 }
@@ -109,9 +110,7 @@ G_MODULE_EXPORT gboolean pop_menu (GtkWidget * widget, GdkEventButton * event, g
 /*
 *  void clean_view ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: clean the main window
 */
 void clean_view ()
 {
@@ -132,9 +131,9 @@ void clean_view ()
 /*
 *  void view_buffer (GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTextBuffer * buffer : 
+*  GtkTextBuffer * buffer :
 */
 void view_buffer (GtkTextBuffer * buffer)
 {
@@ -149,7 +148,6 @@ void view_buffer (GtkTextBuffer * buffer)
   if (! MainView)
   {
     MainView = gtk_text_view_new ();
-    if (! registered_atomes || testing_atomes) widget_set_sensitive (MainView, 0);
     gtk_text_view_set_editable (GTK_TEXT_VIEW(MainView), 0);
     text_view_set_monospace (MainView);
     add = TRUE;
@@ -175,10 +173,10 @@ void view_buffer (GtkTextBuffer * buffer)
 /*
 *  void atomes_key_pressed (guint keyval, GdkModifierType state)
 *
-*  Usage: 
+*  Usage: main window key actions callbacks
 *
-*  guint keyval          : 
-*  GdkModifierType state : 
+*  guint keyval          : key id
+*  GdkModifierType state : modifier (Ctrl, Alt ...)
 */
 void atomes_key_pressed (guint keyval, GdkModifierType state)
 {
@@ -235,9 +233,9 @@ void atomes_key_pressed (guint keyval, GdkModifierType state)
 /*
 *  void add_action (GSimpleAction * action)
 *
-*  Usage: 
+*  Usage: add action to the main window action map
 *
-*  GSimpleAction * action : 
+*  GSimpleAction * action : The action to add
 */
 void add_action (GSimpleAction * action)
 {
@@ -247,9 +245,9 @@ void add_action (GSimpleAction * action)
 /*
 *  void remove_action (gchar * action_name)
 *
-*  Usage: 
+*  Usage: add action from the main window action map
 *
-*  gchar * action_name : 
+*  gchar * action_name : The action to remove
 */
 void remove_action (gchar * action_name)
 {
@@ -259,9 +257,7 @@ void remove_action (gchar * action_name)
 /*
 *  void remove_edition_actions ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: remove all edition actions
 */
 void remove_edition_actions ()
 {
@@ -272,9 +268,7 @@ void remove_edition_actions ()
 /*
 *  void remove_edition_and_analyze_actions ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: remove all edition and analysis action
 */
 void remove_edition_and_analyze_actions ()
 {
@@ -286,10 +280,10 @@ void remove_edition_and_analyze_actions ()
 /*
 *  G_MODULE_EXPORT void show_periodic_table (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: show the periodic table of the elements
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void show_periodic_table (GtkWidget * widg, gpointer data)
 {
@@ -297,26 +291,13 @@ G_MODULE_EXPORT void show_periodic_table (GtkWidget * widg, gpointer data)
 }
 
 /*
-*  G_MODULE_EXPORT void register_atomes (GtkWidget * widg, gpointer data)
-*
-*  Usage: 
-*
-*  GtkWidget * widg : 
-*  gpointer data    : 
-*/
-G_MODULE_EXPORT void register_atomes (GtkWidget * widg, gpointer data)
-{
-  registered_atomes = validate ();
-}
-
-/*
 *  G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -449,10 +430,10 @@ G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * 
   {
     create_about_dialog (NULL, data);
   }
-  else if (g_strcmp0 (name, "help.register") == 0)
+  /*else if (g_strcmp0 (name, "help.register") == 0)
   {
     register_atomes (NULL, data);
-  }
+  }*/
   g_free (name);
 }
 
@@ -475,11 +456,11 @@ GIcon * get_gicon_from_data (int format, const gchar * icon)
 /*
 *  G_MODULE_EXPORT void change_radio_state (GSimpleAction * action, GVariant * state, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * state       : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * state       :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void change_radio_state (GSimpleAction * action, GVariant * state, gpointer data)
 {
@@ -549,11 +530,11 @@ GMenuItem * create_gmenu_item (const gchar * label, const gchar * action, const 
 /*
 *  void append_submenu (GMenu * menu, const gchar * label, GMenu * submenu)
 *
-*  Usage: 
+*  Usage:
 *
-*  GMenu * menu        : 
-*  const gchar * label : 
-*  GMenu * submenu     : 
+*  GMenu * menu        :
+*  const gchar * label :
+*  GMenu * submenu     :
 */
 void append_submenu (GMenu * menu, const gchar * label, GMenu * submenu)
 {
@@ -578,10 +559,10 @@ void append_menu_item (GMenu * menu, const gchar * label, const gchar * action, 
 /*
 *  GMenu * workspace_section (gchar * act, int pop)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * act : 
-*  int pop     : 
+*  gchar * act :
+*  int pop     :
 */
 GMenu * workspace_section (gchar * act, int pop)
 {
@@ -608,11 +589,11 @@ GMenu * workspace_section (gchar * act, int pop)
 /*
 *  GMenu * port_section (gchar * act, int pop, int port)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * act : 
-*  int pop     : 
-*  int port    : 
+*  gchar * act :
+*  int pop     :
+*  int port    :
 */
 GMenu * port_section (gchar * act, int pop, int port)
 {
@@ -631,12 +612,12 @@ GMenu * port_section (gchar * act, int pop, int port)
 /*
 *  GMenu * project_section (gchar * act, int pop_up, int proj, int calc)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * act : 
-*  int pop_up  : 
-*  int proj    : 
-*  int calc    : 
+*  gchar * act :
+*  int pop_up  :
+*  int proj    :
+*  int calc    :
 */
 GMenu * project_section (gchar * act, int pop_up, int proj, int calc)
 {
@@ -687,9 +668,9 @@ GMenu * project_section (gchar * act, int pop_up, int proj, int calc)
 /*
 *  GMenu * import_section (gchar * act)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * act : 
+*  gchar * act :
 */
 GMenu * import_section (gchar * act)
 {
@@ -701,9 +682,9 @@ GMenu * import_section (gchar * act)
 /*
 *  GMenu * quit_section (gchar * act)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * act : 
+*  gchar * act :
 */
 GMenu * quit_section (gchar * act)
 {
@@ -717,9 +698,9 @@ GMenu * quit_section (gchar * act)
 /*
 *  GMenu * workspace_title ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 GMenu * workspace_title ()
 {
@@ -731,10 +712,10 @@ GMenu * workspace_title ()
 /*
 *  GMenu * project_title (int pop_up, int proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  int pop_up : 
-*  int proj   : 
+*  int pop_up :
+*  int proj   :
 */
 GMenu * project_title (int pop_up, int proj)
 {
@@ -755,12 +736,12 @@ GMenu * project_title (int pop_up, int proj)
 /*
 *  GMenu * create_workspace_menu (gchar * act, int pop_up, int proj, int calc)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * act : 
-*  int pop_up  : 
-*  int proj    : 
-*  int calc    : 
+*  gchar * act :
+*  int pop_up  :
+*  int proj    :
+*  int calc    :
 */
 GMenu * create_workspace_menu (gchar * act, int pop_up, int proj, int calc)
 {
@@ -777,9 +758,9 @@ GMenu * create_workspace_menu (gchar * act, int pop_up, int proj, int calc)
 /*
 *  GMenu * create_edit_menu ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 GMenu * create_edit_menu ()
 {
@@ -793,9 +774,9 @@ GMenu * create_edit_menu ()
 /*
 *  GMenu * tool_box_section ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 GMenu * tool_box_section ()
 {
@@ -807,9 +788,9 @@ GMenu * tool_box_section ()
 /*
 *  GMenu * create_analyze_menu ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 GMenu * create_analyze_menu ()
 {
@@ -830,9 +811,9 @@ GMenu * create_analyze_menu ()
 /*
 *  GMenu * create_help_menu ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 GMenu * create_help_menu ()
 {
@@ -846,9 +827,9 @@ GMenu * create_help_menu ()
 /*
 *  GMenu * atomes_menu_bar ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 GMenu * atomes_menu_bar ()
 {
@@ -864,13 +845,13 @@ GMenu * atomes_menu_bar ()
 /*
 *  G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
-*  gpointer data        : 
+*  GtkGesture * gesture :
+*  int n_press          :
+*  double x             :
+*  double y             :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -881,7 +862,7 @@ G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, doubl
     rect.y = y;
     rect.width = 1;
     rect.height = 1;
-    GtkWidget * popover = work_menu (1, -1, -1);
+    GtkWidget * popover = work_menu (-1, -1);
     gtk_widget_set_parent (popover, MainWindow);
     gtk_popover_set_has_arrow (GTK_POPOVER(popover), FALSE);
     gtk_popover_set_pointing_to (GTK_POPOVER(popover), & rect);
@@ -892,13 +873,13 @@ G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, doubl
 /*
 *  G_MODULE_EXPORT gboolean on_atomes_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEventControllerKey * self : 
-*  guint keyval                 : 
-*  guint keycode                : 
-*  GdkModifierType state        : 
-*  gpointer data                : 
+*  GtkEventControllerKey * self :
+*  guint keyval                 :
+*  guint keycode                :
+*  GdkModifierType state        :
+*  gpointer data                :
 */
 G_MODULE_EXPORT gboolean on_atomes_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
 {
@@ -910,9 +891,9 @@ G_MODULE_EXPORT gboolean on_atomes_pressed (GtkEventControllerKey * self, guint 
 /*
 *  GtkWidget * create_main_window (GApplication * atomes)
 *
-*  Usage: 
+*  Usage:
 *
-*  GApplication * atomes : 
+*  GApplication * atomes :
 */
 GtkWidget * create_main_window (GApplication * atomes)
 {

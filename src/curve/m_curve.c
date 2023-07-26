@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_curve.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The curve context menu (mouse right click)
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   gboolean was_not_added (ExtraSets * sets, int a, int b, int c);
 
@@ -66,10 +67,10 @@ int ** extrarid;
 /*
 *  G_MODULE_EXPORT void autoscale (GtkWidget * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * but : 
-*  gpointer data   : 
+*  GtkWidget * but :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void autoscale (GtkWidget * but, gpointer data)
 {
@@ -82,9 +83,9 @@ G_MODULE_EXPORT void autoscale (GtkWidget * but, gpointer data)
 /*
 *  struct cextra * init_extra (tint * id)
 *
-*  Usage: 
+*  Usage:
 *
-*  tint * id : 
+*  tint * id :
 */
 struct cextra * init_extra (tint * id)
 {
@@ -102,10 +103,10 @@ struct cextra * init_extra (tint * id)
 /*
 *  void add_extra (ExtraSets * sets, tint * id)
 *
-*  Usage: 
+*  Usage:
 *
-*  ExtraSets * sets : 
-*  tint * id        : 
+*  ExtraSets * sets :
+*  tint * id        :
 */
 void add_extra (ExtraSets * sets, tint * id)
 {
@@ -126,10 +127,10 @@ void add_extra (ExtraSets * sets, tint * id)
 /*
 *  void remove_extra (ExtraSets * sets, struct cextra * ctmp)
 *
-*  Usage: 
+*  Usage:
 *
-*  ExtraSets * sets     : 
-*  struct cextra * ctmp : 
+*  ExtraSets * sets     :
+*  struct cextra * ctmp :
 */
 void remove_extra (ExtraSets * sets, struct cextra * ctmp)
 {
@@ -169,9 +170,9 @@ void curve_window_add_menu_bar (tint * data);
 /*
 *  void prep_extra_rid (tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  tint * data : 
+*  tint * data :
 */
 void prep_extra_rid (tint * data)
 {
@@ -192,10 +193,10 @@ void prep_extra_rid (tint * data)
 /*
 *  G_MODULE_EXPORT void action_to_plot (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void action_to_plot (GtkWidget * widg, gpointer data)
 {
@@ -235,11 +236,11 @@ G_MODULE_EXPORT void action_to_plot (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void curve_edit_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void curve_edit_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -249,11 +250,11 @@ G_MODULE_EXPORT void curve_edit_menu_action (GSimpleAction * action, GVariant * 
 /*
 *  G_MODULE_EXPORT void curve_add_remove_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void curve_add_remove_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -263,11 +264,11 @@ G_MODULE_EXPORT void curve_add_remove_menu_action (GSimpleAction * action, GVari
 /*
 *  G_MODULE_EXPORT void curve_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void curve_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -297,12 +298,12 @@ G_MODULE_EXPORT void curve_menu_bar_action (GSimpleAction * action, GVariant * p
 /*
 *  gboolean was_not_added (ExtraSets * sets, int a, int b, int c)
 *
-*  Usage: 
+*  Usage:
 *
-*  ExtraSets * sets : 
-*  int a            : 
-*  int b            : 
-*  int c            : 
+*  ExtraSets * sets :
+*  int a            :
+*  int b            :
+*  int c            :
 */
 gboolean was_not_added (ExtraSets * sets, int a, int b, int c)
 {
@@ -325,16 +326,16 @@ gboolean was_not_added (ExtraSets * sets, int a, int b, int c)
 /*
 *  GMenu * curve_section (GSimpleActionGroup * action_group, gchar * act, ExtraSets * sets, gboolean add, int edit, int a, int b, tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleActionGroup * action_group : 
-*  gchar * act                       : 
-*  ExtraSets * sets                  : 
-*  gboolean add                      : 
-*  int edit                          : 
-*  int a                             : 
-*  int b                             : 
-*  tint * data                       : 
+*  GSimpleActionGroup * action_group :
+*  gchar * act                       :
+*  ExtraSets * sets                  :
+*  gboolean add                      :
+*  int edit                          :
+*  int a                             :
+*  int b                             :
+*  tint * data                       :
 */
 GMenu * curve_section (GSimpleActionGroup * action_group, gchar * act, ExtraSets * sets, gboolean add, int edit, int a, int b, tint * data)
 {
@@ -373,13 +374,13 @@ GMenu * curve_section (GSimpleActionGroup * action_group, gchar * act, ExtraSets
 /*
 *  GMenu * create_curve_submenu (GSimpleActionGroup * action_group, gchar * act, tint * data, gboolean add, int edit)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleActionGroup * action_group : 
-*  gchar * act                       : 
-*  tint * data                       : 
-*  gboolean add                      : 
-*  int edit                          : 
+*  GSimpleActionGroup * action_group :
+*  gchar * act                       :
+*  tint * data                       :
+*  gboolean add                      :
+*  int edit                          :
 */
 GMenu * create_curve_submenu (GSimpleActionGroup * action_group, gchar * act, tint * data, gboolean add, int edit)
 {
@@ -453,9 +454,9 @@ extern GIcon * get_gicon_from_data (int format, const gchar * icon);
 /*
 *  GMenu * create_curve_menu (gchar * str)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * str : 
+*  gchar * str :
 */
 GMenu * create_curve_menu (gchar * str)
 {
@@ -472,11 +473,11 @@ GMenu * create_curve_menu (gchar * str)
 /*
 *  GMenu * edit_data_section (GSimpleActionGroup * action_group, gchar * str, tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleActionGroup * action_group : 
-*  gchar * str                       : 
-*  tint * data                       : 
+*  GSimpleActionGroup * action_group :
+*  gchar * str                       :
+*  tint * data                       :
 */
 GMenu * edit_data_section (GSimpleActionGroup * action_group, gchar * str, tint * data)
 {
@@ -499,9 +500,9 @@ GMenu * edit_data_section (GSimpleActionGroup * action_group, gchar * str, tint 
 /*
 *  GMenu * curve_close_section (gchar * str)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * str : 
+*  gchar * str :
 */
 GMenu * curve_close_section (gchar * str)
 {
@@ -515,12 +516,12 @@ GMenu * curve_close_section (gchar * str)
 /*
 *  GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * str, tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleActionGroup * action_group : 
-*  int pop                           : 
-*  gchar * str                       : 
-*  tint * data                       : 
+*  GSimpleActionGroup * action_group :
+*  int pop                           :
+*  gchar * str                       :
+*  tint * data                       :
 */
 GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * str, tint * data)
 {
@@ -536,12 +537,12 @@ GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * st
 /*
 *  GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj        : 
-*  GSimpleActionGroup * action_group : 
-*  gchar * str                       : 
-*  tint * data                       : 
+*  struct project * this_proj        :
+*  GSimpleActionGroup * action_group :
+*  gchar * str                       :
+*  tint * data                       :
 */
 GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data)
 {
@@ -556,9 +557,9 @@ GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_
 /*
 *  void curve_window_add_menu_bar (tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  tint * data : 
+*  tint * data :
 */
 void curve_window_add_menu_bar (tint * data)
 {
@@ -584,12 +585,12 @@ void curve_window_add_menu_bar (tint * data)
 /*
 *  GMenu * create_add_remove_section (GSimpleActionGroup * action_group, gchar * act, int num, tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleActionGroup * action_group : 
-*  gchar * act                       : 
-*  int num                           : 
-*  tint * data                       : 
+*  GSimpleActionGroup * action_group :
+*  gchar * act                       :
+*  int num                           :
+*  tint * data                       :
 */
 GMenu * create_add_remove_section (GSimpleActionGroup * action_group, gchar * act, int num, tint * data)
 {
@@ -634,9 +635,9 @@ GMenu * create_add_remove_section (GSimpleActionGroup * action_group, gchar * ac
 /*
 *  GMenu * autoscale_section (gchar * str)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * str : 
+*  gchar * str :
 */
 GMenu * autoscale_section (gchar * str)
 {
@@ -650,9 +651,9 @@ GMenu * autoscale_section (gchar * str)
 /*
 *  GtkWidget * curve_popup_menu (gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  gpointer data : 
+*  gpointer data :
 */
 GtkWidget * curve_popup_menu (gpointer data)
 {

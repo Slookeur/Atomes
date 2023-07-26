@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'close_p.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void update_insert_combos ();
   void close_project (struct project * to_close);
@@ -31,7 +31,6 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "global.h"
 #include "bind.h"
-#include "gui.h"
 #include "callbacks.h"
 #include "interface.h"
 #include "project.h"
@@ -45,9 +44,9 @@ extern GtkTreeModel * replace_combo_tree (gboolean insert, int p);
 /*
 *  void update_insert_combos ()
 *
-*  Usage: 
+*  Usage:
 *
-*   : 
+*   :
 */
 void update_insert_combos ()
 {
@@ -81,9 +80,9 @@ void update_insert_combos ()
 /*
 *  void close_project (struct project * to_close)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * to_close : 
+*  struct project * to_close :
 */
 void close_project (struct project * to_close)
 {
@@ -185,7 +184,7 @@ void close_project (struct project * to_close)
     workzone.first = NULL;
     workzone.last = NULL;
     activep = -1;
-    correct_this_window_title (MainWindow, (registered_atomes) ? g_strdup_printf ("%s", PACKAGE) : g_strdup_printf ("%s - demo version", PACKAGE));
+    correct_this_window_title (MainWindow, g_strdup_printf ("%s", PACKAGE));
     correct_this_window_title (curvetoolbox, g_strdup_printf ("Toolboxes"));
     if (workspacefile != NULL)
     {
@@ -293,10 +292,10 @@ void close_project (struct project * to_close)
 /*
 *  G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  int to_activate            : 
-*  struct project * this_proj : 
+*  int to_activate            :
+*  struct project * this_proj :
 */
 G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * this_proj)
 {
@@ -316,10 +315,10 @@ G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * th
 /*
 *  G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer cdata   : 
+*  GtkWidget * widg :
+*  gpointer cdata   :
 */
 G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata)
 {

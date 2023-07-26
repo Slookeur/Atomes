@@ -12,19 +12,14 @@ You should have received a copy of the GNU Affero General Public License along w
 If not, see <https://www.gnu.org/licenses/> */
 
 /*
-* This header file: 'xmlrw.h'
+* This header file: 'read_isaacs.h'
 *
-*  Contains: 
-
-*  Called by: 
-
-  gui/callbacks.c
-  gui/main.c
+*  Contains:
 
 */
 
-#ifndef XMLRW_H_
-#define XMLRW_H_
+#ifndef ISAACSRW_H_
+#define ISAACSRW_H_
 
 #include <libxml/encoding.h>
 #include <libxml/xmlwriter.h>
@@ -34,7 +29,7 @@ If not, see <https://www.gnu.org/licenses/> */
 size_t strfind (int * ida);
 int XmlwriterFilename (const char *uri);
 int write_xml (const char * filetosave);
-gboolean file_exists(const char * filename);
+gboolean file_exists (const char * filename);
 xmlNodePtr findnode (xmlNodePtr startnode, char * nname);
 int setprop (xmlNodePtr pnode);
 int testopening (char * tdata, char * tfichier);

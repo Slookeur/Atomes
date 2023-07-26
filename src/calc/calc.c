@@ -14,12 +14,15 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'calc.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - Callbacks used in by the assistants
+ - Atom selection manipulation tools
+ - The initialization of the assistant
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void field_question (gchar * question, GCallback handler, gpointer data);
   void unselect_all_atoms (glwin * view);
@@ -66,11 +69,11 @@ gboolean selection_confirmed;
 /*
 *  G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage: confirm that the selection is good
 *
-*  GtkDialog * dialog : 
-*  gint response_id   : 
-*  gpointer data      : 
+*  GtkDialog * dialog : the GtkDialog sending the signal
+*  gint response_id   : the response id of the GtkDialog
+*  gpointer data      : the pointer if needed, not in this case
 */
 G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -81,11 +84,11 @@ G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gp
 /*
 *  void field_question (gchar * question, GCallback handler, gpointer data)
 *
-*  Usage: 
+*  Usage: ask the use to confirm something
 *
-*  gchar * question  : 
-*  GCallback handler : 
-*  gpointer data     : 
+*  gchar * question  : the text to display
+*  GCallback handler : the callback to use
+*  gpointer data     : the data to transmit to the callback
 */
 void field_question (gchar * question, GCallback handler, gpointer data)
 {
@@ -99,9 +102,9 @@ void field_question (gchar * question, GCallback handler, gpointer data)
 /*
 *  struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel)
 *
-*  Usage: 
+*  Usage: copy an atom selection
 *
-*  struct atom_selection * old_sel : 
+*  struct atom_selection * old_sel : the atom selection to copy
 */
 struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel)
 {
@@ -162,9 +165,9 @@ struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel
 /*
 *  void unselect_all_atoms (glwin * view)
 *
-*  Usage: 
+*  Usage: remove all atom(s) from selection
 *
-*  glwin * view : 
+*  glwin * view : the glwin the selection comes from
 */
 void unselect_all_atoms (glwin * view)
 {
@@ -198,9 +201,9 @@ void unselect_all_atoms (glwin * view)
 /*
 *  void restore_ogl_selection (glwin * view)
 *
-*  Usage: 
+*  Usage: restore a saved atom selection
 *
-*  glwin * view : 
+*  glwin * view : the glwin to restore the selection to
 */
 void restore_ogl_selection (glwin * view)
 {
@@ -244,9 +247,9 @@ void restore_ogl_selection (glwin * view)
 /*
 *  void preserve_ogl_selection (glwin * view)
 *
-*  Usage: 
+*  Usage: copy the atom selection, so that it can be re-used once the input assistant is closed.
 *
-*  glwin * view : 
+*  glwin * view : the glwin the selection comes from
 */
 void preserve_ogl_selection (glwin * view)
 {
@@ -287,10 +290,10 @@ extern char * input_types[NINPUTS];
 /*
 *  G_MODULE_EXPORT void create_field (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: start an input creation assistant
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void create_field (GtkWidget * widg, gpointer data)
 {

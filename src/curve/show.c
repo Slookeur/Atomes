@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'show.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The general complete graph drawing subroutine
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   gboolean show_curve (GtkWidget * grwdget, cairo_t * cr, gpointer curve);
 
@@ -47,24 +48,24 @@ extern void adjust_tool_model (int calc, int curve, gchar * string_path);
 /*
 *  gboolean show_curve (GtkWidget * grwdget, cairo_t * cr, gpointer curve)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * grwdget : 
-*  cairo_t * cr        : 
-*  gpointer curve      : 
+*  GtkWidget * grwdget :
+*  cairo_t * cr        :
+*  gpointer curve      :
 */
 gboolean show_curve (GtkWidget * grwdget, cairo_t * cr, gpointer curve)
 #else
 /*
 *  void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpointer curve)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDrawingArea * area : 
-*  cairo_t * cr          : 
-*  int width             : 
-*  int height            : 
-*  gpointer curve        : 
+*  GtkDrawingArea * area :
+*  cairo_t * cr          :
+*  int width             :
+*  int height            :
+*  gpointer curve        :
 */
 void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpointer curve)
 #endif
@@ -297,10 +298,10 @@ void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpo
 /*
 *  G_MODULE_EXPORT void hide_curve (GtkWidget * curve, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * curve : 
-*  gpointer data     : 
+*  GtkWidget * curve :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void hide_curve (GtkWidget * curve, gpointer data)
 {
@@ -316,21 +317,21 @@ G_MODULE_EXPORT void hide_curve (GtkWidget * curve, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean to_hide_curve (GtkWindow * thecurve, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWindow * thecurve : 
-*  gpointer data        : 
+*  GtkWindow * thecurve :
+*  gpointer data        :
 */
 G_MODULE_EXPORT gboolean to_hide_curve (GtkWindow * thecurve, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT gboolean to_hide_curve (GtkWidget * thecurve, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * thecurve : 
-*  GdkEvent * event     : 
-*  gpointer data        : 
+*  GtkWidget * thecurve :
+*  GdkEvent * event     :
+*  gpointer data        :
 */
 G_MODULE_EXPORT gboolean to_hide_curve (GtkWidget * thecurve, GdkEvent * event, gpointer data)
 #endif

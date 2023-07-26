@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'project.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void send_steps_ (int * steps);
 
@@ -31,7 +31,6 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "callbacks.h"
 #include "interface.h"
-#include "gui.h"
 #include "bind.h"
 
 workspace workzone;
@@ -85,9 +84,9 @@ void save_pos_ (int * nat,
 /*
 *  void send_steps_ (int * steps)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * steps : 
+*  int * steps :
 */
 void send_steps_ (int * steps)
 {
@@ -97,9 +96,9 @@ void send_steps_ (int * steps)
 /*
 *  struct project * get_project_by_id (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 struct project * get_project_by_id (int p)
 {
