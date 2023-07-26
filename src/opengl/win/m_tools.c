@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_tools.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void set_motion_sensitive (glwin * view, int status);
   void invert_visible (struct project * this_proj);
@@ -73,10 +73,10 @@ gchar * invl[2]={"Selection", "Visible/Hidden"};
 /*
 *  void set_motion_sensitive (glwin * view, int status)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int status   : 
+*  glwin * view :
+*  int status   :
 */
 void set_motion_sensitive (glwin * view, int status)
 {
@@ -116,10 +116,10 @@ void set_motion_sensitive (glwin * view, int status)
 /*
 *  G_MODULE_EXPORT void set_selection_mode (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_selection_mode (GtkWidget * widg, gpointer data)
 {
@@ -132,22 +132,22 @@ G_MODULE_EXPORT void set_selection_mode (GtkWidget * widg, gpointer data)
   {
 #else
   // GTK3 Menu Action To Check
-  if (i != j && check_menu_item_get_active ((gpointer)widg))
+  if (i != j && gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg))
   {
     this_proj -> modelgl -> selection_mode = NONE;
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_smode[i], FALSE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_smode[i], FALSE);
     if (widg != this_proj -> modelgl -> ogl_smode[j])
     {
-      check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_smode[j], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_smode[j], TRUE);
     }
 #endif
     this_proj -> modelgl -> selection_mode = j;
   }
 #ifdef GTK3
   // GTK3 Menu Action To Check
-  else if (i == j && ! check_menu_item_get_active ((gpointer)widg))
+  else if (i == j && ! gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg))
   {
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_smode[j], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_smode[j], TRUE);
   }
 #endif
 }
@@ -155,10 +155,10 @@ G_MODULE_EXPORT void set_selection_mode (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
 {
@@ -169,16 +169,16 @@ G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
 #ifdef GTK4
   if (i != j)
 #else
-  if (i != j && check_menu_item_get_active ((gpointer)widg))
+  if (i != j && gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg))
 #endif
   {
     this_proj -> modelgl -> mode = NONE;
 #ifdef GTK3
     // GTK3 Menu Action To Check
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_mode[i], FALSE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_mode[i], FALSE);
     if (widg != this_proj -> modelgl -> ogl_mode[j])
     {
-      check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_mode[j], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_mode[j], TRUE);
     }
 #endif
     this_proj -> modelgl -> mode = j;
@@ -204,7 +204,7 @@ G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
         set_selection_mode (NULL, & this_proj -> modelgl -> colorp[0][0]);
 #else
         // GTK3 Menu Action To Check
-        check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_smode[0], TRUE);
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_smode[0], TRUE);
         set_selection_mode (this_proj -> modelgl -> ogl_smode[0], & this_proj -> modelgl -> colorp[0][0]);
 #endif
       }
@@ -226,9 +226,9 @@ G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
   }
 #ifdef GTK3
   // GTK3 Menu Action To Check
-  else if (i == j && ! check_menu_item_get_active ((gpointer)widg))
+  else if (i == j && ! gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg))
   {
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_mode[j], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_mode[j], TRUE);
   }
 #endif
 }
@@ -236,9 +236,9 @@ G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
 /*
 *  void invert_visible (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void invert_visible (struct project * this_proj)
 {
@@ -257,10 +257,10 @@ void invert_visible (struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void invert_this (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void invert_this (GtkWidget * widg, gpointer data)
 {
@@ -283,10 +283,10 @@ extern G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data);
 /*
 *  GtkWidget * menu_tools (glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
+*  glwin * view :
+*  int id       :
 */
 GtkWidget * menu_tools (glwin * view, int id)
 {
@@ -296,12 +296,12 @@ GtkWidget * menu_tools (glwin * view, int id)
   GtkWidget * widg = gtk3_menu_item (menut, "Volumes", IMG_NONE, NULL, G_CALLBACK(window_volumes), (gpointer)view, FALSE, 0, 0, FALSE, FALSE, FALSE);
   widget_set_sensitive (widg, (get_project_by_id(view -> proj) -> steps > 1) ? 0 : 1);
   add_menu_separator (menut);
-  add_menu_child (menut, menu_item_new_with_submenu("Edit", TRUE, menu_edit(view, id)));
+  gtk_menu_shell_append ((GtkMenuShell *)menut, menu_item_new_with_submenu("Edit", TRUE, menu_edit(view, id)));
   add_menu_separator (menut);
   widg = create_menu_item (FALSE, "Mouse Mode");
-  add_menu_child (menut, widg);
+  gtk_menu_shell_append ((GtkMenuShell *)menut, widg);
   GtkWidget * menum = gtk_menu_new ();
-  menu_item_set_submenu (widg, menum);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)widg, menum);
   guint accel[3]={GDK_KEY_a, GDK_KEY_e, GDK_KEY_i};
   if (id == 0)
   {
@@ -322,9 +322,9 @@ GtkWidget * menu_tools (glwin * view, int id)
     }
   }
   /*widg = create_menu_item (TRUE, modes[2]);
-  add_menu_child (menum, widg);
+  gtk_menu_shell_append ((GtkMenuShell *)menum, widg);
   GtkWidget * menui = gtk_menu_new ();
-  menu_item_set_submenu (widg, menui);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)widg, menui);
   widget_set_sensitive (widg, (get_project_by_id(view -> proj) -> steps > 1) ? 0 : 1);
   if (id == 0)
   {
@@ -345,9 +345,9 @@ GtkWidget * menu_tools (glwin * view, int id)
     }
   }*/
   widg = create_menu_item (FALSE, "Selection Mode");
-  add_menu_child (menut, widg);
+  gtk_menu_shell_append ((GtkMenuShell *)menut, widg);
   GtkWidget * menusm = gtk_menu_new ();
-  menu_item_set_submenu (widg, menusm);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)widg, menusm);
 
   if (id == 0)
   {
@@ -373,15 +373,15 @@ GtkWidget * menu_tools (glwin * view, int id)
   GtkWidget * menuf = NULL;
   widg = create_menu_item (FALSE, "Molecular Dynamics");
   widget_set_sensitive (widg, get_project_by_id(view -> proj) -> nspec);
-  add_menu_child (menut, widg);
+  gtk_menu_shell_append ((GtkMenuShell *)menut, widg);
   menuf = gtk_menu_new ();
-  menu_item_set_submenu (widg, menuf);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)widg, menuf);
   if (id == 0)
   {
     for (i=0; i<NINPUTS; i++)
     {
       view -> ogl_mode[i+2+NINPUTS] = create_menu_item (TRUE, input_types[i]);
-      add_menu_child (menuf, view -> ogl_mode[i+2+NINPUTS]);
+      gtk_menu_shell_append ((GtkMenuShell *)menuf, view -> ogl_mode[i+2+NINPUTS]);
       g_signal_connect (G_OBJECT (view -> ogl_mode[i+2+NINPUTS]), "activate", G_CALLBACK(create_field), & view -> colorp[i][0]);
       if (i > 3) widget_set_sensitive (view -> ogl_mode[i+2+NINPUTS], 0);
     }
@@ -392,7 +392,7 @@ GtkWidget * menu_tools (glwin * view, int id)
     for (i=0; i<NINPUTS; i++)
     {
       widg = create_menu_item (TRUE, input_types[i]);
-      add_menu_child (menuf, widg);
+      gtk_menu_shell_append ((GtkMenuShell *)menuf, widg);
       g_signal_connect (G_OBJECT (widg), "activate", G_CALLBACK(create_field), & view -> colorp[i][0]);
       // if (i < 2 || i > 3) widget_set_sensitive (widg, view -> adv_bonding[1]);
       if (i < 2) widget_set_sensitive (widg, view -> adv_bonding[1]);
@@ -403,13 +403,13 @@ GtkWidget * menu_tools (glwin * view, int id)
   add_menu_separator (menut);
   GtkWidget * menuin = NULL;
   widg = create_menu_item (FALSE, "Invert");
-  add_menu_child (menut, widg);
+  gtk_menu_shell_append ((GtkMenuShell *)menut, widg);
   menuin = gtk_menu_new ();
-  menu_item_set_submenu (widg, menuin);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)widg, menuin);
   for (i=0; i<2; i++)
   {
     widg = create_menu_item (FALSE, invl[i]);
-    add_menu_child (menuin, widg);
+    gtk_menu_shell_append ((GtkMenuShell *)menuin, widg);
     g_signal_connect (G_OBJECT (widg), "activate", G_CALLBACK(invert_this), & view -> colorp[i][0]);
   }
   return menut;
@@ -418,11 +418,11 @@ GtkWidget * menu_tools (glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void to_window_measures (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_window_measures (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -432,10 +432,10 @@ G_MODULE_EXPORT void to_window_measures (GSimpleAction * action, GVariant * para
 /*
 *  GMenu * measure_section (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * measure_section (glwin * view, int popm)
 {
@@ -447,11 +447,11 @@ GMenu * measure_section (glwin * view, int popm)
 /*
 *  G_MODULE_EXPORT void to_window_volumes (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_window_volumes (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -461,10 +461,10 @@ G_MODULE_EXPORT void to_window_volumes (GSimpleAction * action, GVariant * param
 /*
 *  GMenu * volume_section (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * volume_section (glwin * view, int popm)
 {
@@ -476,10 +476,10 @@ GMenu * volume_section (glwin * view, int popm)
 /*
 *  GMenu * edit_section (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * edit_section (glwin * view, int popm)
 {
@@ -491,11 +491,11 @@ GMenu * edit_section (glwin * view, int popm)
 /*
 *  G_MODULE_EXPORT void change_mouse_mode_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void change_mouse_mode_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -534,10 +534,10 @@ G_MODULE_EXPORT void change_mouse_mode_radio (GSimpleAction * action, GVariant *
 /*
 *  GMenu * mouse_mode_menu (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * mouse_mode_menu (glwin * view, int popm)
 {
@@ -556,11 +556,11 @@ GMenu * mouse_mode_menu (glwin * view, int popm)
 /*
 *  G_MODULE_EXPORT void change_sel_mode_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void change_sel_mode_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -599,10 +599,10 @@ G_MODULE_EXPORT void change_sel_mode_radio (GSimpleAction * action, GVariant * p
 /*
 *  GMenu * selection_mode_menu (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * selection_mode_menu (glwin * view, int popm)
 {
@@ -620,10 +620,10 @@ GMenu * selection_mode_menu (glwin * view, int popm)
 /*
 *  GMenu * modes_section (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * modes_section (glwin * view, int popm)
 {
@@ -636,11 +636,11 @@ GMenu * modes_section (glwin * view, int popm)
 /*
 *  G_MODULE_EXPORT void to_create_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_create_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -650,10 +650,10 @@ G_MODULE_EXPORT void to_create_field (GSimpleAction * action, GVariant * paramet
 /*
 *  GMenu * md_menu (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * md_menu (glwin * view, int popm)
 {
@@ -670,11 +670,11 @@ GMenu * md_menu (glwin * view, int popm)
 /*
 *  G_MODULE_EXPORT void to_invert_this (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_invert_this (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -684,10 +684,10 @@ G_MODULE_EXPORT void to_invert_this (GSimpleAction * action, GVariant * paramete
 /*
 *  GMenu * inv_menu (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * inv_menu (glwin * view, int popm)
 {
@@ -703,11 +703,11 @@ GMenu * inv_menu (glwin * view, int popm)
 /*
 *  GMenu * add_section_item_with_menu (glwin * view, gchar * item_name, GMenu * men)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view      : 
-*  gchar * item_name : 
-*  GMenu * men       : 
+*  glwin * view      :
+*  gchar * item_name :
+*  GMenu * men       :
 */
 GMenu * add_section_item_with_menu (glwin * view, gchar * item_name, GMenu * men)
 {
@@ -719,10 +719,10 @@ GMenu * add_section_item_with_menu (glwin * view, gchar * item_name, GMenu * men
 /*
 *  GMenu * menu_tools (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_tools (glwin * view, int popm)
 {

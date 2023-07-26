@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_axis.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void menu_axis (GtkWidget * menu_ab, glwin * view, int id);
   void menu_axis (GMenu * menu_ab, glwin * view, int popm);
@@ -50,10 +50,10 @@ extern GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, 
 /*
 *  G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
 {
@@ -66,26 +66,26 @@ G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
   struct project * this_proj = get_project_by_id(the_data -> a);
   int i = this_proj -> modelgl -> anim -> last -> img -> axispos;
   int j = the_data -> b;
-  if (check_menu_item_get_active ((gpointer)widg) && i != j)
+  if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg) && i != j)
   {
     this_proj -> modelgl -> anim -> last -> img -> axispos = NONE;
     if (i != CUSTOM)
     {
-      check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_box_axis[1][8+i], FALSE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_box_axis[1][8+i], FALSE);
     }
     if (widg != this_proj -> modelgl -> ogl_box_axis[1][8+j])
     {
-      check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_box_axis[1][8+j], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_box_axis[1][8+j], TRUE);
     }
     this_proj -> modelgl -> anim -> last -> img -> axispos = j;
     this_proj -> modelgl -> create_shaders[MAXIS] = TRUE;
     update (this_proj -> modelgl);
   }
-  else if (i == j && ! check_menu_item_get_active ((gpointer)widg))
+  else if (i == j && ! gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg))
   {
     if (i != CUSTOM)
     {
-      check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_box_axis[1][8+i], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_box_axis[1][8+i], TRUE);
     }
   }
 }
@@ -93,10 +93,10 @@ G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * axis_position_submenu (glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
+*  glwin * view :
+*  int id       :
 */
 GtkWidget * axis_position_submenu (glwin * view, int id)
 {
@@ -110,9 +110,9 @@ GtkWidget * axis_position_submenu (glwin * view, int id)
   for (j=0; j<2; j++)
   {
     ud = create_menu_item (FALSE, udlab[j]);
-    add_menu_child (menup, ud);
+    gtk_menu_shell_append ((GtkMenuShell *)menup, ud);
     udm = gtk_menu_new ();
-    menu_item_set_submenu (ud, udm);
+    gtk_menu_item_set_submenu ((GtkMenuItem *)ud, udm);
     for (k=0; k<2; k++)
     {
       if (id == 0)
@@ -148,18 +148,18 @@ GtkWidget * axis_position_submenu (glwin * view, int id)
 /*
 *  void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * menu_ab : 
-*  glwin * view        : 
-*  int id              : 
+*  GtkWidget * menu_ab :
+*  glwin * view        :
+*  int id              :
 */
 void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
 {
   GtkWidget * widg = create_menu_item (FALSE, "Length");
-  add_menu_child (menu_ab, widg);
+  gtk_menu_shell_append ((GtkMenuShell *)menu_ab, widg);
   GtkWidget * menul = gtk_menu_new ();
-  menu_item_set_submenu (widg, menul);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)widg, menul);
 
   gchar * str = g_strdup_printf (" Length [ %f Å ]", view -> anim -> last -> img -> axis_length);
   if (id == 0)
@@ -179,18 +179,18 @@ void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
     }
   }
   g_free (str);
-  add_menu_child (menu_ab, menu_item_new_with_submenu ("Position", TRUE, axis_position_submenu(view, id)));
+  gtk_menu_shell_append ((GtkMenuShell *)menu_ab, menu_item_new_with_submenu ("Position", TRUE, axis_position_submenu(view, id)));
   add_advanced_item (menu_ab, G_CALLBACK(axis_advanced), (gpointer)view, FALSE, 0, 0);
 }
 #else
 /*
 *  G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -238,11 +238,11 @@ G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * p
 /*
 *  GMenu * position_submenu (glwin * view, int popm, int pos)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
-*  int pos      : 
+*  glwin * view :
+*  int popm     :
+*  int pos      :
 */
 GMenu * position_submenu (glwin * view, int popm, int pos)
 {
@@ -263,10 +263,10 @@ GMenu * position_submenu (glwin * view, int popm, int pos)
 /*
 *  GMenu * axis_position_submenu (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * axis_position_submenu (glwin * view, int popm)
 {
@@ -286,11 +286,11 @@ GMenu * axis_position_submenu (glwin * view, int popm)
 /*
 *  void menu_axis (GMenu * menu_ab, glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  GMenu * menu_ab : 
-*  glwin * view    : 
-*  int popm        : 
+*  GMenu * menu_ab :
+*  glwin * view    :
+*  int popm        :
 */
 void menu_axis (GMenu * menu_ab, glwin * view, int popm)
 {

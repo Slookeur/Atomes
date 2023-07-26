@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'save_bond.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to write bonding information in the atomes project file format
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int save_bonding (FILE * fp, struct project * this_proj);
 
@@ -33,10 +34,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int save_bonding (FILE * fp, struct project * this_proj)
 *
-*  Usage: 
+*  Usage: save bonding information to file
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project to save
 */
 int save_bonding (FILE * fp, struct project * this_proj)
 {

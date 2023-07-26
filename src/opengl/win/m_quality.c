@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_quality.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void set_quality (int q, glwin * view);
 
@@ -42,10 +42,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void set_quality (int q, glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  int q        : 
-*  glwin * view : 
+*  int q        :
+*  glwin * view :
 */
 void set_quality (int q, glwin * view)
 {
@@ -62,10 +62,10 @@ void set_quality (int q, glwin * view)
 /*
 *  G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
 {
@@ -77,10 +77,10 @@ G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 {
@@ -108,10 +108,10 @@ G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * menu_quality (glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
+*  glwin * view :
+*  int id       :
 */
 GtkWidget * menu_quality (glwin * view, int id)
 {
@@ -129,18 +129,18 @@ GtkWidget * menu_quality (glwin * view, int id)
   }
   GtkWidget * qs = create_menu_item_from_widget (fixed, FALSE, FALSE, FALSE);
   g_signal_connect (G_OBJECT (qs), "activate", G_CALLBACK(window_quality), view);
-  add_menu_child (menuq, qs);
+  gtk_menu_shell_append ((GtkMenuShell *)menuq, qs);
   return menuq;
 }
 #else
 /*
 *  G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -150,10 +150,10 @@ G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * param
 /*
 *  GMenu * menu_quality (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_quality (glwin * view, int popm)
 {

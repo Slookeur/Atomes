@@ -161,7 +161,7 @@ void prep_all_coord_menus (glwin * view)
 #ifdef GTK3
   // GTK3 Menu Action To Check
   set_color_map_sensitive (view);
-  menu_item_set_submenu (view -> ogl_coord[0], coord_menu (view));
+  gtk_menu_item_set_submenu ((GtkMenuItem *)view -> ogl_coord[0], coord_menu (view));
   widget_set_sensitive (view -> ogl_coord[3], view -> adv_bonding[0]);
   widget_set_sensitive (view -> ogl_coord[4], view -> adv_bonding[1]);
   show_the_widgets (view -> ogl_coord[0]);
@@ -186,7 +186,7 @@ GtkWidget * coord_view_setup (int * sp, int id, int jd)
   {
     active_glwin -> oglmv[jd][id][* sp] = NULL;
     active_glwin -> oglmv[jd][id][* sp] = create_menu_item (TRUE, active_chem -> label[* sp]);
-    menu_item_set_submenu (active_glwin -> oglmv[jd][id][* sp], menuv);
+    gtk_menu_item_set_submenu ((GtkMenuItem *)active_glwin -> oglmv[jd][id][* sp], menuv);
   }
   return menuv;
 }
@@ -233,7 +233,7 @@ GtkWidget * coord_color_setup (int * sp, int id, int jd)
   {
     active_glwin -> oglmc[jd][id][* sp] = NULL;
     active_glwin -> oglmc[jd][id][* sp] = create_menu_item (TRUE, active_chem -> label[* sp]);
-    menu_item_set_submenu (active_glwin -> oglmc[jd][id][* sp], menuc);
+    gtk_menu_item_set_submenu ((GtkMenuItem *)active_glwin -> oglmc[jd][id][* sp], menuc);
   }
   return menuc;
 }
@@ -259,7 +259,7 @@ GtkWidget * poly_show_setup (int * sp, int id, int jd)
   {
     active_glwin -> oglmpv[jd][id][* sp] = create_menu_item (TRUE, "_Show/Hide");
   }
-  menu_item_set_submenu (active_glwin -> oglmpv[jd][id][* sp], menup);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)active_glwin -> oglmpv[jd][id][* sp], menup);
   return menup;
 }
 
@@ -447,8 +447,8 @@ void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp
         active_image -> spcolor[* id][* sp][n].alpha = DEFAULT_ALPHA;
       }
       active_glwin -> ogl_geom[m][* id][n+i] = create_coord_menu (0, str, TRUE, menuv, & active_glwin -> gcid[* id][n+i][* id]);
-      add_menu_child (menuc, spm);
-      menu_item_set_submenu (spm, color_box (active_glwin, k+n, * sp, n));
+      gtk_menu_shell_append ((GtkMenuShell *)menuc, spm);
+      gtk_menu_item_set_submenu ((GtkMenuItem *)spm, color_box (active_glwin, k+n, * sp, n));
       if (active_image -> show_poly[* id][n+i])
       {
         // The polyhedra show/hide menu
@@ -531,8 +531,8 @@ void init_menu_fragmol_ (int * id)
         active_glwin -> ogl_geom[k][* id][i] = create_coord_menu (0, str, TRUE, active_glwin -> oglmv[k][* id][0], & active_glwin -> gcid[* id][i][* id]);
         spm = create_menu_item (TRUE, str);
         g_free (str);
-        add_menu_child (active_glwin -> oglmc[k][* id][0], spm);
-        menu_item_set_submenu (spm, color_box (active_glwin, j+i, * id, i));
+        gtk_menu_shell_append ((GtkMenuShell *)active_glwin -> oglmc[k][* id][0], spm);
+        gtk_menu_item_set_submenu ((GtkMenuItem *)spm, color_box (active_glwin, j+i, * id, i));
       }
       else
       {
@@ -618,10 +618,10 @@ void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int 
       str = g_strdup_printf ("%d", coordt[j]);
       spm = create_menu_item (TRUE, str);
       active_glwin -> ogl_geom[i][* coo][j] = create_coord_menu (0, str, TRUE, NULL, & active_glwin -> gcid[* coo][j][* coo]);
-      add_menu_child (active_glwin -> oglmc[i][* coo][0], spm);
+      gtk_menu_shell_append ((GtkMenuShell *)active_glwin -> oglmc[i][* coo][0], spm);
       if (* coo < 9)
       {
-        menu_item_set_submenu (spm, color_box (active_glwin, -3, * ids, j));
+        gtk_menu_item_set_submenu ((GtkMenuItem *)spm, color_box (active_glwin, -3, * ids, j));
         active_glwin -> ogl_poly[i][* coo][j] = create_coord_menu (1, str, active_image -> show_poly[* coo][j], NULL, & active_glwin -> gcid[* coo][j][* coo]);
       }
       else
@@ -635,7 +635,7 @@ void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int 
     }
     allt = create_menu_item (TRUE, "_All");
     g_signal_connect (G_OBJECT (allt), "activate", G_CALLBACK(coord_properties), & active_glwin -> colorp[* coo][1]);
-    add_menu_child (active_glwin -> oglmc[i][* coo][0], allt);
+    gtk_menu_shell_append ((GtkMenuShell *)active_glwin -> oglmc[i][* coo][0], allt);
   }
 #endif
 }

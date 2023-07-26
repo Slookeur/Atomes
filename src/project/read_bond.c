@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_bond.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutine to read bonding information from atomes project file
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int read_bonding (FILE * fp);
 
@@ -36,9 +37,9 @@ extern void new_coord_menus (struct project * this_proj, coord_info * coord, int
 /*
 *  int read_bonding (FILE * fp)
 *
-*  Usage: 
+*  Usage: read bonding information from file
 *
-*  FILE * fp : 
+*  FILE * fp : The file pointer
 */
 int read_bonding (FILE * fp)
 {

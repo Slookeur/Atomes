@@ -24,7 +24,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
   int recup_data_ (int * cd, int * rd);
 
-  void initgr (int r, int s);
+  void initgr (int r);
   void update_rdf_view (struct project * this_proj, int rdf);
   void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc]);
 
@@ -48,14 +48,14 @@ If not, see <https://www.gnu.org/licenses/> */
 int fitc = 0;
 
 /*
-*  void initgr (int r, int s)
+*  void initgr (int r)
 *
 *  Usage: initialize the curve widgets for the g(r)/g(k)
 *
 *  int r : GR = real space, GK = FFT
 *  int s :
 */
-void initgr (int r, int s)
+void initgr (int r)
 {
   int i, j, k;
 
@@ -106,7 +106,7 @@ void initgr (int r, int s)
     k=k+1;
     active_project -> curves[r][k] -> name = g_strdup_printf("BT(r)[CC] - smoothed");
   }
-  addcurwidgets (activep, r, s);
+  addcurwidgets (activep, r, 0);
   active_project -> initok[r] = TRUE;
 }
 
@@ -192,7 +192,7 @@ void update_rdf_view (struct project * this_proj, int rdf)
 G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
 {
   int i;
-  if (! active_project -> initok[GR]) initgr (GR, 0);
+  if (! active_project -> initok[GR]) initgr (GR);
   clean_curves_data (GR, 0, active_project -> numc[GR]);
   active_project -> delta[GR] = active_project -> max[GR] / active_project -> num_delta[GR];
   prepostcalc (widg, FALSE, GR, 0, opac);
@@ -219,7 +219,7 @@ G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
 /*
 *  void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
 *
-*  Usage: bond cutoff from Fortran 90
+*  Usage: bond cutoff from Fortran90
 *
 *  int * nc                 : number of species
 *  double * totc            : total cutoff
@@ -281,7 +281,7 @@ G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * but, gpointer data)
 /*
 *  int recup_data_ (int * cd, int * rd)
 *
-*  Usage: Sending data back to Fortran 90
+*  Usage: Sending data back to Fortran90
 *
 *  int * cd : The curve id
 *  int * rd : The analysis id
@@ -318,7 +318,7 @@ G_MODULE_EXPORT void on_calc_gq_released (GtkWidget * widg, gpointer data)
 {
   int i;
 
-  if (! active_project -> initok[GK]) initgr (GK, 0);
+  if (! active_project -> initok[GK]) initgr (GK);
   clean_curves_data (GK, 0, active_project -> numc[GK]);
   active_project -> delta[GK] = active_project -> max[GR] / active_project -> num_delta[GK];
   prepostcalc (widg, FALSE, GK, 0, opac);

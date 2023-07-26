@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'color_box.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void get_color (ColRGBA * but, int cid);
   void color_box (glwin * view, int ideo, int spec, int geo);
@@ -47,10 +47,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void get_color (ColRGBA * but, int cid)
 *
-*  Usage: 
+*  Usage:
 *
-*  ColRGBA * but : 
-*  int cid       : 
+*  ColRGBA * but :
+*  int cid       :
 */
 void get_color (ColRGBA * but, int cid)
 {
@@ -77,10 +77,10 @@ cairo_surface_t * col_surface (double r, double g, double b, int x, int y)
 /*
 *  G_MODULE_EXPORT void set_back_color (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_back_color (GtkWidget * widg, gpointer data)
 {
@@ -94,10 +94,10 @@ G_MODULE_EXPORT void set_back_color (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_box_color (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_box_color (GtkWidget * widg, gpointer data)
 {
@@ -111,10 +111,10 @@ G_MODULE_EXPORT void set_box_color (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_at_color (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_at_color (GtkWidget * widg, gpointer data)
 {
@@ -131,10 +131,10 @@ G_MODULE_EXPORT void set_at_color (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_rings_color (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_rings_color (GtkWidget * widg, gpointer data)
 {
@@ -149,10 +149,10 @@ G_MODULE_EXPORT void set_rings_color (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_total_coord_color (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_total_coord_color (GtkWidget * widg, gpointer data)
 {
@@ -169,10 +169,10 @@ G_MODULE_EXPORT void set_total_coord_color (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_partial_coord_color (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_partial_coord_color (GtkWidget * widg, gpointer data)
 {
@@ -189,10 +189,10 @@ G_MODULE_EXPORT void set_partial_coord_color (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_frag_mol_color (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_frag_mol_color (GtkWidget * widg, gpointer data)
 {
@@ -210,24 +210,24 @@ G_MODULE_EXPORT void set_frag_mol_color (GtkWidget * widg, gpointer data)
 /*
 *  void color_box (glwin * view, int ideo, int spec, int geo)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int ideo     : 
-*  int spec     : 
-*  int geo      : 
+*  glwin * view :
+*  int ideo     :
+*  int spec     :
+*  int geo      :
 */
 void color_box (glwin * view, int ideo, int spec, int geo)
 #else
 /*
 *  GtkWidget * color_box (glwin * view, int ideo, int spec, int geo)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int ideo     : 
-*  int spec     : 
-*  int geo      : 
+*  glwin * view :
+*  int ideo     :
+*  int spec     :
+*  int geo      :
 */
 GtkWidget * color_box (glwin * view, int ideo, int spec, int geo)
 #endif
@@ -337,7 +337,7 @@ GtkWidget * color_box (glwin * view, int ideo, int spec, int geo)
   }
 #ifdef GTK3
   but = create_menu_item (FALSE, "More colors ...");
-  add_menu_child (coltable, but);
+  gtk_menu_shell_append ((GtkMenuShell *)coltable, but);
 // #endif
   if (ideo < -2)
   {
@@ -376,12 +376,12 @@ GtkWidget * color_box (glwin * view, int ideo, int spec, int geo)
 /*
 *  GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int ideo     : 
-*  int spec     : 
-*  int geo      : 
+*  glwin * view :
+*  int ideo     :
+*  int spec     :
+*  int geo      :
 */
 GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo)
 {

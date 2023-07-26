@@ -17,7 +17,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Contains:
 *
 
- - The reader subroutines for the ISAACS XML file
+ - The reader/writer subroutines for the ISAACS XML file
 
 *
 *  List of subroutines:

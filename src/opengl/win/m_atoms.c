@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_atoms.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   gchar * label_atpts (struct project * this_proj, glwin * view, int id);
 
@@ -54,11 +54,11 @@ extern G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data)
 /*
 *  gchar * label_atpts (struct project * this_proj, glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  glwin * view               : 
-*  int id                     : 
+*  struct project * this_proj :
+*  glwin * view               :
+*  int id                     :
 */
 gchar * label_atpts (struct project * this_proj, glwin * view, int id)
 {
@@ -110,10 +110,10 @@ extern G_MODULE_EXPORT void atom_properties (GtkWidget * widg, gpointer data);
 /*
 *  G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
 {
@@ -122,10 +122,10 @@ G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
   int k = the_data -> c;
   int l, m;
   struct project * this_proj = get_project_by_id(the_data -> a);
-  gboolean v = check_menu_item_get_active ((gpointer)widg);
+  gboolean v = gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg);
   if (widg != this_proj -> modelgl -> ogl_spec[j][k])
   {
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_spec[j][k], v);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_spec[j][k], v);
   }
   for (l=0; l<this_proj -> steps; l++)
   {
@@ -141,10 +141,10 @@ G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
 {
@@ -153,10 +153,10 @@ G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
   int j = id -> b;
   int k = id -> c;
   struct project * this_proj = get_project_by_id(id -> a);
-  gboolean v = check_menu_item_get_active ((gpointer)widg);
+  gboolean v = gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg);
   if (widg != this_proj -> modelgl -> ogl_lab[j][k])
   {
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_lab[j][k], v);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_lab[j][k], v);
   }
   for (l=0; l<this_proj -> steps; l++)
   {
@@ -179,10 +179,10 @@ G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
 {
@@ -197,21 +197,21 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
   }
   for (k=0; k<this_proj -> nspec; k++)
   {
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_lab[j][k], show);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_lab[j][k], show);
   }
 }
 
 /*
 *  GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget * menu, GCallback handler, tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  char * name       : 
-*  gboolean va       : 
-*  gboolean vb       : 
-*  GtkWidget * menu  : 
-*  GCallback handler : 
-*  tint * data       : 
+*  char * name       :
+*  gboolean va       :
+*  gboolean vb       :
+*  GtkWidget * menu  :
+*  GCallback handler :
+*  tint * data       :
 */
 GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget * menu, GCallback handler, tint * data)
 {
@@ -223,20 +223,20 @@ GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget *
 /*
 *  GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, int val, int vb, tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * str      : 
-*  GtkWidget * widg : 
-*  int val          : 
-*  int vb           : 
-*  tint * data      : 
+*  gchar * str      :
+*  GtkWidget * widg :
+*  int val          :
+*  int vb           :
+*  tint * data      :
 */
 GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, int val, int vb, tint * data)
 {
   GtkWidget * menu = gtk_menu_new ();
-  menu_item_set_submenu (widg, menu);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)widg, menu);
   GtkWidget * layout = create_menu_item (TRUE, str);
-  add_menu_child (menu, layout);
+  gtk_menu_shell_append ((GtkMenuShell *)menu, layout);
   g_signal_connect (G_OBJECT (layout), "activate", G_CALLBACK(set_atom_parameter), data);
   return layout;
 }
@@ -244,11 +244,11 @@ GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, int val, i
 /*
 *  GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
-*  int at       : 
+*  glwin * view :
+*  int id       :
+*  int at       :
 */
 GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
 {
@@ -297,11 +297,11 @@ GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
 /*
 *  GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
-*  int at       : 
+*  glwin * view :
+*  int id       :
+*  int at       :
 */
 GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
 {
@@ -330,8 +330,8 @@ GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
     }
     sp = create_menu_item (FALSE, str);
     g_free (str);
-    add_menu_child (menuc, sp);
-    menu_item_set_submenu (sp, color_box(view, i+j, 0, 0));
+    gtk_menu_shell_append ((GtkMenuShell *)menuc, sp);
+    gtk_menu_item_set_submenu ((GtkMenuItem *)sp, color_box(view, i+j, 0, 0));
   }
   if (at == 1) widget_set_sensitive (menuc, view -> anim -> last -> img -> draw_clones);
   return menuc;
@@ -340,22 +340,22 @@ GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
 /*
 *  GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
-*  int at       : 
+*  glwin * view :
+*  int id       :
+*  int at       :
 */
 GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
 {
   GtkWidget * menul = gtk_menu_new ();
   GtkWidget * all = create_menu_item (FALSE, "Show/Hide all");
   g_signal_connect (G_OBJECT (all), "activate", G_CALLBACK(show_hide_all_atom_labels), & view -> colorp[at][0]);
-  add_menu_child (menul, all);
+  gtk_menu_shell_append ((GtkMenuShell *)menul, all);
   GtkWidget * l_show = create_menu_item (FALSE, "Show");
-  add_menu_child (menul, l_show);
+  gtk_menu_shell_append ((GtkMenuShell *)menul, l_show);
   GtkWidget * mshow = gtk_menu_new ();
-  menu_item_set_submenu (l_show, mshow);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)l_show, mshow);
   struct project * this_proj = get_project_by_id (view -> proj);
   gchar * str;
   gboolean sensitive = (! at) ? TRUE : view -> anim -> last -> img -> draw_clones;
@@ -396,7 +396,7 @@ GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
   if (at == 0 || id == 1)
   {
     GtkWidget * l_sel = create_menu_item (FALSE, "Select atom(s)");
-    add_menu_child (menul, l_sel);
+    gtk_menu_shell_append ((GtkMenuShell *)menul, l_sel);
     g_signal_connect (G_OBJECT (l_sel), "activate",G_CALLBACK(atom_properties), & view -> colorp[at][2]);
     if (id == 1) widget_set_sensitive (l_sel, sensitive);
     GtkWidget * l_adv = add_advanced_item (menul, G_CALLBACK(atom_properties), (gpointer)& view -> colorp[at][1], FALSE, 0, 0);
@@ -405,7 +405,7 @@ GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
   else
   {
     view -> ogl_clones[2] = create_menu_item (FALSE, "Select atom(s)");
-    add_menu_child (menul, view -> ogl_clones[2]);
+    gtk_menu_shell_append ((GtkMenuShell *)menul, view -> ogl_clones[2]);
     g_signal_connect (G_OBJECT (view -> ogl_clones[2]), "activate",G_CALLBACK(atom_properties), & view -> colorp[at][2]);
     widget_set_sensitive (view -> ogl_clones[2], sensitive);
     view -> ogl_clones[3] = add_advanced_item (menul, G_CALLBACK(atom_properties), (gpointer)& view -> colorp[at][1], FALSE, 0, 0);
@@ -417,11 +417,11 @@ GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
 /*
 *  GtkWidget * menu_atoms (glwin * view, int id, int at)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
-*  int at       : 
+*  glwin * view :
+*  int id       :
+*  int at       :
 */
 GtkWidget * menu_atoms (glwin * view, int id, int at)
 {
@@ -430,24 +430,24 @@ GtkWidget * menu_atoms (glwin * view, int id, int at)
   gchar * str;
   struct project * this_proj = get_project_by_id(view -> proj);
   GtkWidget * menua = gtk_menu_new ();
-  add_menu_child (menua, menu_item_new_with_submenu ("Show", TRUE, show_atoms_submenu (view, id, at)));
+  gtk_menu_shell_append ((GtkMenuShell *)menua, menu_item_new_with_submenu ("Show", TRUE, show_atoms_submenu (view, id, at)));
   if (at == 1 && id == 0)
   {
     view -> ogl_clones[1] = color_atoms_submenu (view, id, at);
-    add_menu_child (menua, menu_item_new_with_submenu ("Color(s)", ! (view -> anim -> last -> img -> color_map[0] != 0), view -> ogl_clones[1]));
+    gtk_menu_shell_append ((GtkMenuShell *)menua, menu_item_new_with_submenu ("Color(s)", ! (view -> anim -> last -> img -> color_map[0] != 0), view -> ogl_clones[1]));
   }
   else
   {
-    add_menu_child (menua, menu_item_new_with_submenu ("Color(s)", ! (view -> anim -> last -> img -> color_map[0] != 0), color_atoms_submenu (view, id, at)));
+    gtk_menu_shell_append ((GtkMenuShell *)menua, menu_item_new_with_submenu ("Color(s)", ! (view -> anim -> last -> img -> color_map[0] != 0), color_atoms_submenu (view, id, at)));
   }
-  add_menu_child (menua, menu_item_new_with_submenu ("Label(s)", TRUE, label_atoms_submenu (view, id, at)));
+  gtk_menu_shell_append ((GtkMenuShell *)menua, menu_item_new_with_submenu ("Label(s)", TRUE, label_atoms_submenu (view, id, at)));
 
   i = view -> anim -> last -> img -> style;
   str = label_atpts (this_proj, view, 2*at);
   if (id == 0)
   {
     view -> ogl_atoms[4*at] = create_menu_item(FALSE, "Radius(ii)");
-    add_menu_child (menua, view -> ogl_atoms[4*at]);
+    gtk_menu_shell_append ((GtkMenuShell *)menua, view -> ogl_atoms[4*at]);
     view -> ogl_atoms[4*at+1] = create_atom_layout_widget (str, view -> ogl_atoms[4*at], 0, i, & view -> colorp[at][0]);
     if (at == 1 && ! view -> anim -> last -> img -> draw_clones)
     {
@@ -457,7 +457,7 @@ GtkWidget * menu_atoms (glwin * view, int id, int at)
   else if (i == SPHERES || i == BALL_AND_STICK)
   {
     widg = create_menu_item (FALSE, "Radius(ii)");
-    add_menu_child (menua, widg);
+    gtk_menu_shell_append ((GtkMenuShell *)menua, widg);
     widg = create_atom_layout_widget (str, widg, 0, i, & view -> colorp[at][0]);
     if (at == 1 && ! view -> anim -> last -> img -> draw_clones)
     {
@@ -470,7 +470,7 @@ GtkWidget * menu_atoms (glwin * view, int id, int at)
   if (id == 0)
   {
     view -> ogl_atoms[4*at+2] = create_menu_item(FALSE, "Point size(s)");
-    add_menu_child (menua, view -> ogl_atoms[4*at+2]);
+    gtk_menu_shell_append ((GtkMenuShell *)menua, view -> ogl_atoms[4*at+2]);
     view -> ogl_atoms[4*at+3] = create_atom_layout_widget (str, view -> ogl_atoms[4*at+2], 1, i, & view -> colorp[at][1]);
     if (at == 1 && ! view -> anim -> last -> img -> draw_clones)
     {
@@ -480,7 +480,7 @@ GtkWidget * menu_atoms (glwin * view, int id, int at)
   else if (i == WIREFRAME || i == PUNT)
   {
     widg = create_menu_item (FALSE, "Point size(s)");
-    add_menu_child (menua, widg);
+    gtk_menu_shell_append ((GtkMenuShell *)menua, widg);
     widg = create_atom_layout_widget (str, widg, 1, i, & view -> colorp[at][1]);
     if (at == 1 && ! view -> anim -> last -> img -> draw_clones)
     {
@@ -513,11 +513,11 @@ extern G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * 
 /*
 *  G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -571,11 +571,11 @@ G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * paramet
 /*
 *  G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -636,11 +636,11 @@ G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parame
 /*
 *  G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -666,12 +666,12 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant
 /*
 *  GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view       : 
-*  int popm           : 
-*  int at             : 
-*  gboolean sensitive : 
+*  glwin * view       :
+*  int popm           :
+*  int at             :
+*  gboolean sensitive :
 */
 GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
@@ -707,12 +707,12 @@ GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 /*
 *  GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view       : 
-*  int popm           : 
-*  int at             : 
-*  gboolean sensitive : 
+*  glwin * view       :
+*  int popm           :
+*  int at             :
+*  gboolean sensitive :
 */
 GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
@@ -747,12 +747,12 @@ GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 /*
 *  GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view       : 
-*  int popm           : 
-*  int at             : 
-*  gboolean sensitive : 
+*  glwin * view       :
+*  int popm           :
+*  int at             :
+*  gboolean sensitive :
 */
 GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
@@ -781,11 +781,11 @@ GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 /*
 *  GMenu * menu_atoms (glwin * view, int popm, int at)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
-*  int at       : 
+*  glwin * view :
+*  int popm     :
+*  int at       :
 */
 GMenu * menu_atoms (glwin * view, int popm, int at)
 {

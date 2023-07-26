@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_coord.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   gboolean is_coord_in_menu (int id, struct project * this_proj);
 
@@ -57,10 +57,10 @@ extern GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo);
 /*
 *  gboolean is_coord_in_menu (int id, struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id                     : 
-*  struct project * this_proj : 
+*  int id                     :
+*  struct project * this_proj :
 */
 gboolean is_coord_in_menu (int id, struct project * this_proj)
 {
@@ -78,21 +78,21 @@ gboolean is_coord_in_menu (int id, struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
 #endif
@@ -116,7 +116,7 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
   }
   j += c;
 #ifdef GTK3
-  show = check_menu_item_get_active ((gpointer)widg);
+  show = gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg);
 #else
   GVariant * state;
   if (action)
@@ -153,9 +153,9 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
       {
         if (GTK_IS_WIDGET(this_proj -> modelgl -> ogl_geom[i][g][j]))
         {
-          if (check_menu_item_get_active ((gpointer)this_proj -> modelgl -> ogl_geom[i][g][j]) != show)
+          if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[i][g][j]) != show)
           {
-            check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_geom[i][g][j], show);
+            gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[i][g][j], show);
           }
         }
       }
@@ -222,11 +222,11 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
 /*
 *  void detach_frag_mol_menu (glwin * view, int id, int jd)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
-*  int jd       : 
+*  glwin * view :
+*  int id       :
+*  int jd       :
 */
 void detach_frag_mol_menu (glwin * view, int id, int jd)
 {
@@ -266,11 +266,11 @@ void detach_frag_mol_menu (glwin * view, int id, int jd)
 /*
 *  GtkWidget * add_menu_coord (glwin * view, int id, int jd)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
-*  int jd       : 
+*  glwin * view :
+*  int id       :
+*  int jd       :
 */
 GtkWidget * add_menu_coord (glwin * view, int id, int jd)
 {
@@ -283,11 +283,11 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
   {
     if (jd == 2 || jd == 3) detach_frag_mol_menu(view, id, jd);
     GtkWidget * colt = create_menu_item (TRUE, "_Show/Hide");
-    add_menu_child (menuct, colt);
+    gtk_menu_shell_append ((GtkMenuShell *)menuct, colt);
     if (jd < 2 || jd > 3)
     {
       menucts = gtk_menu_new ();
-      menu_item_set_submenu (colt, menucts);
+      gtk_menu_item_set_submenu ((GtkMenuItem *)colt, menucts);
       if (jd > 3)
       {
         if (jd == 9)
@@ -298,9 +298,9 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
         {
           colt = create_menu_item (FALSE, "Atoms in ring(s) of size");
         }
-        add_menu_child (menucts, colt);
+        gtk_menu_shell_append ((GtkMenuShell *)menucts, colt);
         menucts = gtk_menu_new ();
-        menu_item_set_submenu (colt, menucts);
+        gtk_menu_item_set_submenu ((GtkMenuItem *)colt, menucts);
       }
       j = (jd < 2) ? this_proj -> nspec : this_proj -> coord -> totcoord[jd];
       for (i=0; i<j; i++)
@@ -317,7 +317,7 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
                 g_object_ref (view -> oglmv[id][jd][i]);
                 gtk_container_remove (GTK_CONTAINER(widg), view -> oglmv[id][jd][i]);
               }
-              add_menu_child (menucts, view -> oglmv[id][jd][i]);
+              gtk_menu_shell_append ((GtkMenuShell *)menucts, view -> oglmv[id][jd][i]);
             }
           }
         }
@@ -333,7 +333,7 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
                 g_object_ref (view -> ogl_geom[id][jd][i]);
                 gtk_container_remove (GTK_CONTAINER(widg), view -> ogl_geom[id][jd][i]);
               }
-              add_menu_child (menucts, view -> ogl_geom[id][jd][i]);
+              gtk_menu_shell_append ((GtkMenuShell *)menucts, view -> ogl_geom[id][jd][i]);
             }
           }
         }
@@ -343,18 +343,18 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
     {
       if (view -> oglmv[id][jd])
       {
-        menu_item_set_submenu (colt, view -> oglmv[id][jd][0]);
+        gtk_menu_item_set_submenu ((GtkMenuItem *)colt, view -> oglmv[id][jd][0]);
       }
     }
     if (jd != 9)
     {
       colt = create_menu_item (FALSE, "Color(s)");
-      add_menu_child (menuct, colt);
+      gtk_menu_shell_append ((GtkMenuShell *)menuct, colt);
     }
     if (jd < 2)
     {
       menucts = gtk_menu_new ();
-      menu_item_set_submenu (colt, menucts);
+      gtk_menu_item_set_submenu ((GtkMenuItem *)colt, menucts);
       if (view -> oglmc[id][jd])
       {
         for (i=0; i<this_proj -> nspec; i++)
@@ -367,7 +367,7 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
               g_object_ref (view -> oglmc[id][jd][i]);
               gtk_container_remove (GTK_CONTAINER(widg), view -> oglmc[id][jd][i]);
             }
-            add_menu_child (menucts, view -> oglmc[id][jd][i]);
+            gtk_menu_shell_append ((GtkMenuShell *)menucts, view -> oglmc[id][jd][i]);
           }
         }
       }
@@ -378,7 +378,7 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
       {
         if (GTK_IS_WIDGET(view -> oglmc[id][jd][0]))
         {
-          menu_item_set_submenu (colt, view -> oglmc[id][jd][0]);
+          gtk_menu_item_set_submenu ((GtkMenuItem *)colt, view -> oglmc[id][jd][0]);
         }
       }
     }
@@ -394,7 +394,7 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
             g_object_ref (view -> oglmc[id][jd][0]);
             gtk_menu_detach (GTK_MENU(view -> oglmc[id][jd][0]));
           }
-          menu_item_set_submenu (colt, view -> oglmc[id][jd][0]);
+          gtk_menu_item_set_submenu ((GtkMenuItem *)colt, view -> oglmc[id][jd][0]);
         }
       }
     }
@@ -406,30 +406,30 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
 /*
 *  GtkWidget * menu_coord (glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
+*  glwin * view :
+*  int id       :
 */
 GtkWidget * menu_coord (glwin * view, int id)
 {
   GtkWidget * menuco = create_menu_item (FALSE, "Coordination");
   GtkWidget * menuc = gtk_menu_new ();
-  menu_item_set_submenu (menuco, menuc);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)menuco, menuc);
 
-  add_menu_child (menuc, menu_item_new_with_submenu ("Total(s)", TRUE, add_menu_coord(view, id, 0)));
-  add_menu_child (menuc, menu_item_new_with_submenu ("Partial(s)", TRUE, add_menu_coord(view, id, 1)));
+  gtk_menu_shell_append ((GtkMenuShell *)menuc, menu_item_new_with_submenu ("Total(s)", TRUE, add_menu_coord(view, id, 0)));
+  gtk_menu_shell_append ((GtkMenuShell *)menuc, menu_item_new_with_submenu ("Partial(s)", TRUE, add_menu_coord(view, id, 1)));
   return menuco;
 }
 
 /*
 *  GtkWidget * menu_rings (glwin * view, int id, int jd)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
-*  int jd       : 
+*  glwin * view :
+*  int id       :
+*  int jd       :
 */
 GtkWidget * menu_rings (glwin * view, int id, int jd)
 {
@@ -444,11 +444,11 @@ GtkWidget * menu_rings (glwin * view, int id, int jd)
         if (id == 0)
         {
           view -> ogl_rings[i+1] = menu_item_new_with_submenu (rings_type[i], TRUE, add_menu_coord (view, id, 4+i));
-          add_menu_child (menuco, view -> ogl_rings[i+1]);
+          gtk_menu_shell_append ((GtkMenuShell *)menuco, view -> ogl_rings[i+1]);
         }
         else
         {
-          add_menu_child (menuco, menu_item_new_with_submenu (rings_type[i], TRUE, add_menu_coord (view, id, 4+i)));
+          gtk_menu_shell_append ((GtkMenuShell *)menuco, menu_item_new_with_submenu (rings_type[i], TRUE, add_menu_coord (view, id, 4+i)));
         }
       }
     }
@@ -459,14 +459,14 @@ GtkWidget * menu_rings (glwin * view, int id, int jd)
 /*
 *  GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handler, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view      : 
-*  gchar * act       : 
-*  int popm          : 
-*  int id            : 
-*  GCallback handler : 
-*  gpointer data     : 
+*  glwin * view      :
+*  gchar * act       :
+*  int popm          :
+*  int id            :
+*  GCallback handler :
+*  gpointer data     :
 */
 GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handler, gpointer data)
 {
@@ -479,12 +479,12 @@ GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handl
 /*
 *  GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
-*  int id       : 
-*  int mid      : 
+*  glwin * view :
+*  int popm     :
+*  int id       :
+*  int mid      :
 */
 GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
 {
@@ -540,11 +540,11 @@ GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
 /*
 *  G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -554,12 +554,12 @@ G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * par
 /*
 *  GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
-*  int id       : 
-*  int mid      : 
+*  glwin * view :
+*  int popm     :
+*  int id       :
+*  int mid      :
 */
 GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
 {
@@ -593,12 +593,12 @@ GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
 /*
 *  GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
-*  int id       : 
-*  int mid      : 
+*  glwin * view :
+*  int popm     :
+*  int id       :
+*  int mid      :
 */
 GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
 {
@@ -635,11 +635,11 @@ GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
 /*
 *  GMenu * add_menu_coord (glwin * view, int popm, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
-*  int id       : 
+*  glwin * view :
+*  int popm     :
+*  int id       :
 */
 GMenu * add_menu_coord (glwin * view, int popm, int id)
 {
@@ -673,10 +673,10 @@ GMenu * add_menu_coord (glwin * view, int popm, int id)
 /*
 *  GMenu * menu_coord (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_coord (glwin * view, int popm)
 {
@@ -689,10 +689,10 @@ GMenu * menu_coord (glwin * view, int popm)
 /*
 *  GMenu * menu_rings (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_rings (glwin * view, int popm)
 {

@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to read Chem3d atomic coordinates
+
 *
 *  List of subroutines:
 
@@ -40,9 +41,7 @@ extern void check_for_species (double v, int ato);
 /*
 *  int c3d_get_atom_coordinates ()
 *
-*  Usage:
-*
-*   :
+*  Usage: get the atomic coordinates from the C3D file
 */
 int c3d_get_atom_coordinates ()
 {
@@ -288,9 +287,9 @@ int c3d_get_atom_coordinates ()
 /*
 *  int open_c3d_file (int linec)
 *
-*  Usage:
+*  Usage: open C3D file
 *
-*  int linec :
+*  int linec : Number of lines in the file
 */
 int open_c3d_file (int linec)
 {

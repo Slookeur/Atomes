@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The initialization subroutines to import atomic coordinates
+
 *
 *  List of subroutines:
 
@@ -62,9 +63,9 @@ struct line_node * tail = NULL;
 /*
 *  void add_reader_info (gchar * info)
 *
-*  Usage:
+*  Usage: append information message to the reader information
 *
-*  gchar * info :
+*  gchar * info : The reader information message
 */
 void add_reader_info (gchar * info)
 {
@@ -74,11 +75,11 @@ void add_reader_info (gchar * info)
 /*
 *  void reader_info (gchar * type, gchar * sinf, int val)
 *
-*  Usage:
+*  Usage: display reader information
 *
-*  gchar * type :
-*  gchar * sinf :
-*  int val      :
+*  gchar * type : File type
+*  gchar * sinf : Information message
+*  int val      : Value to present
 */
 void reader_info (gchar * type, gchar * sinf, int val)
 {
@@ -88,12 +89,12 @@ void reader_info (gchar * type, gchar * sinf, int val)
 /*
 *  void format_error (int stp, int ato, gchar * mot, int line)
 *
-*  Usage:
+*  Usage: Message to display an error message
 *
-*  int stp     :
-*  int ato     :
-*  gchar * mot :
-*  int line    :
+*  int stp     : MD step id
+*  int ato     : Atom id
+*  gchar * mot : Message
+*  int line    : Line with the error
 */
 void format_error (int stp, int ato, gchar * mot, int line)
 {
@@ -117,10 +118,10 @@ void format_error (int stp, int ato, gchar * mot, int line)
 /*
 *  void check_for_species (double v, int ato)
 *
-*  Usage:
+*  Usage: Fill the species for each atom and the associated data
 *
-*  double v :
-*  int ato  :
+*  double v : Z
+*  int ato  : Total number of atoms
 */
 void check_for_species (double v, int ato)
 {
@@ -171,10 +172,10 @@ void check_for_species (double v, int ato)
 /*
 *  int open_coord_file (gchar * filename, int fti)
 *
-*  Usage:
+*  Usage: open atomic coordinates file
 *
-*  gchar * filename :
-*  int fti          :
+*  gchar * filename : The file name
+*  int fti          : The type of coordinates
 */
 int open_coord_file (gchar * filename, int fti)
 {

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_coord.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc);
 
@@ -35,14 +35,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int spec                   : 
-*  int gid                    : 
-*  int cid                    : 
-*  int minc                   : 
-*  int maxc                   : 
+*  struct project * this_proj :
+*  int spec                   :
+*  int gid                    :
+*  int cid                    :
+*  int minc                   :
+*  int maxc                   :
 */
 int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc)
 {
@@ -64,10 +64,10 @@ int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int
 /*
 *  void print_coord_info (struct project * this_proj, coord_info * coord)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  coord_info * coord         : 
+*  struct project * this_proj :
+*  coord_info * coord         :
 */
 void print_coord_info (struct project * this_proj, coord_info * coord)
 {
@@ -161,9 +161,9 @@ void print_coord_info (struct project * this_proj, coord_info * coord)
 /*
 *  coord_info * duplicate_coord_info (coord_info * old_coord)
 *
-*  Usage: 
+*  Usage:
 *
-*  coord_info * old_coord : 
+*  coord_info * old_coord :
 */
 coord_info * duplicate_coord_info (coord_info * old_coord)
 {
@@ -437,9 +437,9 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
         {
           if (GTK_IS_WIDGET(this_proj -> modelgl -> ogl_geom[0][i][j]))
           {
-            if (check_menu_item_get_active ((gpointer)this_proj -> modelgl -> ogl_geom[0][i][j]) != showcoord[i][j])
+            if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][i][j]) != showcoord[i][j])
             {
-              check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_geom[0][i][j], showcoord[i][j]);
+              gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][i][j], showcoord[i][j]);
             }
           }
         }
@@ -447,9 +447,9 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
         {
           if (GTK_IS_WIDGET(this_proj -> modelgl -> ogl_poly[0][i][j]))
           {
-            if (check_menu_item_get_active ((gpointer)this_proj -> modelgl -> ogl_poly[0][i][j]) != showpoly[i][j])
+            if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_poly[0][i][j]) != showpoly[i][j])
             {
-              check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_poly[0][i][j], showpoly[i][j]);
+              gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_poly[0][i][j], showpoly[i][j]);
             }
           }
         }
@@ -465,9 +465,9 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
         {
           if (GTK_IS_WIDGET(this_proj -> modelgl -> ogl_geom[0][2][i]))
           {
-            if (check_menu_item_get_active ((gpointer)this_proj -> modelgl -> ogl_geom[0][2][i]) != showfrag[i])
+            if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][2][i]) != showfrag[i])
             {
-              check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_geom[0][2][i], showfrag[i]);
+              gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][2][i], showfrag[i]);
             }
           }
         }
@@ -485,15 +485,15 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
 /*
 *  void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int nmols                  : 
-*  int add                    : 
-*  int rem                    : 
-*  int * num                  : 
-*  int * rec                  : 
-*  int *** tmpgeo             : 
+*  struct project * this_proj :
+*  int nmols                  :
+*  int add                    :
+*  int rem                    :
+*  int * num                  :
+*  int * rec                  :
+*  int *** tmpgeo             :
 */
 void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag)
 {

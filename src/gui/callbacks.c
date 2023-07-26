@@ -602,7 +602,7 @@ G_MODULE_EXPORT void on_save_as_activate (GtkWidget * widg, gpointer data)
 /*
 *  void run_project ()
 *
-*  Usage:
+*  Usage: send project data to Fortran90
 */
 void run_project ()
 {
@@ -632,7 +632,7 @@ void run_project ()
 /*
 *  void apply_project (gboolean showtools)
 *
-*  Usage:
+*  Usage: get project ready for calculation and initialize the OpenGL window
 *
 *  gboolean showtools :
 */
@@ -801,7 +801,7 @@ G_MODULE_EXPORT void on_isaacs_port (GtkWidget * widg, gpointer data)
 /*
 *  void to_read_pos ()
 *
-*  Usage: send atomic coordinates to Fortran 90
+*  Usage: send atomic coordinates to Fortran90
 */
 void to_read_pos ()
 {
@@ -1048,7 +1048,7 @@ int reading_vas_trj;
 /*
 *  int prep_chem_data ()
 *
-*  Usage:
+*  Usage: prepare chemical data to read CPMD/VASP file
 */
 int prep_chem_data ()
 {
@@ -1386,9 +1386,9 @@ void open_this_coordinate_file (int format)
     if (format == 9 && active_cell -> has_a_box)
     {
 #ifdef GTK3
-      check_menu_item_set_active ((gpointer)active_glwin -> ogl_rep[0], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_rep[0], TRUE);
       set_rep (active_glwin -> ogl_rep[0], & active_glwin -> colorp[0][0]);
-      check_menu_item_set_active ((gpointer)active_glwin -> ogl_clones[0], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_clones[0], TRUE);
       widget_set_sensitive (active_glwin -> ogl_clones[0], active_glwin -> allbonds[1]);
       show_hide_clones (active_glwin -> ogl_clones[0], active_glwin);
 #endif

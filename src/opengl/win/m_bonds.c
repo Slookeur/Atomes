@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_bonds.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   gchar * label_cutrab (struct project * this_proj, glwin * view, int id);
 
@@ -49,11 +49,11 @@ extern G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 /*
 *  gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  glwin * view               : 
-*  int id                     : 
+*  struct project * this_proj :
+*  glwin * view               :
+*  int id                     :
 */
 gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
 {
@@ -163,34 +163,34 @@ gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
 /*
 *  GtkWidget * create_bond_layout_menu (gchar * str, GtkWidget * menu)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * str      : 
-*  GtkWidget * menu : 
+*  gchar * str      :
+*  GtkWidget * menu :
 */
 GtkWidget * create_bond_layout_menu (gchar * str, GtkWidget * menu)
 {
   GtkWidget * layout = create_menu_item (FALSE, str);
-  add_menu_child (menu, layout);
+  gtk_menu_shell_append ((GtkMenuShell *)menu, layout);
   return  layout;
 }
 
 /*
 *  GtkWidget * create_bond_layout_widget (gchar * str, GtkWidget * widg, int va, tint * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * str      : 
-*  GtkWidget * widg : 
-*  int va           : 
-*  tint * data      : 
+*  gchar * str      :
+*  GtkWidget * widg :
+*  int va           :
+*  tint * data      :
 */
 GtkWidget * create_bond_layout_widget (gchar * str, GtkWidget * widg, int va, tint * data)
 {
   GtkWidget * menu = gtk_menu_new ();
-  menu_item_set_submenu (widg, menu);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)widg, menu);
   GtkWidget * layout = create_menu_item (FALSE, str);
-  add_menu_child (menu, layout);
+  gtk_menu_shell_append ((GtkMenuShell *)menu, layout);
   switch (va)
   {
     case 0:
@@ -209,11 +209,11 @@ GtkWidget * create_bond_layout_widget (gchar * str, GtkWidget * widg, int va, ti
 /*
 *  GtkWidget * menu_bonds (glwin * view, int id, int at)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
-*  int at       : 
+*  glwin * view :
+*  int id       :
+*  int at       :
 */
 GtkWidget * menu_bonds (glwin * view, int id, int at)
 {
@@ -328,16 +328,16 @@ GtkWidget * menu_bonds (glwin * view, int id, int at)
 /*
 *  GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int popm, int id, GCallback handler, gpointer data, gboolean sensitive)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view       : 
-*  gchar * str        : 
-*  gchar * key        : 
-*  int popm           : 
-*  int id             : 
-*  GCallback handler  : 
-*  gpointer data      : 
-*  gboolean sensitive : 
+*  glwin * view       :
+*  gchar * str        :
+*  gchar * key        :
+*  int popm           :
+*  int id             :
+*  GCallback handler  :
+*  gpointer data      :
+*  gboolean sensitive :
 */
 GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int popm, int id, GCallback handler, gpointer data, gboolean sensitive)
 {
@@ -349,11 +349,11 @@ GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int 
 /*
 *  GMenu * menu_bonds (glwin * view, int popm, int at)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
-*  int at       : 
+*  glwin * view :
+*  int popm     :
+*  int at       :
 */
 GMenu * menu_bonds (glwin * view, int popm, int at)
 {

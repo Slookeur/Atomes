@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ -  - The subroutines to read XYZ atomic coordinates
+
 *
 *  List of subroutines:
 
@@ -38,9 +39,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int xyz_get_atom_coordinates ()
 *
-*  Usage:
-*
-*   :
+*  Usage: get the atomic coordinates from the XYZ file
 */
 int xyz_get_atom_coordinates ()
 {
@@ -269,9 +268,9 @@ int xyz_get_atom_coordinates ()
 /*
 *  int open_xyz_file (int linec)
 *
-*  Usage:
+*  Usage: open XYZ file
 *
-*  int linec :
+*  int linec : Number of lines in the file
 */
 int open_xyz_file (int linec)
 {

@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'save_opengl.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to write OpenGL information in the atomes project file format
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int save_atom_a (FILE * fp, struct project * this_proj, int s, int a);
   int save_atom_b (FILE * fp, struct project * this_proj, int s, int a);
@@ -35,12 +36,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 *
-*  Usage: 
+*  Usage: save atom data to file (a)
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
-*  int s                      : 
-*  int a                      : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project
+*  int s                      : The MD step
+*  int a                      : The atom number
 */
 int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -57,12 +58,12 @@ int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 /*
 *  int save_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 *
-*  Usage: 
+*  Usage: save atom data to file (b)
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
-*  int s                      : 
-*  int a                      : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project
+*  int s                      : The MD step
+*  int a                      : The atom number
 */
 int save_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -75,15 +76,16 @@ int save_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 /*
 *  int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_max, int ** num_data, gboolean *** show, int **** all_data)
 *
-*  Usage: 
+*  Usage: saving rings and chains statistics data to file
 *
-*  FILE * fp         : 
-*  int type          : 
-*  int size          : 
-*  int steps         : 
-*  int data_max      : 
-*  int ** num_data   : 
-*  gboolean *** show : 
+*  FILE * fp         : The file pointer
+*  int type          : Rings (0) or chains (1)
+*  int size          : The number of data to save
+*  int steps         : The MD step
+*  int data_max      : The maximum size of
+*  int ** num_data   : Id of the objects to save
+*  gboolean *** show : Display information pointer
+*  int **** all_data : Atoms id of the objects to save
 */
 int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_max, int ** num_data, gboolean *** show, int **** all_data)
 {
@@ -114,12 +116,12 @@ int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_m
 /*
 *  int save_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
 *
-*  Usage: 
+*  Usage: save OpenGL image properties to file
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
-*  image * img                : 
-*  int sid                    : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project that contains the data
+*  image * img                : The image that contains the data
+*  int sid                    : The number of chemical species
 */
 int save_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
 {

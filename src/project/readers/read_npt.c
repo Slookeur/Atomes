@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_npt.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to read NPT data
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int cell_get_lattice (int format);
   int open_cell_file (int format, gchar * filename);
@@ -54,9 +55,9 @@ cell_file * this_cell;
 /*
 *  void add_cell_info (gchar * info)
 *
-*  Usage: 
+*  Usage: append information message to the cell information
 *
-*  gchar * info : 
+*  gchar * info : The cell information message
 */
 void add_cell_info (gchar * info)
 {
@@ -66,9 +67,9 @@ void add_cell_info (gchar * info)
 /*
 *  int cell_get_lattice (int format)
 *
-*  Usage: 
+*  Usage: get the lattice parameters format from the file
 *
-*  int format : 
+*  int format : File format
 */
 int cell_get_lattice (int format)
 {
@@ -215,10 +216,10 @@ int cell_get_lattice (int format)
 /*
 *  int open_cell_file (int format, gchar * filename)
 *
-*  Usage: 
+*  Usage: open the file that contains the cell parameters
 *
-*  int format       : 
-*  gchar * filename : 
+*  int format       : File format
+*  gchar * filename : File name
 */
 int open_cell_file (int format, gchar * filename)
 {

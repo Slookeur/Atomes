@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_cutoffs.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void update_cutoffs (struct project * this_proj);
   void cut_box (struct project * this_proj, GtkWidget * vbox);
@@ -43,9 +43,9 @@ double * tmpcut;
 /*
 *  void update_cutoffs (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void update_cutoffs (struct project * this_proj)
 {
@@ -89,7 +89,9 @@ void update_cutoffs (struct project * this_proj)
     if (this_proj -> modelgl -> chains)
     {
       clean_chains_data (this_proj -> modelgl);
+#ifdef GTK3
       update_chains_menus (this_proj -> modelgl);
+#endif
     }
     bonds_update = 1;
     frag_update = (this_proj -> natomes > ATOM_LIMIT) ? 0 : 1;
@@ -113,10 +115,10 @@ void update_cutoffs (struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
 {
@@ -134,10 +136,10 @@ G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
 /*
 *  void cut_box (struct project * this_proj, GtkWidget * vbox)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  GtkWidget * vbox           : 
+*  struct project * this_proj :
+*  GtkWidget * vbox           :
 */
 void cut_box (struct project * this_proj, GtkWidget * vbox)
 {
@@ -200,11 +202,11 @@ void cut_box (struct project * this_proj, GtkWidget * vbox)
 /*
 *  G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * win  : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * win  :
+*  gint response_id :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -240,21 +242,21 @@ G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointe
 /*
 *  G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void window_cuts (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void window_cuts (GtkWidget * widg, gpointer data)
 #endif

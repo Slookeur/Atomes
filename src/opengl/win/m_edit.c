@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_edit.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
   G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data);
@@ -50,21 +50,21 @@ extern G_MODULE_EXPORT void turn_rebuild (GtkWidget * widg, gpointer data);
 /*
 *  G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 #endif
@@ -77,11 +77,11 @@ G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view  : 
-*  int id        : 
-*  int j         : 
+*  glwin * view  :
+*  int id        :
+*  int j         :
 */
 GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 {
@@ -113,7 +113,7 @@ GtkWidget * menu_cell_edit (glwin * view , int id, int j)
         for (l=0; l<3; l++) k += view -> anim -> last -> img-> extra_cell[l];
         widget_set_sensitive (view -> ogl_box[2+i], k);
       }
-      add_menu_child (menu, view -> ogl_box[2+i]);
+      gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_box[2+i]);
     }
   }
   else
@@ -142,7 +142,7 @@ GtkWidget * menu_cell_edit (glwin * view , int id, int j)
         for (l=0; l<3; l++) k += view -> anim -> last -> img-> extra_cell[l];
         widget_set_sensitive (widg, k);
       }
-      add_menu_child (menu, widg);
+      gtk_menu_shell_append ((GtkMenuShell *)menu, widg);
     }
   }
   return menu;
@@ -151,10 +151,10 @@ GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 /*
 *  GtkWidget * menu_edit (glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
+*  glwin * view :
+*  int id       :
 */
 GtkWidget * menu_edit (glwin * view, int id)
 {
@@ -166,35 +166,35 @@ GtkWidget * menu_edit (glwin * view, int id)
   {
     view -> cbuilder = create_menu_item (FALSE, "Crystal Builder");
     g_signal_connect (G_OBJECT (view -> cbuilder), "activate", G_CALLBACK(crystal_window), & view -> colorp[0][0]);
-    add_menu_child (menu, view -> cbuilder);
+    gtk_menu_shell_append ((GtkMenuShell *)menu, view -> cbuilder);
   }
   else
   {
     widg = create_menu_item (FALSE, "Crystal Builder");
     g_signal_connect (G_OBJECT (widg), "activate", G_CALLBACK(crystal_window), & view -> colorp[0][0]);
-    add_menu_child (menu, widg);
+    gtk_menu_shell_append ((GtkMenuShell *)menu, widg);
   }
   j = (this_proj -> cell.ltype && this_proj -> steps == 1) ? 1 : 0;
   if (id == 0)
   {
     view -> ogl_box[1] = menu_item_new_with_submenu ("Cell", (this_proj -> natomes) ? this_proj -> cell.ltype : 0, menu_cell_edit(view, id, j));
-    add_menu_child (menu, view -> ogl_box[1]);
+    gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_box[1]);
   }
   else
   {
-    add_menu_child (menu, menu_item_new_with_submenu ("Cell", (this_proj -> natomes) ? this_proj -> cell.ltype : 0, menu_cell_edit(view, id, j)));
+    gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Cell", (this_proj -> natomes) ? this_proj -> cell.ltype : 0, menu_cell_edit(view, id, j)));
   }
 
   GtkWidget * ats = create_menu_item (FALSE, "Atoms");
-  add_menu_child (menu, ats);
+  gtk_menu_shell_append ((GtkMenuShell *)menu, ats);
   GtkWidget * menua = gtk_menu_new ();
-  menu_item_set_submenu (ats, menua);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)ats, menua);
   j = (this_proj -> steps == 1) ? 1 : 0;
   for (i=0; i<5; i++)
   {
     widg = create_menu_item (TRUE, action_name[i]);
     g_signal_connect (G_OBJECT (widg), "activate", G_CALLBACK(action_window), & view -> colorp[i][0]);
-    add_menu_child (menua, widg);
+    gtk_menu_shell_append ((GtkMenuShell *)menua, widg);
     widget_set_sensitive (widg, this_proj -> nspec);
     widget_set_sensitive (widg, (i == 3) ? j : (this_proj -> natomes) ? j : 0);
   }
@@ -214,11 +214,11 @@ GtkWidget * menu_edit (glwin * view, int id)
 /*
 *  GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view  : 
-*  int popm      : 
-*  int sensitive : 
+*  glwin * view  :
+*  int popm      :
+*  int sensitive :
 */
 GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 {
@@ -256,11 +256,11 @@ GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 /*
 *  GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view  : 
-*  int popm      : 
-*  int sensitive : 
+*  glwin * view  :
+*  int popm      :
+*  int sensitive :
 */
 GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
 {
@@ -282,11 +282,11 @@ GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
 /*
 *  G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -316,10 +316,10 @@ G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * paramete
 /*
 *  GMenu * extract_section (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * extract_section (glwin * view, int popm)
 {
@@ -338,10 +338,10 @@ GMenu * extract_section (glwin * view, int popm)
 /*
 *  GMenu * menu_edit (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_edit (glwin * view, int popm)
 {

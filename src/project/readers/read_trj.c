@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to read CPMD atomic coordinates
+
 *
 *  List of subroutines:
 
@@ -38,9 +39,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int trj_get_atom_coordinates ()
 *
-*  Usage:
-*
-*   :
+*  Usage: get the atomic coordinates from the CPMD file
 */
 int trj_get_atom_coordinates ()
 {
@@ -235,9 +234,9 @@ int trj_get_atom_coordinates ()
 /*
 *  int open_trj_file (int linec)
 *
-*  Usage:
+*  Usage: open CPMD file
 *
-*  int linec :
+*  int linec : Number of lines in the file
 */
 int open_trj_file (int linec)
 {

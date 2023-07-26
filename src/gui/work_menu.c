@@ -58,7 +58,7 @@ G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data)
   apply_project (FALSE);
 #ifdef GTK3
   // GTK3 Menu Action To Check
-  check_menu_item_set_active ((gpointer)active_project -> modelgl -> ogl_mode[1], TRUE);
+  gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_project -> modelgl -> ogl_mode[1], TRUE);
   set_mode (active_project -> modelgl -> ogl_mode[1], & active_project -> modelgl -> colorp[1][0]);
 #else
   set_mode (NULL, & active_project -> modelgl -> colorp[1][0]);
@@ -137,7 +137,7 @@ GtkWidget * this_work_menu (int p, int c)
     dmenu = gtk_menu_new ();
     gtk3_menu_item (dmenu, "ISAACS Project File '*.ipf'", IMG_FILE, (gpointer)PACKAGE_MOL, G_CALLBACK(on_isaacs_port), GINT_TO_POINTER(1), FALSE, 0, 0, FALSE, FALSE, FALSE);
     gtk3_menu_item (dmenu, "Atomic Coordinates", IMG_FILE, (gpointer)PACKAGE_CON, G_CALLBACK(on_coord_port), GINT_TO_POINTER(1), FALSE, 0, 0, FALSE, FALSE, FALSE);
-    menu_item_set_submenu (port, dmenu);
+    gtk_menu_item_set_submenu ((GtkMenuItem *)port, dmenu);
   }
   else
   {
@@ -163,12 +163,12 @@ GtkWidget * this_work_menu (int p, int c)
     dmenu = gtk_menu_new ();
     gtk3_menu_item (dmenu, "ISAACS Project File '*.ipf'", IMG_FILE, (gpointer)PACKAGE_MOL, G_CALLBACK(on_isaacs_port), GINT_TO_POINTER(1), FALSE, 0, 0, FALSE, FALSE, FALSE);
     gtk3_menu_item (dmenu, "Atomic Coordinates", IMG_FILE, (gpointer)PACKAGE_CON, G_CALLBACK(on_coord_port), GINT_TO_POINTER(1), FALSE, 0, 0, FALSE, FALSE, FALSE);
-    menu_item_set_submenu (port, dmenu);
+    gtk_menu_item_set_submenu ((GtkMenuItem *)port, dmenu);
   }
   add_menu_separator (menu);
   port = gtk3_menu_item (menu, imp_str[0], IMG_FILE, (gpointer)PACKAGE_IMP, NULL, NULL, FALSE, 0, 0, FALSE, FALSE, FALSE);
   dmenu = gtk_menu_new ();
-  menu_item_set_submenu (port, dmenu);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)port, dmenu);
   gtk3_menu_item (dmenu, "ISAACS Project File '*.ipf'", IMG_FILE, (gpointer)PACKAGE_MOL, G_CALLBACK(on_isaacs_port), GINT_TO_POINTER(0), FALSE, 0, 0, FALSE, FALSE, FALSE);
   gtk3_menu_item (dmenu, "Atomic Coordinates", IMG_FILE, (gpointer)PACKAGE_IMP, G_CALLBACK(on_coord_port), GINT_TO_POINTER(0), FALSE, 0, 0, FALSE, FALSE, FALSE);
   add_menu_separator (menu);

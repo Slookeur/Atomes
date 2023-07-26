@@ -837,7 +837,7 @@ GtkWidget * create_tab_4 (gpointer data)
   g_signal_connect (G_OBJECT(axischoice), "changed", G_CALLBACK(update_axis), data);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, ahbox, axischoice, FALSE, FALSE, 25);
 
-  add_box_child_start (GTK_ORIENTATION_VERTICAL, axisbox, create_hsep (), FALSE, FALSE, 5);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, axisbox, gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), FALSE, FALSE, 5);
 
   ahbox = create_hbox (0);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, axisbox, ahbox, FALSE, FALSE, 0);

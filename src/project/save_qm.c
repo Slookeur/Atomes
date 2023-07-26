@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'save_qm.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - Subroutines to save ab-initio calculation (CPMD/CP2K) to atomes project file
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int save_thermo (FILE * fp, struct thermostat * thermo);
   int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord);
@@ -97,10 +98,10 @@ typedef struct {
 /*
 *  int save_thermo (FILE * fp, struct thermostat * thermo)
 *
-*  Usage: 
+*  Usage: save thermostat to file
 *
-*  FILE * fp                  : 
-*  struct thermostat * thermo : 
+*  FILE * fp                  : The file pointer
+*  struct thermostat * thermo : The thermostat to save
 */
 int save_thermo (FILE * fp, struct thermostat * thermo)
 {
@@ -116,12 +117,12 @@ int save_thermo (FILE * fp, struct thermostat * thermo)
 /*
 *  int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
 *
-*  Usage: 
+*  Usage: save fixed atom(s) to file
 *
-*  FILE * fp       : 
-*  int fixatoms    : 
-*  int * fixlist   : 
-*  int ** fixcoord : 
+*  FILE * fp       : The file pointer
+*  int fixatoms    : The number of fixed atom(s)
+*  int * fixlist   : The list of fixed atom(s)
+*  int ** fixcoord : The list of fixed coordinate(s) for the fix atom(s)
 */
 int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
 {
@@ -154,11 +155,11 @@ int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
 /*
 *  int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 *
-*  Usage: 
+*  Usage: save CPMD data to file
 *
-*  FILE * fp                  : 
-*  int cid                    : 
-*  struct project * this_proj : 
+*  FILE * fp                  : The file pointer
+*  int cid                    : The CPMD id (0 = ab-initio, 1 = QM-MM)
+*  struct project * this_proj : The project that contains the data
 */
 int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 {
@@ -225,11 +226,11 @@ int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 /*
 *  int save_cp2k_data (FILE * fp, int cid, struct project * this_proj)
 *
-*  Usage: 
+*  Usage: save CP2K data to file
 *
-*  FILE * fp                  : 
-*  int cid                    : 
-*  struct project * this_proj : 
+*  FILE * fp                  : The file pointer
+*  int cid                    : The CP2K id (0 = ab-initio, 1 = QM-MM)
+*  struct project * this_proj : The project that contains the data
 */
 int save_cp2k_data (FILE * fp, int cid, struct project * this_proj)
 {

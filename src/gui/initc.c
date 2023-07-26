@@ -135,13 +135,13 @@ void initcwidgets ()
 /*
 *  void prepostcalc (GtkWidget * widg, gboolean status, int run, int adv, double opc)
 *
-*  Usage:
+*  Usage: to just before and just after running a calculation
 *
-*  GtkWidget * widg :
-*  gboolean status  :
-*  int run          :
-*  int adv          :
-*  double opc       :
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gboolean status  : Calculation completed (1/0)
+*  int run          : Calculation id
+*  int adv          : Calculation result
+*  double opc       : Opacity
 */
 void prepostcalc (GtkWidget * widg, gboolean status, int run, int adv, double opc)
 {

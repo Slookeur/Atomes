@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_rep.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
   G_MODULE_EXPORT gboolean on_rep_delete (GtkWindow * widg, gpointer data);
@@ -68,9 +68,9 @@ gchar * text_reps[OGL_REPS] = {"Orthographic", "Perspective"};
 /*
 *  void update_labels (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 void update_labels (glwin * view)
 {
@@ -83,10 +83,10 @@ void update_labels (glwin * view)
 /*
 *  void camera_has_changed (gdouble value, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  gdouble value : 
-*  gpointer data : 
+*  gdouble value :
+*  gpointer data :
 */
 void camera_has_changed (gdouble value, gpointer data)
 {
@@ -153,10 +153,10 @@ void camera_has_changed (gdouble value, gpointer data)
 /*
 *  G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
 {
@@ -173,21 +173,21 @@ G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void to_reset_view (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_reset_view (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data)
 #endif
@@ -198,12 +198,12 @@ G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkRange * range     : 
-*  GtkScrollType scroll : 
-*  gdouble value        : 
-*  gpointer data        : 
+*  GtkRange * range     :
+*  GtkScrollType scroll :
+*  gdouble value        :
+*  gpointer data        :
 */
 G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -214,10 +214,10 @@ G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scro
 /*
 *  G_MODULE_EXPORT void set_camera (GtkRange * range, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkRange * range : 
-*  gpointer data    : 
+*  GtkRange * range :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_camera (GtkRange * range, gpointer data)
 {
@@ -227,10 +227,10 @@ G_MODULE_EXPORT void set_camera (GtkRange * range, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_camera_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
-*  gpointer data       : 
+*  GtkSpinButton * res :
+*  gpointer data       :
 */
 G_MODULE_EXPORT void set_camera_spin (GtkSpinButton * res, gpointer data)
 {
@@ -241,21 +241,21 @@ G_MODULE_EXPORT void set_camera_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean on_rep_delete (GtkWindow * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWindow * widg : 
-*  gpointer data    : 
+*  GtkWindow * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT gboolean on_rep_delete (GtkWindow * widg, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT gboolean on_rep_delete (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  GdkEvent * event : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  GdkEvent * event :
+*  gpointer data    :
 */
 G_MODULE_EXPORT gboolean on_rep_delete (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -273,10 +273,10 @@ G_MODULE_EXPORT gboolean on_rep_delete (GtkWidget * widg, GdkEvent * event, gpoi
 /*
 *  G_MODULE_EXPORT void representation_advanced (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void representation_advanced (GtkWidget * widg, gpointer data)
 {
@@ -351,10 +351,10 @@ G_MODULE_EXPORT void representation_advanced (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
 {
@@ -366,16 +366,16 @@ G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
 #ifdef GTK4
   if (i != j)
 #else
-  if (i != j && check_menu_item_get_active ((gpointer)widg))
+  if (i != j && gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg))
 #endif
   {
     this_proj -> modelgl -> anim -> last -> img -> rep = NONE;
 #ifdef GTK3
     // GTK3 Menu Action To Check
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_rep[i], FALSE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_rep[i], FALSE);
     if (widg != this_proj -> modelgl -> ogl_rep[j])
     {
-      check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_rep[j], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_rep[j], TRUE);
     }
 #endif
     this_proj -> modelgl -> anim -> last -> img -> rep = j;
@@ -397,9 +397,9 @@ G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
   }
 #ifdef GTK3
   // GTK3 Menu Action To Check
-  else if (i == j && ! check_menu_item_get_active ((gpointer)widg))
+  else if (i == j && ! gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg))
   {
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_rep[j], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_rep[j], TRUE);
   }
 #endif
 }
@@ -408,10 +408,10 @@ G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * menu_rep (glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
+*  glwin * view :
+*  int id       :
 */
 GtkWidget * menu_rep (glwin * view, int id)
 {
@@ -439,11 +439,11 @@ GtkWidget * menu_rep (glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -483,11 +483,11 @@ G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parame
 /*
 *  G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -497,10 +497,10 @@ G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * paramet
 /*
 *  GMenu * menu_rep (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_rep (glwin * view, int popm)
 {
@@ -518,11 +518,11 @@ GMenu * menu_rep (glwin * view, int popm)
 /*
 *  G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -532,10 +532,10 @@ G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * para
 /*
 *  GMenu * menu_reset (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_reset (glwin * view, int popm)
 {
@@ -548,10 +548,10 @@ GMenu * menu_reset (glwin * view, int popm)
 /*
 *  GMenu * menu_fullscreen (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_fullscreen (glwin * view, int popm)
 {
@@ -563,10 +563,10 @@ GMenu * menu_fullscreen (glwin * view, int popm)
 /*
 *  GMenu * menu_view (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_view (glwin * view, int popm)
 {

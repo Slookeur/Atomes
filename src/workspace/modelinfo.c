@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'modelinfo.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - Miscellaneous printing subroutines to display information
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void print_spg_name (gchar * str , GtkTextBuffer * buffer);
   void print_spg_setting (gchar * init, GtkTextBuffer * buffer);
@@ -40,10 +41,10 @@ extern gchar * get_num_string (gchar * str);
 /*
 *  void print_spg_name (gchar * str , GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage: print space group name in a GtkTextBuffer
 *
-*  gchar * str            : 
-*  GtkTextBuffer * buffer : 
+*  gchar * str            : The space group string
+*  GtkTextBuffer * buffer : The GtkTextBuffer
 */
 void print_spg_name (gchar * str , GtkTextBuffer * buffer)
 {
@@ -79,10 +80,10 @@ void print_spg_name (gchar * str , GtkTextBuffer * buffer)
 /*
 *  void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage: print space group name in a GtkTextBuffer
 *
-*  gchar * init           : 
-*  GtkTextBuffer * buffer : 
+*  gchar * init           : The space group setting
+*  GtkTextBuffer * buffer : The GtkTextBuffer
 */
 void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
 {
@@ -96,10 +97,10 @@ void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
 /*
 *  void model_info (struct project * this_proj, GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage: display model information in GtkTexBuffer
 *
-*  struct project * this_proj : 
-*  GtkTextBuffer * buffer     : 
+*  struct project * this_proj : The project
+*  GtkTextBuffer * buffer     : The GtkTextBuffer
 */
 void model_info (struct project * this_proj, GtkTextBuffer * buffer)
 {
@@ -315,11 +316,11 @@ void model_info (struct project * this_proj, GtkTextBuffer * buffer)
 /*
 *  void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
 *
-*  Usage: 
+*  Usage: print OpenGL stuff in a GtkTextBuffer
 *
-*  gchar * text        : 
-*  GLenum name         : 
-*  GtkTextBuffer * buf : 
+*  gchar * text        : Message
+*  GLenum name         : OpenGL id to retreive
+*  GtkTextBuffer * buf : The GtkTextBuffer
 */
 void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
 {
@@ -335,10 +336,10 @@ void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
 /*
 *  void opengl_info (struct project * this_proj, GtkTextBuffer * buf)
 *
-*  Usage: 
+*  Usage: display OpenGL information in a GtkTextBuffer
 *
-*  struct project * this_proj : 
-*  GtkTextBuffer * buf        : 
+*  struct project * this_proj : The project
+*  GtkTextBuffer * buf        : The GtkTextBuffer
 */
 void opengl_info (struct project * this_proj, GtkTextBuffer * buf)
 {

@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to read PDB files
+
 *
 *  List of subroutines:
 
@@ -42,9 +43,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  double get_z_from_pdb_name (char * name)
 *
-*  Usage:
+*  Usage: get Z from the PDB atom string
 *
-*  char * name :
+*  char * name : The string from the PDB file
 */
 double get_z_from_pdb_name (char * name)
 {
@@ -55,9 +56,9 @@ double get_z_from_pdb_name (char * name)
 /*
 *  int pdb_get_atoms_data (int linec)
 *
-*  Usage:
+*  Usage: get the atomic data from the PDB file
 *
-*  int linec :
+*  int linec : Total number of lines
 */
 int pdb_get_atoms_data (int linec)
 {
@@ -198,9 +199,9 @@ int pdb_get_atoms_data (int linec)
 /*
 *  int open_pdb_file (int linec)
 *
-*  Usage:
+*  Usage: open PDB file
 *
-*  int linec :
+*  int linec : Number of lines in the file
 */
 int open_pdb_file (int linec)
 {

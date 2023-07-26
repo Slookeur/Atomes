@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'glwindow.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   gboolean create_3d_model (int p, gboolean load);
 
@@ -109,11 +109,11 @@ extern int get_measure_type (glwin * view);
 /*
 *  GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
-*  int ri       : 
+*  glwin * view :
+*  int id       :
+*  int ri       :
 */
 GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 {
@@ -130,9 +130,9 @@ GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 /*
 *  GtkWidget * coord_menu (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 GtkWidget * coord_menu (glwin * view)
 {
@@ -202,17 +202,13 @@ GtkWidget * coord_menu (glwin * view)
   view -> ogl_coord[3] = menu_item_new_with_submenu ("Fragment(s)", get_project_by_id(view -> proj) -> coord -> totcoord[2], add_menu_coord (view, 0, 2));
   view -> ogl_coord[4] = menu_item_new_with_submenu ("Molecule(s)", get_project_by_id(view -> proj) -> coord -> totcoord[3], add_menu_coord (view, 0, 3));
   GtkWidget * menu = gtk_menu_new ();
-  add_menu_child (menu, view -> ogl_coord[1]);
-  add_menu_child (menu, view -> ogl_coord[2]);
-  add_menu_child (menu, view -> ogl_rings[0]);
-  add_menu_child (menu, view -> ogl_chains[0]);
-  add_menu_child (menu, view -> ogl_coord[3]);
-  add_menu_child (menu, view -> ogl_coord[4]);
-#ifdef MENU_ICONS
-  add_menu_child (menu, gtk3_image_menu_item ("Advanced", IMG_STOCK, (gpointer)DPROPERTIES, G_CALLBACK(coord_properties), (gpointer)& view -> colorp[30][0], "Ctrl+E", FALSE, FALSE, FALSE));
-#else
+  gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_coord[1]);
+  gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_coord[2]);
+  gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_rings[0]);
+  gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_chains[0]);
+  gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_coord[3]);
+  gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_coord[4]);
   add_advanced_item (menu, G_CALLBACK(coord_properties), (gpointer)& view -> colorp[30][0], TRUE, GDK_KEY_e, GDK_CONTROL_MASK);
-#endif
   return menu;
 }
 #endif
@@ -220,10 +216,10 @@ GtkWidget * coord_menu (glwin * view)
 /*
 *  void update_all_menus (glwin * view, int nats)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int nats     : 
+*  glwin * view :
+*  int nats     :
 */
 void update_all_menus (glwin * view, int nats)
 {
@@ -233,16 +229,16 @@ void update_all_menus (glwin * view, int nats)
   j = (nats <= 1000) ? BALL_AND_STICK : DEFAULT_STYLE;
   if (i != j)
   {
-    check_menu_item_set_active ((gpointer)view -> ogl_styles[j], FALSE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[j], FALSE);
     if (i != SPACEFILL)
     {
-      check_menu_item_set_active ((gpointer)view -> ogl_styles[i], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[i], TRUE);
       set_style (view -> ogl_styles[i], & view -> colorp[i][0]);
     }
     else
     {
       i = view -> anim -> last -> img -> filled_type;
-      check_menu_item_set_active ((gpointer)view -> filled_styles[i], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> filled_styles[i], TRUE);
       set_style (view -> filled_styles[i], & view -> colorp[OGL_STYLES+i][0]);
     }
   }
@@ -250,8 +246,8 @@ void update_all_menus (glwin * view, int nats)
   j = FILL;
   if (i != j)
   {
-    check_menu_item_set_active ((gpointer)view -> ogl_render[j], FALSE);
-    check_menu_item_set_active ((gpointer)view -> ogl_render[i], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_render[j], FALSE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_render[i], TRUE);
     set_render (view -> ogl_render[i], & view -> colorp[i][0]);
   }
 
@@ -261,7 +257,7 @@ void update_all_menus (glwin * view, int nats)
     widget_set_sensitive (view -> ogl_box[i], active_cell -> ltype);
     if (view -> anim -> last -> img -> box_axis[i] == NONE)
     {
-      check_menu_item_set_active ((gpointer)view -> ogl_box_axis[i][0], FALSE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_box_axis[i][0], FALSE);
       set_box_axis_style (view -> ogl_box_axis[i][0], & view -> colorp[0][i]);
     }
     else
@@ -269,36 +265,36 @@ void update_all_menus (glwin * view, int nats)
       j = (view -> anim -> last -> img -> box_axis[i] == WIREFRAME) ? 1 : 2;
       k = j*j;
       l = (view -> anim -> last -> img -> box_axis[i] == WIREFRAME) ? CYLINDERS : WIREFRAME;
-      check_menu_item_set_active ((gpointer)view -> ogl_box_axis[i][0], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_box_axis[i][0], TRUE);
       set_box_axis_style (view -> ogl_box_axis[i][0], & view -> colorp[0][i]);
       view -> anim -> last -> img -> box_axis[i] = l;
-      check_menu_item_set_active ((gpointer)view -> ogl_box_axis[i][j], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_box_axis[i][j], TRUE);
       set_box_axis_style (view -> ogl_box_axis[i][j], & view -> colorp[k][i]);
     }
   }
-  check_menu_item_set_active ((gpointer)view -> ogl_rep[view -> anim -> last -> img -> rep], TRUE);
-  check_menu_item_set_active ((gpointer)view -> ogl_rep[! view -> anim -> last -> img -> rep], FALSE);
-  for (i=0; i<5; i++) check_menu_item_set_active ((gpointer)view -> ogl_box_axis[1][8+i], FALSE);
+  gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_rep[view -> anim -> last -> img -> rep], TRUE);
+  gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_rep[! view -> anim -> last -> img -> rep], FALSE);
+  for (i=0; i<5; i++) gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_box_axis[1][8+i], FALSE);
   if (view -> anim -> last -> img -> axispos != CUSTOM)
   {
-    check_menu_item_set_active ((gpointer)view -> ogl_box_axis[1][8+view -> anim -> last -> img -> axispos], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_box_axis[1][8+view -> anim -> last -> img -> axispos], TRUE);
   }
   set_advanced_bonding_menus (view);
   widget_set_sensitive (view -> ogl_clones[0], view -> allbonds[1]);
   update_rings_menus (view);
   update_chains_menus (view);
-  check_menu_item_set_active ((gpointer)view -> ogl_clones[0], view -> anim -> last -> img -> draw_clones);
-  check_menu_item_set_active ((gpointer)view -> ogl_clones[5], view -> anim -> last -> img -> cloned_poly);
+  gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_clones[0], view -> anim -> last -> img -> draw_clones);
+  gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_clones[5], view -> anim -> last -> img -> cloned_poly);
   int * cmap = save_color_map (view);
   set_color_map_sensitive (view);
   if (view -> color_styles[0])
   {
-    check_menu_item_set_active ((gpointer)view -> color_styles[0], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> color_styles[0], TRUE);
     set_color_map (view -> color_styles[0], & view  -> colorp[0][0]);
   }
   if (view -> color_styles[ATOM_MAPS])
   {
-    check_menu_item_set_active ((gpointer)view -> color_styles[ATOM_MAPS], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> color_styles[ATOM_MAPS], TRUE);
     set_color_map (view -> color_styles[ATOM_MAPS], & view  -> colorp[ATOM_MAPS][0]);
   }
   restore_color_map (view, cmap);
@@ -312,10 +308,10 @@ void update_all_menus (glwin * view, int nats)
 /*
 *  G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
 {
@@ -328,23 +324,23 @@ G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
 /*
 *  void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * menu : 
-*  glwin * view     : 
-*  int pop          : 
+*  GtkWidget * menu :
+*  glwin * view     :
+*  int pop          :
 */
 void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 {
 #ifdef MENU_ICONS
   GtkWidget * style = gtk3_menu_item (menu, "Style", IMG_FILE, (gpointer)PACKAGE_MOL, NULL, NULL, FALSE, 0, 0, FALSE, FALSE, get_project_by_id(view -> proj) -> nspec);
-  menu_item_set_submenu (style, menu_style(view, pop));
+  gtk_menu_item_set_submenu ((GtkMenuItem *)style, menu_style(view, pop));
 #else
-  add_menu_child (menu, menu_item_new_with_submenu ("Style", get_project_by_id(view -> proj) -> nspec, menu_style(view, pop)));
+  gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Style", get_project_by_id(view -> proj) -> nspec, menu_style(view, pop)));
 #endif
-  add_menu_child (menu, menu_item_new_with_submenu ("Color Scheme(s)", get_project_by_id(view -> proj) -> nspec, menu_map(view, pop)));
-  add_menu_child (menu, menu_item_new_with_submenu ("Render", get_project_by_id(view -> proj) -> nspec, menu_render(view, pop)));
-  add_menu_child (menu, menu_item_new_with_submenu ("Quality", get_project_by_id(view -> proj) -> nspec, menu_quality(view, pop)));
+  gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Color Scheme(s)", get_project_by_id(view -> proj) -> nspec, menu_map(view, pop)));
+  gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Render", get_project_by_id(view -> proj) -> nspec, menu_render(view, pop)));
+  gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Quality", get_project_by_id(view -> proj) -> nspec, menu_quality(view, pop)));
   gtk3_menu_item (menu, "Material And Light(s)", IMG_NONE, NULL, G_CALLBACK(opengl_advanced), (gpointer)view, FALSE, 0, 0, FALSE, FALSE, FALSE);
   gtk3_menu_item (menu, "Render Image", IMG_FILE, (gpointer)PACKAGE_IMG, G_CALLBACK(render_gl_image), (gpointer)view, FALSE, 0, 0, FALSE, FALSE, FALSE);
 }
@@ -352,10 +348,10 @@ void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 /*
 *  GtkWidget * menu_opengl (glwin * view, int pop)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int pop      : 
+*  glwin * view :
+*  int pop      :
 */
 GtkWidget * menu_opengl (glwin * view, int pop)
 {
@@ -367,30 +363,30 @@ GtkWidget * menu_opengl (glwin * view, int pop)
 /*
 *  void menu_items_model (GtkWidget * menu, glwin * view, int pop)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * menu : 
-*  glwin * view     : 
-*  int pop          : 
+*  GtkWidget * menu :
+*  glwin * view     :
+*  int pop          :
 */
 void menu_items_model (GtkWidget * menu, glwin * view, int pop)
 {
   if (get_project_by_id(view -> proj) -> nspec)
   {
-    add_menu_child (menu, menu_item_new_with_submenu ("Atom(s)", TRUE, menu_atoms (view, pop, 0)));
-    add_menu_child (menu, menu_item_new_with_submenu ("Bond(s)", TRUE, menu_bonds (view, pop, 0)));
-    add_menu_child (menu, menu_item_new_with_submenu ("Clone(s)", TRUE, menu_clones (view, pop)));
-    add_menu_child (menu, menu_box_axis (view, 0, 0));
+    gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Atom(s)", TRUE, menu_atoms (view, pop, 0)));
+    gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Bond(s)", TRUE, menu_bonds (view, pop, 0)));
+    gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Clone(s)", TRUE, menu_clones (view, pop)));
+    gtk_menu_shell_append ((GtkMenuShell *)menu, menu_box_axis (view, 0, 0));
   }
 }
 
 /*
 *  GtkWidget * menu_model (glwin * view, int pop)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int pop      : 
+*  glwin * view :
+*  int pop      :
 */
 GtkWidget * menu_model (glwin * view, int pop)
 {
@@ -402,39 +398,35 @@ GtkWidget * menu_model (glwin * view, int pop)
 /*
 *  void menu_items_view (GtkWidget * menu, glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * menu : 
-*  glwin * view     : 
-*  int popm         : 
+*  GtkWidget * menu :
+*  glwin * view     :
+*  int popm         :
 */
 void menu_items_view (GtkWidget * menu, glwin * view, int popm)
 {
-  add_menu_child (menu, menu_item_new_with_submenu ("Representation", TRUE, menu_rep (view, popm)));
-  add_menu_child (menu, menu_item_new_with_submenu ("Projection", TRUE, menu_proj (view)));
-  add_menu_child (menu, menu_item_new_with_submenu ("Background", TRUE, menu_back (view)));
-  if (get_project_by_id(view -> proj) -> nspec) add_menu_child (menu, menu_box_axis (view, popm, 1));
+  gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Representation", TRUE, menu_rep (view, popm)));
+  gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Projection", TRUE, menu_proj (view)));
+  gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Background", TRUE, menu_back (view)));
+  if (get_project_by_id(view -> proj) -> nspec) gtk_menu_shell_append ((GtkMenuShell *)menu, menu_box_axis (view, popm, 1));
   if (! popm)
   {
     add_menu_separator (menu);
     gtk3_menu_item (menu, "Reset view", IMG_STOCK, (gpointer)FITBEST, G_CALLBACK(to_reset_view), (gpointer)view, FALSE, 0, 0, FALSE, FALSE, FALSE);
     gtk3_menu_item (menu, "Center molecule", IMG_STOCK, (gpointer)FITBEST, G_CALLBACK(to_center_this_molecule), (gpointer)view, FALSE, 0, 0, FALSE, FALSE, FALSE);
     add_menu_separator (menu);
-#ifdef MENU_ICONS
-    add_menu_child (menu, gtk3_image_menu_item ("Fullscreen", IMG_STOCK, (gpointer)FULLSCREEN, G_CALLBACK(set_full_screen), (gpointer)view, "Ctrl+F", FALSE, FALSE, FALSE));
-#else
     gtk3_menu_item (menu, "Fullscreen", IMG_STOCK, (gpointer)FULLSCREEN, G_CALLBACK(set_full_screen), (gpointer)view, TRUE, GDK_KEY_f, GDK_CONTROL_MASK, FALSE, FALSE, FALSE);
-#endif
   }
 }
 
 /*
 *  GtkWidget * menu_view (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GtkWidget * menu_view (glwin * view, int popm)
 {
@@ -447,9 +439,9 @@ GtkWidget * menu_view (glwin * view, int popm)
 /*
 *  void prepare_opengl_menu_bar (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 void prepare_opengl_menu_bar (glwin * view)
 {
@@ -459,19 +451,19 @@ void prepare_opengl_menu_bar (glwin * view)
   view -> menu_bar = destroy_this_widget (view -> menu_bar);
 #ifdef GTK3
   view -> menu_bar = gtk_menu_bar_new ();
-  add_menu_child (view -> menu_bar, menu_item_new_with_submenu ("OpenGL", TRUE, menu_opengl(view, 0)));
+  gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, menu_item_new_with_submenu ("OpenGL", TRUE, menu_opengl(view, 0)));
   struct project * this_proj = get_project_by_id (view -> proj);
-  add_menu_child (view -> menu_bar, menu_item_new_with_submenu ("Model", this_proj -> nspec, menu_model(view, 0)));
+  gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, menu_item_new_with_submenu ("Model", this_proj -> nspec, menu_model(view, 0)));
   view -> ogl_coord[0] = create_menu_item (FALSE, "Chemistry");
-  add_menu_child (view -> menu_bar, view -> ogl_coord[0]);
+  gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, view -> ogl_coord[0]);
   widget_set_sensitive (view -> ogl_coord[0], this_proj -> nspec);
   if (this_proj -> nspec)
   {
-    menu_item_set_submenu (view -> ogl_coord[0], coord_menu (view));
+    gtk_menu_item_set_submenu ((GtkMenuItem *)view -> ogl_coord[0], coord_menu (view));
   }
-  add_menu_child (view -> menu_bar, menu_item_new_with_submenu ("Tools", TRUE, menu_tools(view, 0)));
-  add_menu_child (view -> menu_bar, menu_item_new_with_submenu ("View", TRUE, menu_view(view, 0)));
-  add_menu_child (view -> menu_bar, menu_anim (view, 0));
+  gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, menu_item_new_with_submenu ("Tools", TRUE, menu_tools(view, 0)));
+  gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, menu_item_new_with_submenu ("View", TRUE, menu_view(view, 0)));
+  gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, menu_anim (view, 0));
   show_the_widgets (view -> menu_bar);
 
   if (this_proj -> nspec) update_all_menus (view, this_proj -> natomes);
@@ -485,10 +477,10 @@ void prepare_opengl_menu_bar (glwin * view)
 /*
 *  void change_color_map (glwin * view, int col)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int col      : 
+*  glwin * view :
+*  int col      :
 */
 void change_color_map (glwin * view, int col)
 {
@@ -525,7 +517,7 @@ void change_color_map (glwin * view, int col)
   gboolean was_input = reading_input;
   reading_input = TRUE;
 #ifdef GTK3
-  check_menu_item_set_active ((gpointer)view -> color_styles[j], TRUE);
+  gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> color_styles[j], TRUE);
   set_color_map (view -> color_styles[j], & view -> colorp[j][0]);
 #else
   gchar * variant = g_strdup_printf ("set-%s.%d.0", (col) ? "pmap" : "amap", j);
@@ -538,14 +530,14 @@ void change_color_map (glwin * view, int col)
 /*
 *  void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view          : 
-*  int axis              : 
-*  int da                : 
-*  int db                : 
-*  gboolean UpDown       : 
-*  GdkModifierType state : 
+*  glwin * view          :
+*  int axis              :
+*  int da                :
+*  int db                :
+*  gboolean UpDown       :
+*  GdkModifierType state :
 */
 void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state)
 {
@@ -602,9 +594,9 @@ void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkMod
 /*
 *  mat4_t insert_projection (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 mat4_t insert_projection (glwin * view)
 {
@@ -645,11 +637,11 @@ vec3_t get_insertion_coordinates (glwin * view)
 /*
 *  void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  guint keyval          : 
-*  GdkModifierType state : 
-*  gpointer data         : 
+*  guint keyval          :
+*  GdkModifierType state :
+*  gpointer data         :
 */
 void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 {
@@ -740,7 +732,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
           set_mode (NULL, & view -> colorp[0][0]);
 #else
           // GTK3 Menu Action To Check
-          check_menu_item_set_active ((gpointer)view -> ogl_mode[0], TRUE);
+          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_mode[0], TRUE);
           set_mode (view -> ogl_mode[0], & view -> colorp[0][0]);
 #endif
         }
@@ -758,7 +750,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
           set_style (NULL, & view -> colorp[BALL_AND_STICK][0]);
 #else
           // GTK3 Menu Action To Check
-          check_menu_item_set_active ((gpointer)view -> ogl_styles[BALL_AND_STICK], TRUE);
+          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[BALL_AND_STICK], TRUE);
           set_style (view -> ogl_styles[BALL_AND_STICK], & view -> colorp[BALL_AND_STICK][0]);
 #endif
 
@@ -798,7 +790,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
           set_style (NULL, & view -> colorp[CYLINDERS][0]);
 #else
           // GTK3 Menu Action To Check
-          check_menu_item_set_active ((gpointer)view -> ogl_styles[CYLINDERS], TRUE);
+          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[CYLINDERS], TRUE);
           set_style (view -> ogl_styles[CYLINDERS], & view -> colorp[CYLINDERS][0]);
 #endif
         }
@@ -811,7 +803,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
           set_style (NULL, & view -> colorp[PUNT][0]);
 #else
         // GTK3 Menu Action To Check
-        check_menu_item_set_active ((gpointer)view -> ogl_styles[PUNT], TRUE);
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[PUNT], TRUE);
         set_style (view -> ogl_styles[PUNT], & view -> colorp[PUNT][0]);
 #endif
       }
@@ -835,7 +827,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
             set_mode (NULL, & view -> colorp[1][0]);
 #else
             // GTK3 Menu Action To Check
-            check_menu_item_set_active ((gpointer)view -> ogl_mode[1], TRUE);
+            gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_mode[1], TRUE);
             set_mode (view -> ogl_mode[1], & view -> colorp[1][0]);
 #endif
           }
@@ -913,7 +905,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
           set_style (NULL, & view -> colorp[SPHERES][0]);
 #else
           // GTK3 Menu Action To Check
-          check_menu_item_set_active ((gpointer)view -> ogl_styles[SPHERES], TRUE);
+          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[SPHERES], TRUE);
           set_style (view -> ogl_styles[SPHERES], & view -> colorp[SPHERES][0]);
 #endif
         }
@@ -950,7 +942,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         set_style (NULL, & view -> colorp[OGL_STYLES][0]);
 #else
         // GTK3 Menu Action To Check
-        check_menu_item_set_active ((gpointer)view -> filled_styles[0], TRUE);
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> filled_styles[0], TRUE);
         set_style (view -> filled_styles[0], & view -> colorp[OGL_STYLES][0]);
 #endif
       }
@@ -962,7 +954,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         set_style (NULL, & view -> colorp[WIREFRAME][0]);
 #else
         // GTK3 Menu Action To Check
-        check_menu_item_set_active ((gpointer)view -> ogl_styles[WIREFRAME], TRUE);
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[WIREFRAME], TRUE);
         set_style (view -> ogl_styles[WIREFRAME], & view -> colorp[WIREFRAME][0]);
 #endif
       }
@@ -1007,11 +999,11 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg    : 
-*  GdkEventKey * event : 
-*  gpointer data       : 
+*  GtkWidget * widg    :
+*  GdkEventKey * event :
+*  gpointer data       :
 */
 G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data)
 {
@@ -1025,13 +1017,13 @@ G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, 
 /*
 *  G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEventControllerKey * self : 
-*  guint keyval                 : 
-*  guint keycode                : 
-*  GdkModifierType state        : 
-*  gpointer data                : 
+*  GtkEventControllerKey * self :
+*  guint keyval                 :
+*  guint keycode                :
+*  GdkModifierType state        :
+*  gpointer data                :
 */
 G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
 {
@@ -1043,10 +1035,10 @@ G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, gui
 /*
 *  G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
 {
@@ -1068,10 +1060,10 @@ G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
 /*
 *  gboolean create_3d_model (int p, gboolean load)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p         : 
-*  gboolean load : 
+*  int p         :
+*  gboolean load :
 */
 gboolean create_3d_model (int p, gboolean load)
 {
@@ -1191,9 +1183,9 @@ gboolean create_3d_model (int p, gboolean load)
 /*
 *  void prep_model (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 void prep_model (int p)
 {
@@ -1204,7 +1196,7 @@ void prep_model (int p)
     if (create_3d_model (p, TRUE))
     {
       /*GtkWidget * dummy = create_menu_item (FALSE, "Dummy");
-      add_menu_child (this_proj -> modelgl -> menu_bar, dummy);
+      gtk_menu_shell_append ((GtkMenuShell *)this_proj -> modelgl -> menu_bar, dummy);
       show_the_widgets (this_proj -> modelgl -> win);
       destroy_this_widget (dummy);*/
       show_the_widgets (this_proj -> modelgl -> win);

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_clones.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -40,19 +40,19 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
 {
   glwin * view = (glwin *)data;
   gboolean j;
-  j = check_menu_item_get_active ((gpointer)widg);
+  j = gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg);
   if (widg != view -> ogl_clones[0])
   {
-    check_menu_item_set_active ((gpointer)view -> ogl_clones[0], j);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_clones[0], j);
   }
   view -> anim -> last -> img -> draw_clones = j;
   widget_set_sensitive (view -> ogl_atoms[5], j);
@@ -77,12 +77,12 @@ G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  char * name      : 
-*  gboolean clone   : 
-*  GtkWidget * menu : 
-*  glwin * view     : 
+*  char * name      :
+*  gboolean clone   :
+*  GtkWidget * menu :
+*  glwin * view     :
 */
 GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, glwin * view)
 {
@@ -94,10 +94,10 @@ GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, 
 /*
 *  GtkWidget * menu_clones (glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
+*  glwin * view :
+*  int id       :
 */
 GtkWidget * menu_clones (glwin * view, int id)
 {
@@ -110,10 +110,10 @@ GtkWidget * menu_clones (glwin * view, int id)
   {
     create_clone_widget ("Show/Hide", view -> anim -> last -> img -> draw_clones, menu, view);
   }
-  add_menu_child (menu, menu_item_new_with_submenu ("Atom(s)", TRUE, menu_atoms (view, id, 1)));
+  gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Atom(s)", TRUE, menu_atoms (view, id, 1)));
   if ((id == 0) || (view -> anim -> last -> img -> style != SPHERES && view -> anim -> last -> img -> style != PUNT))
   {
-    add_menu_child (menu, menu_item_new_with_submenu ("Bond(s)", TRUE, menu_bonds (view, id, 1)));
+    gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Bond(s)", TRUE, menu_bonds (view, id, 1)));
   }
   return menu;
 }
@@ -121,11 +121,11 @@ GtkWidget * menu_clones (glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -162,10 +162,10 @@ G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parame
 /*
 *  GMenu * menu_clones (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_clones (glwin * view, int popm)
 {

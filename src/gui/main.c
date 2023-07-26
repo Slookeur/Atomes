@@ -16,8 +16,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The initialization of the atomes program
+ - The subroutines required to read data from the command line
+
 *
 *  List of subroutines:
 

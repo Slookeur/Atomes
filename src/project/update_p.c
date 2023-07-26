@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ -
+
 *
 *  List of subroutines:
 
@@ -43,8 +44,6 @@ extern GtkTreeStore * tool_model;
 *  void prep_calc_actions ()
 *
 *  Usage:
-*
-*   :
 */
 void prep_calc_actions ()
 {
@@ -80,9 +79,7 @@ void prep_calc_actions ()
 /*
 *  int update_project ()
 *
-*  Usage:
-*
-*   :
+*  Usage: update project: send data to Fortran90, and update calculation interactors
 */
 int update_project ()
 {
@@ -160,9 +157,9 @@ int update_project ()
 /*
 *  void active_project_changed (int id)
 *
-*  Usage:
+*  Usage: change the active project
 *
-*  int id :
+*  int id : The id of the new active project
 */
 void active_project_changed (int id)
 {
@@ -230,9 +227,9 @@ void active_project_changed (int id)
 /*
 *  void opengl_project_changed (int id)
 *
-*  Usage:
+*  Usage: change the OpenGL project
 *
-*  int id :
+*  int id : The id of the new OpenGL project
 */
 void opengl_project_changed (int id)
 {

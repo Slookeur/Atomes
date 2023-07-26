@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_render.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -39,10 +39,10 @@ gchar * text_renders[OGL_RENDERS] = {"Filled", "Lines", "Points"};
 /*
 *  G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 {
@@ -51,17 +51,17 @@ G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
   int i = this_proj -> modelgl -> anim -> last -> img -> render;
   int j = the_data -> b;
 #ifdef GTK3
-  if (i != j && check_menu_item_get_active ((gpointer)widg))
+  if (i != j && gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg))
 #else
   if (i != j)
 #endif
   {
     this_proj -> modelgl -> anim -> last -> img -> render = NONE;
 #ifdef GTK3
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_render[i], FALSE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_render[i], FALSE);
     if (widg != this_proj -> modelgl -> ogl_render[j])
     {
-      check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_render[j], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_render[j], TRUE);
     }
 #endif
     this_proj -> modelgl -> anim -> last -> img -> render = j;
@@ -69,9 +69,9 @@ G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
     update (this_proj -> modelgl);
   }
 #ifdef GTK3
-  else if (i == j && ! check_menu_item_get_active ((gpointer)widg))
+  else if (i == j && ! gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg))
   {
-    check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_render[j], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_render[j], TRUE);
   }
 #endif
 }
@@ -80,10 +80,10 @@ G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * menu_render (glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int id       : 
+*  glwin * view :
+*  int id       :
 */
 GtkWidget * menu_render (glwin * view, int id)
 {
@@ -122,11 +122,11 @@ GtkWidget * menu_render (glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -165,10 +165,10 @@ G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * par
 /*
 *  GMenu * menu_render (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_render (glwin * view, int popm)
 {

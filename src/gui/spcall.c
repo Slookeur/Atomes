@@ -44,7 +44,7 @@ extern gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb);
 *
 *  Usage: initialize the curve widgets for the spherical harmonics
 *
-*  int str :
+*  int str : initialize or not (1/0)
 */
 void initsh (int str)
 {

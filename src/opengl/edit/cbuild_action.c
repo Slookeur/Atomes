@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cbuild_action.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int test_lattice (builder_edition * cbuilder);
   int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos);
@@ -61,10 +61,10 @@ gchar * tmp_pos = NULL;
 /*
 *  double get_val_from_setting (gchar * pos, gchar * sval)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * pos  : 
-*  gchar * sval : 
+*  gchar * pos  :
+*  gchar * sval :
 */
 double get_val_from_setting (gchar * pos, gchar * sval)
 {
@@ -101,9 +101,9 @@ double get_val_from_setting (gchar * pos, gchar * sval)
 /*
 *  double get_value_from_pos (gchar * pos)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * pos : 
+*  gchar * pos :
 */
 double get_value_from_pos (gchar * pos)
 {
@@ -126,9 +126,9 @@ double get_value_from_pos (gchar * pos)
 /*
 *  void get_origin (space_group * spg)
 *
-*  Usage: 
+*  Usage:
 *
-*  space_group * spg : 
+*  space_group * spg :
 */
 void get_origin (space_group * spg)
 {
@@ -173,9 +173,9 @@ void get_origin (space_group * spg)
 /*
 *  void compute_lattice_properties (cell_info * cell)
 *
-*  Usage: 
+*  Usage:
 *
-*  cell_info * cell : 
+*  cell_info * cell :
 */
 void compute_lattice_properties (cell_info * cell)
 {
@@ -291,9 +291,9 @@ void compute_lattice_properties (cell_info * cell)
 /*
 *  int test_lattice (builder_edition * cbuilder)
 *
-*  Usage: 
+*  Usage:
 *
-*  builder_edition * cbuilder : 
+*  builder_edition * cbuilder :
 */
 int test_lattice (builder_edition * cbuilder)
 {
@@ -376,10 +376,10 @@ int test_lattice (builder_edition * cbuilder)
 /*
 *  double get_val_from_wyckoff (gchar * pos, gchar * wval)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * pos  : 
-*  gchar * wval : 
+*  gchar * pos  :
+*  gchar * wval :
 */
 double get_val_from_wyckoff (gchar * pos, gchar * wval)
 {
@@ -415,10 +415,10 @@ double get_val_from_wyckoff (gchar * pos, gchar * wval)
 /*
 *  void clean_this_proj (struct project * this_proj, gboolean newp)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  gboolean newp              : 
+*  struct project * this_proj :
+*  gboolean newp              :
 */
 void clean_this_proj (struct project * this_proj, gboolean newp)
 {
@@ -445,10 +445,10 @@ void clean_this_proj (struct project * this_proj, gboolean newp)
 /*
 *  gboolean same_coords (float a, float b)
 *
-*  Usage: 
+*  Usage:
 *
-*  float a : 
-*  float b : 
+*  float a :
+*  float b :
 */
 gboolean same_coords (float a, float b)
 {
@@ -460,10 +460,10 @@ gboolean same_coords (float a, float b)
 /*
 *  gboolean are_equal_vectors (vec3_t u, vec3_t v)
 *
-*  Usage: 
+*  Usage:
 *
-*  vec3_t u : 
-*  vec3_t v : 
+*  vec3_t u :
+*  vec3_t v :
 */
 gboolean are_equal_vectors (vec3_t u, vec3_t v)
 {
@@ -477,11 +477,11 @@ gboolean are_equal_vectors (vec3_t u, vec3_t v)
 /*
 *  int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos)
 *
-*  Usage: 
+*  Usage:
 *
-*  vec3_t * all_pos : 
-*  int num_pos      : 
-*  vec3_t pos       : 
+*  vec3_t * all_pos :
+*  int num_pos      :
+*  vec3_t pos       :
 */
 int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos)
 {
@@ -496,11 +496,11 @@ int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos)
 /*
 *  double get_pos_from_wyckoff (vec3_t pos, vec4_t wyck, double point)
 *
-*  Usage: 
+*  Usage:
 *
-*  vec3_t pos   : 
-*  vec4_t wyck  : 
-*  double point : 
+*  vec3_t pos   :
+*  vec4_t wyck  :
+*  double point :
 */
 double get_pos_from_wyckoff (vec3_t pos, vec4_t wyck, double point)
 {
@@ -510,9 +510,9 @@ double get_pos_from_wyckoff (vec3_t pos, vec4_t wyck, double point)
 /*
 *  space_group * duplicate_space_group (space_group * spg)
 *
-*  Usage: 
+*  Usage:
 *
-*  space_group * spg : 
+*  space_group * spg :
 */
 space_group * duplicate_space_group (space_group * spg)
 {
@@ -592,11 +592,11 @@ crystal_data * free_crystal_data (crystal_data * cryst)
 /*
 *  gboolean pos_not_taken (int pos, int dim, int * tab)
 *
-*  Usage: 
+*  Usage:
 *
-*  int pos   : 
-*  int dim   : 
-*  int * tab : 
+*  int pos   :
+*  int dim   :
+*  int * tab :
 */
 gboolean pos_not_taken (int pos, int dim, int * tab)
 {
@@ -608,11 +608,11 @@ gboolean pos_not_taken (int pos, int dim, int * tab)
 /*
 *  gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_cell)
 *
-*  Usage: 
+*  Usage:
 *
-*  crystal_data * cryst : 
-*  int occupying        : 
-*  int tot_cell         : 
+*  crystal_data * cryst :
+*  int occupying        :
+*  int tot_cell         :
 */
 gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_cell)
 {
@@ -847,14 +847,14 @@ gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_c
 /*
 *  int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
 *
-*  Usage: 
+*  Usage:
 *
-*  gboolean visible           : 
-*  struct project * this_proj : 
-*  gboolean to_wrap           : 
-*  gboolean show_clones       : 
-*  cell_info * cell           : 
-*  GtkWidget * widg           : 
+*  gboolean visible           :
+*  struct project * this_proj :
+*  gboolean to_wrap           :
+*  gboolean show_clones       :
+*  cell_info * cell           :
+*  GtkWidget * widg           :
 */
 int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
 {
@@ -1539,7 +1539,7 @@ int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wra
         set_mode (NULL, & active_glwin -> colorp[0][0]);
 #else
         // GTK3 Menu Action To Check
-        check_menu_item_set_active ((gpointer)active_glwin -> ogl_mode[0], TRUE);
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_mode[0], TRUE);
         set_mode (active_glwin -> ogl_mode[0], & active_glwin -> colorp[0][0]);
 #endif
       }
@@ -1571,7 +1571,7 @@ int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wra
         widget_set_sensitive (active_glwin -> ogl_box[i], active_cell -> ltype);
       }
     }
-    check_menu_item_set_active ((gpointer)active_glwin -> ogl_rep[0], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_rep[0], TRUE);
     set_rep (active_glwin -> ogl_rep[0], & active_glwin -> colorp[0][0]);
 #endif
     init_shaders (active_glwin);

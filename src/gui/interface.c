@@ -451,10 +451,10 @@ GtkWidget * answer_info;
 /*
 *  G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: Handling the GtkComboBox in 'int iask'
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
 {
@@ -854,9 +854,9 @@ void lattice_info_ (int * bid, double * volume, double * density,
 /*
 *  void send_chem_info_ (int prop[active_project -> nspec])
 *
-*  Usage:
+*  Usage: getting chemistry formula information from Fortran90
 *
-*  int prop[active_project -> nspec] :
+*  int prop[active_project -> nspec] : the formula
 */
 void send_chem_info_ (int prop[active_project -> nspec])
 {

@@ -38,9 +38,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void init_curves_and_calc (struct project * this_proj)
 *
-*  Usage:
+*  Usage: for a project reset analysis, curves, data to not performed
 *
-*  struct project * this_proj :
+*  struct project * this_proj : The project
 */
 void init_curves_and_calc (struct project * this_proj)
 {
@@ -56,9 +56,9 @@ void init_curves_and_calc (struct project * this_proj)
 /*
 *  void init_project (gboolean alloc_box)
 *
-*  Usage:
+*  Usage: initialize a new project
 *
-*  gboolean alloc_box :
+*  gboolean alloc_box : allocate data for the MD box (1/0)
 */
 void init_project (gboolean alloc_box)
 {

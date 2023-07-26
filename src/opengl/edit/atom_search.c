@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_search.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void set_status_for_all (struct project * this_proj, int * data, int status, int start, int stop);
 
@@ -41,13 +41,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void set_status_for_all (struct project * this_proj, int * data, int status, int start, int stop)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int * data                 : 
-*  int status                 : 
-*  int start                  : 
-*  int stop                   : 
+*  struct project * this_proj :
+*  int * data                 :
+*  int status                 :
+*  int start                  :
+*  int stop                   :
 */
 void set_status_for_all (struct project * this_proj, int * data, int status, int start, int stop)
 {
@@ -68,20 +68,20 @@ void set_status_for_all (struct project * this_proj, int * data, int status, int
 /*
 *  G_MODULE_EXPORT void turn_rebuild_on (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void turn_rebuild_on (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void turn_rebuild_on (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void turn_rebuild_on (GtkToggleButton * but, gpointer data)
 #endif
@@ -92,29 +92,29 @@ G_MODULE_EXPORT void turn_rebuild_on (GtkToggleButton * but, gpointer data)
   i = gtk_check_button_get_active (but);
 #else
   i = gtk_toggle_button_get_active (but);
+  gtk_check_menu_item_set_active ((GtkCheckMenuItem *)get_project_by_id(dat -> a) -> modelgl -> rbuild[i], i);
 #endif
   get_project_by_id(dat -> a) -> modelgl -> rebuild[0][dat -> c] = i;
-  check_menu_item_set_active ((gpointer)get_project_by_id(dat -> a) -> modelgl -> rbuild[i], i);
 }
 
 #ifdef GTK4
 /*
 *  G_MODULE_EXPORT void turn_bonding_on (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void turn_bonding_on (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data)
 #endif
@@ -132,10 +132,10 @@ G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data)
 /*
 *  GtkWidget * create_search_box (int aid, struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  int aid                    : 
-*  struct project * this_proj : 
+*  int aid                    :
+*  struct project * this_proj :
 */
 GtkWidget * create_search_box (int aid, struct project * this_proj)
 {
@@ -195,10 +195,10 @@ GtkWidget * create_search_box (int aid, struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box :
+*  gpointer data     :
 */
 G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
 {
@@ -226,10 +226,10 @@ G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
 /*
 *  GtkWidget * create_action_combo (int id, struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id                     : 
-*  struct project * this_proj : 
+*  int id                     :
+*  struct project * this_proj :
 */
 GtkWidget * create_action_combo (int id, struct project * this_proj)
 {
@@ -266,10 +266,10 @@ GtkWidget * create_action_combo (int id, struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * exp : 
-*  gpointer data   : 
+*  GtkWidget * exp :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
 {
@@ -291,10 +291,10 @@ G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
 /*
 *  GtkWidget * action_tab (int aid, struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  int aid                    : 
-*  struct project * this_proj : 
+*  int aid                    :
+*  struct project * this_proj :
 */
 GtkWidget * action_tab (int aid, struct project * this_proj)
 {
@@ -320,7 +320,7 @@ GtkWidget * action_tab (int aid, struct project * this_proj)
     int i;
     for (i=0; i<3; i++)
     {
-      this_proj -> modelgl -> atom_win -> at_expand[i] = create_expander (exp_name[i], NULL, i);
+      this_proj -> modelgl -> atom_win -> at_expand[i] = create_expander (exp_name[i], NULL);
       add_box_child_start (GTK_ORIENTATION_VERTICAL, sbox, this_proj -> modelgl -> atom_win -> at_expand[i], TRUE, TRUE, 10);
       if (! i)
       {

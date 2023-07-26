@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'save_curve.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to write curves information in the atomes project file format
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int save_project_curve (FILE * fp, int wid, struct project * this_proj, int rid, int cid);
 
@@ -33,10 +34,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  gboolean write_data_layout (FILE * fp, DataLayout * layout)
 *
-*  Usage: 
+*  Usage: save curve data layout to file
 *
-*  FILE * fp           : 
-*  DataLayout * layout : 
+*  FILE * fp           : The file pointer
+*  DataLayout * layout : The data layout to save
 */
 gboolean write_data_layout (FILE * fp, DataLayout * layout)
 {
@@ -56,13 +57,13 @@ gboolean write_data_layout (FILE * fp, DataLayout * layout)
 /*
 *  int save_project_curve (FILE * fp, int wid, struct project * this_proj, int rid, int cid)
 *
-*  Usage: 
+*  Usage: save project curve to file
 *
-*  FILE * fp                  : 
-*  int wid                    : 
-*  struct project * this_proj : 
-*  int rid                    : 
-*  int cid                    : 
+*  FILE * fp                  : The file pointer
+*  int wid                    : The total number of project file in the workspace
+*  struct project * this_proj : The project to save
+*  int rid                    : The calculation to save
+*  int cid                    : The curve id to save
 */
 int save_project_curve (FILE * fp, int wid, struct project * this_proj, int rid, int cid)
 {

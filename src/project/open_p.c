@@ -16,12 +16,13 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - Subroutine to start reading atomes project file
+
 *
 *  List of subroutines:
 
-  int open_project (FILE * fp, int pid);
+  int open_project (FILE * fp, int npi);
 
   char * read_string (int i, FILE * fp);
 
@@ -46,22 +47,22 @@ If not, see <https://www.gnu.org/licenses/> */
 extern void alloc_curves (int c);
 extern void init_box_calc ();
 extern void set_color_map_sensitive (glwin * view);
-extern void initgr (int r, int s);
-extern void initsq (int r, int s);
-extern void initbd (int s);
-extern void initang (int s);
-extern void initrng (int s);
-extern void initchn (int s);
-extern void initmsd (int s);
+extern void initgr (int r);
+extern void initsq (int r);
+extern void initbd ();
+extern void initang ();
+extern void initrng ();
+extern void initchn ();
+extern void initmsd ();
 extern void initsh (int s);
 
 /*
 *  char * read_string (int i, FILE * fp)
 *
-*  Usage:
+*  Usage: read a string from a file
 *
-*  int i     :
-*  FILE * fp :
+*  int i     : The size of the string to read
+*  FILE * fp : The file pointer
 */
 char * read_string (int i, FILE * fp)
 {
@@ -79,9 +80,9 @@ char * read_string (int i, FILE * fp)
 /*
 *  gchar * read_this_string (FILE * fp)
 *
-*  Usage:
+*  Usage: is there a string to read in this file ? yes do it
 *
-*  FILE * fp :
+*  FILE * fp : The file pointer
 */
 gchar * read_this_string (FILE * fp)
 {
@@ -99,9 +100,9 @@ gchar * read_this_string (FILE * fp)
 /*
 *  void initcnames (int w, int s)
 *
-*  Usage:
+*  Usage: initialize curve namees
 *
-*  int w : calculation id
+*  int w : Calculation id
 *  int s :
 */
 void initcnames (int w, int s)
@@ -109,34 +110,34 @@ void initcnames (int w, int s)
   switch (w)
   {
     case GR:
-      initgr (w, s);
+      initgr (w);
       break;
     case SQ:
-      initsq (w, s);
+      initsq (w);
       break;
     case SK:
-      initsq (w, s);
+      initsq (w);
       break;
     case GK:
-      initgr (w, s);
+      initgr (w);
       break;
     case BD:
-      initbd (s);
+      initbd ();
       break;
     case AN:
-      initang (s);
+      initang ();
       break;
     case RI:
-      initrng (s);
+      initrng ();
       break;
     case CH:
-      initchn (s);
+      initchn ();
       break;
     case SP:
-      initsh (s);
+      initsh (0);
       break;
     default:
-      initmsd (s);
+      initmsd ();
       break;
   }
 }
@@ -144,9 +145,9 @@ void initcnames (int w, int s)
 /*
 *  void allocatoms (struct project * this_proj)
 *
-*  Usage:
+*  Usage: allocate project data
 *
-*  struct project * this_proj :
+*  struct project * this_proj : The project
 */
 void allocatoms (struct project * this_proj)
 {
@@ -170,9 +171,9 @@ void allocatoms (struct project * this_proj)
 /*
 *  chemical_data * alloc_chem_data (int spec)
 *
-*  Usage:
+*  Usage: allocate chemistry data
 *
-*  int spec :
+*  int spec : The number of chemical species
 */
 chemical_data * alloc_chem_data (int spec)
 {
@@ -189,10 +190,10 @@ chemical_data * alloc_chem_data (int spec)
 /*
 *  void alloc_proj_data (struct project * this_proj, int cid)
 *
-*  Usage:
+*  Usage: allocate data
 *
-*  struct project * this_proj :
-*  int cid                    :
+*  struct project * this_proj : The project
+*  int cid                    : Allocate chemistry data (1/0)
 */
 void alloc_proj_data (struct project * this_proj, int cid)
 {
@@ -201,14 +202,14 @@ void alloc_proj_data (struct project * this_proj, int cid)
 }
 
 /*
-*  int open_project (FILE * fp, int pid)
+*  int open_project (FILE * fp, int npi)
 *
-*  Usage:
+*  Usage: open atomes project file
 *
-*  FILE * fp :
-*  int pid   :
+*  FILE * fp : The file pointer
+*  int npi   : The total number of projects in the workspace
 */
-int open_project (FILE * fp, int pid)
+int open_project (FILE * fp, int npi)
 {
   int i, j, k;
   gchar * ver;
@@ -362,7 +363,7 @@ int open_project (FILE * fp, int pid)
           }
           for (j=0; j<i; j++)
           {
-            if (read_project_curve (fp, pid, activep) != OK)
+            if (read_project_curve (fp, npi, activep) != OK)
             {
               // error
               return ERROR_CURVE;

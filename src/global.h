@@ -941,7 +941,6 @@ extern GtkWidget * new_gtk_window ();
 extern GtkWidget * dialogmodal (gchar * str, GtkWindow * parent);
 extern GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType mtype, GtkButtonsType buttons, GtkWidget * parent);
 extern GtkWidget * dialog_cancel_apply (gchar * title, GtkWidget * parent, gboolean resiz);
-extern void run_this_gtk_native_dialog (GtkNativeDialog * dial, GCallback handler, gpointer data);
 extern void run_this_gtk_dialog (GtkWidget * dial, GCallback handler, gpointer data);
 extern void resize_this_window (GtkWidget * window, int x, int y);
 
@@ -955,10 +954,6 @@ extern GtkWidget * create_vscale (float min, float max, float delta,
 extern void add_container_child (int type, GtkWidget * widg, GtkWidget * child);
 extern void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding);
 extern void add_box_child_start (int orientation, GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding);
-extern void add_menu_child (GtkWidget * widg, GtkWidget * child);
-extern void add_item_child (GtkWidget * widg, GtkWidget * child);
-extern GtkWidget * create_hsep ();
-extern GtkWidget * create_hpaned ();
 extern GtkWidget * create_vbox (int spacing);
 extern GtkWidget * create_hbox (int spacing);
 extern GtkWidget * dialog_get_content_area (GtkWidget * widg);
@@ -967,6 +962,7 @@ extern GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_
 extern GtkWidget * create_layout (int x, int y);
 
 #ifdef GTK4
+extern void run_this_gtk_native_dialog (GtkNativeDialog * dial, GCallback handler, gpointer data);
 extern G_MODULE_EXPORT void select_unselect_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data);
 extern G_MODULE_EXPORT void select_unselect_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
 extern G_MODULE_EXPORT void select_unselect_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -991,7 +987,6 @@ extern void add_widget_gesture_and_key_action (GtkWidget * widget,
                                                gchar * kp_name, GCallback kp_handler, gpointer kp_data,
                                                gchar * mo_name, GCallback mo_handler, gpointer mo_data,
                                                gchar * sc_name, GCallback sc_handler, gpointer sc_data);
-extern void menu_item_set_submenu (GMenu * menu, GMenu * sub_menu);
 extern G_MODULE_EXPORT gboolean destroy_this_window (GtkWindow * win, gpointer data);
 extern G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data);
 extern GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name);
@@ -1023,7 +1018,6 @@ extern GtkWidget * create_menu_item (gboolean add_mnemo, gchar * action);
 extern GtkWidget * create_menu_item_from_widget (GtkWidget * widg, gboolean check, gboolean radio, gboolean status);
 extern GtkWidget * menu_item_new_with_submenu (gchar * name, gboolean active, GtkWidget * sub_menu);
 extern void add_menu_separator (GtkWidget * menu);
-extern void menu_item_set_submenu (GtkWidget * item, GtkWidget * sub_menu);
 extern G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event, gpointer data);
 extern G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data);
 extern GtkWidget * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name);
@@ -1044,15 +1038,16 @@ extern GtkWidget * gtk3_menu_item (GtkWidget * menu, gchar * name,
                                    GCallback handler, gpointer data,
                                    gboolean accel, guint key, GdkModifierType mod,
                                    gboolean check, gboolean radio, gboolean status);
-extern GtkWidget * gtk3_image_menu_item (gchar * name, int icon_format, gpointer item_icon,
-                                         GCallback handler, gpointer data, gchar * accel,
-                                         gboolean check, gboolean radio, gboolean status);
 
 extern GtkWidget * add_advanced_item (GtkWidget * menu, GCallback handler, gpointer data, gboolean accel, guint key, GdkModifierType mod);
 
-extern GtkWidget * markup_label (gchar * text,
-                                 int dimx, int dimy,
-                                 float ax, float ay);
+extern GtkWidget * markup_label (gchar * text, int dimx, int dimy, float ax, float ay);
+extern GtkWidget * color_button (ColRGBA col, gboolean alpha, int dimx, int dimy, GCallback handler, gpointer data);
+extern GtkWidget * font_button (gchar * font, int dimx, int dimy, GCallback handler, gpointer data);
+extern GtkWidget * spin_button (GCallback handler, double value, double start, double end, double step, int digits, int dim,  gpointer data);
+extern GtkWidget * check_button (gchar * text, int dimx, int dimy, gboolean state, GCallback handler, gpointer data);
+extern GtkWidget * radio_button (gchar * text, int dimx, int dimy, gboolean state, GCallback handler, gpointer data);
+extern GtkWidget * create_button (gchar * text, int image_format, gchar * image, int dimx, int dimy, int relief, GCallback handler, gpointer data);
 
 extern ColRGBA gdkrgba_to_rgba (GdkRGBA colgdk);
 extern GdkRGBA colrgba_togtkrgba (ColRGBA col);
@@ -1063,46 +1058,12 @@ extern void set_renderer_color (int tocol, GtkCellRenderer * renderer, ColRGBA c
 
 extern void button_set_image (GtkButton * but, gchar * text, int format, gpointer image);
 
-extern GtkWidget * color_button (ColRGBA col,
-                                 gboolean alpha,
-                                 int dimx, int dimy,
-                                 GCallback handler, gpointer data);
-
-extern GtkWidget * font_button (gchar * font,
-                                int dimx, int dimy,
-                                GCallback handler, gpointer data);
-
-extern GtkWidget * spin_button (GCallback handler_a,
-                                double value, double start, double end, double step, int digits,
-                                int dim,
-                                gpointer data);
-
-extern GtkWidget * check_button (gchar * text,
-                                 int dimx, int dimy,
-                                 gboolean state,
-                                 GCallback handler,
-                                 gpointer data);
-
-extern GtkWidget * radio_button (gchar * text,
-                                 int dimx, int dimy,
-                                 gboolean state,
-                                 GCallback handler,
-                                 gpointer data);
-
-extern GtkWidget * create_button (gchar * text,
-                                  int image_format,
-                                  gchar * image,
-                                  int dimx, int dimy,
-                                  int relief,
-                                  GCallback handler,
-                                  gpointer data);
-
 extern GtkWidget * abox (GtkWidget * box, char * lab, int vspace);
 extern GtkWidget * bbox (GtkWidget * box, char * lab);
 extern GtkWidget * cbox (GtkWidget * box, char * lab);
 extern GtkWidget * fbox (GtkWidget * box, char * lab);
 extern GtkWidget * create_scroll (GtkWidget * box, int dimx, int dimy, int shadow);
-extern GtkWidget * create_expander (gchar * name, gchar * file_img, int i);
+extern GtkWidget * create_expander (gchar * name, gchar * file_img);
 
 extern GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolean resiz);
 
@@ -1112,8 +1073,6 @@ extern void append_menu_item (GMenu * menu, const gchar * label, const gchar * a
                               const gchar * custom, int format, const gchar * icon,
                               gboolean check, gboolean status, gboolean radio, const gchar * rstatus);
 extern void append_submenu (GMenu * menu, const gchar * label, GMenu * submenu);
-extern void check_menu_item_set_active (gpointer item, gboolean active);
-extern gboolean check_menu_item_get_active (gpointer item);
 
 extern GtkWidget * destroy_this_widget (GtkWidget * widg);
 extern void destroy_this_dialog (GtkDialog * dialog);
@@ -1122,8 +1081,8 @@ extern G_MODULE_EXPORT void run_destroy_dialog (GtkDialog * dialog, gint respons
 
 extern void add_gtk_close_event (GtkWidget * widg, GCallback handler, gpointer data);
 
-gchar * file_chooser_get_file_name (GtkFileChooser * chooser);
-gchar * file_chooser_get_current_folder (GtkFileChooser * chooser);
+extern gchar * file_chooser_get_file_name (GtkFileChooser * chooser);
+extern gchar * file_chooser_get_current_folder (GtkFileChooser * chooser);
 extern gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename);
 extern void file_chooser_set_current_folder (GtkFileChooser * chooser);
 

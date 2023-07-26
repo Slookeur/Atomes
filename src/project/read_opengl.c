@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_opengl.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - Subroutines to read the OpenGL window configuration from atomes project file
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int read_atom_a (FILE * fp, struct project * this_proj, int s, int a);
   int read_atom_b (FILE * fp, struct project * this_proj, int s, int a);
@@ -36,12 +37,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 *
-*  Usage: 
+*  Usage: read atom properties from file (a)
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
-*  int s                      : 
-*  int a                      : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project
+*  int s                      : The MD step
+*  int a                      : The atom number
 */
 int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -58,12 +59,12 @@ int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 /*
 *  int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 *
-*  Usage: 
+*  Usage: read atom properties from file (b)
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
-*  int s                      : 
-*  int a                      : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project
+*  int s                      : The MD step
+*  int a                      : The atom number
 */
 int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -139,14 +140,14 @@ int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 /*
 *  int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size, int steps)
 *
-*  Usage: 
+*  Usage: read rings and chains statistics data from file
 *
-*  FILE * fp    : 
-*  glwin * view : 
-*  int type     : 
-*  int rid      : 
-*  int size     : 
-*  int steps    : 
+*  FILE * fp    : The file pointer
+*  glwin * view : The glwin to store the data
+*  int type     : Rings (0) or chains (1)
+*  int rid      : The ring id or 0
+*  int size     : The size of the ring or chain
+*  int steps    : The number of MD steps
 */
 int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size, int steps)
 {
@@ -265,12 +266,12 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
 /*
 *  int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
 *
-*  Usage: 
+*  Usage: read OpenGL image properties from file
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
-*  image * img                : 
-*  int sid                    : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project to store the data
+*  image * img                : The latest image to store the data
+*  int sid                    : The number of chemical species
 */
 int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
 {
@@ -583,9 +584,9 @@ int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int s
     {
       if (GTK_IS_WIDGET(this_proj -> modelgl -> ogl_spec[i][j]))
       {
-        if (check_menu_item_get_active ((gpointer)this_proj -> modelgl -> ogl_spec[i][j]) != img -> show_atom[i][j])
+        if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_spec[i][j]) != img -> show_atom[i][j])
         {
-          check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_spec[i][j], img -> show_atom[i][j]);
+          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_spec[i][j], img -> show_atom[i][j]);
         }
       }
     }
@@ -602,9 +603,9 @@ int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int s
           {
             if (GTK_IS_WIDGET(this_proj -> modelgl -> ogl_poly[0][i][j]))
             {
-              if (check_menu_item_get_active ((gpointer)this_proj -> modelgl -> ogl_poly[0][i][j]) != img -> show_poly[i][j])
+              if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_poly[0][i][j]) != img -> show_poly[i][j])
               {
-                check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_poly[0][i][j], img -> show_poly[i][j]);
+                gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_poly[0][i][j], img -> show_poly[i][j]);
               }
             }
           }
@@ -619,9 +620,9 @@ int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int s
         {
           if (GTK_IS_WIDGET(this_proj -> modelgl -> ogl_geom[0][i][j]))
           {
-            if (check_menu_item_get_active ((gpointer)this_proj -> modelgl -> ogl_geom[0][i][j]) != img -> show_coord[i][j])
+            if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][i][j]) != img -> show_coord[i][j])
             {
-              check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_geom[0][i][j], img -> show_coord[i][j]);
+              gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][i][j], img -> show_coord[i][j]);
             }
           }
         }

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_edit.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   gboolean is_atom_win_active (glwin * view);
 
@@ -55,9 +55,9 @@ gboolean was_moved;
 /*
 *  gboolean is_atom_win_active (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 gboolean is_atom_win_active (glwin * view)
 {
@@ -71,9 +71,9 @@ gboolean is_atom_win_active (glwin * view)
 /*
 *  void clean_coord_window (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void clean_coord_window (struct project * this_proj)
 {
@@ -94,9 +94,9 @@ void clean_coord_window (struct project * this_proj)
 /*
 *  void clean_other_window_after_edit (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void clean_other_window_after_edit (struct project * this_proj)
 {
@@ -146,9 +146,9 @@ void clean_other_window_after_edit (struct project * this_proj)
 /*
 *  void clean_atom_win (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void clean_atom_win (struct project * this_proj)
 {
@@ -186,10 +186,10 @@ void clean_atom_win (struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 {
@@ -222,21 +222,21 @@ G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWindow * widg : 
-*  gpointer data    : 
+*  GtkWindow * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  GdkEvent * event : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  GdkEvent * event :
+*  gpointer data    :
 */
 G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -249,10 +249,10 @@ G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpoi
 /*
 *  G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer data)
 {
@@ -261,10 +261,10 @@ G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer da
 /*
 *  G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer data)
 {
@@ -309,10 +309,10 @@ G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer d
 /*
 *  G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 {
@@ -349,10 +349,10 @@ G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 /*
 *  GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  GtkWidget * vbox           : 
+*  struct project * this_proj :
+*  GtkWidget * vbox           :
 */
 GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
 {
@@ -374,12 +374,12 @@ GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
 /*
 *  atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize)
 *
-*  Usage: 
+*  Usage:
 *
-*  int proj     : 
-*  int action   : 
-*  int searchid : 
-*  int tsize    : 
+*  int proj     :
+*  int action   :
+*  int searchid :
+*  int tsize    :
 */
 atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize)
 {
@@ -403,9 +403,9 @@ atom_search * allocate_atom_search (int proj, int action, int searchid, int tsiz
 /*
 *  GtkWidget * create_edition_window (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 GtkWidget * create_edition_window (struct project * this_proj)
 {
@@ -443,10 +443,10 @@ GtkWidget * create_edition_window (struct project * this_proj)
 /*
 *  void prepare_atom_edition (gpointer data, gboolean visible)
 *
-*  Usage: 
+*  Usage:
 *
-*  gpointer data    : 
-*  gboolean visible : 
+*  gpointer data    :
+*  gboolean visible :
 */
 void prepare_atom_edition (gpointer data, gboolean visible)
 {
@@ -497,7 +497,7 @@ void prepare_atom_edition (gpointer data, gboolean visible)
       set_mode (NULL, & this_proj -> modelgl -> colorp[0][0]);
 #else
       // GTK3 Menu Action To Check
-      check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_mode[0], TRUE);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_mode[0], TRUE);
       set_mode (this_proj -> modelgl -> ogl_mode[0], & this_proj -> modelgl -> colorp[0][0]);
 #endif
     }
@@ -508,21 +508,21 @@ void prepare_atom_edition (gpointer data, gboolean visible)
 /*
 *  G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void action_window (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void action_window (GtkWidget * widg, gpointer data)
 #endif

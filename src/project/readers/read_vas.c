@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to read VASP atomic coordinates
+
 *
 *  List of subroutines:
 
@@ -38,9 +39,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int vas_get_atom_coordinates (int sli)
 *
-*  Usage:
+*  Usage: get the atomic coordinates from the VASP file
 *
-*  int sli :
+*  int sli : Correction parameters depending on the VASP file version
 */
 int vas_get_atom_coordinates (int sli)
 {
@@ -226,9 +227,9 @@ int vas_get_atom_coordinates (int sli)
 /*
 *  int open_vas_file (int linec)
 *
-*  Usage:
+*  Usage: open VASP file
 *
-*  int linec :
+*  int linec : Number of lines in the file
 */
 int open_vas_file (int linec)
 {

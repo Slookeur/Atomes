@@ -14,14 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'chainscall.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
-  void initchn (int s);
+  void initchn ();
   void update_chains_menus (glwin * view);
   void update_chains_view (struct project * this_proj);
   void clean_chains_data (glwin * view);
@@ -51,13 +51,11 @@ extern gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb);
 extern void clean_coord_window (struct project * this_proj);
 
 /*
-*  void initchn (int s)
+*  void initchn ()
 *
-*  Usage: 
-*
-*  int s : 
+*  Usage: initialize the curve widgets for the chains statistics calculation
 */
-void initchn (int s)
+void initchn ()
 {
   int i;
   active_project -> curves[CH][0] -> name = g_strdup_printf ("Chains - Cc(n)[All]");
@@ -65,20 +63,20 @@ void initchn (int s)
   {
     active_project -> curves[CH][i+1] -> name = g_strdup_printf ("Chains - Cc(n)[%s]", active_chem -> label[i]);
   }
-  addcurwidgets (activep, CH, s);
+  addcurwidgets (activep, CH, 0);
   active_project -> initok[CH] = TRUE;
 }
 
+#ifdef GTK3
 /*
 *  void update_chains_menus (glwin * view)
 *
-*  Usage: 
+*  Usage: update the chains statistics menus
 *
-*  glwin * view : 
+*  glwin * view : The gliwn to update the menu from
 */
 void update_chains_menus (glwin * view)
 {
-#ifdef GTK3
   GtkWidget * menu;
   view -> ogl_chains[0] = destroy_this_widget (view -> ogl_chains[0]);
   view -> ogl_chains[0] = menu_item_new_with_submenu ("Chain(s)", view -> chains, add_menu_coord (view, 0, 9));
@@ -88,15 +86,15 @@ void update_chains_menus (glwin * view)
     gtk_menu_shell_insert (GTK_MENU_SHELL(menu), view -> ogl_chains[0], 3);
     show_the_widgets (view -> ogl_chains[0]);
   }
-#endif
 }
+#endif
 
 /*
 *  void update_chains_view (struct project * this_proj)
 *
-*  Usage: 
+*  Usage: update the chains statistics text view after the calculation
 *
-*  struct project * this_proj : 
+*  struct project * this_proj : The project that was analysed
 */
 void update_chains_view (struct project * this_proj)
 {
@@ -244,9 +242,9 @@ void update_chains_view (struct project * this_proj)
 /*
 *  void clean_chains_data (glwin * view)
 *
-*  Usage: 
+*  Usage: cleaning the OpenGL data related to chain statistics
 *
-*  glwin * view : 
+*  glwin * view : The gliwn to clean the data from
 */
 void clean_chains_data (glwin * view)
 {
@@ -284,10 +282,10 @@ void clean_chains_data (glwin * view)
 /*
 *  G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: compute chains statistics
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
 {
@@ -295,7 +293,7 @@ G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
 
   cutoffsend ();
   //if (active_project -> steps > 1) statusb = 1;
-  if (! active_project -> initok[CH]) initchn (0);
+  if (! active_project -> initok[CH]) initchn ();
   active_project -> csparam[6] = 0;
   if (! active_project -> dmtx) active_project -> dmtx = run_distance_matrix (widg, 6, 0);
 
@@ -360,11 +358,22 @@ G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
   gtk_widget_show (curvetoolbox);
   clean_coord_window (active_project);
   fill_tool_model ();
+#ifdef GTK3
   update_chains_menus (active_glwin);
+#endif
 }
 
-void save_chains_data_ (int * taille, double ectrc[* taille],
-                        double * rpstep, double * ectrpst)
+/*
+*  void save_chains_data_ (int * taille, double ectrc[* taille], double * rpstep, double * ectrpst)
+*
+*  Usage: get chains statistics results form Fortran90
+*
+*  int * taille           : Number of data points
+*  double ectrc[* taille] : Results
+*  double * rpstep        : Chains per MD step
+*  double * ectrpst       : Standard deviation
+*/
+void save_chains_data_ (int * taille, double ectrc[* taille], double * rpstep, double * ectrpst)
 {
   int i;
   active_project -> csdata[0] = * rpstep;

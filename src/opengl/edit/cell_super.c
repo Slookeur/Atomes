@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cell_super.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   gboolean ** duplicate_geom_info (struct project * this_proj);
   gboolean ** duplicate_poly_info (struct project * this_proj);
@@ -43,9 +43,9 @@ extern GtkWidget * cell_tab (int i, struct project * this_proj);
 /*
 *  gboolean ** duplicate_geom_info (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 gboolean ** duplicate_geom_info (struct project * this_proj)
 {
@@ -65,9 +65,9 @@ gboolean ** duplicate_geom_info (struct project * this_proj)
 /*
 *  gboolean ** duplicate_poly_info (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 gboolean ** duplicate_poly_info (struct project * this_proj)
 {
@@ -87,11 +87,11 @@ gboolean ** duplicate_poly_info (struct project * this_proj)
 /*
 *  void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboolean ** pshow)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * proj : 
-*  gboolean ** cshow     : 
-*  gboolean ** pshow     : 
+*  struct project * proj :
+*  gboolean ** cshow     :
+*  gboolean ** pshow     :
 */
 void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboolean ** pshow)
 {
@@ -105,7 +105,7 @@ void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboo
       {
         if (GTK_IS_WIDGET(active_glwin -> ogl_geom[0][i][j]))
         {
-          check_menu_item_set_active ((gpointer)active_glwin -> ogl_geom[0][i][j], cshow[i][j]);
+          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_geom[0][i][j], cshow[i][j]);
           if (cshow[i][j]) show_hide_coord (active_glwin -> ogl_geom[0][i][j], & active_glwin -> gcid[i][j][i]);
         }
       }
@@ -113,7 +113,7 @@ void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboo
       {
         if (GTK_IS_WIDGET(active_glwin -> ogl_poly[0][i][j]))
         {
-          check_menu_item_set_active ((gpointer)active_glwin -> ogl_poly[0][i][j], pshow[i][j]);
+          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_poly[0][i][j], pshow[i][j]);
           if (pshow[i][j]) show_hide_poly (active_glwin -> ogl_poly[0][i][j], & active_glwin -> gcid[i][j][i]);
         }
       }
@@ -125,9 +125,9 @@ void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboo
 /*
 *  void sens_superbut (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void sens_superbut (struct project * this_proj)
 {
@@ -154,9 +154,9 @@ void sens_superbut (struct project * this_proj)
 /*
 *  void super_celling (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 void super_celling (glwin * view)
 {
@@ -258,7 +258,9 @@ void super_celling (glwin * view)
       if (view -> chains)
       {
         clean_chains_data (view);
+#ifdef GTK3
         update_chains_menus (view);
+#endif
       }
       on_calc_bonds_released (NULL, NULL);
       restore_coord_and_poly_info (active_project, cshow, pshow);
@@ -290,21 +292,21 @@ void super_celling (glwin * view)
 /*
 *  G_MODULE_EXPORT void super_cell (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void super_cell (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void super_cell (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void super_cell (GtkWidget * widg, gpointer data)
 #endif
@@ -317,10 +319,10 @@ G_MODULE_EXPORT void super_cell (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void super_cell_but (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void super_cell_but (GtkButton * but, gpointer data)
 {

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_atoms.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT gboolean close_event_model (GtkWindow * widg, gpointer data);
   G_MODULE_EXPORT gboolean close_event_model (GtkWidget * widg, GdkEvent * event, gpointer data);
@@ -58,10 +58,10 @@ extern GtkTreeStore * atom_model;
 /*
 *  G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res :
+*  gpointer data  :
 */
 G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data)
 {
@@ -123,13 +123,13 @@ G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data)
 /*
 *  void atoms_input_win (GtkWidget * win, struct project * this_proj, int s, int id, double * val)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * win            : 
-*  struct project * this_proj : 
-*  int s                      : 
-*  int id                     : 
-*  double * val               : 
+*  GtkWidget * win            :
+*  struct project * this_proj :
+*  int s                      :
+*  int id                     :
+*  double * val               :
 */
 void atoms_input_win (GtkWidget * win, struct project * this_proj, int s, int id, double * val)
 {
@@ -175,10 +175,10 @@ void atoms_input_win (GtkWidget * win, struct project * this_proj, int s, int id
 /*
 *  G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data)
 {
@@ -211,10 +211,10 @@ G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_atom_color (GtkColorChooser * colob, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkColorChooser * colob : 
-*  gpointer data           : 
+*  GtkColorChooser * colob :
+*  gpointer data           :
 */
 G_MODULE_EXPORT void set_atom_color (GtkColorChooser * colob, gpointer data)
 {
@@ -232,20 +232,20 @@ G_MODULE_EXPORT void set_atom_color (GtkColorChooser * colob, gpointer data)
 /*
 *  G_MODULE_EXPORT void toggled_show_hide_atom (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void toggled_show_hide_atom (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void toggled_show_hide_atom (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void toggled_show_hide_atom (GtkToggleButton * but, gpointer data)
 #endif
@@ -275,7 +275,7 @@ G_MODULE_EXPORT void toggled_show_hide_atom (GtkToggleButton * but, gpointer dat
   update_menu_bar (this_proj -> modelgl);
 #else
   show = gtk_toggle_button_get_active (but);
-  check_menu_item_set_active ((gpointer)get_project_by_id(i) -> modelgl -> ogl_spec[j][k], show);
+  gtk_check_menu_item_set_active ((GtkCheckMenuItem *)get_project_by_id(i) -> modelgl -> ogl_spec[j][k], show);
 #endif
 }
 
@@ -283,20 +283,20 @@ G_MODULE_EXPORT void toggled_show_hide_atom (GtkToggleButton * but, gpointer dat
 /*
 *  G_MODULE_EXPORT void toggled_show_hide_label (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void toggled_show_hide_label (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void toggled_show_hide_label (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void toggled_show_hide_label (GtkToggleButton * but, gpointer data)
 #endif
@@ -328,17 +328,17 @@ G_MODULE_EXPORT void toggled_show_hide_label (GtkToggleButton * but, gpointer da
 #else
   // GTK3 Menu Action To Check
   show = gtk_toggle_button_get_active (but);
-  check_menu_item_set_active ((gpointer)this_proj -> modelgl -> ogl_lab[j][k], show);
+  gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_lab[j][k], show);
 #endif
 }
 
 /*
 *  GtkWidget * prop_tab (glwin * view, int g)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int g        : 
+*  glwin * view :
+*  int g        :
 */
 GtkWidget * prop_tab (glwin * view, int g)
 {
@@ -453,10 +453,10 @@ GtkWidget * prop_tab (glwin * view, int g)
 /*
 *  G_MODULE_EXPORT void close_model (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void close_model (GtkButton * but, gpointer data)
 {
@@ -474,21 +474,21 @@ G_MODULE_EXPORT void close_model (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean close_event_model (GtkWindow * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWindow * widg : 
-*  gpointer data    : 
+*  GtkWindow * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT gboolean close_event_model (GtkWindow * widg, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT gboolean close_event_model (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  GdkEvent * event : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  GdkEvent * event :
+*  gpointer data    :
 */
 G_MODULE_EXPORT gboolean close_event_model (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -500,10 +500,10 @@ G_MODULE_EXPORT gboolean close_event_model (GtkWidget * widg, GdkEvent * event, 
 /*
 *  GtkWidget * advance_atom_notebook (glwin * view, int atom_or_clone)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view      : 
-*  int atom_or_clone : 
+*  glwin * view      :
+*  int atom_or_clone :
 */
 GtkWidget * advance_atom_notebook (glwin * view, int atom_or_clone)
 {
@@ -524,10 +524,10 @@ GtkWidget * advance_atom_notebook (glwin * view, int atom_or_clone)
 /*
 *  GtkWidget * advanced_atom_properties (int atom_or_clone, glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  int atom_or_clone : 
-*  glwin * view      : 
+*  int atom_or_clone :
+*  glwin * view      :
 */
 GtkWidget * advanced_atom_properties (int atom_or_clone, glwin * view)
 {
@@ -553,21 +553,21 @@ GtkWidget * advanced_atom_properties (int atom_or_clone, glwin * view)
 /*
 *  G_MODULE_EXPORT void atom_properties (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void atom_properties (GtkWidget * widg, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * state, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * state       : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * state       :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * state, gpointer data)
 #endif

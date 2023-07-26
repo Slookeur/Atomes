@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'save_mol.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to write molecules information in the atomes project file format
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int save_atom_m (FILE * fp, struct project * this_proj, int s, int a);
   int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp);
@@ -51,12 +52,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
 *
-*  Usage: 
+*  Usage: save atom data to file
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
-*  int s                      : 
-*  int a                      : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project that contains the data
+*  int s                      : The MD step
+*  int a                      : The atom number
 */
 int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -68,11 +69,11 @@ int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
 /*
 *  int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
 *
-*  Usage: 
+*  Usage: save this molecule data to file
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
-*  struct molecule * tmp      : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project that contains the data
+*  struct molecule * tmp      : The molecule that contains the data
 */
 int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
 {
@@ -89,10 +90,10 @@ int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
 /*
 *  int save_mol (FILE * fp, struct project * this_proj)
 *
-*  Usage: 
+*  Usage: save molecule information to file
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project that contains the data
 */
 int save_mol (FILE * fp, struct project * this_proj)
 {

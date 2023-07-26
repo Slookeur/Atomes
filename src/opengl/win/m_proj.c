@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_proj.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -46,10 +46,10 @@ enum position {
 /*
 *  G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 {
@@ -100,31 +100,31 @@ G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * menu_proj (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 GtkWidget * menu_proj (glwin * view)
 {
   GtkWidget * menup = gtk_menu_new ();
   GtkWidget * r = create_menu_item (FALSE, "Right [1, 0, 0]");
   g_signal_connect (G_OBJECT (r), "activate", G_CALLBACK(set_camera_pos), & view -> colorp[RIGHT][0]);
-  add_menu_child (menup, r);
+  gtk_menu_shell_append ((GtkMenuShell *)menup, r);
   GtkWidget * l = create_menu_item (FALSE, "Left [-1, 0, 0]");
   g_signal_connect (G_OBJECT (l), "activate", G_CALLBACK(set_camera_pos), & view -> colorp[LEFT][0]);
-  add_menu_child (menup, l);
+  gtk_menu_shell_append ((GtkMenuShell *)menup, l);
   GtkWidget * t = create_menu_item (FALSE, "Top [0, 1, 0]");
   g_signal_connect (G_OBJECT (t), "activate", G_CALLBACK(set_camera_pos), & view -> colorp[TOP][0]);
-  add_menu_child (menup, t);
+  gtk_menu_shell_append ((GtkMenuShell *)menup, t);
   GtkWidget * b = create_menu_item (FALSE, "Bottom [0, -1, 0]");
   g_signal_connect (G_OBJECT (b), "activate", G_CALLBACK(set_camera_pos), & view -> colorp[BOTTOM][0]);
-  add_menu_child (menup, b);
+  gtk_menu_shell_append ((GtkMenuShell *)menup, b);
   GtkWidget * f = create_menu_item (FALSE, "Front [0, 0, 1]");
   g_signal_connect (G_OBJECT (f), "activate", G_CALLBACK(set_camera_pos), & view -> colorp[FRONT][0]);
-  add_menu_child (menup, f);
+  gtk_menu_shell_append ((GtkMenuShell *)menup, f);
   GtkWidget * a = create_menu_item (FALSE, "Back [0, 0, -1]");
   g_signal_connect (G_OBJECT (a), "activate", G_CALLBACK(set_camera_pos), & view -> colorp[BACK][0]);
-  add_menu_child (menup, a);
+  gtk_menu_shell_append ((GtkMenuShell *)menup, a);
 
   return menup;
 }
@@ -132,11 +132,11 @@ GtkWidget * menu_proj (glwin * view)
 /*
 *  G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -146,10 +146,10 @@ G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * param
 /*
 *  GMenu * menu_proj (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_proj (glwin * view, int popm)
 {

@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_field.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines required to read a DLPOLY force field information from atomes project file
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int read_field_atom (FILE * fp);
   int read_field_shell (FILE * fp);
@@ -44,9 +45,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  int read_field_atom (FILE * fp)
 *
-*  Usage: 
+*  Usage: read field atom properties from file
 *
-*  FILE * fp : 
+*  FILE * fp : The file pointer
 */
 int read_field_atom (FILE * fp)
 {
@@ -74,9 +75,9 @@ int read_field_atom (FILE * fp)
 /*
 *  int read_field_shell (FILE * fp)
 *
-*  Usage: 
+*  Usage: read field core shell data from file
 *
-*  FILE * fp : 
+*  FILE * fp : The file pointer
 */
 int read_field_shell (FILE * fp)
 {
@@ -95,9 +96,9 @@ int read_field_shell (FILE * fp)
 /*
 *  int read_field_constraint (FILE * fp)
 *
-*  Usage: 
+*  Usage: read field constraint data from file
 *
-*  FILE * fp : 
+*  FILE * fp : The file pointer
 */
 int read_field_constraint (FILE * fp)
 {
@@ -113,9 +114,9 @@ int read_field_constraint (FILE * fp)
 /*
 *  int read_field_pmf (FILE * fp)
 *
-*  Usage: 
+*  Usage: read field mean force potential data from file
 *
-*  FILE * fp : 
+*  FILE * fp : The file pointer
 */
 int read_field_pmf (FILE * fp)
 {
@@ -139,9 +140,9 @@ int read_field_pmf (FILE * fp)
 /*
 *  int read_field_rigid (FILE * fp)
 *
-*  Usage: 
+*  Usage: read field rigid constraints data from file
 *
-*  FILE * fp : 
+*  FILE * fp : The file pointer
 */
 int read_field_rigid (FILE * fp)
 {
@@ -157,10 +158,10 @@ int read_field_rigid (FILE * fp)
 /*
 *  int read_field_tethered (FILE * fp, int fid)
 *
-*  Usage: 
+*  Usage: read field tethered data from file
 *
-*  FILE * fp : 
-*  int fid   : 
+*  FILE * fp : The file pointer
+*  int fid   : The field id
 */
 int read_field_tethered (FILE * fp, int fid)
 {
@@ -178,11 +179,11 @@ int read_field_tethered (FILE * fp, int fid)
 /*
 *  int read_field_prop (FILE * fp, int fid, int pid)
 *
-*  Usage: 
+*  Usage: read field property from file
 *
-*  FILE * fp : 
-*  int fid   : 
-*  int pid   : 
+*  FILE * fp : The file pointer
+*  int fid   : The field id
+*  int pid   : The property id
 */
 int read_field_prop (FILE * fp, int fid, int pid)
 {
@@ -203,10 +204,10 @@ int read_field_prop (FILE * fp, int fid, int pid)
 /*
 *  int read_field_struct (FILE * fp, int fid)
 *
-*  Usage: 
+*  Usage: read field structural properties from file
 *
-*  FILE * fp : 
-*  int fid   : 
+*  FILE * fp : The file pointer
+*  int fid   : The field id
 */
 int read_field_struct (FILE * fp, int fid)
 {
@@ -242,10 +243,10 @@ int read_field_struct (FILE * fp, int fid)
 /*
 *  int read_field_molecule (FILE * fp, int fid)
 *
-*  Usage: 
+*  Usage: read field molecule from file
 *
-*  FILE * fp : 
-*  int fid   : 
+*  FILE * fp : The file pointer
+*  int fid   : The field id
 */
 int read_field_molecule (FILE * fp, int fid)
 {
@@ -385,10 +386,10 @@ int read_field_molecule (FILE * fp, int fid)
 /*
 *  int read_field_body (FILE * fp, int fid)
 *
-*  Usage: 
+*  Usage: read field nth body data from file
 *
-*  FILE * fp : 
-*  int fid   : 
+*  FILE * fp : The file pointer
+*  int fid   : The field id
 */
 int read_field_body (FILE * fp, int fid)
 {
@@ -424,10 +425,10 @@ int read_field_body (FILE * fp, int fid)
 /*
 *  int read_field_external (FILE * fp, int fid)
 *
-*  Usage: 
+*  Usage: read field external data from file
 *
-*  FILE * fp : 
-*  int fid   : 
+*  FILE * fp : The file pointer
+*  int fid   : The field id
 */
 int read_field_external (FILE * fp, int fid)
 {
@@ -443,10 +444,10 @@ int read_field_external (FILE * fp, int fid)
 /*
 *  int read_dlp_field_data (FILE * fp, struct project * this_proj)
 *
-*  Usage: 
+*  Usage: read force field data from file
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project to store the data
 */
 int read_dlp_field_data (FILE * fp, struct project * this_proj)
 {
@@ -562,10 +563,10 @@ int read_dlp_field_data (FILE * fp, struct project * this_proj)
 /*
 *  int read_lmp_field_data (FILE * fp, struct project * this_proj)
 *
-*  Usage: 
+*  Usage: read LAMMPS field data from file
 *
-*  FILE * fp                  : 
-*  struct project * this_proj : 
+*  FILE * fp                  : The file pointer
+*  struct project * this_proj : The project to store the data
 */
 int read_lmp_field_data (FILE * fp, struct project * this_proj)
 {

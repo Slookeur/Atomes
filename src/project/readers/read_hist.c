@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_hist.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to read DL-POLY history file
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int hist_get_data (int linec);
   int hist_get_content ();
@@ -41,9 +42,9 @@ extern void check_for_species (double v, int ato);
 /*
 *  int hist_get_data (int linec)
 *
-*  Usage: 
+*  Usage: read data from the DL-POLY history file
 *
-*  int linec : 
+*  int linec : Total number of lines
 */
 int hist_get_data (int linec)
 {
@@ -84,9 +85,7 @@ int hist_get_data (int linec)
 /*
 *  int hist_get_content ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: read the content of the DL-POLY history file
 */
 int hist_get_content ()
 {
@@ -424,9 +423,9 @@ int hist_get_content ()
 /*
 *  int open_hist_file (int linec)
 *
-*  Usage: 
+*  Usage: open DL-POLY history file
 *
-*  int linec : 
+*  int linec : Number of lines in the file
 */
 int open_hist_file (int linec)
 {

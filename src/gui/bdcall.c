@@ -28,8 +28,8 @@ If not, see <https://www.gnu.org/licenses/> */
 
   void restore_color_map (glwin * view, int * colm);
   void recup_dmin_dmax_ (double * min, double * max);
-  void initbd (int s);
-  void initang (int s);
+  void initbd ();
+  void initang ();
   void initcutoffs (chemical_data * chem, int species);
   void cutoffsend (void);
   void prep_ogl_bonds ();
@@ -99,7 +99,7 @@ void restore_color_map (glwin * view, int * colm)
     {
       j = i*ATOM_MAPS + colm[i];
     }
-    check_menu_item_set_active ((gpointer)view -> color_styles[j], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> color_styles[j], TRUE);
     set_color_map (view -> color_styles[j], & view -> colorp[j][0]);
   }
   reading_input = was_input;
@@ -121,13 +121,11 @@ void recup_dmin_dmax_ (double * min, double * max)
 }
 
 /*
-*  void initbd (int s)
+*  void initbd ()
 *
 *  Usage:
-*
-*  int s :
 */
-void initbd (int s)
+void initbd ()
 {
   int i, j, k;
 
@@ -142,18 +140,16 @@ void initbd (int s)
       k=k+1;
     }
   }
-  addcurwidgets (activep, BD, s);
+  addcurwidgets (activep, BD, 0);
   active_project -> initok[BD] = TRUE;
 }
 
 /*
-*  void initang (int s)
+*  void initang ()
 *
 *  Usage:
-*
-*  int s :
 */
-void initang (int s)
+void initang ()
 {
   int h, i, j, k, l;
 
@@ -188,7 +184,7 @@ void initang (int s)
       }
     }
   }
-  addcurwidgets (activep, AN, s);
+  addcurwidgets (activep, AN, 0);
   active_project -> initok[AN] = TRUE;
 }
 
@@ -492,7 +488,7 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
     //if (bonding && active_project -> steps > 1) statusb = 1;
     if (bonds_update || active_project -> runc[0] || active_project -> runc[2])
     {
-      if (! active_project -> initok[BD] && bonding) initbd (0);
+      if (! active_project -> initok[BD] && bonding) initbd ();
       if (active_project -> runc[0]) clean_curves_data (BD, 0, active_project -> numc[BD]);
       prepostcalc (widg, FALSE, BD, statusb, opac);
       l = 0;
@@ -570,7 +566,7 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
     }
     if (active_project -> runc[1])
     {
-      if (! active_project -> initok[AN]) initang (0);
+      if (! active_project -> initok[AN]) initang ();
       clean_curves_data (AN, 0, active_project -> numc[AN]);
       prepostcalc (widg, FALSE, AN, statusb, opac);
       active_project -> delta[AN] = 180.0 / active_project -> num_delta[AN];

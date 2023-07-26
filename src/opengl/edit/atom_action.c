@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_action.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible);
 
@@ -44,9 +44,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void free_dummies (struct dummy_atom * tmp_pick)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct dummy_atom * tmp_pick : 
+*  struct dummy_atom * tmp_pick :
 */
 void free_dummies (struct dummy_atom * tmp_pick)
 {
@@ -69,9 +69,9 @@ void free_dummies (struct dummy_atom * tmp_pick)
 /*
 *  void clean_this_project (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void clean_this_project (struct project * this_proj)
 {
@@ -156,11 +156,11 @@ void clean_this_project (struct project * this_proj)
 /*
 *  void clean_motion_search (struct project * this_proj, atom_search * asearch, int sid)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
-*  int sid                    : 
+*  struct project * this_proj :
+*  atom_search * asearch      :
+*  int sid                    :
 */
 void clean_motion_search (struct project * this_proj, atom_search * asearch, int sid)
 {
@@ -189,11 +189,11 @@ void clean_motion_search (struct project * this_proj, atom_search * asearch, int
 /*
 *  int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
-*  gboolean visible           : 
+*  struct project * this_proj :
+*  atom_search * asearch      :
+*  gboolean visible           :
 */
 int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible)
 {
@@ -416,7 +416,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
           // GTK3 Menu Action To Check
           if (this_proj -> modelgl -> color_styles[i*ATOM_MAPS])
           {
-            check_menu_item_set_active ((gpointer)this_proj -> modelgl -> color_styles[i*ATOM_MAPS], TRUE);
+            gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> color_styles[i*ATOM_MAPS], TRUE);
             set_color_map (this_proj -> modelgl -> color_styles[i*ATOM_MAPS], & this_proj -> modelgl  -> colorp[i*ATOM_MAPS][0]);
           }
 #endif
@@ -439,7 +439,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
         {
           j = i*ATOM_MAPS;
 #ifdef GTK3
-          check_menu_item_set_active ((gpointer)this_proj -> modelgl -> color_styles[j], TRUE);
+          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> color_styles[j], TRUE);
           set_color_map (this_proj -> modelgl -> color_styles[j], & this_proj -> modelgl -> colorp[j][0]);
           if (i) widget_set_sensitive (this_proj -> modelgl -> color_styles[j+6], 0);
 #endif
@@ -467,7 +467,9 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   if (this_proj -> modelgl -> chains)
   {
     clean_chains_data (this_proj -> modelgl);
+#ifdef GTK3
     update_chains_menus (this_proj -> modelgl);
+#endif
   }
   clean_volumes_data (this_proj -> modelgl);
 
@@ -1009,10 +1011,10 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
 /*
 *  void clean_all_trees (atom_search * asearch, struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  atom_search * asearch      : 
-*  struct project * this_proj : 
+*  atom_search * asearch      :
+*  struct project * this_proj :
 */
 void clean_all_trees (atom_search * asearch, struct project * this_proj)
 {
@@ -1091,10 +1093,10 @@ void clean_all_trees (atom_search * asearch, struct project * this_proj)
 /*
 *  void apply_action (struct project * this_proj, atom_search * asearch)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
+*  struct project * this_proj :
+*  atom_search * asearch      :
 */
 void apply_action (struct project * this_proj, atom_search * asearch)
 {
@@ -1162,10 +1164,10 @@ void apply_action (struct project * this_proj, atom_search * asearch)
 /*
 *  void prepare_random_action (struct project * this_proj, atom_search * asearch)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
+*  struct project * this_proj :
+*  atom_search * asearch      :
 */
 void prepare_random_action (struct project * this_proj, atom_search * asearch)
 {
@@ -1359,11 +1361,11 @@ void prepare_random_action (struct project * this_proj, atom_search * asearch)
 /*
 *  gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_search * asearch, gboolean editing)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
-*  gboolean editing           : 
+*  struct project * this_proj :
+*  atom_search * asearch      :
+*  gboolean editing           :
 */
 gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_search * asearch, gboolean editing)
 {
@@ -1962,9 +1964,9 @@ gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_searc
 /*
 *  atom_search * duplicate_atom_search (atom_search * asearch)
 *
-*  Usage: 
+*  Usage:
 *
-*  atom_search * asearch : 
+*  atom_search * asearch :
 */
 atom_search * duplicate_atom_search (atom_search * asearch)
 {
@@ -2002,10 +2004,10 @@ atom_search * duplicate_atom_search (atom_search * asearch)
 /*
 *  G_MODULE_EXPORT void take_action (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but :
+*  gpointer data   :
 */
 G_MODULE_EXPORT void take_action (GtkButton * but, gpointer data)
 {

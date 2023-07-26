@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_mol.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutine to read molecule(s) data from atomes project file
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int read_atom_m (FILE * fp, int s, int a);
   int read_this_mol (FILE * fp, struct molecule * tmp);
@@ -37,11 +38,11 @@ extern void duplicate_molecule (struct molecule * new_mol, struct molecule * old
 /*
 *  int read_atom_m (FILE * fp, int s, int a)
 *
-*  Usage: 
+*  Usage: read atom fragment and molecule data
 *
-*  FILE * fp : 
-*  int s     : 
-*  int a     : 
+*  FILE * fp : The file pointer
+*  int s     : The MD step
+*  int a     : The atom number
 */
 int read_atom_m (FILE * fp, int s, int a)
 {
@@ -53,10 +54,10 @@ int read_atom_m (FILE * fp, int s, int a)
 /*
 *  int read_this_mol (FILE * fp, struct molecule * tmp)
 *
-*  Usage: 
+*  Usage: read molecule data
 *
-*  FILE * fp             : 
-*  struct molecule * tmp : 
+*  FILE * fp             : The file pointer
+*  struct molecule * tmp : The molecule to store the data
 */
 int read_this_mol (FILE * fp, struct molecule * tmp)
 {
@@ -76,9 +77,9 @@ int read_this_mol (FILE * fp, struct molecule * tmp)
 /*
 *  int read_mol (FILE * fp)
 *
-*  Usage: 
+*  Usage: read molecule(s) information from file
 *
-*  FILE * fp : 
+*  FILE * fp : The file pointer
 */
 int read_mol (FILE * fp)
 {

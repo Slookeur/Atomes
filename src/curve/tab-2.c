@@ -1083,7 +1083,7 @@ GtkWidget * create_tab_2 (gpointer data)
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, bbox (Hist_box, "Bar opacity:"), data_hist_pos, FALSE, FALSE, 0);
 
 
-  add_box_child_start (GTK_ORIENTATION_VERTICAL, databox, create_hsep (), FALSE, FALSE, 5);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, databox, gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), FALSE, FALSE, 5);
   GtkWidget * hbox;
   if (b != MS)
   {
@@ -1092,7 +1092,7 @@ GtkWidget * create_tab_2 (gpointer data)
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox,
                          check_button ("Automatic <i>x axis</i> shift for bar diagram  (to improve visibility)", -1, -1, this_proj -> curves[b][c] -> bshift, G_CALLBACK(set_bshift), data),
                          FALSE, FALSE, 10);
-    add_box_child_start (GTK_ORIENTATION_VERTICAL, databox, create_hsep (), FALSE, FALSE, 5);
+    add_box_child_start (GTK_ORIENTATION_VERTICAL, databox, gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), FALSE, FALSE, 5);
   }
   hbox = create_hbox (0);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, databox, hbox, FALSE, FALSE, 10);

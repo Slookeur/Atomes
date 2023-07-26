@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_box.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data);
@@ -49,10 +49,10 @@ GtkWidget * box_data;
 /*
 *  G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 {
@@ -70,7 +70,7 @@ G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 
 #else
     // GTK3 Menu Action To Check
-    check_menu_item_set_active ((gpointer)opengl_project -> modelgl -> ogl_box_axis[0][2], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)opengl_project -> modelgl -> ogl_box_axis[0][2], TRUE);
 #endif
   }
   else if (i == 0)
@@ -79,7 +79,7 @@ G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
     if (! is_the_widget_visible(width_box)) gtk_widget_show (width_box);
 #ifdef GTK3
     // GTK3 Menu Action To Check
-    check_menu_item_set_active ((gpointer)opengl_project -> modelgl -> ogl_box_axis[0][1], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)opengl_project -> modelgl -> ogl_box_axis[0][1], TRUE);
 #endif
   }
 }
@@ -88,20 +88,20 @@ G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but :
+*  gpointer data        :
 */
 G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but :
+*  gpointer data         :
 */
 G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
 #endif
@@ -116,7 +116,7 @@ G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
   {
 #ifdef GTK3
      // GTK3 Menu Action To Check
-    check_menu_item_set_active ((gpointer)opengl_project -> modelgl -> ogl_box_axis[0][0], TRUE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)opengl_project -> modelgl -> ogl_box_axis[0][0], TRUE);
 #endif
     gtk_combo_box_set_active (GTK_COMBO_BOX(styles), WIREFRAME-1);
   }
@@ -124,7 +124,7 @@ G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
   {
 #ifdef GTK3
     // GTK3 Menu Action To Check
-    check_menu_item_set_active ((gpointer)opengl_project -> modelgl -> ogl_box_axis[0][0], FALSE);
+    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)opengl_project -> modelgl -> ogl_box_axis[0][0], FALSE);
 #endif
     gtk_combo_box_set_active (GTK_COMBO_BOX(styles), NONE);
   }
@@ -134,10 +134,10 @@ G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkColorChooser * colob : 
-*  gpointer data           : 
+*  GtkColorChooser * colob :
+*  gpointer data           :
 */
 G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 {
@@ -150,21 +150,21 @@ G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 /*
 *  G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          :
 */
 G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg :
+*  gpointer data    :
 */
 G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
 #endif

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_back.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   GtkWidget * menu_back (glwin * view);
 
@@ -35,26 +35,26 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  GtkWidget * menu_back (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view :
 */
 GtkWidget * menu_back (glwin * view)
 {
   GtkWidget * menub = gtk_menu_new ();
   GtkWidget * bc = create_menu_item (FALSE, "Color");
-  add_menu_child (menub, bc);
-  menu_item_set_submenu (bc, color_box(view, -2, 0, 0));
+  gtk_menu_shell_append ((GtkMenuShell *)menub, bc);
+  gtk_menu_item_set_submenu ((GtkMenuItem *)bc, color_box(view, -2, 0, 0));
   return menub;
 }
 #else
 /*
 *  GMenu * menu_back (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view :
+*  int popm     :
 */
 GMenu * menu_back (glwin * view, int popm)
 {

@@ -2861,7 +2861,7 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
   {
     prop = create_menu_item (FALSE, str);
     g_free (str);
-    add_menu_child (menu, prop);
+    gtk_menu_shell_append ((GtkMenuShell *)menu, prop);
     if (actel > 0) add_menu_separator (menu);
   }
   if (actel > 0)
@@ -2871,7 +2871,7 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
     {
       prop = create_menu_item (FALSE, str);
       g_free (str);
-      add_menu_child (menu, prop);
+      gtk_menu_shell_append ((GtkMenuShell *)menu, prop);
       g_signal_connect (G_OBJECT(prop), "activate", G_CALLBACK(edit_field_prop), data);
     }
     switch (i)
@@ -2881,7 +2881,7 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
         {
           add_menu_separator (menu);
           prop = create_menu_item (FALSE, "Add New Molecule");
-          add_menu_child (menu, prop);
+          gtk_menu_shell_append ((GtkMenuShell *)menu, prop);
           g_signal_connect (G_OBJECT(prop), "activate", G_CALLBACK(add_molecule_to_field), data);
         }
         if (tmp_field -> molecules > tmp_coord -> totcoord[3]
@@ -2892,7 +2892,7 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
           str = g_strdup_printf ("Remove Molecule %s From Field", tmp_fmol -> name);
           prop = create_menu_item (FALSE, str);
           g_free (str);
-          add_menu_child (menu, prop);
+          gtk_menu_shell_append ((GtkMenuShell *)menu, prop);
           g_signal_connect (G_OBJECT(prop), "activate", G_CALLBACK(remove_molecule_from_field), (gpointer *)tmp_fmol);
         }
         break;
@@ -2907,7 +2907,7 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
             str = g_strdup_printf ("Created New Field Atom From %s Atom(s)", tmp_fat -> name);
             prop = create_menu_item (FALSE, str);
             g_free (str);
-            add_menu_child (menu, prop);
+            gtk_menu_shell_append ((GtkMenuShell *)menu, prop);
             g_signal_connect (G_OBJECT(prop), "activate", G_CALLBACK(select_atom_id_from_fied_molecule), GINT_TO_POINTER(0));
           }
           l = 0;
@@ -2923,7 +2923,7 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
             str = g_strdup_printf ("Remove Atom %s From Field Molecule", tmp_fat -> name);
             prop = create_menu_item (FALSE, str);
             g_free (str);
-            add_menu_child (menu, prop);
+            gtk_menu_shell_append ((GtkMenuShell *)menu, prop);
             g_signal_connect (G_OBJECT(prop), "activate", G_CALLBACK(remove_atom_from_field_molecule), (gpointer *)tmp_fat);
           }
         }
@@ -2932,7 +2932,7 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
         {
           prop = create_menu_item (FALSE, str);
           g_free (str);
-          add_menu_child (menu, prop);
+          gtk_menu_shell_append ((GtkMenuShell *)menu, prop);
           g_signal_connect (G_OBJECT(prop), "activate", G_CALLBACK(remove_field_prop), data);
         }
         break;
@@ -2944,7 +2944,7 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
     if (actel > 0) add_menu_separator (menu);
     prop = create_menu_item (FALSE, str);
     g_free (str);
-    add_menu_child (menu, prop);
+    gtk_menu_shell_append ((GtkMenuShell *)menu, prop);
     g_signal_connect (G_OBJECT(prop), "activate", G_CALLBACK(add_field_prop), data);
   }
   pop_menu_at_pointer (menu, (GdkEvent *)event);

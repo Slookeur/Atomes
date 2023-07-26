@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_curve.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to read curve information from atomes project file
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int read_project_curve (FILE * fp, int wid, int pid);
 
@@ -33,10 +34,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  gboolean read_data_layout (FILE * fp, DataLayout * layout)
 *
-*  Usage: 
+*  Usage: read data layout from file
 *
-*  FILE * fp           : 
-*  DataLayout * layout : 
+*  FILE * fp           : The file pointer
+*  DataLayout * layout : The data layout to store the data
 */
 gboolean read_data_layout (FILE * fp, DataLayout * layout)
 {
@@ -56,11 +57,11 @@ gboolean read_data_layout (FILE * fp, DataLayout * layout)
 /*
 *  int read_project_curve (FILE * fp, int wid, int pid)
 *
-*  Usage: 
+*  Usage: read a project curve from file
 *
-*  FILE * fp : 
-*  int wid   : 
-*  int pid   : 
+*  FILE * fp : The file pointer
+*  int wid   : The total number of projects in the workspace
+*  int pid   : The active project id
 */
 int read_project_curve (FILE * fp, int wid, int pid)
 {

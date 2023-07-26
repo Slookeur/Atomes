@@ -22,7 +22,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  List of subroutines:
 
-  void initmsd (int s);
+  void initmsd ();
   void update_msd_view (struct project * this_proj);
 
   G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data);
@@ -41,13 +41,11 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "project.h"
 
 /*
-*  void initmsd (int s)
+*  void initmsd ()
 *
 *  Usage: initialize the curve widgets for the MSD
-*
-*  int s :
 */
-void initmsd (int s)
+void initmsd ()
 {
   int i, j;
 
@@ -101,7 +99,7 @@ void initmsd (int s)
   j=j+1;
   active_project -> curves[MS][j] -> name = g_strdup_printf ("Drift[z]");
 
-  addcurwidgets (activep, MS, s);
+  addcurwidgets (activep, MS, 0);
   active_project -> initok[MS]=TRUE;
 }
 
@@ -148,7 +146,7 @@ G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data)
 {
   int i;
 
-  if (! active_project -> initok[MS])  initmsd (0);
+  if (! active_project -> initok[MS])  initmsd ();
   clean_curves_data (MS, 0, active_project -> numc[MS]);
   prepostcalc (widg, FALSE, MS, 0, opac);
   active_project -> min[MS] = active_project -> delta[MS]*active_project -> num_delta[MS];

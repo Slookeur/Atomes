@@ -16,16 +16,14 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - GTK3/GTK4 utility subroutines, instead of having pre-processor flags everywhere in the code
+   when ever I need to use a GTK function that changed between v3 and v4, I use an home made
+   function in this file, and deal then here with the potential GTK versions issues.
+
 *
 *  List of subroutines:
 
-  int to_gdk_col (float val);
-
-  float gdk_to_col (float val);
-
-  gboolean check_menu_item_get_active (gpointer item);
   gboolean is_the_widget_visible (GtkWidget * widg);
   gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename);
 
@@ -45,10 +43,12 @@ If not, see <https://www.gnu.org/licenses/> */
   void add_container_child (int type, GtkWidget * widg, GtkWidget * child);
   void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding);
   void add_box_child_start (int orientation, GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding);
-  void check_menu_item_set_active (gpointer item, gboolean active);
-  void add_menu_child (GtkWidget * widg, GtkWidget * child);
-  void menu_item_set_submenu (GtkWidget * item, GtkWidget * sub_menu);
-  void add_item_child (GtkWidget * widg, GtkWidget * child);
+  void add_widget_gesture_and_key_action (GtkWidget * widget,
+                                          gchar * cp_name, GCallback cp_handler, gpointer cp_data,
+                                          gchar * cr_name, GCallback cr_handler, gpointer cr_data,
+                                          gchar * kp_name, GCallback kp_handler, gpointer kp_data,
+                                          gchar * mo_name, GCallback mo_handler, gpointer mo_data,
+                                          gchar * sc_name, GCallback sc_handler, gpointer sc_data);
   void run_this_gtk_native_dialog (GtkNativeDialog * dial, GCallback handler, gpointer data);
   void run_this_gtk_dialog (GtkWidget * dial, GCallback handler, gpointer data);
   void resize_this_window (GtkWidget * window, int x, int y);
@@ -75,6 +75,7 @@ If not, see <https://www.gnu.org/licenses/> */
   void pop_menu_at_pointer (GtkWidget * pop, double x, double y);
   void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event);
   void add_gtk_close_event (GtkWidget * widg, GCallback handler, gpointer data);
+  static void convert_alpha (cairo_surface_t * surf, GdkPixbuf * pix, int src_x, int src_y, int width, int height);
 
   G_MODULE_EXPORT void to_activate_entry (GtkEventControllerFocus * focus, gpointer data);
   G_MODULE_EXPORT void run_destroy_dialog (GtkDialog * dialog, gint response_id, gpointer data);
@@ -83,29 +84,45 @@ If not, see <https://www.gnu.org/licenses/> */
   GtkWidget * new_gtk_window ();
   GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolean resiz);
   GtkWidget * dialogmodal (gchar * str, GtkWindow * parent);
-  GtkWidget * message_popover (gchar * message, GtkWidget * parent);
   GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType mtype, GtkButtonsType buttons, GtkWidget * parent);
   GtkWidget * dialog_cancel_apply (gchar * title, GtkWidget * parent, gboolean resiz);
-  GtkWidget * create_hsep ();
-  GtkWidget * create_hpaned ();
+  GtkWidget * create_hscale (float min, float max, float delta,
+                             float val, int pos, int round, int size,
+                             GCallback handler, GCallback scroll_handler, gpointer data);
+  GtkWidget * create_vscale (float min, float max, float delta,
+                             float val, int pos, int round, int size,
+                             GCallback handler, GCallback scroll_handler, gpointer data);
   GtkWidget * create_vbox (int spacing);
   GtkWidget * create_hbox (int spacing);
   GtkWidget * dialog_get_content_area (GtkWidget * widg);
   GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_y);
   GtkWidget * create_layout (int x, int y);
   GtkWidget * create_combo ();
+  GtkWidget * create_text_view (int dimx, int dimy, int edit, int mono, GCallback handler, gpointer data, gchar * text);
   GtkWidget * create_entry (GCallback handler, int dim, int cdim, gboolean key_release, gpointer data);
   GtkWidget * stock_image (const gchar * stock_id);
   GtkWidget * create_menu_item (gboolean add_mnemo, gchar * name);
   GtkWidget * create_menu_item_from_widget (GtkWidget * widg, gboolean check, gboolean radio, gboolean status);
   GtkWidget * create_image_from_data (int format, gpointer item_image);
+  GtkWidget * gtk3_menu_item (GtkWidget * menu, gchar * name,
+                              int icon_format, gpointer item_icon,
+                              GCallback handler, gpointer data,
+                              gboolean accel, guint key, GdkModifierType mod,
+                              gboolean check, gboolean radio, gboolean status);
   GtkWidget * add_advanced_item (GtkWidget * menu, GCallback handler, gpointer data, gboolean accel, guint key, GdkModifierType mod);
+  GtkWidget * markup_label (gchar * text, int dimx, int dimy, float ax, float ay);
+  GtkWidget * color_button (ColRGBA col, gboolean alpha, int dimx, int dimy, GCallback handler, gpointer data);
+  GtkWidget * font_button (gchar * font, int dimx, int dimy, GCallback handler, gpointer data);
+  GtkWidget * spin_button (GCallback handler, double value, double start, double end, double step, int digits, int dim,  gpointer data);
+  GtkWidget * check_button (gchar * text, int dimx, int dimy, gboolean state, GCallback handler, gpointer data);
+  GtkWidget * radio_button (gchar * text, int dimx, int dimy, gboolean state, GCallback handler, gpointer data);
+  GtkWidget * create_button (gchar * text, int image_format, gchar * image, int dimx, int dimy, int relief, GCallback handler, gpointer data);
   GtkWidget * abox (GtkWidget * box, char * lab, int vspace);
   GtkWidget * bbox (GtkWidget * box, char * lab);
   GtkWidget * cbox (GtkWidget * box, char * lab);
   GtkWidget * fbox (GtkWidget * box, char * lab);
   GtkWidget * create_scroll (GtkWidget * box, int dimx, int dimy, int shadow);
-  GtkWidget * create_expander (gchar * name, gchar * file_img, int i);
+  GtkWidget * create_expander (gchar * name, gchar * file_img);
   GtkWidget * destroy_this_widget (GtkWidget * widg);
   GtkWidget * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name);
   GtkWidget * get_top_level (GtkWidget * widg);
@@ -113,6 +130,8 @@ If not, see <https://www.gnu.org/licenses/> */
   GtkTextBuffer * add_buffer (GCallback handler, gpointer data, gchar * text);
 
   GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name);
+
+  GdkPixbuf * convert_to_pixbuf (cairo_surface_t * surf);
 
   GMenuItem * create_menu_item (gboolean add_mnemo, gchar * name, gchar * action);
 
@@ -137,9 +156,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void show_the_widgets (GtkWidget * widg)
 *
-*  Usage:
+*  Usage: show GtkWidget
 *
-*  GtkWidget * widg :
+*  GtkWidget * widg : The GtkWidget to show
 */
 void show_the_widgets (GtkWidget * widg)
 {
@@ -153,10 +172,10 @@ void show_the_widgets (GtkWidget * widg)
 /*
 *  void widget_set_sensitive (GtkWidget * widg, gboolean sensitive)
 *
-*  Usage:
+*  Usage: Set sensitivity for a GtkWidget, ensuring it is a GtkWidget
 *
-*  GtkWidget * widg   :
-*  gboolean sensitive :
+*  GtkWidget * widg   : The GtkWidget
+*  gboolean sensitive : Sensitivity
 */
 void widget_set_sensitive (GtkWidget * widg, gboolean sensitive)
 {
@@ -172,11 +191,11 @@ void widget_set_sensitive (GtkWidget * widg, gboolean sensitive)
 /*
 *  void add_container_child (int type, GtkWidget * widg, GtkWidget * child)
 *
-*  Usage:
+*  Usage: Add a GtkWidget into another GtkWidget
 *
-*  int type          :
-*  GtkWidget * widg  :
-*  GtkWidget * child :
+*  int type          : GTK4 only: the type of container
+*  GtkWidget * widg  : The container Gtkwidget
+*  GtkWidget * child : The child GtkWidget
 */
 void add_container_child (int type, GtkWidget * widg, GtkWidget * child)
 {
@@ -221,13 +240,13 @@ void add_container_child (int type, GtkWidget * widg, GtkWidget * child)
 /*
 *  void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding)
 *
-*  Usage:
+*  Usage: Add a GtkWidget in a GtkBox at the end position
 *
-*  GtkWidget * widg  :
-*  GtkWidget * child :
-*  gboolean expand   :
-*  gboolean fill     :
-*  int padding       :
+*  GtkWidget * widg  : The GtkBox
+*  GtkWidget * child : The GtkWidget to add
+*  gboolean expand   : GTK3 only: expandable
+*  gboolean fill     : GTK3 only: fill
+*  int padding       : GTK3 only: box padding
 */
 void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding)
 {
@@ -242,14 +261,13 @@ void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gb
 /*
 *  void add_box_child_start (int orientation, GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding)
 *
-*  Usage:
+*  Usage: Add a GtkWidget in a GtkBox at the initial position
 *
-*  int orientation   :
-*  GtkWidget * widg  :
-*  GtkWidget * child :
-*  gboolean expand   :
-*  gboolean fill     :
-*  int padding       :
+*  GtkWidget * widg  : The GtkBox
+*  GtkWidget * child : The GtkWidget to add
+*  gboolean expand   : GTK3 only: expandable
+*  gboolean fill     : GTK3 only: fill
+*  int padding       : GTK3 only: box padding
 */
 void add_box_child_start (int orientation, GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding)
 {
@@ -276,107 +294,29 @@ void add_box_child_start (int orientation, GtkWidget * widg, GtkWidget * child, 
 #endif
 }
 
-/*
-*  void check_menu_item_set_active (gpointer item, gboolean active)
-*
-*  Usage:
-*
-*  gpointer item   :
-*  gboolean active :
-*/
-void check_menu_item_set_active (gpointer item, gboolean active)
-{
 #ifdef GTK3
-  gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM((GtkWidget *)item), active);
-#else
-
-#endif
-}
-
-/*
-*  gboolean check_menu_item_get_active (gpointer item)
-*
-*  Usage:
-*
-*  gpointer item :
-*/
-gboolean check_menu_item_get_active (gpointer item)
-{
-#ifdef GTK4
-  return FALSE;
-#else
-  return gtk_check_menu_item_get_active (GTK_CHECK_MENU_ITEM((GtkWidget *)item));
-#endif
-}
-
-#ifdef GTK3
-/*
-*  void add_menu_child (GtkWidget * widg, GtkWidget * child)
-*
-*  Usage:
-*
-*  GtkWidget * widg  :
-*  GtkWidget * child :
-*/
-void add_menu_child (GtkWidget * widg, GtkWidget * child)
-{
-  gtk_menu_shell_append (GTK_MENU_SHELL(widg), child);
-}
-
-/*
-*  void menu_item_set_submenu (GtkWidget * item, GtkWidget * sub_menu)
-*
-*  Usage:
-*
-*  GtkWidget * item     :
-*  GtkWidget * sub_menu :
-*/
-void menu_item_set_submenu (GtkWidget * item, GtkWidget * sub_menu)
-{
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM(item), sub_menu);
-}
-
 /*
 *  GtkWidget * menu_item_new_with_submenu (gchar * name, gboolean active, GtkWidget * sub_menu)
 *
-*  Usage:
+*  Usage: Adding a GtkMenuItem with a submenu and setting the sensitivity
 *
-*  gchar * name         :
-*  gboolean active      :
-*  GtkWidget * sub_menu :
+*  gchar * name         : Name of the menu item
+*  gboolean active      : Sensitivity
+*  GtkWidget * sub_menu : The GtkWidget submenu
 */
 GtkWidget * menu_item_new_with_submenu (gchar * name, gboolean active, GtkWidget * sub_menu)
 {
    GtkWidget * item =  create_menu_item (FALSE, name);
-   menu_item_set_submenu (item, sub_menu);
+   gtk_menu_item_set_submenu ((GtkMenuItem *)item, sub_menu);
    widget_set_sensitive (item, active);
    return item;
 }
 #endif
 
 /*
-*  void add_item_child (GtkWidget * widg, GtkWidget * child)
-*
-*  Usage:
-*
-*  GtkWidget * widg  :
-*  GtkWidget * child :
-*/
-void add_item_child (GtkWidget * widg, GtkWidget * child)
-{
-#ifdef GTK4
-
-#else
-  gtk_container_add (GTK_CONTAINER(widg), child);
-#endif
-}
-
-/*
 *  GtkWidget * new_gtk_window ()
 *
-*  Usage:
-*
-*   :
+*  Usage: create a new GtkWindow
 */
 GtkWidget * new_gtk_window ()
 {
@@ -388,6 +328,33 @@ GtkWidget * new_gtk_window ()
 }
 
 #ifdef GTK4
+/*
+*  void add_widget_gesture_and_key_action (GtkWidget * widget,
+*                                          gchar * cp_name, GCallback cp_handler, gpointer cp_data,
+*                                          gchar * cr_name, GCallback cr_handler, gpointer cr_data,
+*                                          gchar * kp_name, GCallback kp_handler, gpointer kp_data,
+*                                          gchar * mo_name, GCallback mo_handler, gpointer mo_data,
+*                                          gchar * sc_name, GCallback sc_handler, gpointer sc_data)
+*
+*  Usage: Adding GTK4 mouse, and keyboard events to a GtkWidget
+*
+*  GtkWidget * widget   : The GtkWidget
+*  gchar * cp_name      : Name of the click pressed event
+*  GCallback cp_handler : Click pressed callback
+*  gpointer cp_data     : Click pressed data pointer
+*  gchar * cr_name      : Name of the click released event
+*  GCallback cr_handler : Click released callback
+*  gpointer cr_data     : Click released data pointer
+*  gchar * kp_name      : Name of the key pressed event
+*  GCallback kp_handler : Key pressed callback
+*  gpointer kp_data     : Key pressed data pointer
+*  gchar * mo_name      : Name of the mouse motion event
+*  GCallback mo_handler : Mouse motion callback
+*  gpointer mo_data     : Mouse motion data pointer
+*  gchar * sc_name      : Name of the mouse scroll event
+*  GCallback sc_handler : Mouse scroll callback
+*  gpointer sc_data     : Mouse scroll data pointer
+*/
 void add_widget_gesture_and_key_action (GtkWidget * widget,
                                         gchar * cp_name, GCallback cp_handler, gpointer cp_data,
                                         gchar * cr_name, GCallback cr_handler, gpointer cr_data,
@@ -441,7 +408,7 @@ void add_widget_gesture_and_key_action (GtkWidget * widget,
 /*
 *  GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolean resiz)
 *
-*  Usage: create a new GtkWindo
+*  Usage: create a new GtkWindow
 *
 *  gchar * str        : Title
 *  GtkWidget * parent : Parent GtkWidget (if any)
@@ -465,14 +432,15 @@ GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolea
   return win;
 }
 
+#ifdef GTK4
 /*
 *  void run_this_gtk_native_dialog (GtkNativeDialog * dial, GCallback handler, gpointer data)
 *
-*  Usage:
+*  Usage: run a GTK4 GtkNativeDialog (used to read files)
 *
-*  GtkNativeDialog * dial :
-*  GCallback handler      :
-*  gpointer data          :
+*  GtkNativeDialog * dial : The GtkNativeDialog
+*  GCallback handler      : The callback
+*  gpointer data          : The associated data pointer
 */
 void run_this_gtk_native_dialog (GtkNativeDialog * dial, GCallback handler, gpointer data)
 {
@@ -483,15 +451,16 @@ void run_this_gtk_native_dialog (GtkNativeDialog * dial, GCallback handler, gpoi
   Event_loop[dialog_id] = g_main_loop_new (NULL, FALSE);
   g_main_loop_run (Event_loop[dialog_id]);
 }
+#endif
 
 /*
 *  void run_this_gtk_dialog (GtkWidget * dial, GCallback handler, gpointer data)
 *
-*  Usage:
+*  Usage: run a GTK (3 and 4) basic GtkDialog
 *
-*  GtkWidget * dial  :
-*  GCallback handler :
-*  gpointer data     :
+*  GtkWidget * dial  : The GtkDialog
+*  GCallback handler : The callback
+*  gpointer data     : The associated data pointer
 */
 void run_this_gtk_dialog (GtkWidget * dial, GCallback handler, gpointer data)
 {
@@ -521,37 +490,16 @@ GtkWidget * dialogmodal (gchar * str, GtkWindow * parent)
   return win;
 }
 
-#ifdef GTK3
-/*
-*  GtkWidget * message_popover (gchar * message, GtkWidget * parent)
-*
-*  Usage:
-*
-*  gchar * message    :
-*  GtkWidget * parent :
-*/
-GtkWidget * message_popover (gchar * message, GtkWidget * parent)
-{
-  GtkWidget * popover = gtk_popover_new (parent);
-  // gtk_popover_set_position (GTK_POPOVER (popover), pos);
-  GtkWidget * child = markup_label(message, -1, -1, -1, -1);
-  gtk_widget_show (child);
-  gtk_container_add (GTK_CONTAINER (popover), child);
-  gtk_container_set_border_width (GTK_CONTAINER (popover), 6);
-  return popover;
-}
-#endif
-
 /*
 *  GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType mtype, GtkButtonsType buttons, GtkWidget * parent)
 *
-*  Usage:
+*  Usage: create a modal (cannot be ignored) message window
 *
-*  gchar * message        :
-*  gchar * title          :
-*  GtkMessageType mtype   :
-*  GtkButtonsType buttons :
-*  GtkWidget * parent     :
+*  gchar * message        : The message
+*  gchar * title          : The title
+*  GtkMessageType mtype   : The message type
+*  GtkButtonsType buttons : The type of closing button to add
+*  GtkWidget * parent     : The parent window, if any
 */
 GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType mtype, GtkButtonsType buttons, GtkWidget * parent)
 {
@@ -577,11 +525,11 @@ GtkWidget * message_dialogmodal (gchar * message, gchar * title, GtkMessageType 
 /*
 *  GtkWidget * dialog_cancel_apply (gchar * title, GtkWidget * parent, gboolean resiz)
 *
-*  Usage:
+*  Usage: create a dialog modal offering a choice to apply something or not
 *
-*  gchar * title      :
-*  GtkWidget * parent :
-*  gboolean resiz     :
+*  gchar * title      : The message
+*  GtkWidget * parent : The parent window, if any
+*  gboolean resiz     : Is the new window re-sizable ?
 */
 GtkWidget * dialog_cancel_apply (gchar * title, GtkWidget * parent, gboolean resiz)
 {
@@ -615,9 +563,9 @@ void resize_this_window (GtkWidget * window, int x, int y)
 /*
 *  const gchar * entry_get_text (GtkEntry * entry)
 *
-*  Usage:
+*  Usage: get the text in a GtkEntry
 *
-*  GtkEntry * entry :
+*  GtkEntry * entry : The GtkEntry
 */
 const gchar * entry_get_text (GtkEntry * entry)
 {
@@ -631,10 +579,10 @@ const gchar * entry_get_text (GtkEntry * entry)
 /*
 *  void update_entry_int (GtkEntry * entry, int intval)
 *
-*  Usage:
+*  Usage: update the content of a GtkEntry as int
 *
-*  GtkEntry * entry :
-*  int intval       :
+*  GtkEntry * entry : The GtkEntry
+*  int intval       : The new int value to display
 */
 void update_entry_int (GtkEntry * entry, int intval)
 {
@@ -650,10 +598,10 @@ void update_entry_int (GtkEntry * entry, int intval)
 /*
 *  void update_entry_double (GtkEntry * entry, double doubleval)
 *
-*  Usage:
+*  Usage: update the content of a GtkEntry as double
 *
-*  GtkEntry * entry :
-*  double doubleval :
+*  GtkEntry * entry : The GtkEntry
+*  int doubleval    : The new double value to display
 */
 void update_entry_double (GtkEntry * entry, double doubleval)
 {
@@ -669,10 +617,10 @@ void update_entry_double (GtkEntry * entry, double doubleval)
 /*
 *  void update_entry_long_double (GtkEntry * entry, double doubleval)
 *
-*  Usage:
+*  Usage: update the content of a GtkEntry as long double
 *
-*  GtkEntry * entry :
-*  double doubleval :
+*  GtkEntry * entry : The GtkEntry
+*  int doubleval    : The new long double value to display
 */
 void update_entry_long_double (GtkEntry * entry, double doubleval)
 {
@@ -688,10 +636,10 @@ void update_entry_long_double (GtkEntry * entry, double doubleval)
 /*
 *  void update_entry_text (GtkEntry * entry, gchar * text)
 *
-*  Usage:
+*  Usage: update the content of a GtkEntry as string
 *
-*  GtkEntry * entry :
-*  gchar * text     :
+*  GtkEntry * entry : The GtkEntry
+*  gchar * text     : The new string to display
 */
 void update_entry_text (GtkEntry * entry, gchar * text)
 {
@@ -705,9 +653,9 @@ void update_entry_text (GtkEntry * entry, gchar * text)
 /*
 *  void text_view_set_monospace (GtkWidget * view)
 *
-*  Usage:
+*  Usage: set the font of a GtkTextView as monospace
 *
-*  GtkWidget * view :
+*  GtkWidget * view : The GtkTextView
 */
 void text_view_set_monospace (GtkWidget * view)
 {
@@ -717,11 +665,11 @@ void text_view_set_monospace (GtkWidget * view)
 /*
 *  void gtk_label_align (GtkWidget * lab, float ax, float ay)
 *
-*  Usage:
+*  Usage: set text alignment in a GtkLabel
 *
-*  GtkWidget * lab :
-*  float ax        :
-*  float ay        :
+*  GtkWidget * lab : The GtkLabel
+*  float ax        : The x alignment
+*  float ay        : The Y alignment
 */
 void gtk_label_align (GtkWidget * lab, float ax, float ay)
 {
@@ -732,9 +680,9 @@ void gtk_label_align (GtkWidget * lab, float ax, float ay)
 /*
 *  gboolean is_the_widget_visible (GtkWidget * widg)
 *
-*  Usage:
+*  Usage: test if a GtkWidget exist, then return if it is visible or not
 *
-*  GtkWidget * widg :
+*  GtkWidget * widg : The GtkWidget
 */
 gboolean is_the_widget_visible (GtkWidget * widg)
 {
@@ -748,6 +696,24 @@ gboolean is_the_widget_visible (GtkWidget * widg)
   }
 }
 
+/*
+*  GtkWidget * create_hscale (float min, float max, float delta,
+                              float val, int pos, int round, int size,
+                              GCallback handler, GCallback scroll_handler, gpointer data)
+*
+*  Usage: create an horizontal scale GtkWidget
+*
+*  float min                : Min value for the h scale
+*  float max                : Max value for the h scale
+*  float delta              : The step on the h scale
+*  float val                : The value to position to set on the h scale
+*  int pos                  : The location where the value is on display
+*  int round                : The rounding digit for the value on display
+*  int size                 : The x size of the GtkWdiget
+*  GCallback handler        : The callback to move the h scale
+*  GCallback scroll_handler : The callback on mouse scroll
+*  gpointer data            : The associated data pointer
+*/
 GtkWidget * create_hscale (float min, float max, float delta,
                            float val, int pos, int round, int size,
                            GCallback handler, GCallback scroll_handler, gpointer data)
@@ -755,8 +721,8 @@ GtkWidget * create_hscale (float min, float max, float delta,
   GtkWidget * hscale;
   hscale = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, min, max, delta);
   gtk_scale_set_draw_value (GTK_SCALE(hscale), TRUE);
-  gtk_scale_set_value_pos (GTK_SCALE(hscale), pos);
   gtk_widget_set_size_request (hscale, size, -1);
+  gtk_scale_set_value_pos (GTK_SCALE(hscale), pos);
   gtk_range_set_value (GTK_RANGE(hscale), val);
   gtk_range_set_round_digits (GTK_RANGE(hscale), round);
   if (handler != NULL) g_signal_connect (G_OBJECT(hscale), "value-changed", handler, data);
@@ -764,6 +730,24 @@ GtkWidget * create_hscale (float min, float max, float delta,
   return hscale;
 }
 
+/*
+*  GtkWidget * create_vscale (float min, float max, float delta,
+                              float val, int pos, int round, int size,
+                              GCallback handler, GCallback scroll_handler, gpointer data)
+*
+*  Usage: create an vertical scale GtkWidget
+*
+*  float min                : Min value for the v scale
+*  float max                : Max value for the v scale
+*  float delta              : The step on the v scale
+*  float val                : The value to position to set on the h scale
+*  int pos                  : The location where the value is on display
+*  int round                : The rounding digit for the value on display
+*  int size                 : The x size of the GtkWdiget
+*  GCallback handler        : The callback to move the v scale
+*  GCallback scroll_handler : The callback on mouse scroll
+*  gpointer data            : The associated data pointer
+*/
 GtkWidget * create_vscale (float min, float max, float delta,
                            float val, int pos, int round, int size,
                            GCallback handler, GCallback scroll_handler, gpointer data)
@@ -781,35 +765,11 @@ GtkWidget * create_vscale (float min, float max, float delta,
 }
 
 /*
-*  GtkWidget * create_hsep ()
-*
-*  Usage:
-*
-*   :
-*/
-GtkWidget * create_hsep ()
-{
-  return gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-}
-
-/*
-*  GtkWidget * create_hpaned ()
-*
-*  Usage:
-*
-*   :
-*/
-GtkWidget * create_hpaned ()
-{
-  return gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
-}
-
-/*
 *  GtkWidget * create_vbox (int spacing)
 *
-*  Usage:
+*  Usage: create a GtkBox with vertical orientation
 *
-*  int spacing :
+*  int spacing : spacing between elements
 */
 GtkWidget * create_vbox (int spacing)
 {
@@ -819,9 +779,9 @@ GtkWidget * create_vbox (int spacing)
 /*
 *  GtkWidget * create_hbox (int spacing)
 *
-*  Usage:
+*  Usage: create a GtkBox with horizontal orientation
 *
-*  int spacing :
+*  int spacing : spacing between elements
 */
 GtkWidget * create_hbox (int spacing)
 {
@@ -831,9 +791,9 @@ GtkWidget * create_hbox (int spacing)
 /*
 *  GtkWidget * dialog_get_content_area (GtkWidget * widg)
 *
-*  Usage:
+*  Usage: prepare GtkWidget to insert content in a GtkDialog window
 *
-*  GtkWidget * widg :
+*  GtkWidget * widg : The GtkDialog window
 */
 GtkWidget * dialog_get_content_area (GtkWidget * widg)
 {
@@ -849,12 +809,12 @@ GtkWidget * dialog_get_content_area (GtkWidget * widg)
 /*
 *  void layout_add_widget (GtkWidget * layout, GtkWidget * child, int x_pos, int y_pos)
 *
-*  Usage:
+*  Usage: Add a GtkWidget in a GtkLayout
 *
-*  GtkWidget * layout :
-*  GtkWidget * child  :
-*  int x_pos          :
-*  int y_pos          :
+*  GtkWidget * layout : The GtkLayout
+*  GtkWidget * child  : The GtkWidget to insert
+*  int x_pos          : The x position to insert at
+*  int y_pos          : The y position to insert at
 */
 void layout_add_widget (GtkWidget * layout, GtkWidget * child, int x_pos, int y_pos)
 {
@@ -868,11 +828,11 @@ void layout_add_widget (GtkWidget * layout, GtkWidget * child, int x_pos, int y_
 /*
 *  GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_y)
 *
-*  Usage:
+*  Usage: Insert a vertical GtkBox in a GtkLatout then send back the GtkBox
 *
-*  GtkWidget * layout :
-*  int size_x         :
-*  int size_y         :
+*  GtkWidget * layout : The GtkLayout
+*  int size_x         : The x size of the box
+*  int size_y         : The y size of the box
 */
 GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_y)
 {
@@ -885,10 +845,10 @@ GtkWidget * add_vbox_to_layout (GtkWidget * layout, int size_x, int size_y)
 /*
 *  GtkWidget * create_layout (int x, int y)
 *
-*  Usage:
+*  Usage: create a GtkLayout / GtkFixed widget
 *
-*  int x :
-*  int y :
+*  int x : The x size of the widget
+*  int y : The y size of the widget
 */
 GtkWidget * create_layout (int x, int y)
 {
@@ -905,10 +865,10 @@ GtkWidget * create_layout (int x, int y)
 /*
 *  void combo_text_append (GtkWidget * combo, gchar * text)
 *
-*  Usage:
+*  Usage: append text in GtkComboBox widget
 *
-*  GtkWidget * combo :
-*  gchar * text      :
+*  GtkWidget * combo : The GtkWidget
+*  gchar * text      : The text to append
 */
 void combo_text_append (GtkWidget * combo, gchar * text)
 {
@@ -918,10 +878,10 @@ void combo_text_append (GtkWidget * combo, gchar * text)
 /*
 *  void combo_text_prepend (GtkWidget * combo, gchar * text)
 *
-*  Usage:
+*  Usage: prepend text in GtkComboBox widget
 *
-*  GtkWidget * combo :
-*  gchar * text      :
+*  GtkWidget * combo : The GtkWidget
+*  gchar * text      : The text to prepend
 */
 void combo_text_prepend (GtkWidget * combo, gchar * text)
 {
@@ -931,9 +891,7 @@ void combo_text_prepend (GtkWidget * combo, gchar * text)
 /*
 *  GtkWidget * create_combo ()
 *
-*  Usage:
-*
-*   :
+*  Usage: create a GtkCombox widget, note deprecated in GTK4
 */
 GtkWidget * create_combo ()
 {
@@ -943,9 +901,9 @@ GtkWidget * create_combo ()
 /*
 *  void setup_text_tags (GtkTextBuffer * buffer)
 *
-*  Usage:
+*  Usage: prepare the avialable text tags for the GtkTextBuffer
 *
-*  GtkTextBuffer * buffer :
+*  GtkTextBuffer * buffer : The GtkTextBuffer
 */
 void setup_text_tags (GtkTextBuffer * buffer)
 {
@@ -1177,11 +1135,11 @@ void setup_text_tags (GtkTextBuffer * buffer)
 /*
 *  GtkTextBuffer * add_buffer (GCallback handler, gpointer data, gchar * text)
 *
-*  Usage:
+*  Usage: create a GtkTextBuffer
 *
-*  GCallback handler :
-*  gpointer data     :
-*  gchar * text      :
+*  GCallback handler : The callback on buffer changed
+*  gpointer data     : The associated data pointer
+*  gchar * text      : The text to display
 */
 GtkTextBuffer * add_buffer (GCallback handler, gpointer data, gchar * text)
 {
@@ -1198,8 +1156,20 @@ GtkTextBuffer * add_buffer (GCallback handler, gpointer data, gchar * text)
   return buffer;
 }
 
-GtkWidget * create_text_view (int dimx, int dimy, int edit, int mono,
-                              GCallback handler, gpointer data, gchar * text)
+/*
+*  GtkWidget * create_text_view (int dimx, int dimy, int edit, int mono, GCallback handler, gpointer data, gchar * text)
+*
+*  Usage: create a GtkTextView and display some text
+*
+*  int dimx          : The x size of the GtkTextView
+*  int dimy          : The y size of the GtkTextView
+*  int edit          : Is the text view editable (1/0)
+*  int mono          : Use monospace font (1/0)
+*  GCallback handler : The callback on buffer changed
+*  gpointer data     : The associated data pointer
+*  gchar * text      : The text to display
+*/
+GtkWidget * create_text_view (int dimx, int dimy, int edit, int mono, GCallback handler, gpointer data, gchar * text)
 {
   GtkWidget * tview = gtk_text_view_new ();
   gtk_text_view_set_buffer (GTK_TEXT_VIEW(tview), add_buffer(handler, data, text));
@@ -1209,17 +1179,25 @@ GtkWidget * create_text_view (int dimx, int dimy, int edit, int mono,
   return tview;
 }
 
-static void
-convert_alpha (guchar * dest_data,
-               int     dest_stride,
-               guchar * src_data,
-               int     src_stride,
-               int     src_x,
-               int     src_y,
-               int     width,
-               int     height)
+/*
+*  static void convert_alpha (cairo_surface_t * surf, GdkPixbuf * pix, int src_x, int src_y, int width, int height)
+*
+*  Usage: convert a cairo surface to pixbuf
+*
+*  cairo_surface_t * surf : The cairo surface to convert
+*  GdkPixbuf * pix        : The resulting GdkPixBuf
+*  int src_x              : Shift on x, if any
+*  int src_y              : Shift on y, if any
+*  int width              : Image width
+*  int height             : Image height
+*/
+static void convert_alpha (cairo_surface_t * surf, GdkPixbuf * pix, int src_x, int src_y, int width, int height)
 {
   int x, y;
+  guchar * src_data = cairo_image_surface_get_data (surf);
+  int src_stride = cairo_image_surface_get_stride (surf);
+  guchar * dest_data = gdk_pixbuf_get_pixels (pix);
+  int dest_stride = gdk_pixbuf_get_rowstride (pix);
 
   src_data += src_stride * src_y + src_x * 4;
 
@@ -1249,16 +1227,19 @@ convert_alpha (guchar * dest_data,
   }
 }
 
+/*
+*  GdkPixbuf * convert_to_pixbuf (cairo_surface_t * surf)
+*
+*  Usage: convert cairo surface to GdkPixbuf
+*
+*  cairo_surface_t * surf : The cairo sufrace to convert
+*/
 GdkPixbuf * convert_to_pixbuf (cairo_surface_t * surf)
 {
   int width  = cairo_image_surface_get_width (surf);
   int height = cairo_image_surface_get_height (surf);
   GdkPixbuf * pix = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width , height);
-  convert_alpha (gdk_pixbuf_get_pixels (pix),
-                 gdk_pixbuf_get_rowstride (pix),
-                 cairo_image_surface_get_data (surf),
-                 cairo_image_surface_get_stride (surf),
-                 0, 0, width, height);
+  convert_alpha (surf, pix, 0, 0, width, height);
   return pix;
 }
 
@@ -1266,11 +1247,11 @@ GdkPixbuf * convert_to_pixbuf (cairo_surface_t * surf)
 /*
 *  G_MODULE_EXPORT gboolean to_activate_entry (GtkWidget * widg, GdkEventFocus * event, gpointer data)
 *
-*  Usage:
+*  Usage: GtkEntry activate signal managment
 *
-*  GtkWidget * widg      :
-*  GdkEventFocus * event :
-*  gpointer data         :
+*  GtkWidget * widg      : The GtkWidget sending the signal
+*  GdkEventFocus * event : The associated focus event
+*  gpointer data         : The associated data pointer
 */
 G_MODULE_EXPORT gboolean to_activate_entry (GtkWidget * widg, GdkEventFocus * event, gpointer data)
 {
@@ -1281,10 +1262,10 @@ G_MODULE_EXPORT gboolean to_activate_entry (GtkWidget * widg, GdkEventFocus * ev
 /*
 *  G_MODULE_EXPORT void to_activate_entry (GtkEventControllerFocus * focus, gpointer data)
 *
-*  Usage:
+*  Usage: GtkEntry activate signal managment
 *
-*  GtkEventControllerFocus * focus :
-*  gpointer data                   :
+*  GtkEventControllerFocus * focus : Focus event controller
+*  gpointer data                   : The associated data pointer
 */
 G_MODULE_EXPORT void to_activate_entry (GtkEventControllerFocus * focus, gpointer data)
 {
@@ -1295,13 +1276,13 @@ G_MODULE_EXPORT void to_activate_entry (GtkEventControllerFocus * focus, gpointe
 /*
 *  GtkWidget * create_entry (GCallback handler, int dim, int cdim, gboolean key_release, gpointer data)
 *
-*  Usage:
+*  Usage: Create a GtkEntry
 *
-*  GCallback handler    :
-*  int dim              :
-*  int cdim             :
-*  gboolean key_release :
-*  gpointer data        :
+*  GCallback handler    : The callback
+*  int dim              : The x size
+*  int cdim             : The maximum number of character to display
+*  gboolean key_release : Use release event (1/0)
+*  gpointer data        : The data pointer for the callback
 */
 GtkWidget * create_entry (GCallback handler, int dim, int cdim, gboolean key_release, gpointer data)
 {
@@ -1349,7 +1330,7 @@ GtkWidget * create_entry (GCallback handler, int dim, int cdim, gboolean key_rel
 /*
 *  GtkWidget * stock_image (const gchar * stock_id)
 *
-*  Usage:
+*  Usage: create a GtkImage for the Gtk database
 *
 *  const gchar * stock_id :
 */
@@ -1362,50 +1343,29 @@ GtkWidget * stock_image (const gchar * stock_id)
 #endif
 }
 
-#ifdef GTK4
-/*
-*
-*
-*  Usage:
-*
-*   :
-*/
-/*
-*
-*
-*  Usage:
-*
-*   :
-*/
-GMenuItem * create_menu_item (gboolean add_mnemo, gchar * name, gchar * action)
-{
-  return g_menu_item_new (name, action);
-}
-#else
+#ifdef GTK3
 /*
 *  GtkWidget * create_menu_item (gboolean add_mnemo, gchar * name)
 *
-*  Usage:
+*  Usage: create a GtkMenuItem and set mnemonic
 *
-*  gboolean add_mnemo :
-*  gchar * name       :
+*  gboolean add_mnemo : Use mnemonic (1/0)
+*  gchar * name       : The name of the menu item
 */
 GtkWidget * create_menu_item (gboolean add_mnemo, gchar * name)
 {
   return (add_mnemo) ? gtk_menu_item_new_with_mnemonic (name) : gtk_menu_item_new_with_label (name);
 }
-#endif
 
-#ifdef GTK3
 /*
 *  GtkWidget * create_menu_item_from_widget (GtkWidget * widg, gboolean check, gboolean radio, gboolean status)
 *
-*  Usage:
+*  Usage: create a GtkMenuItem using a GtkWidget as label
 *
-*  GtkWidget * widg :
-*  gboolean check   :
-*  gboolean radio   :
-*  gboolean status  :
+*  GtkWidget * widg : The GtkWidget to use
+*  gboolean check   : Create a check menu item (1/0)
+*  gboolean radio   : Create a radio menu item (1/0)
+*  gboolean status  : If check or radio status (1/0)
 */
 GtkWidget * create_menu_item_from_widget (GtkWidget * widg, gboolean check, gboolean radio, gboolean status)
 {
@@ -1448,10 +1408,10 @@ g_menu_item_set_attribute (
 /*
 *  GtkWidget * create_image_from_data (int format, gpointer item_image)
 *
-*  Usage:
+*  Usage: create Gtk image for data
 *
-*  int format          :
-*  gpointer item_image :
+*  int format          : Image format
+*  gpointer item_image : The data to create the image
 */
 GtkWidget * create_image_from_data (int format, gpointer item_image)
 {
@@ -1479,6 +1439,28 @@ GtkWidget * create_image_from_data (int format, gpointer item_image)
 }
 
 #ifdef GTK3
+/*
+*  GtkWidget * gtk3_menu_item (GtkWidget * menu, gchar * name,
+*                              int icon_format, gpointer item_icon,
+*                              GCallback handler, gpointer data,
+*                              gboolean accel, guint key, GdkModifierType mod,
+*                              gboolean check, gboolean radio, gboolean status)
+*
+*  Usage: create a GT3 menu item, and insert it in a menu, if any
+*
+*  GtkWidget * menu    : The menu to insert the menu item in
+*  gchar * name        : The name of the menu item
+*  int icon_format     : The image format of the icon for the menu item
+*  gpointer item_icon  : The data for the image of the icon
+*  GCallback handler   : The callback for the menu item
+*  gpointer data       : The associated data pointer
+*  gboolean accel      : Keyboard short cut -1/0)
+*  guint key           : The key to press
+*  GdkModifierType mod : The modifier in any (Ctrl, Alt ...)
+*  gboolean check      : Create a check menu item (1/0)
+*  gboolean radio      : Create a radio menu item (1/0)
+*  gboolean status     : If check or radio status (1/0)
+*/
 GtkWidget * gtk3_menu_item (GtkWidget * menu, gchar * name,
                             int icon_format, gpointer item_icon,
                             GCallback handler, gpointer data,
@@ -1528,36 +1510,21 @@ GtkWidget * gtk3_menu_item (GtkWidget * menu, gchar * name,
     item = create_menu_item_from_widget (icon, check, radio, status);
   }
   if (handler != NULL) g_signal_connect (G_OBJECT(item), "activate", handler, data);
-  if (menu != NULL) add_menu_child (menu, item);
-  return item;
-}
-
-GtkWidget * gtk3_image_menu_item (gchar * name, int icon_format, gpointer item_icon,
-                                  GCallback handler, gpointer data, gchar * accel,
-                                  gboolean check, gboolean radio, gboolean status)
-{
-  GtkWidget * lab = gtk_label_new (accel);
-  widget_set_sensitive (lab, FALSE);
-  GtkWidget * box = create_hbox (0);
-  add_box_child_start (GTK_ORIENTATION_HORIZONTAL, box, create_image_from_data (icon_format, item_icon), FALSE, FALSE, 0);
-  add_box_child_start (GTK_ORIENTATION_HORIZONTAL, box, markup_label(name, -1, -1, 0.0, 0.5), FALSE, FALSE, (icon_format == IMG_SURFACE) ? 0 : 6);
-  add_box_child_end (box, lab, FALSE, FALSE, 4);
-  GtkWidget * item = create_menu_item_from_widget (box, FALSE, FALSE, FALSE);
-  g_signal_connect (G_OBJECT(item), "activate", handler, data);
+  if (menu != NULL) gtk_menu_shell_append ((GtkMenuShell *)menu, item);
   return item;
 }
 
 /*
 *  GtkWidget * add_advanced_item (GtkWidget * menu, GCallback handler, gpointer data, gboolean accel, guint key, GdkModifierType mod)
 *
-*  Usage:
+*  Usage: short cut to create and insert a menu item with the "Advanced" text and a stock icon
 *
-*  GtkWidget * menu    :
-*  GCallback handler   :
-*  gpointer data       :
-*  gboolean accel      :
-*  guint key           :
-*  GdkModifierType mod :
+*  GtkWidget * menu    : The menu to insert the menu item
+*  GCallback handler   : The callback for the menu item
+*  gpointer data       : The associated data pointer
+*  gboolean accel      : Keyboard short cut -1/0)
+*  guint key           : The key to press
+*  GdkModifierType mod : The modifier in any (Ctrl, Alt ...)
 */
 GtkWidget * add_advanced_item (GtkWidget * menu, GCallback handler, gpointer data, gboolean accel, guint key, GdkModifierType mod)
 {
@@ -1567,19 +1534,28 @@ GtkWidget * add_advanced_item (GtkWidget * menu, GCallback handler, gpointer dat
 /*
 *  void add_menu_separator (GtkWidget * menu)
 *
-*  Usage:
+*  Usage: add sepator in a menu
 *
-*  GtkWidget * menu :
+*  GtkWidget * menu : The GtkMenu
 */
 void add_menu_separator (GtkWidget * menu)
 {
-  add_menu_child (menu, gtk_separator_menu_item_new ());
+  gtk_menu_shell_append ((GtkMenuShell *)menu, gtk_separator_menu_item_new ());
 }
 #endif
 
-GtkWidget * markup_label (gchar * text,
-                          int dimx, int dimy,
-                          float ax, float ay)
+/*
+* GtkWidget * markup_label (gchar * text, int dimx, int dimy, float ax, float ay)
+*
+*  Usage: create a GtkLabel with pango markup
+*
+*  gchar * text : Message to display
+*  int dimx     : y size for the widget
+*  int dimy     : y size for the widget
+*  float ax     : x alignment
+*  float ay     : y alignment
+*/
+GtkWidget * markup_label (gchar * text, int dimx, int dimy, float ax, float ay)
 {
   GtkWidget * lab = gtk_label_new (text);
   gtk_label_align (lab, ax, ay);
@@ -1589,36 +1565,12 @@ GtkWidget * markup_label (gchar * text,
 }
 
 /*
-*  float gdk_to_col (float val)
-*
-*  Usage:
-*
-*  float val :
-*/
-float gdk_to_col (float val)
-{
-  return ((float) (val)) / 65535.0;
-}
-
-/*
-*  int to_gdk_col (float val)
-*
-*  Usage:
-*
-*  float val :
-*/
-int to_gdk_col (float val)
-{
-  return (int) (val * 65535.0);
-}
-
-/*
 *  ColRGBA * duplicate_color (int num, ColRGBA * col)
 *
-*  Usage:
+*  Usage: duplicate a ColRGBA pointer
 *
-*  int num       :
-*  ColRGBA * col :
+*  int num       : Size of the pointer
+*  ColRGBA * col : ColRGBA pointer to duplicate
 */
 ColRGBA * duplicate_color (int num, ColRGBA * col)
 {
@@ -1631,9 +1583,9 @@ ColRGBA * duplicate_color (int num, ColRGBA * col)
 /*
 *  ColRGBA gdkrgba_to_rgba (GdkRGBA colgdk)
 *
-*  Usage:
+*  Usage: convert GdkRGBA color to ColRGBA color
 *
-*  GdkRGBA colgdk :
+*  GdkRGBA colgdk : The GdkRGBA to convert
 */
 ColRGBA gdkrgba_to_rgba (GdkRGBA colgdk)
 {
@@ -1648,9 +1600,9 @@ ColRGBA gdkrgba_to_rgba (GdkRGBA colgdk)
 /*
 *  GdkRGBA colrgba_togtkrgba (ColRGBA col)
 *
-*  Usage:
+*  Usage: convert ColRGBA color to GdkRGBA color
 *
-*  ColRGBA col :
+*  ColRGBA col : The ColRGBA to convert
 */
 GdkRGBA colrgba_togtkrgba (ColRGBA col)
 {
@@ -1665,11 +1617,11 @@ GdkRGBA colrgba_togtkrgba (ColRGBA col)
 /*
 *  void set_renderer_color (int tocol, GtkCellRenderer * renderer, ColRGBA col)
 *
-*  Usage:
+*  Usage: set the color of a GtkCellRenderer
 *
-*  int tocol                  :
-*  GtkCellRenderer * renderer :
-*  ColRGBA col                :
+*  int tocol                  : Apply color (1/0)
+*  GtkCellRenderer * renderer : The GtkCellRenderer
+*  ColRGBA col                : The color to apply
 */
 void set_renderer_color (int tocol, GtkCellRenderer * renderer, ColRGBA col)
 {
@@ -1688,12 +1640,12 @@ void set_renderer_color (int tocol, GtkCellRenderer * renderer, ColRGBA col)
 /*
 *  void button_set_image (GtkButton * but, gchar * text, int format, gpointer image)
 *
-*  Usage:
+*  Usage: Add an image to a GtkButton
 *
-*  GtkButton * but :
-*  gchar * text    :
-*  int format      :
-*  gpointer image  :
+*  GtkButton * but : The GtkButton
+*  gchar * text    : The message to display
+*  int format      : The image format
+*  gpointer image  : The data of the image
 */
 void button_set_image (GtkButton * but, gchar * text, int format, gpointer image)
 {
@@ -1715,10 +1667,38 @@ void button_set_image (GtkButton * but, gchar * text, int format, gpointer image
 #endif
 }
 
-GtkWidget * color_button (ColRGBA col,
-                          gboolean alpha,
-                          int dimx, int dimy,
-                          GCallback handler, gpointer data)
+/*
+*  void adjust_label (GtkWidget * lab, int dimx, int dimy, float ax, float ay)
+*
+*  Usage: adjust the text position, and widget size of a GtkLabel
+*
+*  GtkWidget * lab : The GtkLabel to adjust
+*  int dimx        : The x size
+*  int dimy        : The y size
+*  float ax        : The x alignment
+*  float ay        : The y alignment
+*/
+void adjust_label (GtkWidget * lab, int dimx, int dimy, float ax, float ay)
+{
+  gtk_label_set_xalign (GTK_LABEL(lab), ax);
+  gtk_label_set_yalign (GTK_LABEL(lab), ay);
+  gtk_widget_set_size_request (lab, dimx, dimy);
+  gtk_label_set_use_markup (GTK_LABEL(lab), TRUE);
+}
+
+/*
+*  GtkWidget * color_button (ColRGBA col, gboolean alpha, int dimx, int dimy, GCallback handler, gpointer data)
+*
+*  Usage: create a color selection button
+*
+*  ColRGBA col       : The color to use
+*  gboolean alpha    : Use alpha channel (1/0)
+*  int dimx          : Size x of the button
+*  int dimy          : Size y of the button
+*  GCallback handler : The callback for the button
+*  gpointer data     : The associated data pointer
+*/
+GtkWidget * color_button (ColRGBA col, gboolean alpha, int dimx, int dimy, GCallback handler, gpointer data)
 {
   GtkWidget * colorb;
   GdkRGBA colo = colrgba_togtkrgba (col);
@@ -1729,9 +1709,18 @@ GtkWidget * color_button (ColRGBA col,
   return colorb;
 }
 
-GtkWidget * font_button (gchar * font,
-                         int dimx, int dimy,
-                         GCallback handler, gpointer data)
+/*
+*  GtkWidget * font_button (gchar * font, int dimx, int dimy, GCallback handler, gpointer data)
+*
+*  Usage: create a font selection button
+*
+*  gchar * font      : The font to use
+*  int dimx          : Size x of the button
+*  int dimy          : Size y of the button
+*  GCallback handler : The callback for the button
+*  gpointer data     : The associated data pointer
+*/
+GtkWidget * font_button (gchar * font, int dimx, int dimy, GCallback handler, gpointer data)
 {
   GtkWidget * fontb = gtk_font_button_new_with_font (font);
   g_signal_connect (G_OBJECT(fontb), "font-set", handler, data);
@@ -1739,10 +1728,21 @@ GtkWidget * font_button (gchar * font,
   return fontb;
 }
 
-GtkWidget * spin_button (GCallback handler_a,
-                         double value, double start, double end, double step, int digits,
-                         int dim,
-                         gpointer data)
+/*
+*  GtkWidget * spin_button (GCallback handler, double value, double start, double end, double step, int digits, int dim,  gpointer data)
+*
+*  Usage: create a spin button
+*
+*  GCallback handler : The callback for the button
+*  double value      : Initial value for the spin button
+*  double start      : Minimum value
+*  double end        : Maximum value
+*  double step       : Step between values
+*  int digits        : Number of digits displayed
+*  int dim           : Size x of the button
+*  gpointer data     : The associated data pointer
+*/
+GtkWidget * spin_button (GCallback handler, double value, double start, double end, double step, int digits, int dim,  gpointer data)
 {
   GtkWidget * spin = gtk_spin_button_new_with_range (start, end, step);
   gtk_spin_button_set_digits (GTK_SPIN_BUTTON(spin), digits);
@@ -1753,34 +1753,23 @@ GtkWidget * spin_button (GCallback handler_a,
 #endif
   gtk_spin_button_set_value (GTK_SPIN_BUTTON(spin), value);
   gtk_widget_set_size_request (spin, dim, -1);
-  if (handler_a != NULL) g_signal_connect (G_OBJECT (spin), "value-changed", handler_a, data);
+  if (handler != NULL) g_signal_connect (G_OBJECT (spin), "value-changed", handler, data);
   return spin;
 }
 
 /*
-*  void adjust_label (GtkWidget * lab, int dimx, int dimy, float ax, float ay)
+*  GtkWidget * check_button (gchar * text, int dimx, int dimy, gboolean state, GCallback handler, gpointer data)
 *
-*  Usage:
+*  Usage: create a check button
 *
-*  GtkWidget * lab :
-*  int dimx        :
-*  int dimy        :
-*  float ax        :
-*  float ay        :
+*  gchar * text      : The message to display
+*  int dimx          : The x size
+*  int dimy          : The y size
+*  gboolean state    : Checked or not (1/0)
+*  GCallback handler : The callback for the button
+*  gpointer data     : The associated data pointer
 */
-void adjust_label (GtkWidget * lab, int dimx, int dimy, float ax, float ay)
-{
-  gtk_label_set_xalign (GTK_LABEL(lab), ax);
-  gtk_label_set_yalign (GTK_LABEL(lab), ay);
-  gtk_widget_set_size_request (lab, dimx, dimy);
-  gtk_label_set_use_markup (GTK_LABEL(lab), TRUE);
-}
-
-GtkWidget * check_button (gchar * text,
-                          int dimx, int dimy,
-                          gboolean state,
-                          GCallback handler,
-                          gpointer data)
+GtkWidget * check_button (gchar * text, int dimx, int dimy, gboolean state, GCallback handler, gpointer data)
 {
   GtkWidget * but = gtk_check_button_new ();
   if (text != NULL)
@@ -1803,11 +1792,19 @@ GtkWidget * check_button (gchar * text,
   return but;
 }
 
-GtkWidget * radio_button (gchar * text,
-                          int dimx, int dimy,
-                          gboolean state,
-                          GCallback handler,
-                          gpointer data)
+/*
+*  GtkWidget * radio_button (gchar * text, int dimx, int dimy, gboolean state, GCallback handler, gpointer data)
+*
+*  Usage: create a radio button
+*
+*  gchar * text      : The message to display
+*  int dimx          : The x size
+*  int dimy          : The y size
+*  gboolean state    : Checked or not (1/0)
+*  GCallback handler : The callback for the button
+*  gpointer data     : The associated data pointer
+*/
+GtkWidget * radio_button (gchar * text, int dimx, int dimy, gboolean state, GCallback handler, gpointer data)
 {
   GtkWidget * but;
 #ifdef GTK4
@@ -1822,13 +1819,21 @@ GtkWidget * radio_button (gchar * text,
   return but;
 }
 
-GtkWidget * create_button (gchar * text,
-                           int image_format,
-                           gchar * image,
-                           int dimx, int dimy,
-                           int relief,
-                           GCallback handler,
-                           gpointer data)
+/*
+*  GtkWidget * create_button (gchar * text, int image_format, gchar * image, int dimx, int dimy, int relief, GCallback handler, gpointer data)
+*
+*  Usage: create a simple button
+*
+*  gchar * text      : The message to display
+*  int format        : The image format
+*  gchar * image     : The name of the stock image
+*  int dimx          : The x size
+*  int dimy          : The y size
+*  int relief        : Should appear pressed or not (1/0)
+*  GCallback handler : The callback for the button
+*  gpointer data     : The associated data pointer
+*/
+GtkWidget * create_button (gchar * text, int image_format, gchar * image, int dimx, int dimy, int relief, GCallback handler, gpointer data)
 {
   GtkWidget * but;
 #ifdef GTK3
@@ -1854,10 +1859,10 @@ GtkWidget * create_button (gchar * text,
 /*
 *  void set_image_from_icon_name (GtkWidget * widg, gchar * icon)
 *
-*  Usage:
+*  Usage: set a image from a stock icon name
 *
-*  GtkWidget * widg :
-*  gchar * icon     :
+*  GtkWidget * widg : The GtkImage to modify
+*  gchar * icon     : The name of the stock icon
 */
 void set_image_from_icon_name (GtkWidget * widg, gchar * icon)
 {
@@ -1870,12 +1875,12 @@ void set_image_from_icon_name (GtkWidget * widg, gchar * icon)
 
 /*
 *  GtkWidget * abox (GtkWidget * box, char * lab, int vspace)
-*
-*  Usage:
-*
-*  GtkWidget * box :
-*  char * lab      :
-*  int vspace      :
+*  GtkWidget * bbox (GtkWidget * box, char * lab)
+*  GtkWidget * cbox (GtkWidget * box, char * lab)
+*  GtkWidget * fbox (GtkWidget * box, char * lab)
+
+*  Usage: box creating routine, to help design faster elements for the GUI
+
 */
 GtkWidget * abox (GtkWidget * box, char * lab, int vspace)
 {
@@ -1886,14 +1891,6 @@ GtkWidget * abox (GtkWidget * box, char * lab, int vspace)
   return hbox;
 }
 
-/*
-*  GtkWidget * bbox (GtkWidget * box, char * lab)
-*
-*  Usage:
-*
-*  GtkWidget * box :
-*  char * lab      :
-*/
 GtkWidget * bbox (GtkWidget * box, char * lab)
 {
   GtkWidget * hbox = create_hbox (0);
@@ -1904,14 +1901,6 @@ GtkWidget * bbox (GtkWidget * box, char * lab)
   return hhbox;
 }
 
-/*
-*  GtkWidget * cbox (GtkWidget * box, char * lab)
-*
-*  Usage:
-*
-*  GtkWidget * box :
-*  char * lab      :
-*/
 GtkWidget * cbox (GtkWidget * box, char * lab)
 {
   GtkWidget * hbox = create_hbox (0);
@@ -1922,14 +1911,6 @@ GtkWidget * cbox (GtkWidget * box, char * lab)
   return hhbox;
 }
 
-/*
-*  GtkWidget * fbox (GtkWidget * box, char * lab)
-*
-*  Usage:
-*
-*  GtkWidget * box :
-*  char * lab      :
-*/
 GtkWidget * fbox (GtkWidget * box, char * lab)
 {
   GtkWidget * hbox = create_hbox (0);
@@ -1942,12 +1923,12 @@ GtkWidget * fbox (GtkWidget * box, char * lab)
 /*
 *  GtkWidget * create_scroll (GtkWidget * box, int dimx, int dimy, int shadow)
 *
-*  Usage:
+*  Usage: create a scroll window
 *
-*  GtkWidget * box :
-*  int dimx        :
-*  int dimy        :
-*  int shadow      :
+*  GtkWidget * box : The box to insert the scroll window in, if any
+*  int dimx        : The x size of the widget
+*  int dimy        : The x size of the widget
+*  int shadow      : Add shadow (1/0)
 */
 GtkWidget * create_scroll (GtkWidget * box, int dimx, int dimy, int shadow)
 {
@@ -1966,15 +1947,14 @@ GtkWidget * create_scroll (GtkWidget * box, int dimx, int dimy, int shadow)
 }
 
 /*
-*  GtkWidget * create_expander (gchar * name, gchar * file_img, int i)
+*  GtkWidget * create_expander (gchar * name, gchar * file_img)
 *
-*  Usage:
+*  Usage: create GtkExpander
 *
-*  gchar * name     :
-*  gchar * file_img :
-*  int i            :
+*  gchar * name     : Name of the expander tab
+*  gchar * file_img : image file to add if required
 */
-GtkWidget * create_expander (gchar * name, gchar * file_img, int i)
+GtkWidget * create_expander (gchar * name, gchar * file_img)
 {
   GtkWidget * expand = gtk_expander_new (name);
   GtkWidget * hbox = create_hbox (0);
@@ -1992,9 +1972,9 @@ GtkWidget * create_expander (gchar * name, gchar * file_img, int i)
 /*
 *  void provide_gtk_css (gchar * css)
 *
-*  Usage:
+*  Usage: create a css provider based on the css data
 *
-*  gchar * css :
+*  gchar * css : The css data, use the name of the variable to use the css
 */
 void provide_gtk_css (gchar * css)
 {
@@ -2016,9 +1996,9 @@ void provide_gtk_css (gchar * css)
 /*
 *  GtkWidget * destroy_this_widget (GtkWidget * widg)
 *
-*  Usage:
+*  Usage: destroy a GtkWidget
 *
-*  GtkWidget * widg :
+*  GtkWidget * widg : The GtkWidget to destroy
 */
 GtkWidget * destroy_this_widget (GtkWidget * widg)
 {
@@ -2047,9 +2027,9 @@ GtkWidget * destroy_this_widget (GtkWidget * widg)
 /*
 *  void destroy_this_dialog (GtkDialog * dialog)
 *
-*  Usage:
+*  Usage: destroy a GtkDialog
 *
-*  GtkDialog * dialog :
+*  GtkDialog * dialog : The GtkDialog to destroy
 */
 void destroy_this_dialog (GtkDialog * dialog)
 {
@@ -2066,9 +2046,9 @@ void destroy_this_dialog (GtkDialog * dialog)
 /*
 *  void destroy_this_native_dialog (GtkNativeDialog * dialog)
 *
-*  Usage:
+*  Usage: destroy a GtkNativeDialog
 *
-*  GtkNativeDialog * dialog :
+*  GtkNativeDialog * dialog : The GtkNativeDialog to destroy
 */
 void destroy_this_native_dialog (GtkNativeDialog * dialog)
 {
@@ -2082,11 +2062,11 @@ void destroy_this_native_dialog (GtkNativeDialog * dialog)
 /*
 *  G_MODULE_EXPORT void run_destroy_dialog (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: to destroy a GtkDialog when the dialog emit the closing signal
 *
-*  GtkDialog * dialog :
-*  gint response_id   :
-*  gpointer data      :
+*  GtkDialog * dialog : The GtkDialog to destroy
+*  gint response_id   : The response id
+*  gpointer data      : The associated data pointer
 */
 G_MODULE_EXPORT void run_destroy_dialog (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -2095,24 +2075,20 @@ G_MODULE_EXPORT void run_destroy_dialog (GtkDialog * dialog, gint response_id, g
 
 #ifdef GTK4
 /*
+*  GListModel * file_chooser_get_file_names (GtkFileChooser * chooser)
 *
-*
-*  Usage:
-*
-*   :
-*/
-/*
-*
-*
-*  Usage:
-*
-*   :
+*  Usage: create a file list from files selected using a GtkFileChooser
 */
 GListModel * file_chooser_get_file_names (GtkFileChooser * chooser)
 {
   return gtk_file_chooser_get_files (chooser);
 }
 #else
+/*
+*  GList * file_chooser_get_file_names (GtkFileChooser * chooser)
+*
+*  Usage: create a file list from files selected using a GtkFileChooser
+*/
 GSList * file_chooser_get_file_names (GtkFileChooser * chooser)
 {
   return gtk_file_chooser_get_filenames (chooser);
@@ -2122,9 +2098,9 @@ GSList * file_chooser_get_file_names (GtkFileChooser * chooser)
 /*
 *  gchar * file_chooser_get_file_name (GtkFileChooser * chooser)
 *
-*  Usage:
+*  Usage: get a file name from a GtkFileChooser (single file selected)
 *
-*  GtkFileChooser * chooser :
+*  GtkFileChooser * chooser : The GtkFilechooser
 */
 gchar * file_chooser_get_file_name (GtkFileChooser * chooser)
 {
@@ -2138,9 +2114,9 @@ gchar * file_chooser_get_file_name (GtkFileChooser * chooser)
 /*
 *  gchar * file_chooser_get_current_folder (GtkFileChooser * chooser)
 *
-*  Usage:
+*  Usage: get the current folder for a GtkFileChooser
 *
-*  GtkFileChooser * chooser :
+*  GtkFileChooser * chooser : The GtkFilechooser
 */
 gchar * file_chooser_get_current_folder (GtkFileChooser * chooser)
 {
@@ -2154,10 +2130,10 @@ gchar * file_chooser_get_current_folder (GtkFileChooser * chooser)
 /*
 *  gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename)
 *
-*  Usage:
+*  Usage: set file name in a GtkFilechooser
 *
-*  GtkFileChooser * chooser :
-*  gchar * filename         :
+*  GtkFileChooser * chooser : The GtkFilechooser
+*  gchar * filename         : The file name to appear in the GtkFilechooser
 */
 gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename)
 {
@@ -2174,9 +2150,9 @@ gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename)
 /*
 *  void file_chooser_set_current_folder (GtkFileChooser * chooser)
 *
-*  Usage:
+*  Usage: set current folder in a GtkFilechooser
 *
-*  GtkFileChooser * chooser :
+*  GtkFileChooser * chooser : The GtkFilechooser
 */
 void file_chooser_set_current_folder (GtkFileChooser * chooser)
 {
@@ -2191,12 +2167,12 @@ void file_chooser_set_current_folder (GtkFileChooser * chooser)
 /*
 *  GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name)
 *
-*  Usage:
+*  Usage: create a GtkFileChooser, utility to select file(s)
 *
-*  const gchar * title      :
-*  GtkWindow * parent       :
-*  GtkFileChooserAction act :
-*  const gchar * act_name   :
+*  const gchar * title      : The title of the window
+*  GtkWindow * parent       : The parent window, if any
+*  GtkFileChooserAction act : The action to perform (read or write)
+*  const gchar * act_name   : The action name to display
 */
 GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name)
 {
@@ -2206,12 +2182,12 @@ GtkFileChooserNative * create_file_chooser (const gchar * title, GtkWindow * par
 /*
 *  GtkWidget * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name)
 *
-*  Usage:
+*  Usage: create a GtkFileChooser, utility to select file(s)
 *
-*  const gchar * title      :
-*  GtkWindow * parent       :
-*  GtkFileChooserAction act :
-*  const gchar * act_name   :
+*  const gchar * title      : The title of the window
+*  GtkWindow * parent       : The parent window, if any
+*  GtkFileChooserAction act : The action to perform (read or write)
+*  const gchar * act_name   : The action name to display
 */
 GtkWidget * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFileChooserAction act, const gchar * act_name)
 {
@@ -2222,9 +2198,9 @@ GtkWidget * create_file_chooser (const gchar * title, GtkWindow * parent, GtkFil
 /*
 *  ColRGBA get_button_color (GtkColorChooser * colob)
 *
-*  Usage:
+*  Usage: get the ColRGBA color from a GtkColorChooser button
 *
-*  GtkColorChooser * colob :
+*  GtkColorChooser * colob : The GtkColorChooser button
 */
 ColRGBA get_button_color (GtkColorChooser * colob)
 {
@@ -2236,9 +2212,9 @@ ColRGBA get_button_color (GtkColorChooser * colob)
 /*
 *  ColRGBA get_window_color (GtkWidget * color_win)
 *
-*  Usage:
+*  Usage: get the ColRGBA color from a color selection window
 *
-*  GtkWidget * color_win :
+*  GtkWidget * color_win : The color selection window
 */
 ColRGBA get_window_color (GtkWidget * color_win)
 {
@@ -2250,10 +2226,10 @@ ColRGBA get_window_color (GtkWidget * color_win)
 /*
 *  void set_color_chooser_color (GtkWidget * color_win, ColRGBA col)
 *
-*  Usage:
+*  Usage: set the color of a color selection window
 *
-*  GtkWidget * color_win :
-*  ColRGBA col           :
+*  GtkWidget * color_win : The color selection window
+*  ColRGBA col           : The color to use
 */
 void set_color_chooser_color (GtkWidget * color_win, ColRGBA col)
 {
@@ -2265,11 +2241,11 @@ void set_color_chooser_color (GtkWidget * color_win, ColRGBA col)
 /*
 *  void pop_menu_at_pointer (GtkWidget * pop, double x, double y)
 *
-*  Usage:
+*  Usage: popup a popover menu at pointer location
 *
-*  GtkWidget * pop :
-*  double x        :
-*  double y        :
+*  GtkWidget * pop : The menu to popup
+*  double x        : x position
+*  double y        : y position
 */
 void pop_menu_at_pointer (GtkWidget * pop, double x, double y)
 {
@@ -2286,10 +2262,10 @@ void pop_menu_at_pointer (GtkWidget * pop, double x, double y)
 /*
 *  void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event)
 *
-*  Usage:
+*  Usage: popup a menu at pointer location
 *
-*  GtkWidget * widg :
-*  GdkEvent * event :
+*  GtkWidget * widg : The menu to popup
+*  GdkEvent * event : The corresponding GdkEvent
 */
 void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event)
 {
@@ -2301,9 +2277,9 @@ void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event)
 /*
 *  GtkWidget * get_top_level (GtkWidget * widg)
 *
-*  Usage:
+*  Usage: get the top level container, window, of a widget
 *
-*  GtkWidget * widg :
+*  GtkWidget * widg : The GtkWidget
 */
 GtkWidget * get_top_level (GtkWidget * widg)
 {
@@ -2318,21 +2294,21 @@ GtkWidget * get_top_level (GtkWidget * widg)
 /*
 *  G_MODULE_EXPORT gboolean destroy_this_window (GtkWindow * win, gpointer data)
 *
-*  Usage:
+*  Usage: destroy a GtkWindow
 *
-*  GtkWindow * win :
-*  gpointer data   :
+*  GtkWindow * win : The GtkWindow to destroy
+*  gpointer data   : The associated data pointer
 */
 G_MODULE_EXPORT gboolean destroy_this_window (GtkWindow * win, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
 *
-*  Usage:
+*  Usage: destroy a GtkWindow
 *
-*  GtkWidget * win  :
-*  GdkEvent * event :
-*  gpointer data    :
+*  GtkWidget * win  : The GtkWindow to destroy
+*  GdkEvent * event : The associated GdkEvent
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
 #endif
@@ -2345,21 +2321,21 @@ G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event,
 /*
 *  G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data)
 *
-*  Usage:
+*  Usage: hide a GtkWindow
 *
-*  GtkWindow * win :
-*  gpointer data   :
+*  GtkWindow * win : The GtkWindow to hide
+*  gpointer data   : The associated data pointer
 */
 G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
 *
-*  Usage:
+*  Usage: hide a GtkWindow
 *
-*  GtkWidget * win  :
-*  GdkEvent * event :
-*  gpointer data    :
+*  GtkWidget * win  : The GtkWindow to hide
+*  GdkEvent * event : The associated GdkEvent
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
 #endif
@@ -2371,11 +2347,11 @@ G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gp
 /*
 *  void add_gtk_close_event (GtkWidget * widg, GCallback handler, gpointer data)
 *
-*  Usage:
+*  Usage: add a close event signal and callback to a GtkWidget
 *
-*  GtkWidget * widg  :
-*  GCallback handler :
-*  gpointer data     :
+*  GtkWidget * widg  : The GtkWidget
+*  GCallback handler : The callback for the close event
+*  gpointer data     : The associated data pointer
 */
 void add_gtk_close_event (GtkWidget * widg, GCallback handler, gpointer data)
 {

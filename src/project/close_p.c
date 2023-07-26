@@ -16,15 +16,17 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to close a project
+ - the callbacks to close a project
+
 *
 *  List of subroutines:
 
   void update_insert_combos ();
   void close_project (struct project * to_close);
 
-  G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * this_proj);
+  void to_close_this_project (int to_activate, struct project * this_proj);
   G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata);
 
 */
@@ -44,9 +46,7 @@ extern GtkTreeModel * replace_combo_tree (gboolean insert, int p);
 /*
 *  void update_insert_combos ()
 *
-*  Usage:
-*
-*   :
+*  Usage: update some GtkComboBox in the workspace if a project is removed
 */
 void update_insert_combos ()
 {
@@ -80,9 +80,9 @@ void update_insert_combos ()
 /*
 *  void close_project (struct project * to_close)
 *
-*  Usage:
+*  Usage: close a project
 *
-*  struct project * to_close :
+*  struct project * to_close : The project to close
 */
 void close_project (struct project * to_close)
 {
@@ -290,14 +290,14 @@ void close_project (struct project * to_close)
 }
 
 /*
-*  G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * this_proj)
+*  void to_close_this_project (int to_activate, struct project * this_proj)
 *
-*  Usage:
+*  Usage: to close this project
 *
-*  int to_activate            :
-*  struct project * this_proj :
+*  int to_activate            : If the workspace is not empty, activate first another project
+*  struct project * this_proj : The project to close
 */
-G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * this_proj)
+void to_close_this_project (int to_activate, struct project * this_proj)
 {
   if (nprojects > 0) close_project (this_proj);
   if (nprojects > 0)
@@ -315,10 +315,10 @@ G_MODULE_EXPORT void to_close_this_project (int to_activate, struct project * th
 /*
 *  G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata)
 *
-*  Usage:
+*  Usage: signal to close a project
 *
-*  GtkWidget * widg :
-*  gpointer cdata   :
+*  GtkWidget * widg : The GtkWidget sending the signal
+*  gpointer cdata   : The associated data pointer
 */
 G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata)
 {

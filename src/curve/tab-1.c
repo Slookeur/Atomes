@@ -644,7 +644,7 @@ GtkWidget * create_tab_1 (gpointer data)
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, ghbox, xyp[1], FALSE, FALSE, 0);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, ghbox, markup_label("pixels", -1, -1, 0.0, 0.5), FALSE, FALSE, 20);
 
-  add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox, create_hsep (), FALSE, FALSE, 5);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox, gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), FALSE, FALSE, 5);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox,
                        check_button ("Insert title", -1, -1, this_proj -> curves[b][c] -> show_title, G_CALLBACK(set_title), data),
                        FALSE, FALSE, 10);
@@ -691,7 +691,7 @@ GtkWidget * create_tab_1 (gpointer data)
   }
   widget_set_sensitive (title_box, this_proj -> curves[b][c] -> show_title);
 
-  add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox, create_hsep (), FALSE, FALSE, 10);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox, gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), FALSE, FALSE, 10);
 
   ghbox = create_hbox (0);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox, ghbox, FALSE, FALSE, 0);
@@ -700,7 +700,7 @@ GtkWidget * create_tab_1 (gpointer data)
                       color_button (this_proj -> curves[b][c] -> backcolor, TRUE, 100, -1, G_CALLBACK(set_background_color), data),
                       FALSE, FALSE, 40);
 
-  add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox, create_hsep (), FALSE, FALSE, 10);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox, gtk_separator_new (GTK_ORIENTATION_HORIZONTAL), FALSE, FALSE, 10);
 
 // Frame
   add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox,

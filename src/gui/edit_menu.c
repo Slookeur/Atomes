@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'edit_menu.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The creation of the edition dialogs
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   gboolean test_vol (double box[2][3], double vect[3][3]);
   gboolean test_pbc (int pbc, int frac, double box[2][3], double vect[3][3]);
@@ -43,8 +44,8 @@ If not, see <https://www.gnu.org/licenses/> */
   G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer data);
   G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data);
   G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data);
-  G_MODULE_EXPORT void on_spec_changed (GtkWidget * widg, gpointer data);
-  G_MODULE_EXPORT void on_rad_changed (GtkWidget * widg, gpointer data);
+  G_MODULE_EXPORT void on_spec_changed (GtkComboBox * combo, gpointer data);
+  G_MODULE_EXPORT void on_rad_changed (GtkComboBox * combo, gpointer data);
   G_MODULE_EXPORT void toggle_xcor (GtkCheckButton * but, gpointer data);
   G_MODULE_EXPORT void toggle_xcor (GtkToggleButton * but, gpointer data);
   G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gpointer data);
@@ -90,10 +91,10 @@ extern void cut_box (struct project * this_proj, GtkWidget * vbox);
 /*
 *  G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)
 *
-*  Usage: 
+*  Usage: update lattice parameters
 *
-*  GtkEntry * entry : 
-*  gpointer data    : 
+*  GtkEntry * entry : The GtkEntry sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)
 {
@@ -111,20 +112,20 @@ G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)
 /*
 *  G_MODULE_EXPORT void toggle_pbc (GtkCheckButton * Button, gpointer data)
 *
-*  Usage: 
+*  Usage: use PBC ?
 *
-*  GtkCheckButton * Button : 
-*  gpointer data           : 
+*  GtkCheckButton * Button : The GtkCheckButton sending the signal
+*  gpointer data           : The associated data pointer
 */
 G_MODULE_EXPORT void toggle_pbc (GtkCheckButton * Button, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void toggle_pbc (GtkToggleButton * Button, gpointer data)
 *
-*  Usage: 
+*  Usage: use PBC ?
 *
-*  GtkToggleButton * Button : 
-*  gpointer data            : 
+*  GtkToggleButton * Button : The GtkToggleButton sending the signal
+*  gpointer data            : The associated data pointer
 */
 G_MODULE_EXPORT void toggle_pbc (GtkToggleButton * Button, gpointer data)
 #endif
@@ -140,20 +141,20 @@ G_MODULE_EXPORT void toggle_pbc (GtkToggleButton * Button, gpointer data)
 /*
 *  G_MODULE_EXPORT void toggle_frac (GtkCheckButton * Button, gpointer data)
 *
-*  Usage: 
+*  Usage: use fractional coordinates
 *
-*  GtkCheckButton * Button : 
-*  gpointer data           : 
+*  GtkCheckButton * Button : The GtkCheckButton sending the signal
+*  gpointer data           : The associated data pointer
 */
 G_MODULE_EXPORT void toggle_frac (GtkCheckButton * Button, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data)
 *
-*  Usage: 
+*  Usage: use fractional coordinates
 *
-*  GtkToggleButton * Button : 
-*  gpointer data            : 
+*  GtkToggleButton * Button : The GtkToggleButton sending the signal
+*  gpointer data            : The associated data pointer
 */
 G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data)
 #endif
@@ -175,18 +176,13 @@ G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data)
   }*/
 }
 
-/*G_MODULE_EXPORT void on_frac_changed (GtkWidget * widg, gpointer data)
-{
-  tmp_frac = gtk_combo_box_get_active (GTK_COMBO_BOX(widg)) + 1;
-}*/
-
 /*
 *  G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data)
 *
-*  Usage: 
+*  Usage: update lattice vector component
 *
-*  GtkEntry * entry : 
-*  gpointer data    : 
+*  GtkEntry * entry : The GtkEntry sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data)
 {
@@ -198,11 +194,11 @@ G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data)
 /*
 *  G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage: lattice vectors: run the dialog
 *
-*  GtkDialog * win  : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * win  : The GtkDialog sending the signal
+*  gint response_id : The response id
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -229,10 +225,10 @@ G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer da
 /*
 *  G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage: lattice vectors: prepare the dialog
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : The GtkButton sending the signal
+*  gpointer data   : The associated data pointer
 */
 G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data)
 {
@@ -271,9 +267,9 @@ G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data)
 /*
 *  void edit_box (GtkWidget * vbox)
 *
-*  Usage: 
+*  Usage: creation of the edit cell widgets
 *
-*  GtkWidget * vbox : 
+*  GtkWidget * vbox : GtkWidget that will receive the data
 */
 void edit_box (GtkWidget * vbox)
 {
@@ -324,10 +320,10 @@ void edit_box (GtkWidget * vbox)
 /*
 *  G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data)
 *
-*  Usage: 
+*  Usage: update chemical property
 *
-*  GtkEntry * entry : 
-*  gpointer data    : 
+*  GtkEntry * entry : The GtkEntry sending the signal
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data)
 {
@@ -340,17 +336,17 @@ G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data)
 }
 
 /*
-*  G_MODULE_EXPORT void on_spec_changed (GtkWidget * widg, gpointer data)
+*  G_MODULE_EXPORT void on_spec_changed (GtkComboBox * combo, gpointer data)
 *
-*  Usage: 
+*  Usage: change the chemical species
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkComboBox * combo : The GtkComboBox sending the signal
+*  gpointer data       : The associated data pointer
 */
-G_MODULE_EXPORT void on_spec_changed (GtkWidget * widg, gpointer data)
+G_MODULE_EXPORT void on_spec_changed (GtkComboBox * combo, gpointer data)
 {
   int i, j;
-  i = gtk_combo_box_get_active (GTK_COMBO_BOX(widg));
+  i = gtk_combo_box_get_active (combo);
   gtk_label_set_text (GTK_LABEL(chem_spec[0]), active_chem -> element[i]);
   gtk_label_set_text (GTK_LABEL(chem_spec[1]), g_strdup_printf("%d", (int)active_chem -> chem_prop[CHEM_Z][i]));
   for (j=0; j<CHEM_PARAMS-1; j++)
@@ -361,17 +357,17 @@ G_MODULE_EXPORT void on_spec_changed (GtkWidget * widg, gpointer data)
 }
 
 /*
-*  G_MODULE_EXPORT void on_rad_changed (GtkWidget * widg, gpointer data)
+*  G_MODULE_EXPORT void on_rad_changed (GtkComboBox * combo, gpointer data)
 *
-*  Usage: 
+*  Usage: change the type of atomic radius
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkComboBox * combo : The GtkComboBox sending the signal
+*  gpointer data       : The associated data pointer
 */
-G_MODULE_EXPORT void on_rad_changed (GtkWidget * widg, gpointer data)
+G_MODULE_EXPORT void on_rad_changed (GtkComboBox * combo, gpointer data)
 {
   int i, j, k;
-  i = gtk_combo_box_get_active (GTK_COMBO_BOX(widg));
+  i = gtk_combo_box_get_active (combo);
   if (i != -1)
   {
     j = gtk_combo_box_get_active (GTK_COMBO_BOX(spec_box));
@@ -385,20 +381,20 @@ G_MODULE_EXPORT void on_rad_changed (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void toggle_xcor (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage: use X ray diffraction q coorection
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : The GtkCheckButton sending the signal
+*  gpointer data        : The associated data pointer
 */
 G_MODULE_EXPORT void toggle_xcor (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void toggle_xcor (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage: use X ray diffraction q coorection
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : The GtkToggleButton sending the signal
+*  gpointer data         : The associated data pointer
 */
 G_MODULE_EXPORT void toggle_xcor (GtkToggleButton * but, gpointer data)
 #endif
@@ -414,9 +410,9 @@ G_MODULE_EXPORT void toggle_xcor (GtkToggleButton * but, gpointer data)
 /*
 *  void edit_chem (GtkWidget * vbox)
 *
-*  Usage: 
+*  Usage: creation of the edit chemical properties widgets
 *
-*  GtkWidget * vbox : 
+*  GtkWidget * vbox : GtkWidget that will receive the data
 */
 void edit_chem (GtkWidget * vbox)
 {
@@ -486,10 +482,10 @@ void edit_chem (GtkWidget * vbox)
 /*
 *  gboolean test_vol (double box[2][3], double vect[3][3])
 *
-*  Usage: 
+*  Usage: is the cell properly described to use PBC ?
 *
-*  double box[2][3] : 
-*  double box[2][3] : 
+*  double box[2][3]  : lattice parameters
+*  double vect[2][3] : lattice vectors
 */
 gboolean test_vol (double box[2][3], double vect[3][3])
 {
@@ -519,12 +515,12 @@ gboolean test_vol (double box[2][3], double vect[3][3])
 /*
 *  gboolean test_pbc (int pbc, int frac, double box[2][3], double vect[3][3])
 *
-*  Usage: 
+*  Usage: is the cell properly described ?
 *
-*  int pbc          : 
-*  int frac         : 
-*  double box[2][3] : 
-*  double box[2][3] : 
+*  int pbc           :
+*  int frac          : fractional coordinates
+*  double box[2][3]  : lattice parameters
+*  double vect[2][3] : lattice vectors
 */
 gboolean test_pbc (int pbc, int frac, double box[2][3], double vect[3][3])
 {
@@ -542,9 +538,7 @@ gboolean test_pbc (int pbc, int frac, double box[2][3], double vect[3][3])
 /*
 *  void init_box_calc ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: initialize calculation possibilities based the periodicity
 */
 void init_box_calc ()
 {
@@ -565,13 +559,6 @@ void init_box_calc ()
   prep_calc_actions ();
 }
 
-/*
-*  gboolean has_box_changed ()
-*
-*  Usage: 
-*
-*   : 
-*/
 gboolean has_box_changed ()
 {
   int i, j;
@@ -590,13 +577,6 @@ gboolean has_box_changed ()
   return changed;
 }
 
-/*
-*  gboolean have_vectors_changed ()
-*
-*  Usage: 
-*
-*   : 
-*/
 gboolean have_vectors_changed ()
 {
   int i, j;
@@ -618,9 +598,9 @@ gboolean have_vectors_changed ()
 /*
 *  void prep_box (int id)
 *
-*  Usage: 
+*  Usage: prepare the project depending on the changes to the MD box
 *
-*  int id : 
+*  int id :
 */
 void prep_box (int id)
 {
@@ -657,9 +637,7 @@ void prep_box (int id)
 /*
 *  void test_chem ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: were chemical properties modified ?
 */
 void test_chem ()
 {
@@ -689,9 +667,7 @@ void test_chem ()
 /*
 *  gboolean test_cutoffs ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage: are all cutoffs described ?
 */
 gboolean test_cutoffs ()
 {
@@ -715,9 +691,9 @@ gboolean test_cutoffs ()
 /*
 *  void edit_bonds (GtkWidget * vbox)
 *
-*  Usage: 
+*  Usage: creation of the edit bond cutoff widgets
 *
-*  GtkWidget * vbox : 
+*  GtkWidget * vbox : GtkWidget that will receive the data
 */
 void edit_bonds (GtkWidget * vbox)
 {
@@ -749,11 +725,11 @@ void edit_bonds (GtkWidget * vbox)
 /*
 *  G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage: create an edition dialog: run the dialog
 *
-*  GtkDialog * win  : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * dial : The GtkDialog sending the signal
+*  gint response_id : The response id
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -843,10 +819,11 @@ G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gp
 /*
 *  G_MODULE_EXPORT void on_edit_activate (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: create an edition dialog: prepare the dialog
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkDialog * dial : The GtkDialog sending the signal
+*  gint response_id : The response id
+*  gpointer data    : The associated data pointer
 */
 G_MODULE_EXPORT void on_edit_activate (GtkWidget * widg, gpointer data)
 {
