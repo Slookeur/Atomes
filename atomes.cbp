@@ -1474,13 +1474,6 @@
 			<Option target="cleancalc" />
 			<Option target="cleanogl" />
 		</Unit>
-		<Unit filename="src/gui/xmlrw.c">
-			<Option compilerVar="CC" />
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-		</Unit>
 		<Unit filename="src/gui/xmlrw.h">
 			<Option target="atomes" />
 			<Option target="debug" />
@@ -3129,6 +3122,10 @@
 		<Unit filename="src/project/readers/read_hist.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/project/readers/read_isaacs.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/project/readers/read_isaacs.h" />
 		<Unit filename="src/project/readers/read_npt.c">
 			<Option compilerVar="CC" />
 		</Unit>
