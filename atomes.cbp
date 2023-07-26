@@ -1487,9 +1487,6 @@
 			<Option target="clean" />
 			<Option target="cleanc" />
 		</Unit>
-		<Unit filename="src/lic/valid.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="src/lic/valid.h" />
 		<Unit filename="src/opengl/arcball.c">
 			<Option compilerVar="CC" />
