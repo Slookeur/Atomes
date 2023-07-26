@@ -17,7 +17,7 @@ LINUX = 1
 WINDOWS = 0
 
 # The next line defines the GTK version !
-GTKV = 4
+GTKV = 3
 ifeq ($(GTKV),4)
   DGTK = -DGTK4 -DGTKGLAREA
   IGTK = `pkg-config --cflags gtk4 epoxy libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
@@ -191,7 +191,6 @@ ifeq ($(WINDOWS),1)
 endif
 
 SRC = src/
-LIC = src/lic/
 GUI = src/gui/
 WORK = src/workspace/
 PROJ = src/project/
@@ -210,8 +209,8 @@ FOR = src/fortran/
 OBJ = obj/
 BIN = bin/
 
-INC = -I$(SRC) -I$(LIC) -I$(GUI) -I$(WORK) -I$(PROJ) -I$(PROJ)readers/ -I$(CALC) -I$(DLPOLY) -I$(LAMMPS) -I$(FIELDS) -I$(CPMD) -I$(CP2K) -I$(CURVE) -I$(GLWIN) -I$(GLEDIT) -I$(GLDRAW) -I$(OGL) -I.
-INCLUDES = $(INC) $(IGTK) -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED
+INC = -I$(SRC) -I$(GUI) -I$(WORK) -I$(PROJ) -I$(PROJ)readers/ -I$(CALC) -I$(DLPOLY) -I$(LAMMPS) -I$(FIELDS) -I$(CPMD) -I$(CP2K) -I$(CURVE) -I$(GLWIN) -I$(GLEDIT) -I$(GLDRAW) -I$(OGL) -I.
+INCLUDES = $(INC) $(IGTK) -DGDK_DISABLE_DEPRECATED
 
 ifeq ($(MAKECMDGOALS),atomes)
   FCFLAGS = -O3 -cpp
@@ -236,10 +235,8 @@ OBJECTS_F90 := $(patsubst $(FOR)%.F90, $(OBJ)%.o, $(SOURCES_F90))
 MODOBJECTS_F90 := $(OBJ)mendeleiev.o $(OBJ)parameters.o
 
 
-OBJECTS_c = $(OBJ)global.o $(OBJ_LIC) $(OBJ_GUI) $(OBJ_WORK) $(OBJ_PROJ) $(OBJ_CURVE) \
+OBJECTS_c = $(OBJ)global.o $(OBJ_GUI) $(OBJ_WORK) $(OBJ_PROJ) $(OBJ_CURVE) \
 			$(OBJ_CALC) $(OBJ_POLY) $(OBJ_LAMMPS) $(OBJ_FIELD) $(OBJ_CPMD) $(OBJ_CP2K) $(OBJ_OGL)
-
-OBJ_LIC = $(OBJ)valid.o
 
 OBJ_GUI = \
 	$(OBJ)gtk-misc.o \
@@ -251,7 +248,6 @@ OBJ_GUI = \
 	$(OBJ)initc.o \
 	$(OBJ)callbacks.o \
 	$(OBJ)interface.o \
-	$(OBJ)xmlrw.o \
 	$(OBJ)bdcall.o \
 	$(OBJ)grcall.o \
 	$(OBJ)sqcall.o \
@@ -267,6 +263,7 @@ OBJ_WORK = \
 	$(OBJ)workspace.o
 
 OBJ_PROJ = \
+	$(OBJ)read_isaacs.o \
 	$(OBJ)read_cif.o \
 	$(OBJ)read_coord.o \
 	$(OBJ)read_xyz.o \
@@ -498,7 +495,6 @@ SOURCES_h = \
 	$(SRC)affero.h \
 	$(SRC)bind.h \
 	$(SRC)global.h \
-	$(GUI)gui.h \
 	$(GUI)interface.h \
 	$(GUI)callbacks.h \
 	$(PROJ)project.h \
@@ -510,8 +506,7 @@ SOURCES_h = \
 	$(GLWIN)submenus.h \
 	$(GLWIN)color_box.h \
 	$(GLWIN)initcoord.h \
-	$(GLDRAW)movie.h \
-	$(LIC)valid.h
+	$(GLDRAW)movie.h
 
 # The rule to build the executable
 
@@ -598,10 +593,6 @@ $(filter-out $(MODOBJECTS_F90), $(OBJECTS_F90)): $(MODOBJECTS_F90)
 $(OBJ)global.o:
 	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)global.o $(SRC)global.c $(INCLUDES)
 
-# license info:
-$(OBJ)valid.o:
-	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)valid.o $(LIC)valid.c $(INCLUDES)
-
 # GUI
 $(OBJ)gtk-misc.o:
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)gtk-misc.o $(GUI)gtk-misc.c $(INCLUDES)
@@ -629,8 +620,6 @@ $(OBJ)workspace.o:
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)workspace.o $(WORK)workspace.c $(INCLUDES)
 
 # GUI
-$(OBJ)xmlrw.o:
-	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)xmlrw.o $(GUI)xmlrw.c $(INCLUDES)
 $(OBJ)callbacks.o:
 	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)callbacks.o $(GUI)callbacks.c $(INCLUDES)
 $(OBJ)interface.o:
@@ -653,6 +642,8 @@ $(OBJ)main.o:
 	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)main.o $(GUI)main.c $(INCLUDES)
 
 # Project
+$(OBJ)read_isaacs.o:
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)read_isaacs.o $(PROJ)readers/read_isaacs.c $(INCLUDES)
 $(OBJ)read_cif.o:
 	$(CC) -c $(CFLAGS) $(DOMP) $(DEFS) -o $(OBJ)read_cif.o $(PROJ)readers/read_cif.c $(INCLUDES)
 $(OBJ)read_coord.o:
