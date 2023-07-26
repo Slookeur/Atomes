@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The callbacks for the chains statistics calculation dialog
+
 *
 *  List of subroutines:
 

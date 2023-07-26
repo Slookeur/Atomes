@@ -879,7 +879,6 @@ extern gboolean is_atom_win_active (glwin * view);
 extern G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data);
 extern void update_rings_menus (glwin * view);
 extern void clean_rings_data (int rid, glwin * view);
-extern void update_chains_menus (glwin * view);
 extern void clean_chains_data (glwin * view);
 extern void clean_volumes_data (glwin * view);
 
@@ -995,6 +994,8 @@ GListModel * file_chooser_get_file_names (GtkFileChooser * chooser);
 extern void update_menu_bar (glwin * view);
 
 #else
+
+extern void update_chains_menus (glwin * view);
 
 extern G_MODULE_EXPORT void select_unselect_this_atom (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void select_unselect_atoms (GtkWidget * widg, gpointer data);
