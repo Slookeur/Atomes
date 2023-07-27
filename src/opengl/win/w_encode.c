@@ -57,8 +57,8 @@ extern gboolean spin (gpointer data);
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
 {
@@ -78,8 +78,8 @@ G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
 {
@@ -99,8 +99,8 @@ G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
 {
@@ -121,7 +121,7 @@ G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox *ComboBoxGtk :
+*  GtkComboBox *ComboBoxGtk : the GtkComboBox sending the signal
 */
 G_MODULE_EXPORT void set_video_codec (GtkComboBox *ComboBoxGtk)
 {
@@ -134,7 +134,7 @@ G_MODULE_EXPORT void set_video_codec (GtkComboBox *ComboBoxGtk)
 *  Usage:
 *
 *  GtkSpinButton * res :
-*  gpointer data       :
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
 {
@@ -151,8 +151,8 @@ G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
 {
@@ -172,7 +172,7 @@ G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void clean_animation (glwin * view)
 {
@@ -231,8 +231,8 @@ GtkWidget * form;
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_image_format (GtkComboBox * box, gpointer data)
 {
@@ -262,9 +262,9 @@ gboolean encode_video;
 *
 *  Usage:
 *
-*  GtkDialog * win  :
-*  GtkDialog * win  :
-*  GtkDialog * win  :
+*  GtkDialog * win  : the GtkDialog sending the signal
+*  GtkDialog * win  : the GtkDialog sending the signal
+*  GtkDialog * win  : the GtkDialog sending the signal
 */
 G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpointer data)
 {
@@ -304,7 +304,7 @@ G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpoin
 *
 *  Usage:
 *
-*  glwin * view   :
+*  glwin * view   : the target glwin pointer
 *  gboolean video :
 */
 void window_encode (glwin * view, gboolean video)

@@ -176,8 +176,6 @@ void sort_files (int num_f)
 *  int get_cif_files ()
 *
 *  Usage: 
-*
-*   : 
 */
 int get_cif_files ()
 {
@@ -303,8 +301,6 @@ int get_cif_files ()
 *  int get_num_cif ()
 *
 *  Usage: 
-*
-*   : 
 */
 int get_num_cif ()
 {
@@ -315,8 +311,6 @@ int get_num_cif ()
 *  int get_num_group ()
 *
 *  Usage: 
-*
-*   : 
 */
 int get_num_group ()
 {
@@ -431,8 +425,6 @@ void fill_database_tree (GtkListStore * store)
 *  void insert_cif_preview ()
 *
 *  Usage: 
-*
-*   : 
 */
 void insert_cif_preview ()
 {

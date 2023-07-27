@@ -111,7 +111,7 @@ extern int get_measure_type (glwin * view);
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 *  int ri       :
 */
@@ -132,7 +132,7 @@ GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 GtkWidget * coord_menu (glwin * view)
 {
@@ -218,7 +218,7 @@ GtkWidget * coord_menu (glwin * view)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int nats     :
 */
 void update_all_menus (glwin * view, int nats)
@@ -310,8 +310,8 @@ void update_all_menus (glwin * view, int nats)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
 {
@@ -326,18 +326,14 @@ G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * menu :
-*  glwin * view     :
+*  GtkWidget * menu : the GtkWidget sending the signal
+*  glwin * view     : the target glwin pointer
 *  int pop          :
 */
 void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 {
-#ifdef MENU_ICONS
   GtkWidget * style = gtk3_menu_item (menu, "Style", IMG_FILE, (gpointer)PACKAGE_MOL, NULL, NULL, FALSE, 0, 0, FALSE, FALSE, get_project_by_id(view -> proj) -> nspec);
   gtk_menu_item_set_submenu ((GtkMenuItem *)style, menu_style(view, pop));
-#else
-  gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Style", get_project_by_id(view -> proj) -> nspec, menu_style(view, pop)));
-#endif
   gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Color Scheme(s)", get_project_by_id(view -> proj) -> nspec, menu_map(view, pop)));
   gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Render", get_project_by_id(view -> proj) -> nspec, menu_render(view, pop)));
   gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Quality", get_project_by_id(view -> proj) -> nspec, menu_quality(view, pop)));
@@ -350,7 +346,7 @@ void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int pop      :
 */
 GtkWidget * menu_opengl (glwin * view, int pop)
@@ -365,8 +361,8 @@ GtkWidget * menu_opengl (glwin * view, int pop)
 *
 *  Usage:
 *
-*  GtkWidget * menu :
-*  glwin * view     :
+*  GtkWidget * menu : the GtkWidget sending the signal
+*  glwin * view     : the target glwin pointer
 *  int pop          :
 */
 void menu_items_model (GtkWidget * menu, glwin * view, int pop)
@@ -385,7 +381,7 @@ void menu_items_model (GtkWidget * menu, glwin * view, int pop)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int pop      :
 */
 GtkWidget * menu_model (glwin * view, int pop)
@@ -400,8 +396,8 @@ GtkWidget * menu_model (glwin * view, int pop)
 *
 *  Usage:
 *
-*  GtkWidget * menu :
-*  glwin * view     :
+*  GtkWidget * menu : the GtkWidget sending the signal
+*  glwin * view     : the target glwin pointer
 *  int popm         :
 */
 void menu_items_view (GtkWidget * menu, glwin * view, int popm)
@@ -425,7 +421,7 @@ void menu_items_view (GtkWidget * menu, glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GtkWidget * menu_view (glwin * view, int popm)
@@ -441,7 +437,7 @@ GtkWidget * menu_view (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void prepare_opengl_menu_bar (glwin * view)
 {
@@ -479,7 +475,7 @@ void prepare_opengl_menu_bar (glwin * view)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int col      :
 */
 void change_color_map (glwin * view, int col)
@@ -532,7 +528,7 @@ void change_color_map (glwin * view, int col)
 *
 *  Usage:
 *
-*  glwin * view          :
+*  glwin * view          : the target glwin pointer
 *  int axis              :
 *  int da                :
 *  int db                :
@@ -596,7 +592,7 @@ void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkMod
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 mat4_t insert_projection (glwin * view)
 {
@@ -641,7 +637,7 @@ vec3_t get_insertion_coordinates (glwin * view)
 *
 *  guint keyval          :
 *  GdkModifierType state :
-*  gpointer data         :
+*  gpointer data         : the associated data pointer
 */
 void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 {
@@ -1001,9 +997,9 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg    :
+*  GtkWidget * widg    : the GtkWidget sending the signal
 *  GdkEventKey * event :
-*  gpointer data       :
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data)
 {
@@ -1023,7 +1019,7 @@ G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, 
 *  guint keyval                 :
 *  guint keycode                :
 *  GdkModifierType state        :
-*  gpointer data                :
+*  gpointer data                : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
 {
@@ -1037,8 +1033,8 @@ G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, gui
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
 {

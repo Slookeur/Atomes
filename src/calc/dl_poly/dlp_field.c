@@ -43,7 +43,7 @@ If not, see <https://www.gnu.org/licenses/> */
   gchar * pop_add (int i);
   gchar * pop_remove (int i);
 
-  void set_mol_num_label (void);
+  void set_mol_num_label ();
   void setup_cs_labels (int i);
   void get_is_energy (int i, int l);
   void fill_field_struct (GtkTreeStore * store, int id, int mo);
@@ -1008,13 +1008,11 @@ int body_at (int b)
 model example;
 
 /*
-*  void set_mol_num_label (void)
+*  void set_mol_num_label ()
 *
 *  Usage:
-*
-*  void :
 */
-void set_mol_num_label (void)
+void set_mol_num_label ()
 {
   gchar * str;
   str = g_strdup_printf ("<b>%d</b>", tmp_field -> molecules);
@@ -1765,8 +1763,8 @@ void fill_field_model (GtkTreeStore * store, int f, int m)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void toggle_field_params (GtkCheckButton * but, gpointer data)
 #else
@@ -1775,8 +1773,8 @@ G_MODULE_EXPORT void toggle_field_params (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void toggle_field_params (GtkToggleButton * but, gpointer data)
 #endif
@@ -1970,8 +1968,8 @@ gchar * set_field_label (int f, int m)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_mol_box (GtkComboBox * box, gpointer data)
 {
@@ -1988,8 +1986,6 @@ G_MODULE_EXPORT void changed_mol_box (GtkComboBox * box, gpointer data)
 *  void update_field_trees ()
 *
 *  Usage:
-*
-*   :
 */
 void update_field_trees ()
 {
@@ -2018,9 +2014,9 @@ void update_field_trees ()
 *
 *  Usage:
 *
-*  GtkDialog * dialog :
+*  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   :
-*  gpointer data      :
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_changed_energy_unit (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -2041,8 +2037,8 @@ G_MODULE_EXPORT void run_changed_energy_unit (GtkDialog * dialog, gint response_
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_energy_unit (GtkComboBox * box, gpointer data)
 {
@@ -2250,7 +2246,7 @@ GtkWidget * vbox_init (int p)
 *
 *  Usage:
 *
-*  GtkWidget * tree   :
+*  GtkWidget * tree   : the GtkWidget sending the signal
 *  int treeid         :
 *  GtkTreePath * path :
 */
@@ -2685,7 +2681,7 @@ gchar * pop_remove (int i)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_select_atom_id_from_fied_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -2724,10 +2720,10 @@ void append_field_item (GMenu * menu, const gchar * name, const gchar * key, int
 *  Usage:
 *
 *  int id             :
-*  GtkWidget * widget :
+*  GtkWidget * widget : the GtkWidget sending the signal
 *  double event_x     :
 *  double event_y     :
-*  gpointer data      :
+*  gpointer data      : the associated data pointer
 */
 void pop_up_field_context_menu (int id, GtkWidget * widget, double event_x, double event_y, gpointer data)
 #else
@@ -2737,9 +2733,9 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, double event_x, doub
 *  Usage:
 *
 *  int id             :
-*  GtkWidget * widget :
+*  GtkWidget * widget : the GtkWidget sending the signal
 *  GdkEvent * event   :
-*  gpointer data      :
+*  gpointer data      : the associated data pointer
 */
 void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gpointer data)
 #endif
@@ -2957,8 +2953,8 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
 *
 *  Usage:
 *
-*  GtkWidget * widget :
-*  gpointer data      :
+*  GtkWidget * widget : the GtkWidget sending the signal
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_pop_up_field (GtkWidget * widget, gpointer data)
 {
@@ -2978,7 +2974,7 @@ G_MODULE_EXPORT gboolean on_pop_up_field (GtkWidget * widget, gpointer data)
 *  guint event_button :
 *  guint event_type   :
 *  guint32 event_time :
-*  gpointer data      :
+*  gpointer data      : the associated data pointer
 */
 void field_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 #else
@@ -2993,7 +2989,7 @@ void field_button_event (double event_x, double event_y, guint event_button, gui
 *  guint event_button :
 *  guint event_type   :
 *  guint32 event_time :
-*  gpointer data      :
+*  gpointer data      : the associated data pointer
 */
 void field_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 #endif
@@ -3040,7 +3036,7 @@ void field_button_event (GdkEvent * event, double event_x, double event_y, guint
 *  int n_press          :
 *  double x             :
 *  double y             :
-*  gpointer data        :
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_field_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -3056,7 +3052,7 @@ G_MODULE_EXPORT void on_field_button_pressed (GtkGesture * gesture, int n_press,
 *  int n_press          :
 *  double x             :
 *  double y             :
-*  gpointer data        :
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_field_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -3068,9 +3064,9 @@ G_MODULE_EXPORT void on_field_button_released (GtkGesture * gesture, int n_press
 *
 *  Usage:
 *
-*  GtkWidget * widget :
+*  GtkWidget * widget : the GtkWidget sending the signal
 *  GdkEvent * event   :
-*  gpointer data      :
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_field_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
@@ -3338,8 +3334,8 @@ G_MODULE_EXPORT void edit_field_cell (GtkCellRendererText * cell,
 *  Usage:
 *
 *  gchar * path_string :
-*  gpointer data       :
-*  GtkWidget * widg    :
+*  gpointer data       : the associated data pointer
+*  GtkWidget * widg    : the GtkWidget sending the signal
 */
 void get_field_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * widg)
 {
@@ -3536,7 +3532,7 @@ GtkWidget * create_field_tree (int f)
 *
 *  Usage:
 *
-*  GtkWidget * vbx :
+*  GtkWidget * vbx : the GtkWidget sending the signal
 *  int f           :
 */
 void create_field_list (GtkWidget * vbx, int f)
@@ -3812,7 +3808,7 @@ void close_the_assistant (GtkAssistant * assistant)
 *  Usage:
 *
 *  GtkAssistant * assistant :
-*  gpointer data            :
+*  gpointer data            : the associated data pointer
 */
 G_MODULE_EXPORT void on_assistant_cancel (GtkAssistant * assistant, gpointer data)
 {
@@ -3826,7 +3822,7 @@ G_MODULE_EXPORT void on_assistant_cancel (GtkAssistant * assistant, gpointer dat
 *  Usage:
 *
 *  GtkWindow * assistant :
-*  gpointer data         :
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWindow * assistant, gpointer data)
 #else
@@ -3835,9 +3831,9 @@ G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWindow * assistant, gpoin
 *
 *  Usage:
 *
-*  GtkWidget * assistant :
+*  GtkWidget * assistant : the GtkWidget sending the signal
 *  GdkEvent * event      :
-*  gpointer data         :
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWidget * assistant, GdkEvent * event, gpointer data)
 #endif
@@ -3852,7 +3848,7 @@ G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWidget * assistant, GdkEv
 *  Usage:
 *
 *  GtkAssistant * assistant :
-*  gpointer data            :
+*  gpointer data            : the associated data pointer
 */
 G_MODULE_EXPORT void on_assistant_close (GtkAssistant * assistant, gpointer data)
 {
@@ -3865,7 +3861,7 @@ G_MODULE_EXPORT void on_assistant_close (GtkAssistant * assistant, gpointer data
 *  Usage:
 *
 *  gint current_page :
-*  gpointer data     :
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT gint on_assistant_go_forward (gint current_page, gpointer data)
 {
@@ -3920,7 +3916,7 @@ G_MODULE_EXPORT gint on_assistant_go_forward (gint current_page, gpointer data)
 *  Usage:
 *
 *  GtkAssistant * assistant :
-*  GtkWidget * page         :
+*  GtkWidget * page         : the GtkWidget sending the signal
 */
 G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page)
 {
@@ -4009,9 +4005,9 @@ void remove_classical_assistant_pages (int p)
 *
 *  Usage:
 *
-*  GtkDialog * dial :
+*  GtkDialog * dial : the GtkDialog sending the signal
 *  gint response_id :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -4069,8 +4065,8 @@ G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpoint
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void clean_field (GtkCheckButton * but, gpointer data)
 #else
@@ -4079,8 +4075,8 @@ G_MODULE_EXPORT void clean_field (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void clean_field (GtkToggleButton * but, gpointer data)
 #endif
@@ -4106,8 +4102,8 @@ G_MODULE_EXPORT void clean_field (GtkToggleButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void select_field_action (GtkCheckButton * but, gpointer data)
 #else
@@ -4116,8 +4112,8 @@ G_MODULE_EXPORT void select_field_action (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void select_field_action (GtkToggleButton * but, gpointer data)
 #endif
@@ -4257,8 +4253,8 @@ void create_ff_structure (int ai, int type)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
 {
@@ -4313,8 +4309,8 @@ G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
 {
@@ -4375,9 +4371,9 @@ G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkNativeDialog * info :
+*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
 *  gint response_id       :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_on_assistant_apply (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -4388,9 +4384,9 @@ G_MODULE_EXPORT void run_on_assistant_apply (GtkNativeDialog * info, gint respon
 *
 *  Usage:
 *
-*  GtkDialog * info :
+*  GtkDialog * info : the GtkDialog sending the signal
 *  gint response_id :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_on_assistant_apply (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -4482,7 +4478,7 @@ G_MODULE_EXPORT void run_on_assistant_apply (GtkDialog * info, gint response_id,
 *  Usage:
 *
 *  GtkAssistant * assistant :
-*  gpointer data            :
+*  gpointer data            : the associated data pointer
 */
 void on_assistant_apply (GtkAssistant * assistant, gpointer data)
 {

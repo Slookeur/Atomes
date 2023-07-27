@@ -36,8 +36,8 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage: save bonding information to file
 *
-*  FILE * fp                  : The file pointer
-*  struct project * this_proj : The project to save
+*  FILE * fp                  : the file pointer
+*  struct project * this_proj : the project to save
 */
 int save_bonding (FILE * fp, struct project * this_proj)
 {

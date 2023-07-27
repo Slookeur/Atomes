@@ -39,7 +39,7 @@ extern void new_coord_menus (struct project * this_proj, coord_info * coord, int
 *
 *  Usage: read bonding information from file
 *
-*  FILE * fp : The file pointer
+*  FILE * fp : the file pointer
 */
 int read_bonding (FILE * fp)
 {

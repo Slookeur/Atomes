@@ -48,8 +48,8 @@ enum position {
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 {
@@ -102,7 +102,7 @@ G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 GtkWidget * menu_proj (glwin * view)
 {
@@ -136,7 +136,7 @@ GtkWidget * menu_proj (glwin * view)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -148,7 +148,7 @@ G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * param
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_proj (glwin * view, int popm)

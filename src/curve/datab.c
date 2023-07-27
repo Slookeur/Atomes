@@ -190,7 +190,7 @@ void add_to_last_row (gpointer data, gpointer user_data)
 *  Usage:
 *
 *  double cte    :
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 void add_to_last_col (double cte, gpointer data)
 {
@@ -230,7 +230,7 @@ void multiply_last_row (gpointer data, gpointer user_data)
 *  Usage:
 *
 *  double cte    :
-*  gpointer data :
+*  gpointer data :the associated data pointer
 */
 void multiply_last_col (double cte, gpointer data)
 {
@@ -298,7 +298,7 @@ void copy_row (gpointer data, gpointer user_data)
 *
 *  Usage:
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 void copy_content (gpointer data)
 {
@@ -358,7 +358,7 @@ void delete_row (gpointer data, gpointer user_data)
 *
 *  Usage:
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 void insert_cell (gpointer data)
 {
@@ -379,7 +379,7 @@ void insert_cell (gpointer data)
 *
 *  Usage:
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 void delete_cell (gpointer data)
 {
@@ -393,7 +393,7 @@ void delete_cell (gpointer data)
 *  GtkCellRendererText * cell :
 *  gchar * path_string        :
    gchar * new_text           :
-   gpointer data              :
+   gpointer data              : the associated data pointer
 */
 G_MODULE_EXPORT void edit_cell (GtkCellRendererText * cell, gchar * path_string,
                                 gchar * new_text, gpointer user_data)
@@ -413,8 +413,8 @@ GtkWidget * col_entry;
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void adjust_value (GtkEntry * res, gpointer data)
 {
@@ -428,9 +428,9 @@ G_MODULE_EXPORT void adjust_value (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkDialog * wind :
+*  GtkDialog * wind : the GtkDialog sending the signal
 *  gint response_id :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_add_to_column (GtkDialog * wind, gint response_id, gpointer data)
 {
@@ -449,7 +449,7 @@ G_MODULE_EXPORT void run_add_to_column (GtkDialog * wind, gint response_id, gpoi
 *
 *  Usage:
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 void add_to_column (gpointer data)
 {
@@ -481,9 +481,9 @@ void add_to_column (gpointer data)
 *
 *  Usage:
 *
-*  GtkDialog * wind :
+*  GtkDialog * wind : the GtkDialog sending the signal
 *  gint response_id :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_multiply_column (GtkDialog * wind, gint response_id, gpointer data)
 {
@@ -502,7 +502,7 @@ G_MODULE_EXPORT void run_multiply_column (GtkDialog * wind, gint response_id, gp
 *
 *  Usage:
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 void multiply_column (gpointer data)
 {
@@ -639,7 +639,7 @@ GMenu * data_menu ()
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void data_pop_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -679,7 +679,7 @@ G_MODULE_EXPORT void data_pop_action (GSimpleAction * action, GVariant * paramet
 *  GtkWidget * top_level :
 *  double x              :
 *  double y              :
-*  gpointer data         :
+*  gpointer data         : the associated data pointer
 */
 void data_popup_menu (GtkWidget * top_level, double x, double y, gpointer data)
 #else
@@ -690,7 +690,7 @@ void data_popup_menu (GtkWidget * top_level, double x, double y, gpointer data)
 *
 *  GtkWidget * top_level :
 *  GdkEvent * event      :
-*  gpointer data         :
+*  gpointer data         : the associated data pointer
 */
 void data_popup_menu (GtkWidget * top_level, GdkEvent * event, gpointer data)
 #endif
@@ -755,7 +755,7 @@ void data_button_event (GtkWidget * data_tree, double event_x, double event_y, g
 *  GdkEvent * event      :
 *  guint event_button    :
 *  guint event_type      :
-*  gpointer data         :
+*  gpointer data         : the associated data pointer
 */
 void data_button_event (GtkWidget * data_tree, GdkEvent * event, guint event_button, guint event_type, gpointer data)
 #endif
@@ -905,8 +905,8 @@ GtkWidget * setview (struct project * this_proj, int b, int c)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 void cancel_changes (GtkWidget * widg, gpointer data)
 {
@@ -920,8 +920,8 @@ void cancel_changes (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void cancel_but (GtkButton * but, gpointer data)
 {
@@ -934,8 +934,8 @@ G_MODULE_EXPORT void cancel_but (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkWindow * win :
-*  gpointer data   :
+*  GtkWindow * win : the GtkWindow sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT gboolean cancel_win (GtkWindow * win, gpointer data)
 #else
@@ -944,9 +944,9 @@ G_MODULE_EXPORT gboolean cancel_win (GtkWindow * win, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * win  :
-*  GdkEvent * event :
-*  gpointer data    :
+*  GtkWidget * win  : the GtkWidget sending the signal
+*  GdkEvent * event : the associated GdkEvent
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer data)
 #endif
@@ -961,7 +961,7 @@ G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer
 *  Usage:
 *
 *  GtkButton * but :
-*  gpointer data   :
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void validate_changes (GtkButton * but, gpointer data)
 {
@@ -990,8 +990,8 @@ G_MODULE_EXPORT void validate_changes (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * but :
-*  gpointer data   :
+*  GtkWidget * but : the GtkWidget sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void edit_data (GtkWidget * but, gpointer data)
 {

@@ -96,9 +96,9 @@ gboolean sel_and_conf;
 *
 *  Usage: 
 *
-*  GtkDialog * dialog : 
+*  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   : 
-*  gpointer data      : 
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -126,9 +126,9 @@ G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint respons
 *
 *  Usage: 
 *
-*  GtkDialog * dial : 
+*  GtkDialog * dial : the GtkDialog sending the signal
 *  gint response_id : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -205,8 +205,6 @@ G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, 
 *  void cp2k_fix_molecule ()
 *
 *  Usage: 
-*
-*   : 
 */
 void cp2k_fix_molecule ()
 {

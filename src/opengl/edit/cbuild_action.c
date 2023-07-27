@@ -854,7 +854,7 @@ gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_c
 *  gboolean to_wrap           :
 *  gboolean show_clones       :
 *  cell_info * cell           :
-*  GtkWidget * widg           :
+*  GtkWidget * widg           : the GtkWidget sending the signal
 */
 int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
 {

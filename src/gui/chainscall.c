@@ -74,7 +74,7 @@ void initchn ()
 *
 *  Usage: update the chains statistics menus
 *
-*  glwin * view : The gliwn to update the menu from
+*  glwin * view : the gliwn to update the menu from
 */
 void update_chains_menus (glwin * view)
 {
@@ -95,7 +95,7 @@ void update_chains_menus (glwin * view)
 *
 *  Usage: update the chains statistics text view after the calculation
 *
-*  struct project * this_proj : The project that was analysed
+*  struct project * this_proj : the project that was analysed
 */
 void update_chains_view (struct project * this_proj)
 {
@@ -245,7 +245,7 @@ void update_chains_view (struct project * this_proj)
 *
 *  Usage: cleaning the OpenGL data related to chain statistics
 *
-*  glwin * view : The gliwn to clean the data from
+*  glwin * view : the gliwn to clean the data from
 */
 void clean_chains_data (glwin * view)
 {
@@ -285,8 +285,8 @@ void clean_chains_data (glwin * view)
 *
 *  Usage: compute chains statistics
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
 {

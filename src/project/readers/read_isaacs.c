@@ -95,7 +95,7 @@ size_t strfind (char * ida)
 *
 *  Usage: write ISAACS XML file
 *
-*  const char *uri : The file name
+*  const char *uri : the file name
 */
 int XmlwriterFilename (const char *uri)
 {
@@ -556,7 +556,7 @@ xmlNodePtr findnode (xmlNodePtr startnode, char * nname)
 *
 *  Usage: get atomic species from data
 *
-*  xmlChar * data : The data
+*  xmlChar * data : the data
 */
 int get_spec_from_data (xmlChar * data)
 {
@@ -576,7 +576,7 @@ int get_spec_from_data (xmlChar * data)
 *
 *  Usage: read chemical properties from XML node
 *
-*  xmlNodePtr pnode : The XML node
+*  xmlNodePtr pnode : the XML node
 */
 int setprop (xmlNodePtr pnode)
 {
@@ -758,7 +758,7 @@ int testopening (char * tdata, char * tfichier)
 *
 *  Usage: read chemistry data from node
 *
-*  xmlNodePtr xsnode : The XML node
+*  xmlNodePtr xsnode : the XML node
 */
 int setchemistry (xmlNodePtr xsnode)
 {
@@ -852,7 +852,7 @@ xend:
 *
 *  Usage: read box properties from node
 *
-*  xmlNodePtr boxnode : The XML node
+*  xmlNodePtr boxnode : the XML node
 */
 int setbox (xmlNodePtr boxnode)
 {
@@ -1045,7 +1045,7 @@ bend:
 *
 *  Usage: read the PBC information from node
 *
-*  xmlNodePtr pbcnode : The XML node
+*  xmlNodePtr pbcnode : the XML node
 */
 int setpbc (xmlNodePtr pbcnode)
 {
@@ -1099,7 +1099,7 @@ pend:
 *
 *  Usage: read bond cutoffs from node
 *
-*  xmlNodePtr cutnode : The XML node
+*  xmlNodePtr cutnode : the XML node
 */
 int setcutoffs (xmlNodePtr cutnode)
 {
@@ -1162,7 +1162,7 @@ cend:
 *
 *  Usage: read MD information from node
 *
-*  xmlNodePtr timenode : The XML node
+*  xmlNodePtr timenode : the XML node
 */
 int settime(xmlNodePtr timenode)
 {

@@ -82,7 +82,7 @@ void update_insert_combos ()
 *
 *  Usage: close a project
 *
-*  struct project * to_close : The project to close
+*  struct project * to_close : the project to close
 */
 void close_project (struct project * to_close)
 {
@@ -295,7 +295,7 @@ void close_project (struct project * to_close)
 *  Usage: to close this project
 *
 *  int to_activate            : If the workspace is not empty, activate first another project
-*  struct project * this_proj : The project to close
+*  struct project * this_proj : the project to close
 */
 void to_close_this_project (int to_activate, struct project * this_proj)
 {
@@ -317,8 +317,8 @@ void to_close_this_project (int to_activate, struct project * this_proj)
 *
 *  Usage: signal to close a project
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer cdata   : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer cdata   : the associated data pointer
 */
 G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata)
 {

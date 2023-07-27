@@ -61,8 +61,8 @@ extern void initsh (int s);
 *
 *  Usage: read a string from a file
 *
-*  int i     : The size of the string to read
-*  FILE * fp : The file pointer
+*  int i     : the size of the string to read
+*  FILE * fp : the file pointer
 */
 char * read_string (int i, FILE * fp)
 {
@@ -82,7 +82,7 @@ char * read_string (int i, FILE * fp)
 *
 *  Usage: is there a string to read in this file ? yes do it
 *
-*  FILE * fp : The file pointer
+*  FILE * fp : the file pointer
 */
 gchar * read_this_string (FILE * fp)
 {
@@ -147,7 +147,7 @@ void initcnames (int w, int s)
 *
 *  Usage: allocate project data
 *
-*  struct project * this_proj : The project
+*  struct project * this_proj : the project
 */
 void allocatoms (struct project * this_proj)
 {
@@ -173,7 +173,7 @@ void allocatoms (struct project * this_proj)
 *
 *  Usage: allocate chemistry data
 *
-*  int spec : The number of chemical species
+*  int spec : the number of chemical species
 */
 chemical_data * alloc_chem_data (int spec)
 {
@@ -192,7 +192,7 @@ chemical_data * alloc_chem_data (int spec)
 *
 *  Usage: allocate data
 *
-*  struct project * this_proj : The project
+*  struct project * this_proj : the project
 *  int cid                    : Allocate chemistry data (1/0)
 */
 void alloc_proj_data (struct project * this_proj, int cid)
@@ -206,8 +206,8 @@ void alloc_proj_data (struct project * this_proj, int cid)
 *
 *  Usage: open atomes project file
 *
-*  FILE * fp : The file pointer
-*  int npi   : The total number of projects in the workspace
+*  FILE * fp : the file pointer
+*  int npi   : the total number of projects in the workspace
 */
 int open_project (FILE * fp, int npi)
 {

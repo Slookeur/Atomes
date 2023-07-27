@@ -44,8 +44,8 @@ extern GtkWidget * cpmd_box (GtkWidget * box, gchar * lab, int v_space, int h_sp
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_restart_parameter (GtkEntry * res, gpointer data)
 {
@@ -71,8 +71,8 @@ GtkWidget * trap_box[2];
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void update_restart_check (GtkCheckButton * but, gpointer data)
 #else
@@ -81,8 +81,8 @@ G_MODULE_EXPORT void update_restart_check (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void update_restart_check (GtkToggleButton * but, gpointer data)
 #endif
@@ -109,8 +109,8 @@ G_MODULE_EXPORT void update_restart_check (GtkToggleButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_restart_box (GtkComboBox * box, gpointer data)
 {
@@ -123,8 +123,6 @@ G_MODULE_EXPORT void changed_restart_box (GtkComboBox * box, gpointer data)
 *  GtkWidget * restart_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * restart_box ()
 {

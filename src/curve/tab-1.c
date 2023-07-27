@@ -171,8 +171,8 @@ cairo_surface_t * draw_frame_surface (int tf,
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void set_title (GtkCheckButton * but, gpointer data)
 #else
@@ -181,8 +181,8 @@ G_MODULE_EXPORT void set_title (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_title (GtkToggleButton * but, gpointer data)
 #endif
@@ -207,8 +207,8 @@ G_MODULE_EXPORT void set_title (GtkToggleButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void set_title_default (GtkCheckButton * but, gpointer data)
 #else
@@ -217,8 +217,8 @@ G_MODULE_EXPORT void set_title_default (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_title_default (GtkToggleButton * but, gpointer data)
 #endif
@@ -248,8 +248,8 @@ G_MODULE_EXPORT void set_title_default (GtkToggleButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * tit :
-*  gpointer data  :
+*  GtkEntry * tit : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_title_custom (GtkEntry * tit, gpointer data)
 {
@@ -270,7 +270,7 @@ G_MODULE_EXPORT void set_title_custom (GtkEntry * tit, gpointer data)
 *  Usage:
 *
 *  GtkFontButton * fontb :
-*  gpointer data         :
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_title_font (GtkFontButton * fontb, gpointer data)
 {
@@ -308,8 +308,8 @@ G_MODULE_EXPORT void set_title_color (GtkColorChooser * colob, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * entry :
-*  gpointer data    :
+*  GtkEntry * entry : the GtkEntry sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_title_pos (GtkEntry * entry, gpointer data)
 {
@@ -379,8 +379,8 @@ void set_frame_style (gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void set_show_frame (GtkCheckButton * but, gpointer data)
 #else
@@ -389,8 +389,8 @@ G_MODULE_EXPORT void set_show_frame (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_show_frame (GtkToggleButton * but, gpointer data)
 #endif
@@ -433,8 +433,8 @@ G_MODULE_EXPORT void set_background_color (GtkColorChooser * colob, gpointer dat
 *
 *  Usage:
 *
-*  GtkComboBox * fbox :
-*  gpointer data      :
+*  GtkComboBox * fbox : the GtkComboBox sending the signal
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void set_frame_type (GtkComboBox * fbox, gpointer data)
 {
@@ -451,8 +451,8 @@ G_MODULE_EXPORT void set_frame_type (GtkComboBox * fbox, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * fbox :
-*  gpointer data      :
+*  GtkComboBox * fbox : the GtkComboBox sending the signal
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void set_frame_line (GtkComboBox * fbox, gpointer data)
 {
@@ -469,8 +469,8 @@ G_MODULE_EXPORT void set_frame_line (GtkComboBox * fbox, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * entry :
-*  gpointer data    :
+*  GtkEntry * entry : the GtkEntry sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_frame_thickness (GtkEntry * entry, gpointer data)
 {
@@ -510,8 +510,8 @@ G_MODULE_EXPORT void set_frame_color (GtkColorChooser * colob, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * fen :
-*  gpointer data  :
+*  GtkEntry * fen : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_frame_pos (GtkEntry * fen, gpointer data)
 {

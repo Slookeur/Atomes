@@ -40,9 +40,9 @@ extern void duplicate_molecule (struct molecule * new_mol, struct molecule * old
 *
 *  Usage: read atom fragment and molecule data
 *
-*  FILE * fp : The file pointer
-*  int s     : The MD step
-*  int a     : The atom number
+*  FILE * fp : the file pointer
+*  int s     : the MD step
+*  int a     : the atom number
 */
 int read_atom_m (FILE * fp, int s, int a)
 {
@@ -56,8 +56,8 @@ int read_atom_m (FILE * fp, int s, int a)
 *
 *  Usage: read molecule data
 *
-*  FILE * fp             : The file pointer
-*  struct molecule * tmp : The molecule to store the data
+*  FILE * fp             : the file pointer
+*  struct molecule * tmp : the molecule to store the data
 */
 int read_this_mol (FILE * fp, struct molecule * tmp)
 {
@@ -79,7 +79,7 @@ int read_this_mol (FILE * fp, struct molecule * tmp)
 *
 *  Usage: read molecule(s) information from file
 *
-*  FILE * fp : The file pointer
+*  FILE * fp : the file pointer
 */
 int read_mol (FILE * fp)
 {

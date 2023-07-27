@@ -494,6 +494,8 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
 *  int * num                  :
 *  int * rec                  :
 *  int *** tmpgeo             :
+*  int *** tmpgeo             :
+*  int *** tmpgeo             :
 */
 void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag)
 {

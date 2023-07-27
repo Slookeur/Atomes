@@ -100,8 +100,8 @@ typedef struct {
 *
 *  Usage: save thermostat to file
 *
-*  FILE * fp                  : The file pointer
-*  struct thermostat * thermo : The thermostat to save
+*  FILE * fp                  : the file pointer
+*  struct thermostat * thermo : the thermostat to save
 */
 int save_thermo (FILE * fp, struct thermostat * thermo)
 {
@@ -119,10 +119,10 @@ int save_thermo (FILE * fp, struct thermostat * thermo)
 *
 *  Usage: save fixed atom(s) to file
 *
-*  FILE * fp       : The file pointer
-*  int fixatoms    : The number of fixed atom(s)
-*  int * fixlist   : The list of fixed atom(s)
-*  int ** fixcoord : The list of fixed coordinate(s) for the fix atom(s)
+*  FILE * fp       : the file pointer
+*  int fixatoms    : the number of fixed atom(s)
+*  int * fixlist   : the list of fixed atom(s)
+*  int ** fixcoord : the list of fixed coordinate(s) for the fix atom(s)
 */
 int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
 {
@@ -157,9 +157,9 @@ int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
 *
 *  Usage: save CPMD data to file
 *
-*  FILE * fp                  : The file pointer
-*  int cid                    : The CPMD id (0 = ab-initio, 1 = QM-MM)
-*  struct project * this_proj : The project that contains the data
+*  FILE * fp                  : the file pointer
+*  int cid                    : the CPMD id (0 = ab-initio, 1 = QM-MM)
+*  struct project * this_proj : the project that contains the data
 */
 int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 {
@@ -228,9 +228,9 @@ int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 *
 *  Usage: save CP2K data to file
 *
-*  FILE * fp                  : The file pointer
-*  int cid                    : The CP2K id (0 = ab-initio, 1 = QM-MM)
-*  struct project * this_proj : The project that contains the data
+*  FILE * fp                  : the file pointer
+*  int cid                    : the CP2K id (0 = ab-initio, 1 = QM-MM)
+*  struct project * this_proj : the project that contains the data
 */
 int save_cp2k_data (FILE * fp, int cid, struct project * this_proj)
 {

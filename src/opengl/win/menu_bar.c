@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'menu_bar.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar);
   void update_menu_bar (glwin * view);
@@ -55,11 +55,11 @@ GSimpleActionGroup * view_pop_actions;
 /*
 *  G_MODULE_EXPORT void to_opengl_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_opengl_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -69,11 +69,11 @@ G_MODULE_EXPORT void to_opengl_advanced (GSimpleAction * action, GVariant * para
 /*
 *  G_MODULE_EXPORT void to_render_gl_image (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
-*  gpointer data          : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_render_gl_image (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -114,10 +114,10 @@ void append_opengl_item (glwin * view, GMenu * menu, const gchar * name, const g
 /*
 *  GMenu * prepare_opengl_menu (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view : the target glwin pointer
+*  int popm     :
 */
 GMenu * prepare_opengl_menu (glwin * view, int popm)
 {
@@ -136,10 +136,10 @@ GMenu * prepare_opengl_menu (glwin * view, int popm)
 /*
 *  GMenu * prepare_model_menu (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view : the target glwin pointer
+*  int popm     :
 */
 GMenu * prepare_model_menu (glwin * view, int popm)
 {
@@ -154,10 +154,10 @@ GMenu * prepare_model_menu (glwin * view, int popm)
 /*
 *  GMenu * prepare_coord_menu (glwin * view, int popm)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  int popm     : 
+*  glwin * view : the target glwin pointer
+*  int popm     :
 */
 GMenu * prepare_coord_menu (glwin * view, int popm)
 {
@@ -203,10 +203,10 @@ GMenu * prepare_coord_menu (glwin * view, int popm)
 /*
 *  GMenu * opengl_menu_bar (glwin * view, gchar * str)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
-*  gchar * str  : 
+*  glwin * view : the target glwin pointer
+*  gchar * str  :
 */
 GMenu * opengl_menu_bar (glwin * view, gchar * str)
 {
@@ -231,10 +231,10 @@ GMenu * opengl_menu_bar (glwin * view, gchar * str)
 /*
 *  void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view         : 
-*  GtkWidget * menu_bar : 
+*  glwin * view         : the target glwin pointer
+*  GtkWidget * menu_bar : the GtkWidget sending the signal
 */
 void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar)
 {
@@ -341,9 +341,9 @@ void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar)
 /*
 *  GtkWidget * opengl_window_create_menu_bar (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 GtkWidget * opengl_window_create_menu_bar (glwin * view)
 {
@@ -370,9 +370,9 @@ GtkWidget * opengl_window_create_menu_bar (glwin * view)
 /*
 *  void update_menu_bar (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 void update_menu_bar (glwin * view)
 {

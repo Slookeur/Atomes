@@ -205,8 +205,8 @@ void update_pix_table (struct project * this_proj)
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
 {

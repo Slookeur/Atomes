@@ -70,8 +70,8 @@ void set_status_for_all (struct project * this_proj, int * data, int status, int
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void turn_rebuild_on (GtkCheckButton * but, gpointer data)
 #else
@@ -80,21 +80,22 @@ G_MODULE_EXPORT void turn_rebuild_on (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void turn_rebuild_on (GtkToggleButton * but, gpointer data)
 #endif
 {
-  tint * dat = (tint *) data;
   int i;
 #ifdef GTK4
   i = gtk_check_button_get_active (but);
+  // DO SOMETHING HERE !!!
 #else
+  tint * dat = (tint *) data;
   i = gtk_toggle_button_get_active (but);
+  get_project_by_id(dat -> a) -> modelgl -> rebuild[0][dat -> c] = i;
   gtk_check_menu_item_set_active ((GtkCheckMenuItem *)get_project_by_id(dat -> a) -> modelgl -> rbuild[i], i);
 #endif
-  get_project_by_id(dat -> a) -> modelgl -> rebuild[0][dat -> c] = i;
 }
 
 #ifdef GTK4
@@ -103,8 +104,8 @@ G_MODULE_EXPORT void turn_rebuild_on (GtkToggleButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void turn_bonding_on (GtkCheckButton * but, gpointer data)
 #else
@@ -113,8 +114,8 @@ G_MODULE_EXPORT void turn_bonding_on (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data)
 #endif
@@ -197,8 +198,8 @@ GtkWidget * create_search_box (int aid, struct project * this_proj)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
 {
@@ -268,8 +269,8 @@ GtkWidget * create_action_combo (int id, struct project * this_proj)
 *
 *  Usage:
 *
-*  GtkWidget * exp :
-*  gpointer data   :
+*  GtkWidget * exp : the GtkWidget sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
 {

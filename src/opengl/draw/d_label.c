@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'd_label.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int create_label_lists ();
 
@@ -42,9 +42,7 @@ extern float get_sphere_radius (int style, int sp, int ac, int sel);
 /*
 *  mat4_t create_label_matrices ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage:
 */
 mat4_t create_label_matrices ()
 {
@@ -54,11 +52,11 @@ mat4_t create_label_matrices ()
 /*
 *  void prepare_label (struct atom at, int id, double al)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct atom at : 
-*  int id         : 
-*  double al      : 
+*  struct atom at :
+*  int id         :
+*  double al      :
 */
 void prepare_label (struct atom at, int id, double al)
 {
@@ -129,9 +127,9 @@ void prepare_label (struct atom at, int id, double al)
 /*
 *  void clean_labels (int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id : 
+*  int id :
 */
 void clean_labels (int id)
 {
@@ -145,9 +143,7 @@ void clean_labels (int id)
 /*
 *  int create_label_lists ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage:
 */
 int create_label_lists ()
 {

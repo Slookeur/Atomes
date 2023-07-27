@@ -79,7 +79,7 @@ gboolean with_workspace = FALSE;
 *
 *  Usage: test an argument from the command line
 *
-*  gchar * arg : The argument to test
+*  gchar * arg : the argument to test
 */
 int test_this_arg (gchar * arg)
 {
@@ -229,7 +229,7 @@ void printversion ()
 *
 *  Usage: destroy splash screen
 *
-*  gpointer user_data : The splash screen to destroy
+*  gpointer user_data : the splash screen to destroy
 */
 gboolean destroy_func (gpointer user_data)
 {
@@ -244,9 +244,9 @@ gboolean destroy_func (gpointer user_data)
 *
 *  Usage: draw splash screen
 *
-*  GtkWidget * widget : The GtkWidget sending the signal
-*  cairo_t * cr       : The cairo drawing context
-*  gpointer data      : The associated data pointer
+*  GtkWidget * widget : the GtkWidget sending the signal
+*  cairo_t * cr       : the cairo drawing context
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean splashdraw (GtkWidget * widget, cairo_t * cr, gpointer data)
 {
@@ -476,8 +476,8 @@ void open_this_data_file (int file_type, gchar * file_name)
 *
 *  Usage: run the program
 *
-*  GApplication * app : The application to run
-*  gpointer data      : The associated data pointer
+*  GApplication * app : the application to run
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
 {

@@ -345,11 +345,11 @@ gchar * replace_markup (char * init, char * key, char * rep)
 /*
 *  gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
 *
-*  Usage: replace pattern in string
+*  Usage:
 *
-*  gchar * init    : The initial string
-*  gchar * o_motif : The initial pattern
-*  gchar * n_motif : The new pattern
+*  gchar * init    : the initial string
+*  gchar * o_motif : the initial pattern
+*  gchar * n_motif : the new pattern
 */
 gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
 {
@@ -632,8 +632,6 @@ void sort_files (int num_f)
 *  int get_sml_files ()
 *
 *  Usage:
-*
-*   :
 */
 int get_sml_files ()
 {
@@ -807,8 +805,6 @@ void fill_family_tree (GtkListStore * store)
 *  void insert_preview ()
 *
 *  Usage:
-*
-*   :
 */
 void insert_preview ()
 {
@@ -1010,9 +1006,9 @@ gboolean lib_visible;
 *
 *  Usage:
 *
-*  GtkDialog * lib  :
+*  GtkDialog * lib  : the GtkDialog sending the signal
 *  gint response_id :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id, gpointer data)
 {

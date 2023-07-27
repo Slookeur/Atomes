@@ -68,7 +68,7 @@ extern double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, v
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 void clean_volumes_data (glwin * view)
 {
@@ -429,8 +429,8 @@ double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
 {
@@ -519,8 +519,8 @@ void adjust_vol_md_step (struct project * this_proj, int geo)
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
 {
@@ -575,8 +575,8 @@ G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void show_volumes (GtkCheckButton * but, gpointer data)
 #else
@@ -585,8 +585,8 @@ G_MODULE_EXPORT void show_volumes (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data)
 #endif
@@ -609,8 +609,8 @@ G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void fm_show_volumes (GtkCheckButton * but, gpointer data)
 #else
@@ -619,8 +619,8 @@ G_MODULE_EXPORT void fm_show_volumes (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
 #endif
@@ -643,7 +643,7 @@ G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
 *  Usage: 
 *
 *  GtkColorChooser * colob : 
-*  gpointer data           : 
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
 {
@@ -661,7 +661,7 @@ G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
 *  Usage: 
 *
 *  GtkColorChooser * colob : 
-*  gpointer data           : 
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data)
 {
@@ -679,7 +679,7 @@ G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data
 *  Usage: 
 *
 *  GtkSpinButton * res : 
-*  gpointer data       : 
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
 {
@@ -694,9 +694,9 @@ G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
 *
 *  Usage: 
 *
-*  GtkWidget * vbox           : 
+*  GtkWidget * vbox           : the GtkWidget sending the signal
 *  struct project * this_proj : 
-*  glwin * view               : 
+*  glwin * view               : the target glwin pointer
 *  int geo                    : 
 */
 void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin * view, int geo)
@@ -806,8 +806,8 @@ void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin 
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
 {
@@ -892,7 +892,7 @@ GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int geo      : 
 */
 GtkWidget * frag_mol_volume_tab (glwin * view, int geo)
@@ -983,7 +983,7 @@ GtkWidget * frag_mol_volume_tab (glwin * view, int geo)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 GtkWidget * mol_model_tab (glwin * view)
 {
@@ -997,8 +997,8 @@ GtkWidget * mol_model_tab (glwin * view)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
 {
@@ -1040,7 +1040,7 @@ G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 GtkWidget * vol_model_tab (glwin * view)
 {
@@ -1129,8 +1129,8 @@ GtkWidget * vol_model_tab (glwin * view)
 *
 *  Usage: 
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data)
 {

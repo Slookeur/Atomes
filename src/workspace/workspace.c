@@ -99,8 +99,8 @@ char * work_menu_items[NITEMS-2] = {"Workspace                ",
 *
 *  Usage: add project to the GtkTreeStore of the workspace
 *
-*  GtkTreeStore * store : The GtkTreeStore
-*  int i                : The id of the project to add
+*  GtkTreeStore * store : the GtkTreeStore
+*  int i                : the id of the project to add
 */
 void add_project (GtkTreeStore * store, int i)
 {
@@ -149,7 +149,7 @@ void add_project (GtkTreeStore * store, int i)
 *
 *  Usage: fill the workspace tree store
 *
-*  GtkTreeStore * store : The GtkTreeStore
+*  GtkTreeStore * store : the GtkTreeStore
 */
 static void fill_workspace (GtkTreeStore * store)
 {
@@ -176,8 +176,8 @@ static void fill_workspace (GtkTreeStore * store)
 *
 *  Usage: activate a project
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data)
 {
@@ -199,8 +199,8 @@ G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data)
 *
 *  Usage: find the calculation using the GtkTreePath in the GtkTreeView
 *
-*  GtkTreeView * treeview : The GtkTreeView
-*  GtkTreePath * path     : The GtkTreePath
+*  GtkTreeView * treeview : the GtkTreeView
+*  GtkTreePath * path     : the GtkTreePath
 */
 int find_calc_by_path (GtkTreeView * treeview, GtkTreePath * path)
 {
@@ -221,7 +221,7 @@ int find_calc_by_path (GtkTreeView * treeview, GtkTreePath * path)
 *
 *  Usage: find the project id using the GtkTreePath
 *
-*  GtkTreePath * path : The GtkTreePath
+*  GtkTreePath * path : the GtkTreePath
 */
 int find_proj_by_path (GtkTreePath * path)
 {
@@ -245,10 +245,10 @@ int find_proj_by_path (GtkTreePath * path)
 *          - DC on a project name: activate this project
 *          - DC elsewhere: display related information
 *
-*  GtkTreeView * treeview   : The GtkTreeView
-*  GtkTreePath * path       : The GtkTreePath
-*  GtkTreeViewColumn  * col : The GtkTreeViewColumn
-*  gpointer data            : The associated data pointer
+*  GtkTreeView * treeview   : the GtkTreeView
+*  GtkTreePath * path       : the GtkTreePath
+*  GtkTreeViewColumn  * col : the GtkTreeViewColumn
+*  gpointer data            : the associated data pointer
 */
 G_MODULE_IMPORT void workspace_ondc (GtkTreeView * treeview,
                                      GtkTreePath * path,
@@ -325,8 +325,8 @@ extern char * window_mouse[MOUSE_ACTIONS];
 *
 *  Usage: use new title for GtkWindow, providing it exists
 *
-*  GtkWidget * win : The GtkWindow
-*  gchar * str     : The new title
+*  GtkWidget * win : the GtkWindow
+*  gchar * str     : the new title
 */
 void correct_this_window_title (GtkWidget * win, gchar * str)
 {
@@ -345,8 +345,8 @@ void correct_this_window_title (GtkWidget * win, gchar * str)
 *
 *  Usage: change project name
 *
-*  GtkWidget * wid : The GtkWidgent sending the signal
-*  gpointer edata  : The associated data pointer
+*  GtkWidget * wid : the GtkWidgent sending the signal
+*  gpointer edata  : the associated data pointer
 */
 G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata)
 {
@@ -439,8 +439,8 @@ G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata)
 *
 *  Usage: popup the workspace contextual menu in workspace tree view
 *
-*  GtkWidget * tree : The GtkTreeView
-*  gpointer event   : The event
+*  GtkWidget * tree : the GtkTreeView
+*  gpointer event   : the event
 *  double x         : x position
 *  double y         : y position
 */
@@ -474,11 +474,11 @@ void workspace_menu (GtkWidget * tree, gpointer event, double x, double y)
 *
 *  Usage: GTK4 popover workspace menu at current location
 *
-*  GtkGesture * gesture : The GtkGesture sending the signal
+*  GtkGesture * gesture : the GtkGesture sending the signal
 *  int n_press          : Number of times it was pressed
 *  double x             : x position
 *  double y             : y position
-*  gpointer data        : The associated data pointer
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void workspace_popup (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -493,9 +493,9 @@ G_MODULE_EXPORT void workspace_popup (GtkGesture * gesture, int n_press, double 
 *
 *  Usage: GTK3 button event on workspace to display contextual menu
 *
-*  GtkWidget * widget     : The GtkWidget sending the signal
-*  GdkEventButton * event : The associated GtkButton
-*  gpointer data          : The associated data pointer
+*  GtkWidget * widget     : the GtkWidget sending the signal
+*  GdkEventButton * event : the associated GtkButton
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_workspace_button_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
@@ -639,7 +639,7 @@ void add_project_to_workspace ()
 *
 *  Usage: remove project from workspace
 *
-*  int id : The id of the project to be remove
+*  int id : the id of the project to be remove
 */
 void remove_project_from_workspace (int id)
 {

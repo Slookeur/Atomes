@@ -45,7 +45,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Usage:
 *
 *  int q        :
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void set_quality (int q, glwin * view)
 {
@@ -65,7 +65,7 @@ void set_quality (int q, glwin * view)
 *  Usage:
 *
 *  GtkSpinButton * res :
-*  gpointer data       :
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
 {
@@ -79,8 +79,8 @@ G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 {
@@ -110,7 +110,7 @@ G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 */
 GtkWidget * menu_quality (glwin * view, int id)
@@ -140,7 +140,7 @@ GtkWidget * menu_quality (glwin * view, int id)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -152,7 +152,7 @@ G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * param
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_quality (glwin * view, int popm)

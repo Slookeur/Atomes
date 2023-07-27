@@ -51,8 +51,8 @@ GtkWidget * box_data;
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 {
@@ -90,8 +90,8 @@ G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
 #else
@@ -100,8 +100,8 @@ G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
 #endif
@@ -137,7 +137,7 @@ G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
 *  Usage:
 *
 *  GtkColorChooser * colob :
-*  gpointer data           :
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 {
@@ -154,7 +154,7 @@ G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -163,8 +163,8 @@ G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter,
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
 #endif

@@ -186,8 +186,8 @@ void update_rdf_view (struct project * this_proj, int rdf)
 *
 *  Usage: compute g(r)
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
 {
@@ -246,8 +246,8 @@ void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
 *
 *  Usage: Fitting bond cutoff or data ?
 *
-*  GtkCheckButton * but : The GtkCheckButton sending the signal
-*  gpointer data        : The associated data pointer
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_cutcheck_toggled (GtkCheckButton * but, gpointer data)
 #else
@@ -256,8 +256,8 @@ G_MODULE_EXPORT void on_cutcheck_toggled (GtkCheckButton * but, gpointer data)
 *
 *  Usage: Fitting bond cutoff or data ?
 *
-*  GtkToggleButton * but : The GtkToggleButton sending the signal
-*  gpointer data        : The associated data pointer
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * but, gpointer data)
 #endif
@@ -283,8 +283,8 @@ G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * but, gpointer data)
 *
 *  Usage: Sending data back to Fortran90
 *
-*  int * cd : The curve id
-*  int * rd : The analysis id
+*  int * cd : the curve id
+*  int * rd : the analysis id
 */
 int recup_data_ (int * cd, int * rd)
 {
@@ -311,8 +311,8 @@ int recup_data_ (int * cd, int * rd)
 *
 *  Usage: compute g(k)
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_gq_released (GtkWidget * widg, gpointer data)
 {

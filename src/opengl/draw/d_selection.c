@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'd_selection.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int find_selected_clone_vertices (int style, int at);
   int find_selected_bond_vertices (int sty, int at, int sp, int bi, int pi, int cap);
@@ -60,12 +60,12 @@ extern void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap
 /*
 *  void setup_selected_clone_vertices (int style, int at, int pi, float * vertices)
 *
-*  Usage: 
+*  Usage:
 *
-*  int style        : 
-*  int at           : 
-*  int pi           : 
-*  float * vertices : 
+*  int style        :
+*  int at           :
+*  int pi           :
+*  float * vertices :
 */
 void setup_selected_clone_vertices (int style, int at, int pi, float * vertices)
 {
@@ -102,10 +102,10 @@ void setup_selected_clone_vertices (int style, int at, int pi, float * vertices)
 /*
 *  int find_selected_clone_vertices (int style, int at)
 *
-*  Usage: 
+*  Usage:
 *
-*  int style : 
-*  int at    : 
+*  int style :
+*  int at    :
 */
 int find_selected_clone_vertices (int style, int at)
 {
@@ -136,14 +136,14 @@ int find_selected_clone_vertices (int style, int at)
 /*
 *  int find_selected_bond_vertices (int sty, int at, int sp, int bi, int pi, int cap)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sty : 
-*  int at  : 
-*  int sp  : 
-*  int bi  : 
-*  int pi  : 
-*  int cap : 
+*  int sty :
+*  int at  :
+*  int sp  :
+*  int bi  :
+*  int pi  :
+*  int cap :
 */
 int find_selected_bond_vertices (int sty, int at, int sp, int bi, int pi, int cap)
 {
@@ -205,10 +205,10 @@ int find_selected_bond_vertices (int sty, int at, int sp, int bi, int pi, int ca
 /*
 *  int get_clone_id (int at, int bt)
 *
-*  Usage: 
+*  Usage:
 *
-*  int at : 
-*  int bt : 
+*  int at :
+*  int bt :
 */
 int get_clone_id (int at, int bt)
 {
@@ -225,17 +225,17 @@ int get_clone_id (int at, int bt)
 /*
 *  void prepare_selected_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sty          : 
-*  gboolean to_pick : 
-*  gboolean picked  : 
-*  int cap          : 
-*  int bi           : 
-*  int pi           : 
-*  struct atom * at : 
-*  struct atom * bt : 
-*  float * vertices : 
+*  int sty          :
+*  gboolean to_pick :
+*  gboolean picked  :
+*  int cap          :
+*  int bi           :
+*  int pi           :
+*  struct atom * at :
+*  struct atom * bt :
+*  float * vertices :
 */
 void prepare_selected_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices)
 {
@@ -280,15 +280,15 @@ void prepare_selected_bond (int sty, gboolean to_pick, gboolean picked, int cap,
 /*
 *  void setup_all_selected_bond_vertices (int sty, int cap, int bi, int at, int sb, int pi, float * vertices)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sty          : 
-*  int cap          : 
-*  int bi           : 
-*  int at           : 
-*  int sb           : 
-*  int pi           : 
-*  float * vertices : 
+*  int sty          :
+*  int cap          :
+*  int bi           :
+*  int at           :
+*  int sb           :
+*  int pi           :
+*  float * vertices :
 */
 void setup_all_selected_bond_vertices (int sty, int cap, int bi, int at, int sb, int pi, float * vertices)
 {
@@ -356,12 +356,12 @@ int *** nbonds[NUM_STYLES][2];
 /*
 *  void prepare_selected (int style, gboolean cylinder, int clone, int type)
 *
-*  Usage: 
+*  Usage:
 *
-*  int style         : 
-*  gboolean cylinder : 
-*  int clone         : 
-*  int type          : 
+*  int style         :
+*  gboolean cylinder :
+*  int clone         :
+*  int type          :
 */
 void prepare_selected (int style, gboolean cylinder, int clone, int type)
 {
@@ -416,12 +416,12 @@ void prepare_selected (int style, gboolean cylinder, int clone, int type)
 /*
 *  void prepare_picked (int style, gboolean cylinder, int clone, int type)
 *
-*  Usage: 
+*  Usage:
 *
-*  int style         : 
-*  gboolean cylinder : 
-*  int clone         : 
-*  int type          : 
+*  int style         :
+*  gboolean cylinder :
+*  int clone         :
+*  int type          :
 */
 void prepare_picked (int style, gboolean cylinder, int clone, int type)
 {
@@ -477,16 +477,16 @@ void prepare_picked (int style, gboolean cylinder, int clone, int type)
 /*
 *  int render_selected (int style, gboolean cylinder, int caps, int bonds, int ncaps, int type, int clone, int shader)
 *
-*  Usage: 
+*  Usage:
 *
-*  int style         : 
-*  gboolean cylinder : 
-*  int caps          : 
-*  int bonds         : 
-*  int ncaps         : 
-*  int type          : 
-*  int clone         : 
-*  int shader        : 
+*  int style         :
+*  gboolean cylinder :
+*  int caps          :
+*  int bonds         :
+*  int ncaps         :
+*  int type          :
+*  int clone         :
+*  int shader        :
 */
 int render_selected (int style, gboolean cylinder, int caps, int bonds, int ncaps, int type, int clone, int shader)
 {
@@ -572,16 +572,16 @@ int render_selected (int style, gboolean cylinder, int caps, int bonds, int ncap
 /*
 *  int render_picked (int style, gboolean cylinder, int caps, int bonds, int ncaps, int type, int clone, int shader)
 *
-*  Usage: 
+*  Usage:
 *
-*  int style         : 
-*  gboolean cylinder : 
-*  int caps          : 
-*  int bonds         : 
-*  int ncaps         : 
-*  int type          : 
-*  int clone         : 
-*  int shader        : 
+*  int style         :
+*  gboolean cylinder :
+*  int caps          :
+*  int bonds         :
+*  int ncaps         :
+*  int type          :
+*  int clone         :
+*  int shader        :
 */
 int render_picked (int style, gboolean cylinder, int caps, int bonds, int ncaps, int type, int clone, int shader)
 {
@@ -666,13 +666,13 @@ int render_picked (int style, gboolean cylinder, int caps, int bonds, int ncaps,
 /*
 *  int prepare_selection_shaders (int style, int shaders, int clone, int type, gboolean do_bonds)
 *
-*  Usage: 
+*  Usage:
 *
-*  int style         : 
-*  int shaders       : 
-*  int clone         : 
-*  int type          : 
-*  gboolean do_bonds : 
+*  int style         :
+*  int shaders       :
+*  int clone         :
+*  int type          :
+*  gboolean do_bonds :
 */
 int prepare_selection_shaders (int style, int shaders, int clone, int type, gboolean do_bonds)
 {
@@ -799,10 +799,10 @@ int prepare_selection_shaders (int style, int shaders, int clone, int type, gboo
 /*
 *  int check_selection (int style, int type)
 *
-*  Usage: 
+*  Usage:
 *
-*  int style : 
-*  int type  : 
+*  int style :
+*  int type  :
 */
 int check_selection (int style, int type)
 {
@@ -857,9 +857,7 @@ int check_selection (int style, int type)
 /*
 *  int create_selection_lists ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage:
 */
 int create_selection_lists ()
 {
@@ -927,9 +925,7 @@ int create_selection_lists ()
 /*
 *  int create_pick_lists ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage:
 */
 int create_pick_lists ()
 {

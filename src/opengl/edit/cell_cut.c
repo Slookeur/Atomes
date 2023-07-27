@@ -52,8 +52,8 @@ extern G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void setup_passivate (GtkButton * but, gpointer data)
 {
@@ -137,8 +137,8 @@ void create_slab_info (struct project * this_proj)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void set_slab_property (GtkCheckButton * but, gpointer data)
 #else
@@ -147,8 +147,8 @@ G_MODULE_EXPORT void set_slab_property (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_slab_property (GtkToggleButton * but, gpointer data)
 #endif
@@ -256,8 +256,8 @@ GtkWidget * prepare_slab_box (int sid, struct project * this_proj)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_slab_option (GtkComboBox * box, gpointer data)
 {
@@ -318,8 +318,8 @@ GtkWidget * create_slab_param_combo (int sid, struct project * this_proj)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_slab_type (GtkComboBox * box, gpointer data)
 {
@@ -342,7 +342,7 @@ G_MODULE_EXPORT void set_slab_type (GtkComboBox * box, gpointer data)
 *
 *  Usage: 
 *
-*  gpointer data : 
+*  gpointer data : the associated data pointer
 *  GLfloat v     : 
 */
 void slab_alpha_has_changed (gpointer data, GLfloat v)
@@ -364,7 +364,7 @@ void slab_alpha_has_changed (gpointer data, GLfloat v)
 *  GtkRange * range     : 
 *  GtkScrollType scroll : 
 *  gdouble value        : 
-*  gpointer data        : 
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -378,7 +378,7 @@ G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType 
 *  Usage: 
 *
 *  GtkRange * range : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_slab_alpha (GtkRange * range, gpointer data)
 {
@@ -447,8 +447,8 @@ void invert_selection (struct project * this_proj)
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data)
 {
@@ -478,8 +478,8 @@ G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
 {

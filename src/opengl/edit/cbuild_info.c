@@ -442,8 +442,8 @@ GtkWidget * create_wyck_pts_info (space_group * spg, int sid)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_so_info (GtkComboBox * box, gpointer data)
 {
@@ -478,8 +478,8 @@ G_MODULE_EXPORT void set_so_info (GtkComboBox * box, gpointer data)
 *
 *  Usage: 
 *
-*  GtkWidget * but : 
-*  gpointer data   : 
+*  GtkWidget * but : the GtkWidget sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void show_sg_info (GtkWidget * but, gpointer data)
 {

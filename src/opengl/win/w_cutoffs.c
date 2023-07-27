@@ -83,7 +83,9 @@ void update_cutoffs (struct project * this_proj)
       for (j=0; j<5; j++)
       {
         clean_rings_data (j, this_proj -> modelgl);
+#ifdef GTK3
         update_rings_menus (this_proj -> modelgl);
+#endif
       }
     }
     if (this_proj -> modelgl -> chains)
@@ -117,8 +119,8 @@ void update_cutoffs (struct project * this_proj)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
 {
@@ -139,7 +141,7 @@ G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
 *  Usage:
 *
 *  struct project * this_proj :
-*  GtkWidget * vbox           :
+*  GtkWidget * vbox           : the GtkWidget sending the signal
 */
 void cut_box (struct project * this_proj, GtkWidget * vbox)
 {
@@ -204,9 +206,9 @@ void cut_box (struct project * this_proj, GtkWidget * vbox)
 *
 *  Usage:
 *
-*  GtkDialog * win  :
+*  GtkDialog * win  : the GtkDialog sending the signal
 *  gint response_id :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -246,7 +248,7 @@ G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointe
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -255,8 +257,8 @@ G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, 
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void window_cuts (GtkWidget * widg, gpointer data)
 #endif

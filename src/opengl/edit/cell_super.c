@@ -156,7 +156,7 @@ void sens_superbut (struct project * this_proj)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void super_celling (glwin * view)
 {
@@ -252,7 +252,9 @@ void super_celling (glwin * view)
         for (i=0; i<5; i++)
         {
           clean_rings_data (i, view);
+#ifdef GTK3
           update_rings_menus (view);
+#endif
         }
       }
       if (view -> chains)
@@ -296,7 +298,7 @@ void super_celling (glwin * view)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void super_cell (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -305,8 +307,8 @@ G_MODULE_EXPORT void super_cell (GSimpleAction * action, GVariant * parameter, g
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void super_cell (GtkWidget * widg, gpointer data)
 #endif
@@ -321,8 +323,8 @@ G_MODULE_EXPORT void super_cell (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void super_cell_but (GtkButton * but, gpointer data)
 {

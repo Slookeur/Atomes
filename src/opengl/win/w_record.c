@@ -39,7 +39,7 @@ extern void window_encode (glwin * view, gboolean video);
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int status   : 
 */
 void prepare_edition_windows (glwin * view, int status)
@@ -86,8 +86,8 @@ void prepare_edition_windows (glwin * view, int status)
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data)
 {
@@ -113,8 +113,8 @@ G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
 {
@@ -137,8 +137,8 @@ G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data)
 {

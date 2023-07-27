@@ -60,8 +60,8 @@ extern G_MODULE_EXPORT void window_lines (GtkWidget * widg, gpointer data);
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data)
 {
@@ -120,7 +120,7 @@ G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data)
 *  char * name      :
 *  int val          :
 *  int box          :
-*  GtkWidget * menu :
+*  GtkWidget * menu : the GtkWidget sending the signal
 *  tint * data      :
 */
 GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * menu, tint * data)
@@ -142,8 +142,8 @@ GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * men
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  glwin * view     :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  glwin * view     : the target glwin pointer
 *  int va           :
 *  int vb           :
 */
@@ -164,10 +164,10 @@ GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va, int vb)
 *  Usage:
 *
 *  gchar * str      :
-*  GtkWidget * menu :
+*  GtkWidget * menu : the GtkWidget sending the signal
 *  int vl           :
 *  int vab          :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab, gpointer data)
 {
@@ -183,7 +183,7 @@ GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 *  int ab       :
 */
@@ -302,7 +302,7 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -346,7 +346,7 @@ G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * para
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -394,7 +394,7 @@ G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * p
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 *  int ab       :
 *  int abs      :
@@ -420,7 +420,7 @@ GMenu * axis_box_style (glwin * view, int popm, int ab, int abs)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 *  int ab       :
 *  int style    :
@@ -452,18 +452,13 @@ GMenu * axis_box_param (glwin * view, int popm, int ab, int style)
 }
 
 /*
-*
-*
-*  Usage:
-*
-*   :
-*/
-/*
-*
+*  GMenuItem * menu_box_axis (glwin * view, int popm, int ab)
 *
 *  Usage:
 *
-*   :
+*  glwin * view : the target glwin pointer
+*  int popm     :
+*  int ab       :
 */
 GMenuItem * menu_box_axis (glwin * view, int popm, int ab)
 {

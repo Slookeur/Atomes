@@ -44,8 +44,8 @@ extern gchar * label_cutrab (struct project * this_proj, glwin * view, int id);
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
 {
@@ -234,7 +234,7 @@ G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
 *
 *  Usage: 
 *
-*  GtkWidget * win            : 
+*  GtkWidget * win            : the GtkWidget sending the signal
 *  struct project * this_proj : 
 *  int s                      : 
 *  int id                     : 
@@ -300,7 +300,7 @@ void bonds_input_win (GtkWidget * win, struct project * this_proj, int s, int id
 *
 *  GSimpleAction * action : 
 *  GVariant * parameter   : 
-*  gpointer data          : 
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -309,8 +309,8 @@ G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * para
 *
 *  Usage: 
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 #endif
@@ -349,7 +349,7 @@ G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 *
 *  GSimpleAction * action : 
 *  GVariant * parameter   : 
-*  gpointer data          : 
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -358,8 +358,8 @@ G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter,
 *
 *  Usage: 
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void window_bonds (GtkWidget * widg, gpointer data)
 #endif

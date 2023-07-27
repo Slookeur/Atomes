@@ -41,8 +41,8 @@ gchar * text_renders[OGL_RENDERS] = {"Filled", "Lines", "Points"};
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 {
@@ -82,7 +82,7 @@ G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 */
 GtkWidget * menu_render (glwin * view, int id)
@@ -126,7 +126,7 @@ GtkWidget * menu_render (glwin * view, int id)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -167,7 +167,7 @@ G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * par
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_render (glwin * view, int popm)

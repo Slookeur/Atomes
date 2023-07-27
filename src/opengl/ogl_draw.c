@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'ogl_draw.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void print_matrices ();
   void setup_camera (void);
@@ -78,9 +78,7 @@ extern void create_volumes_lists ();
 /*
 *  void print_matrices ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage:
 */
 void print_matrices ()
 {
@@ -106,13 +104,11 @@ void print_matrices ()
 }
 
 /*
-*  void setup_camera (void)
+*  void setup_camera ()
 *
-*  Usage: 
-*
-*  void : 
+*  Usage:
 */
-void setup_camera (void)
+void setup_camera ()
 {
   wingl -> model_position         = vec3 (0.0, 0.0, -plot -> p_depth);
   wingl -> model_matrix           = m4_translation (wingl -> model_position);
@@ -131,13 +127,11 @@ void setup_camera (void)
 }
 
 /*
-*  void unrotate_camera (void)
+*  void unrotate_camera ()
 *
-*  Usage: 
-*
-*  void : 
+*  Usage:
 */
-void unrotate_camera (void)
+void unrotate_camera ()
 {
   vec4_t quat;
   quat = plot -> rotation_quaternion;
@@ -148,9 +142,9 @@ void unrotate_camera (void)
 /*
 *  struct screen_string * duplicate_screen_string (struct screen_string * old_s)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct screen_string * old_s : 
+*  struct screen_string * old_s :
 */
 struct screen_string * duplicate_screen_string (struct screen_string * old_s)
 {
@@ -169,10 +163,10 @@ struct screen_string * duplicate_screen_string (struct screen_string * old_s)
 /*
 *  void duplicate_material_and_lightning (image * new_img, image * old_img)
 *
-*  Usage: 
+*  Usage:
 *
-*  image * new_img : 
-*  image * old_img : 
+*  image * new_img :
+*  image * old_img :
 */
 void duplicate_material_and_lightning (image * new_img, image * old_img)
 {
@@ -194,9 +188,9 @@ void duplicate_material_and_lightning (image * new_img, image * old_img)
 /*
 *  image * duplicate_image (image * old_img)
 *
-*  Usage: 
+*  Usage:
 *
-*  image * old_img : 
+*  image * old_img :
 */
 image * duplicate_image (image * old_img)
 {
@@ -354,13 +348,11 @@ image * duplicate_image (image * old_img)
 }
 
 /*
-*  void add_image (void)
+*  void add_image ()
 *
-*  Usage: 
-*
-*  void : 
+*  Usage:
 */
-void add_image (void)
+void add_image ()
 {
   struct snapshot * nextsnap = g_malloc0 (sizeof*nextsnap);
   nextsnap -> img = duplicate_image (plot);
@@ -390,9 +382,9 @@ extern void update_gl_pick_colors ();
 /*
 *  struct atom * duplicate_atom (struct atom * at)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct atom * at : 
+*  struct atom * at :
 */
 struct atom * duplicate_atom (struct atom * at)
 {
@@ -425,10 +417,10 @@ struct atom * duplicate_atom (struct atom * at)
 /*
 *  void at_shift (struct atom * at, float * shift)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct atom * at : 
-*  float * shift    : 
+*  struct atom * at :
+*  float * shift    :
 */
 void at_shift (struct atom * at, float * shift)
 {
@@ -440,10 +432,10 @@ void at_shift (struct atom * at, float * shift)
 /*
 *  void at_unshift (struct atom * at, float * shift)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct atom * at : 
-*  float * shift    : 
+*  struct atom * at :
+*  float * shift    :
 */
 void at_unshift (struct atom * at, float * shift)
 {
@@ -455,9 +447,9 @@ void at_unshift (struct atom * at, float * shift)
 /*
 *  void draw (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 void draw (glwin * view)
 {

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'movie.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, int ogl_q);
   gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile);
@@ -114,12 +114,12 @@ int frame_start;
 /*
 *  void convert_rgb_pixbuf_to_yuv (GdkPixbuf * pixbuf, AVFrame * picture, int w, int h)
 *
-*  Usage: 
+*  Usage:
 *
-*  GdkPixbuf * pixbuf : 
-*  AVFrame * picture  : 
-*  int w              : 
-*  int h              : 
+*  GdkPixbuf * pixbuf :
+*  AVFrame * picture  :
+*  int w              :
+*  int h              :
 */
 void convert_rgb_pixbuf_to_yuv (GdkPixbuf * pixbuf, AVFrame * picture, int w, int h)
 {
@@ -207,10 +207,10 @@ void convert_rgb_pixbuf_to_yuv (GdkPixbuf * pixbuf, AVFrame * picture, int w, in
 /*
 *  static void ffmpeg_encoder_set_frame_yuv_from_rgb (uint8_t * rgb, VideoStream * vs)
 *
-*  Usage: 
+*  Usage:
 *
-*  uint8_t * rgb    : 
-*  VideoStream * vs : 
+*  uint8_t * rgb    :
+*  VideoStream * vs :
 */
 static void ffmpeg_encoder_set_frame_yuv_from_rgb (uint8_t * rgb, VideoStream * vs)
 {
@@ -244,12 +244,12 @@ static GLubyte * capture_opengl_image (unsigned int width, unsigned int height)
 /*
 *  void fill_image (VideoStream * vs, int width, int height, glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  VideoStream * vs : 
-*  int width        : 
-*  int height       : 
-*  glwin * view     : 
+*  VideoStream * vs :
+*  int width        :
+*  int height       :
+*  glwin * view     : the target glwin pointer
 */
 void fill_image (VideoStream * vs, int width, int height, glwin * view)
 {
@@ -276,12 +276,12 @@ void fill_image (VideoStream * vs, int width, int height, glwin * view)
 /*
 *  static void write_video_frame (AVFormatContext * f_context, VideoStream * vs, int frame_id, glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  AVFormatContext * f_context : 
-*  VideoStream * vs            : 
-*  int frame_id                : 
-*  glwin * view                : 
+*  AVFormatContext * f_context :
+*  VideoStream * vs            :
+*  int frame_id                :
+*  glwin * view                : the target glwin pointer
 */
 static void write_video_frame (AVFormatContext * f_context, VideoStream * vs, int frame_id, glwin * view)
 {
@@ -407,11 +407,11 @@ AVCodecContext * add_codec_context (AVFormatContext * fc, const AVCodec * vc, vi
 /*
 *  VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_options * vopts)
 *
-*  Usage: 
+*  Usage:
 *
-*  AVFormatContext * fc  : 
-*  const AVCodec * vc    : 
-*  video_options * vopts : 
+*  AVFormatContext * fc  :
+*  const AVCodec * vc    :
+*  video_options * vopts :
 */
 VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_options * vopts)
 {
@@ -442,10 +442,10 @@ VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_
 /*
 *  static void close_stream (AVFormatContext * fc, VideoStream * vs)
 *
-*  Usage: 
+*  Usage:
 *
-*  AVFormatContext * fc : 
-*  VideoStream * vs     : 
+*  AVFormatContext * fc :
+*  VideoStream * vs     :
 */
 static void close_stream (AVFormatContext * fc, VideoStream * vs)
 {
@@ -460,11 +460,11 @@ int * old_cmap[2];
 /*
 *  void set_old_cmap (image * img, int stp, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  image * img : 
-*  int stp     : 
-*  int id      : 
+*  image * img :
+*  int stp     :
+*  int id      :
 */
 void set_old_cmap (image * img, int stp, int id)
 {
@@ -474,12 +474,12 @@ void set_old_cmap (image * img, int stp, int id)
 /*
 *  gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, int ogl_q)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view  : 
-*  image * img_a : 
-*  image * img_b : 
-*  int ogl_q     : 
+*  glwin * view  : the target glwin pointer
+*  image * img_a :
+*  image * img_b :
+*  int ogl_q     :
 */
 gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, int ogl_q)
 {
@@ -897,11 +897,11 @@ typedef struct{
 /*
 *  gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view          : 
-*  video_options * vopts : 
-*  gchar * videofile     : 
+*  glwin * view          : the target glwin pointer
+*  video_options * vopts :
+*  gchar * videofile     :
 */
 gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
 {
@@ -1068,10 +1068,10 @@ static GLuint rbo_depth;
 /*
 *  void init_frame_buffer (int x, int y)
 *
-*  Usage: 
+*  Usage:
 *
-*  int x : 
-*  int y : 
+*  int x :
+*  int y :
 */
 void init_frame_buffer (int x, int y)
 {
@@ -1099,9 +1099,7 @@ void init_frame_buffer (int x, int y)
 /*
 *  void close_frame_buffer ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage:
 */
 void close_frame_buffer ()
 {
@@ -1114,11 +1112,11 @@ void close_frame_buffer ()
 /*
 *  G_MODULE_EXPORT void run_save_movie (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkNativeDialog * info : 
-*  gint response_id       : 
-*  gpointer data          : 
+*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
+*  gint response_id       :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_save_movie (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -1127,11 +1125,11 @@ G_MODULE_EXPORT void run_save_movie (GtkNativeDialog * info, gint response_id, g
 /*
 *  G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkDialog * info : 
-*  gint response_id : 
-*  gpointer data    : 
+*  GtkDialog * info : the GtkDialog sending the signal
+*  gint response_id :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -1183,10 +1181,10 @@ G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointe
 /*
 *  void save_movie (glwin * view, video_options * vopts)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view          : 
-*  video_options * vopts : 
+*  glwin * view          : the target glwin pointer
+*  video_options * vopts :
 */
 void save_movie (glwin * view, video_options * vopts)
 {

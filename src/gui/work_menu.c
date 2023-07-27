@@ -47,8 +47,8 @@ extern G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data);
 *
 *  Usage: create a new project
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data)
 {
@@ -71,8 +71,8 @@ G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data)
 *
 *  Usage: leaving atomes ?
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void leaving_from_menu (GtkWidget * widg, gpointer data)
 {
@@ -90,8 +90,8 @@ int calc_to_compute;
 *
 *  Usage: to compute the 'calc_to_compute'
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data)
 {

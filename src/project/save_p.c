@@ -35,8 +35,8 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage: save string to file
 *
-*  FILE * fp      : The file pointer
-*  gchar * string : The string to save
+*  FILE * fp      : the file pointer
+*  gchar * string : the string to save
 */
 int save_this_string (FILE * fp, gchar * string)
 {
@@ -69,9 +69,9 @@ int save_this_string (FILE * fp, gchar * string)
 *
 *  Usage: save project to file
 *
-*  FILE * fp                  : The file pointer
-*  struct project * this_proj : The project to save
-*  int npi                    : The total number of projects in the workspace
+*  FILE * fp                  : the file pointer
+*  struct project * this_proj : the project to save
+*  int npi                    : the total number of projects in the workspace
 */
 int save_project (FILE * fp, struct project * this_proj, int npi)
 {

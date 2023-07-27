@@ -182,7 +182,7 @@ void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
 *
 *  Usage: 
 *
-*  glwin * view         : 
+*  glwin * view         : the target glwin pointer
 *  int id               : 
 *  int pi               : 
 *  GtkTreeStore * store : 
@@ -292,7 +292,7 @@ void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 *
 *  Usage: 
 *
-*  glwin * view         : 
+*  glwin * view         : the target glwin pointer
 *  int id               : 
 *  int pi               : 
 *  GtkTreeStore * store : 
@@ -498,7 +498,7 @@ void setup_this_measured_bond (int s, int sa, int sb, int pi)
 *
 *  Usage: 
 *
-*  glwin * view         : 
+*  glwin * view         : the target glwin pointer
 *  int id               : 
 *  int pi               : 
 *  GtkTreeStore * store : 
@@ -645,8 +645,6 @@ int prepare_measure_shaders (int type, int shaders)
 *  void create_measures_lists ()
 *
 *  Usage: 
-*
-*   : 
 */
 void create_measures_lists ()
 {

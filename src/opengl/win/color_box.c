@@ -79,8 +79,8 @@ cairo_surface_t * col_surface (double r, double g, double b, int x, int y)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_back_color (GtkWidget * widg, gpointer data)
 {
@@ -96,8 +96,8 @@ G_MODULE_EXPORT void set_back_color (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_box_color (GtkWidget * widg, gpointer data)
 {
@@ -113,8 +113,8 @@ G_MODULE_EXPORT void set_box_color (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_at_color (GtkWidget * widg, gpointer data)
 {
@@ -133,8 +133,8 @@ G_MODULE_EXPORT void set_at_color (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_rings_color (GtkWidget * widg, gpointer data)
 {
@@ -151,8 +151,8 @@ G_MODULE_EXPORT void set_rings_color (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_total_coord_color (GtkWidget * widg, gpointer data)
 {
@@ -171,8 +171,8 @@ G_MODULE_EXPORT void set_total_coord_color (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_partial_coord_color (GtkWidget * widg, gpointer data)
 {
@@ -191,8 +191,8 @@ G_MODULE_EXPORT void set_partial_coord_color (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_frag_mol_color (GtkWidget * widg, gpointer data)
 {
@@ -212,7 +212,7 @@ G_MODULE_EXPORT void set_frag_mol_color (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int ideo     :
 *  int spec     :
 *  int geo      :
@@ -224,7 +224,7 @@ void color_box (glwin * view, int ideo, int spec, int geo)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int ideo     :
 *  int spec     :
 *  int geo      :
@@ -378,7 +378,7 @@ GtkWidget * color_box (glwin * view, int ideo, int spec, int geo)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int ideo     :
 *  int spec     :
 *  int geo      :

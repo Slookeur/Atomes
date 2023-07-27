@@ -114,7 +114,7 @@ ColRGBA init_color (int id, int numid)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void set_color_map_sensitive (glwin * view)
 {
@@ -135,7 +135,7 @@ void set_color_map_sensitive (glwin * view)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void set_advanced_bonding_menus (glwin * view)
 {
@@ -154,7 +154,7 @@ void set_advanced_bonding_menus (glwin * view)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void prep_all_coord_menus (glwin * view)
 {
@@ -271,7 +271,7 @@ GtkWidget * poly_show_setup (int * sp, int id, int jd)
 *  int p            :
 *  char * name      :
 *  gboolean va      :
-*  GtkWidget * menu :
+*  GtkWidget * menu : the GtkWidget sending the signal
 *  qint * data      :
 */
 GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu, qint * data)

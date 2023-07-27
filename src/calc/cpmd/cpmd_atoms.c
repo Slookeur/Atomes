@@ -86,8 +86,8 @@ struct dummy_atom * get_active_dummy (int id)
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_dummy_coord (GtkEntry * res, gpointer data)
 {
@@ -107,8 +107,8 @@ void create_dummy_param_box (int dummy_id);
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void dummy_type_changed (GtkComboBox * box, gpointer data)
 {
@@ -189,8 +189,8 @@ void create_dummy_param_box (int dummy_id)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_dummy_id_box (GtkComboBox * box, gpointer data)
 {
@@ -296,8 +296,6 @@ GtkWidget * create_dummy_box ();
 *  void clean_dummy_widgets ()
 *
 *  Usage: 
-*
-*   : 
 */
 void clean_dummy_widgets ()
 {
@@ -313,9 +311,9 @@ void clean_dummy_widgets ()
 *
 *  Usage: 
 *
-*  GtkDialog * dialog : 
+*  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   : 
-*  gpointer data      : 
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_dummy (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -505,7 +503,7 @@ void add_dummy (int extra)
 *  Usage: 
 *
 *  GtkSpinButton * res : 
-*  gpointer data       : 
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void add_or_remove_dummy (GtkSpinButton * res, gpointer data)
 {
@@ -543,8 +541,6 @@ G_MODULE_EXPORT void add_or_remove_dummy (GtkSpinButton * res, gpointer data)
 *  GtkWidget * create_dummy_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_dummy_box ()
 {
@@ -567,8 +563,8 @@ GtkWidget * create_dummy_box ()
 *
 *  Usage: 
 *
-*  GtkWidget * but : 
-*  gpointer data   : 
+*  GtkWidget * but : the GtkWidget sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void atom_button (GtkWidget * but, gpointer data)
 {

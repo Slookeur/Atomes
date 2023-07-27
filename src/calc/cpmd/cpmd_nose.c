@@ -144,8 +144,6 @@ GtkTreeStore * add_model;
 *  struct thermostat * get_thermo ()
 *
 *  Usage:
-*
-*   :
 */
 struct thermostat * get_thermo ()
 {
@@ -163,8 +161,6 @@ struct thermostat * get_thermo ()
 *  int get_num_thermo ()
 *
 *  Usage:
-*
-*   :
 */
 int get_num_thermo ()
 {
@@ -182,8 +178,6 @@ int get_num_thermo ()
 *  gboolean are_all_atoms_thermostated ()
 *
 *  Usage:
-*
-*   :
 */
 gboolean are_all_atoms_thermostated ()
 {
@@ -210,8 +204,6 @@ gboolean are_all_atoms_thermostated ()
 *  void set_going_forward ()
 *
 *  Usage:
-*
-*   :
 */
 void set_going_forward ()
 {
@@ -224,8 +216,6 @@ void set_going_forward ()
 *  void clean_nose_widgets ()
 *
 *  Usage:
-*
-*   :
 */
 void clean_nose_widgets ()
 {
@@ -337,9 +327,9 @@ GtkWidget * create_nose_box (int n);
 *
 *  Usage:
 *
-*  GtkDialog * dialog :
+*  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   :
-*  gpointer data      :
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_nose_thermostat (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -586,7 +576,7 @@ G_MODULE_EXPORT void update_thermo_parameter (GtkEntry * res, gpointer data);
 *
 *  Usage:
 *
-*  GtkWidget * vbox :
+*  GtkWidget * vbox : the GtkWidget sending the signal
 *  int id           :
 *  int jd           :
 *  gchar ** la      :
@@ -909,8 +899,8 @@ void fill_thermo_atom_model (int therm)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void select_atoms_not_thermostated (GtkCheckButton * but, gpointer data)
 #else
@@ -919,8 +909,8 @@ G_MODULE_EXPORT void select_atoms_not_thermostated (GtkCheckButton * but, gpoint
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void select_atoms_not_thermostated (GtkToggleButton * but, gpointer data)
 #endif
@@ -968,9 +958,9 @@ G_MODULE_EXPORT void select_atoms_not_thermostated (GtkToggleButton * but, gpoin
 *
 *  Usage:
 *
-*  GtkDialog * dialog :
+*  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   :
-*  gpointer data      :
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_select_atom_from_model (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -1299,8 +1289,8 @@ void select_atom_from_model (int therm)
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void atom_selection_button (GtkButton * but, gpointer data)
 {
@@ -1365,10 +1355,10 @@ G_MODULE_EXPORT void atom_selection_button (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * box :
+*  GtkWidget * box : the GtkWidget sending the signal
 *  int num         :
 *  int id          :
-*  gpointer data   :
+*  gpointer data   : the associated data pointer
 */
 void create_selection_button (GtkWidget * box, int num, int id, gpointer data)
 {
@@ -1423,8 +1413,8 @@ void create_nose_thermo_param_box (int therm_id)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_nose_thermo_id_box (GtkComboBox * box, gpointer data)
 {
@@ -1441,7 +1431,7 @@ G_MODULE_EXPORT void changed_nose_thermo_id_box (GtkComboBox * box, gpointer dat
 *  int id            :
 *  int num           :
 *  int type          :
-*  GCallback handler :
+*  GCallback handler : the associated callback
 */
 void create_selection_combo (int id, int num, int type, GCallback handler)
 {
@@ -1517,7 +1507,7 @@ void add_thermostat (int extra)
 *  Usage:
 *
 *  GtkSpinButton * res :
-*  gpointer data       :
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void add_or_remove_thermostat (GtkSpinButton * res, gpointer data)
 {
@@ -1588,8 +1578,8 @@ G_MODULE_EXPORT void add_or_remove_thermostat (GtkSpinButton * res, gpointer dat
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_thermo_parameter (GtkEntry * res, gpointer data)
 {
@@ -1675,8 +1665,8 @@ GtkWidget * create_nose_box (int n)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_thermo_box_nose (GtkComboBox * box, gpointer data)
 {
@@ -1700,8 +1690,6 @@ G_MODULE_EXPORT void changed_thermo_box_nose (GtkComboBox * box, gpointer data)
 *  void prepare_therm_ions ()
 *
 *  Usage:
-*
-*   :
 */
 void prepare_therm_ions ()
 {
@@ -1742,8 +1730,6 @@ void prepare_therm_ions ()
 *  void prepare_therm_elec ()
 *
 *  Usage:
-*
-*   :
 */
 void prepare_therm_elec ()
 {
@@ -1764,8 +1750,8 @@ void prepare_therm_elec ()
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_thermo_box (GtkComboBox * box, gpointer data)
 {
@@ -1797,7 +1783,7 @@ G_MODULE_EXPORT void changed_thermo_box (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * vbox :
+*  GtkWidget * vbox : the GtkWidget sending the signal
 *  gchar * str      :
 *  int id           :
 */
@@ -1831,8 +1817,6 @@ void thermo_type_box (GtkWidget * vbox, gchar * str, int id)
 *  GtkWidget * thermo_box ()
 *
 *  Usage:
-*
-*   :
 */
 GtkWidget * thermo_box ()
 {

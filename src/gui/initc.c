@@ -40,9 +40,9 @@ extern void clean_this_curve_window (int cid, int rid);
 *
 *  Usage: clean curve data on a range of curve id
 *
-*  int calc  : The calculation
-*  int start : The starting value
-*  int end   : The ending value
+*  int calc  : the calculation
+*  int start : the starting value
+*  int end   : the ending value
 */
 void clean_curves_data (int calc, int start, int end)
 {
@@ -137,7 +137,7 @@ void initcwidgets ()
 *
 *  Usage: to just before and just after running a calculation
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
+*  GtkWidget * widg : the GtkWidget sending the signal
 *  gboolean status  : Calculation completed (1/0)
 *  int run          : Calculation id
 *  int adv          : Calculation result

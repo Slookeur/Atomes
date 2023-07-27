@@ -613,7 +613,7 @@ gboolean in_md_shaders (struct project * this_proj, int id)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 void re_create_all_md_shaders (glwin * view)
 {
@@ -656,7 +656,7 @@ void re_create_md_shaders (int nshaders, int shaders[nshaders], struct project *
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int shader   : 
 */
 void cleaning_shaders (glwin * view, int shader)
@@ -675,7 +675,7 @@ void cleaning_shaders (glwin * view, int shader)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 void recreate_all_shaders (glwin * view)
 {
@@ -691,7 +691,7 @@ void recreate_all_shaders (glwin * view)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 void init_default_shaders (glwin * view)
 {
@@ -719,7 +719,7 @@ void init_default_shaders (glwin * view)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 void init_shaders (glwin * view)
 {

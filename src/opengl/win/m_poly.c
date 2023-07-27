@@ -55,7 +55,7 @@ extern G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVarian
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -64,8 +64,8 @@ G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * paramete
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
 #endif
@@ -157,7 +157,7 @@ G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void cloned_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -166,8 +166,8 @@ G_MODULE_EXPORT void cloned_poly (GSimpleAction * action, GVariant * parameter, 
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
 #endif
@@ -211,7 +211,7 @@ G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int jd       :
 *  int id       :
 */
@@ -267,7 +267,7 @@ GtkWidget * mpoly (glwin * view, int jd, int id)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int jd       :
 *  int id       :
 *  int hd       :
@@ -316,7 +316,7 @@ GtkWidget * menupoly (glwin * view, int jd, int id, int hd, gchar * poln)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 */
 GtkWidget * menu_poly (glwin * view, int id)
@@ -347,7 +347,7 @@ GtkWidget * menu_poly (glwin * view, int id)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 *  int id       :
 */
@@ -399,7 +399,7 @@ GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 *  int id       :
 */
@@ -429,7 +429,7 @@ GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 *  int aid      :
 */
@@ -454,7 +454,7 @@ GMenu * add_menu_poly (glwin * view, int popm, int aid)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_poly_rings (glwin * view, int popm)
@@ -476,7 +476,7 @@ GMenu * menu_poly_rings (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_poly (glwin * view, int popm)

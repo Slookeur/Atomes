@@ -277,9 +277,9 @@ void molecule_set_color (GtkTreeViewColumn * col,
 *
 *  Usage: 
 *
-*  GtkDialog * dialog : 
+*  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   : 
-*  gpointer data      : 
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -431,7 +431,7 @@ G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint respons
 *
 *  GSimpleAction * action : 
 *  GVariant * parameter   : 
-*  gpointer data          : 
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -599,9 +599,9 @@ struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
 *
 *  Usage: 
 *
-*  GtkDialog * rmol : 
+*  GtkDialog * rmol : the GtkDialog sending the signal
 *  gint response_id : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data)
 {
@@ -706,7 +706,7 @@ G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint resp
 *
 *  GSimpleAction * action : 
 *  GVariant * parameter   : 
-*  gpointer data          : 
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 {

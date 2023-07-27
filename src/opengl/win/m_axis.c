@@ -52,8 +52,8 @@ extern GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, 
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
 {
@@ -95,7 +95,7 @@ G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 */
 GtkWidget * axis_position_submenu (glwin * view, int id)
@@ -150,8 +150,8 @@ GtkWidget * axis_position_submenu (glwin * view, int id)
 *
 *  Usage:
 *
-*  GtkWidget * menu_ab :
-*  glwin * view        :
+*  GtkWidget * menu_ab : the GtkWidget sending the signal
+*  glwin * view        : the target glwin pointer
 *  int id              :
 */
 void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
@@ -190,7 +190,7 @@ void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -240,7 +240,7 @@ G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * p
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 *  int pos      :
 */
@@ -265,7 +265,7 @@ GMenu * position_submenu (glwin * view, int popm, int pos)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * axis_position_submenu (glwin * view, int popm)
@@ -289,7 +289,7 @@ GMenu * axis_position_submenu (glwin * view, int popm)
 *  Usage:
 *
 *  GMenu * menu_ab :
-*  glwin * view    :
+*  glwin * view    : the target glwin pointer
 *  int popm        :
 */
 void menu_axis (GMenu * menu_ab, glwin * view, int popm)

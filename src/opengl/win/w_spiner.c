@@ -42,7 +42,7 @@ extern void rotate_x_y (glwin * view, double angle_x, double angle_y);
 *
 *  Usage: 
 *
-*  gpointer data : 
+*  gpointer data : the associated data pointer
 */
 gboolean spin (gpointer data)
 {
@@ -72,7 +72,7 @@ gboolean spin (gpointer data)
 *
 *  Usage: 
 *
-*  gpointer data : 
+*  gpointer data : the associated data pointer
 */
 static gboolean spin_wait_for_stop (gpointer data)
 {
@@ -92,8 +92,8 @@ static gboolean spin_wait_for_stop (gpointer data)
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
 {
@@ -123,8 +123,8 @@ G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
 {
@@ -143,8 +143,8 @@ G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void window_spinner (GtkWidget * widg, gpointer data)
 {

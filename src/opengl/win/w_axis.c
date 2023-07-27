@@ -84,7 +84,7 @@ GtkWidget * ax_title[3];
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  gboolean val :
 */
 void activate_pos_box (glwin * view, gboolean val)
@@ -107,8 +107,8 @@ void activate_pos_box (glwin * view, gboolean val)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_template (GtkComboBox * box, gpointer data)
 {
@@ -129,8 +129,8 @@ G_MODULE_EXPORT void set_axis_template (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
 {
@@ -168,8 +168,8 @@ G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void set_show_axis_toggle (GtkCheckButton * but, gpointer data)
 #else
@@ -178,8 +178,8 @@ G_MODULE_EXPORT void set_show_axis_toggle (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data)
 #endif
@@ -226,8 +226,8 @@ G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void use_axis_default_positions (GtkCheckButton * but, gpointer data)
 #else
@@ -236,8 +236,8 @@ G_MODULE_EXPORT void use_axis_default_positions (GtkCheckButton * but, gpointer 
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer data)
 #endif
@@ -282,7 +282,7 @@ G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void init_axis_colors (glwin * view)
 {
@@ -304,8 +304,8 @@ void init_axis_colors (glwin * view)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void use_axis_default_colors (GtkCheckButton * but, gpointer data)
 #else
@@ -314,8 +314,8 @@ G_MODULE_EXPORT void use_axis_default_colors (GtkCheckButton * but, gpointer dat
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void use_axis_default_colors (GtkToggleButton * but, gpointer data)
 #endif
@@ -353,7 +353,7 @@ G_MODULE_EXPORT void use_axis_default_colors (GtkToggleButton * but, gpointer da
 *  Usage:
 *
 *  GtkColorChooser * colob :
-*  gpointer data           :
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_color (GtkColorChooser * colob, gpointer data)
 {
@@ -369,7 +369,7 @@ G_MODULE_EXPORT void set_axis_color (GtkColorChooser * colob, gpointer data)
 *
 *  Usage:
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 *  double v      :
 */
 void axis_position_has_changed (gpointer data, double v)
@@ -389,7 +389,7 @@ void axis_position_has_changed (gpointer data, double v)
 *  GtkRange * range     :
 *  GtkScrollType scroll :
 *  gdouble value        :
-*  gpointer data        :
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -403,7 +403,7 @@ G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollTy
 *  Usage:
 *
 *  GtkRange * range :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_position (GtkRange * range, gpointer data)
 {
@@ -416,8 +416,8 @@ G_MODULE_EXPORT void set_axis_position (GtkRange * range, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_labels (GtkCheckButton * but, gpointer data)
 #else
@@ -426,8 +426,8 @@ G_MODULE_EXPORT void set_axis_labels (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_labels (GtkToggleButton * but, gpointer data)
 #endif
@@ -451,8 +451,8 @@ G_MODULE_EXPORT void set_axis_labels (GtkToggleButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * entry :
-*  gpointer data    :
+*  GtkEntry * entry : the GtkEntry sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
 {
@@ -473,7 +473,7 @@ G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -482,8 +482,8 @@ G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * parameter
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void axis_advanced (GtkWidget * widg, gpointer data)
 #endif

@@ -133,7 +133,7 @@ gchar * cpos[3] = {"r", "g", "b"};
 *
 *  Usage:
 *
-*  GtkWidget * box :
+*  GtkWidget * box : the GtkWidget sending the signal
 *  char * lab      :
 *  int size        :
 *  float xalign    :
@@ -155,8 +155,8 @@ int status;
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void toggled_delete_ligth (GtkCheckButton * but, gpointer data)
 {
@@ -167,8 +167,8 @@ G_MODULE_EXPORT void toggled_delete_ligth (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void toggled_delete_ligth (GtkToggleButton * but, gpointer data)
 {
@@ -199,9 +199,9 @@ GtkWidget ** light_but;
 *
 *  Usage:
 *
-*  GtkDialog * win  :
+*  GtkDialog * win  : the GtkDialog sending the signal
 *  gint response_id :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_light_source_to_be_removed (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -476,8 +476,8 @@ void update_light_data (int li, opengl_edition * ogl_win)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void show_light_param (GtkComboBox * box, gpointer data)
 {
@@ -515,7 +515,7 @@ void create_lights_combo (image * this_image, opengl_edition * ogl_win)
 *  Usage:
 *
 *  int val       :
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 void add_remove_lights (int val, gpointer data)
 {
@@ -598,7 +598,7 @@ void add_remove_lights (int val, gpointer data)
 *  Usage:
 *
 *  GtkSpinButton * res :
-*  gpointer data       :
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_nlights_spin (GtkSpinButton * res, gpointer data)
 {
@@ -610,8 +610,8 @@ G_MODULE_EXPORT void set_nlights_spin (GtkSpinButton * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_nlights (GtkEntry * res, gpointer data)
 {
@@ -627,8 +627,8 @@ G_MODULE_EXPORT void set_nlights (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_light_param (GtkEntry * res, gpointer data)
 {
@@ -697,8 +697,8 @@ void set_data_pos (vec3_t * vect, int pos, double v)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_object_pos (GtkEntry * res, gpointer data)
 {
@@ -741,8 +741,8 @@ G_MODULE_EXPORT void set_object_pos (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_light_type (GtkComboBox * box, gpointer data)
 {
@@ -757,8 +757,8 @@ G_MODULE_EXPORT void set_light_type (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_light_fix (GtkComboBox * box, gpointer data)
 {
@@ -776,8 +776,8 @@ G_MODULE_EXPORT void set_light_fix (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void show_this_light (GtkCheckButton * but, gpointer data)
 #else
@@ -786,8 +786,8 @@ G_MODULE_EXPORT void show_this_light (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void show_this_light (GtkToggleButton * but, gpointer data)
 #endif
@@ -853,7 +853,7 @@ GtkWidget * create_setting_pos (int id, int kd, int jd, float * values, opengl_e
 *
 *  Usage:
 *
-*  glwin * view              :
+*  glwin * view              : the target glwin pointer
 *  opengl_edition * ogl_edit :
 */
 GtkWidget * lights_tab (glwin * view, opengl_edition * ogl_edit)
@@ -944,8 +944,8 @@ GtkWidget * lights_tab (glwin * view, opengl_edition * ogl_edit)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void set_use_template_toggle (GtkCheckButton * but, gpointer data)
 #else
@@ -954,8 +954,8 @@ G_MODULE_EXPORT void set_use_template_toggle (GtkCheckButton * but, gpointer dat
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_use_template_toggle (GtkToggleButton * but, gpointer data)
 #endif
@@ -990,8 +990,8 @@ G_MODULE_EXPORT void set_use_template_toggle (GtkToggleButton * but, gpointer da
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_template (GtkComboBox * box, gpointer data)
 {
@@ -1017,8 +1017,8 @@ G_MODULE_EXPORT void set_template (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_l_model (GtkComboBox * box, gpointer data)
 {
@@ -1032,7 +1032,7 @@ G_MODULE_EXPORT void set_l_model (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 *  double val    :
 */
 void param_has_changed (gpointer data, double val)
@@ -1054,8 +1054,8 @@ void param_has_changed (gpointer data, double val)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_mat_param (GtkEntry * res, gpointer data)
 {
@@ -1072,7 +1072,7 @@ G_MODULE_EXPORT void update_mat_param (GtkEntry * res, gpointer data)
 *  GtkRange * range     :
 *  GtkScrollType scroll :
 *  gdouble value        :
-*  gpointer data        :
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_scale_param (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -1086,7 +1086,7 @@ G_MODULE_EXPORT gboolean scroll_scale_param (GtkRange * range, GtkScrollType scr
 *  Usage:
 *
 *  GtkRange * range :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void scale_param (GtkRange * range, gpointer data)
 {
@@ -1101,7 +1101,7 @@ G_MODULE_EXPORT void scale_param (GtkRange * range, gpointer data)
 *  GtkRange * range     :
 *  GtkScrollType scroll :
 *  gdouble value        :
-*  gpointer data        :
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_scale_quality (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -1118,7 +1118,7 @@ G_MODULE_EXPORT gboolean scroll_scale_quality (GtkRange * range, GtkScrollType s
 *  Usage:
 *
 *  GtkRange * range :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void scale_quality (GtkRange * range, gpointer data)
 {
@@ -1133,7 +1133,7 @@ G_MODULE_EXPORT void scale_quality (GtkRange * range, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view              :
+*  glwin * view              : the target glwin pointer
 *  opengl_edition * ogl_edit :
 */
 GtkWidget * materials_tab (glwin * view, opengl_edition * ogl_edit)
@@ -1217,7 +1217,7 @@ GtkWidget * materials_tab (glwin * view, opengl_edition * ogl_edit)
 *
 *  Usage:
 *
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 *  GLfloat u        :
 *  GtkRange * range :
 */
@@ -1266,7 +1266,7 @@ void fog_param_changed (gpointer data, GLfloat u, GtkRange * range)
 *  GtkRange * range     :
 *  GtkScrollType scroll :
 *  gdouble value        :
-*  gpointer data        :
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_fog_param (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -1280,7 +1280,7 @@ G_MODULE_EXPORT gboolean scroll_set_fog_param (GtkRange * range, GtkScrollType s
 *  Usage:
 *
 *  GtkRange * range :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_fog_param (GtkRange * range, gpointer data)
 {
@@ -1292,8 +1292,8 @@ G_MODULE_EXPORT void set_fog_param (GtkRange * range, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_fog_type (GtkWidget * widg, gpointer data)
 {
@@ -1308,7 +1308,7 @@ G_MODULE_EXPORT void set_fog_type (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int fid      :
 */
 void setup_fog_dialogs (glwin * view, int fid)
@@ -1340,8 +1340,8 @@ void setup_fog_dialogs (glwin * view, int fid)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_fog_mode (GtkWidget * widg, gpointer data)
 {
@@ -1355,7 +1355,7 @@ G_MODULE_EXPORT void set_fog_mode (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view              :
+*  glwin * view              : the target glwin pointer
 *  opengl_edition * ogl_edit :
 */
 GtkWidget * fog_tab (glwin * view, opengl_edition * ogl_edit)
@@ -1420,7 +1420,7 @@ GtkWidget * fog_tab (glwin * view, opengl_edition * ogl_edit)
 *
 *  Usage:
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 void close_advanced_opengl (gpointer data)
 {
@@ -1436,8 +1436,8 @@ void close_advanced_opengl (gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * window :
-*  gpointer data      :
+*  GtkWidget * window : the GtkWidget sending the signal
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_advanced (GtkWidget * window, gpointer data)
 #else
@@ -1446,9 +1446,9 @@ G_MODULE_EXPORT gboolean close_advanced (GtkWidget * window, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
+*  GtkWidget * widg : the GtkWidget sending the signal
 *  GdkEvent * event :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_advanced (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -1462,8 +1462,8 @@ G_MODULE_EXPORT gboolean close_advanced (GtkWidget * widg, GdkEvent * event, gpo
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void opengl_advanced (GtkWidget * widg, gpointer data)
 {

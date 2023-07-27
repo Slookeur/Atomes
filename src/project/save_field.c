@@ -82,7 +82,7 @@ typedef struct {
 *
 *  Usage: save field atom data to file
 *
-*  FILE * fp : The file pointer
+*  FILE * fp : the file pointer
 */
 int save_field_atom (FILE * fp)
 {
@@ -108,7 +108,7 @@ int save_field_atom (FILE * fp)
 *
 *  Usage: save field core shell data to file
 *
-*  FILE * fp : The file pointer
+*  FILE * fp : the file pointer
 */
 int save_field_shell (FILE * fp)
 {
@@ -129,7 +129,7 @@ int save_field_shell (FILE * fp)
 *
 *  Usage: save field constraint data to file
 *
-*  FILE * fp : The file pointer
+*  FILE * fp : the file pointer
 */
 int save_field_constraint (FILE * fp)
 {
@@ -147,7 +147,7 @@ int save_field_constraint (FILE * fp)
 *
 *  Usage: save field mean force potential data to file
 *
-*  FILE * fp : The file pointer
+*  FILE * fp : the file pointer
 */
 int save_field_pmf (FILE * fp)
 {
@@ -172,7 +172,7 @@ int save_field_pmf (FILE * fp)
 *
 *  Usage: save field rigid constraints data to file
 *
-*  FILE * fp : The file pointer
+*  FILE * fp : the file pointer
 */
 int save_field_rigid (FILE * fp)
 {
@@ -189,7 +189,7 @@ int save_field_rigid (FILE * fp)
 *
 *  Usage: save field tethered data to file
 *
-*  FILE * fp : The file pointer
+*  FILE * fp : the file pointer
 *  int fid   :
 */
 int save_field_tethered (FILE * fp, int fid)
@@ -209,9 +209,9 @@ int save_field_tethered (FILE * fp, int fid)
 *
 *  Usage: save field property data to file
 *
-*  FILE * fp : The file pointer
-*  int fid   : The field id
-*  int pid   : The property id
+*  FILE * fp : the file pointer
+*  int fid   : the field id
+*  int pid   : the property id
 */
 int save_field_prop (FILE * fp, int fid, int pid)
 {
@@ -232,8 +232,8 @@ int save_field_prop (FILE * fp, int fid, int pid)
 *
 *  Usage: save field structural properties to file
 *
-*  FILE * fp : The file pointer
-*  int fid   : The field id
+*  FILE * fp : the file pointer
+*  int fid   : the field id
 */
 int save_field_struct (FILE * fp, int fid)
 {
@@ -270,8 +270,8 @@ int save_field_struct (FILE * fp, int fid)
 *
 *  Usage: save field molecule data to file
 *
-*  FILE * fp : The file pointer
-*  int fid   : The field id
+*  FILE * fp : the file pointer
+*  int fid   : the field id
 */
 int save_field_molecule (FILE * fp, int fid)
 {
@@ -350,8 +350,8 @@ int save_field_molecule (FILE * fp, int fid)
 *
 *  Usage: save field nth body data to file
 *
-*  FILE * fp : The file pointer
-*  int fid   : The field id
+*  FILE * fp : the file pointer
+*  int fid   : the field id
 */
 int save_field_body (FILE * fp, int fid)
 {
@@ -378,8 +378,8 @@ int save_field_body (FILE * fp, int fid)
 *
 *  Usage: save field external data to file
 *
-*  FILE * fp : The file pointer
-*  int fid   : The field id
+*  FILE * fp : the file pointer
+*  int fid   : the field id
 */
 int save_field_external (FILE * fp, int fid)
 {
@@ -396,8 +396,8 @@ int save_field_external (FILE * fp, int fid)
 *
 *  Usage: save force field data to file
 *
-*  FILE * fp                  : The file pointer
-*  struct project * this_proj : The project that contains the data
+*  FILE * fp                  : the file pointer
+*  struct project * this_proj : the project that contains the data
 */
 int save_dlp_field_data (FILE * fp, struct project * this_proj)
 {
@@ -477,8 +477,8 @@ int save_dlp_field_data (FILE * fp, struct project * this_proj)
 *
 *  Usage: save LAMMPS force field data to file
 *
-*  FILE * fp                  : The file pointer
-*  struct project * this_proj : The project that contains the data
+*  FILE * fp                  : the file pointer
+*  struct project * this_proj : the project that contains the data
 */
 int save_lmp_field_data (FILE * fp, struct project * this_proj)
 {

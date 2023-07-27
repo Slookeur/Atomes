@@ -97,18 +97,16 @@ void initrng ()
   active_project -> initok[RI] = TRUE;
 }
 
+#ifdef GTK3
 /*
 *  void update_rings_menus (glwin * view)
 *
 *  Usage: update the ring(s) menu for the glview
 *
-*  glwin * view : The glview
+*  glwin * view : the glview
 */
 void update_rings_menus (glwin * view)
 {
-#ifdef GTK4
-  update_menu_bar (view);
-#else
   int i, j;
   GtkWidget * menu;
   for (i=0; i<2; i++)
@@ -129,16 +127,16 @@ void update_rings_menus (glwin * view)
     show_the_widgets (view -> ogl_rings[i*6]);
     widget_set_sensitive (view -> ogl_rings[i*6], view -> rings);
   }
-#endif
 }
+#endif
 
 /*
 *  void update_rings_view (struct project * this_proj, int c)
 *
 *  Usage: update the text view for ring statistics
 *
-*  struct project * this_proj : The project
-*  int c                      : The ring type
+*  struct project * this_proj : the project
+*  int c                      : the ring type
 */
 void update_rings_view (struct project * this_proj, int c)
 {
@@ -363,7 +361,7 @@ void update_rings_view (struct project * this_proj, int c)
 *  Usage: clean a ring type data for a glview
 *
 *  int rid      : Rings type
-*  glwin * view : The glview
+*  glwin * view : the glview
 */
 void clean_rings_data (int rid, glwin * view)
 {
@@ -427,8 +425,8 @@ void clean_rings_data (int rid, glwin * view)
 *
 *  Usage: compute ring statistics
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
 {
@@ -537,7 +535,11 @@ G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
   }
   gtk_widget_show (curvetoolbox);
   clean_coord_window (active_project);
+#ifdef GTK3
   update_rings_menus (active_glwin);
+#else
+  update_menu_bar (active_glwin);
+#endif
   fill_tool_model ();
   if (search > 2 && active_cell -> pbc) active_project -> dmtx = FALSE;
 }

@@ -992,8 +992,6 @@ int bonds_between_atoms (int n, struct field_atom * at, struct field_atom * bt, 
 *  void init_all_bonds ()
 *
 *  Usage: 
-*
-*   : 
 */
 void init_all_bonds ()
 {
@@ -1084,8 +1082,6 @@ int angles_from_bonds (int n, struct field_atom * at,
 *  void init_all_angles ()
 *
 *  Usage: 
-*
-*   : 
 */
 void init_all_angles ()
 {
@@ -1172,8 +1168,6 @@ int dihedrals_from_angles (int n,
 *  void init_all_dihedrals ()
 *
 *  Usage: 
-*
-*   : 
 */
 void init_all_dihedrals ()
 {
@@ -1850,8 +1844,6 @@ int setup_atomic_weight (int seq)
 *  void find_atom_id_in_field_molecule ()
 *
 *  Usage: 
-*
-*   : 
 */
 void find_atom_id_in_field_molecule ()
 {

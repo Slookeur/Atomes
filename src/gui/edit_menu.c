@@ -93,8 +93,8 @@ extern void cut_box (struct project * this_proj, GtkWidget * vbox);
 *
 *  Usage: update lattice parameters
 *
-*  GtkEntry * entry : The GtkEntry sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkEntry * entry : the GtkEntry sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)
 {
@@ -114,8 +114,8 @@ G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)
 *
 *  Usage: use PBC ?
 *
-*  GtkCheckButton * Button : The GtkCheckButton sending the signal
-*  gpointer data           : The associated data pointer
+*  GtkCheckButton * Button : the GtkCheckButton sending the signal
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void toggle_pbc (GtkCheckButton * Button, gpointer data)
 #else
@@ -124,8 +124,8 @@ G_MODULE_EXPORT void toggle_pbc (GtkCheckButton * Button, gpointer data)
 *
 *  Usage: use PBC ?
 *
-*  GtkToggleButton * Button : The GtkToggleButton sending the signal
-*  gpointer data            : The associated data pointer
+*  GtkToggleButton * Button : the GtkToggleButton sending the signal
+*  gpointer data            : the associated data pointer
 */
 G_MODULE_EXPORT void toggle_pbc (GtkToggleButton * Button, gpointer data)
 #endif
@@ -143,8 +143,8 @@ G_MODULE_EXPORT void toggle_pbc (GtkToggleButton * Button, gpointer data)
 *
 *  Usage: use fractional coordinates
 *
-*  GtkCheckButton * Button : The GtkCheckButton sending the signal
-*  gpointer data           : The associated data pointer
+*  GtkCheckButton * Button : the GtkCheckButton sending the signal
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void toggle_frac (GtkCheckButton * Button, gpointer data)
 #else
@@ -153,8 +153,8 @@ G_MODULE_EXPORT void toggle_frac (GtkCheckButton * Button, gpointer data)
 *
 *  Usage: use fractional coordinates
 *
-*  GtkToggleButton * Button : The GtkToggleButton sending the signal
-*  gpointer data            : The associated data pointer
+*  GtkToggleButton * Button : the GtkToggleButton sending the signal
+*  gpointer data            : the associated data pointer
 */
 G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data)
 #endif
@@ -181,8 +181,8 @@ G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data)
 *
 *  Usage: update lattice vector component
 *
-*  GtkEntry * entry : The GtkEntry sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkEntry * entry : the GtkEntry sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data)
 {
@@ -196,9 +196,9 @@ G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data)
 *
 *  Usage: lattice vectors: run the dialog
 *
-*  GtkDialog * win  : The GtkDialog sending the signal
-*  gint response_id : The response id
-*  gpointer data    : The associated data pointer
+*  GtkDialog * win  : the GtkDialog sending the signal
+*  gint response_id : the response id
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -227,8 +227,8 @@ G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer da
 *
 *  Usage: lattice vectors: prepare the dialog
 *
-*  GtkButton * but : The GtkButton sending the signal
-*  gpointer data   : The associated data pointer
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data)
 {
@@ -322,8 +322,8 @@ void edit_box (GtkWidget * vbox)
 *
 *  Usage: update chemical property
 *
-*  GtkEntry * entry : The GtkEntry sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkEntry * entry : the GtkEntry sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data)
 {
@@ -340,8 +340,8 @@ G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data)
 *
 *  Usage: change the chemical species
 *
-*  GtkComboBox * combo : The GtkComboBox sending the signal
-*  gpointer data       : The associated data pointer
+*  GtkComboBox * combo : the GtkComboBox sending the signal
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void on_spec_changed (GtkComboBox * combo, gpointer data)
 {
@@ -361,8 +361,8 @@ G_MODULE_EXPORT void on_spec_changed (GtkComboBox * combo, gpointer data)
 *
 *  Usage: change the type of atomic radius
 *
-*  GtkComboBox * combo : The GtkComboBox sending the signal
-*  gpointer data       : The associated data pointer
+*  GtkComboBox * combo : the GtkComboBox sending the signal
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void on_rad_changed (GtkComboBox * combo, gpointer data)
 {
@@ -383,8 +383,8 @@ G_MODULE_EXPORT void on_rad_changed (GtkComboBox * combo, gpointer data)
 *
 *  Usage: use X ray diffraction q coorection
 *
-*  GtkCheckButton * but : The GtkCheckButton sending the signal
-*  gpointer data        : The associated data pointer
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void toggle_xcor (GtkCheckButton * but, gpointer data)
 #else
@@ -393,8 +393,8 @@ G_MODULE_EXPORT void toggle_xcor (GtkCheckButton * but, gpointer data)
 *
 *  Usage: use X ray diffraction q coorection
 *
-*  GtkToggleButton * but : The GtkToggleButton sending the signal
-*  gpointer data         : The associated data pointer
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void toggle_xcor (GtkToggleButton * but, gpointer data)
 #endif
@@ -727,9 +727,9 @@ void edit_bonds (GtkWidget * vbox)
 *
 *  Usage: create an edition dialog: run the dialog
 *
-*  GtkDialog * dial : The GtkDialog sending the signal
-*  gint response_id : The response id
-*  gpointer data    : The associated data pointer
+*  GtkDialog * dial : the GtkDialog sending the signal
+*  gint response_id : the response id
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -821,9 +821,9 @@ G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gp
 *
 *  Usage: create an edition dialog: prepare the dialog
 *
-*  GtkDialog * dial : The GtkDialog sending the signal
-*  gint response_id : The response id
-*  gpointer data    : The associated data pointer
+*  GtkDialog * dial : the GtkDialog sending the signal
+*  gint response_id : the response id
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_edit_activate (GtkWidget * widg, gpointer data)
 {

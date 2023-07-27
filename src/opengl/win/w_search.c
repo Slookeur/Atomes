@@ -1374,8 +1374,8 @@ gboolean update_this_search (atom_search * asearch)
 *
 *  Usage:
 *
-*  GtkEntry * entry :
-*  gpointer data    :
+*  GtkEntry * entry : the GtkEntry sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_atom (GtkEntry * entry, gpointer data)
 {
@@ -1438,8 +1438,8 @@ void clear_fields (atom_search * asearch)
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void remove_atom (GtkButton * but, gpointer data)
 {
@@ -1454,8 +1454,8 @@ G_MODULE_EXPORT void remove_atom (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void add_atom (GtkButton * but, gpointer data)
 {
@@ -1645,8 +1645,8 @@ void re_populate_tree_search (atom_search * asearch)
 *
 *  Usage:
 *
-*  GtkEntry * entry :
-*  gpointer data    :
+*  GtkEntry * entry : the GtkEntry sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_id (GtkEntry * entry, gpointer data)
 {
@@ -2648,8 +2648,8 @@ atom_search * csearch;
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_occupancy (GtkEntry * res, gpointer data)
 {
@@ -2668,8 +2668,8 @@ G_MODULE_EXPORT void set_occupancy (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_i_coord (GtkEntry * res, gpointer data)
 {
@@ -2688,8 +2688,8 @@ G_MODULE_EXPORT void set_i_coord (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_max_msd (GtkEntry * res, gpointer data)
 {
@@ -2774,8 +2774,8 @@ int max_random;
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_max_action (GtkEntry * res, gpointer data)
 {
@@ -2795,8 +2795,8 @@ G_MODULE_EXPORT void set_max_action (GtkEntry * res, gpointer data)
 *  Usage:
 *
 *  gchar * path_string :
-*  gpointer data       :
-*  GtkWidget * widg    :
+*  gpointer data       : the associated data pointer
+*  GtkWidget * widg    : the GtkWidget sending the signal
 */
 void get_coord_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * widg)
 {
@@ -3166,8 +3166,8 @@ G_MODULE_EXPORT void markup_action_renderer (GtkCellRendererCombo * cell,
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_max_msd_for_all (GtkEntry * res, gpointer data)
 {
@@ -3225,7 +3225,7 @@ gboolean update_search_model (GtkTreeModel * model,
 *  Usage:
 *
 *  GtkTreeViewColumn * col :
-*  gpointer data           :
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void select_all_atoms (GtkTreeViewColumn * col, gpointer data)
 {
@@ -3399,7 +3399,7 @@ G_MODULE_EXPORT void select_all_atoms (GtkTreeViewColumn * col, gpointer data)
 *
 *  GtkTreeModel * tree_model :
 *  GtkTreePath * path        :
-*  gpointer data             :
+*  gpointer data             : the associated data pointer
 */
 G_MODULE_EXPORT void move_up_down (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data)
 {
@@ -3702,8 +3702,8 @@ void clean_picked_and_labelled (atom_search * asearch)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data)
 {
@@ -3731,8 +3731,8 @@ G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data)
 {
@@ -3757,8 +3757,8 @@ G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_object_changed (GtkComboBox * box, gpointer data)
 {
@@ -3856,8 +3856,8 @@ void add_random_column (atom_search * asearch)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_search_mode (GtkComboBox * box, gpointer data)
 {
@@ -3922,8 +3922,8 @@ G_MODULE_EXPORT void set_search_mode (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_search_digit (GtkEntry * res, gpointer data)
 {
@@ -3948,9 +3948,9 @@ G_MODULE_EXPORT void set_search_digit (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * vbox  :
-*  GtkWidget * lab   :
-*  GtkWidget * combo :
+*  GtkWidget * vbox  : the GtkWidget sending the signal
+*  GtkWidget * lab   : the GtkWidget sending the signal
+*  GtkWidget * combo : the GtkWidget sending the signal
 */
 void prep_search_box (GtkWidget * vbox, GtkWidget * lab, GtkWidget * combo)
 {

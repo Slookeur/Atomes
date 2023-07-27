@@ -253,9 +253,9 @@ void adjust_field_struct (int oid, int k, struct field_struct * olds)
 *
 *  Usage: 
 *
-*  GtkDialog * add_dialog : 
+*  GtkDialog * add_dialog : the GtkDialog sending the signal
 *  gint response_id       : 
-*  gpointer data          : 
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_id, gpointer data)
 {
@@ -339,9 +339,9 @@ G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_
 *
 *  Usage: 
 *
-*  GtkDialog * select_dialog : 
+*  GtkDialog * select_dialog : the GtkDialog sending the signal
 *  gint response_id          : 
-*  gpointer data             : 
+*  gpointer data             : the associated data pointer
 */
 G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint response_id, gpointer data)
 {
@@ -610,9 +610,9 @@ void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove,
 *
 *  Usage: 
 *
-*  GtkDialog * rmol : 
+*  GtkDialog * rmol : the GtkDialog sending the signal
 *  gint response_id : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint response_id, gpointer data)
 {
@@ -691,7 +691,7 @@ G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint
 *
 *  GSimpleAction * action : 
 *  GVariant * parameter   : 
-*  gpointer data          : 
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 {

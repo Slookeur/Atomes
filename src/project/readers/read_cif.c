@@ -175,7 +175,7 @@ gchar * cif_coord_opts[40][2] = {{"b1", "Monoclinic unique axis b, cell choice 1
 *
 *  Usage: get string from CIF file, EOL can be ugly
 *
-*  gchar * mot : The string that was read in the file
+*  gchar * mot : the string that was read in the file
 */
 gchar * get_cif_word (gchar * mot)
 {
@@ -189,8 +189,8 @@ gchar * get_cif_word (gchar * mot)
 *
 *  Usage: read atom coordinates from CIF file
 *
-*  gchar * line : The string that contains the data
-*  int mid      : The position to reach on the line
+*  gchar * line : the string that contains the data
+*  int mid      : the position to reach on the line
 */
 float get_atom_coord (gchar * line, int mid)
 {
@@ -212,8 +212,8 @@ float get_atom_coord (gchar * line, int mid)
 *
 *  Usage: read atom label from CIF file
 *
-*  gchar * line : The string that contains the data
-*  int lid      : The position to reach on the line
+*  gchar * line : the string that contains the data
+*  int lid      : the position to reach on the line
 */
 gchar * get_atom_label (gchar * line, int lid)
 {
@@ -240,8 +240,8 @@ gchar * get_atom_label (gchar * line, int lid)
 *
 *  Usage: read Wyckoff position from CIF file
 *
-*  gchar * line : The string that contains the data
-*  int wid      : The position to reach on the line
+*  gchar * line : the string that contains the data
+*  int wid      : the position to reach on the line
 */
 int get_atom_wyckoff (gchar * line, int wid)
 {
@@ -271,8 +271,8 @@ atom_search * cif_search;
 *
 *  Usage: Select a chemical species to correct error in CIF file
 *
-*  GtkButton * but : The GtkButton sending the signal
-*  gpointer data   : The associated data pointer
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data)
 {
@@ -1139,7 +1139,7 @@ gchar * get_string_from_origin (space_group * spg)
 *
 *  Usage: Getting the space group parameters using the HM Key
 *
-*  gchar * hmk : The HM key
+*  gchar * hmk : the HM key
 *  int end     : Use origin (number of possible SP origins), or not (-1)
 */
 int get_setting_from_hm (gchar * hmk, int end)

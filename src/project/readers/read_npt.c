@@ -57,7 +57,7 @@ cell_file * this_cell;
 *
 *  Usage: append information message to the cell information
 *
-*  gchar * info : The cell information message
+*  gchar * info : the cell information message
 */
 void add_cell_info (gchar * info)
 {

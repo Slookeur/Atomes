@@ -52,7 +52,7 @@ extern G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 *  Usage:
 *
 *  struct project * this_proj :
-*  glwin * view               :
+*  glwin * view               : the target glwin pointer
 *  int id                     :
 */
 gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
@@ -166,7 +166,7 @@ gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
 *  Usage:
 *
 *  gchar * str      :
-*  GtkWidget * menu :
+*  GtkWidget * menu : the GtkWidget sending the signal
 */
 GtkWidget * create_bond_layout_menu (gchar * str, GtkWidget * menu)
 {
@@ -181,7 +181,7 @@ GtkWidget * create_bond_layout_menu (gchar * str, GtkWidget * menu)
 *  Usage:
 *
 *  gchar * str      :
-*  GtkWidget * widg :
+*  GtkWidget * widg : the GtkWidget sending the signal
 *  int va           :
 *  tint * data      :
 */
@@ -211,7 +211,7 @@ GtkWidget * create_bond_layout_widget (gchar * str, GtkWidget * widg, int va, ti
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 *  int at       :
 */
@@ -330,13 +330,13 @@ GtkWidget * menu_bonds (glwin * view, int id, int at)
 *
 *  Usage:
 *
-*  glwin * view       :
+*  glwin * view       : the target glwin pointer
 *  gchar * str        :
 *  gchar * key        :
 *  int popm           :
 *  int id             :
-*  GCallback handler  :
-*  gpointer data      :
+*  GCallback handler  : the associated callback
+*  gpointer data      : the associated data pointer
 *  gboolean sensitive :
 */
 GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int popm, int id, GCallback handler, gpointer data, gboolean sensitive)
@@ -351,7 +351,7 @@ GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int 
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 *  int at       :
 */

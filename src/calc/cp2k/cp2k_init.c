@@ -231,7 +231,7 @@ GtkWidget * cp2k_thermo_box;
 /*
 *  void print_start_buffer ()
 *
-*  Usage: live display of the CP2K input creation
+*  Usage: update of the GtkTextBuffer showing the CP2K input
 *
 */
 void print_start_buffer ()
@@ -448,12 +448,12 @@ void create_mol_selection_button (GtkWidget * box, int id)
 }
 
 /*
-*  G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget *but, gpointer data)
+*  G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget *but :
-*  gpointer data  :
+*  GtkWidget * but : the GtkWidget sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget *but, gpointer data)
 {
@@ -535,8 +535,8 @@ G_MODULE_EXPORT void cp2k_option_dialog (GtkWidget *but, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data)
 {
@@ -563,20 +563,20 @@ G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void update_cp2k_check (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: update some CP2K check button parameter
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void update_cp2k_check (GtkCheckButton * but, gpointer data)
 #else
 /*
 *  G_MODULE_EXPORT void update_cp2k_check (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: update some CP2K check button parameter
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void update_cp2k_check (GtkToggleButton * but, gpointer data)
 #endif
@@ -623,7 +623,7 @@ G_MODULE_EXPORT void update_cp2k_check (GtkToggleButton * but, gpointer data)
 *  Usage:
 *
 *  GtkTextBuffer * textbuf :
-*  gpointer data           :
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void cp2k_file_info (GtkTextBuffer * textbuf, gpointer data)
 {
@@ -718,8 +718,8 @@ gchar * page_name_cp2k (int p);
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_cp2k_box (GtkComboBox * box, gpointer data)
 {

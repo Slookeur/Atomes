@@ -325,7 +325,7 @@ GtkWidget * el_preview (int p, int a)
 *  Usage: 
 *
 *  GtkEventControllerFocus * focus : 
-*  gpointer data                   : 
+*  gpointer data                   : the associated data pointer
 */
 G_MODULE_EXPORT void on_element_focus (GtkEventControllerFocus * focus, gpointer data)
 #else
@@ -334,9 +334,9 @@ G_MODULE_EXPORT void on_element_focus (GtkEventControllerFocus * focus, gpointer
 *
 *  Usage: 
 *
-*  GtkWidget * widget : 
+*  GtkWidget * widget : the GtkWidget sending the signal
 *  GdkEvent * event   : 
-*  gpointer data      : 
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_element_focus (GtkWidget * widget, GdkEvent * event, gpointer data)
 #endif
@@ -358,7 +358,7 @@ G_MODULE_EXPORT gboolean on_element_focus (GtkWidget * widget, GdkEvent * event,
 *  GtkEventControllerMotion * motion : 
 *  gdouble x                         : 
 *  gdouble y                         : 
-*  gpointer data                     : 
+*  gpointer data                     : the associated data pointer
 */
 G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion, gdouble x, gdouble y, gpointer data)
 {
@@ -374,9 +374,9 @@ G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion,
 *
 *  Usage: 
 *
-*  GtkDialog * info : 
+*  GtkDialog * info : the GtkDialog sending the signal
 *  gint response_id : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_periodic_table (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -388,8 +388,8 @@ G_MODULE_EXPORT void run_periodic_table (GtkDialog * info, gint response_id, gpo
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void get_element (GtkButton * but, gpointer data)
 {

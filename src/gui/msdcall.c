@@ -139,8 +139,8 @@ void update_msd_view (struct project * this_proj)
 *
 *  Usage: compute MSD
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data)
 {

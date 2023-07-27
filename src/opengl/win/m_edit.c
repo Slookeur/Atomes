@@ -54,7 +54,7 @@ extern G_MODULE_EXPORT void turn_rebuild (GtkWidget * widg, gpointer data);
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -63,8 +63,8 @@ G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * paramete
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 #endif
@@ -79,7 +79,7 @@ G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view  :
+*  glwin * view  : the target glwin pointer
 *  int id        :
 *  int j         :
 */
@@ -153,7 +153,7 @@ GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 */
 GtkWidget * menu_edit (glwin * view, int id)
@@ -216,7 +216,7 @@ GtkWidget * menu_edit (glwin * view, int id)
 *
 *  Usage:
 *
-*  glwin * view  :
+*  glwin * view  : the target glwin pointer
 *  int popm      :
 *  int sensitive :
 */
@@ -258,7 +258,7 @@ GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 *
 *  Usage:
 *
-*  glwin * view  :
+*  glwin * view  : the target glwin pointer
 *  int popm      :
 *  int sensitive :
 */
@@ -286,7 +286,7 @@ GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -318,7 +318,7 @@ G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * paramete
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * extract_section (glwin * view, int popm)
@@ -340,7 +340,7 @@ GMenu * extract_section (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_edit (glwin * view, int popm)

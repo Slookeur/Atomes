@@ -65,7 +65,7 @@ struct line_node * tail = NULL;
 *
 *  Usage: append information message to the reader information
 *
-*  gchar * info : The reader information message
+*  gchar * info : the reader information message
 */
 void add_reader_info (gchar * info)
 {
@@ -174,8 +174,8 @@ void check_for_species (double v, int ato)
 *
 *  Usage: open atomic coordinates file
 *
-*  gchar * filename : The file name
-*  int fti          : The type of coordinates
+*  gchar * filename : the file name
+*  int fti          : the type of coordinates
 */
 int open_coord_file (gchar * filename, int fti)
 {

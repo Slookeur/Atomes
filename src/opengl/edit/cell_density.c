@@ -75,8 +75,8 @@ void display_density (cell_edition * cell, double vol, double dens, double adens
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data)
 #else
@@ -85,8 +85,8 @@ G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
 #endif

@@ -57,7 +57,7 @@ gboolean was_moved;
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 gboolean is_atom_win_active (glwin * view)
 {
@@ -188,8 +188,8 @@ void clean_atom_win (struct project * this_proj)
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 {
@@ -225,7 +225,7 @@ G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 *  Usage:
 *
 *  GtkWindow * widg :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data)
 #else
@@ -234,9 +234,9 @@ G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
+*  GtkWidget * widg : the GtkWidget sending the signal
 *  GdkEvent * event :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -251,8 +251,8 @@ G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpoi
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer data)
 {
@@ -263,8 +263,8 @@ G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer da
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer data)
 {
@@ -311,8 +311,8 @@ G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer d
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 {
@@ -352,7 +352,7 @@ G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 *  Usage:
 *
 *  struct project * this_proj :
-*  GtkWidget * vbox           :
+*  GtkWidget * vbox           : the GtkWidget sending the signal
 */
 GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
 {
@@ -445,7 +445,7 @@ GtkWidget * create_edition_window (struct project * this_proj)
 *
 *  Usage:
 *
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 *  gboolean visible :
 */
 void prepare_atom_edition (gpointer data, gboolean visible)
@@ -512,7 +512,7 @@ void prepare_atom_edition (gpointer data, gboolean visible)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -521,8 +521,8 @@ G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void action_window (GtkWidget * widg, gpointer data)
 #endif

@@ -51,8 +51,8 @@ int forme;
 *
 *  Usage:
 *
-*  GtkEntry * val :
-*  gpointer data  :
+*  GtkEntry * val : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
 {
@@ -77,22 +77,24 @@ G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
 
 #ifdef GTK4
 /*
-*  G_MODULE_EXPORT void set_background (GtkCheckButton * backb)
+*  G_MODULE_EXPORT void set_background (GtkCheckButton * backb, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * backb :
+*  GtkCheckButton * backb : the GtkCheckButton sending the signal
+*  gpointer data  : the associated data pointer
 */
-G_MODULE_EXPORT void set_background (GtkCheckButton * backb)
+G_MODULE_EXPORT void set_background (GtkCheckButton * backb, gpointer data)
 #else
 /*
-*  G_MODULE_EXPORT void set_background (GtkToggleButton * backb)
+*  G_MODULE_EXPORT void set_background (GtkToggleButton * backb, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * backb :
+*  GtkToggleButton * backb :  the GtkTogglekButton sending the signal
+*  gpointer data  : the associated data pointer
 */
-G_MODULE_EXPORT void set_background (GtkToggleButton * backb)
+G_MODULE_EXPORT void set_background (GtkToggleButton * backb, gpointer data)
 #endif
 {
 #ifdef GTK4
@@ -114,8 +116,8 @@ G_MODULE_EXPORT void set_background (GtkToggleButton * backb)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer cid      :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer cid      : the associated data pointer
 */
 G_MODULE_EXPORT void choose_format (GtkComboBox * box, gpointer cid)
 {
@@ -169,9 +171,9 @@ gchar * i_pattern[4]={"*.png",
 *
 *  Usage:
 *
-*  GtkNativeDialog * info :
-*  gint response_id       :
-*  gpointer data          :
+*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
+*  gint response_id       : the response id
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -182,9 +184,9 @@ G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, 
 *
 *  Usage:
 *
-*  GtkDialog * info :
-*  gint response_id :
-*  gpointer data    :
+*  GtkDialog * info : the GtkDialog sending the signal
+*  gint response_id : the response id
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -271,9 +273,9 @@ void write_image (gpointer curetow)
 *
 *  Usage:
 *
-*  GtkDialog * save_img :
-*  gint response_id     :
-*  gpointer data        :
+*  GtkDialog * save_img : the GtkDialog sending the signal
+*  gint response_id     : the response id
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpointer data)
 {
@@ -306,8 +308,8 @@ G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpo
 *
 *  Usage:
 *
-*  GtkWidget * curve :
-*  gpointer cdata    :
+*  GtkWidget * curve : the GtkWidget sending the signal
+*  gpointer cdata    : the associated data pointer
 */
 G_MODULE_EXPORT void save_image (GtkWidget * curve, gpointer cdata)
 {

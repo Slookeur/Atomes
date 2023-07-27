@@ -36,8 +36,8 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage: save curve data layout to file
 *
-*  FILE * fp           : The file pointer
-*  DataLayout * layout : The data layout to save
+*  FILE * fp           : the file pointer
+*  DataLayout * layout : the data layout to save
 */
 gboolean write_data_layout (FILE * fp, DataLayout * layout)
 {
@@ -59,11 +59,11 @@ gboolean write_data_layout (FILE * fp, DataLayout * layout)
 *
 *  Usage: save project curve to file
 *
-*  FILE * fp                  : The file pointer
-*  int wid                    : The total number of project file in the workspace
-*  struct project * this_proj : The project to save
-*  int rid                    : The calculation to save
-*  int cid                    : The curve id to save
+*  FILE * fp                  : the file pointer
+*  int wid                    : the total number of project file in the workspace
+*  struct project * this_proj : the project to save
+*  int rid                    : the calculation to save
+*  int cid                    : the curve id to save
 */
 int save_project_curve (FILE * fp, int wid, struct project * this_proj, int rid, int cid)
 {

@@ -99,8 +99,6 @@ void viz_fragment (struct field_molecule * fmol, int id, int viz)
 *  void field_unselect_all ()
 *
 *  Usage: 
-*
-*   : 
 */
 void field_unselect_all ()
 {
@@ -928,7 +926,7 @@ gboolean show_field_object (int id, int jd, int kd)
 *  Usage: 
 *
 *  GtkTreeViewColumn * col : 
-*  gpointer data           : 
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void visualize_or_select_all_elements (GtkTreeViewColumn * col, gpointer data)
 {

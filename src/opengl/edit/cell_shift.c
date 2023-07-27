@@ -164,13 +164,17 @@ void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, m
         for (j=0; j<5; j++)
         {
           clean_rings_data (j, this_proj -> modelgl);
+#ifdef GTK3
           update_rings_menus (this_proj -> modelgl);
+#endif
         }
       }
       if (this_proj -> modelgl -> chains)
       {
         clean_chains_data (this_proj -> modelgl);
+#ifdef GTK3
         update_chains_menus (this_proj -> modelgl);
+#endif
       }*/
     }
     init_default_shaders (this_proj -> modelgl);
@@ -240,7 +244,7 @@ void adjust_it (int refresh, int proj)
 *
 *  Usage:
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 *  double val    :
 */
 void shift_has_changed (gpointer data, double val)
@@ -339,8 +343,8 @@ void shift_has_changed (gpointer data, double val)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_shift (GtkEntry * res, gpointer data)
 {
@@ -357,7 +361,7 @@ G_MODULE_EXPORT void set_shift (GtkEntry * res, gpointer data)
 *  GtkRange * range     :
 *  GtkScrollType scroll :
 *  gdouble value        :
-*  gpointer data        :
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_shift_coord (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -371,7 +375,7 @@ G_MODULE_EXPORT gboolean scroll_shift_coord (GtkRange * range, GtkScrollType scr
 *  Usage:
 *
 *  GtkRange * range :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void shift_coord (GtkRange * range, gpointer data)
 {
@@ -480,7 +484,7 @@ GtkWidget * create_shift_box (struct project * this_proj)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void wrapping (glwin * view)
 {
@@ -516,8 +520,8 @@ void wrapping (glwin * view)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void wrap_coord (GtkCheckButton * but, gpointer data)
 #else
@@ -526,8 +530,8 @@ G_MODULE_EXPORT void wrap_coord (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void wrap_coord (GtkToggleButton * but, gpointer data)
 #endif

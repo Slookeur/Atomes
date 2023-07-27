@@ -462,7 +462,9 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     {
       clean_rings_data (i, this_proj -> modelgl);
     }
+#ifdef GTK3
     update_rings_menus (this_proj -> modelgl);
+#endif
   }
   if (this_proj -> modelgl -> chains)
   {
@@ -2006,8 +2008,8 @@ atom_search * duplicate_atom_search (atom_search * asearch)
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void take_action (GtkButton * but, gpointer data)
 {

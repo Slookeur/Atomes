@@ -597,8 +597,8 @@ int get_chain_size_index (struct project * this_proj, int s, int r)
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
 {
@@ -767,7 +767,7 @@ GtkWidget * create_chains_search (struct project * this_proj)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 GtkWidget * chains_tab (glwin * view)
 {

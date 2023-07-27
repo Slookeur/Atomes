@@ -159,7 +159,7 @@ int update_project ()
 *
 *  Usage: change the active project
 *
-*  int id : The id of the new active project
+*  int id : the id of the new active project
 */
 void active_project_changed (int id)
 {
@@ -229,7 +229,7 @@ void active_project_changed (int id)
 *
 *  Usage: change the OpenGL project
 *
-*  int id : The id of the new OpenGL project
+*  int id : the id of the new OpenGL project
 */
 void opengl_project_changed (int id)
 {

@@ -35,7 +35,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Usage: 
 *
 *  GtkSpinButton * res : 
-*  gpointer data       : 
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
 {
@@ -67,7 +67,7 @@ G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 GtkWidget * add_extra_cell_tab (glwin * view)
 {

@@ -109,7 +109,7 @@ void initsq (int r)
 *
 *  Usage: update the text view for s(q) / s(k) calculation
 *
-*  struct project * this_proj : The project
+*  struct project * this_proj : the project
 *  int sqk                    : s(q) (SQ) or s(k) (SK)
 */
 void update_sq_view (struct project * this_proj, int sqk)
@@ -178,8 +178,8 @@ void update_sq_view (struct project * this_proj, int sqk)
 *
 *  Usage: compute s(q) / s(k)
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data)
 {
@@ -230,8 +230,8 @@ void save_xsk_ (int * interv, double datacurve[* interv])
 *
 *  Usage: compute s(q) / s(k)
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_sk_released (GtkWidget * widg, gpointer data)
 {

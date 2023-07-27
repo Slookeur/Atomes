@@ -173,8 +173,8 @@ GtkWidget * thermo_option_box;
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_order (GtkComboBox * box, gpointer data)
 {
@@ -186,8 +186,8 @@ G_MODULE_EXPORT void set_order (GtkComboBox * box, gpointer data)
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_thermo_param (GtkEntry * res, gpointer data)
 {
@@ -219,8 +219,8 @@ G_MODULE_EXPORT void set_thermo_param (GtkEntry * res, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_nvs (GtkToggleButton * but, gpointer data)
 {
@@ -266,8 +266,8 @@ G_MODULE_EXPORT void check_nvs (GtkToggleButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void check_semi (GtkCheckButton * but, gpointer data)
 #else
@@ -276,8 +276,8 @@ G_MODULE_EXPORT void check_semi (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_semi (GtkToggleButton * but, gpointer data)
 #endif
@@ -402,8 +402,8 @@ GtkWidget * create_thermo_options (int ensemble, int thermo)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_thermostat (GtkComboBox * box, gpointer data)
 {
@@ -465,8 +465,8 @@ GtkWidget * create_thermo_box (int ensemble)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_ensemble (GtkComboBox * box, gpointer data)
 {
@@ -495,8 +495,6 @@ G_MODULE_EXPORT void set_ensemble (GtkComboBox * box, gpointer data)
 *  GtkWidget * create_ensemble_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_ensemble_box ()
 {
@@ -567,8 +565,8 @@ gchar * md_combo[2][2] = {{"Velocity", "Leapfrog"}, {"Fixed", "Variable"}};
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_md_param (GtkEntry * res, gpointer data)
 {
@@ -602,8 +600,8 @@ G_MODULE_EXPORT void set_md_param (GtkEntry * res, gpointer data)
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void show_advance_time_step (GtkButton * but, gpointer data)
 {
@@ -631,8 +629,8 @@ G_MODULE_EXPORT void show_advance_time_step (GtkButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_md_combo (GtkComboBox * box, gpointer data)
 {
@@ -661,8 +659,8 @@ gchar * imp_dir[3] = {"on x:", "on y:", "on z:"};
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void check_impact (GtkCheckButton * but, gpointer data)
 #else
@@ -671,8 +669,8 @@ G_MODULE_EXPORT void check_impact (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_impact (GtkToggleButton * but, gpointer data)
 #endif
@@ -692,8 +690,8 @@ G_MODULE_EXPORT void check_impact (GtkToggleButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void show_impact_dialog (GtkButton * but, gpointer data)
 {
@@ -759,8 +757,6 @@ G_MODULE_EXPORT void show_impact_dialog (GtkButton * but, gpointer data)
 *  GtkWidget * create_md_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_md_box ()
 {
@@ -889,8 +885,8 @@ float init_minop[3]={50.0, 0.005, 0.005};
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_equi_combo (GtkComboBox * box, gpointer data)
 {
@@ -911,8 +907,8 @@ G_MODULE_EXPORT void set_equi_combo (GtkComboBox * box, gpointer data)
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_equi_param (GtkEntry * res, gpointer data)
 {
@@ -955,8 +951,8 @@ G_MODULE_EXPORT void set_equi_param (GtkEntry * res, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void check_equi (GtkCheckButton * but, gpointer data)
 #else
@@ -965,8 +961,8 @@ G_MODULE_EXPORT void check_equi (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_equi (GtkToggleButton * but, gpointer data)
 #endif
@@ -988,8 +984,6 @@ G_MODULE_EXPORT void check_equi (GtkToggleButton * but, gpointer data)
 *  GtkWidget * create_equi_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_equi_box ()
 {
@@ -1110,8 +1104,8 @@ GtkWidget * out_entry[3];
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_out_param (GtkEntry * res, gpointer data)
 {
@@ -1148,8 +1142,8 @@ G_MODULE_EXPORT void set_out_param (GtkEntry * res, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void check_out (GtkCheckButton * but, gpointer data)
 #else
@@ -1158,8 +1152,8 @@ G_MODULE_EXPORT void check_out (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_out (GtkToggleButton * but, gpointer data)
 #endif
@@ -1195,8 +1189,8 @@ G_MODULE_EXPORT void check_out (GtkToggleButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_print_level (GtkComboBox * box, gpointer data)
 {
@@ -1207,8 +1201,6 @@ G_MODULE_EXPORT void set_print_level (GtkComboBox * box, gpointer data)
 *  GtkWidget * create_traj_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_traj_box ()
 {
@@ -1266,8 +1258,6 @@ GtkWidget * create_traj_box ()
 *  GtkWidget * create_dump_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_dump_box ()
 {
@@ -1296,8 +1286,6 @@ gchar * out_info[3] = {"Every:", "Every:", " "};
 *  GtkWidget * create_out_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_out_box ()
 {
@@ -1329,8 +1317,6 @@ GtkWidget * create_out_box ()
 *  GtkWidget * create_overall_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_overall_box ()
 {
@@ -1399,8 +1385,8 @@ gchar * ana_param[3]={"Every:", "Num. δ", "Cutoff = "};
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_ana_param (GtkEntry * res, gpointer data)
 {
@@ -1428,8 +1414,8 @@ G_MODULE_EXPORT void set_ana_param (GtkEntry * res, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void check_ana (GtkCheckButton * but, gpointer data)
 #else
@@ -1438,8 +1424,8 @@ G_MODULE_EXPORT void check_ana (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_ana (GtkToggleButton * but, gpointer data)
 #endif
@@ -1472,8 +1458,6 @@ G_MODULE_EXPORT void check_ana (GtkToggleButton * but, gpointer data)
 *  GtkWidget * create_analyze_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_analyze_box ()
 {
@@ -1546,8 +1530,6 @@ GtkWidget * create_analyze_box ()
 *  GtkWidget * create_system_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_system_box ()
 {
@@ -1581,8 +1563,8 @@ GtkWidget * check_e[2];
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_io_param (GtkEntry * res, gpointer data)
 {
@@ -1651,8 +1633,8 @@ G_MODULE_EXPORT void set_io_param (GtkEntry * res, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void check_io (GtkCheckButton * but, gpointer data)
 #else
@@ -1661,8 +1643,8 @@ G_MODULE_EXPORT void check_io (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_io (GtkToggleButton * but, gpointer data)
 #endif
@@ -1700,8 +1682,8 @@ G_MODULE_EXPORT void check_io (GtkToggleButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_io_method (GtkComboBox * box, gpointer data)
 {
@@ -1729,8 +1711,6 @@ G_MODULE_EXPORT void set_io_method (GtkComboBox * box, gpointer data)
 *  GtkWidget * create_job_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_job_box ()
 {
@@ -1760,8 +1740,6 @@ GtkWidget * create_job_box ()
 *  GtkWidget * create_io_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_io_box ()
 {
@@ -1842,8 +1820,6 @@ GtkWidget * create_io_box ()
 *  GtkWidget * create_misc_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_misc_box ()
 {
@@ -1891,8 +1867,8 @@ gchar * eval_m[10] = {"Direct Coulomb sum", "Distance dependent dielectric Coulo
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_elec_param (GtkEntry * res, gpointer data)
 {
@@ -1987,7 +1963,7 @@ G_MODULE_EXPORT void set_elec_param (GtkEntry * res, gpointer data)
 *  Usage: 
 *
 *  GtkSpinButton * res : 
-*  gpointer data       : 
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void adjust_precision (GtkSpinButton * res, gpointer data)
 {
@@ -2005,8 +1981,6 @@ G_MODULE_EXPORT void adjust_precision (GtkSpinButton * res, gpointer data)
 *  GtkWidget * create_elec_param_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_elec_param_box ()
 {
@@ -2094,8 +2068,8 @@ GtkWidget * create_elec_param_box ()
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_elec_eval (GtkComboBox * box, gpointer data)
 {
@@ -2112,8 +2086,8 @@ G_MODULE_EXPORT void set_elec_eval (GtkComboBox * box, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void check_elec (GtkCheckButton * but, gpointer data)
 #else
@@ -2122,8 +2096,8 @@ G_MODULE_EXPORT void check_elec (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_elec (GtkToggleButton * but, gpointer data)
 #endif
@@ -2144,8 +2118,6 @@ G_MODULE_EXPORT void check_elec (GtkToggleButton * but, gpointer data)
 *  GtkWidget * create_electro_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_electro_box ()
 {
@@ -2204,8 +2176,8 @@ gchar * eval_vdw[6] = {"Lorentz-Berthelot", "Fender-Halsey", "Hogervorst",
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_vdw_param (GtkEntry * res, gpointer data)
 {
@@ -2232,8 +2204,8 @@ G_MODULE_EXPORT void set_vdw_param (GtkEntry * res, gpointer data)
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_vdw_mix (GtkComboBox * box, gpointer data)
 {
@@ -2246,8 +2218,8 @@ G_MODULE_EXPORT void set_vdw_mix (GtkComboBox * box, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void check_vdw (GtkCheckButton * but, gpointer data)
 #else
@@ -2256,8 +2228,8 @@ G_MODULE_EXPORT void check_vdw (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_vdw (GtkToggleButton * but, gpointer data)
 #endif
@@ -2278,8 +2250,6 @@ G_MODULE_EXPORT void check_vdw (GtkToggleButton * but, gpointer data)
 *  GtkWidget * create_vdws_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_vdws_box ()
 {
@@ -2338,8 +2308,8 @@ GtkWidget * create_vdws_box ()
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void check_met (GtkCheckButton * but, gpointer data)
 #else
@@ -2348,8 +2318,8 @@ G_MODULE_EXPORT void check_met (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_met (GtkToggleButton * but, gpointer data)
 #endif
@@ -2368,8 +2338,6 @@ G_MODULE_EXPORT void check_met (GtkToggleButton * but, gpointer data)
 *  GtkWidget * create_metal_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_metal_box ()
 {
@@ -2394,8 +2362,8 @@ GtkWidget * create_metal_box ()
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_sys_param (GtkEntry * res, gpointer data)
 {
@@ -2445,8 +2413,8 @@ gchar * sys_opts[10] = {"Relative dielectric constant &#949;<sub>r</sub>",
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_sys_restart (GtkComboBox * box, gpointer data)
 {
@@ -2459,8 +2427,8 @@ G_MODULE_EXPORT void set_sys_restart (GtkComboBox * box, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void check_sys (GtkCheckButton * but, gpointer data)
 #else
@@ -2469,8 +2437,8 @@ G_MODULE_EXPORT void check_sys (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void check_sys (GtkToggleButton * but, gpointer data)
 #endif
@@ -2496,8 +2464,6 @@ G_MODULE_EXPORT void check_sys (GtkToggleButton * but, gpointer data)
 *  GtkWidget * create_sys_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_sys_box ()
 {
@@ -2560,8 +2526,6 @@ GtkWidget * create_sys_box ()
 *  GtkWidget * create_restart_box ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_restart_box ()
 {

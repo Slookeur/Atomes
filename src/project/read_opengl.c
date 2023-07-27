@@ -39,10 +39,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage: read atom properties from file (a)
 *
-*  FILE * fp                  : The file pointer
-*  struct project * this_proj : The project
-*  int s                      : The MD step
-*  int a                      : The atom number
+*  FILE * fp                  : the file pointer
+*  struct project * this_proj : the project
+*  int s                      : the MD step
+*  int a                      : the atom number
 */
 int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -61,10 +61,10 @@ int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 *
 *  Usage: read atom properties from file (b)
 *
-*  FILE * fp                  : The file pointer
-*  struct project * this_proj : The project
-*  int s                      : The MD step
-*  int a                      : The atom number
+*  FILE * fp                  : the file pointer
+*  struct project * this_proj : the project
+*  int s                      : the MD step
+*  int a                      : the atom number
 */
 int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -142,12 +142,12 @@ int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 *
 *  Usage: read rings and chains statistics data from file
 *
-*  FILE * fp    : The file pointer
-*  glwin * view : The glwin to store the data
+*  FILE * fp    : the file pointer
+*  glwin * view : the glwin to store the data
 *  int type     : Rings (0) or chains (1)
-*  int rid      : The ring id or 0
-*  int size     : The size of the ring or chain
-*  int steps    : The number of MD steps
+*  int rid      : the ring id or 0
+*  int size     : the size of the ring or chain
+*  int steps    : the number of MD steps
 */
 int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size, int steps)
 {
@@ -268,10 +268,10 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
 *
 *  Usage: read OpenGL image properties from file
 *
-*  FILE * fp                  : The file pointer
-*  struct project * this_proj : The project to store the data
-*  image * img                : The latest image to store the data
-*  int sid                    : The number of chemical species
+*  FILE * fp                  : the file pointer
+*  struct project * this_proj : the project to store the data
+*  image * img                : the latest image to store the data
+*  int sid                    : the number of chemical species
 */
 int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
 {

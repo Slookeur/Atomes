@@ -45,7 +45,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage: get Z from the PDB atom string
 *
-*  char * name : The string from the PDB file
+*  char * name : the string from the PDB file
 */
 double get_z_from_pdb_name (char * name)
 {

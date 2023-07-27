@@ -68,7 +68,7 @@ void clean_atom_style (struct project * this_proj)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void update_menus (glwin * view)
 {
@@ -144,8 +144,8 @@ void update_menus (glwin * view)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data)
 {
@@ -245,7 +245,7 @@ G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data)
 *  int style        :
 *  int vbl          :
 *  int filled       :
-*  GtkWidget * menu :
+*  GtkWidget * menu : the GtkWidget sending the signal
 *  tint * data      :
 */
 GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int filled, GtkWidget * menu, tint * data)
@@ -259,7 +259,7 @@ GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int fil
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 */
 GtkWidget * menu_style (glwin * view, int id)
@@ -344,7 +344,7 @@ GtkWidget * menu_style (glwin * view, int id)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -398,7 +398,7 @@ G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * para
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_style (glwin * view, int popm)

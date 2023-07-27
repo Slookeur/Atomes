@@ -209,7 +209,7 @@ int ** tmp_object_id[3] = {NULL, NULL, NULL};
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 */
 void save_dihedral_selection (glwin * view, int pi)
@@ -236,7 +236,7 @@ void save_dihedral_selection (glwin * view, int pi)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 */
 void update_dihedral_selection (glwin * view, int pi)
@@ -256,7 +256,7 @@ void update_dihedral_selection (glwin * view, int pi)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 */
 void save_angle_selection (glwin * view, int pi)
@@ -283,7 +283,7 @@ void save_angle_selection (glwin * view, int pi)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 */
 void update_angle_selection (glwin * view, int pi)
@@ -303,7 +303,7 @@ void update_angle_selection (glwin * view, int pi)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 */
 void save_bond_selection (glwin * view, int pi)
@@ -330,7 +330,7 @@ void save_bond_selection (glwin * view, int pi)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 */
 void update_bond_selection (glwin * view, int pi)
@@ -357,7 +357,7 @@ void update_bond_selection (glwin * view, int pi)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 */
 void save_all_selections (glwin * view, int pi)
@@ -372,7 +372,7 @@ void save_all_selections (glwin * view, int pi)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 */
 void update_all_selections (glwin * view, int pi)
@@ -496,7 +496,7 @@ void update_selection_list (struct atom_selection * at_list, struct atom * at, g
 *  Usage: 
 *
 *  struct project * this_proj : 
-*  glwin * view               : 
+*  glwin * view               : the target glwin pointer
 *  int id                     : 
 *  int ac                     : 
 *  int se                     : 
@@ -542,7 +542,7 @@ void process_selected_atom (struct project * this_proj, glwin * view, int id, in
 *  Usage: 
 *
 *  struct project * this_proj : 
-*  glwin * view               : 
+*  glwin * view               : the target glwin pointer
 *  int id                     : 
 *  int ac                     : 
 *  int se                     : 
@@ -571,7 +571,7 @@ void process_selection (struct project * this_proj, glwin * view, int id, int ac
 *
 *  Usage: 
 *
-*  glwin * view      : 
+*  glwin * view      : the target glwin pointer
 *  gint event_button : 
 *  double ptx        : 
 *  double pty        : 

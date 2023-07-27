@@ -88,7 +88,7 @@ void initsh (int str)
 *
 *  Usage: update the text view for spherical harmonics
 *
-*  struct project * this_proj : The project
+*  struct project * this_proj : the project
 */
 void update_spherical_view (struct project * this_proj)
 {
@@ -174,8 +174,8 @@ void update_spherical_view (struct project * this_proj)
 *
 *  Usage: compute spherical harmonics
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_sph_released (GtkWidget * widg, gpointer data)
 {

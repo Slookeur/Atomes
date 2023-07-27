@@ -57,7 +57,7 @@ vec3_t get_arc_ball_vector (glwin * view, int x, int y)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int x        : 
 *  int y        : 
 */

@@ -40,7 +40,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage: for a project reset analysis, curves, data to not performed
 *
-*  struct project * this_proj : The project
+*  struct project * this_proj : the project
 */
 void init_curves_and_calc (struct project * this_proj)
 {

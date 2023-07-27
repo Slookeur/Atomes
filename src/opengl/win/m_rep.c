@@ -70,7 +70,7 @@ gchar * text_reps[OGL_REPS] = {"Orthographic", "Perspective"};
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 */
 void update_labels (glwin * view)
 {
@@ -86,7 +86,7 @@ void update_labels (glwin * view)
 *  Usage:
 *
 *  gdouble value :
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 void camera_has_changed (gdouble value, gpointer data)
 {
@@ -155,8 +155,8 @@ void camera_has_changed (gdouble value, gpointer data)
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
 {
@@ -177,7 +177,7 @@ G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_reset_view (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -186,8 +186,8 @@ G_MODULE_EXPORT void to_reset_view (GSimpleAction * action, GVariant * parameter
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data)
 #endif
@@ -203,7 +203,7 @@ G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data)
 *  GtkRange * range     :
 *  GtkScrollType scroll :
 *  gdouble value        :
-*  gpointer data        :
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -217,7 +217,7 @@ G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scro
 *  Usage:
 *
 *  GtkRange * range :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_camera (GtkRange * range, gpointer data)
 {
@@ -230,7 +230,7 @@ G_MODULE_EXPORT void set_camera (GtkRange * range, gpointer data)
 *  Usage:
 *
 *  GtkSpinButton * res :
-*  gpointer data       :
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_camera_spin (GtkSpinButton * res, gpointer data)
 {
@@ -244,7 +244,7 @@ G_MODULE_EXPORT void set_camera_spin (GtkSpinButton * res, gpointer data)
 *  Usage:
 *
 *  GtkWindow * widg :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_rep_delete (GtkWindow * widg, gpointer data)
 #else
@@ -253,9 +253,9 @@ G_MODULE_EXPORT gboolean on_rep_delete (GtkWindow * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
+*  GtkWidget * widg : the GtkWidget sending the signal
 *  GdkEvent * event :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_rep_delete (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -275,8 +275,8 @@ G_MODULE_EXPORT gboolean on_rep_delete (GtkWidget * widg, GdkEvent * event, gpoi
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void representation_advanced (GtkWidget * widg, gpointer data)
 {
@@ -353,8 +353,8 @@ G_MODULE_EXPORT void representation_advanced (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
 {
@@ -410,7 +410,7 @@ G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 */
 GtkWidget * menu_rep (glwin * view, int id)
@@ -443,7 +443,7 @@ GtkWidget * menu_rep (glwin * view, int id)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -487,7 +487,7 @@ G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parame
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -499,7 +499,7 @@ G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * paramet
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_rep (glwin * view, int popm)
@@ -522,7 +522,7 @@ GMenu * menu_rep (glwin * view, int popm)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -534,7 +534,7 @@ G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * para
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_reset (glwin * view, int popm)
@@ -550,7 +550,7 @@ GMenu * menu_reset (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_fullscreen (glwin * view, int popm)
@@ -565,7 +565,7 @@ GMenu * menu_fullscreen (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_view (glwin * view, int popm)

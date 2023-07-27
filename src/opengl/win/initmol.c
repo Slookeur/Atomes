@@ -159,8 +159,6 @@ void allocate_mol_for_step_ (int * sid, int * mol_in_step)
 *  void allocate_mol_data_ ()
 *
 *  Usage:
-*
-*   :
 */
 void allocate_mol_data_ ()
 {
@@ -518,8 +516,6 @@ void setup_molecules_ (int * stepid)
 *  void setup_menu_molecules_ ()
 *
 *  Usage:
-*
-*   :
 */
 void setup_menu_molecules_ ()
 {

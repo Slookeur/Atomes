@@ -938,7 +938,7 @@ void update_coordinates (struct project * this_proj, int status, int axis, int a
 *  Usage: 
 *
 *  GtkSpinButton * res : 
-*  gpointer data       : 
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void repeat_move (GtkSpinButton * res, gpointer data)
 {
@@ -970,7 +970,7 @@ void update_range_and_entry (struct project * this_proj, int i, int j, int k)
 *  Usage: 
 *
 *  int mot      : 
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 float get_limit (int mot, glwin * view)
 {
@@ -990,7 +990,7 @@ float get_limit (int mot, glwin * view)
 *
 *  Usage: 
 *
-*  gpointer data : 
+*  gpointer data : the associated data pointer
 *  double v      : 
 */
 void range_has_changed (gpointer data, double v)
@@ -1020,8 +1020,8 @@ void range_has_changed (gpointer data, double v)
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void set_move (GtkEntry * res, gpointer data)
 {
@@ -1036,7 +1036,7 @@ G_MODULE_EXPORT void set_move (GtkEntry * res, gpointer data)
 *  Usage: 
 *
 *  GtkRange * range : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void range_move (GtkRange * range, gpointer data)
 {
@@ -1051,7 +1051,7 @@ G_MODULE_EXPORT void range_move (GtkRange * range, gpointer data)
 *  GtkRange * range     : 
 *  GtkScrollType scroll : 
 *  gdouble value        : 
-*  gpointer data        : 
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_range_move (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -1064,8 +1064,8 @@ G_MODULE_EXPORT gboolean scroll_range_move (GtkRange * range, GtkScrollType scro
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_for_motion (GtkComboBox * box, gpointer data)
 {
@@ -1088,8 +1088,8 @@ G_MODULE_EXPORT void set_axis_for_motion (GtkComboBox * box, gpointer data)
 *
 *  Usage: 
 *
-*  GtkCheckButton * but : 
-*  gpointer data        : 
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void  set_show_motion_axis (GtkCheckButton * but, gpointer data)
 #else
@@ -1098,8 +1098,8 @@ G_MODULE_EXPORT void  set_show_motion_axis (GtkCheckButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkToggleButton * but : 
-*  gpointer data         : 
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_show_motion_axis (GtkToggleButton * but, gpointer data)
 #endif

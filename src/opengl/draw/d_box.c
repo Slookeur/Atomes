@@ -32,7 +32,6 @@ If not, see <https://www.gnu.org/licenses/> */
   void setup_extra_box_vertices (vec3_t a, vec3_t b, int id, float * c_vert, float * s_vert);
   void setup_box_vertices (vec3_t ax, vec3_t bx, int id, float * c_vert, float * s_vert);
   void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, int, float *, float *), float * verts, float * serts, int id);
-  void setup_cuboid_vertices (vec3_t a, vec3_t b, int id);
   void prepare_cuboid (vec3_t position, int id);
   void create_light_lists ();
   void cuboid_slab (mat4_t rot);
@@ -281,8 +280,6 @@ void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, int, float *, float *)
 *  int create_box_lists ()
 *
 *  Usage:
-*
-*   :
 */
 int create_box_lists ()
 {
@@ -460,8 +457,6 @@ void prepare_cuboid (vec3_t position, int id)
 *  void create_light_lists ()
 *
 *  Usage:
-*
-*   :
 */
 void create_light_lists ()
 {
@@ -503,6 +498,7 @@ vec3_t get_normal (vec3_t v1, vec3_t v2, vec3_t v3)
   vec3_t edge_b = v3_sub(v2, v1);
   return v3_norm (v3_cross(edge_a, edge_b));
 }
+
 
 /*
 *  double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t cpos, double paral[3][3], ColRGBA col, double slab_alpha)
@@ -828,8 +824,6 @@ void cylinder_slab (mat4_t rot)
 *  void spherical_slab ()
 *
 *  Usage:
-*
-*   :
 */
 void spherical_slab ()
 {
@@ -935,8 +929,6 @@ void create_slab_lists (struct project * this_proj)
 *  void create_volumes_lists ()
 *
 *  Usage:
-*
-*   :
 */
 void create_volumes_lists ()
 {

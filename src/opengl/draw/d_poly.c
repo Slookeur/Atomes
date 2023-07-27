@@ -636,8 +636,6 @@ int is_atom_cloned (int at)
 *  void create_poly_lists ()
 *
 *  Usage: 
-*
-*   : 
 */
 void create_poly_lists ()
 {

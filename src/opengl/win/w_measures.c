@@ -65,7 +65,7 @@ int dihedral_id;
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 int get_measure_type (glwin * view)
 {
@@ -331,7 +331,7 @@ GtkWidget * create_selection_tree (glwin * view, int pi, int id);
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 *  int id       : 
 */
@@ -349,11 +349,11 @@ void update_selection_tree (glwin * view, int pi, int id)
 *
 *  Usage: 
 *
-*  GtkWidget * widget : 
+*  GtkWidget * widget : the GtkWidget sending the signal
 *  double event_x     : 
 *  double event_y     : 
 *  guint event_button : 
-*  gpointer data      : 
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event_x, double event_y, guint event_button, gpointer data)
 {
@@ -404,9 +404,9 @@ G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event
 *
 *  Usage: 
 *
-*  GtkWidget * widget     : 
+*  GtkWidget * widget     : the GtkWidget sending the signal
 *  GdkEventButton * event : 
-*  gpointer data          : 
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT gboolean measure_tree_selection_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
@@ -427,7 +427,7 @@ G_MODULE_EXPORT gboolean measure_tree_selection_event (GtkWidget * widget, GdkEv
 *  int n_press          : 
 *  double x             : 
 *  double y             : 
-*  gpointer data        : 
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void measure_tree_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -440,7 +440,7 @@ G_MODULE_EXPORT void measure_tree_button_pressed (GtkGesture * gesture, int n_pr
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 *  int id       : 
 */
@@ -559,7 +559,7 @@ GtkWidget * create_selection_tree (glwin * view, int pi, int id)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 *  int id       : 
 */
@@ -576,7 +576,7 @@ GtkWidget * measurment_tab (glwin * view, int pi, int id)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 */
 gchar * create_measure_label (glwin * view, int pi)
@@ -599,7 +599,7 @@ gchar * create_measure_label (glwin * view, int pi)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int pi       : 
 */
 void update_label_selection (glwin * view, int pi)
@@ -615,8 +615,8 @@ extern GtkWidget * labels_tab (glwin * view, int id);
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void close_ml (GtkButton * but, gpointer data)
 {
@@ -628,8 +628,8 @@ G_MODULE_EXPORT void close_ml (GtkButton * but, gpointer data)
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data)
 {
@@ -657,7 +657,7 @@ G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data)
 *  Usage: 
 *
 *  GtkWindow * widg : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_measure_event (GtkWindow * widg, gpointer data)
 #else
@@ -666,9 +666,9 @@ G_MODULE_EXPORT gboolean close_measure_event (GtkWindow * widg, gpointer data)
 *
 *  Usage: 
 *
-*  GtkWidget * widg : 
+*  GtkWidget * widg : the GtkWidget sending the signal
 *  GdkEvent * event : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -690,8 +690,8 @@ G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event
 *
 *  Usage: 
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data)
 {

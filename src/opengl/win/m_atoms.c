@@ -57,7 +57,7 @@ extern G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data)
 *  Usage:
 *
 *  struct project * this_proj :
-*  glwin * view               :
+*  glwin * view               : the target glwin pointer
 *  int id                     :
 */
 gchar * label_atpts (struct project * this_proj, glwin * view, int id)
@@ -112,8 +112,8 @@ extern G_MODULE_EXPORT void atom_properties (GtkWidget * widg, gpointer data);
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
 {
@@ -143,8 +143,8 @@ G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
 {
@@ -181,8 +181,8 @@ G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
 {
@@ -209,8 +209,8 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
 *  char * name       :
 *  gboolean va       :
 *  gboolean vb       :
-*  GtkWidget * menu  :
-*  GCallback handler :
+*  GtkWidget * menu  : the GtkWidget sending the signal
+*  GCallback handler : the associated callback
 *  tint * data       :
 */
 GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget * menu, GCallback handler, tint * data)
@@ -226,7 +226,7 @@ GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget *
 *  Usage:
 *
 *  gchar * str      :
-*  GtkWidget * widg :
+*  GtkWidget * widg : the GtkWidget sending the signal
 *  int val          :
 *  int vb           :
 *  tint * data      :
@@ -246,7 +246,7 @@ GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, int val, i
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 *  int at       :
 */
@@ -299,7 +299,7 @@ GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 *  int at       :
 */
@@ -342,7 +342,7 @@ GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 *  int at       :
 */
@@ -419,7 +419,7 @@ GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 *  int at       :
 */
@@ -517,7 +517,7 @@ extern G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * 
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -575,7 +575,7 @@ G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * paramet
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -640,7 +640,7 @@ G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parame
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -668,7 +668,7 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant
 *
 *  Usage:
 *
-*  glwin * view       :
+*  glwin * view       : the target glwin pointer
 *  int popm           :
 *  int at             :
 *  gboolean sensitive :
@@ -709,7 +709,7 @@ GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 *
 *  Usage:
 *
-*  glwin * view       :
+*  glwin * view       : the target glwin pointer
 *  int popm           :
 *  int at             :
 *  gboolean sensitive :
@@ -749,7 +749,7 @@ GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 *
 *  Usage:
 *
-*  glwin * view       :
+*  glwin * view       : the target glwin pointer
 *  int popm           :
 *  int at             :
 *  gboolean sensitive :
@@ -783,7 +783,7 @@ GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 *  int at       :
 */

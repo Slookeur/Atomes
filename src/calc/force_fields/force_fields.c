@@ -1957,8 +1957,6 @@ int * ff_key;
 *  int field_find_atoms ()
 *
 *  Usage: 
-*
-*   : 
 */
 int field_find_atoms ()
 {
@@ -2135,8 +2133,6 @@ void find_object_ijkl (int hid, int foid, int oid, int sa, int za, int sb, int z
 *  void field_find_bonds ()
 *
 *  Usage: 
-*
-*   : 
 */
 void field_find_bonds ()
 {
@@ -2171,8 +2167,6 @@ void field_find_bonds ()
 *  void field_find_angles ()
 *
 *  Usage: 
-*
-*   : 
 */
 void field_find_angles ()
 {
@@ -2247,8 +2241,6 @@ void field_find_dihedrals (int id)
 *  void field_find_vdw ()
 *
 *  Usage: 
-*
-*   : 
 */
 void field_find_vdw ()
 {

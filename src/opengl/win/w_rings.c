@@ -697,8 +697,8 @@ int get_rmax (struct project * this_proj, int g, int s)
 *
 *  Usage: 
 *
-*  GtkEntry * res : 
-*  gpointer data  : 
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
 {
@@ -874,7 +874,7 @@ GtkWidget * create_rings_search (struct project * this_proj, int g)
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 *  int g        : 
 */
 GtkWidget * rings_tab (glwin * view, int g)

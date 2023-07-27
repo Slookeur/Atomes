@@ -161,8 +161,8 @@ GtkWidget * addweb (int id)
 *
 *  Usage: create the about dialog
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
 {
@@ -202,7 +202,7 @@ G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
 *
 *  Usage: add / show web information to widget
 *
-*  GtkWidget * dialog : The GtkWidget to modify
+*  GtkWidget * dialog : the GtkWidget to modify
 *  int id             : Add contact info (1) or not (0)
 */
 void show_web (GtkWidget * dialog, int id)
@@ -221,7 +221,7 @@ void show_web (GtkWidget * dialog, int id)
 *
 *  char * information : Message
 *  int val            : Add contact info (1) or not (0)
-*  GtkWidget * win    : The GtkWidget to modify
+*  GtkWidget * win    : the GtkWidget to modify
 */
 void show_info (char * information, int val, GtkWidget * win)
 {
@@ -325,9 +325,9 @@ gboolean res_yes_no;
 *
 *  Usage: ask yes or no for something: running dialog
 *
-*  GtkDialog * dial : The GtkDialog sending the signal
-*  gint response_id : The response id
-*  gpointer data    : The associated data pointer
+*  GtkDialog * dial : the GtkDialog sending the signal
+*  gint response_id : the response id
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -342,8 +342,8 @@ G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer da
 *
 *  gchar * title    : Title
 *  gchar * text     : Message
-*  int type         : The type of message window
-*  GtkWidget * widg : The parent GtkWidget, if any
+*  int type         : the type of message window
+*  GtkWidget * widg : the parent GtkWidget, if any
 */
 gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
 {
@@ -357,7 +357,7 @@ gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
 *
 *  Usage: short cut to print string without spaces
 *
-*  gchar * name : The initial string
+*  gchar * name : the initial string
 */
 gchar * exact_name (gchar * name)
 {
@@ -393,8 +393,8 @@ GtkWidget * show_pop (char * pop, GtkWidget * pwin)
 *
 *  Usage: Leaving atomes ?
 *
-*  GtkWindow * widget : The GtkWidget sending the signal
-*  gpointer data      : The associated data pointer
+*  GtkWindow * widget : the GtkWidget sending the signal
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data)
 #else
@@ -403,9 +403,9 @@ G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data)
 *
 *  Usage: Leaving atomes ?
 *
-*  GtkWidget * widget : The GtkWidget sending the signal
-*  GdkEvent * event   : The associated GdkEvent
-*  gpointer data      : The associated data pointer
+*  GtkWidget * widget : the GtkWidget sending the signal
+*  GdkEvent * event   : the associated GdkEvent
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event, gpointer data)
 #endif
@@ -453,8 +453,8 @@ GtkWidget * answer_info;
 *
 *  Usage: Handling the GtkComboBox in 'int iask'
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
 {
@@ -471,9 +471,9 @@ int res_int;
 *
 *  Usage: enter an integer value: running the dialog
 *
-*  GtkDialog * iask : The GtkDialog sending the signal
-*  gint response_id : The response id
-*  gpointer data    : The associated data pointer
+*  GtkDialog * iask : the GtkDialog sending the signal
+*  gint response_id : the response id
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data)
 {
@@ -515,8 +515,8 @@ G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data
 *
 *  char * question : Message
 *  char * lab      : Text to use for label
-*  int id          : The required parameter id
-*  GtkWidget * win : The parent GtkWidget, if any
+*  int id          : the required parameter id
+*  GtkWidget * win : the parent GtkWidget, if any
 */
 int iask (char * question, char * lab, int id, GtkWidget * win)
 {
@@ -589,9 +589,9 @@ gchar * res_char;
 *
 *  Usage: enter a string: running the dialog
 *
-*  GtkDialog * cask : The GtkDialog sending the signal
-*  gint response_id : The response id
-*  gpointer data    : The associated data pointer
+*  GtkDialog * cask : the GtkDialog sending the signal
+*  gint response_id : the response id
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data)
 {
@@ -630,9 +630,9 @@ G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data
 *
 *  char * question : Message
 *  char * lab      : Text to use for label
-*  int id          : The required parameter id
-*  char * old      : The initial value for the string
-*  GtkWidget * win : The parent GtkWidget, if any
+*  int id          : the required parameter id
+*  char * old      : the initial value for the string
+*  GtkWidget * win : the parent GtkWidget, if any
 */
 gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
 {
@@ -689,7 +689,7 @@ void init_data_ (int * nats, int * nspc, int * stps, int * cid)
 *  Usage: update project data using information from Fortran90
 *
 *  int * status    : Update data (1) or not (0)
-*  int * ind       : The chemical species
+*  int * ind       : the chemical species
 *  int * atd       : Z
 *  int * nsp       : Number of atoms of this species
 *  char * lbel     : Symbol
@@ -723,9 +723,9 @@ void spec_data_ (int * status, int * ind, int * atd, int * nsp,
 *
 *  Usage: print information in GtkTextBuffer
 *
-*  gchar * str            : The text
-*  gchar * stag           : The tags
-*  GtkTextBuffer * buffer : The GtkTextBuffer to print to
+*  gchar * str            : the text
+*  gchar * stag           : the tags
+*  GtkTextBuffer * buffer : the GtkTextBuffer to print to
 */
 void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
 {
@@ -872,9 +872,9 @@ void send_chem_info_ (int prop[active_project -> nspec])
 *
 *  Usage: ouput the name of a coordination sphere
 *
-*  struct project * this_proj : The project
-*  int g                      : The coordination (0 = total, 1 = partial)
-*  int s                      : The chemical species
+*  struct project * this_proj : the project
+*  int g                      : the coordination (0 = total, 1 = partial)
+*  int s                      : the chemical species
 *  int f                      : With markup or not
 *  GtkTextBuffer * buffer     : Output in a GtkTextBuffer, or not if NULL
 */

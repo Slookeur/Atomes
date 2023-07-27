@@ -370,7 +370,7 @@ void correct_coordinates_for_object (struct project * this_proj, struct insert_o
 *
 *  Usage: 
 *
-*  glwin * view : 
+*  glwin * view : the target glwin pointer
 */
 tint ulam_coord (glwin * view)
 {

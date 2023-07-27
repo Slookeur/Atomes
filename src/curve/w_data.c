@@ -48,9 +48,9 @@ GtkFileFilter * filter1, * filter2;
 *
 *  Usage:
 *
-*  GtkNativeDialog * info :
-*  gint response_id       :
-*  gpointer data          :
+*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
+*  gint response_id       : the response id
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -61,9 +61,9 @@ G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, 
 *
 *  Usage:
 *
-*  GtkDialog * info :
-*  gint response_id :
-*  gpointer data    :
+*  GtkDialog * info : the GtkDialog sending the signal
+*  gint response_id : the response id
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -150,8 +150,8 @@ G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpoint
 *
 *  Usage:
 *
-*  GtkWidget * butcurve :
-*  gpointer idata       :
+*  GtkWidget * butcurve : the GtkWidget sending the signal
+*  gpointer idata       : the associated data pointer
 */
 G_MODULE_EXPORT void write_curve (GtkWidget * butcurve, gpointer idata)
 {

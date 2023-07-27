@@ -14,14 +14,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_molopt-basis.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CP2K MOLOPT basis set, as distributed with CP2K 9.1
 
   This file contains 3 tables:
@@ -29,6 +24,7 @@ If not, see <https://www.gnu.org/licenses/> */
   molopt_elem -> the list of chemical elements
   molopt_keys -> the list of keywords
   cp2k_molopt -> finally the complete MOLOPT basis set
+
 */
 
 #include "global.h"

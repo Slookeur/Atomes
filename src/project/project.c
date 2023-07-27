@@ -95,7 +95,7 @@ void save_pos_ (int * nat, int lot[* nat], int * num, double xpos[* num], double
 *
 *  Usage: retrieve the number of MD steps from Fortran90
 *
-*  int * steps : The number of MD steps
+*  int * steps : the number of MD steps
 */
 void send_steps_ (int * steps)
 {
@@ -107,7 +107,7 @@ void send_steps_ (int * steps)
 *
 *  Usage: get project pointer using id number
 *
-*  int p : The id number
+*  int p : the id number
 */
 struct project * get_project_by_id (int p)
 {

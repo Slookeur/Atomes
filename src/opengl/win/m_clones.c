@@ -42,8 +42,8 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
 {
@@ -81,8 +81,8 @@ G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
 *
 *  char * name      :
 *  gboolean clone   :
-*  GtkWidget * menu :
-*  glwin * view     :
+*  GtkWidget * menu : the GtkWidget sending the signal
+*  glwin * view     : the target glwin pointer
 */
 GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, glwin * view)
 {
@@ -96,7 +96,7 @@ GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, 
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 */
 GtkWidget * menu_clones (glwin * view, int id)
@@ -125,7 +125,7 @@ GtkWidget * menu_clones (glwin * view, int id)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -164,7 +164,7 @@ G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parame
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_clones (glwin * view, int popm)

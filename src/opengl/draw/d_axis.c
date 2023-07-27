@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'd_axis.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int create_axis_lists ();
 
@@ -61,9 +61,9 @@ float label_pos;
 /*
 *  ColRGBA color_axis (int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id : 
+*  int id :
 */
 ColRGBA color_axis (int id)
 {
@@ -85,10 +85,10 @@ ColRGBA color_axis (int id)
 /*
 *  mat4_t create_axis_matrices (int type, vec3_t pos)
 *
-*  Usage: 
+*  Usage:
 *
-*  int type   : 
-*  vec3_t pos : 
+*  int type   :
+*  vec3_t pos :
 */
 mat4_t create_axis_matrices (int type, vec3_t pos)
 {
@@ -161,14 +161,14 @@ mat4_t create_axis_matrices (int type, vec3_t pos)
 /*
 *  void setup_arrow (float * vert, vec3_t a, vec3_t b, vec3_t c, vec3_t d, vec3_t e)
 *
-*  Usage: 
+*  Usage:
 *
-*  float * vert : 
-*  vec3_t a     : 
-*  vec3_t b     : 
-*  vec3_t c     : 
-*  vec3_t d     : 
-*  vec3_t e     : 
+*  float * vert :
+*  vec3_t a     :
+*  vec3_t b     :
+*  vec3_t c     :
+*  vec3_t d     :
+*  vec3_t e     :
 */
 void setup_arrow (float * vert, vec3_t a, vec3_t b, vec3_t c, vec3_t d, vec3_t e)
 {
@@ -183,9 +183,7 @@ void setup_arrow (float * vert, vec3_t a, vec3_t b, vec3_t c, vec3_t d, vec3_t e
 /*
 *  void init_axis_param ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage:
 */
 void init_axis_param ()
 {
@@ -207,11 +205,11 @@ void init_axis_param ()
 /*
 *  void prepare_axis_data (float * vert_a, float * vert_b, float * vert_c)
 *
-*  Usage: 
+*  Usage:
 *
-*  float * vert_a : 
-*  float * vert_b : 
-*  float * vert_c : 
+*  float * vert_a :
+*  float * vert_b :
+*  float * vert_c :
 */
 void prepare_axis_data (float * vert_a, float * vert_b, float * vert_c)
 {
@@ -257,9 +255,7 @@ void prepare_axis_data (float * vert_a, float * vert_b, float * vert_c)
 /*
 *  int create_axis_lists ()
 *
-*  Usage: 
-*
-*   : 
+*  Usage:
 */
 int create_axis_lists ()
 {

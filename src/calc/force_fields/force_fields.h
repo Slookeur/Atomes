@@ -14,12 +14,8 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'force_fields.h'
 *
-*  Contains: 
+*  Contains:
 
-*  Called by: 
-
-  calc/force_fields/force_fields.c
-  calc/force_fields/force_fields.c:  //FILE * hp = fopen ("force_fields.h", "w");
 
 */
 

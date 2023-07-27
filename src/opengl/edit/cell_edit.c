@@ -43,8 +43,8 @@ gchar * edit_names[7] = {"Wrap All Atoms in", "Shift Center", "Add Extra(s)", "C
 *
 *  Usage: 
 *
-*  GtkButton * but : 
-*  gpointer data   : 
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
 {
@@ -65,7 +65,7 @@ G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
 *  Usage: 
 *
 *  GtkWindow * widg : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data)
 #else
@@ -74,9 +74,9 @@ G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data)
 *
 *  Usage: 
 *
-*  GtkWidget * widg : 
+*  GtkWidget * widg : the GtkWidget sending the signal
 *  GdkEvent * event : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -127,7 +127,7 @@ GtkWidget * cell_tab (int i, struct project * this_proj)
 *  Usage: 
 *
 *  struct project * this_proj : 
-*  GtkWidget * vbox           : 
+*  GtkWidget * vbox           : the GtkWidget sending the signal
 */
 GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
 {
@@ -168,7 +168,7 @@ GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
 *  Usage: 
 *
 *  struct project * this_proj : 
-*  gpointer data              : 
+*  gpointer data              : the associated data pointer
 */
 GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data)
 {
@@ -200,7 +200,7 @@ GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer dat
 *
 *  GSimpleAction * action : 
 *  GVariant * parameter   : 
-*  gpointer data          : 
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
@@ -209,8 +209,8 @@ G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, 
 *
 *  Usage: 
 *
-*  GtkWidget * widg : 
-*  gpointer data    : 
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data)
 #endif

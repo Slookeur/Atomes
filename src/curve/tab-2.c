@@ -247,8 +247,8 @@ void set_data_style (gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * gbox :
-*  gpointer data      :
+*  GtkComboBox * gbox : the GtkComboBox sending the signal
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void set_data_glyph (GtkComboBox * gbox, gpointer data)
 {
@@ -285,8 +285,8 @@ G_MODULE_EXPORT void set_data_glyph (GtkComboBox * gbox, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * gbox :
-*  gpointer data      :
+*  GtkComboBox * gbox : the GtkComboBox sending the signal
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void set_data_dash (GtkComboBox * gbox, gpointer data)
 {
@@ -349,8 +349,8 @@ G_MODULE_EXPORT void set_data_color (GtkColorChooser * colob, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * thickd :
-*  gpointer data     :
+*  GtkEntry * thickd : the GtkEntry sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
 {
@@ -397,8 +397,8 @@ G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * glsize :
-*  gpointer data     :
+*  GtkEntry * glsize : the GtkEntry sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
 {
@@ -445,8 +445,8 @@ G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * entry :
-*  gpointer data    :
+*  GtkEntry * entry : the GtkEntry sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
 {
@@ -493,8 +493,8 @@ G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * entry :
-*  gpointer data    :
+*  GtkEntry * entry : the GtkEntry sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
 {
@@ -541,8 +541,8 @@ G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * gbox :
-*  gpointer data      :
+*  GtkComboBox * gbox : the GtkComboBox sending the signal
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void set_data_hist_pos (GtkComboBox * gbox, gpointer data)
 {
@@ -569,8 +569,8 @@ G_MODULE_EXPORT void set_data_hist_pos (GtkComboBox * gbox, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * glfreq :
-*  gpointer data     :
+*  GtkEntry * glfreq : the GtkEntry sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
 {
@@ -616,8 +616,8 @@ G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void choose_set (GtkComboBox * box, gpointer data)
 {
@@ -659,8 +659,8 @@ G_MODULE_EXPORT void choose_set (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_data_aspect (GtkComboBox * box, gpointer data)
 {
@@ -925,8 +925,8 @@ GtkWidget * create_org_list (gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * shift :
-*  gpointer data          :
+*  GtkCheckButton * shift : the GtkCheckButton sending the signal
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void set_bshift (GtkCheckButton * shift, gpointer data)
 #else
@@ -935,8 +935,8 @@ G_MODULE_EXPORT void set_bshift (GtkCheckButton * shift, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * shift :
-*  gpointer data           :
+*  GtkToggleButton * shift : the GtkToggleButton sending the signal
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void set_bshift (GtkToggleButton * shift, gpointer data)
 #endif

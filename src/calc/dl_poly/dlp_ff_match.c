@@ -592,8 +592,6 @@ void fill_update_model (GtkTreeStore * store)
 *  GtkTreeModel * global_render_tree ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkTreeModel * global_render_tree ()
 {
@@ -700,8 +698,8 @@ G_MODULE_EXPORT void changed_update_renderer (GtkCellRendererCombo * combo,
 *
 *  Usage: 
 *
-*  GtkWidget * tree   : 
-*  gpointer data      : 
+*  GtkWidget * tree   : the GtkWidget sending the signal
+*  gpointer data      : the associated data pointer
 *  GtkTreePath * path : 
 */
 void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path)
@@ -727,7 +725,7 @@ void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path)
 *  guint event_button : 
 *  guint event_type   : 
 *  guint32 event_time : 
-*  gpointer data      : 
+*  gpointer data      : the associated data pointer
 */
 void ff_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 #else
@@ -742,7 +740,7 @@ void ff_button_event (double event_x, double event_y, guint event_button, guint 
 *  guint event_button : 
 *  guint event_type   : 
 *  guint32 event_time : 
-*  gpointer data      : 
+*  gpointer data      : the associated data pointer
 */
 void ff_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 #endif
@@ -776,7 +774,7 @@ void ff_button_event (GdkEvent * event, double event_x, double event_y, guint ev
 *  int n_press          : 
 *  double x             : 
 *  double y             : 
-*  gpointer data        : 
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_ff_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -792,7 +790,7 @@ G_MODULE_EXPORT void on_ff_button_pressed (GtkGesture * gesture, int n_press, do
 *  int n_press          : 
 *  double x             : 
 *  double y             : 
-*  gpointer data        : 
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_ff_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -804,9 +802,9 @@ G_MODULE_EXPORT void on_ff_button_released (GtkGesture * gesture, int n_press, d
 *
 *  Usage: 
 *
-*  GtkWidget * widget : 
+*  GtkWidget * widget : the GtkWidget sending the signal
 *  GdkEvent * event   : 
-*  gpointer data      : 
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_ff_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
@@ -852,7 +850,7 @@ G_MODULE_EXPORT void on_toggle_update (GtkCellRendererToggle * cell_renderer,
 *
 *  GtkTreeModel * model : 
 *  GtkTreeIter * iter   : 
-*  gpointer  data       : 
+*  gpointer  data       : the associated data pointer
 */
 static gboolean update_rend (GtkTreeModel * model, GtkTreeIter * iter, gpointer  data)
 {
@@ -897,8 +895,6 @@ void field_set_markup_and_visible (GtkTreeViewColumn * col,
 *  GtkWidget * create_update_tree ()
 *
 *  Usage: 
-*
-*   : 
 */
 GtkWidget * create_update_tree ()
 {
@@ -970,7 +966,7 @@ GtkWidget * create_update_tree ()
 *
 *  Usage: 
 *
-*  GtkWidget * vbx : 
+*  GtkWidget * vbx : the GtkWidget sending the signal
 */
 void win_update_tree (GtkWidget * vbx)
 {
@@ -1152,9 +1148,9 @@ int this_body_has_atom (struct field_nth_body * body, char * name)
 *
 *  Usage: 
 *
-*  GtkDialog * dialog : 
+*  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   : 
-*  gpointer data      : 
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_check_atom_for_updates (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -1280,8 +1276,6 @@ G_MODULE_EXPORT void run_check_atom_for_updates (GtkDialog * dialog, gint respon
 *  void check_atom_for_updates ()
 *
 *  Usage: 
-*
-*   : 
 */
 void check_atom_for_updates ()
 {
@@ -1391,8 +1385,8 @@ void check_atom_for_updates ()
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_field_prop_combo (GtkComboBox * box, gpointer data)
 {

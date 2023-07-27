@@ -376,8 +376,8 @@ void set_curve_data_zero (int rid, int cid, int interv)
 *
 *  int * interv               :
 *  double datacurve[* interv] :
-*  double datacurve[* interv] :
-*  double datacurve[* interv] :
+*  int * cid                  :
+*  int * rid                  :
 */
 void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
 {
@@ -547,8 +547,6 @@ void erase_curves (struct project * this_proj, int c)
 *  void update_curves ()
 *
 *  Usage:
-*
-*   :
 */
 void update_curves ()
 {

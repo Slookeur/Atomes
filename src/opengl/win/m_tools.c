@@ -75,7 +75,7 @@ gchar * invl[2]={"Selection", "Visible/Hidden"};
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int status   :
 */
 void set_motion_sensitive (glwin * view, int status)
@@ -118,8 +118,8 @@ void set_motion_sensitive (glwin * view, int status)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_selection_mode (GtkWidget * widg, gpointer data)
 {
@@ -157,8 +157,8 @@ G_MODULE_EXPORT void set_selection_mode (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
 {
@@ -259,8 +259,8 @@ void invert_visible (struct project * this_proj)
 *
 *  Usage:
 *
-*  GtkWidget * widg :
-*  gpointer data    :
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void invert_this (GtkWidget * widg, gpointer data)
 {
@@ -285,7 +285,7 @@ extern G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data);
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int id       :
 */
 GtkWidget * menu_tools (glwin * view, int id)
@@ -422,7 +422,7 @@ GtkWidget * menu_tools (glwin * view, int id)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_window_measures (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -434,7 +434,7 @@ G_MODULE_EXPORT void to_window_measures (GSimpleAction * action, GVariant * para
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * measure_section (glwin * view, int popm)
@@ -451,7 +451,7 @@ GMenu * measure_section (glwin * view, int popm)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_window_volumes (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -463,7 +463,7 @@ G_MODULE_EXPORT void to_window_volumes (GSimpleAction * action, GVariant * param
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * volume_section (glwin * view, int popm)
@@ -478,7 +478,7 @@ GMenu * volume_section (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * edit_section (glwin * view, int popm)
@@ -495,7 +495,7 @@ GMenu * edit_section (glwin * view, int popm)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_mouse_mode_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -536,7 +536,7 @@ G_MODULE_EXPORT void change_mouse_mode_radio (GSimpleAction * action, GVariant *
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * mouse_mode_menu (glwin * view, int popm)
@@ -560,7 +560,7 @@ GMenu * mouse_mode_menu (glwin * view, int popm)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_sel_mode_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -601,7 +601,7 @@ G_MODULE_EXPORT void change_sel_mode_radio (GSimpleAction * action, GVariant * p
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * selection_mode_menu (glwin * view, int popm)
@@ -622,7 +622,7 @@ GMenu * selection_mode_menu (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * modes_section (glwin * view, int popm)
@@ -640,7 +640,7 @@ GMenu * modes_section (glwin * view, int popm)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_create_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -652,7 +652,7 @@ G_MODULE_EXPORT void to_create_field (GSimpleAction * action, GVariant * paramet
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * md_menu (glwin * view, int popm)
@@ -674,7 +674,7 @@ GMenu * md_menu (glwin * view, int popm)
 *
 *  GSimpleAction * action :
 *  GVariant * parameter   :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_invert_this (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -686,7 +686,7 @@ G_MODULE_EXPORT void to_invert_this (GSimpleAction * action, GVariant * paramete
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * inv_menu (glwin * view, int popm)
@@ -705,7 +705,7 @@ GMenu * inv_menu (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view      :
+*  glwin * view      : the target glwin pointer
 *  gchar * item_name :
 *  GMenu * men       :
 */
@@ -721,7 +721,7 @@ GMenu * add_section_item_with_menu (glwin * view, gchar * item_name, GMenu * men
 *
 *  Usage:
 *
-*  glwin * view :
+*  glwin * view : the target glwin pointer
 *  int popm     :
 */
 GMenu * menu_tools (glwin * view, int popm)

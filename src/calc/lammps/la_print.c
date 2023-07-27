@@ -402,8 +402,6 @@ gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * 
 *  int get_different_atoms ()
 *
 *  Usage: 
-*
-*   : 
 */
 int get_different_atoms ()
 {

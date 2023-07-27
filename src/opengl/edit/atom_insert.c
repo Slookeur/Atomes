@@ -116,8 +116,8 @@ void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * 
 *
 *  Usage: 
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data)
 {

@@ -58,7 +58,7 @@ GtkWidget * toolscroll = NULL;
 *
 *  Usage: prepare a string for a window title, getting rid of all markup
 *
-*  gchar * init : The initial string
+*  gchar * init : the initial string
 */
 gchar * prepare_for_title (gchar * init)
 {
@@ -161,11 +161,11 @@ void fill_tool_model ()
 *
 *  Usage: show/hide and sensitive/not a GtkCellRenderer
 *
-*  GtkTreeViewColumn * col    : The column
-*  GtkCellRenderer * renderer : The cell renderer
-*  GtkTreeModel * mod         : The model
-*  GtkTreeIter  * iter        : The iter
-*  gpointer data              : The associated data pointer
+*  GtkTreeViewColumn * col    : the column
+*  GtkCellRenderer * renderer : the cell renderer
+*  GtkTreeModel * mod         : the model
+*  GtkTreeIter  * iter        : the iter
+*  gpointer data              : the associated data pointer
 */
 void tool_set_visible (GtkTreeViewColumn * col,
                        GtkCellRenderer * renderer,
@@ -201,9 +201,9 @@ void tool_set_visible (GtkTreeViewColumn * col,
 *
 *  Usage: adjust the content of the tool box tree model
 *
-*  int calc            : The calculation
-*  int curve           : The curve
-*  gchar * string_path : The path in the tree view
+*  int calc            : the calculation
+*  int curve           : the curve
+*  gchar * string_path : the path in the tree view
 */
 void adjust_tool_model (int calc, int curve, gchar * string_path)
 {
@@ -229,9 +229,9 @@ void adjust_tool_model (int calc, int curve, gchar * string_path)
 *
 *  Usage: To show/hide a curve by clicking in the tree view
 *
-*  GtkCellRendererToggle * cell_renderer : The renderer toggled
-*  gchar * string_path                   : The path in the tree view
-*  gpointer data                         : The associated data pointer
+*  GtkCellRendererToggle * cell_renderer : the renderer toggled
+*  gchar * string_path                   : the path in the tree view
+*  gpointer data                         : the associated data pointer
 */
 G_MODULE_EXPORT void toggle_show_hide_curve (GtkCellRendererToggle * cell_renderer,
                                              gchar * string_path, gpointer data)

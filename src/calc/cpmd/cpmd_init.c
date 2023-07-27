@@ -230,7 +230,7 @@ gboolean is_cpmd;
 *
 *  Usage:
 *
-*  GtkWidget * box :
+*  GtkWidget * box : the GtkWidget sending the signal
 *  gchar * lab     :
 *  int v_space     :
 *  int h_space     :
@@ -297,8 +297,8 @@ void print_all_sections (GtkTextBuffer * buf)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void toggle_cpmd_params (GtkToggleButton * but, gpointer data)
 {
@@ -312,8 +312,8 @@ G_MODULE_EXPORT void toggle_cpmd_params (GtkToggleButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_cpmd_parameter (GtkEntry * res, gpointer data)
 {
@@ -339,8 +339,8 @@ G_MODULE_EXPORT void update_cpmd_parameter (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void update_cpmd_check (GtkCheckButton * but, gpointer data)
 #else
@@ -349,8 +349,8 @@ G_MODULE_EXPORT void update_cpmd_check (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void update_cpmd_check (GtkToggleButton * but, gpointer data)
 #endif
@@ -375,8 +375,8 @@ G_MODULE_EXPORT void update_cpmd_check (GtkToggleButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_opt_box (GtkComboBox * box, gpointer data)
 {
@@ -579,8 +579,8 @@ GtkWidget * prepare_qm_option_box (int s)
 *
 *  Usage:
 *
-*  GtkEntry * res :
-*  gpointer data  :
+*  GtkEntry * res : the GtkEntry sending the signal
+*  gpointer data  : the associated data pointer
 */
 G_MODULE_EXPORT void update_calc_parameter (GtkEntry * res, gpointer data)
 {
@@ -614,8 +614,8 @@ G_MODULE_EXPORT void update_calc_parameter (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_calc_opt_box (GtkComboBox * box, gpointer data)
 {
@@ -635,8 +635,8 @@ G_MODULE_EXPORT void changed_calc_opt_box (GtkComboBox * box, gpointer data)
 *
 *  Usage:
 *
-*  GtkCheckButton * but :
-*  gpointer data        :
+*  GtkCheckButton * but : the GtkCheckButton sending the signal
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void update_calc_check (GtkCheckButton * but, gpointer data)
 #else
@@ -645,8 +645,8 @@ G_MODULE_EXPORT void update_calc_check (GtkCheckButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkToggleButton * but :
-*  gpointer data         :
+*  GtkToggleButton * but : the GtkToggleButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void update_calc_check (GtkToggleButton * but, gpointer data)
 #endif
@@ -750,8 +750,8 @@ GtkWidget * calc_qm_option_box (int c)
 *
 *  Usage:
 *
-*  GtkComboBox * box :
-*  gpointer data     :
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_calc_box (GtkComboBox * box, gpointer data)
 {
@@ -782,7 +782,7 @@ G_MODULE_EXPORT void changed_calc_box (GtkComboBox * box, gpointer data)
 *  Usage:
 *
 *  GtkTextBuffer * textbuf :
-*  gpointer data           :
+*  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void changed_info (GtkTextBuffer * textbuf, gpointer data)
 {
@@ -799,8 +799,6 @@ G_MODULE_EXPORT void changed_info (GtkTextBuffer * textbuf, gpointer data)
 *  GtkWidget * info_box ()
 *
 *  Usage:
-*
-*   :
 */
 GtkWidget * info_box ()
 {
@@ -1039,8 +1037,6 @@ void add_cpmd_pages (int p)
 *  void proj_unselect_all_atoms ()
 *
 *  Usage:
-*
-*   :
 */
 void proj_unselect_all_atoms ()
 {
@@ -1063,7 +1059,7 @@ void proj_unselect_all_atoms ()
 *  Usage:
 *
 *  GtkAssistant * assistant :
-*  gpointer data            :
+*  gpointer data            : the associated data pointer
 */
 G_MODULE_EXPORT void on_qm_assistant_cancel (GtkAssistant * assistant, gpointer data)
 {
@@ -1080,7 +1076,7 @@ G_MODULE_EXPORT void on_qm_assistant_cancel (GtkAssistant * assistant, gpointer 
 *  Usage:
 *
 *  GtkWindow * assistant :
-*  gpointer data         :
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_qm_assistant_cancel_event (GtkWindow * assistant, gpointer data)
 #else
@@ -1089,9 +1085,9 @@ G_MODULE_EXPORT gboolean on_qm_assistant_cancel_event (GtkWindow * assistant, gp
 *
 *  Usage:
 *
-*  GtkWidget * assistant :
+*  GtkWidget * assistant : the GtkWidget sending the signal
 *  GdkEvent  * event     :
-*  gpointer data         :
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_qm_assistant_cancel_event (GtkWidget * assistant, GdkEvent  * event, gpointer data)
 #endif
@@ -1106,7 +1102,7 @@ G_MODULE_EXPORT gboolean on_qm_assistant_cancel_event (GtkWidget * assistant, Gd
 *  Usage:
 *
 *  GtkAssistant * assistant :
-*  gpointer data            :
+*  gpointer data            : the associated data pointer
 */
 G_MODULE_EXPORT void on_qm_assistant_close (GtkAssistant * assistant, gpointer data)
 {
@@ -1126,7 +1122,7 @@ G_MODULE_EXPORT void on_qm_assistant_close (GtkAssistant * assistant, gpointer d
 *  Usage:
 *
 *  gint current_page :
-*  gpointer data     :
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT gint on_qm_assistant_go_forward (gint current_page, gpointer data)
 {
@@ -1230,8 +1226,8 @@ gboolean go_for_it (int i, int j, gboolean print[2])
 *
 *  Usage:
 *
-*  GtkButton * but :
-*  gpointer data   :
+*  GtkButton * but : the GtkButton sending the signal
+*  gpointer data   : the associated data pointer
 */
 G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
 {
@@ -1339,9 +1335,9 @@ G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GtkNativeDialog * info :
+*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
 *  gint response_id       :
-*  gpointer data          :
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_saving_qm (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -1352,9 +1348,9 @@ G_MODULE_EXPORT void run_saving_qm (GtkNativeDialog * info, gint response_id, gp
 *
 *  Usage:
 *
-*  GtkDialog * info :
+*  GtkDialog * info : the GtkDialog sending the signal
 *  gint response_id :
-*  gpointer data    :
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_saving_qm (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -1512,7 +1508,7 @@ G_MODULE_EXPORT void run_saving_qm (GtkDialog * info, gint response_id, gpointer
 *  Usage:
 *
 *  GtkAssistant * assistant :
-*  gpointer data            :
+*  gpointer data            : the associated data pointer
 */
 G_MODULE_EXPORT void on_qm_assistant_apply (GtkAssistant * assistant, gpointer data)
 {

@@ -36,8 +36,8 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage: read data layout from file
 *
-*  FILE * fp           : The file pointer
-*  DataLayout * layout : The data layout to store the data
+*  FILE * fp           : the file pointer
+*  DataLayout * layout : the data layout to store the data
 */
 gboolean read_data_layout (FILE * fp, DataLayout * layout)
 {
@@ -59,9 +59,9 @@ gboolean read_data_layout (FILE * fp, DataLayout * layout)
 *
 *  Usage: read a project curve from file
 *
-*  FILE * fp : The file pointer
-*  int wid   : The total number of projects in the workspace
-*  int pid   : The active project id
+*  FILE * fp : the file pointer
+*  int wid   : the total number of projects in the workspace
+*  int pid   : the active project id
 */
 int read_project_curve (FILE * fp, int wid, int pid)
 {

@@ -101,9 +101,9 @@ ColRGBA std[6];
 *
 *  Usage: popup a menu at an event position
 *
-*  GtkWidget * widget     : The GtkWidget sending the signal
-*  GdkEventButton * event : The associated event
-*  gpointer data          : The associated pointer data
+*  GtkWidget * widget     : the GtkWidget sending the signal
+*  GdkEventButton * event : the associated event
+*  gpointer data          : the associated pointer data
 */
 G_MODULE_EXPORT gboolean pop_menu (GtkWidget * widget, GdkEventButton * event, gpointer data)
 {
@@ -141,7 +141,7 @@ void clean_view ()
 *
 *  Usage: set a text buffer in the main window or an image
 *
-*  GtkTextBuffer * buffer : The GtkTextBuffer to display
+*  GtkTextBuffer * buffer : the GtkTextBuffer to display
 */
 void view_buffer (GtkTextBuffer * buffer)
 {
@@ -243,7 +243,7 @@ void atomes_key_pressed (guint keyval, GdkModifierType state)
 *
 *  Usage: add action to the main window action map
 *
-*  GSimpleAction * action : The action to add
+*  GSimpleAction * action : the action to add
 */
 void add_action (GSimpleAction * action)
 {
@@ -255,7 +255,7 @@ void add_action (GSimpleAction * action)
 *
 *  Usage: add action from the main window action map
 *
-*  gchar * action_name : The action to remove
+*  gchar * action_name : the action to remove
 */
 void remove_action (gchar * action_name)
 {
@@ -290,8 +290,8 @@ void remove_edition_and_analyze_actions ()
 *
 *  Usage: show the periodic table of the elements
 *
-*  GtkWidget * widg : The GtkWidget sending the signal
-*  gpointer data    : The associated data pointer
+*  GtkWidget * widg : the GtkWidget sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void show_periodic_table (GtkWidget * widg, gpointer data)
 {
@@ -303,9 +303,9 @@ G_MODULE_EXPORT void show_periodic_table (GtkWidget * widg, gpointer data)
 *
 *  Usage: atomes menu bar actions
 *
-*  GSimpleAction * action : The GSimpleAction sending the signal
-*  GVariant * parameter   : The parameter of the action, if any
-*  gpointer data          : The associated data pointer
+*  GSimpleAction * action : the GSimpleAction sending the signal
+*  GVariant * parameter   : the parameter of the action, if any
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -467,10 +467,10 @@ GIcon * get_gicon_from_data (int format, const gchar * icon)
 *
 *  Usage: add an action to an action group
 *
-*  GSimpleActionGroup * action_group : The action group to add an action to
-*  const gchar * act                 : The name of the action to add
-*  GCallback handler                 : The associated callback
-*  gpointer data                     : The associated data pointer
+*  GSimpleActionGroup * action_group : the action group to add an action to
+*  const gchar * act                 : the name of the action to add
+*  GCallback handler                 : the associated callback
+*  gpointer data                     : the associated data pointer
 *  gboolean check                    : is the action a check (1/0)
 *  gboolean status                   : if check or radio, status of the action (1/0)
 *  gboolean radio                    : is the action a radio (1/0)
@@ -559,9 +559,9 @@ GMenuItem * create_gmenu_item (const gchar * label, const gchar * action, const 
 *
 *  Usage: append a GMenuItem with a subenu to a GMenu, and use markup for the GMenuItem
 *
-*  GMenu * menu        : The GMenu to insert the item with a submenu
-*  const gchar * label : The text for the menu item
-*  GMenu * submenu     : The submenu to add to the menu item
+*  GMenu * menu        : the GMenu to insert the item with a submenu
+*  const gchar * label : the text for the menu item
+*  GMenu * submenu     : the submenu to add to the menu item
 */
 void append_submenu (GMenu * menu, const gchar * label, GMenu * submenu)
 {
@@ -581,7 +581,7 @@ void append_submenu (GMenu * menu, const gchar * label, GMenu * submenu)
 *
 *  Usage: create a menu item, then append it to a menu
 *
-*  GMenu * menu          : The menu to insert the item in
+*  GMenu * menu          : the menu to insert the item in
 *  const gchar * label   : Label of the menu item
 *  const gchar * action  : Action of the menu item
 *  const gchar * accel   : Keyboard accelerator, if any
@@ -881,11 +881,11 @@ GMenu * atomes_menu_bar ()
 *
 *  Usage: mouse right event to popup the main application 'workspace' menu
 *
-*  GtkGesture * gesture : The GtkGesture sending the signal
+*  GtkGesture * gesture : the GtkGesture sending the signal
 *  int n_press          : Number of times it was pressed
 *  double x             : x position
 *  double y             : y position
-*  gpointer data        : The associated data pointer
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -909,11 +909,11 @@ G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, doubl
 *
 *  Usage: the GtkEventController for the keyboard button press event
 *
-*  GtkEventControllerKey * self : The GtkEventController sending the signal
-*  guint keyval                 : The
-*  guint keycode                : The key pressed
-*  GdkModifierType state        : The keyboard modifier (Ctrl, Alt ... if any)
-*  gpointer data                : The associated data pointer
+*  GtkEventControllerKey * self : the GtkEventController sending the signal
+*  guint keyval                 : the
+*  guint keycode                : the key pressed
+*  GdkModifierType state        : the keyboard modifier (Ctrl, Alt ... if any)
+*  gpointer data                : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_atomes_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
 {
@@ -927,7 +927,7 @@ G_MODULE_EXPORT gboolean on_atomes_pressed (GtkEventControllerKey * self, guint 
 *
 *  Usage: create the main application window
 *
-*  GApplication * atomes : The initial GtkApplication
+*  GApplication * atomes : the initial GtkApplication
 */
 GtkWidget * create_main_window (GApplication * atomes)
 {

@@ -65,9 +65,9 @@ extern void close_frame_buffer ();
 *
 *  Usage: 
 *
-*  GtkNativeDialog * info : 
+*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
 *  gint response_id       : 
-*  gpointer data          : 
+*  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data)
 {
@@ -78,9 +78,9 @@ G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id,
 *
 *  Usage: 
 *
-*  GtkDialog * info : 
+*  GtkDialog * info : the GtkDialog sending the signal
 *  gint response_id : 
-*  gpointer data    : 
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -149,7 +149,7 @@ G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpoin
 *
 *  Usage: 
 *
-*  glwin * view          : 
+*  glwin * view          : the target glwin pointer
 *  video_options * iopts : 
 */
 void render_image (glwin * view, video_options * iopts)

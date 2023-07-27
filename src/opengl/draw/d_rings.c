@@ -159,8 +159,6 @@ int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean
 *  void create_ring_lists ()
 *
 *  Usage: 
-*
-*   : 
 */
 void create_ring_lists ()
 {
