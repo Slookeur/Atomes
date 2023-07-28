@@ -43,7 +43,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int * data                 :
 *  int status                 :
 *  int start                  :
@@ -136,7 +136,7 @@ G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data)
 *  Usage:
 *
 *  int aid                    :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 GtkWidget * create_search_box (int aid, struct project * this_proj)
 {
@@ -230,7 +230,7 @@ G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
 *  Usage:
 *
 *  int id                     :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 GtkWidget * create_action_combo (int id, struct project * this_proj)
 {
@@ -295,7 +295,7 @@ G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
 *  Usage:
 *
 *  int aid                    :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 GtkWidget * action_tab (int aid, struct project * this_proj)
 {

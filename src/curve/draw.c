@@ -57,7 +57,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  cairo_t * cr               :
 *  int cid                    :
 *  int rid                    :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int points                 :
 *  ColRGBA withcolor          :
 *  int xscale                 :

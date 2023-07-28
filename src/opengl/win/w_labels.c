@@ -141,7 +141,7 @@ G_MODULE_EXPORT void set_labels_render (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  image * img :
+*  image * img : the target image
 *  int sp      :
 *  int id      :
 */

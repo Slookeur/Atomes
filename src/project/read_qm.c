@@ -120,7 +120,7 @@ int read_fixed_atoms_cp2k (FILE * fp, cp2k * cp2k_input, int idf)
 *
 *  FILE * fp                  : the file pointer
 *  int cid                    : CPMD id (0 = ab-initio, 1 = QM-MM)
-*  struct project * this_proj : the project to store the data
+*  struct project * this_proj : the target project
 */
 int read_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 {
@@ -203,7 +203,7 @@ int read_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 *
 *  FILE * fp                  : the file pointer
 *  int cid                    : CP2K id (0 = ab-initio, 1 = QM-MM)
-*  struct project * this_proj : the project to store the data
+*  struct project * this_proj : the target project
 */
 int read_cp2k_data (FILE * fp, int cid, struct project * this_proj)
 {

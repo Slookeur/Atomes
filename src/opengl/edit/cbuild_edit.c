@@ -1107,7 +1107,7 @@ G_MODULE_EXPORT gboolean delete_build (GtkWindow * widg, gpointer data)
 *  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event :
+*  GdkEvent * event : the GdkEvent triggering the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean delete_build (GtkWidget * widg, GdkEvent * event, gpointer data)
@@ -1265,7 +1265,7 @@ G_MODULE_EXPORT void adjust_occupancy (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  gpointer data              : the associated data pointer
 */
 GtkWidget * builder_win (struct project * this_proj, gpointer data)

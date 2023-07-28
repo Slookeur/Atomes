@@ -689,7 +689,7 @@ void data_popup_menu (GtkWidget * top_level, double x, double y, gpointer data)
 *  Usage:
 *
 *  GtkWidget * top_level :
-*  GdkEvent * event      :
+*  GdkEvent * event      : the GdkEvent triggering the signal
 *  gpointer data         : the associated data pointer
 */
 void data_popup_menu (GtkWidget * top_level, GdkEvent * event, gpointer data)
@@ -752,7 +752,7 @@ void data_button_event (GtkWidget * data_tree, double event_x, double event_y, g
 *  Usage:
 *
 *  GtkWidget * data_tree :
-*  GdkEvent * event      :
+*  GdkEvent * event      : the GdkEvent triggering the signal
 *  guint event_button    :
 *  guint event_type      :
 *  gpointer data         : the associated data pointer
@@ -806,7 +806,7 @@ G_MODULE_EXPORT gboolean on_data_button_event (GtkWidget * widget, GdkEvent * ev
 *  Usage:
 *
 *  GtkListStore * store       :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int b                      :
 *  int c                      :
 */
@@ -829,7 +829,7 @@ static void fill_data_model (GtkListStore * store, struct project * this_proj, i
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int b                      :
 *  int c                      :
 */
@@ -945,7 +945,7 @@ G_MODULE_EXPORT gboolean cancel_win (GtkWindow * win, gpointer data)
 *  Usage:
 *
 *  GtkWidget * win  : the GtkWidget sending the signal
-*  GdkEvent * event : the associated GdkEvent
+*  GdkEvent * event : the GdkEvent triggering the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer data)

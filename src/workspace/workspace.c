@@ -475,7 +475,7 @@ void workspace_menu (GtkWidget * tree, gpointer event, double x, double y)
 *  Usage: GTK4 popover workspace menu at current location
 *
 *  GtkGesture * gesture : the GtkGesture sending the signal
-*  int n_press          : Number of times it was pressed
+*  int n_press          : number of times it was pressed
 *  double x             : x position
 *  double y             : y position
 *  gpointer data        : the associated data pointer

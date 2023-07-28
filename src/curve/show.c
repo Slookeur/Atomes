@@ -330,7 +330,7 @@ G_MODULE_EXPORT gboolean to_hide_curve (GtkWindow * thecurve, gpointer data)
 *  Usage:
 *
 *  GtkWidget * thecurve : the GtkWidget sending the signal
-*  GdkEvent * event     : the associated GdkEvent
+*  GdkEvent * event     : the GdkEvent triggering the signal
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean to_hide_curve (GtkWidget * thecurve, GdkEvent * event, gpointer data)

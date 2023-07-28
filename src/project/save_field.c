@@ -397,7 +397,7 @@ int save_field_external (FILE * fp, int fid)
 *  Usage: save force field data to file
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project that contains the data
+*  struct project * this_proj : the target project
 */
 int save_dlp_field_data (FILE * fp, struct project * this_proj)
 {
@@ -478,7 +478,7 @@ int save_dlp_field_data (FILE * fp, struct project * this_proj)
 *  Usage: save LAMMPS force field data to file
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project that contains the data
+*  struct project * this_proj : the target project
 */
 int save_lmp_field_data (FILE * fp, struct project * this_proj)
 {

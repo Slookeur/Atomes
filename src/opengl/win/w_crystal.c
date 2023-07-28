@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_crystal.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int cif_preview (const char * filetoread);
   int get_cgroup (gchar * str);
@@ -104,9 +104,9 @@ typdef struct cif_data{
 /*
 *  int cif_preview (const char * filetoread)
 *
-*  Usage: 
+*  Usage:
 *
-*  const char * filetoread : 
+*  const char * filetoread :
 */
 int cif_preview (const char * filetoread)
 {
@@ -126,9 +126,9 @@ int cif_preview (const char * filetoread)
 /*
 *  int get_cgroup (gchar * str)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * str : 
+*  gchar * str :
 */
 int get_cgroup (gchar * str)
 {
@@ -143,9 +143,9 @@ int get_cgroup (gchar * str)
 /*
 *  void sort_files (int num_f)
 *
-*  Usage: 
+*  Usage:
 *
-*  int num_f : 
+*  int num_f :
 */
 void sort_files (int num_f)
 {
@@ -175,7 +175,7 @@ void sort_files (int num_f)
 /*
 *  int get_cif_files ()
 *
-*  Usage: 
+*  Usage:
 */
 int get_cif_files ()
 {
@@ -300,7 +300,7 @@ int get_cif_files ()
 /*
 *  int get_num_cif ()
 *
-*  Usage: 
+*  Usage:
 */
 int get_num_cif ()
 {
@@ -310,7 +310,7 @@ int get_num_cif ()
 /*
 *  int get_num_group ()
 *
-*  Usage: 
+*  Usage:
 */
 int get_num_group ()
 {
@@ -320,9 +320,9 @@ int get_num_group ()
 /*
 *  void fill_cif_tree (GtkListStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkListStore * store : 
+*  GtkListStore * store :
 */
 void fill_cif_tree (GtkListStore * store)
 {
@@ -346,9 +346,9 @@ void fill_cif_tree (GtkListStore * store)
 /*
 *  void fill_group_tree (GtkListStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkListStore * store : 
+*  GtkListStore * store :
 */
 void fill_group_tree (GtkListStore * store)
 {
@@ -372,9 +372,9 @@ void fill_group_tree (GtkListStore * store)
 /*
 *  void fill_symmetry_tree (GtkListStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkListStore * store : 
+*  GtkListStore * store :
 */
 void fill_symmetry_tree (GtkListStore * store)
 {
@@ -398,9 +398,9 @@ void fill_symmetry_tree (GtkListStore * store)
 /*
 *  void fill_database_tree (GtkListStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkListStore * store : 
+*  GtkListStore * store :
 */
 void fill_database_tree (GtkListStore * store)
 {
@@ -424,7 +424,7 @@ void fill_database_tree (GtkListStore * store)
 /*
 *  void insert_cif_preview ()
 *
-*  Usage: 
+*  Usage:
 */
 void insert_cif_preview ()
 {
@@ -475,9 +475,9 @@ void insert_cif_preview ()
 /*
 *  void prepare_cif_preview (int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id : 
+*  int id :
 */
 void prepare_cif_preview (int id)
 {
@@ -506,9 +506,9 @@ void prepare_cif_preview (int id)
 /*
 *  int get_cif_info_from_cif_node (xmlNodePtr * cnode)
 *
-*  Usage: 
+*  Usage:
 *
-*  xmlNodePtr * cnode : 
+*  xmlNodePtr * cnode :
 */
 int get_cif_info_from_cif_node (xmlNodePtr * cnode)
 {
@@ -519,11 +519,11 @@ int get_cif_info_from_cif_node (xmlNodePtr * cnode)
 /*
 *  void prepare_cif_list (int dba, int sym, int spg)
 *
-*  Usage: 
+*  Usage:
 *
-*  int dba : 
-*  int sym : 
-*  int spg : 
+*  int dba :
+*  int sym :
+*  int spg :
 */
 void prepare_cif_list (int dba, int sym, int spg)
 {
@@ -570,9 +570,9 @@ void prepare_cif_list (int dba, int sym, int spg)
 /*
 *  int open_cif_database (gchar * filetoread)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * filetoread : 
+*  gchar * filetoread :
 */
 int open_cif_database (gchar * filetoread)
 {
@@ -651,9 +651,9 @@ int open_cif_database (gchar * filetoread)
 /*
 *  int prepare_data_base (int db)
 *
-*  Usage: 
+*  Usage:
 *
-*  int db : 
+*  int db :
 */
 int prepare_data_base (int db)
 {
@@ -727,11 +727,11 @@ extern void set_library_markup (GtkTreeViewColumn * col,
 /*
 *  GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkListStore * store : 
-*  int id               : 
-*  gchar * name         : 
+*  GtkListStore * store :
+*  int id               :
+*  gchar * name         :
 */
 GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
 {
@@ -756,9 +756,9 @@ GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
 /*
 *  int build_crystal_from_cif_database (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj : the target project
 */
 int build_crystal_from_cif_database (struct project * this_proj)
 {

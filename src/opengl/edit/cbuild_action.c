@@ -417,7 +417,7 @@ double get_val_from_wyckoff (gchar * pos, gchar * wval)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  gboolean newp              :
 */
 void clean_this_proj (struct project * this_proj, gboolean newp)
@@ -850,7 +850,7 @@ gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_c
 *  Usage:
 *
 *  gboolean visible           :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  gboolean to_wrap           :
 *  gboolean show_clones       :
 *  cell_info * cell           :

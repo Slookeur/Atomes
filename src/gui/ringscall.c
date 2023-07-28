@@ -135,7 +135,7 @@ void update_rings_menus (glwin * view)
 *
 *  Usage: update the text view for ring statistics
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int c                      : the ring type
 */
 void update_rings_view (struct project * this_proj, int c)

@@ -109,7 +109,7 @@ void initsq (int r)
 *
 *  Usage: update the text view for s(q) / s(k) calculation
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int sqk                    : s(q) (SQ) or s(k) (SK)
 */
 void update_sq_view (struct project * this_proj, int sqk)

@@ -223,7 +223,7 @@ void rings_set_visible (GtkTreeViewColumn * col,
 *  Usage:
 *
 *  GtkTreeStore * store       :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 */
 void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
@@ -303,7 +303,7 @@ void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 *  gboolean fill_this         :
 */
@@ -346,7 +346,7 @@ GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 */
 void add_this_ring_to_search_tree (struct project * this_proj, int g)
@@ -657,7 +657,7 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 *  int s                      :
 */
@@ -677,7 +677,7 @@ int get_rmin (struct project * this_proj, int g, int s)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 *  int s                      :
 */
@@ -821,7 +821,7 @@ G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 */
 GtkWidget * create_rings_search (struct project * this_proj, int g)

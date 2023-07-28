@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cell_edit.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data);
   G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data);
@@ -41,7 +41,7 @@ gchar * edit_names[7] = {"Wrap All Atoms in", "Shift Center", "Add Extra(s)", "C
 /*
 *  G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -62,9 +62,9 @@ G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkWindow * widg : 
+*  GtkWindow * widg :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data)
@@ -72,10 +72,10 @@ G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event : 
+*  GdkEvent * event : the GdkEvent triggering the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data)
@@ -88,10 +88,10 @@ G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointe
 /*
 *  GtkWidget * cell_tab (int i, struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i                      : 
-*  struct project * this_proj : 
+*  int i                      :
+*  struct project * this_proj : the target project
 */
 GtkWidget * cell_tab (int i, struct project * this_proj)
 {
@@ -124,9 +124,9 @@ GtkWidget * cell_tab (int i, struct project * this_proj)
 /*
 *  GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj : the target project
 *  GtkWidget * vbox           : the GtkWidget sending the signal
 */
 GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
@@ -165,9 +165,9 @@ GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
 /*
 *  GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj : the target project
 *  gpointer data              : the associated data pointer
 */
 GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data)
@@ -196,10 +196,10 @@ GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer dat
 /*
 *  G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -207,7 +207,7 @@ G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, 
 /*
 *  G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer

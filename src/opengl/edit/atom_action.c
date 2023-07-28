@@ -71,7 +71,7 @@ void free_dummies (struct dummy_atom * tmp_pick)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void clean_this_project (struct project * this_proj)
 {
@@ -158,7 +158,7 @@ void clean_this_project (struct project * this_proj)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 *  int sid                    :
 */
@@ -191,7 +191,7 @@ void clean_motion_search (struct project * this_proj, atom_search * asearch, int
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 *  gboolean visible           :
 */
@@ -1016,7 +1016,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
 *  Usage:
 *
 *  atom_search * asearch      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void clean_all_trees (atom_search * asearch, struct project * this_proj)
 {
@@ -1097,7 +1097,7 @@ void clean_all_trees (atom_search * asearch, struct project * this_proj)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 */
 void apply_action (struct project * this_proj, atom_search * asearch)
@@ -1168,7 +1168,7 @@ void apply_action (struct project * this_proj, atom_search * asearch)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 */
 void prepare_random_action (struct project * this_proj, atom_search * asearch)
@@ -1365,7 +1365,7 @@ void prepare_random_action (struct project * this_proj, atom_search * asearch)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 *  gboolean editing           :
 */

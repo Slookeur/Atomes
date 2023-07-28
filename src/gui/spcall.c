@@ -88,7 +88,7 @@ void initsh (int str)
 *
 *  Usage: update the text view for spherical harmonics
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 */
 void update_spherical_view (struct project * this_proj)
 {

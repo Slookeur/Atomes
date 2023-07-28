@@ -170,7 +170,7 @@ double sphere_volume (double rad)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int rid                    :
 *  int sid                    :
 *  int gid                    :
@@ -307,7 +307,7 @@ double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], doubl
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int rid                    :
 *  int sid                    :
 *  int geo                    :
@@ -459,7 +459,7 @@ G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int geo                    :
 */
 void adjust_vol_md_step (struct project * this_proj, int geo)
@@ -695,7 +695,7 @@ G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
 *  Usage:
 *
 *  GtkWidget * vbox           : the GtkWidget sending the signal
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  glwin * view               : the target glwin
 *  int geo                    :
 */
@@ -859,7 +859,7 @@ G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 */
 GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)

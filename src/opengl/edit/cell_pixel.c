@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cell_pixel.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void pix_info_ (int * na, int * nb, int * nc);
   void send_pix_info_ (int * p, int listp[27], int * ngb);
@@ -40,11 +40,11 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void pix_info_ (int * na, int * nb, int * nc)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * na : 
-*  int * nb : 
-*  int * nc : 
+*  int * na :
+*  int * nb :
+*  int * nc :
 */
 void pix_info_ (int * na, int * nb, int * nc)
 {
@@ -57,11 +57,11 @@ void pix_info_ (int * na, int * nb, int * nc)
 /*
 *  void send_pix_info_ (int * p, int listp[27], int * ngb)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * p       : 
-*  int listp[27] : 
-*  int listp[27] : 
+*  int * p       :
+*  int listp[27] :
+*  int listp[27] :
 */
 void send_pix_info_ (int * p, int listp[27], int * ngb)
 {
@@ -75,10 +75,10 @@ void send_pix_info_ (int * p, int listp[27], int * ngb)
 /*
 *  GtkWidget * create_css_label (gchar * str, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * str : 
-*  int id      : 
+*  gchar * str :
+*  int id      :
 */
 GtkWidget * create_css_label (gchar * str, int id)
 {
@@ -98,10 +98,10 @@ GtkWidget * create_css_label (gchar * str, int id)
 /*
 *  GtkWidget * attach_grid (struct project * this_proj, int init)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int init                   : 
+*  struct project * this_proj : the target project
+*  int init                   :
 */
 GtkWidget * attach_grid (struct project * this_proj, int init)
 {
@@ -151,9 +151,9 @@ GtkWidget * attach_grid (struct project * this_proj, int init)
 /*
 *  void update_pix_table (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj : the target project
 */
 void update_pix_table (struct project * this_proj)
 {
@@ -203,7 +203,7 @@ void update_pix_table (struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -227,9 +227,9 @@ G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
 /*
 *  GtkWidget * pixels_tab (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj : the target project
 */
 GtkWidget * pixels_tab (struct project * this_proj)
 {

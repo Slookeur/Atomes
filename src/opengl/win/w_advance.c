@@ -229,7 +229,7 @@ G_MODULE_EXPORT void run_light_source_to_be_removed (GtkDialog * win, gint respo
 *  Usage:
 *
 *  int val                   :
-*  image * img               :
+*  image * img               : the target image
 *  opengl_edition * ogl_edit :
 */
 int * light_source_to_be_removed (int val, image * img, opengl_edition * ogl_edit)
@@ -1447,7 +1447,7 @@ G_MODULE_EXPORT gboolean close_advanced (GtkWidget * window, gpointer data)
 *  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event :
+*  GdkEvent * event : the GdkEvent triggering the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_advanced (GtkWidget * widg, GdkEvent * event, gpointer data)

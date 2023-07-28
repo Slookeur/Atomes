@@ -39,7 +39,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Usage: setup x axis using a linear scale
 *
 *  cairo_t * cr               : the cairo drawing context
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int rid                    : the analysis id
 *  int cid                    : the curve id
 */
@@ -147,7 +147,7 @@ void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int 
 *  Usage: setup x axis using a log scale
 *
 *  cairo_t * cr               : the cairo drawing context
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int rid                    : the analysis id
 *  int cid                    : the curve id
 *  gboolean draw_it           : 1/0 draw or not

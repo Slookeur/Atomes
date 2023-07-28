@@ -66,7 +66,7 @@ struct distance distance_2d (struct atom * at, struct atom * bt)
 *  Usage: distance between atom a and b in 3D
 *
 *  cell_info * cell : unit cell
-*  int mdstep       : MD step
+*  int mdstep       : the MD step
 *  struct atom * at : atom a
 *  struct atom * bt : atom b
 */
@@ -163,7 +163,7 @@ struct angle angle_2d (struct atom * at, struct atom * bt, struct atom * ct)
 *  Usage: angle between atom a, b and c in 3D
 *
 *  cell_info * cell : unit cell
-*  int mdstep       : MD step
+*  int mdstep       : the MD step
 *  struct atom * at : atom a
 *  struct atom * bt : atom b
 *  struct atom * ct : atom c
@@ -187,7 +187,7 @@ struct angle angle_3d (cell_info * cell, int mdstep, struct atom * at, struct at
 *  Usage: dihedral between atom a, b, c and d in 3D
 *
 *  cell_info * cell : unit cell
-*  int mdstep       : MD step
+*  int mdstep       : the MD step
 *  struct atom * at : atom a
 *  struct atom * bt : atom b
 *  struct atom * ct : atom c
@@ -223,7 +223,7 @@ struct angle dihedral_3d (cell_info * cell, int mdstep, struct atom * at, struct
 *  Usage: inversion angle between atom a, b, c and d in 3D
 *
 *  cell_info * cell : unit cell
-*  int mdstep       : MD step
+*  int mdstep       : the MD step
 *  struct atom * at : atom a
 *  struct atom * bt : atom b
 *  struct atom * ct : atom c

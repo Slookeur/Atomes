@@ -462,7 +462,7 @@ int * old_cmap[2];
 *
 *  Usage:
 *
-*  image * img :
+*  image * img : the target image
 *  int stp     :
 *  int id      :
 */

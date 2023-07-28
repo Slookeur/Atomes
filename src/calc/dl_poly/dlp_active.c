@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'dlp_active.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid);
   struct field_molecule * get_active_field_molecule (int a);
@@ -42,10 +42,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int aid                    : 
+*  struct project * this_proj : the target project
+*  int aid                    :
 */
 struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid)
 {
@@ -71,9 +71,9 @@ struct field_molecule * get_active_field_molecule_from_model_id (struct project 
 /*
 *  struct field_molecule * get_active_field_molecule (int a)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
+*  int a :
 */
 struct field_molecule * get_active_field_molecule (int a)
 {
@@ -89,10 +89,10 @@ struct field_molecule * get_active_field_molecule (int a)
 /*
 *  struct field_nth_body * get_active_body (int a, int b)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
-*  int b : 
+*  int a :
+*  int b :
 */
 struct field_nth_body * get_active_body (int a, int b)
 {
@@ -109,9 +109,9 @@ struct field_nth_body * get_active_body (int a, int b)
 /*
 *  struct field_external * get_active_external (int a)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
+*  int a :
 */
 struct field_external * get_active_external (int a)
 {
@@ -128,10 +128,10 @@ struct field_external * get_active_external (int a)
 /*
 *  struct field_atom * get_active_atom (int a, int b)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
-*  int b : 
+*  int a :
+*  int b :
 */
 struct field_atom * get_active_atom (int a, int b)
 {
@@ -148,10 +148,10 @@ struct field_atom * get_active_atom (int a, int b)
 /*
 *  struct field_shell * get_active_shell (int a, int b)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
-*  int b : 
+*  int a :
+*  int b :
 */
 struct field_shell * get_active_shell (int a, int b)
 {
@@ -168,10 +168,10 @@ struct field_shell * get_active_shell (int a, int b)
 /*
 *  struct field_constraint * get_active_constraint (int a, int b)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
-*  int b : 
+*  int a :
+*  int b :
 */
 struct field_constraint * get_active_constraint (int a, int b)
 {
@@ -188,10 +188,10 @@ struct field_constraint * get_active_constraint (int a, int b)
 /*
 *  struct field_pmf * get_active_pmf (int a, int b)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
-*  int b : 
+*  int a :
+*  int b :
 */
 struct field_pmf * get_active_pmf (int a, int b)
 {
@@ -208,10 +208,10 @@ struct field_pmf * get_active_pmf (int a, int b)
 /*
 *  struct field_rigid * get_active_rigid (int a, int b)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
-*  int b : 
+*  int a :
+*  int b :
 */
 struct field_rigid * get_active_rigid (int a, int b)
 {
@@ -228,10 +228,10 @@ struct field_rigid * get_active_rigid (int a, int b)
 /*
 *  struct field_tethered * get_active_tethered (int a, int b)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
-*  int b : 
+*  int a :
+*  int b :
 */
 struct field_tethered * get_active_tethered (int a, int b)
 {
@@ -248,10 +248,10 @@ struct field_tethered * get_active_tethered (int a, int b)
 /*
 *  struct field_prop * get_active_prop (struct  field_prop * pr, int a)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct  field_prop * pr : 
-*  int a                   : 
+*  struct  field_prop * pr :
+*  int a                   :
 */
 struct field_prop * get_active_prop (struct  field_prop * pr, int a)
 {
@@ -268,11 +268,11 @@ struct field_prop * get_active_prop (struct  field_prop * pr, int a)
 /*
 *  struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct  field_prop * pr : 
-*  int ti                  : 
-*  int * ids               : 
+*  struct  field_prop * pr :
+*  int ti                  :
+*  int * ids               :
 */
 struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids)
 {
@@ -300,11 +300,11 @@ struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti
 /*
 *  struct field_struct * get_active_struct (int s, int a, int b)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s : 
-*  int a : 
-*  int b : 
+*  int s :
+*  int a :
+*  int b :
 */
 struct field_struct * get_active_struct (int s, int a, int b)
 {

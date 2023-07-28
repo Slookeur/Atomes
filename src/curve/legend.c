@@ -41,7 +41,7 @@ extern DataLayout * get_extra_layout (int i);
 *  Usage:
 *
 *  cairo_t * cr               :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int rid                    :
 *  int cid                    :
 */

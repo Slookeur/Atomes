@@ -126,7 +126,7 @@ G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data)
 *  Usage:
 *
 *  GtkWidget * win            : the GtkWidget sending the signal
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int s                      :
 *  int id                     :
 *  double * val               :
@@ -487,7 +487,7 @@ G_MODULE_EXPORT gboolean close_event_model (GtkWindow * widg, gpointer data)
 *  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event :
+*  GdkEvent * event : the GdkEvent triggering the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_event_model (GtkWidget * widg, GdkEvent * event, gpointer data)

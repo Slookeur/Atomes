@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'initring.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ -
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+1]);
   void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * num, int ring[* num]);
@@ -33,13 +34,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+1])
 *
-*  Usage: 
+*  Usage: get single ring data for the glwin from Fortran90
 *
-*  int * id          : 
-*  int * st          : 
-*  int * ta          : 
-*  int * ri          : 
-*  int nring[* ta+1] : 
+*  int * id          : type of ring
+*  int * st          : the MD step
+*  int * ta          : size of the ring
+*  int * ri          : ring size id
+*  int nring[* ta+1] : ring's atom list
 */
 void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+1])
 {
@@ -54,14 +55,14 @@ void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+
 /*
 *  void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * num, int ring[* num])
 *
-*  Usage: 
+*  Usage: get rings data for an atom from Fortran90
 *
-*  int * st        : 
-*  int * at        : 
-*  int * id        : 
-*  int * ta        : 
-*  int * num       : 
-*  int ring[* num] : 
+*  int * st        : the MD step
+*  int * at        : atom id
+*  int * id        : type of ring
+*  int * ta        : size of the ring
+*  int * num       : number of ring(s) of that size
+*  int ring[* num] : the list(s) of atoms of the(these) ring(s)
 */
 void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * num, int ring[* num])
 {
@@ -80,12 +81,12 @@ void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * n
 /*
 *  void allocate_all_rings_ (int * id, int * st, int * ta, int * nring)
 *
-*  Usage: 
+*  Usage: allocate data to store ring statistics results for the glwin
 *
-*  int * id    : 
-*  int * st    : 
-*  int * ta    : 
-*  int * nring : 
+*  int * id    : the type of ring
+*  int * st    : the MD step
+*  int * ta    : the size of the ring
+*  int * nring : the number of ring(s) of that size
 */
 void allocate_all_rings_ (int * id, int * st, int * ta, int * nring)
 {

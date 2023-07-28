@@ -16,15 +16,18 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - Coordinations and polyhedra menu data initialization
+ - Coordinations and polyhedra GTK3 menus and menu items creation
+ - Initialization of coordinations and polyhedra related data from Fortran90 information
+
 *
 *  List of subroutines:
 
+  void gcid_spcolor_setup (int sp, int id);
   void set_color_map_sensitive (glwin * view);
   void set_advanced_bonding_menus (glwin * view);
   void prep_all_coord_menus (glwin * view);
-  void gcid_spcolor_setup (int sp, int id);
   void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp]);
   void allocate_partial_geo_ (int * sp, int * ngsp);
   void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp]);
@@ -60,10 +63,10 @@ int ** idgeo = NULL;
 /*
 *  ColRGBA init_color (int id, int numid)
 *
-*  Usage:
+*  Usage: initialize color based id number over total number of elements
 *
-*  int id    :
-*  int numid :
+*  int id    : the id number
+*  int numid : the total number of elements
 */
 ColRGBA init_color (int id, int numid)
 {
@@ -107,12 +110,34 @@ ColRGBA init_color (int id, int numid)
   return col;
 }
 
+/*
+*  void gcid_spcolor_setup (int sp, int id)
+*
+*  Usage: prepare color pointers
+*
+*  int sp : the chemical species
+*  int id : the coordination id
+*/
+void gcid_spcolor_setup (int sp, int id)
+{
+  int i;
+  if (active_glwin -> gcid[id] == NULL)
+  {
+    active_glwin -> gcid[id] = g_malloc0 (active_coord -> totcoord[id]*sizeof*active_glwin -> gcid[id]);
+    for (i=0; i<active_coord -> totcoord[id]; i++)
+    {
+      active_glwin -> gcid[id][i] = g_malloc0 (64*sizeof*active_glwin -> gcid[id][i]);
+    }
+  }
+  active_image -> spcolor[id][sp] = g_malloc0 (active_coord -> totcoord[id]*sizeof*active_image -> spcolor[id][sp]);
+}
+
 #ifdef GTK3
 // GTK3 Menu Action To Check
 /*
 *  void set_color_map_sensitive (glwin * view)
 *
-*  Usage:
+*  Usage: set color map menu items sensitivity GTK3
 *
 *  glwin * view : the target glwin
 */
@@ -133,7 +158,7 @@ void set_color_map_sensitive (glwin * view)
 /*
 *  void set_advanced_bonding_menus (glwin * view)
 *
-*  Usage:
+*  Usage: set sensitivity of advanced bonding menus GTK3
 *
 *  glwin * view : the target glwin
 */
@@ -147,18 +172,16 @@ void set_advanced_bonding_menus (glwin * view)
     widget_set_sensitive (view -> ogl_mode[2+i+NINPUTS], view -> adv_bonding[1]);
   }
 }
-#endif
 
 /*
 *  void prep_all_coord_menus (glwin * view)
 *
-*  Usage:
+*  Usage: prepare coordination menus GTK3
 *
 *  glwin * view : the target glwin
 */
 void prep_all_coord_menus (glwin * view)
 {
-#ifdef GTK3
   // GTK3 Menu Action To Check
   set_color_map_sensitive (view);
   gtk_menu_item_set_submenu ((GtkMenuItem *)view -> ogl_coord[0], coord_menu (view));
@@ -166,18 +189,16 @@ void prep_all_coord_menus (glwin * view)
   widget_set_sensitive (view -> ogl_coord[4], view -> adv_bonding[1]);
   show_the_widgets (view -> ogl_coord[0]);
   set_advanced_bonding_menus (view);
-#endif
 }
 
-#ifdef GTK3
 /*
 *  GtkWidget * coord_view_setup (int * sp, int id, int jd)
 *
-*  Usage:
+*  Usage: create coordination menu elements GTK3
 *
-*  int * sp :
-*  int id   :
-*  int jd   :
+*  int * sp : the chemical species
+*  int id   : the coordination (0=total, 1=partial, >1 rings)
+*  int jd   : pop menu or main app menu
 */
 GtkWidget * coord_view_setup (int * sp, int id, int jd)
 {
@@ -190,39 +211,15 @@ GtkWidget * coord_view_setup (int * sp, int id, int jd)
   }
   return menuv;
 }
-#endif
 
-/*
-*  void gcid_spcolor_setup (int sp, int id)
-*
-*  Usage:
-*
-*  int sp :
-*  int id :
-*/
-void gcid_spcolor_setup (int sp, int id)
-{
-  int i;
-  if (active_glwin -> gcid[id] == NULL)
-  {
-    active_glwin -> gcid[id] = g_malloc0 (active_coord -> totcoord[id]*sizeof*active_glwin -> gcid[id]);
-    for (i=0; i<active_coord -> totcoord[id]; i++)
-    {
-      active_glwin -> gcid[id][i] = g_malloc0 (64*sizeof*active_glwin -> gcid[id][i]);
-    }
-  }
-  active_image -> spcolor[id][sp] = g_malloc0 (active_coord -> totcoord[id]*sizeof*active_image -> spcolor[id][sp]);
-}
-
-#ifdef GTK3
 /*
 *  GtkWidget * coord_color_setup (int * sp, int id, int jd)
 *
-*  Usage:
+*  Usage: create coordination color menu elements GTK3
 *
-*  int * sp :
-*  int id   :
-*  int jd   :
+*  int * sp : the chemical species
+*  int id   : the coordination (0=total, 1=partial, >1 rings)
+*  int jd   : pop menu or main app menu
 */
 GtkWidget * coord_color_setup (int * sp, int id, int jd)
 {
@@ -241,11 +238,11 @@ GtkWidget * coord_color_setup (int * sp, int id, int jd)
 /*
 *  GtkWidget * poly_show_setup (int * sp, int id, int jd)
 *
-*  Usage:
+*  Usage: create polyhedra menu item elements GTK3
 *
-*  int * sp :
-*  int id   :
-*  int jd   :
+*  int * sp : the chemical species
+*  int id   : the coordination (0=total, 1=partial, >1 rings)
+*  int jd   : pop menu or main app menu
 */
 GtkWidget * poly_show_setup (int * sp, int id, int jd)
 {
@@ -266,13 +263,13 @@ GtkWidget * poly_show_setup (int * sp, int id, int jd)
 /*
 *  GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu, qint * data)
 *
-*  Usage:
+*  Usage: create coordination/polyhedra menu widget GTK3
 *
-*  int p            :
-*  char * name      :
-*  gboolean va      :
-*  GtkWidget * menu : the GtkWidget sending the signal
-*  qint * data      :
+*  int p            : coordination (0), or polyhedra (1)
+*  char * name      : text of the menu item
+*  gboolean va      : status, coordination or polyhedra visible or not (1/0)
+*  GtkWidget * menu : the GtkWidget menu to attach the menu item to
+*  qint * data      : the associated data pointer
 */
 GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu, qint * data)
 {
@@ -292,12 +289,12 @@ GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu
 /*
 *  void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp])
 *
-*  Usage:
+*  Usage: partial coordination data from Fortran90
 *
-*  int * sp          :
-*  int * id          :
-*  int * ngsp        :
-*  int coord[* ngsp] :
+*  int * sp          : the chemical species
+*  int * id          : the partial coordination id
+*  int * ngsp        : the number of chemical species
+*  int coord[* ngsp] : the list of partial coordination(s) for that chemical species and coordination id
 */
 void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp])
 {
@@ -307,10 +304,10 @@ void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp])
 /*
 *  void allocate_partial_geo_ (int * sp, int * ngsp)
 *
-*  Usage:
+*  Usage: allocate partial coordination(s) data
 *
-*  int * sp   :
-*  int * ngsp :
+*  int * sp   : the chemical species
+*  int * ngsp : the number of distinct coordination(s) for that chemical species
 */
 void allocate_partial_geo_ (int * sp, int * ngsp)
 {
@@ -325,12 +322,12 @@ void allocate_partial_geo_ (int * sp, int * ngsp)
 /*
 *  void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp])
 *
-*  Usage:
+*  Usage: getting atomic coordinations data from Fortran90, and related GTK3 menu elements creation
 *
-*  int * id           :
-*  int * sp           :
-*  int * ngsp         :
-*  int coordt[* ngsp] :
+*  int * id           : 0 for total coordination(s), 1 for partial coordination(s)
+*  int * sp           : the chemical species
+*  int * ngsp         : the number of distinct coordination(s) for that chemical species
+*  int coordt[* ngsp] : the list of coordination(s) for that chemical species
 */
 void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp])
 {
@@ -464,9 +461,9 @@ void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp
 /*
 *  void init_menu_fragmol_ (int * id)
 *
-*  Usage:
+*  Usage: getting fragment(s)/molecule(s) data from Fortran90, and related GTK3 menu elements creation
 *
-*  int * id :
+*  int * id : 2 for fragments, 3 for molecules
 */
 void init_menu_fragmol_ (int * id)
 {
@@ -552,13 +549,13 @@ void init_menu_fragmol_ (int * id)
 /*
 *  void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init)
 *
-*  Usage:
+*  Usage: getting rings statistics data from Fortran90, and related GTK3 menu elements creation
 *
-*  int * coo          :
-*  int * ids          :
-*  int * ngsp         :
-*  int coordt[* ngsp] :
-*  int coordt[* ngsp] :
+*  int * coo          : the coord type, for rings: * ids + 4, for chains: 9
+*  int * ids          : the ring(s) type in [0-4], or 0 for the chains
+*  int * ngsp         : the total number of distinct ring size(s)
+*  int coordt[* ngsp] : the list of ring size(s) with rings
+*  int * init         : initialize some visual information (1/0)
 */
 void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init)
 {
@@ -643,11 +640,11 @@ void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int 
 /*
 *  void init_opengl_coords (int id, int nt, int init)
 *
-*  Usage:
+*  Usage: initialize data to
 *
-*  int id   :
-*  int nt   :
-*  int init :
+*  int * id : the geometry id, in: [0-9]
+*  int nt   : total number of distinct coordination
+*  int init : initialize some visual information (1/0)
 */
 void init_opengl_coords (int id, int nt, int init)
 {
@@ -698,14 +695,14 @@ void init_opengl_coords (int id, int nt, int init)
 /*
 *  void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[* num])
 *
-*  Usage:
+*  Usage: coordination information from Fortran90
 *
-*  int * id         :
-*  int * num        :
-*  int * cmin       :
-*  int * cmax       :
-*  int * nt         :
-*  int coord[* num] :
+*  int * id         : the geometry id, in: [0-9]
+*  int * num        : number of atom(s)
+*  int * cmin       : min value for the total coordination
+*  int * cmax       : max value for the total coordination
+*  int * nt         : total number of distinct coordination
+*  int coord[* num] : the values for each atom
 */
 void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[* num])
 {

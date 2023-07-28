@@ -16,8 +16,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - subroutines collecting chain(s) data from Fortran90
+ - subroutines allocating chain(s) data from Fortran90
+
 *
 *  List of subroutines:
 
@@ -36,12 +38,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
 *
-*  Usage:
+*  Usage: getting the chain data elemnts from Fortran90
 *
-*  int * st         :
-*  int * ta         :
-*  int * ri         :
-*  int nchain[* ta] :
+*  int * st         : the MD step
+*  int * ta         : the chain size
+*  int * ri         : the chain id
+*  int nchain[* ta] : the chain element(s)
 */
 void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
 {
@@ -55,13 +57,13 @@ void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
 /*
 *  void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
 *
-*  Usage:
+*  Usage: allocate atom chains data from Fortran90 information
 *
-*  int * st          :
-*  int * at          :
-*  int * ta          :
-*  int * num         :
-*  int nchain[* num] :
+*  int * st          : the MD step
+*  int * at          : the atom id
+*  int * ta          : the chain size
+*  int * num         : the number of chain(s)
+*  int nchain[* num] : the chain id(s)
 */
 void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
 {
@@ -80,11 +82,11 @@ void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int n
 /*
 *  void allocate_all_chains_ (int * st, int * ta, int * nring)
 *
-*  Usage:
+*  Usage: allocate chains data from Fortran90 information
 *
-*  int * st    :
-*  int * ta    :
-*  int * nring :
+*  int * st    : the MD step
+*  int * ta    : the number of chain size(s)
+*  int * nring : the number of chain(s) of that size
 */
 void allocate_all_chains_ (int * st, int * ta, int * nring)
 {

@@ -45,7 +45,7 @@ double * tmpcut;
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void update_cutoffs (struct project * this_proj)
 {
@@ -140,7 +140,7 @@ G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  GtkWidget * vbox           : the GtkWidget sending the signal
 */
 void cut_box (struct project * this_proj, GtkWidget * vbox)

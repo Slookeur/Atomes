@@ -47,7 +47,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  mat4_t * dlat              :
 *  mat4_t * drec              :
 *  int refresh                :
@@ -387,7 +387,7 @@ G_MODULE_EXPORT void shift_coord (GtkRange * range, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int i                      :
 */
 GtkWidget * create_cell_entries (struct project * this_proj, int i)
@@ -465,7 +465,7 @@ GtkWidget * create_cell_entries (struct project * this_proj, int i)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 GtkWidget * create_shift_box (struct project * this_proj)
 {
@@ -546,7 +546,7 @@ G_MODULE_EXPORT void wrap_coord (GtkToggleButton * but, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 GtkWidget * shift_center_tab (struct project * this_proj)
 {

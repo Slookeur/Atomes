@@ -159,7 +159,7 @@ gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct in
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int ifcl                   :
 *  int * bcid                 :
 */
@@ -652,7 +652,7 @@ void add_object_atoms (struct insert_object * this_object, struct project * this
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int sid                    :
 *  atom_search * remove       :
 */
@@ -694,7 +694,7 @@ struct insert_object * create_object_from_species (struct project * this_proj, i
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 struct insert_object * create_object_from_selection (struct project * this_proj)
 {
@@ -742,7 +742,7 @@ struct insert_object * create_object_from_selection (struct project * this_proj)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int coord                  :
 *  int aid                    :
 *  atom_search * remove       :
@@ -818,7 +818,7 @@ struct insert_object * create_object_from_atom_coordination (struct project * th
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int coord                  :
 *  int aid                    :
 *  atom_search * remove       :
@@ -898,7 +898,7 @@ struct insert_object * create_object_from_overall_coordination (struct project *
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int coord                  :
 *  int geo                    :
 *  atom_search * remove       :
@@ -986,7 +986,7 @@ void adjust_object_frag_coord (struct insert_object * object)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int p                      :
 */
 int create_object_from_open_project (struct project * this_proj, int p)
@@ -1072,7 +1072,7 @@ int create_object_from_open_project (struct project * this_proj, int p)
 *
 *  int orig                   :
 *  int act                    :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 */
 void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch)
@@ -1162,7 +1162,7 @@ void clean_this_object (int orig, int act, struct project * this_proj, atom_sear
 *
 *  int stat                   :
 *  int orig                   :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 *  gboolean visible           :
 */

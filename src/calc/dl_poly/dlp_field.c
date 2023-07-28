@@ -2734,7 +2734,7 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, double event_x, doub
 *
 *  int id             :
 *  GtkWidget * widget : the GtkWidget sending the signal
-*  GdkEvent * event   :
+*  GdkEvent * event   : the GdkEvent triggering the signal
 *  gpointer data      : the associated data pointer
 */
 void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gpointer data)
@@ -2983,7 +2983,7 @@ void field_button_event (double event_x, double event_y, guint event_button, gui
 *
 *  Usage:
 *
-*  GdkEvent * event   :
+*  GdkEvent * event   : the GdkEvent triggering the signal
 *  double event_x     :
 *  double event_y     :
 *  guint event_button :
@@ -3032,10 +3032,10 @@ void field_button_event (GdkEvent * event, double event_x, double event_y, guint
 *
 *  Usage:
 *
-*  GtkGesture * gesture :
-*  int n_press          :
-*  double x             :
-*  double y             :
+*  GtkGesture * gesture : the GtkGesture sending the signal
+*  int n_press          : number of times it was pressed
+*  double x             : x position
+*  double y             : y position
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_field_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
@@ -3048,10 +3048,10 @@ G_MODULE_EXPORT void on_field_button_pressed (GtkGesture * gesture, int n_press,
 *
 *  Usage:
 *
-*  GtkGesture * gesture :
-*  int n_press          :
-*  double x             :
-*  double y             :
+*  GtkGesture * gesture : the GtkGesture sending the signal
+*  int n_press          : number of times it was pressed
+*  double x             : x position
+*  double y             : y position
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_field_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
@@ -3065,7 +3065,7 @@ G_MODULE_EXPORT void on_field_button_released (GtkGesture * gesture, int n_press
 *  Usage:
 *
 *  GtkWidget * widget : the GtkWidget sending the signal
-*  GdkEvent * event   :
+*  GdkEvent * event   : the GdkEvent triggering the signal
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_field_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
@@ -3832,7 +3832,7 @@ G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWindow * assistant, gpoin
 *  Usage:
 *
 *  GtkWidget * assistant : the GtkWidget sending the signal
-*  GdkEvent * event      :
+*  GdkEvent * event      : the GdkEvent triggering the signal
 *  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWidget * assistant, GdkEvent * event, gpointer data)

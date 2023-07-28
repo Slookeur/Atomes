@@ -61,7 +61,7 @@ gboolean write_data_layout (FILE * fp, DataLayout * layout)
 *
 *  FILE * fp                  : the file pointer
 *  int wid                    : the total number of project file in the workspace
-*  struct project * this_proj : the project to save
+*  struct project * this_proj : the target project
 *  int rid                    : the calculation to save
 *  int cid                    : the curve id to save
 */

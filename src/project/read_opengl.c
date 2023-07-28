@@ -40,7 +40,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Usage: read atom properties from file (a)
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int s                      : the MD step
 *  int a                      : the atom number
 */
@@ -62,7 +62,7 @@ int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 *  Usage: read atom properties from file (b)
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int s                      : the MD step
 *  int a                      : the atom number
 */
@@ -269,7 +269,7 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
 *  Usage: read OpenGL image properties from file
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project to store the data
+*  struct project * this_proj : the target project
 *  image * img                : the latest image to store the data
 *  int sid                    : the number of chemical species
 */

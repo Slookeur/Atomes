@@ -45,7 +45,7 @@ extern GtkWidget * cell_tab (int i, struct project * this_proj);
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 gboolean ** duplicate_geom_info (struct project * this_proj)
 {
@@ -67,7 +67,7 @@ gboolean ** duplicate_geom_info (struct project * this_proj)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 gboolean ** duplicate_poly_info (struct project * this_proj)
 {
@@ -127,7 +127,7 @@ void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboo
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void sens_superbut (struct project * this_proj)
 {

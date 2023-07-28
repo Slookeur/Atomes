@@ -238,7 +238,7 @@ G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void invert_visible (struct project * this_proj)
 {

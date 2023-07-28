@@ -45,7 +45,7 @@ extern void opengl_info (struct project * this_proj, GtkTextBuffer * buf);
 *
 *  Usage: display information about a workspace menu item for a project
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int i                      : the properties to display from the menu
 */
 void workinfo (struct project * this_proj, int i)

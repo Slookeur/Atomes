@@ -95,7 +95,7 @@ void update_chains_menus (glwin * view)
 *
 *  Usage: update the chains statistics text view after the calculation
 *
-*  struct project * this_proj : the project that was analysed
+*  struct project * this_proj : the target project
 */
 void update_chains_view (struct project * this_proj)
 {

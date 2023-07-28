@@ -608,7 +608,7 @@ void append_menu_item (GMenu * menu, const gchar * label, const gchar * action, 
 *  Usage: create the workspace section
 *
 *  gchar * act : app" or "pop" key for the GAction
-*  int pop     : From main app (0) or contextual (1)
+*  int pop     : from main app (0) or contextual (1)
 */
 GMenu * workspace_section (gchar * act, int pop)
 {
@@ -638,7 +638,7 @@ GMenu * workspace_section (gchar * act, int pop)
 *  Usage: create the import/export menu items
 *
 *  gchar * act : "app" or "pop" key for the GAction
-*  int pop     : From main app (0) or contextual (1)
+*  int pop     : from main app (0) or contextual (1)
 *  int port    : Import (1) or Export (0)
 */
 GMenu * port_section (gchar * act, int pop, int port)
@@ -661,9 +661,9 @@ GMenu * port_section (gchar * act, int pop, int port)
 *  Usage: create the project section
 *
 *  gchar * act : "app" or "pop" key for the GAction
-*  int pop_up  : From main app (0) or contextual (1)
-*  int proj    : Project id, if any (or -1)
-*  int calc    : Calculation id, if any (or -1)
+*  int pop_up  : from main app (0) or contextual (1)
+*  int proj    : project id, if any (or -1)
+*  int calc    : calculation id, if any (or -1)
 */
 GMenu * project_section (gchar * act, int pop_up, int proj, int calc)
 {
@@ -758,8 +758,8 @@ GMenu * workspace_title ()
 *
 *  Usage: create project title menu item
 *
-*  int pop_up : From main app (0) or contextual (1)
-*  int proj   : Project id, if any (or -1)
+*  int pop_up : from main app (0) or contextual (1)
+*  int proj   : project id, if any (or -1)
 */
 GMenu * project_title (int pop_up, int proj)
 {
@@ -783,9 +783,9 @@ GMenu * project_title (int pop_up, int proj)
 *  Usage: create atomes 'workspace' menu
 *
 *  gchar * act : "app" or "pop" key for the GAction
-*  int pop_up  : From main app (0) or contextual (1)
-*  int proj    : Project id, if any (or -1)
-*  int calc    : Calculation id, if any (or -1)
+*  int pop_up  : from main app (0) or contextual (1)
+*  int proj    : project id, if any (or -1)
+*  int calc    : calculation id, if any (or -1)
 */
 GMenu * create_workspace_menu (gchar * act, int pop_up, int proj, int calc)
 {
@@ -882,7 +882,7 @@ GMenu * atomes_menu_bar ()
 *  Usage: mouse right event to popup the main application 'workspace' menu
 *
 *  GtkGesture * gesture : the GtkGesture sending the signal
-*  int n_press          : Number of times it was pressed
+*  int n_press          : number of times it was pressed
 *  double x             : x position
 *  double y             : y position
 *  gpointer data        : the associated data pointer

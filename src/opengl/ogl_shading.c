@@ -67,10 +67,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  GLuint create_shader (int type, const GLchar * src)
 *
-*  Usage:
+*  Usage: create an OpenGL GLSL shader
 *
-*  int type           :
-*  const GLchar * src :
+*  int type           : type of the shader
+*  const GLchar * src : name of the shader
 */
 GLuint create_shader (int type, const GLchar * src)
 {
@@ -103,10 +103,10 @@ GLuint create_shader (int type, const GLchar * src)
 /*
 *  GLuint * alloc_shader_pointer (GLuint * pointer, int shaders)
 *
-*  Usage:
+*  Usage: allocate GLuint data pointer, ensure that it is clean
 *
-*  GLuint * pointer :
-*  int shaders      :
+*  GLuint * pointer : the data pointer to allocate
+*  int shaders      : the data size to allocate
 */
 GLuint * alloc_shader_pointer (GLuint * pointer, int shaders)
 {
@@ -127,13 +127,13 @@ GLuint * alloc_shader_pointer (GLuint * pointer, int shaders)
 /*
 *  void set_light_uniform_location (GLuint * lightning, int id, int j, int k, char * string)
 *
-*  Usage:
+*  Usage: set lightning uniform location
 *
 *  GLuint * lightning :
-*  int id             :
-*  int j              :
-*  int k              :
-*  char * string      :
+*  int id             : shader id
+*  int j              : light id
+*  int k              : uniform id
+*  char * string      : uniform string
 */
 void set_light_uniform_location (GLuint * lightning, int id, int j, int k, char * string)
 {
@@ -509,16 +509,16 @@ object_3d * duplicate_object_3d (object_3d * old_obj)
 *
 *  Usage: create an OpenGL shader program
 *
-*  int object              :
-*  int object_id           :
-*  const GLchar * vertex   :
-*  const GLchar * geometry :
-*  const GLchar * fragment :
-*  GLenum type_of_vertices :
-*  int narray              :
-*  int nunif               :
-*  gboolean lightning      :
-*  object_3d * obj         :
+*  int object              : shader id (in enum shaders)
+*  int object_id           : shader type in: GLSL_SPHERES, GLSL_POINTS, GLSL_LINES, GLSL_CYLINDERS, GLSL_CAPS, GLSL_POLYEDRA, GLSL_STRING
+*  const GLchar * vertex   : general shader: in the shaders defined in 'ogl_shaders.c'
+*  const GLchar * geometry : geometry shader, if any: in the shaders defined in 'ogl_shaders.c'
+*  const GLchar * fragment : color shader, if any: in the shaders defined in 'ogl_shaders.c'
+*  GLenum type_of_vertices : type of vertices in: GL_POINTS, GL_LINES, GL_TRIANGLE GL_TRIANGLE_FAN, GL_TRIANGLE_STRIP
+*  int narray              : number of vertices to allocate
+*  int nunif               : number of uniform location(s) to allocate
+*  gboolean lightning      : use lightning (1/0)
+*  object_3d * obj         : the object 3D to bind to the shader
 */
 glsl_program * init_shader_program (int object, int object_id,
                                     const GLchar * vertex, const GLchar * geometry, const GLchar * fragment,

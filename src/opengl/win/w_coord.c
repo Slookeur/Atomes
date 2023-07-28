@@ -445,7 +445,7 @@ G_MODULE_EXPORT void set_poly_alpha (GtkRange * range, gpointer data)
 *  Usage:
 *
 *  int poly                   :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 *  int i                      :
 *  int j                      :
@@ -732,7 +732,7 @@ void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRG
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 *  int id                     :
 */
@@ -868,7 +868,7 @@ G_MODULE_EXPORT void to_set_this_frag_mol_color (GtkTreeView * tree_view, GtkTre
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 */
 GtkWidget * create_frag_mol_tree (struct project * this_proj, int g)
@@ -937,7 +937,7 @@ G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int g                      :
 */
 GtkWidget * create_frag_mol_search (struct project * this_proj, int g)
@@ -1268,7 +1268,7 @@ G_MODULE_EXPORT gboolean close_event_coord (GtkWindow * widg, gpointer data)
 *  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event :
+*  GdkEvent * event : the GdkEvent triggering the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_event_coord (GtkWidget * widg, GdkEvent * event, gpointer data)

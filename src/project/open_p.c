@@ -102,8 +102,8 @@ gchar * read_this_string (FILE * fp)
 *
 *  Usage: initialize curve namees
 *
-*  int w : Calculation id
-*  int s :
+*  int w : calculation id
+*  int s : initialize spherical harmonics or not
 */
 void initcnames (int w, int s)
 {
@@ -147,7 +147,7 @@ void initcnames (int w, int s)
 *
 *  Usage: allocate project data
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 */
 void allocatoms (struct project * this_proj)
 {
@@ -192,7 +192,7 @@ chemical_data * alloc_chem_data (int spec)
 *
 *  Usage: allocate data
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int cid                    : Allocate chemistry data (1/0)
 */
 void alloc_proj_data (struct project * this_proj, int cid)

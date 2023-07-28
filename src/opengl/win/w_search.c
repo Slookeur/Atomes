@@ -185,7 +185,7 @@ gboolean get_asearch_is_object (atom_search * asearch)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 */
 void check_tree_for_this_search (struct project * this_proj, atom_search * asearch)
@@ -411,7 +411,7 @@ void check_tree_for_this_search (struct project * this_proj, atom_search * asear
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void check_all_trees (struct project * this_proj)
 {
@@ -548,7 +548,7 @@ void motion_to_zero (atom_search * asearch)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 *  int mv                     :
 *  int id                     :
@@ -671,7 +671,7 @@ void adjust_object_to_move (struct project * this_proj, atom_search * asearch, i
 *  gboolean is_object         :
 *  int h                      :
 *  int i                      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void append_to_model (GtkTreeIter * atom_level, atom_search * asearch, gboolean is_object, int h, int i, struct project * this_proj)
 {
@@ -750,7 +750,7 @@ void append_to_model (GtkTreeIter * atom_level, atom_search * asearch, gboolean 
 *  atom_search * asearch      :
 *  int i                      :
 *  int j                      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 gboolean fill_for_action (atom_search * asearch, int i, int j, struct project * this_proj)
 {
@@ -782,7 +782,7 @@ gboolean fill_for_action (atom_search * asearch, int i, int j, struct project * 
 *  Usage:
 *
 *  atom_search * asearch      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int i                      :
 *  int j                      :
 */
@@ -876,7 +876,7 @@ gchar * adjust_picked (gchar * picked, struct insert_object * object, gboolean i
 *
 *  int node                   :
 *  atom_search * asearch      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 gchar * get_node_name (int node, atom_search * asearch, struct project * this_proj)
 {
@@ -921,7 +921,7 @@ gchar * get_node_name (int node, atom_search * asearch, struct project * this_pr
 *  Usage:
 *
 *  atom_search * asearch      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void fill_atom_model (atom_search * asearch, struct project * this_proj)
 {
@@ -1690,7 +1690,7 @@ G_MODULE_EXPORT void set_id (GtkEntry * entry, gpointer data)
 *  Usage:
 *
 *  atom_search * asearch      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int a                      :
 *  int s                      :
 *  int c                      :
@@ -1777,7 +1777,7 @@ G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data);
 *  Usage:
 *
 *  atom_search * asearch      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int oid                    :
 *  int sid                    :
 *  GtkTreeIter iter           :
@@ -2179,7 +2179,7 @@ void adjust_this_tree_branch (atom_search * asearch, struct project * this_proj,
 *  Usage:
 *
 *  atom_search * asearch      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int oid                    :
 *  int aid                    :
 *  int new_status             :
@@ -2387,7 +2387,7 @@ int get_selected_object_id (gboolean visible, int p, gchar * str, atom_search * 
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 *  int sid                    :
 *  int vid                    :
@@ -3458,7 +3458,7 @@ G_MODULE_EXPORT void move_up_down (GtkTreeModel * tree_model, GtkTreePath * path
 *  Usage:
 *
 *  atom_search * asearch      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int nats                   :
 */
 GtkWidget * create_atoms_tree (atom_search * asearch, struct project * this_proj, int nats)

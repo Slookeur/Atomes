@@ -47,7 +47,7 @@ extern gchar * label_atpts (struct project * this_proj, glwin * view, int id);
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void clean_atom_style (struct project * this_proj)
 {

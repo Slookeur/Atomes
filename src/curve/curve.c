@@ -300,7 +300,7 @@ double scale (double axe)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int rid                    :
 *  int cid                    :
 */
@@ -437,7 +437,7 @@ void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int c                      :
 */
 void hide_curves (struct project * this_proj, int c)
@@ -512,7 +512,7 @@ void remove_this_curve_from_extras (int a, int b, int c)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int c                      :
 */
 void erase_curves (struct project * this_proj, int c)

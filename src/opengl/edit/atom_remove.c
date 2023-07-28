@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_remove.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list, int tmpbond[2], int ** tmpbondid[2], int * old_id, gboolean remove);
 
@@ -47,10 +47,10 @@ extern atom_search * allocate_atom_search (int proj, int action, int searchid, i
 /*
 *  void set_mol_data (int the_atom, int the_mol)
 *
-*  Usage: 
+*  Usage:
 *
-*  int the_atom : 
-*  int the_mol  : 
+*  int the_atom :
+*  int the_mol  :
 */
 void set_mol_data (int the_atom, int the_mol)
 {
@@ -77,16 +77,16 @@ void set_mol_data (int the_atom, int the_mol)
 /*
 *  int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list, int tmpbond[2], int ** tmpbondid[2], int * old_id, gboolean remove)
 *
-*  Usage: 
+*  Usage:
 *
-*  int natomes            : 
-*  int fcoord             : 
-*  int fid                : 
-*  struct atom * new_list : 
-*  int tmpbond[2]         : 
-*  int tmpbond[2]         : 
-*  int tmpbond[2]         : 
-*  int tmpbond[2]         : 
+*  int natomes            :
+*  int fcoord             :
+*  int fid                :
+*  struct atom * new_list :
+*  int tmpbond[2]         :
+*  int tmpbond[2]         :
+*  int tmpbond[2]         :
+*  int tmpbond[2]         :
 */
 int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list, int tmpbond[2], int ** tmpbondid[2], int * old_id, gboolean remove)
 {
@@ -214,10 +214,10 @@ int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list
 /*
 *  struct atom * get_atom_pointer (int aid, struct atom * new_list)
 *
-*  Usage: 
+*  Usage:
 *
-*  int aid                : 
-*  struct atom * new_list : 
+*  int aid                :
+*  struct atom * new_list :
 */
 struct atom * get_atom_pointer (int aid, struct atom * new_list)
 {
@@ -628,10 +628,10 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
 /*
 *  void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
+*  struct project * this_proj : the target project
+*  atom_search * asearch      :
 */
 void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch)
 {
@@ -698,10 +698,10 @@ void to_remove_this_list_of_objects (struct project * this_proj, atom_search * a
 /*
 *  void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
+*  struct project * this_proj : the target project
+*  atom_search * asearch      :
 */
 void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch)
 {

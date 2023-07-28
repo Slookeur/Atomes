@@ -295,7 +295,7 @@ void close_project (struct project * to_close)
 *  Usage: to close this project
 *
 *  int to_activate            : If the workspace is not empty, activate first another project
-*  struct project * this_proj : the project to close
+*  struct project * this_proj : the target project
 */
 void to_close_this_project (int to_activate, struct project * this_proj)
 {

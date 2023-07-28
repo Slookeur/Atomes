@@ -43,7 +43,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  double val                 :
 *  int axe                    :
 *  int p                      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
 {

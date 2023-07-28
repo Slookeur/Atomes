@@ -118,7 +118,7 @@ void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int rid                    :
 *  int cid                    :
 *  int ax                     :
@@ -150,7 +150,7 @@ void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
 *  Usage:
 *
 *  cairo_t * cr               :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int rid                    :
 *  int cid                    :
 */

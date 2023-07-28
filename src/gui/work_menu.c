@@ -105,8 +105,8 @@ G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data)
 *
 *  Usage: create the workspace menu GTK3 version with icons
 *
-*  int p  : Project id, or -1
-*  int c  : Calculation id, or -1
+*  int p  : project id, or -1
+*  int c  : calculation id, or -1
 */
 GtkWidget * this_work_menu (int p, int c)
 {
@@ -187,8 +187,8 @@ extern GSimpleAction * pop_act[7];
 *
 *  Usage: create the workspace popup menu
 *
-*  int p  : Project id, or -1
-*  int c  : Calculation id, or -1
+*  int p  : project id, or -1
+*  int c  : calculation id, or -1
 */
 GtkWidget * work_menu (int p, int c)
 {

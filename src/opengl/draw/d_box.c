@@ -887,7 +887,7 @@ void spherical_slab ()
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void create_slab_lists (struct project * this_proj)
 {

@@ -316,7 +316,7 @@ void curve_button_event (double event_x, double event_y, guint event_button, gui
 *
 *  Usage:
 *
-*  GdkEvent * event   :
+*  GdkEvent * event   : the GdkEvent triggering the signal
 *  double event_x     :
 *  double event_y     :
 *  guint event_button :
@@ -441,10 +441,10 @@ void curve_button_event (GdkEvent * event, double event_x, double event_y, guint
 *
 *  Usage:
 *
-*  GtkGesture * gesture :
-*  int n_press          :
-*  double x             :
-*  double y             :
+*  GtkGesture * gesture : the GtkGesture sending the signal
+*  int n_press          : number of times it was pressed
+*  double x             : x position
+*  double y             : y position
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_curve_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
@@ -457,10 +457,10 @@ G_MODULE_EXPORT void on_curve_button_pressed (GtkGesture * gesture, int n_press,
 *
 *  Usage:
 *
-*  GtkGesture * gesture :
-*  int n_press          :
-*  double x             :
-*  double y             :
+*  GtkGesture * gesture : the GtkGesture sending the signal
+*  int n_press          : number of times it was pressed
+*  double x             : x position
+*  double y             : y position
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_curve_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
@@ -474,7 +474,7 @@ G_MODULE_EXPORT void on_curve_button_released (GtkGesture * gesture, int n_press
 *  Usage:
 *
 *  GtkWidget * widget : the GtkWidget sending the signal
-*  GdkEvent * event   :
+*  GdkEvent * event   : the GdkEvent triggering the signal
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_curve_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
@@ -565,7 +565,7 @@ G_MODULE_EXPORT gboolean on_curve_key_pressed (GtkEventControllerKey * self, gui
 *  Usage:
 *
 *  GtkWidget * widget : the GtkWidget sending the signal
-*  GdkEvent * event   :
+*  GdkEvent * event   : the GdkEvent triggering the signal
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean curve_configure_event (GtkWidget * widget, GdkEvent * event, gpointer data)
@@ -576,7 +576,7 @@ G_MODULE_EXPORT gboolean curve_configure_event (GtkWidget * widget, GdkEvent * e
 *  Usage:
 *
 *  GtkWidget * widget        : the GtkWidget sending the signal
-*  GdkEventConfigure * event :
+*  GdkEventConfigure * event : the GdkEvent triggering the signal
 *  gpointer data             : the associated data pointer
 */
 G_MODULE_EXPORT gboolean curve_configure_event (GtkWidget * widget, GdkEventConfigure * event, gpointer data)
@@ -607,7 +607,7 @@ G_MODULE_EXPORT gboolean curve_configure_event (GtkWidget * widget, GdkEventConf
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int b                      :
 *  int c                      :
 */

@@ -447,7 +447,7 @@ int read_field_external (FILE * fp, int fid)
 *  Usage: read force field data from file
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project to store the data
+*  struct project * this_proj : the target project
 */
 int read_dlp_field_data (FILE * fp, struct project * this_proj)
 {
@@ -566,7 +566,7 @@ int read_dlp_field_data (FILE * fp, struct project * this_proj)
 *  Usage: read LAMMPS field data from file
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project to store the data
+*  struct project * this_proj : the target project
 */
 int read_lmp_field_data (FILE * fp, struct project * this_proj)
 {

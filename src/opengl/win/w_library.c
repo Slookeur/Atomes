@@ -1053,7 +1053,7 @@ G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id,
 *  Usage:
 *
 *  gboolean visible           :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 */
 int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch)
@@ -1099,7 +1099,7 @@ int select_from_library (gboolean visible, struct project * this_proj, atom_sear
 *
 *  int id                     :
 *  gboolean visible           :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 */
 int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch)

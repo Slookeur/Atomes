@@ -47,6 +47,8 @@ If not, see <https://www.gnu.org/licenses/> */
 
   mat4_t insert_projection (glwin * view);
 
+  vec3_t get_insertion_coordinates (glwin * view);
+
 */
 
 #include "global.h"
@@ -68,7 +70,6 @@ extern void set_color_map_sensitive (glwin * view);
 extern gboolean spin (gpointer data);
 extern G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data);
 extern G_MODULE_EXPORT void spin_go (GtkWidget * widg, gpointer data);
-extern void prep_all_coord_menus (glwin * view);
 extern void update_menus (glwin * view);
 extern G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data);
@@ -86,6 +87,7 @@ extern G_MODULE_EXPORT void edit_in_new_project (GSimpleAction * action, GVarian
 extern G_MODULE_EXPORT void remove_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
 extern G_MODULE_EXPORT void copy_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data);
 #else
+extern void prep_all_coord_menus (glwin * view);
 extern G_MODULE_EXPORT void set_full_screen (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void add_object (GtkWidget * widg, gpointer data);
@@ -109,11 +111,11 @@ extern int get_measure_type (glwin * view);
 /*
 *  GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 *
-*  Usage:
+*  Usage: create the rings submenus GTK3
 *
 *  glwin * view : the target glwin
-*  int id       :
-*  int ri       :
+*  int id       : atoms in ring(s) or polyhedra from rings (0/1)
+*  int ri       : the type of rings
 */
 GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 {
@@ -130,7 +132,7 @@ GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 /*
 *  GtkWidget * coord_menu (glwin * view)
 *
-*  Usage:
+*  Usage: create the coordination submenus GTK3
 *
 *  glwin * view : the target glwin
 */
@@ -216,10 +218,10 @@ GtkWidget * coord_menu (glwin * view)
 /*
 *  void update_all_menus (glwin * view, int nats)
 *
-*  Usage:
+*  Usage: update all menus of the OpenGL window
 *
 *  glwin * view : the target glwin
-*  int nats     :
+*  int nats     : the total number of atoms
 */
 void update_all_menus (glwin * view, int nats)
 {
@@ -308,7 +310,7 @@ void update_all_menus (glwin * view, int nats)
 /*
 *  G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: render image from the OpenGL window
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -324,11 +326,11 @@ G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
 /*
 *  void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 *
-*  Usage:
+*  Usage: create the OpenGL submenu items GTK3
 *
 *  GtkWidget * menu : the GtkWidget sending the signal
 *  glwin * view     : the target glwin
-*  int pop          :
+*  int pop          : main app (0) or popup (1)
 */
 void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 {
@@ -344,10 +346,10 @@ void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 /*
 *  GtkWidget * menu_opengl (glwin * view, int pop)
 *
-*  Usage:
+*  Usage: create the OpenGL submenu GTK3
 *
 *  glwin * view : the target glwin
-*  int pop      :
+*  int pop      : main app (0) or popup (1)
 */
 GtkWidget * menu_opengl (glwin * view, int pop)
 {
@@ -359,11 +361,11 @@ GtkWidget * menu_opengl (glwin * view, int pop)
 /*
 *  void menu_items_model (GtkWidget * menu, glwin * view, int pop)
 *
-*  Usage:
+*  Usage: create the model submenu items GTK3
 *
 *  GtkWidget * menu : the GtkWidget sending the signal
 *  glwin * view     : the target glwin
-*  int pop          :
+*  int pop          : main app (0) or popup (1)
 */
 void menu_items_model (GtkWidget * menu, glwin * view, int pop)
 {
@@ -379,10 +381,10 @@ void menu_items_model (GtkWidget * menu, glwin * view, int pop)
 /*
 *  GtkWidget * menu_model (glwin * view, int pop)
 *
-*  Usage:
+*  Usage: create the model submenu GTK3
 *
 *  glwin * view : the target glwin
-*  int pop      :
+*  int pop      : main app (0) or popup (1)
 */
 GtkWidget * menu_model (glwin * view, int pop)
 {
@@ -394,11 +396,11 @@ GtkWidget * menu_model (glwin * view, int pop)
 /*
 *  void menu_items_view (GtkWidget * menu, glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the view menu items GTK3
 *
 *  GtkWidget * menu : the GtkWidget sending the signal
 *  glwin * view     : the target glwin
-*  int popm         :
+*  int popm         : main app (0) or popup (1)
 */
 void menu_items_view (GtkWidget * menu, glwin * view, int popm)
 {
@@ -419,10 +421,10 @@ void menu_items_view (GtkWidget * menu, glwin * view, int popm)
 /*
 *  GtkWidget * menu_view (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the view submenu GTK3
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GtkWidget * menu_view (glwin * view, int popm)
 {
@@ -435,7 +437,7 @@ GtkWidget * menu_view (glwin * view, int popm)
 /*
 *  void prepare_opengl_menu_bar (glwin * view)
 *
-*  Usage:
+*  Usage: update the OpenGL window menu bar
 *
 *  glwin * view : the target glwin
 */
@@ -473,10 +475,10 @@ void prepare_opengl_menu_bar (glwin * view)
 /*
 *  void change_color_map (glwin * view, int col)
 *
-*  Usage:
+*  Usage: change atom / polyhedra color map
 *
 *  glwin * view : the target glwin
-*  int col      :
+*  int col      : the color id
 */
 void change_color_map (glwin * view, int col)
 {
@@ -526,14 +528,14 @@ void change_color_map (glwin * view, int col)
 /*
 *  void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state)
 *
-*  Usage:
+*  Usage: handle keyboard motion event on the OpenGL window
 *
 *  glwin * view          : the target glwin
-*  int axis              :
-*  int da                :
-*  int db                :
-*  gboolean UpDown       :
-*  GdkModifierType state :
+*  int axis              : axis
+*  int da                : direction (-1/1)
+*  int db                : zoom out (1) or zoom in (3)
+*  gboolean UpDown       : up or down key motion (TRUE), or else (FALSE)
+*  GdkModifierType state : keyboard modifier
 */
 void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state)
 {
@@ -590,7 +592,7 @@ void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkMod
 /*
 *  mat4_t insert_projection (glwin * view)
 *
-*  Usage:
+*  Usage: calculate the insertion projection matrix to insert object in the 3D window
 *
 *  glwin * view : the target glwin
 */
@@ -621,6 +623,13 @@ mat4_t insert_projection (glwin * view)
   return m4_ortho (gleft, gright, gbottom, gtop, -view -> anim -> last -> img -> gfar, view -> anim -> last -> img -> gfar);
 }
 
+/*
+*  vec3_t get_insertion_coordinates (glwin * view)
+*
+*  Usage: get the insertion coordinates to insert object in the 3D window
+*
+*  glwin * view : the target glwin
+*/
 vec3_t get_insertion_coordinates (glwin * view)
 {
   vec3_t pos;
@@ -633,10 +642,10 @@ vec3_t get_insertion_coordinates (glwin * view)
 /*
 *  void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 *
-*  Usage:
+*  Usage: the keyboard shortcut actions for the OpenGL window
 *
-*  guint keyval          :
-*  GdkModifierType state :
+*  guint keyval          : the key pressed
+*  GdkModifierType state : the keyboard modifier
 *  gpointer data         : the associated data pointer
 */
 void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
@@ -995,10 +1004,10 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data)
 *
-*  Usage:
+*  Usage: keyboard key press event for the OpenGL window GTK3
 *
 *  GtkWidget * widg    : the GtkWidget sending the signal
-*  GdkEventKey * event :
+*  GdkEventKey * event : the GdkEventKey triggering the signal
 *  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data)
@@ -1013,12 +1022,12 @@ G_MODULE_EXPORT gboolean on_key_pressed (GtkWidget * widg, GdkEventKey * event, 
 /*
 *  G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
 *
-*  Usage:
+*  Usage: keyboard key press event for the OpenGL window GTK4
 *
-*  GtkEventControllerKey * self :
-*  guint keyval                 :
-*  guint keycode                :
-*  GdkModifierType state        :
+*  GtkEventControllerKey * self : the GtkEventControllerKey sending the signal
+*  guint keyval                 : number of times it was pressed
+*  guint keycode                : the key pressed
+*  GdkModifierType state        : the keyboard modifier
 *  gpointer data                : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
@@ -1031,7 +1040,7 @@ G_MODULE_EXPORT gboolean on_glwin_key_pressed (GtkEventControllerKey * self, gui
 /*
 *  G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: realize event for the OpenGL window
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -1056,10 +1065,10 @@ G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
 /*
 *  gboolean create_3d_model (int p, gboolean load)
 *
-*  Usage:
+*  Usage: create the 3D - OpenGL container - window
 *
-*  int p         :
-*  gboolean load :
+*  int p         : the project id
+*  gboolean load : add OpenGL widget or not (1/0)
 */
 gboolean create_3d_model (int p, gboolean load)
 {
@@ -1179,9 +1188,9 @@ gboolean create_3d_model (int p, gboolean load)
 /*
 *  void prep_model (int p)
 *
-*  Usage:
+*  Usage: prepare, or display, the OpenGL model window
 *
-*  int p :
+*  int p : the project id
 */
 void prep_model (int p)
 {

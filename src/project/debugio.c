@@ -37,7 +37,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage: debug and print some info about the curves in a project
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  gboolean win               : curve window exists (1/0)
 *  int rid                    : analysis id
 *  int cid                    : curve id
@@ -169,7 +169,7 @@ void debugiocurve (struct project * this_proj, gboolean win, int rid, int cid, g
 *
 *  Usage: debug lattice data
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  gchar * iost               : input or output information
 */
 void debug_lattice_info (struct project * this_proj, gchar * iost)
@@ -195,7 +195,7 @@ void debug_lattice_info (struct project * this_proj, gchar * iost)
 *
 *  Usage: debug project info
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  gchar * iost               : input or output information
 */
 void debugioproj (struct project * this_proj, gchar * iost)
@@ -277,7 +277,7 @@ void debugioproj (struct project * this_proj, gchar * iost)
 *
 *  Usage: debug chemical data info
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 */
 void debug_chemical_information (struct project * this_proj)
 {

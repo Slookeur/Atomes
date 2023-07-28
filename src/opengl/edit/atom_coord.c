@@ -37,7 +37,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int spec                   :
 *  int gid                    :
 *  int cid                    :
@@ -66,7 +66,7 @@ int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  coord_info * coord         :
 */
 void print_coord_info (struct project * this_proj, coord_info * coord)
@@ -417,8 +417,9 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
       this_proj -> coord -> totcoord[i+2] = 0;
     }
   }
+#ifdef GTK3
   prep_all_coord_menus (this_proj -> modelgl);
-
+#endif
   if (update_it)
   {
     gboolean * viz[2];
@@ -487,7 +488,7 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int nmols                  :
 *  int add                    :
 *  int rem                    :

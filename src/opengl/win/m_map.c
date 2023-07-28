@@ -196,7 +196,7 @@ colormap * allocate_color_map (int pts, struct project * this_proj)
 *  Usage:
 *
 *  float * data               :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  gboolean init              :
 */
 gboolean setup_custom_color_map (float * data, struct project * this_proj, gboolean init)
@@ -582,7 +582,7 @@ G_MODULE_EXPORT void custom_mize_map (GtkWidget * but, gpointer data)
 *  Usage:
 *
 *  GtkTreeStore * store       :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void fill_map_model (GtkTreeStore * store, struct project * this_proj)
 {
@@ -653,7 +653,7 @@ G_MODULE_EXPORT void edit_map_cell (GtkCellRendererText * cell,
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 GtkWidget * create_map_tree (struct project * this_proj)
 {
@@ -748,7 +748,7 @@ G_MODULE_EXPORT void edit_data_map (GtkWidget * but, gpointer data)
 *
 *  FILE * fp                  :
 *  int act                    :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 gboolean open_save_map (FILE * fp, int act, struct project * this_proj)
 {

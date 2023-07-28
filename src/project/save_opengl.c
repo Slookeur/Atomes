@@ -39,7 +39,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Usage: save atom data to file (a)
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int s                      : the MD step
 *  int a                      : the atom number
 */
@@ -61,7 +61,7 @@ int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 *  Usage: save atom data to file (b)
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int s                      : the MD step
 *  int a                      : the atom number
 */
@@ -119,7 +119,7 @@ int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_m
 *  Usage: save OpenGL image properties to file
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project that contains the data
+*  struct project * this_proj : the target project
 *  image * img                : the image that contains the data
 *  int sid                    : the number of chemical species
 */

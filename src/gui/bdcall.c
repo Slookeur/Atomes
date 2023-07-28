@@ -354,7 +354,7 @@ gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb)
 *
 *  Usage:
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 */
 void update_ang_view (struct project * this_proj)
 {
@@ -860,7 +860,7 @@ void env_info (int sp, int totgsa, int numgsa[totgsa], int listgsa[totgsa])
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void update_angle_view (struct project * this_proj)
 {

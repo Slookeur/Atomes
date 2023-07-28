@@ -404,7 +404,7 @@ G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data)
 *  Usage: Leaving atomes ?
 *
 *  GtkWidget * widget : the GtkWidget sending the signal
-*  GdkEvent * event   : the associated GdkEvent
+*  GdkEvent * event   : the GdkEvent triggering the signal
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event, gpointer data)
@@ -872,7 +872,7 @@ void send_chem_info_ (int prop[active_project -> nspec])
 *
 *  Usage: ouput the name of a coordination sphere
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int g                      : the coordination (0 = total, 1 = partial)
 *  int s                      : the chemical species
 *  int f                      : With markup or not

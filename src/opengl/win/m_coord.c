@@ -60,7 +60,7 @@ extern GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo);
 *  Usage:
 *
 *  int id                     :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 gboolean is_coord_in_menu (int id, struct project * this_proj)
 {

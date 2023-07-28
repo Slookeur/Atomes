@@ -91,7 +91,7 @@ void reader_info (gchar * type, gchar * sinf, int val)
 *
 *  Usage: Message to display an error message
 *
-*  int stp     : MD step id
+*  int stp     : the MD step id
 *  int ato     : Atom id
 *  gchar * mot : Message
 *  int line    : Line with the error

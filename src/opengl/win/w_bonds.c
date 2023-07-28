@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_bonds.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void bonds_input_win (GtkWidget * win, struct project * this_proj, int s, int id, double ** val);
 
@@ -42,7 +42,7 @@ extern gchar * label_cutrab (struct project * this_proj, glwin * view, int id);
 /*
 *  G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -232,13 +232,13 @@ G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
 /*
 *  void bonds_input_win (GtkWidget * win, struct project * this_proj, int s, int id, double ** val)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * win            : the GtkWidget sending the signal
-*  struct project * this_proj : 
-*  int s                      : 
-*  int id                     : 
-*  double ** val              : 
+*  struct project * this_proj : the target project
+*  int s                      :
+*  int id                     :
+*  double ** val              :
 */
 void bonds_input_win (GtkWidget * win, struct project * this_proj, int s, int id, double ** val)
 {
@@ -296,10 +296,10 @@ void bonds_input_win (GtkWidget * win, struct project * this_proj, int s, int id
 /*
 *  G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -307,7 +307,7 @@ G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * para
 /*
 *  G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -345,10 +345,10 @@ G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -356,7 +356,7 @@ G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter,
 /*
 *  G_MODULE_EXPORT void window_bonds (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer

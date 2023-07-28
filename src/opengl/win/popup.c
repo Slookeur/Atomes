@@ -849,7 +849,7 @@ G_MODULE_EXPORT void copy_this_atom (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void check_hidden_visible (struct project * this_proj)
 {
@@ -1005,7 +1005,7 @@ G_MODULE_EXPORT void show_hide_this_atom (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int types                  :
 */
 int check_label_numbers (struct project * this_proj, int types)

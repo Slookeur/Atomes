@@ -73,7 +73,7 @@ gboolean is_atom_win_active (glwin * view)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void clean_coord_window (struct project * this_proj)
 {
@@ -96,7 +96,7 @@ void clean_coord_window (struct project * this_proj)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void clean_other_window_after_edit (struct project * this_proj)
 {
@@ -148,7 +148,7 @@ void clean_other_window_after_edit (struct project * this_proj)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void clean_atom_win (struct project * this_proj)
 {
@@ -235,7 +235,7 @@ G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data)
 *  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event :
+*  GdkEvent * event : the GdkEvent triggering the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpointer data)
@@ -351,7 +351,7 @@ G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  GtkWidget * vbox           : the GtkWidget sending the signal
 */
 GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
@@ -405,7 +405,7 @@ atom_search * allocate_atom_search (int proj, int action, int searchid, int tsiz
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 GtkWidget * create_edition_window (struct project * this_proj)
 {

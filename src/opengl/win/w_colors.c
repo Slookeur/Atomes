@@ -89,7 +89,7 @@ G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpoint
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  glwin * view               : the target glwin
 *  int id                     :
 */
@@ -224,7 +224,7 @@ G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
 *  Usage:
 *
 *  GtkDialog * win  : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, gpointer data)

@@ -108,7 +108,7 @@ void initmsd ()
 *
 *  Usage: update the project text view for the MSD calculation
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 */
 void update_msd_view (struct project * this_proj)
 {

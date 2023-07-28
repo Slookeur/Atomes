@@ -72,7 +72,7 @@ gboolean * was_moved_atom;
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int status                 :
 */
 double ** save_coordinates (struct project * this_proj, int status)
@@ -124,7 +124,7 @@ double ** save_coordinates (struct project * this_proj, int status)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int status                 :
 */
 void reset_coordinates (struct project * this_proj, int status)
@@ -168,7 +168,7 @@ vec3_t get_bary (struct project * this_proj, int status)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int status                 :
 *  gboolean win               :
 *  gboolean init              :
@@ -201,7 +201,7 @@ void init_coordinates (struct project * this_proj, int status, gboolean win, gbo
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int status                 :
 *  int axis                   :
 *  vec3_t trans               :
@@ -240,7 +240,7 @@ void translate (struct project * this_proj, int status, int axis, vec3_t trans)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  vec4_t q                   :
 *  int status                 :
 *  int axis                   :
@@ -279,7 +279,7 @@ void rotate_quat (struct project * this_proj, vec4_t q, int status, int axis)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int i                      :
 *  int j                      :
 *  int k                      :
@@ -301,7 +301,7 @@ void rotate (struct project * this_proj, int i, int j, int k, float param)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int aid                    :
 */
 void random_move_this_atom (struct project * this_proj, int aid)
@@ -477,7 +477,7 @@ void random_move_this_object (struct project * this_proj, struct insert_object *
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 */
 void trigger_refresh (struct project * this_proj, atom_search * asearch)
@@ -494,7 +494,7 @@ void trigger_refresh (struct project * this_proj, atom_search * asearch)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 *  int filter                 :
 */
@@ -585,7 +585,7 @@ gboolean rebuild_selection (struct project * this_proj, atom_search * asearch, i
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 *  int numo                   :
 *  int filter                 :
@@ -631,7 +631,7 @@ gboolean random_move_objects (struct project * this_proj, atom_search * asearch,
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 */
 void random_move (struct project * this_proj, atom_search * asearch)
@@ -685,7 +685,7 @@ void random_move (struct project * this_proj, atom_search * asearch)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int aid                    :
 *  int axis                   :
 *  vec3_t trans               :
@@ -807,7 +807,7 @@ void rotate_this_object (struct project * this_proj, struct insert_object * obje
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 *  int action                 :
 *  int axis                   :
@@ -852,7 +852,7 @@ extern atom_search * duplicate_atom_search (atom_search * asearch);
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int action                 :
 *  int axis                   :
 *  vec3_t trans               :
@@ -911,7 +911,7 @@ void move_selection (struct project * this_proj, int action, int axis, vec3_t tr
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int status                 :
 *  int axis                   :
 *  int action                 :
@@ -951,7 +951,7 @@ G_MODULE_EXPORT void repeat_move (GtkSpinButton * res, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int i                      :
 *  int j                      :
 *  int k                      :
@@ -1134,7 +1134,7 @@ G_MODULE_EXPORT void set_show_motion_axis (GtkToggleButton * but, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  atom_search * asearch      :
 */
 void check_motion_interactors (struct project * this_proj, atom_search * asearch)
@@ -1163,7 +1163,7 @@ void check_motion_interactors (struct project * this_proj, atom_search * asearch
 *  Usage:
 *
 *  atom_search * asearch      :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int mot                    :
 *  int axd                    :
 */
@@ -1205,7 +1205,7 @@ GtkWidget * create_axis_entries (atom_search * asearch, struct project * this_pr
 *
 *  atom_search * asearch      :
 *  int axd                    :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 GtkWidget * add_motion_interaction (atom_search * asearch, int axd, struct project * this_proj)
 {

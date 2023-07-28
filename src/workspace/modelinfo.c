@@ -99,7 +99,7 @@ void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
 *
 *  Usage: display model information in GtkTexBuffer
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  GtkTextBuffer * buffer     : the GtkTextBuffer
 */
 void model_info (struct project * this_proj, GtkTextBuffer * buffer)
@@ -338,7 +338,7 @@ void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
 *
 *  Usage: display OpenGL information in a GtkTextBuffer
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  GtkTextBuffer * buf        : the GtkTextBuffer
 */
 void opengl_info (struct project * this_proj, GtkTextBuffer * buf)

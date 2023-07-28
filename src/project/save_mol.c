@@ -55,7 +55,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Usage: save atom data to file
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project that contains the data
+*  struct project * this_proj : the target project
 *  int s                      : the MD step
 *  int a                      : the atom number
 */
@@ -72,7 +72,7 @@ int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
 *  Usage: save this molecule data to file
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project that contains the data
+*  struct project * this_proj : the target project
 *  struct molecule * tmp      : the molecule that contains the data
 */
 int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
@@ -93,7 +93,7 @@ int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
 *  Usage: save molecule information to file
 *
 *  FILE * fp                  : the file pointer
-*  struct project * this_proj : the project that contains the data
+*  struct project * this_proj : the target project
 */
 int save_mol (FILE * fp, struct project * this_proj)
 {

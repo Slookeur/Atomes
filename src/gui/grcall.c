@@ -115,7 +115,7 @@ void initgr (int r)
 *
 *  Usage: update the project text view for the g(r)/g(k) calculation
 *
-*  struct project * this_proj : the project
+*  struct project * this_proj : the target project
 *  int rdf                    : the calculation GR / GK
 */
 void update_rdf_view (struct project * this_proj, int rdf)

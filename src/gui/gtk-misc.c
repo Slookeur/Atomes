@@ -2265,7 +2265,7 @@ void pop_menu_at_pointer (GtkWidget * pop, double x, double y)
 *  Usage: popup a menu at pointer location
 *
 *  GtkWidget * widg : the menu to popup
-*  GdkEvent * event : the corresponding GdkEvent
+*  GdkEvent * event : the GdkEvent triggering the signal
 */
 void pop_menu_at_pointer (GtkWidget * widg, GdkEvent * event)
 {
@@ -2307,7 +2307,7 @@ G_MODULE_EXPORT gboolean destroy_this_window (GtkWindow * win, gpointer data)
 *  Usage: destroy a GtkWindow
 *
 *  GtkWidget * win  : the GtkWindow to destroy
-*  GdkEvent * event : the associated GdkEvent
+*  GdkEvent * event : the GdkEvent triggering the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
@@ -2334,7 +2334,7 @@ G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data)
 *  Usage: hide a GtkWindow
 *
 *  GtkWidget * win  : the GtkWindow to hide
-*  GdkEvent * event : the associated GdkEvent
+*  GdkEvent * event : the GdkEvent triggering the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data)

@@ -131,7 +131,7 @@ G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer,
 *  Usage:
 *
 *  GtkTreeStore * store       :
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
 {
@@ -205,7 +205,7 @@ void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  gboolean fill_this         :
 */
 GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
@@ -247,7 +247,7 @@ GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 void add_this_chain_to_search_tree (struct project * this_proj)
 {
@@ -539,7 +539,7 @@ void add_this_chain_to_search_tree (struct project * this_proj)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int s                      :
 */
 int get_cmin (struct project * this_proj, int s)
@@ -558,7 +558,7 @@ int get_cmin (struct project * this_proj, int s)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int s                      :
 */
 int get_cmax (struct project * this_proj, int s)
@@ -577,7 +577,7 @@ int get_cmax (struct project * this_proj, int s)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 *  int s                      :
 *  int r                      :
 */
@@ -714,7 +714,7 @@ G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  struct project * this_proj :
+*  struct project * this_proj : the target project
 */
 GtkWidget * create_chains_search (struct project * this_proj)
 {

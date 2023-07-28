@@ -159,7 +159,7 @@ int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
 *
 *  FILE * fp                  : the file pointer
 *  int cid                    : the CPMD id (0 = ab-initio, 1 = QM-MM)
-*  struct project * this_proj : the project that contains the data
+*  struct project * this_proj : the target project
 */
 int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 {
@@ -230,7 +230,7 @@ int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 *
 *  FILE * fp                  : the file pointer
 *  int cid                    : the CP2K id (0 = ab-initio, 1 = QM-MM)
-*  struct project * this_proj : the project that contains the data
+*  struct project * this_proj : the target project
 */
 int save_cp2k_data (FILE * fp, int cid, struct project * this_proj)
 {

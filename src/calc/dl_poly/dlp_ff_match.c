@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'dlp_ff_match.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int this_body_has_atom (struct field_nth_body * body, char * name);
 
@@ -108,12 +108,12 @@ gboolean vdw_same_atom;
 /*
 *  gboolean is_this_object_a_match (int fsid, int nat, int * ffc, int * fpar)
 *
-*  Usage: 
+*  Usage:
 *
-*  int fsid   : 
-*  int nat    : 
-*  int * ffc  : 
-*  int * fpar : 
+*  int fsid   :
+*  int nat    :
+*  int * ffc  :
+*  int * fpar :
 */
 gboolean is_this_object_a_match (int fsid, int nat, int * ffc, int * fpar)
 {
@@ -202,10 +202,10 @@ gboolean is_this_object_a_match (int fsid, int nat, int * ffc, int * fpar)
 /*
 *  struct field_data * get_ff_data (int i, int j)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i : 
-*  int j : 
+*  int i :
+*  int j :
 */
 struct field_data * get_ff_data (int i, int j)
 {
@@ -240,13 +240,13 @@ struct field_data * get_ff_data (int i, int j)
 /*
 *  gchar * get_this_prop_param (int sid, int key, int calc, int newp, float * val)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sid     : 
-*  int key     : 
-*  int calc    : 
-*  int newp    : 
-*  float * val : 
+*  int sid     :
+*  int key     :
+*  int calc    :
+*  int newp    :
+*  float * val :
 */
 gchar * get_this_prop_param (int sid, int key, int calc, int newp, float * val)
 {
@@ -306,12 +306,12 @@ gchar * get_this_prop_param (int sid, int key, int calc, int newp, float * val)
 /*
 *  gchar * get_this_prop_string (int sid, int oid, int type, int calc)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sid  : 
-*  int oid  : 
-*  int type : 
-*  int calc : 
+*  int sid  :
+*  int oid  :
+*  int type :
+*  int calc :
 */
 gchar * get_this_prop_string (int sid, int oid, int type, int calc)
 {
@@ -359,9 +359,9 @@ gchar * get_this_prop_string (int sid, int oid, int type, int calc)
 /*
 *  struct object_match * duplicate_match (struct object_match * old_m)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct object_match * old_m : 
+*  struct object_match * old_m :
 */
 struct object_match * duplicate_match (struct object_match * old_m)
 {
@@ -377,10 +377,10 @@ struct object_match * duplicate_match (struct object_match * old_m)
 /*
 *  void update_result_list (int sid, struct object_match * new_match)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sid                         : 
-*  struct object_match * new_match : 
+*  int sid                         :
+*  struct object_match * new_match :
 */
 void update_result_list (int sid, struct object_match * new_match)
 {
@@ -430,9 +430,9 @@ void update_result_list (int sid, struct object_match * new_match)
 /*
 *  void fill_update_model (GtkTreeStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeStore * store : 
+*  GtkTreeStore * store :
 */
 void fill_update_model (GtkTreeStore * store)
 {
@@ -591,7 +591,7 @@ void fill_update_model (GtkTreeStore * store)
 /*
 *  GtkTreeModel * global_render_tree ()
 *
-*  Usage: 
+*  Usage:
 */
 GtkTreeModel * global_render_tree ()
 {
@@ -625,10 +625,10 @@ GtkTreeModel * global_render_tree ()
 /*
 *  dint get_visible (gboolean result, gchar * the_name)
 *
-*  Usage: 
+*  Usage:
 *
-*  gboolean result  : 
-*  gchar * the_name : 
+*  gboolean result  :
+*  gchar * the_name :
 */
 dint get_visible (gboolean result, gchar * the_name)
 {
@@ -696,11 +696,11 @@ G_MODULE_EXPORT void changed_update_renderer (GtkCellRendererCombo * combo,
 /*
 *  void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * tree   : the GtkWidget sending the signal
 *  gpointer data      : the associated data pointer
-*  GtkTreePath * path : 
+*  GtkTreePath * path :
 */
 void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path)
 {
@@ -718,13 +718,13 @@ void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path)
 /*
 *  void ff_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  double event_x     : 
-*  double event_y     : 
-*  guint event_button : 
-*  guint event_type   : 
-*  guint32 event_time : 
+*  double event_x     :
+*  double event_y     :
+*  guint event_button :
+*  guint event_type   :
+*  guint32 event_time :
 *  gpointer data      : the associated data pointer
 */
 void ff_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
@@ -732,14 +732,14 @@ void ff_button_event (double event_x, double event_y, guint event_button, guint 
 /*
 *  void ff_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GdkEvent * event   : 
-*  double event_x     : 
-*  double event_y     : 
-*  guint event_button : 
-*  guint event_type   : 
-*  guint32 event_time : 
+*  GdkEvent * event   : the GdkEvent triggering the signal
+*  double event_x     :
+*  double event_y     :
+*  guint event_button :
+*  guint event_type   :
+*  guint32 event_time :
 *  gpointer data      : the associated data pointer
 */
 void ff_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
@@ -768,12 +768,12 @@ void ff_button_event (GdkEvent * event, double event_x, double event_y, guint ev
 /*
 *  G_MODULE_EXPORT void on_ff_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
+*  GtkGesture * gesture : the GtkGesture sending the signal
+*  int n_press          : number of times it was pressed
+*  double x             : x position
+*  double y             : y position
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_ff_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
@@ -784,12 +784,12 @@ G_MODULE_EXPORT void on_ff_button_pressed (GtkGesture * gesture, int n_press, do
 /*
 *  G_MODULE_EXPORT void on_ff_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
+*  GtkGesture * gesture : the GtkGesture sending the signal
+*  int n_press          : number of times it was pressed
+*  double x             : x position
+*  double y             : y position
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_ff_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
@@ -800,10 +800,10 @@ G_MODULE_EXPORT void on_ff_button_released (GtkGesture * gesture, int n_press, d
 /*
 *  G_MODULE_EXPORT gboolean on_ff_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widget : the GtkWidget sending the signal
-*  GdkEvent * event   : 
+*  GdkEvent * event   : the GdkEvent triggering the signal
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_ff_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
@@ -846,10 +846,10 @@ G_MODULE_EXPORT void on_toggle_update (GtkCellRendererToggle * cell_renderer,
 /*
 *  static gboolean update_rend (GtkTreeModel * model, GtkTreeIter * iter, gpointer  data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeModel * model : 
-*  GtkTreeIter * iter   : 
+*  GtkTreeModel * model :
+*  GtkTreeIter * iter   :
 *  gpointer  data       : the associated data pointer
 */
 static gboolean update_rend (GtkTreeModel * model, GtkTreeIter * iter, gpointer  data)
@@ -894,7 +894,7 @@ void field_set_markup_and_visible (GtkTreeViewColumn * col,
 /*
 *  GtkWidget * create_update_tree ()
 *
-*  Usage: 
+*  Usage:
 */
 GtkWidget * create_update_tree ()
 {
@@ -964,7 +964,7 @@ GtkWidget * create_update_tree ()
 /*
 *  void win_update_tree (GtkWidget * vbx)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * vbx : the GtkWidget sending the signal
 */
@@ -1026,14 +1026,14 @@ void win_update_tree (GtkWidget * vbx)
 /*
 *  void look_up_this_field_object (int fsid, int fpid, int ssid, int nat, int * fsp, int * fat)
 *
-*  Usage: 
+*  Usage:
 *
-*  int fsid  : 
-*  int fpid  : 
-*  int ssid  : 
-*  int nat   : 
-*  int * fsp : 
-*  int * fat : 
+*  int fsid  :
+*  int fpid  :
+*  int ssid  :
+*  int nat   :
+*  int * fsp :
+*  int * fat :
 */
 void look_up_this_field_object (int fsid, int fpid, int ssid, int nat, int * fsp, int * fat)
 {
@@ -1072,13 +1072,13 @@ void look_up_this_field_object (int fsid, int fpid, int ssid, int nat, int * fsp
 /*
 *  void check_this_fprop (int fsid, int fpid, int ssid, int * fat, int * fsp)
 *
-*  Usage: 
+*  Usage:
 *
-*  int fsid  : 
-*  int fpid  : 
-*  int ssid  : 
-*  int * fat : 
-*  int * fsp : 
+*  int fsid  :
+*  int fpid  :
+*  int ssid  :
+*  int * fat :
+*  int * fsp :
 */
 void check_this_fprop (int fsid, int fpid, int ssid, int * fat, int * fsp)
 {
@@ -1122,10 +1122,10 @@ void check_this_fprop (int fsid, int fpid, int ssid, int * fat, int * fsp)
 /*
 *  int this_body_has_atom (struct field_nth_body * body, char * name)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct field_nth_body * body : 
-*  char * name                  : 
+*  struct field_nth_body * body :
+*  char * name                  :
 */
 int this_body_has_atom (struct field_nth_body * body, char * name)
 {
@@ -1146,10 +1146,10 @@ int this_body_has_atom (struct field_nth_body * body, char * name)
 /*
 *  G_MODULE_EXPORT void run_check_atom_for_updates (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   : 
+*  gint response_id   :
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_check_atom_for_updates (GtkDialog * dialog, gint response_id, gpointer data)
@@ -1275,7 +1275,7 @@ G_MODULE_EXPORT void run_check_atom_for_updates (GtkDialog * dialog, gint respon
 /*
 *  void check_atom_for_updates ()
 *
-*  Usage: 
+*  Usage:
 */
 void check_atom_for_updates ()
 {
@@ -1383,7 +1383,7 @@ void check_atom_for_updates ()
 /*
 *  G_MODULE_EXPORT void changed_field_prop_combo (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -1497,10 +1497,10 @@ G_MODULE_EXPORT void changed_field_prop_combo (GtkComboBox * box, gpointer data)
 /*
 *  GtkWidget * create_field_prop_combo (int f, int is_moy)
 *
-*  Usage: 
+*  Usage:
 *
-*  int f      : 
-*  int is_moy : 
+*  int f      :
+*  int is_moy :
 */
 GtkWidget * create_field_prop_combo (int f, int is_moy)
 {
