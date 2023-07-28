@@ -52,7 +52,7 @@ extern G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 *  Usage:
 *
 *  struct project * this_proj :
-*  glwin * view               : the target glwin pointer
+*  glwin * view               : the target glwin
 *  int id                     :
 */
 gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
@@ -211,7 +211,7 @@ GtkWidget * create_bond_layout_widget (gchar * str, GtkWidget * widg, int va, ti
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 *  int at       :
 */
@@ -330,7 +330,7 @@ GtkWidget * menu_bonds (glwin * view, int id, int at)
 *
 *  Usage:
 *
-*  glwin * view       : the target glwin pointer
+*  glwin * view       : the target glwin
 *  gchar * str        :
 *  gchar * key        :
 *  int popm           :
@@ -351,7 +351,7 @@ GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int 
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int at       :
 */

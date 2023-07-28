@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+  - The main OpenGL drawing subroutines
+
 *
 *  List of subroutines:
 
@@ -78,7 +79,7 @@ extern void create_volumes_lists ();
 /*
 *  void print_matrices ()
 *
-*  Usage:
+*  Usage: print OpenGL matrices
 */
 void print_matrices ()
 {
@@ -106,7 +107,7 @@ void print_matrices ()
 /*
 *  void setup_camera ()
 *
-*  Usage:
+*  Usage: setup OpenGL camera
 */
 void setup_camera ()
 {
@@ -129,7 +130,7 @@ void setup_camera ()
 /*
 *  void unrotate_camera ()
 *
-*  Usage:
+*  Usage: unrotate OpenGL camera
 */
 void unrotate_camera ()
 {
@@ -142,9 +143,9 @@ void unrotate_camera ()
 /*
 *  struct screen_string * duplicate_screen_string (struct screen_string * old_s)
 *
-*  Usage:
+*  Usage: create a copy a screen_string data structure
 *
-*  struct screen_string * old_s :
+*  struct screen_string * old_s : the data structure to be copied
 */
 struct screen_string * duplicate_screen_string (struct screen_string * old_s)
 {
@@ -163,10 +164,10 @@ struct screen_string * duplicate_screen_string (struct screen_string * old_s)
 /*
 *  void duplicate_material_and_lightning (image * new_img, image * old_img)
 *
-*  Usage:
+*  Usage: copy the material and lightning parameters of an image data structure
 *
-*  image * new_img :
-*  image * old_img :
+*  image * new_img : the new image
+*  image * old_img : the old image with the data to be copied
 */
 void duplicate_material_and_lightning (image * new_img, image * old_img)
 {
@@ -188,15 +189,18 @@ void duplicate_material_and_lightning (image * new_img, image * old_img)
 /*
 *  image * duplicate_image (image * old_img)
 *
-*  Usage:
+*  Usage: create a copy of an image data structure
 *
-*  image * old_img :
+*  image * old_img : the image to copy
 */
 image * duplicate_image (image * old_img)
 {
   int i, j, k, l, m;
   image * new_img = g_malloc0 (sizeof*new_img);
+
+  // This line will copy all the stuff that is not dynamically allocated
   * new_img = * old_img;
+
   j = proj_gl -> nspec;
   for (i=0; i<2; i++)
   {
@@ -204,6 +208,7 @@ image * duplicate_image (image * old_img)
     new_img -> show_atom[i] = duplicate_bool(j, old_img -> show_atom[i]);
     new_img -> show_label[i] = duplicate_bool(j, old_img -> show_label[i]);
   }
+
   new_img -> sphererad = duplicate_double(2*j, old_img -> sphererad);
   new_img -> pointrad = duplicate_double(2*j, old_img -> pointrad);
   new_img -> atomicrad = duplicate_double(2*j, old_img -> atomicrad);
@@ -215,7 +220,7 @@ image * duplicate_image (image * old_img)
     new_img -> bondrad[i] = duplicate_double(2*j, old_img -> bondrad[i]);
     new_img -> linerad[i] = duplicate_double(2*j, old_img -> linerad[i]);
   }
-  // to be done: labels_list ?
+
   for (i=0; i<9; i++)
   {
     new_img -> show_coord[i] = duplicate_bool(coord_gl -> totcoord[i], old_img -> show_coord[i]);
@@ -243,6 +248,12 @@ image * duplicate_image (image * old_img)
   {
     new_img -> axis_title[i] = g_strdup_printf ("%s", old_img -> axis_title[i]);
   }
+  new_img -> axis_color = NULL;
+  if (old_img -> axis_color != NULL)
+  {
+    new_img -> axis_color = duplicate_color (3, old_img -> axis_color);
+  }
+
   struct screen_string * stmp_a, * stmp_b;
 
   for (i=0; i<5; i++)
@@ -271,12 +282,6 @@ image * duplicate_image (image * old_img)
         stmp_b = stmp_b -> prev;
       }
     }
-  }
-
-  new_img -> axis_color = NULL;
-  if (old_img -> axis_color != NULL)
-  {
-    new_img -> axis_color = duplicate_color (3, old_img -> axis_color);
   }
 
   duplicate_material_and_lightning (new_img, old_img);
@@ -326,12 +331,6 @@ image * duplicate_image (image * old_img)
   // Volumes
   if (wingl -> volumes)
   {
-    for (i=0; i<FILLED_STYLES; i++)
-    {
-      new_img -> show_vol[i] = old_img -> show_vol[i];
-      new_img -> vol_col[i] = old_img -> vol_col[i];
-
-    }
     for (i=0; i<2; i++)
     {
       for (j=0; j<FILLED_STYLES; j++)
@@ -350,7 +349,7 @@ image * duplicate_image (image * old_img)
 /*
 *  void add_image ()
 *
-*  Usage:
+*  Usage: add an image to the animation
 */
 void add_image ()
 {
@@ -382,9 +381,9 @@ extern void update_gl_pick_colors ();
 /*
 *  struct atom * duplicate_atom (struct atom * at)
 *
-*  Usage:
+*  Usage: copy (partially) an atom data structure
 *
-*  struct atom * at :
+*  struct atom * at : the atom to copy
 */
 struct atom * duplicate_atom (struct atom * at)
 {
@@ -417,10 +416,10 @@ struct atom * duplicate_atom (struct atom * at)
 /*
 *  void at_shift (struct atom * at, float * shift)
 *
-*  Usage:
+*  Usage: modify atomic coordinates to display image in cell replica
 *
-*  struct atom * at :
-*  float * shift    :
+*  struct atom * at : the atom
+*  float * shift    : the shift to apply
 */
 void at_shift (struct atom * at, float * shift)
 {
@@ -432,10 +431,10 @@ void at_shift (struct atom * at, float * shift)
 /*
 *  void at_unshift (struct atom * at, float * shift)
 *
-*  Usage:
+*  Usage: correct atomic coordinates modified to display image in cell replica
 *
-*  struct atom * at :
-*  float * shift    :
+*  struct atom * at : the atom
+*  float * shift    : the shift to correct
 */
 void at_unshift (struct atom * at, float * shift)
 {
@@ -447,9 +446,9 @@ void at_unshift (struct atom * at, float * shift)
 /*
 *  void draw (glwin * view)
 *
-*  Usage:
+*  Usage: main drawing subroutine for the OpenGL window
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void draw (glwin * view)
 {

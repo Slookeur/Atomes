@@ -14,12 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'ogl_shading.c'
 *
-*  Contains: 
+*  Contains:
+*
+
+ -
+
 *
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   GLuint create_shader (int type, const GLchar * src);
   GLuint * alloc_shader_pointer (GLuint * pointer, int shaders);
@@ -48,6 +50,10 @@ If not, see <https://www.gnu.org/licenses/> */
   void render_this_shader (glsl_program * glsl, int ids);
   void draw_vertices (int id);
 
+  glsl_program * init_shader_program (int object, int object_id,
+                                      const GLchar * vertex, const GLchar * geometry, const GLchar * fragment,
+                                      GLenum type_of_vertices, int narray, int nunif, gboolean lightning, object_3d * obj);
+
   object_3d * duplicate_object_3d (object_3d * old_obj);
 
 */
@@ -61,10 +67,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  GLuint create_shader (int type, const GLchar * src)
 *
-*  Usage: 
+*  Usage:
 *
-*  int type           : 
-*  const GLchar * src : 
+*  int type           :
+*  const GLchar * src :
 */
 GLuint create_shader (int type, const GLchar * src)
 {
@@ -97,10 +103,10 @@ GLuint create_shader (int type, const GLchar * src)
 /*
 *  GLuint * alloc_shader_pointer (GLuint * pointer, int shaders)
 *
-*  Usage: 
+*  Usage:
 *
-*  GLuint * pointer : 
-*  int shaders      : 
+*  GLuint * pointer :
+*  int shaders      :
 */
 GLuint * alloc_shader_pointer (GLuint * pointer, int shaders)
 {
@@ -121,13 +127,13 @@ GLuint * alloc_shader_pointer (GLuint * pointer, int shaders)
 /*
 *  void set_light_uniform_location (GLuint * lightning, int id, int j, int k, char * string)
 *
-*  Usage: 
+*  Usage:
 *
-*  GLuint * lightning : 
-*  int id             : 
-*  int j              : 
-*  int k              : 
-*  char * string      : 
+*  GLuint * lightning :
+*  int id             :
+*  int j              :
+*  int k              :
+*  char * string      :
 */
 void set_light_uniform_location (GLuint * lightning, int id, int j, int k, char * string)
 {
@@ -137,9 +143,9 @@ void set_light_uniform_location (GLuint * lightning, int id, int j, int k, char 
 /*
 *  GLuint * glsl_add_lights (glsl_program * glsl)
 *
-*  Usage: 
+*  Usage: add lightning to an OpenGL shader program
 *
-*  glsl_program * glsl : 
+*  glsl_program * glsl : the target glsl
 */
 GLuint * glsl_add_lights (glsl_program * glsl)
 {
@@ -179,10 +185,10 @@ GLuint * glsl_add_lights (glsl_program * glsl)
 /*
 *  void glsl_bind_points (glsl_program * glsl, object_3d * obj)
 *
-*  Usage: 
+*  Usage: bind a 3D object point to an OpenGL shader program
 *
-*  glsl_program * glsl : 
-*  object_3d * obj     : 
+*  glsl_program * glsl : the target glsl
+*  object_3d * obj     : the 3D object point to bind
 */
 void glsl_bind_points (glsl_program * glsl, object_3d * obj)
 {
@@ -212,10 +218,10 @@ void glsl_bind_points (glsl_program * glsl, object_3d * obj)
 /*
 *  void glsl_bind_spheres (glsl_program * glsl, object_3d * obj)
 *
-*  Usage: 
+*  Usage: bind a 3D object sphere to an OpenGL shader program
 *
-*  glsl_program * glsl : 
-*  object_3d * obj     : 
+*  glsl_program * glsl : the target glsl
+*  object_3d * obj     : the 3D object sphere to bind
 */
 void glsl_bind_spheres (glsl_program * glsl, object_3d * obj)
 {
@@ -248,10 +254,10 @@ void glsl_bind_spheres (glsl_program * glsl, object_3d * obj)
 /*
 *  void glsl_bind_lines (glsl_program * glsl, object_3d * obj)
 *
-*  Usage: 
+*  Usage: bind a 3D object line to an OpenGL shader program
 *
-*  glsl_program * glsl : 
-*  object_3d * obj     : 
+*  glsl_program * glsl : the target glsl
+*  object_3d * obj     : the 3D object line to bind
 */
 void glsl_bind_lines (glsl_program * glsl, object_3d * obj)
 {
@@ -278,10 +284,10 @@ void glsl_bind_lines (glsl_program * glsl, object_3d * obj)
 /*
 *  void glsl_bind_cylinders (glsl_program * glsl, object_3d * obj)
 *
-*  Usage: 
+*  Usage: bind a 3D object cylinder to an OpenGL shader program
 *
-*  glsl_program * glsl : 
-*  object_3d * obj     : 
+*  glsl_program * glsl : the target glsl
+*  object_3d * obj     : the 3D object, cylinder to bind
 */
 void glsl_bind_cylinders (glsl_program * glsl, object_3d * obj)
 {
@@ -324,10 +330,10 @@ void glsl_bind_cylinders (glsl_program * glsl, object_3d * obj)
 /*
 *  void glsl_bind_caps (glsl_program * glsl, object_3d * obj)
 *
-*  Usage: 
+*  Usage: bind a 3D object cylinder cap to an OpenGL shader program
 *
-*  glsl_program * glsl : 
-*  object_3d * obj     : 
+*  glsl_program * glsl : the target glsl
+*  object_3d * obj     : the 3D object, cylinder cap to bind
 */
 void glsl_bind_caps (glsl_program * glsl, object_3d * obj)
 {
@@ -366,10 +372,10 @@ void glsl_bind_caps (glsl_program * glsl, object_3d * obj)
 /*
 *  void glsl_bind_polyedra (glsl_program * glsl, object_3d * obj)
 *
-*  Usage: 
+*  Usage: bind a 3D object polyhedra to an OpenGL shader program
 *
-*  glsl_program * glsl : 
-*  object_3d * obj     : 
+*  glsl_program * glsl : the target glsl
+*  object_3d * obj     : the 3D object polyhedra to bind
 */
 void glsl_bind_polyedra (glsl_program * glsl, object_3d * obj)
 {
@@ -390,10 +396,10 @@ void glsl_bind_polyedra (glsl_program * glsl, object_3d * obj)
 /*
 *  void update_string_instances (glsl_program * glsl, object_3d * obj)
 *
-*  Usage: 
+*  Usage:
 *
-*  glsl_program * glsl : 
-*  object_3d * obj     : 
+*  glsl_program * glsl : the target glsl
+*  object_3d * obj     :
 */
 void update_string_instances (glsl_program * glsl, object_3d * obj)
 {
@@ -424,10 +430,10 @@ void update_string_instances (glsl_program * glsl, object_3d * obj)
 /*
 *  void glsl_bind_string (glsl_program * glsl, object_3d * obj)
 *
-*  Usage: 
+*  Usage: bind a 3D object text string to an OpenGL shader program
 *
-*  glsl_program * glsl : 
-*  object_3d * obj     : 
+*  glsl_program * glsl : the target glsl
+*  object_3d * obj     : the 3D object text string to bind
 */
 void glsl_bind_string (glsl_program * glsl, object_3d * obj)
 {
@@ -464,9 +470,9 @@ void glsl_bind_string (glsl_program * glsl, object_3d * obj)
 /*
 *  object_3d * duplicate_object_3d (object_3d * old_obj)
 *
-*  Usage: 
+*  Usage: create a copy of an object_3d data structure
 *
-*  object_3d * old_obj : 
+*  object_3d * old_obj : the data structure to copy
 */
 object_3d * duplicate_object_3d (object_3d * old_obj)
 {
@@ -496,6 +502,24 @@ object_3d * duplicate_object_3d (object_3d * old_obj)
   return new_obj;
 }
 
+/*
+*  glsl_program * init_shader_program (int object, int object_id,
+*                                      const GLchar * vertex, const GLchar * geometry, const GLchar * fragment,
+*                                      GLenum type_of_vertices, int narray, int nunif, gboolean lightning, object_3d * obj)
+*
+*  Usage: create an OpenGL shader program
+*
+*  int object              :
+*  int object_id           :
+*  const GLchar * vertex   :
+*  const GLchar * geometry :
+*  const GLchar * fragment :
+*  GLenum type_of_vertices :
+*  int narray              :
+*  int nunif               :
+*  gboolean lightning      :
+*  object_3d * obj         :
+*/
 glsl_program * init_shader_program (int object, int object_id,
                                     const GLchar * vertex, const GLchar * geometry, const GLchar * fragment,
                                     GLenum type_of_vertices, int narray, int nunif, gboolean lightning, object_3d * obj)
@@ -587,14 +611,13 @@ glsl_program * init_shader_program (int object, int object_id,
   return glsl;
 }
 
-
 /*
 *  gboolean in_md_shaders (struct project * this_proj, int id)
 *
-*  Usage: 
+*  Usage: is this shader MD dependent ?
 *
-*  struct project * this_proj : 
-*  int id                     : 
+*  struct project * this_proj : the target project
+*  int id                     : the shader id
 */
 gboolean in_md_shaders (struct project * this_proj, int id)
 {
@@ -611,9 +634,9 @@ gboolean in_md_shaders (struct project * this_proj, int id)
 /*
 *  void re_create_all_md_shaders (glwin * view)
 *
-*  Usage: 
+*  Usage: re-initialize all MD dependent OpenGL shaders
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void re_create_all_md_shaders (glwin * view)
 {
@@ -631,11 +654,11 @@ void re_create_all_md_shaders (glwin * view)
 /*
 *  void re_create_md_shaders (int nshaders, int shaders[nshaders], struct project * this_proj)
 *
-*  Usage: 
+*  Usage: re-initialize some MD dependent OpenGL shaders
 *
-*  int nshaders          : 
-*  int shaders[nshaders] : 
-*  int shaders[nshaders] : 
+*  int nshaders               : the number of shader(s) to initialize
+*  int shaders[nshaders]      : the list of shaders
+*  struct project * this_proj : the target project
 */
 void re_create_md_shaders (int nshaders, int shaders[nshaders], struct project * this_proj)
 {
@@ -654,10 +677,10 @@ void re_create_md_shaders (int nshaders, int shaders[nshaders], struct project *
 /*
 *  void cleaning_shaders (glwin * view, int shader)
 *
-*  Usage: 
+*  Usage: re-initialize an OpenGL shader
 *
-*  glwin * view : the target glwin pointer
-*  int shader   : 
+*  glwin * view : the target glwin
+*  int shader   : the shader to initialize
 */
 void cleaning_shaders (glwin * view, int shader)
 {
@@ -673,9 +696,9 @@ void cleaning_shaders (glwin * view, int shader)
 /*
 *  void recreate_all_shaders (glwin * view)
 *
-*  Usage: 
+*  Usage: re-initialize all OpenGL shaders
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void recreate_all_shaders (glwin * view)
 {
@@ -689,9 +712,9 @@ void recreate_all_shaders (glwin * view)
 /*
 *  void init_default_shaders (glwin * view)
 *
-*  Usage: 
+*  Usage: re-initialize the default OpenGL shaders
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void init_default_shaders (glwin * view)
 {
@@ -717,9 +740,9 @@ void init_default_shaders (glwin * view)
 /*
 *  void init_shaders (glwin * view)
 *
-*  Usage: 
+*  Usage: initialize all the OpenGL shaders
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void init_shaders (glwin * view)
 {
@@ -751,9 +774,9 @@ void init_shaders (glwin * view)
 /*
 *  gboolean glsl_disable_cull_face (glsl_program * glsl)
 *
-*  Usage: 
+*  Usage:
 *
-*  glsl_program * glsl : 
+*  glsl_program * glsl : the target glsl
 */
 gboolean glsl_disable_cull_face (glsl_program * glsl)
 {
@@ -778,9 +801,9 @@ gboolean glsl_disable_cull_face (glsl_program * glsl)
 /*
 *  void set_lights_data (glsl_program * glsl)
 *
-*  Usage: 
+*  Usage:
 *
-*  glsl_program * glsl : 
+*  glsl_program * glsl : the target glsl
 */
 void set_lights_data (glsl_program * glsl)
 {
@@ -834,9 +857,9 @@ uint16_t stipple_pattern[NDOTS]={ 0xAAAA, 0x1111, 0x0000, 0x55FF, 0x24FF, 0x3F3F
 /*
 *  void shading_glsl_text (glsl_program * glsl)
 *
-*  Usage: 
+*  Usage:
 *
-*  glsl_program * glsl : 
+*  glsl_program * glsl : the target glsl
 */
 void shading_glsl_text (glsl_program * glsl)
 {
@@ -854,10 +877,10 @@ void shading_glsl_text (glsl_program * glsl)
 /*
 *  void render_this_shader (glsl_program * glsl, int ids)
 *
-*  Usage: 
+*  Usage: render an OpenGL shader
 *
-*  glsl_program * glsl : 
-*  int ids             : 
+*  glsl_program * glsl : the target glsl
+*  int ids             :
 */
 void render_this_shader (glsl_program * glsl, int ids)
 {
@@ -989,9 +1012,9 @@ void render_this_shader (glsl_program * glsl, int ids)
 /*
 *  void draw_vertices (int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id : 
+*  int id :
 */
 void draw_vertices (int id)
 {

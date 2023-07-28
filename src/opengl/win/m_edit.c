@@ -79,7 +79,7 @@ G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view  : the target glwin pointer
+*  glwin * view  : the target glwin
 *  int id        :
 *  int j         :
 */
@@ -153,7 +153,7 @@ GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 */
 GtkWidget * menu_edit (glwin * view, int id)
@@ -216,7 +216,7 @@ GtkWidget * menu_edit (glwin * view, int id)
 *
 *  Usage:
 *
-*  glwin * view  : the target glwin pointer
+*  glwin * view  : the target glwin
 *  int popm      :
 *  int sensitive :
 */
@@ -258,7 +258,7 @@ GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 *
 *  Usage:
 *
-*  glwin * view  : the target glwin pointer
+*  glwin * view  : the target glwin
 *  int popm      :
 *  int sensitive :
 */
@@ -318,7 +318,7 @@ G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * paramete
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * extract_section (glwin * view, int popm)
@@ -340,7 +340,7 @@ GMenu * extract_section (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_edit (glwin * view, int popm)

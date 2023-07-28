@@ -143,7 +143,7 @@ GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * men
 *  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  glwin * view     : the target glwin pointer
+*  glwin * view     : the target glwin
 *  int va           :
 *  int vb           :
 */
@@ -183,7 +183,7 @@ GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 *  int ab       :
 */
@@ -394,7 +394,7 @@ G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * p
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int ab       :
 *  int abs      :
@@ -420,7 +420,7 @@ GMenu * axis_box_style (glwin * view, int popm, int ab, int abs)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int ab       :
 *  int style    :
@@ -456,7 +456,7 @@ GMenu * axis_box_param (glwin * view, int popm, int ab, int style)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int ab       :
 */
@@ -488,8 +488,8 @@ GMenuItem * menu_box_axis (glwin * view, int popm, int ab)
   if (ab == 0)
   {
     GMenu * menuc = g_menu_new ();
-    append_opengl_item (view, menu, "box-color", "box-color", popm, popm, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
-    append_opengl_item (view, menu, "More colors ...", "box-color", popm, popm, NULL, IMG_NONE, NULL, FALSE,
+    append_opengl_item (view, menuc, "box-color", "box-color", popm, popm, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
+    append_opengl_item (view, menuc, "More colors ...", "box-color", popm, popm, NULL, IMG_NONE, NULL, FALSE,
                         G_CALLBACK(to_run_box_color_window), view, FALSE, FALSE, FALSE, get_project_by_id(view -> proj) -> cell.ltype);
     append_submenu (menu, "Color", menuc);
     g_object_unref (menuc);

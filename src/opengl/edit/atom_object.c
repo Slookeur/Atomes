@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_object.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int in_object_bond_list (struct insert_object * object, int aid, int bid);
   int create_object_from_open_project (struct project * this_proj, int p);
@@ -56,9 +56,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  double get_object_dim (struct insert_object * object)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct insert_object * object : 
+*  struct insert_object * object :
 */
 double get_object_dim (struct insert_object * object)
 {
@@ -82,10 +82,10 @@ double get_object_dim (struct insert_object * object)
 /*
 *  void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct insert_object * object : 
-*  gboolean adjust               : 
+*  struct insert_object * object :
+*  gboolean adjust               :
 */
 void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
 {
@@ -114,15 +114,15 @@ void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
 /*
 *  gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj    : 
-*  int step                      : 
-*  struct insert_object * object : 
-*  int target                    : 
-*  int aid                       : 
-*  struct atom * at              : 
-*  gboolean * checked_at         : 
+*  struct project * this_proj    :
+*  int step                      :
+*  struct insert_object * object :
+*  int target                    :
+*  int aid                       :
+*  struct atom * at              :
+*  gboolean * checked_at         :
 */
 gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at)
 {
@@ -157,11 +157,11 @@ gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct in
 /*
 *  void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int ifcl                   : 
-*  int * bcid                 : 
+*  struct project * this_proj :
+*  int ifcl                   :
+*  int * bcid                 :
 */
 void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
 {
@@ -240,11 +240,11 @@ void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
 /*
 *  void reconstruct_coordinates (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj         : 
-*  struct insert_object * this_object : 
-*  gboolean upcoord                   : 
+*  struct project * this_proj         :
+*  struct insert_object * this_object :
+*  gboolean upcoord                   :
 */
 void reconstruct_coordinates (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 {
@@ -298,11 +298,11 @@ void reconstruct_coordinates (struct project * this_proj, struct insert_object *
 /*
 *  void reconstruct_coordinates_for_object (struct insert_object * this_object, struct project * this_proj, gboolean upcoord)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct insert_object * this_object : 
-*  struct project * this_proj         : 
-*  gboolean upcoord                   : 
+*  struct insert_object * this_object :
+*  struct project * this_proj         :
+*  gboolean upcoord                   :
 */
 void reconstruct_coordinates_for_object (struct insert_object * this_object, struct project * this_proj, gboolean upcoord)
 {
@@ -337,11 +337,11 @@ void reconstruct_coordinates_for_object (struct insert_object * this_object, str
 /*
 *  void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj         : 
-*  struct insert_object * this_object : 
-*  gboolean upcoord                   : 
+*  struct project * this_proj         :
+*  struct insert_object * this_object :
+*  gboolean upcoord                   :
 */
 void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 {
@@ -368,9 +368,9 @@ void correct_coordinates_for_object (struct project * this_proj, struct insert_o
 /*
 *  tint ulam_coord (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 tint ulam_coord (glwin * view)
 {
@@ -395,9 +395,9 @@ struct insert_object * lib_object;
 /*
 *  struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct insert_object * old_obj : 
+*  struct insert_object * old_obj :
 */
 struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
 {
@@ -435,9 +435,9 @@ struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
 /*
 *  void create_object_from_library (int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  int p : 
+*  int p :
 */
 void create_object_from_library (int p)
 {
@@ -478,11 +478,11 @@ void create_object_from_library (int p)
 /*
 *  int in_object_bond_list (struct insert_object * object, int aid, int bid)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct insert_object * object : 
-*  int aid                       : 
-*  int bid                       : 
+*  struct insert_object * object :
+*  int aid                       :
+*  int bid                       :
 */
 int in_object_bond_list (struct insert_object * object, int aid, int bid)
 {
@@ -498,12 +498,12 @@ int in_object_bond_list (struct insert_object * object, int aid, int bid)
 /*
 *  void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj    : 
-*  struct insert_object * object : 
-*  int * new_id                  : 
-*  gboolean movtion              : 
+*  struct project * this_proj    :
+*  struct insert_object * object :
+*  int * new_id                  :
+*  gboolean movtion              :
 */
 void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion)
 {
@@ -552,13 +552,13 @@ void clean_object_vois (struct project * this_proj, struct insert_object * objec
 /*
 *  void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * proj         : 
-*  int o_step                    : 
-*  struct insert_object * object : 
-*  int * new_id                  : 
-*  gboolean movtion              : 
+*  struct project * proj         :
+*  int o_step                    :
+*  struct insert_object * object :
+*  int * new_id                  :
+*  gboolean movtion              :
 */
 void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion)
 {
@@ -650,11 +650,11 @@ void add_object_atoms (struct insert_object * this_object, struct project * this
 /*
 *  struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int sid                    : 
-*  atom_search * remove       : 
+*  struct project * this_proj :
+*  int sid                    :
+*  atom_search * remove       :
 */
 struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove)
 {
@@ -692,9 +692,9 @@ struct insert_object * create_object_from_species (struct project * this_proj, i
 /*
 *  struct insert_object * create_object_from_selection (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 struct insert_object * create_object_from_selection (struct project * this_proj)
 {
@@ -740,12 +740,12 @@ struct insert_object * create_object_from_selection (struct project * this_proj)
 /*
 *  struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int coord                  : 
-*  int aid                    : 
-*  atom_search * remove       : 
+*  struct project * this_proj :
+*  int coord                  :
+*  int aid                    :
+*  atom_search * remove       :
 */
 struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 {
@@ -816,12 +816,12 @@ struct insert_object * create_object_from_atom_coordination (struct project * th
 /*
 *  struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int coord                  : 
-*  int aid                    : 
-*  atom_search * remove       : 
+*  struct project * this_proj :
+*  int coord                  :
+*  int aid                    :
+*  atom_search * remove       :
 */
 struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 {
@@ -896,12 +896,12 @@ struct insert_object * create_object_from_overall_coordination (struct project *
 /*
 *  struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int coord                  : 
-*  int geo                    : 
-*  atom_search * remove       : 
+*  struct project * this_proj :
+*  int coord                  :
+*  int geo                    :
+*  atom_search * remove       :
 */
 struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove)
 {
@@ -943,9 +943,9 @@ extern int test_this_fragment (int natomes, int fcoord, int fid, struct atom * n
 /*
 *  void adjust_object_frag_coord (struct insert_object * object)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct insert_object * object : 
+*  struct insert_object * object :
 */
 void adjust_object_frag_coord (struct insert_object * object)
 {
@@ -984,10 +984,10 @@ void adjust_object_frag_coord (struct insert_object * object)
 /*
 *  int create_object_from_open_project (struct project * this_proj, int p)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int p                      : 
+*  struct project * this_proj :
+*  int p                      :
 */
 int create_object_from_open_project (struct project * this_proj, int p)
 {
@@ -1068,12 +1068,12 @@ int create_object_from_open_project (struct project * this_proj, int p)
 /*
 *  void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch)
 *
-*  Usage: 
+*  Usage:
 *
-*  int orig                   : 
-*  int act                    : 
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
+*  int orig                   :
+*  int act                    :
+*  struct project * this_proj :
+*  atom_search * asearch      :
 */
 void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch)
 {
@@ -1158,13 +1158,13 @@ void clean_this_object (int orig, int act, struct project * this_proj, atom_sear
 /*
 *  void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible)
 *
-*  Usage: 
+*  Usage:
 *
-*  int stat                   : 
-*  int orig                   : 
-*  struct project * this_proj : 
-*  atom_search * asearch      : 
-*  gboolean visible           : 
+*  int stat                   :
+*  int orig                   :
+*  struct project * this_proj :
+*  atom_search * asearch      :
+*  gboolean visible           :
 */
 void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible)
 {

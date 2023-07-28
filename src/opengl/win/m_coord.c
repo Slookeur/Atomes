@@ -224,7 +224,7 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 *  int jd       :
 */
@@ -268,7 +268,7 @@ void detach_frag_mol_menu (glwin * view, int id, int jd)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 *  int jd       :
 */
@@ -408,7 +408,7 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 */
 GtkWidget * menu_coord (glwin * view, int id)
@@ -427,7 +427,7 @@ GtkWidget * menu_coord (glwin * view, int id)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 *  int jd       :
 */
@@ -461,7 +461,7 @@ GtkWidget * menu_rings (glwin * view, int id, int jd)
 *
 *  Usage:
 *
-*  glwin * view      : the target glwin pointer
+*  glwin * view      : the target glwin
 *  gchar * act       :
 *  int popm          :
 *  int id            :
@@ -481,7 +481,7 @@ GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handl
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int id       :
 *  int mid      :
@@ -556,7 +556,7 @@ G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * par
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int id       :
 *  int mid      :
@@ -595,7 +595,7 @@ GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int id       :
 *  int mid      :
@@ -637,7 +637,7 @@ GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int id       :
 */
@@ -675,7 +675,7 @@ GMenu * add_menu_coord (glwin * view, int popm, int id)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_coord (glwin * view, int popm)
@@ -691,7 +691,7 @@ GMenu * menu_coord (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_rings (glwin * view, int popm)

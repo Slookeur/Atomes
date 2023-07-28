@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_rings.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int get_rmin (struct project * this_proj, int g, int s);
   int get_rmax (struct project * this_proj, int g, int s);
@@ -220,11 +220,11 @@ void rings_set_visible (GtkTreeViewColumn * col,
 /*
 *  void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeStore * store       : 
-*  struct project * this_proj : 
-*  int g                      : 
+*  GtkTreeStore * store       :
+*  struct project * this_proj :
+*  int g                      :
 */
 void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
 {
@@ -301,11 +301,11 @@ void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
 /*
 *  GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_this)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int g                      : 
-*  gboolean fill_this         : 
+*  struct project * this_proj :
+*  int g                      :
+*  gboolean fill_this         :
 */
 GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_this)
 {
@@ -344,10 +344,10 @@ GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_
 /*
 *  void add_this_ring_to_search_tree (struct project * this_proj, int g)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int g                      : 
+*  struct project * this_proj :
+*  int g                      :
 */
 void add_this_ring_to_search_tree (struct project * this_proj, int g)
 {
@@ -655,11 +655,11 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
 /*
 *  int get_rmin (struct project * this_proj, int g, int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int g                      : 
-*  int s                      : 
+*  struct project * this_proj :
+*  int g                      :
+*  int s                      :
 */
 int get_rmin (struct project * this_proj, int g, int s)
 {
@@ -675,11 +675,11 @@ int get_rmin (struct project * this_proj, int g, int s)
 /*
 *  int get_rmax (struct project * this_proj, int g, int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int g                      : 
-*  int s                      : 
+*  struct project * this_proj :
+*  int g                      :
+*  int s                      :
 */
 int get_rmax (struct project * this_proj, int g, int s)
 {
@@ -695,7 +695,7 @@ int get_rmax (struct project * this_proj, int g, int s)
 /*
 *  G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -819,10 +819,10 @@ G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
 /*
 *  GtkWidget * create_rings_search (struct project * this_proj, int g)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int g                      : 
+*  struct project * this_proj :
+*  int g                      :
 */
 GtkWidget * create_rings_search (struct project * this_proj, int g)
 {
@@ -872,10 +872,10 @@ GtkWidget * create_rings_search (struct project * this_proj, int g)
 /*
 *  GtkWidget * rings_tab (glwin * view, int g)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
-*  int g        : 
+*  glwin * view : the target glwin
+*  int g        :
 */
 GtkWidget * rings_tab (glwin * view, int g)
 {

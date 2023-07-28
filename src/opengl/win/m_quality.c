@@ -45,7 +45,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Usage:
 *
 *  int q        :
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void set_quality (int q, glwin * view)
 {
@@ -110,7 +110,7 @@ G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 */
 GtkWidget * menu_quality (glwin * view, int id)
@@ -152,7 +152,7 @@ G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * param
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_quality (glwin * view, int popm)

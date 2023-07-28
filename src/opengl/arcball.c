@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'arcball.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The mouse trackball rotation subroutines
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   void arc_ball_rotation (glwin * view, int x, int y);
 
@@ -55,11 +56,11 @@ vec3_t get_arc_ball_vector (glwin * view, int x, int y)
 /*
 *  void arc_ball_rotation (glwin * view, int x, int y)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
-*  int x        : 
-*  int y        : 
+*  glwin * view : the target glwin
+*  int x        : x position
+*  int y        : y position
 */
 void arc_ball_rotation (glwin * view, int x, int y)
 {

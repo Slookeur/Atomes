@@ -114,7 +114,7 @@ ColRGBA init_color (int id, int numid)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void set_color_map_sensitive (glwin * view)
 {
@@ -135,7 +135,7 @@ void set_color_map_sensitive (glwin * view)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void set_advanced_bonding_menus (glwin * view)
 {
@@ -154,7 +154,7 @@ void set_advanced_bonding_menus (glwin * view)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void prep_all_coord_menus (glwin * view)
 {

@@ -68,7 +68,7 @@ void clean_atom_style (struct project * this_proj)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void update_menus (glwin * view)
 {
@@ -259,7 +259,7 @@ GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int fil
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 */
 GtkWidget * menu_style (glwin * view, int id)
@@ -398,7 +398,7 @@ G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * para
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_style (glwin * view, int popm)

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'd_measures.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int prepare_measure_shaders (int type, int shaders);
 
@@ -71,12 +71,12 @@ ColRGBA col_gdk;
 /*
 *  void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int pi)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct atom * at : 
-*  struct atom * bt : 
-*  struct atom * ct : 
-*  int pi           : 
+*  struct atom * at :
+*  struct atom * bt :
+*  struct atom * ct :
+*  int pi           :
 */
 void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int pi)
 {
@@ -99,11 +99,11 @@ void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int
 /*
 *  void set_measure_color (int selected, int id, int num)
 *
-*  Usage: 
+*  Usage:
 *
-*  int selected : 
-*  int id       : 
-*  int num      : 
+*  int selected :
+*  int id       :
+*  int num      :
 */
 void set_measure_color (int selected, int id, int num)
 {
@@ -123,13 +123,13 @@ void set_measure_color (int selected, int id, int num)
 /*
 *  void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s  : 
-*  int sa : 
-*  int sb : 
-*  int sc : 
-*  int pi : 
+*  int s  :
+*  int sa :
+*  int sb :
+*  int sc :
+*  int pi :
 */
 void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
 {
@@ -180,12 +180,12 @@ void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
 /*
 *  void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view         : the target glwin pointer
-*  int id               : 
-*  int pi               : 
-*  GtkTreeStore * store : 
+*  glwin * view         : the target glwin
+*  int id               :
+*  int pi               :
+*  GtkTreeStore * store :
 */
 void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 {
@@ -290,12 +290,12 @@ void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 /*
 *  void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view         : the target glwin pointer
-*  int id               : 
-*  int pi               : 
-*  GtkTreeStore * store : 
+*  glwin * view         : the target glwin
+*  int id               :
+*  int pi               :
+*  GtkTreeStore * store :
 */
 void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 {
@@ -410,11 +410,11 @@ void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 /*
 *  void draw_bond_label (struct atom * at, struct atom * bt, int pi)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct atom * at : 
-*  struct atom * bt : 
-*  int pi           : 
+*  struct atom * at :
+*  struct atom * bt :
+*  int pi           :
 */
 void draw_bond_label (struct atom * at, struct atom * bt, int pi)
 {
@@ -445,12 +445,12 @@ void draw_bond_label (struct atom * at, struct atom * bt, int pi)
 /*
 *  void setup_this_measured_bond (int s, int sa, int sb, int pi)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s  : 
-*  int sa : 
-*  int sb : 
-*  int pi : 
+*  int s  :
+*  int sa :
+*  int sb :
+*  int pi :
 */
 void setup_this_measured_bond (int s, int sa, int sb, int pi)
 {
@@ -496,12 +496,12 @@ void setup_this_measured_bond (int s, int sa, int sb, int pi)
 /*
 *  void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view         : the target glwin pointer
-*  int id               : 
-*  int pi               : 
-*  GtkTreeStore * store : 
+*  glwin * view         : the target glwin
+*  int id               :
+*  int pi               :
+*  GtkTreeStore * store :
 */
 void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 {
@@ -576,10 +576,10 @@ void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 /*
 *  int prepare_measure_shaders (int type, int shaders)
 *
-*  Usage: 
+*  Usage:
 *
-*  int type    : 
-*  int shaders : 
+*  int type    :
+*  int shaders :
 */
 int prepare_measure_shaders (int type, int shaders)
 {
@@ -644,7 +644,7 @@ int prepare_measure_shaders (int type, int shaders)
 /*
 *  void create_measures_lists ()
 *
-*  Usage: 
+*  Usage:
 */
 void create_measures_lists ()
 {

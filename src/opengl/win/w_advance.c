@@ -853,7 +853,7 @@ GtkWidget * create_setting_pos (int id, int kd, int jd, float * values, opengl_e
 *
 *  Usage:
 *
-*  glwin * view              : the target glwin pointer
+*  glwin * view              : the target glwin
 *  opengl_edition * ogl_edit :
 */
 GtkWidget * lights_tab (glwin * view, opengl_edition * ogl_edit)
@@ -1133,7 +1133,7 @@ G_MODULE_EXPORT void scale_quality (GtkRange * range, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view              : the target glwin pointer
+*  glwin * view              : the target glwin
 *  opengl_edition * ogl_edit :
 */
 GtkWidget * materials_tab (glwin * view, opengl_edition * ogl_edit)
@@ -1308,7 +1308,7 @@ G_MODULE_EXPORT void set_fog_type (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int fid      :
 */
 void setup_fog_dialogs (glwin * view, int fid)
@@ -1355,7 +1355,7 @@ G_MODULE_EXPORT void set_fog_mode (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view              : the target glwin pointer
+*  glwin * view              : the target glwin
 *  opengl_edition * ogl_edit :
 */
 GtkWidget * fog_tab (glwin * view, opengl_edition * ogl_edit)

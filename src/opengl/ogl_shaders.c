@@ -14,10 +14,11 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'ogl_shaders.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
+
+ - The OpenGL shaders for the atomes program
+
 *
 */
 

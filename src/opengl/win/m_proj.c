@@ -102,7 +102,7 @@ G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 GtkWidget * menu_proj (glwin * view)
 {
@@ -148,7 +148,7 @@ G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * param
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_proj (glwin * view, int popm)

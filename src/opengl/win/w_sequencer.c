@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_sequencer.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   static gboolean animate (gpointer data);
   static gboolean seq_wait_for_stop (gpointer data);
@@ -53,9 +53,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void set_player_title (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void set_player_title (glwin * view)
 {
@@ -68,10 +68,10 @@ void set_player_title (glwin * view)
 /*
 *  void update_selection (glwin * view, int o_step)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
-*  int o_step   : 
+*  glwin * view : the target glwin
+*  int o_step   :
 */
 void update_selection (glwin * view, int o_step)
 {
@@ -102,9 +102,9 @@ void update_selection (glwin * view, int o_step)
 /*
 *  void show_step (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void show_step (glwin * view)
 {
@@ -134,11 +134,11 @@ void show_step (glwin * view)
 /*
 *  void sequence (glwin * view, int o_step, int n_step)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
-*  int o_step   : 
-*  int n_step   : 
+*  glwin * view : the target glwin
+*  int o_step   :
+*  int n_step   :
 */
 void sequence (glwin * view, int o_step, int n_step)
 {
@@ -159,7 +159,7 @@ void sequence (glwin * view, int o_step, int n_step)
 /*
 *  G_MODULE_EXPORT void seq_go_previous (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -176,7 +176,7 @@ G_MODULE_EXPORT void seq_go_previous (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_go_next (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -194,7 +194,7 @@ G_MODULE_EXPORT void seq_go_next (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_go_first (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -208,7 +208,7 @@ G_MODULE_EXPORT void seq_go_first (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_go_last (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -222,7 +222,7 @@ G_MODULE_EXPORT void seq_go_last (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -243,7 +243,7 @@ G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_jump (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -267,7 +267,7 @@ G_MODULE_EXPORT void seq_jump (GtkButton * but, gpointer data)
 /*
 *  static gboolean animate (gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  gpointer data : the associated data pointer
 */
@@ -301,7 +301,7 @@ static gboolean animate (gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_play (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -320,7 +320,7 @@ G_MODULE_EXPORT void seq_play (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_stop (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -334,7 +334,7 @@ G_MODULE_EXPORT void seq_stop (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_loop (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -358,7 +358,7 @@ G_MODULE_EXPORT void seq_loop (GtkButton * but, gpointer data)
 /*
 *  static gboolean seq_wait_for_stop (gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  gpointer data : the associated data pointer
 */
@@ -380,7 +380,7 @@ static gboolean seq_wait_for_stop (gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_faster (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -408,7 +408,7 @@ G_MODULE_EXPORT void seq_faster (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_slower (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -436,7 +436,7 @@ G_MODULE_EXPORT void seq_slower (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer

@@ -57,7 +57,7 @@ extern G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data)
 *  Usage:
 *
 *  struct project * this_proj :
-*  glwin * view               : the target glwin pointer
+*  glwin * view               : the target glwin
 *  int id                     :
 */
 gchar * label_atpts (struct project * this_proj, glwin * view, int id)
@@ -246,7 +246,7 @@ GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, int val, i
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 *  int at       :
 */
@@ -299,7 +299,7 @@ GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 *  int at       :
 */
@@ -342,7 +342,7 @@ GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 *  int at       :
 */
@@ -419,7 +419,7 @@ GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 *  int at       :
 */
@@ -668,7 +668,7 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant
 *
 *  Usage:
 *
-*  glwin * view       : the target glwin pointer
+*  glwin * view       : the target glwin
 *  int popm           :
 *  int at             :
 *  gboolean sensitive :
@@ -709,7 +709,7 @@ GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 *
 *  Usage:
 *
-*  glwin * view       : the target glwin pointer
+*  glwin * view       : the target glwin
 *  int popm           :
 *  int at             :
 *  gboolean sensitive :
@@ -749,7 +749,7 @@ GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 *
 *  Usage:
 *
-*  glwin * view       : the target glwin pointer
+*  glwin * view       : the target glwin
 *  int popm           :
 *  int at             :
 *  gboolean sensitive :
@@ -783,7 +783,7 @@ GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int at       :
 */

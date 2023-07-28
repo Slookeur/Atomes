@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_colors.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void window_color (struct project * this_proj, glwin * view, int id);
 
@@ -48,10 +48,10 @@ int wc_cid;
 /*
 *  G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkDialog * win  : the GtkDialog sending the signal
-*  gint response_id : 
+*  gint response_id :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data)
@@ -87,11 +87,11 @@ G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpoint
 /*
 *  void window_color (struct project * this_proj, glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  glwin * view               : the target glwin pointer
-*  int id                     : 
+*  struct project * this_proj :
+*  glwin * view               : the target glwin
+*  int id                     :
 */
 void window_color (struct project * this_proj, glwin * view, int id)
 {
@@ -132,10 +132,10 @@ void window_color (struct project * this_proj, glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -143,7 +143,7 @@ G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant 
 /*
 *  G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -160,10 +160,10 @@ G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -171,7 +171,7 @@ G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant *
 /*
 *  G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -189,10 +189,10 @@ G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -200,7 +200,7 @@ G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant 
 /*
 *  G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -221,10 +221,10 @@ G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkDialog * win  : the GtkDialog sending the signal
-*  gint response_id : 
+*  gint response_id :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, gpointer data)
@@ -250,10 +250,10 @@ G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, 
 /*
 *  G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action :
+*  GVariant * parameter   :
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -261,7 +261,7 @@ G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * para
 /*
 *  G_MODULE_EXPORT void window_color_coord (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer

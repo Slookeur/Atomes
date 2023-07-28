@@ -484,7 +484,7 @@ GtkWidget * create_shift_box (struct project * this_proj)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void wrapping (glwin * view)
 {

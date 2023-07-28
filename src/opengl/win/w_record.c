@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_record.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void prepare_edition_windows (glwin * view, int status);
 
@@ -37,10 +37,10 @@ extern void window_encode (glwin * view, gboolean video);
 /*
 *  void prepare_edition_windows (glwin * view, int status)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
-*  int status   : 
+*  glwin * view : the target glwin
+*  int status   :
 */
 void prepare_edition_windows (glwin * view, int status)
 {
@@ -84,7 +84,7 @@ void prepare_edition_windows (glwin * view, int status)
 /*
 *  G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -111,7 +111,7 @@ G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -135,7 +135,7 @@ G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer

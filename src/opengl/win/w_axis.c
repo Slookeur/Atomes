@@ -84,7 +84,7 @@ GtkWidget * ax_title[3];
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  gboolean val :
 */
 void activate_pos_box (glwin * view, gboolean val)
@@ -282,7 +282,7 @@ G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void init_axis_colors (glwin * view)
 {

@@ -177,7 +177,7 @@ dint btoid;
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 int get_to_be_selected (glwin * view)
 {
@@ -2914,7 +2914,7 @@ G_MODULE_EXPORT void select_action_for_all_bonds (GtkWidget * widg, gpointer dat
 *
 *  Usage:
 *
-*  glwin * view      : the target glwin pointer
+*  glwin * view      : the target glwin
 *  gchar * act       :
 *  int aid           :
 *  GCallback handler : the associated callback
@@ -2991,7 +2991,7 @@ GMenu * add_edition_sub_menu (glwin * view, gchar * act, int aid, GCallback hand
 *
 *  Usage:
 *
-*  glwin * view      : the target glwin pointer
+*  glwin * view      : the target glwin
 *  gchar * act       :
 *  int aid           :
 *  GCallback handler : the associated callback
@@ -3140,7 +3140,7 @@ void add_edition_sub_menu (GtkWidget * item, GCallback handler, gpointer data)
 *  Usage:
 *
 *  GMenu * menu      :
-*  glwin * view      : the target glwin pointer
+*  glwin * view      : the target glwin
 *  gchar * str       :
 *  gchar * act       :
 *  int aid           :
@@ -3160,7 +3160,7 @@ void create_selection_item (GMenu * menu, glwin * view, gchar * str, gchar * act
 *
 *  Usage:
 *
-*  glwin * view      : the target glwin pointer
+*  glwin * view      : the target glwin
 *  gchar * str       :
 *  int id            :
 *  int ig            :
@@ -3512,7 +3512,7 @@ GtkWidget * selection_menu (glwin * view, int ai, int bi, int ac, int id,
 *
 *  Usage:
 *
-*  glwin * view     : the target glwin pointer
+*  glwin * view     : the target glwin
 *  GtkWidget * menu : the GtkWidget sending the signal
 *  int ato          :
 *  int spc          :
@@ -3585,7 +3585,7 @@ void analyze_popup_attach_color_palettes (glwin * view, GtkWidget * menu, int at
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  double ptx   :
 *  double pty   :
 *  int se       :
@@ -3916,7 +3916,7 @@ G_MODULE_EXPORT void to_center_this_molecule (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 GMenu * tools_section (glwin * view)
 {
@@ -3930,7 +3930,7 @@ GMenu * tools_section (glwin * view)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 GMenu * anim_section (glwin * view)
 {
@@ -3944,7 +3944,7 @@ GMenu * anim_section (glwin * view)
 *
 *  Usage:
 *
-*  glwin * view     : the target glwin pointer
+*  glwin * view     : the target glwin
 *  GtkWidget * menu : the GtkWidget sending the signal
 */
 void analyze_menu_attach_color_palettes (glwin * view, GtkWidget * menu)
@@ -4055,7 +4055,7 @@ void analyze_menu_attach_color_palettes (glwin * view, GtkWidget * menu)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  double ptx   :
 *  double pty   :
 */

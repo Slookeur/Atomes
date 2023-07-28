@@ -172,7 +172,7 @@ G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void clean_animation (glwin * view)
 {
@@ -304,7 +304,7 @@ G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpoin
 *
 *  Usage:
 *
-*  glwin * view   : the target glwin pointer
+*  glwin * view   : the target glwin
 *  gboolean video :
 */
 void window_encode (glwin * view, gboolean video)

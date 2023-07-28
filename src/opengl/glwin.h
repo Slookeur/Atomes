@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'glwin.h'
 *
-*  Contains: 
+*  Contains:
 
 */
 
@@ -237,6 +237,7 @@ typedef struct {
   double mwidth;
 
   int m_is_pressed;
+  // Atom selection: 0 = normal mode, 1 = edition mode
   struct atom_selection * selected[2];
 
   // Model box and partial axis data
@@ -752,7 +753,7 @@ typedef struct {
   //    atom_win inactive: 0/1 to turn off/on
   gboolean rebuild[2][2];
   gboolean bonding;
-  gboolean adv_bonding[2];                   // 0 = Fraglments, 1 = Molecules
+  gboolean adv_bonding[2];                   // 0 = Fragments, 1 = Molecules
   qint ** gcid[10];                          // Geom colors pointers
   gboolean rings;
   int ring_max[5];                           // The largest ring size

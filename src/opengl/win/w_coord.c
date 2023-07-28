@@ -519,7 +519,7 @@ gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int g        :
 *  int poly     :
 */
@@ -972,7 +972,7 @@ GtkWidget * create_frag_mol_search (struct project * this_proj, int g)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int g        :
 */
 GtkWidget * fragmol_tab (glwin * view, int g)
@@ -1121,7 +1121,7 @@ G_MODULE_EXPORT void on_cloned_poly_toggled (GtkToggleButton * Button, gpointer 
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 GtkWidget * param_tab (glwin * view)
 {
@@ -1283,7 +1283,7 @@ G_MODULE_EXPORT gboolean close_event_coord (GtkWidget * widg, GdkEvent * event, 
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int page     :
 */
 GtkWidget * advanced_coord_properties (glwin * view, int page)
@@ -1392,7 +1392,7 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int geo      :
 *  int coord    :
 */

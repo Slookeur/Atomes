@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'selection.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines handling the atom and bond selection process in the OpenGL window
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id);
   int find_selected_bond (struct project * this_proj, int id);
@@ -38,7 +39,7 @@ If not, see <https://www.gnu.org/licenses/> */
   void update_all_selections (glwin * view, int pi);
   void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add);
   void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi);
-  void process_selection (struct project * this_proj, glwin * view, int id, int ac, int se, int pi);
+  void process_selection (struct project * this_proj, glwin * view, int id, int ac, int pi);
   void process_the_hits (glwin * view, gint event_button, double ptx, double pty);
 
   struct selatom * new_selatom (int id, int sp);
@@ -61,13 +62,13 @@ extern int get_to_be_selected (glwin * view);
 /*
 *  int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int i                      : 
-*  int j                      : 
-*  int b                      : 
-*  int id                     : 
+*  struct project * this_proj : the target project
+*  int i                      : id tracker
+*  int j                      : the MD step
+*  int b                      : 0 = normal, 1 = clones
+*  int id                     : the id-th visible bond to find
 */
 int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id)
 {
@@ -97,10 +98,10 @@ int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id)
 /*
 *  int find_selected_bond (struct project * this_proj, int id)
 *
-*  Usage: 
+*  Usage: find the selected bond based of the picked color id
 *
-*  struct project * this_proj : 
-*  int id                     : 
+*  struct project * this_proj : the target project
+*  int id                     : the id-th visible bond to find
 */
 int find_selected_bond (struct project * this_proj, int id)
 {
@@ -134,10 +135,10 @@ int find_selected_bond (struct project * this_proj, int id)
 /*
 *  int find_selected_atom (struct project * this_proj, int id)
 *
-*  Usage: 
+*  Usage: find the selected atom based of the picked color id
 *
-*  struct project * this_proj : 
-*  int id                     : 
+*  struct project * this_proj : the target project
+*  int id                     : the id-th visible atom or clone to find
 */
 int find_selected_atom (struct project * this_proj, int id)
 {
@@ -167,9 +168,9 @@ int find_selected_atom (struct project * this_proj, int id)
 /*
 *  int num_bonds (int i)
 *
-*  Usage: 
+*  Usage: number of distinct pair(s) of atoms in selection
 *
-*  int i : 
+*  int i : the number of atom(s) in selection
 */
 int num_bonds (int i)
 {
@@ -179,9 +180,9 @@ int num_bonds (int i)
 /*
 *  int num_angles (int i)
 *
-*  Usage: 
+*  Usage: number of distinct triplet(s) of atoms in selection
 *
-*  int i : 
+*  int i : the number of atom(s) in selection
 */
 int num_angles (int i)
 {
@@ -191,9 +192,9 @@ int num_angles (int i)
 /*
 *  int num_dihedrals (int i)
 *
-*  Usage: 
+*  Usage: number of distinct quadruplet(s) of atoms in selection
 *
-*  int i : 
+*  int i : the number of atom(s) in selection
 */
 int num_dihedrals (int i)
 {
@@ -207,10 +208,10 @@ int ** tmp_object_id[3] = {NULL, NULL, NULL};
 /*
 *  void save_dihedral_selection (glwin * view, int pi)
 *
-*  Usage: 
+*  Usage: save the dihedral selection data
 *
-*  glwin * view : the target glwin pointer
-*  int pi       : 
+*  glwin * view : the target glwin
+*  int pi       : selection mode (0 = normal mode, 1 = edition mode)
 */
 void save_dihedral_selection (glwin * view, int pi)
 {
@@ -234,10 +235,10 @@ void save_dihedral_selection (glwin * view, int pi)
 /*
 *  void update_dihedral_selection (glwin * view, int pi)
 *
-*  Usage: 
+*  Usage: update the dihedral selection data
 *
-*  glwin * view : the target glwin pointer
-*  int pi       : 
+*  glwin * view : the target glwin
+*  int pi       : selection mode (0 = normal mode, 1 = edition mode)
 */
 void update_dihedral_selection (glwin * view, int pi)
 {
@@ -254,10 +255,10 @@ void update_dihedral_selection (glwin * view, int pi)
 /*
 *  void save_angle_selection (glwin * view, int pi)
 *
-*  Usage: 
+*  Usage: save the angle selection data
 *
-*  glwin * view : the target glwin pointer
-*  int pi       : 
+*  glwin * view : the target glwin
+*  int pi       : selection mode (0 = normal mode, 1 = edition mode)
 */
 void save_angle_selection (glwin * view, int pi)
 {
@@ -281,10 +282,10 @@ void save_angle_selection (glwin * view, int pi)
 /*
 *  void update_angle_selection (glwin * view, int pi)
 *
-*  Usage: 
+*  Usage: update the angle selection data
 *
-*  glwin * view : the target glwin pointer
-*  int pi       : 
+*  glwin * view : the target glwin
+*  int pi       : selection mode (0 = normal mode, 1 = edition mode)
 */
 void update_angle_selection (glwin * view, int pi)
 {
@@ -301,10 +302,10 @@ void update_angle_selection (glwin * view, int pi)
 /*
 *  void save_bond_selection (glwin * view, int pi)
 *
-*  Usage: 
+*  Usage: save the bond selection data
 *
-*  glwin * view : the target glwin pointer
-*  int pi       : 
+*  glwin * view : the target glwin
+*  int pi       : selection mode (0 = normal mode, 1 = edition mode)
 */
 void save_bond_selection (glwin * view, int pi)
 {
@@ -328,10 +329,10 @@ void save_bond_selection (glwin * view, int pi)
 /*
 *  void update_bond_selection (glwin * view, int pi)
 *
-*  Usage: 
+*  Usage: update the bond selection data
 *
-*  glwin * view : the target glwin pointer
-*  int pi       : 
+*  glwin * view : the target glwin
+*  int pi       : selection mode (0 = normal mode, 1 = edition mode)
 */
 void update_bond_selection (glwin * view, int pi)
 {
@@ -355,10 +356,10 @@ void update_bond_selection (glwin * view, int pi)
 /*
 *  void save_all_selections (glwin * view, int pi)
 *
-*  Usage: 
+*  Usage: save all selection data
 *
-*  glwin * view : the target glwin pointer
-*  int pi       : 
+*  glwin * view : the target glwin
+*  int pi       : selection mode (0 = normal mode, 1 = edition mode)
 */
 void save_all_selections (glwin * view, int pi)
 {
@@ -370,10 +371,10 @@ void save_all_selections (glwin * view, int pi)
 /*
 *  void update_all_selections (glwin * view, int pi)
 *
-*  Usage: 
+*  Usage: update the selection data: bonds, angles and dihedrals
 *
-*  glwin * view : the target glwin pointer
-*  int pi       : 
+*  glwin * view : the target glwin
+*  int pi       : selection mode (0 = normal mode, 1 = edition mode)
 */
 void update_all_selections (glwin * view, int pi)
 {
@@ -411,10 +412,10 @@ void update_all_selections (glwin * view, int pi)
 /*
 *  struct selatom * new_selatom (int id, int sp)
 *
-*  Usage: 
+*  Usage: create a selection atom
 *
-*  int id : 
-*  int sp : 
+*  int id : atom id
+*  int sp : atom species
 */
 struct selatom * new_selatom (int id, int sp)
 {
@@ -427,11 +428,11 @@ struct selatom * new_selatom (int id, int sp)
 /*
 *  void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add)
 *
-*  Usage: 
+*  Usage: update the selection list adding or removing an atom
 *
-*  struct atom_selection * at_list : 
-*  struct atom * at                : 
-*  gboolean add                    : 
+*  struct atom_selection * at_list : target atom selection
+*  struct atom * at                : atom
+*  gboolean add                    : add or remove (1/0)
 */
 void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add)
 {
@@ -493,14 +494,14 @@ void update_selection_list (struct atom_selection * at_list, struct atom * at, g
 /*
 *  void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  glwin * view               : the target glwin pointer
-*  int id                     : 
-*  int ac                     : 
-*  int se                     : 
-*  int pi                     : 
+*  struct project * this_proj : the target project
+*  glwin * view               : the target glwin
+*  int id                     : the atom id
+*  int ac                     : atom or clone (0/1)
+*  int se                     : set to 0 to ensure to remove a selected atom from the list and not to add label
+*  int pi                     : selection mode (0 = normal mode, 1 = edition mode)
 */
 void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
 {
@@ -537,18 +538,17 @@ void process_selected_atom (struct project * this_proj, glwin * view, int id, in
 }
 
 /*
-*  void process_selection (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
+*  void process_selection (struct project * this_proj, glwin * view, int id, int ac, int pi)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  glwin * view               : the target glwin pointer
-*  int id                     : 
-*  int ac                     : 
-*  int se                     : 
-*  int pi                     : 
+*  struct project * this_proj : the target project
+*  glwin * view               : the target glwin
+*  int id                     : the atom id
+*  int ac                     : atom or clone (0/1)
+*  int pi                     : selection mode (0 = normal mode, 1 = edition mode)
 */
-void process_selection (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
+void process_selection (struct project * this_proj, glwin * view, int id, int ac, int pi)
 {
   int i, j, k;
   j =  view -> anim -> last -> img -> step;
@@ -557,7 +557,7 @@ void process_selection (struct project * this_proj, glwin * view, int id, int ac
   {
     if (i == j)
     {
-      process_selected_atom (this_proj, view, id, ac, se, pi);
+      process_selected_atom (this_proj, view, id, ac, 1, pi);
     }
     else
     {
@@ -569,12 +569,12 @@ void process_selection (struct project * this_proj, glwin * view, int id, int ac
 /*
 *  void process_the_hits (glwin * view, gint event_button, double ptx, double pty)
 *
-*  Usage: 
+*  Usage: process a mouse click
 *
-*  glwin * view      : the target glwin pointer
-*  gint event_button : 
-*  double ptx        : 
-*  double pty        : 
+*  glwin * view      : the target glwin
+*  gint event_button : the event button
+*  double ptx        : x position
+*  double pty        : y position
 */
 void process_the_hits (glwin * view, gint event_button, double ptx, double pty)
 {
@@ -632,12 +632,12 @@ void process_the_hits (glwin * view, gint event_button, double ptx, double pty)
           save_all_selections (view, k);
           if (j < view -> clones_to_be_picked)
           {
-            process_selection (this_proj, view, m, n, 1, k);
+            process_selection (this_proj, view, m, n, k);
           }
           else
           {
-            if (this_proj -> atoms[l][o].show[n]) process_selection (this_proj, view, o, n, 1, k);
-            if (this_proj -> atoms[l][p].show[n]) process_selection (this_proj, view, p, n, 1, k);
+            if (this_proj -> atoms[l][o].show[n]) process_selection (this_proj, view, o, n, k);
+            if (this_proj -> atoms[l][p].show[n]) process_selection (this_proj, view, p, n, k);
           }
           update_all_selections (view, k);
         }

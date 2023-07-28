@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'glview.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   GLuint * allocgluint (int  val);
   GLuint ** allocdgluint (int xal, int yal);
@@ -104,9 +104,9 @@ GLenum ogl_texture;
 /*
 *  GLuint * allocgluint (int  val)
 *
-*  Usage: 
+*  Usage:
 *
-*  int  val : 
+*  int  val :
 */
 GLuint * allocgluint (int  val)
 {
@@ -119,10 +119,10 @@ GLuint * allocgluint (int  val)
 /*
 *  GLuint ** allocdgluint (int xal, int yal)
 *
-*  Usage: 
+*  Usage:
 *
-*  int xal : 
-*  int yal : 
+*  int xal :
+*  int yal :
 */
 GLuint ** allocdgluint (int xal, int yal)
 {
@@ -141,10 +141,10 @@ GLuint ** allocdgluint (int xal, int yal)
 /*
 *  GLfloat ** allocdGLfloat (int xal, int yal)
 *
-*  Usage: 
+*  Usage:
 *
-*  int xal : 
-*  int yal : 
+*  int xal :
+*  int yal :
 */
 GLfloat ** allocdGLfloat (int xal, int yal)
 {
@@ -168,9 +168,9 @@ const float light_pos[MAX_LIGHTS][4] = {{-0.1f,  0.1f,  1.0f, 0.0f},
 /*
 *  ColRGBA set_default_color (int z)
 *
-*  Usage: 
+*  Usage:
 *
-*  int z : 
+*  int z :
 */
 ColRGBA set_default_color (int z)
 {
@@ -342,10 +342,10 @@ void update_bonds_ (int * bd, int * stp,
 /*
 *  void sort (int dim, int * tab)
 *
-*  Usage: 
+*  Usage:
 *
-*  int dim   : 
-*  int * tab : 
+*  int dim   :
+*  int * tab :
 */
 void sort (int dim, int * tab)
 {
@@ -365,11 +365,11 @@ void sort (int dim, int * tab)
 /*
 *  void update_atom_neighbors_ (int * stp, int * at, int * nv)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * stp : 
-*  int * at  : 
-*  int * nv  : 
+*  int * stp :
+*  int * at  :
+*  int * nv  :
 */
 void update_atom_neighbors_ (int * stp, int * at, int * nv)
 {
@@ -383,12 +383,12 @@ void update_atom_neighbors_ (int * stp, int * at, int * nv)
 /*
 *  void update_this_neighbor_ (int * stp, int * at, int * iv, int * nv)
 *
-*  Usage: 
+*  Usage:
 *
-*  int * stp : 
-*  int * at  : 
-*  int * iv  : 
-*  int * nv  : 
+*  int * stp :
+*  int * at  :
+*  int * iv  :
+*  int * nv  :
 */
 void update_this_neighbor_ (int * stp, int * at, int * iv, int * nv)
 {
@@ -402,9 +402,9 @@ void update_this_neighbor_ (int * stp, int * at, int * iv, int * nv)
 /*
 *  void update (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void update (glwin * view)
 {
@@ -418,10 +418,10 @@ void update (glwin * view)
 /*
 *  void transform (glwin * view, double aspect)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view  : the target glwin pointer
-*  double aspect : 
+*  glwin * view  : the target glwin
+*  double aspect :
 */
 void transform (glwin * view, double aspect)
 {
@@ -474,11 +474,11 @@ void transform (glwin * view, double aspect)
 /*
 *  void reshape (glwin * view, int width, int height)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
-*  int width    : 
-*  int height   : 
+*  glwin * view : the target glwin
+*  int width    :
+*  int height   :
 */
 void reshape (glwin * view, int width, int height)
 {
@@ -500,11 +500,11 @@ void reshape (glwin * view, int width, int height)
 /*
 *  void rotate_x_y (glwin * view, double angle_x, double angle_y)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view   : the target glwin pointer
-*  double angle_x : 
-*  double angle_y : 
+*  glwin * view   : the target glwin
+*  double angle_x :
+*  double angle_y :
 */
 void rotate_x_y (glwin * view, double angle_x, double angle_y)
 {
@@ -552,9 +552,9 @@ void rotate_x_y (glwin * view, double angle_x, double angle_y)
 /*
 *  void save_rotation_quaternion (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void save_rotation_quaternion (glwin * view)
 {
@@ -569,9 +569,9 @@ void save_rotation_quaternion (glwin * view)
 /*
 *  void edit_for_motion (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void edit_for_motion (glwin * view)
 {
@@ -633,12 +633,12 @@ void edit_for_motion (glwin * view)
 /*
 *  void motion (glwin * view, gint x, gint y, GdkModifierType state)
 *
-*  Usage: 
+*  Usage: mouse motion
 *
-*  glwin * view          : the target glwin pointer
-*  gint x                : 
-*  gint y                : 
-*  GdkModifierType state : 
+*  glwin * view          : the target glwin
+*  gint x                : x position
+*  gint y                : y position
+*  GdkModifierType state : The keyboard modifier (Ctrl, Alt ...)
 */
 void motion (glwin * view, gint x, gint y, GdkModifierType state)
 {
@@ -705,10 +705,10 @@ void motion (glwin * view, gint x, gint y, GdkModifierType state)
 /*
 *  G_MODULE_EXPORT gboolean on_motion (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event : 
+*  GdkEvent * event :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_motion (GtkWidget * widg, GdkEvent * event, gpointer data)
@@ -737,11 +737,11 @@ G_MODULE_EXPORT gboolean on_motion (GtkWidget * widg, GdkEvent * event, gpointer
 /*
 *  G_MODULE_EXPORT void on_glwin_pointer_motion (GtkEventControllerMotion * motc, gdouble x, gdouble y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEventControllerMotion * motc : 
-*  gdouble x                       : 
-*  gdouble y                       : 
+*  GtkEventControllerMotion * motc :
+*  gdouble x                       :
+*  gdouble y                       :
 *  gpointer data                   : the associated data pointer
 */
 G_MODULE_EXPORT void on_glwin_pointer_motion (GtkEventControllerMotion * motc, gdouble x, gdouble y, gpointer data)
@@ -758,24 +758,24 @@ G_MODULE_EXPORT void on_glwin_pointer_motion (GtkEventControllerMotion * motc, g
 /*
 *  void render_this_gl_window (glwin * view, GtkGLArea * area, gint button, double ptx, double pty)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view     : the target glwin pointer
-*  GtkGLArea * area : 
-*  gint button      : 
-*  double ptx       : 
-*  double pty       : 
+*  glwin * view     : the target glwin
+*  GtkGLArea * area :
+*  gint button      :
+*  double ptx       :
+*  double pty       :
 */
 void render_this_gl_window (glwin * view, GtkGLArea * area, gint button, double ptx, double pty)
 #else
 /*
 *  void render_this_gl_window (glwin * view, GtkWidget * widg, gint button)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view     : the target glwin pointer
+*  glwin * view     : the target glwin
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  gint button      : 
+*  gint button      :
 */
 void render_this_gl_window (glwin * view, GtkWidget * widg, gint button)
 #endif
@@ -812,12 +812,12 @@ void render_this_gl_window (glwin * view, GtkWidget * widg, gint button)
 /*
 *  void glwin_lib_pressed (double x, double y, guint event_type, int event_button, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  double x         : 
-*  double y         : 
-*  guint event_type : 
-*  int event_button : 
+*  double x         :
+*  double y         :
+*  guint event_type :
+*  int event_button :
 *  gpointer data    : the associated data pointer
 */
 void glwin_lib_pressed (double x, double y, guint event_type, int event_button, gpointer data)
@@ -847,10 +847,10 @@ void glwin_lib_pressed (double x, double y, guint event_type, int event_button, 
 /*
 *  G_MODULE_EXPORT gboolean on_lib_pressed (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event : 
+*  GdkEvent * event :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_lib_pressed (GtkWidget * widg, GdkEvent * event, gpointer data)
@@ -863,12 +863,12 @@ G_MODULE_EXPORT gboolean on_lib_pressed (GtkWidget * widg, GdkEvent * event, gpo
 /*
 *  G_MODULE_EXPORT void on_lib_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
+*  GtkGesture * gesture :
+*  int n_press          :
+*  double x             :
+*  double y             :
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_lib_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
@@ -879,12 +879,12 @@ G_MODULE_EXPORT void on_lib_button_pressed (GtkGesture * gesture, int n_press, d
 /*
 *  G_MODULE_EXPORT void on_lib_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
+*  GtkGesture * gesture :
+*  int n_press          :
+*  double x             :
+*  double y             :
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_lib_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
@@ -898,13 +898,13 @@ gl_pop_info to_pop;
 /*
 *  void glwin_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  double event_x     : 
-*  double event_y     : 
-*  guint event_button : 
-*  guint event_type   : 
-*  guint32 event_time : 
+*  double event_x     :
+*  double event_y     :
+*  guint event_button :
+*  guint event_type   :
+*  guint32 event_time :
 *  gpointer data      : the associated data pointer
 */
 void glwin_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
@@ -968,10 +968,10 @@ void glwin_button_event (double event_x, double event_y, guint event_button, gui
 /*
 *  G_MODULE_EXPORT gboolean on_glwin_button_event (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event : 
+*  GdkEvent * event :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_glwin_button_event (GtkWidget * widg, GdkEvent * event, gpointer data)
@@ -984,12 +984,12 @@ G_MODULE_EXPORT gboolean on_glwin_button_event (GtkWidget * widg, GdkEvent * eve
 /*
 *  G_MODULE_EXPORT void on_glwin_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
+*  GtkGesture * gesture :
+*  int n_press          :
+*  double x             :
+*  double y             :
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_glwin_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
@@ -1000,12 +1000,12 @@ G_MODULE_EXPORT void on_glwin_button_pressed (GtkGesture * gesture, int n_press,
 /*
 *  G_MODULE_EXPORT void on_glwin_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGesture * gesture : 
-*  int n_press          : 
-*  double x             : 
-*  double y             : 
+*  GtkGesture * gesture :
+*  int n_press          :
+*  double x             :
+*  double y             :
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT void on_glwin_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
@@ -1018,10 +1018,10 @@ G_MODULE_EXPORT void on_glwin_button_released (GtkGesture * gesture, int n_press
 /*
 *  void zoom (glwin * view, int delta)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
-*  int delta    : 
+*  glwin * view : the target glwin
+*  int delta    :
 */
 void zoom (glwin * view, int delta)
 {
@@ -1039,10 +1039,10 @@ void zoom (glwin * view, int delta)
 /*
 *  G_MODULE_EXPORT gboolean on_scrolled (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event : 
+*  GdkEvent * event :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_scrolled (GtkWidget * widg, GdkEvent * event, gpointer data)
@@ -1065,11 +1065,11 @@ G_MODULE_EXPORT gboolean on_scrolled (GtkWidget * widg, GdkEvent * event, gpoint
 /*
 *  G_MODULE_EXPORT gboolean on_glwin_pointer_scoll (GtkEventControllerScroll * event, gdouble dx, gdouble dy, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkEventControllerScroll * event : 
-*  gdouble dx                       : 
-*  gdouble dy                       : 
+*  GtkEventControllerScroll * event :
+*  gdouble dx                       :
+*  gdouble dy                       :
 *  gpointer data                    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_glwin_pointer_scoll (GtkEventControllerScroll * event, gdouble dx, gdouble dy, gpointer data)
@@ -1092,10 +1092,10 @@ G_MODULE_EXPORT gboolean on_glwin_pointer_scoll (GtkEventControllerScroll * even
 /*
 *  void init_camera (struct project * this_proj, int get_depth)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int get_depth              : 
+*  struct project * this_proj :
+*  int get_depth              :
 */
 void init_camera (struct project * this_proj, int get_depth)
 {
@@ -1149,11 +1149,11 @@ void init_camera (struct project * this_proj, int get_depth)
 /*
 *  void image_init_spec_data (image * img, struct project * this_proj, int nsp)
 *
-*  Usage: 
+*  Usage:
 *
-*  image * img                : 
-*  struct project * this_proj : 
-*  int nsp                    : 
+*  image * img                :
+*  struct project * this_proj :
+*  int nsp                    :
 */
 void image_init_spec_data (image * img, struct project * this_proj, int nsp)
 {
@@ -1212,10 +1212,10 @@ void image_init_spec_data (image * img, struct project * this_proj, int nsp)
 /*
 *  void set_img_lights (struct project * this_proj, image * img)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  image * img                : 
+*  struct project * this_proj :
+*  image * img                :
 */
 void set_img_lights (struct project * this_proj, image * img)
 {
@@ -1240,9 +1240,9 @@ void set_img_lights (struct project * this_proj, image * img)
 /*
 *  void init_img (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void init_img (struct project * this_proj)
 {
@@ -1334,9 +1334,9 @@ void init_img (struct project * this_proj)
 /*
 *  gboolean is_GLExtension_Supported (const char * extension)
 *
-*  Usage: 
+*  Usage:
 *
-*  const char * extension : 
+*  const char * extension :
 */
 gboolean is_GLExtension_Supported (const char * extension)
 {
@@ -1353,9 +1353,9 @@ gboolean is_GLExtension_Supported (const char * extension)
 /*
 *  void init_opengl (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void init_opengl (glwin * view)
 {
@@ -1401,9 +1401,9 @@ void init_opengl (glwin * view)
 /*
 *  void center_molecule (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void center_molecule (struct project * this_proj)
 {
@@ -1482,9 +1482,9 @@ void center_molecule (struct project * this_proj)
 /*
 *  void center_this_molecule (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void center_this_molecule (glwin * view)
 {
@@ -1502,10 +1502,10 @@ void center_this_molecule (glwin * view)
 /*
 *  void free_glwin_spec_data (struct project * this_proj, int spec)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int spec                   : 
+*  struct project * this_proj :
+*  int spec                   :
 */
 void free_glwin_spec_data (struct project * this_proj, int spec)
 {
@@ -1547,10 +1547,10 @@ void free_glwin_spec_data (struct project * this_proj, int spec)
 /*
 *  void glwin_init_spec_data (struct project * this_proj, int nspec)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int nspec                  : 
+*  struct project * this_proj :
+*  int nspec                  :
 */
 void glwin_init_spec_data (struct project * this_proj, int nspec)
 {
@@ -1613,9 +1613,9 @@ void glwin_init_spec_data (struct project * this_proj, int nspec)
 /*
 *  void init_glwin (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void init_glwin (glwin * view)
 {
@@ -1662,9 +1662,9 @@ void init_glwin (glwin * view)
 /*
 *  GError * init_gtk_gl_area (GtkGLArea * area)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGLArea * area : 
+*  GtkGLArea * area :
 */
 GError * init_gtk_gl_area (GtkGLArea * area)
 {
@@ -1685,7 +1685,7 @@ GError * init_gtk_gl_area (GtkGLArea * area)
 /*
 *  void gtk_window_change_gdk_visual (GtkWidget * win)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * win : the GtkWidget sending the signal
 */
@@ -1722,9 +1722,9 @@ void gtk_window_change_gdk_visual (GtkWidget * win)
 /*
 *  G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGLArea * area : 
+*  GtkGLArea * area :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data)
@@ -1732,7 +1732,7 @@ G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data)
 /*
 *  G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -1796,10 +1796,10 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean on_expose (GtkGLArea * area, GdkGLContext * context, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkGLArea * area       : 
-*  GdkGLContext * context : 
+*  GtkGLArea * area       :
+*  GdkGLContext * context :
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_expose (GtkGLArea * area, GdkGLContext * context, gpointer data)
@@ -1807,10 +1807,10 @@ G_MODULE_EXPORT gboolean on_expose (GtkGLArea * area, GdkGLContext * context, gp
 /*
 *  G_MODULE_EXPORT gboolean on_expose (GtkWidget * widg, cairo_t * cr, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  cairo_t * cr     : 
+*  cairo_t * cr     :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_expose (GtkWidget * widg, cairo_t * cr, gpointer data)

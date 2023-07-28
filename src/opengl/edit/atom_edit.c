@@ -57,7 +57,7 @@ gboolean was_moved;
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 gboolean is_atom_win_active (glwin * view)
 {

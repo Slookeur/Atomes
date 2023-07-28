@@ -212,7 +212,7 @@ G_MODULE_EXPORT void set_frag_mol_color (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int ideo     :
 *  int spec     :
 *  int geo      :
@@ -224,7 +224,7 @@ void color_box (glwin * view, int ideo, int spec, int geo)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int ideo     :
 *  int spec     :
 *  int geo      :
@@ -378,7 +378,7 @@ GtkWidget * color_box (glwin * view, int ideo, int spec, int geo)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int ideo     :
 *  int spec     :
 *  int geo      :

@@ -82,7 +82,7 @@ G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 */
 GtkWidget * menu_render (glwin * view, int id)
@@ -167,7 +167,7 @@ G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * par
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_render (glwin * view, int popm)

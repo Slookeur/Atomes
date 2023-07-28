@@ -116,7 +116,7 @@ void append_opengl_item (glwin * view, GMenu * menu, const gchar * name, const g
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * prepare_opengl_menu (glwin * view, int popm)
@@ -138,7 +138,7 @@ GMenu * prepare_opengl_menu (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * prepare_model_menu (glwin * view, int popm)
@@ -156,7 +156,7 @@ GMenu * prepare_model_menu (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * prepare_coord_menu (glwin * view, int popm)
@@ -205,7 +205,7 @@ GMenu * prepare_coord_menu (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  gchar * str  :
 */
 GMenu * opengl_menu_bar (glwin * view, gchar * str)
@@ -233,7 +233,7 @@ GMenu * opengl_menu_bar (glwin * view, gchar * str)
 *
 *  Usage:
 *
-*  glwin * view         : the target glwin pointer
+*  glwin * view         : the target glwin
 *  GtkWidget * menu_bar : the GtkWidget sending the signal
 */
 void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar)
@@ -343,7 +343,7 @@ void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 GtkWidget * opengl_window_create_menu_bar (glwin * view)
 {
@@ -372,7 +372,7 @@ GtkWidget * opengl_window_create_menu_bar (glwin * view)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void update_menu_bar (glwin * view)
 {

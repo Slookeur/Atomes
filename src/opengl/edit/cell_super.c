@@ -156,7 +156,7 @@ void sens_superbut (struct project * this_proj)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 void super_celling (glwin * view)
 {

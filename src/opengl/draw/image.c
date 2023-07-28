@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'image.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void render_image (glwin * view, video_options * iopts);
 
@@ -63,10 +63,10 @@ extern void close_frame_buffer ();
 /*
 *  G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id       : 
+*  gint response_id       :
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data)
@@ -76,10 +76,10 @@ G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id,
 /*
 *  G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id : 
+*  gint response_id :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data)
@@ -147,10 +147,10 @@ G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpoin
 /*
 *  void render_image (glwin * view, video_options * iopts)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view          : the target glwin pointer
-*  video_options * iopts : 
+*  glwin * view          : the target glwin
+*  video_options * iopts :
 */
 void render_image (glwin * view, video_options * iopts)
 {

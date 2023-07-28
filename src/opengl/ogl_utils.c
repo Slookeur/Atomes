@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'ogl_utils.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - 2D and 3D calculations utilities for distances and angles
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   double arc_cos (double val);
 
@@ -43,10 +44,10 @@ extern ColRGBA init_color (int id, int numid);
 /*
 *  struct distance distance_2d (struct atom * at, struct atom * bt)
 *
-*  Usage: 
+*  Usage: distance between atom a and b in 2D
 *
-*  struct atom * at : 
-*  struct atom * bt : 
+*  struct atom * at : atom a
+*  struct atom * bt : atom b
 */
 struct distance distance_2d (struct atom * at, struct atom * bt)
 {
@@ -62,12 +63,12 @@ struct distance distance_2d (struct atom * at, struct atom * bt)
 /*
 *  struct distance distance_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt)
 *
-*  Usage: 
+*  Usage: distance between atom a and b in 3D
 *
-*  cell_info * cell : 
-*  int mdstep       : 
-*  struct atom * at : 
-*  struct atom * bt : 
+*  cell_info * cell : unit cell
+*  int mdstep       : MD step
+*  struct atom * at : atom a
+*  struct atom * bt : atom b
 */
 struct distance distance_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt)
 {
@@ -115,9 +116,9 @@ struct distance distance_3d (cell_info * cell, int mdstep, struct atom * at, str
 /*
 *  double arc_cos (double val)
 *
-*  Usage: 
+*  Usage: compute arc cosinus
 *
-*  double val : 
+*  double val : the angle
 */
 double arc_cos (double val)
 {
@@ -138,11 +139,11 @@ double arc_cos (double val)
 /*
 *  struct angle angle_2d (struct atom * at, struct atom * bt, struct atom * ct)
 *
-*  Usage: 
+*  Usage: angle between atom a, b and c in 2D
 *
-*  struct atom * at : 
-*  struct atom * bt : 
-*  struct atom * ct : 
+*  struct atom * at : atom a
+*  struct atom * bt : atom b
+*  struct atom * ct : atom c
 */
 struct angle angle_2d (struct atom * at, struct atom * bt, struct atom * ct)
 {
@@ -159,13 +160,13 @@ struct angle angle_2d (struct atom * at, struct atom * bt, struct atom * ct)
 /*
 *  struct angle angle_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct)
 *
-*  Usage: 
+*  Usage: angle between atom a, b and c in 3D
 *
-*  cell_info * cell : 
-*  int mdstep       : 
-*  struct atom * at : 
-*  struct atom * bt : 
-*  struct atom * ct : 
+*  cell_info * cell : unit cell
+*  int mdstep       : MD step
+*  struct atom * at : atom a
+*  struct atom * bt : atom b
+*  struct atom * ct : atom c
 */
 struct angle angle_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct)
 {
@@ -183,14 +184,14 @@ struct angle angle_3d (cell_info * cell, int mdstep, struct atom * at, struct at
 /*
 *  struct angle dihedral_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct, struct atom * dt)
 *
-*  Usage: 
+*  Usage: dihedral between atom a, b, c and d in 3D
 *
-*  cell_info * cell : 
-*  int mdstep       : 
-*  struct atom * at : 
-*  struct atom * bt : 
-*  struct atom * ct : 
-*  struct atom * dt : 
+*  cell_info * cell : unit cell
+*  int mdstep       : MD step
+*  struct atom * at : atom a
+*  struct atom * bt : atom b
+*  struct atom * ct : atom c
+*  struct atom * dt : atom d
 */
 struct angle dihedral_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct, struct atom * dt)
 {
@@ -219,14 +220,14 @@ struct angle dihedral_3d (cell_info * cell, int mdstep, struct atom * at, struct
 /*
 *  struct angle inversion_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct, struct atom * dt)
 *
-*  Usage: 
+*  Usage: inversion angle between atom a, b, c and d in 3D
 *
-*  cell_info * cell : 
-*  int mdstep       : 
-*  struct atom * at : 
-*  struct atom * bt : 
-*  struct atom * ct : 
-*  struct atom * dt : 
+*  cell_info * cell : unit cell
+*  int mdstep       : MD step
+*  struct atom * at : atom a
+*  struct atom * bt : atom b
+*  struct atom * ct : atom c
+*  struct atom * dt : atom d
 */
 struct angle inversion_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct, struct atom * dt)
 {

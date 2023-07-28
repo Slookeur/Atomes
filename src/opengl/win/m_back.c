@@ -37,7 +37,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 GtkWidget * menu_back (glwin * view)
 {
@@ -53,7 +53,7 @@ GtkWidget * menu_back (glwin * view)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_back (glwin * view, int popm)

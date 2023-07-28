@@ -1060,7 +1060,7 @@ G_MODULE_EXPORT void set_color_map (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int m        :
 *  int mi       :
 *  int mid      :
@@ -1101,7 +1101,7 @@ GtkWidget * mapw (glwin * view, int m, int mi, int mid, int mp, gchar * str)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  gchar * ncm  :
 *  int mid      :
 *  int id       :
@@ -1138,7 +1138,7 @@ GtkWidget * menump (glwin * view, gchar * ncm, int mid, int id, int cid)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *   int id      :
 */
 GtkWidget * menu_map (glwin * view,  int id)
@@ -1209,7 +1209,7 @@ G_MODULE_EXPORT void change_color_radio (GSimpleAction * action, GVariant * para
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int mid      :
 *  int cid      :
@@ -1249,7 +1249,7 @@ GMenu * menump (glwin * view, int popm, int mid, int cid)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_map (glwin * view, int popm)

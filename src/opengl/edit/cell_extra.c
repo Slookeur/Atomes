@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cell_extra.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data);
 
@@ -32,9 +32,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
+*  GtkSpinButton * res :
 *  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
@@ -65,9 +65,9 @@ G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
 /*
 *  GtkWidget * add_extra_cell_tab (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 GtkWidget * add_extra_cell_tab (glwin * view)
 {

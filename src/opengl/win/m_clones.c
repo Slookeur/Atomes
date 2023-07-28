@@ -82,7 +82,7 @@ G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
 *  char * name      :
 *  gboolean clone   :
 *  GtkWidget * menu : the GtkWidget sending the signal
-*  glwin * view     : the target glwin pointer
+*  glwin * view     : the target glwin
 */
 GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, glwin * view)
 {
@@ -96,7 +96,7 @@ GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, 
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 */
 GtkWidget * menu_clones (glwin * view, int id)
@@ -164,7 +164,7 @@ G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parame
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_clones (glwin * view, int popm)

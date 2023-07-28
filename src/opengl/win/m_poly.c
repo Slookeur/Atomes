@@ -211,7 +211,7 @@ G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int jd       :
 *  int id       :
 */
@@ -267,7 +267,7 @@ GtkWidget * mpoly (glwin * view, int jd, int id)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int jd       :
 *  int id       :
 *  int hd       :
@@ -316,7 +316,7 @@ GtkWidget * menupoly (glwin * view, int jd, int id, int hd, gchar * poln)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 */
 GtkWidget * menu_poly (glwin * view, int id)
@@ -347,7 +347,7 @@ GtkWidget * menu_poly (glwin * view, int id)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int id       :
 */
@@ -399,7 +399,7 @@ GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int id       :
 */
@@ -429,7 +429,7 @@ GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 *  int aid      :
 */
@@ -454,7 +454,7 @@ GMenu * add_menu_poly (glwin * view, int popm, int aid)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_poly_rings (glwin * view, int popm)
@@ -476,7 +476,7 @@ GMenu * menu_poly_rings (glwin * view, int popm)
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_poly (glwin * view, int popm)

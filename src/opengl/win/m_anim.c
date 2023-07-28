@@ -44,7 +44,7 @@ extern G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data);
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int id       :
 */
 GtkWidget * menu_anim (glwin * view, int id)
@@ -124,7 +124,7 @@ G_MODULE_EXPORT void to_rec (GSimpleAction * action, GVariant * parameter, gpoin
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int popm     :
 */
 GMenu * menu_anim (glwin * view, int popm)

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_labels.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT gboolean scroll_set_label_shift (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
   G_MODULE_EXPORT gboolean scroll_set_measure_factor (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
@@ -67,7 +67,7 @@ GtkWidget * tilt;
 /*
 *  G_MODULE_EXPORT void set_measure_style (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -84,7 +84,7 @@ G_MODULE_EXPORT void set_measure_style (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_labels_format (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -106,7 +106,7 @@ G_MODULE_EXPORT void set_labels_format (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_labels_render (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -139,11 +139,11 @@ G_MODULE_EXPORT void set_labels_render (GtkWidget * widg, gpointer data)
 /*
 *  void init_labels_colors (image * img, int sp, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  image * img : 
-*  int sp      : 
-*  int id      : 
+*  image * img :
+*  int sp      :
+*  int id      :
 */
 void init_labels_colors (image * img, int sp, int id)
 {
@@ -163,7 +163,7 @@ void init_labels_colors (image * img, int sp, int id)
 /*
 *  G_MODULE_EXPORT void use_atom_default_colors (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -173,7 +173,7 @@ G_MODULE_EXPORT void use_atom_default_colors (GtkCheckButton * but, gpointer dat
 /*
 *  G_MODULE_EXPORT void use_atom_default_colors (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -213,9 +213,9 @@ G_MODULE_EXPORT void use_atom_default_colors (GtkToggleButton * but, gpointer da
 /*
 *  G_MODULE_EXPORT void set_labels_font (GtkFontButton * fontb, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkFontButton * fontb : 
+*  GtkFontButton * fontb :
 *  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_labels_font (GtkFontButton * fontb, gpointer data)
@@ -242,9 +242,9 @@ G_MODULE_EXPORT void set_labels_font (GtkFontButton * fontb, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_label_color (GtkColorChooser * colob, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkColorChooser * colob : 
+*  GtkColorChooser * colob :
 *  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void set_label_color (GtkColorChooser * colob, gpointer data)
@@ -260,7 +260,7 @@ G_MODULE_EXPORT void set_label_color (GtkColorChooser * colob, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_labels_position (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -278,10 +278,10 @@ G_MODULE_EXPORT void set_labels_position (GtkComboBox * box, gpointer data)
 /*
 *  void label_shift_has_changed (gpointer data, double value)
 *
-*  Usage: 
+*  Usage:
 *
 *  gpointer data : the associated data pointer
-*  double value  : 
+*  double value  :
 */
 void label_shift_has_changed (gpointer data, double value)
 {
@@ -297,11 +297,11 @@ void label_shift_has_changed (gpointer data, double value)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_label_shift (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkRange * range     : 
-*  GtkScrollType scroll : 
-*  gdouble value        : 
+*  GtkRange * range     :
+*  GtkScrollType scroll :
+*  gdouble value        :
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_label_shift (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
@@ -313,9 +313,9 @@ G_MODULE_EXPORT gboolean scroll_set_label_shift (GtkRange * range, GtkScrollType
 /*
 *  G_MODULE_EXPORT void set_label_shift (GtkRange * range, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkRange * range : 
+*  GtkRange * range :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_label_shift (GtkRange * range, gpointer data)
@@ -327,7 +327,7 @@ G_MODULE_EXPORT void set_label_shift (GtkRange * range, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_labels_scale (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -337,7 +337,7 @@ G_MODULE_EXPORT void set_labels_scale (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_labels_scale (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -361,7 +361,7 @@ G_MODULE_EXPORT void set_labels_scale (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_labels_tilt (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -379,10 +379,10 @@ G_MODULE_EXPORT void set_labels_tilt (GtkComboBox * box, gpointer data)
 /*
 *  void mesure_factor_has_changed (gpointer data, double value)
 *
-*  Usage: 
+*  Usage:
 *
 *  gpointer data : the associated data pointer
-*  double value  : 
+*  double value  :
 */
 void mesure_factor_has_changed (gpointer data, double value)
 {
@@ -396,11 +396,11 @@ void mesure_factor_has_changed (gpointer data, double value)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_measure_factor (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkRange * range     : 
-*  GtkScrollType scroll : 
-*  gdouble value        : 
+*  GtkRange * range     :
+*  GtkScrollType scroll :
+*  gdouble value        :
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_measure_factor (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
@@ -412,9 +412,9 @@ G_MODULE_EXPORT gboolean scroll_set_measure_factor (GtkRange * range, GtkScrollT
 /*
 *  G_MODULE_EXPORT void set_measure_factor (GtkRange * range, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkRange * range : 
+*  GtkRange * range :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_measure_factor (GtkRange * range, gpointer data)
@@ -425,10 +425,10 @@ G_MODULE_EXPORT void set_measure_factor (GtkRange * range, gpointer data)
 /*
 *  void measure_width_has_changed (gpointer data, double value)
 *
-*  Usage: 
+*  Usage:
 *
 *  gpointer data : the associated data pointer
-*  double value  : 
+*  double value  :
 */
 void measure_width_has_changed (gpointer data, double value)
 {
@@ -442,11 +442,11 @@ void measure_width_has_changed (gpointer data, double value)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_measure_width (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkRange * range     : 
-*  GtkScrollType scroll : 
-*  gdouble value        : 
+*  GtkRange * range     :
+*  GtkScrollType scroll :
+*  gdouble value        :
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_measure_width (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
@@ -458,9 +458,9 @@ G_MODULE_EXPORT gboolean scroll_set_measure_width (GtkRange * range, GtkScrollTy
 /*
 *  G_MODULE_EXPORT void set_measure_width (GtkRange * range, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkRange * range : 
+*  GtkRange * range :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_measure_width (GtkRange * range, gpointer data)
@@ -475,7 +475,7 @@ GtkWidget * lstyle;
 /*
 *  G_MODULE_EXPORT void enable_lines (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -485,7 +485,7 @@ G_MODULE_EXPORT void enable_lines (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void enable_lines (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -518,10 +518,10 @@ G_MODULE_EXPORT void enable_lines (GtkToggleButton * but, gpointer data)
 /*
 *  GtkWidget * labels_tab (glwin * view, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
-*  int id       : 
+*  glwin * view : the target glwin
+*  int id       :
 */
 GtkWidget * labels_tab (glwin * view, int id)
 {

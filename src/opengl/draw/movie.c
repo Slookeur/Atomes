@@ -249,7 +249,7 @@ static GLubyte * capture_opengl_image (unsigned int width, unsigned int height)
 *  VideoStream * vs :
 *  int width        :
 *  int height       :
-*  glwin * view     : the target glwin pointer
+*  glwin * view     : the target glwin
 */
 void fill_image (VideoStream * vs, int width, int height, glwin * view)
 {
@@ -281,7 +281,7 @@ void fill_image (VideoStream * vs, int width, int height, glwin * view)
 *  AVFormatContext * f_context :
 *  VideoStream * vs            :
 *  int frame_id                :
-*  glwin * view                : the target glwin pointer
+*  glwin * view                : the target glwin
 */
 static void write_video_frame (AVFormatContext * f_context, VideoStream * vs, int frame_id, glwin * view)
 {
@@ -476,34 +476,36 @@ void set_old_cmap (image * img, int stp, int id)
 *
 *  Usage:
 *
-*  glwin * view  : the target glwin pointer
-*  image * img_a :
-*  image * img_b :
+*  glwin * view  : the target glwin
+*  image * img_a : the previous image
+*  image * img_b : the next image
 *  int ogl_q     :
 */
 gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, int ogl_q)
 {
   gboolean shaders = FALSE;
   int i, j, k;
-  k = img_b -> step;
+  int stp = img_b -> step;
 
   if (ogl_q == 0 && img_a -> quality != img_b -> quality)
   {
     view -> create_shaders[MDBOX] = TRUE;
     view -> create_shaders[MAXIS] = TRUE;
-    view -> n_shaders[ATOMS][k] = -1;
+    view -> n_shaders[ATOMS][stp] = -1;
     view -> create_shaders[ATOMS] = TRUE;
-    view -> n_shaders[BONDS][k] = -1;
+    view -> n_shaders[BONDS][stp] = -1;
     view -> create_shaders[BONDS] = TRUE;
-    view -> n_shaders[POLYS][k] = -1;
+    view -> n_shaders[POLYS][stp] = -1;
     view -> create_shaders[POLYS] = TRUE;
-    view -> n_shaders[RINGS][k] = -1;
+    view -> n_shaders[RINGS][stp] = -1;
     view -> create_shaders[RINGS] = TRUE;
-    view -> n_shaders[SELEC][k] = -1;
+    view -> n_shaders[VOLMS][stp] = -1;
+    view -> create_shaders[VOLMS] = TRUE;
+    view -> n_shaders[SELEC][stp] = -1;
     view -> create_shaders[SELEC] = TRUE;
     view -> create_shaders[LABEL] = TRUE;
     view -> create_shaders[MEASU] = TRUE;
-    for (i=0; i<2; i++) set_old_cmap (img_b, k, i);
+    for (i=0; i<2; i++) set_old_cmap (img_b, stp, i);
     return TRUE;
   }
 
@@ -513,19 +515,21 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
     {
       view -> create_shaders[MDBOX] = TRUE;
       view -> create_shaders[MAXIS] = TRUE;
-      view -> n_shaders[ATOMS][k] = -1;
+      view -> n_shaders[ATOMS][stp] = -1;
       view -> create_shaders[ATOMS] = TRUE;
-      view -> n_shaders[BONDS][k] = -1;
+      view -> n_shaders[BONDS][stp] = -1;
       view -> create_shaders[BONDS] = TRUE;
-      view -> n_shaders[POLYS][k] = -1;
+      view -> n_shaders[POLYS][stp] = -1;
       view -> create_shaders[POLYS] = TRUE;
-      view -> n_shaders[RINGS][k] = -1;
+      view -> n_shaders[RINGS][stp] = -1;
       view -> create_shaders[RINGS] = TRUE;
-      view -> n_shaders[SELEC][k] = -1;
+      view -> n_shaders[VOLMS][stp] = -1;
+      view -> create_shaders[VOLMS] = TRUE;
+      view -> n_shaders[SELEC][stp] = -1;
       view -> create_shaders[SELEC] = TRUE;
       view -> create_shaders[LABEL] = TRUE;
       view -> create_shaders[MEASU] = TRUE;
-      for (i=0; i<2; i++) set_old_cmap (img_b, k, i);
+      for (i=0; i<2; i++) set_old_cmap (img_b, stp, i);
       return TRUE;
     }
   }
@@ -538,11 +542,11 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
     {
       if (img_a -> show_coord[i][j] != img_b -> show_coord[i][j])
       {
-        view -> n_shaders[ATOMS][k] = -1;
+        view -> n_shaders[ATOMS][stp] = -1;
         view -> create_shaders[ATOMS] = TRUE;
-        view -> n_shaders[BONDS][k] = -1;
+        view -> n_shaders[BONDS][stp] = -1;
         view -> create_shaders[BONDS] = TRUE;
-        view -> n_shaders[SELEC][k] = -1;
+        view -> n_shaders[SELEC][stp] = -1;
         view -> create_shaders[SELEC] = TRUE;
         view -> create_shaders[LABEL] = TRUE;
         view -> create_shaders[MEASU] = TRUE;
@@ -554,7 +558,7 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
       {
         if (img_a -> show_poly[i][j] != img_b -> show_poly[i][j])
         {
-          view -> n_shaders[POLYS][k] = -1;
+          view -> n_shaders[POLYS][stp] = -1;
           view -> create_shaders[POLYS] = TRUE;
         }
       }
@@ -565,7 +569,7 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
       {
         if (img_a -> show_poly[i][j] != img_b -> show_poly[i][j])
         {
-          view -> n_shaders[RINGS][k] = -1;
+          view -> n_shaders[RINGS][stp] = -1;
           view -> create_shaders[RINGS] = TRUE;
         }
       }
@@ -575,9 +579,9 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
   {
     if (img_a -> show_coord[9][j] != img_b -> show_coord[9][j])
     {
-      view -> n_shaders[ATOMS][k] = -1;
+      view -> n_shaders[ATOMS][stp] = -1;
       view -> create_shaders[ATOMS] = TRUE;
-      view -> n_shaders[BONDS][k] = -1;
+      view -> n_shaders[BONDS][stp] = -1;
       view -> create_shaders[BONDS] = TRUE;
       view -> create_shaders[LABEL] = TRUE;
       view -> create_shaders[MEASU] = TRUE;
@@ -586,60 +590,116 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
 
   if (img_a -> draw_clones != img_b -> draw_clones)
   {
-    view -> n_shaders[ATOMS][k] = -1;
+    view -> n_shaders[ATOMS][stp] = -1;
     view -> create_shaders[ATOMS] = TRUE;
-    view -> n_shaders[BONDS][k] = -1;
+    view -> n_shaders[BONDS][stp] = -1;
     view -> create_shaders[BONDS] = TRUE;
-    view -> n_shaders[POLYS][k] = -1;
+    view -> n_shaders[POLYS][stp] = -1;
     view -> create_shaders[POLYS] = TRUE;
-    view -> n_shaders[RINGS][k] = -1;
+    view -> n_shaders[RINGS][stp] = -1;
     view -> create_shaders[RINGS] = TRUE;
-    view -> n_shaders[SELEC][k] = -1;
+    view -> n_shaders[SELEC][stp] = -1;
     view -> create_shaders[SELEC] = TRUE;
     view -> create_shaders[LABEL] = TRUE;
     shaders = TRUE;
   }
 
-  if (img_a -> color_map[0] != img_b -> color_map[0] || img_b -> color_map[0] != old_cmap[0][k])
+  if (img_a -> color_map[0] != img_b -> color_map[0] || img_b -> color_map[0] != old_cmap[0][stp])
   {
-    view -> n_shaders[ATOMS][k] = -1;
+    view -> n_shaders[ATOMS][stp] = -1;
     view -> create_shaders[ATOMS] = TRUE;
-    view -> n_shaders[BONDS][k] = -1;
+    view -> n_shaders[BONDS][stp] = -1;
     view -> create_shaders[BONDS] = TRUE;
     view -> create_shaders[LABEL] = TRUE;
-    set_old_cmap (img_b, k, 0);
+    set_old_cmap (img_b, stp, 0);
     shaders = TRUE;
   }
 
-  if (img_a -> color_map[1] != img_b -> color_map[1] || img_b -> color_map[1] != old_cmap[1][k])
+  if (img_a -> color_map[1] != img_b -> color_map[1] || img_b -> color_map[1] != old_cmap[1][stp])
   {
-    view -> n_shaders[POLYS][k] = -1;
+    view -> n_shaders[POLYS][stp] = -1;
     view -> create_shaders[POLYS] = TRUE;
-    set_old_cmap (img_b, k, 1);
+    set_old_cmap (img_b, stp, 1);
     shaders = TRUE;
   }
 
   if (img_a -> step != img_b -> step)
   {
-    if (view -> n_shaders[ATOMS][k] < 0) view -> create_shaders[ATOMS] = TRUE;
-    if (view -> n_shaders[BONDS][k] < 0) view -> create_shaders[BONDS] = TRUE;
-    if (view -> n_shaders[POLYS][k] < 0) view -> create_shaders[POLYS] = TRUE;
-    if (view -> n_shaders[RINGS][k] < 0) view -> create_shaders[RINGS] = TRUE;
-    if (view -> n_shaders[SELEC][k] < 0) view -> create_shaders[SELEC] = TRUE;
+    if (view -> n_shaders[ATOMS][stp] < 0) view -> create_shaders[ATOMS] = TRUE;
+    if (view -> n_shaders[BONDS][stp] < 0) view -> create_shaders[BONDS] = TRUE;
+    if (view -> n_shaders[POLYS][stp] < 0) view -> create_shaders[POLYS] = TRUE;
+    if (view -> n_shaders[RINGS][stp] < 0) view -> create_shaders[RINGS] = TRUE;
+    if (view -> n_shaders[VOLMS][stp] < 0) view -> create_shaders[VOLMS] = TRUE;
+    if (view -> n_shaders[SELEC][stp] < 0) view -> create_shaders[SELEC] = TRUE;
     view -> create_shaders[LABEL] = TRUE;
     view -> create_shaders[MEASU] = TRUE;
     shaders = TRUE;
   }
 
+  gboolean do_volms = FALSE;
+  for (i=0; i<FILLED_STYLES; i++)
+  {
+    if (img_a -> show_vol[i] != img_b -> show_vol[i]) do_volms = TRUE;
+    if (img_a -> vol_col[i].red != img_b -> vol_col[i].red) do_volms = TRUE;
+    if (img_a -> vol_col[i].green != img_b -> vol_col[i].green) do_volms = TRUE;
+    if (img_a -> vol_col[i].blue != img_b -> vol_col[i].blue) do_volms = TRUE;
+    for (j=0; j<2; j++)
+    {
+      if (img_a -> fm_show_vol[j][i] == NULL && img_b -> fm_show_vol[j][i] != NULL)
+      {
+        do_volms = TRUE;
+      }
+      else if (img_a -> fm_show_vol[j][i] == NULL && img_b -> fm_show_vol[j][i] != NULL)
+      {
+        do_volms = TRUE;
+      }
+      else if (img_a -> fm_show_vol[j][i] != NULL && img_b -> fm_show_vol[j][i] != NULL)
+      {
+        for (k=0; k<this_coord -> totcoord[j+2]; k++)
+        {
+          if (img_a -> fm_show_vol[j][i][k] != img_b -> fm_show_vol[j][i][k]) do_volms = TRUE;
+          if (img_a -> fm_vol_col[j][i][k].red != img_b -> fm_vol_col[j][i][k].red) do_volms = TRUE;
+          if (img_a -> fm_vol_col[j][i][k].green != img_b -> fm_vol_col[j][i][k].green) do_volms = TRUE;
+          if (img_a -> fm_vol_col[j][i][k].blue != img_b -> fm_vol_col[j][i][k].blue) do_volms = TRUE;
+        }
+      }
+    }
+  }
+  if (do_volms)
+  {
+    view -> create_shaders[VOLMS] = shaders = TRUE;
+    view -> n_shaders[VOLMS][stp] = -1;
+  }
+
   if (img_a -> box_axis[0] != img_b -> box_axis[0]) view -> create_shaders[MDBOX] = shaders = TRUE;
   if (img_a -> box_axis_rad[0] != img_b -> box_axis_rad[0]) view -> create_shaders[MDBOX] = shaders = TRUE;
   if (img_a -> box_axis_line[0] != img_b -> box_axis_line[0]) view -> create_shaders[MDBOX] = shaders = TRUE;
+  if (img_a -> box_color.red != img_b -> box_color.red) view -> create_shaders[MDBOX] = shaders = TRUE;
+  if (img_a -> box_color.green != img_b -> box_color.green) view -> create_shaders[MDBOX] = shaders = TRUE;
+  if (img_a -> box_color.blue != img_b -> box_color.blue) view -> create_shaders[MDBOX] = shaders = TRUE;
 
   if (img_a -> box_axis[1] != img_b -> box_axis[1]) view -> create_shaders[MAXIS] = shaders = TRUE;
   if (img_a -> box_axis_rad[1] != img_b -> box_axis_rad[1]) view -> create_shaders[MAXIS] = shaders = TRUE;
   if (img_a -> box_axis_line[1] != img_b -> box_axis_line[1]) view -> create_shaders[MAXIS] = shaders = TRUE;
   if (img_a -> axis_length != img_b -> axis_length) view -> create_shaders[MAXIS] = shaders = TRUE;
   if (img_a -> axispos != img_b -> axispos) view -> create_shaders[MAXIS] = shaders = TRUE;
+  if (img_a -> axis_color == NULL && img_b -> axis_color != NULL)
+  {
+    view -> create_shaders[MAXIS] = shaders = TRUE;
+  }
+  else if (img_a -> axis_color == NULL && img_b -> axis_color != NULL)
+  {
+    view -> create_shaders[MAXIS] = shaders = TRUE;
+  }
+  else if (img_a -> axis_color != NULL && img_b -> axis_color != NULL)
+  {
+    for (i=0; i<3; i++)
+    {
+      if (img_a -> axis_color[i].red != img_b -> axis_color[i].red) view -> create_shaders[MAXIS] = shaders = TRUE;
+      if (img_a -> axis_color[i].green != img_b -> axis_color[i].green) view -> create_shaders[MAXIS] = shaders = TRUE;
+      if (img_a -> axis_color[i].blue != img_b -> axis_color[i].blue) view -> create_shaders[MAXIS] = shaders = TRUE;
+    }
+  }
   if (img_a -> axis_labels != img_b -> axis_labels) view -> create_shaders[MAXIS] = shaders = TRUE;
   for (i=0; i<3; i++)
   {
@@ -661,18 +721,19 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
   }
   else if (img_a -> labels_color[2] != NULL && img_b -> labels_color[2] != NULL)
   {
-    for (j=0; j<3; j++)
+    for (i=0; i<3; i++)
     {
       if (img_a -> labels_color[2][i].red != img_b -> labels_color[2][i].red) view -> create_shaders[MAXIS] = shaders = TRUE;
       if (img_a -> labels_color[2][i].green != img_b -> labels_color[2][i].green) view -> create_shaders[MAXIS] = shaders = TRUE;
       if (img_a -> labels_color[2][i].blue != img_b -> labels_color[2][i].blue) view -> create_shaders[MAXIS] = shaders = TRUE;
     }
   }
+
   if (img_a -> cloned_poly != img_b -> cloned_poly)
   {
-    view -> n_shaders[POLYS][k] = -1;
+    view -> n_shaders[POLYS][stp] = -1;
     view -> create_shaders[POLYS] = TRUE;
-    view -> n_shaders[RINGS][k] = -1;
+    view -> n_shaders[RINGS][stp] = -1;
     view -> create_shaders[RINGS] = TRUE;
     shaders = TRUE;
   }
@@ -686,7 +747,7 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
       {
         if (img_a -> i_rings[i][0][0] != img_b -> i_rings[i][0][0])
         {
-          view -> n_shaders[RINGS][k] = -1;
+          view -> n_shaders[RINGS][stp] = -1;
           view -> create_shaders[RINGS] = TRUE;
           dorings = shaders = TRUE;
           break;
@@ -697,7 +758,7 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
           {
             if ((img_a -> i_rings[i][j+1][0] != img_b -> i_rings[i][j+1][0]) || (img_a -> i_rings[i][j+1][1] != img_b -> i_rings[i][j+1][1]))
             {
-              view -> n_shaders[RINGS][k] = -1;
+              view -> n_shaders[RINGS][stp] = -1;
               view -> create_shaders[RINGS] = TRUE;
               dorings = shaders = TRUE;
               break;
@@ -723,11 +784,11 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
       }
       if (img_a -> show_atom[i][j] != img_b -> show_atom[i][j])
       {
-        view -> n_shaders[ATOMS][k] = -1;
+        view -> n_shaders[ATOMS][stp] = -1;
         view -> create_shaders[ATOMS] = TRUE;
-        view -> n_shaders[BONDS][k] = -1;
+        view -> n_shaders[BONDS][stp] = -1;
         view -> create_shaders[BONDS] = TRUE;
-        view -> n_shaders[SELEC][k] = -1;
+        view -> n_shaders[SELEC][stp] = -1;
         view -> create_shaders[SELEC] = TRUE;
         view -> create_shaders[LABEL] = TRUE;
         view -> create_shaders[MEASU] = TRUE;
@@ -739,11 +800,11 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
     {
       if (img_a -> at_data[j].show[i] != img_b -> at_data[j].show[i] || img_a -> at_data[j].style != img_b -> at_data[j].style)
       {
-        view -> n_shaders[ATOMS][k] = -1;
+        view -> n_shaders[ATOMS][stp] = -1;
         view -> create_shaders[ATOMS] = TRUE;
-        view -> n_shaders[BONDS][k] = -1;
+        view -> n_shaders[BONDS][stp] = -1;
         view -> create_shaders[BONDS] = TRUE;
-        view -> n_shaders[SELEC][k] = -1;
+        view -> n_shaders[SELEC][stp] = -1;
         view -> create_shaders[SELEC] = TRUE;
         view -> create_shaders[LABEL] = TRUE;
         view -> create_shaders[MEASU] = TRUE;
@@ -756,12 +817,12 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
       }
       if (img_a -> at_data[j].pick[0] != img_b -> at_data[j].pick[0])
       {
-        view -> n_shaders[SELEC][k] = -1;
+        view -> n_shaders[SELEC][stp] = -1;
         view -> create_shaders[SELEC] = shaders = TRUE;
       }
       if (img_a -> at_data[j].pick[1] != img_b -> at_data[j].pick[1])
       {
-        view -> n_shaders[SELEC][k] = -1;
+        view -> n_shaders[SELEC][stp] = -1;
         view -> create_shaders[SELEC] = shaders = TRUE;
       }
     }
@@ -773,9 +834,9 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
      || (img_a -> pointrad[i] != img_b -> pointrad[i])
      || (img_a -> atomicrad[i] != img_b -> atomicrad[i]))
     {
-      view -> n_shaders[ATOMS][k] = -1;
+      view -> n_shaders[ATOMS][stp] = -1;
       view -> create_shaders[ATOMS] = TRUE;
-      view -> n_shaders[SELEC][k] = -1;
+      view -> n_shaders[SELEC][stp] = -1;
       view -> create_shaders[SELEC] = TRUE;
       view -> create_shaders[LABEL] = TRUE;
       shaders = TRUE;
@@ -785,9 +846,9 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
       if ((img_a -> bondrad[i][j] != img_b -> bondrad[i][j])
       || (img_a -> linerad[i][j] != img_b -> linerad[i][j]))
       {
-        view -> n_shaders[BONDS][k] = -1;
+        view -> n_shaders[BONDS][stp] = -1;
         view -> create_shaders[BONDS] = TRUE;
-        view -> n_shaders[SELEC][k] = -1;
+        view -> n_shaders[SELEC][stp] = -1;
         view -> create_shaders[SELEC] = TRUE;
         view -> create_shaders[LABEL] = TRUE;
         shaders = TRUE;
@@ -826,11 +887,11 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
 
     if (img_a -> radall[i] != img_b -> radall[i])
     {
-      view -> n_shaders[ATOMS][k] = -1;
+      view -> n_shaders[ATOMS][stp] = -1;
       view -> create_shaders[ATOMS] = TRUE;
-      view -> n_shaders[BONDS][k] = -1;
+      view -> n_shaders[BONDS][stp] = -1;
       view -> create_shaders[BONDS] = TRUE;
-      view -> n_shaders[SELEC][k] = -1;
+      view -> n_shaders[SELEC][stp] = -1;
       view -> create_shaders[SELEC] = TRUE;
       view -> create_shaders[LABEL] = TRUE;
       shaders = TRUE;
@@ -839,21 +900,21 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
 
   if (img_a -> render != img_b -> render)
   {
-    view -> n_shaders[ATOMS][k] = -1;
+    view -> n_shaders[ATOMS][stp] = -1;
     view -> create_shaders[ATOMS] = TRUE;
-    view -> n_shaders[BONDS][k] = -1;
+    view -> n_shaders[BONDS][stp] = -1;
     view -> create_shaders[BONDS] = TRUE;
-    view -> n_shaders[SELEC][k] = -1;
+    view -> n_shaders[SELEC][stp] = -1;
     view -> create_shaders[SELEC] = TRUE;
     shaders = TRUE;
   }
   if (img_a -> style != img_b -> style)
   {
-    view -> n_shaders[ATOMS][k] = -1;
+    view -> n_shaders[ATOMS][stp] = -1;
     view -> create_shaders[ATOMS] = TRUE;
-    view -> n_shaders[BONDS][k] = -1;
+    view -> n_shaders[BONDS][stp] = -1;
     view -> create_shaders[BONDS] = TRUE;
-    view -> n_shaders[SELEC][k] = -1;
+    view -> n_shaders[SELEC][stp] = -1;
     view -> create_shaders[SELEC] = TRUE;
     view -> create_shaders[LABEL] = TRUE;
     shaders = TRUE;
@@ -899,7 +960,7 @@ typedef struct{
 *
 *  Usage:
 *
-*  glwin * view          : the target glwin pointer
+*  glwin * view          : the target glwin
 *  video_options * vopts :
 *  gchar * videofile     :
 */
@@ -1183,7 +1244,7 @@ G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointe
 *
 *  Usage:
 *
-*  glwin * view          : the target glwin pointer
+*  glwin * view          : the target glwin
 *  video_options * vopts :
 */
 void save_movie (glwin * view, video_options * vopts)

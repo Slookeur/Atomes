@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_chains.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int get_cmin (struct project * this_proj, int s);
   int get_cmax (struct project * this_proj, int s);
@@ -128,10 +128,10 @@ G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer,
 /*
 *  void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTreeStore * store       : 
-*  struct project * this_proj : 
+*  GtkTreeStore * store       :
+*  struct project * this_proj :
 */
 void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
 {
@@ -203,10 +203,10 @@ void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
 /*
 *  GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  gboolean fill_this         : 
+*  struct project * this_proj :
+*  gboolean fill_this         :
 */
 GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
 {
@@ -245,9 +245,9 @@ GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
 /*
 *  void add_this_chain_to_search_tree (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 void add_this_chain_to_search_tree (struct project * this_proj)
 {
@@ -537,10 +537,10 @@ void add_this_chain_to_search_tree (struct project * this_proj)
 /*
 *  int get_cmin (struct project * this_proj, int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int s                      : 
+*  struct project * this_proj :
+*  int s                      :
 */
 int get_cmin (struct project * this_proj, int s)
 {
@@ -556,10 +556,10 @@ int get_cmin (struct project * this_proj, int s)
 /*
 *  int get_cmax (struct project * this_proj, int s)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int s                      : 
+*  struct project * this_proj :
+*  int s                      :
 */
 int get_cmax (struct project * this_proj, int s)
 {
@@ -575,11 +575,11 @@ int get_cmax (struct project * this_proj, int s)
 /*
 *  int get_chain_size_index (struct project * this_proj, int s, int r)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
-*  int s                      : 
-*  int r                      : 
+*  struct project * this_proj :
+*  int s                      :
+*  int r                      :
 */
 int get_chain_size_index (struct project * this_proj, int s, int r)
 {
@@ -595,7 +595,7 @@ int get_chain_size_index (struct project * this_proj, int s, int r)
 /*
 *  G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -712,9 +712,9 @@ G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
 /*
 *  GtkWidget * create_chains_search (struct project * this_proj)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct project * this_proj : 
+*  struct project * this_proj :
 */
 GtkWidget * create_chains_search (struct project * this_proj)
 {
@@ -765,9 +765,9 @@ GtkWidget * create_chains_search (struct project * this_proj)
 /*
 *  GtkWidget * chains_tab (glwin * view)
 *
-*  Usage: 
+*  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 */
 GtkWidget * chains_tab (glwin * view)
 {

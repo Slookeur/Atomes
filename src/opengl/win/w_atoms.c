@@ -337,7 +337,7 @@ G_MODULE_EXPORT void toggled_show_hide_label (GtkToggleButton * but, gpointer da
 *
 *  Usage:
 *
-*  glwin * view : the target glwin pointer
+*  glwin * view : the target glwin
 *  int g        :
 */
 GtkWidget * prop_tab (glwin * view, int g)
@@ -502,7 +502,7 @@ G_MODULE_EXPORT gboolean close_event_model (GtkWidget * widg, GdkEvent * event, 
 *
 *  Usage:
 *
-*  glwin * view      : the target glwin pointer
+*  glwin * view      : the target glwin
 *  int atom_or_clone :
 */
 GtkWidget * advance_atom_notebook (glwin * view, int atom_or_clone)
@@ -527,7 +527,7 @@ GtkWidget * advance_atom_notebook (glwin * view, int atom_or_clone)
 *  Usage:
 *
 *  int atom_or_clone :
-*  glwin * view      : the target glwin pointer
+*  glwin * view      : the target glwin
 */
 GtkWidget * advanced_atom_properties (int atom_or_clone, glwin * view)
 {
