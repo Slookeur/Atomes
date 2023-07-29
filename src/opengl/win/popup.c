@@ -197,8 +197,8 @@ int get_to_be_selected (glwin * view)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void set_full_screen (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -373,7 +373,7 @@ void to_remove_this_object (int type, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
+*  GSimpleAction * action : the GAction sending the signal
 */
 gchar * get_object_from_action (GSimpleAction * action)
 {
@@ -434,7 +434,7 @@ gchar * get_object_from_action (GSimpleAction * action)
 *  Usage:
 *
 *  int type               :
-*  GSimpleAction * action :
+*  GSimpleAction * action : the GAction sending the signal
 *  gpointer data          : the associated data pointer
 */
 void to_replace_this_object (int type, GSimpleAction * action, gpointer data)
@@ -616,8 +616,8 @@ void remove_object ()
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void remove_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -681,8 +681,8 @@ gboolean insert_this_object;
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void add_object (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -748,8 +748,8 @@ G_MODULE_EXPORT void add_object (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_add_object (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -780,8 +780,8 @@ G_MODULE_EXPORT void to_add_object (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void replace_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -810,8 +810,8 @@ G_MODULE_EXPORT void replace_this_atom (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void copy_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -973,8 +973,8 @@ void check_hidden_visible (struct project * this_proj)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1082,8 +1082,8 @@ int check_label_numbers (struct project * this_proj, int types)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void label_unlabel_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1131,8 +1131,8 @@ G_MODULE_EXPORT void label_unlabel_this_atom (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void select_unselect_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1210,8 +1210,8 @@ gboolean wait_for_style = FALSE;
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void style_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1251,8 +1251,8 @@ G_MODULE_EXPORT void style_this_atom (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void remove_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1278,8 +1278,8 @@ G_MODULE_EXPORT void remove_the_atoms (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void replace_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1309,8 +1309,8 @@ G_MODULE_EXPORT void replace_the_atoms (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void copy_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1367,8 +1367,8 @@ G_MODULE_EXPORT void copy_the_atoms (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_others (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1410,8 +1410,8 @@ G_MODULE_EXPORT void show_hide_others (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1457,8 +1457,8 @@ G_MODULE_EXPORT void show_hide_the_atoms (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void label_unlabel_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1505,8 +1505,8 @@ G_MODULE_EXPORT void label_unlabel_atoms (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void select_unselect_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1571,8 +1571,8 @@ G_MODULE_EXPORT void select_unselect_atoms (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void style_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1622,8 +1622,8 @@ G_MODULE_EXPORT void style_the_atoms (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void remove_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1649,8 +1649,8 @@ G_MODULE_EXPORT void remove_the_coord (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void replace_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1679,8 +1679,8 @@ G_MODULE_EXPORT void replace_the_coord (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void copy_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1742,8 +1742,8 @@ G_MODULE_EXPORT void copy_the_coord (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1795,8 +1795,8 @@ G_MODULE_EXPORT void show_hide_the_coord (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void label_unlabel_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1871,8 +1871,8 @@ G_MODULE_EXPORT void label_unlabel_coord (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void select_unselect_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1963,8 +1963,8 @@ G_MODULE_EXPORT void select_unselect_coord (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void style_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2147,8 +2147,8 @@ void create_new_project_using_data (struct atom_selection * selection)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void edit_in_new_project (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2230,8 +2230,8 @@ G_MODULE_EXPORT void edit_in_new_project (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void edit_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2297,8 +2297,8 @@ G_MODULE_EXPORT void edit_coord (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void edit_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2347,8 +2347,8 @@ G_MODULE_EXPORT void edit_atoms (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void select_action_for_all (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2554,8 +2554,8 @@ G_MODULE_EXPORT void select_action_for_all (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void select_action_for_this_bond (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2712,8 +2712,8 @@ G_MODULE_EXPORT void select_action_for_this_bond (GtkWidget * widg, gpointer dat
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void select_action_for_all_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -3828,8 +3828,8 @@ void popup_selection (glwin * view, double ptx, double pty, int se, int pe, int 
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void reset_coords (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -3861,8 +3861,8 @@ G_MODULE_EXPORT void reset_coords (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void turn_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)

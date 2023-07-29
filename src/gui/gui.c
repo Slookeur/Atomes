@@ -243,7 +243,7 @@ void atomes_key_pressed (guint keyval, GdkModifierType state)
 *
 *  Usage: add action to the main window action map
 *
-*  GSimpleAction * action : the action to add
+*  GSimpleAction * action : the GAction sending the signal the action to add
 */
 void add_action (GSimpleAction * action)
 {
@@ -303,8 +303,8 @@ G_MODULE_EXPORT void show_periodic_table (GtkWidget * widg, gpointer data)
 *
 *  Usage: atomes menu bar actions
 *
-*  GSimpleAction * action : the GSimpleAction sending the signal
-*  GVariant * parameter   : the parameter of the action, if any
+*  GSimpleAction * action : the GAction sending the signal the GSimpleAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction the parameter of the action, if any
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data)

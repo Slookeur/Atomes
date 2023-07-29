@@ -238,8 +238,8 @@ G_MODULE_EXPORT void action_to_plot (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          :
 */
 G_MODULE_EXPORT void curve_edit_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -252,8 +252,8 @@ G_MODULE_EXPORT void curve_edit_menu_action (GSimpleAction * action, GVariant * 
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          :
 */
 G_MODULE_EXPORT void curve_add_remove_menu_action (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -266,8 +266,8 @@ G_MODULE_EXPORT void curve_add_remove_menu_action (GSimpleAction * action, GVari
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          :
 */
 G_MODULE_EXPORT void curve_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data)

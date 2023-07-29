@@ -471,8 +471,8 @@ G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)

@@ -515,8 +515,8 @@ extern G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * 
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -573,8 +573,8 @@ G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * paramet
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -638,8 +638,8 @@ G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parame
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data)

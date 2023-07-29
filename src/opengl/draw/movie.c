@@ -1075,6 +1075,7 @@ gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
     old_cmap[frame_id] = allocint(get_project_by_id(view -> proj) -> steps);
     set_old_cmap (view -> anim -> last -> img, 0, frame_id);
   }
+  double fraction;
   for (frame_id = frame_start; frame_id < num_frames+frame_start; frame_id ++)
   {
     //g_debug ("Rendering frame: %d, id= %d", frame_id-frame_start, view -> anim -> last -> img -> id);
@@ -1085,11 +1086,12 @@ gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
     write_video_frame (format_context, video_stream, frame_id, view);
     if (frame_id-frame_start > 0 && frame_id-frame_start - 10*((frame_id-frame_start)/10) == 0)
     {
-      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR(encoding_pb), (double)(frame_id-frame_start+1)/num_frames);
 #ifdef GTK3
+      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR(encoding_pb), (double)(frame_id-frame_start+1)/num_frames);
       while (gtk_events_pending()) gtk_main_iteration();
 #else
-      while (g_main_context_pending (g_main_context_default())) g_main_context_iteration (NULL, TRUE);
+      fraction = gtk_progress_bar_get_fraction (GTK_PROGRESS_BAR(encoding_pb));
+      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR(encoding_pb), fraction + (double)(1)/num_frames);
 #endif
     }
     if (frame_id-frame_start < num_frames-1)

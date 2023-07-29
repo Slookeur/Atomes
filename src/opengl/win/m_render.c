@@ -124,8 +124,8 @@ GtkWidget * menu_render (glwin * view, int id)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -168,7 +168,7 @@ G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * par
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_render (glwin * view, int popm)
 {

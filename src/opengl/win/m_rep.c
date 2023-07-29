@@ -175,8 +175,8 @@ G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_reset_view (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -441,8 +441,8 @@ GtkWidget * menu_rep (glwin * view, int id)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -485,8 +485,8 @@ G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parame
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -500,7 +500,7 @@ G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * paramet
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_rep (glwin * view, int popm)
 {
@@ -520,8 +520,8 @@ GMenu * menu_rep (glwin * view, int popm)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -535,7 +535,7 @@ G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * para
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_reset (glwin * view, int popm)
 {
@@ -551,7 +551,7 @@ GMenu * menu_reset (glwin * view, int popm)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_fullscreen (glwin * view, int popm)
 {
@@ -566,7 +566,7 @@ GMenu * menu_fullscreen (glwin * view, int popm)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_view (glwin * view, int popm)
 {

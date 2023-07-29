@@ -45,7 +45,7 @@ extern G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data);
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int id       :
+*  int id       : main app (0) or popup (1)
 */
 GtkWidget * menu_anim (glwin * view, int id)
 {
@@ -82,8 +82,8 @@ GtkWidget * menu_anim (glwin * view, int id)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_spin (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -96,8 +96,8 @@ G_MODULE_EXPORT void to_spin (GSimpleAction * action, GVariant * parameter, gpoi
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_seq (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -110,8 +110,8 @@ G_MODULE_EXPORT void to_seq (GSimpleAction * action, GVariant * parameter, gpoin
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_rec (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -125,7 +125,7 @@ G_MODULE_EXPORT void to_rec (GSimpleAction * action, GVariant * parameter, gpoin
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_anim (glwin * view, int popm)
 {

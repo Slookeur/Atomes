@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'dlp_edit.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int get_num_vdw_max ();
 
@@ -112,12 +112,12 @@ int * edit_atids;
 /*
 *  gboolean are_identical_prop (int ti, int ai, struct field_prop * pro_a, struct field_prop * pro_b)
 *
-*  Usage: 
+*  Usage:
 *
-*  int ti                    : 
-*  int ai                    : 
-*  struct field_prop * pro_a : 
-*  struct field_prop * pro_b : 
+*  int ti                    :
+*  int ai                    :
+*  struct field_prop * pro_a :
+*  struct field_prop * pro_b :
 */
 gboolean are_identical_prop (int ti, int ai, struct field_prop * pro_a, struct field_prop * pro_b)
 {
@@ -139,13 +139,13 @@ gboolean are_identical_prop (int ti, int ai, struct field_prop * pro_a, struct f
 /*
 *  void adjust_field_prop (int fil, int sti, struct field_prop * tmp, int * ids, int key)
 *
-*  Usage: 
+*  Usage:
 *
-*  int fil                 : 
-*  int sti                 : 
-*  struct field_prop * tmp : 
-*  int * ids               : 
-*  int key                 : 
+*  int fil                 :
+*  int sti                 :
+*  struct field_prop * tmp :
+*  int * ids               :
+*  int key                 :
 */
 void adjust_field_prop (int fil, int sti, struct field_prop * tmp, int * ids, int key)
 {
@@ -316,7 +316,7 @@ void adjust_field_prop (int fil, int sti, struct field_prop * tmp, int * ids, in
 /*
 *  G_MODULE_EXPORT void update_atom_parameter (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -368,7 +368,7 @@ int object_is;
 /*
 *  G_MODULE_EXPORT void update_field_parameter (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -409,7 +409,7 @@ gboolean change_tersoff;
 /*
 *  G_MODULE_EXPORT void update_cross_parameter (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -428,7 +428,7 @@ G_MODULE_EXPORT void update_cross_parameter (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void changed_cross_combo (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -447,9 +447,9 @@ G_MODULE_EXPORT void changed_cross_combo (GtkComboBox * box, gpointer data)
 /*
 *  GtkWidget * combo_cross (struct field_nth_body * body)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct field_nth_body * body : 
+*  struct field_nth_body * body :
 */
 GtkWidget * combo_cross (struct field_nth_body * body)
 {
@@ -472,7 +472,7 @@ GtkWidget * combo_cross (struct field_nth_body * body)
 /*
 *  gchar * get_this_vdw_string ()
 *
-*  Usage: 
+*  Usage:
 */
 gchar * get_this_vdw_string ()
 {
@@ -501,12 +501,12 @@ gchar * get_this_vdw_string ()
 /*
 *  GtkWidget * parameters_box (int obj, int key,  gchar ** words, float * data)
 *
-*  Usage: 
+*  Usage:
 *
-*  int obj         : 
-*  int key         : 
-*   gchar ** words : 
-*  float * data    : 
+*  int obj         :
+*  int key         :
+*   gchar ** words :
+*  float * data    :
 */
 GtkWidget * parameters_box (int obj, int key,  gchar ** words, float * data)
 {
@@ -628,9 +628,9 @@ GtkWidget * parameters_box (int obj, int key,  gchar ** words, float * data)
 /*
 *  gchar * field_str (int a)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
+*  int a :
 */
 gchar * field_str (int a)
 {
@@ -645,7 +645,7 @@ gchar * field_str (int a)
 /*
 *  gboolean tersoff_question ()
 *
-*  Usage: 
+*  Usage:
 */
 gboolean tersoff_question ()
 {
@@ -667,9 +667,9 @@ gboolean tersoff_question ()
 /*
 *  GtkWidget * param_prop_param_box (int pid)
 *
-*  Usage: 
+*  Usage:
 *
-*  int pid : 
+*  int pid :
 */
 GtkWidget * param_prop_param_box (int pid)
 {
@@ -719,7 +719,7 @@ GtkWidget * param_prop_param_box (int pid)
 /*
 *  G_MODULE_EXPORT void changed_field_key_combo (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -809,7 +809,7 @@ G_MODULE_EXPORT void changed_field_key_combo (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void visualize_it (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -819,7 +819,7 @@ G_MODULE_EXPORT void visualize_it (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void visualize_it (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -862,7 +862,7 @@ G_MODULE_EXPORT void visualize_it (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void select_it (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -872,7 +872,7 @@ G_MODULE_EXPORT void select_it (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void select_it (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -1124,7 +1124,7 @@ G_MODULE_EXPORT void edit_unit_weight (GtkCellRendererText * cell,
 /*
 *  G_MODULE_EXPORT void select_atom_id_from_fied_molecule (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -1570,9 +1570,9 @@ GtkWidget * av_lgt;
 /*
 *  void update_field_dist (float v)
 *
-*  Usage: 
+*  Usage:
 *
-*  float v : 
+*  float v :
 */
 void update_field_dist (float v)
 {
@@ -1592,9 +1592,9 @@ void update_field_dist (float v)
 /*
 *  gchar * body_str (int a)
 *
-*  Usage: 
+*  Usage:
 *
-*  int a : 
+*  int a :
 */
 gchar * body_str (int a)
 {
@@ -1616,7 +1616,7 @@ gchar * body_str (int a)
 /*
 *  G_MODULE_EXPORT void selection_button (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -1835,7 +1835,7 @@ G_MODULE_EXPORT void selection_button (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void changed_atom_combo (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -1885,11 +1885,11 @@ G_MODULE_EXPORT void changed_atom_combo (GtkComboBox * box, gpointer data)
 /*
 *  gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct field_nth_body * body : 
-*  int aid                      : 
-*  int nbd                      : 
+*  struct field_nth_body * body :
+*  int aid                      :
+*  int nbd                      :
 */
 gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd)
 {
@@ -1909,13 +1909,13 @@ gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd)
 /*
 *  gboolean body_identicals (struct field_nth_body * body, int nbd, int * na, int ** ma, int ** ba)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct field_nth_body * body : 
-*  int nbd                      : 
-*  int * na                     : 
-*  int ** ma                    : 
-*  int ** ba                    : 
+*  struct field_nth_body * body :
+*  int nbd                      :
+*  int * na                     :
+*  int ** ma                    :
+*  int ** ba                    :
 */
 gboolean body_identicals (struct field_nth_body * body, int nbd, int * na, int ** ma, int ** ba)
 {
@@ -1957,7 +1957,7 @@ gboolean body_identicals (struct field_nth_body * body, int nbd, int * na, int *
 /*
 *  int get_num_vdw_max ()
 *
-*  Usage: 
+*  Usage:
 */
 int get_num_vdw_max ()
 {
@@ -1983,9 +1983,9 @@ int get_num_vdw_max ()
 /*
 *  void adjust_vdw_interactions (gboolean add_shell)
 *
-*  Usage: 
+*  Usage:
 *
-*  gboolean add_shell : 
+*  gboolean add_shell :
 */
 void adjust_vdw_interactions (gboolean add_shell)
 {
@@ -2170,7 +2170,7 @@ void adjust_vdw_interactions (gboolean add_shell)
 /*
 *  G_MODULE_EXPORT void shell_in_vdw (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -2180,7 +2180,7 @@ G_MODULE_EXPORT void shell_in_vdw (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void shell_in_vdw (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -2202,10 +2202,10 @@ gchar * rep_atom_name;
 /*
 *  G_MODULE_EXPORT void run_edit_parameters (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   : 
+*  gint response_id   :
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_edit_parameters (GtkDialog * dialog, gint response_id, gpointer data)
@@ -2230,10 +2230,10 @@ G_MODULE_EXPORT void run_edit_parameters (GtkDialog * dialog, gint response_id, 
 /*
 *  void edit_parameters (int f, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int f  : 
-*  int id : 
+*  int f  :
+*  int id :
 */
 void edit_parameters (int f, int id)
 {
@@ -2877,10 +2877,10 @@ void edit_parameters (int f, int id)
 /*
 *  void update_tersoffs (int id, int key)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id  : 
-*  int key : 
+*  int id  :
+*  int key :
 */
 void update_tersoffs (int id, int key)
 {
@@ -2909,10 +2909,10 @@ void update_tersoffs (int id, int key)
 /*
 *  void check_tersoffs (int id, int key)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id  : 
-*  int key : 
+*  int id  :
+*  int key :
 */
 void check_tersoffs (int id, int key)
 {
@@ -2944,10 +2944,10 @@ void check_tersoffs (int id, int key)
 /*
 *  G_MODULE_EXPORT void edit_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void edit_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -3009,10 +3009,10 @@ G_MODULE_EXPORT void edit_field_prop (GSimpleAction * action, GVariant * paramet
 /*
 *  G_MODULE_EXPORT void add_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void add_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -3249,10 +3249,10 @@ G_MODULE_EXPORT void add_field_prop (GSimpleAction * action, GVariant * paramete
 /*
 *  G_MODULE_EXPORT void remove_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void remove_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data)

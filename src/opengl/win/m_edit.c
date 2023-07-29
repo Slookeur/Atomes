@@ -52,8 +52,8 @@ extern G_MODULE_EXPORT void turn_rebuild (GtkWidget * widg, gpointer data);
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -217,7 +217,7 @@ GtkWidget * menu_edit (glwin * view, int id)
 *  Usage:
 *
 *  glwin * view  : the target glwin
-*  int popm      :
+*  int popm      : main app (0) or popup (1)
 *  int sensitive :
 */
 GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
@@ -259,7 +259,7 @@ GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 *  Usage:
 *
 *  glwin * view  : the target glwin
-*  int popm      :
+*  int popm      : main app (0) or popup (1)
 *  int sensitive :
 */
 GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
@@ -284,8 +284,8 @@ GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -319,7 +319,7 @@ G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * paramete
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * extract_section (glwin * view, int popm)
 {
@@ -341,7 +341,7 @@ GMenu * extract_section (glwin * view, int popm)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_edit (glwin * view, int popm)
 {

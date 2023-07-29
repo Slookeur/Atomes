@@ -539,6 +539,9 @@ void draw (glwin * view)
     // Atom labels
     draw_vertices (LABEL);
 
+    // Axis if centered
+    if (view -> anim -> last -> img -> axispos == 4) draw_vertices (MAXIS);
+
     // Last the coordination polyhedra
     draw_vertices (POLYS);
     draw_vertices (RINGS);
@@ -546,14 +549,14 @@ void draw (glwin * view)
     // Measures
     draw_vertices (MEASU);
 
-    // Axis
-    draw_vertices (MAXIS);
-
     // Slab
     draw_vertices (SLABS);
 
     // Volumes
     draw_vertices (VOLMS);
+
+    // Axis if not centered
+    if (view -> anim -> last -> img -> axispos != 4) draw_vertices (MAXIS);
 
     // Lights
     draw_vertices (LIGHT);

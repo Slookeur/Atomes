@@ -246,8 +246,8 @@ G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointe
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, gpointer data)

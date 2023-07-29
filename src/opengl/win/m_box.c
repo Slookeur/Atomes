@@ -300,8 +300,8 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -344,8 +344,8 @@ G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * para
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -395,7 +395,7 @@ G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * p
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 *  int ab       :
 *  int abs      :
 */
@@ -421,7 +421,7 @@ GMenu * axis_box_style (glwin * view, int popm, int ab, int abs)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 *  int ab       :
 *  int style    :
 */
@@ -457,7 +457,7 @@ GMenu * axis_box_param (glwin * view, int popm, int ab, int style)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 *  int ab       :
 */
 GMenuItem * menu_box_axis (glwin * view, int popm, int ab)

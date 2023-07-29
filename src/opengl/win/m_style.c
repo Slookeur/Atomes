@@ -260,7 +260,7 @@ GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int fil
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int id       :
+*  int id       : main app (0) or popup (1)
 */
 GtkWidget * menu_style (glwin * view, int id)
 {
@@ -342,8 +342,8 @@ GtkWidget * menu_style (glwin * view, int id)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -399,7 +399,7 @@ G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * para
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_style (glwin * view, int popm)
 {

@@ -1155,8 +1155,8 @@ GtkWidget * menu_map (glwin * view,  int id)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_color_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1210,7 +1210,7 @@ G_MODULE_EXPORT void change_color_radio (GSimpleAction * action, GVariant * para
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 *  int mid      :
 *  int cid      :
 */
@@ -1250,7 +1250,7 @@ GMenu * menump (glwin * view, int popm, int mid, int cid)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_map (glwin * view, int popm)
 {

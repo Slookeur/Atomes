@@ -198,8 +198,8 @@ GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer dat
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)

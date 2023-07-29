@@ -565,7 +565,7 @@ G_MODULE_EXPORT void atom_properties (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
+*  GSimpleAction * action : the GAction sending the signal
 *  GVariant * state       :
 *  gpointer data          : the associated data pointer
 */

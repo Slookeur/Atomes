@@ -298,8 +298,8 @@ void bonds_input_win (GtkWidget * win, struct project * this_proj, int s, int id
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -347,8 +347,8 @@ G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)

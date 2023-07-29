@@ -134,8 +134,8 @@ GtkWidget * menu_proj (glwin * view)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -149,7 +149,7 @@ G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * param
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_proj (glwin * view, int popm)
 {

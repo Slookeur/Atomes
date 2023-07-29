@@ -1461,8 +1461,8 @@ void prepare_crystal_builder (gpointer data)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void crystal_window (GSimpleAction * action, GVariant * parameter, gpointer data)

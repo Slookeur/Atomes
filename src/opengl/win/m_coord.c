@@ -80,8 +80,8 @@ gboolean is_coord_in_menu (int id, struct project * this_proj)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -225,7 +225,7 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int id       :
+*  int id       : main app (0) or popup (1)
 *  int jd       :
 */
 void detach_frag_mol_menu (glwin * view, int id, int jd)
@@ -269,7 +269,7 @@ void detach_frag_mol_menu (glwin * view, int id, int jd)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int id       :
+*  int id       : main app (0) or popup (1)
 *  int jd       :
 */
 GtkWidget * add_menu_coord (glwin * view, int id, int jd)
@@ -409,7 +409,7 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int id       :
+*  int id       : main app (0) or popup (1)
 */
 GtkWidget * menu_coord (glwin * view, int id)
 {
@@ -428,7 +428,7 @@ GtkWidget * menu_coord (glwin * view, int id)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int id       :
+*  int id       : main app (0) or popup (1)
 *  int jd       :
 */
 GtkWidget * menu_rings (glwin * view, int id, int jd)
@@ -463,7 +463,7 @@ GtkWidget * menu_rings (glwin * view, int id, int jd)
 *
 *  glwin * view      : the target glwin
 *  gchar * act       :
-*  int popm          :
+*  int popm          : main app (0) or popup (1)
 *  int id            :
 *  GCallback handler : the associated callback
 *  gpointer data     : the associated data pointer
@@ -482,7 +482,7 @@ GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handl
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 *  int id       :
 *  int mid      :
 */
@@ -542,8 +542,8 @@ GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -557,7 +557,7 @@ G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * par
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 *  int id       :
 *  int mid      :
 */
@@ -596,7 +596,7 @@ GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 *  int id       :
 *  int mid      :
 */
@@ -638,7 +638,7 @@ GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 *  int id       :
 */
 GMenu * add_menu_coord (glwin * view, int popm, int id)
@@ -692,7 +692,7 @@ GMenu * menu_coord (glwin * view, int popm)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_rings (glwin * view, int popm)
 {

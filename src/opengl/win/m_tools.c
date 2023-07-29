@@ -286,7 +286,7 @@ extern G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data);
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int id       :
+*  int id       : main app (0) or popup (1)
 */
 GtkWidget * menu_tools (glwin * view, int id)
 {
@@ -420,8 +420,8 @@ GtkWidget * menu_tools (glwin * view, int id)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_window_measures (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -435,7 +435,7 @@ G_MODULE_EXPORT void to_window_measures (GSimpleAction * action, GVariant * para
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * measure_section (glwin * view, int popm)
 {
@@ -449,8 +449,8 @@ GMenu * measure_section (glwin * view, int popm)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_window_volumes (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -464,7 +464,7 @@ G_MODULE_EXPORT void to_window_volumes (GSimpleAction * action, GVariant * param
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * volume_section (glwin * view, int popm)
 {
@@ -479,7 +479,7 @@ GMenu * volume_section (glwin * view, int popm)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * edit_section (glwin * view, int popm)
 {
@@ -493,8 +493,8 @@ GMenu * edit_section (glwin * view, int popm)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_mouse_mode_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -537,7 +537,7 @@ G_MODULE_EXPORT void change_mouse_mode_radio (GSimpleAction * action, GVariant *
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * mouse_mode_menu (glwin * view, int popm)
 {
@@ -558,8 +558,8 @@ GMenu * mouse_mode_menu (glwin * view, int popm)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void change_sel_mode_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -602,7 +602,7 @@ G_MODULE_EXPORT void change_sel_mode_radio (GSimpleAction * action, GVariant * p
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * selection_mode_menu (glwin * view, int popm)
 {
@@ -623,7 +623,7 @@ GMenu * selection_mode_menu (glwin * view, int popm)
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * modes_section (glwin * view, int popm)
 {
@@ -638,8 +638,8 @@ GMenu * modes_section (glwin * view, int popm)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_create_field (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -672,8 +672,8 @@ GMenu * md_menu (glwin * view, int popm)
 *
 *  Usage:
 *
-*  GSimpleAction * action :
-*  GVariant * parameter   :
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void to_invert_this (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -687,7 +687,7 @@ G_MODULE_EXPORT void to_invert_this (GSimpleAction * action, GVariant * paramete
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * inv_menu (glwin * view, int popm)
 {
@@ -722,7 +722,7 @@ GMenu * add_section_item_with_menu (glwin * view, gchar * item_name, GMenu * men
 *  Usage:
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_tools (glwin * view, int popm)
 {

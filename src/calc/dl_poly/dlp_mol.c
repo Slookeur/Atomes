@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'dlp_mol.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   gchar * remove_text (int i, int j, gchar * str);
 
@@ -59,11 +59,11 @@ extern void check_to_visualize_properties (int id);
 /*
 *  gchar * remove_text (int i, int j, gchar * str)
 *
-*  Usage: 
+*  Usage:
 *
-*  int i       : 
-*  int j       : 
-*  gchar * str : 
+*  int i       :
+*  int j       :
+*  gchar * str :
 */
 gchar * remove_text (int i, int j, gchar * str)
 {
@@ -104,9 +104,9 @@ gchar * remove_text (int i, int j, gchar * str)
 /*
 *  void clean_up_molecules_info (gboolean usel)
 *
-*  Usage: 
+*  Usage:
 *
-*  gboolean usel : 
+*  gboolean usel :
 */
 void clean_up_molecules_info (gboolean usel)
 {
@@ -190,12 +190,12 @@ dint ** atomd_id_save;
 /*
 *  void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct field_molecule * fmol : 
-*  struct field_atom * at       : 
-*  int mols                     : 
-*  int * mol                    : 
+*  struct field_molecule * fmol :
+*  struct field_atom * at       :
+*  int mols                     :
+*  int * mol                    :
 */
 void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol)
 {
@@ -275,10 +275,10 @@ void molecule_set_color (GtkTreeViewColumn * col,
 /*
 *  G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   : 
+*  gint response_id   :
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data)
@@ -427,10 +427,10 @@ G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint respons
 /*
 *  G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -495,10 +495,10 @@ G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * p
 /*
 *  void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
 *
-*  Usage: 
+*  Usage:
 *
-*  struct field_molecule * new_mol : 
-*  int mstart                      : 
+*  struct field_molecule * new_mol :
+*  int mstart                      :
 */
 void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
 {
@@ -564,10 +564,10 @@ void prepare_atoms_to_merge (struct field_atom * at,
 /*
 *  struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id                       : 
-*  struct field_molecule * fmol : 
+*  int id                       :
+*  struct field_molecule * fmol :
 */
 struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
 {
@@ -597,10 +597,10 @@ struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
 /*
 *  G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkDialog * rmol : the GtkDialog sending the signal
-*  gint response_id : 
+*  gint response_id :
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data)
@@ -702,10 +702,10 @@ G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint resp
 /*
 *  G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GSimpleAction * action : 
-*  GVariant * parameter   : 
+*  GSimpleAction * action : the GAction sending the signal
+*  GVariant * parameter   : GVariant parameter of the GAction
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data)
