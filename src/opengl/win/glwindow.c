@@ -111,7 +111,7 @@ extern int get_measure_type (glwin * view);
 /*
 *  GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 *
-*  Usage: create the rings submenus GTK3
+*  Usage: create the 'Rings' submenu GTK3
 *
 *  glwin * view : the target glwin
 *  int id       : atoms in ring(s) or polyhedra from rings (0/1)
@@ -132,7 +132,7 @@ GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 /*
 *  GtkWidget * coord_menu (glwin * view)
 *
-*  Usage: create the coordination submenus GTK3
+*  Usage: create the 'Coordination' submenu GTK3
 *
 *  glwin * view : the target glwin
 */
@@ -326,7 +326,7 @@ G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
 /*
 *  void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 *
-*  Usage: create the OpenGL submenu items GTK3
+*  Usage: create the 'OpenGL' submenu items GTK3
 *
 *  GtkWidget * menu : the GtkWidget sending the signal
 *  glwin * view     : the target glwin
@@ -346,7 +346,7 @@ void menu_items_opengl (GtkWidget * menu, glwin * view, int pop)
 /*
 *  GtkWidget * menu_opengl (glwin * view, int pop)
 *
-*  Usage: create the OpenGL submenu GTK3
+*  Usage: create the 'OpenGL' submenu GTK3
 *
 *  glwin * view : the target glwin
 *  int pop      : main app (0) or popup (1)
@@ -361,7 +361,7 @@ GtkWidget * menu_opengl (glwin * view, int pop)
 /*
 *  void menu_items_model (GtkWidget * menu, glwin * view, int pop)
 *
-*  Usage: create the model submenu items GTK3
+*  Usage: create the 'Model' submenu items GTK3
 *
 *  GtkWidget * menu : the GtkWidget sending the signal
 *  glwin * view     : the target glwin
@@ -381,7 +381,7 @@ void menu_items_model (GtkWidget * menu, glwin * view, int pop)
 /*
 *  GtkWidget * menu_model (glwin * view, int pop)
 *
-*  Usage: create the model submenu GTK3
+*  Usage: create the 'Model' submenu GTK3
 *
 *  glwin * view : the target glwin
 *  int pop      : main app (0) or popup (1)
@@ -396,7 +396,7 @@ GtkWidget * menu_model (glwin * view, int pop)
 /*
 *  void menu_items_view (GtkWidget * menu, glwin * view, int popm)
 *
-*  Usage: create the view menu items GTK3
+*  Usage: create the 'View' menu items GTK3
 *
 *  GtkWidget * menu : the GtkWidget sending the signal
 *  glwin * view     : the target glwin
@@ -421,7 +421,7 @@ void menu_items_view (GtkWidget * menu, glwin * view, int popm)
 /*
 *  GtkWidget * menu_view (glwin * view, int popm)
 *
-*  Usage: create the view submenu GTK3
+*  Usage: create the 'View' submenu GTK3
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)

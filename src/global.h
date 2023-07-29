@@ -138,11 +138,7 @@ typedef struct {
 #define FULLSCREEN "view-fullscreen"
 #define FITBEST "zoom-fit-best"
 #define RECORD "media-record"
-#ifdef GTK4
-#define YES "emblem-generic"
-#else
 #define YES "gtk-yes"
-#endif
 #define EDITA "edit-find-replace"
 #define EDITC "edit-copy"
 #define EDITF "edit-find"

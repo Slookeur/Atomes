@@ -955,6 +955,7 @@ typedef struct{
   int video_res[2];
 } video_options;
 */
+
 /*
 *  gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
 *
@@ -962,7 +963,7 @@ typedef struct{
 *
 *  glwin * view          : the target glwin
 *  video_options * vopts :
-*  gchar * videofile     :
+*  gchar * videofile     : video file name
 */
 gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
 {
@@ -1086,12 +1087,12 @@ gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
     write_video_frame (format_context, video_stream, frame_id, view);
     if (frame_id-frame_start > 0 && frame_id-frame_start - 10*((frame_id-frame_start)/10) == 0)
     {
+      fraction = (double)(frame_id-frame_start+1)/num_frames;
+      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR(encoding_pb), fraction);
 #ifdef GTK3
-      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR(encoding_pb), (double)(frame_id-frame_start+1)/num_frames);
       while (gtk_events_pending()) gtk_main_iteration();
 #else
-      fraction = gtk_progress_bar_get_fraction (GTK_PROGRESS_BAR(encoding_pb));
-      gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR(encoding_pb), fraction + (double)(1)/num_frames);
+      // while (g_main_context_pending (g_main_context_default())) g_main_context_iteration (NULL, TRUE);
 #endif
     }
     if (frame_id-frame_start < num_frames-1)

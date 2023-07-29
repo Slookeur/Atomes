@@ -181,11 +181,11 @@ GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab
 /*
 *  GtkWidget * menu_box_axis (glwin * view, int id, int ab)
 *
-*  Usage:
+*  Usage: create the 'Model -> Box' and 'View -> Axis' submenus GTK3
 *
 *  glwin * view : the target glwin
-*  int id       :
-*  int ab       :
+*  int id       : main app (0) or popup (1)
+*  int ab       : box (0) or axis (1)
 */
 GtkWidget * menu_box_axis (glwin * view, int id, int ab)
 {
@@ -298,7 +298,7 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
 /*
 *  G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: handle the 'box/axis' show/hide signal GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -342,7 +342,7 @@ G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * para
 /*
 *  G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: handle a box/axis radio menu item signal GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -392,12 +392,12 @@ G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * p
 /*
 *  GMenu * axis_box_style (glwin * view, int popm, int ab, int abs)
 *
-*  Usage:
+*  Usage: create the box/axis '-> Style' submenu GTK4
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)
-*  int ab       :
-*  int abs      :
+*  int ab       : box (0) or axis (1)
+*  int abs      : the active box/axis style
 */
 GMenu * axis_box_style (glwin * view, int popm, int ab, int abs)
 {
@@ -418,12 +418,12 @@ GMenu * axis_box_style (glwin * view, int popm, int ab, int abs)
 /*
 *  GMenu * axis_box_param (glwin * view, int popm, int ab, int style)
 *
-*  Usage:
+*  Usage: create the box/axis '-> Length/Width/Radius' submenus GTK4
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)
-*  int ab       :
-*  int style    :
+*  int ab       : box (0) or axis (1)
+*  int style    : the active box/axis style
 */
 GMenu * axis_box_param (glwin * view, int popm, int ab, int style)
 {
@@ -454,11 +454,11 @@ GMenu * axis_box_param (glwin * view, int popm, int ab, int style)
 /*
 *  GMenuItem * menu_box_axis (glwin * view, int popm, int ab)
 *
-*  Usage:
+*  Usage: create the 'Model -> Box' and 'View -> Axis' submenus GTK4
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)
-*  int ab       :
+*  int ab       : box (0) or axis (1)
 */
 GMenuItem * menu_box_axis (glwin * view, int popm, int ab)
 {

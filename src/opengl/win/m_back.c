@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the background color menu item
+
 *
 *  List of subroutines:
 
@@ -35,7 +36,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  GtkWidget * menu_back (glwin * view)
 *
-*  Usage:
+*  Usage: create the background color menu item GTK3
 *
 *  glwin * view : the target glwin
 */
@@ -51,10 +52,10 @@ GtkWidget * menu_back (glwin * view)
 /*
 *  GMenu * menu_back (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the background color menu item GTK4
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * menu_back (glwin * view, int popm)
 {

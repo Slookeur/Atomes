@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutine to create the 'Animate' submenu
+
 *
 *  List of subroutines:
 
@@ -42,7 +43,7 @@ extern G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data);
 /*
 *  GtkWidget * menu_anim (glwin * view, int id)
 *
-*  Usage:
+*  Usage: create the 'Animate' submenu elements GTK3
 *
 *  glwin * view : the target glwin
 *  int id       : main app (0) or popup (1)
@@ -80,7 +81,7 @@ GtkWidget * menu_anim (glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void to_spin (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: handle the spinner window creation signal
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -94,7 +95,7 @@ G_MODULE_EXPORT void to_spin (GSimpleAction * action, GVariant * parameter, gpoi
 /*
 *  G_MODULE_EXPORT void to_seq (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: handle the sequencer window creation signal
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -108,7 +109,7 @@ G_MODULE_EXPORT void to_seq (GSimpleAction * action, GVariant * parameter, gpoin
 /*
 *  G_MODULE_EXPORT void to_rec (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: handle the recorder window creation signal
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -122,7 +123,7 @@ G_MODULE_EXPORT void to_rec (GSimpleAction * action, GVariant * parameter, gpoin
 /*
 *  GMenu * menu_anim (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the 'Animate' submenu elements
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)

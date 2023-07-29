@@ -305,7 +305,7 @@ G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpoin
 *  Usage:
 *
 *  glwin * view   : the target glwin
-*  gboolean video :
+*  gboolean video : video (1) or image (0)
 */
 void window_encode (glwin * view, gboolean video)
 {

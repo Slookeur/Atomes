@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the 'Axis' submenu
+
 *
 *  List of subroutines:
 
@@ -50,7 +51,7 @@ extern GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, 
 /*
 *  G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: handle change axis position signal GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -93,10 +94,10 @@ G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * axis_position_submenu (glwin * view, int id)
 *
-*  Usage:
+*  Usage:  create the 'Axis -> Position' submenu GTK3
 *
 *  glwin * view : the target glwin
-*  int id       :
+*  int id       : main app (0) or popup (1)
 */
 GtkWidget * axis_position_submenu (glwin * view, int id)
 {
@@ -148,11 +149,11 @@ GtkWidget * axis_position_submenu (glwin * view, int id)
 /*
 *  void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
 *
-*  Usage:
+*  Usage: create 'Axis' menu GTK3
 *
 *  GtkWidget * menu_ab : the GtkWidget sending the signal
 *  glwin * view        : the target glwin
-*  int id              :
+*  int id              : main app (0) or popup (1)
 */
 void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
 {
@@ -186,7 +187,7 @@ void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: handle change axis position signal GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -238,11 +239,11 @@ G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * p
 /*
 *  GMenu * position_submenu (glwin * view, int popm, int pos)
 *
-*  Usage:
+*  Usage: create elements of the 'Axis -> Position' submenu GTK4
 *
 *  glwin * view : the target glwin
-*  int popm     :
-*  int pos      :
+*  int popm     : main app (0) or popup (1)
+*  int pos      : position id
 */
 GMenu * position_submenu (glwin * view, int popm, int pos)
 {
@@ -263,10 +264,10 @@ GMenu * position_submenu (glwin * view, int popm, int pos)
 /*
 *  GMenu * axis_position_submenu (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the 'Axis -> Position' submenu GTK4
 *
 *  glwin * view : the target glwin
-*  int popm     :
+*  int popm     : main app (0) or popup (1)
 */
 GMenu * axis_position_submenu (glwin * view, int popm)
 {
@@ -286,11 +287,11 @@ GMenu * axis_position_submenu (glwin * view, int popm)
 /*
 *  void menu_axis (GMenu * menu_ab, glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the 'Axis' submenu GTK4
 *
-*  GMenu * menu_ab :
+*  GMenu * menu_ab : the menu to attach the new menu to
 *  glwin * view    : the target glwin
-*  int popm        :
+*  int popm        : main app (0) or popup (1)
 */
 void menu_axis (GMenu * menu_ab, glwin * view, int popm)
 {
