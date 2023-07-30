@@ -16,9 +16,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains: 
 
-*  Called by: 
-
-  gui/interface.c
+ - The text of the Affero GPL v3 license
 
 */
 
