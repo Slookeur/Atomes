@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The OpenGL window callbacks subroutines
+
 *
 *  List of subroutines:
 
@@ -107,9 +108,9 @@ GLenum ogl_texture;
 /*
 *  GLuint * allocgluint (int  val)
 *
-*  Usage:
+*  Usage: allocate a GLuint * pointer
 *
-*  int  val :
+*  int  val : size of the pointer to allocate
 */
 GLuint * allocgluint (int  val)
 {
@@ -122,10 +123,10 @@ GLuint * allocgluint (int  val)
 /*
 *  GLuint ** allocdgluint (int xal, int yal)
 *
-*  Usage:
+*  Usage: allocate a GLuint ** pointer
 *
-*  int xal :
-*  int yal :
+*  int xal : 1st dimension size of the pointer to allocate
+*  int yal : 2nd dimension size of the pointer to allocate
 */
 GLuint ** allocdgluint (int xal, int yal)
 {
@@ -144,10 +145,10 @@ GLuint ** allocdgluint (int xal, int yal)
 /*
 *  GLfloat ** allocdGLfloat (int xal, int yal)
 *
-*  Usage:
+*  Usage: allocate a GLfloat ** pointer
 *
-*  int xal :
-*  int yal :
+*  int xal : 1st dimension size of the pointer to allocate
+*  int yal : 2nd dimension size of the pointer to allocate
 */
 GLfloat ** allocdGLfloat (int xal, int yal)
 {
@@ -171,9 +172,9 @@ const float light_pos[MAX_LIGHTS][4] = {{-0.1f,  0.1f,  1.0f, 0.0f},
 /*
 *  ColRGBA set_default_color (int z)
 *
-*  Usage:
+*  Usage: pick the default color for an atom
 *
-*  int z :
+*  int z : atomic number
 */
 ColRGBA set_default_color (int z)
 {
