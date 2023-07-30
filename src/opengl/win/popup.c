@@ -241,7 +241,7 @@ int get_style (gchar * str)
   int i;
   is_filled = NONE;
 #ifdef GTK4
-  i = StringLength(str);
+  i = strlen (str);
   return (int) atof ((const gchar *)g_strdup_printf ("%c", str[i-1]));
 #else
   for (i=0; i<OGL_STYLES; i++)
@@ -382,9 +382,9 @@ gchar * get_object_from_action (GSimpleAction * action)
   gchar * act_end;
   gchar * str;
   k = strlen (act);
-  if (strstr(act, "mol-ins"))
+  if (strstr(act, "set-mol-ins"))
   {
-    act_end = g_strdup_printf ("%c%c", act[k-2], act[k-1]);
+    act_end = g_strdup_printf ("%c%c", act[k-4], act[k-3]);
     for (i=0; mol[i].type || mol[i].object; i++)
     {
       if (mol[i].object)
@@ -404,7 +404,7 @@ gchar * get_object_from_action (GSimpleAction * action)
   }
   if (strstr(act, "set-ifp"))
   {
-    act_end = g_strdup_printf ("%c%c%c%c", act[k-4], act[k-3], act[k-2], act[k-1]);
+    act_end = g_strdup_printf ("%c%c%c%c", act[k-6], act[k-5], act[k-4], act[k-3]);
     for (i=0; i<nprojects; i++)
     {
       if (get_project_by_id(i) -> steps == 1 && get_project_by_id(i) -> natomes)

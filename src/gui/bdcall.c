@@ -496,7 +496,7 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
       if (active_project -> bondfile != NULL)
       {
         l = 1;
-        m = StringLength(active_project -> bondfile);
+        m = strlen (active_project -> bondfile);
       }
       // debug_chemical_information (active_project);
       active_project -> delta[BD] = (active_project -> max[BD]-active_project -> min[BD]) / active_project -> num_delta[BD];
@@ -800,7 +800,7 @@ void env_info (int sp, int totgsa, int numgsa[totgsa], int listgsa[totgsa])
   for ( j=0 ; j < active_project -> nspec ; j++ )
   {
     snr = g_strdup_printf ("%s", exact_name(active_chem -> label[j]));
-    i = 6 - StringLength (snr);
+    i = 6 - strlen (snr);
     for (k=0; k<i; k++) print_info (" ", NULL, active_project -> text_buffer[BD+OT]);
     str = g_strdup_printf ("N(%s)", snr);
     spr = g_strdup_printf ("%s", textcolor(j));
@@ -828,7 +828,7 @@ void env_info (int sp, int totgsa, int numgsa[totgsa], int listgsa[totgsa])
     spr = g_strdup_printf ("%s", env_name (active_project, i, sp, 1, active_project -> text_buffer[BD+OT]));
     g_free (spr);
     spr = g_strdup_printf ("%s", exact_name(env_name (active_project, i, sp, 0, NULL)));
-    k = 12 - StringLength (spr);
+    k = 12 - strlen (spr);
     g_free (spr);
     for (j=0; j<k; j++) print_info (" ", NULL, active_project -> text_buffer[BD+OT]);
     print_info ("\t", NULL, active_project -> text_buffer[BD+OT]);

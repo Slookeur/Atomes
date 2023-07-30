@@ -885,8 +885,6 @@ extern void update_entry_double (GtkEntry * entry, double doubleval);
 extern void update_entry_long_double (GtkEntry * entry, double doubleval);
 extern void update_entry_text (GtkEntry * entry, gchar * text);
 
-extern int StringLength (char * str);
-
 extern double * xsk;
 extern gboolean * allocbool (int val);
 extern gboolean ** allocdbool (int xal, int yal);

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_print.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   gchar * cp2kbool (double opt);
 
@@ -358,10 +358,10 @@ gchar * cp2k_fix[4] = {"    &FIXED_ATOMS\n      COMPONENTS_TO_FIX ",
 /*
 *  void print_cp2k_var (gchar * var, GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * var            : 
-*  GtkTextBuffer * buffer : 
+*  gchar * var            :
+*  GtkTextBuffer * buffer :
 */
 void print_cp2k_var (gchar * var, GtkTextBuffer * buffer)
 {
@@ -373,11 +373,11 @@ void print_cp2k_var (gchar * var, GtkTextBuffer * buffer)
 /*
 *  void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  int num                : 
-*  gchar ** section       : 
-*  GtkTextBuffer * buffer : 
+*  int num                :
+*  gchar ** section       :
+*  GtkTextBuffer * buffer :
 */
 void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer)
 {
@@ -398,9 +398,9 @@ void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer)
 /*
 *  gchar * cp2kbool (double opt)
 *
-*  Usage: 
+*  Usage:
 *
-*  double opt : 
+*  double opt :
 */
 gchar * cp2kbool (double opt)
 {
@@ -419,10 +419,10 @@ extern int v_thermo[2][CP2NTHERM];
 /*
 *  void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  int n_thermo           : 
-*  GtkTextBuffer * buffer : 
+*  int n_thermo           :
+*  GtkTextBuffer * buffer :
 */
 void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
 {
@@ -502,10 +502,10 @@ void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
 /*
 *  void print_motion_cp2k (int m, GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  int m                  : 
-*  GtkTextBuffer * buffer : 
+*  int m                  :
+*  GtkTextBuffer * buffer :
 */
 void print_motion_cp2k (int m, GtkTextBuffer * buffer)
 {
@@ -592,9 +592,9 @@ void print_motion_cp2k (int m, GtkTextBuffer * buffer)
 /*
 *  void print_coord_cp2k (GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTextBuffer * buffer : 
+*  GtkTextBuffer * buffer :
 */
 void print_coord_cp2k (GtkTextBuffer * buffer)
 {
@@ -635,9 +635,9 @@ void print_coord_cp2k (GtkTextBuffer * buffer)
 /*
 *  void print_subsys_cp2k (GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTextBuffer * buffer : 
+*  GtkTextBuffer * buffer :
 */
 void print_subsys_cp2k (GtkTextBuffer * buffer)
 {
@@ -668,7 +668,7 @@ void print_subsys_cp2k (GtkTextBuffer * buffer)
     str = g_strdup_printf ("BASIS_FOR_%s", exact_name(qm_proj -> chemistry -> label[i]));
     print_cp2k_var (str, buffer);
     g_free (str);
-    if (StringLength(exact_name(qm_proj -> chemistry -> label[i])) == 1) print_info (" ",NULL, buffer);
+    if (strlen(exact_name(qm_proj -> chemistry -> label[i])) == 1) print_info (" ",NULL, buffer);
     print_info ("\n    POTENTIAL ", NULL, buffer);
 
     str = g_strdup_printf ("POTENTIAL_FOR_%s", exact_name(qm_proj -> chemistry -> label[i]));
@@ -682,9 +682,9 @@ void print_subsys_cp2k (GtkTextBuffer * buffer)
 /*
 *  void print_variables_cp2k (GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTextBuffer * buffer : 
+*  GtkTextBuffer * buffer :
 */
 void print_variables_cp2k (GtkTextBuffer * buffer)
 {
@@ -925,7 +925,7 @@ void print_variables_cp2k (GtkTextBuffer * buffer)
         str = g_strdup_printf ("@SET BASIS_FOR_%s                   ", exact_name(qm_proj -> chemistry -> label[j]));
         print_info (str, NULL, buffer);
         g_free (str);
-        if (StringLength(exact_name(qm_proj -> chemistry -> label[j])) == 1) print_info (" ",NULL, buffer);
+        if (strlen(exact_name(qm_proj -> chemistry -> label[j])) == 1) print_info (" ",NULL, buffer);
         if (tmp_cp2k -> spec_data[j][0] > -1)
         {
           print_info (get_nth_key (j, tmp_cp2k -> spec_data[j][0], 0), "blue", buffer);
@@ -939,7 +939,7 @@ void print_variables_cp2k (GtkTextBuffer * buffer)
         str = g_strdup_printf ("@SET POTENTIAL_FOR_%s               ", exact_name(qm_proj -> chemistry -> label[j]));
         print_info (str, NULL, buffer);
         g_free (str);
-        if (StringLength(exact_name(qm_proj -> chemistry -> label[j])) == 1) print_info (" ",NULL, buffer);
+        if (strlen(exact_name(qm_proj -> chemistry -> label[j])) == 1) print_info (" ",NULL, buffer);
         if (tmp_cp2k -> spec_data[j][1] > -1)
         {
           print_info (get_nth_key (j, tmp_cp2k -> spec_data[j][1], 1), "blue", buffer);
@@ -959,9 +959,9 @@ void print_variables_cp2k (GtkTextBuffer * buffer)
 /*
 *  void print_global_cp2k (GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkTextBuffer * buffer : 
+*  GtkTextBuffer * buffer :
 */
 void print_global_cp2k (GtkTextBuffer * buffer)
 {
@@ -998,13 +998,13 @@ void print_global_cp2k (GtkTextBuffer * buffer)
 /*
 *  void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  gchar * spaces         : 
-*  gchar * info           : 
-*  int i                  : 
-*  int j                  : 
-*  GtkTextBuffer * buffer : 
+*  gchar * spaces         :
+*  gchar * info           :
+*  int i                  :
+*  int j                  :
+*  GtkTextBuffer * buffer :
 */
 void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer * buffer)
 {
@@ -1036,10 +1036,10 @@ void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer
 /*
 *  void print_cp2k (int f, GtkTextBuffer * buffer)
 *
-*  Usage: 
+*  Usage:
 *
-*  int f                  : 
-*  GtkTextBuffer * buffer : 
+*  int f                  :
+*  GtkTextBuffer * buffer :
 */
 void print_cp2k (int f, GtkTextBuffer * buffer)
 {

@@ -574,7 +574,7 @@ void clean_object_bonds (struct project * proj, int o_step, struct insert_object
     h = 1;
   }
   i = 0;
-  object -> bcid = allocint (proj -> modelgl -> bonds[o_step][1]);
+  if (new_id) object -> bcid = allocint (proj -> modelgl -> bonds[o_step][1]);
   for (j=0; j<h; j++)
   {
     for (k=0; k<proj -> modelgl -> bonds[o_step][j]; k++)
@@ -582,13 +582,28 @@ void clean_object_bonds (struct project * proj, int o_step, struct insert_object
       l = proj -> modelgl -> bondid[o_step][j][k][0];
       m = proj -> modelgl -> bondid[o_step][j][k][1];
       doit = FALSE;
-      if (new_id[l] && new_id[m]) doit = TRUE;
+      if (new_id)
+      {
+        if (new_id[l] && new_id[m]) doit = TRUE;
+      }
+      else
+      {
+        doit = TRUE;
+      }
       if (doit)
       {
-        tmpibonds[i][0] = new_id[l] - 1;
-        tmpibonds[i][1] = new_id[m] - 1;
+        if (new_id)
+        {
+          tmpibonds[i][0] = new_id[l] - 1;
+          tmpibonds[i][1] = new_id[m] - 1;
+        }
+        else
+        {
+          tmpibonds[i][0] = l;
+          tmpibonds[i][1] = m;
+        }
         i ++;
-        if (j)
+        if (j && new_id)
         {
           object -> bcid[object -> ifcl] = k;
           object -> ifcl ++;
@@ -607,7 +622,7 @@ void clean_object_bonds (struct project * proj, int o_step, struct insert_object
   }
   g_free (tmpibonds);
   object -> bonds = i;
-  clean_object_vois (proj, object, new_id, movtion);
+  if (new_id) clean_object_vois (proj, object, new_id, movtion);
 }
 
 void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
@@ -807,7 +822,11 @@ struct insert_object * create_object_from_atom_coordination (struct project * th
       this_object -> old_z[k] = (int) this_proj -> chemistry -> chem_prop[CHEM_Z][k];
     }
     clean_object_bonds (this_proj, o_step, this_object, new_id, movtion);
-    if (new_id) g_free (new_id);
+    if (new_id)
+    {
+      g_free (new_id);
+      new_id = NULL;
+    }
     correct_coordinates_for_object (this_proj, this_object, movtion);
   }
   return this_object;
@@ -1020,7 +1039,7 @@ int create_object_from_open_project (struct project * this_proj, int p)
   lib_object -> species = other_proj -> nspec;
   lib_object -> old_z = allocint (other_proj -> nspec);
   int * new_id = NULL;
-  gboolean alloc_new_id = (this_proj -> modelgl -> other_status != 2 && i > 1 && (other_proj -> modelgl -> bonds[o_step][0] || other_proj -> modelgl -> bonds[o_step][1])) ? TRUE : FALSE;
+  gboolean alloc_new_id =  (i > 1 && (other_proj -> modelgl -> bonds[o_step][0] || other_proj -> modelgl -> bonds[o_step][1])) ? TRUE : FALSE;
   if (alloc_new_id) new_id = allocint (other_proj -> natomes);
   if (this_proj -> modelgl -> other_status == 2)
   {
@@ -1029,13 +1048,13 @@ int create_object_from_open_project (struct project * this_proj, int p)
       k = other_proj -> atoms[o_step][j].sp;
       lib_object -> old_z[k] = (int) other_proj -> chemistry -> chem_prop[CHEM_Z][k];
       lib_object -> at_list[j] = * duplicate_atom (& other_proj -> atoms[o_step][j]);
+      if (alloc_new_id)  new_id[j] = j+1;
       if (j)
       {
         lib_object -> at_list[j].prev = & lib_object -> at_list[j-1];
         lib_object -> at_list[j-1].next = & lib_object -> at_list[j];
       }
     }
-    lib_object -> ifcl = other_proj -> modelgl -> bonds[o_step][1];
   }
   else
   {
@@ -1045,23 +1064,27 @@ int create_object_from_open_project (struct project * this_proj, int p)
       if (other_proj -> atoms[o_step][j].pick[0] == this_proj -> modelgl -> other_status)
       {
         k = other_proj -> atoms[o_step][j].sp;
-        if (alloc_new_id) new_id[j] = i+1;
+        lib_object -> old_z[k] = (int)other_proj -> chemistry -> chem_prop[CHEM_Z][k];
         lib_object -> at_list[i] = * duplicate_atom (& other_proj -> atoms[o_step][j]);
+        if (alloc_new_id) new_id[j] = i+1;
         if (i)
         {
           lib_object -> at_list[i].prev = & lib_object -> at_list[i-1];
           lib_object -> at_list[i-1].next = & lib_object -> at_list[i];
         }
-        lib_object -> old_z[k] = (int)other_proj -> chemistry -> chem_prop[CHEM_Z][k];
         i ++;
       }
     }
-    clean_object_bonds (other_proj, o_step, lib_object, new_id, alloc_new_id);
-    g_free (new_id);
-    check_coord_modification (other_proj, NULL, & lib_object -> at_list[0], lib_object, FALSE, FALSE);
   }
+  clean_object_bonds (other_proj, o_step, lib_object, new_id, alloc_new_id);
+  if (alloc_new_id)
+  {
+    g_free (new_id);
+    new_id = NULL;
+  }
+  if (this_proj -> modelgl -> other_status < 2 && i < other_proj -> natomes)  check_coord_modification (other_proj, NULL, & lib_object -> at_list[0], lib_object, FALSE, FALSE);
   correct_coordinates_for_object (other_proj, lib_object, TRUE);
-  if (this_proj -> modelgl -> other_status < 2) adjust_object_frag_coord (lib_object);
+  if (this_proj -> modelgl -> other_status < 2  && i < other_proj -> natomes) adjust_object_frag_coord (lib_object);
   return FROM_PROJECT;
 }
 

@@ -809,7 +809,7 @@ gboolean append (atom_search * asearch, struct project * this_proj, int i, int j
     {
       str_a = g_strdup_printf ("%d", i+1);
       str_b = g_strdup_printf ("%d", asearch -> search_digit);
-      if (StringLength(str_b) > StringLength(str_a))
+      if (strlen (str_b) > strlen (str_a))
       {
         append = FALSE;
       }
@@ -817,7 +817,7 @@ gboolean append (atom_search * asearch, struct project * this_proj, int i, int j
       {
         k = 0;
         append = TRUE;
-        while (k < StringLength(str_b))
+        while (k < strlen (str_b))
         {
           if (str_a[k] != str_b[k])
           {
@@ -2365,6 +2365,7 @@ int get_selected_object_id (gboolean visible, int p, gchar * str, atom_search * 
       if (g_strcmp0 (word, str) == 0)
       {
         g_free (word);
+        g_free (name);
         get_project_by_id(p) -> modelgl -> other_status = j;
         return create_object_from_open_project (get_project_by_id(p), i);
       }
@@ -2373,6 +2374,7 @@ int get_selected_object_id (gboolean visible, int p, gchar * str, atom_search * 
         g_free (word);
       }
     }
+    g_free (name);
   }
   if (g_strcmp0 ("Copied data", str) == 0)
   {

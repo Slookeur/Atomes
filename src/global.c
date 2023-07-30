@@ -23,7 +23,6 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  List of subroutines:
 
-  int StringLength (char * str);
   int * allocint (int  val);
   int ** allocdint (int xal, int yal);
   int *** alloctint (int xal, int yal, int zal);
@@ -295,7 +294,7 @@ GdkPixbuf * RUN = NULL;
 *  Usage: return the length of a string
 *
 *  char * str : string to measure
-*/
+* /
 int StringLength (char * str)
 {
   int na, nb;
@@ -306,6 +305,7 @@ int StringLength (char * str)
   for (nb = na; (c = * str) == ' '; -- str, nb --);
   return nb;
 }
+*/
 
 /*
 *  gboolean * allocbool (int  val)
