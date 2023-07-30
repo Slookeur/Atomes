@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to prepare the measure(s) OpenGL rendering
+
 *
 *  List of subroutines:
 
@@ -71,12 +72,12 @@ ColRGBA col_gdk;
 /*
 *  void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int pi)
 *
-*  Usage:
+*  Usage: prepare an measured angle label OpenGL rendering
 *
-*  struct atom * at :
-*  struct atom * bt :
-*  struct atom * ct :
-*  int pi           :
+*  struct atom * at : 1st atom
+*  struct atom * bt : 2nd atom
+*  struct atom * ct : 3rd atom
+*  int pi           : 0 = mouse analysis mode, 1 = mouse edition mode
 */
 void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int pi)
 {
@@ -101,9 +102,9 @@ void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int
 *
 *  Usage:
 *
-*  int selected :
-*  int id       :
-*  int num      :
+*  int selected : total number of selected atom(s)
+*  int id       : measured element id number
+*  int num      : total number of measured element(s) in the list
 */
 void set_measure_color (int selected, int id, int num)
 {
@@ -123,13 +124,13 @@ void set_measure_color (int selected, int id, int num)
 /*
 *  void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
 *
-*  Usage:
+*  Usage: prepare measured angle to render
 *
-*  int s  :
-*  int sa :
-*  int sb :
-*  int sc :
-*  int pi :
+*  int s  : measured line (0) or label (1)
+*  int sa : 1st atom
+*  int sb : 2nd atom
+*  int sc ! 3rd atom
+*  int pi : 0 = mouse analysis mode, 1 = mouse edition mode
 */
 void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
 {
@@ -180,12 +181,17 @@ void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
 /*
 *  void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 *
-*  Usage:
+*  Usage: do things for the measured angles selection
 *
 *  glwin * view         : the target glwin
-*  int id               :
-*  int pi               :
-*  GtkTreeStore * store :
+*  int id               : action to perform:
+*                          -2 = save angles selection
+*                          -1 = clean angles selection
+*                           0 = prepare OpenGL buffer data analysis mode selection measure
+*                           1 = prepare OpenGL buffer data edition mode selection measure
+*                           2 = fill angles tree store measures window
+*  int pi               : 0 = mouse analysis mode, 1 = mouse edition mode
+*  GtkTreeStore * store : the tree store to fill, if any
 */
 void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 {
@@ -290,12 +296,17 @@ void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 /*
 *  void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 *
-*  Usage:
+*  Usage: do things for the measured dihedrals selection
 *
 *  glwin * view         : the target glwin
-*  int id               :
-*  int pi               :
-*  GtkTreeStore * store :
+*  int id               : action to perform:
+*                          -2 = save dihedrals selection
+*                          -1 = clean dihedrals selection
+*                           0 = prepare OpenGL buffer data analysis mode selection measure
+*                           1 = prepare OpenGL buffer data edition mode selection measure
+*                           2 = fill dihedrals tree store measures window
+*  int pi               : 0 = mouse analysis mode, 1 = mouse edition mode
+*  GtkTreeStore * store : the tree store to fill, if any
 */
 void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 {
@@ -410,11 +421,11 @@ void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 /*
 *  void draw_bond_label (struct atom * at, struct atom * bt, int pi)
 *
-*  Usage:
+*  Usage: prepare a measured distance OpenGL rendering
 *
-*  struct atom * at :
-*  struct atom * bt :
-*  int pi           :
+*  struct atom * at : 1st atom
+*  struct atom * bt : 2nd atom
+*  int pi           : 0 = mouse analysis mode, 1 = mouse edition mode
 */
 void draw_bond_label (struct atom * at, struct atom * bt, int pi)
 {
@@ -445,12 +456,12 @@ void draw_bond_label (struct atom * at, struct atom * bt, int pi)
 /*
 *  void setup_this_measured_bond (int s, int sa, int sb, int pi)
 *
-*  Usage:
+*  Usage: prepare measured distance to render
 *
-*  int s  :
-*  int sa :
-*  int sb :
-*  int pi :
+*  int s  : measured line (0) or label (1)
+*  int sa : 1st atom
+*  int sb : 2nd atom
+*  int pi : 0 = mouse analysis mode, 1 = mouse edition mode
 */
 void setup_this_measured_bond (int s, int sa, int sb, int pi)
 {
@@ -496,12 +507,17 @@ void setup_this_measured_bond (int s, int sa, int sb, int pi)
 /*
 *  void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 *
-*  Usage:
+*  Usage: do things for the measured distances selection
 *
 *  glwin * view         : the target glwin
-*  int id               :
-*  int pi               :
-*  GtkTreeStore * store :
+*  int id               : action to perform:
+*                          -2 = save bonds selection
+*                          -1 = clean bonds selection
+*                           0 = prepare OpenGL buffer data analysis mode selection measure
+*                           1 = prepare OpenGL buffer data edition mode selection measure
+*                           2 = fill bonds distances tree store measures window
+*  int pi               : 0 = mouse analysis mode, 1 = mouse edition mode
+*  GtkTreeStore * store : the tree store to fill, if any
 */
 void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 {
@@ -576,10 +592,10 @@ void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 /*
 *  int prepare_measure_shaders (int type, int shaders)
 *
-*  Usage:
+*  Usage: prepare measure OpenGL rendering
 *
-*  int type    :
-*  int shaders :
+*  int type    : the measure type (0 = distances, 1 = angles, 2 = dihedrals)
+*  int shaders : the shader id
 */
 int prepare_measure_shaders (int type, int shaders)
 {
@@ -644,7 +660,7 @@ int prepare_measure_shaders (int type, int shaders)
 /*
 *  void create_measures_lists ()
 *
-*  Usage:
+*  Usage: prepare measure(s) OpenGL rendering
 */
 void create_measures_lists ()
 {

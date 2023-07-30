@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to prepare the axis OpenGL rendering
+
 *
 *  List of subroutines:
 
@@ -29,7 +30,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
   ColRGBA color_axis (int id);
 
-  mat4_t create_axis_matrices (int type, vec3_t pos);
+  mat4_t create_axis_matrices (int type);
 
 */
 
@@ -61,9 +62,9 @@ float label_pos;
 /*
 *  ColRGBA color_axis (int id)
 *
-*  Usage:
+*  Usage: get axis color
 *
-*  int id :
+*  int id : axis x (0), y(1) or z(2)
 */
 ColRGBA color_axis (int id)
 {
@@ -83,14 +84,13 @@ ColRGBA color_axis (int id)
 }
 
 /*
-*  mat4_t create_axis_matrices (int type, vec3_t pos)
+*  mat4_t create_axis_matrices (int type)
 *
-*  Usage:
+*  Usage: create axis OpenGL rendering matrices
 *
-*  int type   :
-*  vec3_t pos :
+*  int type   : axis type (standard: 0, atom edition viewer axis: 1)
 */
-mat4_t create_axis_matrices (int type, vec3_t pos)
+mat4_t create_axis_matrices (int type)
 {
   GLfloat x, y, z;
   float from_edge = 50.0;
@@ -161,14 +161,14 @@ mat4_t create_axis_matrices (int type, vec3_t pos)
 /*
 *  void setup_arrow (float * vert, vec3_t a, vec3_t b, vec3_t c, vec3_t d, vec3_t e)
 *
-*  Usage:
+*  Usage: setup axis 3D arrow rendering data
 *
-*  float * vert :
-*  vec3_t a     :
-*  vec3_t b     :
-*  vec3_t c     :
-*  vec3_t d     :
-*  vec3_t e     :
+*  float * vert : the OpenGL buffer data to fill
+*  vec3_t a     : position vector a
+*  vec3_t b     : position vector b
+*  vec3_t c     : position vector c
+*  vec3_t d     : position vector d
+*  vec3_t e     : position vector e
 */
 void setup_arrow (float * vert, vec3_t a, vec3_t b, vec3_t c, vec3_t d, vec3_t e)
 {
@@ -183,7 +183,7 @@ void setup_arrow (float * vert, vec3_t a, vec3_t b, vec3_t c, vec3_t d, vec3_t e
 /*
 *  void init_axis_param ()
 *
-*  Usage:
+*  Usage: initialize axis rendering parameters
 */
 void init_axis_param ()
 {
@@ -205,11 +205,11 @@ void init_axis_param ()
 /*
 *  void prepare_axis_data (float * vert_a, float * vert_b, float * vert_c)
 *
-*  Usage:
+*  Usage: prepare axis OpenGL rendering data buffer
 *
-*  float * vert_a :
-*  float * vert_b :
-*  float * vert_c :
+*  float * vert_a : OpenGL buffer data to fill
+*  float * vert_b : OpenGL buffer data to fill
+*  float * vert_c : OpenGL buffer data to fill
 */
 void prepare_axis_data (float * vert_a, float * vert_b, float * vert_c)
 {
@@ -255,7 +255,7 @@ void prepare_axis_data (float * vert_a, float * vert_b, float * vert_c)
 /*
 *  int create_axis_lists ()
 *
-*  Usage:
+*  Usage: prepare axis OpenGL rendering
 */
 int create_axis_lists ()
 {

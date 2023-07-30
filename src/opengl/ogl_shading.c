@@ -887,7 +887,6 @@ void render_this_shader (glsl_program * glsl, int ids)
   int j, k;
   if (glsl -> object == MAXIS)
   {
-    vec3_t pos = vec3(0.0,0.0,0.0);
     j = 0;
     if (is_atom_win_active(wingl))
     {
@@ -897,7 +896,7 @@ void render_this_shader (glsl_program * glsl, int ids)
         j = wingl -> atom_win -> axis[k];
       }
     }
-    wingl -> axis_proj_model_view_matrix = create_axis_matrices (j, pos);
+    wingl -> axis_proj_model_view_matrix = create_axis_matrices (j);
     glUniformMatrix4fv (glsl -> uniform_loc[0], 1, GL_FALSE, & wingl -> axis_proj_model_view_matrix.m00);
     j = (plot -> box_axis[AXIS] == WIREFRAME) ? 1 : 3;
     if (ids > j) shading_glsl_text (glsl);

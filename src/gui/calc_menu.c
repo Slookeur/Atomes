@@ -1360,7 +1360,7 @@ G_MODULE_EXPORT void run_on_calc_activate (GtkDialog * dial, gint response_id, g
 /*
 *  G_MODULE_EXPORT void on_calc_activate (GtkWidget * widg, gpointer data)
 *
-*  Usage: create a calculation dialog: prepare the dialog
+*  Usage: create a calculation dialog - prepare the dialog
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer

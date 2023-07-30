@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to encode a movie / image from the OpenGL rendering
+
 *
 *  List of subroutines:
 
@@ -37,6 +38,11 @@ If not, see <https://www.gnu.org/licenses/> */
 
   G_MODULE_EXPORT void run_save_movie (GtkNativeDialog * info, gint response_id, gpointer data);
   G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointer data);
+
+  static GLubyte * capture_opengl_image (unsigned int width, unsigned int height);
+
+  AVCodecContext * add_codec_context (AVFormatContext * fc, const AVCodec * vc, video_options * vopts);
+  static AVFrame * alloc_video_frame (AVCodecContext * cc);
 
   VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_options * vopts);
 
@@ -114,12 +120,12 @@ int frame_start;
 /*
 *  void convert_rgb_pixbuf_to_yuv (GdkPixbuf * pixbuf, AVFrame * picture, int w, int h)
 *
-*  Usage:
+*  Usage: convert an RGB pixbuf to an YUV picture frame
 *
-*  GdkPixbuf * pixbuf :
-*  AVFrame * picture  :
-*  int w              :
-*  int h              :
+*  GdkPixbuf * pixbuf : the Gdk RGB pixbuf to convert
+*  AVFrame * picture  : the AVFrame to store the data
+*  int w              : image width
+*  int h              : image height
 */
 void convert_rgb_pixbuf_to_yuv (GdkPixbuf * pixbuf, AVFrame * picture, int w, int h)
 {
@@ -207,10 +213,10 @@ void convert_rgb_pixbuf_to_yuv (GdkPixbuf * pixbuf, AVFrame * picture, int w, in
 /*
 *  static void ffmpeg_encoder_set_frame_yuv_from_rgb (uint8_t * rgb, VideoStream * vs)
 *
-*  Usage:
+*  Usage: set an encoder YUV frame from an RGB image
 *
-*  uint8_t * rgb    :
-*  VideoStream * vs :
+*  uint8_t * rgb    : the RGB data to convert
+*  VideoStream * vs : the video stream to encode the data
 */
 static void ffmpeg_encoder_set_frame_yuv_from_rgb (uint8_t * rgb, VideoStream * vs)
 {
@@ -224,6 +230,11 @@ static void ffmpeg_encoder_set_frame_yuv_from_rgb (uint8_t * rgb, VideoStream * 
              vs -> frame -> data, vs -> frame -> linesize);
 }
 
+/*
+*  static GLubyte * capture_opengl_image (unsigned int width, unsigned int height)
+*
+*  Usage : capture an OpenGL image from an OpenGL rendering
+*/
 static GLubyte * capture_opengl_image (unsigned int width, unsigned int height)
 {
   size_t i, nvals;
@@ -244,11 +255,11 @@ static GLubyte * capture_opengl_image (unsigned int width, unsigned int height)
 /*
 *  void fill_image (VideoStream * vs, int width, int height, glwin * view)
 *
-*  Usage:
+*  Usage: render an image from an OpenGL rendering
 *
-*  VideoStream * vs :
-*  int width        :
-*  int height       :
+*  VideoStream * vs : the video stream
+*  int width        : image width
+*  int height       : image height
 *  glwin * view     : the target glwin
 */
 void fill_image (VideoStream * vs, int width, int height, glwin * view)
@@ -276,11 +287,11 @@ void fill_image (VideoStream * vs, int width, int height, glwin * view)
 /*
 *  static void write_video_frame (AVFormatContext * f_context, VideoStream * vs, int frame_id, glwin * view)
 *
-*  Usage:
+*  Usage: write a video frame from an OpenGL render
 *
-*  AVFormatContext * f_context :
-*  VideoStream * vs            :
-*  int frame_id                :
+*  AVFormatContext * f_context : the format context to use
+*  VideoStream * vs            : the video stream
+*  int frame_id                : the frame id number
 *  glwin * view                : the target glwin
 */
 static void write_video_frame (AVFormatContext * f_context, VideoStream * vs, int frame_id, glwin * view)
@@ -340,6 +351,13 @@ static void write_video_frame (AVFormatContext * f_context, VideoStream * vs, in
   }
 }
 
+/*
+*  static AVFrame * alloc_video_frame (AVCodecContext * cc)
+*
+*  Usage : allocate a video frame using a codec context
+*
+*  AVCodecContext * cc : the codec context
+*/
 static AVFrame * alloc_video_frame (AVCodecContext * cc)
 {
   AVFrame * frame;
@@ -358,6 +376,15 @@ static AVFrame * alloc_video_frame (AVCodecContext * cc)
   return frame;
 }
 
+/*
+*  AVCodecContext * add_codec_context (AVFormatContext * fc, const AVCodec * vc, video_options * vopts)
+*
+*  Usage : create a video codec context
+*
+*  AVFormatContext * fc  : the format context
+*  const AVCodec * vc    : the codec
+*  video_options * vopts : the video encoding options
+*/
 AVCodecContext * add_codec_context (AVFormatContext * fc, const AVCodec * vc, video_options * vopts)
 {
   AVCodecContext * cc;
@@ -407,11 +434,11 @@ AVCodecContext * add_codec_context (AVFormatContext * fc, const AVCodec * vc, vi
 /*
 *  VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_options * vopts)
 *
-*  Usage:
+*  Usage: create video stream and the associated data buffers
 *
-*  AVFormatContext * fc  :
-*  const AVCodec * vc    :
-*  video_options * vopts :
+*  AVFormatContext * fc  : the format context
+*  const AVCodec * vc    : the codec
+*  video_options * vopts : the video encoding options
 */
 VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_options * vopts)
 {
@@ -442,16 +469,16 @@ VideoStream * add_video_stream (AVFormatContext * fc, const AVCodec * vc, video_
 /*
 *  static void close_stream (AVFormatContext * fc, VideoStream * vs)
 *
-*  Usage:
+*  Usage: close the video stream and free associated data buffers
 *
-*  AVFormatContext * fc :
-*  VideoStream * vs     :
+*  AVFormatContext * fc : the format context to free
+*  VideoStream * vs     : the video stream to close
 */
 static void close_stream (AVFormatContext * fc, VideoStream * vs)
 {
-  avcodec_free_context(& vs -> cc);
+  avcodec_free_context (& vs -> cc);
   av_frame_free (& vs -> frame);
-  sws_freeContext(vs -> sws_ctx);
+  sws_freeContext (vs -> sws_ctx);
   avformat_free_context (fc);
 }
 
@@ -460,11 +487,11 @@ int * old_cmap[2];
 /*
 *  void set_old_cmap (image * img, int stp, int id)
 *
-*  Usage:
+*  Usage: preserve color map information
 *
 *  image * img : the target image
-*  int stp     :
-*  int id      :
+*  int stp     : MD step
+*  int id      : color map id (0 = atom(s), 1 = polyhedra)
 */
 void set_old_cmap (image * img, int stp, int id)
 {
@@ -474,12 +501,12 @@ void set_old_cmap (image * img, int stp, int id)
 /*
 *  gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, int ogl_q)
 *
-*  Usage:
+*  Usage: test if it is required to update the OpenGL shaders, and which one(s)
 *
 *  glwin * view  : the target glwin
 *  image * img_a : the previous image
 *  image * img_b : the next image
-*  int ogl_q     :
+*  int ogl_q     : OpenGL quality
 */
 gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, int ogl_q)
 {
@@ -947,22 +974,22 @@ extern GtkWidget * encoding_pb;
 
 /*
 typedef struct{
-  int framesec;
-  int extraframes;
-  int codec;
-  int oglquality;
-  int bitrate;
-  int video_res[2];
+  int framesec;      // frame(s) per second
+  int extraframes;   // extra frame(s) per second
+  int codec;         // video codec
+  int oglquality;    // OpenGL quality
+  int bitrate;       // bitrate
+  int video_res[2];  // video resolution (x, y)
 } video_options;
 */
 
 /*
 *  gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
 *
-*  Usage:
+*  Usage: render a movie from the saved animation parameters
 *
 *  glwin * view          : the target glwin
-*  video_options * vopts :
+*  video_options * vopts : the video encoding options
 *  gchar * videofile     : video file name
 */
 gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
@@ -1132,10 +1159,10 @@ static GLuint rbo_depth;
 /*
 *  void init_frame_buffer (int x, int y)
 *
-*  Usage:
+*  Usage: init a frame buffer
 *
-*  int x :
-*  int y :
+*  int x : x size - image width
+*  int y : y size - image height
 */
 void init_frame_buffer (int x, int y)
 {
@@ -1163,7 +1190,7 @@ void init_frame_buffer (int x, int y)
 /*
 *  void close_frame_buffer ()
 *
-*  Usage:
+*  Usage: close the frame buffer
 */
 void close_frame_buffer ()
 {
@@ -1176,10 +1203,10 @@ void close_frame_buffer ()
 /*
 *  G_MODULE_EXPORT void run_save_movie (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: saving a movie - running the dialog
 *
 *  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id       :
+*  gint response_id       : the response id
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_save_movie (GtkNativeDialog * info, gint response_id, gpointer data)
@@ -1189,10 +1216,10 @@ G_MODULE_EXPORT void run_save_movie (GtkNativeDialog * info, gint response_id, g
 /*
 *  G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: saving a movie - running the dialog
 *
 *  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointer data)
@@ -1245,10 +1272,10 @@ G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointe
 /*
 *  void save_movie (glwin * view, video_options * vopts)
 *
-*  Usage:
+*  Usage: saving a movie - prepare the dialog
 *
 *  glwin * view          : the target glwin
-*  video_options * vopts :
+*  video_options * vopts : the video encoding options
 */
 void save_movie (glwin * view, video_options * vopts)
 {

@@ -469,7 +469,7 @@ int res_int;
 /*
 *  G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data)
 *
-*  Usage: enter an integer value: running the dialog
+*  Usage: enter an integer value - running the dialog
 *
 *  GtkDialog * iask : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -511,7 +511,7 @@ G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data
 /*
 *  int iask (char * question, char * lab, int id, GtkWidget * win)
 *
-*  Usage: enter an integer value: prepare the dialog
+*  Usage: enter an integer value - prepare the dialog
 *
 *  char * question : Message
 *  char * lab      : Text to use for label
@@ -587,7 +587,7 @@ gchar * res_char;
 /*
 *  G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data)
 *
-*  Usage: enter a string: running the dialog
+*  Usage: enter a string - running the dialog
 *
 *  GtkDialog * cask : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -626,7 +626,7 @@ G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data
 /*
 *  gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
 *
-*  Usage: enter a string: prepare the dialog
+*  Usage: enter a string - prepare the dialog
 *
 *  char * question : Message
 *  char * lab      : Text to use for label

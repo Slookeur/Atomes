@@ -14,16 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'd_poly.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int is_atom_cloned (int at);
-
-  float normal_direction (vec3_t v1, vec3_t v2, vec3_t v3);
 
   gboolean is_inside (vec3_t p, float * mi, float * ma);
   gboolean is_in_triangle (vec3_t p, vec3_t a, vec3_t b, vec3_t c);
@@ -38,6 +36,8 @@ If not, see <https://www.gnu.org/licenses/> */
   void check_triangles (int s, GLfloat ** xyz);
   void prepare_poly_gl (float * vertices, struct atom at, int c);
   void create_poly_lists ();
+
+  vec3_t get_triangle_normal (vec3_t v1, vec3_t v2, vec3_t v3);
 
 */
 
@@ -58,11 +58,11 @@ float poly_alpha;
 /*
 *  void setup_summit (float * vertices, vec3_t s, vec3_t n)
 *
-*  Usage: 
+*  Usage: prepare the polygon summit to render
 *
-*  float * vertices : 
-*  vec3_t s         : 
-*  vec3_t n         : 
+*  float * vertices : the OpenGL data buffer to fill
+*  vec3_t s         : position vector
+*  vec3_t n         : normal vector
 */
 void setup_summit (float * vertices, vec3_t s, vec3_t n)
 {
@@ -81,29 +81,14 @@ void setup_summit (float * vertices, vec3_t s, vec3_t n)
 }
 
 /*
-*  float normal_direction (vec3_t v1, vec3_t v2, vec3_t v3)
+*  vec3_t get_triangle_normal (vec3_t v1, vec3_t v2, vec3_t v3)
 *
-*  Usage: 
+*  Usage: compute triangle normal vector
 *
-*  vec3_t v1 : 
-*  vec3_t v2 : 
-*  vec3_t v3 : 
+*  vec3_t v1 : 1st summit
+*  vec3_t v2 : 2nd summit
+*  vec3_t v3 : 3rd summit
 */
-float normal_direction (vec3_t v1, vec3_t v2, vec3_t v3)
-{
-  vec3_t edge_a = v3_sub(v3, v1);
-  vec3_t edge_b = v3_sub(v2, v1);
-  vec3_t normal = v3_norm (v3_cross(edge_a, edge_b));
-  vec3_t plane  = v3_add (v1, v3_add(v2, v3));
-  plane = v3_divs (plane, 3.0);
-  float sign = 1.0;
-  if (v3_dot (v3_sub(plane,centroid), normal) < 0)
-  {
-    sign = -1.0;
-  }
-  return sign;
-}
-
 vec3_t get_triangle_normal (vec3_t v1, vec3_t v2, vec3_t v3)
 {
   vec3_t edge_a = v3_sub(v3, v1);
@@ -122,17 +107,15 @@ vec3_t get_triangle_normal (vec3_t v1, vec3_t v2, vec3_t v3)
 /*
 *  void setup_triangles (float * vertices, vec3_t sa, vec3_t sb, vec3_t sc)
 *
-*  Usage: 
+*  Usage:
 *
-*  float * vertices : 
-*  vec3_t sa        : 
-*  vec3_t sb        : 
-*  vec3_t sc        : 
+*  float * vertices :
+*  vec3_t sa        : 1st summit
+*  vec3_t sb        : 2nd summit
+*  vec3_t sc        : 3rd summit
 */
 void setup_triangles (float * vertices, vec3_t sa, vec3_t sb, vec3_t sc)
 {
-  //float dir;
-  //dir = normal_direction (sa, sb, sc);
   vec3_t normal = get_triangle_normal (sa, sb, sc);
   setup_summit (vertices, sa, normal);
   setup_summit (vertices, sb, normal);
@@ -151,11 +134,11 @@ void setup_triangles (float * vertices, vec3_t sa, vec3_t sb, vec3_t sc)
 /*
 *  void setup_polyhedron (float * vertices, GLfloat ** xyz, int s)
 *
-*  Usage: 
+*  Usage: fill the OpenGL data buffer for a polyhedron to render
 *
-*  float * vertices : 
-*  GLfloat ** xyz   : 
-*  int s            : 
+*  float * vertices : the OpenGL buffer data to fill
+*  GLfloat ** xyz   : the summits coordinates
+*  int s            : the number of summits
 */
 void setup_polyhedron (float * vertices, GLfloat ** xyz, int s)
 {
@@ -208,13 +191,13 @@ void setup_polyhedron (float * vertices, GLfloat ** xyz, int s)
 /*
 *  void setup_tetra (float * vertices, vec3_t a, vec3_t b, vec3_t c, vec3_t d)
 *
-*  Usage: 
+*  Usage: fill the OpenGL data buffer for a tetrahedra to render
 *
-*  float * vertices : 
-*  vec3_t a         : 
-*  vec3_t b         : 
-*  vec3_t c         : 
-*  vec3_t d         : 
+*  float * vertices : the OpenGL buffer data to fill
+*  vec3_t a         : 1st summit
+*  vec3_t b         : 2nd summit
+*  vec3_t c         : 3rd summit
+*  vec3_t d         : 4th summit
 */
 void setup_tetra (float * vertices, vec3_t a, vec3_t b, vec3_t c, vec3_t d)
 {
@@ -227,10 +210,10 @@ void setup_tetra (float * vertices, vec3_t a, vec3_t b, vec3_t c, vec3_t d)
 /*
 *  void setup_tetrahedron (float * vertices, GLfloat ** xyz)
 *
-*  Usage: 
+*  Usage: fill the OpenGL data buffer for a tetrahedra to render
 *
-*  float * vertices : 
-*  GLfloat ** xyz   : 
+*  float * vertices : the OpenGL buffer data to fill
+*  GLfloat ** xyz   : the summits coordinates
 */
 void setup_tetrahedron (float * vertices, GLfloat ** xyz)
 {
@@ -267,10 +250,10 @@ void setup_tetrahedron (float * vertices, GLfloat ** xyz)
 /*
 *  void get_centroid (GLfloat ** xyz, int id)
 *
-*  Usage: 
+*  Usage: find the barycenter of a polyhedron
 *
-*  GLfloat ** xyz : 
-*  int id         : 
+*  GLfloat ** xyz : the OpenGL buffer data to fill
+*  int id         : the number of summits
 */
 void get_centroid (GLfloat ** xyz, int id)
 {
@@ -288,11 +271,11 @@ void get_centroid (GLfloat ** xyz, int id)
 /*
 *  gboolean is_inside (vec3_t p, float * mi, float * ma)
 *
-*  Usage: 
+*  Usage: is this point inside the polyhedron ?
 *
-*  vec3_t p   : 
-*  float * mi : 
-*  float * ma : 
+*  vec3_t p   : the position to test
+*  float * mi : the min values in the summits coordinates on each axis
+*  float * ma : the max values in the summits coordinates on each axis
 */
 gboolean is_inside (vec3_t p, float * mi, float * ma)
 {
@@ -312,12 +295,12 @@ gboolean is_inside (vec3_t p, float * mi, float * ma)
 /*
 *  gboolean is_in_triangle (vec3_t p, vec3_t a, vec3_t b, vec3_t c)
 *
-*  Usage: 
+*  Usage: is this point inside a triangle ?
 *
-*  vec3_t p : 
-*  vec3_t a : 
-*  vec3_t b : 
-*  vec3_t c : 
+*  vec3_t p : the position to test
+*  vec3_t a : 1st summit of the triangle
+*  vec3_t b : 2nd summit of the triangle
+*  vec3_t c : 3rd summit of the triangle
 */
 gboolean is_in_triangle (vec3_t p, vec3_t a, vec3_t b, vec3_t c)
 {
@@ -338,12 +321,12 @@ gboolean is_in_triangle (vec3_t p, vec3_t a, vec3_t b, vec3_t c)
 /*
 *  gboolean check_it (int i, int j, int k, int l)
 *
-*  Usage: 
+*  Usage: test this atom id ?
 *
-*  int i : 
-*  int j : 
-*  int k : 
-*  int l : 
+*  int i : 1st summit atom id
+*  int j : 2nd summit atom id
+*  int k : 3rd summit atom id
+*  int l : atom id to test
 */
 gboolean check_it (int i, int j, int k, int l)
 {
@@ -357,15 +340,13 @@ gboolean check_it (int i, int j, int k, int l)
   }
 }
 
-// int summits[50];
-
 /*
 *  void check_triangles (int s, GLfloat ** xyz)
 *
-*  Usage: 
+*  Usage:
 *
-*  int s          : 
-*  GLfloat ** xyz : 
+*  int s          : number of summits for the polygon
+*  GLfloat ** xyz : the coordinates of the summits
 */
 void check_triangles (int s, GLfloat ** xyz)
 {
@@ -516,11 +497,11 @@ void check_triangles (int s, GLfloat ** xyz)
 /*
 *  void prepare_poly_gl (float * vertices, struct atom at, int c)
 *
-*  Usage: 
+*  Usage: prepare the OpenGL rendering of a polyhedron
 *
-*  float * vertices : 
-*  struct atom at   : 
-*  int c            : 
+*  float * vertices : the OpenGL data buffer to fill
+*  struct atom at   : the atom origin of the polyhedron
+*  int c            : the coordination (0= total, 1= partial)
 */
 void prepare_poly_gl (float * vertices, struct atom at, int c)
 {
@@ -616,9 +597,9 @@ void prepare_poly_gl (float * vertices, struct atom at, int c)
 /*
 *  int is_atom_cloned (int at)
 *
-*  Usage: 
+*  Usage: does this atom have clone(s) ?
 *
-*  int at : 
+*  int at : the atom id to test
 */
 int is_atom_cloned (int at)
 {
@@ -635,7 +616,7 @@ int is_atom_cloned (int at)
 /*
 *  void create_poly_lists ()
 *
-*  Usage: 
+*  Usage: prepare coordination polyhedra(s) OpenGL rendering
 */
 void create_poly_lists ()
 {

@@ -16,8 +16,11 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to prepare the box(s) OpenGL rendering
+ - The subroutines to prepare the slab(s) OpenGL rendering
+ - The subroutines to prepare the volume(s) OpenGL rendering
+
 *
 *  List of subroutines:
 
@@ -61,10 +64,10 @@ int BOX_BUFF_SIZE;
 /*
 *  gboolean are_identical_vec3 (vec3_t va, vec3_t vb)
 *
-*  Usage:
+*  Usage: are these 2 vectors indentical
 *
-*  vec3_t va :
-*  vec3_t vb :
+*  vec3_t va : 1st vector
+*  vec3_t vb : 2nd vector
 */
 gboolean are_identical_vec3 (vec3_t va, vec3_t vb)
 {
@@ -82,11 +85,11 @@ gboolean are_identical_vec3 (vec3_t va, vec3_t vb)
 /*
 *  gboolean not_in_already (vec3_t a, vec3_t b, float * vertices)
 *
-*  Usage:
+*  Usage: is this box edge vector already saved ?
 *
-*  vec3_t a         :
-*  vec3_t b         :
-*  float * vertices :
+*  vec3_t a         : 1st set of coordinates
+*  vec3_t b         : 2nd set of coordinates
+*  float * vertices : the data buffer to check
 */
 gboolean not_in_already (vec3_t a, vec3_t b, float * vertices)
 {
@@ -113,10 +116,10 @@ gboolean not_in_already (vec3_t a, vec3_t b, float * vertices)
 /*
 *  gboolean not_in_corners (vec3_t a, float * vertices)
 *
-*  Usage:
+*  Usage: is this box cornder already saved ?
 *
-*  vec3_t a         :
-*  float * vertices :
+*  vec3_t a         : the coordinates
+*  float * vertices : the data buffer to check
 */
 gboolean not_in_corners (vec3_t a, float * vertices)
 {
@@ -135,17 +138,16 @@ gboolean not_in_corners (vec3_t a, float * vertices)
 }
 
 /*
-*  void setup_extra_box_vertices (vec3_t a, vec3_t b, int id, float * c_vert, float * s_vert)
+*  void setup_extra_box_vertices (vec3_t a, vec3_t b, float * c_vert, float * s_vert)
 *
-*  Usage:
+*  Usage: prepare the extra cell(s) OpenGL rendering
 *
-*  vec3_t a       :
-*  vec3_t b       :
-*  int id         :
-*  float * c_vert :
-*  float * s_vert :
+*  vec3_t a       : 1st point coordinates
+*  vec3_t b       : 2nd point coordinates
+*  float * c_vert : OpenGL cylinder/line data buffer to fill
+*  float * s_vert : OpenGL sphere data buffer to fill, or NULL
 */
-void setup_extra_box_vertices (vec3_t a, vec3_t b, int id, float * c_vert, float * s_vert)
+void setup_extra_box_vertices (vec3_t a, vec3_t b, float * c_vert, float * s_vert)
 {
   float j;
   int p, q, r;
@@ -189,17 +191,16 @@ void setup_extra_box_vertices (vec3_t a, vec3_t b, int id, float * c_vert, float
 }
 
 /*
-*  void setup_box_vertices (vec3_t ax, vec3_t bx, int id, float * c_vert, float * s_vert)
+*  void setup_box_vertices (vec3_t ax, vec3_t bx, float * c_vert, float * s_vert)
 *
-*  Usage:
+*  Usage: prepare the unit cell OpenGL rendering
 *
-*  vec3_t ax      :
-*  vec3_t bx      :
-*  int id         :
-*  float * c_vert :
-*  float * s_vert :
+*  vec3_t ax      : 1st point coordinates
+*  vec3_t bx      : 2nd point coordinates
+*  float * c_vert : OpenGL cylinder/line data buffer to fill
+*  float * s_vert : OpenGL sphere data buffer to fill, or NULL
 */
-void setup_box_vertices (vec3_t ax, vec3_t bx, int id, float * c_vert, float * s_vert)
+void setup_box_vertices (vec3_t ax, vec3_t bx, float * c_vert, float * s_vert)
 {
   float j;
   vec3_t a, b;
@@ -232,20 +233,15 @@ void setup_box_vertices (vec3_t ax, vec3_t bx, int id, float * c_vert, float * s
 }
 
 /*
-*  void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, int, float *, float *), float * verts, float * serts, int id)
+*  void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, float *, float *), float * verts, float * serts)
 *
-*  Usage:
+*  Usage: prepare a box OpenGL rendering
 *
-*  vec3_t        :
-*  vec3_t        :
-*  int           :
-*  float *       :
-*  float *       :
-*  float * verts :
-*  float * serts :
-*  int id)       :
+*  void (*c_func)(vec3_t, vec3_t, int, float *, float *) : the function to use a render
+*  float * verts                                         : OpenGL cylinder/line data buffer to fill
+*  float * serts                                         : OpenGL sphere data buffer to fill, or NULL
 */
-void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, int, float *, float *), float * verts, float * serts, int id)
+void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, float *, float *), float * verts, float * serts)
 {
   int i;
   vec3_t pa, pb;
@@ -258,28 +254,28 @@ void prepare_box_vertices (void (*c_func)(vec3_t, vec3_t, int, float *, float *)
     pb.x = (box_gl -> vect[0][0] - box_gl -> vect[1][0] + i * box_gl -> vect[2][0]) / 2.0;
     pb.y = (box_gl -> vect[0][1] - box_gl -> vect[1][1] + i * box_gl -> vect[2][1]) / 2.0;
     pb.z = (box_gl -> vect[0][2] - box_gl -> vect[1][2] + i * box_gl -> vect[2][2]) / 2.0;
-    (* c_func)(pa, pb, id, verts, serts);
+    (* c_func)(pa, pb, verts, serts);
     pa.x = (i * box_gl -> vect[0][0] - box_gl -> vect[1][0] + box_gl -> vect[2][0]) / 2.0;
     pa.y = (i * box_gl -> vect[0][1] - box_gl -> vect[1][1] + box_gl -> vect[2][1]) / 2.0;
     pa.z = (i * box_gl -> vect[0][2] - box_gl -> vect[1][2] + box_gl -> vect[2][2]) / 2.0;
     pb.x = (i * box_gl -> vect[0][0] - box_gl -> vect[1][0] - box_gl -> vect[2][0]) / 2.0;
     pb.y = (i * box_gl -> vect[0][1] - box_gl -> vect[1][1] - box_gl -> vect[2][1]) / 2.0;
     pb.z = (i * box_gl -> vect[0][2] - box_gl -> vect[1][2] - box_gl -> vect[2][2]) / 2.0;
-    (* c_func)(pa, pb, id, verts, serts);
+    (* c_func)(pa, pb, verts, serts);
     pa.x = (i * box_gl -> vect[0][0] + box_gl -> vect[1][0] + box_gl -> vect[2][0]) / 2.0;
     pa.y = (i * box_gl -> vect[0][1] + box_gl -> vect[1][1] + box_gl -> vect[2][1]) / 2.0;
     pa.z = (i * box_gl -> vect[0][2] + box_gl -> vect[1][2] + box_gl -> vect[2][2]) / 2.0;
     pb.x = (i * box_gl -> vect[0][0] - box_gl -> vect[1][0] + box_gl -> vect[2][0]) / 2.0;
     pb.y = (i * box_gl -> vect[0][1] - box_gl -> vect[1][1] + box_gl -> vect[2][1]) / 2.0;
     pb.z = (i * box_gl -> vect[0][2] - box_gl -> vect[1][2] + box_gl -> vect[2][2]) / 2.0;
-    (* c_func)(pa, pb, id, verts, serts);
+    (* c_func)(pa, pb, verts, serts);
   }
 }
 
 /*
 *  int create_box_lists ()
 *
-*  Usage:
+*  Usage: prepare box OpenGL rendering
 */
 int create_box_lists ()
 {
@@ -326,11 +322,11 @@ int create_box_lists ()
 
   prepare_box_vertices (setup_box_vertices,
                         (plot -> box_axis[BOX] == WIREFRAME) ? box_b -> vertices: box_b -> instances,
-                        (plot -> box_axis[BOX] == WIREFRAME) ? NULL : box_a -> instances, 0);
+                        (plot -> box_axis[BOX] == WIREFRAME) ? NULL : box_a -> instances);
   if (plot -> extra_cell[0] > 0 || plot -> extra_cell[1] > 0 || plot -> extra_cell[2] > 0)
   {
     prepare_box_vertices (setup_extra_box_vertices, (plot -> box_axis[BOX] == WIREFRAME) ? box_b -> vertices: box_b -> instances,
-                                                    (plot -> box_axis[BOX] == WIREFRAME) ? NULL : box_a -> instances, 1);
+                                                    (plot -> box_axis[BOX] == WIREFRAME) ? NULL : box_a -> instances);
   }
   if (plot -> box_axis[BOX] == WIREFRAME)
   {
@@ -419,10 +415,10 @@ GLfloat cuboid_vertices[] = {
 /*
 *  void prepare_cuboid (vec3_t position, int id)
 *
-*  Usage:
+*  Usage: OpenGL 3D light object rendering
 *
-*  vec3_t position :
-*  int id          :
+*  vec3_t position : light position
+*  int id          : shader number
 */
 void prepare_cuboid (vec3_t position, int id)
 {
@@ -456,7 +452,7 @@ void prepare_cuboid (vec3_t position, int id)
 /*
 *  void create_light_lists ()
 *
-*  Usage:
+*  Usage: prepare light(s) OpenGL rendering
 */
 void create_light_lists ()
 {
@@ -505,14 +501,14 @@ vec3_t get_normal (vec3_t v1, vec3_t v2, vec3_t v3)
 *
 *  Usage:
 *
-*  gboolean draw      :
-*  int SHADID         :
-*  int shadnum        :
-*  mat4_t rot         :
-*  vec3_t cpos        :
-*  double paral[3][3] :
-*  double paral[3][3] :
-*  double paral[3][3] :
+*  gboolean draw      : draw or not (1/0)
+*  int SHADID         : shader id
+*  int shadnum        : shader number
+*  mat4_t rot         : rotation matrix
+*  vec3_t cpos        : position of center of slab
+*  double paral[3][3] : cell parameters
+*  ColRGBA col        : slab color
+*  double slab_alpha  : slab opacity
 */
 double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t cpos, double paral[3][3], ColRGBA col, double slab_alpha)
 {
@@ -589,9 +585,9 @@ double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t c
 /*
 *  void cuboid_slab (mat4_t rot)
 *
-*  Usage:
+*  Usage: prepare cuboid slab OpenGL rendering
 *
-*  mat4_t rot :
+*  mat4_t rot : rotation matrix
 */
 void cuboid_slab (mat4_t rot)
 {
@@ -718,9 +714,9 @@ void cuboid_slab (mat4_t rot)
 /*
 *  void cylinder_slab (mat4_t rot)
 *
-*  Usage:
+*  Usage: prepare cylinder slab OpenGL rendering
 *
-*  mat4_t rot :
+*  mat4_t rot : rotation matrix
 */
 void cylinder_slab (mat4_t rot)
 {
@@ -823,7 +819,7 @@ void cylinder_slab (mat4_t rot)
 /*
 *  void spherical_slab ()
 *
-*  Usage:
+*  Usage: prepare spherical slab OpenGL rendering
 */
 void spherical_slab ()
 {
@@ -885,7 +881,7 @@ void spherical_slab ()
 /*
 *  void create_slab_lists (struct project * this_proj)
 *
-*  Usage:
+*  Usage: prepare slab(s) OpenGL rendering
 *
 *  struct project * this_proj : the target project
 */
@@ -928,7 +924,7 @@ void create_slab_lists (struct project * this_proj)
 /*
 *  void create_volumes_lists ()
 *
-*  Usage:
+*  Usage: prepare volume(s) OpenGL rendering
 */
 void create_volumes_lists ()
 {

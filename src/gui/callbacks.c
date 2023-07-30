@@ -289,7 +289,7 @@ gboolean run_os;
 /*
 *  G_MODULE_EXPORT void run_on_open_save_active (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage: open or save an atomes file: running the dialog
+*  Usage: open or save an atomes file - running the dialog
 *
 *  GtkNativeDialog * info : the GtkNativeDialog sending the signal
 *  gint response_id : the response id
@@ -303,7 +303,7 @@ G_MODULE_EXPORT void run_on_open_save_active (GtkNativeDialog * info, gint respo
 /*
 *  G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage: open or save an atomes file: running the dialog
+*  Usage: open or save an atomes file - running the dialog
 *
 *  GtkDialog * info : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -389,7 +389,7 @@ G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id
 /*
 *  G_MODULE_EXPORT void on_open_save_activate (GtkWidget * widg, gpointer data)
 *
-*  Usage: open or save an atomes file: prepare the dialog
+*  Usage: open or save an atomes file - prepare the dialog
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -681,7 +681,7 @@ void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible)
 /*
 *  G_MODULE_EXPORT void run_on_isaacs_port (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage: open or write ISAACS XML file: running the dialog
+*  Usage: open or write ISAACS XML file - running the dialog
 *
 *  GtkNativeDialog * info : the GtkNativeDialog sending the signal
 *  gint response_id : the response id
@@ -694,7 +694,7 @@ G_MODULE_EXPORT void run_on_isaacs_port (GtkNativeDialog * info, gint response_i
 /*
 *  G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage: open or write ISAACS XML file: running the dialog
+*  Usage: open or write ISAACS XML file - running the dialog
 *
 *  GtkDialog * info : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -742,7 +742,7 @@ G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpo
 /*
 *  G_MODULE_EXPORT void on_isaacs_port (GtkWidget * widg, gpointer data)
 *
-*  Usage: open or write ISAACS XML file: prepare the dialog
+*  Usage: open or write ISAACS XML file - prepare the dialog
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer (int *) open = 0, save = 1
@@ -1097,7 +1097,7 @@ G_MODULE_EXPORT void run_to_read_trj_or_vas (GtkDialog * dialog, gint response_i
 /*
 *  int to_read_trj_or_vas (int ff)
 *
-*  Usage: reading CPMD/VASP trajectory: prepare the dialog
+*  Usage: reading CPMD/VASP trajectory - prepare the dialog
 *
 *  int ff : file type
 */

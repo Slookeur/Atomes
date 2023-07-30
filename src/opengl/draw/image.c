@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to render an image from the OpenGL window
+
 *
 *  List of subroutines:
 
@@ -63,10 +64,10 @@ extern void close_frame_buffer ();
 /*
 *  G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: render an image from the OpenGL window - running the dialog
 *
 *  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id       :
+*  gint response_id       : the response id
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data)
@@ -76,10 +77,10 @@ G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id,
 /*
 *  G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: render an image from the OpenGL window - running the dialog
 *
 *  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data)
@@ -147,10 +148,10 @@ G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpoin
 /*
 *  void render_image (glwin * view, video_options * iopts)
 *
-*  Usage:
+*  Usage: render an image from the OpenGL window - prepare the dialog
 *
 *  glwin * view          : the target glwin
-*  video_options * iopts :
+*  video_options * iopts : the rendering options
 */
 void render_image (glwin * view, video_options * iopts)
 {

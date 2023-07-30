@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to prepare the atomic label(s) OpenGL rendering
+
 *
 *  List of subroutines:
 
@@ -42,7 +43,7 @@ extern float get_sphere_radius (int style, int sp, int ac, int sel);
 /*
 *  mat4_t create_label_matrices ()
 *
-*  Usage:
+*  Usage: create label projection matrices
 */
 mat4_t create_label_matrices ()
 {
@@ -52,11 +53,11 @@ mat4_t create_label_matrices ()
 /*
 *  void prepare_label (struct atom at, int id, double al)
 *
-*  Usage:
+*  Usage: prepare an atomic label OpenGL rendering
 *
-*  struct atom at :
-*  int id         :
-*  double al      :
+*  struct atom at : the atom to label
+*  int id         : the label id
+*  double al      : opacity
 */
 void prepare_label (struct atom at, int id, double al)
 {
@@ -127,9 +128,9 @@ void prepare_label (struct atom at, int id, double al)
 /*
 *  void clean_labels (int id)
 *
-*  Usage:
+*  Usage: clean atomic label shaders
 *
-*  int id :
+*  int id : label id
 */
 void clean_labels (int id)
 {
@@ -143,7 +144,7 @@ void clean_labels (int id)
 /*
 *  int create_label_lists ()
 *
-*  Usage:
+*  Usage: prepare atomic label(s) OpenGL rendering
 */
 int create_label_lists ()
 {

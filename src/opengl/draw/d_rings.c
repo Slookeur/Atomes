@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'd_rings.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to prepare the ring(s) polyhedra OpenGL rendering
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean go);
 
@@ -37,19 +38,18 @@ extern void setup_tetrahedron (float * vertices, GLfloat ** xyz);
 extern void setup_polyhedron (float * vertices, GLfloat ** xyz, int s);
 extern void get_centroid (GLfloat ** xyz, int id);
 extern void check_triangles (int s, GLfloat ** xyz);
-//extern int summit[50];
 
 /*
 *  int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean go)
 *
-*  Usage: 
+*  Usage: prepare a ring polyhedra OpenGL rendering
 *
-*  float * vertices : 
-*  int se           : 
-*  int ge           : 
-*  int ta           : 
-*  int id           : 
-*  gboolean go      : 
+*  float * vertices : the ring atomic positions buffer to fill, if any
+*  int se           : type of ring
+*  int ge           : the coord id for this size of ring
+*  int ta           : the size of the ring
+*  int id           : the ring id number
+*  gboolean go      : render the ring or not (1/0)
 */
 int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean go)
 {
@@ -70,7 +70,6 @@ int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean
   xyz[0][l][0] = proj_gl -> atoms[step][j].x;
   xyz[0][l][1] = proj_gl -> atoms[step][j].y;
   xyz[0][l][2] = proj_gl -> atoms[step][j].z;
-  //summit[l] = j+1;
   for (i=1; i < ta; i++)
   {
     j = wingl -> all_rings[se][step][ta-1][id][i];
@@ -79,7 +78,6 @@ int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean
     bt.y = xyz[0][i-1][1];
     bt.z = xyz[0][i-1][2];
     d = distance_3d (cell_gl, (cell_gl -> npt) ? step : 0, & at, & bt);
-    //summit[l] = k+1;
     if (d.pbc) clones = TRUE;
     xyz[0][i][0] = xyz[0][i-1][0] + d.x;
     xyz[0][i][1] = xyz[0][i-1][1] + d.y;
@@ -158,7 +156,7 @@ int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean
 /*
 *  void create_ring_lists ()
 *
-*  Usage: 
+*  Usage: prepare ring(s) polyhedra OpenGL rendering
 */
 void create_ring_lists ()
 {

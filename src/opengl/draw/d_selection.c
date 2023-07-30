@@ -16,8 +16,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to prepare the selected atom(s), clone(s), bond(s) and clone bond(s) OpenGL rendering
+ - The subroutines to prepare the atom(s) and bond(s) picking y unique color rendering
+
 *
 *  List of subroutines:
 
@@ -32,7 +34,7 @@ If not, see <https://www.gnu.org/licenses/> */
   int create_pick_lists ();
 
   void setup_selected_clone_vertices (int style, int at, int pi, float * vertices);
-  void prepare_selected_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices);
+  void prepare_selected_bond (int sty, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices);
   void setup_all_selected_bond_vertices (int sty, int cap, int bi, int at, int sb, int pi, float * vertices);
   void prepare_selected (int style, gboolean cylinder, int clone, int type);
   void prepare_picked (int style, gboolean cylinder, int clone, int type);
@@ -60,12 +62,12 @@ extern void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap
 /*
 *  void setup_selected_clone_vertices (int style, int at, int pi, float * vertices)
 *
-*  Usage:
+*  Usage: fill the OpenGL data buffer for a selected atom clone bonds to render
 *
-*  int style        :
-*  int at           :
-*  int pi           :
-*  float * vertices :
+*  int style        : rendering style
+*  int at           : the atom id
+*  int pi           : 0 = mouse analysis mode, 1 = mouse edition mode
+*  float * vertices : the OpenGL buffer data to fill
 */
 void setup_selected_clone_vertices (int style, int at, int pi, float * vertices)
 {
@@ -102,10 +104,10 @@ void setup_selected_clone_vertices (int style, int at, int pi, float * vertices)
 /*
 *  int find_selected_clone_vertices (int style, int at)
 *
-*  Usage:
+*  Usage: find the number of selected atom(s) to render
 *
-*  int style :
-*  int at    :
+*  int style : rendering style
+*  int at    : the atom id
 */
 int find_selected_clone_vertices (int style, int at)
 {
@@ -136,14 +138,14 @@ int find_selected_clone_vertices (int style, int at)
 /*
 *  int find_selected_bond_vertices (int sty, int at, int sp, int bi, int pi, int cap)
 *
-*  Usage:
+*  Usage: find the number of selected bond(s) to render
 *
-*  int sty :
-*  int at  :
-*  int sp  :
-*  int bi  :
-*  int pi  :
-*  int cap :
+*  int sty : rendering style
+*  int at  : the atom id
+*  int sp  : the chemical species
+*  int bi  : atom (0) or clone (1)
+*  int pi  : 0 = mouse analysis mode, 1 = mouse edition mode
+*  int cap : render cylinder caps (1/0)
 */
 int find_selected_bond_vertices (int sty, int at, int sp, int bi, int pi, int cap)
 {
@@ -205,10 +207,10 @@ int find_selected_bond_vertices (int sty, int at, int sp, int bi, int pi, int ca
 /*
 *  int get_clone_id (int at, int bt)
 *
-*  Usage:
+*  Usage: get the bond id of cloned bond
 *
-*  int at :
-*  int bt :
+*  int at : 1st atom
+*  int bt : 2nd atom
 */
 int get_clone_id (int at, int bt)
 {
@@ -223,25 +225,23 @@ int get_clone_id (int at, int bt)
 }
 
 /*
-*  void prepare_selected_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices)
+*  void prepare_selected_bond (int sty, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices)
 *
-*  Usage:
+*  Usage: prepare the rendering of a selected bond
 *
-*  int sty          :
-*  gboolean to_pick :
-*  gboolean picked  :
-*  int cap          :
-*  int bi           :
-*  int pi           :
-*  struct atom * at :
-*  struct atom * bt :
-*  float * vertices :
+*  int sty          : rendering style
+*  int cap          : render cylinder caps (1/0)
+*  int bi           : atom (0) or clone (1)
+*  int pi           : 0 = mouse analysis mode, 1 = mouse edition mode
+*  struct atom * at : 1st atom
+*  struct atom * bt : 2nd atom
+*  float * vertices : the OpenGL buffer data to fill
 */
-void prepare_selected_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices)
+void prepare_selected_bond (int sty, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices)
 {
   if (bi == 0)
   {
-    setup_this_bond (sty, to_pick, picked, cap, bi, pi, at, bt, 1.0, vertices);
+    setup_this_bond (sty, FALSE, TRUE, cap, bi, pi, at, bt, 1.0, vertices);
   }
   else
   {
@@ -257,7 +257,7 @@ void prepare_selected_bond (int sty, gboolean to_pick, gboolean picked, int cap,
     tmp_a -> x -= d.x;
     tmp_a -> y -= d.y;
     tmp_a -> z -= d.z;
-    setup_this_bond (sty, to_pick, picked, cap, bi, pi, tmp_b, tmp_a, 0.5, vertices);
+    setup_this_bond (sty, FALSE, TRUE, cap, bi, pi, tmp_b, tmp_a, 0.5, vertices);
     g_free (tmp_a);
     g_free (tmp_b);
 
@@ -271,7 +271,7 @@ void prepare_selected_bond (int sty, gboolean to_pick, gboolean picked, int cap,
     tmp_a -> x += d.x;
     tmp_a -> y += d.y;
     tmp_a -> z += d.z;
-    setup_this_bond (sty, to_pick, picked, cap, bi, pi, tmp_a, tmp_b, 0.5, vertices);
+    setup_this_bond (sty, FALSE, TRUE, cap, bi, pi, tmp_a, tmp_b, 0.5, vertices);
     g_free (tmp_a);
     g_free (tmp_b);
   }
@@ -280,15 +280,15 @@ void prepare_selected_bond (int sty, gboolean to_pick, gboolean picked, int cap,
 /*
 *  void setup_all_selected_bond_vertices (int sty, int cap, int bi, int at, int sb, int pi, float * vertices)
 *
-*  Usage:
+*  Usage: prepare the rendering of all selected bond(s)
 *
-*  int sty          :
-*  int cap          :
-*  int bi           :
-*  int at           :
-*  int sb           :
-*  int pi           :
-*  float * vertices :
+*  int sty          : rendering style
+*  int cap          : render cylinder caps (1/0)
+*  int bi           : atom (0) or clone (1)
+*  int at           : atom id
+*  int sb           : target chemical species
+*  int pi           : 0 = mouse analysis mode, 1 = mouse edition mode
+*  float * vertices : the OpenGL buffer data to fill
 */
 void setup_all_selected_bond_vertices (int sty, int cap, int bi, int at, int sb, int pi, float * vertices)
 {
@@ -335,12 +335,12 @@ void setup_all_selected_bond_vertices (int sty, int cap, int bi, int at, int sb,
           {
             if ((! show_b || ! show_d) || (l != m))
             {
-              prepare_selected_bond (sty, FALSE, TRUE, cap, bi, pi, & proj_gl -> atoms[step][at], & proj_gl -> atoms[step][j], vertices);
+              prepare_selected_bond (sty, cap, bi, pi, & proj_gl -> atoms[step][at], & proj_gl -> atoms[step][j], vertices);
             }
           }
           else
           {
-            prepare_selected_bond (sty, FALSE, TRUE, cap, bi, pi, & proj_gl -> atoms[step][at], & proj_gl -> atoms[step][j], vertices);
+            prepare_selected_bond (sty, cap, bi, pi, & proj_gl -> atoms[step][at], & proj_gl -> atoms[step][j], vertices);
           }
         }
       }
@@ -356,12 +356,12 @@ int *** nbonds[NUM_STYLES][2];
 /*
 *  void prepare_selected (int style, gboolean cylinder, int clone, int type)
 *
-*  Usage:
+*  Usage: prepare the list of selected bond(s) to render
 *
-*  int style         :
-*  gboolean cylinder :
-*  int clone         :
-*  int type          :
+*  int style         : rendering style
+*  gboolean cylinder : cylinder (1) or line (1)
+*  int clone         : atom (0) or clone (1)
+*  int type          :  0 = mouse analysis mode, 1 = mouse edition mode
 */
 void prepare_selected (int style, gboolean cylinder, int clone, int type)
 {
@@ -416,12 +416,12 @@ void prepare_selected (int style, gboolean cylinder, int clone, int type)
 /*
 *  void prepare_picked (int style, gboolean cylinder, int clone, int type)
 *
-*  Usage:
+*  Usage: prepare the list of the bond that can be picked to render
 *
-*  int style         :
-*  gboolean cylinder :
-*  int clone         :
-*  int type          :
+*  int style         : rendering style
+*  gboolean cylinder : cylinder (1) or line (1)
+*  int clone         : atom (0) or clone (1)
+*  int type          :  0 = mouse analysis mode, 1 = mouse edition mode
 */
 void prepare_picked (int style, gboolean cylinder, int clone, int type)
 {
@@ -477,16 +477,16 @@ void prepare_picked (int style, gboolean cylinder, int clone, int type)
 /*
 *  int render_selected (int style, gboolean cylinder, int caps, int bonds, int ncaps, int type, int clone, int shader)
 *
-*  Usage:
+*  Usage: prepare the OpenGL rendering data of to selected bond / clone bond
 *
-*  int style         :
-*  gboolean cylinder :
-*  int caps          :
-*  int bonds         :
-*  int ncaps         :
-*  int type          :
-*  int clone         :
-*  int shader        :
+*  int style         : rendering style
+*  gboolean cylinder : cylinders (1) or lines (0)
+*  int caps          : cylinder caps (1/0)
+*  int bonds         : number of selected bonds
+*  int ncaps         : number of cylinder caps
+*  int type          : 0 = mouse analysis mode, 1 = mouse edition mode
+*  int clone         : atom (0) or clone (1)
+*  int shader        : shader id number
 */
 int render_selected (int style, gboolean cylinder, int caps, int bonds, int ncaps, int type, int clone, int shader)
 {
@@ -572,16 +572,16 @@ int render_selected (int style, gboolean cylinder, int caps, int bonds, int ncap
 /*
 *  int render_picked (int style, gboolean cylinder, int caps, int bonds, int ncaps, int type, int clone, int shader)
 *
-*  Usage:
+*  Usage: prepare the OpenGL rendering data of to be picked bond / clone bond
 *
-*  int style         :
-*  gboolean cylinder :
-*  int caps          :
-*  int bonds         :
-*  int ncaps         :
-*  int type          :
-*  int clone         :
-*  int shader        :
+*  int style         : rendering style
+*  gboolean cylinder : cylinders (1) or lines (0)
+*  int caps          : cylinder caps (1/0)
+*  int bonds         : number of selected bonds
+*  int ncaps         : number of cylinder caps
+*  int type          : 0 = mouse analysis mode, 1 = mouse edition mode
+*  int clone         : atom (0) or clone (1)
+*  int shader        : shader id number
 */
 int render_picked (int style, gboolean cylinder, int caps, int bonds, int ncaps, int type, int clone, int shader)
 {
@@ -668,11 +668,11 @@ int render_picked (int style, gboolean cylinder, int caps, int bonds, int ncaps,
 *
 *  Usage:
 *
-*  int style         :
-*  int shaders       :
-*  int clone         :
-*  int type          :
-*  gboolean do_bonds :
+*  int style         : rendering style
+*  int shaders       : shader id number
+*  int clone         : atoms (0) or clones (1)
+*  int type          : 0 = mouse analysis mode, 1 = mouse edition mode
+*  gboolean do_bonds : render bonds (1/0)
 */
 int prepare_selection_shaders (int style, int shaders, int clone, int type, gboolean do_bonds)
 {
@@ -801,8 +801,8 @@ int prepare_selection_shaders (int style, int shaders, int clone, int type, gboo
 *
 *  Usage:
 *
-*  int style :
-*  int type  :
+*  int style : rendering style
+*  int type  : 0 = mouse analysis mode, 1 = mouse edition mode
 */
 int check_selection (int style, int type)
 {
@@ -857,7 +857,7 @@ int check_selection (int style, int type)
 /*
 *  int create_selection_lists ()
 *
-*  Usage:
+*  Usage: prepare the selected atom(s) and bond(s) OpenGL rendering
 */
 int create_selection_lists ()
 {
@@ -925,7 +925,7 @@ int create_selection_lists ()
 /*
 *  int create_pick_lists ()
 *
-*  Usage:
+*  Usage: prepare the picking list OpenGL rendering
 */
 int create_pick_lists ()
 {

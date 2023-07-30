@@ -225,7 +225,7 @@ G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer da
 /*
 *  G_MODULE_EXPORT void on_vectors_clicked (GtkButton * but, gpointer data)
 *
-*  Usage: lattice vectors: prepare the dialog
+*  Usage: lattice vectors - prepare the dialog
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -819,7 +819,7 @@ G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gp
 /*
 *  G_MODULE_EXPORT void on_edit_activate (GtkWidget * widg, gpointer data)
 *
-*  Usage: create an edition dialog: prepare the dialog
+*  Usage: create an edition dialog - prepare the dialog
 *
 *  GtkDialog * dial : the GtkDialog sending the signal
 *  gint response_id : the response id
