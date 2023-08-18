@@ -170,7 +170,7 @@ G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
 /*
 *  void clean_animation (glwin * view)
 *
-*  Usage:
+*  Usage: clean saved animation data
 *
 *  glwin * view : the target glwin
 */
@@ -229,7 +229,7 @@ GtkWidget * form;
 /*
 *  G_MODULE_EXPORT void set_image_format (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: selecting the image format
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -257,16 +257,17 @@ G_MODULE_EXPORT void set_image_format (GtkComboBox * box, gpointer data)
 GtkWidget * encoding_pb;
 gboolean encode_video;
 
+
 /*
-*  G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpointer data)
+*  G_MODULE_EXPORT void run_window_encode (GtkDialog * win , gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: encoding a movie - running the dialog
 *
 *  GtkDialog * win  : the GtkDialog sending the signal
-*  GtkDialog * win  : the GtkDialog sending the signal
-*  GtkDialog * win  : the GtkDialog sending the signal
+*  gint response_id : the response id
+*  gpointer data    : the associated data pointer
 */
-G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpointer data)
+G_MODULE_EXPORT void run_window_encode (GtkDialog * win , gint response_id, gpointer data)
 {
   glwin * view = (glwin *)data;
   if (response_id == GTK_RESPONSE_APPLY)
@@ -302,7 +303,7 @@ G_MODULE_EXPORT void run_window_encode (GtkDialog * win ,gint response_id, gpoin
 /*
 *  void window_encode (glwin * view, gboolean video)
 *
-*  Usage:
+*  Usage: encoding a movie - creating the dialog
 *
 *  glwin * view   : the target glwin
 *  gboolean video : video (1) or image (0)

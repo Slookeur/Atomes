@@ -891,6 +891,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       break;
     case GDK_KEY_n:
       if (state & GDK_CONTROL_MASK) on_create_new_project (NULL, NULL);
+      break;
     case GDK_KEY_p:
       if (get_project_by_id(view -> proj) -> natomes) change_color_map (view, 1);
       break;

@@ -1104,6 +1104,9 @@ gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
     set_old_cmap (view -> anim -> last -> img, 0, frame_id);
   }
   double fraction;
+#ifdef GTK4
+  // GMainContext * context = g_main_loop_get_context (Event_loop[dialog_id]);
+#endif // GTK4
   for (frame_id = frame_start; frame_id < num_frames+frame_start; frame_id ++)
   {
     //g_debug ("Rendering frame: %d, id= %d", frame_id-frame_start, view -> anim -> last -> img -> id);
@@ -1119,7 +1122,7 @@ gboolean create_movie (glwin * view, video_options * vopts, gchar * videofile)
 #ifdef GTK3
       while (gtk_events_pending()) gtk_main_iteration();
 #else
-      // while (g_main_context_pending (g_main_context_default())) g_main_context_iteration (NULL, TRUE);
+      // while (g_main_context_pending (context)) g_main_context_iteration (context, TRUE);
 #endif
     }
     if (frame_id-frame_start < num_frames-1)
