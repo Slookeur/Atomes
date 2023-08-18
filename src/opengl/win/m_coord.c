@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the 'Chemistry -> Coordination' submenu
+
 *
 *  List of subroutines:
 

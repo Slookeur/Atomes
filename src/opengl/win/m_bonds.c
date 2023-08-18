@@ -17,7 +17,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Contains:
 *
 
- -  The subroutine to create the 'Bond(s)' submenu
+ - The subroutines to create the 'Model -> Bond(s)' submenu
 
 *
 *  List of subroutines:

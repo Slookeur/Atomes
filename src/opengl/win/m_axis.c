@@ -17,7 +17,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Contains:
 *
 
- - The subroutines to create the 'Axis' submenu
+ - The subroutines to create the 'View -> Axis' submenu
 
 *
 *  List of subroutines:

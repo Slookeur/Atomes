@@ -17,7 +17,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Contains:
 *
 
- -  The subroutine to create the 'Atom(s)' submenu
+ - The subroutine to create the 'Model -> Atom(s)' submenu
 
 *
 *  List of subroutines:

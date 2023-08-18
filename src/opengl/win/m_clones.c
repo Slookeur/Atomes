@@ -17,7 +17,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Contains:
 *
 
- -  The subroutine to create the 'Clone(s)' submenu
+ - The subroutines to create the 'Model -> Clone(s)' submenu
 
 *
 *  List of subroutines:

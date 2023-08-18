@@ -17,7 +17,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Contains:
 *
 
- - The subroutine to create the 'Animate' submenu
+ - The subroutines to create the 'Animate' submenu
 
 *
 *  List of subroutines:

@@ -16,8 +16,11 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the 'OpenGL -> Color Scheme(s)' submenus
+ - The subroutines to handle custom color maps
+
+
 *
 *  List of subroutines:
 
@@ -986,7 +989,7 @@ gboolean use_custom_color_map (int p)
 /*
 *  G_MODULE_EXPORT void set_color_map (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: set color map callback
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer

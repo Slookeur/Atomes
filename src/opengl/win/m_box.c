@@ -17,7 +17,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Contains:
 *
 
- -  The subroutine to create the 'Box' submenu
+ - The subroutines to create the 'Model -> Box' submenu
 
 *
 *  List of subroutines:

@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the 'Tools -> Edit' submenu
+
 *
 *  List of subroutines:
 
@@ -29,7 +30,7 @@ If not, see <https://www.gnu.org/licenses/> */
   GtkWidget * menu_edit (glwin * view, int id);
 
   GMenu * menu_cell_edit (glwin * view, int popm, int sensitive);
-  GMenu * menu_atom_edit (glwin * view, int popm, int sensitive);
+  GMenu * menu_atom_edit (glwin * view, int popm);
   GMenu * extract_section (glwin * view, int popm);
   GMenu * menu_edit (glwin * view, int popm);
 
@@ -50,7 +51,7 @@ extern G_MODULE_EXPORT void turn_rebuild (GtkWidget * widg, gpointer data);
 /*
 *  G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: wrapp coordinates callback
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -61,7 +62,7 @@ G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * paramete
 /*
 *  G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: wrapp coordinates callback
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -77,11 +78,11 @@ G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 *
-*  Usage:
+*  Usage:  create the 'Edit -> Cell' submenu GTK3
 *
 *  glwin * view  : the target glwin
-*  int id        :
-*  int j         :
+*  int id        : main app (0) or popup (1)
+*  int j         : menu items sensitivity (cell + single MD step)
 */
 GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 {
@@ -151,10 +152,10 @@ GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 /*
 *  GtkWidget * menu_edit (glwin * view, int id)
 *
-*  Usage:
+*  Usage: create the 'Edit' submenu GTK3
 *
 *  glwin * view : the target glwin
-*  int id       :
+*  int id       : main app (0) or popup (1)
 */
 GtkWidget * menu_edit (glwin * view, int id)
 {
@@ -214,11 +215,11 @@ GtkWidget * menu_edit (glwin * view, int id)
 /*
 *  GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 *
-*  Usage:
+*  Usage: create the 'Edit -> Cell' submenu GTK4
 *
 *  glwin * view  : the target glwin
 *  int popm      : main app (0) or popup (1)
-*  int sensitive :
+*  int sensitive : menu items sensitivity (cell + single MD step)
 */
 GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 {
@@ -254,15 +255,14 @@ GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 }
 
 /*
-*  GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
+*  GMenu * menu_atom_edit (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the 'Edit -> Atom(s)' submenu GTK4
 *
 *  glwin * view  : the target glwin
 *  int popm      : main app (0) or popup (1)
-*  int sensitive :
 */
-GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
+GMenu * menu_atom_edit (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
   gchar * act;
@@ -282,7 +282,7 @@ GMenu * menu_atom_edit (glwin * view, int popm, int sensitive)
 /*
 *  G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: Extract/Rebuild menu items callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -316,7 +316,7 @@ G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * paramete
 /*
 *  GMenu * extract_section (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the 'Extract/Rebuild' menu items GTK4
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)
@@ -338,7 +338,7 @@ GMenu * extract_section (glwin * view, int popm)
 /*
 *  GMenu * menu_edit (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the 'Edit' submenu GTK4
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)
@@ -349,7 +349,7 @@ GMenu * menu_edit (glwin * view, int popm)
   GMenu * menu = g_menu_new ();
   append_opengl_item (view, menu, "Crystal Builder", "cbuilder", popm, popm, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(crystal_window), & view -> colorp[0][0], FALSE, FALSE, FALSE, TRUE);
   append_submenu (menu, "Cell", menu_cell_edit(view, popm, (this_proj -> cell.ltype && this_proj -> steps == 1) ? 1 : 0));
-  append_submenu (menu, "Atom(s)", menu_atom_edit(view, popm, (this_proj -> steps == 1) ? 1 : 0));
+  append_submenu (menu, "Atom(s)", menu_atom_edit(view, popm));
   if (! popm) g_menu_append_section (menu, NULL, (GMenuModel*)extract_section(view, popm));
   return menu;
 }
