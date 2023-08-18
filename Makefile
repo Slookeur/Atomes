@@ -17,9 +17,9 @@ LINUX = 1
 WINDOWS = 0
 
 # The next line defines the GTK version !
-GTKV = 3
+GTKV = 4
 ifeq ($(GTKV),4)
-  DGTK = -DGTK4 -DGTKGLAREA
+  DGTK = -DGTK4 -DGTKGLAREA -DGDK_DISABLE_DEPRECATION_WARNINGS
   IGTK = `pkg-config --cflags gtk4 epoxy libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
   LGTK = `pkg-config --libs gtk4 epoxy libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
 else

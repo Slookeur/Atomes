@@ -45,7 +45,7 @@ extern G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * pa
 #else
 extern G_MODULE_EXPORT void axis_advanced (GtkWidget * widg, gpointer data);
 #endif
-extern GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab, gpointer data);
+extern GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vab, gpointer data);
 
 #ifdef GTK3
 /*
@@ -165,7 +165,7 @@ void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
   gchar * str = g_strdup_printf (" Length [ %f Å ]", view -> anim -> last -> img -> axis_length);
   if (id == 0)
   {
-    view -> ogl_box_axis[1][7] = create_layout_widget (str, menul, 1, view -> anim -> last -> img -> box_axis[AXIS], & view -> colorp[0][AXIS]);
+    view -> ogl_box_axis[1][7] = create_layout_widget (str, menul, view -> anim -> last -> img -> box_axis[AXIS], & view -> colorp[0][AXIS]);
     if (view -> anim -> last -> img -> box_axis[AXIS] == NONE)
     {
       widget_set_sensitive (view -> ogl_box_axis[1][7], 0);
@@ -173,7 +173,7 @@ void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
   }
   else
   {
-    widg = create_layout_widget (str, menul, 1, view -> anim -> last -> img -> box_axis[AXIS], & view -> colorp[0][AXIS]);
+    widg = create_layout_widget (str, menul, view -> anim -> last -> img -> box_axis[AXIS], & view -> colorp[0][AXIS]);
     if (view -> anim -> last -> img -> box_axis[AXIS] == NONE)
     {
       widget_set_sensitive (widg, 0);

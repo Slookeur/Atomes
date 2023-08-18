@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ -  The subroutine to create the 'Box' submenu
+
 *
 *  List of subroutines:
 
@@ -26,8 +27,8 @@ If not, see <https://www.gnu.org/licenses/> */
   G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * parameter, gpointer data);
 
   GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * menu, tint * data);
-  GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va, int vb);
-  GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab, gpointer data);
+  GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va);
+  GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vab, gpointer data);
   GtkWidget * menu_box_axis (glwin * view, int id, int ab);
 
   GMenuItem * menu_box_axis (glwin * view, int popm, int ab);
@@ -58,7 +59,7 @@ extern G_MODULE_EXPORT void window_lines (GtkWidget * widg, gpointer data);
 /*
 *  G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: set box/axis style
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -115,13 +116,13 @@ G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * menu, tint * data)
 *
-*  Usage:
+*  Usage: create a menu item for box/axis style
 *
-*  char * name      :
-*  int val          :
-*  int box          :
-*  GtkWidget * menu : the GtkWidget sending the signal
-*  tint * data      :
+*  char * name      : the new menu item label
+*  int val          : box/axis active style
+*  int box          : menu item style type
+*  GtkWidget * menu : the GtkMenu to attach the new item to
+*  tint * data      : the pointer associated with the callback
 */
 GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * menu, tint * data)
 {
@@ -138,20 +139,19 @@ GtkWidget * create_box_axis_menu (char * name, int val, int box, GtkWidget * men
 }
 
 /*
-*  GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va, int vb)
+*  GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va)
 *
-*  Usage:
+*  Usage: create box color selection menu item
 *
-*  GtkWidget * widg : the GtkWidget sending the signal
+*  GtkWidget * widg : the GtkMenuItem to attach the color palette to
 *  glwin * view     : the target glwin
-*  int va           :
-*  int vb           :
+*  int va           : box style
 */
-GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va, int vb)
+GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va)
 {
   GtkWidget * color_widget = color_box(view, -1, 0, 0);
   gtk_menu_item_set_submenu ((GtkMenuItem *)widg, color_widget);
-  if (va == vb)
+  if (va == NONE)
   {
     widget_set_sensitive (color_widget, 0);
   }
@@ -159,17 +159,16 @@ GtkWidget * create_color_widget (GtkWidget * widg, glwin * view, int va, int vb)
 }
 
 /*
-*  GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab, gpointer data)
+*  GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vab, gpointer data)
 *
-*  Usage:
+*  Usage: create box/axis style menu widget
 *
-*  gchar * str      :
-*  GtkWidget * menu : the GtkWidget sending the signal
-*  int vl           :
-*  int vab          :
+*  gchar * str      : menu item label
+*  GtkWidget * menu : the GtkMenu to attach the new item to
+*  int vab          : box/axis style
 *  gpointer data    : the associated data pointer
 */
-GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vl, int vab, gpointer data)
+GtkWidget * create_layout_widget (gchar * str, GtkWidget * menu, int vab, gpointer data)
 {
   GtkWidget * layout = create_menu_item (TRUE, str);
   gtk_menu_shell_append ((GtkMenuShell *)menu, layout);
@@ -230,7 +229,7 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
     gtk_menu_shell_append ((GtkMenuShell *)menu_ab, view -> ogl_box_axis[ab][3]);
     menul = gtk_menu_new ();
     gtk_menu_item_set_submenu ((GtkMenuItem *)view -> ogl_box_axis[ab][3], menul);
-    view -> ogl_box_axis[ab][4] = create_layout_widget (str, menul, 0, view -> anim -> last -> img -> box_axis[ab], & view -> colorp[WIREFRAME][ab]);
+    view -> ogl_box_axis[ab][4] = create_layout_widget (str, menul, view -> anim -> last -> img -> box_axis[ab], & view -> colorp[WIREFRAME][ab]);
   }
   else
   {
@@ -242,7 +241,7 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
       gtk_menu_shell_append ((GtkMenuShell *)menu_ab, widg);
       menul = gtk_menu_new ();
       gtk_menu_item_set_submenu ((GtkMenuItem *)widg, menul);
-      widg = create_layout_widget (str, menul, 0, view -> anim -> last -> img -> box_axis[ab], & view -> colorp[WIREFRAME][ab]);
+      widg = create_layout_widget (str, menul, view -> anim -> last -> img -> box_axis[ab], & view -> colorp[WIREFRAME][ab]);
     }
   }
   g_free (str);
@@ -254,7 +253,7 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
     gtk_menu_shell_append ((GtkMenuShell *)menu_ab, view -> ogl_box_axis[ab][5]);
     menul = gtk_menu_new ();
     gtk_menu_item_set_submenu ((GtkMenuItem *)view -> ogl_box_axis[ab][5], menul);
-    view -> ogl_box_axis[ab][6] = create_layout_widget (str, menul, 1, view -> anim -> last -> img -> box_axis[ab], & view -> colorp[CYLINDERS][ab]);
+    view -> ogl_box_axis[ab][6] = create_layout_widget (str, menul, view -> anim -> last -> img -> box_axis[ab], & view -> colorp[CYLINDERS][ab]);
   }
   else if (i == CYLINDERS)
   {
@@ -262,7 +261,7 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
     gtk_menu_shell_append ((GtkMenuShell *)menu_ab, widg);
     menul = gtk_menu_new ();
     gtk_menu_item_set_submenu ((GtkMenuItem *)widg, menul);
-    widg = create_layout_widget (str, menul, 1, view -> anim -> last -> img -> box_axis[ab], & view -> colorp[CYLINDERS][ab]);
+    widg = create_layout_widget (str, menul, view -> anim -> last -> img -> box_axis[ab], & view -> colorp[CYLINDERS][ab]);
   }
   g_free (str);
 
@@ -272,11 +271,11 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
     gtk_menu_shell_append ((GtkMenuShell *)menu_ab, widg);
     if (id == 0)
     {
-      view -> ogl_box_axis[ab][7] = create_color_widget (widg, view, i, NONE);
+      view -> ogl_box_axis[ab][7] = create_color_widget (widg, view, i);
     }
     else
     {
-      widg = create_color_widget (widg, view, i, NONE);
+      widg = create_color_widget (widg, view, i);
     }
     add_advanced_item (menu_ab, G_CALLBACK(box_advanced), (gpointer)view, FALSE, 0, 0);
   }

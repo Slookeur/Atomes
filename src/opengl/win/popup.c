@@ -4115,7 +4115,7 @@ void popup_main_menu (glwin * view, double ptx, double pty)
       add_menu_separator (menu);
       gtk_menu_shell_append ((GtkMenuShell *)menu, menu_coord (view, 1));
       gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Polyhedra", TRUE, menu_poly (view, 1)));
-      gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Rings", view -> rings, menu_rings (view, 1, 0)));
+      gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Rings", view -> rings, menu_rings (view, 1)));
       gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Chain(s)", view -> chains, add_menu_coord (view, 1, 9)));
       gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Fragment(s)", opengl_project -> coord -> totcoord[2], add_menu_coord (view, 1, 2)));
       gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Molecule(s)", opengl_project -> coord -> totcoord[3], add_menu_coord (view, 1, 3)));

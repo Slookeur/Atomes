@@ -121,7 +121,7 @@ GtkWidget * prep_rings_menu (glwin * view, int id, int ri)
 {
   if (id == 0)
   {
-    return menu_rings (view, 0, ri);
+    return menu_rings (view, 0);
   }
   else
   {

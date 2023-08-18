@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ -  The subroutine to create the 'Clone(s)' submenu
+
 *
 *  List of subroutines:
 
@@ -40,7 +41,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: show/hide clone(s) callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -77,11 +78,11 @@ G_MODULE_EXPORT void show_hide_clones (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, glwin * view)
 *
-*  Usage:
+*  Usage: create the 'Show/hide clone(s)' menu item GTK3
 *
-*  char * name      :
-*  gboolean clone   :
-*  GtkWidget * menu : the GtkWidget sending the signal
+*  char * name      : label of the new menu item
+*  gboolean clone   : draw clones (1) or not (0)
+*  GtkWidget * menu : the GtkMenu to attach the new item to
 *  glwin * view     : the target glwin
 */
 GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, glwin * view)
@@ -94,7 +95,7 @@ GtkWidget * create_clone_widget (char * name, gboolean clone, GtkWidget * menu, 
 /*
 *  GtkWidget * menu_clones (glwin * view, int id)
 *
-*  Usage:
+*  Usage: create the 'Clone(s)' submenu GTK3
 *
 *  glwin * view : the target glwin
 *  int id       : main app (0) or popup (1)
@@ -121,7 +122,7 @@ GtkWidget * menu_clones (glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: show/hide clones menu item callback
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -162,7 +163,7 @@ G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parame
 /*
 *  GMenu * menu_clones (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the 'Clone(s)' submenu GTK4
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)

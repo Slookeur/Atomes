@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'submenus.h'
 *
-*  Contains: 
+*  Contains:
 
 */
 
@@ -35,7 +35,7 @@ extern void detach_frag_mol_menu (glwin * view, int id, int jd);
 extern GtkWidget * menu_coord (glwin * view, int id);
 extern GtkWidget * add_menu_coord (glwin * view, int id, int jd);
 extern GtkWidget * menu_poly (glwin * view, int id);
-extern GtkWidget * menu_rings (glwin * view, int id, int jd);
+extern GtkWidget * menu_rings (glwin * view, int id);
 extern GtkWidget * menu_edit (glwin * view, int id);
 extern GtkWidget * menu_tools (glwin * view, int id);
 extern GtkWidget * menu_rep (glwin * view, int id);
