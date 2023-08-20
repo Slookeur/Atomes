@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_mol.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void cp2k_fix_molecule ();
 
@@ -94,10 +94,10 @@ gboolean sel_and_conf;
 /*
 *  G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   : 
+*  gint response_id   : the response id
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data)
@@ -124,10 +124,10 @@ G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint respons
 /*
 *  G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkDialog * dial : the GtkDialog sending the signal
-*  gint response_id : 
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data)
@@ -204,7 +204,7 @@ G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, 
 /*
 *  void cp2k_fix_molecule ()
 *
-*  Usage: 
+*  Usage:
 */
 void cp2k_fix_molecule ()
 {

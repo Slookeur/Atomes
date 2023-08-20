@@ -1336,7 +1336,7 @@ G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
 *  Usage:
 *
 *  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id       :
+*  gint response_id       : the response id
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_saving_qm (GtkNativeDialog * info, gint response_id, gpointer data)
@@ -1349,7 +1349,7 @@ G_MODULE_EXPORT void run_saving_qm (GtkNativeDialog * info, gint response_id, gp
 *  Usage:
 *
 *  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_saving_qm (GtkDialog * info, gint response_id, gpointer data)

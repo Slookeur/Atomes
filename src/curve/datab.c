@@ -429,7 +429,7 @@ G_MODULE_EXPORT void adjust_value (GtkEntry * res, gpointer data)
 *  Usage:
 *
 *  GtkDialog * wind : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_add_to_column (GtkDialog * wind, gint response_id, gpointer data)
@@ -482,7 +482,7 @@ void add_to_column (gpointer data)
 *  Usage:
 *
 *  GtkDialog * wind : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_multiply_column (GtkDialog * wind, gint response_id, gpointer data)

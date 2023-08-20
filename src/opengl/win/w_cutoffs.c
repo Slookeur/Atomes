@@ -207,7 +207,7 @@ void cut_box (struct project * this_proj, GtkWidget * vbox)
 *  Usage:
 *
 *  GtkDialog * win  : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointer data)

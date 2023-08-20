@@ -2015,7 +2015,7 @@ void update_field_trees ()
 *  Usage:
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   :
+*  gint response_id   : the response id
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_changed_energy_unit (GtkDialog * dialog, gint response_id, gpointer data)
@@ -4006,7 +4006,7 @@ void remove_classical_assistant_pages (int p)
 *  Usage:
 *
 *  GtkDialog * dial : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpointer data)
@@ -4372,7 +4372,7 @@ G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
 *  Usage:
 *
 *  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id       :
+*  gint response_id       : the response id
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_on_assistant_apply (GtkNativeDialog * info, gint response_id, gpointer data)
@@ -4385,7 +4385,7 @@ G_MODULE_EXPORT void run_on_assistant_apply (GtkNativeDialog * info, gint respon
 *  Usage:
 *
 *  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_on_assistant_apply (GtkDialog * info, gint response_id, gpointer data)

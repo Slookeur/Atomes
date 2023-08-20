@@ -72,7 +72,7 @@ gboolean selection_confirmed;
 *  Usage: confirm that the selection is good
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   : the response id of the GtkDialog
+*  gint response_id   : the response id
 *  gpointer data      : the pointer if needed, not in this case
 */
 G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gpointer data)

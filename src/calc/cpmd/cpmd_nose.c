@@ -328,7 +328,7 @@ GtkWidget * create_nose_box (int n);
 *  Usage:
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   :
+*  gint response_id   : the response id
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_nose_thermostat (GtkDialog * dialog, gint response_id, gpointer data)
@@ -959,7 +959,7 @@ G_MODULE_EXPORT void select_atoms_not_thermostated (GtkToggleButton * but, gpoin
 *  Usage:
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   :
+*  gint response_id   : the response id
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_select_atom_from_model (GtkDialog * dialog, gint response_id, gpointer data)

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cpmd_atoms.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   void create_dummy_param_box (int dummy_id);
   void clean_dummy_widgets ();
@@ -67,9 +67,9 @@ GtkTreeViewColumn * dummy_col[5];
 /*
 *  struct dummy_atom * get_active_dummy (int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int id : 
+*  int id :
 */
 struct dummy_atom * get_active_dummy (int id)
 {
@@ -84,7 +84,7 @@ struct dummy_atom * get_active_dummy (int id)
 /*
 *  G_MODULE_EXPORT void update_dummy_coord (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -105,7 +105,7 @@ void create_dummy_param_box (int dummy_id);
 /*
 *  G_MODULE_EXPORT void dummy_type_changed (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -125,9 +125,9 @@ G_MODULE_EXPORT void dummy_type_changed (GtkComboBox * box, gpointer data)
 /*
 *  void create_dummy_param_box (int dummy_id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int dummy_id : 
+*  int dummy_id :
 */
 void create_dummy_param_box (int dummy_id)
 {
@@ -187,7 +187,7 @@ void create_dummy_param_box (int dummy_id)
 /*
 *  G_MODULE_EXPORT void changed_dummy_id_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -202,10 +202,10 @@ G_MODULE_EXPORT void changed_dummy_id_box (GtkComboBox * box, gpointer data)
 /*
 *  struct dummy_atom * init_dummy (int type, int id)
 *
-*  Usage: 
+*  Usage:
 *
-*  int type : 
-*  int id   : 
+*  int type :
+*  int id   :
 */
 struct dummy_atom * init_dummy (int type, int id)
 {
@@ -295,7 +295,7 @@ GtkWidget * create_dummy_box ();
 /*
 *  void clean_dummy_widgets ()
 *
-*  Usage: 
+*  Usage:
 */
 void clean_dummy_widgets ()
 {
@@ -309,10 +309,10 @@ void clean_dummy_widgets ()
 /*
 *  G_MODULE_EXPORT void run_remove_dummy (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   : 
+*  gint response_id   : the response id
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_dummy (GtkDialog * dialog, gint response_id, gpointer data)
@@ -398,9 +398,9 @@ G_MODULE_EXPORT void run_remove_dummy (GtkDialog * dialog, gint response_id, gpo
 /*
 *  void remove_dummy (int num_to_remove)
 *
-*  Usage: 
+*  Usage:
 *
-*  int num_to_remove : 
+*  int num_to_remove :
 */
 void remove_dummy (int num_to_remove)
 {
@@ -470,9 +470,9 @@ void remove_dummy (int num_to_remove)
 /*
 *  void add_dummy (int extra)
 *
-*  Usage: 
+*  Usage:
 *
-*  int extra : 
+*  int extra :
 */
 void add_dummy (int extra)
 {
@@ -500,9 +500,9 @@ void add_dummy (int extra)
 /*
 *  G_MODULE_EXPORT void add_or_remove_dummy (GtkSpinButton * res, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
-*  GtkSpinButton * res : 
+*  GtkSpinButton * res :
 *  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void add_or_remove_dummy (GtkSpinButton * res, gpointer data)
@@ -540,7 +540,7 @@ G_MODULE_EXPORT void add_or_remove_dummy (GtkSpinButton * res, gpointer data)
 /*
 *  GtkWidget * create_dummy_box ()
 *
-*  Usage: 
+*  Usage:
 */
 GtkWidget * create_dummy_box ()
 {
@@ -561,7 +561,7 @@ GtkWidget * create_dummy_box ()
 /*
 *  G_MODULE_EXPORT void atom_button (GtkWidget * but, gpointer data)
 *
-*  Usage: 
+*  Usage:
 *
 *  GtkWidget * but : the GtkWidget sending the signal
 *  gpointer data   : the associated data pointer

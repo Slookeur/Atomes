@@ -278,7 +278,7 @@ void molecule_set_color (GtkTreeViewColumn * col,
 *  Usage:
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   :
+*  gint response_id   : the response id
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data)
@@ -600,7 +600,7 @@ struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
 *  Usage:
 *
 *  GtkDialog * rmol : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data)

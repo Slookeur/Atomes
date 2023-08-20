@@ -254,7 +254,7 @@ void adjust_field_struct (int oid, int k, struct field_struct * olds)
 *  Usage:
 *
 *  GtkDialog * add_dialog : the GtkDialog sending the signal
-*  gint response_id       :
+*  gint response_id       : the response id
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_id, gpointer data)
@@ -340,7 +340,7 @@ G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_
 *  Usage:
 *
 *  GtkDialog * select_dialog : the GtkDialog sending the signal
-*  gint response_id          :
+*  gint response_id          : the response id
 *  gpointer data             : the associated data pointer
 */
 G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint response_id, gpointer data)
@@ -611,7 +611,7 @@ void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove,
 *  Usage:
 *
 *  GtkDialog * rmol : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint response_id, gpointer data)

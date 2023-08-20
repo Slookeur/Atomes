@@ -55,7 +55,7 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "curve.h"
 #include "initcoord.h"
 
-extern GtkWidget * prep_rings_menu (glwin * view, int id, int ri);
+extern GtkWidget * prep_rings_menu (glwin * view, int id);
 extern gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb);
 extern void clean_coord_window (struct project * this_proj);
 #ifdef GTK3
@@ -123,7 +123,7 @@ void update_rings_menus (glwin * view)
         }
       }
     }
-    gtk_menu_item_set_submenu ((GtkMenuItem *)view -> ogl_rings[i*6], prep_rings_menu (view, i*6, get_project_by_id(view->proj) -> rsearch[0]+1));
+    gtk_menu_item_set_submenu ((GtkMenuItem *)view -> ogl_rings[i*6], prep_rings_menu (view, i*6));
     show_the_widgets (view -> ogl_rings[i*6]);
     widget_set_sensitive (view -> ogl_rings[i*6], view -> rings);
   }

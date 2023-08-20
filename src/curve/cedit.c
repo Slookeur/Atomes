@@ -345,8 +345,8 @@ GtkWidget * create_projects_tree ()
 *  Usage:
 *
 *  GtkDialog * dial :
-*  gint response_id :
-*  gpointer data    :
+*  gint response_id : the response id
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointer data)
 {

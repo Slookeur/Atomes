@@ -375,7 +375,7 @@ G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion,
 *  Usage:
 *
 *  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_periodic_table (GtkDialog * info, gint response_id, gpointer data)

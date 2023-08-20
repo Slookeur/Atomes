@@ -51,7 +51,7 @@ int wc_cid;
 *  Usage:
 *
 *  GtkDialog * win  : the GtkDialog sending the signal
-*  gint response_id :
+*  gint response_id : the response id
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data)

@@ -1149,7 +1149,7 @@ int this_body_has_atom (struct field_nth_body * body, char * name)
 *  Usage:
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   :
+*  gint response_id   : the response id
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void run_check_atom_for_updates (GtkDialog * dialog, gint response_id, gpointer data)
