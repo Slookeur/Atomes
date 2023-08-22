@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the 'OpenGL -> Render' submenu
+
 *
 *  List of subroutines:
 
@@ -39,7 +40,7 @@ gchar * text_renders[OGL_RENDERS] = {"Filled", "Lines", "Points"};
 /*
 *  G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: set OpenGL rendering mode callback
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -80,10 +81,10 @@ G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * menu_render (glwin * view, int id)
 *
-*  Usage:
+*  Usage: create the 'OpenGL -> Render' submenu - GTK3
 *
 *  glwin * view : the target glwin
-*  int id       :
+*  int id       : main app (0) or popup (1)
 */
 GtkWidget * menu_render (glwin * view, int id)
 {
@@ -122,7 +123,7 @@ GtkWidget * menu_render (glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: set OpenGL rendering mode callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -165,7 +166,7 @@ G_MODULE_EXPORT void change_render_radio (GSimpleAction * action, GVariant * par
 /*
 *  GMenu * menu_render (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the 'OpenGL -> Render' submenu - GTK4
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)

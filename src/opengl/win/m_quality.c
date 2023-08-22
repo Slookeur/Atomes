@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the 'OengGL -> Quality' submenu
+
 *
 *  List of subroutines:
 
@@ -42,9 +43,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void set_quality (int q, glwin * view)
 *
-*  Usage:
+*  Usage: set OpenGL quality
 *
-*  int q        :
+*  int q        : new OpenGL quality
 *  glwin * view : the target glwin
 */
 void set_quality (int q, glwin * view)
@@ -62,9 +63,9 @@ void set_quality (int q, glwin * view)
 /*
 *  G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: set quality spin button callback
 *
-*  GtkSpinButton * res :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
 *  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
@@ -77,7 +78,7 @@ G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: adjust OpenGL quality - creating the dialog
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -108,7 +109,7 @@ G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * menu_quality (glwin * view, int id)
 *
-*  Usage:
+*  Usage:  create the 'OpenGL -> Quality' menu item - GTK3
 *
 *  glwin * view : the target glwin
 *  int id       : main app (0) or popup (1)
@@ -136,7 +137,7 @@ GtkWidget * menu_quality (glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: quality callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -150,7 +151,7 @@ G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * param
 /*
 *  GMenu * menu_quality (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the 'OpenGL -> Quality' menu item - GTK4
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)

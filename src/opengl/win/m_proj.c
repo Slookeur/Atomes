@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the 'View -> Projection' submenu
+
 *
 *  List of subroutines:
 
@@ -46,7 +47,7 @@ enum position {
 /*
 *  G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: set camera position callback
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -100,7 +101,7 @@ G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 /*
 *  GtkWidget * menu_proj (glwin * view)
 *
-*  Usage:
+*  Usage: create the 'View -> Projection' submenu - GTK3
 *
 *  glwin * view : the target glwin
 */
@@ -132,7 +133,7 @@ GtkWidget * menu_proj (glwin * view)
 /*
 *  G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: set camera position callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -146,7 +147,7 @@ G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * param
 /*
 *  GMenu * menu_proj (glwin * view, int popm)
 *
-*  Usage:
+*  Usage: create the 'View -> Projection' submenu - GTK4
 *
 *  glwin * view : the target glwin
 *  int popm     : main app (0) or popup (1)

@@ -149,7 +149,6 @@ extern vec3_t get_bary (struct project * this_proj, int status);
 extern void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible);
 extern struct insertion mol[];
 extern struct selatom * new_selatom (int id, int sp);
-extern void update_labels (glwin * view);
 extern int inserted_from_lib;
 extern void duplicate_material_and_lightning (image * new_img, image * old_img);
 #ifdef GTK4
