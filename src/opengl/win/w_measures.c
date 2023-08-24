@@ -16,24 +16,29 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the measurement(s) window
+
 *
 *  List of subroutines:
 
-  int get_measure_type (glwin * view);
+  int get_selection_type (glwin * view);
 
   G_MODULE_EXPORT gboolean measure_tree_selection_event (GtkWidget * widget, GdkEventButton * event, gpointer data);
   G_MODULE_EXPORT gboolean close_measure_event (GtkWindow * widg, gpointer data);
   G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event, gpointer data);
 
-  gchar * create_measure_label (glwin * view, int pi);
+  gchar * create_measure_label (glwin * view, int sid);
 
+  void measure_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void measure_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void dihedral_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void measure_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
   void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store);
   void fill_angle_model_row (int p, int a, int b, int c, GtkTreeStore * store);
   void fill_dihedral_model_row (int p, int a, int b, int c, int d, GtkTreeStore * store);
-  void update_selection_tree (glwin * view, int pi, int id);
-  void update_label_selection (glwin * view, int pi);
+  void update_selection_tree (glwin * view, int sid, int mid);
+  void update_label_selection (glwin * view, int sid);
 
   G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event_x, double event_y, guint event_button, gpointer data);
   G_MODULE_EXPORT void measure_tree_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data);
@@ -41,8 +46,8 @@ If not, see <https://www.gnu.org/licenses/> */
   G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data);
   G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data);
 
-  GtkWidget * create_selection_tree (glwin * view, int pi, int id);
-  GtkWidget * measurment_tab (glwin * view, int pi, int id);
+  GtkWidget * create_selection_tree (glwin * view, int sid, int mid);
+  GtkWidget * measurment_tab (glwin * view, int sid, int mid);
 
 */
 
@@ -61,13 +66,13 @@ int angle_id;
 int dihedral_id;
 
 /*
-*  int get_measure_type (glwin * view)
+*  int get_selection_type (glwin * view)
 *
-*  Usage:
+*  Usage: get selection type
 *
 *  glwin * view : the target glwin
 */
-int get_measure_type (glwin * view)
+int get_selection_type (glwin * view)
 {
   if (view -> mode == EDITION && view -> selection_mode == NSELECTION-1)
   {
@@ -86,12 +91,12 @@ int get_measure_type (glwin * view)
 /*
 *  void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store)
 *
-*  Usage:
+*  Usage: fill bond tree store row
 *
-*  int p                :
-*  int a                :
-*  int b                :
-*  GtkTreeStore * store :
+*  int p                : the project id
+*  int a                : 1st atom id
+*  int b                : 2nd atom id
+*  GtkTreeStore * store : the GtkTreeStore to fill
 */
 void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store)
 {
@@ -134,13 +139,13 @@ void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store)
 /*
 *  void fill_angle_model_row (int p, int a, int b, int c, GtkTreeStore * store)
 *
-*  Usage:
+*  Usage: fill angle tree store row
 *
-*  int p                :
-*  int a                :
-*  int b                :
-*  int c                :
-*  GtkTreeStore * store :
+*  int p                : the project id
+*  int a                : 1st atom id
+*  int b                : 2nd atom id
+*  int c                : 3rd atom id
+*  GtkTreeStore * store : the GtkTreeStore to fill
 */
 void fill_angle_model_row (int p, int a, int b, int c, GtkTreeStore * store)
 {
@@ -188,14 +193,14 @@ void fill_angle_model_row (int p, int a, int b, int c, GtkTreeStore * store)
 /*
 *  void fill_dihedral_model_row (int p, int a, int b, int c, int d, GtkTreeStore * store)
 *
-*  Usage:
+*  Usage: fill dihedral tree store row
 *
-*  int p                :
-*  int a                :
-*  int b                :
-*  int c                :
-*  int d                :
-*  GtkTreeStore * store :
+*  int p                : the project id
+*  int a                : 1st atom id
+*  int b                : 2nd atom id
+*  int c                : 3rd atom id
+*  int d                : 4th atom id
+*  GtkTreeStore * store : the GtkTreeStore to fill
 */
 void fill_dihedral_model_row (int p, int a, int b, int c, int d, GtkTreeStore * store)
 {
@@ -247,11 +252,18 @@ void fill_dihedral_model_row (int p, int a, int b, int c, int d, GtkTreeStore * 
 
 extern ColRGBA init_color (int id, int numid);
 
-void measure_set_visible (GtkTreeViewColumn * col,
-                          GtkCellRenderer   * renderer,
-                          GtkTreeModel      * mod,
-                          GtkTreeIter       * iter,
-                          gpointer          data)
+/*
+*  void measure_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage :
+*
+*  GtkTreeViewColumn * col    : the tree view column
+*  GtkCellRenderer * renderer : the column renderer
+*  GtkTreeModel * mod         : the tree model
+*  GtkTreeIter * iter         : the tree it
+*  gpointer data              : the associated data pointer
+*/
+void measure_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i;
   tint * dat = (tint *)data;
@@ -259,18 +271,26 @@ void measure_set_visible (GtkTreeViewColumn * col,
   gtk_cell_renderer_set_visible (renderer, i);
 }
 
-void measure_set_color (GtkTreeViewColumn * col,
-                        GtkCellRenderer   * renderer,
-                        GtkTreeModel      * mod,
-                        GtkTreeIter       * iter,
-                        tint * dat)
+/*
+*  void measure_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage :
+*
+*  GtkTreeViewColumn * col    : the tree view column
+*  GtkCellRenderer * renderer : the column renderer
+*  GtkTreeModel * mod         : the tree model
+*  GtkTreeIter * iter         : the tree it
+*  gpointer data              : the associated data pointer
+*/
+void measure_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i, j;
+  tint * dat = (tint *) data;
   gboolean docolor = FALSE;
   gtk_tree_model_get (mod, iter, 0, & i, -1);
   struct project * this_proj = get_project_by_id(dat -> a);
   image * img = this_proj -> modelgl -> anim -> last -> img;
-  int pi = get_measure_type (this_proj -> modelgl);
+  int pi = get_selection_type (this_proj -> modelgl);
   if (img -> selected[pi] -> selected)
   {
     if ((dat -> c == 2 && img -> selected[pi] -> selected < MAX_IN_SELECTION-10) || (dat -> c < 2 && img -> selected[pi] -> selected < MAX_IN_SELECTION))
@@ -295,26 +315,40 @@ void measure_set_color (GtkTreeViewColumn * col,
   set_renderer_color (docolor, renderer, init_color (i, j));
 }
 
-void dihedral_set_color_and_markup (GtkTreeViewColumn * col,
-                                    GtkCellRenderer   * renderer,
-                                    GtkTreeModel      * mod,
-                                    GtkTreeIter       * iter,
-                                    gpointer          data)
+/*
+*  void dihedral_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage :
+*
+*  GtkTreeViewColumn * col    : the tree view column
+*  GtkCellRenderer * renderer : the column renderer
+*  GtkTreeModel * mod         : the tree model
+*  GtkTreeIter * iter         : the tree it
+*  gpointer data              : the associated data pointer
+*/
+void dihedral_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
-  tint dat = * ((tint *)data);
-  dat.c = 2;
-  measure_set_color (col, renderer, mod, iter, & dat);
+  tint * dat = (tint *)data;
+  dat -> c = 2;
+  measure_set_color (col, renderer, mod, iter, data);
   gchar * str = NULL;
-  gtk_tree_model_get (mod, iter, dat.b, & str, -1);
+  gtk_tree_model_get (mod, iter, dat -> b, & str, -1);
   g_object_set (renderer, "markup", str, NULL, NULL);
   g_free (str);
 }
 
-void measure_set_color_and_markup (GtkTreeViewColumn * col,
-                                   GtkCellRenderer   * renderer,
-                                   GtkTreeModel      * mod,
-                                   GtkTreeIter       * iter,
-                                   gpointer          data)
+/*
+*  void measure_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage :
+*
+*  GtkTreeViewColumn * col    : the tree view column
+*  GtkCellRenderer * renderer : the column renderer
+*  GtkTreeModel * mod         : the tree model
+*  GtkTreeIter * iter         : the tree it
+*  gpointer data              : the associated data pointer
+*/
+void measure_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   tint * dat = (tint *)data;
   measure_set_color (col, renderer, mod, iter, dat);
@@ -324,35 +358,35 @@ void measure_set_color_and_markup (GtkTreeViewColumn * col,
   g_free (str);
 }
 
-GtkWidget * create_selection_tree (glwin * view, int pi, int id);
+GtkWidget * create_selection_tree (glwin * view, int sid, int mid);
 
 /*
-*  void update_selection_tree (glwin * view, int pi, int id)
+*  void update_selection_tree (glwin * view, int sid, int mid)
 *
-*  Usage:
+*  Usage: update measurements tree view
 *
 *  glwin * view : the target glwin
-*  int pi       :
-*  int id       :
+*  int sid      : the type of selection (0 = analysis mode, 1 = edition mode)
+*  int mid      : the type of measurement (0 = bonds, 1 = angles, 2 = dihedrals)
 */
-void update_selection_tree (glwin * view, int pi, int id)
+void update_selection_tree (glwin * view, int sid, int mid)
 {
-  GtkWidget * cont = gtk_widget_get_parent (view -> measure_win -> selection_tree[id]);
-  view -> measure_win -> selection_tree[id] = destroy_this_widget (view -> measure_win -> selection_tree[id]);
-  view -> measure_win -> selection_tree[id] = create_selection_tree (view, pi, id);
-  add_container_child (CONTAINER_SCR, cont, view -> measure_win -> selection_tree[id]);
+  GtkWidget * cont = gtk_widget_get_parent (view -> measure_win -> selection_tree[mid]);
+  view -> measure_win -> selection_tree[mid] = destroy_this_widget (view -> measure_win -> selection_tree[mid]);
+  view -> measure_win -> selection_tree[mid] = create_selection_tree (view, sid, mid);
+  add_container_child (CONTAINER_SCR, cont, view -> measure_win -> selection_tree[mid]);
   show_the_widgets (cont);
 }
 
 /*
 *  G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event_x, double event_y, guint event_button, gpointer data)
 *
-*  Usage:
+*  Usage: measure tree button event
 *
 *  GtkWidget * widget : the GtkWidget sending the signal
-*  double event_x     :
-*  double event_y     :
-*  guint event_button :
+*  double event_x     : x position
+*  double event_y     : y position
+*  guint event_button : event buttton
 *  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event_x, double event_y, guint event_button, gpointer data)
@@ -361,7 +395,7 @@ G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event
   {
     tint * dat = (tint *)data;
     glwin * view = get_project_by_id(dat -> a) -> modelgl;
-    int pi = get_measure_type (view);
+    int pi = get_selection_type (view);
     GtkTreeModel * measure_model = gtk_tree_view_get_model(GTK_TREE_VIEW(widget));
     GtkTreePath * path;
     GtkTreeViewColumn * column;
@@ -402,10 +436,10 @@ G_MODULE_EXPORT void measure_tree_button_event (GtkWidget * widget, double event
 /*
 *  G_MODULE_EXPORT gboolean measure_tree_selection_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
 *
-*  Usage:
+*  Usage: measures tree view button press callback GTK4
 *
 *  GtkWidget * widget     : the GtkWidget sending the signal
-*  GdkEventButton * event :
+*  GdkEventButton * event : the GtkEventButton triggering the signal
 *  gpointer data          : the associated data pointer
 */
 G_MODULE_EXPORT gboolean measure_tree_selection_event (GtkWidget * widget, GdkEventButton * event, gpointer data)
@@ -421,7 +455,7 @@ G_MODULE_EXPORT gboolean measure_tree_selection_event (GtkWidget * widget, GdkEv
 /*
 *  G_MODULE_EXPORT void measure_tree_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage:
+*  Usage: measures tree view button press callback GTK3
 *
 *  GtkGesture * gesture : the GtkGesture sending the signal
 *  int n_press          : number of times it was pressed
@@ -436,15 +470,15 @@ G_MODULE_EXPORT void measure_tree_button_pressed (GtkGesture * gesture, int n_pr
 #endif
 
 /*
-*  GtkWidget * create_selection_tree (glwin * view, int pi, int id)
+*  GtkWidget * create_selection_tree (glwin * view, int sid, int mid)
 *
-*  Usage:
+*  Usage: create the measurements selection tree
 *
 *  glwin * view : the target glwin
-*  int pi       :
-*  int id       :
+*  int sid      : the type of selection (0 = analysis mode, 1 = edition mode)
+*  int mid      : the type of measurement (0 = bonds, 1 = angles, 2 = dihedrals)
 */
-GtkWidget * create_selection_tree (glwin * view, int pi, int id)
+GtkWidget * create_selection_tree (glwin * view, int sid, int mid)
 {
   int i, j;
   GtkTreeViewColumn * sel_col[7];
@@ -462,36 +496,36 @@ GtkWidget * create_selection_tree (glwin * view, int pi, int id)
                          {G_TYPE_INT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN}};
   if (get_project_by_id(view -> proj) -> cell.pbc)
   {
-    sel_model = gtk_tree_store_newv (tree_dim[id]+1, col_type[id]);
+    sel_model = gtk_tree_store_newv (tree_dim[mid]+1, col_type[mid]);
     j = 1;
   }
   else
   {
-    sel_model = gtk_tree_store_newv (tree_dim[id], col_type[id]);
+    sel_model = gtk_tree_store_newv (tree_dim[mid], col_type[mid]);
     j = 0;
   }
 
   GtkWidget * selection_tree = gtk_tree_view_new_with_model(GTK_TREE_MODEL(sel_model));
-  for (i=0; i<4+j+id; i++)
+  for (i=0; i<4+j+mid; i++)
   {
-    if ((id == 0 && i < 4) || (id == 1 && i < 5) || (id == 2 && i < 6))
+    if ((mid == 0 && i < 4) || (mid == 1 && i < 5) || (mid == 2 && i < 6))
     {
       sel_cell[i] = gtk_cell_renderer_text_new();
-      sel_col[i] = gtk_tree_view_column_new_with_attributes (ctitle[id][i], sel_cell[i], ctype[id][i], i, NULL);
+      sel_col[i] = gtk_tree_view_column_new_with_attributes (ctitle[mid][i], sel_cell[i], ctype[mid][i], i, NULL);
       if (i == 0) gtk_tree_view_column_set_visible (sel_col[i], FALSE);
     }
-    else if ((id == 0 && i == 4) || (id == 1 && i == 5) || (id == 2 && i == 6))
+    else if ((mid == 0 && i == 4) || (mid == 1 && i == 5) || (mid == 2 && i == 6))
     {
       sel_cell[i] = gtk_cell_renderer_toggle_new ();
-      sel_col[i] = gtk_tree_view_column_new_with_attributes (ctitle[id][i], sel_cell[i], ctype[id][i], i, NULL);
+      sel_col[i] = gtk_tree_view_column_new_with_attributes (ctitle[mid][i], sel_cell[i], ctype[mid][i], i, NULL);
     }
     gtk_tree_view_column_set_alignment (sel_col[i], 0.5);
     gtk_tree_view_append_column(GTK_TREE_VIEW(selection_tree), sel_col[i]);
-    if (i > 0 && i < 4+id)
+    if (i > 0 && i < 4+mid)
     {
-      if (id < 2)
+      if (mid < 2)
       {
-        gtk_tree_view_column_set_cell_data_func (sel_col[i], sel_cell[i], measure_set_color_and_markup, & view -> colorp[i][id], NULL);
+        gtk_tree_view_column_set_cell_data_func (sel_col[i], sel_cell[i], measure_set_color_and_markup, & view -> colorp[i][mid], NULL);
       }
       else
       {
@@ -504,46 +538,46 @@ GtkWidget * create_selection_tree (glwin * view, int pi, int id)
     }
   }
   image * img = view -> anim -> last -> img;
-  if (img -> selected[pi] -> selected < MAX_IN_SELECTION)
+  if (img -> selected[sid] -> selected < MAX_IN_SELECTION)
   {
-    if ( (id == 0 && img -> selected[pi] -> selected > 1)
-      || (id == 1 && img -> selected[pi] -> selected > 2)
-      || (id == 2 && img -> selected[pi] -> selected > 3 && img -> selected[pi] -> selected < MAX_IN_SELECTION-10))
+    if ( (mid == 0 && img -> selected[sid] -> selected > 1)
+      || (mid == 1 && img -> selected[sid] -> selected > 2)
+      || (mid == 2 && img -> selected[sid] -> selected > 3 && img -> selected[sid] -> selected < MAX_IN_SELECTION-10))
     {
-      if (id == 0)
+      if (mid == 0)
       {
         bond_id = -1;
-        bonds_loop (view, 2, pi, GTK_TREE_STORE(sel_model));
+        bonds_loop (view, 2, sid, GTK_TREE_STORE(sel_model));
 #ifdef GTK4
-        add_widget_gesture_and_key_action (selection_tree, "bond-tree-pressed", G_CALLBACK(measure_tree_button_pressed), & view -> colorp[0][id],
+        add_widget_gesture_and_key_action (selection_tree, "bond-tree-pressed", G_CALLBACK(measure_tree_button_pressed), & view -> colorp[0][mid],
                                            NULL, NULL, NULL, NULL, NULL, NULL,
                                            NULL, NULL, NULL, NULL, NULL, NULL);
 #else
-        g_signal_connect (G_OBJECT(selection_tree), "button_press_event", G_CALLBACK(measure_tree_selection_event), & view -> colorp[0][id]);
+        g_signal_connect (G_OBJECT(selection_tree), "button_press_event", G_CALLBACK(measure_tree_selection_event), & view -> colorp[0][mid]);
 #endif
       }
-      else if (id == 1)
+      else if (mid == 1)
       {
         angle_id = -1;
-        angles_loop (view, 2, pi, GTK_TREE_STORE(sel_model));
+        angles_loop (view, 2, sid, GTK_TREE_STORE(sel_model));
 #ifdef GTK4
-        add_widget_gesture_and_key_action (selection_tree, "angle-tree-pressed", G_CALLBACK(measure_tree_button_pressed), & view -> colorp[0][id],
+        add_widget_gesture_and_key_action (selection_tree, "angle-tree-pressed", G_CALLBACK(measure_tree_button_pressed), & view -> colorp[0][mid],
                                            NULL, NULL, NULL, NULL, NULL, NULL,
                                            NULL, NULL, NULL, NULL, NULL, NULL);
 #else
-        g_signal_connect (G_OBJECT(selection_tree), "button_press_event", G_CALLBACK(measure_tree_selection_event), & view -> colorp[0][id]);
+        g_signal_connect (G_OBJECT(selection_tree), "button_press_event", G_CALLBACK(measure_tree_selection_event), & view -> colorp[0][mid]);
 #endif
       }
-      else if (id == 2)
+      else if (mid == 2)
       {
         dihedral_id = -1;
-        dihedrals_loop (view, 2, pi, GTK_TREE_STORE(sel_model));
+        dihedrals_loop (view, 2, sid, GTK_TREE_STORE(sel_model));
 /*#ifdef GTK4
-        add_widget_gesture_and_key_action (selection_tree, "dihedral-tree-pressed", G_CALLBACK(measure_tree_button_pressed), & view -> colorp[0][id],
+        add_widget_gesture_and_key_action (selection_tree, "dihedral-tree-pressed", G_CALLBACK(measure_tree_button_pressed), & view -> colorp[0][mid],
                                            NULL, NULL, NULL, NULL, NULL, NULL,
                                            NULL, NULL, NULL, NULL, NULL, NULL);
 #else
-        g_signal_connect (G_OBJECT(selection_tree), "button_press_event", G_CALLBACK(measure_tree_selection_event), & view -> colorp[0][id]);
+        g_signal_connect (G_OBJECT(selection_tree), "button_press_event", G_CALLBACK(measure_tree_selection_event), & view -> colorp[0][mid]);
 #endif*/
       }
     }
@@ -555,56 +589,56 @@ GtkWidget * create_selection_tree (glwin * view, int pi, int id)
 }
 
 /*
-*  GtkWidget * measurment_tab (glwin * view, int pi, int id)
+*  GtkWidget * measurment_tab (glwin * view, int sid, mid)
 *
-*  Usage:
+*  Usage: create measurement tab
 *
 *  glwin * view : the target glwin
-*  int pi       :
-*  int id       :
+*  int sid      : the type of selection (0 = analysis mode, 1 = edition mode)
+*  int mid      : the type of measurement (0 = bonds, 1 = angles, 2 = dihedrals)
 */
-GtkWidget * measurment_tab (glwin * view, int pi, int id)
+GtkWidget * measurment_tab (glwin * view, int sid, int mid)
 {
-  GtkWidget * scrollsets = create_scroll (NULL, 350+50*id, 350, GTK_SHADOW_NONE);
-  view -> measure_win -> selection_tree[id] = create_selection_tree (view, pi, id);
-  add_container_child (CONTAINER_SCR, scrollsets, view -> measure_win -> selection_tree[id]);
+  GtkWidget * scrollsets = create_scroll (NULL, 350+50*mid, 350, GTK_SHADOW_NONE);
+  view -> measure_win -> selection_tree[mid] = create_selection_tree (view, sid, mid);
+  add_container_child (CONTAINER_SCR, scrollsets, view -> measure_win -> selection_tree[mid]);
   return scrollsets;
 }
 
 /*
-*  gchar * create_measure_label (glwin * view, int pi)
+*  gchar * create_measure_label (glwin * view, int sid)
 *
-*  Usage:
+*  Usage: create the text information for the number of atom(s) in selection
 *
 *  glwin * view : the target glwin
-*  int pi       :
+*  int sid      : the type of selection (0 = analysis mode, 1 = edition mode)
 */
-gchar * create_measure_label (glwin * view, int pi)
+gchar * create_measure_label (glwin * view, int sid)
 {
   gchar * str;
   image * img = view -> anim -> last -> img;
-  if (img -> selected[pi] -> selected < MAX_IN_SELECTION)
+  if (img -> selected[sid] -> selected < MAX_IN_SELECTION)
   {
-    str = g_strdup_printf ("\tAtom(s) in selection<sup>*</sup> :\t<b>%d</b>", img -> selected[pi] -> selected);
+    str = g_strdup_printf ("\tAtom(s) in selection<sup>*</sup> :\t<b>%d</b>", img -> selected[sid] -> selected);
   }
   else
   {
-    str = g_strdup_printf ("\tSorry too many [%d] atoms in selection<sup>*</sup>", img -> selected[pi] -> selected);
+    str = g_strdup_printf ("\tSorry too many [%d] atoms in selection<sup>*</sup>", img -> selected[sid] -> selected);
   }
   return str;
 }
 
 /*
-*  void update_label_selection (glwin * view, int pi)
+*  void update_label_selection (glwin * view, int sid)
 *
-*  Usage:
+*  Usage: update the text information for the number of atoms/measures in selection
 *
 *  glwin * view : the target glwin
-*  int pi       :
+*  int pi       : the type of selection (0 = analysis mode, 1 = edition mode)
 */
-void update_label_selection (glwin * view, int pi)
+void update_label_selection (glwin * view, int sid)
 {
-  gtk_label_set_text (GTK_LABEL(view -> measure_win -> label), create_measure_label(view, pi));
+  gtk_label_set_text (GTK_LABEL(view -> measure_win -> label), create_measure_label(view, sid));
   gtk_label_set_use_markup (GTK_LABEL(view -> measure_win -> label), TRUE);
 }
 
@@ -613,7 +647,7 @@ extern GtkWidget * labels_tab (glwin * view, int id);
 /*
 *  G_MODULE_EXPORT void close_ml (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: measurements style edition window close button
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -626,7 +660,7 @@ G_MODULE_EXPORT void close_ml (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: measurements style edition window
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -654,7 +688,7 @@ G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean close_measure_event (GtkWindow * widg, gpointer data)
 *
-*  Usage:
+*  Usage: measurements window close event callback GTK4
 *
 *  GtkWindow * widg :
 *  gpointer data    : the associated data pointer
@@ -664,7 +698,7 @@ G_MODULE_EXPORT gboolean close_measure_event (GtkWindow * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage:
+*  Usage: measurements window close event callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  GdkEvent * event : the GdkEvent triggering the signal
@@ -688,7 +722,7 @@ G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event
 /*
 *  G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: create the measurements window
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -700,7 +734,7 @@ G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data)
   {
     view -> measure_win = g_malloc0 (sizeof*view -> measure_win);
     gchar * str = g_strdup_printf ("%s - measures", get_project_by_id(view -> proj) -> name);
-    int pi = get_measure_type (view);
+    int pi = get_selection_type (view);
     view -> measure_win -> win = create_win (str, view -> win, FALSE, FALSE);
     gtk_widget_set_size_request (view -> measure_win -> win, 450, 500);
     g_free (str);

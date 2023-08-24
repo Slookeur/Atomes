@@ -1119,7 +1119,7 @@ G_MODULE_EXPORT void on_cloned_poly_toggled (GtkToggleButton * Button, gpointer 
 /*
 *  GtkWidget * param_tab (glwin * view)
 *
-*  Usage:
+*  Usage: environments configuration window parameters tab
 *
 *  glwin * view : the target glwin
 */
@@ -1238,7 +1238,7 @@ GtkWidget * param_tab (glwin * view)
 /*
 *  G_MODULE_EXPORT void close_coord (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: environments configuration window close button
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -1255,9 +1255,9 @@ G_MODULE_EXPORT void close_coord (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean close_event_coord (GtkWindow * widg, gpointer data)
 *
-*  Usage:
+*  Usage: environments configuration window close event callback GTK4
 *
-*  GtkWindow * widg :
+*  GtkWindow * widg : the GtkWindow sending the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_event_coord (GtkWindow * widg, gpointer data)
@@ -1265,7 +1265,7 @@ G_MODULE_EXPORT gboolean close_event_coord (GtkWindow * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean close_event_coord (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage:
+*  Usage: environments configuration window close event callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  GdkEvent * event : the GdkEvent triggering the signal
@@ -1281,10 +1281,10 @@ G_MODULE_EXPORT gboolean close_event_coord (GtkWidget * widg, GdkEvent * event, 
 /*
 *  GtkWidget * advanced_coord_properties (glwin * view, int page)
 *
-*  Usage:
+*  Usage: create the environments configuration window
 *
 *  glwin * view : the target glwin
-*  int page     :
+*  int page     : the page of the notebook to display
 */
 GtkWidget * advanced_coord_properties (glwin * view, int page)
 {
@@ -1390,11 +1390,11 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
 /*
 *  int get_page_from_geo_coord (glwin * view, int geo, int coord)
 *
-*  Usage:
+*  Usage: find the proper page to display in the notebook
 *
 *  glwin * view : the target glwin
-*  int geo      :
-*  int coord    :
+*  int geo      : the type of environment
+*  int coord    : coordination (1) or polyhedra (0)
 */
 int get_page_from_geo_coord (glwin * view, int geo, int coord)
 {
@@ -1414,7 +1414,6 @@ int get_page_from_geo_coord (glwin * view, int geo, int coord)
   }
   else
   {
-    i = geo + 1;
     if (geo > 1)
     {
       i = 0;
@@ -1443,6 +1442,10 @@ int get_page_from_geo_coord (glwin * view, int geo, int coord)
         i = 3 + i;
       }
     }
+    else
+    {
+      i = geo + 1;
+    }
   }
   return i;
 }
@@ -1450,7 +1453,7 @@ int get_page_from_geo_coord (glwin * view, int geo, int coord)
 /*
 *  G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: create the environments configuration window
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer

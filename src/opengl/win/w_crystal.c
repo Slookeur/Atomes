@@ -16,8 +16,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create a crystal database window
+ - This is a project and not in use for the time being
+
 *
 *  List of subroutines:
 
@@ -651,7 +653,7 @@ int open_cif_database (gchar * filetoread)
 /*
 *  int prepare_data_base (int db)
 *
-*  Usage:
+*  Usage: prepare CIF files database
 *
 *  int db :
 */
@@ -727,11 +729,11 @@ extern void set_library_markup (GtkTreeViewColumn * col,
 /*
 *  GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
 *
-*  Usage:
+*  Usage: create cif tree store widget
 *
-*  GtkListStore * store :
+*  GtkListStore * store : the GtkListStore model
 *  int id               :
-*  gchar * name         :
+*  gchar * name         : column name
 */
 GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
 {
@@ -756,7 +758,7 @@ GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
 /*
 *  int build_crystal_from_cif_database (struct project * this_proj)
 *
-*  Usage:
+*  Usage: create crystal database window
 *
 *  struct project * this_proj : the target project
 */
@@ -816,5 +818,3 @@ int build_crystal_from_cif_database (struct project * this_proj)
   cif_proj = NULL;
   return res;
 }
-
-

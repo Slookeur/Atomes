@@ -105,7 +105,7 @@ extern int is_selected;
 extern int is_labelled;
 extern G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data);
 extern gchar * action_atoms[3];
-extern int get_measure_type (glwin * view);
+extern int get_selection_type (glwin * view);
 
 #ifdef GTK3
 /*
@@ -706,7 +706,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       {
         opengl_project_changed (view -> proj);
         selected_aspec = -1;
-        i = get_measure_type (view);
+        i = get_selection_type (view);
         if (view -> anim -> last -> img -> selected[i] -> selected == opengl_project -> natomes)
         {
 #ifdef GTK4

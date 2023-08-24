@@ -16,13 +16,14 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the encoding (image/video) window
+
 *
 *  List of subroutines:
 
   void clean_animation (glwin * view);
-  void set_sensitive_widgets (gboolean video, int i);
+  void set_encoding_widget_sensitivity (gboolean video, int sensitivity);
   void window_encode (glwin * view, gboolean video);
 
   G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data);
@@ -55,7 +56,7 @@ extern gboolean spin (gpointer data);
 /*
 *  G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: set number of frames
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -76,7 +77,7 @@ G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: set video extra frames
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -97,7 +98,7 @@ G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: set video / image resolution
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -119,7 +120,7 @@ G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_video_codec (GtkComboBox *ComboBoxGtk)
 *
-*  Usage:
+*  Usage: change video codec
 *
 *  GtkComboBox *ComboBoxGtk : the GtkComboBox sending the signal
 */
@@ -131,9 +132,9 @@ G_MODULE_EXPORT void set_video_codec (GtkComboBox *ComboBoxGtk)
 /*
 *  G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: set encoding OpenGL quality callback - spin
 *
-*  GtkSpinButton * res :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
 *  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
@@ -149,7 +150,7 @@ G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: set video bitrate entry callback
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -204,24 +205,24 @@ GtkWidget * res[2];
 GtkWidget * cod;
 
 /*
-*  void set_sensitive_widgets (gboolean video, int i)
+*  void set_encoding_widget_sensitivity (gboolean video, int sensitivity)
 *
 *  Usage:
 *
-*  gboolean video :
-*  int i          :
+*  gboolean video  : encoding video (yes / no)
+*  int sensitivity : sensitivity
 */
-void set_sensitive_widgets (gboolean video, int i)
+void set_encoding_widget_sensitivity (gboolean video, int sensitivity)
 {
   if (video)
   {
-    widget_set_sensitive (resf, i);
-    widget_set_sensitive (rese, i);
-    widget_set_sensitive (resb, i);
+    widget_set_sensitive (resf, sensitivity);
+    widget_set_sensitive (rese, sensitivity);
+    widget_set_sensitive (resb, sensitivity);
   }
-  widget_set_sensitive (res[0], i);
-  widget_set_sensitive (res[1], i);
-  widget_set_sensitive (cod, i);
+  widget_set_sensitive (res[0], sensitivity);
+  widget_set_sensitive (res[1], sensitivity);
+  widget_set_sensitive (cod, sensitivity);
 }
 
 GtkWidget * form;
@@ -257,7 +258,6 @@ G_MODULE_EXPORT void set_image_format (GtkComboBox * box, gpointer data)
 GtkWidget * encoding_pb;
 gboolean encode_video;
 
-
 /*
 *  G_MODULE_EXPORT void run_window_encode (GtkDialog * win , gint response_id, gpointer data)
 *
@@ -272,7 +272,7 @@ G_MODULE_EXPORT void run_window_encode (GtkDialog * win , gint response_id, gpoi
   glwin * view = (glwin *)data;
   if (response_id == GTK_RESPONSE_APPLY)
   {
-    set_sensitive_widgets (encode_video, 0);
+    set_encoding_widget_sensitivity (encode_video, 0);
     video_options * vopts = g_malloc0(sizeof*vopts);
     vopts -> proj = view -> proj;
     vopts -> oglquality = oglquality;
@@ -292,7 +292,7 @@ G_MODULE_EXPORT void run_window_encode (GtkDialog * win , gint response_id, gpoi
     }
     g_free (vopts -> video_res);
     g_free (vopts);
-    set_sensitive_widgets (encode_video, 1);
+    set_encoding_widget_sensitivity (encode_video, 1);
   }
   else
   {

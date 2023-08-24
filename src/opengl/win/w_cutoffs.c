@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the bond cutoffs update dialog
+
 *
 *  List of subroutines:
 
@@ -43,7 +44,7 @@ double * tmpcut;
 /*
 *  void update_cutoffs (struct project * this_proj)
 *
-*  Usage:
+*  Usage: update bond cutoffs
 *
 *  struct project * this_proj : the target project
 */
@@ -117,7 +118,7 @@ void update_cutoffs (struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: change cutoff entry callback
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -138,7 +139,7 @@ G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
 /*
 *  void cut_box (struct project * this_proj, GtkWidget * vbox)
 *
-*  Usage:
+*  Usage: box cutoff entries
 *
 *  struct project * this_proj : the target project
 *  GtkWidget * vbox           : the GtkWidget sending the signal
@@ -204,7 +205,7 @@ void cut_box (struct project * this_proj, GtkWidget * vbox)
 /*
 *  G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: bond cutoffs window - running the dialog
 *
 *  GtkDialog * win  : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -244,7 +245,7 @@ G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointe
 /*
 *  G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: adjust bond cutoffs window callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -255,7 +256,7 @@ G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, 
 /*
 *  G_MODULE_EXPORT void window_cuts (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: adjust bond cutoffs window callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer

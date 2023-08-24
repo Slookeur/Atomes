@@ -16,14 +16,15 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines de create the recording window
+
 *
 *  List of subroutines:
 
   void prepare_edition_windows (glwin * view, int status);
 
-  G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data);
+  G_MODULE_EXPORT void rec_start (GtkButton * but, gpointer data);
   G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data);
   G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data);
 
@@ -37,10 +38,10 @@ extern void window_encode (glwin * view, gboolean video);
 /*
 *  void prepare_edition_windows (glwin * view, int status)
 *
-*  Usage:
+*  Usage: update the sensitivity of the edition window(s) if any are opened
 *
 *  glwin * view : the target glwin
-*  int status   :
+*  int status   : sensitity
 */
 void prepare_edition_windows (glwin * view, int status)
 {
@@ -82,14 +83,14 @@ void prepare_edition_windows (glwin * view, int status)
 }
 
 /*
-*  G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data)
+*  G_MODULE_EXPORT void rec_start (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: start recording
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
 */
-G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data)
+G_MODULE_EXPORT void rec_start (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
   if (! view -> record)
@@ -111,7 +112,7 @@ G_MODULE_EXPORT void rec_record (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: stop recording
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -135,7 +136,7 @@ G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: create video recorder window
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -152,7 +153,7 @@ G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data)
     GtkWidget * hbox = create_hbox (0);
     add_container_child (CONTAINER_WIN, view -> rec -> win, hbox);
     // Record
-    view -> rec -> rec = create_button ("Record", IMG_STOCK, YES, -1, -1, GTK_RELIEF_NONE, G_CALLBACK(rec_record), data);
+    view -> rec -> rec = create_button ("Record", IMG_STOCK, YES, -1, -1, GTK_RELIEF_NONE, G_CALLBACK(rec_start), data);
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, view -> rec -> rec, TRUE, TRUE, 0);
     // Stop
     view -> rec -> stop = create_button ("Stop", IMG_STOCK, MEDIA_STOP, -1, -1, GTK_RELIEF_NONE, G_CALLBACK(rec_stop), data);
