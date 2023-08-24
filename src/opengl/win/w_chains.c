@@ -16,18 +16,19 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the chain(s) tab for the advanced environments window
+
 *
 *  List of subroutines:
 
-  int get_cmin (struct project * this_proj, int s);
-  int get_cmax (struct project * this_proj, int s);
-  int get_chain_size_index (struct project * this_proj, int s, int r);
+  int get_cmin (struct project * this_proj, int step);
+  int get_cmax (struct project * this_proj, int step);
 
   void fill_chains_model (GtkTreeStore * store, struct project * this_proj);
   void add_this_chain_to_search_tree (struct project * this_proj);
 
+  G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
   G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data);
 
   GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this);
@@ -47,9 +48,16 @@ extern void rings_set_visible (GtkTreeViewColumn * col,
                                GtkTreeIter       * iter,
                                gpointer          data);
 
-G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer,
-                                       gchar * string_path,
-                                       gpointer data)
+/*
+*  G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+*
+*  Usage: on select chain toggle callback
+*
+*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
+*  gchar * string_path                   : the path in the tree store
+*  gpointer data                         : the associated data pointer
+*/
+G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
   tint * dat = (tint * )data;
   gboolean saved_label[2];
@@ -128,9 +136,9 @@ G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer,
 /*
 *  void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
 *
-*  Usage:
+*  Usage: fill the entire chain(s) tree store
 *
-*  GtkTreeStore * store       :
+*  GtkTreeStore * store       : the GtkTreeStore to fill
 *  struct project * this_proj : the target project
 */
 void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
@@ -203,10 +211,10 @@ void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
 /*
 *  GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
 *
-*  Usage:
+*  Usage: create the chain(s) search tree store
 *
 *  struct project * this_proj : the target project
-*  gboolean fill_this         :
+*  gboolean fill_this         : 1 = yes, 0 = no
 */
 GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
 {
@@ -245,7 +253,7 @@ GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
 /*
 *  void add_this_chain_to_search_tree (struct project * this_proj)
 *
-*  Usage:
+*  Usage: add chain in the search tree based on chain length and id
 *
 *  struct project * this_proj : the target project
 */
@@ -535,39 +543,39 @@ void add_this_chain_to_search_tree (struct project * this_proj)
 }
 
 /*
-*  int get_cmin (struct project * this_proj, int s)
+*  int get_cmin (struct project * this_proj, int step)
 *
-*  Usage:
+*  Usage: get chain(s) min size for the MD step
 *
 *  struct project * this_proj : the target project
-*  int s                      :
+*  int step                   : the MD step
 */
-int get_cmin (struct project * this_proj, int s)
+int get_cmin (struct project * this_proj, int step)
 {
   int i, j;
   for (i=0; i<this_proj -> coord -> totcoord[9]; i++)
   {
      j = this_proj -> coord -> geolist[9][0][i];
-     if (this_proj -> modelgl -> num_chains[s-1][j-1]) break;
+     if (this_proj -> modelgl -> num_chains[step-1][j-1]) break;
   }
   return j;
 }
 
 /*
-*  int get_cmax (struct project * this_proj, int s)
+*  int get_cmax (struct project * this_proj, int step)
 *
-*  Usage:
+*  Usage: get chain(s) max size for the MD step
 *
 *  struct project * this_proj : the target project
-*  int s                      :
+*  int step                   : the MD step
 */
-int get_cmax (struct project * this_proj, int s)
+int get_cmax (struct project * this_proj, int step)
 {
   int i, j;
   for (i=this_proj -> coord -> totcoord[9]-1; i>-1; i--)
   {
      j = this_proj -> coord -> geolist[9][0][i];
-     if (this_proj -> modelgl -> num_chains[s-1][j-1]) break;
+     if (this_proj -> modelgl -> num_chains[step-1][j-1]) break;
   }
   return j;
 }
@@ -580,7 +588,7 @@ int get_cmax (struct project * this_proj, int s)
 *  struct project * this_proj : the target project
 *  int s                      :
 *  int r                      :
-*/
+*
 int get_chain_size_index (struct project * this_proj, int s, int r)
 {
   int i, j;
@@ -591,11 +599,12 @@ int get_chain_size_index (struct project * this_proj, int s, int r)
   }
   return i;
 }
+*/
 
 /*
 *  G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: update the chain(s) search widget callback
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -712,7 +721,7 @@ G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
 /*
 *  GtkWidget * create_chains_search (struct project * this_proj)
 *
-*  Usage:
+*  Usage: create the chain(s) search widget
 *
 *  struct project * this_proj : the target project
 */
@@ -765,7 +774,7 @@ GtkWidget * create_chains_search (struct project * this_proj)
 /*
 *  GtkWidget * chains_tab (glwin * view)
 *
-*  Usage:
+*  Usage: create the chain(s) tab for the advanced environments window
 *
 *  glwin * view : the target glwin
 */

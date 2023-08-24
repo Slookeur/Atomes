@@ -16,12 +16,13 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the color selection dialogs
+
 *
 *  List of subroutines:
 
-  void window_color (struct project * this_proj, glwin * view, int id);
+  void window_color (struct project * this_proj, glwin * view, int wc_cid);
 
   G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data);
   G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -48,7 +49,7 @@ int wc_cid;
 /*
 *  G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: window color chooser - running the dialog
 *
 *  GtkDialog * win  : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -85,19 +86,18 @@ G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpoint
 }
 
 /*
-*  void window_color (struct project * this_proj, glwin * view, int id)
+*  void window_color (struct project * this_proj, glwin * view, int wc_cid)
 *
-*  Usage:
+*  Usage: window color chooser - creating the dialog
 *
 *  struct project * this_proj : the target project
 *  glwin * view               : the target glwin
-*  int id                     :
+*  int wc_cid                 : the object to change color
 */
-void window_color (struct project * this_proj, glwin * view, int id)
+void window_color (struct project * this_proj, glwin * view, int wc_cid)
 {
   gchar * str;
   GdkRGBA col;
-  wc_cid = id;
   if (wc_cid == -2)
   {
     str = g_strdup_printf ("Background color");
@@ -132,7 +132,7 @@ void window_color (struct project * this_proj, glwin * view, int id)
 /*
 *  G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: to run background color selection window callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -143,7 +143,7 @@ G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant 
 /*
 *  G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: to run background color selection window callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -160,7 +160,7 @@ G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: to run box color selection window callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -171,7 +171,7 @@ G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant *
 /*
 *  G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage:  to run box color selection window callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -189,7 +189,7 @@ G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: to run atom color selection window callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -200,7 +200,7 @@ G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant 
 /*
 *  G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: to run atom color selection window callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -221,7 +221,7 @@ G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: window to select a color - running the dialog
 *
 *  GtkDialog * win  : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -250,7 +250,7 @@ G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, 
 /*
 *  G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: create a window to select a color callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -261,7 +261,7 @@ G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * para
 /*
 *  G_MODULE_EXPORT void window_color_coord (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: create a window to select a color callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -313,4 +313,3 @@ G_MODULE_EXPORT void window_color_coord (GtkWidget * widg, gpointer data)
   gtk_window_set_modal ((GtkWindow *)win, TRUE);
   run_this_gtk_dialog (win, G_CALLBACK(run_window_color_coord), data);
 }
-

@@ -145,6 +145,7 @@ GtkWidget * adv_box (GtkWidget * box, char * lab, int size, float xalign)
   add_box_child_start (GTK_ORIENTATION_VERTICAL, box, hbox, TRUE, TRUE, 0);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, markup_label(lab, size, -1, xalign, 0.5), FALSE, FALSE, 5);
   return hbox;
+
 }
 
 GtkWidget * d_close;

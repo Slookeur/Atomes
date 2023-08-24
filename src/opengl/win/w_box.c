@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the box properties window
+
 *
 *  List of subroutines:
 
@@ -45,11 +46,10 @@ extern GtkWidget * radius_box;
 gchar * box_style[BOX_STYLES] = {"Wireframe", "Cylinders"};
 GtkWidget * box_data;
 
-
 /*
 *  G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: set box style callback
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -88,7 +88,7 @@ G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: toggle show / hide box callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -98,7 +98,7 @@ G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: toggle show / hide box callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -134,9 +134,9 @@ G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 *
-*  Usage:
+*  Usage: set box color callback
 *
-*  GtkColorChooser * colob :
+*  GtkColorChooser * colob : the GtkColorChooser sending the signal
 *  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
@@ -150,7 +150,7 @@ G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 /*
 *  G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: create the box edition window callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -161,7 +161,7 @@ G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter,
 /*
 *  G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: create the box edition window callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -239,4 +239,3 @@ G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
   update_menu_bar (view);
 #endif
 }
-
