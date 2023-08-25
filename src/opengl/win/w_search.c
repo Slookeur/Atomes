@@ -97,7 +97,7 @@ extern void restore_ogl_selection (glwin * view);
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 int get_asearch_num_objects (atom_search * asearch)
 {
@@ -121,7 +121,7 @@ int get_asearch_num_objects (atom_search * asearch)
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 int get_asearch_object (atom_search * asearch)
 {
@@ -142,7 +142,7 @@ int get_asearch_object (atom_search * asearch)
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 int get_asearch_filter (atom_search * asearch)
 {
@@ -166,7 +166,7 @@ int get_asearch_filter (atom_search * asearch)
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 gboolean get_asearch_is_object (atom_search * asearch)
 {
@@ -521,7 +521,7 @@ struct insert_object * get_insert_object_by_origin (struct insert_object * first
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 void motion_to_zero (atom_search * asearch)
 {
@@ -1324,7 +1324,7 @@ void add_random_column (atom_search * asearch);
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 void update_search_tree (atom_search * asearch)
 {
@@ -1348,7 +1348,7 @@ void update_search_tree (atom_search * asearch)
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 gboolean update_this_search (atom_search * asearch)
 {
@@ -1415,7 +1415,7 @@ G_MODULE_EXPORT void set_atom (GtkEntry * entry, gpointer data)
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 void clear_fields (atom_search * asearch)
 {
@@ -1557,7 +1557,7 @@ G_MODULE_EXPORT void add_atom (GtkButton * but, gpointer data)
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 void re_populate_tree_search (atom_search * asearch)
 {
@@ -2325,7 +2325,7 @@ G_MODULE_EXPORT void select_atom (GtkCellRendererToggle * cell_renderer,
 *  gboolean visible      :
 *  int p                 :
 *  gchar * str           :
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 int get_selected_object_id (gboolean visible, int p, gchar * str, atom_search * asearch)
 {
@@ -3558,7 +3558,7 @@ GtkWidget * create_atoms_tree (atom_search * asearch, struct project * this_proj
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 int get_todo_size (atom_search * asearch)
 {
@@ -3593,7 +3593,7 @@ int get_todo_size (atom_search * asearch)
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 *  int tsize             :
 */
 void allocate_todo (atom_search * asearch, int tsize)
@@ -3607,7 +3607,7 @@ void allocate_todo (atom_search * asearch, int tsize)
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 void clean_todo (atom_search * asearch)
 {
@@ -3667,7 +3667,7 @@ void clean_todo (atom_search * asearch)
 *
 *  Usage:
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 void clean_picked_and_labelled (atom_search * asearch)
 {
@@ -3731,7 +3731,7 @@ G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change the search filter
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -3757,7 +3757,7 @@ G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_object_changed (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change the search object
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -3838,9 +3838,9 @@ G_MODULE_EXPORT void set_object_changed (GtkComboBox * box, gpointer data)
 /*
 *  void add_random_column (atom_search * asearch)
 *
-*  Usage:
+*  Usage: add a column to the search tree model for the case of random search
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 void add_random_column (atom_search * asearch)
 {
@@ -3856,7 +3856,7 @@ void add_random_column (atom_search * asearch)
 /*
 *  G_MODULE_EXPORT void set_search_mode (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change search mode
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -3922,7 +3922,7 @@ G_MODULE_EXPORT void set_search_mode (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_search_digit (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: update search entry
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -3950,7 +3950,7 @@ G_MODULE_EXPORT void set_search_digit (GtkEntry * res, gpointer data)
 *
 *  Usage:
 *
-*  GtkWidget * vbox  : the GtkWidget sending the signal
+*  GtkWidget * vbox  : the box to insert the search box in
 *  GtkWidget * lab   : the GtkWidget sending the signal
 *  GtkWidget * combo : the GtkWidget sending the signal
 */
@@ -3968,9 +3968,9 @@ void prep_search_box (GtkWidget * vbox, GtkWidget * lab, GtkWidget * combo)
 /*
 *  GtkWidget * prepare_box_too_much (atom_search * asearch)
 *
-*  Usage:
+*  Usage: if too many atoms, then individual search
 *
-*  atom_search * asearch :
+*  atom_search * asearch : the target atom search
 */
 GtkWidget * prepare_box_too_much (atom_search * asearch)
 {
@@ -4003,10 +4003,10 @@ GtkWidget * prepare_box_too_much (atom_search * asearch)
 /*
 *  GtkWidget * selection_tab (atom_search * asearch, int nats)
 *
-*  Usage:
+*  Usage: create the search widget
 *
-*  atom_search * asearch :
-*  int nats              :
+*  atom_search * asearch : the target atom search
+*  int nats              : the total number of atoms
 */
 GtkWidget * selection_tab (atom_search * asearch, int nats)
 {

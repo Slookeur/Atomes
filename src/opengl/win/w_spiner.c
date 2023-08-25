@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_spiner.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to create the 'Spin' window
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   gboolean spin (gpointer data);
 
@@ -40,7 +41,7 @@ extern void rotate_x_y (glwin * view, double angle_x, double angle_y);
 /*
 *  gboolean spin (gpointer data)
 *
-*  Usage: 
+*  Usage: spin
 *
 *  gpointer data : the associated data pointer
 */
@@ -70,7 +71,7 @@ gboolean spin (gpointer data)
 /*
 *  static gboolean spin_wait_for_stop (gpointer data)
 *
-*  Usage: 
+*  Usage: spin and wait for stop
 *
 *  gpointer data : the associated data pointer
 */
@@ -90,7 +91,7 @@ static gboolean spin_wait_for_stop (gpointer data)
 /*
 *  G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage: start spin
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -121,7 +122,7 @@ G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage: stop spin
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -141,7 +142,7 @@ G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void window_spinner (GtkWidget * widg, gpointer data)
 *
-*  Usage: 
+*  Usage: create the spin window callback
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
