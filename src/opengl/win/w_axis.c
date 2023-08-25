@@ -385,10 +385,10 @@ void axis_position_has_changed (gpointer data, double v)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage: change axis position - scroll
+*  Usage: change axis position - scroll callback
 *
 *  GtkRange * range     : the GtkRange sending the signal
-*  GtkScrollType scroll : the type of scroll
+*  GtkScrollType scroll : the associated scroll type
 *  gdouble value        : the range value
 *  gpointer data        : the associated data pointer
 */
@@ -401,7 +401,7 @@ G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollTy
 /*
 *  G_MODULE_EXPORT void set_axis_position (GtkRange * range, gpointer data)
 *
-*  Usage: change axis position - range
+*  Usage: change axis position - range callback
 *
 *  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer

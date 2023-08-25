@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutine to create the MD sequencer window
+
 *
 *  List of subroutines:
 
@@ -26,7 +27,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
   void set_player_title (glwin * view);
   void update_selection (glwin * view, int o_step);
-  void show_step (glwin * view);
+  void update_step_button (glwin * view);
   void sequence (glwin * view, int o_step, int n_step);
 
   G_MODULE_EXPORT void seq_go_previous (GtkButton * but, gpointer data);
@@ -53,7 +54,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void set_player_title (glwin * view)
 *
-*  Usage:
+*  Usage: set sequencer window title
 *
 *  glwin * view : the target glwin
 */
@@ -68,10 +69,10 @@ void set_player_title (glwin * view)
 /*
 *  void update_selection (glwin * view, int o_step)
 *
-*  Usage:
+*  Usage: match and udpate selected atom()s from o_step to the active step
 *
 *  glwin * view : the target glwin
-*  int o_step   :
+*  int o_step   : the step to match selection with
 */
 void update_selection (glwin * view, int o_step)
 {
@@ -100,13 +101,13 @@ void update_selection (glwin * view, int o_step)
 }
 
 /*
-*  void show_step (glwin * view)
+*  void update_step_button (glwin * view)
 *
-*  Usage:
+*  Usage: correct widget buttons sensitivity based on MD step
 *
 *  glwin * view : the target glwin
 */
-void show_step (glwin * view)
+void update_step_button (glwin * view)
 {
   if (view -> anim -> last -> img -> step == get_project_by_id(view -> proj) -> steps - 1)
   {
@@ -134,11 +135,11 @@ void show_step (glwin * view)
 /*
 *  void sequence (glwin * view, int o_step, int n_step)
 *
-*  Usage:
+*  Usage: sequence to next step
 *
 *  glwin * view : the target glwin
-*  int o_step   :
-*  int n_step   :
+*  int o_step   : actual step
+*  int n_step   : next step
 */
 void sequence (glwin * view, int o_step, int n_step)
 {
@@ -148,18 +149,18 @@ void sequence (glwin * view, int o_step, int n_step)
   update_selection (view, o_step);
   for (i=0; i<NGLOBAL_SHADERS; i++)
   {
-    if (in_md_shaders (get_project_by_id(view -> proj), i)) view -> n_shaders[i][step] = -1;
+    if (in_md_shaders (get_project_by_id(view -> proj), i)) view -> n_shaders[i][n_step] = -1;
   }
   recreate_all_shaders (view);
   set_player_title (view);
-  show_step (view);
+  update_step_button (view);
   update (view);
 }
 
 /*
 *  G_MODULE_EXPORT void seq_go_previous (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: go to previous frame
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -176,7 +177,7 @@ G_MODULE_EXPORT void seq_go_previous (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_go_next (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: go to next frame
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -194,7 +195,7 @@ G_MODULE_EXPORT void seq_go_next (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_go_first (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: go to first frame
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -208,7 +209,7 @@ G_MODULE_EXPORT void seq_go_first (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_go_last (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: got to last frame
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -222,7 +223,7 @@ G_MODULE_EXPORT void seq_go_last (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: jump to frame
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -243,7 +244,7 @@ G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_jump (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: jump to frame dialog
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -267,7 +268,7 @@ G_MODULE_EXPORT void seq_jump (GtkButton * but, gpointer data)
 /*
 *  static gboolean animate (gpointer data)
 *
-*  Usage:
+*  Usage: animate
 *
 *  gpointer data : the associated data pointer
 */
@@ -301,7 +302,7 @@ static gboolean animate (gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_play (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: play
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -320,7 +321,7 @@ G_MODULE_EXPORT void seq_play (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_stop (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: stop
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -334,7 +335,7 @@ G_MODULE_EXPORT void seq_stop (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_loop (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: loop the animation
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -358,7 +359,7 @@ G_MODULE_EXPORT void seq_loop (GtkButton * but, gpointer data)
 /*
 *  static gboolean seq_wait_for_stop (gpointer data)
 *
-*  Usage:
+*  Usage: pause / restart if on pause
 *
 *  gpointer data : the associated data pointer
 */
@@ -380,7 +381,7 @@ static gboolean seq_wait_for_stop (gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_faster (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: go faster
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -408,7 +409,7 @@ G_MODULE_EXPORT void seq_faster (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void seq_slower (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: go slower
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -436,7 +437,7 @@ G_MODULE_EXPORT void seq_slower (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: create the sequencer window
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -492,7 +493,7 @@ G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data)
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hboxb, view -> player -> slow, TRUE, TRUE, 0);
     add_gtk_close_event (view -> player -> win, G_CALLBACK(hide_this_window), NULL);
     show_the_widgets (view -> player -> win);
-    show_step (view);
+    update_step_button (view);
   }
   else
   {

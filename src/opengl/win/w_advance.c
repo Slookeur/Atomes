@@ -1068,10 +1068,10 @@ G_MODULE_EXPORT void update_mat_param (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean scroll_scale_param (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage: update OpenGL material parameter - scroll
+*  Usage: update OpenGL material parameter - scroll callback
 *
 *  GtkRange * range     : the GtkRange sending the signal
-*  GtkScrollType scroll : the type of scroll
+*  GtkScrollType scroll : the associated scroll type
 *  gdouble value        : the range value
 *  gpointer data        : the associated data pointer
 */
@@ -1084,7 +1084,7 @@ G_MODULE_EXPORT gboolean scroll_scale_param (GtkRange * range, GtkScrollType scr
 /*
 *  G_MODULE_EXPORT void scale_param (GtkRange * range, gpointer data)
 *
-*  Usage: update OpenGL material parameter - range
+*  Usage: update OpenGL material parameter - range callback
 *
 *  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer
@@ -1097,10 +1097,10 @@ G_MODULE_EXPORT void scale_param (GtkRange * range, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean scroll_scale_quality (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage: update OpenGL quality - scroll
+*  Usage: update OpenGL quality - scroll callback
 *
 *  GtkRange * range     : the GtkRange sending the signal
-*  GtkScrollType scroll : the type of scroll
+*  GtkScrollType scroll : the associated scroll type
 *  gdouble value        : the range value
 *  gpointer data        : the associated data pointer
 */
@@ -1116,7 +1116,7 @@ G_MODULE_EXPORT gboolean scroll_scale_quality (GtkRange * range, GtkScrollType s
 /*
 *  G_MODULE_EXPORT void scale_quality (GtkRange * range, gpointer data)
 *
-*  Usage: update OpenGL quality - range
+*  Usage: update OpenGL quality - range callback
 *
 *  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer
@@ -1262,10 +1262,10 @@ void fog_param_changed (gpointer data, GLfloat u, GtkRange * range)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_fog_param (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage: update OpenGL fog parameter - scroll
+*  Usage: update OpenGL fog parameter - scroll callback
 *
 *  GtkRange * range     : the GtkRange sending the signal
-*  GtkScrollType scroll : the type of scroll
+*  GtkScrollType scroll : the associated scroll type
 *  gdouble value        : the range value
 *  gpointer data        : the associated data pointer
 */
@@ -1278,7 +1278,7 @@ G_MODULE_EXPORT gboolean scroll_set_fog_param (GtkRange * range, GtkScrollType s
 /*
 *  G_MODULE_EXPORT void set_fog_param (GtkRange * range, gpointer data)
 *
-*  Usage: update OpenGL fog parameter - range
+*  Usage: update OpenGL fog parameter - range callback
 *
 *  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer

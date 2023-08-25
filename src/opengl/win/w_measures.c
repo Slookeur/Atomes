@@ -255,7 +255,7 @@ extern ColRGBA init_color (int id, int numid);
 /*
 *  void measure_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 *
-*  Usage :
+*  Usage : show / hide cell renderer in the measures tree store
 *
 *  GtkTreeViewColumn * col    : the tree view column
 *  GtkCellRenderer * renderer : the column renderer
@@ -274,7 +274,7 @@ void measure_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, G
 /*
 *  void measure_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 *
-*  Usage :
+*  Usage : set renderer color in the measures tree store
 *
 *  GtkTreeViewColumn * col    : the tree view column
 *  GtkCellRenderer * renderer : the column renderer

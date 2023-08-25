@@ -504,10 +504,10 @@ void ticks_angle_has_changed (gpointer data, double value)
 *
 *  Usage:
 *
-*  GtkRange * range     :
-*  GtkScrollType scroll :
-*  gdouble value        :
-*  gpointer data        :
+*  GtkRange * range     : the GtkRange sending the signal
+*  GtkScrollType scroll : the associated scroll type
+*  gdouble value        : the range value
+*  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_ticks_angle (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -520,8 +520,8 @@ G_MODULE_EXPORT gboolean scroll_set_ticks_angle (GtkRange * range, GtkScrollType
 *
 *  Usage:
 *
-*  GtkRange * range :
-*  gpointer data    :
+*  GtkRange * range : the GtkRange sending the signal
+*  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_ticks_angle (GtkRange * range, gpointer data)
 {

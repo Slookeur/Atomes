@@ -199,7 +199,7 @@ G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage: update camera data callback - scroll
+*  Usage: update camera data callback - scroll callback
 *
 *  GtkRange * range     : the GtkRange sending the signal
 *  GtkScrollType scroll : the associated scroll type
@@ -215,7 +215,7 @@ G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scro
 /*
 *  G_MODULE_EXPORT void set_camera (GtkRange * range, gpointer data)
 *
-*  Usage: update camera data callback - range
+*  Usage: update camera data callback - range callback
 *
 *  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer

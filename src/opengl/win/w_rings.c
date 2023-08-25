@@ -16,22 +16,25 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the ring(s) tab for the advanced environments window
+
 *
 *  List of subroutines:
 
-  int get_rmin (struct project * this_proj, int g, int s);
-  int get_rmax (struct project * this_proj, int g, int s);
+  int get_rmin (struct project * this_proj, int rid, int step);
+  int get_rmax (struct project * this_proj, int rid, int step);
 
-  void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g);
-  void add_this_ring_to_search_tree (struct project * this_proj, int g);
+  void rings_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int rid);
+  void add_this_ring_to_search_tree (struct project * this_proj, int rid);
 
+  G_MODULE_EXPORT void on_select_rings (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
   G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data);
 
-  GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_this);
-  GtkWidget * create_rings_search (struct project * this_proj, int g);
-  GtkWidget * rings_tab (glwin * view, int g);
+  GtkWidget * create_rings_tree (struct project * this_proj, int rid, gboolean fill_this);
+  GtkWidget * create_rings_search (struct project * this_proj, int rid);
+  GtkWidget * rings_tab (glwin * view, int rid);
 
 */
 
@@ -40,9 +43,16 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "glwindow.h"
 
-G_MODULE_EXPORT void on_select_rings (GtkCellRendererToggle * cell_renderer,
-                                      gchar * string_path,
-                                      gpointer data)
+/*
+*  G_MODULE_EXPORT void on_select_rings (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+*
+*  Usage: on select ring toggle callback
+*
+*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
+*  gchar * string_path                   : the path in the tree store
+*  gpointer data                         : the associated data pointer
+*/
+G_MODULE_EXPORT void on_select_rings (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
   tint * dat = (tint * )data;
   gboolean saved_label[2];
@@ -133,11 +143,18 @@ G_MODULE_EXPORT void on_select_rings (GtkCellRendererToggle * cell_renderer,
   update (opengl_project -> modelgl);
 }
 
-void rings_set_visible (GtkTreeViewColumn * col,
-                        GtkCellRenderer   * renderer,
-                        GtkTreeModel      * mod,
-                        GtkTreeIter       * iter,
-                        gpointer          data)
+/*
+*  void rings_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: show / hide cell renderer in the ring search tree store
+*
+*  GtkTreeViewColumn * col    : the tree view column
+*  GtkCellRenderer * renderer : the column renderer
+*  GtkTreeModel * mod         : the tree model
+*  GtkTreeIter * iter         : the tree it
+*  gpointer data              : the associated data pointer
+*/
+void rings_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   tint * id = (tint *)data;
   int i, j, k;
@@ -218,19 +235,19 @@ void rings_set_visible (GtkTreeViewColumn * col,
 }
 
 /*
-*  void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
+*  void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int rid)
 *
-*  Usage:
+*  Usage: fill the entire ring(s) tree store
 *
-*  GtkTreeStore * store       :
+*  GtkTreeStore * store       : the GtkTreeStore to fill
 *  struct project * this_proj : the target project
-*  int g                      :
+*  int rid                    : the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
 */
-void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
+void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int rid)
 {
   GtkTreeIter step_level, size_level, ring_level;
   int h, i, j, k, l;
-  if (this_proj -> coord -> totcoord[g+4])
+  if (this_proj -> coord -> totcoord[rid+4])
   {
     for (h=0; h < this_proj -> steps; h++)
     {
@@ -245,10 +262,10 @@ void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
                                                  5, 0,
                                                  6, 0, -1);
       }
-      for (i=0; i < this_proj -> coord -> totcoord[g+4]; i++)
+      for (i=0; i < this_proj -> coord -> totcoord[rid+4]; i++)
       {
-        j = this_proj -> coord -> geolist[g+4][0][i];
-        k = this_proj -> modelgl -> num_rings[g][h][j-1];
+        j = this_proj -> coord -> geolist[rid+4][0][i];
+        k = this_proj -> modelgl -> num_rings[rid][h][j-1];
         if (this_proj -> steps > 1 && k > 0)
         {
           gtk_tree_store_append (store, & size_level, & step_level);
@@ -279,7 +296,7 @@ void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
                                                      1, -j,
                                                      2, l+1,
                                                      3, FALSE,
-                                                     4, this_proj -> modelgl -> show_rpoly[g][h][j-1][l],
+                                                     4, this_proj -> modelgl -> show_rpoly[rid][h][j-1][l],
                                                      5, FALSE,
                                                      6, FALSE, -1);
           }
@@ -288,7 +305,7 @@ void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
             gtk_tree_store_set (store, & ring_level, 0, -j,
                                                      1, l+1,
                                                      2, FALSE,
-                                                     3, this_proj -> modelgl -> show_rpoly[g][h][j-1][l],
+                                                     3, this_proj -> modelgl -> show_rpoly[rid][h][j-1][l],
                                                      4, FALSE,
                                                      5, FALSE, -1);
           }
@@ -299,15 +316,15 @@ void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int g)
 }
 
 /*
-*  GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_this)
+*  GtkWidget * create_rings_tree (struct project * this_proj, int rid, gboolean fill_this)
 *
-*  Usage:
+*  Usage: create the ring(s) search tree store
 *
 *  struct project * this_proj : the target project
-*  int g                      :
-*  gboolean fill_this         :
+*  int rid                    : the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
+*  gboolean fill_this         : 1 = yes, 0 = no
 */
-GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_this)
+GtkWidget * create_rings_tree (struct project * this_proj, int rid, gboolean fill_this)
 {
   int i, j, k;
   GtkTreeViewColumn * rings_col[7];
@@ -318,9 +335,9 @@ GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_
   coord_edition * coord = this_proj -> modelgl -> coord_win;
   j = (this_proj -> steps > 1) ? 1: 0;
   k = (this_proj -> steps > 1) ? 0: 1;
-  coord -> rings_model[g] = gtk_tree_store_newv (6+j, col_type);
-  if (fill_this) fill_rings_model (coord -> rings_model[g], this_proj, g);
-  GtkWidget * rings_tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL(coord -> rings_model[g]));
+  coord -> rings_model[rid] = gtk_tree_store_newv (6+j, col_type);
+  if (fill_this) fill_rings_model (coord -> rings_model[rid], this_proj, rid);
+  GtkWidget * rings_tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL(coord -> rings_model[rid]));
   for (i=0; i<6+j; i++)
   {
     if (i < 2+j)
@@ -330,7 +347,7 @@ GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_
     else
     {
       rings_cell[i] = gtk_cell_renderer_toggle_new ();
-      g_signal_connect (G_OBJECT(rings_cell[i]), "toggled", G_CALLBACK(on_select_rings), & this_proj -> modelgl -> colorp[g*10+i][0]);
+      g_signal_connect (G_OBJECT(rings_cell[i]), "toggled", G_CALLBACK(on_select_rings), & this_proj -> modelgl -> colorp[rid*10+i][0]);
     }
     gtk_cell_renderer_set_fixed_size (rings_cell[i], -1, 25);
     rings_col[i] = gtk_tree_view_column_new_with_attributes (ctitle[i+k], rings_cell[i], ctype[i+k], i, NULL);
@@ -342,20 +359,20 @@ GtkWidget * create_rings_tree (struct project * this_proj, int g, gboolean fill_
 }
 
 /*
-*  void add_this_ring_to_search_tree (struct project * this_proj, int g)
+*  void add_this_ring_to_search_tree (struct project * this_proj, int rid)
 *
-*  Usage:
+*  Usage: add ring in the search tree based on ring size and id
 *
 *  struct project * this_proj : the target project
-*  int g                      :
+*  int rid                    : the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
 */
-void add_this_ring_to_search_tree (struct project * this_proj, int g)
+void add_this_ring_to_search_tree (struct project * this_proj, int rid)
 {
   GtkTreeIter step_level, size_level, ring_level;
   GtkTreeIter new_level;
   coord_edition * coord = this_proj -> modelgl -> coord_win;
-  GtkTreeStore * store = (GtkTreeStore *) coord -> rings_model[g];
-  GtkTreeModel * mod = GTK_TREE_MODEL(coord -> rings_model[g]);
+  GtkTreeStore * store = (GtkTreeStore *) coord -> rings_model[rid];
+  GtkTreeModel * mod = GTK_TREE_MODEL(coord -> rings_model[rid]);
   gboolean valid;
   gboolean insert = TRUE;
   int f, h, i, j, k, l, m;
@@ -366,12 +383,12 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
     while (valid)
     {
       gtk_tree_model_get (mod, & step_level, 0, & f, -1);
-      if (f > coord -> rst[g])
+      if (f > coord -> rst[rid])
       {
         prepend = 1;
         valid = FALSE;
       }
-      else if (f == coord -> rst[g])
+      else if (f == coord -> rst[rid])
       {
         if (gtk_tree_model_iter_has_child (mod, &step_level))
         {
@@ -381,13 +398,13 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
             if (gtk_tree_model_iter_nth_child (mod, &size_level, &step_level, i))
             {
               gtk_tree_model_get (mod, &size_level, 1, & j, -1);
-              if (j > coord -> rsz[g])
+              if (j > coord -> rsz[rid])
               {
                 prepend = 3;
                 valid = FALSE;
                 break;
               }
-              else if (j == coord -> rsz[g])
+              else if (j == coord -> rsz[rid])
               {
                 if (gtk_tree_model_iter_has_child (mod, &size_level))
                 {
@@ -397,13 +414,13 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
                     if (gtk_tree_model_iter_nth_child (mod, &ring_level, &size_level, l))
                     {
                       gtk_tree_model_get (mod, &ring_level, 2, & m, -1);
-                      if (m > coord -> ri[g])
+                      if (m > coord -> ri[rid])
                       {
                         prepend = 5;
                         valid = FALSE;
                         break;
                       }
-                      else if (m == coord -> ri[g])
+                      else if (m == coord -> ri[rid])
                       {
                         insert = valid = FALSE;
                         break;
@@ -438,7 +455,7 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
       {
         case 0:
           gtk_tree_store_append (store, & step_level, NULL);
-          gtk_tree_store_set (store, & step_level, 0, coord -> rst[g],
+          gtk_tree_store_set (store, & step_level, 0, coord -> rst[rid],
                                                    1, 0,
                                                    2, 0,
                                                    3, 0,
@@ -447,24 +464,24 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
                                                    6, 0, -1);
           gtk_tree_store_append (store, & size_level, & step_level);
           gtk_tree_store_set (store, & size_level, 0, 0,
-                                                   1, coord -> rsz[g],
+                                                   1, coord -> rsz[rid],
                                                    2, 0,
                                                    3, 0,
                                                    4, 0,
                                                    5, 0,
                                                    6, 0, -1);
           gtk_tree_store_append (store, & ring_level, & size_level);
-          gtk_tree_store_set (store, & ring_level, 0, -coord -> rst[g],
-                                                   1, -coord -> rsz[g],
-                                                   2, coord -> ri[g],
+          gtk_tree_store_set (store, & ring_level, 0, -coord -> rst[rid],
+                                                   1, -coord -> rsz[rid],
+                                                   2, coord -> ri[rid],
                                                    3, FALSE,
-                                                   4, this_proj -> modelgl -> show_rpoly[g][coord -> rst[g]-1][coord -> rsz[g]-1][coord -> ri[g]-1],
+                                                   4, this_proj -> modelgl -> show_rpoly[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1][coord -> ri[rid]-1],
                                                    5, FALSE,
                                                    6, FALSE, -1);
           break;
         case 1:
           gtk_tree_store_insert_before (store, & new_level, NULL, & step_level);
-          gtk_tree_store_set (store, & new_level, 0, coord -> rst[g],
+          gtk_tree_store_set (store, & new_level, 0, coord -> rst[rid],
                                                   1, 0,
                                                   2, 0,
                                                   3, 0,
@@ -473,74 +490,74 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
                                                   6, 0, -1);
           gtk_tree_store_append (store, & size_level, & new_level);
           gtk_tree_store_set (store, & size_level, 0, 0,
-                                                   1, coord -> rsz[g],
+                                                   1, coord -> rsz[rid],
                                                    2, 0,
                                                    3, 0,
                                                    4, 0,
                                                    5, 0,
                                                    6, 0, -1);
           gtk_tree_store_append (store, & ring_level, & size_level);
-          gtk_tree_store_set (store, & ring_level, 0, -coord -> rst[g],
-                                                   1, -coord -> rsz[g],
-                                                   2, coord -> ri[g],
+          gtk_tree_store_set (store, & ring_level, 0, -coord -> rst[rid],
+                                                   1, -coord -> rsz[rid],
+                                                   2, coord -> ri[rid],
                                                    3, FALSE,
-                                                   4, this_proj -> modelgl -> show_rpoly[g][coord -> rst[g]-1][coord -> rsz[g]-1][coord -> ri[g]-1],
+                                                   4, this_proj -> modelgl -> show_rpoly[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1][coord -> ri[rid]-1],
                                                    5, FALSE,
                                                    6, FALSE, -1);
           break;
         case 2:
           gtk_tree_store_insert_after (store, & new_level, & step_level, & size_level);
           gtk_tree_store_set (store, & new_level, 0, 0,
-                                                  1, coord -> rsz[g],
+                                                  1, coord -> rsz[rid],
                                                   2, 0,
                                                   3, 0,
                                                   4, 0,
                                                   5, 0,
                                                   6, 0, -1);
           gtk_tree_store_append (store, & ring_level, & new_level);
-          gtk_tree_store_set (store, & ring_level, 0, -coord -> rst[g],
-                                                   1, -coord -> rsz[g],
-                                                   2, coord -> ri[g],
+          gtk_tree_store_set (store, & ring_level, 0, -coord -> rst[rid],
+                                                   1, -coord -> rsz[rid],
+                                                   2, coord -> ri[rid],
                                                    3, FALSE,
-                                                   4, this_proj -> modelgl -> show_rpoly[g][coord -> rst[g]-1][coord -> rsz[g]-1][coord -> ri[g]-1],
+                                                   4, this_proj -> modelgl -> show_rpoly[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1][coord -> ri[rid]-1],
                                                    5, FALSE,
                                                    6, FALSE, -1);
           break;
         case 3:
           gtk_tree_store_insert_before (store, & new_level, & step_level, & size_level);
           gtk_tree_store_set (store, & new_level, 0, 0,
-                                                  1, coord -> rsz[g],
+                                                  1, coord -> rsz[rid],
                                                   2, 0,
                                                   3, 0,
                                                   4, 0,
                                                   5, 0,
                                                   6, 0, -1);
           gtk_tree_store_append (store, & ring_level, & new_level);
-          gtk_tree_store_set (store, & ring_level, 0, -coord -> rst[g],
-                                                   1, -coord -> rsz[g],
-                                                   2, coord -> ri[g],
+          gtk_tree_store_set (store, & ring_level, 0, -coord -> rst[rid],
+                                                   1, -coord -> rsz[rid],
+                                                   2, coord -> ri[rid],
                                                    3, FALSE,
-                                                   4, this_proj -> modelgl -> show_rpoly[g][coord -> rst[g]-1][coord -> rsz[g]-1][coord -> ri[g]-1],
+                                                   4, this_proj -> modelgl -> show_rpoly[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1][coord -> ri[rid]-1],
                                                    5, FALSE,
                                                    6, FALSE, -1);
           break;
         case 4:
           gtk_tree_store_insert_after (store, & new_level, & size_level, & ring_level);
-          gtk_tree_store_set (store, & new_level, 0, -coord -> rst[g],
-                                                  1, -coord -> rsz[g],
-                                                  2, coord -> ri[g],
+          gtk_tree_store_set (store, & new_level, 0, -coord -> rst[rid],
+                                                  1, -coord -> rsz[rid],
+                                                  2, coord -> ri[rid],
                                                   3, FALSE,
-                                                  4, this_proj -> modelgl -> show_rpoly[g][coord -> rst[g]-1][coord -> rsz[g]-1][coord -> ri[g]-1],
+                                                  4, this_proj -> modelgl -> show_rpoly[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1][coord -> ri[rid]-1],
                                                   5, FALSE,
                                                   6, FALSE, -1);
           break;
         case 5:
           gtk_tree_store_insert_before (store, & new_level, & size_level, & ring_level);
-          gtk_tree_store_set (store, & new_level, 0, -coord -> rst[g],
-                                                  1, -coord -> rsz[g],
-                                                  2, coord -> ri[g],
+          gtk_tree_store_set (store, & new_level, 0, -coord -> rst[rid],
+                                                  1, -coord -> rsz[rid],
+                                                  2, coord -> ri[rid],
                                                   3, FALSE,
-                                                  4, this_proj -> modelgl -> show_rpoly[g][coord -> rst[g]-1][coord -> rsz[g]-1][coord -> ri[g]-1],
+                                                  4, this_proj -> modelgl -> show_rpoly[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1][coord -> ri[rid]-1],
                                                   5, FALSE,
                                                   6, FALSE, -1);
           break;
@@ -553,12 +570,12 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
     while (valid)
     {
       gtk_tree_model_get (mod, & size_level, 0, & i, -1);
-      if (i > coord -> rsz[g])
+      if (i > coord -> rsz[rid])
       {
         prepend = 1;
         valid = FALSE;
       }
-      else if (i == coord -> rsz[g])
+      else if (i == coord -> rsz[rid])
       {
         if (gtk_tree_model_iter_has_child (mod, &size_level))
         {
@@ -568,13 +585,13 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
             if (gtk_tree_model_iter_nth_child (mod, &ring_level, &size_level, k))
             {
               gtk_tree_model_get (mod, &ring_level, 1, & l, -1);
-              if (l > coord -> ri[g])
+              if (l > coord -> ri[rid])
               {
                 prepend = 2;
                 valid = FALSE;
                 break;
               }
-              else if (l == coord -> ri[g])
+              else if (l == coord -> ri[rid])
               {
                 insert = valid = FALSE;
                 break;
@@ -599,51 +616,51 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
       {
         case 0:
           gtk_tree_store_append (store, & size_level, NULL);
-          gtk_tree_store_set (store, & size_level, 0, coord -> rsz[g],
+          gtk_tree_store_set (store, & size_level, 0, coord -> rsz[rid],
                                                    1, 0,
                                                    2, 0,
                                                    3, 0,
                                                    4, 0,
                                                    5, 0, -1);
            gtk_tree_store_append (store, & ring_level, & size_level);
-           gtk_tree_store_set (store, & ring_level, 0, -coord -> rsz[g],
-                                                    1, coord -> ri[g],
+           gtk_tree_store_set (store, & ring_level, 0, -coord -> rsz[rid],
+                                                    1, coord -> ri[rid],
                                                     2, FALSE,
-                                                    3, this_proj -> modelgl -> show_rpoly[g][coord -> rst[g]-1][coord -> rsz[g]-1][coord -> ri[g]-1],
+                                                    3, this_proj -> modelgl -> show_rpoly[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1][coord -> ri[rid]-1],
                                                     4, FALSE,
                                                     5, FALSE, -1);
          break;
        case 1:
           gtk_tree_store_insert_before (store, & new_level, NULL, & size_level);
-          gtk_tree_store_set (store, & new_level, 0, coord -> rsz[g],
+          gtk_tree_store_set (store, & new_level, 0, coord -> rsz[rid],
                                                   1, 0,
                                                   2, 0,
                                                   3, 0,
                                                   4, 0,
                                                   5, 0, -1);
            gtk_tree_store_append (store, & ring_level, & new_level);
-           gtk_tree_store_set (store, & ring_level, 0, -coord -> rsz[g],
-                                                    1, coord -> ri[g],
+           gtk_tree_store_set (store, & ring_level, 0, -coord -> rsz[rid],
+                                                    1, coord -> ri[rid],
                                                     2, FALSE,
-                                                    3, this_proj -> modelgl -> show_rpoly[g][coord -> rst[g]-1][coord -> rsz[g]-1][coord -> ri[g]-1],
+                                                    3, this_proj -> modelgl -> show_rpoly[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1][coord -> ri[rid]-1],
                                                     4, FALSE,
                                                     5, FALSE, -1);
           break;
         case 2:
           gtk_tree_store_insert_before (store, & new_level, & size_level, & ring_level);
-          gtk_tree_store_set (store, & new_level, 0, -coord -> rsz[g],
-                                                  1, coord -> ri[g],
+          gtk_tree_store_set (store, & new_level, 0, -coord -> rsz[rid],
+                                                  1, coord -> ri[rid],
                                                   2, FALSE,
-                                                  3, this_proj -> modelgl -> show_rpoly[g][coord -> rst[g]-1][coord -> rsz[g]-1][coord -> ri[g]-1],
+                                                  3, this_proj -> modelgl -> show_rpoly[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1][coord -> ri[rid]-1],
                                                   4, FALSE,
                                                   5, FALSE, -1);
           break;
         case 3:
           gtk_tree_store_insert_after (store, & new_level, & size_level, & ring_level);
-          gtk_tree_store_set (store, & new_level, 0, -coord -> rsz[g],
-                                                  1, coord -> ri[g],
+          gtk_tree_store_set (store, & new_level, 0, -coord -> rsz[rid],
+                                                  1, coord -> ri[rid],
                                                   2, FALSE,
-                                                  3, this_proj -> modelgl -> show_rpoly[g][coord -> rst[g]-1][coord -> rsz[g]-1][coord -> ri[g]-1],
+                                                  3, this_proj -> modelgl -> show_rpoly[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1][coord -> ri[rid]-1],
                                                   4, FALSE,
                                                   5, FALSE, -1);
           break;
@@ -653,41 +670,41 @@ void add_this_ring_to_search_tree (struct project * this_proj, int g)
 }
 
 /*
-*  int get_rmin (struct project * this_proj, int g, int s)
+*  int get_rmin (struct project * this_proj, int rid, int step)
 *
-*  Usage:
+*  Usage: get ring(s) max size for the MD step
 *
 *  struct project * this_proj : the target project
-*  int g                      :
-*  int s                      :
+*  int rid                    : the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
+*  int step                   : the MD step
 */
-int get_rmin (struct project * this_proj, int g, int s)
+int get_rmin (struct project * this_proj, int rid, int step)
 {
   int i, j;
-  for (i=0; i<this_proj -> coord -> totcoord[g+4]; i++)
+  for (i=0; i<this_proj -> coord -> totcoord[rid+4]; i++)
   {
-    j = this_proj -> coord -> geolist[g+4][0][i];
-    if (this_proj -> modelgl -> num_rings[g][s-1][j-1]) break;
+    j = this_proj -> coord -> geolist[rid+4][0][i];
+    if (this_proj -> modelgl -> num_rings[rid][step-1][j-1]) break;
   }
   return j;
 }
 
 /*
-*  int get_rmax (struct project * this_proj, int g, int s)
+*  int get_rmax (struct project * this_proj, int g, int step)
 *
-*  Usage:
+*  Usage: get ring(s) min size for the MD step
 *
 *  struct project * this_proj : the target project
-*  int g                      :
-*  int s                      :
+*  int rid                    : the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
+*  int step                   : the MD step
 */
-int get_rmax (struct project * this_proj, int g, int s)
+int get_rmax (struct project * this_proj, int rid, int step)
 {
   int i, j;
-  for (i=this_proj -> coord -> totcoord[g+4]-1; i>-1; i--)
+  for (i=this_proj -> coord -> totcoord[rid+4]-1; i>-1; i--)
   {
-    j = this_proj -> coord -> geolist[g+4][0][i];
-    if (this_proj -> modelgl -> num_rings[g][s-1][j-1]) break;
+    j = this_proj -> coord -> geolist[rid+4][0][i];
+    if (this_proj -> modelgl -> num_rings[rid][step-1][j-1]) break;
   }
   return j;
 }
@@ -695,7 +712,7 @@ int get_rmax (struct project * this_proj, int g, int s)
 /*
 *  G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: update the ring(s) search widget
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -704,7 +721,8 @@ G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
 {
   tint * dat = (tint * )data;
   gchar * str;
-  int i, j, k, g, v;
+  int i, j, k, v;
+  int rid;
   const gchar * m = entry_get_text (res);
   v = (int)atof(m);
   struct project * this_proj = get_project_by_id(dat -> a);
@@ -713,32 +731,32 @@ G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
   {
     if (i*10 > dat -> b) break;
   }
-  g = i - 1;
+  rid = i - 1;
   for (i=0; i<3; i++)
   {
-    if (10*g+i == dat -> b) break;
+    if (10*rid+i == dat -> b) break;
   }
   switch (i)
   {
     case 0:
       if (v > 0 && v < this_proj -> steps+1)
       {
-        if (v != coord -> rst[g])
+        if (v != coord -> rst[rid])
         {
-          coord -> rst[g] = v;
-          coord -> rsz[g] = coord -> ri[g] = -1;
-          for (j=1; j<3; j++) gtk_label_set_text (GTK_LABEL(coord -> rilab[g][j]), "");
+          coord -> rst[rid] = v;
+          coord -> rsz[rid] = coord -> ri[rid] = -1;
+          for (j=1; j<3; j++) gtk_label_set_text (GTK_LABEL(coord -> rilab[rid][j]), "");
         }
       }
       else
       {
-        coord -> rst[g] = coord -> rsz[g] = coord -> ri[g] = -1;
+        coord -> rst[rid] = coord -> rsz[rid] = coord -> ri[rid] = -1;
       }
-      if (coord -> rst[g] > 0)
+      if (coord -> rst[rid] > 0)
       {
-        update_entry_int(res, coord -> rst[g]);
-        str = g_strdup_printf ("in [%d - %d]", get_rmin(this_proj,  g, coord -> rst[g]),  get_rmax(this_proj,  g, coord -> rst[g]));
-        gtk_label_set_text (GTK_LABEL(coord -> rilab[g][1]), str);
+        update_entry_int(res, coord -> rst[rid]);
+        str = g_strdup_printf ("in [%d - %d]", get_rmin(this_proj, rid, coord -> rst[rid]),  get_rmax(this_proj, rid, coord -> rst[rid]));
+        gtk_label_set_text (GTK_LABEL(coord -> rilab[rid][1]), str);
         g_free (str);
       }
       else
@@ -747,62 +765,62 @@ G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
       }
       break;
     case 1:
-      if (coord -> rst[g] > -1)
+      if (coord -> rst[rid] > -1)
       {
-        j = get_rmin(this_proj,  g, coord -> rst[g]);
-        k = get_rmax(this_proj,  g, coord -> rst[g]);
+        j = get_rmin(this_proj, rid, coord -> rst[rid]);
+        k = get_rmax(this_proj, rid, coord -> rst[rid]);
         if (v >= j && v <= k)
         {
-          if (v != coord -> rsz[g])
+          if (v != coord -> rsz[rid])
           {
-            if (this_proj -> modelgl -> num_rings[g][coord -> rst[g]-1][v-1])
+            if (this_proj -> modelgl -> num_rings[rid][coord -> rst[rid]-1][v-1])
             {
-              coord -> rsz[g] = v;
-              coord -> ri[g] = -1;
+              coord -> rsz[rid] = v;
+              coord -> ri[rid] = -1;
             }
             else
             {
-              coord -> rsz[g] = -1;
+              coord -> rsz[rid] = -1;
             }
           }
         }
       }
       else
       {
-        coord -> rsz[g] = coord -> ri[g] = -1;
+        coord -> rsz[rid] = coord -> ri[rid] = -1;
       }
-      if (coord -> rsz[g] > 0)
+      if (coord -> rsz[rid] > 0)
       {
-        update_entry_int(res, coord -> rsz[g]);
-        str = g_strdup_printf ("in [1 - %d]", this_proj -> modelgl -> num_rings[g][coord -> rst[g]-1][coord -> rsz[g]-1]);
-        gtk_label_set_text (GTK_LABEL(coord -> rilab[g][2]), str);
+        update_entry_int(res, coord -> rsz[rid]);
+        str = g_strdup_printf ("in [1 - %d]", this_proj -> modelgl -> num_rings[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1]);
+        gtk_label_set_text (GTK_LABEL(coord -> rilab[rid][2]), str);
         g_free (str);
       }
       else
       {
         update_entry_text (res, "");
-        gtk_label_set_text (GTK_LABEL(coord -> rilab[g][2]), "");
+        gtk_label_set_text (GTK_LABEL(coord -> rilab[rid][2]), "");
       }
       break;
     case 2:
-      if (coord -> rst[g] > -1 && coord -> rsz[g] > -1)
+      if (coord -> rst[rid] > -1 && coord -> rsz[rid] > -1)
       {
-        if (v > 0 && v < this_proj -> modelgl -> num_rings[g][coord -> rst[g]-1][coord -> rsz[g]-1]+1)
+        if (v > 0 && v < this_proj -> modelgl -> num_rings[rid][coord -> rst[rid]-1][coord -> rsz[rid]-1]+1)
         {
-          coord -> ri[g] = v;
+          coord -> ri[rid] = v;
         }
         else
         {
-          coord -> ri[g] = -1;
+          coord -> ri[rid] = -1;
         }
       }
       else
       {
-        coord -> ri[g] = -1;
+        coord -> ri[rid] = -1;
       }
-      if (coord -> ri[g] > 0)
+      if (coord -> ri[rid] > 0)
       {
-        update_entry_int(res, coord -> ri[g]);
+        update_entry_int(res, coord -> ri[rid]);
       }
       else
       {
@@ -810,26 +828,26 @@ G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
       }
       break;
   }
-  if (coord -> rst[g] > 0 && coord -> rsz[g] > 0 && coord -> ri[g] > 0)
+  if (coord -> rst[rid] > 0 && coord -> rsz[rid] > 0 && coord -> ri[rid] > 0)
   {
-    add_this_ring_to_search_tree (this_proj, g);
+    add_this_ring_to_search_tree (this_proj, rid);
   }
 }
 
 /*
-*  GtkWidget * create_rings_search (struct project * this_proj, int g)
+*  GtkWidget * create_rings_search (struct project * this_proj, int rid)
 *
-*  Usage:
+*  Usage: create the ring(s) search widget
 *
 *  struct project * this_proj : the target project
-*  int g                      :
+*  int rid                    : the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
 */
-GtkWidget * create_rings_search (struct project * this_proj, int g)
+GtkWidget * create_rings_search (struct project * this_proj, int rid)
 {
   GtkWidget * rings_search = create_vbox (BSEP);
   gchar * str = g_strdup_printf ("Too many <b>%s</b> rings in your model !\n"
                                  "  It is impossible to display the entire list ...\n"
-                                 "... instead you can look for ring(s) 'manually':\n", rings_type[g]);
+                                 "... instead you can look for ring(s) 'manually':\n", rings_type[rid]);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, rings_search, markup_label(str, 200, -1, 0.5, 0.5), FALSE, FALSE, 10);
   g_free (str);
   gchar * search_item[3]={"MD step:", "Ring size:", "Ring ID:"};
@@ -838,46 +856,46 @@ GtkWidget * create_rings_search (struct project * this_proj, int g)
   GtkWidget * entry;
   j = (this_proj -> steps) > 1 ? 0 : 1;
   coord_edition * coord = this_proj -> modelgl -> coord_win;
-  coord -> rst[g] = 1;
+  coord -> rst[rid] = 1;
   for (i=j; i<3; i++)
   {
     hbox = create_hbox (0);
     add_box_child_start (GTK_ORIENTATION_VERTICAL, rings_search, hbox, FALSE, FALSE, 0);
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, markup_label(search_item[i], 100, -1, 0.0, 0.5), FALSE, FALSE, 20);
-    entry = create_entry (G_CALLBACK(update_rings_search), 100, 15, FALSE, & this_proj -> modelgl -> colorp[g*10+i][0]);
+    entry = create_entry (G_CALLBACK(update_rings_search), 100, 15, FALSE, & this_proj -> modelgl -> colorp[rid*10+i][0]);
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox,entry, FALSE, FALSE, 0);
     if (i==0)
     {
       str = g_strdup_printf ("in [1 - %d]", this_proj -> steps);
-      coord -> rilab[g][i] = markup_label(str, 50, -1, 0.0, 0.5);
+      coord -> rilab[rid][i] = markup_label(str, 50, -1, 0.0, 0.5);
       g_free (str);
     }
     else if (i == 1)
     {
-      str = g_strdup_printf ("in [%d - %d]", get_rmin(this_proj,  g, coord -> rst[g]),  get_rmax(this_proj,  g, coord -> rst[g]));
-      coord -> rilab[g][i] = markup_label(str, 50, -1, 0.0, 0.5);
+      str = g_strdup_printf ("in [%d - %d]", get_rmin(this_proj, rid, coord -> rst[rid]),  get_rmax(this_proj, rid, coord -> rst[rid]));
+      coord -> rilab[rid][i] = markup_label(str, 50, -1, 0.0, 0.5);
       g_free (str);
     }
     else
     {
-     coord -> rilab[g][i] = markup_label("", 50, -1, 0.0, 0.5);
+     coord -> rilab[rid][i] = markup_label("", 50, -1, 0.0, 0.5);
     }
-    add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, coord -> rilab[g][i], FALSE, FALSE, 5);
+    add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, coord -> rilab[rid][i], FALSE, FALSE, 5);
   }
   add_box_child_start (GTK_ORIENTATION_VERTICAL, rings_search, markup_label("<b>Search result(s)</b>", 200, -1, 0.5, 0.5), FALSE, FALSE, 10);
-  add_box_child_start (GTK_ORIENTATION_VERTICAL, rings_search, create_rings_tree (this_proj, g, FALSE), FALSE, FALSE, 0);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, rings_search, create_rings_tree (this_proj, rid, FALSE), FALSE, FALSE, 0);
   return rings_search;
 }
 
 /*
-*  GtkWidget * rings_tab (glwin * view, int g)
+*  GtkWidget * rings_tab (glwin * view, int rid)
 *
-*  Usage:
+*  Usage: create the ring(s) tab for the advanced environments window
 *
 *  glwin * view : the target glwin
-*  int g        :
+*  int rid      : the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
 */
-GtkWidget * rings_tab (glwin * view, int g)
+GtkWidget * rings_tab (glwin * view, int rid)
 {
   GtkWidget * rings = create_scroll(NULL, -1, -1, GTK_SHADOW_NONE);
   gtk_widget_set_hexpand (rings, TRUE);
@@ -887,20 +905,19 @@ GtkWidget * rings_tab (glwin * view, int g)
   k = 0;
   for (h=0; h < this_proj -> steps; h++)
   {
-    for (i=0; i < this_proj -> coord -> totcoord[g+4]; i++)
+    for (i=0; i < this_proj -> coord -> totcoord[rid+4]; i++)
     {
-      j = this_proj -> coord -> geolist[g+4][0][i];
-      k += this_proj -> modelgl -> num_rings[g][h][j-1];
+      j = this_proj -> coord -> geolist[rid+4][0][i];
+      k += this_proj -> modelgl -> num_rings[rid][h][j-1];
     }
   }
   if (k < 10000)
   {
-    add_container_child (CONTAINER_SCR, rings, create_rings_tree (this_proj, g, TRUE));
+    add_container_child (CONTAINER_SCR, rings, create_rings_tree (this_proj, rid, TRUE));
   }
   else
   {
-    add_container_child (CONTAINER_SCR, rings, create_rings_search (this_proj, g));
+    add_container_child (CONTAINER_SCR, rings, create_rings_search (this_proj, rid));
   }
   return rings;
 }
-

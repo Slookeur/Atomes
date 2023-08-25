@@ -42,11 +42,7 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "glwindow.h"
 
-extern void rings_set_visible (GtkTreeViewColumn * col,
-                               GtkCellRenderer   * renderer,
-                               GtkTreeModel      * mod,
-                               GtkTreeIter       * iter,
-                               gpointer          data);
+extern void rings_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
 
 /*
 *  G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
@@ -604,7 +600,7 @@ int get_chain_size_index (struct project * this_proj, int s, int r)
 /*
 *  G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
 *
-*  Usage: update the chain(s) search widget callback
+*  Usage: update the chain(s) search widget
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -769,7 +765,6 @@ GtkWidget * create_chains_search (struct project * this_proj)
   add_box_child_start (GTK_ORIENTATION_VERTICAL, chains_search, create_chains_tree (this_proj, FALSE), FALSE, FALSE, 0);
   return chains_search;
 }
-
 
 /*
 *  GtkWidget * chains_tab (glwin * view)

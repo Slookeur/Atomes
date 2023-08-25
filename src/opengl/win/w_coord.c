@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the 'Environments configuration' window
+
 *
 *  List of subroutines:
 
@@ -31,7 +32,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
   void poly_alpha_has_changed (gpointer data, GLfloat v);
   void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRGBA col);
-  void add_this_frag_mol_to_search_tree (struct project * this_proj, int g, int id);
+  void add_this_frag_mol_to_search_tree (struct project * this_proj, int geo, int gid);
   void set_this_frag_mol_color (gpointer data, GtkTreePath * path);
 
   G_MODULE_EXPORT void toggled_show_hide_coord (GtkCheckButton * widg, gpointer data);
@@ -45,6 +46,7 @@ If not, see <https://www.gnu.org/licenses/> */
   G_MODULE_EXPORT void set_color_frag_mol (GtkColorChooser * colob, gpointer data);
   G_MODULE_EXPORT void set_color_coord (GtkColorChooser * colob, gpointer data);
   G_MODULE_EXPORT void set_poly_alpha (GtkRange * range, gpointer data);
+  G_MODULE_EXPORT void on_select_frag_mol (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
   G_MODULE_EXPORT void run_set_this_frag_mol_color (GtkDialog * win, gint response_id, gpointer data);
   G_MODULE_EXPORT void to_set_this_frag_mol_color (GtkTreeView * tree_view, GtkTreePath * path, GtkTreeViewColumn * column, gpointer data);
   G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data);
@@ -55,10 +57,10 @@ If not, see <https://www.gnu.org/licenses/> */
   G_MODULE_EXPORT void close_coord (GtkButton * but, gpointer data);
   G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data);
 
-  GtkWidget * coord_tab (glwin * view, int g, int poly);
-  GtkWidget * create_frag_mol_tree (struct project * this_proj, int g);
-  GtkWidget * create_frag_mol_search (struct project * this_proj, int g);
-  GtkWidget * fragmol_tab (glwin * view, int g);
+  GtkWidget * coord_tab (glwin * view, int geo, int poly);
+  GtkWidget * create_frag_mol_tree (struct project * this_proj, int geo);
+  GtkWidget * create_frag_mol_search (struct project * this_proj, int geo);
+  GtkWidget * fragmol_tab (glwin * view, int geo);
   GtkWidget * param_tab (glwin * view);
   GtkWidget * advanced_coord_properties (glwin * view, int page);
 
@@ -89,7 +91,7 @@ int frag_mol_status;
 /*
 *  G_MODULE_EXPORT void toggled_show_hide_coord (GtkCheckButton * widg, gpointer data)
 *
-*  Usage:
+*  Usage: toggle show / hide coordination callback GTK4
 *
 *  GtkCheckButton * widg : the GtkCheckButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -99,7 +101,7 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkCheckButton * widg, gpointer da
 /*
 *  G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer data)
 *
-*  Usage:
+*  Usage: toggle show / hide coordination callback GTK3
 *
 *  GtkToggleButton * widg : the GtkToggleButton sending the signal
 *  gpointer data          : the associated data pointer
@@ -184,7 +186,7 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
 /*
 *  G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkCheckButton * widg, gpointer data)
 *
-*  Usage:
+*  Usage: toggle label / unlabel coordination callback GTK4
 *
 *  GtkCheckButton * widg : the GtkCheckButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -194,7 +196,7 @@ G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkCheckButton * widg, gpointe
 /*
 *  G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkToggleButton * widg, gpointer data)
 *
-*  Usage:
+*  Usage: toggle label / unlabel coordination callback GTK3
 *
 *  GtkToggleButton * widg : the GtkToggleButton sending the signal
 *  gpointer data          : the associated data pointer
@@ -227,7 +229,7 @@ G_MODULE_EXPORT void toggled_label_unlabel_coord (GtkToggleButton * widg, gpoint
 /*
 *  G_MODULE_EXPORT void toggled_select_unselect_coord (GtkCheckButton * widg, gpointer data)
 *
-*  Usage:
+*  Usage: toggle select / unselect coordination callback GTK4
 *
 *  GtkCheckButton * widg : the GtkCheckButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -237,7 +239,7 @@ G_MODULE_EXPORT void toggled_select_unselect_coord (GtkCheckButton * widg, gpoin
 /*
 *  G_MODULE_EXPORT void toggled_select_unselect_coord (GtkToggleButton * widg, gpointer data)
 *
-*  Usage:
+*  Usage: toggle select / unselect coordination callback GTK3
 *
 *  GtkToggleButton * widg : the GtkToggleButton sending the signal
 *  gpointer data          : the associated data pointer
@@ -270,7 +272,7 @@ G_MODULE_EXPORT void toggled_select_unselect_coord (GtkToggleButton * widg, gpoi
 /*
 *  G_MODULE_EXPORT void toggled_show_hide_poly (GtkCheckButton * widg, gpointer data)
 *
-*  Usage:
+*  Usage: toggle show / hide polyhedra callback GTK4
 *
 *  GtkCheckButton * widg : the GtkCheckButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -280,7 +282,7 @@ G_MODULE_EXPORT void toggled_show_hide_poly (GtkCheckButton * widg, gpointer dat
 /*
 *  G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer data)
 *
-*  Usage:
+*  Usage: toggle show / hide polyhedra callback GTK3
 *
 *  GtkToggleButton * widg : the GtkToggleButton sending the signal
 *  gpointer data          : the associated data pointer
@@ -346,9 +348,9 @@ G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer da
 /*
 *  G_MODULE_EXPORT void set_color_frag_mol (GtkColorChooser * colob, gpointer data)
 *
-*  Usage:
+*  Usage: set fragment or molecule color
 *
-*  GtkColorChooser * colob :
+*  GtkColorChooser * colob : the GtkColorChooser sending the signal
 *  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void set_color_frag_mol (GtkColorChooser * colob, gpointer data)
@@ -367,9 +369,9 @@ G_MODULE_EXPORT void set_color_frag_mol (GtkColorChooser * colob, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_color_coord (GtkColorChooser * colob, gpointer data)
 *
-*  Usage:
+*  Usage: set coordination color
 *
-*  GtkColorChooser * colob :
+*  GtkColorChooser * colob : the GtkColorChosser sending the signal
 *  gpointer data           : the associated data pointer
 */
 G_MODULE_EXPORT void set_color_coord (GtkColorChooser * colob, gpointer data)
@@ -390,10 +392,10 @@ G_MODULE_EXPORT void set_color_coord (GtkColorChooser * colob, gpointer data)
 /*
 *  void poly_alpha_has_changed (gpointer data, GLfloat v)
 *
-*  Usage:
+*  Usage: change polyhedra opacity
 *
 *  gpointer data : the associated data pointer
-*  GLfloat v     :
+*  GLfloat v     : the new opacity value
 */
 void poly_alpha_has_changed (gpointer data, GLfloat v)
 {
@@ -413,11 +415,11 @@ void poly_alpha_has_changed (gpointer data, GLfloat v)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_poly_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage:
+*  Usage: set polyhedra opacity - scroll callback
 *
-*  GtkRange * range     :
-*  GtkScrollType scroll :
-*  gdouble value        :
+*  GtkRange * range     : the GtkRange sending the signal
+*  GtkScrollType scroll : the associated scroll type
+*  gdouble value        : the range value
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_poly_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
@@ -429,9 +431,9 @@ G_MODULE_EXPORT gboolean scroll_set_poly_alpha (GtkRange * range, GtkScrollType 
 /*
 *  G_MODULE_EXPORT void set_poly_alpha (GtkRange * range, gpointer data)
 *
-*  Usage:
+*  Usage: set polyhedra opacity - range callback
 *
-*  GtkRange * range :
+*  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_poly_alpha (GtkRange * range, gpointer data)
@@ -442,13 +444,13 @@ G_MODULE_EXPORT void set_poly_alpha (GtkRange * range, gpointer data)
 /*
 *  gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j)
 *
-*  Usage:
+*  Usage: test add this geometry data to the tree store or not ?
 *
-*  int poly                   :
+*  int poly                   : polyhedra (1 / 0)
 *  struct project * this_proj : the target project
-*  int g                      :
-*  int i                      :
-*  int j                      :
+*  int g                      : the target geometry, 0 = total coord, 1 = partial coord, 4-8 = ring(s), 9 = chain(s)
+*  int i                      : target chemical species or 0
+*  int j                      : geometry id number
 */
 gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j)
 {
@@ -515,15 +517,15 @@ gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j)
 }
 
 /*
-*  GtkWidget * coord_tab (glwin * view, int g, int poly)
+*  GtkWidget * coord_tab (glwin * view, int geo, int poly)
 *
-*  Usage:
+*  Usage: create coordination(s) and polyhedra tab
 *
 *  glwin * view : the target glwin
-*  int g        :
-*  int poly     :
+*  int geo      : the target geometry, 0 = total coord, 1 = partial coord, 4-8 = ring(s), 9 = chain(s)
+*  int poly     : polyhedra (1 / 0)
 */
-GtkWidget * coord_tab (glwin * view, int g, int poly)
+GtkWidget * coord_tab (glwin * view, int geo, int poly)
 {
   int i, j, k, l, m, n;
   int p = view -> proj;
@@ -541,11 +543,11 @@ GtkWidget * coord_tab (glwin * view, int g, int poly)
   gtk_widget_set_hexpand (coord, TRUE);
   gtk_widget_set_vexpand (coord, TRUE);
   n = 0;
-  if (g > 3 && ! poly)
+  if (geo > 3 && ! poly)
   {
-    n = (g == 9) ? 11 : 10;
+    n = (geo == 9) ? 11 : 10;
     gtk_widget_set_size_request (coord, -1, 475);
-    if (g < 9)
+    if (geo < 9)
     {
       add_box_child_start (GTK_ORIENTATION_VERTICAL, box, markup_label("  * for the polyhedra only", -1, -1, 0.0, 0.5), FALSE, FALSE, 5);
       add_box_child_start (GTK_ORIENTATION_VERTICAL, box, markup_label("** affect all atoms that belong to ring(s) of this size", -1, -1, 0.0, 0.5), FALSE, FALSE, 0);
@@ -565,17 +567,17 @@ GtkWidget * coord_tab (glwin * view, int g, int poly)
   wb = create_hbox (0);
   gtk_widget_set_size_request (wb, 350, -1);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, wb, FALSE, FALSE, 0);
-  for (i=0; i<5-2*l-g/9; i++)
+  for (i=0; i<5-2*l-geo/9; i++)
   {
-    if (g == 9)
+    if (geo == 9)
     {
       j = 11 + i;
     }
-    else if (i == 0 && g > 3)
+    else if (i == 0 && geo > 3)
     {
       j = 10;
     }
-    else if (i > 0 && g > 3 && ! poly)
+    else if (i > 0 && geo > 3 && ! poly)
     {
       j = i+5;
     }
@@ -591,16 +593,16 @@ GtkWidget * coord_tab (glwin * view, int g, int poly)
   }
   k = 0;
   struct project * this_proj = get_project_by_id(p);
-  m = (g < 2) ? this_proj -> nspec : 1;
-  if ((g < 2 || (g == 9 && view -> chain_max) || (g > 3 && g < 9 && view -> ring_max[g-4])) && this_proj -> coord -> totcoord[g] > 0)
+  m = (geo < 2) ? this_proj -> nspec : 1;
+  if ((geo < 2 || (geo == 9 && view -> chain_max) || (geo > 3 && geo < 9 && view -> ring_max[geo-4])) && this_proj -> coord -> totcoord[geo] > 0)
   {
     for (i=0; i < m; i++)
     {
-      if (g == 0)
+      if (geo == 0)
       {
-        for (j=0 ; j < this_proj -> coord -> ntg[g][i]; j++)
+        for (j=0 ; j < this_proj -> coord -> ntg[geo][i]; j++)
         {
-          if (add_geo(poly, this_proj, g, i, j))
+          if (add_geo(poly, this_proj, geo, i, j))
           {
             str = g_strdup_printf ("  <b>%s</b>", this_proj -> chemistry -> label[i]);
             add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label(str, -1, -1, 0.0, 0.5), FALSE, FALSE, 0);
@@ -609,52 +611,52 @@ GtkWidget * coord_tab (glwin * view, int g, int poly)
           }
         }
       }
-      for (j=0 ; j < this_proj -> coord -> ntg[g][i]; j++, k++)
+      for (j=0 ; j < this_proj -> coord -> ntg[geo][i]; j++, k++)
       {
-        if (add_geo(poly, this_proj, g, i, j))
+        if (add_geo(poly, this_proj, geo, i, j))
         {
           wb = create_hbox (0);
           gtk_widget_set_size_request (wb, 350, -1);
           add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, wb, FALSE, FALSE, 0);
-          if (g == 0)
+          if (geo == 0)
           {
-            str =  g_strdup_printf ("%d", this_proj -> coord -> geolist[g][i][j]);
+            str =  g_strdup_printf ("%d", this_proj -> coord -> geolist[geo][i][j]);
           }
-          else if (g == 1)
+          else if (geo == 1)
           {
             str = exact_name(env_name (this_proj, j, i, 1, NULL));
           }
           else
           {
-            str = g_strdup_printf ("%d atoms", this_proj -> coord -> geolist[g][i][j]);
+            str = g_strdup_printf ("%d atoms", this_proj -> coord -> geolist[geo][i][j]);
           }
           add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb, markup_label(str, scol[0], -1, 0.5, 0.5), FALSE, FALSE, 5);
           g_free (str);
           if (poly)
           {
-            but = create_hscale (0.0, 1.0, 0.01, view -> anim -> last -> img -> spcolor[g][i][j].alpha, GTK_POS_LEFT, 3, 160,
-                                 G_CALLBACK(set_poly_alpha), G_CALLBACK(scroll_set_poly_alpha), & view -> gcid[g][k][g]);
+            but = create_hscale (0.0, 1.0, 0.01, view -> anim -> last -> img -> spcolor[geo][i][j].alpha, GTK_POS_LEFT, 3, 160,
+                                 G_CALLBACK(set_poly_alpha), G_CALLBACK(scroll_set_poly_alpha), & view -> gcid[geo][k][geo]);
           }
-          else if (g != 9)
+          else if (geo != 9)
           {
-            ColRGBA col = view -> anim -> last -> img -> spcolor[g][i][j];
+            ColRGBA col = view -> anim -> last -> img -> spcolor[geo][i][j];
             col.alpha = 1.0;
-            but = color_button (col, TRUE, 80, -1, G_CALLBACK(set_color_coord), & view -> gcid[g][k][g]);
+            but = color_button (col, TRUE, 80, -1, G_CALLBACK(set_color_coord), & view -> gcid[geo][k][geo]);
           }
-          if (poly || g != 9) add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb, but, FALSE, FALSE, 5);
+          if (poly || geo != 9) add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb, but, FALSE, FALSE, 5);
 
           if (poly)
           {
-            but = check_button (NULL, -1, -1, view -> anim -> last -> img -> show_poly[g][k], G_CALLBACK(toggled_show_hide_poly), & view -> gcid[g][k][g]);
+            but = check_button (NULL, -1, -1, view -> anim -> last -> img -> show_poly[geo][k], G_CALLBACK(toggled_show_hide_poly), & view -> gcid[geo][k][geo]);
             add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb, but, FALSE, FALSE, 20);
           }
           else
           {
-            but = check_button (NULL, -1, -1, view -> anim -> last -> img -> show_coord[g][k], G_CALLBACK(toggled_show_hide_coord), & view -> gcid[g][k][g]);
+            but = check_button (NULL, -1, -1, view -> anim -> last -> img -> show_coord[geo][k], G_CALLBACK(toggled_show_hide_coord), & view -> gcid[geo][k][geo]);
             add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb, but, FALSE, FALSE, 20);
-            but = check_button (NULL, -1, -1, FALSE, G_CALLBACK(toggled_label_unlabel_coord), & view -> gcid[g][k][g]);
+            but = check_button (NULL, -1, -1, FALSE, G_CALLBACK(toggled_label_unlabel_coord), & view -> gcid[geo][k][geo]);
             add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb, but, FALSE, FALSE, 15+n);
-            but = check_button (NULL, -1, -1, FALSE, G_CALLBACK(toggled_select_unselect_coord), & view -> gcid[g][k][g]);
+            but = check_button (NULL, -1, -1, FALSE, G_CALLBACK(toggled_select_unselect_coord), & view -> gcid[geo][k][geo]);
             add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb, but, FALSE, FALSE, 15+n/2);
           }
         }
@@ -664,9 +666,16 @@ GtkWidget * coord_tab (glwin * view, int g, int poly)
   return box;
 }
 
-G_MODULE_EXPORT void on_select_frag_mol (GtkCellRendererToggle * cell_renderer,
-                                         gchar * string_path,
-                                         gpointer data)
+/*
+*  G_MODULE_EXPORT void on_select_frag_mol (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+*
+*  Usage : tree store action on cell selection
+*
+*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
+*  gchar * string_path                   : the path in the tree view
+*  gpointer data                         : the associated data pointer
+*/
+G_MODULE_EXPORT void on_select_frag_mol (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
   int i, g, v, act;
   tint * dat = (tint * )data;
@@ -708,11 +717,11 @@ G_MODULE_EXPORT void on_select_frag_mol (GtkCellRendererToggle * cell_renderer,
 /*
 *  void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRGBA col)
 *
-*  Usage:
+*  Usage: set tree store cell background color
 *
-*  GtkListStore * store :
-*  GtkTreeIter iter     :
-*  ColRGBA col          :
+*  GtkListStore * store : the GtkListStore
+*  GtkTreeIter iter     : the GtkTreeIter target to update
+*  ColRGBA col          : the background color to set
 */
 void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRGBA col)
 {
@@ -728,15 +737,15 @@ void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRG
 }
 
 /*
-*  void add_this_frag_mol_to_search_tree (struct project * this_proj, int g, int id)
+*  void add_this_frag_mol_to_search_tree (struct project * this_proj, int geo, int gid)
 *
-*  Usage:
+*  Usage: add fragment or molecule in the search tree
 *
 *  struct project * this_proj : the target project
-*  int g                      :
-*  int id                     :
+*  int geo                    : 2 = fragment(s) or 3 = molecule(s)
+*  int gid                    : fragment or molecule id number to add
 */
-void add_this_frag_mol_to_search_tree (struct project * this_proj, int g, int id)
+void add_this_frag_mol_to_search_tree (struct project * this_proj, int geo, int gid)
 {
   GtkTreeIter id_level;
   GtkTreeIter new_level;
@@ -744,18 +753,18 @@ void add_this_frag_mol_to_search_tree (struct project * this_proj, int g, int id
   int i;
   int prepend = 0;
   coord_edition * coord = this_proj -> modelgl -> coord_win;
-  GtkListStore * store = (GtkListStore *) coord -> frag_mol_model[g-2];
-  GtkTreeModel * mod = GTK_TREE_MODEL(coord -> frag_mol_model[g-2]);
+  GtkListStore * store = (GtkListStore *) coord -> frag_mol_model[geo-2];
+  GtkTreeModel * mod = GTK_TREE_MODEL(coord -> frag_mol_model[geo-2]);
   valid = gtk_tree_model_get_iter_first(mod, & id_level);
   while (valid)
   {
     gtk_tree_model_get (mod, & id_level, 0, & i, -1);
-    if (i > id)
+    if (i > gid)
     {
       prepend = 1;
       valid = FALSE;
     }
-    else if (i == id)
+    else if (i == gid)
     {
       prepend = 2;
       valid = FALSE;
@@ -771,30 +780,28 @@ void add_this_frag_mol_to_search_tree (struct project * this_proj, int g, int id
     {
       case 0:
         gtk_list_store_append (store, & id_level);
-        gtk_list_store_set (store, & id_level, 0, id,
-                                               1, this_proj -> modelgl -> anim -> last -> img -> show_coord[g][id-1],
+        gtk_list_store_set (store, & id_level, 0, gid,
+                                               1, this_proj -> modelgl -> anim -> last -> img -> show_coord[geo][gid-1],
                                                3, FALSE,
                                                4, FALSE, -1);
-        set_frag_mol_cell_background (store, id_level, this_proj -> modelgl -> anim -> last -> img -> spcolor[g][0][id-1]);
+        set_frag_mol_cell_background (store, id_level, this_proj -> modelgl -> anim -> last -> img -> spcolor[geo][0][gid-1]);
         break;
       case 1:
         gtk_list_store_insert_before (store, & new_level, & id_level);
-        gtk_list_store_set (store, & new_level, 0, id,
-                                                1, this_proj -> modelgl -> anim -> last -> img -> show_coord[g][id-1],
+        gtk_list_store_set (store, & new_level, 0, gid,
+                                                1, this_proj -> modelgl -> anim -> last -> img -> show_coord[geo][gid-1],
                                                 3, FALSE,
                                                 4, FALSE, -1);
-        set_frag_mol_cell_background (store, new_level, this_proj -> modelgl -> anim -> last -> img -> spcolor[g][0][id-1]);
+        set_frag_mol_cell_background (store, new_level, this_proj -> modelgl -> anim -> last -> img -> spcolor[geo][0][gid-1]);
         break;
     }
   }
 }
 
-GtkTreeIter fm_iter;
-
 /*
 *  G_MODULE_EXPORT void run_set_this_frag_mol_color (GtkDialog * win, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: set fragment / molecule color - running the dialog
 *
 *  GtkDialog * win  : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -807,6 +814,7 @@ G_MODULE_EXPORT void run_set_this_frag_mol_color (GtkDialog * win, gint response
   if (response_id == GTK_RESPONSE_OK)
   {
     g = (dat -> b < 30) ? 2 : 3;
+    GtkTreeIter fm_iter;
     gtk_tree_model_get (GTK_TREE_MODEL(opengl_project -> modelgl -> coord_win -> frag_mol_model[g-2]), & fm_iter, 0, & i, -1);
     opengl_project -> modelgl -> anim -> last -> img -> spcolor[g][0][i-1] = get_window_color (GTK_WIDGET(win));
     int shaders[3] = {ATOMS, BONDS, LABEL};
@@ -819,10 +827,10 @@ G_MODULE_EXPORT void run_set_this_frag_mol_color (GtkDialog * win, gint response
 /*
 *  void set_this_frag_mol_color (gpointer data, GtkTreePath * path)
 *
-*  Usage:
+*  Usage: set fragment / molecule color - creating the dialog
 *
 *  gpointer data      : the associated data pointer
-*  GtkTreePath * path :
+*  GtkTreePath * path : the path in the tree view
 */
 void set_this_frag_mol_color (gpointer data, GtkTreePath * path)
 {
@@ -846,11 +854,11 @@ void set_this_frag_mol_color (gpointer data, GtkTreePath * path)
 /*
 *  G_MODULE_EXPORT void to_set_this_frag_mol_color (GtkTreeView * tree_view, GtkTreePath * path, GtkTreeViewColumn * column, gpointer data)
 *
-*  Usage:
+*  Usage: set fragment/molecule color tree view callback
 *
-*  GtkTreeView * tree_view    :
-*  GtkTreePath * path         :
-*  GtkTreeViewColumn * column :
+*  GtkTreeView * tree_view    : the GtkTreeView sending the signal
+*  GtkTreePath * path         : the path in the tree view
+*  GtkTreeViewColumn * column : the tree view column
 *  gpointer data              : the associated data pointer
 */
 G_MODULE_EXPORT void to_set_this_frag_mol_color (GtkTreeView * tree_view, GtkTreePath * path, GtkTreeViewColumn * column, gpointer data)
@@ -864,14 +872,14 @@ G_MODULE_EXPORT void to_set_this_frag_mol_color (GtkTreeView * tree_view, GtkTre
 }
 
 /*
-*  GtkWidget * create_frag_mol_tree (struct project * this_proj, int g)
+*  GtkWidget * create_frag_mol_tree (struct project * this_proj, int geo)
 *
-*  Usage:
+*  Usage: create the fragment(s) / molecule(s) search tree store
 *
 *  struct project * this_proj : the target project
-*  int g                      :
+*  int geo                    : 2 = fragment(s) or 3 = molecule(s)
 */
-GtkWidget * create_frag_mol_tree (struct project * this_proj, int g)
+GtkWidget * create_frag_mol_tree (struct project * this_proj, int geo)
 {
   int i;
   GtkTreeViewColumn * frag_mol_col[7];
@@ -880,8 +888,8 @@ GtkWidget * create_frag_mol_tree (struct project * this_proj, int g)
   gchar * ctype[5]={"text", "active", "pixbuf", "active", "active"};
   GType col_type[5]={G_TYPE_INT, G_TYPE_BOOLEAN, G_TYPE_OBJECT, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN};
   coord_edition * coord = this_proj -> modelgl -> coord_win;
-  coord -> frag_mol_model[g-2] = gtk_list_store_newv (5, col_type);
-  GtkWidget * frag_mol_tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL(coord -> frag_mol_model[g-2]));
+  coord -> frag_mol_model[geo-2] = gtk_list_store_newv (5, col_type);
+  GtkWidget * frag_mol_tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL(coord -> frag_mol_model[geo-2]));
   for (i=0; i<5; i++)
   {
     if (! i)
@@ -895,7 +903,7 @@ GtkWidget * create_frag_mol_tree (struct project * this_proj, int g)
     else
     {
       frag_mol_cell[i] = gtk_cell_renderer_toggle_new ();
-      g_signal_connect (G_OBJECT(frag_mol_cell[i]), "toggled", G_CALLBACK(on_select_frag_mol), & this_proj -> modelgl -> colorp[g*10+i][0]);
+      g_signal_connect (G_OBJECT(frag_mol_cell[i]), "toggled", G_CALLBACK(on_select_frag_mol), & this_proj -> modelgl -> colorp[geo*10+i][0]);
     }
     gtk_cell_renderer_set_fixed_size (frag_mol_cell[i], 70, 25);
     frag_mol_col[i] = gtk_tree_view_column_new_with_attributes (ctitle[i], frag_mol_cell[i], ctype[i], i, NULL);
@@ -903,14 +911,14 @@ GtkWidget * create_frag_mol_tree (struct project * this_proj, int g)
     gtk_tree_view_column_set_alignment (frag_mol_col[i], 0.5);
   }
   g_object_set (frag_mol_tree, "activate-on-single-click", TRUE, NULL, NULL);
-  g_signal_connect (G_OBJECT(frag_mol_tree), "row-activated",  G_CALLBACK(to_set_this_frag_mol_color), & this_proj -> modelgl -> colorp[g*10+i][0]);
+  g_signal_connect (G_OBJECT(frag_mol_tree), "row-activated",  G_CALLBACK(to_set_this_frag_mol_color), & this_proj -> modelgl -> colorp[geo*10+i][0]);
   return frag_mol_tree;
 }
 
 /*
 *  G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: update the fragment(s) / molecule(s) search widget
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -933,20 +941,20 @@ G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data)
 }
 
 /*
-*  GtkWidget * create_frag_mol_search (struct project * this_proj, int g)
+*  GtkWidget * create_frag_mol_search (struct project * this_proj, int geo)
 *
-*  Usage:
+*  Usage: create the frgament(s)/molecule(s) search widget
 *
 *  struct project * this_proj : the target project
-*  int g                      :
+*  int geo                    : 2 = fragment(s) or 3 = molecule(s)
 */
-GtkWidget * create_frag_mol_search (struct project * this_proj, int g)
+GtkWidget * create_frag_mol_search (struct project * this_proj, int geo)
 {
   GtkWidget * frag_mol_search = create_vbox (BSEP);
   gchar * obj[2] = {"fragment", "molecule"};
   gchar * str = g_strdup_printf ("Too many <b>%ss</b> in your model !\n"
                                  "  It is impossible to display the entire list ...\n"
-                                 "... instead you can look for %s(s) 'manually':\n", obj[g-2], obj[g-2]);
+                                 "... instead you can look for %s(s) 'manually':\n", obj[geo-2], obj[geo-2]);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, frag_mol_search, markup_label(str, 200, -1, 0.5, 0.5), FALSE, FALSE, 10);
   g_free (str);
   gchar * search_item[2]={"Fragment ID:", "Molecule ID:"};
@@ -955,27 +963,27 @@ GtkWidget * create_frag_mol_search (struct project * this_proj, int g)
   GtkWidget * label;
   hbox = create_hbox (0);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, frag_mol_search, hbox, FALSE, FALSE, 0);
-  add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, markup_label(search_item[g-2], 100, -1, 0.0, 0.5), FALSE, FALSE, 20);
-  entry = create_entry (G_CALLBACK(update_frag_mol_search), 100, 15, FALSE, & this_proj -> modelgl -> colorp[g][0]);
+  add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, markup_label(search_item[geo-2], 100, -1, 0.0, 0.5), FALSE, FALSE, 20);
+  entry = create_entry (G_CALLBACK(update_frag_mol_search), 100, 15, FALSE, & this_proj -> modelgl -> colorp[geo][0]);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox,entry, FALSE, FALSE, 0);
-  str = g_strdup_printf ("in [%d - %d]", 1, this_proj ->  coord -> totcoord[g]);
+  str = g_strdup_printf ("in [%d - %d]", 1, this_proj ->  coord -> totcoord[geo]);
   label = markup_label (str, 50, -1, 0.0, 0.5);
   g_free (str);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, label, FALSE, FALSE, 5);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, frag_mol_search, markup_label("<b>Search result(s)</b>", 200, -1, 0.5, 0.5), FALSE, FALSE, 10);
-  add_box_child_start (GTK_ORIENTATION_VERTICAL, frag_mol_search, create_frag_mol_tree (this_proj, g), FALSE, FALSE, 0);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, frag_mol_search, create_frag_mol_tree (this_proj, geo), FALSE, FALSE, 0);
   return frag_mol_search;
 }
 
 /*
-*  GtkWidget * fragmol_tab (glwin * view, int g)
+*  GtkWidget * fragmol_tab (glwin * view, int geo)
 *
-*  Usage:
+*  Usage: create fragment(s) or molecule(s) tab
 *
 *  glwin * view : the target glwin
-*  int g        :
+*  int geo      : 2 = fragment(s) or 3 = molecule(s)
 */
-GtkWidget * fragmol_tab (glwin * view, int g)
+GtkWidget * fragmol_tab (glwin * view, int geo)
 {
   int i, j;
   GtkWidget * wb;
@@ -988,10 +996,10 @@ GtkWidget * fragmol_tab (glwin * view, int g)
   gtk_widget_set_hexpand (fragmol, TRUE);
   gtk_widget_set_vexpand (fragmol, TRUE);
   struct project * this_proj = get_project_by_id(view -> proj);
-  i =  this_proj -> coord -> totcoord[g];
-  if (this_proj -> coord -> totcoord[g] >  10000)
+  i =  this_proj -> coord -> totcoord[geo];
+  if (i >  10000)
   {
-    add_container_child (CONTAINER_SCR, fragmol, create_frag_mol_search(this_proj, g));
+    add_container_child (CONTAINER_SCR, fragmol, create_frag_mol_search(this_proj, geo));
   }
   else
   {
@@ -1013,22 +1021,22 @@ GtkWidget * fragmol_tab (glwin * view, int g)
       str = g_strdup_printf ("N°%d", j+1);
       add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb, markup_label(str, scol[0], -1, 0.25, 0.5), FALSE, FALSE, 5);
       g_free (str);
-      ColRGBA col = view -> anim -> last -> img -> spcolor[g][0][j];
+      ColRGBA col = view -> anim -> last -> img -> spcolor[geo][0][j];
       col.alpha = 1.0;
       add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb,
-                           color_button (col, TRUE, 80, -1, G_CALLBACK(set_color_frag_mol), & view -> gcid[g][j][0]),
+                           color_button (col, TRUE, 80, -1, G_CALLBACK(set_color_frag_mol), & view -> gcid[geo][j][0]),
                            FALSE, FALSE, 5);
 
       add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb,
-                           check_button(NULL, -1, -1, view -> anim -> last -> img -> show_coord[g][j], G_CALLBACK(toggled_show_hide_coord), & view -> gcid[g][j][g]),
+                           check_button(NULL, -1, -1, view -> anim -> last -> img -> show_coord[geo][j], G_CALLBACK(toggled_show_hide_coord), & view -> gcid[geo][j][geo]),
                            FALSE, FALSE, 20);
 
       add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb,
-                           check_button(NULL, -1, -1, FALSE, G_CALLBACK(toggled_label_unlabel_coord), & view -> gcid[g][j][g]),
+                           check_button(NULL, -1, -1, FALSE, G_CALLBACK(toggled_label_unlabel_coord), & view -> gcid[geo][j][geo]),
                            FALSE, FALSE, 15);
 
       add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb,
-                           check_button(NULL, -1, -1, FALSE, G_CALLBACK(toggled_select_unselect_coord), & view -> gcid[g][j][g]),
+                           check_button(NULL, -1, -1, FALSE, G_CALLBACK(toggled_select_unselect_coord), & view -> gcid[geo][j][geo]),
                            FALSE, FALSE, 15);
     }
   }
@@ -1038,7 +1046,7 @@ GtkWidget * fragmol_tab (glwin * view, int g)
 /*
 *  G_MODULE_EXPORT void set_atom_color_map_box (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change atom color map
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -1061,7 +1069,7 @@ G_MODULE_EXPORT void set_atom_color_map_box (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_poly_color_map_box (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change polyhedra color map
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -1085,7 +1093,7 @@ G_MODULE_EXPORT void set_poly_color_map_box (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void on_cloned_poly_toggled (GtkCheckButton * Button, gpointer data)
 *
-*  Usage:
+*  Usage: toggle show / hide cloned polyhedra callback GTK4
 *
 *  GtkCheckButton * Button : the GtkCheckButton sending the signal
 *  gpointer data           : the associated data pointer
@@ -1095,7 +1103,7 @@ G_MODULE_EXPORT void on_cloned_poly_toggled (GtkCheckButton * Button, gpointer d
 /*
 *  G_MODULE_EXPORT void on_cloned_poly_toggled (GtkToggleButton * Button, gpointer data)
 *
-*  Usage:
+*  Usage: toggle show / hide cloned polyhedra callback GTK3
 *
 *  GtkToggleButton * Button : the GtkToggleButton sending the signal
 *  gpointer data            : the associated data pointer

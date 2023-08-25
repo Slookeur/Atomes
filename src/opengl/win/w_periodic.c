@@ -16,8 +16,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the periodic table of the elements
+ - The subroutines to select element from the periodic table
+
 *
 *  List of subroutines:
 
@@ -67,10 +69,10 @@ gchar * ptcolo[11] = {"#8EFF8E", "#F5FF53", "#FFB853", "#FF6C7D", "#F4A7FF", "#4
 /*
 *  gchar * get_electronic_structure (int r, int c)
 *
-*  Usage:
+*  Usage: get electronic structure for this (row,column) combination
 *
-*  int r :
-*  int c :
+*  int r : row
+*  int c : column
 */
 gchar * get_electronic_structure (int r, int c)
 {
@@ -175,10 +177,10 @@ gchar * get_electronic_structure (int r, int c)
 /*
 *  int is_in_table (int i, int j)
 *
-*  Usage:
+*  Usage: is this (row,column) combination a chemical element ?
 *
-*  int i :
-*  int j :
+*  int i : row
+*  int j : column
 */
 int is_in_table (int i, int j)
 {
@@ -212,12 +214,12 @@ int is_in_table (int i, int j)
 /*
 *  GtkWidget * create_el_preview (int p, int a, int r, int c)
 *
-*  Usage:
+*  Usage: create element preview
 *
-*  int p :
-*  int a :
-*  int r :
-*  int c :
+*  int p : the target project id
+*  int a : target atom search id
+*  int r : row
+*  int c : column
 */
 GtkWidget * create_el_preview (int p, int a, int r, int c)
 {
@@ -290,10 +292,10 @@ GtkWidget * create_el_preview (int p, int a, int r, int c)
 /*
 *  GtkWidget * el_preview (int p, int a)
 *
-*  Usage:
+*  Usage: create element preview CSS widget
 *
-*  int p :
-*  int a :
+*  int p : the target project id
+*  int a : target atom search id
 */
 GtkWidget * el_preview (int p, int a)
 {
@@ -322,9 +324,9 @@ GtkWidget * el_preview (int p, int a)
 /*
 *  G_MODULE_EXPORT void on_element_focus (GtkEventControllerFocus * focus, gpointer data)
 *
-*  Usage:
+*  Usage: periodic table focus event callback GTK4
 *
-*  GtkEventControllerFocus * focus :
+*  GtkEventControllerFocus * focus : the GtkEventControllerFocus sending the signal
 *  gpointer data                   : the associated data pointer
 */
 G_MODULE_EXPORT void on_element_focus (GtkEventControllerFocus * focus, gpointer data)
@@ -332,7 +334,7 @@ G_MODULE_EXPORT void on_element_focus (GtkEventControllerFocus * focus, gpointer
 /*
 *  G_MODULE_EXPORT gboolean on_element_focus (GtkWidget * widget, GdkEvent * event, gpointer data)
 *
-*  Usage:
+*  Usage: periodic table focus event callback GTK3
 *
 *  GtkWidget * widget : the GtkWidget sending the signal
 *  GdkEvent * event   : the GdkEvent triggering the signal
@@ -353,11 +355,11 @@ G_MODULE_EXPORT gboolean on_element_focus (GtkWidget * widget, GdkEvent * event,
 /*
 *  G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion, gdouble x, gdouble y, gpointer data)
 *
-*  Usage:
+*  Usage: periodic table motion event callback GTK4
 *
-*  GtkEventControllerMotion * motion :
-*  gdouble x                         :
-*  gdouble y                         :
+*  GtkEventControllerMotion * motion : the GtkEventControllerMotion sending the signal
+*  gdouble x                         : x position
+*  gdouble y                         : y position
 *  gpointer data                     : the associated data pointer
 */
 G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion, gdouble x, gdouble y, gpointer data)
@@ -372,7 +374,7 @@ G_MODULE_EXPORT void on_element_motion_enter (GtkEventControllerMotion * motion,
 /*
 *  G_MODULE_EXPORT void run_periodic_table (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: periodic table - running the dialog
 *
 *  GtkDialog * info : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -386,7 +388,7 @@ G_MODULE_EXPORT void run_periodic_table (GtkDialog * info, gint response_id, gpo
 /*
 *  G_MODULE_EXPORT void get_element (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: get element from periodic table button
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -401,12 +403,12 @@ G_MODULE_EXPORT void get_element (GtkButton * but, gpointer data)
 /*
 *  GtkWidget * create_css_button (int p, int id, int r, int c)
 *
-*  Usage:
+*  Usage: create CSS periodic table element button
 *
-*  int p  :
-*  int id :
-*  int r  :
-*  int c  :
+*  int p  : the target project id
+*  int id : is element table (1 / 0)
+*  int r  : row
+*  int c  : column
 */
 GtkWidget * create_css_button (int p, int id, int r, int c)
 {
@@ -557,21 +559,21 @@ GtkWidget * create_css_button (int p, int id, int r, int c)
 /*
 *  GtkWidget * create_css_group (int p, int i)
 *
-*  Usage:
+*  Usage: create group CSS
 *
-*  int p :
-*  int i :
+*  int p : the target project id
+*  int i : the group
 */
 GtkWidget * create_css_group (int p, int i)
 {
   gchar * backcol = g_strdup_printf ("label#group-%d-%d {\n"
-                                       "  border-radius: 25px;\n"
-                                       "  border-color: black;\n"
-                                       "  border-width: 1px;\n"
-                                       "  background-color: %s;\n"
-                                       "  color: black;\n"
-                                       "  font-weight: bold;\n"
-                                       "}\n", p, i, ptcolo[i]);
+                                     "  border-radius: 25px;\n"
+                                     "  border-color: black;\n"
+                                     "  border-width: 1px;\n"
+                                     "  background-color: %s;\n"
+                                     "  color: black;\n"
+                                     "  font-weight: bold;\n"
+                                     "}\n", p, i, ptcolo[i]);
   provide_gtk_css (backcol);
   g_free (backcol);
   GtkWidget * lab = gtk_label_new (" ");
@@ -587,11 +589,11 @@ GtkWidget * create_css_group (int p, int i)
 /*
 *  GtkWidget * css_element (int p, int i, int j)
 *
-*  Usage:
+*  Usage: create CSS for the periodic table elements
 *
-*  int p :
-*  int i :
-*  int j :
+*  int p : target project id
+*  int i : row
+*  int j : column
 */
 GtkWidget * css_element (int p, int i, int j)
 {
@@ -613,10 +615,10 @@ GtkWidget * css_element (int p, int i, int j)
 /*
 *  GtkWidget * periodic_table (int p, int a)
 *
-*  Usage:
+*  Usage: create periodic table
 *
-*  int p :
-*  int a :
+*  int p : target project id
+*  int a : target atom search id
 */
 GtkWidget * periodic_table (int p, int a)
 {
@@ -654,9 +656,9 @@ GtkWidget * periodic_table (int p, int a)
 /*
 *  int get_atom_id_from_periodic_table (atom_search * asearch)
 *
-*  Usage:
+*  Usage: get atom Z from selection in the periodic table
 *
-*  atom_search * asearch :
+*  atom_search * asearch : target atom search, if any
 */
 int get_atom_id_from_periodic_table (atom_search * asearch)
 {

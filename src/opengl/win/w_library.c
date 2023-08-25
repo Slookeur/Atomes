@@ -16,8 +16,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the molecular library
+ - The subrouitnes to read the 'Simple chemical XML' files
+
 *
 *  List of subroutines:
 
@@ -41,6 +43,8 @@ If not, see <https://www.gnu.org/licenses/> */
   void insert_preview ();
   void prepare_preview (int active, int id, gboolean visible);
 
+  G_MODULE_EXPORT void select_library_data (GtkTreeView * tree_view, GtkTreePath * path, GtkTreeViewColumn * column, gpointer data);
+  G_MODULE_EXPORT void set_library_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
   G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id, gpointer data);
 
   GtkWidget * library_tree (GtkListStore * store, int id, gchar * name);
@@ -264,7 +268,7 @@ GtkListStore * family_store;
 GtkTreeIter first_family_iter;
 GtkListStore * molecule_store;
 GtkTreeIter first_mol_iter;
-GtkTreeSelection * dataselect[2];
+GtkTreeSelection * libselect[2];
 int the_family;
 gchar * the_molecule;
 gchar ** sml_file_name;
@@ -279,9 +283,9 @@ int inserted_from_lib;
 /*
 *  double get_z_from_periodic_table (gchar * lab)
 *
-*  Usage:
+*  Usage: get Z from atom label
 *
-*  gchar * lab :
+*  gchar * lab : the atomic label
 */
 double get_z_from_periodic_table (gchar * lab)
 {
@@ -296,10 +300,10 @@ double get_z_from_periodic_table (gchar * lab)
 /*
 *  int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader)
 *
-*  Usage:
+*  Usage: free XML data
 *
-*  xmlDoc * doc            :
-*  xmlTextReaderPtr reader :
+*  xmlDoc * doc            : the XML doc pointer to free
+*  xmlTextReaderPtr reader : the XML reader to free
 */
 int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader)
 {
@@ -312,11 +316,11 @@ int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader)
 /*
 *  gchar * replace_markup (char * init, char * key, char * rep)
 *
-*  Usage:
+*  Usage: replace pattern in string
 *
-*  char * init :
-*  char * key  :
-*  char * rep  :
+*  char * init : the string
+*  char * key  : the pattern to replace
+*  char * rep  : the new pattern
 */
 gchar * replace_markup (char * init, char * key, char * rep)
 {
@@ -345,10 +349,10 @@ gchar * replace_markup (char * init, char * key, char * rep)
 /*
 *  gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
 *
-*  Usage:
+*  Usage: substitute all patterns in string
 *
 *  gchar * init    : the initial string
-*  gchar * o_motif : the initial pattern
+*  gchar * o_motif : the pattern to replace
 *  gchar * n_motif : the new pattern
 */
 gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
@@ -368,9 +372,9 @@ gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif)
 /*
 *  gchar * check_xml_string (gchar * init)
 *
-*  Usage:
+*  Usage: check for, and correct tags in XML string
 *
-*  gchar * init :
+*  gchar * init : the XML string to check / correct
 */
 gchar * check_xml_string (gchar * init)
 {
@@ -387,9 +391,9 @@ gchar * check_xml_string (gchar * init)
 /*
 *  int sml_preview (const char * filetoread)
 *
-*  Usage:
+*  Usage: retrieve preview information from 'Simple chemical library XML' file
 *
-*  const char * filetoread :
+*  const char * filetoread : the name of the file to read
 */
 int sml_preview (const char * filetoread)
 {
@@ -521,10 +525,10 @@ int sml_preview (const char * filetoread)
 /*
 *  gchar * open_sml_file (const char * filetoread, int fam)
 *
-*  Usage:
+*  Usage: open 'Simple chemical library XML' file
 *
-*  const char * filetoread :
-*  int fam                 :
+*  const char * filetoread : the name of the file to open
+*  int fam                 : the molecular family
 */
 gchar * open_sml_file (const char * filetoread, int fam)
 {
@@ -582,9 +586,9 @@ gchar * open_sml_file (const char * filetoread, int fam)
 /*
 *  int get_family (gchar * str)
 *
-*  Usage:
+*  Usage: get molecular family id
 *
-*  gchar * str :
+*  gchar * str : the moecular family
 */
 int get_family (gchar * str)
 {
@@ -599,9 +603,9 @@ int get_family (gchar * str)
 /*
 *  void sort_files (int num_f)
 *
-*  Usage:
+*  Usage: sort file(s) by molecular family and name
 *
-*  int num_f :
+*  int num_f :number of file(s) to sort
 */
 void sort_files (int num_f)
 {
@@ -631,7 +635,7 @@ void sort_files (int num_f)
 /*
 *  int get_sml_files ()
 *
-*  Usage:
+*  Usage: get the library 'Simple chemical library XML' files
 */
 int get_sml_files ()
 {
@@ -752,9 +756,9 @@ int get_sml_files ()
 /*
 *  void fill_molecule_tree (GtkListStore * store)
 *
-*  Usage:
+*  Usage: fill molecule list store
 *
-*  GtkListStore * store :
+*  GtkListStore * store : the list store to fill
 */
 void fill_molecule_tree (GtkListStore * store)
 {
@@ -778,9 +782,9 @@ void fill_molecule_tree (GtkListStore * store)
 /*
 *  void fill_family_tree (GtkListStore * store)
 *
-*  Usage:
+*  Usage: fill molecular family list store
 *
-*  GtkListStore * store :
+*  GtkListStore * store : the list store to fill
 */
 void fill_family_tree (GtkListStore * store)
 {
@@ -804,7 +808,7 @@ void fill_family_tree (GtkListStore * store)
 /*
 *  void insert_preview ()
 *
-*  Usage:
+*  Usage: insert preview in library window and visualize
 */
 void insert_preview ()
 {
@@ -883,11 +887,11 @@ void insert_preview ()
 /*
 *  void prepare_preview (int active, int id, gboolean visible)
 *
-*  Usage:
+*  Usage: prepare library molecule preview
 *
-*  int active       :
-*  int id           :
-*  gboolean visible :
+*  int active       : active project id
+*  int id           : molecule id number
+*  gboolean visible : is the 'model edition' window visible
 */
 void prepare_preview (int active, int id, gboolean visible)
 {
@@ -927,10 +931,17 @@ void prepare_preview (int active, int id, gboolean visible)
   }
 }
 
-G_MODULE_EXPORT void select_library_data (GtkTreeView * tree_view,
-                                          GtkTreePath * path,
-                                          GtkTreeViewColumn * column,
-                                          gpointer data)
+/*
+*  G_MODULE_EXPORT void select_library_data (GtkTreeView * tree_view, GtkTreePath * path, GtkTreeViewColumn * column, gpointer data)
+*
+*  Usage: select library element callback
+*
+*  GtkTreeView * tree_view    : the GtkTreeView sending the signal
+*  GtkTreePath * path         : the path in the tree view
+*  GtkTreeViewColumn * column : the column in the tree view
+*  gpointer data              : the associated data pointer
+*/
+G_MODULE_EXPORT void select_library_data (GtkTreeView * tree_view, GtkTreePath * path, GtkTreeViewColumn * column, gpointer data)
 {
   GtkTreeIter row;
   GtkTreeModel * model = gtk_tree_view_get_model(tree_view);
@@ -946,7 +957,7 @@ G_MODULE_EXPORT void select_library_data (GtkTreeView * tree_view,
       the_family = i;
       gtk_list_store_clear (molecule_store);
       fill_molecule_tree (molecule_store);
-      gtk_tree_selection_select_iter (dataselect[1], & first_mol_iter);
+      gtk_tree_selection_select_iter (libselect[1], & first_mol_iter);
       prepare_preview (activep, 0, TRUE);
     }
     else
@@ -957,11 +968,18 @@ G_MODULE_EXPORT void select_library_data (GtkTreeView * tree_view,
   }
 }
 
-void set_library_markup (GtkTreeViewColumn * col,
-                         GtkCellRenderer   * renderer,
-                         GtkTreeModel      * mod,
-                         GtkTreeIter       * iter,
-                         gpointer          data)
+/*
+*  G_MODULE_EXPORT void set_library_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set font markup in the molecular library tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+G_MODULE_EXPORT void set_library_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   gchar * str = NULL;
   gtk_tree_model_get (mod, iter, 1, & str, -1);
@@ -972,11 +990,11 @@ void set_library_markup (GtkTreeViewColumn * col,
 /*
 *  GtkWidget * library_tree (GtkListStore * store, int id, gchar * name)
 *
-*  Usage:
+*  Usage: create library tree store widget
 *
-*  GtkListStore * store :
-*  int id               :
-*  gchar * name         :
+*  GtkListStore * store : the list store model to use
+*  int id               : selection id (0 = family, 1 = molecule)
+*  gchar * name         : column label
 */
 GtkWidget * library_tree (GtkListStore * store, int id, gchar * name)
 {
@@ -992,8 +1010,8 @@ GtkWidget * library_tree (GtkListStore * store, int id, gchar * name)
   gtk_tree_view_set_activate_on_single_click (GTK_TREE_VIEW(dataview), TRUE);
   g_signal_connect (G_OBJECT(dataview), "row-activated", G_CALLBACK(select_library_data), NULL);
   g_object_unref (store);
-  dataselect[id] = gtk_tree_view_get_selection (GTK_TREE_VIEW(dataview));
-  gtk_tree_selection_set_mode (dataselect[id], GTK_SELECTION_SINGLE);
+  libselect[id] = gtk_tree_view_get_selection (GTK_TREE_VIEW(dataview));
+  gtk_tree_selection_set_mode (libselect[id], GTK_SELECTION_SINGLE);
   add_container_child (CONTAINER_SCR, scrol, dataview);
   return scrol;
 }
@@ -1004,7 +1022,7 @@ gboolean lib_visible;
 /*
 *  G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: select from library - running the dialog
 *
 *  GtkDialog * lib  : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -1050,11 +1068,11 @@ G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id,
 /*
 *  int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch)
 *
-*  Usage:
+*  Usage: select object to insert from the library
 *
-*  gboolean visible           :
+*  gboolean visible           : is the 'model edition' window visible
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
+*  atom_search * asearch      : the target atom search
 */
 int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch)
 {
@@ -1075,10 +1093,10 @@ int select_from_library (gboolean visible, struct project * this_proj, atom_sear
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, lib_preview_box, FALSE, FALSE, 0);
   lib_preview_plot = NULL;
   the_family = 0;
-  gtk_tree_selection_select_iter (dataselect[0], & first_family_iter);
+  gtk_tree_selection_select_iter (libselect[0], & first_family_iter);
   gtk_list_store_clear (molecule_store);
   fill_molecule_tree (molecule_store);
-  gtk_tree_selection_select_iter (dataselect[1], & first_mol_iter);
+  gtk_tree_selection_select_iter (libselect[1], & first_mol_iter);
   show_the_widgets (lib);
   prepare_preview (active, 0, TRUE);
   this_proj -> modelgl -> nth_copy = inserted_from_lib = 0;
@@ -1095,12 +1113,12 @@ int select_from_library (gboolean visible, struct project * this_proj, atom_sear
 /*
 *  int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch)
 *
-*  Usage:
+*  Usage: insert object from the library
 *
-*  int id                     :
-*  gboolean visible           :
+*  int id                     : object id to insert
+*  gboolean visible           : is the 'model edition window' visible
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
+*  atom_search * asearch      : the target atom search
 */
 int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch)
 {

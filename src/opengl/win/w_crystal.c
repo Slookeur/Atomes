@@ -719,12 +719,7 @@ void select_cif_data (GtkTreeView * tree_view,
   }
 }
 
-extern void set_library_markup (GtkTreeViewColumn * col,
-                                GtkCellRenderer   * renderer,
-                                GtkTreeModel      * mod,
-                                GtkTreeIter       * iter,
-                                gpointer          data);
-
+G_MODULE_EXPORT void set_library_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
 
 /*
 *  GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
