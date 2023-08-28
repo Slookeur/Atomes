@@ -62,7 +62,7 @@ void update_insert_combos ()
     {
       if ((this_proj -> modelgl -> atom_win && this_proj -> modelgl -> atom_win -> visible) || this_proj -> modelgl -> builder_win)
       {
-        model = replace_combo_tree (TRUE, this_proj -> id);
+        model = replace_combo_tree (TRUE, i);
         box = (this_proj -> modelgl -> builder_win) ? this_proj -> modelgl -> builder_win -> add_combo : this_proj -> modelgl -> atom_win -> atom_combo[3];
         gtk_combo_box_set_model (GTK_COMBO_BOX(box), model);
         gtk_combo_box_set_active (GTK_COMBO_BOX(box), 0);
