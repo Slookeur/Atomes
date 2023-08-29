@@ -294,7 +294,7 @@ G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
 *
 *  Usage:
 *
-*  int aid                    :
+*  int aid                    : the action id
 *  struct project * this_proj : the target project
 */
 GtkWidget * action_tab (int aid, struct project * this_proj)

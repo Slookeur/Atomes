@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to insert bond(s) to a project
+
 *
 *  List of subroutines:
 
@@ -34,12 +35,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list)
 *
-*  Usage:
+*  Usage: add bond list to project bond list
 *
 *  struct project * this_proj : the target project
-*  int removed                :
-*  int nbd                    :
-*  int ** new_bond_list       :
+*  int removed                : the number of atom(s) removed
+*  int nbd                    : the number of bond(s) to add
+*  int ** new_bond_list       : the bond list to add
 */
 void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list)
 {
@@ -75,12 +76,12 @@ void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int
 /*
 *  void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object)
 *
-*  Usage:
+*  Usage: add object bond(s) list to overall bond(s) list
 *
-*  int ** new_bond_list          :
-*  int nat                       :
-*  int nbd                       :
-*  struct insert_object * object :
+*  int ** new_bond_list          : the bond list in the model
+*  int nat                       : the number of atom(s) in the model
+*  int nbd                       : the number of bond(s) in the model
+*  struct insert_object * object : the target insert object
 */
 void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object)
 {
@@ -98,12 +99,12 @@ void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_ob
 /*
 *  void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible)
 *
-*  Usage:
+*  Usage: prepare to insert something
 *
-*  gchar * key                :
+*  gchar * key                : the string describing the object to insert
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
-*  gboolean visible           :
+*  atom_search * asearch      : the target atom search
+*  gboolean visible           : is the model edition window visible
 */
 void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible)
 {
@@ -114,7 +115,7 @@ void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * 
 /*
 *  G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change the object to insert
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer

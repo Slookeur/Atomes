@@ -16,8 +16,11 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to move atom(s) and group of atom(s)
+ - The subroutines to move randomly atom(s) and group of atom(s)
+ - The subroutines to create the motion widgets of the model edition window
+
 *
 *  List of subroutines:
 
@@ -35,7 +38,7 @@ If not, see <https://www.gnu.org/licenses/> */
   void init_coordinates (struct project * this_proj, int status, gboolean win, gboolean init);
   void translate (struct project * this_proj, int status, int axis, vec3_t trans);
   void rotate_quat (struct project * this_proj, vec4_t q, int status, int axis);
-  void rotate (struct project * this_proj, int i, int j, int k, float param);
+  void rotate (struct project * this_proj, int status, int axis, int raxis, float param);
   void random_move_this_atom (struct project * this_proj, int aid);
   void random_rotate_this_object (struct project * this_proj, struct insert_object * object, double ratio, double msd);
   void random_translate_this_object (struct project * this_proj, struct insert_object * object, double ratio, double msd);
@@ -70,10 +73,10 @@ gboolean * was_moved_atom;
 /*
 *  double ** save_coordinates (struct project * this_proj, int status)
 *
-*  Usage:
+*  Usage: save atomic coordinates
 *
 *  struct project * this_proj : the target project
-*  int status                 :
+*  int status                 : selection status, 0 = non selected atom(s), 1 = selected atom(s), 2 = all atom(s)
 */
 double ** save_coordinates (struct project * this_proj, int status)
 {
@@ -122,10 +125,10 @@ double ** save_coordinates (struct project * this_proj, int status)
 /*
 *  void reset_coordinates (struct project * this_proj, int status)
 *
-*  Usage:
+*  Usage: reset transformation and restore saved atomic coordinates
 *
 *  struct project * this_proj : the target project
-*  int status                 :
+*  int status                 : selection status, 0 = non selected atom(s), 1 = selected atom(s), 2 = all atom(s)
 */
 void reset_coordinates (struct project * this_proj, int status)
 {
@@ -146,6 +149,14 @@ void reset_coordinates (struct project * this_proj, int status)
   }
 }
 
+/*
+*  vec3_t get_bary (struct project * this_proj, int status)
+*
+*  Usage: get barycenter of atomic coordinates
+*
+*  struct project * this_proj : the target project
+*  int status                 : selection status, 0 = non selected atom(s), 1 = selected atom(s), 2 = all atom(s)
+*/
 vec3_t get_bary (struct project * this_proj, int status)
 {
   vec3_t bar = vec3(0.0,0.0,0.0);
@@ -166,12 +177,12 @@ vec3_t get_bary (struct project * this_proj, int status)
 /*
 *  void init_coordinates (struct project * this_proj, int status, gboolean win, gboolean init)
 *
-*  Usage:
+*  Usage: preserve atomic coordinates
 *
 *  struct project * this_proj : the target project
-*  int status                 :
-*  gboolean win               :
-*  gboolean init              :
+*  int status                 : selection status, 0 = non selected atom(s), 1 = selected atom(s), 2 = all atom(s)
+*  gboolean win               : is the model edition window opened ?
+*  gboolean init              : preserve atomic coordinates
 */
 void init_coordinates (struct project * this_proj, int status, gboolean win, gboolean init)
 {
@@ -199,12 +210,12 @@ void init_coordinates (struct project * this_proj, int status, gboolean win, gbo
 /*
 *  void translate (struct project * this_proj, int status, int axis, vec3_t trans)
 *
-*  Usage:
+*  Usage: translate
 *
 *  struct project * this_proj : the target project
-*  int status                 :
-*  int axis                   :
-*  vec3_t trans               :
+*  int status                 : selection status, 0 = non selected atom(s), 1 = selected atom(s), 2 = all atom(s)
+*  int axis                   : 0 = model, 1 = eye
+*  vec3_t trans               : translation vector
 */
 void translate (struct project * this_proj, int status, int axis, vec3_t trans)
 {
@@ -238,12 +249,12 @@ void translate (struct project * this_proj, int status, int axis, vec3_t trans)
 /*
 *  void rotate_quat (struct project * this_proj, vec4_t q, int status, int axis)
 *
-*  Usage:
+*  Usage: rotate using quaternion
 *
 *  struct project * this_proj : the target project
-*  vec4_t q                   :
-*  int status                 :
-*  int axis                   :
+*  vec4_t q                   : rotation quaternion
+*  int status                 : selection status, 0 = non selected atom(s), 1 = selected atom(s), 2 = all atom(s)
+*  int axis                   : 0 = model, 1 = eye
 */
 void rotate_quat (struct project * this_proj, vec4_t q, int status, int axis)
 {
@@ -275,34 +286,34 @@ void rotate_quat (struct project * this_proj, vec4_t q, int status, int axis)
 }
 
 /*
-*  void rotate (struct project * this_proj, int i, int j, int k, float param)
+*  void rotate (struct project * this_proj, int status, int axis, int raxis, float param)
 *
-*  Usage:
+*  Usage: rotate
 *
 *  struct project * this_proj : the target project
-*  int i                      :
-*  int j                      :
-*  int k                      :
-*  float param                :
+*  int status                 : selection status, 0 = non selected atom(s), 1 = selected atom(s), 2 = all atom(s)
+*  int axis                   : 0 = model, 1 = eye
+*  int raxis                  : rotation axis 0 = x, 1 = y, 2 = z
+*  float param                : rotation angle
 */
-void rotate (struct project * this_proj, int i, int j, int k, float param)
+void rotate (struct project * this_proj, int status, int axis, int raxis, float param)
 {
   vec4_t qr;
   vec3_t ax[3];
   ax[0] = vec3(1.0,0.0,0.0);
   ax[1] = vec3(0.0,1.0,0.0);
   ax[2] = vec3(0.0,0.0,1.0);
-  qr = axis_to_quat(ax[k-3], param*pi/90.0);
-  rotate_quat (this_proj, qr, i, j);
+  qr = axis_to_quat(ax[raxis-3], param*pi/90.0);
+  rotate_quat (this_proj, qr, status, axis);
 }
 
 /*
 *  void random_move_this_atom (struct project * this_proj, int aid)
 *
-*  Usage:
+*  Usage: random move atom
 *
 *  struct project * this_proj : the target project
-*  int aid                    :
+*  int aid                    : the atom id
 */
 void random_move_this_atom (struct project * this_proj, int aid)
 {
@@ -336,12 +347,12 @@ void random_move_this_atom (struct project * this_proj, int aid)
 /*
 *  void random_rotate_this_object (struct project * this_proj, struct insert_object * object, double ratio, double msd)
 *
-*  Usage:
+*  Usage: random rotate an object
 *
-*  struct project * this_proj    :
-*  struct insert_object * object :
-*  double ratio                  :
-*  double msd                    :
+*  struct project * this_proj    : the target project
+*  struct insert_object * object : the object to rotate
+*  double ratio                  : ratio translation / rotation
+*  double msd                    : the MSD
 */
 void random_rotate_this_object (struct project * this_proj, struct insert_object * object, double ratio, double msd)
 {
@@ -389,12 +400,12 @@ void random_rotate_this_object (struct project * this_proj, struct insert_object
 /*
 *  void random_translate_this_object (struct project * this_proj, struct insert_object * object, double ratio, double msd)
 *
-*  Usage:
+*  Usage: random translate an object
 *
-*  struct project * this_proj    :
-*  struct insert_object * object :
-*  double ratio                  :
-*  double msd                    :
+*  struct project * this_proj    : the target project
+*  struct insert_object * object : the object to translate
+*  double ratio                  : ratio translation / rotation
+*  double msd                    : the MSD
 */
 void random_translate_this_object (struct project * this_proj, struct insert_object * object, double ratio, double msd)
 {
@@ -441,12 +452,12 @@ void random_translate_this_object (struct project * this_proj, struct insert_obj
 /*
 *  void random_move_this_object (struct project * this_proj, struct insert_object * object, int move, double msd)
 *
-*  Usage:
+*  Usage: random move object
 *
-*  struct project * this_proj    :
-*  struct insert_object * object :
-*  int move                      :
-*  double msd                    :
+*  struct project * this_proj    : the target project
+*  struct insert_object * object : the object to move
+*  int move                      : the number of times to repeat the motion
+*  double msd                    : the MSD
 */
 void random_move_this_object (struct project * this_proj, struct insert_object * object, int move, double msd)
 {
@@ -475,10 +486,10 @@ void random_move_this_object (struct project * this_proj, struct insert_object *
 /*
 *  void trigger_refresh (struct project * this_proj, atom_search * asearch)
 *
-*  Usage:
+*  Usage: refresh search tree model
 *
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
+*  atom_search * asearch      : the target atom search
 */
 void trigger_refresh (struct project * this_proj, atom_search * asearch)
 {
@@ -492,11 +503,11 @@ void trigger_refresh (struct project * this_proj, atom_search * asearch)
 /*
 *  gboolean rebuild_selection (struct project * this_proj, atom_search * asearch, int filter)
 *
-*  Usage:
+*  Usage: rebuild selection (split fragments linked thru PBC)
 *
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
-*  int filter                 :
+*  atom_search * asearch      : the target atom search
+*  int filter                 : the filter (0 = species, 1 = partial coord, 2 = total coord, 3 = fragment, 4 = molecule)
 */
 gboolean rebuild_selection (struct project * this_proj, atom_search * asearch, int filter)
 {
@@ -583,13 +594,13 @@ gboolean rebuild_selection (struct project * this_proj, atom_search * asearch, i
 /*
 *  gboolean random_move_objects (struct project * this_proj, atom_search * asearch, int numo, int filter, int obj)
 *
-*  Usage:
+*  Usage: random move object(s)
 *
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
-*  int numo                   :
-*  int filter                 :
-*  int obj                    :
+*  atom_search * asearch      : the target atom search
+*  int numo                   : the number of object(s) to move
+*  int filter                 : the filter (0 = species, 1 = partial coord, 2 = total coord, 3 = fragment, 4 = molecule)
+*  int obj                    : the object (0 = atom(s), 1 = group of atoms)
 */
 gboolean random_move_objects (struct project * this_proj, atom_search * asearch, int numo, int filter, int obj)
 {
@@ -629,10 +640,10 @@ gboolean random_move_objects (struct project * this_proj, atom_search * asearch,
 /*
 *  void random_move (struct project * this_proj, atom_search * asearch)
 *
-*  Usage:
+*  Usage: random move
 *
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
+*  atom_search * asearch      : the target atom search
 */
 void random_move (struct project * this_proj, atom_search * asearch)
 {
@@ -683,12 +694,12 @@ void random_move (struct project * this_proj, atom_search * asearch)
 /*
 *  void translate_this_atom (struct project * this_proj, int aid, int axis, vec3_t trans)
 *
-*  Usage:
+*  Usage: translate atom
 *
 *  struct project * this_proj : the target project
-*  int aid                    :
-*  int axis                   :
-*  vec3_t trans               :
+*  int aid                    : atom id
+*  int axis                   : 0 = model, 1 = eye
+*  vec3_t trans               : translation vector
 */
 void translate_this_atom (struct project * this_proj, int aid, int axis, vec3_t trans)
 {
@@ -712,12 +723,12 @@ void translate_this_atom (struct project * this_proj, int aid, int axis, vec3_t 
 /*
 *  void translate_this_object (struct project * this_proj, struct insert_object * object, int axis, vec3_t trans)
 *
-*  Usage:
+*  Usage: translate object
 *
-*  struct project * this_proj    :
-*  struct insert_object * object :
-*  int axis                      :
-*  vec3_t trans                  :
+*  struct project * this_proj    : the target project
+*  struct insert_object * object : the object to translate
+*  int axis                      : 0 = model, 1 = eye
+*  vec3_t trans                  : the translation vector
 */
 void translate_this_object (struct project * this_proj, struct insert_object * object, int axis, vec3_t trans)
 {
@@ -753,13 +764,13 @@ void translate_this_object (struct project * this_proj, struct insert_object * o
 /*
 *  void rotate_this_object (struct project * this_proj, struct insert_object * object, int axis, int rax, float ang)
 *
-*  Usage:
+*  Usage: rotate object
 *
-*  struct project * this_proj    :
-*  struct insert_object * object :
-*  int axis                      :
-*  int rax                       :
-*  float ang                     :
+*  struct project * this_proj    : the target project
+*  struct insert_object * object : the object to rotate
+*  int axis                      : 0 = model, 1 = eye
+*  int rax                       : the rotation axis
+*  float ang                     : the rotation angle
 */
 void rotate_this_object (struct project * this_proj, struct insert_object * object, int axis, int rax, float ang)
 {
@@ -805,14 +816,14 @@ void rotate_this_object (struct project * this_proj, struct insert_object * obje
 /*
 *  gboolean move_objects (struct project * this_proj, atom_search * asearch, int action, int axis, vec3_t trans, float ang)
 *
-*  Usage:
+*  Usage: move objects, return reconstruction status
 *
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
-*  int action                 :
-*  int axis                   :
-*  vec3_t trans               :
-*  float ang                  :
+*  atom_search * asearch      : the target atom search
+*  int action                 : 0 = translation, 1 = rotation
+*  int axis                   : 0 = model, 1 = eye
+*  vec3_t trans               : the translation vector, if any
+*  float ang                  : the rotation angle, if any
 */
 gboolean move_objects (struct project * this_proj, atom_search * asearch, int action, int axis, vec3_t trans, float ang)
 {
@@ -850,13 +861,13 @@ extern atom_search * duplicate_atom_search (atom_search * asearch);
 /*
 *  void move_selection (struct project * this_proj, int action, int axis, vec3_t trans, float ang)
 *
-*  Usage:
+*  Usage: move atom selection
 *
 *  struct project * this_proj : the target project
-*  int action                 :
-*  int axis                   :
-*  vec3_t trans               :
-*  float ang                  :
+*  int action                 : 0 = translation, 1 = rotation
+*  int axis                   : 0 = model, 1 = eye
+*  vec3_t trans               : the translation vector, if any
+*  float ang                  : the rotation angle, if any
 */
 void move_selection (struct project * this_proj, int action, int axis, vec3_t trans, float ang)
 {
@@ -909,12 +920,12 @@ void move_selection (struct project * this_proj, int action, int axis, vec3_t tr
 /*
 *  void update_coordinates (struct project * this_proj, int status, int axis, int action)
 *
-*  Usage:
+*  Usage: update atomic coordinates on motion
 *
 *  struct project * this_proj : the target project
-*  int status                 :
-*  int axis                   :
-*  int action                 :
+*  int status                 : selection status, 0 = non selected atom(s), 1 = selected atom(s), 2 = all atom(s)
+*  int axis                   : axis, 0 = model, 1 = eye
+*  int action                 : 0 = translation, 1 = rotation
 */
 void update_coordinates (struct project * this_proj, int status, int axis, int action)
 {
@@ -935,9 +946,9 @@ void update_coordinates (struct project * this_proj, int status, int axis, int a
 /*
 *  G_MODULE_EXPORT void repeat_move (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: repeat motion callback
 *
-*  GtkSpinButton * res :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
 *  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void repeat_move (GtkSpinButton * res, gpointer data)
@@ -949,12 +960,12 @@ G_MODULE_EXPORT void repeat_move (GtkSpinButton * res, gpointer data)
 /*
 *  void update_range_and_entry (struct project * this_proj, int i, int j, int k)
 *
-*  Usage:
+*  Usage: update motion range
 *
 *  struct project * this_proj : the target project
-*  int i                      :
-*  int j                      :
-*  int k                      :
+*  int i                      : selection status, 0 = non selected atom(s), 1 = selected atom(s), 2 = all atom(s)
+*  int j                      : axis, 0 = model, 1 = eye
+*  int k                      : entry id from 0 (0 - 2 : translation) to 5 (3 - 5 : rotation)
 */
 void update_range_and_entry (struct project * this_proj, int i, int j, int k)
 {
@@ -967,9 +978,9 @@ void update_range_and_entry (struct project * this_proj, int i, int j, int k)
 /*
 *  float get_limit (int mot, glwin * view)
 *
-*  Usage:
+*  Usage: get motion limit
 *
-*  int mot      :
+*  int mot      : translation (0) or rotation (1)
 *  glwin * view : the target glwin
 */
 float get_limit (int mot, glwin * view)
@@ -988,10 +999,10 @@ float get_limit (int mot, glwin * view)
 /*
 *  void range_has_changed (gpointer data, double v)
 *
-*  Usage:
+*  Usage: motion
 *
 *  gpointer data : the associated data pointer
-*  double v      :
+*  double v      : the value for motion
 */
 void range_has_changed (gpointer data, double v)
 {
@@ -1018,7 +1029,7 @@ void range_has_changed (gpointer data, double v)
 /*
 *  G_MODULE_EXPORT void set_move (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: motion callback - entry
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -1033,9 +1044,9 @@ G_MODULE_EXPORT void set_move (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void range_move (GtkRange * range, gpointer data)
 *
-*  Usage:
+*  Usage: motion callback - range
 *
-*  GtkRange * range :
+*  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void range_move (GtkRange * range, gpointer data)
@@ -1046,11 +1057,11 @@ G_MODULE_EXPORT void range_move (GtkRange * range, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean scroll_range_move (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage:
+*  Usage: motion callback - scroll
 *
-*  GtkRange * range     :
-*  GtkScrollType scroll :
-*  gdouble value        :
+*  GtkRange * range     : the GtkRange sending the signal
+*  GtkScrollType scroll : the associated scroll type
+*  gdouble value        : the range value
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_range_move (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
@@ -1062,7 +1073,7 @@ G_MODULE_EXPORT gboolean scroll_range_move (GtkRange * range, GtkScrollType scro
 /*
 *  G_MODULE_EXPORT void set_axis_for_motion (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: set motion axis (eye or model)
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -1086,7 +1097,7 @@ G_MODULE_EXPORT void set_axis_for_motion (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void  set_show_motion_axis (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: set show / hide motion axis toggle callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -1096,7 +1107,7 @@ G_MODULE_EXPORT void  set_show_motion_axis (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_show_motion_axis (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: set show / hide motion axis toggle callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -1132,10 +1143,10 @@ G_MODULE_EXPORT void set_show_motion_axis (GtkToggleButton * but, gpointer data)
 /*
 *  void check_motion_interactors (struct project * this_proj, atom_search * asearch)
 *
-*  Usage:
+*  Usage: add motion check button
 *
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
+*  atom_search * asearch      : the target atom search
 */
 void check_motion_interactors (struct project * this_proj, atom_search * asearch)
 {
@@ -1160,12 +1171,12 @@ void check_motion_interactors (struct project * this_proj, atom_search * asearch
 /*
 *  GtkWidget * create_axis_entries (atom_search * asearch, struct project * this_proj, int mot, int axd)
 *
-*  Usage:
+*  Usage: create axis entries
 *
-*  atom_search * asearch      :
+*  atom_search * asearch      : the target atom search
 *  struct project * this_proj : the target project
-*  int mot                    :
-*  int axd                    :
+*  int mot                    : translation (0) or rotation (1)
+*  int axd                    : axis  (0 = x, 1 = y, 2 = z)
 */
 GtkWidget * create_axis_entries (atom_search * asearch, struct project * this_proj, int mot, int axd)
 {
@@ -1201,10 +1212,10 @@ GtkWidget * create_axis_entries (atom_search * asearch, struct project * this_pr
 /*
 *  GtkWidget * add_motion_interaction (atom_search * asearch, int axd, struct project * this_proj)
 *
-*  Usage:
+*  Usage: add motion interaction widgets
 *
-*  atom_search * asearch      :
-*  int axd                    :
+*  atom_search * asearch      : the target atom search
+*  int axd                    : translation (0) or rotation (1)
 *  struct project * this_proj : the target project
 */
 GtkWidget * add_motion_interaction (atom_search * asearch, int axd, struct project * this_proj)

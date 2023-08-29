@@ -56,7 +56,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  double get_object_dim (struct insert_object * object)
 *
-*  Usage:
+*  Usage: get estimate of an object dimension
 *
 *  struct insert_object * object :
 */
@@ -82,10 +82,10 @@ double get_object_dim (struct insert_object * object)
 /*
 *  void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
 *
-*  Usage:
+*  Usage: get the barycenter of the atomic coordinates of an object
 *
-*  struct insert_object * object :
-*  gboolean adjust               :
+*  struct insert_object * object : the target insert object
+*  gboolean adjust               : center object coordinates or not
 */
 void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
 {
@@ -114,13 +114,13 @@ void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
 /*
 *  gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at)
 *
-*  Usage:
+*  Usage: rebuild atom neighbors using PBC
 *
-*  struct project * this_proj    :
-*  int step                      :
-*  struct insert_object * object :
+*  struct project * this_proj    : the target project
+*  int step                      : the MD step
+*  struct insert_object * object : the target insert object
 *  int target                    :
-*  int aid                       :
+*  int aid                       : the atom id
 *  struct atom * at              :
 *  gboolean * checked_at         :
 */
@@ -665,11 +665,11 @@ void add_object_atoms (struct insert_object * this_object, struct project * this
 /*
 *  struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove)
 *
-*  Usage:
+*  Usage: create object from all atom(s) of the same chemical species
 *
 *  struct project * this_proj : the target project
-*  int sid                    :
-*  atom_search * remove       :
+*  int sid                    : the species id
+*  atom_search * remove       : remove search, if any
 */
 struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove)
 {
@@ -707,7 +707,7 @@ struct insert_object * create_object_from_species (struct project * this_proj, i
 /*
 *  struct insert_object * create_object_from_selection (struct project * this_proj)
 *
-*  Usage:
+*  Usage: create object from atom selection
 *
 *  struct project * this_proj : the target project
 */
@@ -755,12 +755,12 @@ struct insert_object * create_object_from_selection (struct project * this_proj)
 /*
 *  struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 *
-*  Usage:
+*  Usage: create object from an atom and its nearest neighbors
 *
 *  struct project * this_proj : the target project
-*  int coord                  :
-*  int aid                    :
-*  atom_search * remove       :
+*  int coord                  : 0 = total coordination, 1 = partial coordination
+*  int aid                    : the atom id
+*  atom_search * remove       : remove search, if any
 */
 struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 {
@@ -835,12 +835,12 @@ struct insert_object * create_object_from_atom_coordination (struct project * th
 /*
 *  struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 *
-*  Usage:
+*  Usage: create object from all the atom(s) that have the same exact coordination than the target atom
 *
 *  struct project * this_proj : the target project
-*  int coord                  :
-*  int aid                    :
-*  atom_search * remove       :
+*  int coord                  : 0 = total coordination, 1 = partial coordination
+*  int aid                    : target atom id
+*  atom_search * remove       : remove search, if any
 */
 struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 {
@@ -915,12 +915,12 @@ struct insert_object * create_object_from_overall_coordination (struct project *
 /*
 *  struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove)
 *
-*  Usage:
+*  Usage: create object from a fragment or a molecule
 *
 *  struct project * this_proj : the target project
-*  int coord                  :
-*  int geo                    :
-*  atom_search * remove       :
+*  int coord                  : 2 = fragment, 3 = molecule
+*  int geo                    : fragment or molecule id
+*  atom_search * remove       : remove search, if any
 */
 struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove)
 {
@@ -1003,10 +1003,10 @@ void adjust_object_frag_coord (struct insert_object * object)
 /*
 *  int create_object_from_open_project (struct project * this_proj, int p)
 *
-*  Usage:
+*  Usage: create object from atom(s) of a project opened in the workspace
 *
 *  struct project * this_proj : the target project
-*  int p                      :
+*  int p                      : the project id of the project that contains the atom(s) to copy
 */
 int create_object_from_open_project (struct project * this_proj, int p)
 {
@@ -1096,7 +1096,7 @@ int create_object_from_open_project (struct project * this_proj, int p)
 *  int orig                   :
 *  int act                    :
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
+*  atom_search * asearch      : the target atom search
 */
 void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch)
 {
@@ -1181,13 +1181,13 @@ void clean_this_object (int orig, int act, struct project * this_proj, atom_sear
 /*
 *  void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible)
 *
-*  Usage:
+*  Usage: to insert object in project
 *
-*  int stat                   :
-*  int orig                   :
+*  int stat                   : in enum object_types
+*  int orig                   : -1 or orgin atom id
 *  struct project * this_proj : the target project
-*  atom_search * asearch      :
-*  gboolean visible           :
+*  atom_search * asearch      : the target atom search
+*  gboolean visible           : is the model edition window visible ?
 */
 void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible)
 {

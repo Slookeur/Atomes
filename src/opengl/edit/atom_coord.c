@@ -16,14 +16,21 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to correct the coordination menus and data pointer after edition
+
 *
 *  List of subroutines:
 
   int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc);
 
   void print_coord_info (struct project * this_proj, coord_info * coord);
+  void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
+                               int new_spec, int rem, int adds, int * spid, int *** tmpgeo,
+                               gboolean * showcoord[2], gboolean * showpoly[2]);
+  void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
+                        gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
+                        gboolean update_it, gboolean update_frag, gboolean update_mol);
   void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag);
 
   coord_info * duplicate_coord_info (coord_info * old_coord);
@@ -38,11 +45,11 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Usage:
 *
 *  struct project * this_proj : the target project
-*  int spec                   :
-*  int gid                    :
-*  int cid                    :
-*  int minc                   :
-*  int maxc                   :
+*  int spec                   : the number of chemical species
+*  int gid                    : the coordination type
+*  int cid                    : the coordination id
+*  int minc                   : min value for coordination id
+*  int maxc                   : max value for coordination id
 */
 int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc)
 {
@@ -64,10 +71,10 @@ int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int
 /*
 *  void print_coord_info (struct project * this_proj, coord_info * coord)
 *
-*  Usage:
+*  Usage: print coordination info
 *
 *  struct project * this_proj : the target project
-*  coord_info * coord         :
+*  coord_info * coord         : the target coordination info
 */
 void print_coord_info (struct project * this_proj, coord_info * coord)
 {
@@ -161,9 +168,9 @@ void print_coord_info (struct project * this_proj, coord_info * coord)
 /*
 *  coord_info * duplicate_coord_info (coord_info * old_coord)
 *
-*  Usage:
+*  Usage: duplicate coordination information data structure
 *
-*  coord_info * old_coord :
+*  coord_info * old_coord : the coordination info to duplicate
 */
 coord_info * duplicate_coord_info (coord_info * old_coord)
 {
@@ -199,6 +206,23 @@ coord_info * duplicate_coord_info (coord_info * old_coord)
   return new_coord;
 }
 
+/*
+*  void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
+*                               int new_spec, int rem, int adds, int * spid, int *** tmpgeo,
+*                               gboolean * showcoord[2], gboolean * showpoly[2])
+*
+*  Usage: clean coordination data and atomic coordination id data
+*
+*  struct project * this_proj : the target project
+*  atom_edition * edit        :
+*  int new_spec               : the number of chemical species
+*  int rem                    : the number of chemical species to remove
+*  int adds                   : the number of new chemical species
+*  int * spid                 : the number of atom(s) by chemical species
+*  int *** tmpgeo             : the new number of coordination [c] by chemical species [s] 'coorrd -> ntg[c][s]'
+*  gboolean * showcoord[2]    : the coordination show status
+*  gboolean * showpoly[2]     : the polyhedra show status
+*/
 void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
                              int new_spec, int rem, int adds, int * spid, int *** tmpgeo,
                              gboolean * showcoord[2], gboolean * showpoly[2])
@@ -358,6 +382,24 @@ void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
   }
 }
 
+/*
+*  void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
+*                        gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
+*                        gboolean update_it, gboolean update_frag, gboolean update_mol)
+*
+* Usage: update coordination(s), fragment(s) and molecule(s) OpenGL menus and associated data pointers
+*
+*  struct project * this_proj : the target project
+*  coord_info * coord         : the target coordination info data structure
+*  int new_spec               : the number of chemical species
+*  int nmols                  : the number of fragment(s) to add
+*  gboolean * showcoord[2]    : the coordination show status
+*  gboolean * showpoly[2]     : the polyhedra show status
+*  gboolean * showfrag        : the fragment show status
+*  gboolean update_it         : update atoms data (and GTK3 menus)
+*  gboolean update_frag       : update fragment(s) data
+*  gboolean update_mol        : update molecule(s) data
+*/
 void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
                       gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
                       gboolean update_it, gboolean update_frag, gboolean update_mol)
@@ -486,17 +528,17 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
 /*
 *  void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag)
 *
-*  Usage:
+*  Usage: recover image pointer data and OpenGL window menu structure
 *
 *  struct project * this_proj : the target project
-*  int nmols                  :
-*  int add                    :
-*  int rem                    :
-*  int * num                  :
-*  int * rec                  :
-*  int *** tmpgeo             :
-*  int *** tmpgeo             :
-*  int *** tmpgeo             :
+*  int nmols                  : the number of molecules
+*  int add                    : the number of new chemical species
+*  int rem                    : the number of chemical species to remove
+*  int * num                  : the number of atom(s) by chemical species
+*  int * rec                  : the lsit of removed chemical species, if any
+*  int *** tmpgeo             : the new number of coordination [c] by chemical species [s] 'coorrd -> ntg[c][s]'
+*  gboolean * showfrag        : the saved fragment(s) show information
+*  gboolean update_frag       : update fragment(s) / molecule(s) menus
 */
 void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag)
 {

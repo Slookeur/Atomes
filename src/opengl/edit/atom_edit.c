@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the model edition window
+
 *
 *  List of subroutines:
 
@@ -55,7 +56,7 @@ gboolean was_moved;
 /*
 *  gboolean is_atom_win_active (glwin * view)
 *
-*  Usage:
+*  Usage: is the model edition window visible ?
 *
 *  glwin * view : the target glwin
 */
@@ -71,7 +72,7 @@ gboolean is_atom_win_active (glwin * view)
 /*
 *  void clean_coord_window (struct project * this_proj)
 *
-*  Usage:
+*  Usage: update the environment configuration window after edtion
 *
 *  struct project * this_proj : the target project
 */
@@ -94,7 +95,7 @@ void clean_coord_window (struct project * this_proj)
 /*
 *  void clean_other_window_after_edit (struct project * this_proj)
 *
-*  Usage:
+*  Usage: update other windows after model edition if required
 *
 *  struct project * this_proj : the target project
 */
@@ -146,7 +147,7 @@ void clean_other_window_after_edit (struct project * this_proj)
 /*
 *  void clean_atom_win (struct project * this_proj)
 *
-*  Usage:
+*  Usage: clean model edition data
 *
 *  struct project * this_proj : the target project
 */
@@ -186,7 +187,7 @@ void clean_atom_win (struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: close model edition window
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -222,7 +223,7 @@ G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data)
 *
-*  Usage:
+*  Usage: model edition window close event callback GTK4
 *
 *  GtkWindow * widg :
 *  gpointer data    : the associated data pointer
@@ -232,7 +233,7 @@ G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage:
+*  Usage: model edition window close event callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  GdkEvent * event : the GdkEvent triggering the signal
@@ -249,7 +250,7 @@ G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpoi
 /*
 *  G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage:  reset model transformation toggle callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -261,7 +262,7 @@ G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer da
 /*
 *  G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: reset model transformation toggle callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -309,7 +310,7 @@ G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer d
 /*
 *  G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: apply edition action callback
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -349,7 +350,7 @@ G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 /*
 *  GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
 *
-*  Usage:
+*  Usage: create the model edition notebook
 *
 *  struct project * this_proj : the target project
 *  GtkWidget * vbox           : the GtkWidget sending the signal
@@ -374,12 +375,12 @@ GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
 /*
 *  atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize)
 *
-*  Usage:
+*  Usage: allocate atom search data structure
 *
-*  int proj     :
-*  int action   :
-*  int searchid :
-*  int tsize    :
+*  int proj     : the target project id
+*  int action   : the edition action
+*  int searchid : the atom search id
+*  int tsize    : the atom search object list size
 */
 atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize)
 {
@@ -403,7 +404,7 @@ atom_search * allocate_atom_search (int proj, int action, int searchid, int tsiz
 /*
 *  GtkWidget * create_edition_window (struct project * this_proj)
 *
-*  Usage:
+*  Usage: create the model edition window
 *
 *  struct project * this_proj : the target project
 */
@@ -443,10 +444,10 @@ GtkWidget * create_edition_window (struct project * this_proj)
 /*
 *  void prepare_atom_edition (gpointer data, gboolean visible)
 *
-*  Usage:
+*  Usage: prepare atom edition
 *
 *  gpointer data    : the associated data pointer
-*  gboolean visible :
+*  gboolean visible : is the window visible (1/0)
 */
 void prepare_atom_edition (gpointer data, gboolean visible)
 {
@@ -508,7 +509,7 @@ void prepare_atom_edition (gpointer data, gboolean visible)
 /*
 *  G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: open model edition window callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -519,7 +520,7 @@ G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter
 /*
 *  G_MODULE_EXPORT void action_window (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: open model edition window callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer

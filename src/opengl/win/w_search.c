@@ -16,8 +16,12 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the object search widgets, for:
+   - The atom(s) / clone(s) advanced window
+   - The model edition window (move, remove, replace, insert, random move)
+   - The crystal builder window
+
 *
 *  List of subroutines:
 

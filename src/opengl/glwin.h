@@ -58,14 +58,17 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #define NGLOBAL_SHADERS 14
 
-#define FROM_DATA    -8
-#define FROM_SPEC    -7
-#define FROM_MOL     -6
-#define FROM_FRAG    -5
-#define FROM_COORD_P -4
-#define FROM_COORD_T -3
-#define FROM_LIBRARY -2
-#define FROM_PROJECT -1
+enum object_types
+{
+  FROM_DATA = -8,
+  FROM_SPEC = -7,
+  FROM_MOL = -6,
+  FROM_FRAG = -5,
+  FROM_COORD_P = -4,
+  FROM_COORD_T = -3,
+  FROM_LIBRARY = -2,
+  FROM_PROJECT = -1
+};
 
 enum shaders {
   ATOMS = 0,

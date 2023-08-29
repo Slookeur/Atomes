@@ -360,9 +360,8 @@ void slab_alpha_has_changed (gpointer data, GLfloat v)
 *  G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
 *  Usage:
-*
-*  GtkRange * range     :
-*  GtkScrollType scroll :
+*  GtkRange * range     : the GtkRange sending the signal
+*  GtkScrollType scroll : the associated scroll type
 *  gdouble value        :
 *  gpointer data        : the associated data pointer
 */
@@ -377,7 +376,7 @@ G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType 
 *
 *  Usage:
 *
-*  GtkRange * range :
+*  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT void set_slab_alpha (GtkRange * range, gpointer data)

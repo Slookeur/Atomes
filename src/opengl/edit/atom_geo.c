@@ -14,19 +14,21 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_geo.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to insert a new atom coordination type during model edition
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z);
 
   gboolean is_in_atom_list (int aid, struct atom * new_list);
 
   void sort_partial_geo (int ** geom, int num_a);
-
+  void check_coord_modification (struct project * this_proj, int * old_id, struct atom * new_list,
+                                 struct insert_object * this_object, gboolean movtion, gboolean passivating);
 */
 
 #include "atom_edit.h"
@@ -34,10 +36,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void sort_partial_geo (int ** geom, int num_a)
 *
-*  Usage: 
+*  Usage: sort partial geometries
 *
-*  int ** geom : 
-*  int num_a   : 
+*  int ** geom : the data to sort
+*  int num_a   : the number of data point
 */
 void sort_partial_geo (int ** geom, int num_a)
 {
@@ -60,20 +62,19 @@ void sort_partial_geo (int ** geom, int num_a)
   }
 }
 
-// The geo, (0= tot, 1 = part), the new object coord, the object z list, the atom old geo, the atom old sp, the atom new sp, the global coord, the new z list
 /*
 *  int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
 *
-*  Usage: 
+*  Usage: create a new geometry, for coordination type 'id' and chemical species 'new_sp'
 *
-*  int id             : 
-*  coord_info * obj   : 
-*  int * old_z        : 
-*  int old_geo        : 
-*  int old_sp         : 
-*  int new_sp         : 
-*  coord_info * coord : 
-*  double * new_z     : 
+*  int id             : the new coordination type (0 = total, 1 = partial)
+*  coord_info * obj   : the new coordination info
+*  int * old_z        : old Z list
+*  int old_geo        : the old coordination id
+*  int old_sp         : the old chemical species id
+*  int new_sp         : the new chemical species id
+*  coord_info * coord : the old coordination info
+*  double * new_z     : new Z list
 */
 int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
 {
@@ -194,10 +195,10 @@ int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int
 /*
 *  gboolean is_in_atom_list (int aid, struct atom * new_list)
 *
-*  Usage: 
+*  Usage: is atom in list ?
 *
-*  int aid                : 
-*  struct atom * new_list : 
+*  int aid                : atom id
+*  struct atom * new_list : the atom list to check
 */
 gboolean is_in_atom_list (int aid, struct atom * new_list)
 {
@@ -211,6 +212,19 @@ gboolean is_in_atom_list (int aid, struct atom * new_list)
   return FALSE;
 }
 
+/*
+*  void check_coord_modification (struct project * this_proj, int * old_id, struct atom * new_list,
+*                                 struct insert_object * this_object, gboolean movtion, gboolean passivating)
+*
+*  Usage: check atom coordination modification on edition
+*
+*  struct project * this_proj         : the target project
+*  int * old_id                       : the old atom id list, if any
+*  struct atom * new_list             : the new atom(s) list
+*  struct insert_object * this_object : the object to insert, if any
+*  gboolean movtion                   : move or remove = 1, else : 0
+*  gboolean passivating               : passivate
+*/
 void check_coord_modification (struct project * this_proj, int * old_id, struct atom * new_list,
                                struct insert_object * this_object, gboolean movtion, gboolean passivating)
 {
