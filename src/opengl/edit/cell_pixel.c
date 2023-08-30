@@ -16,8 +16,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the pixel debugging tab for the cell edition window
+   This is only used when DEBUG option is activated at build time
+
 *
 *  List of subroutines:
 
@@ -40,11 +42,11 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void pix_info_ (int * na, int * nb, int * nc)
 *
-*  Usage:
+*  Usage: allocate pixel data pointer from Fortran90
 *
-*  int * na :
-*  int * nb :
-*  int * nc :
+*  int * na : x size
+*  int * nb : y size
+*  int * nc : z size
 */
 void pix_info_ (int * na, int * nb, int * nc)
 {
@@ -57,11 +59,11 @@ void pix_info_ (int * na, int * nb, int * nc)
 /*
 *  void send_pix_info_ (int * p, int listp[27], int * ngb)
 *
-*  Usage:
+*  Usage: retrieve pixel information from Fortran90
 *
-*  int * p       :
-*  int listp[27] :
-*  int listp[27] :
+*  int * p       : the pixel id
+*  int listp[27] : the neighbor list for pixel id
+*  int * ngb     : the number of neighbor for pixel id
 */
 void send_pix_info_ (int * p, int listp[27], int * ngb)
 {
@@ -75,10 +77,10 @@ void send_pix_info_ (int * p, int listp[27], int * ngb)
 /*
 *  GtkWidget * create_css_label (gchar * str, int id)
 *
-*  Usage:
+*  Usage: create CSS label
 *
-*  gchar * str :
-*  int id      :
+*  gchar * str : the string
+*  int id      : 0 = white, 1 = yellow
 */
 GtkWidget * create_css_label (gchar * str, int id)
 {
@@ -98,10 +100,10 @@ GtkWidget * create_css_label (gchar * str, int id)
 /*
 *  GtkWidget * attach_grid (struct project * this_proj, int init)
 *
-*  Usage:
+*  Usage: create pixel grid
 *
 *  struct project * this_proj : the target project
-*  int init                   :
+*  int init                   : the target pixel
 */
 GtkWidget * attach_grid (struct project * this_proj, int init)
 {
@@ -151,7 +153,7 @@ GtkWidget * attach_grid (struct project * this_proj, int init)
 /*
 *  void update_pix_table (struct project * this_proj)
 *
-*  Usage:
+*  Usage: prepare pixel table widget
 *
 *  struct project * this_proj : the target project
 */
@@ -203,7 +205,7 @@ void update_pix_table (struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: set pixel id callback
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -227,7 +229,7 @@ G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
 /*
 *  GtkWidget * pixels_tab (struct project * this_proj)
 *
-*  Usage:
+*  Usage: create the PBC pixels checking tab
 *
 *  struct project * this_proj : the target project
 */

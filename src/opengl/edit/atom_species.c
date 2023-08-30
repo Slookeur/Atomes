@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_species.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to look for new chemical species and modify the chemical information accordingly
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int find_spec_id (int s, int z, double * list_z);
   int search_for_new_spec (atom_edition * edit, struct insert_object * object);
@@ -33,10 +34,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  chemical_data * duplicate_chemical_data (int spec, chemical_data * chem)
 *
-*  Usage: 
+*  Usage: duplicate chemical data information
 *
-*  int spec             : 
-*  chemical_data * chem : 
+*  int spec             : the number of chemical species
+*  chemical_data * chem : the chemical data to duplicate
 */
 chemical_data * duplicate_chemical_data (int spec, chemical_data * chem)
 {
@@ -65,11 +66,11 @@ chemical_data * duplicate_chemical_data (int spec, chemical_data * chem)
 /*
 *  int find_spec_id (int s, int z, double * list_z)
 *
-*  Usage: 
+*  Usage: find species id based on Z
 *
-*  int s           : 
-*  int z           : 
-*  double * list_z : 
+*  int s           : the number of chemical species
+*  int z           : the target Z
+*  double * list_z : the list of Z values
 */
 int find_spec_id (int s, int z, double * list_z)
 {
@@ -90,10 +91,10 @@ int find_spec_id (int s, int z, double * list_z)
 /*
 *  int search_for_new_spec (atom_edition * edit, struct insert_object * object)
 *
-*  Usage: 
+*  Usage: search for new chemical species
 *
-*  atom_edition * edit           : 
-*  struct insert_object * object : 
+*  atom_edition * edit           : the edition window
+*  struct insert_object * object : the target insert object
 */
 int search_for_new_spec (atom_edition * edit, struct insert_object * object)
 {

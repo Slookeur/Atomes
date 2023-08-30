@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cbuild_info.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to create the space group information dialog
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   gchar * get_bravais (int spg);
   gchar * get_frac (float val);
@@ -27,6 +28,7 @@ If not, see <https://www.gnu.org/licenses/> */
   void get_wyck_char (float val, int ax, int bx);
   void get_extra_val (float val, int ax);
   void get_wyck_names (space_group * spg, int i, int j);
+  void set_wisible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
 
   static void fill_wyckoff_model (GtkTreeStore * store, space_group * spg);
 
@@ -68,9 +70,9 @@ gchar * wnpos[3] = {NULL, NULL, NULL};
 /*
 *  gchar * get_bravais (int spg)
 *
-*  Usage: 
+*  Usage: retrieve the space group bravais lattice
 *
-*  int spg : 
+*  int spg : the target space group id
 */
 gchar * get_bravais (int spg)
 {
@@ -103,9 +105,9 @@ gchar * get_bravais (int spg)
 /*
 *  gchar * get_frac (float val)
 *
-*  Usage: 
+*  Usage: get string for value
 *
-*  float val : 
+*  float val : the target value
 */
 gchar * get_frac (float val)
 {
@@ -122,11 +124,11 @@ gchar * get_frac (float val)
 /*
 *  void get_wyck_char (float val, int ax, int bx)
 *
-*  Usage: 
+*  Usage: convert wyckoff value to string
 *
-*  float val : 
-*  int ax    : 
-*  int bx    : 
+*  float val : the target value
+*  int ax    : axis id, x = 0, y = 1, z = 2
+*  int bx    : axis label 0 = "x", 1 = "y", 2 = "z"
 */
 void get_wyck_char (float val, int ax, int bx)
 {
@@ -185,10 +187,10 @@ void get_wyck_char (float val, int ax, int bx)
 /*
 *  void get_extra_val (float val, int ax)
 *
-*  Usage: 
+*  Usage: convert wyckoff extra value to string
 *
-*  float val : 
-*  int ax    : 
+*  float val : the target value
+*  int ax    : axis id, x = 0, y = 1, z = 2
 */
 void get_extra_val (float val, int ax)
 {
@@ -217,11 +219,11 @@ void get_extra_val (float val, int ax)
 /*
 *  void get_wyck_names (space_group * spg, int i, int j)
 *
-*  Usage: 
+*  Usage: get the name of this wyckoff position
 *
-*  space_group * spg : 
-*  int i             : 
-*  int j             : 
+*  space_group * spg : the target space group
+*  int i             : the wyckoff position id
+*  int j             : the multiplicity for this wyckoff position
 */
 void get_wyck_names (space_group * spg, int i, int j)
 {
@@ -251,7 +253,7 @@ void get_wyck_names (space_group * spg, int i, int j)
                spgpos[1][0], spgpos[1][1], spgpos[1][2], spgpos[1][3],
                spgpos[2][0], spgpos[2][1], spgpos[2][2], spgpos[2][3],
                0.0, 0.0, 0.0, 1.0);
-  if (i==spg->numw-1) m4_print (wpos);
+  if (i == spg -> numw - 1) m4_print (wpos);
   wpos = m43_mul(spg -> wyck_origin, wpos);
   for (k=0; k<3; k++)
   {
@@ -280,14 +282,13 @@ void get_wyck_names (space_group * spg, int i, int j)
   for (k=0; k<3; k++) if (! wnpos[k]) wnpos[k] = g_strdup_printf ("0");
 }
 
-
 /*
 *  static void fill_wyckoff_model (GtkTreeStore * store, space_group * spg)
 *
-*  Usage: 
+*  Usage: fill wyckoff position tree store
 *
-*  GtkTreeStore * store : 
-*  space_group * spg    : 
+*  GtkTreeStore * store : the tree store to fill
+*  space_group * spg    : the target space group
 */
 static void fill_wyckoff_model (GtkTreeStore * store, space_group * spg)
 {
@@ -322,11 +323,18 @@ static void fill_wyckoff_model (GtkTreeStore * store, space_group * spg)
   }
 }
 
-void set_wisible (GtkTreeViewColumn * col,
-                  GtkCellRenderer   * renderer,
-                  GtkTreeModel      * mod,
-                  GtkTreeIter       * iter,
-                  gpointer          data)
+/*
+*  void set_wisible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: show / hide cell renderer, if visible then add or not pango markup
+*
+*  GtkTreeViewColumn * col    : the tree view column
+*  GtkCellRenderer * renderer : the cell renderer
+*  GtkTreeModel * mod         : the tree model
+*  GtkTreeIter * iter         : the tree iter
+*  gpointer data              : the associated data pointer
+*/
+void set_wisible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i, j;
   i = GPOINTER_TO_INT(data);
@@ -344,9 +352,9 @@ void set_wisible (GtkTreeViewColumn * col,
 /*
 *  GtkWidget * create_wyckoff_tree (space_group * spg)
 *
-*  Usage: 
+*  Usage: create wyckoff position tree
 *
-*  space_group * spg : 
+*  space_group * spg : the target space group
 */
 GtkWidget * create_wyckoff_tree (space_group * spg)
 {
@@ -374,10 +382,10 @@ GtkWidget * create_wyckoff_tree (space_group * spg)
 /*
 *  GtkWidget * create_setting_info (space_group * spg, int sid)
 *
-*  Usage: 
+*  Usage: create setting information label
 *
-*  space_group * spg : 
-*  int sid           : 
+*  space_group * spg : the target space group
+*  int sid           : the setting id
 */
 GtkWidget * create_setting_info (space_group * spg, int sid)
 {
@@ -399,10 +407,10 @@ GtkWidget * create_setting_info (space_group * spg, int sid)
 /*
 *  GtkWidget * create_wyck_pts_info (space_group * spg, int sid)
 *
-*  Usage: 
+*  Usage: create wyckoff label
 *
-*  space_group * spg : 
-*  int sid           : 
+*  space_group * spg : the target space group
+*  int sid           : the setting id
 */
 GtkWidget * create_wyck_pts_info (space_group * spg, int sid)
 {
@@ -440,7 +448,7 @@ GtkWidget * create_wyck_pts_info (space_group * spg, int sid)
 /*
 *  G_MODULE_EXPORT void set_so_info (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage: change space group origin
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -476,7 +484,7 @@ G_MODULE_EXPORT void set_so_info (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void show_sg_info (GtkWidget * but, gpointer data)
 *
-*  Usage: 
+*  Usage: show space group information dialog callback
 *
 *  GtkWidget * but : the GtkWidget sending the signal
 *  gpointer data   : the associated data pointer

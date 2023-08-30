@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the add cell(s) tab in the cell edition window
+
 *
 *  List of subroutines:
 
@@ -32,9 +33,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: add cell callback
 *
-*  GtkSpinButton * res :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
 *  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
@@ -65,7 +66,7 @@ G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
 /*
 *  GtkWidget * add_extra_cell_tab (glwin * view)
 *
-*  Usage:
+*  Usage: create the add cell(s) tab
 *
 *  glwin * view : the target glwin
 */

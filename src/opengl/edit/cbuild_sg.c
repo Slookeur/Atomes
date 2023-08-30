@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cbuild_sg.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to read space group data from XML files
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int get_this_group_data (space_group * spg,  xmlNodePtr racine);
 
@@ -496,10 +497,10 @@ gchar * hmsymbols[230] = {"P 1",
 /*
 *  space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader)
 *
-*  Usage: 
+*  Usage: clean space group and corresponding XML data
 *
-*  xmlDoc * doc            : 
-*  xmlTextReaderPtr reader : 
+*  xmlDoc * doc            : the XML doc pointer to free
+*  xmlTextReaderPtr reader : the XML reader to free
 */
 space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader)
 {
@@ -512,10 +513,10 @@ space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader)
 /*
 *  int get_this_group_data (space_group * spg,  xmlNodePtr racine)
 *
-*  Usage: 
+*  Usage: retrieve space group data
 *
-*  space_group * spg  : 
-*   xmlNodePtr racine : 
+*  space_group * spg : the space group pointer to fill
+*  xmlNodePtr racine : the XML node root
 */
 int get_this_group_data (space_group * spg,  xmlNodePtr racine)
 {
@@ -636,9 +637,9 @@ int get_this_group_data (space_group * spg,  xmlNodePtr racine)
 /*
 *  space_group * read_sg_xml_file (const char * filetoread)
 *
-*  Usage: 
+*  Usage: read space group data from XML file
 *
-*  const char * filetoread : 
+*  const char * filetoread : the file to read
 */
 space_group * read_sg_xml_file (const char * filetoread)
 {

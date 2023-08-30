@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'atom_edit.h'
 *
-*  Contains: 
+*  Contains:
 
 */
 
@@ -87,7 +87,7 @@ extern G_MODULE_EXPORT void set_spec_changed (GtkComboBox * box, gpointer data);
 
 extern void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object);
 extern void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list);
-extern gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, int new_atoms, struct atom * new_list, gboolean remove);
+extern gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, struct atom * new_list, gboolean remove);
 #ifdef GTK4
 extern G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer data);
 #else

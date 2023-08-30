@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the slab cutting tab of the cell edition window
+
 *
 *  List of subroutines:
 
@@ -50,7 +51,7 @@ extern G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data
 /*
 *  G_MODULE_EXPORT void setup_passivate (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: passivate button callback
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -93,7 +94,7 @@ G_MODULE_EXPORT void setup_passivate (GtkButton * but, gpointer data)
 /*
 *  void create_slab_info (struct project * this_proj)
 *
-*  Usage:
+*  Usage: create slab information widget
 *
 *  struct project * this_proj : the target project
 */
@@ -135,7 +136,7 @@ void create_slab_info (struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void set_slab_property (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: set slab property toggle callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -145,7 +146,7 @@ G_MODULE_EXPORT void set_slab_property (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_slab_property (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: set slab property toggle callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -211,9 +212,9 @@ G_MODULE_EXPORT void set_slab_property (GtkToggleButton * but, gpointer data)
 /*
 *  GtkWidget * prepare_slab_box (int sid, struct project * this_proj)
 *
-*  Usage:
+*  Usage: create slab parameters widget box
 *
-*  int sid                    :
+*  int sid                    : the type of slab
 *  struct project * this_proj : the target project
 */
 GtkWidget * prepare_slab_box (int sid, struct project * this_proj)
@@ -254,7 +255,7 @@ GtkWidget * prepare_slab_box (int sid, struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void set_slab_option (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change slab option combo
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -292,9 +293,9 @@ G_MODULE_EXPORT void set_slab_option (GtkComboBox * box, gpointer data)
 /*
 *  GtkWidget * create_slab_param_combo (int sid, struct project * this_proj)
 *
-*  Usage:
+*  Usage:  create slab parameters combo widget
 *
-*  int sid                    :
+*  int sid                    : the slab type
 *  struct project * this_proj : the target project
 */
 GtkWidget * create_slab_param_combo (int sid, struct project * this_proj)
@@ -316,7 +317,7 @@ GtkWidget * create_slab_param_combo (int sid, struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void set_slab_type (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change slab type
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -340,10 +341,10 @@ G_MODULE_EXPORT void set_slab_type (GtkComboBox * box, gpointer data)
 /*
 *  void slab_alpha_has_changed (gpointer data, GLfloat v)
 *
-*  Usage:
+*  Usage: change slab opacity
 *
 *  gpointer data : the associated data pointer
-*  GLfloat v     :
+*  GLfloat v     : the new opacity value
 */
 void slab_alpha_has_changed (gpointer data, GLfloat v)
 {
@@ -359,10 +360,11 @@ void slab_alpha_has_changed (gpointer data, GLfloat v)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage:
+*  Usage: change slab opactiy callback - scoll
+*
 *  GtkRange * range     : the GtkRange sending the signal
 *  GtkScrollType scroll : the associated scroll type
-*  gdouble value        :
+*  gdouble value        : the range value
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
@@ -374,7 +376,7 @@ G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType 
 /*
 *  G_MODULE_EXPORT void set_slab_alpha (GtkRange * range, gpointer data)
 *
-*  Usage:
+*  Usage: change slab opactiy callback - range
 *
 *  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer
@@ -387,7 +389,7 @@ G_MODULE_EXPORT void set_slab_alpha (GtkRange * range, gpointer data)
 /*
 *  void invert_selection (struct project * this_proj)
 *
-*  Usage:
+*  Usage: invert atom(s) selection
 *
 *  struct project * this_proj : the target project
 */
@@ -444,7 +446,7 @@ void invert_selection (struct project * this_proj)
 /*
 *  G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: select / unselect atom(s) in slab callback
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -475,7 +477,7 @@ G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: cut this slab callback
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -642,7 +644,7 @@ G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
 /*
 *  GtkWidget * cut_in_model (struct project * this_proj)
 *
-*  Usage:
+*  Usage: create the cut slab tab
 *
 *  struct project * this_proj : the target project
 */

@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create a super-cell using the extra cell(s)
+
 *
 *  List of subroutines:
 
@@ -43,7 +44,7 @@ extern GtkWidget * cell_tab (int i, struct project * this_proj);
 /*
 *  gboolean ** duplicate_geom_info (struct project * this_proj)
 *
-*  Usage:
+*  Usage: duplicate coordinations show status
 *
 *  struct project * this_proj : the target project
 */
@@ -65,7 +66,7 @@ gboolean ** duplicate_geom_info (struct project * this_proj)
 /*
 *  gboolean ** duplicate_poly_info (struct project * this_proj)
 *
-*  Usage:
+*  Usage: duplicate polyhedra show status
 *
 *  struct project * this_proj : the target project
 */
@@ -87,11 +88,11 @@ gboolean ** duplicate_poly_info (struct project * this_proj)
 /*
 *  void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboolean ** pshow)
 *
-*  Usage:
+*  Usage: restore show status after
 *
-*  struct project * proj :
-*  gboolean ** cshow     :
-*  gboolean ** pshow     :
+*  struct project * proj : the target project
+*  gboolean ** cshow     : the saved coordination show status
+*  gboolean ** pshow     : the saved polyhedra show status
 */
 void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboolean ** pshow)
 {
@@ -125,7 +126,7 @@ void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboo
 /*
 *  void sens_superbut (struct project * this_proj)
 *
-*  Usage:
+*  Usage: adjust 'Create super-cell' button sensitivity
 *
 *  struct project * this_proj : the target project
 */
@@ -154,7 +155,7 @@ void sens_superbut (struct project * this_proj)
 /*
 *  void super_celling (glwin * view)
 *
-*  Usage:
+*  Usage: create super cell
 *
 *  glwin * view : the target glwin
 */
@@ -294,7 +295,7 @@ void super_celling (glwin * view)
 /*
 *  G_MODULE_EXPORT void super_cell (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: create super cell menu callback GTK4
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -305,7 +306,7 @@ G_MODULE_EXPORT void super_cell (GSimpleAction * action, GVariant * parameter, g
 /*
 *  G_MODULE_EXPORT void super_cell (GtkWidget * widg, gpointer data)
 *
-*  Usage:
+*  Usage: create super cell menu callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  gpointer data    : the associated data pointer
@@ -321,7 +322,7 @@ G_MODULE_EXPORT void super_cell (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT void super_cell_but (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: create super cell callback
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer

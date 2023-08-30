@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to build a crystal using space group, crystallogrpahic position(s) and object(s) to insert
+
 *
 *  List of subroutines:
 
@@ -28,7 +29,6 @@ If not, see <https://www.gnu.org/licenses/> */
   double get_val_from_setting (gchar * pos, gchar * sval);
   double get_value_from_pos (gchar * pos);
   double get_val_from_wyckoff (gchar * pos, gchar * wval);
-  double get_pos_from_wyckoff (vec3_t pos, vec4_t wyck, double point);
 
   gboolean same_coords (float a, float b);
   gboolean are_equal_vectors (vec3_t u, vec3_t v);
@@ -40,6 +40,9 @@ If not, see <https://www.gnu.org/licenses/> */
   void clean_this_proj (struct project * this_proj, gboolean newp);
 
   space_group * duplicate_space_group (space_group * spg);
+
+  crystal_data * allocate_crystal_data (int objects, int species);
+  crystal_data * free_crystal_data (crystal_data * cryst);
 
 */
 
@@ -61,10 +64,10 @@ gchar * tmp_pos = NULL;
 /*
 *  double get_val_from_setting (gchar * pos, gchar * sval)
 *
-*  Usage:
+*  Usage: get value from space group setting
 *
-*  gchar * pos  :
-*  gchar * sval :
+*  gchar * pos  : the position "a", "b" or "c"
+*  gchar * sval : the space group setting
 */
 double get_val_from_setting (gchar * pos, gchar * sval)
 {
@@ -101,9 +104,9 @@ double get_val_from_setting (gchar * pos, gchar * sval)
 /*
 *  double get_value_from_pos (gchar * pos)
 *
-*  Usage:
+*  Usage: get position double value from string description
 *
-*  gchar * pos :
+*  gchar * pos : the string description
 */
 double get_value_from_pos (gchar * pos)
 {
@@ -126,9 +129,9 @@ double get_value_from_pos (gchar * pos)
 /*
 *  void get_origin (space_group * spg)
 *
-*  Usage:
+*  Usage: get space group origin matrices
 *
-*  space_group * spg :
+*  space_group * spg : the target space group
 */
 void get_origin (space_group * spg)
 {
@@ -173,9 +176,9 @@ void get_origin (space_group * spg)
 /*
 *  void compute_lattice_properties (cell_info * cell)
 *
-*  Usage:
+*  Usage: compute lattice parameters following cell description
 *
-*  cell_info * cell :
+*  cell_info * cell : the target cell description
 */
 void compute_lattice_properties (cell_info * cell)
 {
@@ -291,9 +294,9 @@ void compute_lattice_properties (cell_info * cell)
 /*
 *  int test_lattice (builder_edition * cbuilder)
 *
-*  Usage:
+*  Usage: test lattice parameters
 *
-*  builder_edition * cbuilder :
+*  builder_edition * cbuilder : the builder edition with the lattice parameters
 */
 int test_lattice (builder_edition * cbuilder)
 {
@@ -376,10 +379,10 @@ int test_lattice (builder_edition * cbuilder)
 /*
 *  double get_val_from_wyckoff (gchar * pos, gchar * wval)
 *
-*  Usage:
+*  Usage: get point value from wyckoff position
 *
-*  gchar * pos  :
-*  gchar * wval :
+*  gchar * pos  : "x", "y" or "z"
+*  gchar * wval : wyckoff position vector
 */
 double get_val_from_wyckoff (gchar * pos, gchar * wval)
 {
@@ -415,10 +418,10 @@ double get_val_from_wyckoff (gchar * pos, gchar * wval)
 /*
 *  void clean_this_proj (struct project * this_proj, gboolean newp)
 *
-*  Usage:
+*  Usage: clean project and/or associated cell parameters
 *
 *  struct project * this_proj : the target project
-*  gboolean newp              :
+*  gboolean newp              : is this a new project ?
 */
 void clean_this_proj (struct project * this_proj, gboolean newp)
 {
@@ -445,10 +448,10 @@ void clean_this_proj (struct project * this_proj, gboolean newp)
 /*
 *  gboolean same_coords (float a, float b)
 *
-*  Usage:
+*  Usage: test if values are similar, allowing a 0.0001 difference
 *
-*  float a :
-*  float b :
+*  float a : 1st value
+*  float b : 2nd value
 */
 gboolean same_coords (float a, float b)
 {
@@ -460,10 +463,10 @@ gboolean same_coords (float a, float b)
 /*
 *  gboolean are_equal_vectors (vec3_t u, vec3_t v)
 *
-*  Usage:
+*  Usage: comparing atomic coordinates vectors
 *
-*  vec3_t u :
-*  vec3_t v :
+*  vec3_t u : 1st vector
+*  vec3_t v : 2nd vector
 */
 gboolean are_equal_vectors (vec3_t u, vec3_t v)
 {
@@ -477,11 +480,11 @@ gboolean are_equal_vectors (vec3_t u, vec3_t v)
 /*
 *  int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos)
 *
-*  Usage:
+*  Usage: was this position already saved ?
 *
-*  vec3_t * all_pos :
-*  int num_pos      :
-*  vec3_t pos       :
+*  vec3_t * all_pos : the list of saved atomic coordinates
+*  int num_pos      : the number of saved atomic coordinates
+*  vec3_t pos       : the vector to test
 */
 int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos)
 {
@@ -494,25 +497,11 @@ int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos)
 }
 
 /*
-*  double get_pos_from_wyckoff (vec3_t pos, vec4_t wyck, double point)
-*
-*  Usage:
-*
-*  vec3_t pos   :
-*  vec4_t wyck  :
-*  double point :
-*/
-double get_pos_from_wyckoff (vec3_t pos, vec4_t wyck, double point)
-{
-  return pos.x*wyck.w + pos.y*wyck.x + pos.z*wyck.y + wyck.z + point;
-}
-
-/*
 *  space_group * duplicate_space_group (space_group * spg)
 *
-*  Usage:
+*  Usage: duplicate space ground information
 *
-*  space_group * spg :
+*  space_group * spg : the space group to duplicate
 */
 space_group * duplicate_space_group (space_group * spg)
 {
@@ -551,6 +540,14 @@ typedef struct {
   vec3_t ** position;
 } crystal_data;
 
+/*
+*  crystal_data * allocate_crystal_data (int objects, int species)
+*
+*  Usage: allocate crystal data pointer
+*
+*  int objects : the number of object(s)
+*  int species : the number of chemical species
+*/
 crystal_data * allocate_crystal_data (int objects, int species)
 {
   crystal_data * cryst = g_malloc0(sizeof*cryst);
@@ -571,6 +568,13 @@ crystal_data * allocate_crystal_data (int objects, int species)
   return cryst;
 }
 
+/*
+*  crystal_data * free_crystal_data (crystal_data * cryst)
+*
+*  Usage: free crystal data pointer
+*
+*  crystal_data * cryst : the data pointer to free
+*/
 crystal_data * free_crystal_data (crystal_data * cryst)
 {
   if (cryst -> at_by_object) g_free (cryst -> at_by_object);
@@ -592,11 +596,11 @@ crystal_data * free_crystal_data (crystal_data * cryst)
 /*
 *  gboolean pos_not_taken (int pos, int dim, int * tab)
 *
-*  Usage:
+*  Usage: is this position already taken ?
 *
-*  int pos   :
-*  int dim   :
-*  int * tab :
+*  int pos   : position id
+*  int dim   : number of position(s)
+*  int * tab : the list of position(s)
 */
 gboolean pos_not_taken (int pos, int dim, int * tab)
 {
@@ -608,11 +612,16 @@ gboolean pos_not_taken (int pos, int dim, int * tab)
 /*
 *  gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_cell)
 *
-*  Usage:
+*  Usage: adjust the crystallograpĥic sites occupancy
 *
-*  crystal_data * cryst :
-*  int occupying        :
-*  int tot_cell         :
+*  crystal_data * cryst : the crystal
+*  int occupying        : how to adjust occupancy:
+      0 = Random for the initial cell only,
+      1 = Random cell by cell,
+      2 = Completely random
+      3 = Successively
+      4 = Alternatively
+*  int tot_cell         : the total number of cell to build
 */
 gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_cell)
 {
@@ -847,13 +856,13 @@ gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_c
 /*
 *  int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
 *
-*  Usage:
+*  Usage: build crystal
 *
-*  gboolean visible           :
+*  gboolean visible           : is the crystal builder window visible ?
 *  struct project * this_proj : the target project
-*  gboolean to_wrap           :
-*  gboolean show_clones       :
-*  cell_info * cell           :
+*  gboolean to_wrap           : wrap or not atomic coordinates in the unit cell
+*  gboolean show_clones       : show / hide clone(s)
+*  cell_info * cell           : the cell info that contains the crystal description
 *  GtkWidget * widg           : the GtkWidget sending the signal
 */
 int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)

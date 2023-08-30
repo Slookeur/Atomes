@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create insert objects
+
 *
 *  List of subroutines:
 
@@ -36,6 +37,8 @@ If not, see <https://www.gnu.org/licenses/> */
   void create_object_from_library (int p);
   void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion);
   void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion);
+  void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
+                         int o_step, int numa, int * old_id, gboolean alloc_new_id, atom_search * remove);
   void adjust_object_frag_coord (struct insert_object * object);
   void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch);
   void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible);
@@ -114,15 +117,15 @@ void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
 /*
 *  gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at)
 *
-*  Usage: rebuild atom neighbors using PBC
+*  Usage: rebuild target atom id coordinates using PBC
 *
 *  struct project * this_proj    : the target project
 *  int step                      : the MD step
 *  struct insert_object * object : the target insert object
-*  int target                    :
+*  int target                    : the target atom id to correct
 *  int aid                       : the atom id
-*  struct atom * at              :
-*  gboolean * checked_at         :
+*  struct atom * at              : the target atom
+*  gboolean * checked_at         : the list of already checked/corrected atom coordinates id
 */
 gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at)
 {
@@ -157,11 +160,11 @@ gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct in
 /*
 *  void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
 *
-*  Usage:
+*  Usage: reconstruct the project bond(s)/clone(s) lists after reconstruction using PBC
 *
 *  struct project * this_proj : the target project
-*  int ifcl                   :
-*  int * bcid                 :
+*  int ifcl                   : number of clone bond(s) removed
+*  int * bcid                 : the removed clone bond(s) atoms id
 */
 void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
 {
@@ -240,11 +243,11 @@ void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
 /*
 *  void reconstruct_coordinates (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 *
-*  Usage:
+*  Usage: reconstruct object atomic coordinates using PBC
 *
-*  struct project * this_proj         :
-*  struct insert_object * this_object :
-*  gboolean upcoord                   :
+*  struct insert_object * this_object : the target project
+*  struct project * this_proj         : the target insert object
+*  gboolean upcoord                   : reconstruction of atomic coordinates using PBC ?
 */
 void reconstruct_coordinates (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 {
@@ -298,11 +301,11 @@ void reconstruct_coordinates (struct project * this_proj, struct insert_object *
 /*
 *  void reconstruct_coordinates_for_object (struct insert_object * this_object, struct project * this_proj, gboolean upcoord)
 *
-*  Usage:
+*  Usage: target rebuild of object atomic coordinates using PBC and preserve new atomic coordinates for project
 *
-*  struct insert_object * this_object :
-*  struct project * this_proj         :
-*  gboolean upcoord                   :
+*  struct insert_object * this_object : the target project
+*  struct project * this_proj         : the target insert object
+*  gboolean upcoord                   : reconstruction of atomic coordinates using PBC ?
 */
 void reconstruct_coordinates_for_object (struct insert_object * this_object, struct project * this_proj, gboolean upcoord)
 {
@@ -337,11 +340,11 @@ void reconstruct_coordinates_for_object (struct insert_object * this_object, str
 /*
 *  void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 *
-*  Usage:
+*  Usage: correct the atomic coordinates for 'this_object'
 *
-*  struct project * this_proj         :
-*  struct insert_object * this_object :
-*  gboolean upcoord                   :
+*  struct project * this_proj         : the target project
+*  struct insert_object * this_object : the target insert object
+*  gboolean upcoord                   : reconstruction of atomic coordinates using PBC ?
 */
 void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 {
@@ -368,7 +371,7 @@ void correct_coordinates_for_object (struct project * this_proj, struct insert_o
 /*
 *  tint ulam_coord (glwin * view)
 *
-*  Usage:
+*  Usage: shift insertion position for object not to have overlapping objects for multiple/repeated insertions
 *
 *  glwin * view : the target glwin
 */
@@ -395,9 +398,9 @@ struct insert_object * lib_object;
 /*
 *  struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
 *
-*  Usage:
+*  Usage: duplicate an insert object
 *
-*  struct insert_object * old_obj :
+*  struct insert_object * old_obj : the insert object to duplicate
 */
 struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
 {
@@ -435,9 +438,9 @@ struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
 /*
 *  void create_object_from_library (int p)
 *
-*  Usage:
+*  Usage: create object using the molecular library
 *
-*  int p :
+*  int p : the project id of the library molecule in the workspace
 */
 void create_object_from_library (int p)
 {
@@ -478,11 +481,11 @@ void create_object_from_library (int p)
 /*
 *  int in_object_bond_list (struct insert_object * object, int aid, int bid)
 *
-*  Usage:
+*  Usage: is there a bond between atom aid and atom bid ?
 *
-*  struct insert_object * object :
-*  int aid                       :
-*  int bid                       :
+*  struct insert_object * object : the target insert object
+*  int aid                       : 1st atom id
+*  int bid                       : 2nd atom id
 */
 int in_object_bond_list (struct insert_object * object, int aid, int bid)
 {
@@ -498,12 +501,12 @@ int in_object_bond_list (struct insert_object * object, int aid, int bid)
 /*
 *  void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion)
 *
-*  Usage:
+*  Usage: clean the object neigbours list
 *
-*  struct project * this_proj    :
-*  struct insert_object * object :
-*  int * new_id                  :
-*  gboolean movtion              :
+*  struct project * this_proj    : the target project
+*  struct insert_object * object : the target insert object
+*  int * new_id                  : list of atom's old id in the project 'this_proj'
+*  gboolean movtion              : reconstruction of atomic coordinates using PBC ?
 */
 void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion)
 {
@@ -552,13 +555,13 @@ void clean_object_vois (struct project * this_proj, struct insert_object * objec
 /*
 *  void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion)
 *
-*  Usage:
+*  Usage: create the object bond list, and adjust the bond's atom id
 *
-*  struct project * proj         :
-*  int o_step                    :
-*  struct insert_object * object :
-*  int * new_id                  :
-*  gboolean movtion              :
+*  struct project * proj         : the target project
+*  int o_step                    : the MD step
+*  struct insert_object * object : the target insert object
+*  int * new_id                  : list of atom's old id in the project 'this_proj'
+*  gboolean movtion              : reconstruction of atomic coordinates using PBC ?
 */
 void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion)
 {
@@ -625,8 +628,22 @@ void clean_object_bonds (struct project * proj, int o_step, struct insert_object
   if (new_id) clean_object_vois (proj, object, new_id, movtion);
 }
 
+/*
+*  void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
+*                         int o_step, int numa, int * old_id, gboolean alloc_new_id, atom_search * remove)
+*
+* Usage: add atom list to insert object
+*
+*  struct insert_object * this_object : the target insert object
+*  struct project * this_proj         : the target project
+*  int o_step                         : the MD step
+*  int numa                           : number of atom(s)
+*  int * old_id                       : list of atom's old id in the project 'this_proj'
+*  gboolean alloc_new_id              : do atom(s) id change ? (partial copy or not)
+*  atom_search * remove               : remove search, if any
+*/
 void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
-                       int status, int cid, int o_step, int numa, int * old_id, gboolean alloc_new_id, atom_search * remove)
+                       int o_step, int numa, int * old_id, gboolean alloc_new_id, atom_search * remove)
 {
   int i, j, k;
   this_object -> atoms = numa;
@@ -700,7 +717,7 @@ struct insert_object * create_object_from_species (struct project * this_proj, i
       i ++;
     }
   }
-  add_object_atoms (this_object, this_proj, sid, -1, o_step, i, new_id, alloc_new_id, remove);
+  add_object_atoms (this_object, this_proj, o_step, i, new_id, alloc_new_id, remove);
   return this_object;
 }
 
@@ -743,7 +760,7 @@ struct insert_object * create_object_from_selection (struct project * this_proj)
       i ++;
     }
   }
-  add_object_atoms (this_object, this_proj, -1, -1, o_step, i, new_id, alloc_new_id, NULL);
+  add_object_atoms (this_object, this_proj, o_step, i, new_id, alloc_new_id, NULL);
   if (pasted_todo)
   {
     g_free (pasted_todo);
@@ -908,7 +925,7 @@ struct insert_object * create_object_from_overall_coordination (struct project *
   }
   this_object -> name = g_strdup_printf ("All %s - atom(s)", str);
   g_free (str);
-  add_object_atoms (this_object, this_proj, -1, -1, o_step, j, new_id, alloc_new_id, remove);
+  add_object_atoms (this_object, this_proj, o_step, j, new_id, alloc_new_id, remove);
   return this_object;
 }
 
@@ -953,18 +970,16 @@ struct insert_object * create_object_from_frag_mol (struct project * this_proj, 
       i++;
     }
   }
-  add_object_atoms (this_object, this_proj, geo, coord, o_step, i, new_id, alloc_new_id, remove);
+  add_object_atoms (this_object, this_proj, o_step, i, new_id, alloc_new_id, remove);
   return this_object;
 }
-
-extern int test_this_fragment (int natomes, int fcoord, int fid, struct atom * new_list, int tmpbond[2], int ** tmpbondid[2], int * old_id, gboolean remove);
 
 /*
 *  void adjust_object_frag_coord (struct insert_object * object)
 *
-*  Usage:
+*  Usage: adjust object number of fragment(s)
 *
-*  struct insert_object * object :
+*  struct insert_object * object : the target insert object
 */
 void adjust_object_frag_coord (struct insert_object * object)
 {
@@ -997,7 +1012,7 @@ void adjust_object_frag_coord (struct insert_object * object)
     object -> at_list[i].coord[2] -= j;
     object -> at_list[i].id = i;
   }
-  remove_bonds_from_project (NULL, object, NULL, object -> atoms, & object -> at_list[0], FALSE);
+  remove_bonds_from_project (NULL, object, NULL, & object -> at_list[0], FALSE);
 }
 
 /*
@@ -1091,10 +1106,10 @@ int create_object_from_open_project (struct project * this_proj, int p)
 /*
 *  void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch)
 *
-*  Usage:
+*  Usage: clean object data
 *
-*  int orig                   :
-*  int act                    :
+*  int orig                   : - (fragmol id/species id +1), -1, or, orgin atom id
+*  int act                    : action in enum 'actions'
 *  struct project * this_proj : the target project
 *  atom_search * asearch      : the target atom search
 */
@@ -1184,7 +1199,7 @@ void clean_this_object (int orig, int act, struct project * this_proj, atom_sear
 *  Usage: to insert object in project
 *
 *  int stat                   : in enum object_types
-*  int orig                   : -1 or orgin atom id
+*  int orig                   : - (fragmol id/species id +1), -1, or, orgin atom id
 *  struct project * this_proj : the target project
 *  atom_search * asearch      : the target atom search
 *  gboolean visible           : is the model edition window visible ?

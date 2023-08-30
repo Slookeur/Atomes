@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the shift cell center tab
+
 *
 *  List of subroutines:
 
@@ -45,13 +46,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density)
 *
-*  Usage:
+*  Usage: modify atomic coordinates in lattice
 *
 *  struct project * this_proj : the target project
-*  mat4_t * dlat              :
-*  mat4_t * drec              :
-*  int refresh                :
-*  int density                :
+*  mat4_t * dlat              : lattice vectors matrix
+*  mat4_t * drec              : reciprocal vectors matrix
+*  int refresh                : refresh rendering data
+*  int density                : 0= shift, 1 = density modification
 */
 void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density)
 {
@@ -188,11 +189,11 @@ void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, m
 /*
 *  void shift_it (vec3_t shift, int refresh, int proj)
 *
-*  Usage:
+*  Usage: shift atomic coordinates
 *
-*  vec3_t shift :
-*  int refresh  :
-*  int proj     :
+*  vec3_t shift : the shift vector
+*  int refresh  : refresh rendering data
+*  int proj     : the target project id
 */
 void shift_it (vec3_t shift, int refresh, int proj)
 {
@@ -205,10 +206,10 @@ void shift_it (vec3_t shift, int refresh, int proj)
 /*
 *  void adjust_it (int refresh, int proj)
 *
-*  Usage:
+*  Usage: adjust atomic coordinates
 *
-*  int refresh :
-*  int proj    :
+*  int refresh : refresh rendering data
+*  int proj    : the project id
 */
 void adjust_it (int refresh, int proj)
 {
@@ -242,10 +243,10 @@ void adjust_it (int refresh, int proj)
 /*
 *  void shift_has_changed (gpointer data, double val)
 *
-*  Usage:
+*  Usage: shift atomic coordinates
 *
 *  gpointer data : the associated data pointer
-*  double val    :
+*  double val    : the shift value
 */
 void shift_has_changed (gpointer data, double val)
 {
@@ -341,7 +342,7 @@ void shift_has_changed (gpointer data, double val)
 /*
 *  G_MODULE_EXPORT void set_shift (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: set atomic coordinates shift
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -356,11 +357,11 @@ G_MODULE_EXPORT void set_shift (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean scroll_shift_coord (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage:
+*  Usage: shift coordinates callback - scroll
 *
 *  GtkRange * range     : the GtkRange sending the signal
 *  GtkScrollType scroll : the associated scroll type
-*  gdouble value        :
+*  gdouble value        : the range value
 *  gpointer data        : the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_shift_coord (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
@@ -372,7 +373,7 @@ G_MODULE_EXPORT gboolean scroll_shift_coord (GtkRange * range, GtkScrollType scr
 /*
 *  G_MODULE_EXPORT void shift_coord (GtkRange * range, gpointer data)
 *
-*  Usage:
+*  Usage: shift coordinates callback - range
 *
 *  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer
@@ -385,10 +386,10 @@ G_MODULE_EXPORT void shift_coord (GtkRange * range, gpointer data)
 /*
 *  GtkWidget * create_cell_entries (struct project * this_proj, int i)
 *
-*  Usage:
+*  Usage: create the cell entry widgets
 *
 *  struct project * this_proj : the target project
-*  int i                      :
+*  int i                      : target parameter/action id (shift, cut, density)
 */
 GtkWidget * create_cell_entries (struct project * this_proj, int i)
 {
@@ -463,7 +464,7 @@ GtkWidget * create_cell_entries (struct project * this_proj, int i)
 /*
 *  GtkWidget * create_shift_box (struct project * this_proj)
 *
-*  Usage:
+*  Usage: create shift box widgets
 *
 *  struct project * this_proj : the target project
 */
@@ -482,7 +483,7 @@ GtkWidget * create_shift_box (struct project * this_proj)
 /*
 *  void wrapping (glwin * view)
 *
-*  Usage:
+*  Usage: wrapping atomic coordinates
 *
 *  glwin * view : the target glwin
 */
@@ -518,7 +519,7 @@ void wrapping (glwin * view)
 /*
 *  G_MODULE_EXPORT void wrap_coord (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: wrap atomic coordinates callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -528,7 +529,7 @@ G_MODULE_EXPORT void wrap_coord (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void wrap_coord (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: wrap atomic coordinates callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -544,7 +545,7 @@ G_MODULE_EXPORT void wrap_coord (GtkToggleButton * but, gpointer data)
 /*
 *  GtkWidget * shift_center_tab (struct project * this_proj)
 *
-*  Usage:
+*  Usage: create the shift cell center tab
 *
 *  struct project * this_proj : the target project
 */

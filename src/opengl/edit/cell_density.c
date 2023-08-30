@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create the density adjustement tab in the cell edition window
+
 *
 *  List of subroutines:
 
@@ -35,12 +36,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void display_density (cell_edition * cell, double vol, double dens, double adens)
 *
-*  Usage:
+*  Usage: create density information widgets
 *
-*  cell_edition * cell :
-*  double vol          :
-*  double dens         :
-*  double adens        :
+*  cell_edition * cell : the target cell edition
+*  double vol          : the volume
+*  double dens         : the density
+*  double adens        : the atomic density
 */
 void display_density (cell_edition * cell, double vol, double dens, double adens)
 {
@@ -73,7 +74,7 @@ void display_density (cell_edition * cell, double vol, double dens, double adens
 /*
 *  G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: homogeneous rescaling toggle callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -83,7 +84,7 @@ G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: homogeneous rescaling toggle callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -103,7 +104,7 @@ G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
 /*
 *  GtkWidget * adjust_density_tab (struct project * this_proj)
 *
-*  Usage:
+*  Usage: create the density tab
 *
 *  struct project * this_proj : the target project
 */

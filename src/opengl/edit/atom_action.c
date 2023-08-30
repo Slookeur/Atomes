@@ -581,7 +581,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     {
       if (asearch -> update_bonding)
       {
-        showfrag = remove_bonds_from_project (this_proj, NULL, old_id, new_atoms, new_list, ((asearch -> action == DISPL) || (asearch -> action == RANMOVE)) ? FALSE : TRUE);
+        showfrag = remove_bonds_from_project (this_proj, NULL, old_id, new_list, ((asearch -> action == DISPL) || (asearch -> action == RANMOVE)) ? FALSE : TRUE);
       }
     }
     else
