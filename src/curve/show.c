@@ -28,8 +28,7 @@ If not, see <https://www.gnu.org/licenses/> */
   G_MODULE_EXPORT gboolean to_hide_curve (GtkWidget * thecurve, GdkEvent * event, gpointer data);
 
   void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpointer curve);
-
-  G_MODULE_EXPORT void hide_curve (GtkWidget * curve, gpointer data);
+  void hide_curve (gpointer data);
 
 */
 
@@ -48,7 +47,7 @@ extern void adjust_tool_model (int calc, int curve, gchar * string_path);
 /*
 *  gboolean show_curve (GtkWidget * grwdget, cairo_t * cr, gpointer curve)
 *
-*  Usage:
+*  Usage: show curve callback GTK4
 *
 *  GtkWidget * grwdget : the GtkWidget sending the signal
 *  cairo_t * cr        : the cairo drawing context to use for the draw
@@ -59,7 +58,7 @@ gboolean show_curve (GtkWidget * grwdget, cairo_t * cr, gpointer curve)
 /*
 *  void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpointer curve)
 *
-*  Usage:
+*  Usage: show curve callback GTK3
 *
 *  GtkDrawingArea * area : the GtkDrawingArea sending the signal
 *  cairo_t * cr          : the cairo drawing context to use for the draw
@@ -296,14 +295,13 @@ void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpo
 }
 
 /*
-*  G_MODULE_EXPORT void hide_curve (GtkWidget * curve, gpointer data)
+*  void hide_curve (gpointer data)
 *
-*  Usage:
+*  Usage: hide curve
 *
-*  GtkWidget * curve : the GtkWidget sending the signal
-*  gpointer data     : the associated data pointer
+*  gpointer data : the associated data pointer
 */
-G_MODULE_EXPORT void hide_curve (GtkWidget * curve, gpointer data)
+void hide_curve (gpointer data)
 {
   tint * idc = (tint *)data;
   gtk_widget_hide (get_project_by_id(idc -> a) -> curves[idc -> b][idc -> c] -> window);
@@ -317,7 +315,7 @@ G_MODULE_EXPORT void hide_curve (GtkWidget * curve, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean to_hide_curve (GtkWindow * thecurve, gpointer data)
 *
-*  Usage:
+*  Usage: hide curve callback GTK4
 *
 *  GtkWindow * thecurve : the GtkWindow sending the signal
 *  gpointer data        : the associated data pointer
@@ -327,7 +325,7 @@ G_MODULE_EXPORT gboolean to_hide_curve (GtkWindow * thecurve, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean to_hide_curve (GtkWidget * thecurve, GdkEvent * event, gpointer data)
 *
-*  Usage:
+*  Usage: hide curve callback GTK3
 *
 *  GtkWidget * thecurve : the GtkWidget sending the signal
 *  GdkEvent * event     : the GdkEvent triggering the signal
@@ -336,6 +334,6 @@ G_MODULE_EXPORT gboolean to_hide_curve (GtkWindow * thecurve, gpointer data)
 G_MODULE_EXPORT gboolean to_hide_curve (GtkWidget * thecurve, GdkEvent * event, gpointer data)
 #endif
 {
-  hide_curve ((GtkWidget *)thecurve, data);
+  hide_curve (data);
   return TRUE;
 }

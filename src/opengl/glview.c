@@ -673,7 +673,7 @@ void motion (glwin * view, gint x, gint y, GdkModifierType state)
 /*
 *  G_MODULE_EXPORT gboolean on_motion (GtkWidget * widg, GdkEvent * event, gpointer data)
 *
-*  Usage: handle mouse motion event in the OpenGL window
+*  Usage: handle mouse motion event in the OpenGL window GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  GdkEvent * event : the GdkEvent triggering the signal
@@ -705,7 +705,7 @@ G_MODULE_EXPORT gboolean on_motion (GtkWidget * widg, GdkEvent * event, gpointer
 /*
 *  G_MODULE_EXPORT void on_glwin_pointer_motion (GtkEventControllerMotion * motc, gdouble x, gdouble y, gpointer data)
 *
-*  Usage: handle mouse motion event in the OpenGL window
+*  Usage: handle mouse motion event in the OpenGL window GTK4
 *
 *  GtkEventControllerMotion * motc : The GtkEvenController sending the signal
 *  gdouble x                       : x position
@@ -778,17 +778,17 @@ void render_this_gl_window (glwin * view, GtkWidget * widg, gint button)
 }
 
 /*
-*  void glwin_lib_pressed (double x, double y, guint event_type, int event_button, gpointer data)
+*  void glwin_lib_pressed (double x, double y, guint event_type, guint event_button, gpointer data)
 *
 *  Usage: handle mouse button event on the molecular library OpenGL window
 *
-*  double x         : x position
-*  double y         : y position
-*  guint event_type : event type
-*  int event_button : event button
-*  gpointer data    : the associated data pointer
+*  double x           : x position
+*  double y           : y position
+*  guint event_type   : event type
+*  guint event_button : event button
+*  gpointer data      : the associated data pointer
 */
-void glwin_lib_pressed (double x, double y, guint event_type, int event_button, gpointer data)
+void glwin_lib_pressed (double x, double y, guint event_type, guint event_button, gpointer data)
 {
   glwin * view = (glwin *) data;
   switch (event_type)
@@ -968,7 +968,7 @@ G_MODULE_EXPORT void on_glwin_button_pressed (GtkGesture * gesture, int n_press,
 /*
 *  G_MODULE_EXPORT void on_glwin_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage: mouse button release signal on the OpenGL window
+*  Usage: mouse button released signal on the OpenGL window
 *
 *  GtkGesture * gesture : the GtkGesture sending the signal
 *  int n_press          : number of times it was pressed

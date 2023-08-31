@@ -108,7 +108,7 @@ extern int a, b, c, d;
 /*
 *  int get_active_axis ()
 *
-*  Usage:
+*  Usage: get active axis
 */
 int get_active_axis ()
 {
@@ -118,7 +118,7 @@ int get_active_axis ()
 /*
 *  G_MODULE_EXPORT void set_axis_min (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: set axis min
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -151,7 +151,7 @@ G_MODULE_EXPORT void set_axis_min (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis_max (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: set axis max
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -181,7 +181,7 @@ G_MODULE_EXPORT void set_axis_max (GtkEntry * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_max_div (GtkEntry * maj, gpointer data)
 *
-*  Usage:
+*  Usage: set number of major tick divisions
 *
 *  GtkEntry * maj : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -213,10 +213,10 @@ G_MODULE_EXPORT void set_max_div (GtkEntry * maj, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_min_div_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: set number of minor tick division(s)
 *
-*  GtkSpinButton * res :
-*  gpointer data       :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_min_div_spin (GtkSpinButton * res, gpointer data)
 {
@@ -236,10 +236,10 @@ G_MODULE_EXPORT void set_min_div_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_ticks_size_major_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: set major ticks size
 *
-*  GtkSpinButton * res :
-*  gpointer data       :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_ticks_size_major_spin (GtkSpinButton * res, gpointer data)
 {
@@ -259,10 +259,10 @@ G_MODULE_EXPORT void set_ticks_size_major_spin (GtkSpinButton * res, gpointer da
 /*
 *  G_MODULE_EXPORT void set_ticks_size_minor_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: set minor ticks size
 *
-*  GtkSpinButton * res :
-*  gpointer data       :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_ticks_size_minor_spin (GtkSpinButton * res, gpointer data)
 {
@@ -284,10 +284,10 @@ G_MODULE_EXPORT void set_ticks_size_minor_spin (GtkSpinButton * res, gpointer da
 /*
 *  G_MODULE_EXPORT void set_lab_digit_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: set ticks label number of digit(s)
 *
-*  GtkSpinButton * res :
-*  gpointer data       :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_lab_digit_spin (GtkSpinButton * res, gpointer data)
 {
@@ -309,10 +309,10 @@ G_MODULE_EXPORT void set_lab_digit_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_lab_shift_x_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: set ticks label position shift on x axis
 *
-*  GtkSpinButton * res :
-*  gpointer data       :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_lab_shift_x_spin (GtkSpinButton * res, gpointer data)
 {
@@ -334,10 +334,10 @@ G_MODULE_EXPORT void set_lab_shift_x_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_lab_shift_y_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: set ticks label position shift on y axis
 *
-*  GtkSpinButton * res :
-*  gpointer data       :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_lab_shift_y_spin (GtkSpinButton * res, gpointer data)
 {
@@ -359,10 +359,10 @@ G_MODULE_EXPORT void set_lab_shift_y_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis_title_x_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: set axis title position shift on x axis
 *
-*  GtkSpinButton * res :
-*  gpointer data       :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_title_x_spin (GtkSpinButton * res, gpointer data)
 {
@@ -382,10 +382,10 @@ G_MODULE_EXPORT void set_axis_title_x_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis_title_y_spin (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: set axis title position shift on y axis
 *
-*  GtkSpinButton * res :
-*  gpointer data       :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
+*  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_title_y_spin (GtkSpinButton * res, gpointer data)
 {
@@ -405,7 +405,7 @@ G_MODULE_EXPORT void set_axis_title_y_spin (GtkSpinButton * res, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_io_ticks (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change tick marks location
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -424,7 +424,7 @@ G_MODULE_EXPORT void set_io_ticks (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_pos_ticks (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change tick marks position
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -443,7 +443,7 @@ G_MODULE_EXPORT void set_pos_ticks (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_pos_labels (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change ticks labels position
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -462,10 +462,10 @@ G_MODULE_EXPORT void set_pos_labels (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_ticks_labels_font (GtkFontButton * fontb, gpointer data)
 *
-*  Usage:
+*  Usage: set ticks labels font
 *
-*  GtkFontButton * fontb :
-*  gpointer data         :
+*  GtkFontButton * fontb : the GtkFontButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_ticks_labels_font (GtkFontButton * fontb, gpointer data)
 {
@@ -483,10 +483,10 @@ G_MODULE_EXPORT void set_ticks_labels_font (GtkFontButton * fontb, gpointer data
 /*
 *  void ticks_angle_has_changed (gpointer data, double value)
 *
-*  Usage:
+*  Usage:  set ticks angle
 *
-*  gpointer data :
-*  double value  :
+*  gpointer data : the associated data pointer
+*  double value  : the new ticks angle
 */
 void ticks_angle_has_changed (gpointer data, double value)
 {
@@ -502,7 +502,7 @@ void ticks_angle_has_changed (gpointer data, double value)
 /*
 *  G_MODULE_EXPORT gboolean scroll_set_ticks_angle (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 *
-*  Usage:
+*  Usage:  set ticks angle callback - scroll
 *
 *  GtkRange * range     : the GtkRange sending the signal
 *  GtkScrollType scroll : the associated scroll type
@@ -518,7 +518,7 @@ G_MODULE_EXPORT gboolean scroll_set_ticks_angle (GtkRange * range, GtkScrollType
 /*
 *  G_MODULE_EXPORT void set_ticks_angle (GtkRange * range, gpointer data)
 *
-*  Usage:
+*  Usage: set ticks angle callback - range
 *
 *  GtkRange * range : the GtkRange sending the signal
 *  gpointer data    : the associated data pointer
@@ -532,7 +532,7 @@ G_MODULE_EXPORT void set_ticks_angle (GtkRange * range, gpointer data)
 /*
 *  G_MODULE_EXPORT void to_axis_title (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: show / hide axis title toggle callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -542,7 +542,7 @@ G_MODULE_EXPORT void to_axis_title (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void to_axis_title (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: show / hide axis title toggle callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -578,7 +578,7 @@ G_MODULE_EXPORT void to_axis_title (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_grid (GtkCheckButton * grid, gpointer data)
 *
-*  Usage:
+*  Usage: show / hide grid toggle callback GTK4
 *
 *  GtkCheckButton * grid : the GtkCheckButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -588,7 +588,7 @@ G_MODULE_EXPORT void set_grid (GtkCheckButton * grid, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_grid (GtkToggleButton * grid, gpointer data)
 *
-*  Usage:
+*  Usage: show / hide grid toggle callback GTK3
 *
 *  GtkToggleButton * grid : the GtkToggleButton sending the signal
 *  gpointer data          : the associated data pointer
@@ -612,10 +612,10 @@ G_MODULE_EXPORT void set_grid (GtkToggleButton * grid, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_autoscale (GtkButton * autosc, gpointer data)
 *
-*  Usage:
+*  Usage: autoscale axis
 *
-*  GtkButton * autosc :
-*  gpointer data      :
+*  GtkButton * autosc : the GtkButton sending the signal
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void set_autoscale (GtkButton * autosc, gpointer data)
 {
@@ -632,7 +632,7 @@ G_MODULE_EXPORT void set_autoscale (GtkButton * autosc, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis (GtkCheckButton * axis, gpointer data)
 *
-*  Usage:
+*  Usage: show / hide axis toggle callback GTK4
 *
 *  GtkCheckButton * axis : the GtkCheckButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -642,7 +642,7 @@ G_MODULE_EXPORT void set_axis (GtkCheckButton * axis, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis (GtkToggleButton * axis, gpointer data)
 *
-*  Usage:
+*  Usage: show / hide axis toggle callback GTK3
 *
 *  GtkToggleButton * axis : the GtkToggleButton sending the signal
 *  gpointer data          : the associated data pointer
@@ -666,7 +666,7 @@ G_MODULE_EXPORT void set_axis (GtkToggleButton * axis, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis_legend (GtkEntry * xtit, gpointer data)
 *
-*  Usage:
+*  Usage: set axis legend entry callback
 *
 *  GtkEntry * xtit : the GtkEntry sending the signal
 *  gpointer data   : the associated data pointer
@@ -687,10 +687,10 @@ G_MODULE_EXPORT void set_axis_legend (GtkEntry * xtit, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_axis_title_font (GtkFontButton * fontb, gpointer data)
 *
-*  Usage:
+*  Usage: set axis title font
 *
-*  GtkFontButton * fontb :
-*  gpointer data         :
+*  GtkFontButton * fontb : the GtkFontButton sending the signal
+*  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_title_font (GtkFontButton * fontb, gpointer data)
 {
@@ -708,7 +708,7 @@ G_MODULE_EXPORT void set_axis_title_font (GtkFontButton * fontb, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_scale (GtkComboBox * sbox, gpointer data)
 *
-*  Usage:
+*  Usage: change the axis scale
 *
 *  GtkComboBox * sbox : the GtkComboBox sending the signal
 *  gpointer data      : the associated data pointer
@@ -733,10 +733,10 @@ int handler_id;
 /*
 *  G_MODULE_EXPORT void update_axis (GtkComboBox * widg, gpointer data)
 *
-*  Usage:
+*  Usage: change the axis
 *
-*  GtkComboBox * widg :
-*  gpointer data      :
+*  GtkComboBox * widg : the GtkComboBox sending the signal
+*  gpointer data      : the associated data pointer
 */
 G_MODULE_EXPORT void update_axis (GtkComboBox * widg, gpointer data)
 {
@@ -807,7 +807,7 @@ G_MODULE_EXPORT void update_axis (GtkComboBox * widg, gpointer data)
 
 *  Usage: handle the creation of the 4th tab of the curve edition dialog
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 GtkWidget * create_tab_4 (gpointer data)
 {

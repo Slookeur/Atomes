@@ -38,12 +38,12 @@ extern DataLayout * get_extra_layout (int i);
 /*
 *  void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid)
 *
-*  Usage:
+*  Usage: draw legend
 *
-*  cairo_t * cr               :
+*  cairo_t * cr               : the cairo drawing context to use for the draw
 *  struct project * this_proj : the target project
-*  int rid                    :
-*  int cid                    :
+*  int rid                    : the calculation id
+*  int cid                    : the curve id
 */
 void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {

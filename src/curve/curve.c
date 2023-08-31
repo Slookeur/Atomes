@@ -119,9 +119,9 @@ int lenp = 1;
 /*
 *  thedash * selectdash (int iddash)
 *
-*  Usage:
+*  Usage: setup dash pointer
 *
-*  int iddash :
+*  int iddash : the target dash
 */
 thedash * selectdash (int iddash)
 {
@@ -189,9 +189,9 @@ thedash * selectdash (int iddash)
 /*
 *  double scale (double axe)
 *
-*  Usage:
+*  Usage: find appropriate major tick spacing based on axis length
 *
-*  double axe :
+*  double axe : axis length
 */
 double scale (double axe)
 {
@@ -298,11 +298,11 @@ double scale (double axe)
 /*
 *  void prep_plot (struct project * this_proj, int rid, int cid)
 *
-*  Usage:
+*  Usage: prepare curve plot (setting up variables for the plot)
 *
 *  struct project * this_proj : the target project
-*  int rid                    :
-*  int cid                    :
+*  int rid                    : the calculation id
+*  int cid                    : the curve id
 */
 void prep_plot (struct project * this_proj, int rid, int cid)
 {
@@ -322,10 +322,10 @@ void prep_plot (struct project * this_proj, int rid, int cid)
 /*
 *  void clean_this_curve_window (int cid, int rid)
 *
-*  Usage:
+*  Usage: free curve window data
 *
-*  int cid :
-*  int rid :
+*  int cid : the curve id
+*  int rid : the calculation id
 */
 void clean_this_curve_window (int cid, int rid)
 {
@@ -352,11 +352,11 @@ void clean_this_curve_window (int cid, int rid)
 /*
 *  void set_curve_data_zero (int rid, int cid, int interv)
 *
-*  Usage:
+*  Usage: initialize curve data
 *
-*  int rid    :
-*  int cid    :
-*  int interv :
+*  int rid    : the calculation id
+*  int cid    : the curve id
+*  int interv : the number of data point(s)
 */
 void set_curve_data_zero (int rid, int cid, int interv)
 {
@@ -372,12 +372,12 @@ void set_curve_data_zero (int rid, int cid, int interv)
 /*
 *  void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
 *
-*  Usage:
+*  Usage: save calculation results from Fortran90
 *
-*  int * interv               :
-*  double datacurve[* interv] :
-*  int * cid                  :
-*  int * rid                  :
+*  int * interv               : number of data point(s)
+*  double datacurve[* interv] : calculation result(s) to save
+*  int * cid                  : curve id
+*  int * rid                  : calculation id
 */
 void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
 {
@@ -435,10 +435,10 @@ void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid
 /*
 *  void hide_curves (struct project * this_proj, int c)
 *
-*  Usage:
+*  Usage: for project hide all curves for a calculation
 *
 *  struct project * this_proj : the target project
-*  int c                      :
+*  int c                      : the target calculation
 */
 void hide_curves (struct project * this_proj, int c)
 {
@@ -465,11 +465,11 @@ void hide_curves (struct project * this_proj, int c)
 /*
 *  void remove_this_curve_from_extras (int a, int b, int c)
 *
-*  Usage:
+*  Usage: free all target (a,b,c) curve from other curve(s) extra(s)
 *
-*  int a :
-*  int b :
-*  int c :
+*  int a : the target project
+*  int b : the target calculation
+*  int c : the target curve
 */
 void remove_this_curve_from_extras (int a, int b, int c)
 {
@@ -510,10 +510,10 @@ void remove_this_curve_from_extras (int a, int b, int c)
 /*
 *  void erase_curves (struct project * this_proj, int c)
 *
-*  Usage:
+*  Usage: free all curve(s) data
 *
 *  struct project * this_proj : the target project
-*  int c                      :
+*  int c                      : the target calculation
 */
 void erase_curves (struct project * this_proj, int c)
 {
@@ -546,7 +546,7 @@ void erase_curves (struct project * this_proj, int c)
 /*
 *  void update_curves ()
 *
-*  Usage:
+*  Usage: update all curve(s) rendering for all project(s) in the workspace
 */
 void update_curves ()
 {
@@ -574,9 +574,9 @@ void update_curves ()
 /*
 *  void update_curve (gpointer data)
 *
-*  Usage:
+*  Usage: update curve rendering
 *
-*  gpointer data :
+*  gpointer data : the associated data pointer
 */
 void update_curve (gpointer data)
 {

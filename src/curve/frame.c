@@ -38,12 +38,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol)
 *
-*  Usage:
+*  Usage: draw frame line
 *
-*  cairo_t * fr :
-*  int da       :
-*  double ti    :
-*  ColRGBA dcol :
+*  cairo_t * fr : the cairo drawing context to use for the draw
+*  int da       : dash type
+*  double ti    : line width
+*  ColRGBA dcol : color
 */
 void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol)
 {
@@ -59,16 +59,16 @@ void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol)
 /*
 *  void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2], double y[2], ColRGBA dcol)
 *
-*  Usage:
+*  Usage: draw frame
 *
-*  cairo_t * cd :
-*  int tf       :
-*  int da       :
-*  int res[2]   :
-*  double ti    :
-*  double x[2]  :
-*  double y[2]  :
-*  ColRGBA dcol :
+*  cairo_t * cd : the cairo drawing context to use for the draw
+*  int tf       : frame type
+*  int da       : dash type
+*  int res[2]   : image size
+*  double ti    : line width
+*  double x[2]  : x positions (right, left)
+*  double y[2]  : y positions (top, bottom)
+*  ColRGBA dcol : color
 */
 void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2], double y[2], ColRGBA dcol)
 {
@@ -116,12 +116,12 @@ void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2
 /*
 *  void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
 *
-*  Usage:
+*  Usage: prepare axis data
 *
 *  struct project * this_proj : the target project
-*  int rid                    :
-*  int cid                    :
-*  int ax                     :
+*  int rid                    : the calculation id
+*  int cid                    : the curve id
+*  int ax                     : the axis
 */
 void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
 {
@@ -147,12 +147,12 @@ void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
 /*
 *  void draw_frame (cairo_t * cr, struct project * this_proj, int rid, int cid)
 *
-*  Usage:
+*  Usage: draw frame and axis data
 *
-*  cairo_t * cr               :
+*  cairo_t * cr               : the cairo drawing context to use for the draw
 *  struct project * this_proj : the target project
-*  int rid                    :
-*  int cid                    :
+*  int rid                    : the calculation id
+*  int cid                    : the curve id
 */
 void draw_frame (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {

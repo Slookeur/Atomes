@@ -17,14 +17,15 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Contains:
 *
 
- - Write / output curve data
+ - The subroutines to write / output curve data
 
 *
 *  List of subroutines:
 
+  void write_curve (gpointer idata);
+
   G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, gpointer data);
   G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpointer data);
-  G_MODULE_EXPORT void write_curve (GtkWidget * butcurve, gpointer idata);
 
 */
 
@@ -46,7 +47,7 @@ GtkFileFilter * filter1, * filter2;
 /*
 *  G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: save curve data - running the dialog GTK4
 *
 *  GtkNativeDialog * info : the GtkNativeDialog sending the signal
 *  gint response_id       : the response id
@@ -59,7 +60,7 @@ G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, 
 /*
 *  G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: save curve data - running the dialog GTK3
 *
 *  GtkDialog * info : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -146,14 +147,13 @@ G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpoint
 }
 
 /*
-*  G_MODULE_EXPORT void write_curve (GtkWidget * butcurve, gpointer idata)
+*  void write_curve (gpointer idata)
 *
-*  Usage:
+*  Usage: save curve data - creating the dialog
 *
-*  GtkWidget * butcurve : the GtkWidget sending the signal
-*  gpointer idata       : the associated data pointer
+*  gpointer idata : the associated data pointer
 */
-G_MODULE_EXPORT void write_curve (GtkWidget * butcurve, gpointer idata)
+void write_curve (gpointer idata)
 {
 #ifdef GTK4
   GtkFileChooserNative * info;

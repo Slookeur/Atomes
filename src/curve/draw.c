@@ -52,27 +52,27 @@ If not, see <https://www.gnu.org/licenses/> */
                    int extra,
                     int pid)
 *
-*  Usage:
+*  Usage: draw target curve to the cairo drawing context
 *
-*  cairo_t * cr               :
-*  int cid                    :
-*  int rid                    :
+*  cairo_t * cr               : the cairo drawing context to use for the draw
+*  int cid                    : the target curve id
+*  int rid                    : the target calculation id
 *  struct project * this_proj : the target project
-*  int points                 :
-*  ColRGBA withcolor          :
-*  int xscale                 :
-*  int yscale                 :
-*  int asp                    :
-*  int vdash                  :
-*  double thick               :
-*  int glyp                   :
-*  double gize                :
-*  int freq                   :
-*  double hwidth              :
-*  double hopac               :
-*  int hpos                   :
-*  int extra                  :
-*  int pid                    :
+*  int points                 : the number of data point(s)
+*  ColRGBA withcolor          : the data color
+*  int xscale                 : x axis scale type (0 = linear, 1 = log)
+*  int yscale                 : y axis scale type (0 = linear, 1 = log)
+*  int asp                    : data aspect (0 = x/y normal, 1 = historgram)
+*  int vdash                  : dash type
+*  double thick               : line tthickness
+*  int glyp                   : glyph type
+*  double gize                : glyph size
+*  int freq                   : glyph frequency
+*  double hwidth              : histogram bar width
+*  double hopac               : histogram bar opacity value
+*  int hpos                   : histogram opacity treatment (0 = no opacity, 1 = use opacity)
+*  int extra                  : the number of extra data sets
+*  int pid                    : 0 (x/y plot) or plot id number (historgram)
 */
 void draw_curve (cairo_t * cr,
                  int cid,

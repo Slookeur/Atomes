@@ -36,14 +36,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp)
 *
-*  Usage:
+*  Usage: draw polyhedra glyph
 *
-*  cairo_t * to :
-*  double x     :
-*  double y     :
-*  double size  :
-*  double step  :
-*  double initp :
+*  cairo_t * to : the cairo drawing context to use for the draw
+*  double x     : x position
+*  double y     : y position
+*  double size  : glyph size
+*  double step  : number of points
+*  double initp : starting position
 */
 void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp)
 {
@@ -68,14 +68,14 @@ void draw_poly (cairo_t * to, double x, double y, double size, double step, doub
 /*
 *  void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size)
 *
-*  Usage:
+*  Usage: draw glyph at (x,y)
 *
-*  cairo_t * in   :
-*  int theglyph   :
-*  double x       :
-*  double y       :
-*  ColRGBA gcolor :
-*  double size    :
+*  cairo_t * in   : the cairo drawing context to use for the draw
+*  int theglyph   : the type of glyph
+*  double x       : x position
+*  double y       : y position
+*  ColRGBA gcolor : the glyph color
+*  double size    : the glyph size
 */
 void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size)
 {

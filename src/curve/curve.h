@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'curve.h'
 *
-*  Contains: 
+*  Contains:
 
 
 */
@@ -118,7 +118,7 @@ extern gboolean show_curve (GtkWidget * grwdget, cairo_t * cr, gpointer curve);
 #else
 extern void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpointer curve);
 #endif
-extern G_MODULE_EXPORT void hide_curve (GtkWidget * curve, gpointer data);
+extern void hide_curve (gpointer data);
 #ifdef GTK3
 extern G_MODULE_EXPORT gboolean to_hide_curve (GtkWidget * thecurve, GdkEvent * event, gpointer data);
 #else
@@ -151,8 +151,8 @@ extern void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, 
 extern void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid);
 extern void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it);
 
-extern G_MODULE_EXPORT void write_curve (GtkWidget * butcurve, gpointer idata);
-extern G_MODULE_EXPORT void save_image (GtkWidget * curve, gpointer cdata);
+extern void write_curve (gpointer idata);
+extern void save_image (gpointer cdata);
 extern void remove_extra (ExtraSets * sets, struct cextra * ctmp);
 extern void curve_window_add_menu_bar (tint * data);
 extern GtkWidget * curve_popup_menu (gpointer data);

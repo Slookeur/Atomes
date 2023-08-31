@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_files.c'
 *
-*  Contains: 
+*  Contains:
 *
 *
 *
 *
-*  List of subroutines: 
+*  List of subroutines:
 
   int cp2k_is_basis_in_database (int sp);
   int cp2k_is_pseudo_in_database (int sp);
@@ -48,11 +48,11 @@ extern GtkWidget * cp2k_spec_combo;
 /*
 *  gchar * get_nth_elem (int sp, int id, int obj)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sp  : 
-*  int id  : 
-*  int obj : 
+*  int sp  :
+*  int id  :
+*  int obj :
 */
 gchar * get_nth_elem (int sp, int id, int obj)
 {
@@ -114,11 +114,11 @@ gchar * get_nth_elem (int sp, int id, int obj)
 /*
 *  gchar * get_nth_key (int sp, int id, int obj)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sp  : 
-*  int id  : 
-*  int obj : 
+*  int sp  :
+*  int id  :
+*  int obj :
 */
 gchar * get_nth_key (int sp, int id, int obj)
 {
@@ -180,9 +180,9 @@ gchar * get_nth_key (int sp, int id, int obj)
 /*
 *  int cp2k_is_basis_in_database (int sp)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sp : 
+*  int sp : the chemical species
 */
 int cp2k_is_basis_in_database (int sp)
 {
@@ -205,9 +205,9 @@ int cp2k_is_basis_in_database (int sp)
 /*
 *  int cp2k_is_pseudo_in_database (int sp)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sp : 
+*  int sp :
 */
 int cp2k_is_pseudo_in_database (int sp)
 {
@@ -222,12 +222,12 @@ int cp2k_is_pseudo_in_database (int sp)
 /*
 *  int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, char * bp_elem[n_basis_pseudo])
 *
-*  Usage: 
+*  Usage:
 *
-*  int sp                         : 
-*  int * sp_id                    : 
-*  int n_basis_pseudo             : 
-*  char * bp_elem[n_basis_pseudo] : 
+*  int sp                         : the chemical species
+*  int * sp_id                    :
+*  int n_basis_pseudo             :
+*  char * bp_elem[n_basis_pseudo] :
 */
 int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, char * bp_elem[n_basis_pseudo])
 {
@@ -247,10 +247,10 @@ int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, cha
 /*
 *  G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage: change basis
 *
-*  GtkComboBox * box : 
-*  gpointer data     : 
+*  GtkComboBox * box : the GtkComboBox sending the signal
+*  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data)
 {
@@ -272,10 +272,10 @@ G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data)
 /*
 *  GtkWidget * prepare_basis_combo (int sp, int obj)
 *
-*  Usage: 
+*  Usage:
 *
-*  int sp  : 
-*  int obj : 
+*  int sp  :
+*  int obj :
 */
 GtkWidget * prepare_basis_combo (int sp, int obj)
 {

@@ -17,7 +17,7 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Contains:
 *
 
- - y axis drawing subroutines
+ - The subroutines to draw the y axis
 
 *
 *  List of subroutines:

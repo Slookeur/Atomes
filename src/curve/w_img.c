@@ -17,12 +17,13 @@ If not, see <https://www.gnu.org/licenses/> */
 *  Contains:
 *
 
- - Save screenshot from graph / curve(s)
+ - The subroutines to save screenshot from graph / curve(s)
 
 *
 *  List of subroutines:
 
   void write_image (gpointer curetow);
+  void save_image (gpointer cdata);
 
   G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data);
   G_MODULE_EXPORT void set_background (GtkCheckButton * backb);
@@ -31,7 +32,6 @@ If not, see <https://www.gnu.org/licenses/> */
   G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, gpointer data);
   G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpointer data);
   G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpointer data);
-  G_MODULE_EXPORT void save_image (GtkWidget * curve, gpointer cdata);
 
 */
 
@@ -49,7 +49,7 @@ int forme;
 /*
 *  G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
 *
-*  Usage:
+*  Usage: set image size entry callback
 *
 *  GtkEntry * val : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -79,7 +79,7 @@ G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_background (GtkCheckButton * backb, gpointer data)
 *
-*  Usage:
+*  Usage: show / hide image background toggle callback GTK4
 *
 *  GtkCheckButton * backb : the GtkCheckButton sending the signal
 *  gpointer data  : the associated data pointer
@@ -89,7 +89,7 @@ G_MODULE_EXPORT void set_background (GtkCheckButton * backb, gpointer data)
 /*
 *  G_MODULE_EXPORT void set_background (GtkToggleButton * backb, gpointer data)
 *
-*  Usage:
+*  Usage: show / hide image background toggle callback GTK3
 *
 *  GtkToggleButton * backb :  the GtkTogglekButton sending the signal
 *  gpointer data  : the associated data pointer
@@ -114,7 +114,7 @@ G_MODULE_EXPORT void set_background (GtkToggleButton * backb, gpointer data)
 /*
 *  G_MODULE_EXPORT void choose_format (GtkComboBox * box, gpointer cid)
 *
-*  Usage:
+*  Usage: change image format
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer cid      : the associated data pointer
@@ -169,7 +169,7 @@ gchar * i_pattern[4]={"*.png",
 /*
 *  G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: write image - running the dialog GTK4
 *
 *  GtkNativeDialog * info : the GtkNativeDialog sending the signal
 *  gint response_id       : the response id
@@ -182,7 +182,7 @@ G_MODULE_EXPORT void run_write_image (GtkNativeDialog * info, gint response_id, 
 /*
 *  G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: write image - running the dialog GTK3
 *
 *  GtkDialog * info : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -216,9 +216,9 @@ G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpoint
 /*
 *  void write_image (gpointer curetow)
 *
-*  Usage:
+*  Usage: write image - creating the file chooser dialog
 *
-*  gpointer curetow :
+*  gpointer curetow : the associated data pointer
 */
 void write_image (gpointer curetow)
 {
@@ -271,7 +271,7 @@ void write_image (gpointer curetow)
 /*
 *  G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: export curve window plot to image - running the dialog
 *
 *  GtkDialog * save_img : the GtkDialog sending the signal
 *  gint response_id     : the response id
@@ -304,14 +304,13 @@ G_MODULE_EXPORT void run_save_image (GtkDialog * save_img, gint response_id, gpo
 }
 
 /*
-*  G_MODULE_EXPORT void save_image (GtkWidget * curve, gpointer cdata)
+*  void save_image (gpointer cdata)
 *
-*  Usage:
+*  Usage: export curve window plot to image - creating the dialog
 *
-*  GtkWidget * curve : the GtkWidget sending the signal
-*  gpointer cdata    : the associated data pointer
+*  gpointer cdata : the associated data pointer
 */
-G_MODULE_EXPORT void save_image (GtkWidget * curve, gpointer cdata)
+void save_image (gpointer cdata)
 {
   GtkWidget * save_img;
   GtkWidget * hbox;

@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'datab.h'
 *
-*  Contains: 
+*  Contains:
 
 */
 
 #ifndef DATAB_H_
 #define DATAB_H_
 
-extern G_MODULE_EXPORT void edit_data (GtkWidget * but, gpointer data);
+extern void edit_data (gpointer data);
 #endif

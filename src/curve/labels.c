@@ -37,12 +37,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
 *
-*  Usage:
+*  Usage: draw axis label
 *
-*  cairo_t * cr               :
-*  double val                 :
-*  int axe                    :
-*  int p                      :
+*  cairo_t * cr               : the cairo drawing context to use for the draw
+*  double val                 : the value to display
+*  int axe                    : axis (0 = x, 1 = y)
+*  int p                      : label position (0 = bottom, 1 = top)
 *  struct project * this_proj : the target project
 */
 void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)

@@ -38,10 +38,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  const gchar * default_title (int ax, int c)
 *
-*  Usage:
+*  Usage: default title string
 *
-*  int ax :
-*  int c  :
+*  int ax : axis
+*  int c  : curve id
 */
 const gchar * default_title (int ax, int c)
 {
@@ -89,12 +89,12 @@ const gchar * default_title (int ax, int c)
 /*
 *  void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
 *
-*  Usage:
+*  Usage: draw title
 *
-*  cairo_t * cr               :
+*  cairo_t * cr               : the cairo drawing context to use for the draw
 *  struct project * this_proj : the target project
-*  int rid                    :
-*  int cid                    :
+*  int rid                    : the calculation id
+*  int cid                    : the curve id
 */
 void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {

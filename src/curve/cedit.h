@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'cedit.h'
 *
-*  Contains: 
+*  Contains:
 
 */
 
@@ -27,6 +27,6 @@ extern GtkWidget * thesetbox;
 extern GtkWidget * setcolorbox;
 extern char * lapos[2];
 
-void prepbox (tint * cd);
-G_MODULE_EXPORT void edit_curve (GtkWidget * curve, gpointer cdata);
+void prepbox (int a, int b, int c);
+void edit_curve (gpointer cdata);
 #endif
