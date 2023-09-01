@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to prepare the thermostat(s) configuration widgets for QM / QM-MM input files
+
 *
 *  List of subroutines:
 
@@ -31,10 +32,14 @@ If not, see <https://www.gnu.org/licenses/> */
 
   void set_going_forward ();
   void clean_nose_widgets ();
+  void thermo_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void thermo_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
   void remove_nose_thermostat (int num_to_remove);
   void init_thermostats (int type, int elec);
-  void clean_thermostat (int old_type, int new_type);
+  void clean_thermostat (int new_type);
   void nose_parameters (GtkWidget * vbox, int id, int jd, gchar ** la, gchar ** lb);
+  void atom_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void atom_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
   void fill_thermo_atom_model (int therm);
   void select_atom_from_model (int therm);
   void create_selection_button (GtkWidget * box, int num, int id, gpointer data);
@@ -45,7 +50,10 @@ If not, see <https://www.gnu.org/licenses/> */
   void prepare_therm_elec ();
   void thermo_type_box (GtkWidget * vbox, gchar * str, int id);
 
+  G_MODULE_EXPORT void select_thermo (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
   G_MODULE_EXPORT void run_remove_nose_thermostat (GtkDialog * dialog, gint response_id, gpointer data);
+  G_MODULE_EXPORT void cpmd_select_atom_id (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
+  G_MODULE_EXPORT void cp2k_select_coord_id (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
   G_MODULE_EXPORT void select_atoms_not_thermostated (GtkCheckButton * but, gpointer data);
   G_MODULE_EXPORT void select_atoms_not_thermostated (GtkToggleButton * but, gpointer data);
   G_MODULE_EXPORT void run_select_atom_from_model (GtkDialog * dialog, gint response_id, gpointer data);
@@ -143,7 +151,7 @@ GtkTreeStore * add_model;
 /*
 *  struct thermostat * get_thermo ()
 *
-*  Usage:
+*  Usage: get QM / QM-MM ions thermostat
 */
 struct thermostat * get_thermo ()
 {
@@ -160,7 +168,7 @@ struct thermostat * get_thermo ()
 /*
 *  int get_num_thermo ()
 *
-*  Usage:
+*  Usage: get the number of thermostat(s)
 */
 int get_num_thermo ()
 {
@@ -177,7 +185,7 @@ int get_num_thermo ()
 /*
 *  gboolean are_all_atoms_thermostated ()
 *
-*  Usage:
+*  Usage: are all atom(s) in the model thermostated ?
 */
 gboolean are_all_atoms_thermostated ()
 {
@@ -203,7 +211,7 @@ gboolean are_all_atoms_thermostated ()
 /*
 *  void set_going_forward ()
 *
-*  Usage:
+*  Usage: QM / QM-MM assistant going forward on thermostat page
 */
 void set_going_forward ()
 {
@@ -215,7 +223,7 @@ void set_going_forward ()
 /*
 *  void clean_nose_widgets ()
 *
-*  Usage:
+*  Usage: clean thermostat widgets
 */
 void clean_nose_widgets ()
 {
@@ -229,9 +237,9 @@ void clean_nose_widgets ()
 /*
 *  struct thermostat * get_active_thermostat (int id)
 *
-*  Usage:
+*  Usage: get thermostat using id
 *
-*  int id :
+*  int id : the thermostat id
 */
 struct thermostat * get_active_thermostat (int id)
 {
@@ -250,9 +258,17 @@ struct thermostat * get_active_thermostat (int id)
   }
 }
 
-G_MODULE_EXPORT void select_thermo (GtkCellRendererToggle * cell_renderer,
-                                    gchar * string_path,
-                                    gpointer data)
+/*
+*  G_MODULE_EXPORT void select_thermo (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+*
+*  Usage: on select QM / QM-MM thermostat toggle callback
+*
+*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
+*  gchar * string_path                   : the path in the tree store
+*  gpointer data                         : the associated data pointer
+*
+*/
+G_MODULE_EXPORT void select_thermo (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
   GtkTreeStore ** model = (GtkTreeStore **)data;
   GtkTreeIter iter;
@@ -278,11 +294,18 @@ G_MODULE_EXPORT void select_thermo (GtkCellRendererToggle * cell_renderer,
   // Viz
 }
 
-void thermo_set_color (GtkTreeViewColumn * col,
-                       GtkCellRenderer   * renderer,
-                       GtkTreeModel      * mod,
-                       GtkTreeIter       * iter,
-                       gpointer          data)
+/*
+*  void thermo_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color in the QM / QM-MM thermostat selection tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void thermo_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i, j;
   gtk_tree_model_get (mod, iter, 0, & i, -1);
@@ -291,11 +314,18 @@ void thermo_set_color (GtkTreeViewColumn * col,
   set_renderer_color (j, renderer, init_color (i-1, num_cpmd_objects));
 }
 
-void thermo_set_visible (GtkTreeViewColumn * col,
-                         GtkCellRenderer   * renderer,
-                         GtkTreeModel      * mod,
-                         GtkTreeIter       * iter,
-                         gpointer          data)
+/*
+*  void thermo_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: show / hide cell renderer in the QM / QM-MM thermostat selection tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void thermo_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i, j;
   i = GPOINTER_TO_INT(data);
@@ -325,7 +355,7 @@ GtkWidget * create_nose_box (int n);
 /*
 *  G_MODULE_EXPORT void run_remove_nose_thermostat (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: remove thermostat(s) - running the dialog
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   : the response id
@@ -413,9 +443,9 @@ G_MODULE_EXPORT void run_remove_nose_thermostat (GtkDialog * dialog, gint respon
 /*
 *  void remove_nose_thermostat (int num_to_remove)
 *
-*  Usage:
+*  Usage: remove thermostat(s) - creating the dialog
 *
-*  int num_to_remove :
+*  int num_to_remove : the number of thermostat(s) to remove
 */
 void remove_nose_thermostat (int num_to_remove)
 {
@@ -485,11 +515,11 @@ void remove_nose_thermostat (int num_to_remove)
 /*
 *  struct thermostat * init_thermo (int id, int type, int sys)
 *
-*  Usage:
+*  Usage: initialize new thermostat
 *
-*  int id   :
-*  int type :
-*  int sys  :
+*  int id   : the new thermostat id
+*  int type : the type of thermostat
+*  int sys  : the thermostat system
 */
 struct thermostat * init_thermo (int id, int type, int sys)
 {
@@ -517,10 +547,10 @@ struct thermostat * init_thermo (int id, int type, int sys)
 /*
 *  void init_thermostats (int type, int elec)
 *
-*  Usage:
+*  Usage: initialize thermostat(s)
 *
-*  int type :
-*  int elec :
+*  int type : the type of thermostat
+*  int elec : 1 = fictious electronic thermostat
 */
 void init_thermostats (int type, int elec)
 {
@@ -539,14 +569,13 @@ void init_thermostats (int type, int elec)
 }
 
 /*
-*  void clean_thermostat (int old_type, int new_type)
+*  void clean_thermostat (int new_type)
 *
-*  Usage:
+*  Usage: free thermostat data, then initialiaze new type of thermostat
 *
-*  int old_type :
-*  int new_type :
+*  int new_type : the new type of thermostat
 */
-void clean_thermostat (int old_type, int new_type)
+void clean_thermostat (int new_type)
 {
   int i;
   struct thermostat * thermo = get_thermo ();
@@ -574,13 +603,13 @@ G_MODULE_EXPORT void update_thermo_parameter (GtkEntry * res, gpointer data);
 /*
 *  void nose_parameters (GtkWidget * vbox, int id, int jd, gchar ** la, gchar ** lb)
 *
-*  Usage:
+*  Usage: create thermostat parameters configuration widgets
 *
 *  GtkWidget * vbox : the GtkWidget sending the signal
-*  int id           :
-*  int jd           :
-*  gchar ** la      :
-*  gchar ** lb      :
+*  int id           : thermostat id, -2 if fictious electronic
+*  int jd           : number of parameter(s) for this thermostat
+*  gchar ** la      : thermostat parameter name(s)
+*  gchar ** lb      : thermostat parameter unit(s)
 */
 void nose_parameters (GtkWidget * vbox, int id, int jd, gchar ** la, gchar ** lb)
 {
@@ -600,9 +629,17 @@ void nose_parameters (GtkWidget * vbox, int id, int jd, gchar ** la, gchar ** lb
   }
 }
 
-G_MODULE_EXPORT void cpmd_select_atom_id (GtkCellRendererToggle * cell_renderer,
-                                          gchar * string_path,
-                                          gpointer data)
+/*
+*  G_MODULE_EXPORT void cpmd_select_atom_id (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+*
+*  Usage: on select CPMD atom id toggle callback
+*
+*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
+*  gchar * string_path                   : the path in the tree store
+*  gpointer data                         : the associated data pointer
+*
+*/
+G_MODULE_EXPORT void cpmd_select_atom_id (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
   GtkTreeStore ** model = (GtkTreeStore **)data;
   GtkTreeIter iter;
@@ -631,9 +668,17 @@ G_MODULE_EXPORT void cpmd_select_atom_id (GtkCellRendererToggle * cell_renderer,
   gtk_tree_store_set (* model, & iter, 3, j, -1);
 }
 
-G_MODULE_EXPORT void cp2k_select_coord_id (GtkCellRendererToggle * cell_renderer,
-                                           gchar * string_path,
-                                           gpointer data)
+/*
+*  G_MODULE_EXPORT void cp2k_select_coord_id (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+*
+*  Usage: on select CP2K fixed id toggle callback
+*
+*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
+*  gchar * string_path                   : the path in the tree store
+*  gpointer data                         : the associated data pointer
+*
+*/
+G_MODULE_EXPORT void cp2k_select_coord_id (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
   int i, j;
   j = GPOINTER_TO_INT(data);
@@ -652,11 +697,18 @@ G_MODULE_EXPORT void cp2k_select_coord_id (GtkCellRendererToggle * cell_renderer
   gtk_tree_store_set (add_model, & iter, (fixco) ? j : j-2, old_fixed[i-1][j-4], -1);
 }
 
-void atom_set_color (GtkTreeViewColumn * col,
-                     GtkCellRenderer   * renderer,
-                     GtkTreeModel      * mod,
-                     GtkTreeIter       * iter,
-                     gpointer          data)
+/*
+*  void atom_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color in the CPMD atom selection tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void atom_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i, j, k;
   gtk_tree_model_get (mod, iter, 1, & i, -1);
@@ -672,11 +724,18 @@ void atom_set_color (GtkTreeViewColumn * col,
   }
 }
 
-void atom_set_visible (GtkTreeViewColumn * col,
-                       GtkCellRenderer   * renderer,
-                       GtkTreeModel      * mod,
-                       GtkTreeIter       * iter,
-                       gpointer          data)
+/*
+*  void atom_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: show / hide cell renderer in the CPMD atom selection tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void atom_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i, j, k;
   i = GPOINTER_TO_INT(data);
@@ -711,10 +770,10 @@ void atom_set_visible (GtkTreeViewColumn * col,
 /*
 *  int is_not_thermostated (int at, int therm)
 *
-*  Usage:
+*  Usage: is atom thermostated ?
 *
-*  int at    :
-*  int therm :
+*  int at    : the atom id
+*  int therm : the thermostat id
 */
 int is_not_thermostated (int at, int therm)
 {
@@ -744,9 +803,9 @@ int is_not_thermostated (int at, int therm)
 /*
 *  int is_fixed_atom (int at)
 *
-*  Usage:
+*  Usage: is atom fixed ?
 *
-*  int at :
+*  int at : the atom id
 */
 int is_fixed_atom (int at)
 {
@@ -777,10 +836,10 @@ int is_fixed_atom (int at)
 /*
 *  int in_dummy (int at, int id)
 *
-*  Usage:
+*  Usage: is atom in dummy ?
 *
-*  int at :
-*  int id :
+*  int at : the atom id
+*  int id : the dummy list id
 */
 int in_dummy (int at, int id)
 {
@@ -797,10 +856,10 @@ int in_dummy (int at, int id)
 /*
 *  gboolean was_it_selected (int id, int at)
 *
-*  Usage:
+*  Usage: was this atom already selected ?
 *
-*  int id :
-*  int at :
+*  int id : the selection type
+*  int at : the atom id
 */
 gboolean was_it_selected (int id, int at)
 {
@@ -821,9 +880,9 @@ gboolean was_it_selected (int id, int at)
 /*
 *  void fill_thermo_atom_model (int therm)
 *
-*  Usage:
+*  Usage: fill thermostat atom model
 *
-*  int therm :
+*  int therm : the thermostat id
 */
 void fill_thermo_atom_model (int therm)
 {
@@ -897,7 +956,7 @@ void fill_thermo_atom_model (int therm)
 /*
 *  G_MODULE_EXPORT void select_atoms_not_thermostated (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: select atom to thermostat toggle callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -907,7 +966,7 @@ G_MODULE_EXPORT void select_atoms_not_thermostated (GtkCheckButton * but, gpoint
 /*
 *  G_MODULE_EXPORT void select_atoms_not_thermostated (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: select atom to thermostat toggle callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -956,7 +1015,7 @@ G_MODULE_EXPORT void select_atoms_not_thermostated (GtkToggleButton * but, gpoin
 /*
 *  G_MODULE_EXPORT void run_select_atom_from_model (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: select atom from model - running the dialgo
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   : the response id
@@ -1133,9 +1192,9 @@ G_MODULE_EXPORT void run_select_atom_from_model (GtkDialog * dialog, gint respon
 /*
 *  void select_atom_from_model (int therm)
 *
-*  Usage:
+*  Usage: select atom from model - creating the dialog
 *
-*  int therm :
+*  int therm : the thermostat id
 */
 void select_atom_from_model (int therm)
 {
@@ -1287,7 +1346,7 @@ void select_atom_from_model (int therm)
 /*
 *  G_MODULE_EXPORT void atom_selection_button (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: select atom(s) to be thermostated
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -1353,11 +1412,11 @@ G_MODULE_EXPORT void atom_selection_button (GtkButton * but, gpointer data)
 /*
 *  void create_selection_button (GtkWidget * box, int num, int id, gpointer data)
 *
-*  Usage:
+*  Usage: create thermostat atom(s) selection button
 *
 *  GtkWidget * box : the GtkWidget sending the signal
-*  int num         :
-*  int id          :
+*  int num         : the number of atom(s) already selected
+*  int id          : 0 = ionic, 1 = fictious electronic
 *  gpointer data   : the associated data pointer
 */
 void create_selection_button (GtkWidget * box, int num, int id, gpointer data)
@@ -1386,9 +1445,9 @@ void create_selection_button (GtkWidget * box, int num, int id, gpointer data)
 /*
 *  void create_nose_thermo_param_box (int therm_id)
 *
-*  Usage:
+*  Usage: create thermostat configuration widgets
 *
-*  int therm_id :
+*  int therm_id : the thermostat id
 */
 void create_nose_thermo_param_box (int therm_id)
 {
@@ -1411,7 +1470,7 @@ void create_nose_thermo_param_box (int therm_id)
 /*
 *  G_MODULE_EXPORT void changed_nose_thermo_id_box (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change thermostat id
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -1426,11 +1485,11 @@ G_MODULE_EXPORT void changed_nose_thermo_id_box (GtkComboBox * box, gpointer dat
 /*
 *  void create_selection_combo (int id, int num, int type, GCallback handler)
 *
-*  Usage:
+*  Usage: create thermostat selection combo box
 *
-*  int id            :
-*  int num           :
-*  int type          :
+*  int id            : 0 = ionic, 1 = fictious electronic
+*  int num           : the number of thermostat
+*  int type          : the type of thermostat
 *  GCallback handler : the associated callback
 */
 void create_selection_combo (int id, int num, int type, GCallback handler)
@@ -1629,9 +1688,9 @@ G_MODULE_EXPORT void update_thermo_parameter (GtkEntry * res, gpointer data)
 /*
 *  GtkWidget * create_nose_box (int n)
 *
-*  Usage:
+*  Usage: create thermostat configuration widgets
 *
-*  int n :
+*  int n : the thermostat system
 */
 GtkWidget * create_nose_box (int n)
 {
@@ -1663,7 +1722,7 @@ GtkWidget * create_nose_box (int n)
 /*
 *  G_MODULE_EXPORT void changed_thermo_box_nose (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change the type of the ionic thermostat
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -1674,7 +1733,7 @@ G_MODULE_EXPORT void changed_thermo_box_nose (GtkComboBox * box, gpointer data)
   i = gtk_combo_box_get_active (box);
   if (i != get_thermo () -> sys)
   {
-    clean_thermostat (get_thermo () -> type, get_thermo () -> type);
+    clean_thermostat (get_thermo () -> type);
     clean_nose_widgets ();
     get_thermo () -> sys = i;
     nose_box = create_nose_box (get_thermo () -> sys);
@@ -1748,7 +1807,7 @@ void prepare_therm_elec ()
 /*
 *  G_MODULE_EXPORT void changed_thermo_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: change the type of thermostat
+*  Usage: change the thermostat family (ionic / fictious electronic)
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -1760,7 +1819,7 @@ G_MODULE_EXPORT void changed_thermo_box (GtkComboBox * box, gpointer data)
   j = GPOINTER_TO_INT (data);
   if (j == 0 && i != get_thermo () -> type)
   {
-    clean_thermostat (get_thermo () -> type, i);
+    clean_thermostat (i);
     struct thermostat * thermo = get_thermo();
     thermo -> sys = GLOBAL;
     prepare_therm_ions ();

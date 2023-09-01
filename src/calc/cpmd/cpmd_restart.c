@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cpmd_restart.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to configure the restart section for the CPMD input file creation assistant
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   G_MODULE_EXPORT void update_restart_parameter (GtkEntry * res, gpointer data);
   G_MODULE_EXPORT void update_restart_check (GtkCheckButton * but, gpointer data);
@@ -42,7 +43,7 @@ extern GtkWidget * cpmd_box (GtkWidget * box, gchar * lab, int v_space, int h_sp
 /*
 *  G_MODULE_EXPORT void update_restart_parameter (GtkEntry * res, gpointer data)
 *
-*  Usage: 
+*  Usage: CPMD input file update restart parameter value entry callback
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -69,7 +70,7 @@ GtkWidget * trap_box[2];
 /*
 *  G_MODULE_EXPORT void update_restart_check (GtkCheckButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage: CPMD input file restart option toggle callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -79,7 +80,7 @@ G_MODULE_EXPORT void update_restart_check (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void update_restart_check (GtkToggleButton * but, gpointer data)
 *
-*  Usage: 
+*  Usage: CPMD input file restart option toggle callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -107,7 +108,7 @@ G_MODULE_EXPORT void update_restart_check (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void changed_restart_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: 
+*  Usage: CPMD input file change restart type
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -122,7 +123,7 @@ G_MODULE_EXPORT void changed_restart_box (GtkComboBox * box, gpointer data)
 /*
 *  GtkWidget * restart_box ()
 *
-*  Usage: 
+*  Usage: prepare the CPMD input preparation assistant restart widgets
 */
 GtkWidget * restart_box ()
 {
