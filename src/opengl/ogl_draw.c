@@ -23,10 +23,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *  List of subroutines:
 
   void print_matrices ();
-  void setup_camera (void);
-  void unrotate_camera (void);
+  void setup_camera ();
+  void unrotate_camera ();
   void duplicate_material_and_lightning (image * new_img, image * old_img);
-  void add_image (void);
+  void add_image ();
   void at_shift (struct atom * at, float * shift);
   void at_unshift (struct atom * at, float * shift);
   void draw (glwin * view);

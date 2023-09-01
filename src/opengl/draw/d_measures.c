@@ -40,7 +40,7 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 
 extern void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float alpha);
-extern void unrotate_camera (void);
+extern void unrotate_camera ();
 extern double arc_cos (double val);
 extern ColRGBA init_color (int id, int numid);
 extern void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store);

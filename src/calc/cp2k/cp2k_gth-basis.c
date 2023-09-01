@@ -14,14 +14,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_gth-basis.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CP2K GTH basis set, as delivered with CP2K v9.1
 
   This file contains 3 tables:
@@ -29,6 +24,7 @@ If not, see <https://www.gnu.org/licenses/> */
   gth_elem -> the list of chemical elements
   gth_keys -> the list of keywords
   cp2k_gth -> finally the complete GTH basis set
+
 */
 
 #include "global.h"

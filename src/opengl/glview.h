@@ -170,9 +170,9 @@ extern void draw_vertices (int id);
 extern void draw_atom_to_pick (struct atom at);
 extern void draw_atom (struct atom at, double al);
 extern void draw_rings_gl (int se, int ge, int ta, int id);
-extern void draw_box (void);
+extern void draw_box ();
 extern void prepare_cuboid (vec3_t position, int id);
-extern void prepare_axis (void);
+extern void prepare_axis ();
 extern void draw (glwin * view);
 extern void render_all_strings (int glsl, int id);
 extern void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3],

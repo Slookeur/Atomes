@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'dlp_field.h'
 *
-*  Contains: 
+*  Contains:
 
 */
 
@@ -388,7 +388,7 @@ extern int test_for_dihedrals (struct field_atom * at,
 extern void clean_field_struct_list (struct field_struct * stru);
 
 // Create force field data structure
-extern void set_mol_num_label (void);
+extern void set_mol_num_label ();
 extern G_MODULE_EXPORT void changed_mol_box (GtkComboBox * box, gpointer data);
 extern void update_field_trees ();
 extern GtkWidget * create_combo_mol (int f);

@@ -76,7 +76,7 @@ If not, see <https://www.gnu.org/licenses/> */
 extern int objects[3];
 extern int * object_was_selected[3];
 extern int ** tmp_object_id[3];
-extern GtkWidget * curvetbox (void);
+extern GtkWidget * curvetbox ();
 extern GtkWidget * work_menu (int p, int c);
 
 extern G_MODULE_EXPORT void compute_this_prop (GtkWidget * widg, gpointer data);

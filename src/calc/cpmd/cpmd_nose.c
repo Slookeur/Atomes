@@ -1472,9 +1472,9 @@ void create_selection_combo (int id, int num, int type, GCallback handler)
 /*
 *  void add_thermostat (int extra)
 *
-*  Usage:
+*  Usage: add thermostat(s)
 *
-*  int extra :
+*  int extra : the number of thermostat(s) to add
 */
 void add_thermostat (int extra)
 {
@@ -1504,9 +1504,9 @@ void add_thermostat (int extra)
 /*
 *  G_MODULE_EXPORT void add_or_remove_thermostat (GtkSpinButton * res, gpointer data)
 *
-*  Usage:
+*  Usage: add / remove thermostat
 *
-*  GtkSpinButton * res :
+*  GtkSpinButton * res : the GtkSpinButton sending the signal
 *  gpointer data       : the associated data pointer
 */
 G_MODULE_EXPORT void add_or_remove_thermostat (GtkSpinButton * res, gpointer data)
@@ -1576,7 +1576,7 @@ G_MODULE_EXPORT void add_or_remove_thermostat (GtkSpinButton * res, gpointer dat
 /*
 *  G_MODULE_EXPORT void update_thermo_parameter (GtkEntry * res, gpointer data)
 *
-*  Usage:
+*  Usage: update thermostat parameter value entry callback
 *
 *  GtkEntry * res : the GtkEntry sending the signal
 *  gpointer data  : the associated data pointer
@@ -1689,7 +1689,7 @@ G_MODULE_EXPORT void changed_thermo_box_nose (GtkComboBox * box, gpointer data)
 /*
 *  void prepare_therm_ions ()
 *
-*  Usage:
+*  Usage:  prepare ions thermostat widgets
 */
 void prepare_therm_ions ()
 {
@@ -1729,7 +1729,7 @@ void prepare_therm_ions ()
 /*
 *  void prepare_therm_elec ()
 *
-*  Usage:
+*  Usage: prepare electrons thermostat widgets
 */
 void prepare_therm_elec ()
 {
@@ -1748,7 +1748,7 @@ void prepare_therm_elec ()
 /*
 *  G_MODULE_EXPORT void changed_thermo_box (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change the type of thermostat
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -1781,11 +1781,11 @@ G_MODULE_EXPORT void changed_thermo_box (GtkComboBox * box, gpointer data)
 /*
 *  void thermo_type_box (GtkWidget * vbox, gchar * str, int id)
 *
-*  Usage:
+*  Usage: prepare the thermostat option widgets
 *
 *  GtkWidget * vbox : the GtkWidget sending the signal
-*  gchar * str      :
-*  int id           :
+*  gchar * str      : thermostat information
+*  int id           : the type of thermostat
 */
 void thermo_type_box (GtkWidget * vbox, gchar * str, int id)
 {
@@ -1816,7 +1816,7 @@ void thermo_type_box (GtkWidget * vbox, gchar * str, int id)
 /*
 *  GtkWidget * thermo_box ()
 *
-*  Usage:
+*  Usage: create the thermostat configuration widgets
 */
 GtkWidget * thermo_box ()
 {

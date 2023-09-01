@@ -31,7 +31,7 @@ If not, see <https://www.gnu.org/licenses/> */
   void initbd ();
   void initang ();
   void initcutoffs (chemical_data * chem, int species);
-  void cutoffsend (void);
+  void cutoffsend ();
   void prep_ogl_bonds ();
   void update_ang_view (struct project * this_proj);
   void update_glwin_after_bonds (int bonding, int * colm);
@@ -228,13 +228,13 @@ void initcutoffs (chemical_data * chem, int species)
 }
 
 /*
-*  void cutoffsend (void)
+*  void cutoffsend ()
 *
 *  Usage:
 *
 *  void :
 */
-void cutoffsend (void)
+void cutoffsend ()
 {
   int i, j;
 

@@ -36,7 +36,7 @@ If not, see <https://www.gnu.org/licenses/> */
                                                 gchar * string_path, gpointer data);
 
   GtkWidget * tooltree ();
-  GtkWidget * curvetbox (void);
+  GtkWidget * curvetbox ();
 
 */
 

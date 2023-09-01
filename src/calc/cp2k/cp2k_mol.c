@@ -16,13 +16,19 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to fix fragment(s) when creating the CP2K input file
+
+ Note: this is not used for the time being !
+
 *
 *  List of subroutines:
 
+  void frag_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void frag_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
   void cp2k_fix_molecule ();
 
+  G_MODULE_EXPORT void select_frag (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
   G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data);
   G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data);
 
@@ -35,18 +41,24 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern void proj_unselect_all_atoms ();
 extern ColRGBA init_color (int id, int numid);
-extern G_MODULE_EXPORT void cp2k_select_coord_id (GtkCellRendererToggle * cell_renderer,
-                                                  gchar * string_path,
-                                                  gpointer data);
+extern G_MODULE_EXPORT void cp2k_select_coord_id (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
 extern int at_col;
 extern int ** old_fixed;
 int a_frag;
 int * fix_frag;
 extern GtkTreeStore * add_model;
 
-G_MODULE_EXPORT void select_frag (GtkCellRendererToggle * cell_renderer,
-                                  gchar * string_path,
-                                  gpointer data)
+/*
+*  G_MODULE_EXPORT void select_frag (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+*
+*  Usage: on select molecule toggle callback
+*
+*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
+*  gchar * string_path                   : the path in the tree store
+*  gpointer data                         : the associated data pointer
+*
+*/
+G_MODULE_EXPORT void select_frag (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
   GtkTreeIter iter;
   GtkTreePath * path = gtk_tree_path_new_from_string (string_path);
@@ -66,22 +78,36 @@ G_MODULE_EXPORT void select_frag (GtkCellRendererToggle * cell_renderer,
   gtk_tree_store_set (add_model, & iter, 1, fix_frag[i-1], -1);
 }
 
-void frag_set_visible (GtkTreeViewColumn * col,
-                       GtkCellRenderer   * renderer,
-                       GtkTreeModel      * mod,
-                       GtkTreeIter       * iter,
-                       gpointer          data)
+/*
+*  void frag_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: show / hide cell renderer in the CP2K molecule tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void frag_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i;
   gtk_tree_model_get (mod, iter, 1, & i, -1);
   gtk_cell_renderer_set_visible (renderer, i);
 }
 
-void frag_set_color (GtkTreeViewColumn * col,
-                     GtkCellRenderer   * renderer,
-                     GtkTreeModel      * mod,
-                     GtkTreeIter       * iter,
-                     gpointer          data)
+/*
+*  void frag_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color in the CP2K molecule tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void frag_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i, j;
   gtk_tree_model_get (mod, iter, 0, & i, -1);
@@ -94,7 +120,7 @@ gboolean sel_and_conf;
 /*
 *  G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: confirm fix selection
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   : the response id
@@ -110,7 +136,7 @@ G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint respons
     {
       if (fix_frag[i] && ! old_fixed[i][0] && ! old_fixed[i][1] && ! old_fixed[i][2])
       {
-        gchar * str = g_strdup_printf ("Fragment %d has been selected but not coordinates are frozen !\n"
+        gchar * str = g_strdup_printf ("Fragment %d has been selected but no coordinates appear to be frozen !\n"
                                        "Unselect fragment %d or select coordinate(s) to freeze !", i+1, i+1);
         show_warning (str, qm_assistant);
         g_free (str);
@@ -124,7 +150,7 @@ G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint respons
 /*
 *  G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: CP2K assistant fixing fragment(s) - running the dialog
 *
 *  GtkDialog * dial : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -204,7 +230,7 @@ G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, 
 /*
 *  void cp2k_fix_molecule ()
 *
-*  Usage:
+*  Usage: CP2K assistant fixing fragment(s) - creating the dialog
 */
 void cp2k_fix_molecule ()
 {

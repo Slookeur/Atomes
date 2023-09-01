@@ -879,7 +879,7 @@ extern void clean_chains_data (glwin * view);
 extern void clean_volumes_data (glwin * view);
 
 extern void initcutoffs (chemical_data * chem, int species);
-extern void cutoffsend (void);
+extern void cutoffsend ();
 extern void update_entry_int (GtkEntry * entry, int intval);
 extern void update_entry_double (GtkEntry * entry, double doubleval);
 extern void update_entry_long_double (GtkEntry * entry, double doubleval);
