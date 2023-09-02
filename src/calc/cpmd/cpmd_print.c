@@ -306,11 +306,11 @@ void print_cpmd_section (GtkTextBuffer * buf)
     {
       i = TSTPO;
     }
-    else if (tmp_cpmd -> calc_type == 0)
+    else if (tmp_cpmd -> calc_type == 1)
     {
       i = TSTPG;
     }
-    else if (tmp_cpmd -> calc_type == 0)
+    else if (tmp_cpmd -> calc_type == 2)
     {
       i = TSTPC;
     }

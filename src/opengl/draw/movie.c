@@ -676,7 +676,7 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
       {
         do_volms = TRUE;
       }
-      else if (img_a -> fm_show_vol[j][i] == NULL && img_b -> fm_show_vol[j][i] != NULL)
+      else if (img_a -> fm_show_vol[j][i] != NULL && img_b -> fm_show_vol[j][i] == NULL)
       {
         do_volms = TRUE;
       }
@@ -714,7 +714,7 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
   {
     view -> create_shaders[MAXIS] = shaders = TRUE;
   }
-  else if (img_a -> axis_color == NULL && img_b -> axis_color != NULL)
+  else if (img_a -> axis_color != NULL && img_b -> axis_color == NULL)
   {
     view -> create_shaders[MAXIS] = shaders = TRUE;
   }
