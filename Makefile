@@ -17,7 +17,7 @@ LINUX = 1
 WINDOWS = 0
 
 # The next line defines the GTK version !
-GTKV = 4
+GTKV = 3
 ifeq ($(GTKV),4)
   DGTK = -DGTK4 -DGTKGLAREA -DGDK_DISABLE_DEPRECATION_WARNINGS
   IGTK = `pkg-config --cflags gtk4 epoxy libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
@@ -221,7 +221,7 @@ endif
 
 ifeq ($(MAKECMDGOALS),debug)
   FCFLAGS = -fno-second-underscore -O0 -Wall -g3 -pg -ggdb3 -cpp -dA -dD -dH -dp -dP -fvar-tracking -fbounds-check -fstack-protector-all
-  CFLAGS = -O0 -Wall -g3 -pg -ggdb3 -cpp -dA -dD -dH -dp -dP -fvar-tracking -fbounds-check -fstack-protector-all
+  CFLAGS = -O0 -Wall -g3 -pg -ggdb3 -cpp -dA -dD -dH -dp -dP -fvar-tracking -fbounds-check -fstack-protector-all -Wduplicated-cond
   LDFLAGS = $(LIBS) $(LDFLGS) -pg
   DEFS = -DHAVE_CONFIG_H -DDEBUG $(DGTK) $(DOS)
 endif
