@@ -44,30 +44,30 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "interface.h"
 
 enum lammps_atom_types { // comments = corresponding data file formats
-  l_angle = 0, // atom-ID molecule-ID atom-type x y z
-  l_atomic = 1, // atom-ID atom-type x y z
-  l_body = 2, // atom-ID atom-type bodyflag mass x y z
-  l_bond = 3, // atom-ID molecule-ID atom-type x y z
-  l_charge = 4, // atom-type q x y z
-  l_dipole = 5, // atom-ID atom-type q x y z mux muy muz
-  l_dpd = 6, // atom-ID atom-type theta x y z
-  l_edpd = 7, // atom-ID atom-type edpd_temp edpd_cv x y z
-  l_electron = 8, // atom-ID atom-type q spin eradius x y z
-  l_ellipsoid = 9, // atom-ID atom-type ellipsoidflag density x y z
-  l_full = 10, // atom-ID molecule-ID atom-type q x y z
-  l_line = 11, // atom-ID molecule-ID atom-type lineflag density x y z
-  l_mdpd = 12, // atom-ID atom-type rho x y z
-  l_molecular = 13, // atom-ID molecule-ID atom-type x y z
-  l_peri = 14, // atom-ID atom-type volume density x y z
-  l_smd = 15, // atom-ID atom-type molecule volume mass kernel-radius contact-radius x0 y0 z0 x y z
-  l_sph = 16, // atom-ID atom-type rho esph cv x y z
-  l_sphere = 17, // atom-ID atom-type diameter density x y z
-  l_spin = 18, // atom-ID atom-type x y z spx spy spz sp
-  l_tdpd = 19, // atom-ID atom-type x y z cc1 cc2 … ccNspecies
-  l_template = 20, // atom-ID atom-type molecule-ID template-index template-atom x y z
-  l_tri = 21, // atom-ID molecule-ID atom-type triangleflag density x y z
-  l_wavepacket = 22, // atom-ID atom-type charge spin eradius etag cs_re cs_im x y z
-  l_hybrid = 23 // atom-ID atom-type x y z sub-style1 sub-style2 …
+  l_angle = 0,           // atom-ID molecule-ID atom-type x y z
+  l_atomic = 1,          // atom-ID atom-type x y z
+  l_body = 2,            // atom-ID atom-type bodyflag mass x y z
+  l_bond = 3,            // atom-ID molecule-ID atom-type x y z
+  l_charge = 4,          // atom-type q x y z
+  l_dipole = 5,          // atom-ID atom-type q x y z mux muy muz
+  l_dpd = 6,             // atom-ID atom-type theta x y z
+  l_edpd = 7,            // atom-ID atom-type edpd_temp edpd_cv x y z
+  l_electron = 8,        // atom-ID atom-type q spin eradius x y z
+  l_ellipsoid = 9,       // atom-ID atom-type ellipsoidflag density x y z
+  l_full = 10,           // atom-ID molecule-ID atom-type q x y z
+  l_line = 11,           // atom-ID molecule-ID atom-type lineflag density x y z
+  l_mdpd = 12,           // atom-ID atom-type rho x y z
+  l_molecular = 13,      // atom-ID molecule-ID atom-type x y z
+  l_peri = 14,           // atom-ID atom-type volume density x y z
+  l_smd = 15,            // atom-ID atom-type molecule volume mass kernel-radius contact-radius x0 y0 z0 x y z
+  l_sph = 16,            // atom-ID atom-type rho esph cv x y z
+  l_sphere = 17,         // atom-ID atom-type diameter density x y z
+  l_spin = 18,           // atom-ID atom-type x y z spx spy spz sp
+  l_tdpd = 19,           // atom-ID atom-type x y z cc1 cc2 … ccNspecies
+  l_template = 20,       // atom-ID atom-type molecule-ID template-index template-atom x y z
+  l_tri = 21,            // atom-ID molecule-ID atom-type triangleflag density x y z
+  l_wavepacket = 22,     // atom-ID atom-type charge spin eradius etag cs_re cs_im x y z
+  l_hybrid = 23          // atom-ID atom-type x y z sub-style1 sub-style2 …
 };
 
 extern gboolean in_bond (int at, int bd[2]);
