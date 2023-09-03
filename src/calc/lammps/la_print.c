@@ -14,12 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'la_print.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to print the LAMMPS input file(s)
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int get_mol_id_from_model_id (int at);
   int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_struct * dh);
@@ -80,9 +81,9 @@ extern char * vect_comp[3];
 /*
 *  int get_mol_id_from_model_id (int at)
 *
-*  Usage: 
+*  Usage: get field molecule id using atom id
 *
-*  int at : 
+*  int at : the atom id
 */
 int get_mol_id_from_model_id (int at)
 {
@@ -110,12 +111,12 @@ struct field_prop * print_prop[8];
 /*
 *  int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_struct * dh)
 *
-*  Usage: 
+*  Usage: print LAMMPS dihedral
 *
-*  int did                  : 
-*  int di                   : 
-*  GtkTextBuffer * buf      : 
-*  struct field_struct * dh : 
+*  int did                  : the dihedral id to print
+*  int di                   : the type of structural property = 2
+*  GtkTextBuffer * buf      : the GtkTextBuffer to print into
+*  struct field_struct * dh : the structural property to print
 */
 int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_struct * dh)
 {
@@ -179,12 +180,12 @@ int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_st
 /*
 *  int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struct * an)
 *
-*  Usage: 
+*  Usage: print LAMMPS angle
 *
-*  int aid                  : 
-*  int ai                   : 
-*  GtkTextBuffer * buf      : 
-*  struct field_struct * an : 
+*  int aid                  : the angle id to print
+*  int ai                   : the type of structural property = 1
+*  GtkTextBuffer * buf      : the GtkTextBuffer to print into
+*  struct field_struct * an : the structural property to print
 */
 int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struct * an)
 {
@@ -241,12 +242,12 @@ int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struc
 /*
 *  int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct * bd)
 *
-*  Usage: 
+*  Usage: print LAMMPS bond
 *
-*  int bid                  : 
-*  int bi                   : 
-*  GtkTextBuffer * buf      : 
-*  struct field_struct * bd : 
+*  int bid                  : the bond id to print
+*  int bi                   : the type of structural property = 0
+*  GtkTextBuffer * buf      : the GtkTextBuffer to print into
+*  struct field_struct * bd : the structural property to print
 */
 int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct * bd)
 {
@@ -294,11 +295,11 @@ int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct
 /*
 *  int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_check)
 *
-*  Usage: 
+*  Usage: check if field property exists, if not add it
 *
-*  int sid                      : 
-*  struct field_prop * init     : 
-*  struct field_prop * to_check : 
+*  int sid                      : the type of structural property
+*  struct field_prop * init     : the initial field property pointer
+*  struct field_prop * to_check : the field property to check
 */
 int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_check)
 {
@@ -331,10 +332,10 @@ int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_
 /*
 *  int get_type_struct_to_print (struct field_molecule * tfmol, int sid)
 *
-*  Usage: 
+*  Usage: build the list of 'sid' type structural property(ies) to print
 *
-*  struct field_molecule * tfmol : 
-*  int sid                       : 
+*  struct field_molecule * tfmol : the field molecule
+*  int sid                       : the type of structural
 */
 int get_type_struct_to_print (struct field_molecule * tfmol, int sid)
 {
@@ -384,10 +385,10 @@ struct field_atom * all_at;
 /*
 *  gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * bt)
 *
-*  Usage: 
+*  Usage: check if two field atoms are different
 *
-*  struct field_atom * at : 
-*  struct field_atom * bt : 
+*  struct field_atom * at : 1st field atom
+*  struct field_atom * bt : 2nd field atom
 */
 gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * bt)
 {
@@ -401,7 +402,7 @@ gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * 
 /*
 *  int get_different_atoms ()
 *
-*  Usage: 
+*  Usage: create the list of all different field atoms
 */
 int get_different_atoms ()
 {
@@ -451,9 +452,9 @@ int get_different_atoms ()
 /*
 *  void print_lammps_mass (GtkTextBuffer * buf)
 *
-*  Usage: 
+*  Usage: pritn LAMMPS atomic masses
 *
-*  GtkTextBuffer * buf : 
+*  GtkTextBuffer * buf : the GtkTextBuffer to print into
 */
 void print_lammps_mass (GtkTextBuffer * buf)
 {
@@ -472,9 +473,9 @@ void print_lammps_mass (GtkTextBuffer * buf)
 /*
 *  struct field_atom * get_print_atom (int aid)
 *
-*  Usage: 
+*  Usage: get LAMMPS field atom
 *
-*  int aid : 
+*  int aid : the atom id to find
 */
 struct field_atom * get_print_atom (int aid)
 {
@@ -494,9 +495,9 @@ struct field_atom * get_print_atom (int aid)
 /*
 *  void print_lammps_atoms (GtkTextBuffer * buf)
 *
-*  Usage: 
+*  Usage: print LAMMPS atoms
 *
-*  GtkTextBuffer * buf : 
+*  GtkTextBuffer * buf : the GtkTextBuffer to print into
 */
 void print_lammps_atoms (GtkTextBuffer * buf)
 {
@@ -602,9 +603,9 @@ void print_lammps_atoms (GtkTextBuffer * buf)
 /*
 *  void print_lammps_atom_file (GtkTextBuffer * buf)
 *
-*  Usage: 
+*  Usage: print LAMMPS atom file
 *
-*  GtkTextBuffer * buf : 
+*  GtkTextBuffer * buf : the GtkTextBuffer to print into
 */
 void print_lammps_atom_file (GtkTextBuffer * buf)
 {
