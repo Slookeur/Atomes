@@ -1103,20 +1103,20 @@ GtkWidget * init_cp2k ()
     add_box_child_start (GTK_ORIENTATION_VERTICAL, vfbox[i], fileinf[i], FALSE, FALSE, (i==0) ? 0 : 15);
     hbx = create_hbox (0);
     add_box_child_start (GTK_ORIENTATION_VERTICAL, vfbox[i], hbx, FALSE, FALSE, 0);
-    if (i == 0)
+
+#ifdef GTK4
+    filebut[i] = check_button (ftext[i], -1, -1, (i != j) ? FALSE : TRUE, G_CALLBACK(select_input_type), GINT_TO_POINTER(i));
+    if (i) gtk_check_button_set_group ((GtkCheckButton *)filebut[i], (GtkCheckButton *)filebut[0]);
+#else
+    if (! i)
     {
       filebut[i] = radio_button (ftext[i], -1, -1, (i != j) ? FALSE : TRUE, G_CALLBACK(select_input_type), GINT_TO_POINTER(i));
     }
-    else if (i == 1)
+    else
     {
-#ifdef GTK4
-      filebut[i] = gtk_toggle_button_new_with_label (ftext[i]);
-#else
       filebut[i] = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON(filebut[0]), ftext[i]);
-#endif
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(filebut[i]), (i != j) ? FALSE : TRUE);
-      g_signal_connect (G_OBJECT(filebut[i]), "toggled",G_CALLBACK(select_input_type), GINT_TO_POINTER(i));
     }
+#endif
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbx, filebut[i], FALSE, FALSE, (i==0) ? 50 : 120);
   }
   tmp_cp2k -> input_type = j;

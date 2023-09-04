@@ -401,7 +401,6 @@ extern int * duplicate_int (int num, int * old_val);
 extern gboolean * duplicate_bool (int num, gboolean * old_val);
 extern float * duplicate_float (int num, float * old_val);
 extern struct field_atom * duplicate_field_atom (struct field_atom * old_fat);
-extern struct field_neighbor * duplicate_field_neighbor (struct field_neighbor * old_ngb);
 extern struct field_shell * duplicate_field_shell (struct field_shell * old_shell);
 extern struct field_constraint * duplicate_field_constraint (struct field_constraint * old_cons);
 extern struct field_rigid * duplicate_field_rigid (struct field_rigid * old_rig);

@@ -1211,17 +1211,13 @@ G_MODULE_EXPORT void adjust_occupancy (GtkButton * but, gpointer data)
     occp[i].b = i;
     add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, FALSE, FALSE, 0);
 #ifdef GTK4
-    if (!i)
+    occ_but[i] = check_button (boccup[i], -1, 25, FALSE, G_CALLBACK(toggle_occ), & occp[i]);
+    if (i)
     {
-      occ_but[i] = check_button (boccup[i], -1, 25, FALSE, G_CALLBACK(toggle_occ), & occp[i]);
-    }
-    else
-    {
-      occ_but[i] = check_button (boccup[i], -1, 25, FALSE, G_CALLBACK(toggle_occ), & occp[i]);
       gtk_check_button_set_group ((GtkCheckButton *)occ_but[i], (GtkCheckButton *)occ_but[0]);
     }
 #else
-    if (!i)
+    if (! i)
     {
       occ_but[i] = radio_button (boccup[i], -1, 25, FALSE, G_CALLBACK(toggle_occ), & occp[i]);
     }

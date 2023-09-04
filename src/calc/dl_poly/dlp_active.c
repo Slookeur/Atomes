@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - Subroutines to retrieve data in the force field structure
+
 *
 *  List of subroutines:
 
@@ -42,10 +43,10 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 *  struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid)
 *
-*  Usage:
+*  Usage: retrieve field molecule from overall atom id in the model
 *
 *  struct project * this_proj : the target project
-*  int aid                    :
+*  int aid                    : the target atom id
 */
 struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid)
 {
@@ -71,9 +72,9 @@ struct field_molecule * get_active_field_molecule_from_model_id (struct project 
 /*
 *  struct field_molecule * get_active_field_molecule (int a)
 *
-*  Usage:
+*  Usage: retrieve field molecule
 *
-*  int a :
+*  int a : the id of the field molecule to retrieve
 */
 struct field_molecule * get_active_field_molecule (int a)
 {
@@ -89,10 +90,10 @@ struct field_molecule * get_active_field_molecule (int a)
 /*
 *  struct field_nth_body * get_active_body (int a, int b)
 *
-*  Usage:
+*  Usage: retrieve field nth body interaction
 *
-*  int a :
-*  int b :
+*  int a : the id of the body interaction to retrieve
+*  int b : the type of body interaction
 */
 struct field_nth_body * get_active_body (int a, int b)
 {
@@ -109,9 +110,9 @@ struct field_nth_body * get_active_body (int a, int b)
 /*
 *  struct field_external * get_active_external (int a)
 *
-*  Usage:
+*  Usage: retrieve external field property
 *
-*  int a :
+*  int a : the id of the external field property to retrieve
 */
 struct field_external * get_active_external (int a)
 {
@@ -128,10 +129,10 @@ struct field_external * get_active_external (int a)
 /*
 *  struct field_atom * get_active_atom (int a, int b)
 *
-*  Usage:
+*  Usage: retrieve field atom
 *
-*  int a :
-*  int b :
+*  int a : the id of the field molecule
+*  int b : the id of the field atom to retrieve
 */
 struct field_atom * get_active_atom (int a, int b)
 {
@@ -148,10 +149,10 @@ struct field_atom * get_active_atom (int a, int b)
 /*
 *  struct field_shell * get_active_shell (int a, int b)
 *
-*  Usage:
+*  Usage: retrieve shell property
 *
-*  int a :
-*  int b :
+*  int a : the id of the field molecule
+*  int b : the id of the shell property to retrieve
 */
 struct field_shell * get_active_shell (int a, int b)
 {
@@ -168,10 +169,10 @@ struct field_shell * get_active_shell (int a, int b)
 /*
 *  struct field_constraint * get_active_constraint (int a, int b)
 *
-*  Usage:
+*  Usage: retrieve constraint property
 *
-*  int a :
-*  int b :
+*  int a : the id of the field molecule
+*  int b : the id of the constraint to retrieve
 */
 struct field_constraint * get_active_constraint (int a, int b)
 {
@@ -188,10 +189,10 @@ struct field_constraint * get_active_constraint (int a, int b)
 /*
 *  struct field_pmf * get_active_pmf (int a, int b)
 *
-*  Usage:
+*  Usage: retrieve PMF property
 *
-*  int a :
-*  int b :
+*  int a : the id of the field molecule
+*  int b : the id of the PMF property to retrieve
 */
 struct field_pmf * get_active_pmf (int a, int b)
 {
@@ -208,10 +209,10 @@ struct field_pmf * get_active_pmf (int a, int b)
 /*
 *  struct field_rigid * get_active_rigid (int a, int b)
 *
-*  Usage:
+*  Usage: retrieve rigid property
 *
-*  int a :
-*  int b :
+*  int a : the id of the field molecule
+*  int b : the id of the rigid property to retrieve
 */
 struct field_rigid * get_active_rigid (int a, int b)
 {
@@ -228,10 +229,10 @@ struct field_rigid * get_active_rigid (int a, int b)
 /*
 *  struct field_tethered * get_active_tethered (int a, int b)
 *
-*  Usage:
+*  Usage: retrieve tethered property
 *
-*  int a :
-*  int b :
+*  int a : the id of the field molecule
+*  int b : the id of the tethered to retrieve
 */
 struct field_tethered * get_active_tethered (int a, int b)
 {
@@ -248,10 +249,10 @@ struct field_tethered * get_active_tethered (int a, int b)
 /*
 *  struct field_prop * get_active_prop (struct  field_prop * pr, int a)
 *
-*  Usage:
+*  Usage: the field molecule structural property id to retrieve
 *
-*  struct  field_prop * pr :
-*  int a                   :
+*  struct  field_prop * pr : the pointer on the field molecule properties to browse
+*  int a                   : the id of the field molecule property to retrieve
 */
 struct field_prop * get_active_prop (struct  field_prop * pr, int a)
 {
@@ -268,11 +269,11 @@ struct field_prop * get_active_prop (struct  field_prop * pr, int a)
 /*
 *  struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids)
 *
-*  Usage:
+*  Usage: retrieve field molecule structural property using atoms
 *
-*  struct  field_prop * pr :
-*  int ti                  :
-*  int * ids               :
+*  struct  field_prop * pr : the pointer on the field molecule properties to browse
+*  int ti                  : the number of atoms for this property
+*  int * ids               : the atoms to search for
 */
 struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids)
 {
@@ -300,11 +301,11 @@ struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti
 /*
 *  struct field_struct * get_active_struct (int s, int a, int b)
 *
-*  Usage:
+*  Usage: retrieve field structural property
 *
-*  int s :
-*  int a :
-*  int b :
+*  int s : the type of structural property
+*  int a : the field molecule id
+*  int b : the structural property id to retrieve
 */
 struct field_struct * get_active_struct (int s, int a, int b)
 {
