@@ -550,7 +550,7 @@ struct thermostat * init_thermo (int id, int type, int sys)
 *  Usage: initialize thermostat(s)
 *
 *  int type : the type of thermostat
-*  int elec : 1 = fictious electronic thermostat
+*  int elec : 1 = fictitious electronic thermostat
 */
 void init_thermostats (int type, int elec)
 {
@@ -606,7 +606,7 @@ G_MODULE_EXPORT void update_thermo_parameter (GtkEntry * res, gpointer data);
 *  Usage: create thermostat parameters configuration widgets
 *
 *  GtkWidget * vbox : the GtkWidget sending the signal
-*  int id           : thermostat id, -2 if fictious electronic
+*  int id           : thermostat id, -2 if fictitious electronic
 *  int jd           : number of parameter(s) for this thermostat
 *  gchar ** la      : thermostat parameter name(s)
 *  gchar ** lb      : thermostat parameter unit(s)
@@ -1416,7 +1416,7 @@ G_MODULE_EXPORT void atom_selection_button (GtkButton * but, gpointer data)
 *
 *  GtkWidget * box : the GtkWidget sending the signal
 *  int num         : the number of atom(s) already selected
-*  int id          : 0 = ionic, 1 = fictious electronic
+*  int id          : 0 = ionic, 1 = fictitious electronic
 *  gpointer data   : the associated data pointer
 */
 void create_selection_button (GtkWidget * box, int num, int id, gpointer data)
@@ -1487,7 +1487,7 @@ G_MODULE_EXPORT void changed_nose_thermo_id_box (GtkComboBox * box, gpointer dat
 *
 *  Usage: create thermostat selection combo box
 *
-*  int id            : 0 = ionic, 1 = fictious electronic
+*  int id            : 0 = ionic, 1 = fictitious electronic
 *  int num           : the number of thermostat
 *  int type          : the type of thermostat
 *  GCallback handler : the associated callback
@@ -1807,7 +1807,7 @@ void prepare_therm_elec ()
 /*
 *  G_MODULE_EXPORT void changed_thermo_box (GtkComboBox * box, gpointer data)
 *
-*  Usage: change the thermostat family (ionic / fictious electronic)
+*  Usage: change the thermostat family (ionic / fictitious electronic)
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer

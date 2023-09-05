@@ -67,7 +67,7 @@ void print_info_section (GtkTextBuffer * buf)
 *  Usage: print CPMD thermostat parameters
 *
 *  struct thermostat * thermo : the target thermostat
-*  int id                     : 0 = ionic, 1 = fictious electronic
+*  int id                     : 0 = ionic, 1 = fictitious electronic
 *  GtkTextBuffer * buf        : the GtkTextBuffer to print into
 */
 void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf)
