@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to initialize the creation of a classical force field
+
 *
 *  List of subroutines:
 
@@ -31,6 +32,30 @@ If not, see <https://www.gnu.org/licenses/> */
   int test_for_bonds (struct field_atom * at, struct field_atom * bt);
   int prepare_field_struct (int ids, int sid, int yes_no_num, int * aid);
   int bonds_between_atoms (int n, struct field_atom * at, struct field_atom * bt, int a, int b);
+  int test_for_angles (struct field_atom * at,
+                       struct field_atom * bt,
+                       struct field_atom * ct);
+  int angles_from_bonds (int n,
+                         struct field_atom * at,
+                         struct field_atom * bt,
+                         struct field_atom * ct);
+  int test_for_dihedrals (struct field_atom * at,
+                          struct field_atom * bt,
+                          struct field_atom * ct,
+                          struct field_atom * dt);
+  int dihedrals_from_angles (int n,
+                             struct field_atom * at,
+                             struct field_atom * bt,
+                             struct field_atom * ct,
+                             struct field_atom * dt);
+  int impropers_inversion (int n, int stru,
+                           int at, int bt, int ct, int dt,
+                           int a, int b, int c, int d);
+  int coord_sphere_multiplicity (struct atom * at, int id, gboolean set_atom_id, gboolean in_field_atom);
+  int find_neighbor_loop (int frag, int aid, int fai,
+                          struct field_atom * fat,
+                          struct field_neighbor * ngmb,
+                          int sid, gboolean save_it);
   int setup_atomic_weight (int seq);
   int init_vdw (gboolean init);
 
@@ -40,6 +65,8 @@ If not, see <https://www.gnu.org/licenses/> */
   gboolean are_in_bond (struct atom ato, int at);
   gboolean is_numbering_possible (int frag);
   gboolean is_this_numbering_possible_for_this_atom (int frag, struct field_neighbor * ngma, int atom);
+  gboolean id_n_fold_atoms_in_fragment (int frag, int limit, int num_ngb, int search_type,
+                                        int init, struct field_neighbor * ngma_init);
   gboolean id_atoms_in_fragment (int frag, int seed);
 
   gchar * set_field_atom_name (struct field_atom * ato, struct field_molecule * mol);
@@ -89,10 +116,10 @@ int a_multi;
 /*
 *  int get_position_in_field_atom_from_model_id (int fat, int at)
 *
-*  Usage:
+*  Usage: retrieve atom position id in field atom id using atom id in model
 *
-*  int fat :
-*  int at  :
+*  int fat : the target field atom
+*  int at  : the target model atom id
 */
 int get_position_in_field_atom_from_model_id (int fat, int at)
 {
@@ -108,10 +135,10 @@ int get_position_in_field_atom_from_model_id (int fat, int at)
 /*
 *  int get_field_atom_id_from_model_id (struct field_molecule * fmol, int at)
 *
-*  Usage:
+*  Usage: retrieve field atom id using atom id in model
 *
-*  struct field_molecule * fmol :
-*  int at                       :
+*  struct field_molecule * fmol : the target field molecule
+*  int at                       : the target model atom id
 */
 int get_field_atom_id_from_model_id (struct field_molecule * fmol, int at)
 {
@@ -131,10 +158,10 @@ int get_field_atom_id_from_model_id (struct field_molecule * fmol, int at)
 /*
 *  int get_fragment_atom_id_from_model_id (struct field_molecule * fmol, int at)
 *
-*  Usage:
+*  Usage: retrieve fragment atom id using atom id in model
 *
-*  struct field_molecule * fmol :
-*  int at                       :
+*  struct field_molecule * fmol : the target field molecule
+*  int at                       : the target model atom id
 */
 int get_fragment_atom_id_from_model_id (struct field_molecule * fmol, int at)
 {
@@ -154,10 +181,10 @@ int get_fragment_atom_id_from_model_id (struct field_molecule * fmol, int at)
 /*
 *  int get_atom_id_in_fragment_from_model_id (int frag, int at)
 *
-*  Usage:
+*  Usage: retrieve field atom id in fragment from model id
 *
-*  int frag :
-*  int at   :
+*  int frag : the fragment id
+*  int at   : the atom id in the model
 */
 int get_atom_id_in_fragment_from_model_id (int frag, int at)
 {
@@ -179,12 +206,12 @@ int get_atom_id_in_fragment_from_model_id (int frag, int at)
 /*
 *  int set_atom_id (struct field_atom * at, int c, int p, int id)
 *
-*  Usage:
+*  Usage: set new fragment/molecule atom parameters
 *
-*  struct field_atom * at :
-*  int c                  :
-*  int p                  :
-*  int id                 :
+*  struct field_atom * at : the target field atom
+*  int c                  : the fragment id
+*  int p                  : the list id in field atom
+*  int id                 : the field atom id
 */
 int set_atom_id (struct field_atom * at, int c, int p, int id)
 {
@@ -204,10 +231,10 @@ int set_atom_id (struct field_atom * at, int c, int p, int id)
 /*
 *  gchar * set_field_atom_name (struct field_atom * ato, struct field_molecule * mol)
 *
-*  Usage:
+*  Usage: get name string for field atom
 *
-*  struct field_atom * ato     :
-*  struct field_molecule * mol :
+*  struct field_atom * ato     : the target field atom
+*  struct field_molecule * mol : the target field molecule
 */
 gchar * set_field_atom_name (struct field_atom * ato, struct field_molecule * mol)
 {
@@ -257,14 +284,14 @@ gchar * set_field_atom_name (struct field_atom * ato, struct field_molecule * mo
 /*
 *  struct field_atom * init_field_atom (int id, int type, int at, int nat, int coo, int * list)
 *
-*  Usage:
+*  Usage: intialize a new type of field atom
 *
-*  int id     :
-*  int type   :
-*  int at     :
-*  int nat    :
-*  int coo    :
-*  int * list :
+*  int id     : the new field atom id
+*  int type   : the new field atom coordination type
+*  int at     : the new field atom species
+*  int nat    : the number of atom(s) of for this field atom type
+*  int coo    : the coordination id in coordination type, if any
+*  int * list : the list of atoms that match this type of field atom
 */
 struct field_atom * init_field_atom (int id, int type, int at, int nat, int coo, int * list)
 {
@@ -350,11 +377,11 @@ struct field_atom * init_field_atom (int id, int type, int at, int nat, int coo,
 /*
 *  struct field_shell * init_field_shell (int id, int ia, int ib)
 *
-*  Usage:
+*  Usage: initialize field core shell interaction
 *
-*  int id :
-*  int ia :
-*  int ib :
+*  int id : the new shell id
+*  int ia : 1st atom id in field molecule
+*  int ib : 2nd atom id in field molecule
 */
 struct field_shell * init_field_shell (int id, int ia, int ib)
 {
@@ -375,11 +402,11 @@ struct field_shell * init_field_shell (int id, int ia, int ib)
 /*
 *  struct field_constraint * init_field_constraint (int id, int ia, int ib)
 *
-*  Usage:
+*  Usage: initialize field bond constraint
 *
-*  int id :
-*  int ia :
-*  int ib :
+*  int id : the new field constraint id
+*  int ia : 1st atom id in field molecule
+*  int ib : 2nd atom id in field molecule
 */
 struct field_constraint * init_field_constraint (int id, int ia, int ib)
 {
@@ -400,12 +427,12 @@ struct field_constraint * init_field_constraint (int id, int ia, int ib)
 /*
 *  struct field_pmf * init_field_pmf (int id, int num[2], int * list[2], float * w[2])
 *
-*  Usage:
+*  Usage: initialize new field mean force potential
 *
-*  int id     :
-*  int num[2] :
-*  int num[2] :
-*  int num[2] :
+*  int id       : the id of the new field PMF
+*  int num[2]   : the numbers of atom(s)
+*  int list[2]  : the lists of atom(s)
+*  float * w[2] : the weight list
 */
 struct field_pmf * init_field_pmf (int id, int num[2], int * list[2], float * w[2])
 {
@@ -443,11 +470,11 @@ struct field_pmf * init_field_pmf (int id, int num[2], int * list[2], float * w[
 /*
 *  struct field_rigid * init_field_rigid (int id, int num, int * list)
 *
-*  Usage:
+*  Usage: initialize new field rigid constraint
 *
-*  int id     :
-*  int num    :
-*  int * list :
+*  int id     : the id of the new field rigid
+*  int num    : the number of atom(s) to fix
+*  int * list : the list of atom(s) to fix
 */
 struct field_rigid * init_field_rigid (int id, int num, int * list)
 {
@@ -467,10 +494,10 @@ struct field_rigid * init_field_rigid (int id, int num, int * list)
 /*
 *  struct field_tethered * init_field_tethered (int id, int num)
 *
-*  Usage:
+*  Usage: intialize new field tethered potential
 *
-*  int id  :
-*  int num :
+*  int id  : the new field tethered potential id
+*  int num : the atom id in the field molecule
 */
 struct field_tethered * init_field_tethered (int id, int num)
 {
@@ -490,12 +517,12 @@ struct field_tethered * init_field_tethered (int id, int num)
 /*
 *  struct field_prop * init_field_prop (int ti, int key, gboolean show, gboolean use)
 *
-*  Usage:
+*  Usage: initialize new field molecule structural property
 *
-*  int ti        :
-*  int key       :
-*  gboolean show :
-*  gboolean use  :
+*  int ti        : the type of field structural element to initialize
+*  int key       : the formalism to use
+*  gboolean show : visualize in the 3D window (yes / no)
+*  gboolean use  : use to create the force field input file (yes / no)
 */
 struct field_prop * init_field_prop (int ti, int key, gboolean show, gboolean use)
 {
@@ -516,10 +543,10 @@ struct field_prop * init_field_prop (int ti, int key, gboolean show, gboolean us
 /*
 *  int get_struct_id_from_atom_id (int ids, int * aid)
 *
-*  Usage:
+*  Usage: retrieve field structural element id from a list of atom id
 *
-*  int ids   :
-*  int * aid :
+*  int ids   : the type of structural element
+*  int * aid : the list of atom id
 */
 int get_struct_id_from_atom_id (int ids, int * aid)
 {
@@ -559,11 +586,11 @@ int get_struct_id_from_atom_id (int ids, int * aid)
 /*
 *  gboolean was_not_created_struct (int ids, int num, int * aid)
 *
-*  Usage:
+*  Usage: was this structural element already created ?
 *
-*  int ids   :
-*  int num   :
-*  int * aid :
+*  int ids   : the type of structural element
+*  int num   : the number of atoms
+*  int * aid : the list of atom id
 */
 gboolean was_not_created_struct (int ids, int num, int * aid)
 {
@@ -659,12 +686,12 @@ gboolean was_not_created_struct (int ids, int num, int * aid)
 /*
 *  struct field_struct * init_field_struct (int st, int ai, int an, int * aid)
 *
-*  Usage:
+*  Usage: initialize field molecule new structural element
 *
-*  int st    :
-*  int ai    :
-*  int an    :
-*  int * aid :
+*  int st    : the type of structural element (0 = bond, 1 = angle, 2 = dihedral)
+*  int ai    : the id of the new structural property
+*  int an    : the number of atoms
+*  int * aid : the list of field atoms
 */
 struct field_struct * init_field_struct (int st, int ai, int an, int * aid)
 {
@@ -694,13 +721,13 @@ struct field_struct * init_field_struct (int st, int ai, int an, int * aid)
 /*
 *  struct field_nth_body * init_field_nth_body (int bi, int bd, int * na, int ** ma, int ** ba)
 *
-*  Usage:
+*  Usage: intialize new field non bonded interaction
 *
-*  int bi    :
-*  int bd    :
-*  int * na  :
-*  int ** ma :
-*  int ** ba :
+*  int bi    : the new non bonded interaction id
+*  int bd    : the type of non bonded interaction
+*  int * na  : the list of field atom(s), if any
+*  int ** ma : the list of field molecule(s), if any
+*  int ** ba : the list of atom id in field molecule, if any
 */
 struct field_nth_body * init_field_nth_body (int bi, int bd, int * na, int ** ma, int ** ba)
 {
@@ -748,9 +775,9 @@ struct field_nth_body * init_field_nth_body (int bi, int bd, int * na, int ** ma
 /*
 *  struct field_external * init_field_external (int bi)
 *
-*  Usage:
+*  Usage: intialize new field external potential
 *
-*  int bi :
+*  int bi : the id of the new field external potential
 */
 struct field_external * init_field_external (int bi)
 {
@@ -768,13 +795,13 @@ struct field_external * init_field_external (int bi)
 /*
 *  int prepare_field_atom (int i, int j, int k, int l, int m)
 *
-*  Usage:
+*  Usage: initialiaze new type of field atom
 *
-*  int i :
-*  int j :
-*  int k :
-*  int l :
-*  int m :
+*  int i : the new field atom id
+*  int j : the new field atom coordination type
+*  int k : the new field atom species
+*  int l : the number of atom(s) of for this field atom type
+*  int m : the coordination id in coordination type, if any
 */
 int prepare_field_atom (int i, int j, int k, int l, int m)
 {
@@ -796,9 +823,9 @@ int prepare_field_atom (int i, int j, int k, int l, int m)
 /*
 *  void init_all_atoms (int i)
 *
-*  Usage:
+*  Usage: initialize all field atom(s)
 *
-*  int i :
+*  int i : the molecule id in the model, if any
 */
 void init_all_atoms (int i)
 {
@@ -849,10 +876,10 @@ void init_all_atoms (int i)
 /*
 *  gboolean in_bond (int at, int bd[2])
 *
-*  Usage:
+*  Usage: is atom at in bond bd
 *
-*  int at    :
-*  int bd[2] :
+*  int at    : the target atom id
+*  int bd[2] : the bond atoms id
 */
 gboolean in_bond (int at, int bd[2])
 {
@@ -869,10 +896,10 @@ gboolean in_bond (int at, int bd[2])
 /*
 *  gboolean are_neighbors (struct field_neighbor * ngb, int at)
 *
-*  Usage:
+*  Usage: test if 2 atoms are neighbors
 *
-*  struct field_neighbor * ngb :
-*  int at                      :
+*  struct field_neighbor * ngb : the neighbor data structure to test
+*  int at                      : the target atom id in the model
 */
 gboolean are_neighbors (struct field_neighbor * ngb, int at)
 {
@@ -887,10 +914,10 @@ gboolean are_neighbors (struct field_neighbor * ngb, int at)
 /*
 *  gboolean are_in_bond (struct atom ato, int at)
 *
-*  Usage:
+*  Usage: is at in ato neighbors ?
 *
-*  struct atom ato :
-*  int at          :
+*  struct atom ato : the target atom
+*  int at          : the target atom id
 */
 gboolean are_in_bond (struct atom ato, int at)
 {
@@ -905,10 +932,10 @@ gboolean are_in_bond (struct atom ato, int at)
 /*
 *  int test_for_bonds (struct field_atom * at, struct field_atom * bt)
 *
-*  Usage:
+*  Usage: search for bond(s) between 2 field atoms
 *
-*  struct field_atom * at :
-*  struct field_atom * bt :
+*  struct field_atom * at : 1st field atom
+*  struct field_atom * bt : 2nd field atom
 */
 int test_for_bonds (struct field_atom * at, struct field_atom * bt)
 {
@@ -936,12 +963,12 @@ int test_for_bonds (struct field_atom * at, struct field_atom * bt)
 /*
 *  int prepare_field_struct (int ids, int sid, int yes_no_num, int * aid)
 *
-*  Usage:
+*  Usage: prepare the creation of a field structural element
 *
-*  int ids        :
-*  int sid        :
-*  int yes_no_num :
-*  int * aid      :
+*  int ids        : the type of structural element (0 to 7)
+*  int sid        : the id of the new structural element
+*  int yes_no_num : is there data to save (1 or > 1) or not (0) ?
+*  int * aid      : the list of field atoms
 */
 int prepare_field_struct (int ids, int sid, int yes_no_num, int * aid)
 {
@@ -969,13 +996,13 @@ int prepare_field_struct (int ids, int sid, int yes_no_num, int * aid)
 /*
 *  int bonds_between_atoms (int n, struct field_atom * at, struct field_atom * bt, int a, int b)
 *
-*  Usage:
+*  Usage: search for bond(s) between two field atoms
 *
-*  int n                  :
-*  struct field_atom * at :
-*  struct field_atom * bt :
-*  int a                  :
-*  int b                  :
+*  int n                  : the number of different bond types already found
+*  struct field_atom * at : 1st field atom
+*  struct field_atom * bt : 2nd field atom
+*  int a                  : 1st atom chemical species
+*  int b                  : 2nd atom chemical species
 */
 int bonds_between_atoms (int n, struct field_atom * at, struct field_atom * bt, int a, int b)
 {
@@ -991,7 +1018,7 @@ int bonds_between_atoms (int n, struct field_atom * at, struct field_atom * bt, 
 /*
 *  void init_all_bonds ()
 *
-*  Usage:
+*  Usage: find, and initialize all bond(s)
 */
 void init_all_bonds ()
 {
@@ -1032,6 +1059,17 @@ void init_all_bonds ()
   tmp_fmol -> nstruct[0] = k;
 }
 
+/*
+*  int test_for_angles (struct field_atom * at,
+*                       struct field_atom * bt,
+*                       struct field_atom * ct)
+*
+*  Usage: search for angle(s) between these field atoms
+*
+*  struct field_atom * at : 1st field atom
+*  struct field_atom * bt : 2nd field atom
+*  struct field_atom * ct : 3rd field atom
+*/
 int test_for_angles (struct field_atom * at,
                      struct field_atom * bt,
                      struct field_atom * ct)
@@ -1067,6 +1105,19 @@ int test_for_angles (struct field_atom * at,
   return o / tmp_fmol -> multi;
 }
 
+/*
+*  int angles_from_bonds (int n,
+*                         struct field_atom * at,
+*                         struct field_atom * bt,
+*                         struct field_atom * ct)
+*
+*  Usage: find, and initialize, angles using bonds
+*
+*  int                  n : the number of different angle types already found
+*  struct field_atom * at : 1st field atom
+*  struct field_atom * bt : 2nd field atom
+*  struct field_atom * ct : 3rd field atom
+*/
 int angles_from_bonds (int n, struct field_atom * at,
                               struct field_atom * bt,
                               struct field_atom * ct)
@@ -1081,7 +1132,7 @@ int angles_from_bonds (int n, struct field_atom * at,
 /*
 *  void init_all_angles ()
 *
-*  Usage:
+*  Usage: find, and intialiaze, all angle(s) using bonds
 */
 void init_all_angles ()
 {
@@ -1106,6 +1157,19 @@ void init_all_angles ()
   tmp_fmol -> nstruct[2] = p;
 }
 
+/*
+*  int test_for_dihedrals (struct field_atom * at,
+*                          struct field_atom * bt,
+*                          struct field_atom * ct,
+*                          struct field_atom * dt)
+*
+*  Usage: search for dihedral(s) between these field atoms
+*
+*  struct field_atom * at : 1st field atom
+*  struct field_atom * bt : 2nd field atom
+*  struct field_atom * ct : 3rd field atom
+*  struct field_atom * dt : 4th field atom
+*/
 int test_for_dihedrals (struct field_atom * at,
                         struct field_atom * bt,
                         struct field_atom * ct,
@@ -1150,6 +1214,21 @@ int test_for_dihedrals (struct field_atom * at,
   return q / tmp_fmol -> multi;
 }
 
+/*
+*  int dihedrals_from_angles (int n,
+*                             struct field_atom * at,
+*                             struct field_atom * bt,
+*                             struct field_atom * ct,
+*                             struct field_atom * dt)
+*
+*  Usage: find, and initialize, dihedrals using angles
+*
+*  int                  n : the number of different dihedral types already found
+*  struct field_atom * at : 1st field atom
+*  struct field_atom * bt : 2nd field atom
+*  struct field_atom * ct : 3rd field atom
+*  struct field_atom * dt : 4th field atom
+*/
 int dihedrals_from_angles (int n,
                            struct field_atom * at,
                            struct field_atom * bt,
@@ -1167,7 +1246,7 @@ int dihedrals_from_angles (int n,
 /*
 *  void init_all_dihedrals ()
 *
-*  Usage:
+*  Usage: find, and intialiaze, all dihedral(s) using bonds
 */
 void init_all_dihedrals ()
 {
@@ -1193,6 +1272,24 @@ void init_all_dihedrals ()
   tmp_fmol -> nstruct[4] = p;
 }
 
+/*
+*  int impropers_inversion (int n, int stru,
+*                           int at, int bt, int ct, int dt,
+*                           int a, int b, int c, int d)
+*
+*  Usage: prepare new improper / inversion
+*
+*  int n    : the actual number of structural element
+*  int stru : the type of structural element, 6 = impropers, 7 = inversions
+*  int at   : 1st field atom id
+*  int bt   : 2nd field atom id
+*  int ct   : 3rd field atom id
+*  int dt   : 4th field atom id
+*  int a    : 1st atom id in molecule/fragment
+*  int b    : 2nd atom id in molecule/fragment
+*  int c    : 3rd atom id in molecule/fragment
+*  int d    : 4th atom id in molecule/fragment
+*/
 int impropers_inversion (int n, int stru,
                          int at, int bt, int ct, int dt,
                          int a, int b, int c, int d)
@@ -1231,9 +1328,9 @@ int impropers_inversion (int n, int stru,
 /*
 *  void init_all_impropers_inversions (int stru)
 *
-*  Usage:
+*  Usage: initialize all impropers and inversions
 *
-*  int stru :
+*  int stru : 6 = improper(s), 7 = inversion(s)
 */
 void init_all_impropers_inversions (int stru)
 {
@@ -1303,9 +1400,16 @@ void init_all_impropers_inversions (int stru)
   g_free (matid);
 }
 
-int coord_sphere_multiplicity (struct atom * at, int id,
-                               gboolean set_atom_id,
-                               gboolean in_field_atom)
+/*
+*  int coord_sphere_multiplicity (struct atom * at, int id, gboolean set_atom_id)
+*
+*  Usage:
+*
+*  struct atom * at       : the target atom in the model
+*  int id                 : the atom id in the fragment
+*  gboolean set_atom_id   : adjust field atom parameters (yes / no)
+*/
+int coord_sphere_multiplicity (struct atom * at, int id, gboolean set_atom_id)
 {
   int j, k, l, m;
   gboolean not_alone;
@@ -1332,24 +1436,8 @@ int coord_sphere_multiplicity (struct atom * at, int id,
           }
           if (not_alone)
           {
-            multi++;
-            if (tmp_fct -> id == tmp_fat -> id)
-            {
-              a_multi ++;
-              if (in_field_atom)
-              {
-                l = tmp_proj -> atoms[0][k].coord[2];
-                for (m=1; m<tmp_fmol -> multi; m++)
-                {
-                  if (l == tmp_fmol -> fragments[m])
-                  {
-                    tmp_fmol -> atoms_id[id][m].a = tmp_fat -> id;
-                    tmp_fmol -> atoms_id[id][m].b = j;
-                    tmp_fat -> list_id[j] = id;
-                  }
-                }
-              }
-            }
+            multi ++;
+            if (tmp_fct -> id == tmp_fat -> id)  a_multi ++;
             if (set_atom_id)
             {
               l = tmp_proj -> atoms[0][k].coord[2];
@@ -1380,9 +1468,9 @@ struct field_neighbor * init_ngb = NULL;
 /*
 *  struct field_neighbor * get_init_neighbor (int a)
 *
-*  Usage:
+*  Usage: retrieve neighbor data structure for atom a
 *
-*  int a :
+*  int a : the atom id in the fragment
 */
 struct field_neighbor * get_init_neighbor (int a)
 {
@@ -1399,9 +1487,9 @@ struct field_neighbor * get_init_neighbor (int a)
 /*
 *  gboolean is_numbering_possible (int frag)
 *
-*  Usage:
+*  Usage: compare if the atom numbering of two fragment(s) are identical, and it should
 *
-*  int frag :
+*  int frag : the fragment id
 */
 gboolean is_numbering_possible (int frag)
 {
@@ -1445,11 +1533,11 @@ gboolean is_numbering_possible (int frag)
 /*
 *  gboolean is_this_numbering_possible_for_this_atom (int frag, struct field_neighbor * ngma, int atom)
 *
-*  Usage:
+*  Usage: check if the id in fragment for this atom is possible or not
 *
-*  int frag                     :
-*  struct field_neighbor * ngma :
-*  int atom                     :
+*  int frag                     : the fragment id
+*  struct field_neighbor * ngma : the neigbbor data structure for this fragment
+*  int atom                     : the atom id in the model
 */
 gboolean is_this_numbering_possible_for_this_atom (int frag, struct field_neighbor * ngma, int atom)
 {
@@ -1476,34 +1564,49 @@ gboolean is_this_numbering_possible_for_this_atom (int frag, struct field_neighb
   return TRUE;
 }
 
-int find_neighbor_loop (int frag,
-                        struct field_atom * at, int mad, int aid,
-                        struct field_atom * bt, int mbd,
+/*
+*  int find_neighbor_loop (int frag, int aid, int fai,
+*                          struct field_atom * fat,
+*                          struct field_neighbor * ngmb,
+*                          int sid, gboolean save_it)
+*
+*  Usage: find / set up field atom data for a fragment
+*
+*  int frag                     : the fragment id
+*  int aid                      : the atom id in the model
+*  int fai                      : the atom id in the fragment
+*  struct field_atom * fat      : the field atom
+*  struct field_neighbor * ngmb : the neighbor(s) list for the fragment
+*  int sid                      : iter to save
+*  gboolean save_it             : save field atom data (yes / no)
+*/
+int find_neighbor_loop (int frag, int aid, int fai,
+                        struct field_atom * fat,
                         struct field_neighbor * ngmb,
-                        gboolean save_it, int sid)
+                        int sid, gboolean save_it)
 {
   int i, j, k;
   int iter = 0;
 
-  i = bt -> num / tmp_fmol -> multi;
+  i = fat -> num / tmp_fmol -> multi;
   for (j=frag*i; j < (frag+1)*i; j++)
   {
-    if (bt -> list_id[j] < 0)
+    if (fat -> list_id[j] < 0)
     {
-      k = bt -> list[j];
+      k = fat -> list[j];
       if (are_in_bond (tmp_proj -> atoms[0][k], aid))
       {
         //g_debug ("Are linked, n_weight[%d]= %d, i_weight[%d]= %d", k+1, n_weight[k], j+1, i_weight[j]);
         if (n_weight[k] == i_weight[ngmb -> id])
         {
-          tmp_fmol -> atoms_id[mbd][frag].a = bt -> id;
-          tmp_fmol -> atoms_id[mbd][frag].b = j;
-          bt -> list_id[j] = mbd;
+          tmp_fmol -> atoms_id[fai][frag].a = fat -> id;
+          tmp_fmol -> atoms_id[fai][frag].b = j;
+          fat -> list_id[j] = fai;
           if (save_it && iter == sid) return k;
           if (is_this_numbering_possible_for_this_atom (frag, ngmb, k)) iter ++;
-          tmp_fmol -> atoms_id[mbd][frag].a = -1;
-          tmp_fmol -> atoms_id[mbd][frag].b = -1;
-          bt -> list_id[j] = -1;
+          tmp_fmol -> atoms_id[fai][frag].a = -1;
+          tmp_fmol -> atoms_id[fai][frag].b = -1;
+          fat -> list_id[j] = -1;
         }
       }
     }
@@ -1511,6 +1614,19 @@ int find_neighbor_loop (int frag,
   return iter;
 }
 
+/*
+*  gboolean id_n_fold_atoms_in_fragment (int frag, int limit, int num_ngb, int search_type,
+*                                        int init, struct field_neighbor * ngma_init)
+*
+*  Usage: find atom id in fragment using the neighbor list
+*
+*  int frag                          : the fragment id
+*  int limit                         : the total number of atom(s) in the fragment
+*  int num_ngb                       : the neighbor(s) list for the fragment
+*  int search_type                   : search type (0 = browse field molecule atom list, 1 = browse field atom list)
+*  int init                          : the atom id in the model
+*  struct field_neighbor * ngma_init : the target
+*/
 gboolean id_n_fold_atoms_in_fragment (int frag, int limit, int num_ngb, int search_type,
                                       int init, struct field_neighbor * ngma_init)
 {
@@ -1534,10 +1650,11 @@ gboolean id_n_fold_atoms_in_fragment (int frag, int limit, int num_ngb, int sear
           {
             m = tmp_fmol -> atoms_id[l][0].a;
             fbt = get_active_atom (tmp_fmol -> id, m);
-            n = find_neighbor_loop (frag, fat, i, init, fbt, l, ngma, FALSE, 0);
+
+            n = find_neighbor_loop (frag, init, l, fbt, ngma, 0, FALSE);
             for (o=0; o<n; o++)
             {
-              p = find_neighbor_loop (frag, fat, i, init, fbt, l, ngma, TRUE, o);
+              p = find_neighbor_loop (frag, init, l, fbt, ngma, o, TRUE);
               assigned ++;
               if (assigned == limit)
               {
@@ -1657,10 +1774,10 @@ gboolean id_n_fold_atoms_in_fragment (int frag, int limit, int num_ngb, int sear
 /*
 *  gboolean id_atoms_in_fragment (int frag, int seed)
 *
-*  Usage:
+*  Usage: find the atom field id in the fragment
 *
-*  int frag :
-*  int seed :
+*  int frag : the fragment id
+*  int seed : seed
 */
 gboolean id_atoms_in_fragment (int frag, int seed)
 {
@@ -1899,16 +2016,11 @@ void find_atom_id_in_field_molecule ()
     {
       j = tmp_fmol -> atoms_id[i][0].b;
       k = tmp_fat -> list[j];
-      l = coord_sphere_multiplicity (& tmp_proj -> atoms[0][k], i, FALSE, FALSE);
+      l = coord_sphere_multiplicity (& tmp_proj -> atoms[0][k], i, FALSE);
       coordnum[tmp_proj -> atoms[0][k].sp][tmp_proj -> atoms[0][k].coord[1]] = l+1;
-      if (l == tmp_fmol -> multi - 1)
+      if (l == tmp_fmol -> multi - 1 || a_multi == tmp_fmol -> multi - 1)
       {
-        coord_sphere_multiplicity (& tmp_proj -> atoms[0][k], i, TRUE, FALSE);
-        assigned ++;
-      }
-      else if (a_multi == tmp_fmol -> multi - 1)
-      {
-        coord_sphere_multiplicity (& tmp_proj -> atoms[0][k], i, FALSE, TRUE);
+        coord_sphere_multiplicity (& tmp_proj -> atoms[0][k], i, TRUE);
         assigned ++;
       }
     }

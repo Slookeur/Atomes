@@ -285,9 +285,9 @@ void duplicate_other_prop (int oid, struct field_struct * old_fstr, struct field
 /*
 *  struct field_struct * duplicate_field_struct (struct field_struct * old_fstr)
 *
-*  Usage: create copy of a field structural property
+*  Usage: create copy of a field structural element
 *
-*  struct field_struct * old_fstr : the field structural property to duplicate
+*  struct field_struct * old_fstr : the field structural element to duplicate
 */
 struct field_struct * duplicate_field_struct (struct field_struct * old_fstr)
 {
@@ -309,9 +309,9 @@ struct field_struct * duplicate_field_struct (struct field_struct * old_fstr)
 /*
 *  struct field_struct * duplicate_field_struct_list (struct field_struct * list_str, gboolean init)
 *
-*  Usage: create copy of list of field structural property(ies)
+*  Usage: create copy of list of field structural element(s)
 *
-*  struct field_struct * list_str : the list of field structural property(ies) to duplicate
+*  struct field_struct * list_str : the list of field structural element(s) to duplicate
 *  gboolean init                  :
 */
 struct field_struct * duplicate_field_struct_list (struct field_struct * list_str, gboolean init)

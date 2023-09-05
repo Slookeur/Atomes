@@ -16,8 +16,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to handle atom selection(s) when creating a force field
+ - The surboutines to remove / add field atom from a force field
+
 *
 *  List of subroutines:
 

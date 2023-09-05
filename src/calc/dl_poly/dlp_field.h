@@ -272,10 +272,11 @@ struct field_external{
   struct field_external * next;
 };
 
+/* simplified atom data structure */
 struct field_neighbor{
-  int id;
-  int num;
-  int * vois;
+  int id;               // atom id in molecule/fragment
+  int num;              // number of neighbor(s)
+  int * vois;           // list of neighbor(s)
   struct field_neighbor * prev;
   struct field_neighbor * next;
 };
@@ -304,8 +305,8 @@ struct field_molecule{
   // 2 = angles
   // 3 = angles restraints
   // 4 = diehdrals
-  // 5 = impropers
-  // 6 = torsional restraints
+  // 5 = torsional restraints
+  // 6 = impropers
   // 7 = inversions
   int nstruct[8];
   struct field_struct * first_struct[8];
