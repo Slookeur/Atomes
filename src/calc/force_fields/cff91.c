@@ -14,30 +14,28 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cff91.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
-  CFF91 force field, data from taken from the 'CFF91.frc' file
+  CFF91 force field, data from taken from:
+
+       - the file: 'parm99'
 
   This file contains several tables:
 
-    // Atoms:            CFF91_atoms[93][5]
-    // Equivalence:      CFF91_equivalence_auto[97][11]
-    // Equivalence:      CFF91_equivalence[95][7]
-    // Quadractic bonds: CFF91_bonds_auto[667][5]
-    // Quartic bonds: CFF91_bonds[58][7]
-    // Quadratic angles: CFF91_angles_auto[330][6]
-    // Quartic angles: CFF91_angles[155][8]
-    // Torsions:         CFF91_torsions_auto[216][8]
-    // Torsions:         CFF91_torsions[294][11]
-    // Inversions:       CFF91_inversions[70][7]
-    // Non bonded:       CFF91_vdw[40][4]
-    // Bond increments:  CFF91_bond_increments[560][5]
+    Atoms            : CFF91_atoms[93][5]
+    Equivalence      : CFF91_equivalence_auto[97][11]
+    Equivalence      : CFF91_equivalence[95][7]
+    Quadractic bonds : CFF91_bonds_auto[667][5]
+    Quartic bonds    : CFF91_bonds[58][7]
+    Quadratic angles : CFF91_angles_auto[330][6]
+    Quartic angles   : CFF91_angles[155][8]
+    Torsions         : CFF91_torsions_auto[216][8]
+    Torsions         : CFF91_torsions[294][11]
+    Inversions       : CFF91_inversions[70][7]
+    Non bonded       : CFF91_vdw[40][4]
+    Bond increments  : CFF91_bond_increments[560][5]
+
 */
 
 #include "global.h"

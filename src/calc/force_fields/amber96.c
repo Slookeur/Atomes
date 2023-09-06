@@ -14,26 +14,23 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'amber96.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   Amber-96 force field, data from taken from:
+
        - the file: 'parm96'
 
   This file contains several tables:
 
-    // Atoms:            amber96_atoms[2][4]
-    // Equi vdw:            amber96_equi[2][15]
-    // Bonds:            amber96_bonds[83][5]
-    // Angles:           amber96_angles[191][6]
-    // Dihedrals:        amber96_dihedrals[81][9]
-    // Impropers:       amber96_impropers[31][8]
-    // Non bonded:       amber96_vdw[35][4]
+    Atoms      : amber96_atoms[54][4]
+    Equi vdw   : amber96_equi[2][12]
+    Bonds      : amber96_bonds[83][5]
+    Angles     : amber96_angles[191][6]
+    Dihedrals  : amber96_dihedrals[81][9]
+    Impropers  : amber96_impropers[31][8]
+    Non bonded : amber96_vdw[35][4]
+
 */
 
 #include "global.h"

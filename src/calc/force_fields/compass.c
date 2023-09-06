@@ -14,26 +14,24 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'compass.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
-  Compass force field, data from taken from the 'Compass.frc' file
+  Compass force field, , data from taken from:
+
+       - the file: 'Compass.frc'
 
   This file contains several tables:
 
-    // Atoms:            Compass_atoms[45][5]
-    // Equivalence:      Compass_equivalence[46][7]
-    // Quartic bonds: Compass_bonds[54][7]
-    // Quartic angles: Compass_angles[94][8]
-    // Torsions:         Compass_torsions[95][11]
-    // Inversions:       Compass_inversions[22][7]
-    // Non bonded:       Compass_vdw[46][4]
-    // Bond increments:  Compass_bond_increments[55][5]
+    Atoms           : Compass_atoms[45][5]
+    Equivalence     : Compass_equivalence[46][7]
+    Quartic bonds   : Compass_bonds[54][7]
+    Quartic angles  : Compass_angles[94][8]
+    Torsions        : Compass_torsions[95][11]
+    Inversions      : Compass_inversions[22][7]
+    Non bonded      : Compass_vdw[46][4]
+    Bond increments : Compass_bond_increments[55][5]
+
 */
 
 #include "global.h"

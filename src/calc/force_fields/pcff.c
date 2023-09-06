@@ -14,30 +14,28 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'pcff.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
-  PCFF force field, data from taken from the 'PCFF.frc' file
+  PCFF force field, data from taken from:
+
+       - the file: 'PCFF.frc'
 
   This file contains several tables:
 
-    // Atoms:            PCFF_atoms[133][5]
-    // Equivalence:      PCFF_equivalence_auto[108][11]
-    // Equivalence:      PCFF_equivalence[134][7]
-    // Quadractic bonds: PCFF_bonds_auto[627][5]
-    // Quartic bonds: PCFF_bonds[126][7]
-    // Quadratic angles: PCFF_angles_auto[329][6]
-    // Quartic angles: PCFF_angles[302][8]
-    // Torsions:         PCFF_torsions_auto[216][8]
-    // Torsions:         PCFF_torsions[492][11]
-    // Inversions:       PCFF_inversions[83][7]
-    // Non bonded:       PCFF_vdw[94][4]
-    // Bond increments:  PCFF_bond_increments[564][5]
+    Atoms            : PCFF_atoms[133][5]
+    Equivalence      : PCFF_equivalence_auto[108][11]
+    Equivalence      : PCFF_equivalence[134][7]
+    Quadractic bonds : PCFF_bonds_auto[627][5]
+    Quartic bonds    : PCFF_bonds[126][7]
+    Quadratic angles : PCFF_angles_auto[329][6]
+    Quartic angles   : PCFF_angles[302][8]
+    Torsions         : PCFF_torsions_auto[216][8]
+    Torsions         : PCFF_torsions[492][11]
+    Inversions       : PCFF_inversions[83][7]
+    Non bonded       : PCFF_vdw[94][4]
+    Bond increments  : PCFF_bond_increments[564][5]
+
 */
 
 #include "global.h"

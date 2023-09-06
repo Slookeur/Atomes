@@ -99,13 +99,13 @@ typedef struct {
 } ColRGBA;
 
 typedef struct {
+  int species; // The number of chemical species
   // 0 = tot
   // 1 = partial
   // 2 = fragments
   // 3 = molecules
   // > 3 = rings
   // 9 = chains
-  int species;
   int totcoord[10];
   int * ntg[10];
   int ** geolist[10];     // The matching table for geometries
@@ -192,11 +192,11 @@ enum ContainerType {
 };
 
 enum ImageFormats {
-  IMG_NONE = 0,
-  IMG_PIXBUF = 1,
+  IMG_NONE    = 0,
+  IMG_PIXBUF  = 1,
   IMG_SURFACE = 2,
-  IMG_FILE = 3,
-  IMG_STOCK = 4
+  IMG_FILE    = 3,
+  IMG_STOCK   = 4
 };
 
 #define IODEBUG FALSE
@@ -403,7 +403,7 @@ extern tint cut_lab;
 #define LINE_SIZE 160
 struct line_node
 {
-  gchar * line;//[LINE_SIZE];
+  gchar * line; //[LINE_SIZE];
   struct line_node * next;
   struct line_node * prev;
 };
@@ -562,9 +562,9 @@ typedef struct {
   ColRGBA frame_color;           // Frame color
   double frame_pos[2][2];        // Frame  0 = x, 1 = y, 0 = min and 1 = max
 
-  DataLayout * layout;
-  ExtraSets * extrac;
-  cairo_surface_t * surface;
+  DataLayout * layout;           // The curve layout
+  ExtraSets * extrac;            // Extra data set(s) added to graph
+  cairo_surface_t * surface;     // The rendering surface
   int draw_id;
   int bshift;
 
@@ -577,33 +577,31 @@ typedef struct {
 } curve;
 
 struct atom {
-  int id;
-  int sp;
-  double x, y, z;
-  int numv;
-  int * vois;
-  // Coord:
+  int id;                        // The id in the model
+  int sp;                        // The chemical species
+  double x, y, z;                // The coordinates
+  int numv;                      // The number of neighbors
+  int * vois;                    // The list of neighbors
   // 0 = Total coordination
   // 1 = Partial coordination
   // 2 = Fragment
   // 3 = Molecule
   // 4 = Field object id
-  int coord[5];
-  // Rings:
+  int coord[5];                   // Coordination information
   // 0 = All
   // 1 = King's
   // 2 = Guttman's
   // 3 = Primitive
   // 4 = Strong
-  int ** rings[5];
-  int ** chain;
-  int style;
-  int fid;
-  int faid;
-  gboolean show[2];
-  gboolean label[2];
-  gboolean pick[2];
-  gboolean cloned;
+  int ** rings[5];                // Rings statistics information
+  int ** chain;                   // Chain statistics information
+  int style;                      // Rendering style if not global
+  int fid;                        // Force field id
+  int faid;                       // Force field id in fragment
+  gboolean show[2];               // Show / Hide (0 = atom, 1 = clone)
+  gboolean label[2];              // Label / unlabel (0 = atom, 1 = clone)
+  gboolean pick[2];               // Selected / Unselected (0 = atom, 1 = clone)
+  gboolean cloned;                // Clone(s) ?
   struct atom * prev;
   struct atom * next;
 };
@@ -785,7 +783,7 @@ struct project {
   int readata;
   gboolean tovalidate;
 
-  gboolean runc[3]; // Bonds, Angles, Mol
+  gboolean runc[3];         // Bonds, Angles, Mol
   int numc[NGRAPHS];
   int num_delta[NGRAPHS];
   // gr, sq, sk, gftt, bd, an, frag-mol, ch, sp, msd

@@ -14,25 +14,21 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm35_ethers.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CHARMM-charmm35_ethers force field, data from taken from:
+
        - the file: 'charmm35_ethers'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'
 
   This file contains several tables:
 
-    // Atoms:            charmm35_ethers_atoms[13][5]
-    // Bonds:            charmm35_ethers_bonds[22][5]
-    // Angles:           charmm35_ethers_angles[55][8]
-    // Dihedrals:        charmm35_ethers_dihedrals[106][8]
-    // Non bonded:       charmm35_ethers_vdw[13][6]
+    Atoms      : charmm35_ethers_atoms[13][5]
+    Bonds      : charmm35_ethers_bonds[22][5]
+    Angles     : charmm35_ethers_angles[55][8]
+    Dihedrals  : charmm35_ethers_dihedrals[106][8]
+    Non bonded : charmm35_ethers_vdw[13][6]
 */
 
 #include "global.h"

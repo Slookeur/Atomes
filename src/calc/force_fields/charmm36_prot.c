@@ -14,26 +14,23 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm36_prot.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CHARMM-charmm36_prot force field, data from taken from:
+
        - the file: 'charmm36_prot'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'
 
   This file contains several tables:
 
-    // Atoms:            charmm36_prot_atoms[53][5]
-    // Bonds:            charmm36_prot_bonds[132][5]
-    // Angles:           charmm36_prot_angles[364][8]
-    // Dihedrals:        charmm36_prot_dihedrals[705][8]
-    // Impropers:       charmm36_prot_impropers[35][8]
-    // Non bonded:       charmm36_prot_vdw[53][6]
+    Atoms      : charmm36_prot_atoms[53][5]
+    Bonds      : charmm36_prot_bonds[132][5]
+    Angles     : charmm36_prot_angles[364][8]
+    Dihedrals  : charmm36_prot_dihedrals[705][8]
+    Impropers  : charmm36_prot_impropers[35][8]
+    Non bonded : charmm36_prot_vdw[53][6]
+
 */
 
 #include "global.h"

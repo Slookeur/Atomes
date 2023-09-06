@@ -14,28 +14,26 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cvff.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
-  CVFF force field, data from taken from the 'CVFF.frc' file
+  CVFF force field, data from taken from:
+
+       - the 'CVFF.frc' file
 
   This file contains several tables:
 
-    // Atoms:            CVFF_atoms[133][5]
-    // Equivalence:      CVFF_equivalence_auto[123][11]
-    // Equivalence:      CVFF_equivalence[129][7]
-    // Quadractic bonds: CVFF_bonds_auto[776][5]
-    // Morse bonds: CVFF_morse_bonds[775][6]
-    // Quadratic angles: CVFF_angles_auto[563][6]
-    // Torsions:         CVFF_torsions_auto[295][8]
-    // Impropers:       CVFF_impropers[41][8]
-    // Non bonded:       CVFF_vdw[45][4]
-    // Bond increments:  CVFF_bond_increments[683][5]
+    Atoms            : CVFF_atoms[133][5]
+    Equivalence      : CVFF_equivalence_auto[123][11]
+    Equivalence      : CVFF_equivalence[129][7]
+    Quadractic bonds : CVFF_bonds_auto[776][5]
+    Morse bonds      : CVFF_morse_bonds[775][6]
+    Quadratic angles : CVFF_angles_auto[563][6]
+    Torsions         : CVFF_torsions_auto[295][8]
+    Impropers        : CVFF_impropers[41][8]
+    Non bonded       : CVFF_vdw[45][4]
+    Bond increments  : CVFF_bond_increments[683][5]
+
 */
 
 #include "global.h"

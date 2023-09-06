@@ -14,26 +14,23 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm36_cgenff.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CHARMM-charmm36_cgenff force field, data from taken from:
+
        - the file: 'charmm36_cgenff'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'
 
   This file contains several tables:
 
-    // Atoms:            charmm36_cgenff_atoms[163][5]
-    // Bonds:            charmm36_cgenff_bonds[506][5]
-    // Angles:           charmm36_cgenff_angles[1561][8]
-    // Dihedrals:        charmm36_cgenff_dihedrals[3937][8]
-    // Impropers:       charmm36_cgenff_impropers[125][8]
-    // Non bonded:       charmm36_cgenff_vdw[156][6]
+    Atoms      : charmm36_cgenff_atoms[163][5]
+    Bonds      : charmm36_cgenff_bonds[506][5]
+    Angles     : charmm36_cgenff_angles[1561][8]
+    Dihedrals  : charmm36_cgenff_dihedrals[3937][8]
+    Impropers  : charmm36_cgenff_impropers[125][8]
+    Non bonded : charmm36_cgenff_vdw[156][6]
+
 */
 
 #include "global.h"

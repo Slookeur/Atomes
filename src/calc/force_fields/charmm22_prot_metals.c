@@ -14,26 +14,23 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm22_prot_metals.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CHARMM-charmm22_prot_metals force field, data from taken from:
+
        - the file: 'charmm22_prot_metals'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'
 
   This file contains several tables:
 
-    // Atoms:            charmm22_prot_metals_atoms[98][5]
-    // Bonds:            charmm22_prot_metals_bonds[139][5]
-    // Angles:           charmm22_prot_metals_angles[345][8]
-    // Dihedrals:        charmm22_prot_metals_dihedrals[452][8]
-    // Impropers:       charmm22_prot_metals_impropers[43][8]
-    // Non bonded:       charmm22_prot_metals_vdw[98][6]
+    Atoms      : charmm22_prot_metals_atoms[98][5]
+    Bonds      : charmm22_prot_metals_bonds[139][5]
+    Angles     : charmm22_prot_metals_angles[345][8]
+    Dihedrals  : charmm22_prot_metals_dihedrals[452][8]
+    Impropers  : charmm22_prot_metals_impropers[43][8]
+    Non bonded : charmm22_prot_metals_vdw[98][6]
+
 */
 
 #include "global.h"

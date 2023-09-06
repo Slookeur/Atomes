@@ -14,24 +14,20 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'oplsaar.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   OPLSAAR force field
 
   This file contains several tables:
 
-    // Atoms:            OPLSAAR_atoms[145][4]
-    // Bonds:            OPLSAAR_bonds[242][5]
-    // Angles:           OPLSAAR_angles[593][6]
-    // Dihedrals:        OPLSAAR_dihedrals[2482][8]
-    // Impropers:        OPLSAAR_impropers[131][[8]
-    // Non bonded:       OPLSAAR_vdw[145][7]
+    Atoms      : OPLSAAR_atoms[145][4]
+    Bonds      : OPLSAAR_bonds[242][5]
+    Angles     : OPLSAAR_angles[593][6]
+    Dihedrals  : OPLSAAR_dihedrals[2482][8]
+    Impropers  : OPLSAAR_impropers[131][[8]
+    Non bonded : OPLSAAR_vdw[145][7]
+
 */
 
 #include "global.h"

@@ -14,26 +14,23 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'amber98.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   Amber-98 force field, data from taken from:
+
        - the file: 'parm98'
 
   This file contains several tables:
 
-    // Atoms:            amber98_atoms[2][4]
-    // Equi vdw:            amber98_equi[2][15]
-    // Bonds:            amber98_bonds[83][5]
-    // Angles:           amber98_angles[191][6]
-    // Dihedrals:        amber98_dihedrals[83][9]
-    // Impropers:       amber98_impropers[31][8]
-    // Non bonded:       amber98_vdw[35][4]
+    Atoms      : amber98_atoms[54][4]
+    Equi vdw   : amber98_equi[2][12]
+    Bonds      : amber98_bonds[83][5]
+    Angles     : amber98_angles[191][6]
+    Dihedrals  : amber98_dihedrals[83][9]
+    Impropers  : amber98_impropers[31][8]
+    Non bonded : amber98_vdw[35][4]
+
 */
 
 #include "global.h"

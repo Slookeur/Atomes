@@ -14,26 +14,23 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm36_lipid.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CHARMM-charmm36_lipid force field, data from taken from:
+
        - the file: 'charmm36_lipid'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'
 
   This file contains several tables:
 
-    // Atoms:            charmm36_lipid_atoms[29][5]
-    // Bonds:            charmm36_lipid_bonds[50][5]
-    // Angles:           charmm36_lipid_angles[131][8]
-    // Dihedrals:        charmm36_lipid_dihedrals[180][8]
-    // Impropers:       charmm36_lipid_impropers[4][8]
-    // Non bonded:       charmm36_lipid_vdw[29][6]
+    Atoms      : charmm36_lipid_atoms[29][5]
+    Bonds      : charmm36_lipid_bonds[50][5]
+    Angles     : charmm36_lipid_angles[131][8]
+    Dihedrals  : charmm36_lipid_dihedrals[180][8]
+    Impropers  : charmm36_lipid_impropers[4][8]
+    Non bonded : charmm36_lipid_vdw[29][6]
+
 */
 
 #include "global.h"

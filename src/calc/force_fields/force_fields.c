@@ -14,12 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'force_fields.c'
 *
-*  Contains: 
+*  Contains:
 *
+
+ - The subroutines to prepare the force field XML files from the sources in atomes
+ - The subroutines to read the force field XML files
+
 *
-*
-*
-*  List of subroutines: 
+*  List of subroutines:
 
   int get_pdim(int fid, int prop, int col);
   int get_fkey(int fid, int prop, int col);
@@ -58,7 +60,6 @@ If not, see <https://www.gnu.org/licenses/> */
   void print_improper_table (int fid, int inum);
   void print_inversion_table (int fid, int inum);
   void print_vdw_table (int fid, int inum);
-  void print_increment_table (int fid, int inum);
   void find_object_ijkl (int hid, int foid, int oid, int sa, int za, int sb, int zb, int sc, int zc, int sd, int zd);
   void field_find_bonds ();
   void field_find_angles ();
@@ -270,11 +271,11 @@ int ffpot[N_FIELDS][10]={{1, 0, 0, 1, 0, 1, 0, 1, 0, 1},
 /*
 *  int get_pdim(int fid, int prop, int col)
 *
-*  Usage: 
+*  Usage: retrieve number of parameters for property in force field database
 *
-*  int fid  : 
-*  int prop : 
-*  int col  : 
+*  int fid  : the force field id
+*  int prop : the type of property
+*  int col  : the column id
 */
 int get_pdim(int fid, int prop, int col)
 {
@@ -288,11 +289,11 @@ int get_pdim(int fid, int prop, int col)
 /*
 *  int get_fkey(int fid, int prop, int col)
 *
-*  Usage: 
+*  Usage: retrieve key for property in force field database
 *
-*  int fid  : 
-*  int prop : 
-*  int col  : 
+*  int fid  : the force field id
+*  int prop : the property id
+*  int col  : the column id
 */
 int get_fkey(int fid, int prop, int col)
 {
@@ -462,9 +463,9 @@ void allocate_field_data (int * objects, int * dim,
 /*
 *  void associate_pointers_to_field_data (int id)
 *
-*  Usage: 
+*  Usage: setup force field pointers
 *
-*  int id : 
+*  int id : the force field id
 */
 void associate_pointers_to_field_data (int id)
 {
@@ -594,10 +595,10 @@ void associate_pointers_to_field_data (int id)
 /*
 *  int find_atom_id (int print, char * keyw)
 *
-*  Usage: 
+*  Usage: find atom id in force field database
 *
-*  int print   : 
-*  char * keyw : 
+*  int print   : print debug information ?
+*  char * keyw : the key entry for atom in the force field database
 */
 int find_atom_id (int print, char * keyw)
 {
@@ -617,11 +618,11 @@ int find_atom_id (int print, char * keyw)
 /*
 *  gchar * find_atom_key (int fid, int prop, char * keyw)
 *
-*  Usage: 
+*  Usage: retrieve property key in force field database for atom
 *
-*  int fid     : 
-*  int prop    : 
-*  char * keyw : 
+*  int fid     : the force field id
+*  int prop    : the type of property
+*  char * keyw : the key entry for atom in the force field database
 */
 gchar * find_atom_key (int fid, int prop, char * keyw)
 {
@@ -660,9 +661,9 @@ gchar * find_atom_key (int fid, int prop, char * keyw)
 /*
 *  int find_atom_z (char * keyw)
 *
-*  Usage: 
+*  Usage: find atom Z
 *
-*  char * keyw : 
+*  char * keyw : the element name
 */
 int find_atom_z (char * keyw)
 {
@@ -692,9 +693,9 @@ int find_atom_z (char * keyw)
 /*
 *  void print_object_dim_and_key_tables (int fid)
 *
-*  Usage: 
+*  Usage: print tables dimensions and keys to file
 *
-*  int fid : 
+*  int fid : the force field id
 */
 void print_object_dim_and_key_tables (int fid)
 {
@@ -746,12 +747,12 @@ struct object_match * om_tmp;
 /*
 *  void set_data (int pid, int obj, int oid, int faid)
 *
-*  Usage: 
+*  Usage: save retrieved force field data
 *
-*  int pid  : 
-*  int obj  : 
-*  int oid  : 
-*  int faid : 
+*  int pid  : the type of structural element
+*  int obj  : the element id
+*  int oid  : the parameter id the force field database
+*  int faid : the field atom id
 */
 void set_data (int pid, int obj, int oid, int faid)
 {
@@ -773,9 +774,9 @@ void set_data (int pid, int obj, int oid, int faid)
 /*
 *  int get_z (int faid)
 *
-*  Usage: 
+*  Usage: get field atom Z
 *
-*  int faid : 
+*  int faid : the field atom id
 */
 int get_z (int faid)
 {
@@ -790,9 +791,9 @@ int get_z (int faid)
 /*
 *  int get_atoms (int z)
 *
-*  Usage: 
+*  Usage: retrieve all field atom(s) with matching Z
 *
-*  int z : 
+*  int z : the target Z
 */
 int get_atoms (int z)
 {
@@ -812,10 +813,10 @@ int get_atoms (int z)
 /*
 *  int get_bond (int faid, int bid)
 *
-*  Usage: 
+*  Usage: retrieve all bonding parameter(s) for this field atom
 *
-*  int faid : 
-*  int bid  : 
+*  int faid : the field atom id
+*  int bid  : the structural element id
 */
 int get_bond (int faid, int bid)
 {
@@ -838,10 +839,10 @@ int get_bond (int faid, int bid)
 /*
 *  int get_angle (int faid, int aid)
 *
-*  Usage: 
+*  Usage: retrieve all angle parameter(s) for this field atom
 *
-*  int faid : 
-*  int aid  : 
+*  int faid : the field atom id
+*  int aid  : the structural element id
 */
 int get_angle (int faid, int aid)
 {
@@ -864,10 +865,10 @@ int get_angle (int faid, int aid)
 /*
 *  int get_apex (int faid, int aid)
 *
-*  Usage: 
+*  Usage:  retrieve all angle apex parameter(s) for this field atom
 *
-*  int faid : 
-*  int aid  : 
+*  int faid : the field atom id
+*  int aid  : the structural element id
 */
 int get_apex (int faid, int aid)
 {
@@ -890,12 +891,12 @@ int get_apex (int faid, int aid)
 /*
 *  int get_torsion (int faid, int tid, int a, int b)
 *
-*  Usage: 
+*  Usage: retrieve all torsion parameter(s) for this field atom
 *
-*  int faid : 
-*  int tid  : 
-*  int a    : 
-*  int b    : 
+*  int faid : the field atom id
+*  int tid  : the structural element id
+*  int a    : 1st atom position
+*  int b    : 2nd atom position
 */
 int get_torsion (int faid, int tid, int a, int b)
 {
@@ -918,11 +919,11 @@ int get_torsion (int faid, int tid, int a, int b)
 /*
 *  int get_improper (int faid, int a, int b)
 *
-*  Usage: 
+*  Usage: retrieve all improper parameter(s) for this field atom
 *
-*  int faid : 
-*  int a    : 
-*  int b    : 
+*  int faid : the field atom id
+*  int a    : 1st atom position
+*  int b    : 2nd atom position
 */
 int get_improper (int faid, int a, int b)
 {
@@ -945,9 +946,9 @@ int get_improper (int faid, int a, int b)
 /*
 *  int get_vdw (int faid)
 *
-*  Usage: 
+*  Usage: retrieve all VdW parameter(s) for this field atom
 *
-*  int faid : 
+*  int faid : the field atom id
 */
 int get_vdw (int faid)
 {
@@ -970,10 +971,10 @@ int get_vdw (int faid)
 /*
 *  int get_bi (int faid)
 *
-*  Usage: 
+*  Usage:
 *
-*  int faid : 
-*/
+*  int faid :
+* /
 int get_bi (int faid)
 {
   int i, j;
@@ -982,22 +983,23 @@ int get_bi (int faid)
   {
     for (i=0; i<field_objects[13]; i++)
     {
-      /*if (g_strcmp0 (field_[i][0], field_atoms[faid][2]) == 0)
+      / *if (g_strcmp0 (field_[i][0], field_atoms[faid][2]) == 0)
       {
         set_data (9, 0, i, faid);
         j ++;
-      }*/
+      }* /
     }
   }
   return j;
 }
+*/
 
 /*
 *  void field_has_element (int aid)
 *
-*  Usage: 
+*  Usage: retrieve force field parameters for this atom
 *
-*  int aid : 
+*  int aid : the target atom id
 */
 void field_has_element (int aid)
 {
@@ -1027,9 +1029,9 @@ void field_has_element (int aid)
 /*
 *  void print_atom_table (int fid)
 *
-*  Usage: 
+*  Usage: print force field atom data to file
 *
-*  int fid : 
+*  int fid : the force field id
 */
 void print_atom_table (int fid)
 {
@@ -1062,11 +1064,11 @@ struct bond * tmpbd;
 /*
 *  gboolean not_done (int eid, int a, int b)
 *
-*  Usage: 
+*  Usage: was this case already considered ?
 *
-*  int eid : 
-*  int a   : 
-*  int b   : 
+*  int eid : equivalence id (not used for the time being)
+*  int a   : 1st atom id
+*  int b   : 2nd atom id
 */
 gboolean not_done (int eid, int a, int b)
 {
@@ -1083,15 +1085,15 @@ gboolean not_done (int eid, int a, int b)
 /*
 *  void print_this_bond (int eid, int h, int fid, int inum, char * at_a, char * at_b, char ** the_bond)
 *
-*  Usage: 
+*  Usage: print this bond to file
 *
-*  int eid          : 
-*  int h            : 
-*  int fid          : 
-*  int inum         : 
-*  char * at_a      : 
-*  char * at_b      : 
-*  char ** the_bond : 
+*  int eid          : equivalence id (not used for the time being)
+*  int h            : the bond type
+*  int fid          : the force field id
+*  int inum         : the structural element id
+*  char * at_a      : 1st atom name
+*  char * at_b      : 2nd atom name
+*  char ** the_bond : the force field parameter(s) for this bond
 */
 void print_this_bond (int eid, int h, int fid, int inum, char * at_a, char * at_b, char ** the_bond)
 {
@@ -1164,10 +1166,10 @@ void print_this_bond (int eid, int h, int fid, int inum, char * at_a, char * at_
 /*
 *  void print_bond_table (int fid, int inum)
 *
-*  Usage: 
+*  Usage: print force field bond table to file
 *
-*  int fid  : 
-*  int inum : 
+*  int fid  : the force field id
+*  int inum : the structural element id
 */
 void print_bond_table (int fid, int inum)
 {
@@ -1301,12 +1303,12 @@ struct angl * tmpan;
 /*
 *  gboolean not_done_an (int eid, int a, int b, int c)
 *
-*  Usage: 
+*  Usage: was this case already considered ?
 *
-*  int eid : 
-*  int a   : 
-*  int b   : 
-*  int c   : 
+*  int eid : equivalence id (not used for the time being)
+*  int a   : 1st atom id
+*  int b   : 2nd atom id
+*  int c   : 3rd atom id
 */
 gboolean not_done_an (int eid, int a, int b, int c)
 {
@@ -1323,17 +1325,17 @@ gboolean not_done_an (int eid, int a, int b, int c)
 /*
 *  void print_this_angle (int eid, int h, int fid, int inum, int ub, char * at_a, char * at_b, char * at_c, char ** the_angle)
 *
-*  Usage: 
+*  Usage: print this angle to file
 *
-*  int eid           : 
-*  int h             : 
-*  int fid           : 
-*  int inum          : 
-*  int ub            : 
-*  char * at_a       : 
-*  char * at_b       : 
-*  char * at_c       : 
-*  char ** the_angle : 
+*  int eid           : equivalence id (not used for the time being)
+*  int h             : 0 = angle, 1 = angle restraints
+*  int fid           : the force field id
+*  int inum          : the structural element id
+*  int ub            : Urey-Bradley parameter for the CHARRM FF, 2 for CHARMM FF, 0 otherwise
+*  char * at_a       : 1st atom name
+*  char * at_b       : 2nd atom name
+*  char * at_c       : 3rd atom name
+*  char ** the_angle : the force field parameter(s) for this angle
 */
 void print_this_angle (int eid, int h, int fid, int inum, int ub, char * at_a, char * at_b, char * at_c, char ** the_angle)
 {
@@ -1410,15 +1412,15 @@ void print_this_angle (int eid, int h, int fid, int inum, int ub, char * at_a, c
 /*
 *  void print_angle_table (int fid, int inum)
 *
-*  Usage: 
+*  Usage: print angle(s) table to file
 *
-*  int fid  : 
-*  int inum : 
+*  int fid  : the field id
+*  int inum : the object id
 */
 void print_angle_table (int fid, int inum)
 {
   int h, i;//, j, k, l;
-  int ub = (fid > AMBER99 && fid <= CHARMMSI) ? 2 : 0; // Urey bradley param for the CHARRM FF
+  int ub = (fid > AMBER99 && fid <= CHARMMSI) ? 2 : 0; // Urey-Bradley parameter for the CHARMM FF
   gchar * aode[2] = {"angles-h", "angles-q"};
 
   gchar * desc[3] = {"Quadratic angles:\n\n    V(Theta) = K x (Theta - Theta0)^2\n"
@@ -1660,10 +1662,10 @@ void print_angle_table (int fid, int inum)
 /*
 *  void print_dihedral_table (int fid, int inum)
 *
-*  Usage: 
+*  Usage: print dihedral(s) table to file
 *
-*  int fid  : 
-*  int inum : 
+*  int fid  : the force field id
+*  int inum : the object id
 */
 void print_dihedral_table (int fid, int inum)
 {
@@ -1729,10 +1731,10 @@ void print_dihedral_table (int fid, int inum)
 /*
 *  void print_improper_table (int fid, int inum)
 *
-*  Usage: 
+*  Usage: print improper(s) table to file
 *
-*  int fid  : 
-*  int inum : 
+*  int fid  : the force field id
+*  int inum : the object id
 */
 void print_improper_table (int fid, int inum)
 {
@@ -1792,10 +1794,10 @@ void print_improper_table (int fid, int inum)
 /*
 *  void print_inversion_table (int fid, int inum)
 *
-*  Usage: 
+*  Usage: print inversion(s) table to file
 *
-*  int fid  : 
-*  int inum : 
+*  int fid  : the force field id
+*  int inum : the object id
 */
 void print_inversion_table (int fid, int inum)
 {
@@ -1833,10 +1835,10 @@ void print_inversion_table (int fid, int inum)
 /*
 *  void print_vdw_table (int fid, int inum)
 *
-*  Usage: 
+*  Usage: print VdW table to file
 *
-*  int fid  : 
-*  int inum : 
+*  int fid  : the force field id
+*  int inum : the object id
 */
 void print_vdw_table (int fid, int inum)
 {
@@ -1920,19 +1922,6 @@ void print_vdw_table (int fid, int inum)
   }
 }
 
-/*
-*  void print_increment_table (int fid, int inum)
-*
-*  Usage: 
-*
-*  int fid  : 
-*  int inum : 
-*/
-void print_increment_table (int fid, int inum)
-{
-
-}
-
 
 struct object_match * field_objects_id[6] = {NULL, NULL, NULL, NULL, NULL, NULL};
 struct object_match * tmp_obj_id;
@@ -1956,7 +1945,7 @@ int * ff_key;
 /*
 *  int field_find_atoms ()
 *
-*  Usage: 
+*  Usage: retrieve matching atom from force field data base
 */
 int field_find_atoms ()
 {
@@ -2007,11 +1996,11 @@ int is_extra;
 /*
 *  gboolean is_a_match (int * data, int num, int val[4])
 *
-*  Usage: 
+*  Usage: is this match ?
 *
-*  int * data : 
-*  int num    : 
-*  int val[4] : 
+*  int * data : the set of parameter(s)
+*  int num    : the number of parameter
+*  int val[4] : the target value(s)
 */
 gboolean is_a_match (int * data, int num, int val[4])
 {
@@ -2027,19 +2016,19 @@ gboolean is_a_match (int * data, int num, int val[4])
 /*
 *  void find_object_ijkl (int hid, int foid, int oid, int sa, int za, int sb, int zb, int sc, int zc, int sd, int zd)
 *
-*  Usage: 
+*  Usage: retrieve parameter from force field database
 *
-*  int hid  : 
-*  int foid : 
-*  int oid  : 
-*  int sa   : 
-*  int za   : 
-*  int sb   : 
-*  int zb   : 
-*  int sc   : 
-*  int zc   : 
-*  int sd   : 
-*  int zd   : 
+*  int hid  : iteration parameter
+*  int foid : force table id
+*  int oid  : type of structural element
+*  int sa   : 1st chemical species
+*  int za   : 1st Z
+*  int sb   : 2nd chemical species
+*  int zb   : 2nd Z
+*  int sc   : 3rd chemical species, if any
+*  int zc   : 3rd Z, if any
+*  int sd   : 4th chemical species, if any
+*  int zd   : 4th Z, if any
 */
 void find_object_ijkl (int hid, int foid, int oid, int sa, int za, int sb, int zb, int sc, int zc, int sd, int zd)
 {
@@ -2132,7 +2121,7 @@ void find_object_ijkl (int hid, int foid, int oid, int sa, int za, int sb, int z
 /*
 *  void field_find_bonds ()
 *
-*  Usage: 
+*  Usage: retrieve available bond parameters in force field database
 */
 void field_find_bonds ()
 {
@@ -2166,7 +2155,7 @@ void field_find_bonds ()
 /*
 *  void field_find_angles ()
 *
-*  Usage: 
+*  Usage: retrieve available angle parameters in force field database
 */
 void field_find_angles ()
 {
@@ -2198,9 +2187,9 @@ void field_find_angles ()
 /*
 *  void field_find_dihedrals (int id)
 *
-*  Usage: 
+*  Usage:  retrieve available dihedral parameters in force field database
 *
-*  int id : 
+*  int id : 0 = dihedral(s), 1 = improper(s), 2 = inversion(s)
 */
 void field_find_dihedrals (int id)
 {
@@ -2240,7 +2229,7 @@ void field_find_dihedrals (int id)
 /*
 *  void field_find_vdw ()
 *
-*  Usage: 
+*  Usage: retrieve available VdW parameters in force field database
 */
 void field_find_vdw ()
 {
@@ -2258,9 +2247,9 @@ void field_find_vdw ()
 /*
 *  void print_all (int oid)
 *
-*  Usage: 
+*  Usage: print found force field data
 *
-*  int oid : 
+*  int oid : the type of structural element
 */
 void print_all (int oid)
 {
@@ -2280,10 +2269,10 @@ void print_all (int oid)
 /*
 *  float get_force_field_atom_mass (int sp, int num)
 *
-*  Usage: 
+*  Usage: get force field atomic mass
 *
-*  int sp  : 
-*  int num : 
+*  int sp  : the target chemical species
+*  int num : the atom id
 */
 float get_force_field_atom_mass (int sp, int num)
 {
@@ -2305,10 +2294,10 @@ gchar * filetoread;
 /*
 *  void clean_this_field_data (xmlDoc * doc, xmlTextReaderPtr reader)
 *
-*  Usage: 
+*  Usage: free force field XML file data
 *
-*  xmlDoc * doc            : 
-*  xmlTextReaderPtr reader : 
+*  xmlDoc * doc            : the xmlDoc pointer to free
+*  xmlTextReaderPtr reader : the XML reader to free
 */
 void clean_this_field_data (xmlDoc * doc, xmlTextReaderPtr reader)
 {
@@ -2365,9 +2354,9 @@ void clean_this_field_data (xmlDoc * doc, xmlTextReaderPtr reader)
 /*
 *  gchar * open_field_file (int field)
 *
-*  Usage: 
+*  Usage: open force field XML file
 *
-*  int field : 
+*  int field : the id of the force field to open
 */
 gchar * open_field_file (int field)
 {
@@ -2815,9 +2804,9 @@ gchar * open_field_file (int field)
 /*
 *  G_MODULE_EXPORT void setup_this_force_field (int id)
 *
-*  Usage: 
+*  Usage: setup force field parameters
 *
-*  int id : 
+*  int id : the force field id
 */
 G_MODULE_EXPORT void setup_this_force_field (int id)
 {

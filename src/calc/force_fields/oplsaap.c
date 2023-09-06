@@ -14,24 +14,20 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'oplsaap.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   OPLSAAM force field
 
   This file contains several tables:
 
-    // Atoms:            OPLSAAM_atoms[78][4]
-    // Bonds:            OPLSAAM_bonds[159][4]
-    // Angles:           OPLSAAM_angles[437][5]
-    // Dihedrals:        OPLSAAM_dihedrals[1446][7]
-    // Impropers:        OPLSAAM_impropers[105][[7]
-    // Non bonded:       OPLSAAM_vdw[78][7]
+    Atoms      : OPLSAAM_atoms[78][4]
+    Bonds      : OPLSAAM_bonds[159][4]
+    Angles     : OPLSAAM_angles[437][5]
+    Dihedrals  : OPLSAAM_dihedrals[1446][7]
+    Impropers  : OPLSAAM_impropers[105][[7]
+    Non bonded : OPLSAAM_vdw[78][7]
+
 */
 
 #include "global.h"

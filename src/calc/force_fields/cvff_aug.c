@@ -14,28 +14,26 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cvff_aug.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
-  CVFF_aug force field, data from taken from the 'CVFF_aug.frc' file
+  CVFF_aug force field, data from taken from:
+
+       - the 'CVFF_aug.frc' file
 
   This file contains several tables:
 
-    // Atoms:            CVFF_aug_atoms[172][5]
-    // Equivalence:      CVFF_aug_equivalence_auto[162][11]
-    // Equivalence:      CVFF_aug_equivalence[168][7]
-    // Quadractic bonds: CVFF_aug_bonds_auto[798][5]
-    // Morse bonds: CVFF_aug_morse_bonds[752][6]
-    // Quadratic angles: CVFF_aug_angles_auto[640][6]
-    // Torsions:         CVFF_aug_torsions_auto[342][8]
-    // Impropers:       CVFF_aug_impropers[41][8]
-    // Non bonded:       CVFF_aug_vdw[86][4]
-    // Bond increments:  CVFF_aug_bond_increments[717][5]
+    Atoms            : CVFF_aug_atoms[172][5]
+    Equivalence      : CVFF_aug_equivalence_auto[162][11]
+    Equivalence      : CVFF_aug_equivalence[168][7]
+    Quadractic bonds : CVFF_aug_bonds_auto[798][5]
+    Morse bonds      : CVFF_aug_morse_bonds[752][6]
+    Quadratic angles : CVFF_aug_angles_auto[640][6]
+    Torsions         : CVFF_aug_torsions_auto[342][8]
+    Impropers        : CVFF_aug_impropers[41][8]
+    Non bonded       : CVFF_aug_vdw[86][4]
+    Bond increments  : CVFF_aug_bond_increments[717][5]
+
 */
 
 #include "global.h"

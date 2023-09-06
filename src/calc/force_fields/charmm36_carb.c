@@ -14,26 +14,21 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm36_carb.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CHARMM-charmm36_carb force field, data from taken from:
+
        - the file: 'charmm36_carb'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'
 
   This file contains several tables:
 
-    // Atoms:            charmm36_carb_atoms[59][5]
-    // Bonds:            charmm36_carb_bonds[153][5]
-    // Angles:           charmm36_carb_angles[438][8]
-    // Dihedrals:        charmm36_carb_dihedrals[1354][8]
-    // Impropers:       charmm36_carb_impropers[14][8]
-    // Non bonded:       charmm36_carb_vdw[57][6]
+    Atoms      : charmm36_carb_atoms[59][5]
+    Bonds      : charmm36_carb_bonds[153][5]
+    Angles     : charmm36_carb_angles[438][8]
+    Dihedrals  : charmm36_carb_dihedrals[1354][8]
+    Non bonded : charmm36_carb_vdw[57][6]
 */
 
 #include "global.h"

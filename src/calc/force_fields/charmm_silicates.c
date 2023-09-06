@@ -14,25 +14,22 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm_silicates.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CHARMM-charmm_silicates force field, data from taken from:
+
        - the file: 'charmm_silicates'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'
 
   This file contains several tables:
 
-    // Atoms:            charmm_silicates_atoms[13][5]
-    // Bonds:            charmm_silicates_bonds[14][5]
-    // Angles:           charmm_silicates_angles[27][8]
-    // Dihedrals:        charmm_silicates_dihedrals[34][8]
-    // Non bonded:       charmm_silicates_vdw[13][6]
+    Atoms      : charmm_silicates_atoms[13][5]
+    Bonds      : charmm_silicates_bonds[14][5]
+    Angles     : charmm_silicates_angles[27][8]
+    Dihedrals  : charmm_silicates_dihedrals[34][8]
+    Non bonded : charmm_silicates_vdw[13][6]
+
 */
 
 #include "global.h"

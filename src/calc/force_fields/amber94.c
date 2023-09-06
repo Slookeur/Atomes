@@ -14,26 +14,23 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'amber94.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   Amber-94 force field, data from taken from:
+
        - the file: 'parm94'
 
   This file contains several tables:
 
-    // Atoms:            amber94_atoms[2][4]
-    // Equi vdw:            amber94_equi[2][15]
-    // Bonds:            amber94_bonds[83][5]
-    // Angles:           amber94_angles[191][6]
-    // Dihedrals:        amber94_dihedrals[81][9]
-    // Impropers:       amber94_impropers[31][8]
-    // Non bonded:       amber94_vdw[34][4]
+    Atoms      : amber94_atoms[55][4]
+    Equi vdw   : amber94_equi[2][12]
+    Bonds      : amber94_bonds[83][5]
+    Angles     : amber94_angles[191][6]
+    Dihedrals  : amber94_dihedrals[81][9]
+    Impropers  : amber94_impropers[31][8]
+    Non bonded : amber94_vdw[34][4]
+
 */
 
 #include "global.h"

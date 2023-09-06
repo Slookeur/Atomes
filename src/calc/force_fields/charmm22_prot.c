@@ -14,26 +14,23 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm22_prot.c'
 *
-*  Contains: 
+*  Contains:
 *
-*
-*
-*
-*/
 
-/*
   CHARMM-charmm22_prot force field, data from taken from:
+
        - the file: 'charmm22_prot'
        - distributed in: 'toppar_c36_jul16_mass_orig.tgz'
 
   This file contains several tables:
 
-    // Atoms:            charmm22_prot_atoms[47][5]
-    // Bonds:            charmm22_prot_bonds[122][5]
-    // Angles:           charmm22_prot_angles[324][8]
-    // Dihedrals:        charmm22_prot_dihedrals[445][8]
-    // Impropers:       charmm22_prot_impropers[34][8]
-    // Non bonded:       charmm22_prot_vdw[47][6]
+    Atoms      : charmm22_prot_atoms[47][5]
+    Bonds      : charmm22_prot_bonds[122][5]
+    Angles     : charmm22_prot_angles[324][8]
+    Dihedrals  : charmm22_prot_dihedrals[445][8]
+    Impropers  : charmm22_prot_impropers[34][8]
+    Non bonded : charmm22_prot_vdw[47][6]
+
 */
 
 #include "global.h"
