@@ -2484,7 +2484,7 @@ void adjust_data_model_to_replace (struct project * this_proj, atom_search * ase
 /*
 *  G_MODULE_EXPORT void changed_action_renderer (GtkCellRendererCombo * combo, gchar * path_string, GtkTreeIter * iter, gpointer data)
 *
-*  Usage: change combo box in tree model callback
+*  Usage: change combo box in atom search tree model
 *
 *  GtkCellRendererCombo * combo : the cell renderer combo box
 *  gchar * path_string          : the path in the tree model

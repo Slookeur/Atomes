@@ -16,8 +16,10 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to prepare the DL-POLY / LAMMPS input preparation assistant
+ - The subroutines to design a classical force field
+
 *
 *  List of subroutines:
 
@@ -28,8 +30,8 @@ If not, see <https://www.gnu.org/licenses/> */
 
   G_MODULE_EXPORT gint on_assistant_go_forward (gint current_page, gpointer data);
 
-  gboolean field_file_has_energy_parameters (gboolean scale, int sca, int scb);
   gboolean set_nbd_but_sensitive (int nbid);
+  gboolean field_file_has_energy_parameters (gboolean scale, int sca, int scb);
 
   G_MODULE_EXPORT gboolean on_pop_up_field (GtkWidget * widget, gpointer data);
   G_MODULE_EXPORT gboolean on_field_button_event (GtkWidget * widget, GdkEvent * event, gpointer data);
@@ -45,20 +47,35 @@ If not, see <https://www.gnu.org/licenses/> */
 
   void set_mol_num_label ();
   void setup_cs_labels (int i);
-  void get_is_energy (int i, int l);
   void fill_field_struct (GtkTreeStore * store, int id, int mo);
   void fill_field_body (GtkTreeStore * store, int id);
   void fill_field_model (GtkTreeStore * store, int f, int m);
   void update_field_trees ();
-  void pop_up_field_context_menu (int id, GtkWidget * widget, double event_x, double event_y, gpointer data);
-  void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gpointer data);
+  void get_is_energy (int i, int l);
+  void append_field_item (GMenu * menu, const gchar * name, const gchar * key, int item_id,
+                          gchar * accel, int image_format, gpointer icon,
+                          gboolean custom, GCallback handler, gpointer data,
+                          gboolean check, gboolean status, gboolean radio, gboolean sensitive);
+  void pop_up_field_context_menu (int row_id, GtkWidget * widget, double event_x, double event_y, gpointer data);
+  void pop_up_field_context_menu (int row_id, GtkWidget * widget, GdkEvent * event, gpointer data);
   void field_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data);
   void field_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data);
-  void get_field_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * widg);
+  void field_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void field_set_markup_box (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void field_set_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void field_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void field_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void field_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void prop_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void pmf_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void rig_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void field_set_color_markup_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void field_set_color_markup_and_visible_box (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
+  void get_field_iter_and_edit (gchar * path_string, gpointer data);
   void create_field_list (GtkWidget * vbx, int f);
   void close_the_assistant (GtkAssistant * assistant);
   void hide_show_this_pages (int start, int end, int status, int delta);
-  void remove_classical_assistant_pages (int p);
+  void remove_classical_assistant_pages ();
   void add_classical_assistant_pages (int p);
   void create_ff_structure (int ai, int type);
   void on_assistant_apply (GtkAssistant * assistant, gpointer data);
@@ -69,12 +86,16 @@ If not, see <https://www.gnu.org/licenses/> */
   G_MODULE_EXPORT void changed_mol_box (GtkComboBox * box, gpointer data);
   G_MODULE_EXPORT void run_changed_energy_unit (GtkDialog * dialog, gint response_id, gpointer data);
   G_MODULE_EXPORT void changed_energy_unit (GtkComboBox * box, gpointer data);
+  G_MODULE_EXPORT void changed_field_key_renderer (GtkCellRendererCombo * combo, gchar * path_string, GtkTreeIter * iter, gpointer data);
   G_MODULE_EXPORT void to_select_atom_id_from_fied_molecule (GSimpleAction * action, GVariant * parameter, gpointer data);
   G_MODULE_EXPORT void on_field_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data);
   G_MODULE_EXPORT void on_field_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data);
+  G_MODULE_EXPORT void edit_field_cell (GtkCellRendererText * cell, gchar * path_string,  gchar * new_text, gpointer data);
+  G_MODULE_EXPORT void to_edit_field_prop (GtkCellRenderer * cell, GtkCellEditable * editable, gchar * path_string, gpointer data);
+  G_MODULE_EXPORT void on_field_row_activated (GtkTreeView * treeview, GtkTreePath * path, GtkTreeViewColumn * col, gpointer data);
   G_MODULE_EXPORT void on_assistant_cancel (GtkAssistant * assistant, gpointer data);
   G_MODULE_EXPORT void on_assistant_close (GtkAssistant * assistant, gpointer data);
-  G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page);
+  G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page, gpointer data);
   G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpointer data);
   G_MODULE_EXPORT void clean_field (GtkCheckButton * but, gpointer data);
   G_MODULE_EXPORT void clean_field (GtkToggleButton * but, gpointer data);
@@ -962,9 +983,9 @@ extern void print_lammps_atom_file (GtkTextBuffer * buf);
 /*
 *  int struct_id (int f)
 *
-*  Usage:
+*  Usage: number of atoms in a structural element
 *
-*  int f :
+*  int f : the type of structural element
 */
 int struct_id (int f)
 {
@@ -985,7 +1006,7 @@ int struct_id (int f)
 /*
 *  int body_at (int b)
 *
-*  Usage:
+*  Usage: find the number of atom(s) in a non bonded interaction
 *
 *  int b :
 */
@@ -1010,7 +1031,7 @@ model example;
 /*
 *  void set_mol_num_label ()
 *
-*  Usage:
+*  Usage: classical force field prepare the molecule information widget
 */
 void set_mol_num_label ()
 {
@@ -1030,9 +1051,9 @@ void set_mol_num_label ()
 /*
 *  void setup_cs_labels (int i)
 *
-*  Usage:
+*  Usage: classical force field prepare the core-shell description strings
 *
-*  int i :
+*  int i : the energy unit id
 */
 void setup_cs_labels (int i)
 {
@@ -1055,248 +1076,14 @@ int ** is_energy;
 gchar *** is_var;
 
 /*
-*  void get_is_energy (int i, int l)
-*
-*  Usage:
-*
-*  int i :
-*  int l :
-*/
-void get_is_energy (int i, int l)
-{
-  int j, k;
-  j = (i > 1 && i < 8) ? (i-1)/2 + 1 - i/7 : i;
-  is_energy = g_malloc (fetypes[activef][i+1]*sizeof*is_energy);
-  if (l)
-  {
-    is_var = g_malloc (fetypes[activef][i+1]*sizeof*is_var);
-  }
-  switch (j)
-  {
-    case 0:
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FTETH_P, feunit_teth[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FTETH_P, fvars_teth[activef][k]);
-      }
-      break;
-    case 1:
-      // Bonds
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FBONDS_P, feunit_bond[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FBONDS_P, fvars_bond[activef][k]);
-      }
-      break;
-    case 2:
-      // Angles
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FANGLES_P, feunit_angle[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FANGLES_P, fvars_angle[activef][k]);
-      }
-      break;
-    case 3:
-      // Dihedrals / Impropers
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FDIHEDRAL_P, feunit_dihedral[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FDIHEDRAL_P, fvars_dihedral[activef][k]);
-      }
-      break;
-    case 8:
-      // Inversions
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FINVERS_P, feunit_inversion[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FINVERS_P, fvars_inversion[activef][k]);
-      }
-      break;
-    case 9:
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FVDW_P, feunit_vdw[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FVDW_P, fvars_vdw[activef][k]);
-      }
-      break;
-    case 10:
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FMETALS_P, feunit_met[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FMETALS_P, fvars_met[activef][k]);
-      }
-      break;
-    case 11:
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FTERSOFFS_P, feunit_ters[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FTERSOFFS_P, fvars_ters[activef][k]);
-      }
-      break;
-    case 12:
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FTHREEBODY_P, feunit_tbd[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FTHREEBODY_P, fvars_tbd[activef][k]);
-      }
-      break;
-    case 13:
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FFOURBODY_P, feunit_fbd[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FFOURBODY_P, fvars_fbd[activef][k]);
-      }
-      break;
-    case 14:
-      for (k=0; k<fetypes[activef][i+1]; k++)
-      {
-        is_energy[k] = duplicate_int (FEXTERNAL_P, feunit_fext[activef][k]);
-        if (l) is_var[k] = duplicate_strings (FEXTERNAL_P, fvars_fext[activef][k]);
-      }
-      break;
-    }
-}
-
-/*
-*  gboolean field_file_has_energy_parameters (gboolean scale, int sca, int scb)
-*
-*  Usage:
-*
-*  gboolean scale :
-*  int sca        :
-*  int scb        :
-*/
-gboolean field_file_has_energy_parameters (gboolean scale, int sca, int scb)
-{
-  int i, j, k, l;
-  is_param = allocdint(15, 21);
-  has_energy = allocint (15);
-  i = 0;
-  tmp_fmol = tmp_field -> first_molecule;
-  while (tmp_fmol)
-  {
-    tmp_fshell = get_active_shell(tmp_fmol -> id, 0);
-    while (tmp_fshell)
-    {
-      if (! scale)
-      {
-        i =1;
-        break;
-      }
-      else
-      {
-        tmp_fshell -> k2 = (tmp_fshell -> k2 * internal_to_other[sca]) / internal_to_other[scb];
-        tmp_fshell -> k4 = (tmp_fshell -> k4 * internal_to_other[sca]) / internal_to_other[scb];
-        tmp_fshell = tmp_fshell -> next;
-      }
-    }
-    tmp_fmol = tmp_fmol -> next;
-  }
-  for (j=0; j<15; j++)
-  {
-    get_is_energy (j, 0);
-    l = 0;
-    if (j == 0)
-    {
-      tmp_fmol = tmp_field -> first_molecule;
-      while (tmp_fmol)
-      {
-        tmp_ftet = get_active_tethered (tmp_fmol -> id, 0);
-        while (tmp_ftet)
-        {
-          for (k=0; k<fvalues[activef][j][tmp_ftet -> key]; k++)
-          {
-            if (is_energy[tmp_ftet -> key][k])
-            {
-              is_param[j][tmp_ftet -> key] ++;
-              if (scale) tmp_ftet -> val[k]= (tmp_ftet -> val[k] * internal_to_other[sca]) / internal_to_other[scb];
-              l ++;
-            }
-          }
-          tmp_ftet = tmp_ftet -> next;
-        }
-        tmp_fmol = tmp_fmol -> next;
-      }
-    }
-    else if (j>0 && j<9)
-    {
-      tmp_fmol = tmp_field -> first_molecule;
-      while (tmp_fmol)
-      {
-         tmp_fstr = tmp_fmol -> first_struct[j-1];
-         //get_active_struct (j-1, tmp_fmol -> id, 0);
-         while (tmp_fstr)
-         {
-           for (k=0; k<fvalues[activef][j][tmp_fstr -> def -> key]; k++)
-           {
-             if (is_energy[tmp_fstr -> def -> key][k])
-             {
-               is_param[j][tmp_fstr -> def -> key] ++;
-               if (scale) tmp_fstr -> def -> val[k] = (tmp_fstr -> def -> val[k] * internal_to_other[sca]) / internal_to_other[scb];
-               l ++;
-             }
-           }
-           tmp_fprop = tmp_fstr -> other;
-           while (tmp_fprop)
-           {
-             for (k=0; k<fvalues[activef][j][tmp_fprop -> key]; k++)
-             {
-               if (is_energy[tmp_fprop -> key][k])
-               {
-                 is_param[j][tmp_fprop -> key] ++;
-                 if (scale) tmp_fprop -> val[k] = (tmp_fprop -> val[k] * internal_to_other[sca]) / internal_to_other[scb];
-                 l ++;
-               }
-             }
-             tmp_fprop = tmp_fprop -> next;
-           }
-           tmp_fstr = tmp_fstr -> next;
-         }
-         tmp_fmol = tmp_fmol -> next;
-      }
-    }
-    else
-    {
-      tmp_fbody = get_active_body (0, j-9);
-      while (tmp_fbody)
-      {
-        for (k=0; k<fvalues[activef][j][tmp_fbody -> key]; k++)
-        {
-          if (is_energy[tmp_fbody -> key][k])
-          {
-            is_param[j][tmp_fbody -> key] ++;
-            if (scale) tmp_fbody -> val[k] = (tmp_fbody -> val[k] * internal_to_other[sca]) / internal_to_other[scb];
-            l ++;
-          }
-        }
-        tmp_fbody = tmp_fbody -> next;
-      }
-    }
-    has_energy[j] = l;
-    i += l;
-    for (k=0; k<fetypes[activef][j+1]; k++) g_free (is_energy[k]);
-    g_free (is_energy);
-  }
-  if (i)
-  {
-    return TRUE;
-  }
-  else
-  {
-    g_free (is_param);
-    return FALSE;
-  }
-}
-
-/*
 *  gchar * parameters_info (int obj, int key,  gchar ** words, float * data)
 *
-*  Usage:
+*  Usage: prepare classical force field parameter description string
 *
-*  int obj         :
-*  int key         :
-*   gchar ** words :
-*  float * data    :
+*  int obj        : the type of field object
+*  int key        : the formalism key for this type of object
+*  gchar ** words : the string description lists
+*  float * data   : the value(s) to print
 */
 gchar * parameters_info (int obj, int key,  gchar ** words, float * data)
 {
@@ -1320,11 +1107,11 @@ extern void print_all_field_struct (struct field_molecule * mol, int str);
 /*
 *  void fill_field_struct (GtkTreeStore * store, int id, int mo)
 *
-*  Usage:
+*  Usage: classical force field fill the tree store with structural element parameter(s)
 *
-*  GtkTreeStore * store :
-*  int id               :
-*  int mo               :
+*  GtkTreeStore * store : the tree store to fill
+*  int id               : the type of structural element
+*  int mo               : the id of the target field molecule
 */
 void fill_field_struct (GtkTreeStore * store, int id, int mo)
 {
@@ -1405,10 +1192,8 @@ void fill_field_struct (GtkTreeStore * store, int id, int mo)
 /*
 *  void fill_field_body (GtkTreeStore * store, int id)
 *
-*  Usage:
-*
-*  GtkTreeStore * store :
-*  int id               :
+0
+*  int id               : the type of non bonded interaction
 */
 void fill_field_body (GtkTreeStore * store, int id)
 {
@@ -1459,11 +1244,11 @@ void fill_field_body (GtkTreeStore * store, int id)
 /*
 *  void fill_field_model (GtkTreeStore * store, int f, int m)
 *
-*  Usage:
+*  Usage: classical force field fill the tree store
 *
-*  GtkTreeStore * store :
-*  int f                :
-*  int m                :
+*  GtkTreeStore * store : the tree store to fill
+*  int f                : the type of field object
+*  int m                : the target field molecule, if any
 */
 void fill_field_model (GtkTreeStore * store, int f, int m)
 {
@@ -1761,7 +1546,7 @@ void fill_field_model (GtkTreeStore * store, int f, int m)
 /*
 *  G_MODULE_EXPORT void toggle_field_params (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: change classical force field parameter toggle callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -1771,7 +1556,7 @@ G_MODULE_EXPORT void toggle_field_params (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void toggle_field_params (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: change classical force field parameter toggle callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -1803,9 +1588,9 @@ G_MODULE_EXPORT void toggle_field_params (GtkToggleButton * but, gpointer data)
 /*
 *  gboolean set_nbd_but_sensitive (int nbid)
 *
-*  Usage:
+*  Usage: adjust non bonded interaction button sensitivity
 *
-*  int nbid :
+*  int nbid : the type of non bonded interaction
 */
 gboolean set_nbd_but_sensitive (int nbid)
 {
@@ -1832,10 +1617,10 @@ gboolean set_nbd_but_sensitive (int nbid)
 /*
 *  gchar * set_field_label (int f, int m)
 *
-*  Usage:
+*  Usage: prepare classical force field description string
 *
-*  int f :
-*  int m :
+*  int f : the type of field object(s)
+*  int m : the field molecule id, if any
 */
 gchar * set_field_label (int f, int m)
 {
@@ -1966,7 +1751,7 @@ gchar * set_field_label (int f, int m)
 /*
 *  G_MODULE_EXPORT void changed_mol_box (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field assistant change the target molecule for the page
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -1985,7 +1770,7 @@ G_MODULE_EXPORT void changed_mol_box (GtkComboBox * box, gpointer data)
 /*
 *  void update_field_trees ()
 *
-*  Usage:
+*  Usage: classical force field assistant update all tree models
 */
 void update_field_trees ()
 {
@@ -2010,9 +1795,243 @@ void update_field_trees ()
 }
 
 /*
+*  void get_is_energy (int i, int l)
+*
+*  Usage: get the energy unit linked parameter list
+*
+*  int i : the type of force field object
+*  int l : 1 = prepare the associated string description(s), 0 = no description(s)
+*/
+void get_is_energy (int i, int l)
+{
+  int j, k;
+  j = (i > 1 && i < 8) ? (i-1)/2 + 1 - i/7 : i;
+  is_energy = g_malloc (fetypes[activef][i+1]*sizeof*is_energy);
+  if (l)
+  {
+    is_var = g_malloc (fetypes[activef][i+1]*sizeof*is_var);
+  }
+  switch (j)
+  {
+    case 0:
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FTETH_P, feunit_teth[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FTETH_P, fvars_teth[activef][k]);
+      }
+      break;
+    case 1:
+      // Bonds
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FBONDS_P, feunit_bond[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FBONDS_P, fvars_bond[activef][k]);
+      }
+      break;
+    case 2:
+      // Angles
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FANGLES_P, feunit_angle[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FANGLES_P, fvars_angle[activef][k]);
+      }
+      break;
+    case 3:
+      // Dihedrals / Impropers
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FDIHEDRAL_P, feunit_dihedral[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FDIHEDRAL_P, fvars_dihedral[activef][k]);
+      }
+      break;
+    case 8:
+      // Inversions
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FINVERS_P, feunit_inversion[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FINVERS_P, fvars_inversion[activef][k]);
+      }
+      break;
+    case 9:
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FVDW_P, feunit_vdw[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FVDW_P, fvars_vdw[activef][k]);
+      }
+      break;
+    case 10:
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FMETALS_P, feunit_met[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FMETALS_P, fvars_met[activef][k]);
+      }
+      break;
+    case 11:
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FTERSOFFS_P, feunit_ters[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FTERSOFFS_P, fvars_ters[activef][k]);
+      }
+      break;
+    case 12:
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FTHREEBODY_P, feunit_tbd[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FTHREEBODY_P, fvars_tbd[activef][k]);
+      }
+      break;
+    case 13:
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FFOURBODY_P, feunit_fbd[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FFOURBODY_P, fvars_fbd[activef][k]);
+      }
+      break;
+    case 14:
+      for (k=0; k<fetypes[activef][i+1]; k++)
+      {
+        is_energy[k] = duplicate_int (FEXTERNAL_P, feunit_fext[activef][k]);
+        if (l) is_var[k] = duplicate_strings (FEXTERNAL_P, fvars_fext[activef][k]);
+      }
+      break;
+    }
+}
+
+/*
+*  gboolean field_file_has_energy_parameters (gboolean scale, int sca, int scb)
+*
+*  Usage: scale all field parameter(s) related to the energy unit
+*
+*  gboolean scale : scale or not the parameter
+*  int sca        : initial scale
+*  int scb        : target scale
+*/
+gboolean field_file_has_energy_parameters (gboolean scale, int sca, int scb)
+{
+  int i, j, k, l;
+  is_param = allocdint(15, 21);
+  has_energy = allocint (15);
+  i = 0;
+  tmp_fmol = tmp_field -> first_molecule;
+  while (tmp_fmol)
+  {
+    tmp_fshell = get_active_shell(tmp_fmol -> id, 0);
+    while (tmp_fshell)
+    {
+      if (! scale)
+      {
+        i =1;
+        break;
+      }
+      else
+      {
+        tmp_fshell -> k2 = (tmp_fshell -> k2 * internal_to_other[sca]) / internal_to_other[scb];
+        tmp_fshell -> k4 = (tmp_fshell -> k4 * internal_to_other[sca]) / internal_to_other[scb];
+        tmp_fshell = tmp_fshell -> next;
+      }
+    }
+    tmp_fmol = tmp_fmol -> next;
+  }
+  for (j=0; j<15; j++)
+  {
+    get_is_energy (j, 0);
+    l = 0;
+    if (j == 0)
+    {
+      tmp_fmol = tmp_field -> first_molecule;
+      while (tmp_fmol)
+      {
+        tmp_ftet = get_active_tethered (tmp_fmol -> id, 0);
+        while (tmp_ftet)
+        {
+          for (k=0; k<fvalues[activef][j][tmp_ftet -> key]; k++)
+          {
+            if (is_energy[tmp_ftet -> key][k])
+            {
+              is_param[j][tmp_ftet -> key] ++;
+              if (scale) tmp_ftet -> val[k]= (tmp_ftet -> val[k] * internal_to_other[sca]) / internal_to_other[scb];
+              l ++;
+            }
+          }
+          tmp_ftet = tmp_ftet -> next;
+        }
+        tmp_fmol = tmp_fmol -> next;
+      }
+    }
+    else if (j>0 && j<9)
+    {
+      tmp_fmol = tmp_field -> first_molecule;
+      while (tmp_fmol)
+      {
+         tmp_fstr = tmp_fmol -> first_struct[j-1];
+         //get_active_struct (j-1, tmp_fmol -> id, 0);
+         while (tmp_fstr)
+         {
+           for (k=0; k<fvalues[activef][j][tmp_fstr -> def -> key]; k++)
+           {
+             if (is_energy[tmp_fstr -> def -> key][k])
+             {
+               is_param[j][tmp_fstr -> def -> key] ++;
+               if (scale) tmp_fstr -> def -> val[k] = (tmp_fstr -> def -> val[k] * internal_to_other[sca]) / internal_to_other[scb];
+               l ++;
+             }
+           }
+           tmp_fprop = tmp_fstr -> other;
+           while (tmp_fprop)
+           {
+             for (k=0; k<fvalues[activef][j][tmp_fprop -> key]; k++)
+             {
+               if (is_energy[tmp_fprop -> key][k])
+               {
+                 is_param[j][tmp_fprop -> key] ++;
+                 if (scale) tmp_fprop -> val[k] = (tmp_fprop -> val[k] * internal_to_other[sca]) / internal_to_other[scb];
+                 l ++;
+               }
+             }
+             tmp_fprop = tmp_fprop -> next;
+           }
+           tmp_fstr = tmp_fstr -> next;
+         }
+         tmp_fmol = tmp_fmol -> next;
+      }
+    }
+    else
+    {
+      tmp_fbody = get_active_body (0, j-9);
+      while (tmp_fbody)
+      {
+        for (k=0; k<fvalues[activef][j][tmp_fbody -> key]; k++)
+        {
+          if (is_energy[tmp_fbody -> key][k])
+          {
+            is_param[j][tmp_fbody -> key] ++;
+            if (scale) tmp_fbody -> val[k] = (tmp_fbody -> val[k] * internal_to_other[sca]) / internal_to_other[scb];
+            l ++;
+          }
+        }
+        tmp_fbody = tmp_fbody -> next;
+      }
+    }
+    has_energy[j] = l;
+    i += l;
+    for (k=0; k<fetypes[activef][j+1]; k++) g_free (is_energy[k]);
+    g_free (is_energy);
+  }
+  if (i)
+  {
+    return TRUE;
+  }
+  else
+  {
+    g_free (is_param);
+    return FALSE;
+  }
+}
+
+/*
 *  G_MODULE_EXPORT void run_changed_energy_unit (GtkDialog * dialog, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: change the classical force field energy unit - running the dialog
 *
 *  GtkDialog * dialog : the GtkDialog sending the signal
 *  gint response_id   : the response id
@@ -2035,7 +2054,7 @@ G_MODULE_EXPORT void run_changed_energy_unit (GtkDialog * dialog, gint response_
 /*
 *  G_MODULE_EXPORT void changed_energy_unit (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: change the classical force field energy unit - creating the dialog
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -2153,9 +2172,9 @@ G_MODULE_EXPORT void changed_energy_unit (GtkComboBox * box, gpointer data)
 /*
 *  GtkWidget * vbox_init (int p)
 *
-*  Usage:
+*  Usage: classical force field assistant prepare the field object configuration widgets
 *
-*  int p :
+*  int p : the type of field object
 */
 GtkWidget * vbox_init (int p)
 {
@@ -2244,11 +2263,11 @@ GtkWidget * vbox_init (int p)
 /*
 *  int get_field_tree_data (GtkWidget * tree, int treeid, GtkTreePath * path)
 *
-*  Usage:
+*  Usage: retrieve classical force field data from tree model
 *
 *  GtkWidget * tree   : the GtkWidget sending the signal
-*  int treeid         :
-*  GtkTreePath * path :
+*  int treeid         : the type of field object
+*  GtkTreePath * path : the path in the tree model
 */
 int get_field_tree_data (GtkWidget * tree, int treeid, GtkTreePath * path)
 {
@@ -2272,10 +2291,10 @@ int get_field_tree_data (GtkWidget * tree, int treeid, GtkTreePath * path)
 /*
 *  int get_field_data_id (int k, gchar * data)
 *
-*  Usage:
+*  Usage: get classical force field parameter from description string
 *
-*  int k        :
-*  gchar * data :
+*  int k        : the type of field object
+*  gchar * data : the target description string
 */
 int get_field_data_id (int k, gchar * data)
 {
@@ -2296,10 +2315,17 @@ int get_field_data_id (int k, gchar * data)
   return i;
 }
 
-G_MODULE_EXPORT void changed_field_key_renderer (GtkCellRendererCombo * combo,
-                                                 gchar * path_string,
-                                                 GtkTreeIter * iter,
-                                                 gpointer data)
+/*
+*  G_MODULE_EXPORT void changed_field_key_renderer (GtkCellRendererCombo * combo, gchar * path_string, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: change combo box in classical force field tree model
+*
+*  GtkCellRendererCombo * combo : the cell renderer combo box
+*  gchar * path_string          : the path in the tree model
+*  GtkTreeIter * iter           : the tree iter
+*  gpointer data                : the associated data pointer
+*/
+G_MODULE_EXPORT void changed_field_key_renderer (GtkCellRendererCombo * combo, gchar * path_string, GtkTreeIter * iter, gpointer data)
 {
   GValue val = {0, };
   int i, j, k, l, m, n, o;
@@ -2435,9 +2461,9 @@ G_MODULE_EXPORT void changed_field_key_renderer (GtkCellRendererCombo * combo,
 /*
 *  GtkWidget * create_combo_mol (int f)
 *
-*  Usage:
+*  Usage: classical force field create molecule selection combo box
 *
-*  int f :
+*  int f : the type of force field object
 */
 GtkWidget * create_combo_mol (int f)
 {
@@ -2464,10 +2490,10 @@ int actel;
 /*
 *  gchar * pop_info (int i, int id)
 *
-*  Usage:
+*  Usage: get popup information message
 *
-*  int i  :
-*  int id :
+*  int i  : the type of element
+*  int id : the id number of the element
 */
 gchar * pop_info (int i, int id)
 {
@@ -2627,9 +2653,9 @@ gchar * pop_info (int i, int id)
 /*
 *  gchar * pop_edit (int i)
 *
-*  Usage:
+*  Usage: get edit string label
 *
-*  int i :
+*  int i : the type of element to edit
 */
 gchar * pop_edit (int i)
 {
@@ -2649,9 +2675,9 @@ gchar * pop_edit (int i)
 /*
 *  gchar * pop_add (int i)
 *
-*  Usage:
+*  Usage: get add string label
 *
-*  int i :
+*  int i : the type of element to add
 */
 gchar * pop_add (int i)
 {
@@ -2663,9 +2689,9 @@ gchar * pop_add (int i)
 /*
 *  gchar * pop_remove (int i)
 *
-*  Usage:
+*  Usage: get remove string label
 *
-*  int i :
+*  int i : the type of element to remove
 */
 gchar * pop_remove (int i)
 {
@@ -2677,7 +2703,7 @@ gchar * pop_remove (int i)
 /*
 *  G_MODULE_EXPORT void to_select_atom_id_from_fied_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 *
-*  Usage:
+*  Usage: create new field atom from field atom popup menu callback
 *
 *  GSimpleAction * action : the GAction sending the signal
 *  GVariant * parameter   : GVariant parameter of the GAction
@@ -2690,6 +2716,29 @@ G_MODULE_EXPORT void to_select_atom_id_from_fied_molecule (GSimpleAction * actio
 
 GSimpleActionGroup * field_pop_actions = NULL;
 
+/*
+*  void append_field_item (GMenu * menu, const gchar * name, const gchar * key, int item_id,
+                        gchar * accel, int image_format, gpointer icon,
+                        gboolean custom, GCallback handler, gpointer data,
+                        gboolean check, gboolean status, gboolean radio, gboolean sensitive)
+*
+*  Usage: append menu items to the popup menu
+*
+*  GMenu * menu       : the menu to attach the new menu item to
+*  const gchar * name : the new menu item label, if any
+*  const gchar * key  : the new menu item action key
+*  int item_id        : the new menu item action id
+*  gchar * accel      : keyboard accelerator for the new menu item, if any (NULL otherwise)
+*  int image_format   : the image format (in enum ImageFormats)
+*  gpointer icon      : the image data if any (or NULL)
+*  gboolean custom    : custom menu item (1= yes, 0 = no), to insert a widget later on
+*  GCallback handler  : the new menu item callback (or NULL)
+*  gpointer data      : the associated data pointer (or NULL)
+*  gboolean check     : is the new menu item a check menu item ?
+*  gboolean status    : is 'check' then what is the status of the new check menu item ?
+*  gboolean radio     : is the new menu item a radio menu item ?
+*  gboolean sensitive : new menu item sensitivity
+*/
 void append_field_item (GMenu * menu, const gchar * name, const gchar * key, int item_id,
                         gchar * accel, int image_format, gpointer icon,
                         gboolean custom, GCallback handler, gpointer data,
@@ -2715,36 +2764,36 @@ void append_field_item (GMenu * menu, const gchar * name, const gchar * key, int
 
 #ifdef GTK4
 /*
-*  void pop_up_field_context_menu (int id, GtkWidget * widget, double event_x, double event_y, gpointer data)
+*  void pop_up_field_context_menu (int row_id, GtkWidget * widget, double event_x, double event_y, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field tree model popup menu GTK4
 *
-*  int id             :
-*  GtkWidget * widget : the GtkWidget sending the signal
-*  double event_x     :
-*  double event_y     :
+*  int row_id         : the row id in the tree model
+*  GtkWidget * widget : the target tree model
+*  double event_x     : x position
+*  double event_y     : y position
 *  gpointer data      : the associated data pointer
 */
 void pop_up_field_context_menu (int id, GtkWidget * widget, double event_x, double event_y, gpointer data)
 #else
 /*
-*  void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gpointer data)
+*  void pop_up_field_context_menu (int row_id, GtkWidget * widget, GdkEvent * event, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field tree model popup menu GTK3
 *
-*  int id             :
-*  GtkWidget * widget : the GtkWidget sending the signal
+*  int row_id         : the row id in the tree model
+*  GtkWidget * widget : the target tree model
 *  GdkEvent * event   : the GdkEvent triggering the signal
 *  gpointer data      : the associated data pointer
 */
-void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gpointer data)
+void pop_up_field_context_menu (int row_id, GtkWidget * widget, GdkEvent * event, gpointer data)
 #endif
 {
   GtkWidget * menu;
   gchar * str;
   int i, j, k, l;
   i = GPOINTER_TO_INT (data);
-  str = pop_info (i, id);
+  str = pop_info (i, row_id);
   if (field_pop_actions) g_object_unref (field_pop_actions);
   field_pop_actions = g_simple_action_group_new ();
   GMenu * fmenu = g_menu_new ();
@@ -2951,7 +3000,7 @@ void pop_up_field_context_menu (int id, GtkWidget * widget, GdkEvent * event, gp
 /*
 *  G_MODULE_EXPORT gboolean on_pop_up_field (GtkWidget * widget, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field tree model popup contextual menu callback GTK3
 *
 *  GtkWidget * widget : the GtkWidget sending the signal
 *  gpointer data      : the associated data pointer
@@ -2967,13 +3016,13 @@ G_MODULE_EXPORT gboolean on_pop_up_field (GtkWidget * widget, gpointer data)
 /*
 *  void field_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field tree model button event GTK4
 *
-*  double event_x     :
-*  double event_y     :
-*  guint event_button :
-*  guint event_type   :
-*  guint32 event_time :
+*  double event_x     : x position
+*  double event_y     : y position
+*  guint event_button : event button
+*  guint event_type   : event type
+*  guint32 event_time : event time
 *  gpointer data      : the associated data pointer
 */
 void field_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
@@ -2981,14 +3030,14 @@ void field_button_event (double event_x, double event_y, guint event_button, gui
 /*
 *  void field_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field tree model button event GTK3
 *
 *  GdkEvent * event   : the GdkEvent triggering the signal
-*  double event_x     :
-*  double event_y     :
-*  guint event_button :
-*  guint event_type   :
-*  guint32 event_time :
+*  double event_x     : x position
+*  double event_y     : y position
+*  guint event_button : event button
+*  guint event_type   : event type
+*  guint32 event_time : event time
 *  gpointer data      : the associated data pointer
 */
 void field_button_event (GdkEvent * event, double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data)
@@ -3030,7 +3079,7 @@ void field_button_event (GdkEvent * event, double event_x, double event_y, guint
 /*
 *  G_MODULE_EXPORT void on_field_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field tree model button pressed callback GTK4
 *
 *  GtkGesture * gesture : the GtkGesture sending the signal
 *  int n_press          : number of times it was pressed
@@ -3046,7 +3095,7 @@ G_MODULE_EXPORT void on_field_button_pressed (GtkGesture * gesture, int n_press,
 /*
 *  G_MODULE_EXPORT void on_field_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 *
-*  Usage:
+*  Usage:  classical force field tree model button released callback GTK4
 *
 *  GtkGesture * gesture : the GtkGesture sending the signal
 *  int n_press          : number of times it was pressed
@@ -3062,7 +3111,7 @@ G_MODULE_EXPORT void on_field_button_released (GtkGesture * gesture, int n_press
 /*
 *  G_MODULE_EXPORT gboolean on_field_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field tree model button event callback GTK3
 *
 *  GtkWidget * widget : the GtkWidget sending the signal
 *  GdkEvent * event   : the GdkEvent triggering the signal
@@ -3076,11 +3125,18 @@ G_MODULE_EXPORT gboolean on_field_button_event (GtkWidget * widget, GdkEvent * e
 }
 #endif
 
-void field_set_color (GtkTreeViewColumn * col,
-                      GtkCellRenderer   * renderer,
-                      GtkTreeModel      * mod,
-                      GtkTreeIter       * iter,
-                      gpointer          data)
+/*
+*  void field_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color in the classical force field tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void field_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i, j, k, l;
   int tree = GPOINTER_TO_INT(data);
@@ -3107,11 +3163,18 @@ void field_set_color (GtkTreeViewColumn * col,
   }
 }
 
-void field_set_markup_box (GtkTreeViewColumn * col,
-                           GtkCellRenderer   * renderer,
-                           GtkTreeModel      * mod,
-                           GtkTreeIter       * iter,
-                           gpointer          data)
+/*
+*  void field_set_markup_box (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer pango markup in the classical force field tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void field_set_markup_box (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int tree = GPOINTER_TO_INT(data);
   gchar * str = NULL;
@@ -3120,11 +3183,18 @@ void field_set_markup_box (GtkTreeViewColumn * col,
   g_free (str);
 }
 
-void field_set_markup (GtkTreeViewColumn * col,
-                       GtkCellRenderer   * renderer,
-                       GtkTreeModel      * mod,
-                       GtkTreeIter       * iter,
-                       gpointer          data)
+/*
+*  void field_set_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer pango markup in the classical force field tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void field_set_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i;
   int tree = GPOINTER_TO_INT(data);
@@ -3163,11 +3233,18 @@ void field_set_markup (GtkTreeViewColumn * col,
   }
 }
 
-void field_set_visible (GtkTreeViewColumn * col,
-                        GtkCellRenderer   * renderer,
-                        GtkTreeModel      * mod,
-                        GtkTreeIter       * iter,
-                        gpointer          data)
+/*
+*  void field_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer visibility in the classical force field tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void field_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i, j;
   int tree = GPOINTER_TO_INT(data);
@@ -3190,31 +3267,52 @@ void field_set_visible (GtkTreeViewColumn * col,
   }
 }
 
-void field_set_color_and_markup (GtkTreeViewColumn * col,
-                                 GtkCellRenderer   * renderer,
-                                 GtkTreeModel      * mod,
-                                 GtkTreeIter       * iter,
-                                 gpointer          data)
+/*
+*  void field_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color and markup in the classical force field tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void field_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   field_set_color (col, renderer, mod, iter, data);
   field_set_markup (col, renderer, mod, iter, data);
 }
 
-void field_set_color_and_visible (GtkTreeViewColumn * col,
-                                  GtkCellRenderer   * renderer,
-                                  GtkTreeModel      * mod,
-                                  GtkTreeIter       * iter,
-                                  gpointer          data)
+/*
+*  void field_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color and visibility in the classical force field tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void field_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   field_set_color (col, renderer, mod, iter, data);
   field_set_visible (col, renderer, mod, iter, data);
 }
 
-void prop_set_color_and_visible (GtkTreeViewColumn * col,
-                       GtkCellRenderer   * renderer,
-                       GtkTreeModel      * mod,
-                       GtkTreeIter       * iter,
-                       gpointer          data)
+/*
+*  void prop_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color and visibility in the classical force field structural property tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void prop_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i;
   gtk_tree_model_get (mod, iter, 0, & i, -1);
@@ -3222,11 +3320,18 @@ void prop_set_color_and_visible (GtkTreeViewColumn * col,
   field_set_color (col, renderer, mod, iter, data);
 }
 
-void pmf_set_color_and_visible (GtkTreeViewColumn * col,
-                                GtkCellRenderer   * renderer,
-                                GtkTreeModel      * mod,
-                                GtkTreeIter       * iter,
-                                gpointer          data)
+/*
+*  void pmf_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color and visibility in the classical force field mean force potential tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void pmf_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   field_set_color (col, renderer, mod, iter, GINT_TO_POINTER(4));
   int i, j, k;
@@ -3243,11 +3348,18 @@ void pmf_set_color_and_visible (GtkTreeViewColumn * col,
   gtk_cell_renderer_set_visible (renderer, k);
 }
 
-void rig_set_color_and_visible (GtkTreeViewColumn * col,
-                                GtkCellRenderer   * renderer,
-                                GtkTreeModel      * mod,
-                                GtkTreeIter       * iter,
-                                gpointer          data)
+/*
+*  void rig_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color and visibility in the classical force field rigid constraint(s) tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void rig_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   field_set_color (col, renderer, mod, iter, data);
   int i;
@@ -3256,32 +3368,53 @@ void rig_set_color_and_visible (GtkTreeViewColumn * col,
   gtk_cell_renderer_set_visible (renderer, ! i);
 }
 
-void field_set_color_markup_and_visible (GtkTreeViewColumn * col,
-                                         GtkCellRenderer   * renderer,
-                                         GtkTreeModel      * mod,
-                                         GtkTreeIter       * iter,
-                                         gpointer          data)
+/*
+*  void field_set_color_markup_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color, markup and visibility in the classical force field tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void field_set_color_markup_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   field_set_color (col, renderer, mod, iter, data);
   field_set_markup (col, renderer, mod, iter, data);
   field_set_visible (col, renderer, mod, iter, data);
 }
 
-void field_set_color_markup_and_visible_box (GtkTreeViewColumn * col,
-                                             GtkCellRenderer   * renderer,
-                                             GtkTreeModel      * mod,
-                                             GtkTreeIter       * iter,
-                                             gpointer          data)
+/*
+*  void field_set_color_markup_and_visible_box (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+*
+*  Usage: set renderer color, markup and visibility in the classical force field tree store
+*
+*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
+*  GtkTreeCellRenderer * renderer : the target cell renderer
+*  GtkTreeModel                   : the target tree model
+*  GtkTreeIter                    : the target tree iter
+*  gpointer data                  : the associated data pointer
+*/
+void field_set_color_markup_and_visible_box (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   field_set_color (col, renderer, mod, iter, data);
   field_set_markup_box (col, renderer, mod, iter, data);
   field_set_visible (col, renderer, mod, iter, data);
 }
 
-G_MODULE_EXPORT void edit_field_cell (GtkCellRendererText * cell,
-                                      gchar * path_string,
-                                      gchar * new_text,
-                                      gpointer data)
+/*
+*  G_MODULE_EXPORT void edit_field_cell (GtkCellRendererText * cell, gchar * path_string,  gchar * new_text, gpointer data)
+*
+*  Usage:  edit cell in the classical force field tree model
+*
+*  GtkCellRendererText * cell : the GtkCellRendererText sending the signal
+*  gchar * path_string        : the path in the tree model
+*  gchar * new_text           : the new string to insert
+*  gpointer data              : the associated data pointer
+*/
+G_MODULE_EXPORT void edit_field_cell (GtkCellRendererText * cell, gchar * path_string,  gchar * new_text, gpointer data)
 {
   int i, j, k, l;
   i = GPOINTER_TO_INT(data);
@@ -3329,15 +3462,14 @@ G_MODULE_EXPORT void edit_field_cell (GtkCellRendererText * cell,
 }
 
 /*
-*  void get_field_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * widg)
+*  void get_field_iter_and_edit (gchar * path_string, gpointer data)
 *
-*  Usage:
+*  Usage: edit field property in the classical force field tree model
 *
-*  gchar * path_string :
+*  gchar * path_string : the path in the tree model
 *  gpointer data       : the associated data pointer
-*  GtkWidget * widg    : the GtkWidget sending the signal
 */
-void get_field_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * widg)
+void get_field_iter_and_edit (gchar * path_string, gpointer data)
 {
   int i = GPOINTER_TO_INT(data);
   gtk_tree_model_get_iter (GTK_TREE_MODEL(field_model[i]),
@@ -3360,29 +3492,43 @@ void get_field_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * wi
   edit_field_prop (g_simple_action_new ("Dummy", NULL), NULL, data);
 }
 
-G_MODULE_EXPORT void to_edit_field_prop (GtkCellRenderer * cell,
-                                         GtkCellEditable * editable,
-                                         gchar * path_string,
-                                         gpointer data)
+/*
+*  G_MODULE_EXPORT void to_edit_field_prop (GtkCellRenderer * cell, GtkCellEditable * editable, gchar * path_string, gpointer data)
+*
+*  Usage: to edit data in the classical force field tree model
+*
+*  GtkCellRenderer * cell     : the GtkTreeView sending the signal
+*  GtkCellEditable * editable : the editable
+*  gchar * path_string,       : the path in the tree model
+*  gpointer data              : the associated data pointer
+*/
+G_MODULE_EXPORT void to_edit_field_prop (GtkCellRenderer * cell, GtkCellEditable * editable, gchar * path_string, gpointer data)
 {
   destroy_this_widget (GTK_WIDGET(editable));
-  get_field_iter_and_edit (path_string, data, NULL);
+  get_field_iter_and_edit (path_string, data);
 }
 
-G_MODULE_EXPORT void on_field_row_activated (GtkTreeView * treeview,
-                                             GtkTreePath * path,
-                                             GtkTreeViewColumn * col,
-                                             gpointer data)
+/*
+*  G_MODULE_EXPORT void on_field_row_activated (GtkTreeView * treeview, GtkTreePath * path, GtkTreeViewColumn * col, gpointer data)
+*
+*  Usage: activating row in the classical force field tree model
+*
+*  GtkTreeView * treeview  : the GtkTreeView sending the signal
+*  GtkTreePath * path      : the path in the tree view
+*  GtkTreeViewColumn * col : the column in the tree view
+*  gpointer data           : the associated data pointer
+*/
+G_MODULE_EXPORT void on_field_row_activated (GtkTreeView * treeview, GtkTreePath * path, GtkTreeViewColumn * col, gpointer data)
 {
-  get_field_iter_and_edit (gtk_tree_path_to_string (path), data,GTK_WIDGET(treeview));
+  get_field_iter_and_edit (gtk_tree_path_to_string (path), data);
 }
 
 /*
 *  GtkWidget * create_field_tree (int f)
 *
-*  Usage:
+*  Usage: classical force field create the list store selection widgets
 *
-*  int f :
+*  int f : the page number / type of field object(s)
 */
 GtkWidget * create_field_tree (int f)
 {
@@ -3530,10 +3676,10 @@ GtkWidget * create_field_tree (int f)
 /*
 *  void create_field_list (GtkWidget * vbx, int f)
 *
-*  Usage:
+*  Usage: classical force field creation prepare list store selection widgets
 *
 *  GtkWidget * vbx : the GtkWidget sending the signal
-*  int f           :
+*  int f           : the page number
 */
 void create_field_list (GtkWidget * vbx, int f)
 {
@@ -3578,9 +3724,9 @@ void create_field_list (GtkWidget * vbx, int f)
 /*
 *  GtkWidget * create_mol_box (int f)
 *
-*  Usage:
+*  Usage: classical force field create molecule selection widgets
 *
-*  int f :
+*  int f : the type of force field object
 */
 GtkWidget * create_mol_box (int f)
 {
@@ -3595,9 +3741,9 @@ GtkWidget * create_mol_box (int f)
 /*
 *  GtkWidget * vbox_field (int f)
 *
-*  Usage:
+*  Usage: classical force field create page option widgets
 *
-*  int f :
+*  int f : the page number
 */
 GtkWidget * vbox_field (int f)
 {
@@ -3758,9 +3904,9 @@ int saved_label_position[2];
 /*
 *  void close_the_assistant (GtkAssistant * assistant)
 *
-*  Usage:
+*  Usage: classical force field creation close the assistant
 *
-*  GtkAssistant * assistant :
+*  GtkAssistant * assistant : the target assistant
 */
 void close_the_assistant (GtkAssistant * assistant)
 {
@@ -3805,9 +3951,9 @@ void close_the_assistant (GtkAssistant * assistant)
 /*
 *  G_MODULE_EXPORT void on_assistant_cancel (GtkAssistant * assistant, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field creation cancel assistant
 *
-*  GtkAssistant * assistant :
+*  GtkAssistant * assistant : the GtkAssistant sending the signal
 *  gpointer data            : the associated data pointer
 */
 G_MODULE_EXPORT void on_assistant_cancel (GtkAssistant * assistant, gpointer data)
@@ -3819,9 +3965,9 @@ G_MODULE_EXPORT void on_assistant_cancel (GtkAssistant * assistant, gpointer dat
 /*
 *  G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWindow * assistant, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field creation cancel event callback GTK4
 *
-*  GtkWindow * assistant :
+*  GtkWindow * assistant : the GtkWindow sending the signal
 *  gpointer data         : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWindow * assistant, gpointer data)
@@ -3829,7 +3975,7 @@ G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWindow * assistant, gpoin
 /*
 *  G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWidget * assistant, GdkEvent * event, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field creation cancel event callback GTK3
 *
 *  GtkWidget * assistant : the GtkWidget sending the signal
 *  GdkEvent * event      : the GdkEvent triggering the signal
@@ -3845,9 +3991,9 @@ G_MODULE_EXPORT gboolean on_assistant_cancel_event (GtkWidget * assistant, GdkEv
 /*
 *  G_MODULE_EXPORT void on_assistant_close (GtkAssistant * assistant, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field creation close assistant
 *
-*  GtkAssistant * assistant :
+*  GtkAssistant * assistant : the GtkAssistant sending the signal
 *  gpointer data            : the associated data pointer
 */
 G_MODULE_EXPORT void on_assistant_close (GtkAssistant * assistant, gpointer data)
@@ -3858,9 +4004,9 @@ G_MODULE_EXPORT void on_assistant_close (GtkAssistant * assistant, gpointer data
 /*
 *  G_MODULE_EXPORT gint on_assistant_go_forward (gint current_page, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field assistant find the next page to go to
 *
-*  gint current_page :
+*  gint current_page : the current page id
 *  gpointer data     : the associated data pointer
 */
 G_MODULE_EXPORT gint on_assistant_go_forward (gint current_page, gpointer data)
@@ -3911,14 +4057,15 @@ G_MODULE_EXPORT gint on_assistant_go_forward (gint current_page, gpointer data)
 }
 
 /*
-*  G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page)
+*  G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page, gpointer data)
 *
-*  Usage:
+*  Usage: prepare classical force field assistant pages before display
 *
-*  GtkAssistant * assistant :
-*  GtkWidget * page         : the GtkWidget sending the signal
+*  GtkAssistant * assistant : the GtkAssistant sending the signal
+*  GtkWidget * page         : the current page
+*  gpointer data            : the associated data pointer
 */
-G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page)
+G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget * page, gpointer data)
 {
   int i, j, k;
   i = gtk_assistant_get_current_page (assistant);
@@ -3959,12 +4106,12 @@ G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget *
 /*
 *  void hide_show_this_pages (int start, int end, int status, int delta)
 *
-*  Usage:
+*  Usage: classical force field assistant show / hide pages
 *
-*  int start  :
-*  int end    :
-*  int status :
-*  int delta  :
+*  int start  : starting page id
+*  int end    : ending page id
+*  int status : 0 = hide, 1 = show
+*  int delta  : delta from starting page
 */
 void hide_show_this_pages (int start, int end, int status, int delta)
 {
@@ -3982,13 +4129,11 @@ void hide_show_this_pages (int start, int end, int status, int delta)
 }
 
 /*
-*  void remove_classical_assistant_pages (int p)
+*  void remove_classical_assistant_pages ()
 *
-*  Usage:
-*
-*  int p :
+*  Usage: classical force field creation remove assistant pages
 */
-void remove_classical_assistant_pages (int p)
+void remove_classical_assistant_pages ()
 {
   int i;
   GtkAssistant * assist = GTK_ASSISTANT(field_assistant);
@@ -4003,7 +4148,7 @@ void remove_classical_assistant_pages (int p)
 /*
 *  G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: clean force field data - running the dialog
 *
 *  GtkDialog * dial : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -4048,7 +4193,7 @@ G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpoint
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(ff_but[i]), afp_init[i+MAXDATC+2]);
 #endif
     }
-    if (append_pages) remove_classical_assistant_pages (tmp_view -> proj);
+    if (append_pages) remove_classical_assistant_pages ();
 #ifdef GTK4
     gtk_check_button_set_active (GTK_CHECK_BUTTON(data), FALSE);
 #else
@@ -4063,7 +4208,7 @@ G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpoint
 /*
 *  G_MODULE_EXPORT void clean_field (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: clean force field data toggle callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -4073,7 +4218,7 @@ G_MODULE_EXPORT void clean_field (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void clean_field (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: clean force field data toggle callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -4100,7 +4245,7 @@ G_MODULE_EXPORT void clean_field (GtkToggleButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void select_field_action (GtkCheckButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: select force field creation option toggle callback GTK4
 *
 *  GtkCheckButton * but : the GtkCheckButton sending the signal
 *  gpointer data        : the associated data pointer
@@ -4110,7 +4255,7 @@ G_MODULE_EXPORT void select_field_action (GtkCheckButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void select_field_action (GtkToggleButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: select force field creation option toggle callback GTK3
 *
 *  GtkToggleButton * but : the GtkToggleButton sending the signal
 *  gpointer data         : the associated data pointer
@@ -4143,9 +4288,9 @@ G_MODULE_EXPORT void select_field_action (GtkToggleButton * but, gpointer data)
 /*
 *  void add_classical_assistant_pages (int p)
 *
-*  Usage:
+*  Usage: classical force field assistant add pages
 *
-*  int p :
+*  int p : the target project id
 */
 void add_classical_assistant_pages (int p)
 {
@@ -4200,15 +4345,15 @@ gchar * field_init[3]={"Atomic species as field atom(s)",
 /*
 *  void create_ff_structure (int ai, int type)
 *
-*  Usage:
+*  Usage: create the classical force field data structure and update widgets
 *
-*  int ai   :
-*  int type :
+*  int ai   : how to initialize the force field (0 = atomic species, 1 = total coordination, 2 = partial coordination)
+*  int type : the type of force field to create (0 = DL-POLY, 1 = LAMMPS)
 */
 void create_ff_structure (int ai, int type)
 {
   int i;
-  //if (append_pages) remove_classical_assistant_pages (tmp_view -> proj);
+  //if (append_pages) remove_classical_assistant_pages ();
   tmp_proj -> force_field[activef] = create_force_field_data_structure (ai);
   tmp_proj -> force_field[activef] -> type = type;
   tmp_field = tmp_proj -> force_field[activef];
@@ -4251,7 +4396,7 @@ void create_ff_structure (int ai, int type)
 /*
 *  G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
 *
-*  Usage:
+*  Usage: classical force field change initialization parameter
 *
 *  GtkComboBox * box : the GtkComboBox sending the signal
 *  gpointer data     : the associated data pointer
@@ -4307,7 +4452,7 @@ G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
 /*
 *  G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
 *
-*  Usage:
+*  Usage: show classical force field input files preview
 *
 *  GtkButton * but : the GtkButton sending the signal
 *  gpointer data   : the associated data pointer
@@ -4369,7 +4514,7 @@ G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
 /*
 *  G_MODULE_EXPORT void run_on_assistant_apply (GtkNativeDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: on classical force field assistant apply - running the dialog GTK4
 *
 *  GtkNativeDialog * info : the GtkNativeDialog sending the signal
 *  gint response_id       : the response id
@@ -4382,7 +4527,7 @@ G_MODULE_EXPORT void run_on_assistant_apply (GtkNativeDialog * info, gint respon
 /*
 *  G_MODULE_EXPORT void run_on_assistant_apply (GtkDialog * info, gint response_id, gpointer data)
 *
-*  Usage:
+*  Usage: on classical force field assistant apply - running the dialog GTK3
 *
 *  GtkDialog * info : the GtkDialog sending the signal
 *  gint response_id : the response id
@@ -4475,9 +4620,9 @@ G_MODULE_EXPORT void run_on_assistant_apply (GtkDialog * info, gint response_id,
 /*
 *  void on_assistant_apply (GtkAssistant * assistant, gpointer data)
 *
-*  Usage:
+*  Usage: on classical force field assistant apply - creating the dialog
 *
-*  GtkAssistant * assistant :
+*  GtkAssistant * assistant : the GtkAssistant sending the signal
 *  gpointer data            : the associated data pointer
 */
 void on_assistant_apply (GtkAssistant * assistant, gpointer data)
@@ -4510,10 +4655,10 @@ void on_assistant_apply (GtkAssistant * assistant, gpointer data)
 /*
 *  void create_classical_force_field (int p, int f)
 *
-*  Usage:
+*  Usage: create classical force field prepare the assistant
 *
-*  int p :
-*  int f :
+*  int p : the target project id
+*  int f : 0 = DL-POLY, 1 = LAMMPS
 */
 void create_classical_force_field (int p, int f)
 {

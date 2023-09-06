@@ -2974,7 +2974,7 @@ void init_lammps_field (classical_field * new_field)
 *
 *  Usage: initialize classical force field
 *
-*  int ai : the type of force field (0 = DL-POLY, 1 = LAMMPS)
+*  int ai : how to initialize the force field (0 = atomic species, 1 = total coordination, 2 = partial coordination)
 */
 classical_field * create_force_field_data_structure (int ai)
 {

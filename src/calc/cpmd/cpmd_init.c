@@ -1176,7 +1176,7 @@ G_MODULE_EXPORT gint on_qm_assistant_go_forward (gint current_page, gpointer dat
 *  Usage: prepare QM / QM-MM assistant pages before display
 *
 *  GtkAssistant * assistant : the GtkAssistant sending the signal
-*  GtkWidget * page         : the
+*  GtkWidget * page         : the current page
 *  gpointer data            : the associated data pointer
 */
 G_MODULE_EXPORT void on_qm_assistant_prepare (GtkAssistant * assistant, GtkWidget * page, gpointer data)
