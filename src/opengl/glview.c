@@ -1702,6 +1702,7 @@ GError * init_gtk_gl_area (GtkGLArea * area)
 }
 
 #ifdef GTK3
+#ifndef G_OS_WIN32
 /*
 *  void gtk_window_change_gdk_visual (GtkWidget * win)
 *
@@ -1736,6 +1737,7 @@ void gtk_window_change_gdk_visual (GtkWidget * win)
   }
   gtk_widget_set_visual(GTK_WIDGET(win), default_visual);
 }
+#endif
 #endif
 
 #ifdef GTKGLAREA
@@ -1788,6 +1790,7 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
   {
 #ifdef GTK3
 #ifdef GTKGLAREA
+#ifndef G_OS_WIN32
     gtk_window_change_gdk_visual (view -> win);
     err = init_gtk_gl_area (area);
     if (err == NULL)
@@ -1798,6 +1801,7 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
     {
 #endif
 #endif
+#endif
       gchar * errm = g_strdup_printf ("Impossible to initialize the OpenGL 3D rendering ! \n %s\n", err -> message);
       g_error_free (err);
       show_error (errm, 0, MainWindow);
@@ -1805,7 +1809,9 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
       destroy_this_widget (view -> plot);
 #ifdef GTK3
 #ifdef GTKGLAREA
+#ifndef G_OS_WIN32
     }
+#endif
 #endif
 #endif
     //quit_gtk();
@@ -1816,7 +1822,7 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
 /*
 *  G_MODULE_EXPORT gboolean on_expose (GtkGLArea * area, GdkGLContext * context, gpointer data)
 *
-*  Usage:
+*  Usage: OpenGL rendering widget expose event callback GTK4
 *
 *  GtkGLArea * area       : the GtkGLArea sending the signal
 *  GdkGLContext * context : the associated GdkGLContext
@@ -1827,7 +1833,7 @@ G_MODULE_EXPORT gboolean on_expose (GtkGLArea * area, GdkGLContext * context, gp
 /*
 *  G_MODULE_EXPORT gboolean on_expose (GtkWidget * widg, cairo_t * cr, gpointer data)
 *
-*  Usage:
+*  Usage: OpenGL rendering widget expose event callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
 *  cairo_t * cr     :
