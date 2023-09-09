@@ -1701,45 +1701,6 @@ GError * init_gtk_gl_area (GtkGLArea * area)
   return gtk_gl_area_get_error (area);
 }
 
-#ifdef GTK3
-#ifndef G_OS_WIN32
-/*
-*  void gtk_window_change_gdk_visual (GtkWidget * win)
-*
-*  Usage: change the Gdk visual
-*
-*  GtkWidget * win : the GtkWidget sending the signal
-*/
-void gtk_window_change_gdk_visual (GtkWidget * win)
-{
-  // GTK+ > 3.15.1 uses an X11 visual optimized for GTK+'s OpenGL stuff
-  // since revid dae447728d: https://github.com/GNOME/gtk/commit/dae447728d
-  // However, in some cases it simply cannot start an OpenGL context.
-  // This changes to the default X11 visual instead the GTK's default.
-  GdkScreen * screen = gdk_screen_get_default ();
-  GList * visuals = gdk_screen_list_visuals (screen);
-  // printf("n visuals: %u\n", g_list_length(visuals));
-  GdkX11Screen* x11_screen = GDK_X11_SCREEN (screen);
-  g_assert (x11_screen != NULL);
-  Visual * default_xvisual = DefaultVisual (GDK_SCREEN_XDISPLAY(x11_screen), GDK_SCREEN_XNUMBER(x11_screen));
-  GdkVisual * default_visual = NULL;
-  // int i = 0;
-  while (visuals != NULL)
-  {
-    GdkVisual * visual = GDK_X11_VISUAL (visuals -> data);
-    if (default_xvisual -> visualid == gdk_x11_visual_get_xvisual(GDK_X11_VISUAL (visuals -> data)) -> visualid)
-    {
-      // printf("Default visual %d\n", i);
-      default_visual = visual;
-    }
-    // i++;
-    visuals = visuals -> next;
-  }
-  gtk_widget_set_visual(GTK_WIDGET(win), default_visual);
-}
-#endif
-#endif
-
 #ifdef GTKGLAREA
 /*
 *  G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data)
@@ -1791,31 +1752,21 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
 #ifdef GTK3
 #ifdef GTKGLAREA
 #ifndef G_OS_WIN32
-    gtk_window_change_gdk_visual (view -> win);
-    err = init_gtk_gl_area (area);
-    if (err == NULL)
+    if (atomes_visual)
     {
-      init_glwin (view);
-    }
-    else
-    {
-#endif
-#endif
-#endif
-      gchar * errm = g_strdup_printf ("Impossible to initialize the OpenGL 3D rendering ! \n %s\n", err -> message);
-      g_error_free (err);
-      show_error (errm, 0, MainWindow);
-      g_free (errm);
-      destroy_this_widget (view -> plot);
-#ifdef GTK3
-#ifdef GTKGLAREA
-#ifndef G_OS_WIN32
+      atomes_visual = 0;
+      goto end;
     }
 #endif
 #endif
 #endif
-    //quit_gtk();
+    gchar * errm = g_strdup_printf ("Impossible to initialize the OpenGL 3D rendering ! \n %s\n", err -> message);
+    g_error_free (err);
+    show_error (errm, 0, MainWindow);
+    g_free (errm);
+    atomes_visual = -1;
   }
+  end:;
 }
 
 #ifdef GTKGLAREA
@@ -1836,7 +1787,7 @@ G_MODULE_EXPORT gboolean on_expose (GtkGLArea * area, GdkGLContext * context, gp
 *  Usage: OpenGL rendering widget expose event callback GTK3
 *
 *  GtkWidget * widg : the GtkWidget sending the signal
-*  cairo_t * cr     :
+*  cairo_t * cr     : the cairo drawing context to use for the draw
 *  gpointer data    : the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_expose (GtkWidget * widg, cairo_t * cr, gpointer data)

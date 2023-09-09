@@ -342,6 +342,7 @@ extern int activef;
 extern int inactep;
 extern int activew;
 extern int statusval;
+extern int atomes_visual;
 extern int dialog_id;
 
 extern int bonds_update;

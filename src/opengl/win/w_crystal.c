@@ -762,6 +762,13 @@ int build_crystal_from_cif_database (struct project * this_proj)
   int active = activep;
   int res;
   GtkWidget * clib = dialogmodal ("Crystal builder", GTK_WINDOW(this_proj -> modelgl -> win));
+#ifdef GTK3
+#ifdef GTKGLAREA
+#ifndef G_OS_WIN32
+  if (! atomes_visual) gtk_window_change_gdk_visual (clib);
+#endif // G_OS_WIN32
+#endif // GTKGLAREA
+#endif // GTK3
   gtk_dialog_add_button (GTK_DIALOG(clib), "Build", GTK_RESPONSE_APPLY);
   GtkWidget * vbox = gtk_dialog_get_content_area(GTK_DIALOG (clib));
   GtkWidget * hbox = create_hbox (5);

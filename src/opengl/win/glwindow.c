@@ -16,8 +16,9 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  Contains:
 *
-*
-*
+
+ - The subroutines to create a project OpenGL window
+
 *
 *  List of subroutines:
 
@@ -1062,20 +1063,48 @@ G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
   }
 }
 
+#ifdef GTK3
+#ifndef G_OS_WIN32
 /*
-*  gboolean create_3d_model (int p, gboolean load)
+*  void gtk_window_change_gdk_visual (GtkWidget * win)
 *
-*  Usage: create the 3D - OpenGL container - window
+*  Usage: change the Gdk visual
 *
-*  int p         : the project id
-*  gboolean load : add OpenGL widget or not (1/0)
+*  GtkWidget * win : the GtkWidget sending the signal
 */
+void gtk_window_change_gdk_visual (GtkWidget * win)
+{
+  // GTK+ > 3.15.1 uses an X11 visual optimized for GTK+'s OpenGL stuff
+  // since revid dae447728d: https://github.com/GNOME/gtk/commit/dae447728d
+  // However, in some cases it simply cannot start an OpenGL context.
+  // This changes to the default X11 visual instead the GTK's default.
+  GdkScreen * screen = gdk_screen_get_default ();
+  GList * visuals = gdk_screen_list_visuals (screen);
+  // printf("n visuals: %u\n", g_list_length(visuals));
+  GdkX11Screen* x11_screen = GDK_X11_SCREEN (screen);
+  g_assert (x11_screen != NULL);
+  Visual * default_xvisual = DefaultVisual (GDK_SCREEN_XDISPLAY(x11_screen), GDK_SCREEN_XNUMBER(x11_screen));
+  GdkVisual * default_visual = NULL;
+  // int i = 0;
+  while (visuals != NULL)
+  {
+    GdkVisual * visual = GDK_X11_VISUAL (visuals -> data);
+    if (default_xvisual -> visualid == gdk_x11_visual_get_xvisual(GDK_X11_VISUAL (visuals -> data)) -> visualid)
+    {
+      // printf("Default visual %d\n", i);
+      default_visual = visual;
+    }
+    // i++;
+    visuals = visuals -> next;
+  }
+  gtk_widget_set_visual (win, default_visual);
+}
+#endif
+#endif
+
 gboolean create_3d_model (int p, gboolean load)
 {
-/*
- * Configure a OpenGL-capable context.
- */
-  struct project * this_proj = get_project_by_id(p);
+  struct project * this_proj = get_project_by_id (p);
 #ifndef GTKGLAREA
   if (! glXQueryExtension (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), NULL, NULL))
   {
@@ -1085,14 +1114,27 @@ gboolean create_3d_model (int p, gboolean load)
   else
 #endif
   {
+    if (this_proj -> modelgl)
+    {
+      g_free (this_proj -> modelgl);
+      this_proj -> modelgl = NULL;
+    }
     this_proj -> modelgl = g_malloc0 (sizeof*this_proj -> modelgl);
     this_proj -> modelgl -> init = FALSE;
+    this_proj -> modelgl -> load = load;
     this_proj -> modelgl -> proj = this_proj -> id;
     GtkWidget * gl_vbox;
     if (load)
     {
       gchar * str = g_strdup_printf ("%s - 3D view - [%s mode]", this_proj -> name, mode_name[0]);
       this_proj -> modelgl -> win = create_win (str, MainWindow, FALSE, TRUE);
+#ifdef GTK3
+#ifdef GTKGLAREA
+#ifndef G_OS_WIN32
+      if (! atomes_visual) gtk_window_change_gdk_visual (this_proj -> modelgl -> win);
+#endif
+#endif
+#endif
       // this_proj -> modelgl -> accel_group = gtk_accel_group_new ();
       // gtk_window_add_accel_group (GTK_WINDOW (this_proj -> modelgl -> win), this_proj -> modelgl -> accel_group);
       g_free (str);
@@ -1185,6 +1227,8 @@ gboolean create_3d_model (int p, gboolean load)
   }
 }
 
+
+
 /*
 *  void prep_model (int p)
 *
@@ -1195,6 +1239,7 @@ gboolean create_3d_model (int p, gboolean load)
 void prep_model (int p)
 {
   struct project * this_proj = get_project_by_id (p);
+  gboolean rendering = FALSE;
   gboolean adv_bonding[2];
   if (this_proj -> modelgl == NULL)
   {
@@ -1205,6 +1250,33 @@ void prep_model (int p)
       show_the_widgets (this_proj -> modelgl -> win);
       destroy_this_widget (dummy);*/
       show_the_widgets (this_proj -> modelgl -> win);
+#ifdef GTK3
+#ifdef GTKGLAREA
+#ifndef G_OS_WIN32
+      if (atomes_visual == 0 && ! this_proj -> initgl)
+      {
+        this_proj -> modelgl -> plot = destroy_this_widget (this_proj -> modelgl -> plot);
+        this_proj -> modelgl -> menu_bar = destroy_this_widget (this_proj -> modelgl -> menu_bar);
+        this_proj -> modelgl -> win = destroy_this_widget (this_proj -> modelgl -> win);
+        create_3d_model (p, TRUE);
+        show_the_widgets (this_proj -> modelgl -> win);
+      }
+#endif // G_OS_WIN32
+#endif // GTKGLAREA
+#endif // GTK3
+      if (atomes_visual < 0)
+      {
+        this_proj -> modelgl -> plot = destroy_this_widget (this_proj -> modelgl -> plot);
+        this_proj -> modelgl -> menu_bar = destroy_this_widget (this_proj -> modelgl -> menu_bar);
+        this_proj -> modelgl -> win = destroy_this_widget (this_proj -> modelgl -> win);
+      }
+      else
+      {
+        rendering = TRUE;
+      }
+    }
+    if (rendering)
+    {
       if (this_proj -> initgl)
       {
         active_project_changed (p);

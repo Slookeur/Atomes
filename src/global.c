@@ -214,6 +214,7 @@ int activef = 0;
 int inactep = 0;
 int activew = 0;
 int statusval;
+int atomes_visual = 1; // OpenGL visual: 1 = GTK default, 0 = X11 default (GTK3 + GtkGLArea only), -1 = no OpenGL
 // Loop Id for the dialogs
 int dialog_id = -1;
 

@@ -1079,6 +1079,13 @@ int select_from_library (gboolean visible, struct project * this_proj, atom_sear
   int active = activep;
   lib_visible = visible;
   GtkWidget * lib = dialogmodal ("Library", GTK_WINDOW(this_proj -> modelgl -> win));
+#ifdef GTK3
+#ifdef GTKGLAREA
+#ifndef G_OS_WIN32
+  if (! atomes_visual) gtk_window_change_gdk_visual (lib);
+#endif // G_OS_WIN32
+#endif // GTKGLAREA
+#endif // GTK3
   gtk_dialog_add_button (GTK_DIALOG(lib), (asearch -> action == REPLACE) ? "Replace" : "Insert", GTK_RESPONSE_APPLY);
   GtkWidget * vbox = dialog_get_content_area (lib);
   GtkWidget * hbox = create_hbox (5);
