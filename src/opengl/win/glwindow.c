@@ -1121,7 +1121,6 @@ gboolean create_3d_model (int p, gboolean load)
     }
     this_proj -> modelgl = g_malloc0 (sizeof*this_proj -> modelgl);
     this_proj -> modelgl -> init = FALSE;
-    this_proj -> modelgl -> load = load;
     this_proj -> modelgl -> proj = this_proj -> id;
     GtkWidget * gl_vbox;
     if (load)

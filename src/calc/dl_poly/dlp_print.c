@@ -82,10 +82,11 @@ extern gchar * get_body_element_name (struct field_nth_body * body, int aid, int
 */
 void print_field_prop (struct field_prop * pro, int st, struct field_molecule * mol)
 {
-  int i, j, k, u, v, w;
+  int i, j, k, u, v;
   struct field_atom * fat;
   j = struct_id(st+7);
 #ifdef DEBUG
+  int w;
   g_debug ("Prop - natomes= %d", j);
 #endif
   for (i=0; i<j; i++)
@@ -110,8 +111,8 @@ void print_field_prop (struct field_prop * pro, int st, struct field_molecule * 
         }
         else
         {
-          w = fat -> list[v];
 #ifdef DEBUG
+          w = fat -> list[v];
           g_debug ("        multi= %d::   at.a= %d, at.b= %d, real_id= %d", k, u, v, w);
 #endif
         }
@@ -141,8 +142,8 @@ void print_field_prop (struct field_prop * pro, int st, struct field_molecule * 
 */
 void print_field_struct (struct field_struct * stru, struct field_molecule * mol)
 {
-  int i;
 #ifdef DEBUG
+  int i;
   g_debug (" ");
   g_debug ("Struct - st= %d", stru -> st);
   g_debug ("Struct - id= %d", stru -> id);
@@ -1386,7 +1387,7 @@ void print_dlp_tersoff (GtkTextBuffer * buf, struct field_nth_body * body)
 */
 void print_dlp_field (GtkTextBuffer * buf)
 {
-  int i, j, k, l;
+  int i, j;
   gchar * str;
 
   GtkTextIter bStart;
@@ -1453,11 +1454,6 @@ void print_dlp_field (GtkTextBuffer * buf)
       }
       if (j > 0)
       {
-        if (! i)
-        {
-          k = get_num_vdw_max ();
-          l = k * (k+1) / 2;
-        }
         str = g_strdup_printf ("# Non-bonded: %s potential(s)\n", com_ndb[i]);
         print_info (str, NULL, buf);
         g_free (str);

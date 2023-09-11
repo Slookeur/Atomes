@@ -1632,14 +1632,13 @@ gboolean id_n_fold_atoms_in_fragment (int frag, int limit, int num_ngb, int sear
 {
   int i, j, k, l, m, n, o, p, q, r, s, t;
   struct field_neighbor * ngma, * ngmb, * ngmc;
-  struct field_atom * fat, * fbt, * fct;
+  struct field_atom * fat, * fbt;
   if (assigned < limit)
   {
     if (search_type)
     {
       i = ngma_init -> id;
       j = tmp_fmol -> atoms_id[i][frag].a;
-      fat = get_active_atom (tmp_fmol -> id, j);
       for (k=0; k<ngma_init -> num; k++)
       {
         l = ngma_init -> vois[k];
@@ -1649,12 +1648,12 @@ gboolean id_n_fold_atoms_in_fragment (int frag, int limit, int num_ngb, int sear
           if (ngma -> num > num_ngb)
           {
             m = tmp_fmol -> atoms_id[l][0].a;
-            fbt = get_active_atom (tmp_fmol -> id, m);
+            fat = get_active_atom (tmp_fmol -> id, m);
 
-            n = find_neighbor_loop (frag, init, l, fbt, ngma, 0, FALSE);
+            n = find_neighbor_loop (frag, init, l, fat, ngma, 0, FALSE);
             for (o=0; o<n; o++)
             {
-              p = find_neighbor_loop (frag, init, l, fbt, ngma, o, TRUE);
+              p = find_neighbor_loop (frag, init, l, fat, ngma, o, TRUE);
               assigned ++;
               if (assigned == limit)
               {
@@ -1681,9 +1680,9 @@ gboolean id_n_fold_atoms_in_fragment (int frag, int limit, int num_ngb, int sear
                     if (t)
                     {
                       r = tmp_fmol -> atoms_id[q][frag].a;
-                      fct = get_active_atom (tmp_fmol -> id, r);
+                      fbt = get_active_atom (tmp_fmol -> id, r);
                       s = tmp_fmol -> atoms_id[q][frag].b;
-                      t = fct -> list[s];
+                      t = fbt -> list[s];
                       if (id_n_fold_atoms_in_fragment(frag, limit, num_ngb, 1, t, ngmb))
                       {
                         return TRUE;
@@ -1700,7 +1699,7 @@ gboolean id_n_fold_atoms_in_fragment (int frag, int limit, int num_ngb, int sear
                   assigned --;
                   tmp_fmol -> atoms_id[l][frag].a = -1;
                   p = tmp_fmol -> atoms_id[l][frag].b;
-                  fbt -> list_id[p] = -1;
+                  fat -> list_id[p] = -1;
                   tmp_fmol -> atoms_id[l][frag].b = -1;
                 }
               }

@@ -2244,6 +2244,8 @@ void field_find_vdw ()
   }
 }
 
+
+#ifdef DEBUG
 /*
 *  void print_all (int oid)
 *
@@ -2253,18 +2255,15 @@ void field_find_vdw ()
 */
 void print_all (int oid)
 {
-  gchar * prop[7] =  {"atom", "bond", "angle", "dihedral", "improper", "inversion", "vdw"};
-#ifdef DEBUG
+  gchar * prop[7] = {"atom", "bond", "angle", "dihedral", "improper", "inversion", "vdw"};
   g_debug ("Field %s found: %d", prop[oid-1], tmp_obj_id -> id+1);
-#endif // DEBUG
   while (tmp_obj_id != NULL)
   {
-#ifdef DEBUG
     g_debug ("     %s N° %d: h= %d, oid= %d", prop[oid-1], tmp_obj_id -> id+1, tmp_obj_id -> type, tmp_obj_id -> oid);
-#endif
     tmp_obj_id = tmp_obj_id -> next;
   }
 }
+#endif
 
 /*
 *  float get_force_field_atom_mass (int sp, int num)

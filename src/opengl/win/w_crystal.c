@@ -67,6 +67,11 @@ gchar * sym_list[SYMMETRIES]= {"Triclinic", "Monoclinic", "Orthorhombic", "Tetra
 
 
 extern G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data);
+#ifdef GTK3
+#ifndef G_OS_WIN32
+extern void gtk_window_change_gdk_visual (GtkWidget * win);
+#endif // G_OS_WIN32
+#endif // GTK3
 extern gboolean create_3d_model (int p, gboolean load);
 extern G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data);
 extern void init_camera (struct project * this_proj, gboolean get_depth);
