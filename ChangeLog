@@ -1,3 +1,26 @@
+2023-09-11 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+         Release of version 1.1.12
+         * Bug corrections:
+		Corrections on reading I.S.A.A.C.S. files: 'callbacks.c' and 'xmlrw.c'
+		Workspace contextual menu correction: 'workspace.c'
+		Movie encoding correction for axis colors and volumes: 'movie.c'
+		GTK3 version:
+			OpenGL / GTK interaction, on fail to initialize rendering: test to change the GDK visual 'gtk_window_change_gdk_visual()'
+		GTK4 version:
+			Event controller correction: 'dlp_ff_match.c'
+			Tree view selection corrections: 'dlp_field.c' and 'w_measures.c'
+			Menus with pango markups (if no submenu attached: https://gitlab.gnome.org/GNOME/gtk/-/issues/5946)
+			"Color palettes" ready (if bug fixed: https://gitlab.gnome.org/GNOME/gtk/-/issues/5955)
+			Periodic table focus on mouse motion fixed: 'w_periodic.c'
+			OpenGL window main menu and contextual menus corrections
+         * Improvements:
+	 	Massive code cleaning
+		Massive addition of comments in the C sources
+	 	Code cleaning to remove older APF version compatibilities on open project
+		File associations added for standards atomic coordinates file formats
+		BASH completion adapted accordingly
+		Separate 'Makefile.am' for architecture independent data
+
 2023-03-27 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.11
          * Bug correction:
