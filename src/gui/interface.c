@@ -175,7 +175,7 @@ G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
   const gchar *authors[] = {"Dr. Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>", "", NULL};
   const gchar * weblabel = "https://atomes.ipcms.fr";
   const gchar * comments = "Welcome to Atomes: visualization, analyzis, creation/edition and post-processing of atomistic models !";
-  const gchar * copyrights = "Copyright © 2022 \nDr. Sébastien Le Roux";
+  const gchar * copyrights = "Copyright © 2023 \nDr. Sébastien Le Roux";
 
   // gtk_about_dialog_set_url_hook (about_dialog_handle_url, NULL, NULL);
   // gtk_about_dialog_set_email_hook (about_dialog_handle_url, NULL, NULL);

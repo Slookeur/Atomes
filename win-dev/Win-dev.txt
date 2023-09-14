@@ -22,31 +22,4 @@
     pacman -S getopt
     pacman -S vim
 
-/* Old stuff when I was using OpenBabel
 
-3) Download OpenBabel sources : 
-
-     http://openbabel.org/wiki/Main_Page
-     http://sourceforge.net/projects/openbabel/files/openbabel/2.4.1/openbabel-2-4-1.tar.gz/download
-
-4) Prepare OpenBabel build, few issues with the MSYS build process: 
-
-    a) Edit: "openbabel-*****/CMakeLists.txt"
-       Around line 95-97, comment the test(s) for GCC/G++ versions
-    
-    b) Move "/mingw64/include/regex.h" in "/mingw64/include/old-regex.h"
-
-5) Build OpenBabel:
-
-     cd openbabel-***
-     mkdir build
-     cd build
-     cmake -G "MSYS Makefiles" .. -DBUILD_GUI=OFF -DBUILD_SHARED=OFF -DCMAKE_INSTALL_PREFIX=/?/msys64/mingw64
-     make 
-     make install
-
-*/
-
-6) Makefile: -lz
-
-    
