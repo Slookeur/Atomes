@@ -21,6 +21,6 @@ liste_deps=`cat no-win-deps.dat|wc -l`
 let ldeps=$liste_deps
 for ((num = 1 ; num <= ldeps ; num ++))
 do
-  dep=`tac deps.dat|tail --lines=$num|tac|tail --lines=1|awk '{printf $3}'`
+  dep=`tac no-win-deps.dat|tail --lines=$num|tac|tail --lines=1|awk '{printf $3}'`
   cp $dep bin-no-win
 done
