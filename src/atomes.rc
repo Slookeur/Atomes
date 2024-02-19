@@ -16,8 +16,8 @@ If not, see <https://www.gnu.org/licenses/> */
 SQUIDER_ICON		ICON		"../bin/atomes.ico"
 
 VS_VERSION_INFO VERSIONINFO
-  FILEVERSION    1,1,12,0
-  PRODUCTVERSION 1,1,12,0
+  FILEVERSION    1,1,13,0
+  PRODUCTVERSION 1,1,13,0
   FILEOS         VOS__WINDOWS32
   FILETYPE       VFT_APP
   BEGIN
@@ -26,12 +26,12 @@ VS_VERSION_INFO VERSIONINFO
       BLOCK "040904B0"
       BEGIN
         VALUE "CompanyName", "CNRS - IPCMS - DMO"
-        VALUE "FileDescription", "ATOMES-1.1.12"
-        VALUE "FileVersion", "1.1.12"
-        VALUE "LegalCopyright", "Copyright © 2023 Sébastien Le Roux"
+        VALUE "FileDescription", "ATOMES-1.1.13"
+        VALUE "FileVersion", "1.1.13"
+        VALUE "LegalCopyright", "Copyright © 2024 Sébastien Le Roux"
         VALUE "OriginalFileName", "atomes.exe"
-        VALUE "ProductName", "Atomes 1.1.12"
-        VALUE "ProductVersion", "1.1.12"
+        VALUE "ProductName", "Atomes 1.1.13"
+        VALUE "ProductVersion", "1.1.13"
       END
     END
     BLOCK "VarFileInfo"

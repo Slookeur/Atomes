@@ -508,7 +508,7 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
       prepostcalc (widg, bonding, BD, (bonding) ? j : vis_bd, 1.0);
       if (! j)
       {
-        show_error ("Unexpected error when calculating the bond properties", 0, (widg) ? widg : MainWindow);
+        show_error ("Unexpected error when calculating bond properties", 0, (widg) ? widg : MainWindow);
       }
       else
       {
@@ -521,7 +521,7 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
           clock_gettime (CLOCK_MONOTONIC, & start_time);
           if (! molecules_ (& mol_update, & k))
           {
-            show_error ("Unexpected error when looking for molecules and isolated fragments", 0, (widg) ? widg : MainWindow);
+            show_error ("Unexpected error when looking for isolated fragment(s) and molecule(s)", 0, (widg) ? widg : MainWindow);
             if (active_glwin)
             {
               for (k=0; k<2; k++)

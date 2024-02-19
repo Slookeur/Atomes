@@ -590,7 +590,7 @@ G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
               }
               opengl_project_changed (active_project -> id);
 #ifdef GTK4
-              select_unselect_atoms (NULL, NULL, & this_proj -> modelgl -> colorp[0][0]);
+              select_unselect_atoms (NULL, NULL, & active_glwin -> colorp[0][0]);
 #else
               select_unselect_atoms (NULL, & active_glwin -> colorp[0][0]);
 #endif

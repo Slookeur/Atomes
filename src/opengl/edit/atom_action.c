@@ -230,15 +230,13 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
       if (this_proj -> modelgl -> cell_win -> slab_passivate) passivating = TRUE;
     }
   }
-  if (! this_proj -> dmtx && passivating)
+  /* if (! this_proj -> dmtx && passivating)
   {
     i = activep;
     active_project_changed (this_proj -> id);
-    bonds_update = frag_update = mol_update = 0;
-    active_project -> runc[0] = FALSE;
-    on_calc_bonds_released (NULL, NULL);
+    active_project -> dmtx = run_distance_matrix (NULL, 0, 1);
     active_project_changed (i);
-  }
+  }*/
 
   if (asearch -> action == DISPL || asearch -> action == REMOVE || asearch -> action == RANMOVE)
   {

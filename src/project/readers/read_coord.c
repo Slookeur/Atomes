@@ -22,9 +22,11 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 *  List of subroutines:
 
+  gboolean set_dummy_in_use (gchar * this_word);
+
   int open_coord_file (gchar * filename, int fti);
 
-  void add_reader_info (gchar * info);
+  void add_reader_info (gchar * info, int mid);
   void reader_info (gchar * type, gchar * sinf, int val);
   void format_error (int stp, int ato, gchar * mot, int line);
   void check_for_species (double v, int ato);
@@ -61,15 +63,17 @@ struct line_node * head = NULL;
 struct line_node * tail = NULL;
 
 /*
-*  void add_reader_info (gchar * info)
+*  void add_reader_info (gchar * info, int mid)
 *
 *  Usage: append information message to the reader information
 *
 *  gchar * info : the reader information message
+*  int mid : message type (0 = error, 1 = warning)
 */
-void add_reader_info (gchar * info)
+void add_reader_info (gchar * info, int mid)
 {
   this_reader -> info = (this_reader -> info) ? g_strdup_printf ("%s\n%s", this_reader -> info, info) : g_strdup_printf ("%s", info);
+  if (! mid) this_reader -> mid = 0;
 }
 
 /*
@@ -103,16 +107,69 @@ void format_error (int stp, int ato, gchar * mot, int line)
   {
     str = g_strdup_printf ("Wrong file format: error at step %d !\n"
                            "Wrong file format: record <b>%s</b> on line <b>%d</b> is corrupted !",
-                           stp+1, mot, line);
+                           stp, mot, line);
   }
   else
   {
     str = g_strdup_printf ("Wrong file format: error at step %d, atom %d !\n"
                            "Wrong file format: record <b>%s</b> on line <b>%d</b> is corrupted !",
-                           stp+1, ato+1, mot, line);
+                           stp, ato, mot, line+1);
   }
-  add_reader_info (str);
+  add_reader_info (str, 0);
   g_free (str);
+}
+
+/*
+*  int set_v_dummy (gchar * this_word)
+*
+*  Usage: check if dummy is used for unknown species, if not then ask what to do
+*
+*  gchar * this_word : the chemical species label
+*/
+int set_v_dummy (gchar * this_word)
+{
+  int i;
+  for (i=0; i<this_reader -> ndummy; i++)
+  {
+    if (g_strcmp0(this_reader -> dummy[i], this_word) == 0)
+    {
+      return i+1;
+    }
+  }
+  gchar ** dummy = NULL;
+  if (this_reader -> ndummy)
+  {
+    dummy = duplicate_strings (this_reader -> ndummy, this_reader -> dummy);
+    g_free (this_reader -> dummy);
+  }
+  this_reader -> ndummy ++;
+  this_reader -> dummy = g_malloc0(this_reader -> ndummy*sizeof*this_reader -> dummy);
+  if (dummy)
+  {
+    for (i=0; i<this_reader -> ndummy-1; i++)
+    {
+      this_reader -> dummy[i] = g_strdup_printf ("%s", dummy[i]);
+    }
+  }
+  this_reader -> dummy[this_reader -> ndummy-1] = g_strdup_printf ("%s", this_word);
+  // Dummy added, then do we use this dummy ?
+  gchar * str = g_strdup_printf ("Use dummy atom(s) for unknown %s species ?", this_word);
+  gboolean use_dummy = ask_yes_no ("Use dummy atom(s) ?", str, GTK_MESSAGE_QUESTION, MainWindow);
+  g_free (str);
+  if (use_dummy)
+  {
+    str = g_strdup_printf ("Using dummy atom(s) for unknown %s species", this_word);
+    add_reader_info (str, 1);
+    g_free (str);
+    return this_reader -> ndummy;
+  }
+  else
+  {
+    str = g_strdup_printf ("No dummy atom(s) for unknown %s species", this_word);
+    add_reader_info (str, 1);
+    g_free (str);
+    return 0;
+  }
 }
 
 /*
@@ -185,7 +242,7 @@ int open_coord_file (gchar * filename, int fti)
   res = stat (filename, & status);
   if (res == -1)
   {
-    add_reader_info ("Error - cannot get file statistics !");
+    add_reader_info ("Error - cannot get file statistics !", 0);
     return 1;
   }
   int fsize = status.st_size;
@@ -193,10 +250,10 @@ int open_coord_file (gchar * filename, int fti)
   coordf = fopen (filename, dfi[0]);
   if (! coordf)
   {
-    add_reader_info ("Error - cannot open coordinates file !");
+    add_reader_info ("Error - cannot open coordinates file !", 0);
     return 1;
   }
-  int i, j, k;
+  int i, j, k, l;
 #ifdef OPENMP
   gchar * coord_content = g_malloc0(fsize*sizeof*coord_content);
   fread (coord_content, fsize, 1, coordf);
@@ -298,7 +355,7 @@ int open_coord_file (gchar * filename, int fti)
         // get_origin (this_reader -> lattice.sp_group);
         if (! build_crystal (FALSE, active_project, TRUE, FALSE, & this_reader -> lattice, MainWindow))
         {
-          add_reader_info ("Error trying to build crystal using the CIF file parameters !");
+          add_reader_info ("Error trying to build crystal using the CIF file parameters !", 0);
           res = 3;
         }
       }
@@ -321,19 +378,36 @@ int open_coord_file (gchar * filename, int fti)
       active_project -> nspec = this_reader -> nspec;
       active_project -> chemistry = alloc_chem_data (active_project -> nspec);
       active_project_changed (activep);
-      k = 0;
+      k = l = 0;
       reader_info (file_ext[fti], "Number of species", active_project -> nspec);
       for (i=0; i<active_project -> nspec; i++)
       {
         j = (int)this_reader -> z[i];
-        active_chem -> label[i] = g_strdup_printf ("%s", periodic_table_info[j].lab);
-        active_chem -> element[i] = g_strdup_printf ("%s", periodic_table_info[j].name);
+        if (this_reader -> z[i] < 1.0)
+        {
+          active_chem -> label[i] = g_strdup_printf ("%s", this_reader -> dummy[l]);
+          active_chem -> element[i] = g_strdup_printf ("Dummy %s", this_reader -> dummy[l]);
+          active_chem -> chem_prop[CHEM_M][i] = 1.0;
+          active_chem -> chem_prop[CHEM_R][i] = 0.5;
+          l ++;
+        }
+        else
+        {
+          active_chem -> label[i] = g_strdup_printf ("%s", periodic_table_info[j].lab);
+          active_chem -> element[i] = g_strdup_printf ("%s", periodic_table_info[j].name);
+          active_chem -> chem_prop[CHEM_M][i] = set_mass_ (& j);
+          active_chem -> chem_prop[CHEM_R][i] = set_radius_ (& j, & k);
+          if (! active_chem -> chem_prop[CHEM_R][i])
+          {
+            gchar * str = g_strdup_printf ("For species %s, radius is equal to 0.0 !", active_chem -> label[i]);
+            add_reader_info (str, 1);
+            g_free (str);
+          }
+          active_chem -> chem_prop[CHEM_N][i] = set_neutron_ (& j);
+        }
         active_chem -> nsps[i] = this_reader -> nsps[i];
         g_print ("Reading coordinates [%s]:\t %s, nsps[%d]= %d\n", file_ext[fti], active_chem -> label[i], i+1, active_chem -> nsps[i]);
         active_chem -> chem_prop[CHEM_Z][i] = this_reader -> z[i];
-        active_chem -> chem_prop[CHEM_M][i] = set_mass_ (& j);
-        active_chem -> chem_prop[CHEM_R][i] = set_radius_ (& j, & k);
-        active_chem -> chem_prop[CHEM_N][i] = set_neutron_ (& j);
       }
     }
     else

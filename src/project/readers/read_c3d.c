@@ -46,6 +46,7 @@ extern void check_for_species (double v, int ato);
 int c3d_get_atom_coordinates ()
 {
   int i, j, k;
+  int v_dummy;
   double v;
   gchar * lia[5] = {"a", "b", "c", "d", "e"};
   this_reader -> nspec = 0;
@@ -78,7 +79,7 @@ int c3d_get_atom_coordinates ()
     for (i=0; i<this_reader -> steps; i++)
     {
       k = i*(this_reader -> natomes + 1) + 1;
-      #pragma omp parallel for num_threads(numth) private(j,v,this_line,saved_line,this_word) shared(i,k,lia,coord_line,this_reader,active_project,res)
+      #pragma omp parallel for num_threads(numth) private(j,v,v_dummy,this_line,saved_line,this_word) shared(i,k,lia,coord_line,this_reader,active_project,res)
       for (j=0; j<this_reader -> natomes; j++)
       {
         if (res == 2) goto enda;
@@ -92,10 +93,17 @@ int c3d_get_atom_coordinates ()
           goto enda;
         }
         v = get_z_from_periodic_table (this_word);
-        if (v)
+        v_dummy = 0;
+        if (! v)
+        {
+          #pragma omp critical
+          v_dummy = set_v_dummy (this_word);
+        }
+        if (v || v_dummy)
         {
           if (! i)
           {
+            v = v + v_dummy * 0.1;
             #pragma omp critical
             check_for_species (v, j);
           }
@@ -146,7 +154,7 @@ int c3d_get_atom_coordinates ()
   else
   {
     res = 0;
-    #pragma omp parallel for num_threads(numth) private(i,j,k,v,this_line,saved_line,this_word) shared(lia,coord_line,this_reader,active_project,res)
+    #pragma omp parallel for num_threads(numth) private(i,j,k,v,v_dummy,this_line,saved_line,this_word) shared(lia,coord_line,this_reader,active_project,res)
     for (i=0; i<this_reader -> steps; i++)
     {
       if (res == 2) goto ends;
@@ -163,9 +171,19 @@ int c3d_get_atom_coordinates ()
           goto ends;
         }
         v = get_z_from_periodic_table (this_word);
-        if (v)
+        v_dummy = 0;
+        if (! v)
         {
-          if (! i) check_for_species (v, j);
+          #pragma omp critical
+          v_dummy = set_v_dummy (this_word);
+        }
+        if (v || v_dummy)
+        {
+          if (! i)
+          {
+            v = v + v_dummy * 0.1;
+            check_for_species (v, j);
+          }
           this_word = strtok_r (NULL, " ", & saved_line);
           if (! this_word)
           {
@@ -299,8 +317,8 @@ int open_c3d_file (int linec)
   this_word = strtok (this_line, " ");
   if (! this_word)
   {
-    add_reader_info ("Wrong file format - cannot find the number of atoms !");
-    add_reader_info ("Wrong file format - first line is corrupted !");
+    add_reader_info ("Wrong file format - cannot find the number of atoms !", 0);
+    add_reader_info ("Wrong file format - first line is corrupted !", 0);
     res = 2;
     goto end;
   }
@@ -322,8 +340,8 @@ int open_c3d_file (int linec)
   this_word = strtok (this_line, " ");
   if (! this_word)
   {
-    add_reader_info ("Wrong file format - cannot find the number of atoms !");
-    add_reader_info ("Wrong file format - the first line is corrupted !");
+    add_reader_info ("Wrong file format - cannot find the number of atoms !", 0);
+    add_reader_info ("Wrong file format - the first line is corrupted !", 0);
     res = 2;
     goto end;
   }

@@ -156,7 +156,7 @@ int vas_get_atom_coordinates (int sli)
     {
       if (active_project -> atoms[i-1][j].sp != active_project -> atoms[i][j].sp)
       {
-        add_reader_info (g_strdup_printf ("Error - chemical species changes between steps %d and %d, for atom %d !", i, i+1, j+1));
+        add_reader_info (g_strdup_printf ("Error - chemical species changes between steps %d and %d, for atom %d !", i, i+1, j+1), 0);
         return 2;
       }
     }

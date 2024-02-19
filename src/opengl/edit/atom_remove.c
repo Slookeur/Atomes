@@ -525,7 +525,6 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   while (tmp_list)
   {
     j = tmp_list -> id;
-
     if ((this_proj && (old_id[j] > 0 || (! remove && old_id[j] <0))) || this_object)
     {
       if (! id_frag[tmp_list -> coord[2]])

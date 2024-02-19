@@ -417,7 +417,7 @@ int cif_get_value (gchar * kroot, gchar * keyw, int linec, int lstart, gchar ** 
             if (rec_val || all_ligne)
             {
               str = g_strdup_printf ("Wrong file format: searching for <b>%s</b> - error at line <b>%d</b> !", keyw, i+1);
-              add_reader_info (str);
+              add_reader_info (str, 0);
               g_free (str);
               g_free (str_w);
               g_free (str_a);
@@ -481,7 +481,7 @@ int cif_get_value (gchar * kroot, gchar * keyw, int linec, int lstart, gchar ** 
             if (rec_val || all_ligne)
             {
               str = g_strdup_printf ("Wrong file format: searching for <b>%s</b> - error at line <b>%d</b> !", keyw, i+1);
-              add_reader_info (str);
+              add_reader_info (str, 0);
               g_free (str);
               g_free (str_w);
               g_free (str_a);
@@ -919,7 +919,7 @@ gboolean cif_get_atomic_coordinates (int linec)
   }
   if (! i)
   {
-    add_reader_info ("<b>Atomic coordinates</b>: impossible to find atomic label(s) ...");
+    add_reader_info ("<b>Atomic coordinates</b>: impossible to find atomic label(s) ...", 0);
     return FALSE;
   }
 
@@ -935,7 +935,7 @@ gboolean cif_get_atomic_coordinates (int linec)
     else if (this_reader -> cartesian)
     {
       str = g_strdup_printf ("<b>Atomic coordinates</b>: impossible to find '%s' ...", cartkeys[j]);
-      add_reader_info (str);
+      add_reader_info (str, 1);
       g_free (str);
       this_reader -> cartesian = FALSE;
     }
@@ -954,14 +954,14 @@ gboolean cif_get_atomic_coordinates (int linec)
       else
       {
         str = g_strdup_printf ("<b>Atomic coordinates</b>: impossible to find '%s' ...", frackeys[l]);
-        add_reader_info (str);
+        add_reader_info (str, 1);
         g_free (str);
       }
     }
     if (j < 3)
     {
-      add_reader_info ("<b>Atomic coordinates</b>: no complete cartesian coordinates !");
-      add_reader_info ("<b>Atomic coordinates</b>: no complete fractional coordinates !");
+      add_reader_info ("<b>Atomic coordinates</b>: no complete cartesian coordinates !", 0);
+      add_reader_info ("<b>Atomic coordinates</b>: no complete fractional coordinates !", 0);
       return FALSE;
     }
   }
@@ -1033,7 +1033,7 @@ gboolean cif_get_atomic_coordinates (int linec)
               if (j) this_reader -> occupied[i][k] = l;
               if (v > 1.00001)
               {
-                add_reader_info ("<b>Atomic coordinates</b>: a site was found to have an occupancy > 1.0 !");
+                add_reader_info ("<b>Atomic coordinates</b>: a site was found to have an occupancy > 1.0 !", 0);
                 return FALSE;
               }
             }
@@ -1193,7 +1193,7 @@ int get_setting_from_hm (gchar * hmk, int end)
             str = g_strdup_printf ("<b>Space group</b>: CIF file information could be inaccurate !\n"
                                    " CIF file space group: <b>%s</b>, CIF file H-M symbol: <b>%s</b>",
                                    groups[this_reader -> lattice.sp_group -> id-1], hmk);
-            add_reader_info (str);
+            add_reader_info (str, 1);
             g_free (str);
             return j;
           }
@@ -1206,7 +1206,7 @@ int get_setting_from_hm (gchar * hmk, int end)
             str = g_strdup_printf ("<b>Space group</b>: CIF file information could be inaccurate !\n"
                                    " CIF file space group: <b>%s</b>, CIF file H-M symbol: <b>%s</b>",
                                    groups[this_reader -> lattice.sp_group -> id-1], hmk);
-            add_reader_info (str);
+            add_reader_info (str, 1);
             g_free (str);
             return j;
           }
@@ -1274,7 +1274,7 @@ int group_info_from_hm_key (int spg, gchar * key_hm)
             str = g_strdup_printf ("<b>Space group</b>: CIF file information could be inaccurate !\n"
                                    " CIF file space group: <b>%s</b>, CIF file H-M symbol: <b>%s</b>",
                                    groups[this_reader -> lattice.sp_group -> id-1], key_hm);
-            add_reader_info (str);
+            add_reader_info (str, 1);
             g_free (str);
           }
           if (this_reader -> setting < 0) this_reader -> setting = 0;
@@ -1298,7 +1298,7 @@ int group_info_from_hm_key (int spg, gchar * key_hm)
     str = g_strdup_printf ("<b>Space group</b>: CIF file information could be inaccurate !\n"
                            " CIF file space group: <b>%s</b>, CIF file H-M symbol: <b>%s</b>",
                            groups[this_reader -> lattice.sp_group -> id-1], key_hm);
-    add_reader_info (str);
+    add_reader_info (str, 1);
     g_free (str);
   }
   if (this_reader -> setting < 0) this_reader -> setting = 0;
@@ -1324,7 +1324,7 @@ gboolean cif_get_cell_data (int linec)
     if (! cif_get_value ("_cell", cellkeys[i], linec, 0, & str, TRUE, FALSE, FALSE))
     {
       str = g_strdup_printf ("<b>Lattice parameters</b>: impossible to retrieve the '%s' parameter !", box_prop[0][i]);
-      add_reader_info (str);
+      add_reader_info (str, 0);
       g_free (str);
       return FALSE;
     }
@@ -1335,7 +1335,7 @@ gboolean cif_get_cell_data (int linec)
     if (! cif_get_value ("_cell", cellangs[i], linec, 0, & str, TRUE, FALSE, FALSE))
     {
       str = g_strdup_printf ("<b>Lattice parameters</b>: impossible to retrieve the '%s' parameter !", box_prop[1][i]);
-      add_reader_info (str);
+      add_reader_info (str, 0);
       g_free (str);
       return FALSE;
     }
@@ -1385,7 +1385,7 @@ gboolean cif_get_space_group (int linec)
   }
   if (! hmkey && ! spg)
   {
-    add_reader_info ("<b>Space group</b>: no space group and no H-M symbol found !");
+    add_reader_info ("<b>Space group</b>: no space group and no H-M symbol found !", 1);
     return FALSE;
   }
 #ifdef DEBUG
@@ -1401,7 +1401,7 @@ gboolean cif_get_space_group (int linec)
     i = group_info_from_hm_key (spg, hmkey);
     if (! spg && ! i)
     {
-      add_reader_info ("<b>Space group</b>: no space group found, unknown H-M symbol !");
+      add_reader_info ("<b>Space group</b>: no space group found, unknown H-M symbol !", 1);
 #ifdef DEBUG
       g_debug ("CIF:: No space group found, unknown H-M symbol !");
 #endif
@@ -1410,7 +1410,7 @@ gboolean cif_get_space_group (int linec)
     {
       str = g_strdup_printf ("<b>Space group</b>: space group and H-M symbol do not match !\n"
                              " CIF file space group: <b>%s</b>, CIF file H-M symbol: <b>%s</b>", groups[spg-1], hmkey);
-      add_reader_info (str);
+      add_reader_info (str, 1);
       g_free (str);
 #ifdef DEBUG
       g_debug ("CIF:: Space group and H-M symbol do not match:: spg= %d, hm= %d", spg, i);
@@ -1462,7 +1462,7 @@ gboolean cif_get_space_group (int linec)
               if (g_strcmp0(lat, str) == 0) l ++;
               if (l == k)
               {
-                if (j < this_reader -> setting) add_reader_info ("<b>Space group</b>: ambiguous space group setting !");
+                if (j < this_reader -> setting) add_reader_info ("<b>Space group</b>: ambiguous space group setting !", 1);
                 this_reader -> setting = j;
                 break;
               }
@@ -1492,14 +1492,14 @@ gboolean cif_get_space_group (int linec)
               {
                 if (j < this_reader -> setting || this_reader -> lattice.sp_group -> settings[j].origin != k)
                 {
-                  add_reader_info ("<b>Space group</b>: ambiguous space group setting !");
+                  add_reader_info ("<b>Space group</b>: ambiguous space group setting !", 1);
                 }
                 this_reader -> setting = j;
                 l = 1;
                 break;
               }
             }
-            if (! l) add_reader_info ("<b>Space group</b>: ambiguous space group setting !");
+            if (! l) add_reader_info ("<b>Space group</b>: ambiguous space group setting !", 1);
           }
           else if (i < 38)
           {
@@ -1509,7 +1509,7 @@ gboolean cif_get_space_group (int linec)
               break;
             }
             j = i - 36;
-            if (j < this_reader -> setting) add_reader_info ("<b>Space group</b>: ambiguous space group setting !");
+            if (j < this_reader -> setting) add_reader_info ("<b>Space group</b>: ambiguous space group setting !", 1);
             this_reader -> setting = j;
           }
           else
@@ -1520,7 +1520,7 @@ gboolean cif_get_space_group (int linec)
               break;
             }
             j = i - 38;
-            if (j < this_reader -> setting) add_reader_info ("<b>Space group</b>: ambiguous space group setting !");
+            if (j < this_reader -> setting) add_reader_info ("<b>Space group</b>: ambiguous space group setting !", 1);
             this_reader -> setting = j;
           }
         }
@@ -1561,7 +1561,7 @@ gboolean cif_get_space_group (int linec)
                              "but the lattice parameters were found in %s format ...\n"
                              "\t ... the space group setting was modified accordingly !",
                                spg, groups[spg-1], setc[this_reader -> setting], setc[!this_reader -> setting]);
-        add_reader_info (str);
+        add_reader_info (str, 1);
         g_free (str);
         this_reader -> setting = ! this_reader -> setting;
       }

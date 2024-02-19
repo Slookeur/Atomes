@@ -1248,47 +1248,60 @@ int open_coordinate_file (int id)
   int length = strlen(active_project -> coordfile);
   clock_gettime (CLOCK_MONOTONIC, & sta_time);
   this_reader = g_malloc0(sizeof*this_reader);
+  // Set default message type to warning
+  this_reader -> mid = 1;
   switch (id)
   {
     case 0:
+      // XYZ file
       result = open_coord_file (active_project -> coordfile, id);
       // result = read_xyz_ (active_project -> coordfile, & length, & npt);
       break;
     case 1:
+      // XYZ file NPT
       result = open_coord_file (active_project -> coordfile, id);
       // result = read_xyz_ (active_project -> coordfile, & length, & npt);
       if (! result) result = read_npt_data ();
       break;
     case 2:
+      // Chem3D file
       result = open_coord_file (active_project -> coordfile, id);
       // result = read_c3d_ (active_project -> coordfile, & length);
       break;
     case 3:
+      // CPMD TRJ file
       result = to_read_trj_or_vas (id);
       break;
     case 4:
+      // CPMD TRJ file NPT
       result = to_read_trj_or_vas (id);
       if (! result) result = read_npt_data ();
       break;
     case 5:
+      // VASP XDATCAR file
       result = to_read_trj_or_vas (id);
       break;
     case 6:
+      // VASP XDATCAR file NPT
       result = to_read_trj_or_vas (id);
       if (! result) result = read_npt_data ();
       break;
     case 7:
+      // PDB file
       // result = open_coord_file (active_project -> coordfile, id);
       result = read_pdb_ (active_project -> coordfile, & length);
       break;
     case 8:
+      // PDB file
       // result = open_coord_file (active_project -> coordfile, id);
       result = read_pdb_ (active_project -> coordfile, & length);
       break;
     case 9:
+      // CIF file
       result = open_coord_file (active_project -> coordfile, 9);
       break;
     case 10:
+      // DL-POLY file
       result = open_coord_file (active_project -> coordfile, 10);
       break;
     default:
@@ -1301,7 +1314,15 @@ int open_coordinate_file (int id)
   {
     if (this_reader -> info && ! silent_input)
     {
-      show_error (this_reader -> info, 0, MainWindow);
+      switch (this_reader -> mid)
+      {
+        case 0:
+          show_error (this_reader -> info, 0, MainWindow);
+          break;
+        case 1:
+          show_warning (this_reader -> info, MainWindow);
+          break;
+      }
     }
     if (this_reader)
     {

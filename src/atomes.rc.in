@@ -28,7 +28,7 @@ VS_VERSION_INFO VERSIONINFO
         VALUE "CompanyName", "CNRS - IPCMS - DMO"
         VALUE "FileDescription", "@PACKAGE-@ATOMES_MAJOR_VERSION@.@ATOMES_MINOR_VERSION@.@ATOMES_PATCH_VERSION@"
         VALUE "FileVersion", "@ATOMES_MAJOR_VERSION@.@ATOMES_MINOR_VERSION@.@ATOMES_PATCH_VERSION@"
-        VALUE "LegalCopyright", "Copyright © 2023 Sébastien Le Roux"
+        VALUE "LegalCopyright", "Copyright © 2024 Sébastien Le Roux"
         VALUE "OriginalFileName", "atomes.exe"
         VALUE "ProductName", "Atomes @ATOMES_MAJOR_VERSION@.@ATOMES_MINOR_VERSION@.@ATOMES_PATCH_VERSION@"
         VALUE "ProductVersion", "@ATOMES_MAJOR_VERSION@.@ATOMES_MINOR_VERSION@.@ATOMES_PATCH_VERSION@"

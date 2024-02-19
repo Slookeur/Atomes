@@ -111,7 +111,7 @@ int pdb_get_atoms_data (int linec)
           this_word = strtok_r (NULL, " ", & saved_line);
           if (! this_word)
           {
-            add_reader_info (g_strdup_printf ("Wrong file format - record <b>%d</b> on line <b>%d</b> is corrupted !", k+2, i+1));
+            add_reader_info (g_strdup_printf ("Wrong file format - record <b>%d</b> on line <b>%d</b> is corrupted !", k+2, i+1), 0);
             res = 0;
             goto ends;
           }

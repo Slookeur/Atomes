@@ -294,9 +294,11 @@ ColRGBA set_default_color (int z)
                   {0.97, 0.00, 0.10},
                   {0.98, 0.00, 0.10},
                   {0.99, 0.00, 0.10}};
-  col.red = colors[z-1][0];
-  col.green = colors[z-1][1];
-  col.blue = colors[z-1][2];
+  // Dumy atoms have z < 1
+  int Z = (z < 1) ? 1 : z;
+  col.red = colors[Z-1][0];
+  col.green = colors[Z-1][1];
+  col.blue = colors[Z-1][2];
   col.alpha = 1.0;
   return col;
 }

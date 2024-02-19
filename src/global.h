@@ -419,8 +419,11 @@ typedef struct {
   int * nsps;
   double ** coord;
   int * lot;
+  int ndummy;
+  gchar ** dummy;
   int setting;
   cell_info lattice;
+  int mid;
   gchar * info;
   // The following is only used for CIF files
   int * wyckoff;
@@ -871,6 +874,7 @@ extern gboolean in_md_shaders (struct project * this_proj, int id);
 extern void recreate_all_shaders (glwin * view);
 extern gboolean is_atom_win_active (glwin * view);
 
+// extern gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb);
 extern G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data);
 extern void update_rings_menus (glwin * view);
 extern void clean_rings_data (int rid, glwin * view);

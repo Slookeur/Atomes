@@ -24,6 +24,8 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "read_isaacs.h"
 
+extern int set_v_dummy (gchar * this_word);
+
 extern double get_z_from_periodic_table (gchar * lab);
 extern void allocatoms (struct project * this_proj);
 extern chemical_data * alloc_chem_data (int spec);
@@ -37,7 +39,7 @@ extern gchar ** coord_line;
 extern struct line_node * head;
 extern struct line_node * tail;
 
-extern void add_reader_info (gchar * info);
+extern void add_reader_info (gchar * info, int mid);
 extern void reader_info (gchar * type, gchar * sinf, int val);
 extern void format_error (int stp, int ato, gchar * mot, int line);
 extern void check_for_species (double v, int ato);
