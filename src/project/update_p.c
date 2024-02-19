@@ -101,7 +101,8 @@ int update_project ()
       g_free (lot);
       read_chem_ (active_chem -> chem_prop[CHEM_M], active_chem -> chem_prop[CHEM_R],
                   active_chem -> chem_prop[CHEM_N], active_chem -> chem_prop[CHEM_X]);
-      prep_spec_ (active_chem -> chem_prop[CHEM_Z], active_chem -> nsps);
+      j = 0;
+      prep_spec_ (active_chem -> chem_prop[CHEM_Z], active_chem -> nsps, & j);
     }
     else
     {

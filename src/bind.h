@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'bind.h'
 *
-*  Contains: 
+*  Contains:
 
  - Binding to the Fortran90 subroutines
 
@@ -85,6 +85,7 @@ extern void prep_pos_ (int *,
                        int *);
 
 extern void prep_spec_ (double *,
+                        int *,
                         int *);
 
 extern int prep_data_ ();

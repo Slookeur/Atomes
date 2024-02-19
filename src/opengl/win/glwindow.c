@@ -67,6 +67,7 @@ extern G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data);
 extern void set_sensitive_coord_menu (glwin * view, gboolean status);
 extern void set_color_map_sensitive (glwin * view);
+extern G_MODULE_EXPORT void set_selection_mode (GtkWidget * widg, gpointer data);
 
 extern gboolean spin (gpointer data);
 extern G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data);
@@ -748,6 +749,19 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         update (view);
       }
       break;
+    case GDK_KEY_A:
+      if (get_project_by_id(view -> proj) -> natomes)
+      {
+        // selection mode to coordination sphere
+#ifdef GTK4
+        set_selection_mode (NULL, & view -> colorp[0][0]);
+#else
+        // GTK3 Menu Action To Check
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_smode[0], TRUE);
+        set_selection_mode (view -> ogl_smode[0], & view -> colorp[0][0]);
+#endif
+      }
+      break;
     case GDK_KEY_b:
       if (get_project_by_id(view -> proj) -> natomes)
       {
@@ -801,6 +815,19 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         }
       }
       break;
+    case GDK_KEY_C:
+      if (get_project_by_id(view -> proj) -> natomes)
+      {
+        // selection mode to coordination sphere
+#ifdef GTK4
+        set_selection_mode (NULL, & view -> colorp[1][0]);
+#else
+        // GTK3 Menu Action To Check
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_smode[1], TRUE);
+        set_selection_mode (view -> ogl_smode[1], & view -> colorp[1][0]);
+#endif
+      }
+      break;
     case GDK_KEY_d:
       if (get_project_by_id(view -> proj) -> natomes)
       {
@@ -846,6 +873,19 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       if (state & GDK_CONTROL_MASK) set_full_screen (NULL, view);
 #endif
       break;
+    case GDK_KEY_F:
+      if (get_project_by_id(view -> proj) -> natomes)
+      {
+        // selection mode to coordination sphere
+#ifdef GTK4
+        set_selection_mode (NULL, & view -> colorp[2][0]);
+#else
+        // GTK3 Menu Action To Check
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_smode[2], TRUE);
+        set_selection_mode (view -> ogl_smode[2], & view -> colorp[2][0]);
+#endif
+      }
+      break;
     case GDK_KEY_l:
       if ((state & GDK_CONTROL_MASK) && get_project_by_id(view -> proj) -> natomes)
       {
@@ -887,6 +927,19 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         }
         view -> create_shaders[MEASU] = TRUE;
         update (view);
+      }
+      break;
+    case GDK_KEY_M:
+      if (get_project_by_id(view -> proj) -> natomes)
+      {
+        // selection mode to coordination sphere
+#ifdef GTK4
+        set_selection_mode (NULL, & view -> colorp[3][0]);
+#else
+        // GTK3 Menu Action To Check
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_smode[3], TRUE);
+        set_selection_mode (view -> ogl_smode[3], & view -> colorp[3][0]);
+#endif
       }
       break;
     case GDK_KEY_n:

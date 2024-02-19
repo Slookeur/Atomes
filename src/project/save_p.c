@@ -80,7 +80,7 @@ int save_project (FILE * fp, struct project * this_proj, int npi)
 
   // First 2 lines for compatibility issues
   i = 2;
-  j = 5;
+  j = 6;
   ver = g_strdup_printf ("%%\n%% project file v-%1d.%1d\n%%\n", i, j);
   if (save_this_string (fp, ver) != OK)
   {
@@ -156,6 +156,11 @@ int save_project (FILE * fp, struct project * this_proj, int npi)
   if (fwrite (& this_proj -> tunit, sizeof(int), 1, fp) != 1) return ERROR_PROJECT;
   if (this_proj -> natomes != 0 && this_proj -> nspec != 0)
   {
+    for (i=0; i<this_proj -> nspec; i++)
+    {
+      if (save_this_string (fp, this_proj -> chemistry -> label[i]) != OK) return ERROR_PROJECT;
+      if (save_this_string (fp, this_proj -> chemistry -> element[i]) != OK) return ERROR_PROJECT;
+    }
     if (fwrite (this_proj -> chemistry -> nsps, sizeof(int), this_proj -> nspec, fp) != this_proj -> nspec) return ERROR_PROJECT;
     if (fwrite (this_proj -> chemistry -> formula, sizeof(int), this_proj -> nspec, fp) != this_proj -> nspec) return ERROR_PROJECT;
     for (i=0; i<CHEM_PARAMS; i++)

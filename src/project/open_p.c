@@ -218,10 +218,12 @@ int open_project (FILE * fp, int npi)
   ver = g_malloc0 (i*sizeof*ver);
   if (fread (ver, sizeof(char), i, fp) != i) return ERROR_PROJECT;
 
+  gboolean labels_in_file = FALSE;
   // test on ver for version
-  /*if (g_strcmp0(ver, "%\n% project file v-2.5\n%\n") == 0)
+  if (g_strcmp0(ver, "%\n% project file v-2.6\n%\n") == 0)
   {
-  }*/
+    labels_in_file = TRUE;
+  }
 
  #ifdef DEBUG
   g_debug ("%s", ver);
@@ -303,6 +305,14 @@ int open_project (FILE * fp, int npi)
   {
     alloc_proj_data (active_project, 1);
     active_chem = active_project -> chemistry;
+    if (labels_in_file)
+    {
+      for (i=0; i<active_project -> nspec; i++)
+      {
+        active_chem -> label[i] = read_this_string (fp);
+        active_chem -> element[i] = read_this_string (fp);
+      }
+    }
     if (fread (active_chem -> nsps, sizeof(int), active_project -> nspec, fp) != active_project -> nspec) return ERROR_PROJECT;
     if (fread (active_chem -> formula, sizeof(int), active_project -> nspec, fp) != active_project -> nspec) return ERROR_PROJECT;
     j = 0;
@@ -336,7 +346,11 @@ int open_project (FILE * fp, int npi)
                        & active_project -> steps);
       if (i == 1)
       {
-        prep_spec_ (active_chem -> chem_prop[CHEM_Z], active_chem -> nsps);
+        if (! labels_in_file)
+        {
+          j = 1;
+          prep_spec_ (active_chem -> chem_prop[CHEM_Z], active_chem -> nsps, & j);
+        }
         initcwidgets ();
         // Read curves
         for (i=0; i<NGRAPHS; i++) if (active_project -> initok[i]) initcnames (i, 0);

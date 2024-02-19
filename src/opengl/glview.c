@@ -1768,7 +1768,9 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
     g_free (errm);
     atomes_visual = -1;
   }
+#ifdef GTK3
   end:;
+#endif
 }
 
 #ifdef GTKGLAREA

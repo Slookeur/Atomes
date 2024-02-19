@@ -59,12 +59,12 @@ G_MODULE_EXPORT void turn_rebuild_on (GtkCheckButton * but, gpointer data)
 G_MODULE_EXPORT void turn_rebuild_on (GtkToggleButton * but, gpointer data)
 #endif
 {
+  tint * dat = (tint *) data;
   int i;
 #ifdef GTK4
   i = gtk_check_button_get_active (but);
-  // DO SOMETHING HERE !!!
+  get_project_by_id(dat -> a) -> modelgl -> rebuild[0][dat -> c] = i;
 #else
-  tint * dat = (tint *) data;
   i = gtk_toggle_button_get_active (but);
   get_project_by_id(dat -> a) -> modelgl -> rebuild[0][dat -> c] = i;
   gtk_check_menu_item_set_active ((GtkCheckMenuItem *)get_project_by_id(dat -> a) -> modelgl -> rbuild[i], i);
