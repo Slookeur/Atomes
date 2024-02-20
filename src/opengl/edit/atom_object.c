@@ -673,6 +673,8 @@ void add_object_atoms (struct insert_object * this_object, struct project * this
   {
     clean_object_bonds (this_proj, o_step, this_object, new_id, movtion);
     check_coord_modification (this_proj, NULL, & this_object -> at_list[0], this_object, FALSE, FALSE);
+    g_debug ("Coord info after object creation:");
+    print_coord_info (NULL, this_object -> coord);
   }
   g_free (old_id);
   g_free (new_id);

@@ -2124,7 +2124,8 @@ void create_new_project_using_data (struct atom_selection * selection)
       active_project -> atoms[i][j].label[1] = FALSE;
       active_project -> atoms[i][j].pick[0] = FALSE;
       active_project -> atoms[i][j].cloned = FALSE;
-      active_project -> atoms[i][j].style = NONE;
+      // Next line for style, to initialize style use: NONE
+      active_project -> atoms[i][j].style = opengl_project -> atoms[i][k].style;
       if (tmp -> next != NULL) tmp = tmp -> next;
     }
   }

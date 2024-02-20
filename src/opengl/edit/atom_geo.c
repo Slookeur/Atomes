@@ -102,10 +102,9 @@ int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int
       }
       if (k == l)
       {
-        // Same number of atoms in the coordination and num of spec
-        // 2 structure de l size, [0]= Z, [1] = nato
-        // Tri par Z
-        // Comp
+        // Same number of atoms in the coordination for the spec
+        // 2 structures of size l: [0]= Z, [1] = nato
+        // Sort by Z, then comparing
         n_part = allocdint (l, 2);
         o_part = allocdint (l, 2);
         l = 0;
@@ -149,6 +148,7 @@ int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int
     }
   }
 
+  // If we keep going then this is a new type of coordination sphere
   int * tmpgeol = allocint (i+1);
   for (j=0; j<i; j++) tmpgeol[j] = coord -> geolist[id][new_sp][j];
   tmpgeol[i] = obj -> geolist[id][old_sp][old_geo];
@@ -229,7 +229,7 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
                                struct insert_object * this_object, gboolean movtion, gboolean passivating)
 {
   struct atom * tmp_new;
-  int g, h, i, j, k, l, m, n;
+  int g, h, i, j, k, l, m;
   gboolean correct_it;
   int * new_z = allocint (this_proj -> nspec);
   double * old_z;
@@ -240,6 +240,7 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
   {
     new_z[i] = (int)this_proj -> chemistry -> chem_prop[CHEM_Z][i];
   }
+  // first create a dummy coord to store an atom individual data
   coord_info * new_coord = g_malloc0 (sizeof*new_coord);
   for (i=0; i<2; i++)
   {
@@ -257,6 +258,7 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
     while (tmp_new)
     {
       i = tmp_new -> sp;
+      // Fill the dummy coord with the new atom information
       for (j=0; j<2; j++)
       {
         k = tmp_new -> coord[j];
@@ -278,8 +280,9 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
           if (! passivating || h)
           {
             m = this_proj -> atoms[0][l].sp;
+            // For the atom studied reduce the number of neighbors of that species:
             new_coord -> partial_geo[i][0][m] --;
-            for (n=0; n<2; n++) new_coord -> geolist[n][i][0] --;
+            new_coord -> geolist[0][i][0] --;
           }
         }
       }
@@ -310,6 +313,7 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
         }
         else
         {
+
           for (j=0; j<2; j++)
           {
             if (this_object)

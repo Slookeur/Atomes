@@ -545,7 +545,8 @@ G_MODULE_EXPORT void change_mouse_mode_radio (GSimpleAction * action, GVariant *
       g_free (mode_name);
       mode_name = NULL;
     }
-    g_action_change_state (G_ACTION (action), parameter);
+    // Update the menu bar is required to activate / deactivate the selection mode option
+    update_menu_bar (view);
   }
 }
 

@@ -28,7 +28,7 @@ If not, see <https://www.gnu.org/licenses/> */
   G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * parameter, gpointer data);
 
-  GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int filled, GtkWidget * menu, tint * data);
+  GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int filled, guint accel, GtkWidget * menu, tint * data);
   GtkWidget * menu_style (glwin * view, int id);
 
   GMenu * menu_style (glwin * view, int popm);
@@ -237,7 +237,7 @@ G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data)
 
 #ifdef GTK3
 /*
-*  GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int filled, GtkWidget * menu, tint * data)
+*  GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int filled, guint accel, GtkWidget * menu, tint * data)
 *
 *  Usage: create style menu item GTK3
 *
@@ -246,12 +246,14 @@ G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data)
 *  int style        : style value for this menu item
 *  int vbl          : active filled style if any
 *  int filled       : filled value for this menu item
+*  guint accel      : keyboard accelerator
 *  GtkWidget * menu : the menu to attach the new menu item to
 *  tint * data      : the associated data pointer
 */
-GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int filled, GtkWidget * menu, tint * data)
+GtkWidget * create_style_menu (char * name, int val, int style, int vbl, int filled, guint accel, GtkWidget * menu, tint * data)
 {
-  GtkWidget * style_widget = gtk3_menu_item (menu, name, IMG_NONE, NULL, G_CALLBACK(set_style), data, FALSE, 0, 0, TRUE, TRUE, (style == val && filled == vbl) ? TRUE : FALSE);
+  GtkWidget * style_widget = gtk3_menu_item (menu, name, IMG_NONE, NULL, G_CALLBACK(set_style), data, (accel != -1) ? TRUE : FALSE, accel,
+                                             0, TRUE, TRUE, (style == val && filled == vbl) ? TRUE : FALSE);
   return style_widget;
 }
 
@@ -268,6 +270,8 @@ GtkWidget * menu_style (glwin * view, int id)
   int i, j;
   GtkWidget * widg;
   GtkWidget * menus = gtk_menu_new ();
+  guint accels[OGL_STYLES-1]={GDK_KEY_b, GDK_KEY_w, GDK_KEY_s, GDK_KEY_c, GDK_KEY_d};
+  guint accelf[FILLED_STYLES]={GDK_KEY_o, GDK_KEY_i, GDK_KEY_v, GDK_KEY_r};
   if (id == 0)
   {
     for (i=0; i<OGL_STYLES; i++)
@@ -279,6 +283,7 @@ GtkWidget * menu_style (glwin * view, int id)
                                                    view -> anim -> last -> img -> style,
                                                    i,
                                                    i,
+                                                   accels[(i < SPACEFILL) ? i : i-1],
                                                    menus,
                                                    & view -> colorp[i][0]);
       }
@@ -295,6 +300,7 @@ GtkWidget * menu_style (glwin * view, int id)
                                                          view -> anim -> last -> img -> style,
                                                          j,
                                                          view -> anim -> last -> img -> filled_type,
+                                                         accelf[j],
                                                          menuf,
                                                          & view -> colorp[OGL_STYLES + j][0]);
         }
@@ -312,6 +318,7 @@ GtkWidget * menu_style (glwin * view, int id)
                view -> anim -> last -> img -> style,
                i,
                i,
+               accels[(i < SPACEFILL) ? i : i-1],
                menus,
                & view -> colorp[i][0]);
       }
@@ -328,6 +335,7 @@ GtkWidget * menu_style (glwin * view, int id)
                                      view -> anim -> last -> img -> style,
                                      j,
                                      view -> anim -> last -> img -> filled_type,
+                                     accelf[j],
                                      menuf,
                                      & view -> colorp[OGL_STYLES + j][0]);
         }
@@ -406,13 +414,16 @@ GMenu * menu_style (glwin * view, int popm)
 {
   int i, j, k;
   GMenu * menu = g_menu_new ();
+  gchar * accels[OGL_STYLES-1]={"b", "w", "s", "c", "d"};
+  gchar * accelf[FILLED_STYLES]={"o", "i", "v", "r"};
+
   k = 0;
   for (i=0; i<OGL_STYLES; i++, k++)
   {
     if (i != SPACEFILL)
     {
       append_opengl_item (view, menu, text_styles[i], "style", popm, k,
-                          NULL, IMG_NONE, NULL, FALSE,
+                          accels[(i < SPACEFILL) ? i : i-1], IMG_NONE, NULL, FALSE,
                           G_CALLBACK(change_style_radio), (gpointer)view,
                           FALSE, (view -> anim -> last -> img -> style == i) ? TRUE : FALSE, TRUE, TRUE);
     }
@@ -422,7 +433,7 @@ GMenu * menu_style (glwin * view, int popm)
       for (j=0; j < FILLED_STYLES; j++, k++)
       {
         append_opengl_item (view, menus, text_filled[j], "style", popm, k,
-                            NULL, IMG_NONE, NULL, FALSE,
+                            accelf[j], IMG_NONE, NULL, FALSE,
                             G_CALLBACK(change_style_radio), (gpointer)view,
                             FALSE, (view -> anim -> last -> img -> style == SPACEFILL && view -> anim -> last -> img -> filled_type == j) ? TRUE : FALSE, TRUE, TRUE);
       }

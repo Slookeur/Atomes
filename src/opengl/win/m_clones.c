@@ -152,9 +152,10 @@ G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parame
     view -> anim -> last -> img -> draw_clones = show;
     init_default_shaders (view);
     update (view);
+    // Update the menu bar is reqiured to udpate the clone(s) submenus
+    update_menu_bar (view);
     if (action)
     {
-      g_action_change_state (G_ACTION (action), g_variant_new_boolean (show));
       g_variant_unref (state);
     }
   }

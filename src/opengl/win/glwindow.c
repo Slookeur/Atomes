@@ -34,6 +34,7 @@ If not, see <https://www.gnu.org/licenses/> */
   void prepare_opengl_menu_bar (glwin * view);
   void change_color_map (glwin * view, int col);
   void set_motion (glwin * view, int axis, int da, int db, gboolean UpDown, GdkModifierType state);
+  void activate_glwin_action (gchar * action_string, gchar * action_name, glwin * view);
   void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data);
   void prep_model (int p);
 
@@ -641,6 +642,22 @@ vec3_t get_insertion_coordinates (glwin * view)
 }
 
 /*
+*  void activate_glwin_action (gchar * action_string, gchar * action_name, glwin * view)
+*
+*  Usage: the keyboard shortcut actions for the OpenGL window
+*
+*  gchar * action_string : the variant string
+*  gchar * action_name   : the action name
+*  glwin * view          : the target glwin
+*/
+void activate_glwin_action (gchar * action_string, gchar * action_name, glwin * view)
+{
+  GVariant * action_state = g_variant_new_string (action_string);
+  g_action_group_activate_action ((GActionGroup *)view -> action_group, action_name, action_state);
+  // g_variant_unref (action_state);
+}
+
+/*
 *  void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
 *
 *  Usage: the keyboard shortcut actions for the OpenGL window
@@ -735,7 +752,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         if (view -> mode == EDITION)
         {
 #ifdef GTK4
-          set_mode (NULL, & view -> colorp[0][0]);
+          activate_glwin_action ("set-mouse-mode.0.0", "set-mouse-mode", view);
 #else
           // GTK3 Menu Action To Check
           gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_mode[0], TRUE);
@@ -754,7 +771,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       {
         // selection mode to coordination sphere
 #ifdef GTK4
-        set_selection_mode (NULL, & view -> colorp[0][0]);
+        activate_glwin_action ("set-sel-mode.0.0", "set-sel-mode", view);
 #else
         // GTK3 Menu Action To Check
         gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_smode[0], TRUE);
@@ -766,11 +783,11 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       if (get_project_by_id(view -> proj) -> natomes)
       {
 #ifdef GTK4
-          set_style (NULL, & view -> colorp[BALL_AND_STICK][0]);
+        activate_glwin_action ("set-style.0.0", "set-style", view);
 #else
-          // GTK3 Menu Action To Check
-          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[BALL_AND_STICK], TRUE);
-          set_style (view -> ogl_styles[BALL_AND_STICK], & view -> colorp[BALL_AND_STICK][0]);
+        // GTK3 Menu Action To Check
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[BALL_AND_STICK], TRUE);
+        set_style (view -> ogl_styles[BALL_AND_STICK], & view -> colorp[BALL_AND_STICK][0]);
 #endif
 
       }
@@ -806,7 +823,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         else
         {
 #ifdef GTK4
-          set_style (NULL, & view -> colorp[CYLINDERS][0]);
+          activate_glwin_action ("set-style.8.0", "set-style", view);
 #else
           // GTK3 Menu Action To Check
           gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[CYLINDERS], TRUE);
@@ -820,7 +837,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       {
         // selection mode to coordination sphere
 #ifdef GTK4
-        set_selection_mode (NULL, & view -> colorp[1][0]);
+        activate_glwin_action ("set-sel-mode.1.0", "set-sel-mode", view);
 #else
         // GTK3 Menu Action To Check
         gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_smode[1], TRUE);
@@ -832,7 +849,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       if (get_project_by_id(view -> proj) -> natomes)
       {
 #ifdef GTK4
-          set_style (NULL, & view -> colorp[PUNT][0]);
+        activate_glwin_action ("set-style.9.0", "set-style", view);
 #else
         // GTK3 Menu Action To Check
         gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[PUNT], TRUE);
@@ -856,7 +873,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
           if (view -> mode == ANALYZE && get_project_by_id(view -> proj) -> steps == 1)
           {
 #ifdef GTK4
-            set_mode (NULL, & view -> colorp[1][0]);
+            activate_glwin_action ("set-mouse-mode.1.0", "set-mouse-mode", view);
 #else
             // GTK3 Menu Action To Check
             gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_mode[1], TRUE);
@@ -878,11 +895,23 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       {
         // selection mode to coordination sphere
 #ifdef GTK4
-        set_selection_mode (NULL, & view -> colorp[2][0]);
+        activate_glwin_action ("set-sel-mode.2.0", "set-sel-mode", view);
 #else
         // GTK3 Menu Action To Check
         gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_smode[2], TRUE);
         set_selection_mode (view -> ogl_smode[2], & view -> colorp[2][0]);
+#endif
+      }
+      break;
+    case GDK_KEY_i:
+      if (get_project_by_id(view -> proj) -> natomes)
+      {
+#ifdef GTK4
+        activate_glwin_action ("set-style.3.0", "set-style", view);
+#else
+        // GTK3 Menu Action To Check
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> filled_styles[1], TRUE);
+        set_style (view -> filled_styles[1], & view -> colorp[OGL_STYLES+1][0]);
 #endif
       }
       break;
@@ -934,7 +963,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       {
         // selection mode to coordination sphere
 #ifdef GTK4
-        set_selection_mode (NULL, & view -> colorp[3][0]);
+        activate_glwin_action ("set-sel-mode.3.0", "set-sel-mode", view);
 #else
         // GTK3 Menu Action To Check
         gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_smode[3], TRUE);
@@ -945,10 +974,40 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
     case GDK_KEY_n:
       if (state & GDK_CONTROL_MASK) on_create_new_project (NULL, NULL);
       break;
+    case GDK_KEY_o:
+      if (get_project_by_id(view -> proj) -> natomes)
+      {
+#ifdef GTK4
+          activate_glwin_action ("set-style.2.0", "set-style", view);
+#else
+          // GTK3 Menu Action To Check
+          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> filled_styles[0], TRUE);
+          set_style (view -> filled_styles[0], & view -> colorp[OGL_STYLES][0]);
+#endif
+      }
+      break;
     case GDK_KEY_p:
       if (get_project_by_id(view -> proj) -> natomes) change_color_map (view, 1);
       break;
     case GDK_KEY_r:
+      if (get_project_by_id(view -> proj) -> natomes)
+      {
+        if (state & GDK_CONTROL_MASK)
+        {
+          window_recorder (NULL, (gpointer)view);
+        }
+        else
+        {
+#ifdef GTK4
+          activate_glwin_action ("set-style.5.0", "set-style", view);
+#else
+        // GTK3 Menu Action To Check
+          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> filled_styles[3], TRUE);
+          set_style (view -> filled_styles[3], & view -> colorp[OGL_STYLES+3][0]);
+#endif
+        }
+      }
+      break;
       if ((state & GDK_CONTROL_MASK) && get_project_by_id(view -> proj) -> natomes) window_recorder (NULL, (gpointer)view);
       break;
     case GDK_KEY_s:
@@ -961,7 +1020,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         else
         {
 #ifdef GTK4
-          set_style (NULL, & view -> colorp[SPHERES][0]);
+          activate_glwin_action ("set-style.7.0", "set-style", view);
 #else
           // GTK3 Menu Action To Check
           gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[SPHERES], TRUE);
@@ -998,11 +1057,11 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       else if (get_project_by_id(view -> proj) -> natomes)
       {
 #ifdef GTK4
-        set_style (NULL, & view -> colorp[OGL_STYLES][0]);
+        activate_glwin_action ("set-style.4.0", "set-style", view);
 #else
         // GTK3 Menu Action To Check
-        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> filled_styles[0], TRUE);
-        set_style (view -> filled_styles[0], & view -> colorp[OGL_STYLES][0]);
+        gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> filled_styles[2], TRUE);
+        set_style (view -> filled_styles[2], & view -> colorp[OGL_STYLES+2][0]);
 #endif
       }
       break;
@@ -1010,7 +1069,7 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
       if (get_project_by_id(view -> proj) -> natomes)
       {
 #ifdef GTK4
-        set_style (NULL, & view -> colorp[WIREFRAME][0]);
+        activate_glwin_action ("set-style.1.0", "set-style", view);
 #else
         // GTK3 Menu Action To Check
         gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_styles[WIREFRAME], TRUE);
