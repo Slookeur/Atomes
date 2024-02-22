@@ -494,8 +494,7 @@ void random_move_this_object (struct project * this_proj, struct insert_object *
 void trigger_refresh (struct project * this_proj, atom_search * asearch)
 {
   clean_all_trees (asearch, this_proj);
-  // = TRUE;
-  this_proj -> modelgl -> atom_win -> rebuilt[(asearch -> action == DISPL) ? 0 : 1] = asearch -> update_bonding;
+  this_proj -> modelgl -> atom_win -> rebuilt[(asearch -> action == DISPL) ? 0 : 1] = TRUE;
   update_search_tree (this_proj -> modelgl -> search_widg[(asearch -> action == DISPL) ? 6 : 2]);
   check_all_trees (this_proj);
 }
@@ -670,7 +669,7 @@ void random_move (struct project * this_proj, atom_search * asearch)
       }
     }
   }
-  if (! asearch -> update_bonding)
+  if (! asearch -> recompute_bonding)
   {
     i = activep;
     active_project_changed (activep);
@@ -896,7 +895,7 @@ void move_selection (struct project * this_proj, int action, int axis, vec3_t tr
         }
       }
     }
-    if (! asearch -> update_bonding)
+    if (! asearch -> recompute_bonding)
     {
       i = activep;
       active_project_changed (activep);

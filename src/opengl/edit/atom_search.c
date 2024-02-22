@@ -100,7 +100,7 @@ G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data)
 #else
   i = gtk_toggle_button_get_active (but);
 #endif
-  asearch -> update_bonding = i;
+  asearch -> recompute_bonding = i;
 }
 
 /*
@@ -145,8 +145,8 @@ GtkWidget * create_search_box (int aid, struct project * this_proj)
   {
     hbox = create_hbox (0);
     add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, FALSE, FALSE, 0);
-    widg = check_button("Update bonding information, but do not recompute bonding using bond cutoff(s)",
-                        -1, 25, this_proj -> modelgl -> search_widg[aid+1] -> update_bonding, G_CALLBACK(turn_bonding_on),  this_proj -> modelgl -> search_widg[aid+1]);
+    widg = check_button("Recompute bonding information using bond cutoff(s)",
+                        -1, 25, this_proj -> modelgl -> search_widg[aid+1] -> recompute_bonding, G_CALLBACK(turn_bonding_on),  this_proj -> modelgl -> search_widg[aid+1]);
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, widg, FALSE, FALSE, 50);
   }
 

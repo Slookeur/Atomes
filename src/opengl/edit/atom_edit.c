@@ -395,7 +395,7 @@ atom_search * allocate_atom_search (int proj, int action, int searchid, int tsiz
     asearch -> pointer[i].b = TOLAB+i;
     asearch -> pointer[i].c = searchid;
   }
-  asearch -> update_bonding = (get_project_by_id(proj) -> natomes > 10000) ? FALSE : TRUE;
+  asearch -> recompute_bonding = FALSE;
   if (searchid != 5) allocate_todo (asearch, tsize);
   clean_picked_and_labelled (asearch);
   return asearch;

@@ -110,6 +110,7 @@ int search_for_new_spec (atom_edition * edit, struct insert_object * object)
       k = find_spec_id (coord -> species, object -> old_z[j], edit -> new_z);
       if (k < 0)
       {
+        g_debug ("New chemical species:: %f", (double)object -> old_z[j]);
         i ++;
         tmpnzid = allocdouble (coord -> species+i);
         for (l=0; l<coord -> species+i-1; l++) tmpnzid[l] = edit -> new_z[l];

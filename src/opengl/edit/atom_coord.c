@@ -30,8 +30,8 @@ If not, see <https://www.gnu.org/licenses/> */
                                gboolean * showcoord[2], gboolean * showpoly[2]);
   void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
                         gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
-                        gboolean update_it, gboolean update_frag, gboolean update_mol);
-  void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag);
+                        gboolean update_it, gboolean update_mol);
+  void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag);
 
   coord_info * duplicate_coord_info (coord_info * old_coord);
 
@@ -98,13 +98,21 @@ void print_coord_info (struct project * this_proj, coord_info * coord)
         j = (i < 2) ? coord -> species : 1;
         g_debug ("  spec i = %d, jmax= %d", i, j);
         g_debug (" ");
-        for (k=0; k<j; k++) min_bs[k] = max_bs[k] = coord -> geolist[i][k][0];
         for (k=0; k<j; k++)
         {
+          min_bs[k] = max_bs[k] = coord -> partial_geo[k][0][0];
+          for (m=0; m<coord -> species; m++)
+          {
+            min_bs[k] = min (min_bs[k], coord -> partial_geo[k][0][m]);
+            max_bs[k] = max (max_bs[k], coord -> partial_geo[k][0][m]);
+          }
           for (l=1; l<coord -> ntg[i][k]; l++)
           {
-            min_bs[k] = min (min_bs[k], coord -> geolist[i][k][l]);
-            max_bs[k] = max (max_bs[k], coord -> geolist[i][k][l]);
+            for (m=0; m<coord -> species; m++)
+            {
+              min_bs[k] = min (min_bs[k], coord -> partial_geo[k][l][m]);
+              max_bs[k] = max (max_bs[k], coord -> partial_geo[k][l][m]);
+            }
           }
         }
         for (k=0; k<j; k++)
@@ -117,31 +125,30 @@ void print_coord_info (struct project * this_proj, coord_info * coord)
             for (l=1; l<coord -> ntg[i][k]; l++)
             {
               test = (this_proj) ? test_this_coord (this_proj, k, i, l, min_bs[k], max_bs[k]) : 0;
-              str = g_strdup_printf ("%s\n                                    l = %d, coord -> geolist[%d][%d][%d]= %d, num[at,%d]= %d", str, l, i, k, l, coord -> geolist[i][k][l], l, test);
+              str = g_strdup_printf ("%s\n                                                  l = %d, coord -> geolist[%d][%d][%d]= %d, num[at,%d]= %d", str, l, i, k, l, coord -> geolist[i][k][l], l, test);
             }
           }
           g_debug ("%s", str);
           g_free (str);
-
         }
         if (i == 1)
         {
           g_debug (" ");
           for (k=0; k<j; k++)
           {
-             str = g_strdup_printf ("    Partials geo\n                                    k = %d, coord -> partial_geo[%d][%d][%d]= %d", k, k, 0, 0, coord -> partial_geo[k][0][0]);
+             str = g_strdup_printf ("    Partials geo\n                                                 k = %d, coord -> partial_geo[%d][%d][%d]= %d", k, k, 0, 0, coord -> partial_geo[k][0][0]);
              for (l=1; l<j; l++)
              {
-                str = g_strdup_printf ("%s\n                                    k = %d, coord -> partial_geo[%d][%d][%d]= %d", str, k, k, 0, l, coord -> partial_geo[k][0][l]);
+                str = g_strdup_printf ("%s\n                                                 k = %d, coord -> partial_geo[%d][%d][%d]= %d", str, k, k, 0, l, coord -> partial_geo[k][0][l]);
              }
              if (coord -> ntg[i][k] > 1)
              {
                for (l=1; l<coord -> ntg[i][k]; l++)
                {
-                 str = g_strdup_printf ("%s\n\n                                    k = %d, coord -> partial_geo[%d][%d][%d]= %d", str, k, k, l, 0, coord -> partial_geo[k][l][0]);
+                 str = g_strdup_printf ("%s\n\n                                                 k = %d, coord -> partial_geo[%d][%d][%d]= %d", str, k, k, l, 0, coord -> partial_geo[k][l][0]);
                  for (m=1; m<j; m++)
                  {
-                    str = g_strdup_printf ("%s\n                                    k = %d, coord -> partial_geo[%d][%d][%d]= %d", str, k, k, l, m, coord -> partial_geo[k][l][m]);
+                    str = g_strdup_printf ("%s\n                                                 k = %d, coord -> partial_geo[%d][%d][%d]= %d", str, k, k, l, m, coord -> partial_geo[k][l][m]);
                  }
                }
              }
@@ -397,12 +404,11 @@ void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
 *  gboolean * showpoly[2]     : the polyhedra show status
 *  gboolean * showfrag        : the fragment show status
 *  gboolean update_it         : update atoms data (and GTK3 menus)
-*  gboolean update_frag       : update fragment(s) data
 *  gboolean update_mol        : update molecule(s) data
 */
 void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
                       gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
-                      gboolean update_it, gboolean update_frag, gboolean update_mol)
+                      gboolean update_it, gboolean update_mol)
 {
   int i, j, k;
   for (i=0; i<4; i++)
@@ -425,40 +431,34 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
     init_menu_coordinations_ (& i, & j, & coord -> ntg[1][j], coord -> geolist[1][j]);
   }
 
-  if (update_frag)
+  i = 2;
+  this_proj -> coord -> totcoord[i] += nmols;
+  if (this_proj -> coord -> totcoord[i])
   {
-    i = 2;
-    this_proj -> coord -> totcoord[i] += nmols;
+    this_proj -> modelgl -> adv_bonding[i-2] = TRUE;
+    init_opengl_coords (i, this_proj -> coord -> totcoord[i], 0);
+    init_menu_fragmol_ (& i);
+  }
+  else
+  {
+    this_proj -> modelgl -> adv_bonding[i-2] = FALSE;
+  }
+  if (update_mol)
+  {
+    i = 3;
     if (this_proj -> coord -> totcoord[i])
     {
       this_proj -> modelgl -> adv_bonding[i-2] = TRUE;
       init_opengl_coords (i, this_proj -> coord -> totcoord[i], 0);
       init_menu_fragmol_ (& i);
     }
-    if (update_mol)
-    {
-      i = 3;
-      if (this_proj -> coord -> totcoord[i])
-      {
-        this_proj -> modelgl -> adv_bonding[i-2] = TRUE;
-        init_opengl_coords (i, this_proj -> coord -> totcoord[i], 0);
-        init_menu_fragmol_ (& i);
-      }
-    }
-    else
-    {
-      this_proj -> modelgl -> adv_bonding[1] = FALSE;
-      this_proj -> coord -> totcoord[3] = 0;
-    }
   }
   else
   {
-    for (i=0; i<2; i++)
-    {
-      this_proj -> modelgl -> adv_bonding[i] = FALSE;
-      this_proj -> coord -> totcoord[i+2] = 0;
-    }
+    this_proj -> modelgl -> adv_bonding[1] = FALSE;
+    this_proj -> coord -> totcoord[3] = 0;
   }
+
 #ifdef GTK3
   prep_all_coord_menus (this_proj -> modelgl);
 #endif
@@ -500,18 +500,15 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
       g_free (showcoord[i]);
       g_free (showpoly[i]);
     }
-    if (update_frag)
+    for (i=0; i<this_proj -> coord -> totcoord[2]; i++)
     {
-      for (i=0; i<this_proj -> coord -> totcoord[2]; i++)
+      if (this_proj -> modelgl -> ogl_geom[0][2][i])
       {
-        if (this_proj -> modelgl -> ogl_geom[0][2][i])
+        if (GTK_IS_WIDGET(this_proj -> modelgl -> ogl_geom[0][2][i]))
         {
-          if (GTK_IS_WIDGET(this_proj -> modelgl -> ogl_geom[0][2][i]))
+          if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][2][i]) != showfrag[i])
           {
-            if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][2][i]) != showfrag[i])
-            {
-              gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][2][i], showfrag[i]);
-            }
+            gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][2][i], showfrag[i]);
           }
         }
       }
@@ -526,7 +523,7 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
 }
 
 /*
-*  void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag)
+*  void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag)
 *
 *  Usage: recover image pointer data and OpenGL window menu structure
 *
@@ -538,9 +535,8 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
 *  int * rec                  : the lsit of removed chemical species, if any
 *  int *** tmpgeo             : the new number of coordination [c] by chemical species [s] 'coorrd -> ntg[c][s]'
 *  gboolean * showfrag        : the saved fragment(s) show information
-*  gboolean update_frag       : update fragment(s) / molecule(s) menus
 */
-void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag)
+void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag)
 {
   // Now OpenGL data
   int old_spec = this_proj -> nspec;
@@ -549,6 +545,7 @@ void recover_opengl_data (struct project * this_proj, int nmols, int add, int re
   gboolean * showcoord[2];
   gboolean * showpoly[2];
   gboolean update_it = FALSE;
+
   clean_coords_and_geoms (this_proj, this_proj -> modelgl -> atom_win, new_spec, rem, add, num, tmpgeo, showcoord, showpoly);
 
   if (add || rem)
@@ -682,5 +679,5 @@ void recover_opengl_data (struct project * this_proj, int nmols, int add, int re
     set_advanced_bonding_menus (this_proj -> modelgl);
 #endif
   }
-  new_coord_menus (this_proj, this_proj -> modelgl -> atom_win -> coord, new_spec, nmols, showcoord, showpoly, showfrag, update_it, update_frag, (add || rem) ? FALSE : (! nmols) ? TRUE : FALSE);
+  new_coord_menus (this_proj, this_proj -> modelgl -> atom_win -> coord, new_spec, nmols, showcoord, showpoly, showfrag, update_it, (add || rem) ? FALSE : (! nmols) ? TRUE : FALSE);
 }

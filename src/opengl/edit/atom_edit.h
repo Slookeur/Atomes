@@ -146,12 +146,12 @@ extern gboolean do_we_have_objects_in_selection (struct project * this_proj, ato
 extern G_MODULE_EXPORT void take_action (GtkButton * but, gpointer data);
 extern GtkWidget * action_tab (int aid, struct project * this_proj);
 
-extern int new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z);
+extern int is_this_a_new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z);
 extern void check_coord_modification (struct project * this_proj, int old_id[], struct atom * new_list,
                                       struct insert_object * this_object, gboolean movtion, gboolean passivating);
 extern void print_coord_info (struct project * this_proj, coord_info * coord);
 extern coord_info * duplicate_coord_info (coord_info * old_coord);
-extern void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag, gboolean update_frag);
+extern void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag);
 
 extern chemical_data * duplicate_chemical_data (int spec, chemical_data * chem);
 extern int find_spec_id (int s, int z, double * list_z);

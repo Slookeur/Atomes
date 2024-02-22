@@ -182,8 +182,7 @@ void clean_motion_search (struct project * this_proj, atom_search * asearch, int
       this_proj -> modelgl -> atom_win -> to_be_moved[sid] = NULL;
     }
   }
-  // = TRUE;
-  this_proj -> modelgl -> atom_win -> rebuilt[! sid] = asearch -> update_bonding;
+  this_proj -> modelgl -> atom_win -> rebuilt[! sid] = TRUE;
   this_proj -> modelgl -> atom_win -> rebuilt[sid] = FALSE;
 }
 
@@ -210,7 +209,6 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   to_rem = tmp_rem = NULL;
   to_add = tmp_add = NULL;
   remove = extra = nmols = 0;
-
   atom_edition * edit = this_proj -> modelgl -> atom_win;
   edit -> add_spec = 0;
   if (this_proj -> nspec)
@@ -230,13 +228,6 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
       if (this_proj -> modelgl -> cell_win -> slab_passivate) passivating = TRUE;
     }
   }
-  /* if (! this_proj -> dmtx && passivating)
-  {
-    i = activep;
-    active_project_changed (this_proj -> id);
-    active_project -> dmtx = run_distance_matrix (NULL, 0, 1);
-    active_project_changed (i);
-  }*/
 
   if (asearch -> action == DISPL || asearch -> action == REMOVE || asearch -> action == RANMOVE)
   {
@@ -314,8 +305,8 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
           tmp_add -> xyz[0] = object -> at_list[k].x + object -> baryc[0];
           tmp_add -> xyz[1] = object -> at_list[k].y + object -> baryc[1];
           tmp_add -> xyz[2] = object -> at_list[k].z + object -> baryc[2];
-          for (m=0; m<2; m++) tmp_add -> coord[m] = new_geo (m, object -> coord, object -> old_z, object -> at_list[k].coord[m],
-                                                             l, tmp_add -> type, edit -> coord, edit -> new_z);
+          for (m=0; m<2; m++) tmp_add -> coord[m] = is_this_a_new_geo (m, object -> coord, object -> old_z, object -> at_list[k].coord[1],
+                                                                       l, tmp_add -> type, edit -> coord, edit -> new_z);
           if (this_proj -> coord)
           {
             for (m=2; m<4; m++) tmp_add -> coord[m] = object -> at_list[k].coord[2] + this_proj -> coord -> totcoord[m];
@@ -531,7 +522,10 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     }
     if (asearch -> action == DISPL || asearch -> action == REMOVE || asearch -> action == RANMOVE)
     {
+      g_print ("Going for check coord !\n");
       check_coord_modification (this_proj, old_id, new_list, NULL, TRUE, passivating);
+      g_debug ("Coord info after check coord:");
+      print_coord_info (NULL, edit -> coord);
       if (passivating)
       {
         i = 0;
@@ -552,6 +546,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
       for (k=0; k<j; k++)
       {
         tmpgeo[i][k] = allocint (edit -> coord -> ntg[i][k]);
+
         // g_debug ("allocated i= %d, k= %d, tot= %d", i, k, edit -> coord -> ntg[i][k]);
       }
     }
@@ -560,6 +555,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     {
       j = tmp_new -> id;
       k = tmp_new -> sp;
+      // g_debug ("       id= %d, c[0]= %d, c[1]= %d", j, tmp_new -> coord[0], tmp_new -> coord[1]);
       if (! passivating || old_id[j] > 0)
       {
         for (l=0; l<2; l++)
@@ -577,10 +573,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
 
     if (asearch -> action != INSERT && asearch -> action != REPLACE)
     {
-      if (asearch -> update_bonding)
-      {
-        showfrag = remove_bonds_from_project (this_proj, NULL, old_id, new_list, ((asearch -> action == DISPL) || (asearch -> action == RANMOVE)) ? FALSE : TRUE);
-      }
+      showfrag = remove_bonds_from_project (this_proj, NULL, old_id, new_list, ((asearch -> action == DISPL) || (asearch -> action == RANMOVE)) ? FALSE : TRUE);
     }
     else
     {
@@ -725,6 +718,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     }
     add_bonds_to_project (this_proj, remove, j, new_bond_list);
   }
+
   if (this_proj -> natomes)
   {
     opengl_project_changed (this_proj -> id);
@@ -769,7 +763,6 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     if (! passivating || (passivating && old_id[tmp_new -> id] > 0))
     {
       this_proj -> atoms[0][i] = * duplicate_atom (tmp_new);
-      if (! asearch -> update_bonding) tmp_new -> numv = 0;
       this_proj -> atoms[0][i].id = i;
       spid[this_proj -> atoms[0][i].sp] ++;
       atid[i] = this_proj -> atoms[0][i].sp;
@@ -788,7 +781,6 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     }
   }
   if (passivating) g_free (old_id);
-
   rem_spec = 0;
   for (i=0; i<this_proj -> nspec + edit -> add_spec; i++)
   {
@@ -873,7 +865,6 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     g_free (this_proj -> chemistry -> nsps);
     this_proj -> chemistry -> nsps = duplicate_int (this_proj -> nspec, spid);
   }
-
   g_free (atid);
 
   i = activep;
@@ -887,8 +878,12 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     this_proj -> natomes = new_atoms;
   }
   // Active project changes in the next call
-  recover_opengl_data (this_proj, nmols, edit -> add_spec, rem_spec, spid, spdel, tmpgeo, showfrag, asearch -> update_bonding);
-
+  recover_opengl_data (this_proj, nmols, edit -> add_spec, rem_spec, spid, spdel, tmpgeo, showfrag);
+  if (showfrag)
+  {
+    g_free (showfrag);
+    showfrag = NULL;
+  }
 #ifdef DEBUG
   if (this_proj -> natomes)
   {
@@ -922,7 +917,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
 
   if (asearch -> action == REMOVE)
   {
-    if (! asearch -> update_bonding || passivating)
+    if (asearch -> recompute_bonding || passivating)
     {
       active_project_changed (activep);
       bonds_update = 1;
@@ -1985,7 +1980,7 @@ atom_search * duplicate_atom_search (atom_search * asearch)
   bsearch -> in_selection = asearch -> in_selection;
   bsearch -> passivating = asearch -> passivating;
   bsearch -> was_selected = asearch -> was_selected;
-  bsearch -> update_bonding = asearch -> update_bonding;
+  bsearch -> recompute_bonding = asearch -> recompute_bonding;
   bsearch -> set_for_all = asearch -> set_for_all;
   bsearch -> int_b = asearch -> int_b;
   int i =  get_asearch_num_objects (asearch);

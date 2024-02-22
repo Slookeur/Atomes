@@ -359,7 +359,7 @@ typedef struct {
   // Passivating = for all atoms of that type but not as a group
   gboolean passivating;
   gboolean was_selected;
-  gboolean update_bonding;
+  gboolean recompute_bonding;
   int set_for_all;
   int int_b;
   int * lab;

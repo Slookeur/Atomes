@@ -212,7 +212,8 @@ GtkWidget * coord_menu (glwin * view)
   gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_chains[0]);
   gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_coord[3]);
   gtk_menu_shell_append ((GtkMenuShell *)menu, view -> ogl_coord[4]);
-  add_advanced_item (menu, G_CALLBACK(coord_properties), (gpointer)& view -> colorp[30][0], TRUE, GDK_KEY_e, GDK_CONTROL_MASK);
+  gtk3_menu_item (menu, "Advanced", IMG_NONE, NULL, G_CALLBACK(coord_properties), (gpointer)& view -> colorp[30][0], TRUE, GDK_KEY_e, GDK_CONTROL_MASK, FALSE, FALSE, FALSE);
+  // add_advanced_item (menu, G_CALLBACK(coord_properties), (gpointer)& view -> colorp[30][0], TRUE, GDK_KEY_e, GDK_CONTROL_MASK);
   return menu;
 }
 #endif
