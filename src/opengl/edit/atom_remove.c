@@ -287,24 +287,26 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
         k = 0;
         if (old_id[i] > 0)
         {
-          for (j=0; j<tmp_list -> numv; j++)
+          // Save the neighbors list for this atom
+          for (l=0; l<tmp_list -> numv; l++)
           {
-            l = tmp_list -> vois[j];
-            if (old_id[l] > 0)
+            m = tmp_list -> vois[l];
+            if (old_id[m] > 0)
             {
-              tmp_vois[k] = l;
+              tmp_vois[k] = m;
               k ++;
             }
           }
         }
         else if (! remove && old_id[i] < 0)
         {
-          for (j=0; j<tmp_list -> numv; j++)
+          // Save the neighbors list for this atom
+          for (l=0; l<tmp_list -> numv; l++)
           {
-            l = tmp_list -> vois[j];
-            if (old_id[l] < 0)
+            m = tmp_list -> vois[l];
+            if (old_id[m] < 0)
             {
-              tmp_vois[k] = l;
+              tmp_vois[k] = m;
               k ++;
             }
           }
@@ -314,11 +316,13 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
         tmp_list -> numv = k;
         if (k)
         {
+          // Correct the neighbor list for this atom
           tmp_list -> vois = allocint (k);
-          for (j=0; j<k; j++) tmp_list -> vois[j] = tmp_vois[j];
+          for (l=0; l<k; l++) tmp_list -> vois[l] = tmp_vois[l];
         }
-        else
+        else if (in_frag[j] > 1)
         {
+          // If the atom has no neighbors, and is not the last one in the fragment
           tmp_per_frag = allocint (tcf+1);
           tmp_in_frag = allocint (tcf+1);
           showfrag = allocbool (tcf+1);
@@ -426,7 +430,7 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
         // g_debug ("testing frag[%d], remove= %d, tcf= %d, nat= %d, j= %d", j, remove, tcf, nat, j);
         k = test_this_fragment (nat, tcf, j, atom_list, old_id, remove);
         // g_debug ("After testing: k= %d", k);
-        if (k)
+        if (k > 0)
         {
           g_free (showfrag);
           showfrag = allocbool (tcf+k);

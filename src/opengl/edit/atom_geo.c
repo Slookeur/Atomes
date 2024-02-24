@@ -356,26 +356,6 @@ int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int o
 }
 
 /*
-*  gboolean is_in_atom_list (int aid, struct atom * new_list)
-*
-*  Usage: is atom in list ?
-*
-*  int aid                : atom id
-*  struct atom * new_list : the atom list to check
-*/
-gboolean is_in_atom_list (int aid, struct atom * new_list)
-{
-  struct atom * tmp_new;
-  tmp_new = new_list;
-  while (tmp_new)
-  {
-    if (tmp_new -> id == aid) return TRUE;
-    tmp_new = tmp_new -> next;
-  }
-  return FALSE;
-}
-
-/*
 *  void check_coord_modification (struct project * this_proj, int * old_id, struct atom * new_list,
 *                                 struct insert_object * this_object, gboolean movtion, gboolean passivating)
 *
@@ -424,8 +404,7 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
     {
       i = tmp_new -> sp;
       // Fill the dummy coord with the new atom information
-      new_coord -> geolist[0][i][0] = tmp_new -> numv;
-      new_coord -> geolist[0][i][1] = tmp_new -> numv;
+      for (j=0; j<2; j++) new_coord -> geolist[j][i][0] = tmp_new -> numv;
       k = tmp_new -> coord[1];
       for (j=0; j<this_proj -> nspec; j++)
       {
@@ -438,10 +417,10 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
         for (k=0; k<tmp_new -> numv; k++)
         {
           l = tmp_new -> vois[k];
-          if ((movtion && ((old_id[j] > 0 && old_id[l] < 0) || (old_id[j] < 0 && old_id[l] > 0)))
-             || (! movtion && ! is_in_atom_list (l, new_list)))
+          if ((old_id[j] > 0 && old_id[l] < 0) || (old_id[j] < 0 && old_id[l] > 0))
           {
             correct_it = TRUE;
+            // This neighbor will be moved / removed
             if (! passivating || h)
             {
               m = this_proj -> atoms[0][l].sp;
