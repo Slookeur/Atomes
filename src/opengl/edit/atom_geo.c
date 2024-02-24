@@ -438,7 +438,8 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
         for (k=0; k<tmp_new -> numv; k++)
         {
           l = tmp_new -> vois[k];
-          if ((old_id[j] > 0 && old_id[l] < 0) || (old_id[j] < 0 && old_id[l] > 0))
+          if ((movtion && ((old_id[j] > 0 && old_id[l] < 0) || (old_id[j] < 0 && old_id[l] > 0)))
+             || (! movtion && ! is_in_atom_list (l, new_list)))
           {
             correct_it = TRUE;
             if (! passivating || h)
@@ -460,6 +461,7 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
           m = this_object -> at_list[l].sp;
           nvois[m] ++;
         }
+        l = 0;
         for (k=0; k<this_proj -> nspec; k++)
         {
           if (nvois[k] != new_coord -> partial_geo[i][0][k])
@@ -467,7 +469,9 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
             correct_it = TRUE;
             new_coord -> partial_geo[i][0][k] = nvois[k];
           }
+          l += nvois[k];
         }
+        for (k=0; k<2; k++) new_coord -> geolist[k][i][0] = l;
       }
 
       if (correct_it)
