@@ -259,12 +259,12 @@ void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
       if (spid[k])
       {
         l = 0;
-        //g_debug ("alloc tntg of: %d", old_coord -> ntg[i][k]);
+        // g_debug ("k= %d, alloc tntg of: %d", k, old_coord -> ntg[i][k]);
         tntg = allocint (old_coord -> ntg[i][k]);
-        //if (i == 1) g_debug ("Checking geom:: i= %d, SP= %d, ntg[%d][%d]= %d", i, k, i, k, old_coord -> ntg[i][k]);
+        // if (i == 0) g_debug ("         checking geom:: i= %d, SP= %d, ntg[%d][%d]= %d", i, k, i, k, old_coord -> ntg[i][k]);
         for (m=0; m<old_coord -> ntg[i][k]; m++)
         {
-          //if (i == 1) g_debug ("m = %d, tmpgeo[%d][%d][%d]= %d", m, i, k, m, tmpgeo[i][k][m]);
+          // if (i == 0) g_debug ("                      :: m = %d, tmpgeo[%d][%d][%d]= %d", m, i, k, m, tmpgeo[i][k][m]);
           if (tmpgeo[i][k][m])
           {
             p = 1;
@@ -294,6 +294,7 @@ void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
               {
                 if (old_coord -> geolist[i][k][m] == old_coord -> geolist[i][k][o])
                 {
+                  // g_debug ("  WAS HERE:: k= %d, m= %d, o= %d, geolist = %d", k, m, o, old_coord -> geolist[i][k][m]);
                   p = 0;
                   break;
                 }
@@ -301,12 +302,12 @@ void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
             }
             if (p)
             {
-              //g_debug ("i= %d, tntg[m]= 1, m= %d", i, m);
+              // g_debug ("      i= %d, tntg[m]= 1, m= %d", i, m);
               tntg[m] = 1;
               o = l;
               l ++;
             }
-            // if (i == 1) g_debug ("geo= %d, old_sp= %d, new_sp= %d, old_geo= %d, new_geo= %d", i, k, s, m, o);
+            // if (i == 0) g_debug ("      geo= %d, old_sp= %d, new_sp= %d, old_geo= %d, new_geo= %d", i, k, s, m, o);
             for (p=0; p<this_proj -> natomes; p++)
             {
               if (this_proj -> atoms[0][p].sp == s)
@@ -324,9 +325,10 @@ void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
           tmp_coord -> geolist[i][j] = allocint(l);
           if (i)
           {
-            //g_debug ("allocating partial[%d] of %d and %d", j, l, new_spec);
+            // g_debug ("allocating partial[%d] of %d and %d", j, l, new_spec);
             tmp_coord -> partial_geo[j] = allocdint (l, new_spec);
           }
+          // if (! i) g_debug ("   ntg[0][%d]= %d", j, l);
           tmp_coord -> ntg[i][j] = l;
           tmp_coord -> totcoord[i] += l;
 
@@ -338,7 +340,7 @@ void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
           m = 0;
           for (n=0; n<old_coord -> ntg[i][k]; n++)
           {
-            //g_debug ("n= %d, tntg[%d]= %d", n, n, tntg[n]);
+            // g_debug ("n= %d, tntg[%d]= %d", n, n, tntg[n]);
             if (tntg[n])
             {
               tmp_coord -> geolist[i][j][m] = old_coord -> geolist[i][k][n];

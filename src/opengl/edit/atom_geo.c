@@ -63,11 +63,11 @@ void sort_partial_geo (int ** geom, int num_a)
 }
 
 /*
-*  int is_this_a_new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
+*  int is_this_a_new_geo (int gid, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
 *
-*  Usage: if required create a new geometry, stored in coord, for coordination type 'id' and chemical species 'new_sp', return geometry id
+*  Usage: if required create a new geometry, stored in coord, for coordination type 'gid' and chemical species 'new_sp', return geometry id
 *
-*  int id             : the new coordination type (0 = total, 1 = partial)
+*  int gid            : the new coordination type (0 = total, 1 = partial)
 *  coord_info * obj   : the new coordination info to update
 *  int * old_z        : old Z list
 *  int old_geo        : the old coordination id
@@ -76,13 +76,13 @@ void sort_partial_geo (int ** geom, int num_a)
 *  coord_info * coord : the old coordination info
 *  double * new_z     : new Z list
 */
-int is_this_a_new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
+int is_this_a_new_geo (int gid, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
 {
   int i, j, k, l, m, n, o;
   int ** n_part, ** o_part;
 
   // Number of coord of type id for spec new_sp
-  i = coord -> ntg[id][new_sp];
+  i = coord -> ntg[gid][new_sp];
   // Using j to store the total number of neighbor(s) for the coordination to test
   // Using k to store the number of type(s) of neighbor(s) for the coordination to test
   j = k = 0;
@@ -95,117 +95,263 @@ int is_this_a_new_geo (int id, coord_info * obj, int * old_z, int old_geo, int o
     }
   }
   // Then comparing with already stored data in coord
-  for (l=0; l<coord -> ntg[1][new_sp]; l++)
+  for (l=0; l<i; l++)
   {
-    m = 0;
-    n = 0;
-    for (o=0; o<coord -> species; o++)
+    switch (gid)
     {
-      if (coord -> partial_geo[new_sp][l][o])
-      {
-        m ++;
-        n += coord -> partial_geo[new_sp][l][o];
-      }
-    }
-    if (! id && j == n) return l;
-
-    if (id && j == n && k == m)
-    {
-      // Same number of atoms in the coordination for the spec
-      // 2 structures of size l: [0]= Z, [1] = nato
-      // Sort by Z, then comparing
-      n_part = allocdint (m, 2);
-      o_part = allocdint (m, 2);
-      m = 0;
-      for (n=0; n<coord -> species; n++)
-      {
-        if (coord -> partial_geo[new_sp][l][n])
+      case 0:
+        if (coord -> geolist[gid][new_sp][l] == obj -> geolist[gid][old_sp][old_geo]) return l;
+        break;
+      case 1:
+        m = 0;
+        n = 0;
+        for (o=0; o<coord -> species; o++)
         {
-          n_part[m][0] = (int)new_z[n];
-          n_part[m][1] = coord -> partial_geo[new_sp][l][n];
-          m ++;
+          if (coord -> partial_geo[new_sp][l][o])
+          {
+            m ++;
+            n += coord -> partial_geo[new_sp][l][o];
+          }
         }
-      }
-      if (m > 1) sort_partial_geo (n_part, m);
-      m = 0;
-      for (n=0; n<obj -> species; n++)
-      {
-        if (obj -> partial_geo[old_sp][old_geo][n])
+        if (j == n && k == m)
         {
-          o_part[m][0] = old_z[n];
-          o_part[m][1] = obj -> partial_geo[old_sp][old_geo][n];
-          m ++;
+          // Same number of atoms in the coordination for the spec
+          // 2 structures of size l: [0]= Z, [1] = nato
+          // Sort by Z, then comparing
+          n_part = allocdint (m, 2);
+          o_part = allocdint (m, 2);
+          m = 0;
+          for (n=0; n<coord -> species; n++)
+          {
+            if (coord -> partial_geo[new_sp][l][n])
+            {
+              n_part[m][0] = (int)new_z[n];
+              n_part[m][1] = coord -> partial_geo[new_sp][l][n];
+              m ++;
+            }
+          }
+          if (m > 1) sort_partial_geo (n_part, m);
+          m = 0;
+          for (n=0; n<obj -> species; n++)
+          {
+            if (obj -> partial_geo[old_sp][old_geo][n])
+            {
+              o_part[m][0] = old_z[n];
+              o_part[m][1] = obj -> partial_geo[old_sp][old_geo][n];
+              m ++;
+            }
+          }
+          if (m > 1) sort_partial_geo (o_part, m);
+          n = 1;
+          for (o=0; o<m; o++)
+          {
+            if (o_part[o][0] != n_part[o][0] || o_part[o][1] != n_part[o][1])
+            {
+              n = 0;
+              break;
+            }
+          }
+          g_free (n_part);
+          g_free (o_part);
+          if (n)  return l;
         }
-      }
-      if (m > 1) sort_partial_geo (o_part, m);
-      n = 1;
-      for (o=0; o<m; o++)
-      {
-        if (o_part[o][0] != n_part[o][0] || o_part[o][1] != n_part[o][1])
-        {
-          n = 0;
-          break;
-        }
-      }
-      g_free (n_part);
-      g_free (o_part);
-      if (n)
-      {
-        return l;
-      }
+        break;
     }
   }
 
   // If we keep going then this is a new type of coordination sphere
-  /* In order:
-    1) create the corresponding new partial coordination
-  */
-  int * tmpgeol[2];
-  for (j=id; j<2; j++)
+  int * tmpgeol = NULL;
+  if (! gid)
   {
-    tmpgeol[j] = allocint (coord -> ntg[j][new_sp]+1);
-    for (k=0; k<coord -> ntg[j][new_sp]; k++)
+    tmpgeol = allocint (coord -> ntg[gid][new_sp]+1);
+    for (j=0; j<coord -> ntg[gid][new_sp]; j++)
     {
-      tmpgeol[j][k] = coord -> geolist[id][new_sp][k];
+      tmpgeol[j] = coord -> geolist[gid][new_sp][j];
     }
-    l = 0;
-    for (m=0; m<obj -> species;m++) l += obj -> partial_geo[old_sp][old_geo][m];
-    tmpgeol[j][k] = l;
+    tmpgeol[j] = obj -> geolist[gid][old_sp][old_geo];
   }
-  int ** tmp_part = NULL;
-  tmp_part = g_malloc0 (coord -> ntg[1][new_sp]*sizeof*tmp_part);
-  for (j=0; j<coord -> ntg[1][new_sp]; j++)
+  else
   {
-    tmp_part[j] = duplicate_int (coord -> species, coord -> partial_geo[new_sp][j]);
-  }
-  g_free (coord -> partial_geo[new_sp]);
-  coord -> partial_geo[new_sp] = g_malloc0 ((coord -> ntg[1][new_sp]+1)*sizeof*coord -> partial_geo[new_sp]);
-  if (tmp_part)
-  {
+    int ** tmp_part = NULL;
+    tmp_part = g_malloc0 (coord -> ntg[1][new_sp]*sizeof*tmp_part);
     for (j=0; j<coord -> ntg[1][new_sp]; j++)
     {
-      coord -> partial_geo[new_sp][j] = duplicate_int (coord -> species, tmp_part[j]);
+      tmp_part[j] = duplicate_int (coord -> species, coord -> partial_geo[new_sp][j]);
     }
-    g_free (tmp_part);
-  }
-  coord -> partial_geo[new_sp][j] = allocint (coord -> species);
-  for (k=0; k<obj -> species; k++)
-  {
-    if (old_z[k])
+    g_free (coord -> partial_geo[new_sp]);
+    coord -> partial_geo[new_sp] = g_malloc0 ((coord -> ntg[1][new_sp]+1)*sizeof*coord -> partial_geo[new_sp]);
+    if (tmp_part)
     {
-      l = find_spec_id (coord -> species, old_z[k], new_z);
-      coord -> partial_geo[new_sp][j][l] = obj -> partial_geo[old_sp][old_geo][k];
+      for (j=0; j<coord -> ntg[1][new_sp]; j++)
+      {
+        coord -> partial_geo[new_sp][j] = duplicate_int (coord -> species, tmp_part[j]);
+      }
+      g_free (tmp_part);
+    }
+    coord -> partial_geo[new_sp][j] = allocint (coord -> species);
+    for (k=0; k<obj -> species; k++)
+    {
+      if (old_z[k])
+      {
+        l = find_spec_id (coord -> species, old_z[k], new_z);
+        coord -> partial_geo[new_sp][j][l] = obj -> partial_geo[old_sp][old_geo][k];
+      }
     }
   }
-  if (coord -> geolist[id][new_sp] != NULL) g_free (coord -> geolist[id][new_sp]);
-  // If this is a new total coordination then change the partial coordination as well
-  for (j=id; j<2; j++)
+  coord -> ntg[gid][new_sp] ++;
+  coord -> totcoord[gid] ++;
+  if (! gid)
   {
-    coord -> ntg[j][new_sp] ++;
-    coord -> totcoord[j] ++;
-    coord -> geolist[j][new_sp] = duplicate_int (coord -> ntg[j][new_sp], tmpgeol[j]);
+    if (coord -> geolist[gid][new_sp] != NULL) g_free (coord -> geolist[gid][new_sp]);
+    coord -> geolist[gid][new_sp] = duplicate_int (coord -> ntg[gid][new_sp], tmpgeol);
+    g_free (tmpgeol);
   }
-  for (j=(id) ? 1 : 0; j<2; j++) g_free (tmpgeol[j]);
+  return i;
+}
+
+/*
+*  int find_this_geo_id (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
+*
+*  Usage: if required create a new geometry, stored in coord, for coordination type 'id' and chemical species 'new_sp', return geometry id
+*
+*  int id             : the new coordination type (0 = total, 1 = partial)
+*  coord_info * obj   : the new coordination info to update
+*  int * old_z        : old Z list
+*  int old_geo        : the old coordination id for this coordination type
+*  int old_sp         : the old chemical species id
+*  int new_sp         : the new chemical species id
+*  coord_info * coord : the old coordination info
+*  double * new_z     : new Z list
+*/
+int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
+{
+  int i, j, k, l, m, n, o;
+  int ** n_part, ** o_part;
+
+  // Number of coord of type id for spec new_sp
+  i = coord -> ntg[gid][new_sp];
+  if (gid)
+  {
+    // Using j to store the total number of neighbor(s) for the coordination to test
+    // Using k to store the number of type(s) of neighbor(s) for the coordination to test
+    j = k = 0;
+    for (l=0; l<obj -> species; l++)
+    {
+      if (obj -> partial_geo[old_sp][old_geo][l])
+      {
+        k ++;
+        j += obj -> partial_geo[old_sp][old_geo][l];
+      }
+    }
+  }
+
+  // Then comparing with already stored data in coord
+  for (l=0; l<coord -> ntg[gid][new_sp]; l++)
+  {
+    switch (gid)
+    {
+      case 0:
+        if (coord -> geolist[0][new_sp][l] == obj -> geolist[0][old_sp][old_geo]) return l;
+        break;
+      case 1:
+        m = 0;
+        n = 0;
+        for (o=0; o<coord -> species; o++)
+        {
+          if (coord -> partial_geo[new_sp][l][o])
+          {
+            m ++;
+            n += coord -> partial_geo[new_sp][l][o];
+          }
+        }
+        if (j == n && k == m)
+        {
+          // Same number of atoms in the coordination for the spec
+          // 2 structures of size l: [0]= Z, [1] = nato
+          // Sort by Z, then comparing
+          n_part = allocdint (m, 2);
+          o_part = allocdint (m, 2);
+          m = 0;
+          for (n=0; n<coord -> species; n++)
+          {
+            if (coord -> partial_geo[new_sp][l][n])
+            {
+              n_part[m][0] = (int)new_z[n];
+              n_part[m][1] = coord -> partial_geo[new_sp][l][n];
+              m ++;
+            }
+          }
+          if (m > 1) sort_partial_geo (n_part, m);
+          m = 0;
+          for (n=0; n<obj -> species; n++)
+          {
+            if (obj -> partial_geo[old_sp][old_geo][n])
+            {
+              o_part[m][0] = old_z[n];
+              o_part[m][1] = obj -> partial_geo[old_sp][old_geo][n];
+              m ++;
+            }
+          }
+          if (m > 1) sort_partial_geo (o_part, m);
+          n = 1;
+          for (o=0; o<m; o++)
+          {
+            if (o_part[o][0] != n_part[o][0] || o_part[o][1] != n_part[o][1])
+            {
+              n = 0;
+              break;
+            }
+          }
+          g_free (n_part);
+          g_free (o_part);
+          if (n) return l;
+        }
+        break;
+    }
+  }
+
+  // If we keep going then this is a new type of coordination sphere
+  int * tmpgeol = NULL;
+  tmpgeol = allocint (coord -> ntg[gid][new_sp]+1);
+  for (j=0; j<coord -> ntg[gid][new_sp]; j++)
+  {
+    tmpgeol[j] = coord -> geolist[gid][new_sp][j];
+  }
+  tmpgeol[j] = obj -> geolist[gid][old_sp][old_geo];
+
+  if (gid)
+  {
+    int ** tmp_part = NULL;
+    tmp_part = g_malloc0 (coord -> ntg[1][new_sp]*sizeof*tmp_part);
+    for (j=0; j<coord -> ntg[1][new_sp]; j++)
+    {
+      tmp_part[j] = duplicate_int (coord -> species, coord -> partial_geo[new_sp][j]);
+    }
+    g_free (coord -> partial_geo[new_sp]);
+    coord -> partial_geo[new_sp] = g_malloc0 ((coord -> ntg[1][new_sp]+1)*sizeof*coord -> partial_geo[new_sp]);
+    if (tmp_part)
+    {
+      for (j=0; j<coord -> ntg[1][new_sp]; j++)
+      {
+        coord -> partial_geo[new_sp][j] = duplicate_int (coord -> species, tmp_part[j]);
+      }
+      g_free (tmp_part);
+    }
+    coord -> partial_geo[new_sp][j] = allocint (coord -> species);
+    for (k=0; k<obj -> species; k++)
+    {
+      if (old_z[k])
+      {
+        l = find_spec_id (coord -> species, old_z[k], new_z);
+        coord -> partial_geo[new_sp][j][l] = obj -> partial_geo[old_sp][old_geo][k];
+      }
+    }
+  }
+  coord -> ntg[gid][new_sp] ++;
+  coord -> totcoord[gid] ++;
+  if (coord -> geolist[gid][new_sp] != NULL) g_free (coord -> geolist[gid][new_sp]);
+  coord -> geolist[gid][new_sp] = duplicate_int (coord -> ntg[gid][new_sp], tmpgeol);
+  g_free (tmpgeol);
   return i;
 }
 
@@ -246,7 +392,7 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
                                struct insert_object * this_object, gboolean movtion, gboolean passivating)
 {
   struct atom * tmp_new;
-  int g, h, i, j, k, l, m;
+  int g, h, i, j, k, l, m, n;
   gboolean correct_it;
   int * new_z = allocint (this_proj -> nspec);
   double * old_z;
@@ -258,6 +404,7 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
   {
     new_z[i] = (int)this_proj -> chemistry -> chem_prop[CHEM_Z][i];
   }
+
   // first create a dummy coord structure to store an atom individual data
   coord_info * new_coord = g_malloc0 (sizeof*new_coord);
   for (i=0; i<2; i++)
@@ -277,6 +424,8 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
     {
       i = tmp_new -> sp;
       // Fill the dummy coord with the new atom information
+      new_coord -> geolist[0][i][0] = tmp_new -> numv;
+      new_coord -> geolist[0][i][1] = tmp_new -> numv;
       k = tmp_new -> coord[1];
       for (j=0; j<this_proj -> nspec; j++)
       {
@@ -297,6 +446,7 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
               m = this_proj -> atoms[0][l].sp;
               // For the atom studied reduce the number of neighbors of that species:
               new_coord -> partial_geo[i][0][m] --;
+              for (n=0; n<2; n++) new_coord -> geolist[n][i][0] --;
             }
           }
         }
@@ -351,11 +501,11 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
           {
             if (this_object)
             {
-              tmp_new -> coord[j] = is_this_a_new_geo (j, new_coord, new_z, 0, i, i, this_object -> coord, old_z);
+              tmp_new -> coord[j] = find_this_geo_id (j, new_coord, new_z, 0, i, i, this_object -> coord, old_z);
             }
             else
             {
-              tmp_new -> coord[j] = is_this_a_new_geo (j, new_coord, new_z, 0, i, i, this_proj -> modelgl -> atom_win -> coord, this_proj -> modelgl -> atom_win -> new_z);
+              tmp_new -> coord[j] = find_this_geo_id (j, new_coord, new_z, 0, i, i, this_proj -> modelgl -> atom_win -> coord, this_proj -> modelgl -> atom_win -> new_z);
             }
           }
         }

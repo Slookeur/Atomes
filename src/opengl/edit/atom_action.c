@@ -305,8 +305,12 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
           tmp_add -> xyz[0] = object -> at_list[k].x + object -> baryc[0];
           tmp_add -> xyz[1] = object -> at_list[k].y + object -> baryc[1];
           tmp_add -> xyz[2] = object -> at_list[k].z + object -> baryc[2];
-          for (m=0; m<2; m++) tmp_add -> coord[m] = is_this_a_new_geo (m, object -> coord, object -> old_z, object -> at_list[k].coord[1],
-                                                                       l, tmp_add -> type, edit -> coord, edit -> new_z);
+          for (m=0; m<2; m++)
+          {
+            tmp_add -> coord[m] = find_this_geo_id (m, object -> coord, object -> old_z, object -> at_list[k].coord[m],
+                                                    l, tmp_add -> type, edit -> coord, edit -> new_z);
+
+          }
           if (this_proj -> coord)
           {
             for (m=2; m<4; m++) tmp_add -> coord[m] = object -> at_list[k].coord[2] + this_proj -> coord -> totcoord[m];
@@ -382,6 +386,13 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     print_coord_info (NULL, edit -> coord);
   }
 #endif
+
+  /*if (this_proj -> coord)
+  {
+    g_free (this_proj -> coord);
+    this_proj -> coord = NULL;
+  }
+  this_proj -> coord = duplicate_coord_info (edit -> coord);*/
 
   if (asearch -> action == DISPL && remove == 0) return -1;
   if (asearch -> action == RANMOVE && remove == 0) return -1;
@@ -522,10 +533,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     }
     if (asearch -> action == DISPL || asearch -> action == REMOVE || asearch -> action == RANMOVE)
     {
-      g_print ("Going for check coord !\n");
       check_coord_modification (this_proj, old_id, new_list, NULL, TRUE, passivating);
-      g_debug ("Coord info after check coord:");
-      print_coord_info (NULL, edit -> coord);
       if (passivating)
       {
         i = 0;
@@ -546,8 +554,6 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
       for (k=0; k<j; k++)
       {
         tmpgeo[i][k] = allocint (edit -> coord -> ntg[i][k]);
-
-        // g_debug ("allocated i= %d, k= %d, tot= %d", i, k, edit -> coord -> ntg[i][k]);
       }
     }
     tmp_new = new_list;
@@ -563,7 +569,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
           m = tmp_new -> coord[l];
           if (m >= edit -> coord -> ntg[l][k])
           {
-            g_warning ("Error: at= %d, sp= %d, l= %d, geo= %d", j, k, l, m);
+            g_warning ("Error: at= %d, sp= %d, l= %d, geo_id= %d, edit -> coord -> ntg[%d][%d]= %d", j+1, k, l, m, l, k, edit -> coord -> ntg[l][k]);
           }
           tmpgeo[l][k][m] ++;
         }
@@ -577,13 +583,17 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     }
     else
     {
-      i = this_proj -> coord -> totcoord[2] + edit -> coord -> totcoord[2];
+      // Can  edit -> coord -> totcoord[2] be != 0 at this point ?
+      // g_debug ("this_proj -> totcoord[2]= %d, edit -> totcoord[2]= %d", this_proj -> coord -> totcoord[2], edit -> coord -> totcoord[2]);
+      /*i = this_proj -> coord -> totcoord[2] + edit -> coord -> totcoord[2];
       showfrag = allocbool (i);
       for (j=0; j<this_proj -> coord -> totcoord[2]; j++)
       {
         showfrag[j] = this_proj -> modelgl -> anim -> last -> img -> show_coord[2][j];
       }
-      for (j=this_proj -> coord -> totcoord[2]; j<i; j++) showfrag[j] = TRUE;
+      for (j=this_proj -> coord -> totcoord[2]; j<i; j++) showfrag[j] = TRUE;*/
+      i =  this_proj -> coord -> totcoord[2];
+      showfrag = duplicate_bool (i, this_proj -> modelgl -> anim -> last -> img -> show_coord[2]);
     }
     if (! passivating) g_free (old_id);
   }

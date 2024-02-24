@@ -298,7 +298,7 @@ do i=1, NS
       ! The 10000 iterations break required because of F90 limitations
       if (MOLCOUNTER.eq.10000) goto 002
       MOLCOUNTER = 0
-      n = 1
+      n = j
       goto 002
     else if (MOLCOUNTER.gt.0 .and.TOGL(j).eq.TOTMOL) then
       do l=1, CONTJ(j,i)
@@ -322,6 +322,12 @@ do i=1, NS
       enddo
     endif
   enddo
+
+  if (TMBS .lt. NA) then
+    MOLCOUNTER = 0
+    goto 002
+  endif
+
   003 continue
 
   if (frag_and_mol .eq. 1) then
@@ -369,7 +375,7 @@ do i=1, NS
         do l=1, TMPMOL%ATOMES
           m = ATMOL(l)
           n = CONTJ(m,TMPMOL%STEP)
-           if (allocated(ATVS)) deallocate(ATVS)
+          if (allocated(ATVS)) deallocate(ATVS)
           allocate(ATVS(n), STAT=ERR)
           if (ERR .ne. 0) then
             ALC_TAB="ATVS"
