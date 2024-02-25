@@ -170,7 +170,7 @@ void clean_atom_win (struct project * this_proj)
   this_proj -> modelgl -> create_shaders[MEASU] = TRUE;
   this_proj -> modelgl -> create_shaders[MAXIS] = TRUE;
   this_proj -> modelgl -> create_shaders[PICKS] = TRUE;
-  int i, j;
+  int i;
   for (i=0; i<2; i++)
   {
     if (this_proj -> modelgl -> saved_coord[i] != NULL)
@@ -178,7 +178,6 @@ void clean_atom_win (struct project * this_proj)
       g_free (this_proj -> modelgl -> saved_coord[i]);
       this_proj -> modelgl -> saved_coord[i] = NULL;
     }
-    for (j=0; j<2; j++) this_proj -> modelgl -> rebuild[i][j] = FALSE;
   }
   clean_other_window_after_edit (this_proj);
   update (this_proj -> modelgl);

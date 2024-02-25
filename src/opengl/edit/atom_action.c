@@ -387,13 +387,6 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   }
 #endif
 
-  /*if (this_proj -> coord)
-  {
-    g_free (this_proj -> coord);
-    this_proj -> coord = NULL;
-  }
-  this_proj -> coord = duplicate_coord_info (edit -> coord);*/
-
   if (asearch -> action == DISPL && remove == 0) return -1;
   if (asearch -> action == RANMOVE && remove == 0) return -1;
   if (asearch -> action == REMOVE && remove == 0) return -1;

@@ -167,6 +167,9 @@ G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
   struct project * this_proj = get_project_by_id(the_data -> a);
   int i = this_proj -> modelgl -> mode;
   int j = the_data -> b;
+
+  if (! (j == EDITION && is_atom_win_active(this_proj -> modelgl)))
+  {
 #ifdef GTK4
   if (i != j)
 #else
@@ -232,6 +235,7 @@ G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
     gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_mode[j], TRUE);
   }
 #endif
+  }
 }
 
 /*

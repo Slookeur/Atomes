@@ -748,12 +748,14 @@ typedef struct {
   // Clones
   vec3_t ** clones;
 
-  // Coordination
-  // 0 = on move
-  //    atom_win active: 0 = normal, 1 = random
-  //    atom_win inactive: 0/1 to turn off/on
-  // 1 = on copy
-  //    atom_win inactive: 0/1 to turn off/on
+  gboolean prepare_motion;
+  // Rebuild trigger switch on edition
+  // [0] = on move:
+  //    [0] atom_win active: 0/1 to turn off/on
+  //    [1] atom_win inactive: 0/1 to turn off/on
+  // [1] = on copy:
+  //    [0] atom_win active: 0/1 to turn off/on
+  //    [1] atom_win inactive: 0/1 to turn off/on
   gboolean rebuild[2][2];
   gboolean bonding;
   gboolean adv_bonding[2];                   // 0 = Fragments, 1 = Molecules

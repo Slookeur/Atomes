@@ -514,6 +514,7 @@ void process_selected_atom (struct project * this_proj, glwin * view, int id, in
       this_proj -> atoms[i][id].pick[pi] = FALSE;
       update_selection_list (view -> anim -> last -> img -> selected[pi], & this_proj -> atoms[i][id], FALSE);
       view -> anim -> last -> img -> selected[pi] -> selected --;
+      view -> prepare_motion = TRUE;
     }
     else if (this_proj -> atoms[i][id].label[ac])
     {
@@ -522,6 +523,7 @@ void process_selected_atom (struct project * this_proj, glwin * view, int id, in
       view -> labelled = check_label_numbers (this_proj, 2);
       update_selection_list (view -> anim -> last -> img -> selected[pi], & this_proj -> atoms[i][id], FALSE);
       view -> anim -> last -> img -> selected[pi] -> selected --;
+      view -> prepare_motion = TRUE;
     }
     else
     {
@@ -534,6 +536,7 @@ void process_selected_atom (struct project * this_proj, glwin * view, int id, in
     this_proj -> atoms[i][id].pick[pi] = TRUE;
     update_selection_list (view -> anim -> last -> img -> selected[pi], & this_proj -> atoms[i][id], TRUE);
     view -> anim -> last -> img -> selected[pi] -> selected ++;
+    view -> prepare_motion = TRUE;
   }
 }
 
@@ -709,8 +712,6 @@ void process_the_hits (glwin * view, gint event_button, double ptx, double pty)
         {
           init_coordinates (this_proj, 1, FALSE, TRUE);
           view -> baryc[1] = get_bary (this_proj, 1);
-          if (view -> rebuild[0][1]) view -> rebuild[0][0] = TRUE;
-          if (view -> rebuild[1][1]) view -> rebuild[1][0] = TRUE;
         }
         int shaders[1] = {SELEC};
         re_create_md_shaders (1, shaders, this_proj);

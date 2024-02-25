@@ -217,7 +217,6 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   int tmpbond[2];
   int ** tmpbondid[2];
   struct atom * tmp_list;
-  gboolean split = FALSE;
   gboolean * frag_to_test;
   gboolean * frag_to_remove;
   int * per_frag, * tmp_per_frag;
@@ -354,19 +353,16 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   frag_to_remove = allocbool (tcf);
   for (i=0; i<tcf; i++)
   {
-    if (per_frag[i] > 1)
+    if (! in_frag[i])
     {
-      if (in_frag[i] == per_frag[i])
-      {
-        frag_to_remove[i] = TRUE;
-        split = TRUE;
-      }
-      else if (in_frag[i])
+      frag_to_remove[i] = TRUE;
+    }
+    else if (per_frag[i] > 1)
+    {
+      if (in_frag[i] != per_frag[i])
       {
         frag_to_test[i] = TRUE;
-        split = TRUE;
       }
-      // g_debug ("i= %d, frag_to_test[%d]= %d, frag_to_remove[%d]= %d, in_frag[%d]= %d, per_frag[%d]= %d", i, i, frag_to_test[i], i, frag_to_remove[i], i, in_frag[i], i, per_frag[i]);
     }
     // g_debug ("i= %d, frag_to_test[%d]= %d, frag_to_remove[%d]= %d, in_frag[%d]= %d, per_frag[%d]= %d", i, i, frag_to_test[i], i, frag_to_remove[i], i, in_frag[i], i, per_frag[i]);
   }
@@ -379,97 +375,91 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
     tmp_list = tmp_list -> next;
   }
 
-  if (split)
+  if (remove)
   {
-    if (remove)
+    i = 0;
+    // Removing fragment(s) if needed
+    for (j=0; j<tcf; j++)
     {
-      i = 0;
-      // Removing fragment(s) if needed
-      for (j=0; j<tcf; j++)
+      if (frag_to_remove[j])
       {
-        if (frag_to_remove[j])
+        i ++;
+        // All atoms in fragment j are modified
+        // All other atoms will be affected
+        for (k=0; k<nat; k++)
         {
-          i ++;
-          // All atoms in fragment j are modified
-          // All other atoms will be affected
-          for (k=0; k<nat; k++)
+          if (atom_list[k])
           {
-            if (atom_list[k])
+            if (this_proj)
             {
-              if (this_proj)
+              if (atom_list[k] -> coord[2] > j)
               {
-                if (old_id[atom_list[k] -> sp] > 0)
-                {
-                  if (atom_list[k] -> coord[2] > i)
-                  {
-                    atom_list[k] -> coord[2] -= i-1;
-                  }
-                }
+                atom_list[k] -> coord[2] -= i;
               }
             }
           }
-          if (this_proj)
-          {
-            g_free (showfrag);
-            showfrag = allocbool (tcf-1);
-            for (k=0; k<j; k++) showfrag[k] = show_this[k];
-            for (k=j+1; k<tcf-i; k++) showfrag[k-1] = show_this[k];
-            for (k=j+1; k<tcf-i; k++) frag_to_test[k-1] = frag_to_test[k];
-            g_free (show_this);
-            show_this = duplicate_bool (tcf-i, showfrag);
-          }
         }
-      }
-      tcf -= i;
-    }
-    i = tcf;
-    for (j=0; j<i; j++)
-    {
-      if (frag_to_test[j])
-      {
-        // g_debug ("testing frag[%d], remove= %d, tcf= %d, nat= %d, j= %d", j, remove, tcf, nat, j);
-        k = test_this_fragment (nat, tcf, j, atom_list, old_id, remove);
-        // g_debug ("After testing: k= %d", k);
-        if (k > 0)
+        if (this_proj)
         {
           g_free (showfrag);
-          showfrag = allocbool (tcf+k);
-          for (l=0; l<tcf; l++) showfrag[l] = show_this[l];
-          for (l=tcf; l<tcf+k; l++) showfrag[l] = show_this[j];
+          showfrag = allocbool (tcf-1);
+          for (k=0; k<j; k++) showfrag[k] = show_this[k];
+          for (k=j+1; k<tcf-i; k++) showfrag[k-1] = show_this[k];
+          for (k=j+1; k<tcf-i; k++) frag_to_test[k-1] = frag_to_test[k];
           g_free (show_this);
-          show_this = duplicate_bool (tcf+k, showfrag);
-          tcf += k;
+          show_this = duplicate_bool (tcf-i, showfrag);
         }
       }
     }
-    g_free (frag_to_test);
-    g_free (frag_to_remove);
-    if (this_proj) g_free (show_this);
+    tcf -= i;
+  }
+  i = tcf;
+  for (j=0; j<i; j++)
+  {
+    if (frag_to_test[j])
+    {
+      // g_debug ("testing frag[%d], remove= %d, tcf= %d, nat= %d, j= %d", j, remove, tcf, nat, j);
+      k = test_this_fragment (nat, tcf, j, atom_list, old_id, remove);
+      // g_debug ("After testing: k= %d", k);
+      if (k > 0)
+      {
+        g_free (showfrag);
+        showfrag = allocbool (tcf+k);
+        for (l=0; l<tcf; l++) showfrag[l] = show_this[l];
+        for (l=tcf; l<tcf+k; l++) showfrag[l] = show_this[j];
+        g_free (show_this);
+        show_this = duplicate_bool (tcf+k, showfrag);
+        tcf += k;
+      }
+    }
+  }
+  g_free (frag_to_test);
+  g_free (frag_to_remove);
+  if (this_proj) g_free (show_this);
 
-    id_frag = allocint (tcf);
-    tmp_list = new_list;
-    while (tmp_list)
-    {
-      i = tmp_list -> id;
-      tmp_list -> coord[2] = atom_list[i] -> coord[2];
-      // g_debug ("End:: id= %d, coord[2]= %d", tmp_list -> id, tmp_list -> coord[2]);
-      tmp_list = tmp_list -> next;
-    }
-    g_free (atom_list);
+  id_frag = allocint (tcf);
+  tmp_list = new_list;
+  while (tmp_list)
+  {
+    i = tmp_list -> id;
+    tmp_list -> coord[2] = atom_list[i] -> coord[2];
+    // g_debug ("End:: id= %d, coord[2]= %d", tmp_list -> id, tmp_list -> coord[2]);
+    tmp_list = tmp_list -> next;
+  }
+  g_free (atom_list);
 
-    if (this_proj)
-    {
-      this_proj -> coord -> totcoord[2] = tcf;
-    }
-    else
-    {
-      this_object -> coord -> totcoord[2] = tcf;
-    }
-    if (id_frag)
-    {
-      g_free (id_frag);
-      id_frag = NULL;
-    }
+  if (this_proj)
+  {
+    this_proj -> coord -> totcoord[2] = tcf;
+  }
+  else
+  {
+    this_object -> coord -> totcoord[2] = tcf;
+  }
+  if (id_frag)
+  {
+    g_free (id_frag);
+    id_frag = NULL;
   }
 
   if (this_proj)
