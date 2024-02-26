@@ -572,7 +572,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
 
     if (asearch -> action != INSERT && asearch -> action != REPLACE)
     {
-      showfrag = remove_bonds_from_project (this_proj, NULL, old_id, new_list, ((asearch -> action == DISPL) || (asearch -> action == RANMOVE)) ? FALSE : TRUE);
+      showfrag = remove_bonds_from_project (this_proj, NULL, old_id, new_list, (asearch -> action == DISPL || asearch -> action == RANMOVE || passivating) ? FALSE : TRUE);
     }
     else
     {

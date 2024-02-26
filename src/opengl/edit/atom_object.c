@@ -672,10 +672,10 @@ void add_object_atoms (struct insert_object * this_object, struct project * this
     clean_object_bonds (this_proj, o_step, this_object, new_id, movtion);
   }
   correct_coordinates_for_object (this_proj, this_object, movtion);
-  if (remove)
+  /*if (remove)
   {
     for (i=0; i<this_object -> atoms; i++) this_object -> at_list[i].id = new_id[this_object -> at_list[i].id]-1;
-  }
+  }*/
   if (check_bonding)
   {
     check_coord_modification (this_proj, NULL, & this_object -> at_list[0], this_object, FALSE, FALSE);
