@@ -258,15 +258,24 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   }
 
   int nat = (this_proj) ? this_proj -> natomes : this_object -> atoms;
+  gboolean absolute_test_zero = FALSE;
   per_frag = allocint (tcf);
   in_frag = allocint (tcf);
   id_mod = allocint (nat);
   tmp_vois = allocint (20);
   h = -1;
   tmp_list = new_list;
+  g_debug ("tcf= %d", tcf);
   for (i=0; i<nat; i++)
   {
     j = (this_proj) ? this_proj -> atoms[0][i].coord[2] : tmp_list -> coord[2];
+    if (j > tcf-1)
+    {
+      // Forcing the analysis if system with more than 100 000 atoms
+      g_debug ("j = %d", j);
+      absolute_test_zero = TRUE;
+      j = 0;
+    }
     per_frag[j] ++;
     if (old_id[i] < 0)
     {
@@ -318,6 +327,7 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   while (tmp_list)
   {
     i =  tmp_list -> coord[2];
+    if (i > tcf -1) i = 0;
     if (! tmp_list -> numv && per_frag[i] > 1)
     {
       // If the atom has no neighbors, and if it is not the last one in the fragment
@@ -367,7 +377,12 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
     {
       frag_to_test[i] = TRUE;
     }
-    // g_debug ("i= %d, frag_to_test[%d]= %d, frag_to_remove[%d]= %d, in_frag[%d]= %d, per_frag[%d]= %d", i, i, frag_to_test[i], i, frag_to_remove[i], i, in_frag[i], i, per_frag[i]);
+    if (! i && absolute_test_zero)
+    {
+      frag_to_test[i] = TRUE;
+      frag_to_remove[i] = FALSE;
+    }
+    g_debug ("i= %d, frag_to_test[%d]= %d, frag_to_remove[%d]= %d, in_frag[%d]= %d, per_frag[%d]= %d", i, i, frag_to_test[i], i, frag_to_remove[i], i, in_frag[i], i, per_frag[i]);
   }
   g_free (in_frag);
   g_free (per_frag);
@@ -375,7 +390,11 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   tmp_list = new_list;
   while (tmp_list)
   {
-    atom_list[tmp_list -> id] = duplicate_atom (tmp_list);
+    i = tmp_list -> id;
+    if (old_id[i] > 0 || ! remove)
+    {
+      atom_list[i] = duplicate_atom (tmp_list);
+    }
     tmp_list = tmp_list -> next;
   }
 
@@ -405,11 +424,11 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
         }
         if (this_proj)
         {
-          tmp_show_frag = allocbool (tcf-1);
+          tmp_show_frag = allocbool (tcf-1-i);
           for (k=0; k<j; k++) tmp_show_frag[k] = show_frag[k];
           for (k=j+1; k<tcf-i; k++) tmp_show_frag[k-1] = show_frag[k];
           g_free (show_frag);
-          show_frag = duplicate_bool (tcf-i, tmp_show_frag);
+          show_frag = duplicate_bool (tcf-1-i, tmp_show_frag);
           g_free (tmp_show_frag);
           for (k=j+1; k<tcf-i; k++) frag_to_test[k-1] = frag_to_test[k];
         }

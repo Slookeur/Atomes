@@ -917,18 +917,14 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   active_project -> dmtx = FALSE;
   active_project -> run = (active_project -> natomes) ? TRUE : FALSE;
   chemistry_ () ;
-
-  if (asearch -> action == REMOVE)
+  if (asearch -> recompute_bonding || passivating)
   {
-    if (asearch -> recompute_bonding || passivating)
-    {
-      active_project_changed (activep);
-      bonds_update = 1;
-      frag_update = (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
-      mol_update = (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
-      active_project -> runc[0] = FALSE;
-      on_calc_bonds_released (NULL, NULL);
-    }
+    active_project_changed (activep);
+    bonds_update = 1;
+    frag_update = (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
+    mol_update = (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
+    active_project -> runc[0] = FALSE;
+    on_calc_bonds_released (NULL, NULL);
   }
   // Then back to the previous active project
   active_project_changed (i);
