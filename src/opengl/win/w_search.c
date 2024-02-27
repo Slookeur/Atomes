@@ -3030,13 +3030,24 @@ void get_coord_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * wi
           switch (filter)
           {
             case 0:
-              max_random = this_proj -> chemistry -> nsps[-h-1];
-              nran = g_strdup_printf ("%s", this_proj -> chemistry -> label[-h-1]);
+              if (csearch -> status == 2)
+              {
+                max_random = this_proj -> chemistry -> nsps[-h-1];
+                nran = g_strdup_printf ("%s", this_proj -> chemistry -> label[-h-1]);
+              }
+              else
+              {
+                max_random = 0;
+                for (i=0; i<this_proj -> natomes; i++)
+                {
+                  if (this_proj -> atoms[0][i].sp == -h-1 && this_proj -> atoms[0][i].pick[0] == csearch -> status) max_random ++;
+                }
+              }
               break;
             case 1:
               for (i=0; i<this_proj -> natomes; i++)
               {
-                if (this_proj -> atoms[0][i].numv == -h-1) max_random ++;
+                if (this_proj -> atoms[0][i].numv == -h-1 && (this_proj -> atoms[0][i].pick[0] == csearch -> status || csearch -> status == 2)) max_random ++;
               }
               if (-h-1 > 0)
               {
@@ -3059,7 +3070,10 @@ void get_coord_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * wi
               i = (-h-1) - k;
               for (k=0; k<this_proj -> natomes; k++)
               {
-                if (this_proj -> atoms[0][k].sp == j && this_proj -> atoms[0][k].coord[1] == i) max_random ++;
+                if (this_proj -> atoms[0][k].sp == j && this_proj -> atoms[0][k].coord[1] == i)
+                {
+                  if (this_proj -> atoms[0][k].pick[0] == csearch -> status || csearch -> status == 2) max_random ++;
+                }
               }
               if (csearch -> action != RANMOVE) nran = env_name(this_proj, i, j, 1, NULL);
               break;
@@ -3073,7 +3087,7 @@ void get_coord_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * wi
                 }
                 else if (filter == 4)
                 {
-                   max_random = this_proj -> modelfc -> mols[0][i].multiplicity;
+                  max_random = this_proj -> modelfc -> mols[0][i].multiplicity;
                 }
               }
               else
@@ -3081,7 +3095,10 @@ void get_coord_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * wi
                 i = (-h-1);
                 for (k=0; k<this_proj -> natomes; k++)
                 {
-                  if (this_proj -> atoms[0][k].coord[filter-1] == i) max_random ++;
+                  if (this_proj -> atoms[0][k].coord[filter-1] == i)
+                  {
+                    if (this_proj -> atoms[0][k].pick[0] == csearch -> status || csearch -> status == 2) max_random ++;
+                  }
                 }
                 nran = g_strdup_printf ("atom(s)");
               }

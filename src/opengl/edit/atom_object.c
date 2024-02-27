@@ -672,10 +672,6 @@ void add_object_atoms (struct insert_object * this_object, struct project * this
     clean_object_bonds (this_proj, o_step, this_object, new_id, movtion);
   }
   correct_coordinates_for_object (this_proj, this_object, movtion);
-  /*if (remove)
-  {
-    for (i=0; i<this_object -> atoms; i++) this_object -> at_list[i].id = new_id[this_object -> at_list[i].id]-1;
-  }*/
   if (check_bonding)
   {
     check_coord_modification (this_proj, NULL, & this_object -> at_list[0], this_object, FALSE, FALSE);
@@ -1034,7 +1030,7 @@ void adjust_object_frag_coord (struct insert_object * object)
     object -> at_list[i].coord[2] -= j;
     object -> at_list[i].id = i;
   }
-  remove_bonds_from_project (NULL, object, NULL, & object -> at_list[0], FALSE);
+  remove_bonds_from_project (NULL, object, NULL, & object -> at_list[0], FALSE, FALSE);
 }
 
 /*
