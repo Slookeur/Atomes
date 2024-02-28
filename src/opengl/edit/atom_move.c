@@ -1243,8 +1243,8 @@ GtkWidget * add_motion_interaction (atom_search * asearch, int axd, struct proje
   }
   hbox = create_hbox (5);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, FALSE, FALSE, 20);
-  add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox,
-                      check_button ("Reset transformation(s)", -1, 35, FALSE, G_CALLBACK(set_reset_transformation), & asearch -> pointer[0]),
-                      FALSE, FALSE, 10);
+  //add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox,
+  //                    check_button ("Reset transformation(s)", -1, 35, FALSE, G_CALLBACK(set_reset_transformation), & asearch -> pointer[0]),
+  //                    FALSE, FALSE, 10);
   return vbox;
 }
