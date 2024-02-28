@@ -554,7 +554,7 @@ gboolean rebuild_selection (struct project * this_proj, atom_search * asearch, i
     object = this_proj -> modelgl -> atom_win -> to_be_moved[i];
     while (object)
     {
-      if (object -> ifcl) reconstruct_coordinates_for_object (object, this_proj, TRUE);
+      if (object -> ifcl) reconstruct_coordinates_for_object (this_proj, object, TRUE);
       if (filter < 3)
       {
         recons = TRUE;

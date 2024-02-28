@@ -959,6 +959,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     for (i=0; i<3; i++)
     {
       g_free (this_proj -> modelgl -> saved_coord[i]);
+      this_proj -> modelgl -> saved_coord[i] = NULL;
       init_coordinates (this_proj, i, FALSE, TRUE);
     }
     this_proj -> was_moved = FALSE;

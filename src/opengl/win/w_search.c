@@ -1823,6 +1823,7 @@ void adjust_this_tree_branch (atom_search * asearch, struct project * this_proj,
   struct selatom * selected;
   if (asearch -> action < 2 && oid == TOPIC)
   {
+    selected_status = ! status;
     switch (filter)
     {
       case 0:

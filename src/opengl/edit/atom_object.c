@@ -33,8 +33,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
   void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust);
   void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid);
-  void reconstruct_coordinates (struct project * this_proj, struct insert_object * this_object, gboolean upcoord);
-  void reconstruct_coordinates_for_object (struct insert_object * this_object, struct project * this_proj, gboolean upcoord);
+  void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord);
   void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord);
   void create_object_from_library (int p);
   void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion);
@@ -243,7 +242,7 @@ void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
 }
 
 /*
-*  void reconstruct_coordinates (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
+*  void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 *
 *  Usage: reconstruct object atomic coordinates using PBC
 *
@@ -251,7 +250,7 @@ void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
 *  struct project * this_proj         : the target insert object
 *  gboolean upcoord                   : reconstruction of atomic coordinates using PBC ?
 */
-void reconstruct_coordinates (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
+void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 {
   int h, i, j, k;
   if (this_proj -> coord -> totcoord[2])
@@ -300,45 +299,7 @@ void reconstruct_coordinates (struct project * this_proj, struct insert_object *
       this_proj -> atoms[0][j].z = this_object -> at_list[i].z + this_object -> baryc[2];
       this_proj -> atoms[0][j].cloned = FALSE;
     }
-  }
-}
-
-/*
-*  void reconstruct_coordinates_for_object (struct insert_object * this_object, struct project * this_proj, gboolean upcoord)
-*
-*  Usage: target rebuild of object atomic coordinates using PBC and preserve new atomic coordinates for project
-*
-*  struct insert_object * this_object : the target project
-*  struct project * this_proj         : the target insert object
-*  gboolean upcoord                   : reconstruction of atomic coordinates using PBC ?
-*/
-void reconstruct_coordinates_for_object (struct insert_object * this_object, struct project * this_proj, gboolean upcoord)
-{
-  int i, j, k;
-  reconstruct_coordinates (this_proj, this_object, upcoord);
-
-  if (upcoord)
-  {
-    if (this_proj -> modelgl -> atom_win)
-    {
-      if (this_proj -> modelgl -> atom_win -> win)
-      {
-        for (j=0; j<2; j++) this_proj -> modelgl -> saved_coord[j] = save_coordinates (this_proj, j);
-      }
-    }
-    else if (this_proj -> modelgl -> mode == EDITION)
-    {
-      if (this_proj -> modelgl -> saved_coord[2])
-      {
-        for (i=0; i< this_object -> atoms; i++)
-        {
-          k = this_object -> at_list[i].id;
-          this_proj -> modelgl -> saved_coord[2][k][0] = this_object -> at_list[i].x + this_object -> baryc[0];
-          this_proj -> modelgl -> saved_coord[2][k][1] = this_object -> at_list[i].y + this_object -> baryc[1];
-          this_proj -> modelgl -> saved_coord[2][k][2] = this_object -> at_list[i].z + this_object -> baryc[2];
-        }
-      }
-    }
+    for (i=0; i<3; i++) this_proj -> modelgl -> saved_coord[i] = save_coordinates (this_proj, i);
   }
 }
 
@@ -357,7 +318,7 @@ void correct_coordinates_for_object (struct project * this_proj, struct insert_o
   {
     if (upcoord)
     {
-      reconstruct_coordinates_for_object (this_object, this_proj, upcoord);
+      reconstruct_coordinates_for_object (this_proj, this_object, upcoord);
       this_object -> ifcl = 0;
       g_free (this_object -> bcid);
       this_object -> bcid = NULL;

@@ -101,7 +101,7 @@ extern void correct_pos_and_get_dim (struct insert_object * object, gboolean adj
 extern struct insert_object * duplicate_insert_object (struct insert_object * old_obj);
 extern struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove);
 extern void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid);
-extern void reconstruct_coordinates_for_object (struct insert_object * this_object, struct project * this_proj, gboolean upcoord);
+extern void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord);
 extern struct insert_object * create_object_from_selection (struct project * this_proj);
 extern struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove);
 extern struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove);
