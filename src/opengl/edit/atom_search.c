@@ -193,7 +193,7 @@ G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
       }
     }
   }
-  clean_picked_and_labelled (this_proj -> modelgl -> search_widg[id -> c]);
+  clean_picked_and_labelled (this_proj -> modelgl -> search_widg[id -> c], TRUE);
   update_search_tree (this_proj -> modelgl -> search_widg[id -> c]);
 }
 

@@ -77,7 +77,7 @@ extern int get_asearch_filter (atom_search * asearch);
 extern int get_todo_size (atom_search * asearch);
 extern void allocate_todo (atom_search * asearch, int tsize);
 extern void clean_todo (atom_search * asearch);
-extern void clean_picked_and_labelled (atom_search * asearch);
+extern void clean_picked_and_labelled (atom_search * asearch, gboolean clean_msd);
 extern void adjust_search_param (atom_search * asearch, struct project * this_proj, int a, int s, int c, gboolean status);
 extern void re_populate_tree_search (atom_search * asearch);
 extern G_MODULE_EXPORT void set_search_mode (GtkComboBox * box, gpointer data);

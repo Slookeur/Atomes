@@ -25,7 +25,7 @@ If not, see <https://www.gnu.org/licenses/> */
 
   int test_this_fragment (int natomes, int fcoord, int fid, struct atom * atom_list, int * old_id, gboolean remove);
 
-  gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, struct atom * new_list, gboolean remove, gboolean  passivate);
+  gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, struct atom * new_list, gboolean remove, gboolean passivate);
 
   void set_mol_data (int the_atom, int the_mol);
   void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch);
@@ -210,7 +210,7 @@ int test_this_fragment (int natomes, int fcoord, int fid, struct atom ** atom_li
 *  int * old_id                       : the atom(s) id list
 *  struct atom * new_list             : the new atom list
 *  gboolean remove                    : remove (1) or motion (0) action
-*  gboolean passivate                 : surface passivation (1) or (0)
+*  gboolean passivate                 : passivate (1) or not (0)
 */
 gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, struct atom * new_list, gboolean remove, gboolean passivate)
 {
@@ -272,9 +272,9 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
     if (old_id[i] < 0)
     {
       in_frag[j] ++;
-      if (! remove || passivate)
+      if (! remove && ! passivate)
       {
-        if (! remove && ! passivate) h ++;
+        h ++;
         id_mod[tmp_list -> id] = h;
       }
     }
@@ -310,7 +310,7 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
         }
       }
     }
-    if ( old_id[i] > 0 || ! remove)  tmp_list = tmp_list -> next;
+    if ( old_id[i] > 0 || ! remove || passivate)  tmp_list = tmp_list -> next;
   }
   g_free (tmp_vois);
 
@@ -444,17 +444,6 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   }
   g_free (frag_to_test);
   g_free (frag_to_remove);
-  tmp_list = new_list;
-  while (tmp_list)
-  {
-    i = tmp_list -> id;
-    tmp_list -> coord[2] = atom_list[i] -> coord[2];
-    g_free (atom_list[i]);
-    // g_debug ("End:: id= %d, coord[2]= %d", tmp_list -> id, tmp_list -> coord[2]);
-    tmp_list = tmp_list -> next;
-  }
-  g_free (atom_list);
-
   if (this_proj)
   {
     this_proj -> coord -> totcoord[2] = tcf;
@@ -463,6 +452,19 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   {
     this_object -> coord -> totcoord[2] = tcf;
   }
+  tmp_list = new_list;
+  while (tmp_list)
+  {
+    i = tmp_list -> id;
+    if (old_id[i] > 0 || ! remove)
+    {
+      tmp_list -> coord[2] = atom_list[i] -> coord[2];
+      g_free (atom_list[i]);
+      // g_debug ("End:: id= %d, coord[2]= %d", tmp_list -> id, tmp_list -> coord[2]);
+    }
+    tmp_list = tmp_list -> next;
+  }
+  g_free (atom_list);
 
   if (this_proj)
   {
@@ -487,7 +489,7 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
             tmpbondid[i][j][1] = m;
             j ++;
           }
-          else if (! remove && ! passivate && ((old_id[l] < 0 && old_id[m] < 0)))
+          else if (! remove && (old_id[l] < 0 && old_id[m] < 0))
           {
             tmpbondid[i][j][0] = l;
             tmpbondid[i][j][1] = m;

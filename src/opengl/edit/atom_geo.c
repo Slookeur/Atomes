@@ -498,7 +498,7 @@ void check_coord_modification (struct project * this_proj, int * old_id, struct 
     }
     if (passivating && ! h)
     {
-      for (i=0; i<this_proj -> natomes; i++) old_id[i]= new_old_id[i];
+      for (i=0; i<this_proj -> natomes; i++) old_id[i] = new_old_id[i];
       g_free (new_old_id);
     }
   }

@@ -112,7 +112,7 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
   qint * the_data = (qint *)data;
   int i, j, k;
   int s, g, c;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  struct project * this_proj = get_project_by_id (the_data -> a);
   s = the_data -> b;
   g = the_data -> d;
   c = the_data -> c;
@@ -129,12 +129,19 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
   }
   j += c;
 
-  if (is_coord_in_menu(g, this_proj))
-  {
+
 #ifdef GTK4
-    k = gtk_check_button_get_active (widg);
-    if (k != this_proj -> modelgl -> anim -> last -> img -> show_coord[g][j])
+  k = (widg) ? gtk_check_button_get_active (widg) : frag_mol_status;
+#else
+// GTK3 Menu Action To Check
+  k = (widg) ? gtk_toggle_button_get_active (widg) : frag_mol_status;
+#endif
+
+  if (k != this_proj -> modelgl -> anim -> last -> img -> show_coord[g][j])
+  {
+    if (is_coord_in_menu(g, this_proj))
     {
+#ifdef GTK4
       gchar * name;
       gchar * str;
       if (g < 2)
@@ -160,24 +167,23 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
       }
       g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
       g_free (name);
-    }
 #else
-    // GTK3 Menu Action To Check
-    k = (widg) ? gtk_toggle_button_get_active (widg) : frag_mol_status;
-    gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][g][j], k);
+      gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_geom[0][g][j], k);
 #endif
-  }
-  else if (g > 1)
-  {
-    tint pointer;
-    pointer.a = g;
-    pointer.b = c;
-    pointer.c = frag_mol_status;
+    }
+    else
+    {
+      tint pointer;
+      pointer.a = g;
+      pointer.b = c;
+      pointer.c = k;
+      opengl_project_changed (the_data -> a);
 #ifdef GTK4
-    show_hide_the_coord (NULL, NULL, & pointer);
+      show_hide_the_coord (NULL, NULL, & pointer);
 #else
-    show_hide_the_coord (NULL, & pointer);
+      show_hide_the_coord (NULL, & pointer);
 #endif // GTK4
+    }
   }
   init_default_shaders (this_proj -> modelgl);
 }

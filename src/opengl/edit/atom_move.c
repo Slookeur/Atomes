@@ -876,15 +876,12 @@ void move_selection (struct project * this_proj, int action, int axis, vec3_t tr
   if (move_it)
   {
     int i;
-    g_debug ("Moving it !");
     if (this_proj -> modelgl -> atom_win -> to_be_moved[0])
     {
-    g_debug ("Object in selection !");
       recons = move_objects (this_proj, asearch, action, axis, trans, ang);
     }
     else
     {
-      g_debug ("Atom(s) in selection , rebuild[0][0]= %d, rebuilt[0]= %d!", this_proj -> modelgl -> rebuild[0][0], this_proj -> modelgl -> atom_win -> rebuilt[0]);
       if (this_proj -> modelgl -> rebuild[0][0] && ! this_proj -> modelgl -> atom_win -> rebuilt[0])
       {
         apply_action (this_proj, asearch);
@@ -898,7 +895,6 @@ void move_selection (struct project * this_proj, int action, int axis, vec3_t tr
         }
       }
     }
-    g_debug ("After motion: recons= %d", recons);
     if (asearch -> recompute_bonding)
     {
       i = activep;

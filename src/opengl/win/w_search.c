@@ -220,7 +220,7 @@ void check_tree_for_this_search (struct project * this_proj, atom_search * asear
   if (gtk_tree_model_get_iter_first (atom_model, & iter))
   {
     dothis = TRUE;
-    if (! filter)
+    if (! filter && status == 2)
     {
       while (dothis)
       {
@@ -298,6 +298,17 @@ void check_tree_for_this_search (struct project * this_proj, atom_search * asear
           k = l = 0;
           switch (filter)
           {
+            case 0:
+              for (m=0; m<this_proj -> natomes; m++)
+              {
+                n = this_proj -> atoms[step][m].sp;
+                if (n == j && (this_proj -> atoms[step][m].pick[is_clone] == status || status == 2))
+                {
+                  k ++;
+                  l += (this_proj -> atoms[step][m].label[is_clone]) ? 1 : 0;
+                }
+              }
+              break;
             case 1:
               for (m=0; m<this_proj -> natomes; m++)
               {
@@ -330,7 +341,7 @@ void check_tree_for_this_search (struct project * this_proj, atom_search * asear
               }
               break;
           }
-          gtk_tree_store_set (asearch -> atom_model, & iter, TOLAB,  (k == l && k != 0) ? 1 : 0, -1);
+          gtk_tree_store_set (asearch -> atom_model, & iter, TOLAB, (k == l && k != 0) ? 1 : 0, -1);
           if (gtk_tree_model_iter_children (atom_model, & child, & iter))
           {
             dothat = TRUE;
@@ -412,7 +423,7 @@ void check_tree_for_this_search (struct project * this_proj, atom_search * asear
             }
           }
         }
-        dothis = gtk_tree_model_iter_next(atom_model, & iter);
+        dothis = gtk_tree_model_iter_next (atom_model, & iter);
       }
     }
   }
@@ -643,7 +654,7 @@ void append_to_model (GtkTreeIter * atom_level, atom_search * asearch, gboolean 
       if (asearch -> set_for_all > 0)
       {
         asearch -> todo[i] = asearch -> set_for_all;
-        if (aobj && asearch -> set_for_all)
+        if (aobj)
         {
           adjust_object_to_move (this_proj, asearch, 1, i);
         }
@@ -671,7 +682,7 @@ void append_to_model (GtkTreeIter * atom_level, atom_search * asearch, gboolean 
         asearch -> todo[i] = asearch -> set_for_all;
         if (asearch -> action == DISPL)
         {
-          if (aobj &&  asearch -> set_for_all)
+          if (aobj)
           {
             adjust_object_to_move (this_proj, asearch, 0, i);
           }
@@ -992,7 +1003,7 @@ void fill_atom_model (atom_search * asearch, struct project * this_proj)
             doit = TRUE;
             for (i=0; i<this_proj -> natomes; i++)
             {
-              if (asearch -> spec == 0 || asearch -> spec == this_proj -> atoms[0][i].sp+1)
+              if (asearch -> spec == 0 || asearch -> spec == this_proj -> atoms[0][i].sp + 1)
               {
                 j = this_proj -> atoms[step][i].coord[filter - 1];
                 if (filter == 2)
@@ -1018,7 +1029,6 @@ void fill_atom_model (atom_search * asearch, struct project * this_proj)
           }
           break;
       }
-      // Affecté ?
       if ((asearch -> action == REPLACE || asearch -> action == REMOVE) && asearch -> mode && obj && filter > 2)
       {
         if (filter == 3 && this_proj -> coord -> totcoord[2] > 1)
@@ -1098,13 +1108,11 @@ void fill_atom_model (atom_search * asearch, struct project * this_proj)
               {
                 gtk_tree_store_set (asearch -> atom_model, & spec_level, TOLAB, asearch -> lab[h], -1);
               }
-              if (asearch -> set_for_all > 0 && asearch -> action == DISPL)
+
+              if (asearch -> set_for_all > 0 && asearch -> action == DISPL && filter > 2)
               {
-                if (filter > 2)
-                {
                   asearch -> todo[h] = asearch -> set_for_all;
                   adjust_object_to_move (this_proj, asearch, 0, h);
-                }
               }
               if (asearch -> mode)
               {
@@ -1233,7 +1241,8 @@ void fill_atom_model (atom_search * asearch, struct project * this_proj)
         if (asearch -> action == DISPL) check_motion_interactors (this_proj, asearch);
         if (asearch -> action == REPLACE) g_free (picked_names);
       }
-      if (asearch -> passivating) check_tree_for_this_search (this_proj, asearch);
+      //if (asearch -> passivating)
+      check_tree_for_this_search (this_proj, asearch);
     }
   }
   else
@@ -1258,7 +1267,7 @@ void fill_atom_model (atom_search * asearch, struct project * this_proj)
       iobj = iobj -> next;
     }
   }
-  if (asearch -> set_for_all > 0) asearch -> set_for_all = - asearch -> set_for_all;
+  if (asearch -> set_for_all > 0) asearch -> set_for_all = -asearch -> set_for_all;
 }
 
 G_MODULE_EXPORT void move_up_down (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data);
@@ -2249,7 +2258,8 @@ void adjust_this_tree_leaf (atom_search * asearch, struct project * this_proj, i
     {
       if (this_proj -> atoms[p][aid].pick[0] != new_status || new_status < 0)
       {
-        selected_status = ! this_proj -> atoms[p][aid].pick[get_to_be_selected (this_proj -> modelgl)];
+        // selected_status = ! this_proj -> atoms[p][aid].pick[get_to_be_selected (this_proj -> modelgl)];
+        selected_status = ! this_proj -> atoms[p][aid].pick[0];
 #ifdef GTK4
         select_unselect_this_atom (NULL, NULL, GINT_TO_POINTER(aid));
 #else
@@ -3292,8 +3302,8 @@ gboolean update_search_model (GtkTreeModel * model, GtkTreePath * path, GtkTreeI
   atom_search * asearch = this_proj -> modelgl -> search_widg[dat -> c];
   if (gtk_tree_model_get_iter (model, iter, path))
   {
-    gtk_tree_model_get (GTK_TREE_MODEL(asearch -> atom_model), iter, IDCOL, & i, -1);
-    gtk_tree_store_set (asearch -> atom_model, iter, dat -> b, asearch -> int_b, -1);
+    gtk_tree_model_get (model, iter, IDCOL, & i, -1);
+    gtk_tree_store_set (GTK_TREE_STORE(model), iter, dat -> b, asearch -> int_b, -1);
     if (i > 0)
     {
       i --;
@@ -3303,8 +3313,12 @@ gboolean update_search_model (GtkTreeModel * model, GtkTreePath * path, GtkTreeI
     {
       adjust_this_tree_branch (asearch, this_proj, dat -> b, abs(i) - 1, * iter);
     }
+    return FALSE;
   }
-  return FALSE;
+  else
+  {
+    return TRUE;
+  }
 }
 
 /*
@@ -3345,7 +3359,7 @@ G_MODULE_EXPORT void select_all_atoms (GtkTreeViewColumn * col, gpointer data)
     run_this_gtk_dialog (win, G_CALLBACK(run_destroy_dialog), NULL);
     update_search_tree (csearch);
   }
-  else if (! csearch -> passivating)
+  else
   {
     if (dat -> b == TOLAB)
     {
@@ -3373,7 +3387,7 @@ G_MODULE_EXPORT void select_all_atoms (GtkTreeViewColumn * col, gpointer data)
             is_selected = csearch -> status;
             for (i=0; i<this_proj -> natomes; i++)
             {
-              if (this_proj -> atoms[k][i].pick[0] == is_selected ) break;
+              if (this_proj -> atoms[k][i].pick[0] == is_selected) break;
             }
           }
           else
@@ -3414,7 +3428,8 @@ G_MODULE_EXPORT void select_all_atoms (GtkTreeViewColumn * col, gpointer data)
         }
         else
         {
-          switch (- csearch -> set_for_all)
+          // The value depends on both translation (1), rotation (2), or both (3)
+          switch (abs(csearch -> set_for_all))
           {
             case 0:
               if (dat -> b == TOPIC)
@@ -3462,22 +3477,25 @@ G_MODULE_EXPORT void select_all_atoms (GtkTreeViewColumn * col, gpointer data)
     }
     if (csearch -> action > 1 && dat -> c != 7)
     {
-      clean_picked_and_labelled (csearch);
-      clean_todo (csearch);
+      clean_picked_and_labelled (csearch, FALSE);
+      if (dat -> b != TOLAB) clean_todo (csearch);
     }
-    csearch -> set_for_all = j;
+    csearch -> set_for_all = (dat -> b == TOLAB) ? 0 : j;
     update_search_tree (csearch);
   }
-  else
+  /*else
   {
     GtkTreeIter iter;
     if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL(csearch -> atom_model), & iter))
     {
       gtk_tree_model_get (GTK_TREE_MODEL(csearch -> atom_model), & iter, dat -> b, & j, -1);
+      g_debug ("j= %d,", j);
+      g_debug ("a= %d, b= %d, c= %d, aa= %d, bb= %d, cc= %d", dat -> a, dat -> b, dat -> c,
+                                                              csearch -> pointer[dat -> b-TOLAB].a, csearch -> pointer[dat -> b-TOLAB].b, csearch -> pointer[dat -> b-TOLAB].c);
       csearch -> int_b = ! j;
       gtk_tree_model_foreach (GTK_TREE_MODEL(csearch -> atom_model), update_search_model, & csearch -> pointer[dat -> b-TOLAB]);
     }
-  }
+  }*/
 }
 
 /*
@@ -3749,13 +3767,14 @@ void clean_todo (atom_search * asearch)
 }
 
 /*
-*  void clean_picked_and_labelled (atom_search * asearch)
+*  void clean_picked_and_labelled (atom_search * asearch, gboolean clean_msd)
 *
 *  Usage: initialize atom search data buffers
 *
 *  atom_search * asearch : the target atom search
+*  gboolean clean_msd    : clean msd all data (1) or not (0)
 */
-void clean_picked_and_labelled (atom_search * asearch)
+void clean_picked_and_labelled (atom_search * asearch, gboolean clean_msd)
 {
   struct project * this_proj;
   int val = get_asearch_num_objects (asearch);
@@ -3764,7 +3783,7 @@ void clean_picked_and_labelled (atom_search * asearch)
   if (asearch -> action == RANMOVE)
   {
     this_proj = get_project_by_id (asearch -> proj);
-    if (this_proj -> modelgl -> atom_win)
+    if (this_proj -> modelgl -> atom_win && clean_msd)
     {
       g_free (this_proj -> modelgl -> atom_win -> msd_all);
       this_proj -> modelgl -> atom_win -> msd_all = allocfloat (val);
@@ -3836,7 +3855,7 @@ G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data)
   }
   if (asearch -> action == DISPL) motion_to_zero (asearch);
   clean_todo (asearch);
-  clean_picked_and_labelled (asearch);
+  clean_picked_and_labelled (asearch, TRUE);
   set_spec_changed (GTK_COMBO_BOX(asearch -> atom_box), asearch);
 }
 

@@ -957,6 +957,20 @@ void check_hidden_visible (struct project * this_proj)
         }
       }
     }
+    else
+    {
+      for (j=0; j<this_proj -> coord -> totcoord[i]; j++)
+      {
+        if (numv[i][j] > 0)
+        {
+          this_proj -> modelgl -> anim -> last -> img -> show_coord[i][j] = TRUE;
+        }
+        else if (this_proj -> modelgl -> anim -> last -> img -> show_coord[i][j])
+        {
+          this_proj -> modelgl -> anim -> last -> img -> show_coord[i][j] = FALSE;
+        }
+      }
+    }
   }
   for (i=0; i<2; i++) g_free (num[i]);
   g_free (num);

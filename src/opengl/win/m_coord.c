@@ -117,7 +117,7 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
   }
   j += c;
 #ifdef GTK3
-  show = gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg);
+  show = (widg) ? gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg) : this_proj -> modelgl -> anim -> last -> img -> show_coord[g][j];
 #else
   GVariant * state;
   if (action)

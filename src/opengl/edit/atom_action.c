@@ -528,6 +528,8 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     if (asearch -> action == DISPL || asearch -> action == REMOVE || asearch -> action == RANMOVE)
     {
       check_coord_modification (this_proj, old_id, new_list, NULL, TRUE, passivate);
+      // old_id for atoms to be passivated (removed then replaced) have been corrected to be > 0,
+      // accordingly the total number of atoms to save must be updated
       if (passivate)
       {
         i = 0;
@@ -573,7 +575,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
 
     if (asearch -> action != INSERT && asearch -> action != REPLACE)
     {
-      showfrag = remove_bonds_from_project (this_proj, NULL, old_id, new_list, (asearch -> action == DISPL || asearch -> action == RANMOVE || passivate) ? FALSE : TRUE, passivate);
+      showfrag = remove_bonds_from_project (this_proj, NULL, old_id, new_list, (asearch -> action == DISPL || asearch -> action == RANMOVE) ? FALSE : TRUE, passivate);
     }
     else
     {
@@ -586,7 +588,6 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
       }
       for (k=j; k<i; k++) showfrag[k] = TRUE;
     }
-    if (! passivate) g_free (old_id);
   }
   else
   {
@@ -611,10 +612,10 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     to_rem = NULL;
     to_add = NULL;
     tmp_new = new_list;
-    i = 0;
+    i = k = 0;
     while (tmp_new)
     {
-      if (! passivate || old_id[tmp_new -> id] > 0)
+      if (old_id[tmp_new -> id] > 0)
       {
         if (tmp_new -> pick[0] || tmp_new -> pick[1])
         {
@@ -631,6 +632,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
           }
           for (j=0; j<2; j++) tmp_add -> pick[j] = tmp_new -> pick[j];
           tmp_add -> id = i;
+          k ++;
        }
        i ++;
       }
@@ -678,18 +680,6 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
       tmp_add -> pick[0] = TRUE;
       tmp_add = tmp_add -> next;
     }
-    /*tmp_add = to_add;
-    while (tmp_add -> next) tmp_add = tmp_add -> next;
-    for (i=0;i<this_proj->natomes; i++)
-    {
-      if (this_proj -> atoms[0][i].pick[1])
-      {
-        tmp_add -> next = g_malloc0 (sizeof*tmp_add);
-        tmp_add = tmp_add -> next;
-        tmp_add -> id = i;
-        tmp_add -> pick[1] = TRUE;
-      }
-    }*/
 
     struct insert_object * object = object_list;
     i = 0;
@@ -762,7 +752,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   i = 0;
   while (tmp_new)
   {
-    if (! passivate || (passivate && old_id[tmp_new -> id] > 0))
+    if (asearch -> action != REMOVE || old_id[tmp_new -> id] > 0)
     {
       this_proj -> atoms[0][i] = * duplicate_atom (tmp_new);
       this_proj -> atoms[0][i].id = i;
@@ -782,7 +772,8 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
       tmp_new = NULL;
     }
   }
-  if (passivate) g_free (old_id);
+  if (old_id) g_free (old_id);
+  old_id = NULL;
   rem_spec = 0;
   for (i=0; i<this_proj -> nspec + edit -> add_spec; i++)
   {
@@ -989,6 +980,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   update_menu_bar (this_proj -> modelgl);
 #endif
   clean_coord_window (this_proj);
+
   switch (asearch -> action)
   {
     case REPLACE:
@@ -1021,7 +1013,7 @@ void clean_all_trees (atom_search * asearch, struct project * this_proj)
   {
     if (i == 3)
     {
-      clean_picked_and_labelled (this_proj -> modelgl -> search_widg[i+2]);
+      clean_picked_and_labelled (this_proj -> modelgl -> search_widg[i+2], TRUE);
       if (this_proj -> modelgl -> search_widg[INSERT] -> in_selection)
       {
         allocate_todo (this_proj -> modelgl -> search_widg[i+2], this_proj -> modelgl -> search_widg[INSERT] -> in_selection);
