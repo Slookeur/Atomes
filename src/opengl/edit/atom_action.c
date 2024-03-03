@@ -481,7 +481,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   gboolean * showfrag;
   int ** tmpgeo[2];
   int new_atoms = 0;
-  int * old_id;
+  int * old_id = NULL;
   if (this_proj -> natomes)
   {
     old_id = allocint (this_proj -> natomes);
@@ -615,7 +615,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     i = k = 0;
     while (tmp_new)
     {
-      if (old_id[tmp_new -> id] > 0)
+      if (old_id[tmp_new -> id] > 0 || asearch -> action != REMOVE)
       {
         if (tmp_new -> pick[0] || tmp_new -> pick[1])
         {
