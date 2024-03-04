@@ -383,32 +383,33 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
     }
     tmp_list = tmp_list -> next;
   }
-
   if (remove && this_proj)
   {
     i = 0;
     // Removing fragment(s) if needed
+    int * new_fid = allocint (tcf);
+    for (j=0; j<tcf; j++) new_fid[j] = j;
+    for (j=0; j<tcf-1; j++)
+    {
+      if (frag_to_remove[j])
+      {
+        for (k=j+1; k<tcf; k++) new_fid[k] --;
+      }
+    }
     for (j=0; j<tcf; j++)
     {
       if (frag_to_remove[j])
       {
-        // All atoms in fragment j are modified
-        // All other atoms will be affected
-        for (k=0; k<nat; k++)
-        {
-          if (atom_list[k])
-          {
-            if (atom_list[k] -> coord[2] > j)
-            {
-              atom_list[k] -> coord[2] --;
-            }
-          }
-        }
+        for (k=j; k<tcf-i-1; k++) show_frag[k] = show_frag[k+1];
+        for (k=j; k<tcf-i-1; k++) frag_to_test[k] = frag_to_test[k+1];
         i ++;
-        for (k=j+1; k<tcf-i; k++) show_frag[k-1] = show_frag[k];
-        for (k=j+1; k<tcf-i; k++) frag_to_test[k-1] = frag_to_test[k];
       }
     }
+    for (j=0; j<nat; j++)
+    {
+      if (atom_list[j]) atom_list[j] -> coord[2] = new_fid[atom_list[j] -> coord[2]];
+    }
+    g_free (new_fid);
     tcf -= i;
     if (i)
     {

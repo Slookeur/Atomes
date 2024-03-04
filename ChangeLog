@@ -1,3 +1,14 @@
+2023-28-02 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+         Release of version 1.1.13
+         * Bug corrections:
+	 	Surface passivation: 'cell_cut.c' and 'atom_action.c'
+	 	Atomic object managment: 'src/opengl/edit/atom_*.c'
+		Atom search window: 'w_search.c'
+         * Improvements:
+	 	Handling unknown chemical species when reading coordinates files
+		Keyboard shortcuts added for styles and selection modes for the OpenGL window 
+		Re-compute bonding properties of edition with the model edition window
+
 2023-09-11 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.12
          * Bug corrections:
