@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_poly.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the 'Chemistry -> Polyhedra' submenus
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data);
   G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data);
@@ -49,24 +49,24 @@ extern G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data);
 #ifdef GTK4
 extern G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data);
 
-/*
-*  G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: show / hide polyhedra callback - GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief show / hide polyhedra callback - GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
-*
-*  Usage: show / hide polyhedra callback - GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
+
+  \brief show / hide polyhedra callback - GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
 #endif
@@ -151,24 +151,24 @@ G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void cloned_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: cloned polyehdra callback - GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void cloned_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief cloned polyehdra callback - GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void cloned_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
-*
-*  Usage: cloned polyehdra callback - GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
+
+  \brief cloned polyehdra callback - GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
 #endif
@@ -207,14 +207,14 @@ G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
 
 
 #ifdef GTK3
-/*
-*  GtkWidget * mpoly (glwin * view, int jd, int id)
-*
-*  Usage: update the 'Polyhedra -> * -> Show/Hide' subemnus - GTK3
-*
-*  glwin * view : the target glwin
-*  int jd       : main app (0) or popup (1)
-*  int id       : the type of coordination
+/*!
+  \fn GtkWidget * mpoly (glwin * view, int jd, int id)
+
+  \brief update the 'Polyhedra -> * -> Show/Hide' subemnus - GTK3
+
+  \param view the target glwin
+  \param jd main app (0) or popup (1)
+  \param id the type of coordination
 */
 GtkWidget * mpoly (glwin * view, int jd, int id)
 {
@@ -263,15 +263,15 @@ GtkWidget * mpoly (glwin * view, int jd, int id)
   return menup;
 }
 
-/*
-*  GtkWidget * menupoly (glwin * view, int jd, int id, gchar * poln)
-*
-*  Usage: update the polyhedra submenus - GTK3
-*
-*  glwin * view : the target glwin
-*  int jd       : main app (0) or popup (1)
-*  int id       : the type of coordination: total (0), partial (1), rings (2)
-*  gchar * poln : the label of the menu item
+/*!
+  \fn GtkWidget * menupoly (glwin * view, int jd, int id, gchar * poln)
+
+  \brief update the polyhedra submenus - GTK3
+
+  \param view the target glwin
+  \param jd main app (0) or popup (1)
+  \param id the type of coordination: total (0), partial (1), rings (2)
+  \param poln the label of the menu item
 */
 GtkWidget * menupoly (glwin * view, int jd, int id, gchar * poln)
 {
@@ -311,13 +311,13 @@ GtkWidget * menupoly (glwin * view, int jd, int id, gchar * poln)
   }
 }
 
-/*
-*  GtkWidget * menu_poly (glwin * view, int id)
-*
-*  Usage: create the 'Chemistry -> Polyehdra' submenu - GTK3
-*
-*  glwin * view : the target glwin
-*  int id       : main app (0) or popup (1)
+/*!
+  \fn GtkWidget * menu_poly (glwin * view, int id)
+
+  \brief create the 'Chemistry -> Polyehdra' submenu - GTK3
+
+  \param view the target glwin
+  \param id main app (0) or popup (1)
 */
 GtkWidget * menu_poly (glwin * view, int id)
 {
@@ -342,14 +342,14 @@ GtkWidget * menu_poly (glwin * view, int id)
   return menup;
 }
 #else
-/*
-*  GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
-*
-*  Usage: create the 'Polyedra -> Coordination -> Show/Hide' submenus - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
-*  int id       : the coordination type: total (0) or partial (1)
+/*!
+  \fn GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
+
+  \brief create the 'Polyedra -> Coordination -> Show/Hide' submenus - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+  \param id the coordination type: total (0) or partial (1)
 */
 GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
 {
@@ -394,14 +394,14 @@ GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
   return menu;
 }
 
-/*
-*  GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
-*
-*  Usage: create the 'Rings(s) -> Show/Hide' subemnus - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
-*  int id       : the ring(s) type
+/*!
+  \fn GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
+
+  \brief create the 'Rings(s) -> Show/Hide' subemnus - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+  \param id the ring(s) type
 */
 GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
 {
@@ -424,14 +424,14 @@ GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
   return menu;
 }
 
-/*
-*  GMenu * add_menu_poly (glwin * view, int popm, int aid)
-*
-*  Usage: create the 'Show/Hide' polyhedra subemnus - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
-*  int aid      : coordination id
+/*!
+  \fn GMenu * add_menu_poly (glwin * view, int popm, int aid)
+
+  \brief create the 'Show/Hide' polyhedra subemnus - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+  \param aid coordination id
 */
 GMenu * add_menu_poly (glwin * view, int popm, int aid)
 {
@@ -449,13 +449,13 @@ GMenu * add_menu_poly (glwin * view, int popm, int aid)
   return menu;
 }
 
-/*
-*  GMenu * menu_poly_rings (glwin * view, int popm)
-*
-*  Usage: create the 'Polyhedra -> Ring(s)' submenu - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_poly_rings (glwin * view, int popm)
+
+  \brief create the 'Polyhedra -> Ring(s)' submenu - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_poly_rings (glwin * view, int popm)
 {
@@ -471,13 +471,13 @@ GMenu * menu_poly_rings (glwin * view, int popm)
   return menu;
 }
 
-/*
-*  GMenu * menu_poly (glwin * view, int popm)
-*
-*  Usage: create the 'Chemistry -> Polyehdra' submenu - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_poly (glwin * view, int popm)
+
+  \brief create the 'Chemistry -> Polyehdra' submenu - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_poly (glwin * view, int popm)
 {

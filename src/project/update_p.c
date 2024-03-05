@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'update_p.c'
 *
-*  Contains:
+* Contains:
 *
 
  -
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int update_project ();
 
@@ -40,10 +40,10 @@ If not, see <https://www.gnu.org/licenses/> */
 extern GtkWidget * work_menu (int p, int c);
 extern GtkTreeStore * tool_model;
 
-/*
-*  void prep_calc_actions ()
-*
-*  Usage:
+/*!
+  \fn void prep_calc_actions ()
+
+  \brief
 */
 void prep_calc_actions ()
 {
@@ -76,10 +76,10 @@ void prep_calc_actions ()
   }
 }
 
-/*
-*  int update_project ()
-*
-*  Usage: update project: send data to Fortran90, and update calculation interactors
+/*!
+  \fn int update_project ()
+
+  \brief update project: send data to Fortran90, and update calculation interactors
 */
 int update_project ()
 {
@@ -155,12 +155,12 @@ int update_project ()
   return 1;
 }
 
-/*
-*  void active_project_changed (int id)
-*
-*  Usage: change the active project
-*
-*  int id : the id of the new active project
+/*!
+  \fn void active_project_changed (int id)
+
+  \brief change the active project
+
+  \param id the id of the new active project
 */
 void active_project_changed (int id)
 {
@@ -225,12 +225,12 @@ void active_project_changed (int id)
   activew = activep;
 }
 
-/*
-*  void opengl_project_changed (int id)
-*
-*  Usage: change the OpenGL project
-*
-*  int id : the id of the new OpenGL project
+/*!
+  \fn void opengl_project_changed (int id)
+
+  \brief change the OpenGL project
+
+  \param id the id of the new OpenGL project
 */
 void opengl_project_changed (int id)
 {

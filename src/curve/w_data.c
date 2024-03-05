@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_data.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to write / output curve data
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void write_curve (gpointer idata);
 
@@ -44,27 +44,27 @@ void append_to_file_ (int *, double *, double *, double *, int *, int *, int *, 
 GtkFileFilter * filter1, * filter2;
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, gpointer data)
-*
-*  Usage: save curve data - running the dialog GTK4
-*
-*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id       : the response id
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, gpointer data)
+
+  \brief save curve data - running the dialog GTK4
+
+  \param info the GtkNativeDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_write_curve (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
-/*
-*  G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpointer data)
-*
-*  Usage: save curve data - running the dialog GTK3
-*
-*  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpointer data)
+
+  \brief save curve data - running the dialog GTK3
+
+  \param info the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -146,12 +146,12 @@ G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpoint
 #endif
 }
 
-/*
-*  void write_curve (gpointer idata)
-*
-*  Usage: save curve data - creating the dialog
-*
-*  gpointer idata : the associated data pointer
+/*!
+  \fn void write_curve (gpointer idata)
+
+  \brief save curve data - creating the dialog
+
+  \param idata the associated data pointer
 */
 void write_curve (gpointer idata)
 {

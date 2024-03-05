@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'save_p.c'
 *
-*  Contains:
+* Contains:
 *
 
  - Subroutines to start saving atomes project file
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int save_this_string (FILE * fp, gchar * string);
   int save_project (FILE * fp, struct project * this_proj, int npi);
@@ -30,13 +30,13 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "project.h"
 
-/*
-*  int save_this_string (FILE * fp, gchar * string)
-*
-*  Usage: save string to file
-*
-*  FILE * fp      : the file pointer
-*  gchar * string : the string to save
+/*!
+  \fn int save_this_string (FILE * fp, gchar * string)
+
+  \brief save string to file
+
+  \param fp the file pointer
+  \param string the string to save
 */
 int save_this_string (FILE * fp, gchar * string)
 {
@@ -64,14 +64,14 @@ int save_this_string (FILE * fp, gchar * string)
   return OK;
 }
 
-/*
-*  int save_project (FILE * fp, struct project * this_proj, int npi)
-*
-*  Usage: save project to file
-*
-*  FILE * fp                  : the file pointer
-*  struct project * this_proj : the target project
-*  int npi                    : the total number of projects in the workspace
+/*!
+  \fn int save_project (FILE * fp, struct project * this_proj, int npi)
+
+  \brief save project to file
+
+  \param fp the file pointer
+  \param this_proj the target project
+  \param npi the total number of projects in the workspace
 */
 int save_project (FILE * fp, struct project * this_proj, int npi)
 {

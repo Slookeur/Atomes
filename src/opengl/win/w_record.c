@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_record.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines de create the recording window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void prepare_edition_windows (glwin * view, int status);
 
@@ -35,13 +35,13 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern void window_encode (glwin * view, gboolean video);
 
-/*
-*  void prepare_edition_windows (glwin * view, int status)
-*
-*  Usage: update the sensitivity of the edition window(s) if any are opened
-*
-*  glwin * view : the target glwin
-*  int status   : sensitity
+/*!
+  \fn void prepare_edition_windows (glwin * view, int status)
+
+  \brief update the sensitivity of the edition window(s) if any are opened
+
+  \param view the target glwin
+  \param status sensitity
 */
 void prepare_edition_windows (glwin * view, int status)
 {
@@ -82,13 +82,13 @@ void prepare_edition_windows (glwin * view, int status)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void rec_start (GtkButton * but, gpointer data)
-*
-*  Usage: start recording
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void rec_start (GtkButton * but, gpointer data)
+
+  \brief start recording
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void rec_start (GtkButton * but, gpointer data)
 {
@@ -109,13 +109,13 @@ G_MODULE_EXPORT void rec_start (GtkButton * but, gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
-*
-*  Usage: stop recording
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
+
+  \brief stop recording
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
 {
@@ -133,13 +133,13 @@ G_MODULE_EXPORT void rec_stop (GtkButton * but, gpointer data)
   prepare_edition_windows (view, 1);
 }
 
-/*
-*  G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data)
-*
-*  Usage: create video recorder window
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data)
+
+  \brief create video recorder window
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data)
 {

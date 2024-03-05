@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cpmd_print.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to print the CPMD input file(s)
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void print_info_section (GtkTextBuffer * buf);
   void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf);
@@ -45,12 +45,12 @@ extern struct dummy_atom * get_active_dummy (int id);
 
 int cpmd_sym[NSYM] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 14};
 
-/*
-*  void print_info_section (GtkTextBuffer * buf)
-*
-*  Usage: print the CPMD input file INFO section
-*
-*  GtkTextBuffer * buf : the GtkTextBuffer to print into
+/*!
+  \fn void print_info_section (GtkTextBuffer * buf)
+
+  \brief print the CPMD input file INFO section
+
+  \param buf the GtkTextBuffer to print into
 */
 void print_info_section (GtkTextBuffer * buf)
 {
@@ -61,14 +61,14 @@ void print_info_section (GtkTextBuffer * buf)
   print_info ("\n\n", NULL, buf);
 }
 
-/*
-*  void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf)
-*
-*  Usage: print CPMD thermostat parameters
-*
-*  struct thermostat * thermo : the target thermostat
-*  int id                     : 0 = ionic, 1 = fictitious electronic
-*  GtkTextBuffer * buf        : the GtkTextBuffer to print into
+/*!
+  \fn void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf)
+
+  \brief print CPMD thermostat parameters
+
+  \param thermo the target thermostat
+  \param id 0 = ionic, 1 = fictitious electronic
+  \param buf the GtkTextBuffer to print into
 */
 void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf)
 {
@@ -159,12 +159,12 @@ void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * 
   }
 }
 
-/*
-*  void print_thermostat (GtkTextBuffer * buf)
-*
-*  Usage: print the CPMD input file THERMOSTAT section
-*
-*  GtkTextBuffer * buf : the GtkTextBuffer to print into
+/*!
+  \fn void print_thermostat (GtkTextBuffer * buf)
+
+  \brief print the CPMD input file THERMOSTAT section
+
+  \param buf the GtkTextBuffer to print into
 */
 void print_thermostat (GtkTextBuffer * buf)
 {
@@ -199,12 +199,12 @@ void print_thermostat (GtkTextBuffer * buf)
   }
 }
 
-/*
-*  void print_restart (GtkTextBuffer * buf)
-*
-*  Usage: print the CPMD input file RESTART section
-*
-*  GtkTextBuffer * buf : the GtkTextBuffer to print into
+/*!
+  \fn void print_restart (GtkTextBuffer * buf)
+
+  \brief print the CPMD input file RESTART section
+
+  \param buf the GtkTextBuffer to print into
 */
 void print_restart (GtkTextBuffer * buf)
 {
@@ -229,12 +229,12 @@ void print_restart (GtkTextBuffer * buf)
   }
 }
 
-/*
-*  void print_cpmd_section (GtkTextBuffer * buf)
-*
-*  Usage: print CPMD input file CPMD section
-*
-*  GtkTextBuffer * buf : the GtkTextBuffer to print into
+/*!
+  \fn void print_cpmd_section (GtkTextBuffer * buf)
+
+  \brief print CPMD input file CPMD section
+
+  \param buf the GtkTextBuffer to print into
 */
 void print_cpmd_section (GtkTextBuffer * buf)
 {
@@ -372,12 +372,12 @@ void print_cpmd_section (GtkTextBuffer * buf)
   print_info ("\n\n", NULL, buf);
 }
 
-/*
-*  void print_dft_section (GtkTextBuffer * buf)
-*
-*  Usage: print the CPMD input file DFT section
-*
-*  GtkTextBuffer * buf : the GtkTextBuffer to print into
+/*!
+  \fn void print_dft_section (GtkTextBuffer * buf)
+
+  \brief print the CPMD input file DFT section
+
+  \param buf the GtkTextBuffer to print into
 */
 void print_dft_section (GtkTextBuffer * buf)
 {
@@ -389,12 +389,12 @@ void print_dft_section (GtkTextBuffer * buf)
   g_free (str);
 }
 
-/*
-*  void print_vdw_section (GtkTextBuffer * buf)
-*
-*  Usage: print the CPMD input file VDW section
-*
-*  GtkTextBuffer * buf : the GtkTextBuffer to print into
+/*!
+  \fn void print_vdw_section (GtkTextBuffer * buf)
+
+  \brief print the CPMD input file VDW section
+
+  \param buf the GtkTextBuffer to print into
 */
 void print_vdw_section (GtkTextBuffer * buf)
 {
@@ -408,24 +408,24 @@ void print_vdw_section (GtkTextBuffer * buf)
   g_free (str);
 }
 
-/*
-*  void print_prop_section (GtkTextBuffer * buf)
-*
-*  Usage: print the CPMD input file PROPERTIES section
-*
-*  GtkTextBuffer * buf : the GtkTextBuffer to print into
+/*!
+  \fn void print_prop_section (GtkTextBuffer * buf)
+
+  \brief print the CPMD input file PROPERTIES section
+
+  \param buf the GtkTextBuffer to print into
 */
 void print_prop_section (GtkTextBuffer * buf)
 {
 
 }
 
-/*
-*  void print_system_section (GtkTextBuffer * buf)
-*
-*  Usage: print the CPMD input file SYSTEM section
-*
-*  GtkTextBuffer * buf : the GtkTextBuffer to print into
+/*!
+  \fn void print_system_section (GtkTextBuffer * buf)
+
+  \brief print the CPMD input file SYSTEM section
+
+  \param buf the GtkTextBuffer to print into
 */
 void print_system_section (GtkTextBuffer * buf)
 {
@@ -534,12 +534,12 @@ void print_system_section (GtkTextBuffer * buf)
   g_free (str);
 }
 
-/*
-*  void print_atoms_section (GtkTextBuffer * buf)
-*
-*  Usage: print the CPMD input file ATOMS section
-*
-*  GtkTextBuffer * buf : the GtkTextBuffer to print into
+/*!
+  \fn void print_atoms_section (GtkTextBuffer * buf)
+
+  \brief print the CPMD input file ATOMS section
+
+  \param buf the GtkTextBuffer to print into
 */
 void print_atoms_section (GtkTextBuffer * buf)
 {
@@ -675,14 +675,14 @@ void print_atoms_section (GtkTextBuffer * buf)
   }
 }
 
-/*
-*  void print_the_section (int s, int p, GtkTextBuffer * buffer)
-*
-*  Usage: print CPMD input section
-*
-*  int s                  : the section id
-*  int p                  : 0 = section preview, 1 = complete input file
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_the_section (int s, int p, GtkTextBuffer * buffer)
+
+  \brief print CPMD input section
+
+  \param s the section id
+  \param p 0 = section preview, 1 = complete input file
+  \param buffer the GtkTextBuffer to print into
 */
 void print_the_section (int s, int p, GtkTextBuffer * buffer)
 {

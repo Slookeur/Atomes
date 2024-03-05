@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm_silicates.c'
 *
-*  Contains:
+* Contains:
 *
 
   CHARMM-charmm_silicates force field, data from taken from:

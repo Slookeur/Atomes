@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_colors.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the color selection dialogs
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void window_color (struct project * this_proj, glwin * view, int wc_cid);
 
@@ -46,14 +46,14 @@ If not, see <https://www.gnu.org/licenses/> */
 
 int wc_cid;
 
-/*
-*  G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data)
-*
-*  Usage: window color chooser - running the dialog
-*
-*  GtkDialog * win  : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data)
+
+  \brief window color chooser - running the dialog
+
+  \param win the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -85,14 +85,14 @@ G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpoint
   destroy_this_dialog (win);
 }
 
-/*
-*  void window_color (struct project * this_proj, glwin * view, int wc_cid)
-*
-*  Usage: window color chooser - creating the dialog
-*
-*  struct project * this_proj : the target project
-*  glwin * view               : the target glwin
-*  int wc_cid                 : the object to change color
+/*!
+  \fn void window_color (struct project * this_proj, glwin * view, int wc_cid)
+
+  \brief window color chooser - creating the dialog
+
+  \param this_proj the target project
+  \param view the target glwin
+  \param wc_cid the object to change color
 */
 void window_color (struct project * this_proj, glwin * view, int wc_cid)
 {
@@ -129,24 +129,24 @@ void window_color (struct project * this_proj, glwin * view, int wc_cid)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: to run background color selection window callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief to run background color selection window callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
-*
-*  Usage: to run background color selection window callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
+
+  \brief to run background color selection window callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
 #endif
@@ -157,24 +157,24 @@ G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: to run box color selection window callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief to run box color selection window callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
-*
-*  Usage:  to run box color selection window callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
+
+  \brief  to run box color selection window callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
 #endif
@@ -186,24 +186,24 @@ G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: to run atom color selection window callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief to run atom color selection window callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
-*
-*  Usage: to run atom color selection window callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
+
+  \brief to run atom color selection window callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
 #endif
@@ -218,14 +218,14 @@ G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
   update (this_proj -> modelgl);
 }
 
-/*
-*  G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, gpointer data)
-*
-*  Usage: window to select a color - running the dialog
-*
-*  GtkDialog * win  : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, gpointer data)
+
+  \brief window to select a color - running the dialog
+
+  \param win the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -247,24 +247,24 @@ G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, 
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: create a window to select a color callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief create a window to select a color callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void window_color_coord (GtkWidget * widg, gpointer data)
-*
-*  Usage: create a window to select a color callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void window_color_coord (GtkWidget * widg, gpointer data)
+
+  \brief create a window to select a color callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_color_coord (GtkWidget * widg, gpointer data)
 #endif

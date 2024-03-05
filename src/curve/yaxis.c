@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'yaxis.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to draw the y axis
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void autoscale_axis (struct project * this_proj, int rid, int cid, int aid);
   void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid);
@@ -34,15 +34,15 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "curve.h"
 
-/*
-*  void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
-*
-*  Usage: autoscale axis
-*
-*  struct project * this_proj : the target project
-*  int rid                    : the analysis id
-*  int cid                    : the curve id
-*  int aid                    : the axis id
+/*!
+  \fn void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
+
+  \brief autoscale axis
+
+  \param this_proj the target project
+  \param rid the analysis id
+  \param cid the curve id
+  \param aid the axis id
 */
 void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
 {
@@ -100,15 +100,15 @@ void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
   }
 }
 
-/*
-*  void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
-*
-*  Usage: setup y axis using a linear scale
-*
-*  cairo_t * cr               : the cairo drawing context
-*  struct project * this_proj : the target project
-*  int rid                    : the analysis id
-*  int cid                    : the curve id
+/*!
+  \fn void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
+
+  \brief setup y axis using a linear scale
+
+  \param cr the cairo drawing context
+  \param this_proj the target project
+  \param rid the analysis id
+  \param cid the curve id
 */
 void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {
@@ -211,16 +211,16 @@ void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int 
   }
 }
 
-/*
-*  void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
-*
-*  Usage: setup y axis using a log scale
-*
-*  cairo_t * cr               : the cairo drawing context
-*  struct project * this_proj : the target project
-*  int rid                    : the analysis id
-*  int cid                    : the curve id
-*  gboolean draw_it           : 1/0 draw or not
+/*!
+  \fn void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
+
+  \brief setup y axis using a log scale
+
+  \param cr the cairo drawing context
+  \param this_proj the target project
+  \param rid the analysis id
+  \param cid the curve id
+  \param draw_it 1/0 draw or not
 */
 void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
 {

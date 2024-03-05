@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_opengl.c'
 *
-*  Contains:
+* Contains:
 *
 
  - Subroutines to read the OpenGL window configuration from atomes project file
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int read_atom_a (FILE * fp, struct project * this_proj, int s, int a);
   int read_atom_b (FILE * fp, struct project * this_proj, int s, int a);
@@ -34,15 +34,15 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "initcoord.h"
 
-/*
-*  int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
-*
-*  Usage: read atom properties from file (a)
-*
-*  FILE * fp                  : the file pointer
-*  struct project * this_proj : the target project
-*  int s                      : the MD step
-*  int a                      : the atom number
+/*!
+  \fn int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
+
+  \brief read atom properties from file (a)
+
+  \param fp the file pointer
+  \param this_proj the target project
+  \param s the MD step
+  \param a the atom number
 */
 int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -56,15 +56,15 @@ int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
   return OK;
 }
 
-/*
-*  int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
-*
-*  Usage: read atom properties from file (b)
-*
-*  FILE * fp                  : the file pointer
-*  struct project * this_proj : the target project
-*  int s                      : the MD step
-*  int a                      : the atom number
+/*!
+  \fn int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
+
+  \brief read atom properties from file (b)
+
+  \param fp the file pointer
+  \param this_proj the target project
+  \param s the MD step
+  \param a the atom number
 */
 int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -137,17 +137,17 @@ int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
   return OK;
 }
 
-/*
-*  int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size, int steps)
-*
-*  Usage: read rings and chains statistics data from file
-*
-*  FILE * fp    : the file pointer
-*  glwin * view : the glwin to store the data
-*  int type     : Rings (0) or chains (1)
-*  int rid      : the ring id or 0
-*  int size     : the size of the ring or chain
-*  int steps    : the number of MD steps
+/*!
+  \fn int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size, int steps)
+
+  \brief read rings and chains statistics data from file
+
+  \param fp the file pointer
+  \param view the glwin to store the data
+  \param type Rings (0) or chains (1)
+  \param rid the ring id or 0
+  \param size the size of the ring or chain
+  \param steps the number of MD steps
 */
 int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size, int steps)
 {
@@ -263,15 +263,15 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
   return OK;
 }
 
-/*
-*  int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
-*
-*  Usage: read OpenGL image properties from file
-*
-*  FILE * fp                  : the file pointer
-*  struct project * this_proj : the target project
-*  image * img                : the latest image to store the data
-*  int sid                    : the number of chemical species
+/*!
+  \fn int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
+
+  \brief read OpenGL image properties from file
+
+  \param fp the file pointer
+  \param this_proj the target project
+  \param img the latest image to store the data
+  \param sid the number of chemical species
 */
 int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
 {

@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cff91.c'
 *
-*  Contains:
+* Contains:
 *
 
   CFF91 force field, data from taken from:

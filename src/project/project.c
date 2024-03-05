@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'project.c'
 *
-*  Contains:
+* Contains:
 *
 
  - Project management miscellaneous subroutines
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void save_pos_ (int * nat, int lot[* nat], int * num, double xpos[* num], double ypos[* num], double zpos[* num]);
   void send_steps_ (int * steps);
@@ -45,17 +45,17 @@ image * active_image = NULL;
 glwin * active_glwin = NULL;
 struct project * opengl_project = NULL;
 
-/*
-*  void save_pos_ (int * nat, int lot[* nat], int * num, double xpos[* num], double ypos[* num], double zpos[* num])
-*
-*  Usage: retrieve atomic coordinates from Fortran90
-*
-*  int * nat          : Number of atoms
-*  int lot[* nat]     : List of chemical species by atoms
-*  int * num          : Number of coordinates (NA x NS)
-*  double xpos[* num] : x coordinates
-*  double ypos[* num] : y coordinates
-*  double zpos[* num] : z coordinates
+/*!
+  \fn void save_pos_ (int * nat, int lot[* nat], int * num, double xpos[* num], double ypos[* num], double zpos[* num])
+
+  \brief retrieve atomic coordinates from Fortran90
+
+  \param nat Number of atoms
+  \param nat] List of chemical species by atoms
+  \param num Number of coordinates (NA x NS)
+  \param xpos[*num] x coordinates
+  \param ypos[*num] y coordinates
+  \param zpos[*num] z coordinates
 */
 void save_pos_ (int * nat, int lot[* nat], int * num, double xpos[* num], double ypos[* num], double zpos[* num])
 {
@@ -90,24 +90,24 @@ void save_pos_ (int * nat, int lot[* nat], int * num, double xpos[* num], double
   }
 }
 
-/*
-*  void send_steps_ (int * steps)
-*
-*  Usage: retrieve the number of MD steps from Fortran90
-*
-*  int * steps : the number of MD steps
+/*!
+  \fn void send_steps_ (int * steps)
+
+  \brief retrieve the number of MD steps from Fortran90
+
+  \param steps the number of MD steps
 */
 void send_steps_ (int * steps)
 {
   active_project -> steps = * steps;
 }
 
-/*
-*  struct project * get_project_by_id (int p)
-*
-*  Usage: get project pointer using id number
-*
-*  int p : the id number
+/*!
+  \fn struct project * get_project_by_id (int p)
+
+  \brief get project pointer using id number
+
+  \param p the id number
 */
 struct project * get_project_by_id (int p)
 {

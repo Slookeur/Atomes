@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_action.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subourtines to aplly the edition actions to the model
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible);
 
@@ -42,12 +42,12 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "atom_edit.h"
 #include "curve.h"
 
-/*
-*  void free_dummies (struct dummy_atom * tmp_pick)
-*
-*  Usage: free atom dummy list
-*
-*  struct dummy_atom * tmp_pick : the atom dummy list to free
+/*!
+  \fn void free_dummies (struct dummy_atom * tmp_pick)
+
+  \brief free atom dummy list
+
+  \param tmp_pick the atom dummy list to free
 */
 void free_dummies (struct dummy_atom * tmp_pick)
 {
@@ -67,12 +67,12 @@ void free_dummies (struct dummy_atom * tmp_pick)
   }
 }
 
-/*
-*  void clean_this_project (struct project * this_proj)
-*
-*  Usage: clean project data for the edition process
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void clean_this_project (struct project * this_proj)
+
+  \brief clean project data for the edition process
+
+  \param this_proj the target project
 */
 void clean_this_project (struct project * this_proj)
 {
@@ -154,14 +154,14 @@ void clean_this_project (struct project * this_proj)
   prepare_opengl_menu_bar (opengl_project -> modelgl);
 }
 
-/*
-*  void clean_motion_search (struct project * this_proj, atom_search * asearch, int sid)
-*
-*  Usage: clean atom search motion data
-*
-*  struct project * this_proj : the target project
-*  atom_search * asearch      : the target atom search
-*  int sid                    : motion id
+/*!
+  \fn void clean_motion_search (struct project * this_proj, atom_search * asearch, int sid)
+
+  \brief clean atom search motion data
+
+  \param this_proj the target project
+  \param asearch the target atom search
+  \param sid motion id
 */
 void clean_motion_search (struct project * this_proj, atom_search * asearch, int sid)
 {
@@ -186,14 +186,14 @@ void clean_motion_search (struct project * this_proj, atom_search * asearch, int
   this_proj -> modelgl -> atom_win -> rebuilt[sid] = FALSE;
 }
 
-/*
-*  int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible)
-*
-*  Usage: apply atom edition action to project (motion, remove, replace, insert, random move)
-*
-*  struct project * this_proj : the target project
-*  atom_search * asearch      : the target atom search
-*  gboolean visible           : is the 'model edition' window visible (1/0)
+/*!
+  \fn int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible)
+
+  \brief apply atom edition action to project (motion, remove, replace, insert, random move)
+
+  \param this_proj the target project
+  \param asearch the target atom search
+  \param visible is the 'model edition' window visible (1/0)
 */
 int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible)
 {
@@ -998,13 +998,13 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   }
 }
 
-/*
-*  void clean_all_trees (atom_search * asearch, struct project * this_proj)
-*
-*  Usage: clean all tree models in the 'model edition' window
-*
-*  atom_search * asearch      : the target atom search
-*  struct project * this_proj : the target project
+/*!
+  \fn void clean_all_trees (atom_search * asearch, struct project * this_proj)
+
+  \brief clean all tree models in the 'model edition' window
+
+  \param asearch the target atom search
+  \param this_proj the target project
 */
 void clean_all_trees (atom_search * asearch, struct project * this_proj)
 {
@@ -1080,13 +1080,13 @@ void clean_all_trees (atom_search * asearch, struct project * this_proj)
   for (i=0 ;i<2; i++) this_proj -> modelgl -> atom_win -> adv_bonding[i] = this_proj -> modelgl -> adv_bonding[i];
 }
 
-/*
-*  void apply_action (struct project * this_proj, atom_search * asearch)
-*
-*  Usage: apply edition action
-*
-*  struct project * this_proj : the target project
-*  atom_search * asearch      : the target atom search
+/*!
+  \fn void apply_action (struct project * this_proj, atom_search * asearch)
+
+  \brief apply edition action
+
+  \param this_proj the target project
+  \param asearch the target atom search
 */
 void apply_action (struct project * this_proj, atom_search * asearch)
 {
@@ -1151,13 +1151,13 @@ void apply_action (struct project * this_proj, atom_search * asearch)
   clean_other_window_after_edit (this_proj);
 }
 
-/*
-*  void prepare_random_action (struct project * this_proj, atom_search * asearch)
-*
-*  Usage: prepare random action
-*
-*  struct project * this_proj : the target project
-*  atom_search * asearch      : the target atom search
+/*!
+  \fn void prepare_random_action (struct project * this_proj, atom_search * asearch)
+
+  \brief prepare random action
+
+  \param this_proj the target project
+  \param asearch the target atom search
 */
 void prepare_random_action (struct project * this_proj, atom_search * asearch)
 {
@@ -1348,14 +1348,14 @@ void prepare_random_action (struct project * this_proj, atom_search * asearch)
   }
 }
 
-/*
-*  gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_search * asearch, gboolean editing)
-*
-*  Usage: check for object(s) in selection to apply action
-*
-*  struct project * this_proj : the target project
-*  atom_search * asearch      : the target atom search
-*  gboolean editing           : actually going for action (1) or simply counting elements (0)
+/*!
+  \fn gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_search * asearch, gboolean editing)
+
+  \brief check for object(s) in selection to apply action
+
+  \param this_proj the target project
+  \param asearch the target atom search
+  \param editing actually going for action (1) or simply counting elements (0)
 */
 gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_search * asearch, gboolean editing)
 {
@@ -1951,12 +1951,12 @@ gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_searc
   return taking_action;
 }
 
-/*
-*  atom_search * duplicate_atom_search (atom_search * asearch)
-*
-*  Usage: duplicate atom search data structure
-*
-*  atom_search * asearch :
+/*!
+  \fn atom_search * duplicate_atom_search (atom_search * asearch)
+
+  \brief duplicate atom search data structure
+
+  \param asearch
 */
 atom_search * duplicate_atom_search (atom_search * asearch)
 {
@@ -1991,13 +1991,13 @@ atom_search * duplicate_atom_search (atom_search * asearch)
   return bsearch;
 }
 
-/*
-*  G_MODULE_EXPORT void take_action (GtkButton * but, gpointer data)
-*
-*  Usage: take edition action
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void take_action (GtkButton * but, gpointer data)
+
+  \brief take edition action
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void take_action (GtkButton * but, gpointer data)
 {

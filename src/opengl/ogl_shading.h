@@ -14,21 +14,24 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'ogl_shading.h'
 *
-*  Contains: 
+* Contains:
 
 */
 
 #ifndef OGL_SHADING_H_
 #define OGL_SHADING_H_
 
-#define GLSL_POINTS     0
-#define GLSL_SPHERES    1
-#define GLSL_LINES      2
-#define GLSL_CYLINDERS  3
-#define GLSL_CAPS       4
-#define GLSL_POLYEDRA   5
-#define GLSL_STRING     6
-#define GLSL_LIGHT      7
+/*! \enum glsl_styles */
+enum glsl_styles {
+  GLSL_POINTS    = 0, /*!< 0 */
+  GLSL_SPHERES   = 1, /*!< 1 */
+  GLSL_LINES     = 2, /*!< 2 */
+  GLSL_CYLINDERS = 3, /*!< 3 */
+  GLSL_CAPS      = 4, /*!< 4 */
+  GLSL_POLYEDRA  = 5, /*!< 5 */
+  GLSL_STRING    = 6, /*!< 6 */
+  GLSL_LIGHT     = 7  /*!< 7 */
+};
 
 #define POLY_BUFF_SIZE 10  // p(x,y,z), n(x,y,z), color (r,g,b,a)
 #define LINE_BUFF_SIZE  7  // p(x,y,z), color (r,g,b,a)
@@ -85,39 +88,42 @@ extern const GLchar * string_vertex;
 extern const GLchar * string_color;
 extern const GLchar * string_color_2d;
 
-
+/*! \struct object_3d */
 typedef struct {
-  int quality;
-  int num_vertices;
-  int vert_buffer_size;
-  float * vertices;
-  int num_indices;
-  int ind_buffer_size;
-  int * indices;
-  int num_instances;
-  int inst_buffer_size;
-  float * instances;
-  GLuint texture;       // Texture ID if any
-  float shift[4];       // Texture shift if any (0-2: x,y,z), visible (3: always/normal)
+  int quality;             /*!< OpenGL rendering quality */
+  int num_vertices;        /*!< Number of vertices to render, if any */
+  int vert_buffer_size;    /*!< Buffer size for the vertices, if any  */
+  float * vertices;        /*!< Vertices to render, if any  */
+  int num_indices;         /*!< Number of indices, if any  */
+  int ind_buffer_size;     /*!< Buffer size for the indices, if any  */
+  int * indices;           /*!< Indices to render, if any  */
+  int num_instances;       /*!< Number of instances, if any  */
+  int inst_buffer_size;    /*!< Buffer size for the instances, if any  */
+  float * instances;       /*!< Instances to render, if any  */
+  GLuint texture;          /*!< Texture ID, if any */
+  float shift[4];          /*!< 0 to 2, texture position shift, if any: \n
+                             (0 = x_shift, 1 = y_shift, 2 = z_shift), \n
+                              3 visibility (0 = normal, 1 = always) */
 } object_3d;
 
+/*! \struct glsl_program */
 typedef struct {
-  int id;
-  int object;
-  GLuint vertex_shader;
-  GLuint geometry_shader;
-  GLuint fragment_shader;
-  GLenum vert_type;
-  int draw_type;
-  gboolean draw_instanced;
-  GLuint vao;
-  GLuint * vbo;
-  GLuint * array_pointer;
-  GLuint * uniform_loc;
-  GLuint * light_uniform;
-  object_3d * obj;
-  float line_width;
-  ColRGBA * col;
+  int id;                  /*!< The GLSL program ID */
+  int object;              /*!< The number of 3D object(s) to render */
+  GLuint vertex_shader;    /*!< The vertex shader ID */
+  GLuint geometry_shader;  /*!< The geometry shader ID */
+  GLuint fragment_shader;  /*!< The fragement shader ID */
+  GLenum vert_type;        /*!< The type of vertex */
+  int draw_type;           /*!< In \enum glsl_styles */
+  gboolean draw_instanced; /*!< 0 = single instance, 1 = multiple instances */
+  GLuint vao;              /*!< Vertex object array ID */
+  GLuint * vbo;            /*!< Binding buffer(s) */
+  GLuint * array_pointer;  /*!< Vertex pointer(s) */
+  GLuint * uniform_loc;    /*!< Uniform location pointer(s) */
+  GLuint * light_uniform;  /*!< Light(s) uniform */
+  object_3d * obj;         /*!< The 3D object(s) to render */
+  float line_width;        /*!< Wireframe line width */
+  ColRGBA * col;           /*!< String color */
 } glsl_program;
 
 #endif

@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_proj.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the 'View -> Projection' submenu
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -35,22 +35,23 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "glwindow.h"
 
+/*! \enum position */
 enum position {
-  RIGHT = 0,
-  LEFT = 1,
-  TOP = 2,
-  BOTTOM = 3,
-  FRONT = 4,
-  BACK = 5,
+  RIGHT  = 0, /*!< 0 */
+  LEFT   = 1, /*!< 1 */
+  TOP    = 2, /*!< 2 */
+  BOTTOM = 3, /*!< 3 */
+  FRONT  = 4, /*!< 4 */
+  BACK   = 5  /*!< 5 */
 };
 
-/*
-*  G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
-*
-*  Usage: set camera position callback
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
+
+  \brief set camera position callback
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 {
@@ -98,12 +99,12 @@ G_MODULE_EXPORT void set_camera_pos (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
-/*
-*  GtkWidget * menu_proj (glwin * view)
-*
-*  Usage: create the 'View -> Projection' submenu - GTK3
-*
-*  glwin * view : the target glwin
+/*!
+  \fn GtkWidget * menu_proj (glwin * view)
+
+  \brief create the 'View -> Projection' submenu - GTK3
+
+  \param view the target glwin
 */
 GtkWidget * menu_proj (glwin * view)
 {
@@ -130,27 +131,27 @@ GtkWidget * menu_proj (glwin * view)
   return menup;
 }
 #else
-/*
-*  G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: set camera position callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief set camera position callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_set_camera_pos (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   set_camera_pos (NULL, data);
 }
 
-/*
-*  GMenu * menu_proj (glwin * view, int popm)
-*
-*  Usage: create the 'View -> Projection' submenu - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_proj (glwin * view, int popm)
+
+  \brief create the 'View -> Projection' submenu - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_proj (glwin * view, int popm)
 {

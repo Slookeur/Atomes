@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'amber96.c'
 *
-*  Contains:
+* Contains:
 *
 
   Amber-96 force field, data from taken from:

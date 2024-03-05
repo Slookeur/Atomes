@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'oplsaar.c'
 *
-*  Contains:
+* Contains:
 *
 
   OPLSAAR force field

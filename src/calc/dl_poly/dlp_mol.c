@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'dlp_mol.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to add / remove molecule(s) to / from the force field
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   gchar * remove_text (int i, int j, gchar * str);
 
@@ -61,14 +61,14 @@ extern void find_atom_id_in_field_molecule (struct field_molecule * fmol);
 extern void viz_fragment (struct field_molecule * fmol, int id, int viz);
 extern void check_to_visualize_properties (int id);
 
-/*
-*  gchar * remove_text (int i, int j, gchar * str)
-*
-*  Usage: get removal information text
-*
-*  int i       : -2 = remove field atom, -1 = remove field molecule
-*  int j       : -1 = remove field molecule, else remove field atom
-*  gchar * str : the name of the object to remove
+/*!
+  \fn gchar * remove_text (int i, int j, gchar * str)
+
+  \brief get removal information text
+
+  \param i -2 = remove field atom, -1 = remove field molecule
+  \param j -1 = remove field molecule, else remove field atom
+  \param str the name of the object to remove
 */
 gchar * remove_text (int i, int j, gchar * str)
 {
@@ -106,12 +106,12 @@ gchar * remove_text (int i, int j, gchar * str)
   }
 }
 
-/*
-*  void clean_up_molecules_info (gboolean usel)
-*
-*  Usage: prepare molecule related widgets in the assistant
-*
-*  gboolean usel : unselect all atom(s) (yes / no)
+/*!
+  \fn void clean_up_molecules_info (gboolean usel)
+
+  \brief prepare molecule related widgets in the assistant
+
+  \param usel unselect all atom(s) (yes / no)
 */
 void clean_up_molecules_info (gboolean usel)
 {
@@ -131,16 +131,16 @@ void clean_up_molecules_info (gboolean usel)
   fill_field_model (field_model[0], 0, -1);
 }
 
-/*
-*  void set_sensitive_mol (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
-*
-*  Usage: set renderer sensitivity in the force field molecule selection tree store
-*
-*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
-*  GtkTreeCellRenderer * renderer : the target cell renderer
-*  GtkTreeModel                   : the target tree model
-*  GtkTreeIter                    : the target tree iter
-*  gpointer data                  : the associated data pointer
+/*!
+  \fn void set_sensitive_mol (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+
+  \brief set renderer sensitivity in the force field molecule selection tree store
+
+  \param col the target GtkTreeViewColumn
+  \param renderer the target cell renderer
+  \param GtkTreeModel the target tree model
+  \param GtkTreeIter the target tree iter
+  \param data the associated data pointer
 */
 void set_sensitive_mol (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
@@ -158,14 +158,14 @@ void set_sensitive_mol (GtkTreeViewColumn * col, GtkCellRenderer * renderer, Gtk
 
 int old_viz_mol;
 
-/*
-*  G_MODULE_EXPORT void select_mol (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
-*
-*  Usage: on select field molecule toggle callback
-*
-*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
-*  gchar * string_path                   : the path in the tree store
-*  gpointer data                         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void select_mol (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+
+  \brief on select field molecule toggle callback
+
+  \param cell_renderer the GtkCellRendererToggle sending the signal
+  \param string_path the path in the tree store
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void select_mol (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
@@ -206,15 +206,15 @@ G_MODULE_EXPORT void select_mol (GtkCellRendererToggle * cell_renderer, gchar * 
 
 dint ** atomd_id_save;
 
-/*
-*  void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol)
-*
-*  Usage: clean the field atom from a list of atom(s)
-*
-*  struct field_molecule * fmol : the target fied molecule
-*  struct field_atom * at       : the field atom to clean, remove specific atom(s) from it
-*  int mols                     : the number of fragment(s) for this molecule
-*  int * mol                    : the list of fragment id
+/*!
+  \fn void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol)
+
+  \brief clean the field atom from a list of atom(s)
+
+  \param fmol the target fied molecule
+  \param at the field atom to clean, remove specific atom(s) from it
+  \param mols the number of fragment(s) for this molecule
+  \param mol the list of fragment id
 */
 void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol)
 {
@@ -279,16 +279,16 @@ void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, in
   g_free (t_list);
 }
 
-/*
-*  void molecule_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
-*
-*  Usage: set renderer color in the force field molecule selection tree store
-*
-*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
-*  GtkTreeCellRenderer * renderer : the target cell renderer
-*  GtkTreeModel                   : the target tree model
-*  GtkTreeIter                    : the target tree iter
-*  gpointer data                  : the associated data pointer
+/*!
+  \fn void molecule_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+
+  \brief set renderer color in the force field molecule selection tree store
+
+  \param col the target GtkTreeViewColumn
+  \param renderer the target cell renderer
+  \param GtkTreeModel the target tree model
+  \param GtkTreeIter the target tree iter
+  \param data the associated data pointer
 */
 void molecule_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
@@ -298,14 +298,14 @@ void molecule_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, Gt
   set_renderer_color (j, renderer, init_color (i-1, num_field_objects));
 }
 
-/*
-*  G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data)
-*
-*  Usage: add molecule to force field - running the dialog
-*
-*  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   : the response id
-*  gpointer data      : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data)
+
+  \brief add molecule to force field - running the dialog
+
+  \param dialog the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -450,14 +450,14 @@ G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint respons
   }
 }
 
-/*
-*  G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: add molecule to force field - creating the dialog
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief add molecule to force field - creating the dialog
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -518,13 +518,13 @@ G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * p
   run_this_gtk_dialog (amol, G_CALLBACK(run_add_molecule_to_field), NULL);
 }
 
-/*
-*  void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
-*
-*  Usage: merge all field atoms to another field molecule
-*
-*  struct field_molecule * new_mol : the field molecule to merge the atom(s) with
-*  int mstart                      : the fragment id to start with
+/*!
+  \fn void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
+
+  \brief merge all field atoms to another field molecule
+
+  \param new_mol the field molecule to merge the atom(s) with
+  \param mstart the fragment id to start with
 */
 void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
 {
@@ -553,14 +553,14 @@ void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
   }
 }
 
-/*
-*  void prepare_atoms_to_merge (struct field_atom * at, struct field_molecule * new_mol, struct field_molecule * old_mol)
-*
-*  Usage: update the data for the newly 'merged' field atom
-*
-*  struct field_atom * at          : the target field atom
-*  struct field_molecule * new_mol : the target molecule to merge with
-*  struct field_molecule * old_mol : the molecule to remove
+/*!
+  \fn void prepare_atoms_to_merge (struct field_atom * at, struct field_molecule * new_mol, struct field_molecule * old_mol)
+
+  \brief update the data for the newly 'merged' field atom
+
+  \param at the target field atom
+  \param new_mol the target molecule to merge with
+  \param old_mol the molecule to remove
 */
 void prepare_atoms_to_merge (struct field_atom * at, struct field_molecule * new_mol, struct field_molecule * old_mol)
 {
@@ -594,13 +594,13 @@ void prepare_atoms_to_merge (struct field_atom * at, struct field_molecule * new
   g_free (saved_frozen_id);
 }
 
-/*
-*  struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
-*
-*  Usage: merge field atoms from a field molecule
-*
-*  int id                       : the id of the new field atom
-*  struct field_molecule * fmol : the field molecule for of the atoms
+/*!
+  \fn struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
+
+  \brief merge field atoms from a field molecule
+
+  \param id the id of the new field atom
+  \param fmol the field molecule for of the atoms
 */
 struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
 {
@@ -627,14 +627,14 @@ struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
   return fat;
 }
 
-/*
-*  G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data)
-*
-*  Usage: remove molecule from force field - running the dialog
-*
-*  GtkDialog * rmol : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data)
+
+  \brief remove molecule from force field - running the dialog
+
+  \param rmol the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data)
 {
@@ -732,14 +732,14 @@ G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint resp
   if (done) destroy_this_dialog (rmol);
 }
 
-/*
-*  G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: remove molecule from force field - creating the dialog
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief remove molecule from force field - creating the dialog
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 {

@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_molopt-basis.c'
 *
-*  Contains:
+* Contains:
 *
 
   CP2K MOLOPT basis set, as distributed with CP2K 9.1

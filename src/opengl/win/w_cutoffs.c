@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_cutoffs.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the bond cutoffs update dialog
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void update_cutoffs (struct project * this_proj);
   void cut_box (struct project * this_proj, GtkWidget * vbox);
@@ -41,12 +41,12 @@ If not, see <https://www.gnu.org/licenses/> */
 extern gchar * label_cutrab (struct project * this_proj, glwin * view, int id);
 double * tmpcut;
 
-/*
-*  void update_cutoffs (struct project * this_proj)
-*
-*  Usage: update bond cutoffs
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void update_cutoffs (struct project * this_proj)
+
+  \brief update bond cutoffs
+
+  \param this_proj the target project
 */
 void update_cutoffs (struct project * this_proj)
 {
@@ -115,13 +115,13 @@ void update_cutoffs (struct project * this_proj)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
-*
-*  Usage: change cutoff entry callback
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
+
+  \brief change cutoff entry callback
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
 {
@@ -136,13 +136,13 @@ G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
   update_entry_double (res, tmpcut[id]);
 }
 
-/*
-*  void cut_box (struct project * this_proj, GtkWidget * vbox)
-*
-*  Usage: box cutoff entries
-*
-*  struct project * this_proj : the target project
-*  GtkWidget * vbox           : the GtkWidget sending the signal
+/*!
+  \fn void cut_box (struct project * this_proj, GtkWidget * vbox)
+
+  \brief box cutoff entries
+
+  \param this_proj the target project
+  \param vbox the GtkWidget sending the signal
 */
 void cut_box (struct project * this_proj, GtkWidget * vbox)
 {
@@ -202,14 +202,14 @@ void cut_box (struct project * this_proj, GtkWidget * vbox)
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label("<b>Cutoff(s) must be &#8805; 0.5 &#xC5;</b>", -1, -1, 0.5, 0.5), FALSE, FALSE, 10);
 }
 
-/*
-*  G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointer data)
-*
-*  Usage: bond cutoffs window - running the dialog
-*
-*  GtkDialog * win  : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointer data)
+
+  \brief bond cutoffs window - running the dialog
+
+  \param win the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -242,24 +242,24 @@ G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointe
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: adjust bond cutoffs window callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief adjust bond cutoffs window callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void window_cuts (GtkWidget * widg, gpointer data)
-*
-*  Usage: adjust bond cutoffs window callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void window_cuts (GtkWidget * widg, gpointer data)
+
+  \brief adjust bond cutoffs window callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_cuts (GtkWidget * widg, gpointer data)
 #endif

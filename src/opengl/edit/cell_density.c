@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cell_density.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the density adjustement tab in the cell edition window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void display_density (cell_edition * cell, double vol, double dens, double adens);
 
@@ -33,15 +33,15 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "cell_edit.h"
 
-/*
-*  void display_density (cell_edition * cell, double vol, double dens, double adens)
-*
-*  Usage: create density information widgets
-*
-*  cell_edition * cell : the target cell edition
-*  double vol          : the volume
-*  double dens         : the density
-*  double adens        : the atomic density
+/*!
+  \fn void display_density (cell_edition * cell, double vol, double dens, double adens)
+
+  \brief create density information widgets
+
+  \param cell the target cell edition
+  \param vol the volume
+  \param dens the density
+  \param adens the atomic density
 */
 void display_density (cell_edition * cell, double vol, double dens, double adens)
 {
@@ -71,23 +71,23 @@ void display_density (cell_edition * cell, double vol, double dens, double adens
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data)
-*
-*  Usage: homogeneous rescaling toggle callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data)
+
+  \brief homogeneous rescaling toggle callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
-*
-*  Usage: homogeneous rescaling toggle callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
+
+  \brief homogeneous rescaling toggle callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
 #endif
@@ -101,12 +101,12 @@ G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
   widget_set_sensitive (view -> cell_win -> shift_box[1], view -> cell_win -> homo_density);
 }
 
-/*
-*  GtkWidget * adjust_density_tab (struct project * this_proj)
-*
-*  Usage: create the density tab
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn GtkWidget * adjust_density_tab (struct project * this_proj)
+
+  \brief create the density tab
+
+  \param this_proj the target project
 */
 GtkWidget * adjust_density_tab (struct project * this_proj)
 {

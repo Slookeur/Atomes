@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm35_ethers.c'
 *
-*  Contains:
+* Contains:
 *
 
   CHARMM-charmm35_ethers force field, data from taken from:

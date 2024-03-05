@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cell_extra.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the add cell(s) tab in the cell edition window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data);
 
@@ -30,13 +30,13 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "cell_edit.h"
 
-/*
-*  G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
-*
-*  Usage: add cell callback
-*
-*  GtkSpinButton * res : the GtkSpinButton sending the signal
-*  gpointer data       : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
+
+  \brief add cell callback
+
+  \param res the GtkSpinButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
 {
@@ -63,12 +63,12 @@ G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
   sens_superbut (this_proj);
 }
 
-/*
-*  GtkWidget * add_extra_cell_tab (glwin * view)
-*
-*  Usage: create the add cell(s) tab
-*
-*  glwin * view : the target glwin
+/*!
+  \fn GtkWidget * add_extra_cell_tab (glwin * view)
+
+  \brief create the add cell(s) tab
+
+  \param view the target glwin
 */
 GtkWidget * add_extra_cell_tab (glwin * view)
 {

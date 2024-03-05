@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_bonds.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the 'Model -> Bond(s)' submenu
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   gchar * label_cutrab (struct project * this_proj, glwin * view, int id);
 
@@ -47,14 +47,14 @@ extern G_MODULE_EXPORT void window_cuts (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data);
 #endif
 
-/*
-*  gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
-*
-*  Usage: prepare the text of a menu item in the 'Model -> Bond(s)' submenu
-*
-*  struct project * this_proj : the target project
-*  glwin * view               : the target glwin
-*  int id                     : the type of label to prepare
+/*!
+  \fn gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
+
+  \brief prepare the text of a menu item in the 'Model -> Bond(s)' submenu
+
+  \param this_proj the target project
+  \param view the target glwin
+  \param id the type of label to prepare
 */
 gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
 {
@@ -161,13 +161,13 @@ gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
 }
 
 #ifdef GTK3
-/*
-*  GtkWidget * create_bond_menu_item (gchar * str, GtkWidget * menu)
-*
-*  Usage: create a menu item, and attach it to menu
-*
-*  gchar * str      : the label of the menu item
-*  GtkWidget * menu : the GtkWidget menu to attach the menu item to
+/*!
+  \fn GtkWidget * create_bond_menu_item (gchar * str, GtkWidget * menu)
+
+  \brief create a menu item, and attach it to menu
+
+  \param str the label of the menu item
+  \param menu the GtkWidget menu to attach the menu item to
 */
 GtkWidget * create_bond_menu_item (gchar * str, GtkWidget * menu)
 {
@@ -176,15 +176,15 @@ GtkWidget * create_bond_menu_item (gchar * str, GtkWidget * menu)
   return  layout;
 }
 
-/*
-*  GtkWidget * create_bond_layout_widget (gchar * str, GtkWidget * widg, int va, tint * data)
-*
-*  Usage: *  Usage: create a 'Model -> Bond(s)' menu item GTK3
-*
-*  gchar * str      : the menu item name
-*  GtkWidget * widg : the menu GtkWidget to attach the menu item to
-*  int va           : the type of bond item to set the appropriate action
-*  tint * data      : the associated data pointer
+/*!
+  \fn GtkWidget * create_bond_layout_widget (gchar * str, GtkWidget * widg, int va, tint * data)
+
+  \brief create a 'Model -> Bond(s)' menu item GTK3
+
+  \param str the menu item name
+  \param widg the menu GtkWidget to attach the menu item to
+  \param va the type of bond item to set the appropriate action
+  \param data the associated data pointer
 */
 GtkWidget * create_bond_layout_widget (gchar * str, GtkWidget * widg, int va, tint * data)
 {
@@ -207,14 +207,14 @@ GtkWidget * create_bond_layout_widget (gchar * str, GtkWidget * widg, int va, ti
   return layout;
 }
 
-/*
-*  GtkWidget * menu_bonds (glwin * view, int id, int at)
-*
-*  Usage: create the 'Bond(s)' submenu GTK3
-*
-*  glwin * view : the target glwin
-*  int id       : main app (0) or popup (1)
-*  int at       : atoms (0) or clones (1)
+/*!
+  \fn GtkWidget * menu_bonds (glwin * view, int id, int at)
+
+  \brief create the 'Bond(s)' submenu GTK3
+
+  \param view the target glwin
+  \param id main app (0) or popup (1)
+  \param at atoms (0) or clones (1)
 */
 GtkWidget * menu_bonds (glwin * view, int id, int at)
 {
@@ -326,19 +326,19 @@ GtkWidget * menu_bonds (glwin * view, int id, int at)
   return menub;
 }
 #else
-/*
-*  GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int popm, int id, GCallback handler, gpointer data, gboolean sensitive)
-*
-*  Usage: create a bond menu item GTK4
-*
-*  glwin * view       : the target glwin
-*  gchar * str        : menu item name
-*  gchar * key        : menu item action key
-*  int popm           : main app (0) or popup (1)
-*  int id             : menu item action id
-*  GCallback handler  : the associated callback
-*  gpointer data      : the associated data pointer
-*  gboolean sensitive : menu item sensitivity
+/*!
+  \fn GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int popm, int id, GCallback handler, gpointer data, gboolean sensitive)
+
+  \brief create a bond menu item GTK4
+
+  \param view the target glwin
+  \param str menu item name
+  \param key menu item action key
+  \param popm main app (0) or popup (1)
+  \param id menu item action id
+  \param handler the associated callback
+  \param data the associated data pointer
+  \param sensitive menu item sensitivity
 */
 GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int popm, int id, GCallback handler, gpointer data, gboolean sensitive)
 {
@@ -347,14 +347,14 @@ GMenu * create_bond_layout_section (glwin * view, gchar * str, gchar * key, int 
   return  menu;
 }
 
-/*
-*  GMenu * menu_bonds (glwin * view, int popm, int at)
-*
-*  Usage: create the 'Bond(s)' submenu GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
-*  int at       : atoms (0) or clones (1)
+/*!
+  \fn GMenu * menu_bonds (glwin * view, int popm, int at)
+
+  \brief create the 'Bond(s)' submenu GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+  \param at atoms (0) or clones (1)
 */
 GMenu * menu_bonds (glwin * view, int popm, int at)
 {

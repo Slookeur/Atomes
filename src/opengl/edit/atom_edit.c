@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_edit.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the model edition window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   gboolean is_atom_win_active (glwin * view);
 
@@ -53,12 +53,12 @@ gchar * action_name[5] = {"Move", "Replace", "Remove", "Insert", "Random move"};
 gchar * action_atoms[3] = {"All non-selected atoms", "All selected atoms", "All atoms"};
 gboolean was_moved;
 
-/*
-*  gboolean is_atom_win_active (glwin * view)
-*
-*  Usage: is the model edition window visible ?
-*
-*  glwin * view : the target glwin
+/*!
+  \fn gboolean is_atom_win_active (glwin * view)
+
+  \brief is the model edition window visible ?
+
+  \param view the target glwin
 */
 gboolean is_atom_win_active (glwin * view)
 {
@@ -69,12 +69,12 @@ gboolean is_atom_win_active (glwin * view)
   return FALSE;
 }
 
-/*
-*  void clean_coord_window (struct project * this_proj)
-*
-*  Usage: update the environment configuration window after edtion
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void clean_coord_window (struct project * this_proj)
+
+  \brief update the environment configuration window after edtion
+
+  \param this_proj the target project
 */
 void clean_coord_window (struct project * this_proj)
 {
@@ -92,12 +92,12 @@ void clean_coord_window (struct project * this_proj)
   }
 }
 
-/*
-*  void clean_other_window_after_edit (struct project * this_proj)
-*
-*  Usage: update other windows after model edition if required
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void clean_other_window_after_edit (struct project * this_proj)
+
+  \brief update other windows after model edition if required
+
+  \param this_proj the target project
 */
 void clean_other_window_after_edit (struct project * this_proj)
 {
@@ -144,12 +144,12 @@ void clean_other_window_after_edit (struct project * this_proj)
   }*/
 }
 
-/*
-*  void clean_atom_win (struct project * this_proj)
-*
-*  Usage: clean model edition data
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void clean_atom_win (struct project * this_proj)
+
+  \brief clean model edition data
+
+  \param this_proj the target project
 */
 void clean_atom_win (struct project * this_proj)
 {
@@ -183,13 +183,13 @@ void clean_atom_win (struct project * this_proj)
   update (this_proj -> modelgl);
 }
 
-/*
-*  G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
-*
-*  Usage: close model edition window
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
+
+  \brief close model edition window
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 {
@@ -219,24 +219,24 @@ G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data)
-*
-*  Usage: model edition window close event callback GTK4
-*
-*  GtkWindow * widg :
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data)
+
+  \brief model edition window close event callback GTK4
+
+  \param widg
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpointer data)
-*
-*  Usage: model edition window close event callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event : the GdkEvent triggering the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpointer data)
+
+  \brief model edition window close event callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param event the GdkEvent triggering the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -246,25 +246,25 @@ G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpoi
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer data)
-*
-*  Usage:  reset model transformation toggle callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer data)
+
+  \brief  reset model transformation toggle callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_reset_transformation (GtkCheckButton * but, gpointer data)
 {
   if (gtk_check_button_get_active (but))
 #else
-/*
-*  G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer data)
-*
-*  Usage: reset model transformation toggle callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer data)
+
+  \brief reset model transformation toggle callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer data)
 {
@@ -306,13 +306,13 @@ G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer d
   }
 }
 
-/*
-*  G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
-*
-*  Usage: apply edition action callback
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
+
+  \brief apply edition action callback
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 {
@@ -346,13 +346,13 @@ G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
   //clean_atom_win (this_proj);
 }
 
-/*
-*  GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
-*
-*  Usage: create the model edition notebook
-*
-*  struct project * this_proj : the target project
-*  GtkWidget * vbox           : the GtkWidget sending the signal
+/*!
+  \fn GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
+
+  \brief create the model edition notebook
+
+  \param this_proj the target project
+  \param vbox the GtkWidget sending the signal
 */
 GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
 {
@@ -371,15 +371,15 @@ GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
   return notebook;
 }
 
-/*
-*  atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize)
-*
-*  Usage: allocate atom search data structure
-*
-*  int proj     : the target project id
-*  int action   : the edition action
-*  int searchid : the atom search id
-*  int tsize    : the atom search object list size
+/*!
+  \fn atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize)
+
+  \brief allocate atom search data structure
+
+  \param proj the target project id
+  \param action the edition action
+  \param searchid the atom search id
+  \param tsize the atom search object list size
 */
 atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize)
 {
@@ -400,12 +400,12 @@ atom_search * allocate_atom_search (int proj, int action, int searchid, int tsiz
   return asearch;
 }
 
-/*
-*  GtkWidget * create_edition_window (struct project * this_proj)
-*
-*  Usage: create the model edition window
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn GtkWidget * create_edition_window (struct project * this_proj)
+
+  \brief create the model edition window
+
+  \param this_proj the target project
 */
 GtkWidget * create_edition_window (struct project * this_proj)
 {
@@ -440,13 +440,13 @@ GtkWidget * create_edition_window (struct project * this_proj)
   return win;
 }
 
-/*
-*  void prepare_atom_edition (gpointer data, gboolean visible)
-*
-*  Usage: prepare atom edition
-*
-*  gpointer data    : the associated data pointer
-*  gboolean visible : is the window visible (1/0)
+/*!
+  \fn void prepare_atom_edition (gpointer data, gboolean visible)
+
+  \brief prepare atom edition
+
+  \param data the associated data pointer
+  \param visible is the window visible (1/0)
 */
 void prepare_atom_edition (gpointer data, gboolean visible)
 {
@@ -505,24 +505,24 @@ void prepare_atom_edition (gpointer data, gboolean visible)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: open model edition window callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief open model edition window callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void action_window (GtkWidget * widg, gpointer data)
-*
-*  Usage: open model edition window callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void action_window (GtkWidget * widg, gpointer data)
+
+  \brief open model edition window callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void action_window (GtkWidget * widg, gpointer data)
 #endif

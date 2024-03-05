@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'amber98.c'
 *
-*  Contains:
+* Contains:
 *
 
   Amber-98 force field, data from taken from:

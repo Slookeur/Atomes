@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_coord.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The initialization subroutines to import atomic coordinates
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   gboolean set_dummy_in_use (gchar * this_word);
 
@@ -62,13 +62,13 @@ char * this_word;
 struct line_node * head = NULL;
 struct line_node * tail = NULL;
 
-/*
-*  void add_reader_info (gchar * info, int mid)
-*
-*  Usage: append information message to the reader information
-*
-*  gchar * info : the reader information message
-*  int mid : message type (0 = error, 1 = warning)
+/*!
+  \fn void add_reader_info (gchar * info, int mid)
+
+  \brief append information message to the reader information
+
+  \param info the reader information message
+  \param mid message type (0 = error, 1 = warning)
 */
 void add_reader_info (gchar * info, int mid)
 {
@@ -76,29 +76,29 @@ void add_reader_info (gchar * info, int mid)
   if (! mid) this_reader -> mid = 0;
 }
 
-/*
-*  void reader_info (gchar * type, gchar * sinf, int val)
-*
-*  Usage: display reader information
-*
-*  gchar * type : File type
-*  gchar * sinf : Information message
-*  int val      : Value to present
+/*!
+  \fn void reader_info (gchar * type, gchar * sinf, int val)
+
+  \brief display reader information
+
+  \param type File type
+  \param sinf Information message
+  \param val Value to present
 */
 void reader_info (gchar * type, gchar * sinf, int val)
 {
   g_print ("Reading coordinates [%s]: %s = %d\n", type, sinf, val);
 }
 
-/*
-*  void format_error (int stp, int ato, gchar * mot, int line)
-*
-*  Usage: Message to display an error message
-*
-*  int stp     : the MD step id
-*  int ato     : Atom id
-*  gchar * mot : Message
-*  int line    : Line with the error
+/*!
+  \fn void format_error (int stp, int ato, gchar * mot, int line)
+
+  \brief Message to display an error message
+
+  \param stp the MD step id
+  \param ato Atom id
+  \param mot Message
+  \param line Line with the error
 */
 void format_error (int stp, int ato, gchar * mot, int line)
 {
@@ -119,12 +119,12 @@ void format_error (int stp, int ato, gchar * mot, int line)
   g_free (str);
 }
 
-/*
-*  int set_v_dummy (gchar * this_word)
-*
-*  Usage: check if dummy is used for unknown species, if not then ask what to do
-*
-*  gchar * this_word : the chemical species label
+/*!
+  \fn int set_v_dummy (gchar * this_word)
+
+  \brief check if dummy is used for unknown species, if not then ask what to do
+
+  \param this_word the chemical species label
 */
 int set_v_dummy (gchar * this_word)
 {
@@ -172,13 +172,13 @@ int set_v_dummy (gchar * this_word)
   }
 }
 
-/*
-*  void check_for_species (double v, int ato)
-*
-*  Usage: Fill the species for each atom and the associated data
-*
-*  double v : Z
-*  int ato  : Total number of atoms
+/*!
+  \fn void check_for_species (double v, int ato)
+
+  \brief Fill the species for each atom and the associated data
+
+  \param v Z
+  \param ato Total number of atoms
 */
 void check_for_species (double v, int ato)
 {
@@ -226,13 +226,13 @@ void check_for_species (double v, int ato)
   }
 }
 
-/*
-*  int open_coord_file (gchar * filename, int fti)
-*
-*  Usage: open atomic coordinates file
-*
-*  gchar * filename : the file name
-*  int fti          : the type of coordinates
+/*!
+  \fn int open_coord_file (gchar * filename, int fti)
+
+  \brief open atomic coordinates file
+
+  \param filename the file name
+  \param fti the type of coordinates
 */
 int open_coord_file (gchar * filename, int fti)
 {

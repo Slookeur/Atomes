@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'glview.h'
 *
-*  Contains:
+* Contains:
 
 */
 
@@ -48,89 +48,100 @@ If not, see <https://www.gnu.org/licenses/> */
 #define MAX_IN_SELECTION 21
 #define COORD_MAX_MENU 20
 
+/*! \enum radii */
 enum radii {
-  VDW = 0,
-  INC = 1,
-  COV = 2,
-  ION = 3
+  VDW = 0, /*!< 0 */
+  INC = 1, /*!< 1 */
+  COV = 2, /*!< 2 */
+  ION = 3  /*!< 3 */
 };
 
+/*! \enum representation */
 enum representation {
-  ORTHOGRAPHIC = 0,
-  PERSPECTIVE = 1
+  ORTHOGRAPHIC = 0, /*!< 0 */
+  PERSPECTIVE  = 1 /*!< 1 */
 };
 
+/*! \enum modes */
 enum modes {
-  ANALYZE = 0,
-  EDITION = 1,
-  MOTION = 2,
-  DL_POLY = 3,
-  LAAMPS = 4,
-  CPMD_AI = 5,
-  CP2K_AI = 6,
-  CP2K_QMMM = 7,
-  CP2K_MM = 8
+  ANALYZE   = 0, /*!< 0 */
+  EDITION   = 1, /*!< 1 */
+  MOTION    = 2, /*!< 2 */
+  DL_POLY   = 3, /*!< 3 */
+  LAAMPS    = 4, /*!< 4 */
+  CPMD_AI   = 5, /*!< 5 */
+  CP2K_AI   = 6, /*!< 6 */
+  CP2K_QMMM = 7, /*!< 7 */
+  CP2K_MM   = 8  /*!< 8 */
 };
 
 #define NUM_STYLES 7
 
+/*! \enum styles */
 enum styles {
-  NONE = -1,
-  BALL_AND_STICK = 0,
-  WIREFRAME = 1,
-  SPACEFILL = 2,
-  SPHERES = 3,
-  CYLINDERS = 4,
-  PUNT = 5
+  NONE           = -1, /*!< -1 */
+  BALL_AND_STICK =  0, /*!< 0 */
+  WIREFRAME      =  1, /*!< 1 */
+  SPACEFILL      =  2, /*!< 2 */
+  SPHERES        =  3, /*!< 3 */
+  CYLINDERS      =  4, /*!< 4 */
+  PUNT           =  5  /*!< 5 */
 };
 
+/*! \enum render */
 enum render {
-  FILL = 0,
-  LINE = 1,
-  PTS = 2
+  FILL = 0, /*!< 0 */
+  LINE = 1, /*!< 1 */
+  PTS  = 2  /*!< 2 */
 };
 
+/*! \enum action */
 enum action {
-  ROTATE = 0,
-  MOVE = 1,
-  SELECT = 2,
-  ZOOM_IN_OUT = 3,
-  SPIN = 4
+  ROTATE      = 0, /*!< 0 */
+  MOVE        = 1, /*!< 1 */
+  SELECT      = 2, /*!< 2 */
+  ZOOM_IN_OUT = 3, /*!< 3 */
+  SPIN        = 4  /*!< 4 */
 };
 
+ /*! \enum mouse_status */
 enum mouse_status {
-  CLICKED = 0,
-  RELEASED = 1
+  CLICKED  = 0, /*!< 0 */
+  RELEASED = 1  /*!< 1 */
 };
 
+/*! \enum axisposition */
 enum axisposition {
-  TOP_RIGHT = 0,
-  TOP_LEFT = 1,
-  BOTTOM_RIGHT = 2,
-  BOTTOM_LEFT = 3,
-  CENTER = 4,
-  CUSTOM = 5
+  TOP_RIGHT    = 0, /*!< 0 */
+  TOP_LEFT     = 1, /*!< 1 */
+  BOTTOM_RIGHT = 2, /*!< 2 */
+  BOTTOM_LEFT  = 3, /*!< 3 */
+  CENTER       = 4, /*!< 4 */
+  CUSTOM       = 5  /*!< 5 */
 };
 
+/*! \enum labels */
 enum labels {
-  ELEMENT_NAME = 0,
-  SYMBOL = 1,
-  SYMBOL_AND_NUM = 2,
-  NUM = 3,
-  ID_IN_MOLECULE = 4
+  ELEMENT_NAME   = 0, /*!< 0 */
+  SYMBOL         = 1, /*!< 1 */
+  SYMBOL_AND_NUM = 2, /*!< 2 */
+  NUM            = 3, /*!< 3 */
+  ID_IN_MOLECULE = 4  /*!< 4 */
 };
 
+/*! \enum actions */
 enum actions {
-  DISPL = 2,
-  REPLACE = 3,
-  REMOVE = 4,
-  INSERT = 5,
-  RANMOVE = 6
+  DISPL   = 2, /*!< 2 */
+  REPLACE = 3, /*!< 3 */
+  REMOVE  = 4, /*!< 4 */
+  INSERT  = 5, /*!< 5 */
+  RANMOVE = 6  /*!< 6 */
 };
 
+/*! \enum texts */
 enum texts {
-  SIMPLE_TEXT = 0,
-  BETTER_TEXT = 1
+  SIMPLE_TEXT = 0, /*!< 0 */
+  BETTER_TEXT = 1  /*!< 1 */
 };
 
 /*enum material {

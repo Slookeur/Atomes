@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm36_carb.c'
 *
-*  Contains:
+* Contains:
 *
 
   CHARMM-charmm36_carb force field, data from taken from:

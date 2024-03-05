@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'dlp_field.h'
 *
-*  Contains:
+* Contains:
 
 */
 
@@ -129,11 +129,14 @@ extern char * field_acro[N_FIELDS];
 #define OPLSAAP    19
 #define OPLSAAR    20
 
+/*! \enum dlp_atom_types */
 enum dlp_atom_types {
-  SPEC_ONLY = 0,
-  TOTAL_COORD_AND_SPEC = 1,   // Total coord + spec
-  PARTIAL_COORD_AND_SPEC = 2, // Partial coord + spec
-  OTHER = 3
+  SPEC_ONLY              = 0, /*!< 0 */
+  // Total coord + spec
+  TOTAL_COORD_AND_SPEC   = 1, /*!< 1 */
+  // Partial coord + spec
+  PARTIAL_COORD_AND_SPEC = 2, /*!< 2 */
+  OTHER                  = 3 /*!< 3 */
 };
 
 struct field_prop {

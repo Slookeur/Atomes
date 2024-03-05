@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_print.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to print the CP2K input file(s)
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   gchar * cp2kbool (double opt);
 
@@ -356,13 +356,13 @@ gchar * cp2k_fix[4] = {"    &FIXED_ATOMS\n      COMPONENTS_TO_FIX ",
                        "      LIST", "      MOLNAME",
                        "\n    &END FIXED_ATOMS\n"};
 
-/*
-*  void print_cp2k_var (gchar * var, GtkTextBuffer * buffer)
-*
-*  Usage: print a CP2K variable name
-*
-*  gchar * var            : the variable name
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_cp2k_var (gchar * var, GtkTextBuffer * buffer)
+
+  \brief print a CP2K variable name
+
+  \param var the variable name
+  \param buffer the GtkTextBuffer to print into
 */
 void print_cp2k_var (gchar * var, GtkTextBuffer * buffer)
 {
@@ -371,14 +371,14 @@ void print_cp2k_var (gchar * var, GtkTextBuffer * buffer)
   print_info ("}", "bold", buffer);
 }
 
-/*
-*  void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer)
-*
-*  Usage: print CP2K input file variable section
-*
-*  int num                : the number of element(s) to print
-*  gchar ** section       : the section text
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer)
+
+  \brief print CP2K input file variable section
+
+  \param num the number of element(s) to print
+  \param section the section text
+  \param buffer the GtkTextBuffer to print into
 */
 void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer)
 {
@@ -396,12 +396,12 @@ void print_var_section (int num, gchar ** section, GtkTextBuffer * buffer)
   }
 }
 
-/*
-*  gchar * cp2kbool (double opt)
-*
-*  Usage: print CP2K boolean
-*
-*  double opt : the value to print
+/*!
+  \fn gchar * cp2kbool (double opt)
+
+  \brief print CP2K boolean
+
+  \param opt the value to print
 */
 gchar * cp2kbool (double opt)
 {
@@ -417,13 +417,13 @@ gchar * cp2kbool (double opt)
 
 extern int v_thermo[2][CP2NTHERM];
 
-/*
-*  void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
-*
-*  Usage: print CP2K thermostat(s) information
-*
-*  int n_thermo           : the number ot thermostat(s)
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
+
+  \brief print CP2K thermostat(s) information
+
+  \param n_thermo the number ot thermostat(s)
+  \param buffer the GtkTextBuffer to print into
 */
 void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
 {
@@ -500,13 +500,13 @@ void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
   print_info (thermostat[3], NULL, buffer);
 }
 
-/*
-*  void print_motion_cp2k (int m, GtkTextBuffer * buffer)
-*
-*  Usage: print the CP2K input MOTION section
-*
-*  int m                  : 0 = Geometry optimisation, 1 = MD
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_motion_cp2k (int m, GtkTextBuffer * buffer)
+
+  \brief print the CP2K input MOTION section
+
+  \param m 0 = Geometry optimisation, 1 = MD
+  \param buffer the GtkTextBuffer to print into
 */
 void print_motion_cp2k (int m, GtkTextBuffer * buffer)
 {
@@ -590,12 +590,12 @@ void print_motion_cp2k (int m, GtkTextBuffer * buffer)
   print_info (cp2kmotion[3][0], NULL, buffer);
 }
 
-/*
-*  void print_coord_cp2k (GtkTextBuffer * buffer)
-*
-*  Usage: print atomic coordinates in CP2K input format
-*
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_coord_cp2k (GtkTextBuffer * buffer)
+
+  \brief print atomic coordinates in CP2K input format
+
+  \param buffer the GtkTextBuffer to print into
 */
 void print_coord_cp2k (GtkTextBuffer * buffer)
 {
@@ -633,12 +633,12 @@ void print_coord_cp2k (GtkTextBuffer * buffer)
   }
 }
 
-/*
-*  void print_subsys_cp2k (GtkTextBuffer * buffer)
-*
-*  Usage: print the CP2K input SUBSYS section
-*
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_subsys_cp2k (GtkTextBuffer * buffer)
+
+  \brief print the CP2K input SUBSYS section
+
+  \param buffer the GtkTextBuffer to print into
 */
 void print_subsys_cp2k (GtkTextBuffer * buffer)
 {
@@ -680,12 +680,12 @@ void print_subsys_cp2k (GtkTextBuffer * buffer)
   print_info ("&END SUBSYS", NULL, buffer);
 }
 
-/*
-*  void print_variables_cp2k (GtkTextBuffer * buffer)
-*
-*  Usage: print the list of the CP2K input variables
-*
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_variables_cp2k (GtkTextBuffer * buffer)
+
+  \brief print the list of the CP2K input variables
+
+  \param buffer the GtkTextBuffer to print into
 */
 void print_variables_cp2k (GtkTextBuffer * buffer)
 {
@@ -957,12 +957,12 @@ void print_variables_cp2k (GtkTextBuffer * buffer)
   print_info ("\n", NULL, buffer);
 }
 
-/*
-*  void print_global_cp2k (GtkTextBuffer * buffer)
-*
-*  Usage: print the CP2K input file GLOBAL section
-*
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_global_cp2k (GtkTextBuffer * buffer)
+
+  \brief print the CP2K input file GLOBAL section
+
+  \param buffer the GtkTextBuffer to print into
 */
 void print_global_cp2k (GtkTextBuffer * buffer)
 {
@@ -996,16 +996,16 @@ void print_global_cp2k (GtkTextBuffer * buffer)
   }
 }
 
-/*
-*  void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer * buffer)
-*
-*  Usage: print CP2K input file PRINT section content
-*
-*  gchar * spaces         : spaces string
-*  gchar * info           : variable string to print
-*  int i                  : SCF restart option
-*  int j                  : 1 = MO cubes, 0 = else
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer * buffer)
+
+  \brief print CP2K input file PRINT section content
+
+  \param spaces spaces string
+  \param info variable string to print
+  \param i SCF restart option
+  \param j 1 = MO cubes, 0 = else
+  \param buffer the GtkTextBuffer to print into
 */
 void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer * buffer)
 {
@@ -1034,13 +1034,13 @@ void print_cp2k_print (gchar * spaces, gchar * info, int i, int j, GtkTextBuffer
   print_info ("\n", NULL, buffer);
 }
 
-/*
-*  void print_cp2k (int f, GtkTextBuffer * buffer)
-*
-*  Usage: print the CP2K input file section
-*
-*  int f                  : the section id
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print into
+/*!
+  \fn void print_cp2k (int f, GtkTextBuffer * buffer)
+
+  \brief print the CP2K input file section
+
+  \param f the section id
+  \param buffer the GtkTextBuffer to print into
 */
 void print_cp2k (int f, GtkTextBuffer * buffer)
 {

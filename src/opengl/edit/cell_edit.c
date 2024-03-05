@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cell_edit.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the cell edition window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data);
   G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data);
@@ -39,13 +39,13 @@ If not, see <https://www.gnu.org/licenses/> */
 
 gchar * edit_names[7] = {"Wrap All Atoms in", "Shift Center", "Add Extra(s)", "Create Super-Cell", "Adjust Density", "Cut Slab", "PBC Pixels Debug"};
 
-/*
-*  G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
-*
-*  Usage: close cell edition window and free the associated data pointers
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
+
+  \brief close cell edition window and free the associated data pointers
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
 {
@@ -60,24 +60,24 @@ G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data)
-*
-*  Usage: cell edition window close event callback GTK4
-*
-*  GtkWindow * widg :
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data)
+
+  \brief cell edition window close event callback GTK4
+
+  \param widg
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data)
-*
-*  Usage: cell edition window close event callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event : the GdkEvent triggering the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data)
+
+  \brief cell edition window close event callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param event the GdkEvent triggering the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -86,13 +86,13 @@ G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointe
   return FALSE;
 }
 
-/*
-*  GtkWidget * cell_tab (int i, struct project * this_proj)
-*
-*  Usage: create the 'i'th cell tab
-*
-*  int i                      : the cell tab id
-*  struct project * this_proj : the target project
+/*!
+  \fn GtkWidget * cell_tab (int i, struct project * this_proj)
+
+  \brief create the 'i'th cell tab
+
+  \param i the cell tab id
+  \param this_proj the target project
 */
 GtkWidget * cell_tab (int i, struct project * this_proj)
 {
@@ -122,13 +122,13 @@ GtkWidget * cell_tab (int i, struct project * this_proj)
   }
 }
 
-/*
-*  GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
-*
-*  Usage: create the cell edition notebook
-*
-*  struct project * this_proj : the target project
-*  GtkWidget * vbox           : the GtkWidget sending the signal
+/*!
+  \fn GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
+
+  \brief create the cell edition notebook
+
+  \param this_proj the target project
+  \param vbox the GtkWidget sending the signal
 */
 GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
 {
@@ -163,13 +163,13 @@ GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
   return notebook;
 }
 
-/*
-*  GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data)
-*
-*  Usage: create the cell editon window
-*
-*  struct project * this_proj : the target project
-*  gpointer data              : the associated data pointer
+/*!
+  \fn GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data)
+
+  \brief create the cell editon window
+
+  \param this_proj the target project
+  \param data the associated data pointer
 */
 GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data)
 {
@@ -194,24 +194,24 @@ GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer dat
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: create the cell edition window callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief create the cell edition window callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data)
-*
-*  Usage: create the cell edition window callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data)
+
+  \brief create the cell edition window callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data)
 #endif

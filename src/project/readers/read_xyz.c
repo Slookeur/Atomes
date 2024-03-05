@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_xyz.c'
 *
-*  Contains:
+* Contains:
 *
 
  -  - The subroutines to read XYZ atomic coordinates
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int xyz_get_atom_coordinates ();
   int open_xyz_file (int linec);
@@ -36,10 +36,10 @@ If not, see <https://www.gnu.org/licenses/> */
 #include <omp.h>
 #include "readers.h"
 
-/*
-*  int xyz_get_atom_coordinates ()
-*
-*  Usage: get the atomic coordinates from the XYZ file
+/*!
+  \fn int xyz_get_atom_coordinates ()
+
+  \brief get the atomic coordinates from the XYZ file
 */
 int xyz_get_atom_coordinates ()
 {
@@ -284,12 +284,12 @@ int xyz_get_atom_coordinates ()
   return 0;
 }
 
-/*
-*  int open_xyz_file (int linec)
-*
-*  Usage: open XYZ file
-*
-*  int linec : Number of lines in the file
+/*!
+  \fn int open_xyz_file (int linec)
+
+  \brief open XYZ file
+
+  \param linec Number of lines in the file
 */
 int open_xyz_file (int linec)
 {

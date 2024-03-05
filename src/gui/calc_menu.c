@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'calc_menu.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The creation of the calculation dialogs
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   gboolean test_gr (int gr);
   gboolean test_sq (int sq);
@@ -80,12 +80,12 @@ GtkWidget * calc_win = NULL;
 GtkWidget * ba_entry[2];
 int search_type;
 
-/*
-*  GtkWidget * calc_window (int i)
-*
-*  Usage: create a calculation window
-*
-*  int i : the calculation id
+/*!
+  \fn GtkWidget * calc_window (int i)
+
+  \brief create a calculation window
+
+  \param i the calculation id
 */
 GtkWidget * calc_window (int i)
 {
@@ -98,13 +98,13 @@ GtkWidget * calc_window (int i)
   return calc_dialog;
 }
 
-/*
-*  G_MODULE_EXPORT void set_max (GtkEntry * entry, gpointer data)
-*
-*  Usage: set a maximum value
-*
-*  GtkEntry * entry : the GtkEntry sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_max (GtkEntry * entry, gpointer data)
+
+  \brief set a maximum value
+
+  \param entry the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_max (GtkEntry * entry, gpointer data)
 {
@@ -124,13 +124,13 @@ G_MODULE_EXPORT void set_max (GtkEntry * entry, gpointer data)
 
 GtkWidget * rings_box[2];
 
-/*
-*  G_MODULE_EXPORT void set_delta (GtkEntry * entry, gpointer data)
-*
-*  Usage: set the number of delta between data points
-*
-*  GtkEntry * entry : the GtkEntry sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_delta (GtkEntry * entry, gpointer data)
+
+  \brief set the number of delta between data points
+
+  \param entry the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_delta (GtkEntry * entry, gpointer data)
 {
@@ -199,25 +199,25 @@ G_MODULE_EXPORT void set_delta (GtkEntry * entry, gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void combox_tunit_changed (GtkComboBox * box, gpointer data)
-*
-*  Usage: change time units
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void combox_tunit_changed (GtkComboBox * box, gpointer data)
+
+  \brief change time units
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void combox_tunit_changed (GtkComboBox * box, gpointer data)
 {
   active_project -> tunit = gtk_combo_box_get_active(box);
 }
 
-/*
-*  void calc_sph (GtkWidget * vbox)
-*
-*  Usage: creation of the spherical harmonics calculation widgets
-*
-*  GtkWidget * vbox : GtkWidget that will receive the data
+/*!
+  \fn void calc_sph (GtkWidget * vbox)
+
+  \brief creation of the spherical harmonics calculation widgets
+
+  \param vbox GtkWidget that will receive the data
 */
 void calc_sph (GtkWidget * vbox)
 {
@@ -232,12 +232,12 @@ void calc_sph (GtkWidget * vbox)
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, entry, FALSE, FALSE, 0);
 }
 
-/*
-*  void calc_msd (GtkWidget * vbox)
-*
-*  Usage: creation of the MSD calculation widgets
-*
-*  GtkWidget * vbox : GtkWidget that will receive the data
+/*!
+  \fn void calc_msd (GtkWidget * vbox)
+
+  \brief creation of the MSD calculation widgets
+
+  \param vbox GtkWidget that will receive the data
 */
 void calc_msd (GtkWidget * vbox)
 {
@@ -279,13 +279,13 @@ void calc_msd (GtkWidget * vbox)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void set_numa (GtkEntry * entry, gpointer data)
-*
-*  Usage: set the rings/chains statistics parameter NUMA
-*
-*  GtkEntry * entry : the GtkEntry sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_numa (GtkEntry * entry, gpointer data)
+
+  \brief set the rings/chains statistics parameter NUMA
+
+  \param entry the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_numa (GtkEntry * entry, gpointer data)
 {
@@ -313,15 +313,15 @@ G_MODULE_EXPORT void set_numa (GtkEntry * entry, gpointer data)
   update_entry_int (entry, j);
 }
 
-/*
-*  GtkWidget * combox_rings (gchar * str, int num, gchar * list_item[num], int id)
-*
-*  Usage: create a combo box for the rings statistics calculation
-*
-*  gchar * str            : Label of the combo box
-*  int num                : Number of values to insert in the combo box
-*  gchar * list_item[num] : Text data to insert in the combo boc
-*  int id                 : Id of the box to create
+/*!
+  \fn GtkWidget * combox_rings (gchar * str, int num, gchar * list_item[num], int id)
+
+  \brief create a combo box for the rings statistics calculation
+
+  \param str Label of the combo box
+  \param num Number of values to insert in the combo box
+  \param list_item[num] Text data to insert in the combo boc
+  \param id Id of the box to create
 */
 GtkWidget * combox_rings (gchar * str, int num, gchar * list_item[num], int id)
 {
@@ -339,13 +339,13 @@ GtkWidget * combox_rings (gchar * str, int num, gchar * list_item[num], int id)
  GtkWidget * rings_entry[2];
  GtkWidget * rings_check[4];
 
-/*
-*  G_MODULE_EXPORT void combox_rings_changed (GtkComboBox * box, gpointer data)
-*
-*  Usage: change rings statistics calculation parameter
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void combox_rings_changed (GtkComboBox * box, gpointer data)
+
+  \brief change rings statistics calculation parameter
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void combox_rings_changed (GtkComboBox * box, gpointer data)
 {
@@ -384,23 +384,23 @@ G_MODULE_EXPORT void combox_rings_changed (GtkComboBox * box, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void toggle_rings (GtkCheckButton * but, gpointer data)
-*
-*  Usage: toggle a rings statistics calculation parameter
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void toggle_rings (GtkCheckButton * but, gpointer data)
+
+  \brief toggle a rings statistics calculation parameter
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void toggle_rings (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void toggle_rings (GtkToggleButton * but, gpointer data)
-*
-*  Usage: toggle a rings statistics calculation parameter
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void toggle_rings (GtkToggleButton * but, gpointer data)
+
+  \brief toggle a rings statistics calculation parameter
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void toggle_rings (GtkToggleButton * but, gpointer data)
 #endif
@@ -454,12 +454,12 @@ G_MODULE_EXPORT void toggle_rings (GtkToggleButton * but, gpointer data)
   }
 }
 
-/*
-*  void calc_rings (GtkWidget * vbox)
-*
-*  Usage: creation of the rings statistics calculation widgets
-*
-*  GtkWidget * vbox : GtkWidget that will receive the data
+/*!
+  \fn void calc_rings (GtkWidget * vbox)
+
+  \brief creation of the rings statistics calculation widgets
+
+  \param vbox GtkWidget that will receive the data
 */
 void calc_rings (GtkWidget * vbox)
 {
@@ -539,27 +539,27 @@ void calc_rings (GtkWidget * vbox)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void run_toggle_bond (GtkNativeDialog * info, gint response_id, gpointer data)
-*
-*  Usage: bond properties detailed saving: run the dialog
-*
-*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id       : the response id
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_toggle_bond (GtkNativeDialog * info, gint response_id, gpointer data)
+
+  \brief bond properties detailed saving: run the dialog
+
+  \param info the GtkNativeDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_toggle_bond (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
-/*
-*  G_MODULE_EXPORT void run_toggle_bond (GtkDialog * info, gint response_id, gpointer data)
-*
-*  Usage: bond properties detailed saving: run the dialog
-*
-*  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_toggle_bond (GtkDialog * info, gint response_id, gpointer data)
+
+  \brief bond properties detailed saving: run the dialog
+
+  \param info the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_toggle_bond (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -585,23 +585,23 @@ G_MODULE_EXPORT void run_toggle_bond (GtkDialog * info, gint response_id, gpoint
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void toggle_bond (GtkCheckButton * Button, gpointer data)
-*
-*  Usage: bond properties detailed saving and prepare the dialog
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void toggle_bond (GtkCheckButton * Button, gpointer data)
+
+  \brief bond properties detailed saving and prepare the dialog
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void toggle_bond (GtkCheckButton * Button, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void toggle_bond (GtkToggleButton * Button, gpointer data)
-*
-*  Usage: activate bond properties detailed saving and prepare the dialog
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void toggle_bond (GtkToggleButton * Button, gpointer data)
+
+  \brief activate bond properties detailed saving and prepare the dialog
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void toggle_bond (GtkToggleButton * Button, gpointer data)
 #endif
@@ -655,12 +655,12 @@ G_MODULE_EXPORT void toggle_bond (GtkToggleButton * Button, gpointer data)
   }
 }
 
-/*
-*  gboolean test_gr (int gr)
-*
-*  Usage: is it safe to compute g(r) ?
-*
-*  int gr : type of g(r): real space (GR) or FFT (GK)
+/*!
+  \fn gboolean test_gr (int gr)
+
+  \brief is it safe to compute g(r) ?
+
+  \param gr type of g(r): real space (GR) or FFT (GK)
 */
 gboolean test_gr (int gr)
 {
@@ -682,12 +682,12 @@ gboolean test_gr (int gr)
   }
 }
 
-/*
-*  gboolean test_sq (int sq)
-*
-*  Usage: is it safe to compute s(q) ?
-*
-*  int sq : type of s(q): FFT (1) or direct (SK)
+/*!
+  \fn gboolean test_sq (int sq)
+
+  \brief is it safe to compute s(q) ?
+
+  \param sq type of s(q): FFT (1) or direct (SK)
 */
 gboolean test_sq (int sq)
 {
@@ -709,10 +709,10 @@ gboolean test_sq (int sq)
   }
 }
 
-/*
-*  gboolean test_bonds ()
-*
-*  Usage: is it safe to compute bond properties ?
+/*!
+  \fn gboolean test_bonds ()
+
+  \brief is it safe to compute bond properties ?
 */
 gboolean test_bonds ()
 {
@@ -735,10 +735,10 @@ gboolean test_bonds ()
   }
 }
 
-/*
-*  gboolean test_rings ()
-*
-*  Usage: is it safe to compute ring statistics ?
+/*!
+  \fn gboolean test_rings ()
+
+  \brief is it safe to compute ring statistics ?
 */
 gboolean test_rings ()
 {
@@ -773,10 +773,10 @@ gboolean test_rings ()
   return TRUE;
 }
 
-/*
-*  gboolean test_msd ()
-*
-*  Usage: is it safe to compute MSD ?
+/*!
+  \fn gboolean test_msd ()
+
+  \brief is it safe to compute MSD ?
 */
 gboolean test_msd ()
 {
@@ -817,10 +817,10 @@ gboolean test_msd ()
   }
 }
 
-/*
-*  gboolean test_sph ()
-*
-*  Usage: is it safe to compute spherical harmonics ?
+/*!
+  \fn gboolean test_sph ()
+
+  \brief is it safe to compute spherical harmonics ?
 */
 gboolean test_sph ()
 {
@@ -835,12 +835,12 @@ gboolean test_sph ()
   }
 }
 
-/*
-*  void calc_bonds (GtkWidget * vbox)
-*
-*  Usage: creation of the bond calculation widgets
-*
-*  GtkWidget * vbox : GtkWidget that will receive the data
+/*!
+  \fn void calc_bonds (GtkWidget * vbox)
+
+  \brief creation of the bond calculation widgets
+
+  \param vbox GtkWidget that will receive the data
 */
 void calc_bonds (GtkWidget * vbox)
 {
@@ -874,13 +874,13 @@ void calc_bonds (GtkWidget * vbox)
   widget_set_sensitive (checkbd, 1);
 }
 
-/*
-*  GtkWidget * hbox_note (int i, double val)
-*
-*  Usage: foot note message box with some parameters
-*
-*  int i      : message id
-*  double val : value to display
+/*!
+  \fn GtkWidget * hbox_note (int i, double val)
+
+  \brief foot note message box with some parameters
+
+  \param i message id
+  \param val value to display
 */
 GtkWidget * hbox_note (int i, double val)
 {
@@ -900,13 +900,13 @@ GtkWidget * avbox;
 GtkWidget * smbox;
 int avsize;
 
-/*
-*  G_MODULE_EXPORT void expand_opt (GtkWidget * exp, gpointer data)
-*
-*  Usage: open expander actions
-*
-*  GtkWidget * exp : the GtkWidget sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void expand_opt (GtkWidget * exp, gpointer data)
+
+  \brief open expander actions
+
+  \param exp the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void expand_opt (GtkWidget * exp, gpointer data)
 {
@@ -942,13 +942,13 @@ G_MODULE_EXPORT void expand_opt (GtkWidget * exp, gpointer data)
   gtk_window_set_resizable (GTK_WINDOW (wind), FALSE);
 }
 
-/*
-*  G_MODULE_EXPORT void set_advanced_sq (GtkEntry * entry, gpointer data)
-*
-*  Usage: set a s(k) calculation parameter
-*
-*  GtkEntry * entry : the GtkEntry sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_advanced_sq (GtkEntry * entry, gpointer data)
+
+  \brief set a s(k) calculation parameter
+
+  \param entry the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_advanced_sq (GtkEntry * entry, gpointer data)
 {
@@ -973,13 +973,13 @@ G_MODULE_EXPORT void set_advanced_sq (GtkEntry * entry, gpointer data)
   update_entry_double (entry, active_project -> sk_advanced[c]);
 }
 
-/*
-*  G_MODULE_EXPORT void set_sfact (GtkEntry * entry, gpointer data)
-*
-*  Usage: set the Gaussian smoothing factor
-*
-*  GtkEntry * entry : the GtkEntry sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_sfact (GtkEntry * entry, gpointer data)
+
+  \brief set the Gaussian smoothing factor
+
+  \param entry the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_sfact (GtkEntry * entry, gpointer data)
 {
@@ -998,13 +998,13 @@ G_MODULE_EXPORT void set_sfact (GtkEntry * entry, gpointer data)
   update_entry_double (entry, active_project -> fact[i]);
 }
 
-/*
-*  G_MODULE_EXPORT void on_show_curve_toolbox (GtkWidget * widg, gpointer data)
-*
-*  Usage: show the curve toolboxes
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_show_curve_toolbox (GtkWidget * widg, gpointer data)
+
+  \brief show the curve toolboxes
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_show_curve_toolbox (GtkWidget * widg, gpointer data)
 {
@@ -1018,13 +1018,13 @@ G_MODULE_EXPORT void on_show_curve_toolbox (GtkWidget * widg, gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void on_smoother_released (GtkButton * button, gpointer data)
-*
-*  Usage: smooth g(r), s(q), s(k) or g(k)
-*
-*  GtkButton * button : the button sending the signal
-*  gpointer data      : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_smoother_released (GtkButton * button, gpointer data)
+
+  \brief smooth g(r), s(q), s(k) or g(k)
+
+  \param button the button sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_smoother_released (GtkButton * button, gpointer data)
 {
@@ -1164,13 +1164,13 @@ G_MODULE_EXPORT void on_smoother_released (GtkButton * button, gpointer data)
   }
 }
 
-/*
-*  void calc_gr_sq (GtkWidget * box, int id)
-*
-*  Usage: creation of the g(r) / s(q) / s(k) / g(k) calculation widgets
-*
-*  GtkWidget * box : GtkWidget that will receive the data
-*  int id          : the calculation id
+/*!
+  \fn void calc_gr_sq (GtkWidget * box, int id)
+
+  \brief creation of the g(r) / s(q) / s(k) / g(k) calculation widgets
+
+  \param box GtkWidget that will receive the data
+  \param id the calculation id
 */
 void calc_gr_sq (GtkWidget * box, int id)
 {
@@ -1284,14 +1284,14 @@ void calc_gr_sq (GtkWidget * box, int id)
   widget_set_sensitive (smooth_options, 1);
 }
 
-/*
-*  G_MODULE_EXPORT void run_on_calc_activate (GtkDialog * dial, gint response_id, gpointer data)
-*
-*  Usage: create a calculation dialog: run the dialog
-*
-*  GtkDialog * dial : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_on_calc_activate (GtkDialog * dial, gint response_id, gpointer data)
+
+  \brief create a calculation dialog: run the dialog
+
+  \param dial the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_on_calc_activate (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -1357,13 +1357,13 @@ G_MODULE_EXPORT void run_on_calc_activate (GtkDialog * dial, gint response_id, g
   }
 }
 
-/*
-*  G_MODULE_EXPORT void on_calc_activate (GtkWidget * widg, gpointer data)
-*
-*  Usage: create a calculation dialog - prepare the dialog
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_calc_activate (GtkWidget * widg, gpointer data)
+
+  \brief create a calculation dialog - prepare the dialog
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_activate (GtkWidget * widg, gpointer data)
 {

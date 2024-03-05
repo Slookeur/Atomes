@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'math_3d.h'
 *
-*  Contains: 
+* Contains:
 
 */
 
@@ -657,8 +657,8 @@ static inline mat4_t m4_frustum (float left, float right, float bottom, float to
  *
  * x, y and z are the right-handed base vectors of the cameras subspace.
  * x has to be normalized because the cross product only produces a normalized
- *   output vector if both input vectors are orthogonal to each other. And up
- *   probably isn't orthogonal to z.
+ * output vector if both input vectors are orthogonal to each other. And up
+ * probably isn't orthogonal to z.
  *
  * These vectors are then used to build a 3x3 rotation matrix. This matrix
  * rotates a vector by the same amount the camera is rotated. But instead we
@@ -674,7 +674,7 @@ static inline mat4_t m4_frustum (float left, float right, float bottom, float to
  * is then this translation followed by the rotation. Written as matrix
  * multiplication:
  *
- *   lookat = rotation * translation
+ * lookat = rotation * translation
  *
  * Since we're right-handed this equals to first doing the translation and after
  * that doing the rotation. During that multiplication the rotation 3x3 part
@@ -704,16 +704,16 @@ static inline mat4_t m4_look_at(vec3_t from, vec3_t to, vec3_t up) {
  * Implementation details:
  *
  * - Invert the 3x3 part of the 4x4 matrix to handle rotation, scaling, etc.
- *   correctly (see source).
+ * correctly (see source).
  * - Invert the translation part of the 4x4 matrix by multiplying it with the
- *   inverted rotation matrix and negating it.
+ * inverted rotation matrix and negating it.
  *
  * When a 3D point is multiplied with a transformation matrix it is first
  * rotated and then translated. The inverted transformation matrix is the
  * inverse translation followed by the inverse rotation. Written as a matrix
  * multiplication (remember, the effect applies right to left):
  *
- *   inv(matrix) = inv(rotation) * inv(translation)
+ * inv(matrix) = inv(rotation) * inv(translation)
  *
  * The inverse translation is a translation into the opposite direction, just
  * the negative translation. The rotation part isn't changed by that

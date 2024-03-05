@@ -14,14 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_remove.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to remove bond(s) from a project
  - The subroutine to prepare the passivation (removal followed by insertion)
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int test_this_fragment (int natomes, int fcoord, int fid, struct atom * atom_list, int * old_id, gboolean remove);
 
@@ -48,14 +48,14 @@ int ** neighbors;
 
 extern atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize);
 
-/*
-*  void set_mol_data_list (int the_atom, struct atom ** mol_list, int the_mol)
-*
-*  Usage: set molecule id for atom
-*
-*  int the_atom            : the atom id
-*  struct atom ** mol_list : the list of atom(s) to look up
-*  int the_mol             : the molecule id
+/*!
+  \fn void set_mol_data_list (int the_atom, struct atom ** mol_list, int the_mol)
+
+  \brief set molecule id for atom
+
+  \param the_atom the atom id
+  \param mol_list the list of atom(s) to look up
+  \param the_mol the molecule id
 */
 
 void set_mol_data_list (int aid, struct atom ** mol_list, int the_mol)
@@ -82,17 +82,17 @@ void set_mol_data_list (int aid, struct atom ** mol_list, int the_mol)
   end:;
 }
 
-/*
-*  int test_this_fragment (int natomes, int fcoord, int fid, struct atom * atom_list, int * old_id, gboolean remove)
-*
-*  Usage: verify that all atom(s) in the fragment are connected somehow, otherwise create new fragment
-*
-*  int natomes             : number of atom(s)
-*  int fcoord              : the number of fragment(s)
-*  int fid                 : the fragment id
-*  struct atom * atom_list : the atom(s) list
-*  int * old_id            : the atom(s) old id list
-*  gboolean remove         : remove (1) or motion (0) action
+/*!
+  \fn int test_this_fragment (int natomes, int fcoord, int fid, struct atom * atom_list, int * old_id, gboolean remove)
+
+  \brief verify that all atom(s) in the fragment are connected somehow, otherwise create new fragment
+
+  \param natomes number of atom(s)
+  \param fcoord the number of fragment(s)
+  \param fid the fragment id
+  \param atom_list the atom(s) list
+  \param old_id the atom(s) old id list
+  \param remove remove (1) or motion (0) action
 */
 int test_this_fragment (int natomes, int fcoord, int fid, struct atom ** atom_list, int * old_id, gboolean remove)
 {
@@ -200,17 +200,17 @@ int test_this_fragment (int natomes, int fcoord, int fid, struct atom ** atom_li
   return  i-1;
 }
 
-/*
-*  gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, struct atom * new_list, gboolean remove, gboolean passivate)
+/*!
+  \fn gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, struct atom * new_list, gboolean remove, gboolean passivate)
 *
 * Usage: remove bond(s) from project
-*
-*  struct project * this_proj         : the target project
-*  struct insert_object * this_object : the target insert object, if any
-*  int * old_id                       : the atom(s) id list
-*  struct atom * new_list             : the new atom list
-*  gboolean remove                    : remove (1) or motion (0) action
-*  gboolean passivate                 : passivate (1) or not (0)
+
+  \param this_proj the target project
+  \param this_object the target insert object, if any
+  \param old_id the atom(s) id list
+  \param new_list the new atom list
+  \param remove remove (1) or motion (0) action
+  \param passivate passivate (1) or not (0)
 */
 gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, struct atom * new_list, gboolean remove, gboolean passivate)
 {
@@ -587,13 +587,13 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   return show_frag;
 }
 
-/*
-*  void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch)
-*
-*  Usage: prepaer to remove a list of object(s) from a project, one object after another.
-*
-*  struct project * this_proj : the target project
-*  atom_search * asearch      : the target atom search
+/*!
+  \fn void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch)
+
+  \brief prepaer to remove a list of object(s) from a project, one object after another.
+
+  \param this_proj the target project
+  \param asearch the target atom search
 */
 void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch)
 {
@@ -657,13 +657,13 @@ void to_remove_this_list_of_objects (struct project * this_proj, atom_search * a
   remove_search -> in_selection = i;
 }
 
-/*
-*  void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch)
-*
-*  Usage: prepare passivation (delete of an object, then insert of another one at the same location)
-*
-*  struct project * this_proj : the target project
-*  atom_search * asearch      : the target atom search
+/*!
+  \fn void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch)
+
+  \brief prepare passivation (delete of an object, then insert of another one at the same location)
+
+  \param this_proj the target project
+  \param asearch the target atom search
 */
 void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch)
 {

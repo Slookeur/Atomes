@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'd_rings.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to prepare the ring(s) polyhedra OpenGL rendering
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean go);
 
@@ -39,17 +39,17 @@ extern void setup_polyhedron (float * vertices, GLfloat ** xyz, int s);
 extern void get_centroid (GLfloat ** xyz, int id);
 extern void check_triangles (int s, GLfloat ** xyz);
 
-/*
-*  int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean go)
-*
-*  Usage: prepare a ring polyhedra OpenGL rendering
-*
-*  float * vertices : the ring atomic positions buffer to fill, if any
-*  int se           : type of ring
-*  int ge           : the coord id for this size of ring
-*  int ta           : the size of the ring
-*  int id           : the ring id number
-*  gboolean go      : render the ring or not (1/0)
+/*!
+  \fn int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean go)
+
+  \brief prepare a ring polyhedra OpenGL rendering
+
+  \param vertices the ring atomic positions buffer to fill, if any
+  \param se type of ring
+  \param ge the coord id for this size of ring
+  \param ta the size of the ring
+  \param id the ring id number
+  \param go render the ring or not (1/0)
 */
 int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean go)
 {
@@ -153,10 +153,10 @@ int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean
   return 0;
 }
 
-/*
-*  void create_ring_lists ()
-*
-*  Usage: prepare ring(s) polyhedra OpenGL rendering
+/*!
+  \fn void create_ring_lists ()
+
+  \brief prepare ring(s) polyhedra OpenGL rendering
 */
 void create_ring_lists ()
 {

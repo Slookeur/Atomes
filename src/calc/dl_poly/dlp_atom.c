@@ -14,14 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'dlp_atom.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to handle atom selection(s) when creating a force field
  - The surboutines to remove / add field atom from a force field
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void set_sensitive_atom (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
   void atom_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
@@ -63,16 +63,16 @@ extern void compare_non_bonded (gchar * fatom);
 extern void init_all_impropers_inversions (int stru);
 extern void init_default_shaders (glwin * view);
 
-/*
-*  void set_sensitive_atom (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
-*
-*  Usage: field atom set renderer sensitivity in the DL-POLY atom(s) selection tree model
-*
-*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
-*  GtkTreeCellRenderer * renderer : the target cell renderer
-*  GtkTreeModel                   : the target tree model
-*  GtkTreeIter                    : the target tree iter
-*  gpointer data                  : the associated data pointer
+/*!
+  \fn void set_sensitive_atom (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+
+  \brief field atom set renderer sensitivity in the DL-POLY atom(s) selection tree model
+
+  \param col the target GtkTreeViewColumn
+  \param renderer the target cell renderer
+  \param GtkTreeModel the target tree model
+  \param GtkTreeIter the target tree iter
+  \param data the associated data pointer
 */
 void set_sensitive_atom (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
@@ -88,16 +88,16 @@ void set_sensitive_atom (GtkTreeViewColumn * col, GtkCellRenderer * renderer, Gt
   }
 }
 
-/*
-*  void atom_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
-*
-*  Usage: field atom set renderer color and markup in the DL-POLY atom(s) selection tree model
-*
-*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
-*  GtkTreeCellRenderer * renderer : the target cell renderer
-*  GtkTreeModel                   : the target tree model
-*  GtkTreeIter                    : the target tree iter
-*  gpointer data                  : the associated data pointer
+/*!
+  \fn void atom_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+
+  \brief field atom set renderer color and markup in the DL-POLY atom(s) selection tree model
+
+  \param col the target GtkTreeViewColumn
+  \param renderer the target cell renderer
+  \param GtkTreeModel the target tree model
+  \param GtkTreeIter the target tree iter
+  \param data the associated data pointer
 */
 void atom_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
@@ -107,14 +107,14 @@ void atom_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * rende
   set_renderer_color (j, renderer, init_color (i, num_field_objects));
 }
 
-/*
-*  G_MODULE_EXPORT void select_field_atom (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
-*
-*  Usage: on select field atom toggle callback
-*
-*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
-*  gchar * string_path                   : the path in the tree store
-*  gpointer data                         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void select_field_atom (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+
+  \brief on select field atom toggle callback
+
+  \param cell_renderer the GtkCellRendererToggle sending the signal
+  \param string_path the path in the tree store
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void select_field_atom (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
@@ -158,14 +158,14 @@ G_MODULE_EXPORT void select_field_atom (GtkCellRendererToggle * cell_renderer, g
   gtk_label_set_use_markup (GTK_LABEL(remove_label), TRUE);
 }
 
-/*
-*  void clean_old_atom (struct field_atom * at, int atos, int * atid)
-*
-*  Usage: remove atom list from field atom
-*
-*  struct field_atom * at : the field atom
-*  int atos               : the number of atom(s) to remove
-*  int * atid             : the list of atom(s) id to remove
+/*!
+  \fn void clean_old_atom (struct field_atom * at, int atos, int * atid)
+
+  \brief remove atom list from field atom
+
+  \param at the field atom
+  \param atos the number of atom(s) to remove
+  \param atid the list of atom(s) id to remove
 */
 void clean_old_atom (struct field_atom * at, int atos, int * atid)
 {
@@ -213,14 +213,14 @@ void clean_old_atom (struct field_atom * at, int atos, int * atid)
 }
 
 // extern void print_all_field_struct (struct field_molecule * mol, int str);
-/*
-*  void adjust_field_struct (int oid, int k, struct field_struct * olds)
-*
-*  Usage: adjust field molecule structural property
-*
-*  int oid                    : the target field atom type
-*  int k                      : the type of structural property to adjust
-*  struct field_struct * olds : the field molecule structural property to adjust
+/*!
+  \fn void adjust_field_struct (int oid, int k, struct field_struct * olds)
+
+  \brief adjust field molecule structural property
+
+  \param oid the target field atom type
+  \param k the type of structural property to adjust
+  \param olds the field molecule structural property to adjust
 */
 void adjust_field_struct (int oid, int k, struct field_struct * olds)
 {
@@ -274,14 +274,14 @@ void adjust_field_struct (int oid, int k, struct field_struct * olds)
   g_free (aids);
 }
 
-/*
-*  G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_id, gpointer data)
-*
-*  Usage: DL-POLY force field atom selection - running the dialog
-*
-*  GtkDialog * add_dialog : the GtkDialog sending the signal
-*  gint response_id       : the response id
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_id, gpointer data)
+
+  \brief DL-POLY force field atom selection - running the dialog
+
+  \param add_dialog the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_id, gpointer data)
 {
@@ -360,14 +360,14 @@ G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_
   }
 }
 
-/*
-*  G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint response_id, gpointer data)
-*
-*  Usage: DL-POLY force field atom selection - creating the dialog
-*
-*  GtkDialog * select_dialog : the GtkDialog sending the signal
-*  gint response_id          : the response id
-*  gpointer data             : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint response_id, gpointer data)
+
+  \brief DL-POLY force field atom selection - creating the dialog
+
+  \param select_dialog the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint response_id, gpointer data)
 {
@@ -556,14 +556,14 @@ G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint res
   }
 }
 
-/*
-*  void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda)
-*
-*  Usage: merge the field atom to remove with already other field atom
-*
-*  struct field_atom * to_merge  : the field atom to merge the atom to remove with
-*  struct field_atom * to_remove : the field atom to remove
-*  gboolean upda                 : update field atom(s) data lists
+/*!
+  \fn void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda)
+
+  \brief merge the field atom to remove with already other field atom
+
+  \param to_merge the field atom to merge the atom to remove with
+  \param to_remove the field atom to remove
+  \param upda update field atom(s) data lists
 */
 void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda)
 {
@@ -631,14 +631,14 @@ void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove,
   }
 }
 
-/*
-*  G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint response_id, gpointer data)
-*
-*  Usage: remove atom from field molecule - running the dialog
-*
-*  GtkDialog * rmol : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint response_id, gpointer data)
+
+  \brief remove atom from field molecule - running the dialog
+
+  \param rmol the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint response_id, gpointer data)
 {
@@ -710,14 +710,14 @@ G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint
   if (done) destroy_this_dialog (rmol);
 }
 
-/*
-*  G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: remove atom from field molecule - creating the dialog
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief remove atom from field molecule - creating the dialog
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 {

@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'save_mol.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to write molecules information in the atomes project file format
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int save_atom_m (FILE * fp, struct project * this_proj, int s, int a);
   int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp);
@@ -49,15 +49,15 @@ If not, see <https://www.gnu.org/licenses/> */
   struct molecule * prev;
 };*/
 
-/*
-*  int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
-*
-*  Usage: save atom data to file
-*
-*  FILE * fp                  : the file pointer
-*  struct project * this_proj : the target project
-*  int s                      : the MD step
-*  int a                      : the atom number
+/*!
+  \fn int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
+
+  \brief save atom data to file
+
+  \param fp the file pointer
+  \param this_proj the target project
+  \param s the MD step
+  \param a the atom number
 */
 int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
 {
@@ -66,14 +66,14 @@ int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
   return OK;
 }
 
-/*
-*  int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
-*
-*  Usage: save this molecule data to file
-*
-*  FILE * fp                  : the file pointer
-*  struct project * this_proj : the target project
-*  struct molecule * tmp      : the molecule that contains the data
+/*!
+  \fn int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
+
+  \brief save this molecule data to file
+
+  \param fp the file pointer
+  \param this_proj the target project
+  \param tmp the molecule that contains the data
 */
 int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
 {
@@ -87,13 +87,13 @@ int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
   return 1;
 }
 
-/*
-*  int save_mol (FILE * fp, struct project * this_proj)
-*
-*  Usage: save molecule information to file
-*
-*  FILE * fp                  : the file pointer
-*  struct project * this_proj : the target project
+/*!
+  \fn int save_mol (FILE * fp, struct project * this_proj)
+
+  \brief save molecule information to file
+
+  \param fp the file pointer
+  \param this_proj the target project
 */
 int save_mol (FILE * fp, struct project * this_proj)
 {

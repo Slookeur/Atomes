@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_trj.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to read CPMD atomic coordinates
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int trj_get_atom_coordinates ();
   int open_trj_file (int linec);
@@ -36,10 +36,10 @@ If not, see <https://www.gnu.org/licenses/> */
 #include <omp.h>
 #include "readers.h"
 
-/*
-*  int trj_get_atom_coordinates ()
-*
-*  Usage: get the atomic coordinates from the CPMD file
+/*!
+  \fn int trj_get_atom_coordinates ()
+
+  \brief get the atomic coordinates from the CPMD file
 */
 int trj_get_atom_coordinates ()
 {
@@ -231,12 +231,12 @@ int trj_get_atom_coordinates ()
   return 0;
 }
 
-/*
-*  int open_trj_file (int linec)
-*
-*  Usage: open CPMD file
-*
-*  int linec : Number of lines in the file
+/*!
+  \fn int open_trj_file (int linec)
+
+  \brief open CPMD file
+
+  \param linec Number of lines in the file
 */
 int open_trj_file (int linec)
 {

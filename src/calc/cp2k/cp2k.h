@@ -14,9 +14,9 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'cp2k.h'
 *
-*  Contains: 
+* Contains:
 
-*  Called by: 
+*  Called by:
 
   calc/cp2k/cp2k_files.c
   calc/cp2k/cp2k_init.c
@@ -96,7 +96,7 @@ extern gchar * get_nth_key (int sp, int id, int obj);
 
 extern int find_cp2k_sym ();
 
-// For CP2K v9.1 
+// For CP2K v9.1
 #define N_MOLOPT 191
 extern char * molopt_elem[N_MOLOPT];
 extern char * molopt_keys[N_MOLOPT];

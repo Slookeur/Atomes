@@ -14,14 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cell_pixel.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the pixel debugging tab for the cell edition window
    This is only used when DEBUG option is activated at build time
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void pix_info_ (int * na, int * nb, int * nc);
   void send_pix_info_ (int * p, int listp[27], int * ngb);
@@ -39,14 +39,14 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "cell_edit.h"
 
-/*
-*  void pix_info_ (int * na, int * nb, int * nc)
-*
-*  Usage: allocate pixel data pointer from Fortran90
-*
-*  int * na : x size
-*  int * nb : y size
-*  int * nc : z size
+/*!
+  \fn void pix_info_ (int * na, int * nb, int * nc)
+
+  \brief allocate pixel data pointer from Fortran90
+
+  \param na x size
+  \param nb y size
+  \param nc z size
 */
 void pix_info_ (int * na, int * nb, int * nc)
 {
@@ -56,14 +56,14 @@ void pix_info_ (int * na, int * nb, int * nc)
   active_project -> pixels = allocdint (active_project -> pix[0]*active_project -> pix[1]*active_project -> pix[2],27);
 }
 
-/*
-*  void send_pix_info_ (int * p, int listp[27], int * ngb)
-*
-*  Usage: retrieve pixel information from Fortran90
-*
-*  int * p       : the pixel id
-*  int listp[27] : the neighbor list for pixel id
-*  int * ngb     : the number of neighbor for pixel id
+/*!
+  \fn void send_pix_info_ (int * p, int listp[27], int * ngb)
+
+  \brief retrieve pixel information from Fortran90
+
+  \param p the pixel id
+  \param listp[27] the neighbor list for pixel id
+  \param ngb the number of neighbor for pixel id
 */
 void send_pix_info_ (int * p, int listp[27], int * ngb)
 {
@@ -74,13 +74,13 @@ void send_pix_info_ (int * p, int listp[27], int * ngb)
   }
 }
 
-/*
-*  GtkWidget * create_css_label (gchar * str, int id)
-*
-*  Usage: create CSS label
-*
-*  gchar * str : the string
-*  int id      : 0 = white, 1 = yellow
+/*!
+  \fn GtkWidget * create_css_label (gchar * str, int id)
+
+  \brief create CSS label
+
+  \param str the string
+  \param id 0 = white, 1 = yellow
 */
 GtkWidget * create_css_label (gchar * str, int id)
 {
@@ -97,13 +97,13 @@ GtkWidget * create_css_label (gchar * str, int id)
   return lab;
 }
 
-/*
-*  GtkWidget * attach_grid (struct project * this_proj, int init)
-*
-*  Usage: create pixel grid
-*
-*  struct project * this_proj : the target project
-*  int init                   : the target pixel
+/*!
+  \fn GtkWidget * attach_grid (struct project * this_proj, int init)
+
+  \brief create pixel grid
+
+  \param this_proj the target project
+  \param init the target pixel
 */
 GtkWidget * attach_grid (struct project * this_proj, int init)
 {
@@ -150,12 +150,12 @@ GtkWidget * attach_grid (struct project * this_proj, int init)
   return table;
 }
 
-/*
-*  void update_pix_table (struct project * this_proj)
-*
-*  Usage: prepare pixel table widget
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void update_pix_table (struct project * this_proj)
+
+  \brief prepare pixel table widget
+
+  \param this_proj the target project
 */
 void update_pix_table (struct project * this_proj)
 {
@@ -202,13 +202,13 @@ void update_pix_table (struct project * this_proj)
   show_the_widgets (this_proj -> pix_box);
 }
 
-/*
-*  G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
-*
-*  Usage: set pixel id callback
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
+
+  \brief set pixel id callback
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
 {
@@ -226,12 +226,12 @@ G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
   update_pix_table (this_proj);
 }
 
-/*
-*  GtkWidget * pixels_tab (struct project * this_proj)
-*
-*  Usage: create the PBC pixels checking tab
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn GtkWidget * pixels_tab (struct project * this_proj)
+
+  \brief create the PBC pixels checking tab
+
+  \param this_proj the target project
 */
 GtkWidget * pixels_tab (struct project * this_proj)
 {

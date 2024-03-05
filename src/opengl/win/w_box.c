@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_box.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the box properties window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data);
@@ -46,13 +46,13 @@ extern GtkWidget * radius_box;
 gchar * box_style[BOX_STYLES] = {"Wireframe", "Cylinders"};
 GtkWidget * box_data;
 
-/*
-*  G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
-*
-*  Usage: set box style callback
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
+
+  \brief set box style callback
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 {
@@ -85,23 +85,23 @@ G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
-*
-*  Usage: toggle show / hide box callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
+
+  \brief toggle show / hide box callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_show_box_toggle (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
-*
-*  Usage: toggle show / hide box callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
+
+  \brief toggle show / hide box callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
 #endif
@@ -131,13 +131,13 @@ G_MODULE_EXPORT void set_show_box_toggle (GtkToggleButton * but, gpointer data)
   widget_set_sensitive (box_data, val);
 }
 
-/*
-*  G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
-*
-*  Usage: set box color callback
-*
-*  GtkColorChooser * colob : the GtkColorChooser sending the signal
-*  gpointer data           : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
+
+  \brief set box color callback
+
+  \param colob the GtkColorChooser sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 {
@@ -147,24 +147,24 @@ G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: create the box edition window callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief create the box edition window callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
-*
-*  Usage: create the box edition window callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
+
+  \brief create the box edition window callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
 #endif

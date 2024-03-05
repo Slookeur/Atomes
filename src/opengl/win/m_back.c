@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_back.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the background color menu item
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   GtkWidget * menu_back (glwin * view);
 
@@ -33,12 +33,12 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glwindow.h"
 
 #ifdef GTK3
-/*
-*  GtkWidget * menu_back (glwin * view)
-*
-*  Usage: create the background color menu item GTK3
-*
-*  glwin * view : the target glwin
+/*!
+  \fn GtkWidget * menu_back (glwin * view)
+
+  \brief create the background color menu item GTK3
+
+  \param view the target glwin
 */
 GtkWidget * menu_back (glwin * view)
 {
@@ -49,13 +49,13 @@ GtkWidget * menu_back (glwin * view)
   return menub;
 }
 #else
-/*
-*  GMenu * menu_back (glwin * view, int popm)
-*
-*  Usage: create the background color menu item GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_back (glwin * view, int popm)
+
+  \brief create the background color menu item GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_back (glwin * view, int popm)
 {

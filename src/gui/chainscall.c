@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'chainscall.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The callbacks for the chains statistics calculation dialog
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void initchn ();
   void update_chains_menus (glwin * view);
@@ -51,10 +51,10 @@ If not, see <https://www.gnu.org/licenses/> */
 extern gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb);
 extern void clean_coord_window (struct project * this_proj);
 
-/*
-*  void initchn ()
-*
-*  Usage: initialize the curve widgets for the chains statistics calculation
+/*!
+  \fn void initchn ()
+
+  \brief initialize the curve widgets for the chains statistics calculation
 */
 void initchn ()
 {
@@ -69,12 +69,12 @@ void initchn ()
 }
 
 #ifdef GTK3
-/*
-*  void update_chains_menus (glwin * view)
-*
-*  Usage: update the chains statistics menus
-*
-*  glwin * view : the gliwn to update the menu from
+/*!
+  \fn void update_chains_menus (glwin * view)
+
+  \brief update the chains statistics menus
+
+  \param view the gliwn to update the menu from
 */
 void update_chains_menus (glwin * view)
 {
@@ -90,12 +90,12 @@ void update_chains_menus (glwin * view)
 }
 #endif
 
-/*
-*  void update_chains_view (struct project * this_proj)
-*
-*  Usage: update the chains statistics text view after the calculation
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void update_chains_view (struct project * this_proj)
+
+  \brief update the chains statistics text view after the calculation
+
+  \param this_proj the target project
 */
 void update_chains_view (struct project * this_proj)
 {
@@ -240,12 +240,12 @@ void update_chains_view (struct project * this_proj)
   }
 }
 
-/*
-*  void clean_chains_data (glwin * view)
-*
-*  Usage: cleaning the OpenGL data related to chain statistics
-*
-*  glwin * view : the gliwn to clean the data from
+/*!
+  \fn void clean_chains_data (glwin * view)
+
+  \brief cleaning the OpenGL data related to chain statistics
+
+  \param view the gliwn to clean the data from
 */
 void clean_chains_data (glwin * view)
 {
@@ -280,13 +280,13 @@ void clean_chains_data (glwin * view)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
-*
-*  Usage: compute chains statistics
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
+
+  \brief compute chains statistics
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
 {
@@ -364,15 +364,15 @@ G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
 #endif
 }
 
-/*
-*  void save_chains_data_ (int * taille, double ectrc[* taille], double * rpstep, double * ectrpst)
-*
-*  Usage: get chains statistics results form Fortran90
-*
-*  int * taille           : Number of data points
-*  double ectrc[* taille] : Results
-*  double * rpstep        : Chains per MD step
-*  double * ectrpst       : Standard deviation
+/*!
+  \fn void save_chains_data_ (int * taille, double ectrc[* taille], double * rpstep, double * ectrpst)
+
+  \brief get chains statistics results form Fortran90
+
+  \param taille Number of data points
+  \param taille] Results
+  \param rpstep Chains per MD step
+  \param ectrpst Standard deviation
 */
 void save_chains_data_ (int * taille, double ectrc[* taille], double * rpstep, double * ectrpst)
 {

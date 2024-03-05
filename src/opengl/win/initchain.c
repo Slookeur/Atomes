@@ -14,14 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'initchain.c'
 *
-*  Contains:
+* Contains:
 *
 
  - subroutines collecting chain(s) data from Fortran90
  - subroutines allocating chain(s) data from Fortran90
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta]);
   void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num]);
@@ -35,15 +35,15 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "color_box.h"
 #include "glwindow.h"
 
-/*
-*  void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
-*
-*  Usage: getting the chain data elemnts from Fortran90
-*
-*  int * st         : the MD step
-*  int * ta         : the chain size
-*  int * ri         : the chain id
-*  int nchain[* ta] : the chain element(s)
+/*!
+  \fn void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
+
+  \brief getting the chain data elemnts from Fortran90
+
+  \param st the MD step
+  \param ta the chain size
+  \param ri the chain id
+  \param nchain[*ta] the chain element(s)
 */
 void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
 {
@@ -54,16 +54,16 @@ void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
   }
 }
 
-/*
-*  void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
-*
-*  Usage: allocate atom chains data from Fortran90 information
-*
-*  int * st          : the MD step
-*  int * at          : the atom id
-*  int * ta          : the chain size
-*  int * num         : the number of chain(s)
-*  int nchain[* num] : the chain id(s)
+/*!
+  \fn void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
+
+  \brief allocate atom chains data from Fortran90 information
+
+  \param st the MD step
+  \param at the atom id
+  \param ta the chain size
+  \param num the number of chain(s)
+  \param nchain[*num] the chain id(s)
 */
 void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
 {
@@ -79,14 +79,14 @@ void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int n
   }
 }
 
-/*
-*  void allocate_all_chains_ (int * st, int * ta, int * nring)
-*
-*  Usage: allocate chains data from Fortran90 information
-*
-*  int * st    : the MD step
-*  int * ta    : the number of chain size(s)
-*  int * nring : the number of chain(s) of that size
+/*!
+  \fn void allocate_all_chains_ (int * st, int * ta, int * nring)
+
+  \brief allocate chains data from Fortran90 information
+
+  \param st the MD step
+  \param ta the number of chain size(s)
+  \param nring the number of chain(s) of that size
 */
 void allocate_all_chains_ (int * st, int * ta, int * nring)
 {

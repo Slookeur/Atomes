@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'image.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to render an image from the OpenGL window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void render_image (glwin * view, video_options * iopts);
 
@@ -61,27 +61,27 @@ extern void init_frame_buffer (int x, int y);
 extern void close_frame_buffer ();
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data)
-*
-*  Usage: render an image from the OpenGL window - running the dialog
-*
-*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id       : the response id
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data)
+
+  \brief render an image from the OpenGL window - running the dialog
+
+  \param info the GtkNativeDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_render_image (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
-/*
-*  G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data)
-*
-*  Usage: render an image from the OpenGL window - running the dialog
-*
-*  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data)
+
+  \brief render an image from the OpenGL window - running the dialog
+
+  \param info the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -145,13 +145,13 @@ G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpoin
   }
 }
 
-/*
-*  void render_image (glwin * view, video_options * iopts)
-*
-*  Usage: render an image from the OpenGL window - prepare the dialog
-*
-*  glwin * view          : the target glwin
-*  video_options * iopts : the rendering options
+/*!
+  \fn void render_image (glwin * view, video_options * iopts)
+
+  \brief render an image from the OpenGL window - prepare the dialog
+
+  \param view the target glwin
+  \param iopts the rendering options
 */
 void render_image (glwin * view, video_options * iopts)
 {

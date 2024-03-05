@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cedit.c'
 *
-*  Contains:
+* Contains:
 *
 
 - The initialization of the curve edition dialog
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void prepbox (int k, int l, int m);
   void set_set (int a, int b, int c);
@@ -80,14 +80,14 @@ GtkWidget * xyp[2];
 
 char * lapos[2]={"x: ", "y: "};
 
-/*
-*  void prepbox (int k, int l, int m)
-*
-*  Usage: prepare the curve selection combo box
-*
-*  int k : project id
-*  int l : calculation id
-*  int m : curve id
+/*!
+  \fn void prepbox (int k, int l, int m)
+
+  \brief prepare the curve selection combo box
+
+  \param k project id
+  \param l calculation id
+  \param m curve id
 */
 void prepbox (int k, int l, int m)
 {
@@ -124,14 +124,14 @@ void prepbox (int k, int l, int m)
   g_signal_connect (G_OBJECT(setcolorbox), "changed", G_CALLBACK(choose_set), NULL);
 }
 
-/*
-*  void set_set (int a, int b, int c)
-*
-*  Usage: addjust widgets to handle the new curve
-*
-*  int a : project id
-*  int b : calculation id
-*  int c : curve id
+/*!
+  \fn void set_set (int a, int b, int c)
+
+  \brief addjust widgets to handle the new curve
+
+  \param a project id
+  \param b calculation id
+  \param c curve id
 */
 void set_set (int a, int b, int c)
 {
@@ -149,12 +149,12 @@ void set_set (int a, int b, int c)
   widget_set_sensitive (orgtree, get_project_by_id(activeg) -> curves[activer][activec] -> extrac -> extras);
 }
 
-/*
-*  static void fill_proj_model (GtkTreeStore * store)
-*
-*  Usage: fill project(s) / curves tree store
-*
-*  GtkTreeStore * store : the GtkTreeStore to fill
+/*!
+  \fn static void fill_proj_model (GtkTreeStore * store)
+
+  \brief fill project(s) / curves tree store
+
+  \param store the GtkTreeStore to fill
 */
 static void fill_proj_model (GtkTreeStore * store)
 {
@@ -235,14 +235,14 @@ static void fill_proj_model (GtkTreeStore * store)
 
 GtkTreeStore * projmodel;
 
-/*
-*  void toggle_curve (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
-*
-*  Usage: show / hide curve cellrenderer toggle callback
-*
-*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
-*  gchar * string_path                   : the path in the tree model
-*  gpointer data                         : the associated data pointer
+/*!
+  \fn void toggle_curve (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+
+  \brief show / hide curve cellrenderer toggle callback
+
+  \param cell_renderer the GtkCellRendererToggle sending the signal
+  \param string_path the path in the tree model
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void toggle_curve (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
@@ -256,16 +256,16 @@ G_MODULE_EXPORT void toggle_curve (GtkCellRendererToggle * cell_renderer, gchar 
   set_set (i, j, k);
 }
 
-/*
-*  void set_visible_curve_data (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
-*
-*  Usage: show / hide cell renderer
-*
-*  GtkTreeViewColumn * col    : the tree view column
-*  GtkCellRenderer * renderer : the cell renderer
-*  GtkTreeModel * mod         : the tree model
-*  GtkTreeIter * iter         : the tree iter
-*  gpointer data              : the associated data pointer
+/*!
+  \fn void set_visible_curve_data (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+
+  \brief show / hide cell renderer
+
+  \param col the tree view column
+  \param renderer the cell renderer
+  \param mod the tree model
+  \param iter the tree iter
+  \param data the associated data pointer
 */
 void set_visible_curve_data (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
@@ -274,10 +274,10 @@ void set_visible_curve_data (GtkTreeViewColumn * col, GtkCellRenderer * renderer
   gtk_cell_renderer_set_visible (renderer, m);
 }
 
-/*
-*  GtkWidget * create_projects_tree ()
-*
-*  Usage: curve edition create the project(s) / curves tree model
+/*!
+  \fn GtkWidget * create_projects_tree ()
+
+  \brief curve edition create the project(s) / curves tree model
 */
 GtkWidget * create_projects_tree ()
 {
@@ -312,14 +312,14 @@ GtkWidget * create_projects_tree ()
   return projtree;
 }
 
-/*
-*  G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointer data)
-*
-*  Usage: curve edition dialog callback
-*
-*  GtkDialog * dial : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointer data)
+
+  \brief curve edition dialog callback
+
+  \param dial the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -329,12 +329,12 @@ G_MODULE_EXPORT void run_curve_edit (GtkDialog * dial, gint response_id, gpointe
   axischoice = NULL;
 }
 
-/*
-*  void edit_curve (gpointer data)
-*
-*  Usage: create the curve edition dialog
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn void edit_curve (gpointer data)
+
+  \brief create the curve edition dialog
+
+  \param data the associated data pointer
 */
 void edit_curve (gpointer data)
 {

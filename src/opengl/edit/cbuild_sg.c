@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cbuild_sg.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to read space group data from XML files
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int get_this_group_data (space_group * spg,  xmlNodePtr racine);
 
@@ -494,13 +494,13 @@ gchar * hmsymbols[230] = {"P 1",
                           "I 4/m -3 2/m",
                           "I 41/a -3 2/d"};
 
-/*
-*  space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader)
-*
-*  Usage: clean space group and corresponding XML data
-*
-*  xmlDoc * doc            : the XML doc pointer to free
-*  xmlTextReaderPtr reader : the XML reader to free
+/*!
+  \fn space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader)
+
+  \brief clean space group and corresponding XML data
+
+  \param doc the XML doc pointer to free
+  \param reader the XML reader to free
 */
 space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader)
 {
@@ -510,13 +510,13 @@ space_group * clean_sgl_data (xmlDoc * doc, xmlTextReaderPtr reader)
   return NULL;
 }
 
-/*
-*  int get_this_group_data (space_group * spg,  xmlNodePtr racine)
-*
-*  Usage: retrieve space group data
-*
-*  space_group * spg : the space group pointer to fill
-*  xmlNodePtr racine : the XML node root
+/*!
+  \fn int get_this_group_data (space_group * spg,  xmlNodePtr racine)
+
+  \brief retrieve space group data
+
+  \param spg the space group pointer to fill
+  \param racine the XML node root
 */
 int get_this_group_data (space_group * spg,  xmlNodePtr racine)
 {
@@ -634,12 +634,12 @@ int get_this_group_data (space_group * spg,  xmlNodePtr racine)
   return 1;
 }
 
-/*
-*  space_group * read_sg_xml_file (const char * filetoread)
-*
-*  Usage: read space group data from XML file
-*
-*  const char * filetoread : the file to read
+/*!
+  \fn space_group * read_sg_xml_file (const char * filetoread)
+
+  \brief read space group data from XML file
+
+  \param filetoread the file to read
 */
 space_group * read_sg_xml_file (const char * filetoread)
 {

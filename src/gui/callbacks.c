@@ -14,14 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'callbacks.c'
 *
-*  Contains:
+* Contains:
 *
 
  - General callbacks
  - Open and close files
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int open_save (FILE * fp, int i, int pid, int aid, int npi, gchar * pfile);
   int open_save_workspace (FILE * fp, int act);
@@ -85,10 +85,10 @@ extern int open_history_file (gchar * filename);
 extern int open_cell_file (int format, gchar * filename);
 extern double get_z_from_periodic_table (gchar * lab);
 
-/*
-*  void quit_gtk ()
-*
-*  Usage: Leave the application
+/*!
+  \fn void quit_gtk ()
+
+  \brief Leave the application
 */
 void quit_gtk ()
 {
@@ -96,13 +96,13 @@ void quit_gtk ()
   g_application_quit (G_APPLICATION(AtomesApp));
 }
 
-/*
-*  G_MODULE_EXPORT void on_close_workspace (GtkWidget * widg, gpointer data)
-*
-*  Usage: close the active workspace
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_close_workspace (GtkWidget * widg, gpointer data)
+
+  \brief close the active workspace
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_close_workspace (GtkWidget * widg, gpointer data)
 {
@@ -133,17 +133,17 @@ G_MODULE_EXPORT void on_close_workspace (GtkWidget * widg, gpointer data)
 
 gboolean save = TRUE;
 
-/*
-*  int open_save (FILE * fp, int i, int pid, int aid, int npi, gchar * pfile)
-*
-*  Usage: open or save project file
-*
-*  FILE * fp     : the file pointer
-*  int i         : 0 = read, 1 = write
-*  int pid       : the project id
-*  int aid       : the active project id
-*  int npi       : total number of projects
-*  gchar * pfile : the file name
+/*!
+  \fn int open_save (FILE * fp, int i, int pid, int aid, int npi, gchar * pfile)
+
+  \brief open or save project file
+
+  \param fp the file pointer
+  \param i 0 = read, 1 = write
+  \param pid the project id
+  \param aid the active project id
+  \param npi total number of projects
+  \param pfile the file name
 */
 int open_save (FILE * fp, int i, int pid, int aid, int npi, gchar * pfile)
 {
@@ -197,13 +197,13 @@ int open_save (FILE * fp, int i, int pid, int aid, int npi, gchar * pfile)
   return j;
 }
 
-/*
-*  int open_save_workspace (FILE * fp, int act)
-*
-*  Usage: open or save the active workspace
-*
-*  FILE * fp : the file to read or write
-*  int act   : the action (0 = read, 1 = write)
+/*!
+  \fn int open_save_workspace (FILE * fp, int act)
+
+  \brief open or save the active workspace
+
+  \param fp the file to read or write
+  \param act the action (0 = read, 1 = write)
 */
 int open_save_workspace (FILE * fp, int act)
 {
@@ -264,13 +264,13 @@ int open_save_workspace (FILE * fp, int act)
   }
 }
 
-/*
-*  void open_this_proj (gpointer data, gpointer user_data)
-*
-*  Usage: Open many projects, one at a time
-*
-*  gpointer data      :
-*  gpointer user_data :
+/*!
+  \fn void open_this_proj (gpointer data, gpointer user_data)
+
+  \brief Open many projects, one at a time
+
+  \param data
+  \param user_data
 */
 void open_this_proj (gpointer data, gpointer user_data)
 {
@@ -286,28 +286,28 @@ tint osp;
 gboolean run_os;
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void run_on_open_save_active (GtkNativeDialog * info, gint response_id, gpointer data)
-*
-*  Usage: open or save an atomes file - running the dialog
-*
-*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_on_open_save_active (GtkNativeDialog * info, gint response_id, gpointer data)
+
+  \brief open or save an atomes file - running the dialog
+
+  \param info the GtkNativeDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_on_open_save_active (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GListModel * projlist;
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
-/*
-*  G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id, gpointer data)
-*
-*  Usage: open or save an atomes file - running the dialog
-*
-*  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id, gpointer data)
+
+  \brief open or save an atomes file - running the dialog
+
+  \param info the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -386,13 +386,13 @@ G_MODULE_EXPORT void run_on_open_save_active (GtkDialog * info, gint response_id
   }
 }
 
-/*
-*  G_MODULE_EXPORT void on_open_save_activate (GtkWidget * widg, gpointer data)
-*
-*  Usage: open or save an atomes file - prepare the dialog
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_open_save_activate (GtkWidget * widg, gpointer data)
+
+  \brief open or save an atomes file - prepare the dialog
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_open_save_activate (GtkWidget * widg, gpointer data)
 {
@@ -584,13 +584,13 @@ G_MODULE_EXPORT void on_open_save_activate (GtkWidget * widg, gpointer data)
   end:;
 }
 
-/*
-*  G_MODULE_EXPORT void on_save_as_activate (GtkWidget * widg, gpointer data)
-*
-*  Usage: open or save, choosing a file name
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_save_as_activate (GtkWidget * widg, gpointer data)
+
+  \brief open or save, choosing a file name
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_save_as_activate (GtkWidget * widg, gpointer data)
 {
@@ -599,10 +599,10 @@ G_MODULE_EXPORT void on_save_as_activate (GtkWidget * widg, gpointer data)
   save = TRUE;
 }
 
-/*
-*  void run_project ()
-*
-*  Usage: send project data to Fortran90
+/*!
+  \fn void run_project ()
+
+  \brief send project data to Fortran90
 */
 void run_project ()
 {
@@ -629,12 +629,12 @@ void run_project ()
   if (active_cell -> frac) active_cell -> frac = 0;
 }
 
-/*
-*  void apply_project (gboolean showtools)
-*
-*  Usage: get project ready for calculation and initialize the OpenGL window
-*
-*  gboolean showtools :
+/*!
+  \fn void apply_project (gboolean showtools)
+
+  \brief get project ready for calculation and initialize the OpenGL window
+
+  \param showtools
 */
 void apply_project (gboolean showtools)
 {
@@ -647,14 +647,14 @@ void apply_project (gboolean showtools)
   if (showtools) gtk_widget_show (curvetoolbox);
 }
 
-/*
-*  void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible)
-*
-*  Usage: open an ISAACS XML file
-*
-*  gchar * profile  : the XML file name
-*  int ptoc         : the previous active project
-*  gboolean visible : read from the command line (FALSE), from the gui (TRUE)
+/*!
+  \fn void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible)
+
+  \brief open an ISAACS XML file
+
+  \param profile the XML file name
+  \param ptoc the previous active project
+  \param visible read from the command line (FALSE), from the gui (TRUE)
 */
 void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible)
 {
@@ -678,27 +678,27 @@ void open_this_isaacs_xml_file (gchar * profile, int ptoc, gboolean visible)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void run_on_isaacs_port (GtkNativeDialog * info, gint response_id, gpointer data)
-*
-*  Usage: open or write ISAACS XML file - running the dialog
-*
-*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_on_isaacs_port (GtkNativeDialog * info, gint response_id, gpointer data)
+
+  \brief open or write ISAACS XML file - running the dialog
+
+  \param info the GtkNativeDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_on_isaacs_port (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
-/*
-*  G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpointer data)
-*
-*  Usage: open or write ISAACS XML file - running the dialog
-*
-*  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpointer data)
+
+  \brief open or write ISAACS XML file - running the dialog
+
+  \param info the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -739,13 +739,13 @@ G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpo
   }
 }
 
-/*
-*  G_MODULE_EXPORT void on_isaacs_port (GtkWidget * widg, gpointer data)
-*
-*  Usage: open or write ISAACS XML file - prepare the dialog
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer (int *) open = 0, save = 1
+/*!
+  \fn G_MODULE_EXPORT void on_isaacs_port (GtkWidget * widg, gpointer data)
+
+  \brief open or write ISAACS XML file - prepare the dialog
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer (int *) open = 0, save = 1
 */
 G_MODULE_EXPORT void on_isaacs_port (GtkWidget * widg, gpointer data)
 {
@@ -798,10 +798,10 @@ G_MODULE_EXPORT void on_isaacs_port (GtkWidget * widg, gpointer data)
   update_insert_combos ();
 }
 
-/*
-*  void to_read_pos ()
-*
-*  Usage: send atomic coordinates to Fortran90
+/*!
+  \fn void to_read_pos ()
+
+  \brief send atomic coordinates to Fortran90
 */
 void to_read_pos ()
 {
@@ -847,10 +847,10 @@ GtkWidget * sa_entry[2];
 GtkWidget * read_this;
 int read_spec;
 
-/*
-*  void check_read_sa ()
-*
-*  Usage: reading CPMD/VASP trajectory, testing parameters to active the read capabilty
+/*!
+  \fn void check_read_sa ()
+
+  \brief reading CPMD/VASP trajectory, testing parameters to active the read capabilty
 */
 void check_read_sa ()
 {
@@ -871,12 +871,12 @@ void check_read_sa ()
   }
 }
 
-/*
-*  void update_sa_info (int sid)
-*
-*  Usage: reading CPMD/VASP trajectory, update chemical species info
-*
-*  int sid : the species id
+/*!
+  \fn void update_sa_info (int sid)
+
+  \brief reading CPMD/VASP trajectory, update chemical species info
+
+  \param sid the species id
 */
 void update_sa_info (int sid)
 {
@@ -906,13 +906,13 @@ void update_sa_info (int sid)
   read_spec = sid;
 }
 
-/*
-*  G_MODULE_EXPORT void update_sa (GtkEntry * res, gpointer data)
-*
-*  Usage: reading CPMD/VASP trajectory, set the number of chemical species
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void update_sa (GtkEntry * res, gpointer data)
+
+  \brief reading CPMD/VASP trajectory, set the number of chemical species
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void update_sa (GtkEntry * res, gpointer data)
 {
@@ -938,23 +938,23 @@ G_MODULE_EXPORT void update_sa (GtkEntry * res, gpointer data)
   check_read_sa ();
 }
 
-/*
-*  G_MODULE_EXPORT void changed_spec_combo (GtkComboBox * box, gpointer data)
-*
-*  Usage: reading CPMD/VASP trajectory, change the active species
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void changed_spec_combo (GtkComboBox * box, gpointer data)
+
+  \brief reading CPMD/VASP trajectory, change the active species
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void changed_spec_combo (GtkComboBox * box, gpointer data)
 {
   update_sa_info (gtk_combo_box_get_active (box));
 }
 
-/*
-*  void prepare_sp_box ()
-*
-*  Usage: eading CPMD/VASP trajectory, prepare the species combo box
+/*!
+  \fn void prepare_sp_box ()
+
+  \brief eading CPMD/VASP trajectory, prepare the species combo box
 */
 void prepare_sp_box ()
 {
@@ -1002,13 +1002,13 @@ void prepare_sp_box ()
   update_sa_info (0);
 }
 
-/*
-*  G_MODULE_EXPORT void update_at_sp (GtkEntry * res, gpointer data)
-*
-*  Usage: reading CPMD/VASP trajectory, changing number of atomes or species
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer (int *) 0 = atomes, 1 = species
+/*!
+  \fn G_MODULE_EXPORT void update_at_sp (GtkEntry * res, gpointer data)
+
+  \brief reading CPMD/VASP trajectory, changing number of atomes or species
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer (int *) 0 = atomes, 1 = species
 */
 G_MODULE_EXPORT void update_at_sp (GtkEntry * res, gpointer data)
 {
@@ -1045,10 +1045,10 @@ G_MODULE_EXPORT void update_at_sp (GtkEntry * res, gpointer data)
 
 int reading_vas_trj;
 
-/*
-*  int prep_chem_data ()
-*
-*  Usage: prepare chemical data to read CPMD/VASP file
+/*!
+  \fn int prep_chem_data ()
+
+  \brief prepare chemical data to read CPMD/VASP file
 */
 int prep_chem_data ()
 {
@@ -1063,14 +1063,14 @@ int prep_chem_data ()
   return 1;
 }
 
-/*
-*  G_MODULE_EXPORT void run_to_read_trj_or_vas (GtkDialog * dialog, gint response_id, gpointer data)
-*
-*  Usage: reading CPMD/VASP trajectory: run the dialog
-*
-*  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   : the response id
-*  gpointer data      : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_to_read_trj_or_vas (GtkDialog * dialog, gint response_id, gpointer data)
+
+  \brief reading CPMD/VASP trajectory: run the dialog
+
+  \param dialog the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_to_read_trj_or_vas (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -1094,12 +1094,12 @@ G_MODULE_EXPORT void run_to_read_trj_or_vas (GtkDialog * dialog, gint response_i
   destroy_this_dialog (dialog);
 }
 
-/*
-*  int to_read_trj_or_vas (int ff)
-*
-*  Usage: reading CPMD/VASP trajectory - prepare the dialog
-*
-*  int ff : file type
+/*!
+  \fn int to_read_trj_or_vas (int ff)
+
+  \brief reading CPMD/VASP trajectory - prepare the dialog
+
+  \param ff file type
 */
 int to_read_trj_or_vas (int ff)
 {
@@ -1126,17 +1126,17 @@ int to_read_trj_or_vas (int ff)
   return reading_vas_trj;
 }
 
-/*
-*  void cell_data_from_pdb_ (float * a, float * b, float * c, float * alp, float * bet, float * gam)
-*
-*  Usage: update cell parameters from the data in the PDB file
-*
-*  float * a   : a
-*  float * b   : b
-*  float * c   : c
-*  float * alp : alpha
-*  float * bet : beta
-*  float * gam : gamma
+/*!
+  \fn void cell_data_from_pdb_ (float * a, float * b, float * c, float * alp, float * bet, float * gam)
+
+  \brief update cell parameters from the data in the PDB file
+
+  \param a a
+  \param b b
+  \param c c
+  \param alp alpha
+  \param bet beta
+  \param gam gamma
 */
 void cell_data_from_pdb_ (float * a, float * b, float * c, float * alp, float * bet, float * gam)
 {
@@ -1156,27 +1156,27 @@ int npt_selection;
 gchar * npt_file;
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void run_read_npt_data (GtkNativeDialog * info, gint response_id, gpointer data)
-*
-*  Usage:
-*
-*  GtkNativeDialog * info : read NPT data associated with atomic coordinates: run the dialog
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_read_npt_data (GtkNativeDialog * info, gint response_id, gpointer data)
+
+  \brief
+
+  \param info read NPT data associated with atomic coordinates: run the dialog
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_read_npt_data (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
-/*
-*  G_MODULE_EXPORT void run_read_npt_data (GtkDialog * info, gint response_id, gpointer data)
-*
-*  Usage: read NPT data associated with atomic coordinates: run the dialog
-*
-*  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_read_npt_data (GtkDialog * info, gint response_id, gpointer data)
+
+  \brief read NPT data associated with atomic coordinates: run the dialog
+
+  \param info the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_read_npt_data (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -1198,10 +1198,10 @@ G_MODULE_EXPORT void run_read_npt_data (GtkDialog * info, gint response_id, gpoi
 #endif
 }
 
-/*
-*  int read_npt_data ()
-*
-*  Usage: read NPT data associated with atomic coordinates: setup the dialog
+/*!
+  \fn int read_npt_data ()
+
+  \brief read NPT data associated with atomic coordinates: setup the dialog
 */
 int read_npt_data ()
 {
@@ -1233,12 +1233,12 @@ int read_npt_data ()
   return (npt_selection < 0) ? 0 : open_cell_file (npt_selection, npt_file);
 }
 
-/*
-*  int open_coordinate_file (int id)
-*
-*  Usage: try to open coordinate file, type is based of id
-*
-*  int id : file type to open
+/*!
+  \fn int open_coordinate_file (int id)
+
+  \brief try to open coordinate file, type is based of id
+
+  \param id file type to open
 */
 int open_coordinate_file (int id)
 {
@@ -1375,12 +1375,12 @@ int open_coordinate_file (int id)
 GtkFileFilter * filter[NCFORMATS+1];
 int pactive;
 
-/*
-*  void open_this_coordinate_file (int format)
-*
-*  Usage: open coordinate file format, if successful add to workspace
-*
-*  int format : the format of the file that contains the atomic coordinates
+/*!
+  \fn void open_this_coordinate_file (int format)
+
+  \brief open coordinate file format, if successful add to workspace
+
+  \param format the format of the file that contains the atomic coordinates
 */
 void open_this_coordinate_file (int format)
 {
@@ -1425,27 +1425,27 @@ void open_this_coordinate_file (int format)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void run_on_coord_port (GtkNativeDialog * info, gint response_id, gpointer data)
-*
-*  Usage: export or import atomic coordinates: run dialog
-*
-*  GtkNativeDialog * info : the GtkNativeDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_on_coord_port (GtkNativeDialog * info, gint response_id, gpointer data)
+
+  \brief export or import atomic coordinates: run dialog
+
+  \param info the GtkNativeDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_on_coord_port (GtkNativeDialog * info, gint response_id, gpointer data)
 {
   GtkFileChooser * chooser = GTK_FILE_CHOOSER((GtkFileChooserNative *)info);
 #else
-/*
-*  G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpointer data)
-*
-*  Usage: export or import atomic coordinates: run dialog
-*
-*  GtkDialog * info : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpointer data)
+
+  \brief export or import atomic coordinates: run dialog
+
+  \param info the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpointer data)
 {
@@ -1537,13 +1537,13 @@ G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpoi
   }
 }
 
-/*
-*  G_MODULE_EXPORT void on_coord_port (GtkWidget * widg, gpointer data)
-*
-*  Usage: export or import atomic coordinates: prepare dialog
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_coord_port (GtkWidget * widg, gpointer data)
+
+  \brief export or import atomic coordinates: prepare dialog
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_coord_port (GtkWidget * widg, gpointer data)
 {

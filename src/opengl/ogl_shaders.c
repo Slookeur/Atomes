@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'ogl_shaders.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The OpenGL shaders for the atomes program
@@ -267,8 +267,8 @@ const GLchar * angle_stipple = GLSL(
     vec2 bpos;
     v_color = vert_color[0];
 
-    vec4 pos_s =  mvp * gl_in[0].gl_Position;
-    vec4 pos_e =  mvp * gl_in[1].gl_Position;
+    vec4 pos_s = mvp * gl_in[0].gl_Position;
+    vec4 pos_e = mvp * gl_in[1].gl_Position;
     line_pos = 0.0;
     gl_Position = pos_s;
     EmitVertex();
@@ -696,7 +696,7 @@ const GLchar * sphere_vertex = GLSL(
     surfaceNormal   = mat3(m_view) * vert;
     surfaceToCamera = normalize (- surfacePosition);
     gl_PointSize = 1.0;
-    gl_Position = mvp *  pos;
+    gl_Position = mvp * pos;
   }
 );
 
@@ -720,7 +720,7 @@ const GLchar * axis_sphere_vertex = GLSL(
     surfaceNormal   = mat3(m_view) * vertNormal;
     surfaceToCamera = normalize (- surfacePosition);
     gl_PointSize = 1.0;
-    gl_Position = mvp *  pos;
+    gl_Position = mvp * pos;
   }
 );
 
@@ -911,13 +911,13 @@ const GLchar * gs_cylinder_geom = GLSL(
       surfaceNormal =  mat3(m_view) * normal;
       gl_Position = mvp * vec4(p1, 1.0);
 
-      surfacePosition = vec3(m_view *  vec4(p1, 1.0));
+      surfacePosition = vec3(m_view * vec4(p1, 1.0));
       surfaceToCamera = normalize (- surfacePosition);
       surfaceColor = vertCol[0];
       EmitVertex();
 
       gl_Position = mvp * vec4 (p2, 1.0);
-      surfacePosition = vec3(m_view *  vec4(p2, 1.0));
+      surfacePosition = vec3(m_view * vec4(p2, 1.0));
       surfaceToCamera = normalize (- surfacePosition);
       surfaceColor = vertCol[1];
       EmitVertex();
@@ -979,12 +979,12 @@ const GLchar * axis_cylinder_geom = GLSL(
       surfaceNormal =  mat3(m_view) * normal;
       gl_Position = mvp * vec4(p1, 1.0);
 
-      surfacePosition = vec3(m_view *  vec4(p1, 1.0));
+      surfacePosition = vec3(m_view * vec4(p1, 1.0));
       surfaceToCamera = normalize (- surfacePosition);
       EmitVertex();
 
       gl_Position = mvp * vec4 (p2, 1.0);
-      surfacePosition = vec3(m_view *  vec4(p2, 1.0));
+      surfacePosition = vec3(m_view * vec4(p2, 1.0));
       surfaceToCamera = normalize (- surfacePosition);
       EmitVertex();
     }
@@ -1040,8 +1040,8 @@ const GLchar * polyedron_geom = GLSL(
     surfaceNormal = mat3(m_view) * normal;
     for (i=0; i<3; i++)
     {
-      gl_Position = mvp *  vec4(v[i], 1.0);
-      surfacePosition = vec3(m_view *  vec4(v[i], 1.0));
+      gl_Position = mvp * vec4(v[i], 1.0);
+      surfacePosition = vec3(m_view * vec4(v[i], 1.0));
       surfaceToCamera = normalize (- surfacePosition);
       EmitVertex();
     }

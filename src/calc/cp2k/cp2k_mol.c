@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_mol.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to fix fragment(s) when creating the CP2K input file
@@ -22,7 +22,7 @@ If not, see <https://www.gnu.org/licenses/> */
  Note: this is not used for the time being !
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void frag_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
   void frag_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
@@ -48,14 +48,14 @@ int a_frag;
 int * fix_frag;
 extern GtkTreeStore * add_model;
 
-/*
-*  G_MODULE_EXPORT void select_frag (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
-*
-*  Usage: on select molecule toggle callback
-*
-*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
-*  gchar * string_path                   : the path in the tree store
-*  gpointer data                         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void select_frag (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+
+  \brief on select molecule toggle callback
+
+  \param cell_renderer the GtkCellRendererToggle sending the signal
+  \param string_path the path in the tree store
+  \param data the associated data pointer
 *
 */
 G_MODULE_EXPORT void select_frag (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
@@ -78,16 +78,16 @@ G_MODULE_EXPORT void select_frag (GtkCellRendererToggle * cell_renderer, gchar *
   gtk_tree_store_set (add_model, & iter, 1, fix_frag[i-1], -1);
 }
 
-/*
-*  void frag_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
-*
-*  Usage: show / hide cell renderer in the CP2K molecule tree store
-*
-*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
-*  GtkTreeCellRenderer * renderer : the target cell renderer
-*  GtkTreeModel                   : the target tree model
-*  GtkTreeIter                    : the target tree iter
-*  gpointer data                  : the associated data pointer
+/*!
+  \fn void frag_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+
+  \brief show / hide cell renderer in the CP2K molecule tree store
+
+  \param col the target GtkTreeViewColumn
+  \param renderer the target cell renderer
+  \param GtkTreeModel the target tree model
+  \param GtkTreeIter the target tree iter
+  \param data the associated data pointer
 */
 void frag_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
@@ -96,16 +96,16 @@ void frag_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkT
   gtk_cell_renderer_set_visible (renderer, i);
 }
 
-/*
-*  void frag_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
-*
-*  Usage: set renderer color in the CP2K molecule tree store
-*
-*  GtkTreeViewColumn * col        : the target GtkTreeViewColumn
-*  GtkTreeCellRenderer * renderer : the target cell renderer
-*  GtkTreeModel                   : the target tree model
-*  GtkTreeIter                    : the target tree iter
-*  gpointer data                  : the associated data pointer
+/*!
+  \fn void frag_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
+
+  \brief set renderer color in the CP2K molecule tree store
+
+  \param col the target GtkTreeViewColumn
+  \param renderer the target cell renderer
+  \param GtkTreeModel the target tree model
+  \param GtkTreeIter the target tree iter
+  \param data the associated data pointer
 */
 void frag_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
@@ -117,14 +117,14 @@ void frag_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTre
 
 gboolean sel_and_conf;
 
-/*
-*  G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data)
-*
-*  Usage: confirm fix selection
-*
-*  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   : the response id
-*  gpointer data      : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data)
+
+  \brief confirm fix selection
+
+  \param dialog the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -147,14 +147,14 @@ G_MODULE_EXPORT void select_fixed_atom_confirm (GtkDialog * dialog, gint respons
   destroy_this_dialog (dialog);
 }
 
-/*
-*  G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data)
-*
-*  Usage: CP2K assistant fixing fragment(s) - running the dialog
-*
-*  GtkDialog * dial : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data)
+
+  \brief CP2K assistant fixing fragment(s) - running the dialog
+
+  \param dial the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -227,10 +227,10 @@ G_MODULE_EXPORT void run_cp2k_fix_molecule (GtkDialog * dial, gint response_id, 
   if (done) destroy_this_dialog (dial);
 }
 
-/*
-*  void cp2k_fix_molecule ()
-*
-*  Usage: CP2K assistant fixing fragment(s) - creating the dialog
+/*!
+  \fn void cp2k_fix_molecule ()
+
+  \brief CP2K assistant fixing fragment(s) - creating the dialog
 */
 void cp2k_fix_molecule ()
 {

@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_vas.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to read VASP atomic coordinates
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int vas_get_atom_coordinates (int sli);
   int open_vas_file (int linec);
@@ -36,12 +36,12 @@ If not, see <https://www.gnu.org/licenses/> */
 #include <omp.h>
 #include "readers.h"
 
-/*
-*  int vas_get_atom_coordinates (int sli)
-*
-*  Usage: get the atomic coordinates from the VASP file
-*
-*  int sli : Correction parameters depending on the VASP file version
+/*!
+  \fn int vas_get_atom_coordinates (int sli)
+
+  \brief get the atomic coordinates from the VASP file
+
+  \param sli Correction parameters depending on the VASP file version
 */
 int vas_get_atom_coordinates (int sli)
 {
@@ -224,12 +224,12 @@ int vas_get_atom_coordinates (int sli)
   return 0;
 }
 
-/*
-*  int open_vas_file (int linec)
-*
-*  Usage: open VASP file
-*
-*  int linec : Number of lines in the file
+/*!
+  \fn int open_vas_file (int linec)
+
+  \brief open VASP file
+
+  \param linec Number of lines in the file
 */
 int open_vas_file (int linec)
 {

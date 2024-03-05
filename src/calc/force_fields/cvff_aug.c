@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cvff_aug.c'
 *
-*  Contains:
+* Contains:
 *
 
   CVFF_aug force field, data from taken from:

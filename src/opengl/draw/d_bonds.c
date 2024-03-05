@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'd_bonds.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to prepare the bond(s) and clone bond(s) OpenGL rendering
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int cylinder_vertices (int qual);
   int cylinder_indices (int qual);
@@ -59,38 +59,38 @@ struct bond_rotation {
   double angle;
 };
 
-/*
-*  int cylinder_vertices (int qual)
-*
-*  Usage: return the number of OpenGL vertices to render a cylinder
-*
-*  int qual : OpenGL quality
+/*!
+  \fn int cylinder_vertices (int qual)
+
+  \brief return the number of OpenGL vertices to render a cylinder
+
+  \param qual OpenGL quality
 */
 int cylinder_vertices (int qual)
 {
   return 2*qual;
 }
 
-/*
-*  int cylinder_indices (int qual)
-*
-*  Usage: return the number of OpenGL indices to render a cylinder
-*
-*  int qual : OpenGL quality
+/*!
+  \fn int cylinder_indices (int qual)
+
+  \brief return the number of OpenGL indices to render a cylinder
+
+  \param qual OpenGL quality
 */
 int cylinder_indices (int qual)
 {
   return 2*(qual + 1);
 }
 
-/*
-*  object_3d * draw_cylinder (int quality, float ra, float rb)
-*
-*  Usage: OpenGL 3D cylinder object rendering
-*
-*  int quality     : OpenGL quality
-*  float ra        : cylinder radius at 1st side point
-*  float rb        : cylinder radius at 2nd side point
+/*!
+  \fn object_3d * draw_cylinder (int quality, float ra, float rb)
+
+  \brief OpenGL 3D cylinder object rendering
+
+  \param quality OpenGL quality
+  \param ra cylinder radius at 1st side point
+  \param rb cylinder radius at 2nd side point
 */
 object_3d * draw_cylinder (int quality, float ra, float rb)
 {
@@ -130,38 +130,38 @@ object_3d * draw_cylinder (int quality, float ra, float rb)
   return new_cylinder;
 }
 
-/*
-*  int cap_vertices (int qual)
-*
-*  Usage: return the number of OpenGL vertices to render a cylinder cap
-*
-*  int qual : OpenGL quality
+/*!
+  \fn int cap_vertices (int qual)
+
+  \brief return the number of OpenGL vertices to render a cylinder cap
+
+  \param qual OpenGL quality
 */
 int cap_vertices (int qual)
 {
   return qual + 1;
 }
 
-/*
-*  int cap_indices (int qual)
-*
-*  Usage: return the number of OpenGL indices to render a cylinder cap
-*
-*  int qual : OpenGL quality
+/*!
+  \fn int cap_indices (int qual)
+
+  \brief return the number of OpenGL indices to render a cylinder cap
+
+  \param qual OpenGL quality
 */
 int cap_indices (int qual)
 {
   return qual + 2;
 }
 
-/*
-*  object_3d * draw_cylinder_cap (int quality, float rad, gboolean picked)
-*
-*  Usage: OpenGL 3D cylinder cap object rendering
-*
-*  int quality     : OpenGL quality
-*  float rad       : cylinder radius
-*  gboolean picked : is the bond selected (1) or not (0)
+/*!
+  \fn object_3d * draw_cylinder_cap (int quality, float rad, gboolean picked)
+
+  \brief OpenGL 3D cylinder cap object rendering
+
+  \param quality OpenGL quality
+  \param rad cylinder radius
+  \param picked is the bond selected (1) or not (0)
 */
 object_3d * draw_cylinder_cap (int quality, float rad, gboolean picked)
 {
@@ -202,13 +202,13 @@ object_3d * draw_cylinder_cap (int quality, float rad, gboolean picked)
   return new_cap;
 }
 
-/*
-*  vec4_t rotate_bond (vec3_t a, vec3_t b)
-*
-*  Usage: rotate a bond based on the proper orientation
-*
-*  vec3_t a : 1st atom position
-*  vec3_t b : 2nd atom position
+/*!
+  \fn vec4_t rotate_bond (vec3_t a, vec3_t b)
+
+  \brief rotate a bond based on the proper orientation
+
+  \param a 1st atom position
+  \param b 2nd atom position
 */
 vec4_t rotate_bond (vec3_t a, vec3_t b)
 {
@@ -222,16 +222,16 @@ vec4_t rotate_bond (vec3_t a, vec3_t b)
   return axis_to_quat (raxis, rangle);
 }
 
-/*
-*  float get_bond_radius (int sty, int ac, int at, int bt, int sel)
-*
-*  Usage: get bond (clone bond) radius
-*
-*  int sty : the rendering style
-*  int ac  : atom (0) or clone (1)
-*  int at  : 1st chemical species
-*  int bt  : 2nd chemical species
-*  int sel : is the bond selected (1) or not (0)
+/*!
+  \fn float get_bond_radius (int sty, int ac, int at, int bt, int sel)
+
+  \brief get bond (clone bond) radius
+
+  \param sty the rendering style
+  \param ac atom (0) or clone (1)
+  \param at 1st chemical species
+  \param bt 2nd chemical species
+  \param sel is the bond selected (1) or not (0)
 */
 float get_bond_radius (int sty, int ac, int at, int bt, int sel)
 {
@@ -249,15 +249,15 @@ float get_bond_radius (int sty, int ac, int at, int bt, int sel)
   }
 }
 
-/*
-*  void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float alpha)
-*
-*  Usage: fill the OpenGL data buffer for a line bond (or clone bond) to render
-*
-*  float * vertices : the OpenGL buffer to fill
-*  vec3_t pos       : the position vector
-*  ColRGBA col      : the color
-*  float alpha      : the opacity (atom: 1.0, clone: 0.5)
+/*!
+  \fn void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float alpha)
+
+  \brief fill the OpenGL data buffer for a line bond (or clone bond) to render
+
+  \param vertices the OpenGL buffer to fill
+  \param pos the position vector
+  \param col the color
+  \param alpha the opacity (atom: 1.0, clone: 0.5)
 */
 void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float alpha)
 {
@@ -272,18 +272,18 @@ void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float alpha)
   nbs ++;
 }
 
-/*
-*  void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha, float delta)
-*
-*  Usage: fill the OpenGL data buffer for a cylinder bond (or clone bond) to render
-*
-*  float * vertices : the OpenGL buffer to fill
-*  vec3_t pos_a     : 1st atom position
-*  vec3_t pos_b     : 2nd atom position
-*  ColRGBA col      : the color
-*  float rad        : the radius
-*  float alpha      : the opacity (atom: 1.0, clone: 0.5)
-*  float delta      : radius correction(s) if atom(s) are shown
+/*!
+  \fn void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha, float delta)
+
+  \brief fill the OpenGL data buffer for a cylinder bond (or clone bond) to render
+
+  \param vertices the OpenGL buffer to fill
+  \param pos_a 1st atom position
+  \param pos_b 2nd atom position
+  \param col the color
+  \param rad the radius
+  \param alpha the opacity (atom: 1.0, clone: 0.5)
+  \param delta radius correction(s) if atom(s) are shown
 */
 void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha, float delta)
 {
@@ -305,17 +305,17 @@ void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRG
   nbs ++;
 }
 
-/*
-*  void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha)
-*
-*  Usage: fill the OpenGL data buffer for a cylinder cap bond (or clone bond) to render
-*
-*  float * vertices : the OpenGL buffer to fill
-*  vec3_t pos_a     : the position vector
-*  vec3_t pos_b     : the rotation vector
-*  ColRGBA col      : the color
-*  float rad        : the radius
-*  float alpha      : the opacity (atom: 1.0, clone: 0.5)
+/*!
+  \fn void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha)
+
+  \brief fill the OpenGL data buffer for a cylinder cap bond (or clone bond) to render
+
+  \param vertices the OpenGL buffer to fill
+  \param pos_a the position vector
+  \param pos_b the rotation vector
+  \param col the color
+  \param rad the radius
+  \param alpha the opacity (atom: 1.0, clone: 0.5)
 */
 void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha)
 {
@@ -338,21 +338,21 @@ void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA co
 
 int vs_bid;
 
-/*
-*  void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float al, float * vertices)
-*
-*  Usage: prepare the OpenGL rendering data of a bond / clone bond
-*
-*  int sty          : rendering style
-*  gboolean to_pick : to pick (1) or to draw (0)
-*  gboolean picked  : is the bond selected (1) or not (0)
-*  int cap          : draw cylinder cap (1/0)
-*  int bi           : atom (0) or clone (1) visible
-*  int pi           : atom (0) or clone (1) picked
-*  struct atom * at : 1st atom
-*  struct atom * bt : 2nd atom
-*  float al         : the opacity (bond: 1.0, clone bond: 0.5)
-*  float * vertices : the OpenGL buffer data to fill
+/*!
+  \fn void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float al, float * vertices)
+
+  \brief prepare the OpenGL rendering data of a bond / clone bond
+
+  \param sty rendering style
+  \param to_pick to pick (1) or to draw (0)
+  \param picked is the bond selected (1) or not (0)
+  \param cap draw cylinder cap (1/0)
+  \param bi atom (0) or clone (1) visible
+  \param pi atom (0) or clone (1) picked
+  \param at 1st atom
+  \param bt 2nd atom
+  \param al the opacity (bond: 1.0, clone bond: 0.5)
+  \param vertices the OpenGL buffer data to fill
 */
 void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float al, float * vertices)
 {
@@ -420,21 +420,21 @@ void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int b
   }
 }
 
-/*
-*  void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, struct atom * at, struct atom * bt, float * vertices)
-*
-*  Usage: prepare a bond OpenGL rendering
-*
-*  int sty          : rendering style
-*  gboolean to_pick : to pick (1) or to draw (0)
-*  gboolean picked  : is the atom selected (1) or not (0)
-*  int cap          : draw cylinder cap
-*  int bi           : atom (0) or clone (1) visible
-*  int pi           : atom (0) or clone (1) picked
-*  int bid          : bond id
-*  struct atom * at : 1st atom
-*  struct atom * bt : 2nd atom
-*  float * vertices : the OpenGL buffer data to fill
+/*!
+  \fn void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, struct atom * at, struct atom * bt, float * vertices)
+
+  \brief prepare a bond OpenGL rendering
+
+  \param sty rendering style
+  \param to_pick to pick (1) or to draw (0)
+  \param picked is the atom selected (1) or not (0)
+  \param cap draw cylinder cap
+  \param bi atom (0) or clone (1) visible
+  \param pi atom (0) or clone (1) picked
+  \param bid bond id
+  \param at 1st atom
+  \param bt 2nd atom
+  \param vertices the OpenGL buffer data to fill
 */
 void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, struct atom * at, struct atom * bt, float * vertices)
 {
@@ -481,17 +481,17 @@ void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, 
   }
 }
 
-/*
-*  int find_bond_vertices (gboolean to_pick, int sty, int sa, int sb, int bi, int cap)
-*
-*  Usage: find bond(s) and clone bond(s) to render
-*
-*  gboolean to_pick : to pick (1) or to draw (0)
-*  int sty          : rendering style
-*  int sa           : 1st chemical species
-*  int sb           : 2nd chemical species
-*  int bi           : bond (0) or clone bond (1)
-*  int cap          : draw cylinder cap (1/0)
+/*!
+  \fn int find_bond_vertices (gboolean to_pick, int sty, int sa, int sb, int bi, int cap)
+
+  \brief find bond(s) and clone bond(s) to render
+
+  \param to_pick to pick (1) or to draw (0)
+  \param sty rendering style
+  \param sa 1st chemical species
+  \param sb 2nd chemical species
+  \param bi bond (0) or clone bond (1)
+  \param cap draw cylinder cap (1/0)
 */
 int find_bond_vertices (gboolean to_pick, int sty, int sa, int sb, int bi, int cap)
 {
@@ -548,16 +548,16 @@ int find_bond_vertices (gboolean to_pick, int sty, int sa, int sb, int bi, int c
   return 2*l;
 }
 
-/*
-*  void setup_all_cylinder_vertices (int style, gboolean to_pick, int cap, int bi, float * vertices)
-*
-*  Usage: prepare cylinder bond(s) and clone bond(s) to render
-*
-*  int style        : rendering style
-*  gboolean to_pick : to pick (1) or to draw (0)
-*  int cap          : draw cylinder cap (1/0)
-*  int bi           : bond (0) or clone bond (1)
-*  float * vertices : the OpenGL data buffer to fill
+/*!
+  \fn void setup_all_cylinder_vertices (int style, gboolean to_pick, int cap, int bi, float * vertices)
+
+  \brief prepare cylinder bond(s) and clone bond(s) to render
+
+  \param style rendering style
+  \param to_pick to pick (1) or to draw (0)
+  \param cap draw cylinder cap (1/0)
+  \param bi bond (0) or clone bond (1)
+  \param vertices the OpenGL data buffer to fill
 */
 void setup_all_cylinder_vertices (int style, gboolean to_pick, int cap, int bi, float * vertices)
 {
@@ -606,17 +606,17 @@ void setup_all_cylinder_vertices (int style, gboolean to_pick, int cap, int bi, 
   }
 }
 
-/*
-*  void setup_line_vertices (int style, int cap, int bi, int sa, int sb, float * vertices)
-*
-*  Usage: prepare line bond(s) and clone bond(s) to render
-*
-*  int style        : rendering style
-*  int cap          : draw cylinder cap (1/0)
-*  int bi           : bond (0) or clone bond (1)
-*  int sa           : 1st chemical species
-*  int sb           : 2nd chemical species
-*  float * vertices : the OpenGL buffer to fill
+/*!
+  \fn void setup_line_vertices (int style, int cap, int bi, int sa, int sb, float * vertices)
+
+  \brief prepare line bond(s) and clone bond(s) to render
+
+  \param style rendering style
+  \param cap draw cylinder cap (1/0)
+  \param bi bond (0) or clone bond (1)
+  \param sa 1st chemical species
+  \param sb 2nd chemical species
+  \param vertices the OpenGL buffer to fill
 */
 void setup_line_vertices (int style, int cap, int bi, int sa, int sb, float * vertices)
 {
@@ -657,12 +657,12 @@ void setup_line_vertices (int style, int cap, int bi, int sa, int sb, float * ve
   }
 }
 
-/*
-*  int create_bond_lists (gboolean to_pick)
-*
-*  Usage: prepare bond(s) and clone bond(s) OpenGL rendering
-*
-*  gboolean to_pick : to pick (1) or to draw (0)
+/*!
+  \fn int create_bond_lists (gboolean to_pick)
+
+  \brief prepare bond(s) and clone bond(s) OpenGL rendering
+
+  \param to_pick to pick (1) or to draw (0)
 */
 int create_bond_lists (gboolean to_pick)
 {

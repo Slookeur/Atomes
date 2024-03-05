@@ -14,12 +14,12 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'init_p.c'
 *
-*  Contains:
+* Contains:
 *
 *
 *
 *
-*  List of subroutines:
+* List of subroutines:
 
   void init_curves_and_calc (struct project * this_proj);
   void init_project (gboolean alloc_box);
@@ -35,12 +35,12 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glview.h"
 #include "glwindow.h"
 
-/*
-*  void init_curves_and_calc (struct project * this_proj)
-*
-*  Usage: for a project reset analysis, curves, data to not performed
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void init_curves_and_calc (struct project * this_proj)
+
+  \brief for a project reset analysis, curves, data to not performed
+
+  \param this_proj the target project
 */
 void init_curves_and_calc (struct project * this_proj)
 {
@@ -53,12 +53,12 @@ void init_curves_and_calc (struct project * this_proj)
   }
 }
 
-/*
-*  void init_project (gboolean alloc_box)
-*
-*  Usage: initialize a new project
-*
-*  gboolean alloc_box : allocate data for the MD box (1/0)
+/*!
+  \fn void init_project (gboolean alloc_box)
+
+  \brief initialize a new project
+
+  \param alloc_box allocate data for the MD box (1/0)
 */
 void init_project (gboolean alloc_box)
 {

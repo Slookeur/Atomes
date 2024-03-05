@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cwidget.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The initialization of the curve widget
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void curve_default_scale (int rid, int cid);
   void initcurve (struct project * pid, int rid, int cid);
@@ -37,14 +37,14 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "interface.h"
 #include "curve.h"
 
-/*
-*  DataLayout * curve_default_layout (struct project * pid, int rid, int cid)
-*
-*  Usage: prepare the default layout for a curve
-*
-*  struct project * pid : the project id
-*  int rid              : the analysis id
-*  int cid              : the curve id
+/*!
+  \fn DataLayout * curve_default_layout (struct project * pid, int rid, int cid)
+
+  \brief prepare the default layout for a curve
+
+  \param pid the project id
+  \param rid the analysis id
+  \param cid the curve id
 */
 DataLayout * curve_default_layout (struct project * pid, int rid, int cid)
 {
@@ -95,13 +95,13 @@ DataLayout * curve_default_layout (struct project * pid, int rid, int cid)
   return layout;
 }
 
-/*
-*  void curve_default_scale (int rid, int cid)
-*
-*  Usage: pick appropriate scale based on the type of analysis
-*
-*  int rid : analysis id
-*  int cid : curve id
+/*!
+  \fn void curve_default_scale (int rid, int cid)
+
+  \brief pick appropriate scale based on the type of analysis
+
+  \param rid analysis id
+  \param cid curve id
 */
 void curve_default_scale (int rid, int cid)
 {
@@ -136,14 +136,14 @@ void curve_default_scale (int rid, int cid)
   }
 }
 
-/*
-*  void initcurve (struct project * pid, int rid, int cid)
-*
-*  Usage: initialize curve widget
-*
-*  struct project * pid : the project id
-*  int rid              : the analysis id
-*  int cid              : the curve id
+/*!
+  \fn void initcurve (struct project * pid, int rid, int cid)
+
+  \brief initialize curve widget
+
+  \param pid the project id
+  \param rid the analysis id
+  \param cid the curve id
 */
 void initcurve (struct project * pid, int rid, int cid)
 {
@@ -239,14 +239,14 @@ void initcurve (struct project * pid, int rid, int cid)
   activer = rid;
 }
 
-/*
-*  void addcurwidgets (int pid, int rid, int str)
-*
-*  Usage: add curve widgets to the project
-*
-*  int pid : the project id
-*  int rid : the analysis id
-*  int str : at the project creation stage (1) or latter on (0)
+/*!
+  \fn void addcurwidgets (int pid, int rid, int str)
+
+  \brief add curve widgets to the project
+
+  \param pid the project id
+  \param rid the analysis id
+  \param str at the project creation stage (1) or latter on (0)
 */
 void addcurwidgets (int pid, int rid, int str)
 {

@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'calc.c'
 *
-*  Contains:
+* Contains:
 *
 
  - Callbacks used in by the assistants
@@ -22,7 +22,7 @@ If not, see <https://www.gnu.org/licenses/> */
  - The initialization of the assistant
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void field_question (gchar * question, GCallback handler, gpointer data);
   void unselect_all_atoms (glwin * view);
@@ -66,14 +66,14 @@ int icomb;
 
 gboolean selection_confirmed;
 
-/*
-*  G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gpointer data)
-*
-*  Usage: confirm that the selection is good
-*
-*  GtkDialog * dialog : the GtkDialog sending the signal
-*  gint response_id   : the response id
-*  gpointer data      : the pointer if needed, not in this case
+/*!
+  \fn G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gpointer data)
+
+  \brief confirm that the selection is good
+
+  \param dialog the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the pointer if needed, not in this case
 */
 G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gpointer data)
 {
@@ -81,14 +81,14 @@ G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gp
   destroy_this_dialog (dialog);
 }
 
-/*
-*  void field_question (gchar * question, GCallback handler, gpointer data)
-*
-*  Usage: ask the use to confirm something
-*
-*  gchar * question  : the text to display
-*  GCallback handler : the callback to use
-*  gpointer data     : the data to transmit to the callback
+/*!
+  \fn void field_question (gchar * question, GCallback handler, gpointer data)
+
+  \brief ask the use to confirm something
+
+  \param question the text to display
+  \param handler the callback to use
+  \param data the data to transmit to the callback
 */
 void field_question (gchar * question, GCallback handler, gpointer data)
 {
@@ -99,12 +99,12 @@ void field_question (gchar * question, GCallback handler, gpointer data)
   run_this_gtk_dialog (dialog, handler, data);
 }
 
-/*
-*  struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel)
-*
-*  Usage: copy an atom selection
-*
-*  struct atom_selection * old_sel : the atom selection to copy
+/*!
+  \fn struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel)
+
+  \brief copy an atom selection
+
+  \param old_sel the atom selection to copy
 */
 struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel)
 {
@@ -162,12 +162,12 @@ struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel
   return new_sel;
 }
 
-/*
-*  void unselect_all_atoms (glwin * view)
-*
-*  Usage: remove all atom(s) from selection
-*
-*  glwin * view : the glwin the selection comes from
+/*!
+  \fn void unselect_all_atoms (glwin * view)
+
+  \brief remove all atom(s) from selection
+
+  \param view the glwin the selection comes from
 */
 void unselect_all_atoms (glwin * view)
 {
@@ -198,12 +198,12 @@ void unselect_all_atoms (glwin * view)
   init_default_shaders (view);
 }
 
-/*
-*  void restore_ogl_selection (glwin * view)
-*
-*  Usage: restore a saved atom selection
-*
-*  glwin * view : the glwin to restore the selection to
+/*!
+  \fn void restore_ogl_selection (glwin * view)
+
+  \brief restore a saved atom selection
+
+  \param view the glwin to restore the selection to
 */
 void restore_ogl_selection (glwin * view)
 {
@@ -244,12 +244,12 @@ void restore_ogl_selection (glwin * view)
   }
 }
 
-/*
-*  void preserve_ogl_selection (glwin * view)
-*
-*  Usage: copy the atom selection, so that it can be re-used once the input assistant is closed.
-*
-*  glwin * view : the glwin the selection comes from
+/*!
+  \fn void preserve_ogl_selection (glwin * view)
+
+  \brief copy the atom selection, so that it can be re-used once the input assistant is closed.
+
+  \param view the glwin the selection comes from
 */
 void preserve_ogl_selection (glwin * view)
 {
@@ -287,13 +287,13 @@ void preserve_ogl_selection (glwin * view)
 
 extern char * input_types[NINPUTS];
 
-/*
-*  G_MODULE_EXPORT void create_field (GtkWidget * widg, gpointer data)
-*
-*  Usage: start an input creation assistant
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void create_field (GtkWidget * widg, gpointer data)
+
+  \brief start an input creation assistant
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void create_field (GtkWidget * widg, gpointer data)
 {

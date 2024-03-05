@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_axis.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the axis parameters edition window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
 
@@ -80,13 +80,13 @@ GtkWidget * radius_box;
 GtkWidget * axis_color_title[3];
 GtkWidget * ax_title[3];
 
-/*
-*  void activate_pos_box (glwin * view, gboolean val)
-*
-*  Usage: update axis position data
-*
-*  glwin * view : the target glwin
-*  gboolean val : template widget sensitivy
+/*!
+  \fn void activate_pos_box (glwin * view, gboolean val)
+
+  \brief update axis position data
+
+  \param view the target glwin
+  \param val template widget sensitivy
 */
 void activate_pos_box (glwin * view, gboolean val)
 {
@@ -103,13 +103,13 @@ void activate_pos_box (glwin * view, gboolean val)
   widget_set_sensitive (templates, val);
 }
 
-/*
-*  G_MODULE_EXPORT void set_axis_template (GtkComboBox * box, gpointer data)
-*
-*  Usage: set axis position callback
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_axis_template (GtkComboBox * box, gpointer data)
+
+  \brief set axis position callback
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_template (GtkComboBox * box, gpointer data)
 {
@@ -125,13 +125,13 @@ G_MODULE_EXPORT void set_axis_template (GtkComboBox * box, gpointer data)
 #endif
 }
 
-/*
-*  G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
-*
-*  Usage: set axis style callback
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
+
+  \brief set axis style callback
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
 {
@@ -164,23 +164,23 @@ G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void set_show_axis_toggle (GtkCheckButton * but, gpointer data)
-*
-*  Usage: show / hide axis callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_show_axis_toggle (GtkCheckButton * but, gpointer data)
+
+  \brief show / hide axis callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_show_axis_toggle (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data)
-*
-*  Usage: show / hide axis callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data)
+
+  \brief show / hide axis callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data)
 #endif
@@ -222,23 +222,23 @@ G_MODULE_EXPORT void set_show_axis_toggle (GtkToggleButton * but, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void use_axis_default_positions (GtkCheckButton * but, gpointer data)
-*
-*  Usage: use axis default colors callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void use_axis_default_positions (GtkCheckButton * but, gpointer data)
+
+  \brief use axis default colors callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void use_axis_default_positions (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer data)
-*
-*  Usage: use axis default colors callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer data)
+
+  \brief use axis default colors callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer data)
 #endif
@@ -278,12 +278,12 @@ G_MODULE_EXPORT void use_axis_default_positions (GtkToggleButton * but, gpointer
   // Update menu_bar
 }
 
-/*
-*  void init_axis_colors (glwin * view)
-*
-*  Usage: initialize axis colors
-*
-*  glwin * view : the target glwin
+/*!
+  \fn void init_axis_colors (glwin * view)
+
+  \brief initialize axis colors
+
+  \param view the target glwin
 */
 void init_axis_colors (glwin * view)
 {
@@ -300,23 +300,23 @@ void init_axis_colors (glwin * view)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void use_axis_default_colors (GtkCheckButton * but, gpointer data)
-*
-*  Usage:  use axis default color callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void use_axis_default_colors (GtkCheckButton * but, gpointer data)
+
+  \brief  use axis default color callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void use_axis_default_colors (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void use_axis_default_colors (GtkToggleButton * but, gpointer data)
-*
-*  Usage: use axis default color callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void use_axis_default_colors (GtkToggleButton * but, gpointer data)
+
+  \brief use axis default color callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void use_axis_default_colors (GtkToggleButton * but, gpointer data)
 #endif
@@ -348,13 +348,13 @@ G_MODULE_EXPORT void use_axis_default_colors (GtkToggleButton * but, gpointer da
   update (view);
 }
 
-/*
-*  G_MODULE_EXPORT void set_axis_color (GtkColorChooser * colob, gpointer data)
-*
-*  Usage: change axis color
-*
-*  GtkColorChooser * colob : the GtkColorChooser sending the signal
-*  gpointer data           : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_axis_color (GtkColorChooser * colob, gpointer data)
+
+  \brief change axis color
+
+  \param colob the GtkColorChooser sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_color (GtkColorChooser * colob, gpointer data)
 {
@@ -365,13 +365,13 @@ G_MODULE_EXPORT void set_axis_color (GtkColorChooser * colob, gpointer data)
   update (view);
 }
 
-/*
-*  void axis_position_has_changed (gpointer data, double v)
-*
-*  Usage: change axis position
-*
-*  gpointer data : the associated data pointer
-*  double v      : the new value
+/*!
+  \fn void axis_position_has_changed (gpointer data, double v)
+
+  \brief change axis position
+
+  \param data the associated data pointer
+  \param v the new value
 */
 void axis_position_has_changed (gpointer data, double v)
 {
@@ -382,15 +382,15 @@ void axis_position_has_changed (gpointer data, double v)
   update (view);
 }
 
-/*
-*  G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
-*
-*  Usage: change axis position - scroll callback
-*
-*  GtkRange * range     : the GtkRange sending the signal
-*  GtkScrollType scroll : the associated scroll type
-*  gdouble value        : the range value
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
+
+  \brief change axis position - scroll callback
+
+  \param range the GtkRange sending the signal
+  \param scroll the associated scroll type
+  \param value the range value
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -398,13 +398,13 @@ G_MODULE_EXPORT gboolean scroll_set_axis_position (GtkRange * range, GtkScrollTy
   return FALSE;
 }
 
-/*
-*  G_MODULE_EXPORT void set_axis_position (GtkRange * range, gpointer data)
-*
-*  Usage: change axis position - range callback
-*
-*  GtkRange * range : the GtkRange sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_axis_position (GtkRange * range, gpointer data)
+
+  \brief change axis position - range callback
+
+  \param range the GtkRange sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_position (GtkRange * range, gpointer data)
 {
@@ -412,23 +412,23 @@ G_MODULE_EXPORT void set_axis_position (GtkRange * range, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void set_axis_labels (GtkCheckButton * but, gpointer data)
-*
-*  Usage:  set axis labels callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_axis_labels (GtkCheckButton * but, gpointer data)
+
+  \brief  set axis labels callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_labels (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void set_axis_labels (GtkToggleButton * but, gpointer data)
-*
-*  Usage: set axis labels callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_axis_labels (GtkToggleButton * but, gpointer data)
+
+  \brief set axis labels callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_labels (GtkToggleButton * but, gpointer data)
 #endif
@@ -447,13 +447,13 @@ G_MODULE_EXPORT void set_axis_labels (GtkToggleButton * but, gpointer data)
   update (view);
 }
 
-/*
-*  G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
-*
-*  Usage: set axis title callback
-*
-*  GtkEntry * entry : the GtkEntry sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
+
+  \brief set axis title callback
+
+  \param entry the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
 {
@@ -467,24 +467,24 @@ G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: create the axis advanced parameters window callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief create the axis advanced parameters window callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void axis_advanced (GtkWidget * widg, gpointer data)
-*
-*  Usage: create the axis advanced parameters window callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void axis_advanced (GtkWidget * widg, gpointer data)
+
+  \brief create the axis advanced parameters window callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void axis_advanced (GtkWidget * widg, gpointer data)
 #endif

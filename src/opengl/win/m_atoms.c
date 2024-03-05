@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_atoms.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutine to create the 'Model -> Atom(s)' submenu
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   gchar * label_atpts (struct project * this_proj, glwin * view, int id);
 
@@ -52,14 +52,14 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data);
 
-/*
-*  gchar * label_atpts (struct project * this_proj, glwin * view, int id)
-*
-*  Usage: prepare the text of a menu item in the 'Model -> Atom(s)' submenu
-*
-*  struct project * this_proj : the target project
-*  glwin * view               : the target glwin
-*  int id                     : the type of label to prepare
+/*!
+  \fn gchar * label_atpts (struct project * this_proj, glwin * view, int id)
+
+  \brief prepare the text of a menu item in the 'Model -> Atom(s)' submenu
+
+  \param this_proj the target project
+  \param view the target glwin
+  \param id the type of label to prepare
 */
 gchar * label_atpts (struct project * this_proj, glwin * view, int id)
 {
@@ -108,13 +108,13 @@ gchar * label_atpts (struct project * this_proj, glwin * view, int id)
 extern G_MODULE_EXPORT void set_show_hide_all_atom_labels (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void atom_properties (GtkWidget * widg, gpointer data);
 
-/*
-*  G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
-*
-*  Usage: handle the show / hide atomic species signal
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
+
+  \brief handle the show / hide atomic species signal
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
 {
@@ -139,13 +139,13 @@ G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
   init_default_shaders (this_proj -> modelgl);
 }
 
-/*
-*  G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
-*
-*  Usage: handle the show / hide atomic species label signal
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
+
+  \brief handle the show / hide atomic species label signal
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
 {
@@ -177,13 +177,13 @@ G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
   update (this_proj -> modelgl);
 }
 
-/*
-*  G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
-*
-*  Usage: handle the show / hide all atomic labels signal
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
+
+  \brief handle the show / hide all atomic labels signal
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
 {
@@ -202,17 +202,17 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
   }
 }
 
-/*
-*  GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget * menu, GCallback handler, tint * data)
-*
-*  Usage: create a chemical species related check menu item GTK3
-*
-*  char * name       : menu item name
-*  gboolean va       : check menu item status
-*  gboolean vb       : menu item sensitivity
-*  GtkWidget * menu  : the GtkWidget sending the signal
-*  GCallback handler : the associated callback
-*  tint * data       : the associated data pointer
+/*!
+  \fn GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget * menu, GCallback handler, tint * data)
+
+  \brief create a chemical species related check menu item GTK3
+
+  \param name menu item name
+  \param va check menu item status
+  \param vb menu item sensitivity
+  \param menu the GtkWidget sending the signal
+  \param handler the associated callback
+  \param data the associated data pointer
 */
 GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget * menu, GCallback handler, tint * data)
 {
@@ -221,14 +221,14 @@ GtkWidget * create_spec_menu (char * name, gboolean va, gboolean vb, GtkWidget *
   return spec_widget;
 }
 
-/*
-*  GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, tint * data)
-*
-*  Usage: create a 'Model -> Atom(s)' menu item GTK3
-*
-*  gchar * str      : the label for the menu item
-*  GtkWidget * widg : the menu GtkWidget to attach the menu item to
-*  tint * data      : the associated data pointer
+/*!
+  \fn GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, tint * data)
+
+  \brief create a 'Model -> Atom(s)' menu item GTK3
+
+  \param str the label for the menu item
+  \param widg the menu GtkWidget to attach the menu item to
+  \param data the associated data pointer
 */
 GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, tint * data)
 {
@@ -240,14 +240,14 @@ GtkWidget * create_atom_layout_widget (gchar * str, GtkWidget * widg, tint * dat
   return layout;
 }
 
-/*
-*  GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
-*
-*  Usage: create the 'Atom(s) -> show' submenu GTK3
-*
-*  glwin * view : the target glwin
-*  int id       : main app (0) or popup (1)
-*  int at       : atoms (0) or clones (1)
+/*!
+  \fn GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
+
+  \brief create the 'Atom(s) -> show' submenu GTK3
+
+  \param view the target glwin
+  \param id main app (0) or popup (1)
+  \param at atoms (0) or clones (1)
 */
 GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
 {
@@ -293,14 +293,14 @@ GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
   return mshow;
 }
 
-/*
-*  GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
-*
-*  Usage: create the 'Atom(s) -> Color(s)' submenu GTK3
-*
-*  glwin * view : the target glwin
-*  int id       : main app (0) or popup (1)
-*  int at       : atoms (0) or clones (1)
+/*!
+  \fn GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
+
+  \brief create the 'Atom(s) -> Color(s)' submenu GTK3
+
+  \param view the target glwin
+  \param id main app (0) or popup (1)
+  \param at atoms (0) or clones (1)
 */
 GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
 {
@@ -336,14 +336,14 @@ GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
   return menuc;
 }
 
-/*
-*  GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
-*
-*  Usage: create the 'Atom(s) -> Label(s)' submenu GTK3
-*
-*  glwin * view : the target glwin
-*  int id       : main app (0) or popup (1)
-*  int at       : atoms (0) or clones (1)
+/*!
+  \fn GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
+
+  \brief create the 'Atom(s) -> Label(s)' submenu GTK3
+
+  \param view the target glwin
+  \param id main app (0) or popup (1)
+  \param at atoms (0) or clones (1)
 */
 GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
 {
@@ -413,14 +413,14 @@ GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
   return menul;
 }
 
-/*
-*  GtkWidget * menu_atoms (glwin * view, int id, int at)
-*
-*  Usage: create the 'Atom(s)' submenu elements GTK3
-*
-*  glwin * view : the target glwin
-*  int id       : main app (0) or popup (1)
-*  int at       : atoms (0) or clones (1)
+/*!
+  \fn GtkWidget * menu_atoms (glwin * view, int id, int at)
+
+  \brief create the 'Atom(s)' submenu elements GTK3
+
+  \param view the target glwin
+  \param id main app (0) or popup (1)
+  \param at atoms (0) or clones (1)
 */
 GtkWidget * menu_atoms (glwin * view, int id, int at)
 {
@@ -509,14 +509,14 @@ GtkWidget * menu_atoms (glwin * view, int id, int at)
 
 extern G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * state, gpointer data);
 
-/*
-*  G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: handle the show/hide signal GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief handle the show/hide signal GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -567,14 +567,14 @@ G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * paramet
   }
 }
 
-/*
-*  G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: handle the show/hide label signal GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief handle the show/hide label signal GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -632,14 +632,14 @@ G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parame
   }
 }
 
-/*
-*  G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: handle the show/hide all labels GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief handle the show/hide all labels GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -662,15 +662,15 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant
   update_menu_bar (this_proj -> modelgl);
 }
 
-/*
-*  GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
-*
-*  Usage: create the 'Atom(s) -> Label(s)' submenu elements
-*
-*  glwin * view       : the target glwin
-*  int popm           : main app (0) or popup (1)
-*  int at             : atoms (0) or clones (1)
-*  gboolean sensitive : menu item sensitivity
+/*!
+  \fn GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
+
+  \brief create the 'Atom(s) -> Label(s)' submenu elements
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+  \param at atoms (0) or clones (1)
+  \param sensitive menu item sensitivity
 */
 GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
@@ -703,15 +703,15 @@ GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
   return menu;
 }
 
-/*
-*  GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
-*
-*  Usage: create the 'Atom(s) -> Color(s)' submenu elements
-*
-*  glwin * view       : the target glwin
-*  int popm           : main app (0) or popup (1)
-*  int at             : atoms (0) or clones (1)
-*  gboolean sensitive : menu item sensitivity
+/*!
+  \fn GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
+
+  \brief create the 'Atom(s) -> Color(s)' submenu elements
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+  \param at atoms (0) or clones (1)
+  \param sensitive menu item sensitivity
 */
 GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
@@ -743,15 +743,15 @@ GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
   return menu;
 }
 
-/*
-*  GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
-*
-*  Usage: create the 'Atom(s) -> Show' submenu elements
-*
-*  glwin * view       : the target glwin
-*  int popm           : main app (0) or popup (1)
-*  int at             : atoms (0) or clones (1)
-*  gboolean sensitive : menu item sensitivity
+/*!
+  \fn GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
+
+  \brief create the 'Atom(s) -> Show' submenu elements
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+  \param at atoms (0) or clones (1)
+  \param sensitive menu item sensitivity
 */
 GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
@@ -777,14 +777,14 @@ GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
   return menu;
 }
 
-/*
-*  GMenu * menu_atoms (glwin * view, int popm, int at)
-*
-*  Usage: create the 'Atom(s)' submenu elements
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
-*  int at       : atoms (0) or clones (1)
+/*!
+  \fn GMenu * menu_atoms (glwin * view, int popm, int at)
+
+  \brief create the 'Atom(s)' submenu elements
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+  \param at atoms (0) or clones (1)
 */
 GMenu * menu_atoms (glwin * view, int popm, int at)
 {

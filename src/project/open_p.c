@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'open_p.c'
 *
-*  Contains:
+* Contains:
 *
 
  - Subroutine to start reading atomes project file
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int open_project (FILE * fp, int npi);
 
@@ -56,13 +56,13 @@ extern void initchn ();
 extern void initmsd ();
 extern void initsh (int s);
 
-/*
-*  char * read_string (int i, FILE * fp)
-*
-*  Usage: read a string from a file
-*
-*  int i     : the size of the string to read
-*  FILE * fp : the file pointer
+/*!
+  \fn char * read_string (int i, FILE * fp)
+
+  \brief read a string from a file
+
+  \param i the size of the string to read
+  \param fp the file pointer
 */
 char * read_string (int i, FILE * fp)
 {
@@ -77,12 +77,12 @@ char * read_string (int i, FILE * fp)
   return tmp;
 }
 
-/*
-*  gchar * read_this_string (FILE * fp)
-*
-*  Usage: is there a string to read in this file ? yes do it
-*
-*  FILE * fp : the file pointer
+/*!
+  \fn gchar * read_this_string (FILE * fp)
+
+  \brief is there a string to read in this file ? yes do it
+
+  \param fp the file pointer
 */
 gchar * read_this_string (FILE * fp)
 {
@@ -97,13 +97,13 @@ gchar * read_this_string (FILE * fp)
 }
 
 
-/*
-*  void initcnames (int w, int s)
-*
-*  Usage: initialize curve namees
-*
-*  int w : calculation id
-*  int s : initialize spherical harmonics or not
+/*!
+  \fn void initcnames (int w, int s)
+
+  \brief initialize curve namees
+
+  \param w calculation id
+  \param s initialize spherical harmonics or not
 */
 void initcnames (int w, int s)
 {
@@ -142,12 +142,12 @@ void initcnames (int w, int s)
   }
 }
 
-/*
-*  void allocatoms (struct project * this_proj)
-*
-*  Usage: allocate project data
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void allocatoms (struct project * this_proj)
+
+  \brief allocate project data
+
+  \param this_proj the target project
 */
 void allocatoms (struct project * this_proj)
 {
@@ -168,12 +168,12 @@ void allocatoms (struct project * this_proj)
   }
 }
 
-/*
-*  chemical_data * alloc_chem_data (int spec)
-*
-*  Usage: allocate chemistry data
-*
-*  int spec : the number of chemical species
+/*!
+  \fn chemical_data * alloc_chem_data (int spec)
+
+  \brief allocate chemistry data
+
+  \param spec the number of chemical species
 */
 chemical_data * alloc_chem_data (int spec)
 {
@@ -187,13 +187,13 @@ chemical_data * alloc_chem_data (int spec)
   return chem;
 }
 
-/*
-*  void alloc_proj_data (struct project * this_proj, int cid)
-*
-*  Usage: allocate data
-*
-*  struct project * this_proj : the target project
-*  int cid                    : Allocate chemistry data (1/0)
+/*!
+  \fn void alloc_proj_data (struct project * this_proj, int cid)
+
+  \brief allocate data
+
+  \param this_proj the target project
+  \param cid Allocate chemistry data (1/0)
 */
 void alloc_proj_data (struct project * this_proj, int cid)
 {
@@ -201,13 +201,13 @@ void alloc_proj_data (struct project * this_proj, int cid)
   allocatoms (this_proj);
 }
 
-/*
-*  int open_project (FILE * fp, int npi)
-*
-*  Usage: open atomes project file
-*
-*  FILE * fp : the file pointer
-*  int npi   : the total number of projects in the workspace
+/*!
+  \fn int open_project (FILE * fp, int npi)
+
+  \brief open atomes project file
+
+  \param fp the file pointer
+  \param npi the total number of projects in the workspace
 */
 int open_project (FILE * fp, int npi)
 {

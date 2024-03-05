@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'global.h'
 *
-*  Contains:
+* Contains:
 
  - Global variable definitions
  - Global data structure definitions
@@ -165,38 +165,43 @@ typedef struct {
 #define ABOUT "help-about"
 
 #ifdef GTK4
+/*! \enum ReliefStyle */
 enum ReliefStyle {
-  GTK_RELIEF_NORMAL  = 0,
-  GTK_RELIEF_HALF = 1,
-  GTK_RELIEF_NONE = 2
+  GTK_RELIEF_NORMAL = 0, /*!< 0 */
+  GTK_RELIEF_HALF   = 1, /*!< 1 */
+  GTK_RELIEF_NONE   = 2  /*!< 2 */
 };
+
+/*! \enum ShadowStyle */
 enum ShadowStyle {
-  GTK_SHADOW_NONE = 0,
-  GTK_SHADOW_IN = 1,
-  GTK_SHADOW_OUT = 2,
-  GTK_SHADOW_ETCHED_IN = 3,
-  GTK_SHADOW_ETCHED_OUT = 4
+  GTK_SHADOW_NONE       = 0, /*!< 0 */
+  GTK_SHADOW_IN         = 1, /*!< 1 */
+  GTK_SHADOW_OUT        = 2, /*!< 2 */
+  GTK_SHADOW_ETCHED_IN  = 3, /*!< 3 */
+  GTK_SHADOW_ETCHED_OUT = 4  /*!< 4 */
 };
 #define BSEP 3
 #else
 #define BSEP 0
 #endif
 
+/*! \enum ContainerType */
 enum ContainerType {
-  CONTAINER_WIN = 0,
-  CONTAINER_SCR = 1,
-  CONTAINER_VIE = 2,
-  CONTAINER_BUT = 3,
-  CONTAINER_FRA = 4,
-  CONTAINER_EXP = 5
+  CONTAINER_WIN = 0, /*!< 0 */
+  CONTAINER_SCR = 1, /*!< 1 */
+  CONTAINER_VIE = 2, /*!< 2 */
+  CONTAINER_BUT = 3, /*!< 3 */
+  CONTAINER_FRA = 4, /*!< 4 */
+  CONTAINER_EXP = 5  /*!< 5 */
 };
 
+/*! \enum ImageFormats */
 enum ImageFormats {
-  IMG_NONE    = 0,
-  IMG_PIXBUF  = 1,
-  IMG_SURFACE = 2,
-  IMG_FILE    = 3,
-  IMG_STOCK   = 4
+  IMG_NONE    = 0, /*!< 0 */
+  IMG_PIXBUF  = 1, /*!< 1 */
+  IMG_SURFACE = 2, /*!< 2 */
+  IMG_FILE    = 3, /*!< 3 */
+  IMG_STOCK   = 4  /*!< 4 */
 };
 
 #define IODEBUG FALSE
@@ -474,16 +479,16 @@ typedef struct {
 } CurveState;
 
 typedef struct {
-  ColRGBA datacolor;             // Data color
-  double thickness;              // Data line thickness
-  int dash;                      // Data line style
-  int glyph;                     // Data glyph type
-  double gsize;                  // Data glyph size
-  int gfreq;                     // Data glyph frequency
-  int aspect;                    // X/Y or histogram
-  double hwidth;                 // Histogram width
-  double hopac;                  // Histogram color opacity
-  int hpos;                      // Histogram is transparent ?
+  ColRGBA datacolor;             /*!< Data color */
+  double thickness;              /*!< Data line thickness */
+  int dash;                      /*!< Data line style */
+  int glyph;                     /*!< Data glyph type */
+  double gsize;                  /*!< Data glyph size */
+  int gfreq;                     /*!< Data glyph frequency */
+  int aspect;                    /*!< X/Y or histogram */
+  double hwidth;                 /*!< Histogram width */
+  double hopac;                  /*!< Histogram color opacity */
+  int hpos;                      /*!< Histogram is transparent ? */
 } DataLayout;
 
 struct cextra {
@@ -499,130 +504,148 @@ typedef struct {
   struct cextra * last;
 } ExtraSets;
 
+/*! \struct curve */
 typedef struct {
-  int cid;
-  int ndata;                     // number of data points
-  double * data[2];              // X and Y data
-  double * err;                  // Error bar on Y if any.
-  double cmin[2];                // Min of the data on X and Y
-  double cmax[2];                // Max of the data on X and Y
-  GtkWidget * plot;              // Drawing area
-  GtkWidget * button;            // Interaction button for 'Toolboxes'
-  GtkWidget * curve_vbox;        // Curve top boxes for the menu bar
+  int cid;                       /*!< Curve id */
+  int ndata;                     /*!< number of data points */
+  double * data[2];              /*!< X and Y data */
+  double * err;                  /*!< Error bar on Y if any. */
+  double cmin[2];                /*!< Min of the data on X and Y */
+  double cmax[2];                /*!< Max of the data on X and Y */
+  GtkWidget * plot;              /*!< Drawing area */
+  GtkWidget * button;            /*!< Interaction button for 'Toolboxes' */
+  GtkWidget * curve_vbox;        /*!< Curve top boxes for the menu bar */
   GtkWidget * curve_hbox;
-  GtkWidget * window;            // Widget for the window
-  GtkWidget * pos;               // Mouse cursor position in graph
-  int wsize[2];                  // Curve window size
-  GtkWidget * datatree;          // Widget for the selection tree
-  qint idcol[2];                 // For navigation in the list view
-  ColRGBA backcolor;             // Background color
-  int format;                    // Format of output (screen, png, pdf, ...)
-  char * name;                   // Name of the curve
+  GtkWidget * window;            /*!< Widget for the window */
+  GtkWidget * pos;               /*!< Mouse cursor position in graph */
+  int wsize[2];                  /*!< Curve window size */
+  GtkWidget * datatree;          /*!< Widget for the selection tree */
+  qint idcol[2];                 /*!< For navigation in the list view */
+  ColRGBA backcolor;             /*!< Background color */
+  int format;                    /*!< Format of output (screen, png, pdf, ...) */
+  char * name;                   /*!< Name of the curve */
 // Axis
-  double axmin[2];               // Min for the axis X and Y
-  double axmax[2];               // Max for the axis X and Y
-  gboolean axis_defaut_title[2]; // Use axis default title
-  char * axis_title[2];          // Title of axis
-  int axis_title_x[2];           // Position of the axis title
-  int axis_title_y[2];           // Position of the axis title
-  gchar * axis_title_font[2];    // Axis title font
-  int scale[2];                  // Axis scale (linear or log)
-  gboolean autoscale[2];         // Autoscale
-  gboolean show_grid[2];         // Show/Hide axis grid
-  gboolean show_axis[2];         // Show/Hide axis bar
-  double majt[2];                // Value for major ticks
-  int mint[2];                   // Number of minor ticks
-  int ticks_io[2];               // Ticks in or out / axis bar
-  int ticks_pos[2];              // Ticks position: normal, opposite, both
-  int majt_size[2];              // Majors ticks size (pixels)
-  int mint_size[2];              // Minors ticks size (pixels)
-  int labels_pos[2];             // Ticks label position: normal, opposite, both
-  int labels_digit[2];           // Significant digits for tick labels
-  gchar * labels_font[2];        // Ticks label font
-  double labels_angle[2];        // Ticks label angle
-  int labels_shift_x[2];         // Ticks position shift from x axis
-  int labels_shift_y[2];         // Ticks position shift from y axis
+  double axmin[2];               /*!< Min for the axis X and Y */
+  double axmax[2];               /*!< Max for the axis X and Y */
+  gboolean axis_defaut_title[2]; /*!< Use axis default title */
+  char * axis_title[2];          /*!< Title of axis */
+  int axis_title_x[2];           /*!< Position of the x axis title */
+  int axis_title_y[2];           /*!< Position of the y axis title */
+  gchar * axis_title_font[2];    /*!< Axis title font */
+  int scale[2];                  /*!< Axis scale (linear or log) */
+  gboolean autoscale[2];         /*!< Autoscale */
+  gboolean show_grid[2];         /*!< Show/Hide axis grid */
+  gboolean show_axis[2];         /*!< Show/Hide axis bar */
+  double majt[2];                /*!< Value for major ticks */
+  int mint[2];                   /*!< Number of minor ticks */
+  int ticks_io[2];               /*!< Ticks in or out / axis bar */
+  int ticks_pos[2];              /*!< Ticks position: normal, opposite, both */
+  int majt_size[2];              /*!< Majors ticks size (pixels) */
+  int mint_size[2];              /*!< Minors ticks size (pixels) */
+  int labels_pos[2];             /*!< Ticks label position: normal, opposite, both */
+  int labels_digit[2];           /*!< Significant digits for tick labels */
+  gchar * labels_font[2];        /*!< Ticks label font */
+  double labels_angle[2];        /*!< Ticks label angle */
+  int labels_shift_x[2];         /*!< Ticks position shift from x axis */
+  int labels_shift_y[2];         /*!< Ticks position shift from y axis */
   // Legend
-  gboolean show_legend;          // Show/Hide legend
-  double legend_pos[2];          // Position of the legend
-  gchar * legend_font;           // Legend font
-  ColRGBA legend_color;          // Legend color
-  gboolean show_legend_box;      // Display legend box
-  int legend_box_dash;           // Legend box line style
-  ColRGBA legend_box_color;      // Legend box color
-  double legend_box_thickness;   // Legend box line thickness
+  gboolean show_legend;          /*!< Show/Hide legend */
+  double legend_pos[2];          /*!< Position of the legend */
+  gchar * legend_font;           /*!< Legend font */
+  ColRGBA legend_color;          /*!< Legend color */
+  gboolean show_legend_box;      /*!< Display legend box */
+  int legend_box_dash;           /*!< Legend box line style */
+  ColRGBA legend_box_color;      /*!< Legend box color */
+  double legend_box_thickness;   /*!< Legend box line thickness */
 // Title
-  char * title;                  // Title to display
-  gboolean show_title;           // Show/Hide title
-  gboolean default_title;        // Use default title
-  double title_pos[2];           // Position of the title
-  gchar * title_font;            // Title font
-  ColRGBA title_color;           // Title color
+  char * title;                  /*!< Title to display */
+  gboolean show_title;           /*!< Show/Hide title */
+  gboolean default_title;        /*!< Use default title */
+  double title_pos[2];           /*!< Position of the title */
+  gchar * title_font;            /*!< Title font */
+  ColRGBA title_color;           /*!< Title color */
 // Frame
-  gboolean show_frame;           // Show/Hide frame
-  int frame_type;                // Frame type
-  int frame_dash;                // Frame line style
-  double frame_thickness;        // Frame line thickness
-  ColRGBA frame_color;           // Frame color
-  double frame_pos[2][2];        // Frame  0 = x, 1 = y, 0 = min and 1 = max
+  gboolean show_frame;           /*!< Show/Hide frame */
+  int frame_type;                /*!< Frame type */
+  int frame_dash;                /*!< Frame line style */
+  double frame_thickness;        /*!< Frame line thickness */
+  ColRGBA frame_color;           /*!< Frame color */
+  double frame_pos[2][2];        /*!< Frame  0 = x, 1 = y, 0 = min and 1 = max */
 
-  DataLayout * layout;           // The curve layout
-  ExtraSets * extrac;            // Extra data set(s) added to graph
-  cairo_surface_t * surface;     // The rendering surface
+  DataLayout * layout;           /*!< The curve layout */
+  ExtraSets * extrac;            /*!< Extra data set(s) added to graph */
+  cairo_surface_t * surface;     /*!< The rendering surface */
   int draw_id;
   int bshift;
 
   gboolean displayed;
   char * cfile;
-  gchar * path;                  // For the toolbox
-  int action_id;                 // Unique Id to identify actions
+  gchar * path;                  /*!< Path for the toolbox tree */
+  int action_id;                 /*!< Unique Id to identify actions */
   CurveState state;
   GSimpleActionGroup * action_group;
 } curve;
 
+/*! \struct atom */
 struct atom {
-  int id;                        // The id in the model
-  int sp;                        // The chemical species
-  double x, y, z;                // The coordinates
-  int numv;                      // The number of neighbors
-  int * vois;                    // The list of neighbors
+  int id;                        /*!< The atom's id in the model */ // The id in the model
+  int sp;                        /*!< The chemical species */ // The chemical species
+  // The coordinates
+  double x;                      /*!< x coordinate */
+  double y;                      /*!< y coordinate */
+  double z;                      /*!< z coordinate */
+  int numv;                      /*!< The number of neighbors */ // The number of neighbors
+  int * vois;                    /*!< The list of neighbors */ // The list of neighbors
   // 0 = Total coordination
   // 1 = Partial coordination
   // 2 = Fragment
   // 3 = Molecule
   // 4 = Field object id
-  int coord[5];                   // Coordination information
+  int coord[5];                   /*!< Coordination information:\n
+    0 = Total coordination,\n
+    1 = Partial coordination,\n
+    2 = Fragment,\n
+    3 = Molecule,\n
+    4 = Field object id
+   */ // Coordination information
   // 0 = All
   // 1 = King's
   // 2 = Guttman's
   // 3 = Primitive
   // 4 = Strong
-  int ** rings[5];                // Rings statistics information
-  int ** chain;                   // Chain statistics information
-  int style;                      // Rendering style if not global
-  int fid;                        // Force field id
-  int faid;                       // Force field id in fragment
-  gboolean show[2];               // Show / Hide (0 = atom, 1 = clone)
-  gboolean label[2];              // Label / unlabel (0 = atom, 1 = clone)
-  gboolean pick[2];               // Selected / Unselected (0 = atom, 1 = clone)
-  gboolean cloned;                // Clone(s) ?
+  int ** rings[5];                /*!< Ring statistics information:\n
+    0 = All,\n
+    1 = King's,\n
+    2 = Guttman,\n
+    3 = Primitive,\n
+    4 = Strong
+   */ // Rings statistics information
+  int ** chain;                   /*!< Chain statistics information */
+  int fid;                        /*!< Force field id */
+  int faid;                       /*!< Force field id in fragment */
+  gboolean show[2];               /*!< Show / Hide (0 = atom, 1 = clone) */
+  gboolean label[2];              /*!< Label / Unlabel (0 = atom, 1 = clone) */
+  gboolean pick[2];               /*!< Selected / Unselected (0 = atom, 1 = clone) */
+  gboolean cloned;                /*!< Clone(s) ? (0 = no, 1 = yes) */
+  int style;                      /*!< Rendering style if not global */
   struct atom * prev;
   struct atom * next;
 };
 
+/*! \struct molecule */
 struct molecule {
-  int id;                                 // Molecule id number
-  int md;                                 // MD step
-  int multiplicity;                       // Multiplicity
-  int * fragments;                        // Fragments list
-  int natoms;                             // Number of atoms
-  int nspec;                              // Number of chemical species
-  int * species;                          // Number of atom by species
+  int id;                         /*!< Molecule id number */
+  int md;                         /*!< MD step */
+  int multiplicity;               /*!< Multiplicity */
+  int * fragments;                /*!< Fragments list */
+  int natoms;                     /*!< Number of atoms */
+  int nspec;                      /*!< Number of chemical species */
+  int * species;                  /*!< Number of atom by species */
 };
 
 typedef struct {
-  int * mol_by_step;                      // Num of mol by steps
-  struct molecule ** mols;                // List of molecules by steps
+  int * mol_by_step;              /*!< Num of mol by steps */
+  struct molecule ** mols;        /*!< List of molecules by steps */
 } model;
 
 typedef struct {
@@ -637,7 +660,7 @@ typedef struct {
   int nbody[5];
   struct field_nth_body * first_body[5];
   // Tersoff potential cross terms
-  double *** cross;
+  double *** cross; /*!< Tersoff potential cross termms */
   int extern_fields;
   struct field_external * first_external;
 
@@ -740,13 +763,18 @@ typedef struct {
 
 typedef struct {
   // 0 = Z, 1 = Mass, 2 = Radius, 3 = Neutrons, 4 = X-rays
-  double ** chem_prop;
-  int * nsps;
-  int * formula;
-  char ** label;
-  char ** element;
-  double ** cutoffs;
-  double grtotcutoff;
+  double ** chem_prop; /*!< chemical properties:\n
+                            0 = Z,\n
+                            1 = Mass,\n
+                            2 = Radius,\n
+                            3 = Neutrons,\n
+                            4 = X-rays */
+  int * nsps;          /*!< Number of atom(s) by chemical species */
+  int * formula;       /*!< Chemical formula */
+  char ** label;       /*!< Element label(s) */
+  char ** element;     /*!< Element name(s) */
+  double ** cutoffs;   /*!< partial cutoff(s) */
+  double grtotcutoff;  /*!< Total cutoff */
 } chemical_data;
 
 struct insertion {
@@ -776,24 +804,24 @@ struct project {
   gboolean dmtx;
   gboolean initgl;
   int tfile;
-  int nspec;                // Number of chemical species
-  int natomes;              // Number of atoms
-  int dummies;              // Number of atoms including extra cells
-  int steps;                // Number of MD steps
-  int tunit;                // Time unit between steps, if MD
+  int nspec;                 /*!< Number of chemical species */
+  int natomes;               /*!< Number of atoms */
+  int dummies;               /*!< Number of atoms including extra cells */
+  int steps;                 /*!< Number of MD steps */
+  int tunit;                 /*!< Time unit between steps, if MD */
   int numwid;
 
-  int xcor;                 // S(q) X-rays calculation f(q) or approximated
+  int xcor;                  /*!< S(q) X-rays calculation f(q) or approximated */
   int readata;
   gboolean tovalidate;
 
-  gboolean runc[3];         // Bonds, Angles, Mol
-  int numc[NGRAPHS];
-  int num_delta[NGRAPHS];
+  gboolean runc[3];          /*!< Bonds, Angles, Mol */
   // gr, sq, sk, gftt, bd, an, frag-mol, ch, sp, msd
-  double calc_time[NGRAPHS];
+  int numc[NGRAPHS];         /*!< Number of curves:\n 0 = gr,\n 1 = sq,\n 2 = sk,\n 3 = gftt,\n 4 = bd,\n 5 = an,\n 6 = frag-mol,\n 7 = ch,\n 8 = sp,\n 9 = msd */
+  int num_delta[NGRAPHS];    /*!< Discretization:\n 0 = gr,\n 1 = sq,\n 2 = sk,\n 3 = gftt,\n 4 = bd,\n 5 = an,\n 6 = frag-mol,\n 7 = ch,\n 8 = sp,\n 9 = msd */
+  double calc_time[NGRAPHS]; /*!< calculation time:\n 0 = gr,\n 1 = sq,\n 2 = sk,\n 3 = gftt,\n 4 = bd,\n 5 = an,\n 6 = frag-mol,\n 7 = ch,\n 8 = sp,\n 9 = msd */
   // 0 = Search type, 1 = NUMA
-  int rsearch[2];
+  int rsearch[2];            /*!< 0 = Search type, 1 = Ring's NUMA */
   // First col : search type (up to chains stat). Second col: search info
   // 0 = Initnode, 1 = RMAX, 2 = ABAB, 3 = Homo, 4 = , 5 = Done ?
   int rsparam[5][6];

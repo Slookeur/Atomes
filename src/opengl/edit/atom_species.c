@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_species.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to look for new chemical species and modify the chemical information accordingly
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int find_spec_id (int s, int z, double * list_z);
   int search_for_new_spec (atom_edition * edit, struct insert_object * object);
@@ -31,13 +31,13 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "atom_edit.h"
 
-/*
-*  chemical_data * duplicate_chemical_data (int spec, chemical_data * chem)
-*
-*  Usage: duplicate chemical data information
-*
-*  int spec             : the number of chemical species
-*  chemical_data * chem : the chemical data to duplicate
+/*!
+  \fn chemical_data * duplicate_chemical_data (int spec, chemical_data * chem)
+
+  \brief duplicate chemical data information
+
+  \param spec the number of chemical species
+  \param chem the chemical data to duplicate
 */
 chemical_data * duplicate_chemical_data (int spec, chemical_data * chem)
 {
@@ -63,14 +63,14 @@ chemical_data * duplicate_chemical_data (int spec, chemical_data * chem)
   return newchem;
 }
 
-/*
-*  int find_spec_id (int s, int z, double * list_z)
-*
-*  Usage: find species id based on Z
-*
-*  int s           : the number of chemical species
-*  int z           : the target Z
-*  double * list_z : the list of Z values
+/*!
+  \fn int find_spec_id (int s, int z, double * list_z)
+
+  \brief find species id based on Z
+
+  \param s the number of chemical species
+  \param z the target Z
+  \param list_z the list of Z values
 */
 int find_spec_id (int s, int z, double * list_z)
 {
@@ -88,13 +88,13 @@ int find_spec_id (int s, int z, double * list_z)
   return -1;
 }
 
-/*
-*  int search_for_new_spec (atom_edition * edit, struct insert_object * object)
-*
-*  Usage: search for new chemical species
-*
-*  atom_edition * edit           : the edition window
-*  struct insert_object * object : the target insert object
+/*!
+  \fn int search_for_new_spec (atom_edition * edit, struct insert_object * object)
+
+  \brief search for new chemical species
+
+  \param edit the edition window
+  \param object the target insert object
 */
 int search_for_new_spec (atom_edition * edit, struct insert_object * object)
 {

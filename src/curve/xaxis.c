@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'xaxis.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to draw the x axis
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid);
   void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it);
@@ -33,15 +33,15 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "curve.h"
 
-/*
-*  void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
-*
-*  Usage: setup x axis using a linear scale
-*
-*  cairo_t * cr               : the cairo drawing context
-*  struct project * this_proj : the target project
-*  int rid                    : the analysis id
-*  int cid                    : the curve id
+/*!
+  \fn void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
+
+  \brief setup x axis using a linear scale
+
+  \param cr the cairo drawing context
+  \param this_proj the target project
+  \param rid the analysis id
+  \param cid the curve id
 */
 void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {
@@ -141,16 +141,16 @@ void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int 
   }
 }
 
-/*
-*  void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
-*
-*  Usage: setup x axis using a log scale
-*
-*  cairo_t * cr               : the cairo drawing context
-*  struct project * this_proj : the target project
-*  int rid                    : the analysis id
-*  int cid                    : the curve id
-*  gboolean draw_it           : 1/0 draw or not
+/*!
+  \fn void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
+
+  \brief setup x axis using a log scale
+
+  \param cr the cairo drawing context
+  \param this_proj the target project
+  \param rid the analysis id
+  \param cid the curve id
+  \param draw_it 1/0 draw or not
 */
 void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
 {

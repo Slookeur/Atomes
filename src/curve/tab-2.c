@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'tab-2.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The 2nd tab of the curve edition dialog
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void set_data_style (gpointer data);
 
@@ -93,21 +93,21 @@ GtkWidget * datascroll = NULL;
 extern qint dataxe[2];
 extern int a, b, c, d;
 
-/*
-*  cairo_surface_t * draw_surface (int aspect, double hwidth, double hopac, int da, double ti, ColRGBA dcol, ColRGBA bcol,  int tglyph, double tgsize)
-*
-*  Usage: draw the data set preview
-*
-*  int aspect    : the data aspect (x/y or bars)
-*  double hwidth : the histogram bar width
-*  double hopac  : the histogram bar opacity
-*  int da        : the dash type
-*  double ti     : the thickness
-*  ColRGBA dcol  : the data color
-*  ColRGBA bcol  : the background color
-*  int tglyph    : the glyphe type
-*  double tgsize : the glyph size
-*  gpointer data : the associated data pointer
+/*!
+  \fn cairo_surface_t * draw_surface (int aspect, double hwidth, double hopac, int da, double ti, ColRGBA dcol, ColRGBA bcol,  int tglyph, double tgsize)
+
+  \brief draw the data set preview
+
+  \param aspect the data aspect (x/y or bars)
+  \param hwidth the histogram bar width
+  \param hopac the histogram bar opacity
+  \param da the dash type
+  \param ti the thickness
+  \param dcol the data color
+  \param bcol the background color
+  \param tglyph the glyphe type
+  \param tgsize the glyph size
+  \param data the associated data pointer
 */
 cairo_surface_t * draw_surface (int aspect, double hwidth, double hopac, int da, double ti, ColRGBA dcol, ColRGBA bcol,  int tglyph, double tgsize)
 {
@@ -178,12 +178,12 @@ cairo_surface_t * draw_surface (int aspect, double hwidth, double hopac, int da,
   return cst;
 }
 
-/*
-*  DataLayout * get_extra_layout (int i)
-*
-*  Usage: retrieve the i data layout
-*
-*  int i : the id of data layout to retrieve
+/*!
+  \fn DataLayout * get_extra_layout (int i)
+
+  \brief retrieve the i data layout
+
+  \param i the id of data layout to retrieve
 */
 DataLayout * get_extra_layout (int i)
 {
@@ -196,12 +196,12 @@ DataLayout * get_extra_layout (int i)
   return ctmp -> layout;
 }
 
-/*
-*  void set_data_style (gpointer data)
-*
-*  Usage: update the data style widgets
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn void set_data_style (gpointer data)
+
+  \brief update the data style widgets
+
+  \param data the associated data pointer
 */
 void set_data_style (gpointer data)
 {
@@ -242,13 +242,13 @@ void set_data_style (gpointer data)
   update_curve (data);
 }
 
-/*
-*  G_MODULE_EXPORT void set_data_glyph (GtkComboBox * gbox, gpointer data)
-*
-*  Usage: change glyph type
-*
-*  GtkComboBox * gbox : the GtkComboBox sending the signal
-*  gpointer data      : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_data_glyph (GtkComboBox * gbox, gpointer data)
+
+  \brief change glyph type
+
+  \param gbox the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_data_glyph (GtkComboBox * gbox, gpointer data)
 {
@@ -280,13 +280,13 @@ G_MODULE_EXPORT void set_data_glyph (GtkComboBox * gbox, gpointer data)
   set_data_style (data);
 }
 
-/*
-*  G_MODULE_EXPORT void set_data_dash (GtkComboBox * gbox, gpointer data)
-*
-*  Usage: change data dash style
-*
-*  GtkComboBox * gbox : the GtkComboBox sending the signal
-*  gpointer data      : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_data_dash (GtkComboBox * gbox, gpointer data)
+
+  \brief change data dash style
+
+  \param gbox the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_data_dash (GtkComboBox * gbox, gpointer data)
 {
@@ -316,13 +316,13 @@ G_MODULE_EXPORT void set_data_dash (GtkComboBox * gbox, gpointer data)
   set_data_style (data);
 }
 
-/*
-*  G_MODULE_EXPORT void set_data_color (GtkColorChooser * colob, gpointer data)
-*
-*  Usage: set data color
-*
-*  GtkColorChooser * colob : the GtkColorChooser sending the signal
-*  gpointer data           : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_data_color (GtkColorChooser * colob, gpointer data)
+
+  \brief set data color
+
+  \param colob the GtkColorChooser sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_data_color (GtkColorChooser * colob, gpointer data)
 {
@@ -344,13 +344,13 @@ G_MODULE_EXPORT void set_data_color (GtkColorChooser * colob, gpointer data)
   set_data_style (data);
 }
 
-/*
-*  G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
-*
-*  Usage: set data thickness entry callback
-*
-*  GtkEntry * thickd : the GtkEntry sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
+
+  \brief set data thickness entry callback
+
+  \param thickd the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
 {
@@ -392,13 +392,13 @@ G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
-*
-*  Usage: set glyph size entry callback
-*
-*  GtkEntry * glsize : the GtkEntry sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
+
+  \brief set glyph size entry callback
+
+  \param glsize the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
 {
@@ -440,13 +440,13 @@ G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
-*
-*  Usage: set histogram bar width entry callback
-*
-*  GtkEntry * entry : the GtkEntry sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
+
+  \brief set histogram bar width entry callback
+
+  \param entry the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
 {
@@ -488,13 +488,13 @@ G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
-*
-*  Usage: set histogram bar opacity entry callback
-*
-*  GtkEntry * entry : the GtkEntry sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
+
+  \brief set histogram bar opacity entry callback
+
+  \param entry the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
 {
@@ -536,13 +536,13 @@ G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void set_data_hist_pos (GtkComboBox * gbox, gpointer data)
-*
-*  Usage: change histogram bar position
-*
-*  GtkComboBox * gbox : the GtkComboBox sending the signal
-*  gpointer data      : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_data_hist_pos (GtkComboBox * gbox, gpointer data)
+
+  \brief change histogram bar position
+
+  \param gbox the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_data_hist_pos (GtkComboBox * gbox, gpointer data)
 {
@@ -564,13 +564,13 @@ G_MODULE_EXPORT void set_data_hist_pos (GtkComboBox * gbox, gpointer data)
   set_data_style (data);
 }
 
-/*
-*  G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
-*
-*  Usage: set glyph frequency entry callback
-*
-*  GtkEntry * glfreq : the GtkEntry sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
+
+  \brief set glyph frequency entry callback
+
+  \param glfreq the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
 {
@@ -611,13 +611,13 @@ G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void choose_set (GtkComboBox * box, gpointer data)
-*
-*  Usage: change the data set to customize
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void choose_set (GtkComboBox * box, gpointer data)
+
+  \brief change the data set to customize
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void choose_set (GtkComboBox * box, gpointer data)
 {
@@ -654,13 +654,13 @@ G_MODULE_EXPORT void choose_set (GtkComboBox * box, gpointer data)
   set_data_style (& ad);
 }
 
-/*
-*  G_MODULE_EXPORT void set_data_aspect (GtkComboBox * box, gpointer data)
-*
-*  Usage: change data aspect (x/y or histogram bars)
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_data_aspect (GtkComboBox * box, gpointer data)
+
+  \brief change data aspect (x/y or histogram bars)
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_data_aspect (GtkComboBox * box, gpointer data)
 {
@@ -696,13 +696,13 @@ G_MODULE_EXPORT void set_data_aspect (GtkComboBox * box, gpointer data)
   update_curve (data);
 }
 
-/*
-*  static void fill_org_model (GtkListStore * store, gpointer data)
-*
-*  Usage: fill the data set list store
-*
-*  GtkListStore * store : the data set list store to fill
-*  gpointer data        : the associated data pointer
+/*!
+  \fn static void fill_org_model (GtkListStore * store, gpointer data)
+
+  \brief fill the data set list store
+
+  \param store the data set list store to fill
+  \param data the associated data pointer
 */
 static void fill_org_model (GtkListStore * store, gpointer data)
 {
@@ -746,14 +746,14 @@ static void fill_org_model (GtkListStore * store, gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void move_back_front (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data)
-*
-*  Usage: move up or down data set in the tree model to move it front or back in the data plot
-*
-*  GtkTreeModel * tree_model : the GtkTreeModel sending the signal
-*  GtkTreePath * path        : the path in the tree model
-*  gpointer data             : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void move_back_front (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data)
+
+  \brief move up or down data set in the tree model to move it front or back in the data plot
+
+  \param tree_model the GtkTreeModel sending the signal
+  \param path the path in the tree model
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void move_back_front (GtkTreeModel * tree_model, GtkTreePath * path, gpointer data)
 {
@@ -878,12 +878,12 @@ G_MODULE_EXPORT void move_back_front (GtkTreeModel * tree_model, GtkTreePath * p
   update_curve (data);
 }
 
-/*
-*  GtkWidget * create_org_list (gpointer data)
-*
-*  Usage: create the data set organisation widget
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn GtkWidget * create_org_list (gpointer data)
+
+  \brief create the data set organisation widget
+
+  \param data the associated data pointer
 */
 GtkWidget * create_org_list (gpointer data)
 {
@@ -920,23 +920,23 @@ GtkWidget * create_org_list (gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void set_bshift (GtkCheckButton * shift, gpointer data)
-*
-*  Usage: shift / not histogram bars toggle callback GTK4
-*
-*  GtkCheckButton * shift : the GtkCheckButton sending the signal
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_bshift (GtkCheckButton * shift, gpointer data)
+
+  \brief shift / not histogram bars toggle callback GTK4
+
+  \param shift the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_bshift (GtkCheckButton * shift, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void set_bshift (GtkToggleButton * shift, gpointer data)
-*
-*  Usage: shift / not histogram bars toggle callback GTK3
-*
-*  GtkToggleButton * shift : the GtkToggleButton sending the signal
-*  gpointer data           : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_bshift (GtkToggleButton * shift, gpointer data)
+
+  \brief shift / not histogram bars toggle callback GTK3
+
+  \param shift the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_bshift (GtkToggleButton * shift, gpointer data)
 #endif
@@ -954,12 +954,12 @@ G_MODULE_EXPORT void set_bshift (GtkToggleButton * shift, gpointer data)
   update_curve (data);
 }
 
-/*
-*  GtkWidget * create_tab_2 (gpointer data)
-*
-*  Usage: handle the creation of the 2nd tab of the curve edition dialog
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn GtkWidget * create_tab_2 (gpointer data)
+
+  \brief handle the creation of the 2nd tab of the curve edition dialog
+
+  \param data the associated data pointer
 */
 GtkWidget * create_tab_2 (gpointer data)
 {

@@ -14,14 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_crystal.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create a crystal database window
  - This is a project and not in use for the time being
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int cif_preview (const char * filetoread);
   int get_cgroup (gchar * str);
@@ -108,12 +108,12 @@ typdef struct cif_data{
   int species;
 };
 
-/*
-*  int cif_preview (const char * filetoread)
-*
-*  Usage:
-*
-*  const char * filetoread :
+/*!
+  \fn int cif_preview (const char * filetoread)
+
+  \brief
+
+  \param filetoread
 */
 int cif_preview (const char * filetoread)
 {
@@ -130,12 +130,12 @@ int cif_preview (const char * filetoread)
   return 1;
 }
 
-/*
-*  int get_cgroup (gchar * str)
-*
-*  Usage:
-*
-*  gchar * str :
+/*!
+  \fn int get_cgroup (gchar * str)
+
+  \brief
+
+  \param str
 */
 int get_cgroup (gchar * str)
 {
@@ -147,12 +147,12 @@ int get_cgroup (gchar * str)
   return -1;
 }
 
-/*
-*  void sort_files (int num_f)
-*
-*  Usage:
-*
-*  int num_f :
+/*!
+  \fn void sort_files (int num_f)
+
+  \brief
+
+  \param num_f
 */
 void sort_files (int num_f)
 {
@@ -179,10 +179,10 @@ void sort_files (int num_f)
   }
 }
 
-/*
-*  int get_cif_files ()
-*
-*  Usage:
+/*!
+  \fn int get_cif_files ()
+
+  \brief
 */
 int get_cif_files ()
 {
@@ -304,32 +304,32 @@ int get_cif_files ()
   return val;
 }
 
-/*
-*  int get_num_cif ()
-*
-*  Usage:
+/*!
+  \fn int get_num_cif ()
+
+  \brief
 */
 int get_num_cif ()
 {
   return num_cif[the_symmetry][the_group];
 }
 
-/*
-*  int get_num_group ()
-*
-*  Usage:
+/*!
+  \fn int get_num_group ()
+
+  \brief
 */
 int get_num_group ()
 {
   return num_group[the_symmetry];
 }
 
-/*
-*  void fill_cif_tree (GtkListStore * store)
-*
-*  Usage:
-*
-*  GtkListStore * store :
+/*!
+  \fn void fill_cif_tree (GtkListStore * store)
+
+  \brief
+
+  \param store
 */
 void fill_cif_tree (GtkListStore * store)
 {
@@ -350,12 +350,12 @@ void fill_cif_tree (GtkListStore * store)
   }
 }
 
-/*
-*  void fill_group_tree (GtkListStore * store)
-*
-*  Usage:
-*
-*  GtkListStore * store :
+/*!
+  \fn void fill_group_tree (GtkListStore * store)
+
+  \brief
+
+  \param store
 */
 void fill_group_tree (GtkListStore * store)
 {
@@ -376,12 +376,12 @@ void fill_group_tree (GtkListStore * store)
   }
 }
 
-/*
-*  void fill_symmetry_tree (GtkListStore * store)
-*
-*  Usage:
-*
-*  GtkListStore * store :
+/*!
+  \fn void fill_symmetry_tree (GtkListStore * store)
+
+  \brief
+
+  \param store
 */
 void fill_symmetry_tree (GtkListStore * store)
 {
@@ -402,12 +402,12 @@ void fill_symmetry_tree (GtkListStore * store)
   }
 }
 
-/*
-*  void fill_database_tree (GtkListStore * store)
-*
-*  Usage:
-*
-*  GtkListStore * store :
+/*!
+  \fn void fill_database_tree (GtkListStore * store)
+
+  \brief
+
+  \param store
 */
 void fill_database_tree (GtkListStore * store)
 {
@@ -428,10 +428,10 @@ void fill_database_tree (GtkListStore * store)
   }
 }
 
-/*
-*  void insert_cif_preview ()
-*
-*  Usage:
+/*!
+  \fn void insert_cif_preview ()
+
+  \brief
 */
 void insert_cif_preview ()
 {
@@ -479,12 +479,12 @@ void insert_cif_preview ()
   gtk_widget_show_all (cif_preview_box);
 }
 
-/*
-*  void prepare_cif_preview (int id)
-*
-*  Usage:
-*
-*  int id :
+/*!
+  \fn void prepare_cif_preview (int id)
+
+  \brief
+
+  \param id
 */
 void prepare_cif_preview (int id)
 {
@@ -510,12 +510,12 @@ void prepare_cif_preview (int id)
   }
 }
 
-/*
-*  int get_cif_info_from_cif_node (xmlNodePtr * cnode)
-*
-*  Usage:
-*
-*  xmlNodePtr * cnode :
+/*!
+  \fn int get_cif_info_from_cif_node (xmlNodePtr * cnode)
+
+  \brief
+
+  \param cnode
 */
 int get_cif_info_from_cif_node (xmlNodePtr * cnode)
 {
@@ -523,14 +523,14 @@ int get_cif_info_from_cif_node (xmlNodePtr * cnode)
   return 1;
 }
 
-/*
-*  void prepare_cif_list (int dba, int sym, int spg)
-*
-*  Usage:
-*
-*  int dba :
-*  int sym :
-*  int spg :
+/*!
+  \fn void prepare_cif_list (int dba, int sym, int spg)
+
+  \brief
+
+  \param dba
+  \param sym
+  \param spg
 */
 void prepare_cif_list (int dba, int sym, int spg)
 {
@@ -574,12 +574,12 @@ void prepare_cif_list (int dba, int sym, int spg)
   }
 }
 
-/*
-*  int open_cif_database (gchar * filetoread)
-*
-*  Usage:
-*
-*  gchar * filetoread :
+/*!
+  \fn int open_cif_database (gchar * filetoread)
+
+  \brief
+
+  \param filetoread
 */
 int open_cif_database (gchar * filetoread)
 {
@@ -655,12 +655,12 @@ int open_cif_database (gchar * filetoread)
   }
 }
 
-/*
-*  int prepare_data_base (int db)
-*
-*  Usage: prepare CIF files database
-*
-*  int db :
+/*!
+  \fn int prepare_data_base (int db)
+
+  \brief prepare CIF files database
+
+  \param db
 */
 int prepare_data_base (int db)
 {
@@ -726,14 +726,14 @@ void select_cif_data (GtkTreeView * tree_view,
 
 G_MODULE_EXPORT void set_library_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
 
-/*
-*  GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
-*
-*  Usage: create cif tree store widget
-*
-*  GtkListStore * store : the GtkListStore model
-*  int id               :
-*  gchar * name         : column name
+/*!
+  \fn GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
+
+  \brief create cif tree store widget
+
+  \param store the GtkListStore model
+  \param id
+  \param name column name
 */
 GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
 {
@@ -755,12 +755,12 @@ GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
   return scrol;
 }
 
-/*
-*  int build_crystal_from_cif_database (struct project * this_proj)
-*
-*  Usage: create crystal database window
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn int build_crystal_from_cif_database (struct project * this_proj)
+
+  \brief create crystal database window
+
+  \param this_proj the target project
 */
 int build_crystal_from_cif_database (struct project * this_proj)
 {

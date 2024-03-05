@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'modelinfo.c'
 *
-*  Contains:
+* Contains:
 *
 
  - Miscellaneous printing subroutines to display information
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void print_spg_name (gchar * str , GtkTextBuffer * buffer);
   void print_spg_setting (gchar * init, GtkTextBuffer * buffer);
@@ -38,13 +38,13 @@ extern char * vect_comp[3];
 extern gchar * substitute_string (gchar * init, gchar * o_motif, gchar * n_motif);
 extern gchar * get_num_string (gchar * str);
 
-/*
-*  void print_spg_name (gchar * str , GtkTextBuffer * buffer)
-*
-*  Usage: print space group name in a GtkTextBuffer
-*
-*  gchar * str            : the space group string
-*  GtkTextBuffer * buffer : the GtkTextBuffer
+/*!
+  \fn void print_spg_name (gchar * str , GtkTextBuffer * buffer)
+
+  \brief print space group name in a GtkTextBuffer
+
+  \param str the space group string
+  \param buffer the GtkTextBuffer
 */
 void print_spg_name (gchar * str , GtkTextBuffer * buffer)
 {
@@ -77,13 +77,13 @@ void print_spg_name (gchar * str , GtkTextBuffer * buffer)
   g_free (str);
 }
 
-/*
-*  void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
-*
-*  Usage: print space group name in a GtkTextBuffer
-*
-*  gchar * init           : the space group setting
-*  GtkTextBuffer * buffer : the GtkTextBuffer
+/*!
+  \fn void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
+
+  \brief print space group name in a GtkTextBuffer
+
+  \param init the space group setting
+  \param buffer the GtkTextBuffer
 */
 void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
 {
@@ -94,13 +94,13 @@ void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
   print_spg_name (str, buffer);
 }
 
-/*
-*  void model_info (struct project * this_proj, GtkTextBuffer * buffer)
-*
-*  Usage: display model information in GtkTexBuffer
-*
-*  struct project * this_proj : the target project
-*  GtkTextBuffer * buffer     : the GtkTextBuffer
+/*!
+  \fn void model_info (struct project * this_proj, GtkTextBuffer * buffer)
+
+  \brief display model information in GtkTexBuffer
+
+  \param this_proj the target project
+  \param buffer the GtkTextBuffer
 */
 void model_info (struct project * this_proj, GtkTextBuffer * buffer)
 {
@@ -313,14 +313,14 @@ void model_info (struct project * this_proj, GtkTextBuffer * buffer)
   }
 }
 
-/*
-*  void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
-*
-*  Usage: print OpenGL stuff in a GtkTextBuffer
-*
-*  gchar * text        : Message
-*  GLenum name         : OpenGL id to retreive
-*  GtkTextBuffer * buf : the GtkTextBuffer
+/*!
+  \fn void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
+
+  \brief print OpenGL stuff in a GtkTextBuffer
+
+  \param text Message
+  \param name OpenGL id to retreive
+  \param buf the GtkTextBuffer
 */
 void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
 {
@@ -333,13 +333,13 @@ void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
   g_free (str);
 }
 
-/*
-*  void opengl_info (struct project * this_proj, GtkTextBuffer * buf)
-*
-*  Usage: display OpenGL information in a GtkTextBuffer
-*
-*  struct project * this_proj : the target project
-*  GtkTextBuffer * buf        : the GtkTextBuffer
+/*!
+  \fn void opengl_info (struct project * this_proj, GtkTextBuffer * buf)
+
+  \brief display OpenGL information in a GtkTextBuffer
+
+  \param this_proj the target project
+  \param buf the GtkTextBuffer
 */
 void opengl_info (struct project * this_proj, GtkTextBuffer * buf)
 {

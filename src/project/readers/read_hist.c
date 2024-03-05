@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_hist.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to read DL-POLY history file
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int hist_get_data (int linec);
   int hist_get_content ();
@@ -39,12 +39,12 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern void check_for_species (double v, int ato);
 
-/*
-*  int hist_get_data (int linec)
-*
-*  Usage: read data from the DL-POLY history file
-*
-*  int linec : Total number of lines
+/*!
+  \fn int hist_get_data (int linec)
+
+  \brief read data from the DL-POLY history file
+
+  \param linec Total number of lines
 */
 int hist_get_data (int linec)
 {
@@ -82,10 +82,10 @@ int hist_get_data (int linec)
   return 1;
 }
 
-/*
-*  int hist_get_content ()
-*
-*  Usage: read the content of the DL-POLY history file
+/*!
+  \fn int hist_get_content ()
+
+  \brief read the content of the DL-POLY history file
 */
 int hist_get_content ()
 {
@@ -420,12 +420,12 @@ int hist_get_content ()
   return 1;
 }
 
-/*
-*  int open_hist_file (int linec)
-*
-*  Usage: open DL-POLY history file
-*
-*  int linec : Number of lines in the file
+/*!
+  \fn int open_hist_file (int linec)
+
+  \brief open DL-POLY history file
+
+  \param linec Number of lines in the file
 */
 int open_hist_file (int linec)
 {

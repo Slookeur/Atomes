@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_cif.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to read CIF files
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int get_atom_wyckoff (gchar * line, int wid);
   int cif_get_value (gchar * kroot, gchar * keyw, int linec, int lstart, gchar ** cif_word, gboolean rec_val, gboolean all_ligne, gboolean in_loop);
@@ -170,12 +170,12 @@ gchar * cif_coord_opts[40][2] = {{"b1", "Monoclinic unique axis b, cell choice 1
   }
 #endif // G_OS_WIN_32
 
-/*
-*  gchar * get_cif_word (gchar * mot)
-*
-*  Usage: get string from CIF file, EOL can be ugly
-*
-*  gchar * mot : the string that was read in the file
+/*!
+  \fn gchar * get_cif_word (gchar * mot)
+
+  \brief get string from CIF file, EOL can be ugly
+
+  \param mot the string that was read in the file
 */
 gchar * get_cif_word (gchar * mot)
 {
@@ -184,13 +184,13 @@ gchar * get_cif_word (gchar * mot)
   return word;
 }
 
-/*
-*  float get_atom_coord (gchar * line, int mid)
-*
-*  Usage: read atom coordinates from CIF file
-*
-*  gchar * line : the string that contains the data
-*  int mid      : the position to reach on the line
+/*!
+  \fn float get_atom_coord (gchar * line, int mid)
+
+  \brief read atom coordinates from CIF file
+
+  \param line the string that contains the data
+  \param mid the position to reach on the line
 */
 float get_atom_coord (gchar * line, int mid)
 {
@@ -207,13 +207,13 @@ float get_atom_coord (gchar * line, int mid)
   return v;
 }
 
-/*
-*  gchar * get_atom_label (gchar * line, int lid)
-*
-*  Usage: read atom label from CIF file
-*
-*  gchar * line : the string that contains the data
-*  int lid      : the position to reach on the line
+/*!
+  \fn gchar * get_atom_label (gchar * line, int lid)
+
+  \brief read atom label from CIF file
+
+  \param line the string that contains the data
+  \param lid the position to reach on the line
 */
 gchar * get_atom_label (gchar * line, int lid)
 {
@@ -235,13 +235,13 @@ gchar * get_atom_label (gchar * line, int lid)
   return g_strdup_printf ("%c%c", at_word[0], tolower(at_word[1]));
 }
 
-/*
-*  int get_atom_wyckoff (gchar * line, int wid)
-*
-*  Usage: read Wyckoff position from CIF file
-*
-*  gchar * line : the string that contains the data
-*  int wid      : the position to reach on the line
+/*!
+  \fn int get_atom_wyckoff (gchar * line, int wid)
+
+  \brief read Wyckoff position from CIF file
+
+  \param line the string that contains the data
+  \param wid the position to reach on the line
 */
 int get_atom_wyckoff (gchar * line, int wid)
 {
@@ -266,13 +266,13 @@ int get_atom_wyckoff (gchar * line, int wid)
 GtkWidget ** img_cif;
 atom_search * cif_search;
 
-/*
-*  G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data)
-*
-*  Usage: Select a chemical species to correct error in CIF file
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data)
+
+  \brief Select a chemical species to correct error in CIF file
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data)
 {
@@ -301,10 +301,10 @@ G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data)
   g_free (strb);
 }
 
-/*
-*  gboolean get_missing_z_from_user ()
-*
-*  Usage: get missing atomic number in CIF file from the user
+/*!
+  \fn gboolean get_missing_z_from_user ()
+
+  \brief get missing atomic number in CIF file from the user
 */
 gboolean get_missing_z_from_user ()
 {
@@ -344,12 +344,12 @@ gboolean get_missing_z_from_user ()
 }
 
 #ifndef OPENMP
-/*
-*  void file_get_to_line (int line_id)
-*
-*  Usage: reach line in CIF file
-*
-*  int line_id : Line to reach
+/*!
+  \fn void file_get_to_line (int line_id)
+
+  \brief reach line in CIF file
+
+  \param line_id Line to reach
 */
 void file_get_to_line (int line_id)
 {
@@ -359,19 +359,19 @@ void file_get_to_line (int line_id)
 }
 #endif
 
-/*
-*  int cif_get_value (gchar * kroot, gchar * keyw, int linec, int lstart, gchar ** cif_word, gboolean rec_val, gboolean all_ligne, gboolean in_loop)
-*
-*  Usage: read pattern in CIF file
-*
-*  gchar * kroot      : String root (first part)
-*  gchar * keyw       : String root (first part)
-*  int linec          : Total number of lines
-*  int lstart         : Line to reach
-*  gchar ** cif_word  : pointer to store the data read
-*  gboolean rec_val   : Record position on the line
-*  gboolean all_ligne : Browse all line (1/0)
-*  gboolean in_loop   : More than one identical key string (1/0)
+/*!
+  \fn int cif_get_value (gchar * kroot, gchar * keyw, int linec, int lstart, gchar ** cif_word, gboolean rec_val, gboolean all_ligne, gboolean in_loop)
+
+  \brief read pattern in CIF file
+
+  \param kroot String root (first part)
+  \param keyw String root (first part)
+  \param linec Total number of lines
+  \param lstart Line to reach
+  \param cif_word pointer to store the data read
+  \param rec_val Record position on the line
+  \param all_ligne Browse all line (1/0)
+  \param in_loop More than one identical key string (1/0)
 */
 int cif_get_value (gchar * kroot, gchar * keyw, int linec, int lstart, gchar ** cif_word, gboolean rec_val, gboolean all_ligne, gboolean in_loop)
 {
@@ -520,13 +520,13 @@ int cif_get_value (gchar * kroot, gchar * keyw, int linec, int lstart, gchar ** 
   return res;
 }
 
-/*
-*  int cif_file_get_data_in_loop (int linec, int lid)
-*
-*  Usage:
-*
-*  int linec : Total number of lines
-*  int lid   : Line to reach
+/*!
+  \fn int cif_file_get_data_in_loop (int linec, int lid)
+
+  \brief
+
+  \param linec Total number of lines
+  \param lid Line to reach
 */
 int cif_file_get_data_in_loop (int linec, int lid)
 {
@@ -580,14 +580,14 @@ int cif_file_get_data_in_loop (int linec, int lid)
   return i;
 }
 
-/*
-*  int cif_file_get_number_of_atoms (int linec, int lid, int nelem)
-*
-*  Usage: get the number of atom(s) in a CIF file
-*
-*  int linec : Total number of lines
-*  int lid   : Line to reach
-*  int nelem : Number of element(s) the line
+/*!
+  \fn int cif_file_get_number_of_atoms (int linec, int lid, int nelem)
+
+  \brief get the number of atom(s) in a CIF file
+
+  \param linec Total number of lines
+  \param lid Line to reach
+  \param nelem Number of element(s) the line
 */
 int cif_file_get_number_of_atoms (int linec, int lid, int nelem)
 {
@@ -643,13 +643,13 @@ int cif_file_get_number_of_atoms (int linec, int lid, int nelem)
   return i;
 }
 
-/*
-*  void check_for_to_lab (int ato, gchar * stlab)
-*
-*  Usage: check atom label
-*
-*  int ato       : Atom id
-*  gchar * stlab : Label read in the CIF file
+/*!
+  \fn void check_for_to_lab (int ato, gchar * stlab)
+
+  \brief check atom label
+
+  \param ato Atom id
+  \param stlab Label read in the CIF file
 */
 void check_for_to_lab (int ato, gchar * stlab)
 {
@@ -691,13 +691,13 @@ void check_for_to_lab (int ato, gchar * stlab)
   }
 }
 
-/*
-*  gboolean cif_file_get_atoms_data (int lin, int cid[8])
-*
-*  Usage: get atoms data from the CIF file
-*
-*  int lin    : Line to reach
-*  int cid[8] : Positions on the line for the data to read
+/*!
+  \fn gboolean cif_file_get_atoms_data (int lin, int cid[8])
+
+  \brief get atoms data from the CIF file
+
+  \param lin Line to reach
+  \param cid[8] Positions on the line for the data to read
 */
 gboolean cif_file_get_atoms_data (int lin, int cid[8])
 {
@@ -805,13 +805,13 @@ gboolean cif_file_get_atoms_data (int lin, int cid[8])
   return done;
 }
 
-/*
-*  int get_loop_line_id (int linec, int lid)
-*
-*  Usage: reach a line in the CIF file
-*
-*  int linec : Total number of lines
-*  int lid   : Line to reach
+/*!
+  \fn int get_loop_line_id (int linec, int lid)
+
+  \brief reach a line in the CIF file
+
+  \param linec Total number of lines
+  \param lid Line to reach
 */
 int get_loop_line_id (int linec, int lid)
 {
@@ -859,14 +859,14 @@ int get_loop_line_id (int linec, int lid)
   return 0;
 }
 
-/*
-*  int get_loop_line_for_key (gchar * key_a, gchar * key_b, int linec)
-*
-*  Usage: search a string
-*
-*  gchar * key_a : String root (first part)
-*  gchar * key_b : String end (second part)
-*  int linec     : Total number of lines
+/*!
+  \fn int get_loop_line_for_key (gchar * key_a, gchar * key_b, int linec)
+
+  \brief search a string
+
+  \param key_a String root (first part)
+  \param key_b String end (second part)
+  \param linec Total number of lines
 */
 int get_loop_line_for_key (gchar * key_a, gchar * key_b, int linec)
 {
@@ -876,12 +876,12 @@ int get_loop_line_for_key (gchar * key_a, gchar * key_b, int linec)
   return (i) ? get_loop_line_id (linec, i) : 0;
 }
 
-/*
-*  gboolean cif_get_atomic_coordinates (int linec)
-*
-*  Usage: read the atomic coordinates from the CIF file
-*
-*  int linec : Total number of lines
+/*!
+  \fn gboolean cif_get_atomic_coordinates (int linec)
+
+  \brief read the atomic coordinates from the CIF file
+
+  \param linec Total number of lines
 */
 gboolean cif_get_atomic_coordinates (int linec)
 {
@@ -1051,12 +1051,12 @@ gboolean cif_get_atomic_coordinates (int linec)
   return TRUE;
 }
 
-/*
-*  int get_space_group_from_hm (gchar * hmk)
-*
-*  Usage:
-*
-*  gchar * hmk :
+/*!
+  \fn int get_space_group_from_hm (gchar * hmk)
+
+  \brief
+
+  \param hmk
 */
 int get_space_group_from_hm (gchar * hmk)
 {
@@ -1105,12 +1105,12 @@ int get_space_group_from_hm (gchar * hmk)
   return 0;
 }
 
-/*
-*  gchar * get_string_from_origin (space_group * spg)
-*
-*  Usage: get the space group origin from its name
-*
-*  space_group * spg : Space group
+/*!
+  \fn gchar * get_string_from_origin (space_group * spg)
+
+  \brief get the space group origin from its name
+
+  \param spg Space group
 */
 gchar * get_string_from_origin (space_group * spg)
 {
@@ -1134,13 +1134,13 @@ gchar * get_string_from_origin (space_group * spg)
   return str;
 }
 
-/*
-*  int get_setting_from_hm (gchar * hmk, int end)
-*
-*  Usage: Getting the space group parameters using the HM Key
-*
-*  gchar * hmk : the HM key
-*  int end     : Use origin (number of possible SP origins), or not (-1)
+/*!
+  \fn int get_setting_from_hm (gchar * hmk, int end)
+
+  \brief Getting the space group parameters using the HM Key
+
+  \param hmk the HM key
+  \param end Use origin (number of possible SP origins), or not (-1)
 */
 int get_setting_from_hm (gchar * hmk, int end)
 {
@@ -1222,13 +1222,13 @@ int get_setting_from_hm (gchar * hmk, int end)
   }
 }
 
-/*
-*  int group_info_from_hm_key (int spg, gchar * key_hm)
-*
-*  Usage: get the space group information using the HM key from the CIF file
-*
-*  int spg        : Space group
-*  gchar * key_hm : HM key
+/*!
+  \fn int group_info_from_hm_key (int spg, gchar * key_hm)
+
+  \brief get the space group information using the HM key from the CIF file
+
+  \param spg Space group
+  \param key_hm HM key
 */
 int group_info_from_hm_key (int spg, gchar * key_hm)
 {
@@ -1305,12 +1305,12 @@ int group_info_from_hm_key (int spg, gchar * key_hm)
   return (spg) ? (j) ? j : spg : j;
 }
 
-/*
-*  gboolean cif_get_cell_data (int linec)
-*
-*  Usage: get the cell data from the CIF file
-*
-*  int linec : Total number of lines
+/*!
+  \fn gboolean cif_get_cell_data (int linec)
+
+  \brief get the cell data from the CIF file
+
+  \param linec Total number of lines
 */
 gboolean cif_get_cell_data (int linec)
 {
@@ -1350,12 +1350,12 @@ gboolean cif_get_cell_data (int linec)
   return TRUE;
 }
 
-/*
-*  gboolean cif_get_space_group (int linec)
-*
-*  Usage: get the space group from the CIF file
-*
-*  int linec : Total number of lines
+/*!
+  \fn gboolean cif_get_space_group (int linec)
+
+  \brief get the space group from the CIF file
+
+  \param linec Total number of lines
 */
 gboolean cif_get_space_group (int linec)
 {
@@ -1572,12 +1572,12 @@ gboolean cif_get_space_group (int linec)
   return res;
 }
 
-/*
-*  int open_cif_file (int linec)
-*
-*  Usage: open CIF file
-*
-*  int linec : Total number of lines
+/*!
+  \fn int open_cif_file (int linec)
+
+  \brief open CIF file
+
+  \param linec Total number of lines
 */
 int open_cif_file (int linec)
 {

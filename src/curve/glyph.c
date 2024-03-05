@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'glyph.c'
 *
-*  Contains:
+* Contains:
 *
 
  - Curve glyph drawing subroutines
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp);
   void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size);
@@ -33,17 +33,17 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "curve.h"
 
-/*
-*  void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp)
-*
-*  Usage: draw polyhedra glyph
-*
-*  cairo_t * to : the cairo drawing context to use for the draw
-*  double x     : x position
-*  double y     : y position
-*  double size  : glyph size
-*  double step  : number of points
-*  double initp : starting position
+/*!
+  \fn void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp)
+
+  \brief draw polyhedra glyph
+
+  \param to the cairo drawing context to use for the draw
+  \param x x position
+  \param y y position
+  \param size glyph size
+  \param step number of points
+  \param initp starting position
 */
 void draw_poly (cairo_t * to, double x, double y, double size, double step, double initp)
 {
@@ -65,17 +65,17 @@ void draw_poly (cairo_t * to, double x, double y, double size, double step, doub
   }
 }
 
-/*
-*  void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size)
-*
-*  Usage: draw glyph at (x,y)
-*
-*  cairo_t * in   : the cairo drawing context to use for the draw
-*  int theglyph   : the type of glyph
-*  double x       : x position
-*  double y       : y position
-*  ColRGBA gcolor : the glyph color
-*  double size    : the glyph size
+/*!
+  \fn void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size)
+
+  \brief draw glyph at (x,y)
+
+  \param in the cairo drawing context to use for the draw
+  \param theglyph the type of glyph
+  \param x x position
+  \param y y position
+  \param gcolor the glyph color
+  \param size the glyph size
 */
 void draw_glyph (cairo_t * in, int theglyph, double x, double y, ColRGBA gcolor, double size)
 {

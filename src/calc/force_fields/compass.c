@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'compass.c'
 *
-*  Contains:
+* Contains:
 *
 
   Compass force field, , data from taken from:

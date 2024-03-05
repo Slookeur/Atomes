@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'pcff.c'
 *
-*  Contains:
+* Contains:
 *
 
   PCFF force field, data from taken from:

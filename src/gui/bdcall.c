@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'bdcall.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The callbacks for the bond properties calculation dialog
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int * save_color_map (glwin * view);
 
@@ -37,9 +37,9 @@ If not, see <https://www.gnu.org/licenses/> */
   void update_glwin_after_bonds (int bonding, int * colm);
   void coordination_info (int sp, double sac, double ssac[active_project -> nspec]);
   void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa);
-  void env_info (int sp, int totgsa, int numgsa[totgsa], int listgsa[totgsa]);
+  void env_info (int sp, int totgsa, int numgsa[totgsa]);
   void update_angle_view (struct project * this_proj);
-  void envout_ (int * sid, int * totgsa, int numgsa[* totgsa], int listegsa[* totgsa]);
+  void envout_ (int * sid, int * totgsa, int numgsa[* totgsa]);
 
   G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data);
 
@@ -59,12 +59,12 @@ extern G_MODULE_EXPORT void set_color_map (GtkWidget * widg, gpointer data);
 extern void clean_coord_window (struct project * this_proj);
 extern G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data);
 
-/*
-*  int * save_color_map (glwin * view)
-*
-*  Usage:
-*
-*  glwin * view :
+/*!
+  \fn int * save_color_map (glwin * view)
+
+  \brief
+
+  \param view
 */
 int * save_color_map (glwin * view)
 {
@@ -74,13 +74,13 @@ int * save_color_map (glwin * view)
   return colm;
 }
 
-/*
-*  void restore_color_map (glwin * view, int * colm)
-*
-*  Usage:
-*
-*  glwin * view :
-*  int * colm   :
+/*!
+  \fn void restore_color_map (glwin * view, int * colm)
+
+  \brief
+
+  \param view
+  \param colm
 */
 void restore_color_map (glwin * view, int * colm)
 {
@@ -106,13 +106,13 @@ void restore_color_map (glwin * view, int * colm)
 #endif
 }
 
-/*
-*  void recup_dmin_dmax_ (double * min, double * max)
-*
-*  Usage:
-*
-*  double * min :
-*  double * max :
+/*!
+  \fn void recup_dmin_dmax_ (double * min, double * max)
+
+  \brief
+
+  \param min
+  \param max
 */
 void recup_dmin_dmax_ (double * min, double * max)
 {
@@ -120,10 +120,10 @@ void recup_dmin_dmax_ (double * min, double * max)
   active_project -> max[BD] = * max;
 }
 
-/*
-*  void initbd ()
-*
-*  Usage:
+/*!
+  \fn void initbd ()
+
+  \brief
 */
 void initbd ()
 {
@@ -144,10 +144,10 @@ void initbd ()
   active_project -> initok[BD] = TRUE;
 }
 
-/*
-*  void initang ()
-*
-*  Usage:
+/*!
+  \fn void initang ()
+
+  \brief
 */
 void initang ()
 {
@@ -188,13 +188,13 @@ void initang ()
   active_project -> initok[AN] = TRUE;
 }
 
-/*
-*  void initcutoffs (chemical_data * chem, int species)
-*
-*  Usage:
-*
-*  chemical_data * chem :
-*  int species          :
+/*!
+  \fn void initcutoffs (chemical_data * chem, int species)
+
+  \brief
+
+  \param chem
+  \param species
 */
 void initcutoffs (chemical_data * chem, int species)
 {
@@ -227,12 +227,12 @@ void initcutoffs (chemical_data * chem, int species)
   }
 }
 
-/*
-*  void cutoffsend ()
-*
-*  Usage:
-*
-*  void :
+/*!
+  \fn void cutoffsend ()
+
+  \brief
+
+  \param void
 */
 void cutoffsend ()
 {
@@ -256,12 +256,10 @@ void cutoffsend ()
   sendcuts_ (& i, & i, & active_chem -> grtotcutoff);
 }
 
-/*
-*  void prep_ogl_bonds ()
-*
-*  Usage:
-*
-*   :
+/*!
+  \fn void prep_ogl_bonds ()
+
+  \brief initialize bond pointers
 */
 void prep_ogl_bonds ()
 {
@@ -294,14 +292,14 @@ void prep_ogl_bonds ()
   for (i=0; i<2; i++) active_glwin -> adv_bonding[i] = FALSE;
 }
 
-/*
-*  gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb)
-*
-*  Usage:
-*
-*  GtkWidget * widg :
-*  int calc         :
-*  int up_ngb       :
+/*!
+  \fn gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb)
+
+  \brief compute distance matrix
+
+  \param widg the GtkWidget sending the signal, if any
+  \param calc the calculation that requires the analysis
+  \param up_ngb update neighbors information (0 = no, 1 = yes)
 */
 gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb)
 {
@@ -349,12 +347,12 @@ gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb)
   return res;
 }
 
-/*
-*  void update_ang_view (struct project * this_proj)
-*
-*  Usage:
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void update_ang_view (struct project * this_proj)
+
+  \brief
+
+  \param this_proj the target project
 */
 void update_ang_view (struct project * this_proj)
 {
@@ -377,13 +375,13 @@ void update_ang_view (struct project * this_proj)
   print_info (calculation_time(TRUE, this_proj -> calc_time[AN]), NULL, this_proj -> text_buffer[AN+OT]);
 }
 
-/*
-*  void update_glwin_after_bonds (int bonding, int * colm)
-*
-*  Usage:
-*
-*  int bonding :
-*  int * colm  :
+/*!
+  \fn void update_glwin_after_bonds (int bonding, int * colm)
+
+  \brief
+
+  \param bonding
+  \param colm
 */
 void update_glwin_after_bonds (int bonding, int * colm)
 {
@@ -456,13 +454,13 @@ void update_glwin_after_bonds (int bonding, int * colm)
   update (active_glwin);
 }
 
-/*
-*  G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
-*
-*  Usage:
-*
-*  GtkWidget * widg :
-*  gpointer data    :
+/*!
+  \fn G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
+
+  \brief compute bonding properties
+
+  \param widg the GtkWidget sending the signal, if any
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
 {
@@ -616,14 +614,14 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
 
 double bdtc;
 
-/*
-*  void coordination_info (int sp, double sac, double ssac[active_project -> nspec])
-*
-*  Usage:
-*
-*  int sp                               :
-*  double sac                           :
-*  double ssac[active_project -> nspec] :
+/*!
+  \fn void coordination_info (int sp, double sac, double ssac[active_project -> nspec])
+
+  \brief
+
+  \param sp
+  \param sac
+  \param ssac[active_project->nspec]
 */
 void coordination_info (int sp, double sac, double ssac[active_project -> nspec])
 {
@@ -708,15 +706,15 @@ void coordination_info (int sp, double sac, double ssac[active_project -> nspec]
   }
 }
 
-/*
-*  void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa)
-*
-*  Usage:
-*
-*  int * sid                            :
-*  double * sac                         :
-*  double ssac[active_project -> nspec] :
-*  double ssac[active_project -> nspec] :
+/*!
+  \fn void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa)
+
+  \brief retrieve partial geometry information from Fortran
+
+  \param sid the target chemical species
+  \param sac
+  \param ssac[active_project->nspec]
+  \param totgsa the total number of partial coordination fort the target chemical species
 */
 void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa)
 {
@@ -773,17 +771,16 @@ void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], i
   print_info (str, "bold", active_project -> text_buffer[BD+OT]);
 }*/
 
-/*
-*  void env_info (int sp, int totgsa, int numgsa[totgsa], int listgsa[totgsa])
-*
-*  Usage:
-*
-*  int sp             :
-*  int totgsa         :
-*  int numgsa[totgsa] :
-*  int numgsa[totgsa] :
+/*!
+  \fn void env_info (int sp, int totgsa, int numgsa[totgsa])
+
+  \brief output environment information for target chemical species in text buffer
+
+  \param sp the target chemcial species
+  \param totgsa the total number of partial coordination(s)
+  \param numgsa[totgsa] the number of coordination(s) by coordination type
 */
-void env_info (int sp, int totgsa, int numgsa[totgsa], int listgsa[totgsa])
+void env_info (int sp, int totgsa, int numgsa[totgsa])
 {
   int i, j, k;
   int natpg[totgsa];
@@ -855,12 +852,12 @@ void env_info (int sp, int totgsa, int numgsa[totgsa], int listgsa[totgsa])
 }
 
 
-/*
-*  void update_angle_view (struct project * this_proj)
-*
-*  Usage:
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void update_angle_view (struct project * this_proj)
+
+  \brief update angle buffer information
+
+  \param this_proj the target project
 */
 void update_angle_view (struct project * this_proj)
 {
@@ -878,20 +875,19 @@ void update_angle_view (struct project * this_proj)
   print_info ("\n\n\t between 0.0 and 180.0°\n", NULL, this_proj -> text_buffer[AN+OT]);
 }
 
-/*
-*  void envout_ (int * sid, int * totgsa, int numgsa[* totgsa], int listegsa[* totgsa])
-*
-*  Usage:
-*
-*  int * sid            :
-*  int * totgsa         :
-*  int numgsa[* totgsa] :
-*  int numgsa[* totgsa] :
+/*!
+  \fn void envout_ (int * sid, int * totgsa, int numgsa[* totgsa])
+
+  \brief retrieve environment information for target chemical species from Fortran
+
+  \param sid the target chemical speceis
+  \param totgsa the total number of partial coordination(s)
+  \param numgsa[*totgsa] the number of coordination(s) by coordination type
 */
-void envout_ (int * sid, int * totgsa, int numgsa[* totgsa], int listegsa[* totgsa])
+void envout_ (int * sid, int * totgsa, int numgsa[* totgsa])
 {
   /* Send info for OpenGL */
-  if (bonds_update) env_info (* sid, * totgsa, numgsa, listegsa);
+  if (bonds_update) env_info (* sid, * totgsa, numgsa);
 }
 
 void tetraout_ (int * sid, double eda[active_project -> nspec],

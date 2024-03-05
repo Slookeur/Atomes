@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_files.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to handle CP2K basis sets and pseudopotentials
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int cp2k_is_basis_in_database (int sp);
   int cp2k_is_pseudo_in_database (int sp);
@@ -46,14 +46,14 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern GtkWidget * cp2k_spec_combo;
 
-/*
-*  gchar * get_nth_elem (int sp, int id, int obj)
-*
-*  Usage: retrieve basis or pseudopotential name string for element from global list
-*
-*  int sp  : the chemical species
-*  int id  : the list element id of 'sp' to find
-*  int obj : 0 = basis sets, 1 = pseudopotentials
+/*!
+  \fn gchar * get_nth_elem (int sp, int id, int obj)
+
+  \brief retrieve basis or pseudopotential name string for element from global list
+
+  \param sp the chemical species
+  \param id the list element id of 'sp' to find
+  \param obj 0 = basis sets, 1 = pseudopotentials
 */
 gchar * get_nth_elem (int sp, int id, int obj)
 {
@@ -112,14 +112,14 @@ gchar * get_nth_elem (int sp, int id, int obj)
   return NULL;
 }
 
-/*
-*  gchar * get_nth_key (int sp, int id, int obj)
-*
-*  Usage: retrieve basis or pseudopotential key string for element from global list
-*
-*  int sp  : the chemical species
-*  int id  : the list element id of 'sp' to find
-*  int obj : 0 = basis sets, 1 = pseudopotentials
+/*!
+  \fn gchar * get_nth_key (int sp, int id, int obj)
+
+  \brief retrieve basis or pseudopotential key string for element from global list
+
+  \param sp the chemical species
+  \param id the list element id of 'sp' to find
+  \param obj 0 = basis sets, 1 = pseudopotentials
 */
 gchar * get_nth_key (int sp, int id, int obj)
 {
@@ -178,12 +178,12 @@ gchar * get_nth_key (int sp, int id, int obj)
   return NULL;
 }
 
-/*
-*  int cp2k_is_basis_in_database (int sp)
-*
-*  Usage: does this chemical species have basis set(s) in store ?
-*
-*  int sp : the chemical species
+/*!
+  \fn int cp2k_is_basis_in_database (int sp)
+
+  \brief does this chemical species have basis set(s) in store ?
+
+  \param sp the chemical species
 */
 int cp2k_is_basis_in_database (int sp)
 {
@@ -203,12 +203,12 @@ int cp2k_is_basis_in_database (int sp)
   return -1;
 }
 
-/*
-*  int cp2k_is_pseudo_in_database (int sp)
-*
-*  Usage: does this chemical species have pseudopotential(s) in store ?
-*
-*  int sp : the chemical species
+/*!
+  \fn int cp2k_is_pseudo_in_database (int sp)
+
+  \brief does this chemical species have pseudopotential(s) in store ?
+
+  \param sp the chemical species
 */
 int cp2k_is_pseudo_in_database (int sp)
 {
@@ -220,15 +220,15 @@ int cp2k_is_pseudo_in_database (int sp)
   return -1;
 }
 
-/*
-*  int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, char * bp_elem[n_basis_pseudo])
-*
-*  Usage: find matching chemical element in basis / pseudo database
-*
-*  int sp                         : the chemical species
-*  int * sp_id                    : the list of entries to save
-*  int n_basis_pseudo             : the number of element(s) to check
-*  char * bp_elem[n_basis_pseudo] : the string list to check
+/*!
+  \fn int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, char * bp_elem[n_basis_pseudo])
+
+  \brief find matching chemical element in basis / pseudo database
+
+  \param sp the chemical species
+  \param sp_id the list of entries to save
+  \param n_basis_pseudo the number of element(s) to check
+  \param bp_elem[n_basis_pseudo] the string list to check
 */
 int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, char * bp_elem[n_basis_pseudo])
 {
@@ -245,13 +245,13 @@ int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, cha
   return j;
 }
 
-/*
-*  G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data)
-*
-*  Usage: change basis or pseudopotential
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data)
+
+  \brief change basis or pseudopotential
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data)
 {
@@ -270,13 +270,13 @@ G_MODULE_EXPORT void changed_basis_pseudo_box (GtkComboBox * box, gpointer data)
   }
 }
 
-/*
-*  GtkWidget * prepare_basis_combo (int sp, int obj)
-*
-*  Usage: prepare basis set / pseudopotential combo box
-*
-*  int sp  : the chemical species
-*  int obj : 0 = basis, 1 = pseudopotentials
+/*!
+  \fn GtkWidget * prepare_basis_combo (int sp, int obj)
+
+  \brief prepare basis set / pseudopotential combo box
+
+  \param sp the chemical species
+  \param obj 0 = basis, 1 = pseudopotentials
 */
 GtkWidget * prepare_basis_combo (int sp, int obj)
 {

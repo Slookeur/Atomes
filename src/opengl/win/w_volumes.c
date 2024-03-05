@@ -14,14 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_volumes.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the 'Volumes' window
  - The subroutines to compute system / fragment / molecular volumes
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   double cap_volume (double ht, double dh);
   double get_sphere_caps_volume (double dab, double rad, double rbd);
@@ -64,12 +64,12 @@ If not, see <https://www.gnu.org/licenses/> */
 extern void center_this_molecule (glwin * view);
 extern double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t cpos, double paral[3][3], ColRGBA col, double slab_alpha);
 
-/*
-*  void clean_volumes_data (glwin * view)
-*
-*  Usage: clean volume data
-*
-*  glwin * view : the target glwin
+/*!
+  \fn void clean_volumes_data (glwin * view)
+
+  \brief clean volume data
+
+  \param view the target glwin
 */
 void clean_volumes_data (glwin * view)
 {
@@ -119,27 +119,27 @@ void clean_volumes_data (glwin * view)
   re_create_md_shaders (1, shaders, get_project_by_id(view -> proj));
 }
 
-/*
-*  double cap_volume (double ht, double dh)
-*
-*  Usage: compute cap volume
-*
-*  double ht : cap height
-*  double dh : sphere radius
+/*!
+  \fn double cap_volume (double ht, double dh)
+
+  \brief compute cap volume
+
+  \param ht cap height
+  \param dh sphere radius
 */
 double cap_volume (double ht, double dh)
 {
   return (pi/3.0)*ht*ht*(3*dh-ht);
 }
 
-/*
-*  double get_sphere_caps_volume (double dab, double rad, double rbd)
-*
-*  Usage: compute sphere cap volume
-*
-*  double dab : distance between the center of the 2 spheres
-*  double rad : sphere a radius
-*  double rbd : sphere b radius
+/*!
+  \fn double get_sphere_caps_volume (double dab, double rad, double rbd)
+
+  \brief compute sphere cap volume
+
+  \param dab distance between the center of the 2 spheres
+  \param rad sphere a radius
+  \param rbd sphere b radius
 */
 double get_sphere_caps_volume (double dab, double rad, double rbd)
 {
@@ -154,28 +154,28 @@ double get_sphere_caps_volume (double dab, double rad, double rbd)
   return cap_volume (h1, rma) + cap_volume (h2, rmi);
 }
 
-/*
-*  double sphere_volume (double rad)
-*
-*  Usage: compute sphere volume
-*
-*  double rad : sphere radius
+/*!
+  \fn double sphere_volume (double rad)
+
+  \brief compute sphere volume
+
+  \param rad sphere radius
 */
 double sphere_volume (double rad)
 {
   return ((4.0*pi)/3.0)*rad*rad*rad;
 }
 
-/*
-*  double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, int gcid)
-*
-*  Usage: compute exact atomic volume for all system or fragment or molecule
-*
-*  struct project * this_proj : the target project
-*  int rid                    : the type of atomic radius(ii)
-*  int sid                    : the MD step
-*  int gid                    : -1 = all system, 2 = fragment(s), 3 = molecule(s)
-*  int gcid                   : fragment or molecule id number
+/*!
+  \fn double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, int gcid)
+
+  \brief compute exact atomic volume for all system or fragment or molecule
+
+  \param this_proj the target project
+  \param rid the type of atomic radius(ii)
+  \param sid the MD step
+  \param gid -1 = all system, 2 = fragment(s), 3 = molecule(s)
+  \param gcid fragment or molecule id number
 */
 double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, int gcid)
 {
@@ -244,18 +244,18 @@ double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, 
 
 double vamin[3], vamax[3];
 
-/*
-*  double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang)
-*
-*  Usage: compute volume
-*
-*  int nats              : number of atoms
-*  struct atom * ats_vol : the list of atom(s)
-*  double baryc[3]       : barycenter of the atomic coordinates
-*  double * rvdws        : the list of atomic radius (ii)
-*  double a_ang          : x axis rotation angle
-*  double b_ang          : y axis rotation angle
-*  double c_ang          : z axis rotation angle
+/*!
+  \fn double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang)
+
+  \brief compute volume
+
+  \param nats number of atoms
+  \param ats_vol the list of atom(s)
+  \param baryc[3] barycenter of the atomic coordinates
+  \param rvdws the list of atomic radius (ii)
+  \param a_ang x axis rotation angle
+  \param b_ang y axis rotation angle
+  \param c_ang z axis rotation angle
 */
 double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang)
 {
@@ -303,16 +303,16 @@ double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], doubl
   return draw_cuboid (FALSE, VOLMS, 0, m4_identity (), vec3(0.0,0.0,0.0), paral, null, 1.0);
 }
 
-/*
-*  double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int gid)
-*
-*  Usage: find volume box parameters for object
-*
-*  struct project * this_proj : the target project
-*  int rid                    : type of radius
-*  int sid                    : the MD step
-*  int geo                    : -1 = all system, 2 = fragment(s), 3 = molecule(s)
-*  int gid                    : fragment or molecule id number
+/*!
+  \fn double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int gid)
+
+  \brief find volume box parameters for object
+
+  \param this_proj the target project
+  \param rid type of radius
+  \param sid the MD step
+  \param geo -1 = all system, 2 = fragment(s), 3 = molecule(s)
+  \param gid fragment or molecule id number
 */
 double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int gid)
 {
@@ -425,13 +425,13 @@ double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int
   return vbl;
 }
 
-/*
-*  G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
-*
-*  Usage: compute volume
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
+
+  \brief compute volume
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
 {
@@ -455,13 +455,13 @@ G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
   this_proj -> modelgl -> volumes = TRUE;
 }
 
-/*
-*  void adjust_vol_md_step (struct project * this_proj, int geo)
-*
-*  Usage: update volume value labels
-*
-*  struct project * this_proj : the target project
-*  int geo                    : 2 = fragment(s), 3 = molecule(s)
+/*!
+  \fn void adjust_vol_md_step (struct project * this_proj, int geo)
+
+  \brief update volume value labels
+
+  \param this_proj the target project
+  \param geo 2 = fragment(s), 3 = molecule(s)
 */
 void adjust_vol_md_step (struct project * this_proj, int geo)
 {
@@ -515,13 +515,13 @@ void adjust_vol_md_step (struct project * this_proj, int geo)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
-*
-*  Usage: compute fragment / molecule volume
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
+
+  \brief compute fragment / molecule volume
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
 {
@@ -571,23 +571,23 @@ G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void show_volumes (GtkCheckButton * but, gpointer data)
-*
-*  Usage: toggle show / hide volume callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_volumes (GtkCheckButton * but, gpointer data)
+
+  \brief toggle show / hide volume callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_volumes (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data)
-*
-*  Usage: toggle show / hide volume callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data)
+
+  \brief toggle show / hide volume callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data)
 #endif
@@ -605,23 +605,23 @@ G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void fm_show_volumes (GtkCheckButton * but, gpointer data)
-*
-*  Usage:  toggle show / hide fragment / molecule volume callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void fm_show_volumes (GtkCheckButton * but, gpointer data)
+
+  \brief  toggle show / hide fragment / molecule volume callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void fm_show_volumes (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
-*
-*  Usage: toggle show / hide fragment / molecule volume callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
+
+  \brief toggle show / hide fragment / molecule volume callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
 #endif
@@ -638,13 +638,13 @@ G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
   update (this_proj -> modelgl);
 }
 
-/*
-*  G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
-*
-*  Usage: change volume color
-*
-*  GtkColorChooser * colob : the GtkColorChooser sending the signal
-*  gpointer data           : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
+
+  \brief change volume color
+
+  \param colob the GtkColorChooser sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
 {
@@ -656,13 +656,13 @@ G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
   update (this_proj -> modelgl);
 }
 
-/*
-*  G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data)
-*
-*  Usage: change fragment / molecule volume color
-*
-*  GtkColorChooser * colob : the GtkColorChooser sending the signal
-*  gpointer data           : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data)
+
+  \brief change fragment / molecule volume color
+
+  \param colob the GtkColorChooser sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data)
 {
@@ -674,13 +674,13 @@ G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data
   update (this_proj -> modelgl);
 }
 
-/*
-*  G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
-*
-*  Usage: change MD step spin callback
-*
-*  GtkSpinButton * res : the GtkSpinButton sending the signal
-*  gpointer data       : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
+
+  \brief change MD step spin callback
+
+  \param res the GtkSpinButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
 {
@@ -690,15 +690,15 @@ G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
   adjust_vol_md_step (this_proj, dat -> b);
 }
 
-/*
-*  void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin * view, int geo)
-*
-*  Usage: add fragment / molecule volume data to the search tab
-*
-*  GtkWidget * vbox           : the GtkWidget sending the signal
-*  struct project * this_proj : the target project
-*  glwin * view               : the target glwin
-*  int geo                    : 2 = fragment(s), 3 = molecule(s)
+/*!
+  \fn void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin * view, int geo)
+
+  \brief add fragment / molecule volume data to the search tab
+
+  \param vbox the GtkWidget sending the signal
+  \param this_proj the target project
+  \param view the target glwin
+  \param geo 2 = fragment(s), 3 = molecule(s)
 */
 void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin * view, int geo)
 {
@@ -802,13 +802,13 @@ void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin 
   }
 }
 
-/*
-*  G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
-*
-*  Usage: update fragment / molecule search entry
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
+
+  \brief update fragment / molecule search entry
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
 {
@@ -855,13 +855,13 @@ G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
   }
 }
 
-/*
-*  GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
-*
-*  Usage: create the fragment(s) / molecule(s) search widget
-*
-*  struct project * this_proj : the target project
-*  int g                      : 2 = fragment(s), 3 = molecule(s)
+/*!
+  \fn GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
+
+  \brief create the fragment(s) / molecule(s) search widget
+
+  \param this_proj the target project
+  \param g 2 = fragment(s), 3 = molecule(s)
 */
 GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
 {
@@ -888,13 +888,13 @@ GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
   return frag_mol_search;
 }
 
-/*
-*  GtkWidget * frag_mol_volume_tab (glwin * view, int geo)
-*
-*  Usage: create the fragment(s) / molecule(s) tab
-*
-*  glwin * view : the target glwin
-*  int geo      : 2 = fragment(s), 3 = molecule(s)
+/*!
+  \fn GtkWidget * frag_mol_volume_tab (glwin * view, int geo)
+
+  \brief create the fragment(s) / molecule(s) tab
+
+  \param view the target glwin
+  \param geo 2 = fragment(s), 3 = molecule(s)
 */
 GtkWidget * frag_mol_volume_tab (glwin * view, int geo)
 {
@@ -979,13 +979,13 @@ GtkWidget * frag_mol_volume_tab (glwin * view, int geo)
   return vbox;
 }
 
-/*
-*  G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
-*
-*  Usage: change angular precision
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
+
+  \brief change angular precision
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
 {
@@ -1022,12 +1022,12 @@ G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
   }
 }
 
-/*
-*  GtkWidget * vol_model_tab (glwin * view)
-*
-*  Usage: create the 'Model' volume tab
-*
-*  glwin * view : the target glwin
+/*!
+  \fn GtkWidget * vol_model_tab (glwin * view)
+
+  \brief create the 'Model' volume tab
+
+  \param view the target glwin
 */
 GtkWidget * vol_model_tab (glwin * view)
 {
@@ -1111,13 +1111,13 @@ GtkWidget * vol_model_tab (glwin * view)
   return vbox;
 }
 
-/*
-*  G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data)
-*
-*  Usage: create the 'Volumes' window callback
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data)
+
+  \brief create the 'Volumes' window callback
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data)
 {

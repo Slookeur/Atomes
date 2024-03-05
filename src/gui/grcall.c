@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'grcall.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The callbacks for the g(r)/g(k) calculation dialog
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int recup_data_ (int * cd, int * rd);
 
@@ -47,13 +47,13 @@ If not, see <https://www.gnu.org/licenses/> */
 
 int fitc = 0;
 
-/*
-*  void initgr (int r)
-*
-*  Usage: initialize the curve widgets for the g(r)/g(k)
-*
-*  int r : GR = real space, GK = FFT
-*  int s :
+/*!
+  \fn void initgr (int r)
+
+  \brief initialize the curve widgets for the g(r)/g(k)
+
+  \param r GR = real space, GK = FFT
+  \param s
 */
 void initgr (int r)
 {
@@ -110,13 +110,13 @@ void initgr (int r)
   active_project -> initok[r] = TRUE;
 }
 
-/*
-*  void update_rdf_view (struct project * this_proj, int rdf)
-*
-*  Usage: update the project text view for the g(r)/g(k) calculation
-*
-*  struct project * this_proj : the target project
-*  int rdf                    : the calculation GR / GK
+/*!
+  \fn void update_rdf_view (struct project * this_proj, int rdf)
+
+  \brief update the project text view for the g(r)/g(k) calculation
+
+  \param this_proj the target project
+  \param rdf the calculation GR / GK
 */
 void update_rdf_view (struct project * this_proj, int rdf)
 {
@@ -181,13 +181,13 @@ void update_rdf_view (struct project * this_proj, int rdf)
   print_info (calculation_time(TRUE, this_proj -> calc_time[rdf]), NULL, this_proj -> text_buffer[rdf+OT]);
 }
 
-/*
-*  G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
-*
-*  Usage: compute g(r)
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
+
+  \brief compute g(r)
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
 {
@@ -216,14 +216,14 @@ G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
   for (i=0; i<4; i=i+3) update_after_calc (i);
 }
 
-/*
-*  void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
-*
-*  Usage: bond cutoff from Fortran90
-*
-*  int * nc                 : number of species
-*  double * totc            : total cutoff
-*  double partc[* nc][* nc] : partials cutoff
+/*!
+  \fn void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
+
+  \brief bond cutoff from Fortran90
+
+  \param nc number of species
+  \param totc total cutoff
+  \param nc] partials cutoff
 */
 void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
 {
@@ -241,23 +241,23 @@ void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void on_cutcheck_toggled (GtkCheckButton * but, gpointer data)
-*
-*  Usage: Fitting bond cutoff or data ?
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_cutcheck_toggled (GtkCheckButton * but, gpointer data)
+
+  \brief Fitting bond cutoff or data ?
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_cutcheck_toggled (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * Button)
-*
-*  Usage: Fitting bond cutoff or data ?
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * Button)
+
+  \brief Fitting bond cutoff or data ?
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * but, gpointer data)
 #endif
@@ -278,13 +278,13 @@ G_MODULE_EXPORT void on_cutcheck_toggled (GtkToggleButton * but, gpointer data)
   }
 }
 
-/*
-*  int recup_data_ (int * cd, int * rd)
-*
-*  Usage: Sending data back to Fortran90
-*
-*  int * cd : the curve id
-*  int * rd : the analysis id
+/*!
+  \fn int recup_data_ (int * cd, int * rd)
+
+  \brief Sending data back to Fortran90
+
+  \param cd the curve id
+  \param rd the analysis id
 */
 int recup_data_ (int * cd, int * rd)
 {
@@ -306,13 +306,13 @@ int recup_data_ (int * cd, int * rd)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void on_calc_gq_released (GtkWidget * widg, gpointer data)
-*
-*  Usage: compute g(k)
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_calc_gq_released (GtkWidget * widg, gpointer data)
+
+  \brief compute g(k)
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_gq_released (GtkWidget * widg, gpointer data)
 {

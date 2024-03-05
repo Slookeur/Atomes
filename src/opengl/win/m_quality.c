@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_quality.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the 'OengGL -> Quality' submenu
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void set_quality (int q, glwin * view);
 
@@ -40,13 +40,13 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "glwindow.h"
 #include "glview.h"
 
-/*
-*  void set_quality (int q, glwin * view)
-*
-*  Usage: set OpenGL quality
-*
-*  int q        : new OpenGL quality
-*  glwin * view : the target glwin
+/*!
+  \fn void set_quality (int q, glwin * view)
+
+  \brief set OpenGL quality
+
+  \param q new OpenGL quality
+  \param view the target glwin
 */
 void set_quality (int q, glwin * view)
 {
@@ -60,13 +60,13 @@ void set_quality (int q, glwin * view)
 #endif
 }
 
-/*
-*  G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
-*
-*  Usage: set quality spin button callback
-*
-*  GtkSpinButton * res : the GtkSpinButton sending the signal
-*  gpointer data       : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
+
+  \brief set quality spin button callback
+
+  \param res the GtkSpinButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
 {
@@ -75,13 +75,13 @@ G_MODULE_EXPORT void set_quality_spin (GtkSpinButton * res, gpointer data)
   update_entry_int (GTK_ENTRY(res), view -> anim -> last -> img -> quality);
 }
 
-/*
-*  G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
-*
-*  Usage: adjust OpenGL quality - creating the dialog
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
+
+  \brief adjust OpenGL quality - creating the dialog
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 {
@@ -106,13 +106,13 @@ G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
-/*
-*  GtkWidget * menu_quality (glwin * view, int id)
-*
-*  Usage:  create the 'OpenGL -> Quality' menu item - GTK3
-*
-*  glwin * view : the target glwin
-*  int id       : main app (0) or popup (1)
+/*!
+  \fn GtkWidget * menu_quality (glwin * view, int id)
+
+  \brief  create the 'OpenGL -> Quality' menu item - GTK3
+
+  \param view the target glwin
+  \param id main app (0) or popup (1)
 */
 GtkWidget * menu_quality (glwin * view, int id)
 {
@@ -134,27 +134,27 @@ GtkWidget * menu_quality (glwin * view, int id)
   return menuq;
 }
 #else
-/*
-*  G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: quality callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief quality callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_window_quality (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   window_quality (NULL, data);
 }
 
-/*
-*  GMenu * menu_quality (glwin * view, int popm)
-*
-*  Usage: create the 'OpenGL -> Quality' menu item - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_quality (glwin * view, int popm)
+
+  \brief create the 'OpenGL -> Quality' menu item - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_quality (glwin * view, int popm)
 {

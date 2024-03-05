@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_rep.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the 'View -> Representation' submenu
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
   G_MODULE_EXPORT gboolean on_rep_delete (GtkWindow * widg, gpointer data);
@@ -66,12 +66,12 @@ extern G_MODULE_EXPORT void set_full_screen (GtkWidget * widg, gpointer data);
 
 gchar * text_reps[OGL_REPS] = {"Orthographic", "Perspective"};
 
-/*
-*  void update_labels (glwin * view)
-*
-*  Usage: update labels (on representation data update)
-*
-*  glwin * view : the target glwin
+/*!
+  \fn void update_labels (glwin * view)
+
+  \brief update labels (on representation data update)
+
+  \param view the target glwin
 */
 void update_labels (glwin * view)
 {
@@ -81,13 +81,13 @@ void update_labels (glwin * view)
   if (view -> anim -> last -> img -> labels_scale[3]) view -> create_shaders[MEASU] = TRUE;
 }
 
-/*
-*  void camera_has_changed (gdouble value, gpointer data)
-*
-*  Usage: update camera data
-*
-*  gdouble value : the new value
-*  gpointer data : the associated data pointer
+/*!
+  \fn void camera_has_changed (gdouble value, gpointer data)
+
+  \brief update camera data
+
+  \param value the new value
+  \param data the associated data pointer
 */
 void camera_has_changed (gdouble value, gpointer data)
 {
@@ -151,13 +151,13 @@ void camera_has_changed (gdouble value, gpointer data)
   update (this_proj -> modelgl);
 }
 
-/*
-*  G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
-*
-*  Usage: reset view callback
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
+
+  \brief reset view callback
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
 {
@@ -171,24 +171,24 @@ G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void to_reset_view (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: reset view callback - GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_reset_view (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief reset view callback - GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_reset_view (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data)
-*
-*  Usage: reset view callback - GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data)
+
+  \brief reset view callback - GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data)
 #endif
@@ -196,15 +196,15 @@ G_MODULE_EXPORT void to_reset_view (GtkWidget * widg, gpointer data)
   reset_view (NULL, data);
 }
 
-/*
-*  G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
-*
-*  Usage: update camera data callback - scroll callback
-*
-*  GtkRange * range     : the GtkRange sending the signal
-*  GtkScrollType scroll : the associated scroll type
-*  gdouble value        : the range value
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
+
+  \brief update camera data callback - scroll callback
+
+  \param range the GtkRange sending the signal
+  \param scroll the associated scroll type
+  \param value the range value
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -212,26 +212,26 @@ G_MODULE_EXPORT gboolean scroll_set_camera (GtkRange * range, GtkScrollType scro
   return FALSE;
 }
 
-/*
-*  G_MODULE_EXPORT void set_camera (GtkRange * range, gpointer data)
-*
-*  Usage: update camera data callback - range callback
-*
-*  GtkRange * range : the GtkRange sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_camera (GtkRange * range, gpointer data)
+
+  \brief update camera data callback - range callback
+
+  \param range the GtkRange sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_camera (GtkRange * range, gpointer data)
 {
   camera_has_changed (gtk_range_get_value (range), data);
 }
 
-/*
-*  G_MODULE_EXPORT void set_camera_spin (GtkSpinButton * res, gpointer data)
-*
-*  Usage: update camera data callback - spin button
-*
-*  GtkSpinButton * res : the GtkSpinButton sending the signal
-*  gpointer data       : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_camera_spin (GtkSpinButton * res, gpointer data)
+
+  \brief update camera data callback - spin button
+
+  \param res the GtkSpinButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_camera_spin (GtkSpinButton * res, gpointer data)
 {
@@ -239,24 +239,24 @@ G_MODULE_EXPORT void set_camera_spin (GtkSpinButton * res, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT gboolean on_rep_delete (GtkWindow * widg, gpointer data)
-*
-*  Usage: representation window delete event - GTK4
-*
-*  GtkWindow * widg :
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean on_rep_delete (GtkWindow * widg, gpointer data)
+
+  \brief representation window delete event - GTK4
+
+  \param widg
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_rep_delete (GtkWindow * widg, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT gboolean on_rep_delete (GtkWidget * widg, GdkEvent * event, gpointer data)
-*
-*  Usage: representation window delete event - GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event : the GdkEvent triggering the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean on_rep_delete (GtkWidget * widg, GdkEvent * event, gpointer data)
+
+  \brief representation window delete event - GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param event the GdkEvent triggering the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean on_rep_delete (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -271,13 +271,13 @@ G_MODULE_EXPORT gboolean on_rep_delete (GtkWidget * widg, GdkEvent * event, gpoi
   return TRUE;
 }
 
-/*
-*  G_MODULE_EXPORT void representation_advanced (GtkWidget * widg, gpointer data)
-*
-*  Usage: open advanced representation dialog
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void representation_advanced (GtkWidget * widg, gpointer data)
+
+  \brief open advanced representation dialog
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void representation_advanced (GtkWidget * widg, gpointer data)
 {
@@ -349,13 +349,13 @@ G_MODULE_EXPORT void representation_advanced (GtkWidget * widg, gpointer data)
   show_the_widgets (arep);
 }
 
-/*
-*  G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
-*
-*  Usage: change representation callback - GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
+
+  \brief change representation callback - GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
 {
@@ -406,13 +406,13 @@ G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
-/*
-*  GtkWidget * menu_rep (glwin * view, int id)
-*
-*  Usage: create the 'View' submenu - GTK3
-*
-*  glwin * view : the target glwin
-*  int id       : main app (0) or popup (1)
+/*!
+  \fn GtkWidget * menu_rep (glwin * view, int id)
+
+  \brief create the 'View' submenu - GTK3
+
+  \param view the target glwin
+  \param id main app (0) or popup (1)
 */
 GtkWidget * menu_rep (glwin * view, int id)
 {
@@ -437,14 +437,14 @@ GtkWidget * menu_rep (glwin * view, int id)
   return menur;
 }
 #else
-/*
-*  G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: change representation radio items callback - GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief change representation radio items callback - GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -481,27 +481,27 @@ G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parame
   }
 }
 
-/*
-*  G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: change representation callback - GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief change representation callback - GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   representation_advanced (NULL, data);
 }
 
-/*
-*  GMenu * menu_rep (glwin * view, int popm)
-*
-*  Usage: create 'View -> Representation' submenu items - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_rep (glwin * view, int popm)
+
+  \brief create 'View -> Representation' submenu items - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_rep (glwin * view, int popm)
 {
@@ -516,27 +516,27 @@ GMenu * menu_rep (glwin * view, int popm)
   return menu;
 }
 
-/*
-*  G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: center molecule callback - GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief center molecule callback - GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
   center_this_molecule (data);
 }
 
-/*
-*  GMenu * menu_reset (glwin * view, int popm)
-*
-*  Usage: create the reset menu items - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_reset (glwin * view, int popm)
+
+  \brief create the reset menu items - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_reset (glwin * view, int popm)
 {
@@ -546,13 +546,13 @@ GMenu * menu_reset (glwin * view, int popm)
   return menu;
 }
 
-/*
-*  GMenu * menu_fullscreen (glwin * view, int popm)
-*
-*  Usage: create the 'Fullscreen' menu item - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_fullscreen (glwin * view, int popm)
+
+  \brief create the 'Fullscreen' menu item - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_fullscreen (glwin * view, int popm)
 {
@@ -561,13 +561,13 @@ GMenu * menu_fullscreen (glwin * view, int popm)
   return menu;
 }
 
-/*
-*  GMenu * menu_view (glwin * view, int popm)
-*
-*  Usage: create the 'View' submenu - GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_view (glwin * view, int popm)
+
+  \brief create the 'View' submenu - GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_view (glwin * view, int popm)
 {

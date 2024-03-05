@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'ogl_text.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to prepare the text OpenGL rendering
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int * paint_bitmap (vec4_t color, GLfloat a, int cw, int ch, unsigned char * buff);
 
@@ -70,14 +70,14 @@ const int OUTLINE_BRUSH[2*OUTLINE_WIDTH+1][2*OUTLINE_WIDTH+1]
    { 30, 65,  85,  100,  85, 65,  30 },
    { 10, 30,  45,  50,  45,  30,  10 }};
 
-/*
-*  static void normalize_text_size (GLenum texture,  int * width, int * height)
-*
-*  Usage: normalize the text size
-*
-*  GLenum texture : the texture type
-*  int * width    : image width
-*  int * height   : image height
+/*!
+  \fn static void normalize_text_size (GLenum texture,  int * width, int * height)
+
+  \brief normalize the text size
+
+  \param texture the texture type
+  \param width image width
+  \param height image height
 */
 static void normalize_text_size (GLenum texture,  int * width, int * height)
 {
@@ -95,16 +95,16 @@ static void normalize_text_size (GLenum texture,  int * width, int * height)
   }
 }
 
-/*
-*  int * paint_bitmap (vec4_t color, GLfloat a, int cw, int ch, unsigned char * buff)
-*
-*  Usage: paint bitmap data using color
-*
-*  vec4_t color         : the color
-*  GLfloat a            : opacity
-*  int cw               : width
-*  int ch               : height
-*  unsigned char * buff : the data to paint
+/*!
+  \fn int * paint_bitmap (vec4_t color, GLfloat a, int cw, int ch, unsigned char * buff)
+
+  \brief paint bitmap data using color
+
+  \param color the color
+  \param a opacity
+  \param cw width
+  \param ch height
+  \param buff the data to paint
 */
 int * paint_bitmap (vec4_t color, GLfloat a, int cw, int ch, unsigned char * buff)
 {
@@ -163,14 +163,14 @@ int * paint_bitmap (vec4_t color, GLfloat a, int cw, int ch, unsigned char * buf
 
 gboolean render_format;
 
-/*
-*  object_3d * create_string_texture (int cwidth, int cheight, int * pixels)
-*
-*  Usage: OpenGL 3D string object rendering
-*
-*  int cwidth   : width
-*  int cheight  : height
-*  int * pixels : the data to render
+/*!
+  \fn object_3d * create_string_texture (int cwidth, int cheight, int * pixels)
+
+  \brief OpenGL 3D string object rendering
+
+  \param cwidth width
+  \param cheight height
+  \param pixels the data to render
 */
 object_3d * create_string_texture (int cwidth, int cheight, int * pixels)
 {
@@ -277,15 +277,15 @@ object_3d * create_string_texture (int cwidth, int cheight, int * pixels)
   return new_string;
 }
 
-/*
-*  object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, struct screen_string * this_string)
-*
-*  Usage: OpenGL 3D pango layout object rendering
-*
-*  PangoLayout * layout               : the Pango layout
-*  GLenum texture                     : the OpenGL texture type
-*  int id                             : the label id
-*  struct screen_string * this_string : the screen string
+/*!
+  \fn object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, struct screen_string * this_string)
+
+  \brief OpenGL 3D pango layout object rendering
+
+  \param layout the Pango layout
+  \param texture the OpenGL texture type
+  \param id the label id
+  \param this_string the screen string
 */
 object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, struct screen_string * this_string)
 {
@@ -381,12 +381,12 @@ object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id
   return new_string;
 }
 
-/*
-*  ColRGBA * opposite_color (ColRGBA col)
-*
-*  Usage: compute the opposite color
-*
-*  ColRGBA col : input color
+/*!
+  \fn ColRGBA * opposite_color (ColRGBA col)
+
+  \brief compute the opposite color
+
+  \param col input color
 */
 ColRGBA * opposite_color (ColRGBA col)
 {
@@ -398,14 +398,14 @@ ColRGBA * opposite_color (ColRGBA col)
   return ocol;
 }
 
-/*
-*  void render_string (int glsl, int id, struct screen_string * this_string)
-*
-*  Usage: render a screen string
-*
-*  int glsl                           : the shader id
-*  int id                             : the label id
-*  struct screen_string * this_string : the screen string to render
+/*!
+  \fn void render_string (int glsl, int id, struct screen_string * this_string)
+
+  \brief render a screen string
+
+  \param glsl the shader id
+  \param id the label id
+  \param this_string the screen string to render
 */
 void render_string (int glsl, int id, struct screen_string * this_string)
 {
@@ -507,12 +507,12 @@ void render_string (int glsl, int id, struct screen_string * this_string)
   g_object_unref (G_OBJECT(playout));
 }
 
-/*
-*  void debug_string (struct screen_string  * this_string)
-*
-*  Usage: debug screen string data
-*
-*  struct screen_string  * this_string :
+/*!
+  \fn void debug_string (struct screen_string  * this_string)
+
+  \brief debug screen string data
+
+  \param this_string
 */
 void debug_string (struct screen_string  * this_string)
 {
@@ -530,13 +530,13 @@ void debug_string (struct screen_string  * this_string)
   g_debug ("STRING:: show :: %f",  this_string -> shift[3]);
 }
 
-/*
-*  void render_all_strings (int glsl, int id)
-*
-*  Usage: render all string to be rendered for a label list
-*
-*  int glsl : shader id
-*  int id   : label id
+/*!
+  \fn void render_all_strings (int glsl, int id)
+
+  \brief render all string to be rendered for a label list
+
+  \param glsl shader id
+  \param id label id
 */
 void render_all_strings (int glsl, int id)
 {
@@ -552,13 +552,13 @@ void render_all_strings (int glsl, int id)
   }
 }
 
-/*
-*  struct screen_string * was_not_rendered_already (char * word, struct screen_string * list)
-*
-*  Usage: check if a string was not already rendered and the corresponding screen string created
-*
-*  char * word                 : the string to render
-*  struct screen_string * list : the screen string list
+/*!
+  \fn struct screen_string * was_not_rendered_already (char * word, struct screen_string * list)
+
+  \brief check if a string was not already rendered and the corresponding screen string created
+
+  \param word the string to render
+  \param list the screen string list
 */
 struct screen_string * was_not_rendered_already (char * word, struct screen_string * list)
 {
@@ -579,16 +579,16 @@ struct screen_string * was_not_rendered_already (char * word, struct screen_stri
   return NULL;
 }
 
-/*
-*  void add_string_instance (struct screen_string * string, vec3_t pos, struct atom * at, struct atom * bt, struct atom * ct)
-*
-*  Usage: add an instance to a screen string
-*
-*  struct screen_string * string : the screen string to increase
-*  vec3_t pos                    : the position
-*  struct atom * at              : the 1st atom, if any (bond or angle measure string)
-*  struct atom * bt              : the 2nd atom, if any (bond or angle measure string)
-*  struct atom * ct              : the 3rd atom, if any (angle measure string)
+/*!
+  \fn void add_string_instance (struct screen_string * string, vec3_t pos, struct atom * at, struct atom * bt, struct atom * ct)
+
+  \brief add an instance to a screen string
+
+  \param string the screen string to increase
+  \param pos the position
+  \param at the 1st atom, if any (bond or angle measure string)
+  \param bt the 2nd atom, if any (bond or angle measure string)
+  \param ct the 3rd atom, if any (angle measure string)
 */
 void add_string_instance (struct screen_string * string, vec3_t pos, struct atom * at, struct atom * bt, struct atom * ct)
 {
@@ -630,19 +630,19 @@ void add_string_instance (struct screen_string * string, vec3_t pos, struct atom
   }
 }
 
-/*
-*  void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct))
+/*!
+  \fn void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct))
 *
 * Usage: add a screen string to the list of screen string to render
-*
-*  char * text      : the string
-*  int id           : the label id
-*  ColRGBA col      : the color
-*  vec3_t pos       : the position
-*  float lshift[3]  : label position shift on x, y and z, if any
-*  struct atom * at : the 1st atom, if any (bond or angle measure string)
-*  struct atom * bt : the 2nd atom, if any (bond or angle measure string)
-*  struct atom * ct : the 3rd atom, if any (angle measure string)
+
+  \param text the string
+  \param id the label id
+  \param col the color
+  \param pos the position
+  \param lshift[3] label position shift on x, y and z, if any
+  \param at the 1st atom, if any (bond or angle measure string)
+  \param bt the 2nd atom, if any (bond or angle measure string)
+  \param ct the 3rd atom, if any (angle measure string)
 */
 void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct)
 {
@@ -666,19 +666,19 @@ void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], 
   add_string_instance (plot -> labels_list[id] -> last, pos, at, bt, ct);
 }
 
-/*
-*  void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct)
+/*!
+  \fn void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct)
 *
 * Usage: prepare a screen string to be rendered
-*
-*  char * text      : the string
-*  int id           : the label id
-*  ColRGBA col      : the color
-*  vec3_t pos       : the position
-*  float lshift[3]  : label position shift on x, y and z, if any
-*  struct atom * at : the 1st atom, if any (bond or angle measure string)
-*  struct atom * bt : the 2nd atom, if any (bond or angle measure string)
-*  struct atom * ct : the 3rd atom, if any (angle measure string)
+
+  \param text the string
+  \param id the label id
+  \param col the color
+  \param pos the position
+  \param lshift[3] label position shift on x, y and z, if any
+  \param at the 1st atom, if any (bond or angle measure string)
+  \param bt the 2nd atom, if any (bond or angle measure string)
+  \param ct the 3rd atom, if any (angle measure string)
 */
 void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct)
 {

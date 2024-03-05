@@ -363,7 +363,7 @@ do i=1, NSP
     call partial_geo_out (i-1, k-1, NSP, GESP)
     if (k .lt. j) GA => GA%NEXT
   enddo
-  call envout (i-1, j, NGSA, LGSA)
+  call envout (i-1, j, NGSA)
   call init_menu_coordinations (1, i-1, j, LGSA)
   if (allocated(NGSA)) deallocate(NGSA)
   if (allocated(LGSA)) deallocate(LGSA)

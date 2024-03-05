@@ -14,14 +14,14 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'global.c'
 *
-*  Contains:
+* Contains:
 *
 
  - Global variables declarations
  - Convenience global subroutines
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int * allocint (int  val);
   int ** allocdint (int xal, int yal);
@@ -289,12 +289,12 @@ GdkPixbuf * RUN = NULL;
 
 // Basic utility functions
 
-/*
-*  int StringLength (char * str)
-*
-*  Usage: return the length of a string
-*
-*  char * str : string to measure
+/*!
+  \fn int StringLength (char * str)
+
+  \brief return the length of a string
+
+  \param str string to measure
 * /
 int StringLength (char * str)
 {
@@ -308,12 +308,12 @@ int StringLength (char * str)
 }
 */
 
-/*
-*  gboolean * allocbool (int  val)
-*
-*  Usage: allocate a gboolean * pointer
-*
-*  int  val : size of the pointer to allocate
+/*!
+  \fn gboolean * allocbool (int  val)
+
+  \brief allocate a gboolean * pointer
+
+  \param val size of the pointer to allocate
 */
 gboolean * allocbool (int  val)
 {
@@ -323,13 +323,13 @@ gboolean * allocbool (int  val)
   return var;
 }
 
-/*
-*  gboolean ** allocdbool (int xal, int yal)
-*
-*  Usage: allocate a gboolean ** pointer
-*
-*  int xal : 1st dimension size of the pointer to allocate
-*  int yal : 2nd dimension size of the pointer to allocate
+/*!
+  \fn gboolean ** allocdbool (int xal, int yal)
+
+  \brief allocate a gboolean ** pointer
+
+  \param xal 1st dimension size of the pointer to allocate
+  \param yal 2nd dimension size of the pointer to allocate
 */
 gboolean ** allocdbool (int xal, int yal)
 {
@@ -345,14 +345,14 @@ gboolean ** allocdbool (int xal, int yal)
   return var;
 }
 
-/*
-*  gboolean *** alloctbool (int xal, int yal, int zal)
-*
-*  Usage: allocate a gboolean *** pointer
-*
-*  int xal : 1st dimension size of the pointer to allocate
-*  int yal : 2nd dimension size of the pointer to allocate
-*  int zal : 3rd dimension size of the pointer to allocate
+/*!
+  \fn gboolean *** alloctbool (int xal, int yal, int zal)
+
+  \brief allocate a gboolean *** pointer
+
+  \param xal 1st dimension size of the pointer to allocate
+  \param yal 2nd dimension size of the pointer to allocate
+  \param zal 3rd dimension size of the pointer to allocate
 */
 gboolean *** alloctbool (int xal, int yal, int zal)
 {
@@ -368,12 +368,12 @@ gboolean *** alloctbool (int xal, int yal, int zal)
   return var;
 }
 
-/*
-*  int * allocint (int  val)
-*
-*  Usage: allocate an int * pointer
-*
-*  int val : size of the pointer to allocate
+/*!
+  \fn int * allocint (int  val)
+
+  \brief allocate an int * pointer
+
+  \param val size of the pointer to allocate
 */
 int * allocint (int  val)
 {
@@ -383,13 +383,13 @@ int * allocint (int  val)
   return var;
 }
 
-/*
-*  int ** allocdint (int xal, int yal)
-*
-*  Usage: allocate an int ** pointer
-*
-*  int xal : 1st dimension size of the pointer to allocate
-*  int yal : 2nd dimension size of the pointer to allocate
+/*!
+  \fn int ** allocdint (int xal, int yal)
+
+  \brief allocate an int ** pointer
+
+  \param xal 1st dimension size of the pointer to allocate
+  \param yal 2nd dimension size of the pointer to allocate
 */
 int ** allocdint (int xal, int yal)
 {
@@ -405,14 +405,14 @@ int ** allocdint (int xal, int yal)
   return var;
 }
 
-/*
-*  int *** alloctint (int xal, int yal, int zal)
-*
-*  Usage: allocate an int *** pointer
-*
-*  int xal : 1st dimension size of the pointer to allocate
-*  int yal : 2nd dimension size of the pointer to allocate
-*  int zal : 3rd dimension size of the pointer to allocate
+/*!
+  \fn int *** alloctint (int xal, int yal, int zal)
+
+  \brief allocate an int *** pointer
+
+  \param xal 1st dimension size of the pointer to allocate
+  \param yal 2nd dimension size of the pointer to allocate
+  \param zal 3rd dimension size of the pointer to allocate
 */
 int *** alloctint (int xal, int yal, int zal)
 {
@@ -428,15 +428,15 @@ int *** alloctint (int xal, int yal, int zal)
   return var;
 }
 
-/*
-*  int **** allocqint (int wal, int xal, int yal, int zal)
-*
-*  Usage: allocate an int **** pointer
-*
-*  int wal : 1st dimension size of the pointer to allocate
-*  int xal : 2nd dimension size of the pointer to allocate
-*  int yal : 3rd dimension size of the pointer to allocate
-*  int zal : 4th dimension size of the pointer to allocate
+/*!
+  \fn int **** allocqint (int wal, int xal, int yal, int zal)
+
+  \brief allocate an int **** pointer
+
+  \param wal 1st dimension size of the pointer to allocate
+  \param xal 2nd dimension size of the pointer to allocate
+  \param yal 3rd dimension size of the pointer to allocate
+  \param zal 4th dimension size of the pointer to allocate
 */
 int **** allocqint (int wal, int xal, int yal, int zal)
 {
@@ -452,12 +452,12 @@ int **** allocqint (int wal, int xal, int yal, int zal)
   return var;
 }
 
-/*
-*  float * allocfloat (int  val)
-*
-*  Usage: allocate a float * pointer
-*
-*  int  val : size of the pointer to allocate
+/*!
+  \fn float * allocfloat (int  val)
+
+  \brief allocate a float * pointer
+
+  \param val size of the pointer to allocate
 */
 float * allocfloat (int  val)
 {
@@ -467,13 +467,13 @@ float * allocfloat (int  val)
   return var;
 }
 
-/*
-*  float ** allocdfloat (int xal, int yal)
-*
-*  Usage: allocate a float ** pointer
-*
-*  int wal : 1st dimension size of the pointer to allocate
-*  int xal : 2nd dimension size of the pointer to allocate
+/*!
+  \fn float ** allocdfloat (int xal, int yal)
+
+  \brief allocate a float ** pointer
+
+  \param wal 1st dimension size of the pointer to allocate
+  \param xal 2nd dimension size of the pointer to allocate
 */
 float ** allocdfloat (int xal, int yal)
 {
@@ -489,14 +489,14 @@ float ** allocdfloat (int xal, int yal)
   return var;
 }
 
-/*
-*  float *** alloctfloat (int xal, int yal, int zal)
-*
-*  Usage: allocate a float *** pointer
-*
-*  int xal : 1st dimension size of the pointer to allocate
-*  int yal : 2nd dimension size of the pointer to allocate
-*  int zal : 3rd dimension size of the pointer to allocate
+/*!
+  \fn float *** alloctfloat (int xal, int yal, int zal)
+
+  \brief allocate a float *** pointer
+
+  \param xal 1st dimension size of the pointer to allocate
+  \param yal 2nd dimension size of the pointer to allocate
+  \param zal 3rd dimension size of the pointer to allocate
 */
 float *** alloctfloat (int xal, int yal, int zal)
 {
@@ -513,12 +513,12 @@ float *** alloctfloat (int xal, int yal, int zal)
 }
 
 
-/*
-*  double * allocdouble (int val)
-*
-*  Usage: allocate a double * pointer
-*
-*  int val : size of the pointer to allocate
+/*!
+  \fn double * allocdouble (int val)
+
+  \brief allocate a double * pointer
+
+  \param val size of the pointer to allocate
 */
 double * allocdouble (int val)
 {
@@ -528,13 +528,13 @@ double * allocdouble (int val)
   return var;
 }
 
-/*
-*  double ** allocddouble (int xal, int yal)
-*
-*  Usage: allocate a double ** pointer
-*
-*  int xal : 1st dimension size of the pointer to allocate
-*  int yal : 2nd dimension size of the pointer to allocate
+/*!
+  \fn double ** allocddouble (int xal, int yal)
+
+  \brief allocate a double ** pointer
+
+  \param xal 1st dimension size of the pointer to allocate
+  \param yal 2nd dimension size of the pointer to allocate
 */
 double ** allocddouble (int xal, int yal)
 {
@@ -550,14 +550,14 @@ double ** allocddouble (int xal, int yal)
   return var;
 }
 
-/*
-*  double *** alloctdouble (int xal, int yal, int zal)
-*
-*  Usage: allocate a double *** pointer
-*
-*  int xal : 1st dimension size of the pointer to allocate
-*  int yal : 2nd dimension size of the pointer to allocate
-*  int zal : 3rd dimension size of the pointer to allocate
+/*!
+  \fn double *** alloctdouble (int xal, int yal, int zal)
+
+  \brief allocate a double *** pointer
+
+  \param xal 1st dimension size of the pointer to allocate
+  \param yal 2nd dimension size of the pointer to allocate
+  \param zal 3rd dimension size of the pointer to allocate
 */
 double *** alloctdouble (int xal, int yal, int zal)
 {
@@ -573,15 +573,15 @@ double *** alloctdouble (int xal, int yal, int zal)
   return var;
 }
 
-/*
-*  double **** allocqdouble (int wal, int xal, int yal, int zal)
-*
-*  Usage: allocate a double **** pointer
-*
-*  int wal : 1st dimension size of the pointer to allocate
-*  int xal : 2nd dimension size of the pointer to allocate
-*  int yal : 3rd dimension size of the pointer to allocate
-*  int zal : 4th dimension size of the pointer to allocate
+/*!
+  \fn double **** allocqdouble (int wal, int xal, int yal, int zal)
+
+  \brief allocate a double **** pointer
+
+  \param wal 1st dimension size of the pointer to allocate
+  \param xal 2nd dimension size of the pointer to allocate
+  \param yal 3rd dimension size of the pointer to allocate
+  \param zal 4th dimension size of the pointer to allocate
 */
 double **** allocqdouble (int wal, int xal, int yal, int zal)
 {
@@ -597,13 +597,13 @@ double **** allocqdouble (int wal, int xal, int yal, int zal)
   return var;
 }
 
-/*
-*  gchar ** duplicate_strings (int num, gchar ** old_val)
-*
-*  Usage: copy a list of strings
-*
-*  int num          : number of elements in the list
-*  gchar ** old_val : the list to copy
+/*!
+  \fn gchar ** duplicate_strings (int num, gchar ** old_val)
+
+  \brief copy a list of strings
+
+  \param num number of elements in the list
+  \param old_val the list to copy
 */
 gchar ** duplicate_strings (int num, gchar ** old_val)
 {
@@ -613,13 +613,13 @@ gchar ** duplicate_strings (int num, gchar ** old_val)
   return new_val;
 }
 
-/*
-*  int * duplicate_int (int num, int * old_val)
-*
-*  Usage: copy a list of int
-*
-*  int num       : number of elements in the list
-*  int * old_val : the list to copy
+/*!
+  \fn int * duplicate_int (int num, int * old_val)
+
+  \brief copy a list of int
+
+  \param num number of elements in the list
+  \param old_val the list to copy
 */
 int * duplicate_int (int num, int * old_val)
 {
@@ -629,13 +629,13 @@ int * duplicate_int (int num, int * old_val)
   return new_val;
 }
 
-/*
-*  gboolean * duplicate_bool (int num, gboolean * old_val)
-*
-*  Usage: copy a list of gboolean
-*
-*  int num       : number of elements in the list
-*  int * old_val : the list to copy
+/*!
+  \fn gboolean * duplicate_bool (int num, gboolean * old_val)
+
+  \brief copy a list of gboolean
+
+  \param num number of elements in the list
+  \param old_val the list to copy
 */
 gboolean * duplicate_bool (int num, gboolean * old_val)
 {
@@ -645,13 +645,13 @@ gboolean * duplicate_bool (int num, gboolean * old_val)
   return new_val;
 }
 
-/*
-*  float * duplicate_float (int num, float * old_val)
-*
-*  Usage: copy a list of float
-*
-*  int num       : number of elements in the list
-*  int * old_val : the list to copy
+/*!
+  \fn float * duplicate_float (int num, float * old_val)
+
+  \brief copy a list of float
+
+  \param num number of elements in the list
+  \param old_val the list to copy
 */
 float * duplicate_float (int num, float * old_val)
 {
@@ -661,13 +661,13 @@ float * duplicate_float (int num, float * old_val)
   return new_val;
 }
 
-/*
-*  double * duplicate_double (int num, double * old_val)
-*
-*  Usage: copy a list of double
-*
-*  int num       : number of elements in the list
-*  int * old_val : the list to copy
+/*!
+  \fn double * duplicate_double (int num, double * old_val)
+
+  \brief copy a list of double
+
+  \param num number of elements in the list
+  \param old_val the list to copy
 */
 double * duplicate_double (int num, double * old_val)
 {
@@ -677,26 +677,26 @@ double * duplicate_double (int num, double * old_val)
   return new_val;
 }
 
-/*
-*  double get_calc_time (struct timespec start, struct timespec stop)
-*
-*  Usage: get calculation time in s
-*
-*  struct timespec start : the initial time
-*  struct timespec stop  : the final time
+/*!
+  \fn double get_calc_time (struct timespec start, struct timespec stop)
+
+  \brief get calculation time in s
+
+  \param start the initial time
+  \param stop the final time
 */
 double get_calc_time (struct timespec start, struct timespec stop)
 {
   return (double)(stop.tv_sec - start.tv_sec) + (double)(stop.tv_nsec - start.tv_nsec)/BILLION;
 }
 
-/*
-*  gchar * calculation_time (gboolean modelv, double ctime)
-*
-*  Usage: get calculation time, human readable
-*
-*  gboolean modelv : was an analysis performed ?
-*  double ctime    : the calculation time
+/*!
+  \fn gchar * calculation_time (gboolean modelv, double ctime)
+
+  \brief get calculation time, human readable
+
+  \param modelv was an analysis performed ?
+  \param ctime the calculation time
 */
 gchar * calculation_time (gboolean modelv, double ctime)
 {

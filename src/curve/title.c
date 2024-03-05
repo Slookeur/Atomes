@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'title.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The curve title drawing subroutines
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   const gchar * default_title (int ax, int c);
 
@@ -35,13 +35,13 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "curve.h"
 
-/*
-*  const gchar * default_title (int ax, int c)
-*
-*  Usage: default title string
-*
-*  int ax : axis
-*  int c  : curve id
+/*!
+  \fn const gchar * default_title (int ax, int c)
+
+  \brief default title string
+
+  \param ax axis
+  \param c curve id
 */
 const gchar * default_title (int ax, int c)
 {
@@ -86,15 +86,15 @@ const gchar * default_title (int ax, int c)
   }
 }
 
-/*
-*  void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
-*
-*  Usage: draw title
-*
-*  cairo_t * cr               : the cairo drawing context to use for the draw
-*  struct project * this_proj : the target project
-*  int rid                    : the calculation id
-*  int cid                    : the curve id
+/*!
+  \fn void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
+
+  \brief draw title
+
+  \param cr the cairo drawing context to use for the draw
+  \param this_proj the target project
+  \param rid the calculation id
+  \param cid the curve id
 */
 void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {

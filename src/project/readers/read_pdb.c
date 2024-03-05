@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'read_pdb.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to read PDB files
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int pdb_get_atoms_data (int linec);
   int open_pdb_file (int linec);
@@ -40,12 +40,12 @@ If not, see <https://www.gnu.org/licenses/> */
 #include <omp.h>
 #include <ctype.h>
 
-/*
-*  double get_z_from_pdb_name (char * name)
-*
-*  Usage: get Z from the PDB atom string
-*
-*  char * name : the string from the PDB file
+/*!
+  \fn double get_z_from_pdb_name (char * name)
+
+  \brief get Z from the PDB atom string
+
+  \param name the string from the PDB file
 */
 double get_z_from_pdb_name (char * name)
 {
@@ -53,12 +53,12 @@ double get_z_from_pdb_name (char * name)
   return get_z_from_periodic_table (name);
 }
 
-/*
-*  int pdb_get_atoms_data (int linec)
-*
-*  Usage: get the atomic data from the PDB file
-*
-*  int linec : Total number of lines
+/*!
+  \fn int pdb_get_atoms_data (int linec)
+
+  \brief get the atomic data from the PDB file
+
+  \param linec Total number of lines
 */
 int pdb_get_atoms_data (int linec)
 {
@@ -196,12 +196,12 @@ int pdb_get_atoms_data (int linec)
   return active_project -> natomes;
 }
 
-/*
-*  int open_pdb_file (int linec)
-*
-*  Usage: open PDB file
-*
-*  int linec : Number of lines in the file
+/*!
+  \fn int open_pdb_file (int linec)
+
+  \brief open PDB file
+
+  \param linec Number of lines in the file
 */
 int open_pdb_file (int linec)
 {

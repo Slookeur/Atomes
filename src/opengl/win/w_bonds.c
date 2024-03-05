@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_bonds.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the bond (legnth/radius) edition window(s)
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void bonds_input_win (GtkWidget * win, struct project * this_proj, int nspec, int aoc, double ** val)
 
@@ -40,13 +40,13 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern gchar * label_cutrab (struct project * this_proj, glwin * view, int id);
 
-/*
-*  G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
-*
-*  Usage: update bond parameter callback
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
+
+  \brief update bond parameter callback
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
 {
@@ -230,16 +230,16 @@ G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
   update (opengl_project -> modelgl);
 }
 
-/*
-*  void bonds_input_win (GtkWidget * win, struct project * this_proj, int nspec, int aoc, double ** val)
-*
-*  Usage: prepare bond property entry list
-*
-*  GtkWidget * win            : the GtkWidget sending the signal
-*  struct project * this_proj : the target project
-*  int npsec                  : total number of chemical species
-*  int aoc                    : atom(s) (0) or clone(s) (1)
-*  double ** val              : the list of value(s) to display
+/*!
+  \fn void bonds_input_win (GtkWidget * win, struct project * this_proj, int nspec, int aoc, double ** val)
+
+  \brief prepare bond property entry list
+
+  \param win the GtkWidget sending the signal
+  \param this_proj the target project
+  \param npsec total number of chemical species
+  \param aoc atom(s) (0) or clone(s) (1)
+  \param val the list of value(s) to display
 */
 void bonds_input_win (GtkWidget * win, struct project * this_proj, int nspec, int aoc, double ** val)
 {
@@ -294,24 +294,24 @@ void bonds_input_win (GtkWidget * win, struct project * this_proj, int nspec, in
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage:update bond parameter callback - creating the dialog GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief update bond parameter callback - creating the dialog GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
-*
-*  Usage: update bond parameter callback - creating the dialog GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
+
+  \brief update bond parameter callback - creating the dialog GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 #endif
@@ -343,24 +343,24 @@ G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: create bond(s) configuration window(s) callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief create bond(s) configuration window(s) callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void window_bonds (GtkWidget * widg, gpointer data)
-*
-*  Usage:create bond(s) configuration window(s) callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void window_bonds (GtkWidget * widg, gpointer data)
+
+  \brief create bond(s) configuration window(s) callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_bonds (GtkWidget * widg, gpointer data)
 #endif

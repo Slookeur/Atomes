@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'workinfo.c'
 *
-*  Contains:
+* Contains:
 *
 
  - Subroutines to display project related information in GtkTextBuffer
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void workinfo (struct project * this_proj, int i);
 
@@ -40,13 +40,13 @@ extern void update_msd_view (struct project * this_proj);
 extern void model_info (struct project * this_proj, GtkTextBuffer * buf);
 extern void opengl_info (struct project * this_proj, GtkTextBuffer * buf);
 
-/*
-*  void workinfo (struct project * this_proj, int i)
-*
-*  Usage: display information about a workspace menu item for a project
-*
-*  struct project * this_proj : the target project
-*  int i                      : the properties to display from the menu
+/*!
+  \fn void workinfo (struct project * this_proj, int i)
+
+  \brief display information about a workspace menu item for a project
+
+  \param this_proj the target project
+  \param i the properties to display from the menu
 */
 void workinfo (struct project * this_proj, int i)
 {

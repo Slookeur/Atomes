@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_chains.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the chain(s) tab for the advanced environments window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int get_cmin (struct project * this_proj, int step);
   int get_cmax (struct project * this_proj, int step);
@@ -44,14 +44,14 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern void rings_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
 
-/*
-*  G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
-*
-*  Usage: on select chain toggle callback
-*
-*  GtkCellRendererToggle * cell_renderer : the GtkCellRendererToggle sending the signal
-*  gchar * string_path                   : the path in the tree store
-*  gpointer data                         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
+
+  \brief on select chain toggle callback
+
+  \param cell_renderer the GtkCellRendererToggle sending the signal
+  \param string_path the path in the tree store
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 {
@@ -129,13 +129,13 @@ G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer, gc
   update (opengl_project -> modelgl);
 }
 
-/*
-*  void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
-*
-*  Usage: fill the entire chain(s) tree store
-*
-*  GtkTreeStore * store       : the GtkTreeStore to fill
-*  struct project * this_proj : the target project
+/*!
+  \fn void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
+
+  \brief fill the entire chain(s) tree store
+
+  \param store the GtkTreeStore to fill
+  \param this_proj the target project
 */
 void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
 {
@@ -204,13 +204,13 @@ void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
   }
 }
 
-/*
-*  GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
-*
-*  Usage: create the chain(s) search tree store
-*
-*  struct project * this_proj : the target project
-*  gboolean fill_this         : 1 = yes, 0 = no
+/*!
+  \fn GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
+
+  \brief create the chain(s) search tree store
+
+  \param this_proj the target project
+  \param fill_this 1 = yes, 0 = no
 */
 GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
 {
@@ -246,12 +246,12 @@ GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
   return chains_tree;
 }
 
-/*
-*  void add_this_chain_to_search_tree (struct project * this_proj)
-*
-*  Usage: add chain in the search tree based on chain length and id
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn void add_this_chain_to_search_tree (struct project * this_proj)
+
+  \brief add chain in the search tree based on chain length and id
+
+  \param this_proj the target project
 */
 void add_this_chain_to_search_tree (struct project * this_proj)
 {
@@ -538,13 +538,13 @@ void add_this_chain_to_search_tree (struct project * this_proj)
   }
 }
 
-/*
-*  int get_cmin (struct project * this_proj, int step)
-*
-*  Usage: get chain(s) min size for the MD step
-*
-*  struct project * this_proj : the target project
-*  int step                   : the MD step
+/*!
+  \fn int get_cmin (struct project * this_proj, int step)
+
+  \brief get chain(s) min size for the MD step
+
+  \param this_proj the target project
+  \param step the MD step
 */
 int get_cmin (struct project * this_proj, int step)
 {
@@ -557,13 +557,13 @@ int get_cmin (struct project * this_proj, int step)
   return j;
 }
 
-/*
-*  int get_cmax (struct project * this_proj, int step)
-*
-*  Usage: get chain(s) max size for the MD step
-*
-*  struct project * this_proj : the target project
-*  int step                   : the MD step
+/*!
+  \fn int get_cmax (struct project * this_proj, int step)
+
+  \brief get chain(s) max size for the MD step
+
+  \param this_proj the target project
+  \param step the MD step
 */
 int get_cmax (struct project * this_proj, int step)
 {
@@ -576,14 +576,14 @@ int get_cmax (struct project * this_proj, int step)
   return j;
 }
 
-/*
-*  int get_chain_size_index (struct project * this_proj, int s, int r)
-*
-*  Usage:
-*
-*  struct project * this_proj : the target project
-*  int s                      :
-*  int r                      :
+/*!
+  \fn int get_chain_size_index (struct project * this_proj, int s, int r)
+
+  \brief
+
+  \param this_proj the target project
+  \param s
+  \param r
 *
 int get_chain_size_index (struct project * this_proj, int s, int r)
 {
@@ -597,13 +597,13 @@ int get_chain_size_index (struct project * this_proj, int s, int r)
 }
 */
 
-/*
-*  G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
-*
-*  Usage: update the chain(s) search widget
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
+
+  \brief update the chain(s) search widget
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
 {
@@ -714,12 +714,12 @@ G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
   }
 }
 
-/*
-*  GtkWidget * create_chains_search (struct project * this_proj)
-*
-*  Usage: create the chain(s) search widget
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn GtkWidget * create_chains_search (struct project * this_proj)
+
+  \brief create the chain(s) search widget
+
+  \param this_proj the target project
 */
 GtkWidget * create_chains_search (struct project * this_proj)
 {
@@ -766,12 +766,12 @@ GtkWidget * create_chains_search (struct project * this_proj)
   return chains_search;
 }
 
-/*
-*  GtkWidget * chains_tab (glwin * view)
-*
-*  Usage: create the chain(s) tab for the advanced environments window
-*
-*  glwin * view : the target glwin
+/*!
+  \fn GtkWidget * chains_tab (glwin * view)
+
+  \brief create the chain(s) tab for the advanced environments window
+
+  \param view the target glwin
 */
 GtkWidget * chains_tab (glwin * view)
 {

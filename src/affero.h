@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'affero.h'
 *
-*  Contains: 
+* Contains:
 
  - The text of the Affero GPL v3 license
 

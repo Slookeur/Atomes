@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm36_cgenff.c'
 *
-*  Contains:
+* Contains:
 *
 
   CHARMM-charmm36_cgenff force field, data from taken from:

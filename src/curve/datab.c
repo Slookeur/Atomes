@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'datab.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The curve data edition widget and associated callbacks
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   G_MODULE_EXPORT gboolean on_data_button_event (GtkWidget * widget, GdkEvent * event, gpointer data);
   G_MODULE_EXPORT gboolean cancel_win (GtkWindow * win, gpointer data);
@@ -96,12 +96,12 @@ GtkTreePath * path;
 GtkTreeIter row;
 gchar * text;
 
-/*
-*  void get_tree_data (GtkWidget * tree)
-*
-*  Usage: get information on location in a GtkTreeView
-*
-*  GtkWidget * tree : the GtkTreeView
+/*!
+  \fn void get_tree_data (GtkWidget * tree)
+
+  \brief get information on location in a GtkTreeView
+
+  \param tree the GtkTreeView
 */
 void get_tree_data (GtkWidget * tree)
 {
@@ -111,13 +111,13 @@ void get_tree_data (GtkWidget * tree)
   nrows = gtk_tree_selection_count_selected_rows (sel);
 }
 
-/*
-*  void save_row (gpointer data, gpointer user_data)
-*
-*  Usage: save row data and udpate calculation result accordingly
-*
-*  gpointer data      : the path in the tree model
-*  gpointer user_data : the associated data pointer
+/*!
+  \fn void save_row (gpointer data, gpointer user_data)
+
+  \brief save row data and udpate calculation result accordingly
+
+  \param data the path in the tree model
+  \param user_data the associated data pointer
 */
 void save_row (gpointer data, gpointer user_data)
 {
@@ -132,13 +132,13 @@ void save_row (gpointer data, gpointer user_data)
   nrows = nrows + 1;
 }
 
-/*
-*  void update_first_row (gpointer data, gpointer user_data)
-*
-*  Usage: update row in the first column
-*
-*  gpointer data      : the path in the tree model
-*  gpointer user_data : the associated data pointer
+/*!
+  \fn void update_first_row (gpointer data, gpointer user_data)
+
+  \brief update row in the first column
+
+  \param data the path in the tree model
+  \param user_data the associated data pointer
 */
 void update_first_row (gpointer data, gpointer user_data)
 {
@@ -150,10 +150,10 @@ void update_first_row (gpointer data, gpointer user_data)
   }
 }
 
-/*
-*  void update_first_col ()
-*
-*  Usage: update all rows in the first column
+/*!
+  \fn void update_first_col ()
+
+  \brief update all rows in the first column
 *
 */
 void update_first_col ()
@@ -165,13 +165,13 @@ void update_first_col ()
   gtk_tree_selection_unselect_all (sel);
 }
 
-/*
-*  void add_to_last_row (gpointer data, gpointer user_data)
-*
-*  Usage: add constant to last row
-*
-*  gpointer data      : the path in the tree model
-*  gpointer user_data : the constant
+/*!
+  \fn void add_to_last_row (gpointer data, gpointer user_data)
+
+  \brief add constant to last row
+
+  \param data the path in the tree model
+  \param user_data the constant
 */
 void add_to_last_row (gpointer data, gpointer user_data)
 {
@@ -185,13 +185,13 @@ void add_to_last_row (gpointer data, gpointer user_data)
   }
 }
 
-/*
-*  void add_to_last_col (double cte, gpointer data)
-*
-*  Usage: add constant value to selected rows
-*
-*  double cte    : the constant to add
-*  gpointer data : the associated data pointer
+/*!
+  \fn void add_to_last_col (double cte, gpointer data)
+
+  \brief add constant value to selected rows
+
+  \param cte the constant to add
+  \param data the associated data pointer
 */
 void add_to_last_col (double cte, gpointer data)
 {
@@ -205,13 +205,13 @@ void add_to_last_col (double cte, gpointer data)
   gtk_tree_selection_unselect_all (sel);
 }
 
-/*
-*  void multiply_last_row (gpointer data, gpointer user_data)
-*
-*  Usage: multiply last row by constant
-*
-*  gpointer data      : the path in the tree model
-*  gpointer user_data : the constant
+/*!
+  \fn void multiply_last_row (gpointer data, gpointer user_data)
+
+  \brief multiply last row by constant
+
+  \param data the path in the tree model
+  \param user_data the constant
 */
 void multiply_last_row (gpointer data, gpointer user_data)
 {
@@ -225,13 +225,13 @@ void multiply_last_row (gpointer data, gpointer user_data)
   }
 }
 
-/*
-*  void multiply_last_col (double cte, gpointer data)
-*
-*  Usage: multiply last colum by constant value
-*
-*  double cte    : the constant value
-*  gpointer data :the associated data pointer
+/*!
+  \fn void multiply_last_col (double cte, gpointer data)
+
+  \brief multiply last colum by constant value
+
+  \param cte the constant value
+  \param data the associated data pointer
 */
 void multiply_last_col (double cte, gpointer data)
 {
@@ -245,13 +245,13 @@ void multiply_last_col (double cte, gpointer data)
   gtk_tree_selection_unselect_all (sel);
 }
 
-/*
-*  void select_row (gpointer data, gpointer user_data)
-*
-*  Usage: select row
-*
-*  gpointer data      : the path in the tree model
-*  gpointer user_data : the associated data pointer
+/*!
+  \fn void select_row (gpointer data, gpointer user_data)
+
+  \brief select row
+
+  \param data the path in the tree model
+  \param user_data the associated data pointer
 */
 void select_row (gpointer data, gpointer user_data)
 {
@@ -262,13 +262,13 @@ void select_row (gpointer data, gpointer user_data)
   }
 }
 
-/*
-*  void copy_row (gpointer data, gpointer user_data)
-*
-*  Usage: copy row
-*
-*  gpointer data      : the path in the tree model
-*  gpointer user_data : the associated data pointer
+/*!
+  \fn void copy_row (gpointer data, gpointer user_data)
+
+  \brief copy row
+
+  \param data the path in the tree model
+  \param user_data the associated data pointer
 */
 void copy_row (gpointer data, gpointer user_data)
 {
@@ -294,12 +294,12 @@ void copy_row (gpointer data, gpointer user_data)
   }
 }
 
-/*
-*  void copy_content (gpointer data)
-*
-*  Usage: copy selection
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn void copy_content (gpointer data)
+
+  \brief copy selection
+
+  \param data the associated data pointer
 */
 void copy_content (gpointer data)
 {
@@ -312,13 +312,13 @@ void copy_content (gpointer data)
   g_free (text);
 }
 
-/*
-*  void add_row (gpointer data, gpointer user_data)
-*
-*  Usage: add row
-*
-*  gpointer data      : the path in the tree model
-*  gpointer user_data : the associated data pointer
+/*!
+  \fn void add_row (gpointer data, gpointer user_data)
+
+  \brief add row
+
+  \param data the path in the tree model
+  \param user_data the associated data pointer
 */
 void add_row (gpointer data, gpointer user_data)
 {
@@ -337,13 +337,13 @@ void add_row (gpointer data, gpointer user_data)
   }
 }
 
-/*
-*  void delete_row (gpointer data, gpointer user_data)
-*
-*  Usage: delete row
-*
-*  gpointer data      : the path in the tree model
-*  gpointer user_data : the associated data pointer
+/*!
+  \fn void delete_row (gpointer data, gpointer user_data)
+
+  \brief delete row
+
+  \param data the path in the tree model
+  \param user_data the associated data pointer
 */
 void delete_row (gpointer data, gpointer user_data)
 {
@@ -354,12 +354,12 @@ void delete_row (gpointer data, gpointer user_data)
   }
 }
 
-/*
-*  void insert_cell (gpointer data)
-*
-*  Usage: insert row
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn void insert_cell (gpointer data)
+
+  \brief insert row
+
+  \param data the associated data pointer
 */
 void insert_cell (gpointer data)
 {
@@ -375,12 +375,12 @@ void insert_cell (gpointer data)
   update_first_col ();
 }
 
-/*
-*  void delete_cell (gpointer data)
-*
-*  Usage: delete row
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn void delete_cell (gpointer data)
+
+  \brief delete row
+
+  \param data the associated data pointer
 */
 void delete_cell (gpointer data)
 {
@@ -388,13 +388,13 @@ void delete_cell (gpointer data)
   update_first_col ();
 }
 
-/*
-*  G_MODULE_EXPORT void edit_cell (GtkCellRendererText * cell, gchar * path_string, gchar * new_text, gpointer user_data)
-*
-*  Usage: edit cell in the curve data edition tree model
-*
-*  GtkCellRendererText * cell : the GtkCellRendererText sending the signal
-*  gchar * path_string        : the path in the tree model
+/*!
+  \fn G_MODULE_EXPORT void edit_cell (GtkCellRendererText * cell, gchar * path_string, gchar * new_text, gpointer user_data)
+
+  \brief edit cell in the curve data edition tree model
+
+  \param cell the GtkCellRendererText sending the signal
+  \param path_string the path in the tree model
    gchar * new_text           : the string describing the new value
    gpointer data              : the associated data pointer
 */
@@ -410,13 +410,13 @@ G_MODULE_EXPORT void edit_cell (GtkCellRendererText * cell, gchar * path_string,
 
 GtkWidget * col_entry;
 
-/*
-*  G_MODULE_EXPORT void adjust_value (GtkEntry * res, gpointer data)
-*
-*  Usage: adjust constant value entry callback
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void adjust_value (GtkEntry * res, gpointer data)
+
+  \brief adjust constant value entry callback
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void adjust_value (GtkEntry * res, gpointer data)
 {
@@ -425,14 +425,14 @@ G_MODULE_EXPORT void adjust_value (GtkEntry * res, gpointer data)
   update_entry_double (res, v);
 }
 
-/*
-*  G_MODULE_EXPORT void run_add_to_column (GtkDialog * wind, gint response_id, gpointer data)
-*
-*  Usage:  add constant to column - running the dialog
-*
-*  GtkDialog * wind : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_add_to_column (GtkDialog * wind, gint response_id, gpointer data)
+
+  \brief  add constant to column - running the dialog
+
+  \param wind the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_add_to_column (GtkDialog * wind, gint response_id, gpointer data)
 {
@@ -446,12 +446,12 @@ G_MODULE_EXPORT void run_add_to_column (GtkDialog * wind, gint response_id, gpoi
   destroy_this_dialog (wind);
 }
 
-/*
-*  void add_to_column (gpointer data)
-*
-*  Usage: add constant to column - creating the dialog
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn void add_to_column (gpointer data)
+
+  \brief add constant to column - creating the dialog
+
+  \param data the associated data pointer
 */
 void add_to_column (gpointer data)
 {
@@ -478,14 +478,14 @@ void add_to_column (gpointer data)
   run_this_gtk_dialog (wind, G_CALLBACK(run_add_to_column), data);
 }
 
-/*
-*  G_MODULE_EXPORT void run_multiply_column (GtkDialog * wind, gint response_id, gpointer data)
-*
-*  Usage: multiply column by constant - running the dialog
-*
-*  GtkDialog * wind : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_multiply_column (GtkDialog * wind, gint response_id, gpointer data)
+
+  \brief multiply column by constant - running the dialog
+
+  \param wind the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_multiply_column (GtkDialog * wind, gint response_id, gpointer data)
 {
@@ -499,12 +499,12 @@ G_MODULE_EXPORT void run_multiply_column (GtkDialog * wind, gint response_id, gp
   destroy_this_dialog (wind);
 }
 
-/*
-*  void multiply_column (gpointer data)
-*
-*  Usage: multiply column by constant - creating dialog
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn void multiply_column (gpointer data)
+
+  \brief multiply column by constant - creating dialog
+
+  \param data the associated data pointer
 */
 void multiply_column (gpointer data)
 {
@@ -531,10 +531,10 @@ void multiply_column (gpointer data)
   run_this_gtk_dialog (wind, G_CALLBACK(run_multiply_column), data);
 }
 
-/*
-*  GMenu * insert_place ()
-*
-*  Usage: create the insertion submenu
+/*!
+  \fn GMenu * insert_place ()
+
+  \brief create the insertion submenu
 */
 GMenu * insert_place ()
 {
@@ -544,10 +544,10 @@ GMenu * insert_place ()
   return menu;
 }
 
-/*
-*  GMenu * insert_data ()
-*
-*  Usage: create the insert data submenu
+/*!
+  \fn GMenu * insert_data ()
+
+  \brief create the insert data submenu
 */
 GMenu * insert_data ()
 {
@@ -556,10 +556,10 @@ GMenu * insert_data ()
   return menu;
 }
 
-/*
-*  GMenu * delete_data ()
-*
-*  Usage: create the delete data submenu
+/*!
+  \fn GMenu * delete_data ()
+
+  \brief create the delete data submenu
 */
 GMenu * delete_data ()
 {
@@ -568,10 +568,10 @@ GMenu * delete_data ()
   return menu;
 }
 
-/*
-*  GMenu* cell_actions ()
-*
-*  Usage: create the cell actions submenu
+/*!
+  \fn GMenu* cell_actions ()
+
+  \brief create the cell actions submenu
 */
 GMenu* cell_actions ()
 {
@@ -582,10 +582,10 @@ GMenu* cell_actions ()
   return menu;
 }
 
-/*
-*  GMenu * cell_title ()
-*
-*  Usage: create the cell based operations subemu
+/*!
+  \fn GMenu * cell_title ()
+
+  \brief create the cell based operations subemu
 */
 GMenu * cell_title ()
 {
@@ -594,10 +594,10 @@ GMenu * cell_title ()
   return menu;
 }
 
-/*
-*  GMenu * column_actions ()
-*
-*  Usage: create the column actions submenu
+/*!
+  \fn GMenu * column_actions ()
+
+  \brief create the column actions submenu
 */
 GMenu * column_actions ()
 {
@@ -607,10 +607,10 @@ GMenu * column_actions ()
   return menu;
 }
 
-/*
-*  GMenu * column_title ()
-*
-*  Usage: create the column based operations submenu
+/*!
+  \fn GMenu * column_title ()
+
+  \brief create the column based operations submenu
 */
 GMenu * column_title ()
 {
@@ -619,10 +619,10 @@ GMenu * column_title ()
   return menu;
 }
 
-/*
-*  GMenu * data_menu ()
-*
-*  Usage: create the curve data edition popup menu elements
+/*!
+  \fn GMenu * data_menu ()
+
+  \brief create the curve data edition popup menu elements
 */
 GMenu * data_menu ()
 {
@@ -634,14 +634,14 @@ GMenu * data_menu ()
   return menu;
 }
 
-/*
-*  G_MODULE_EXPORT void data_pop_action (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: curve data edition popup menu actions callbacks
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void data_pop_action (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief curve data edition popup menu actions callbacks
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void data_pop_action (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -673,26 +673,26 @@ G_MODULE_EXPORT void data_pop_action (GSimpleAction * action, GVariant * paramet
 }
 
 #ifdef GTK4
-/*
-*  void data_popup_menu (GtkWidget * top_level, double x, double y, gpointer data)
-*
-*  Usage: create curve data edition popup menu GTK4
-*
-*  GtkWidget * top_level : the top level widget
-*  double x              : x position
-*  double y              : y position
-*  gpointer data         : the associated data pointer
+/*!
+  \fn void data_popup_menu (GtkWidget * top_level, double x, double y, gpointer data)
+
+  \brief create curve data edition popup menu GTK4
+
+  \param top_level the top level widget
+  \param x x position
+  \param y y position
+  \param data the associated data pointer
 */
 void data_popup_menu (GtkWidget * top_level, double x, double y, gpointer data)
 #else
-/*
-*  void data_popup_menu (GtkWidget * top_level, GdkEvent * event, gpointer data)
-*
-*  Usage: create curve data edition popup menu GTK3
-*
-*  GtkWidget * top_level : the top level widget
-*  GdkEvent * event      : the GdkEvent triggering the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn void data_popup_menu (GtkWidget * top_level, GdkEvent * event, gpointer data)
+
+  \brief create curve data edition popup menu GTK3
+
+  \param top_level the top level widget
+  \param event the GdkEvent triggering the signal
+  \param data the associated data pointer
 */
 void data_popup_menu (GtkWidget * top_level, GdkEvent * event, gpointer data)
 #endif
@@ -734,30 +734,30 @@ void data_popup_menu (GtkWidget * top_level, GdkEvent * event, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  void data_button_event (GtkWidget * data_tree, double event_x, double event_y, guint event_button, guint event_type, gpointer data)
-*
-*  Usage: curve data edition mouse button event GTK4
-*
-*  GtkWidget * data_tree : the GtkWidget sending the signal
-*  double event_x        : x position
-*  double event_y        : y position
-*  guint event_button    : event button
-*  guint event_type      : event type
-*  gpointer data         : the associated data pointer
+/*!
+  \fn void data_button_event (GtkWidget * data_tree, double event_x, double event_y, guint event_button, guint event_type, gpointer data)
+
+  \brief curve data edition mouse button event GTK4
+
+  \param data_tree the GtkWidget sending the signal
+  \param event_x x position
+  \param event_y y position
+  \param event_button event button
+  \param event_type event type
+  \param data the associated data pointer
 */
 void data_button_event (GtkWidget * data_tree, double event_x, double event_y, guint event_button, guint event_type, gpointer data)
 #else
-/*
-*  void data_button_event (GtkWidget * data_tree, GdkEvent * event, guint event_button, guint event_type, gpointer data)
-*
-*  Usage: curve data edition mouse button event GTK3
-*
-*  GtkWidget * data_tree : the GtkWidget sending the signal
-*  GdkEvent * event      : the GdkEvent triggering the signal
-*  guint event_button    : event button
-*  guint event_type      : event type
-*  gpointer data         : the associated data pointer
+/*!
+  \fn void data_button_event (GtkWidget * data_tree, GdkEvent * event, guint event_button, guint event_type, gpointer data)
+
+  \brief curve data edition mouse button event GTK3
+
+  \param data_tree the GtkWidget sending the signal
+  \param event the GdkEvent triggering the signal
+  \param event_button event button
+  \param event_type event type
+  \param data the associated data pointer
 */
 void data_button_event (GtkWidget * data_tree, GdkEvent * event, guint event_button, guint event_type, gpointer data)
 #endif
@@ -782,16 +782,16 @@ void data_button_event (GtkWidget * data_tree, GdkEvent * event, guint event_but
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void on_data_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
-*
-*  Usage: mouse button pressed callback GTK4
-*
-*  GtkGesture * gesture : the GtkGesture sending the signal
-*  int n_press          : the number of times it was pressed
-*  double x             : x position
-*  double y             : y position
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_data_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
+
+  \brief mouse button pressed callback GTK4
+
+  \param gesture the GtkGesture sending the signal
+  \param n_press the number of times it was pressed
+  \param x x position
+  \param y y position
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_data_button_pressed (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -799,16 +799,16 @@ G_MODULE_EXPORT void on_data_button_pressed (GtkGesture * gesture, int n_press, 
                      gtk_gesture_single_get_current_button ((GtkGestureSingle * )gesture), GDK_BUTTON_PRESS, data);
 }
 
-/*
-*  G_MODULE_EXPORT void on_data_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
-*
-*  Usage: mouse button released callback GTK4
-*
-*  GtkGesture * gesture : the GtkGesture sending the signal
-*  int n_press          : the number of times it was pressed
-*  double x             : x position
-*  double y             : y position
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_data_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
+
+  \brief mouse button released callback GTK4
+
+  \param gesture the GtkGesture sending the signal
+  \param n_press the number of times it was pressed
+  \param x x position
+  \param y y position
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_data_button_released (GtkGesture * gesture, int n_press, double x, double y, gpointer data)
 {
@@ -816,14 +816,14 @@ G_MODULE_EXPORT void on_data_button_released (GtkGesture * gesture, int n_press,
                      gtk_gesture_single_get_current_button ((GtkGestureSingle * )gesture), GDK_BUTTON_RELEASE, data);
 }
 #else
-/*
-*  G_MODULE_EXPORT gboolean on_data_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
-*
-*  Usage:
-*
-*  GtkWidget * widget : the GtkWidget sending the signal
-*  GdkEvent * event   :
-*  gpointer data      :
+/*!
+  \fn G_MODULE_EXPORT gboolean on_data_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
+
+  \brief
+
+  \param widget the GtkWidget sending the signal
+  \param event
+  \param data
 */
 G_MODULE_EXPORT gboolean on_data_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 {
@@ -833,15 +833,15 @@ G_MODULE_EXPORT gboolean on_data_button_event (GtkWidget * widget, GdkEvent * ev
 }
 #endif
 
-/*
-*  static void fill_data_model (GtkListStore * store, struct project * this_proj, int b, int c)
-*
-*  Usage: fill curve data list store
-*
-*  GtkListStore * store       : the GtkListStore to fill
-*  struct project * this_proj : the target project
-*  int b                      : the calculation id
-*  int c                      : the curve id
+/*!
+  \fn static void fill_data_model (GtkListStore * store, struct project * this_proj, int b, int c)
+
+  \brief fill curve data list store
+
+  \param store the GtkListStore to fill
+  \param this_proj the target project
+  \param b the calculation id
+  \param c the curve id
 */
 static void fill_data_model (GtkListStore * store, struct project * this_proj, int b, int c)
 {
@@ -857,14 +857,14 @@ static void fill_data_model (GtkListStore * store, struct project * this_proj, i
   }
 }
 
-/*
-*  GtkWidget * setview (struct project * this_proj, int b, int c)
-*
-*  Usage: create the curve data tree store
-*
-*  struct project * this_proj : the target project
-*  int b                      : the target calculation
-*  int c                      : the target curve
+/*!
+  \fn GtkWidget * setview (struct project * this_proj, int b, int c)
+
+  \brief create the curve data tree store
+
+  \param this_proj the target project
+  \param b the target calculation
+  \param c the target curve
 */
 GtkWidget * setview (struct project * this_proj, int b, int c)
 {
@@ -888,6 +888,7 @@ GtkWidget * setview (struct project * this_proj, int b, int c)
   {
     datacel[i] = gtk_cell_renderer_text_new();
  /*   if (i == 1)
+  \param 890: /afs /bin /boot /data /dev /etc /home /lib /lib64 /lost+found /media /mnt /opt /proc /root /run /sbin /share /srv /sys /tmp /usr /var if (i == 1) 890: /afs /bin /boot /data /dev /etc /home /lib /lib64 /lost+found /media /mnt /opt /proc /root /run /sbin /share /srv /sys /tmp /usr /var if (i == 1)
     {
       col[i].red = 62965;
       col[i].green = 62965;
@@ -933,13 +934,13 @@ GtkWidget * setview (struct project * this_proj, int b, int c)
   return dataview;
 }
 
-/*
-*  void cancel_changes (GtkWidget * widg, gpointer data)
-*
-*  Usage: Usage: cancel curve data edition
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn void cancel_changes (GtkWidget * widg, gpointer data)
+
+  \brief Usage: cancel curve data edition
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
+  \param data the associated data pointer
 */
 void cancel_changes (GtkWidget * widg, gpointer data)
 {
@@ -948,13 +949,13 @@ void cancel_changes (GtkWidget * widg, gpointer data)
   get_project_by_id(id -> a) -> curves[id -> b][id -> c] -> datatree = NULL;
 }
 
-/*
-*  G_MODULE_EXPORT void cancel_but (GtkButton * but, gpointer data)
-*
-*  Usage: Usage: cancel curve data edition button callback
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void cancel_but (GtkButton * but, gpointer data)
+
+  \brief Usage: cancel curve data edition button callback
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void cancel_but (GtkButton * but, gpointer data)
 {
@@ -962,24 +963,24 @@ G_MODULE_EXPORT void cancel_but (GtkButton * but, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT gboolean cancel_win (GtkWindow * win, gpointer data)
-*
-*  Usage: Usage: cancel curve data edition callback GTK4
-*
-*  GtkWindow * win : the GtkWindow sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean cancel_win (GtkWindow * win, gpointer data)
+
+  \brief Usage: cancel curve data edition callback GTK4
+  \param win the GtkWindow sending the signal
+  \param data the associated data pointer
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean cancel_win (GtkWindow * win, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer data)
-*
-*  Usage: cancel curve data edition callback GTK3
-*
-*  GtkWidget * win  : the GtkWidget sending the signal
-*  GdkEvent * event : the GdkEvent triggering the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer data)
+
+  \brief cancel curve data edition callback GTK3
+  \param win the GtkWidget sending the signal
+  \param event the GdkEvent triggering the signal
+  \param data the associated data pointer
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer data)
 #endif
@@ -988,13 +989,13 @@ G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer
   return TRUE;
 }
 
-/*
-*  G_MODULE_EXPORT void validate_changes (GtkButton * but, gpointer data)
-*
-*  Usage: apply data edition changes
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void validate_changes (GtkButton * but, gpointer data)
+
+  \brief apply data edition changes
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void validate_changes (GtkButton * but, gpointer data)
 {
@@ -1018,12 +1019,12 @@ G_MODULE_EXPORT void validate_changes (GtkButton * but, gpointer data)
   update_curves ();
 }
 
-/*
-*  void edit_data (gpointer data)
-*
-*  Usage: create edit curve data dialog
-*
-*  gpointer data   : the associated data pointer
+/*!
+  \fn void edit_data (gpointer data)
+
+  \brief create edit curve data dialog
+
+  \param data the associated data pointer
 */
 void edit_data (gpointer data)
 {

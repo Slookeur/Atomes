@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'frame.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The frame draw subroutines
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol);
   void prep_axis_data (struct project * this_proj, int rid, int cid, int ax);
@@ -35,15 +35,15 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "curve.h"
 
-/*
-*  void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol)
-*
-*  Usage: draw frame line
-*
-*  cairo_t * fr : the cairo drawing context to use for the draw
-*  int da       : dash type
-*  double ti    : line width
-*  ColRGBA dcol : color
+/*!
+  \fn void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol)
+
+  \brief draw frame line
+
+  \param fr the cairo drawing context to use for the draw
+  \param da dash type
+  \param ti line width
+  \param dcol color
 */
 void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol)
 {
@@ -56,19 +56,19 @@ void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol)
   g_free (tdash);
 }
 
-/*
-*  void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2], double y[2], ColRGBA dcol)
-*
-*  Usage: draw frame
-*
-*  cairo_t * cd : the cairo drawing context to use for the draw
-*  int tf       : frame type
-*  int da       : dash type
-*  int res[2]   : image size
-*  double ti    : line width
-*  double x[2]  : x positions (right, left)
-*  double y[2]  : y positions (top, bottom)
-*  ColRGBA dcol : color
+/*!
+  \fn void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2], double y[2], ColRGBA dcol)
+
+  \brief draw frame
+
+  \param cd the cairo drawing context to use for the draw
+  \param tf frame type
+  \param da dash type
+  \param res[2] image size
+  \param ti line width
+  \param x[2] x positions (right, left)
+  \param y[2] y positions (top, bottom)
+  \param dcol color
 */
 void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2], double y[2], ColRGBA dcol)
 {
@@ -113,15 +113,15 @@ void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2
   cairo_stroke (cd);
 }
 
-/*
-*  void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
-*
-*  Usage: prepare axis data
-*
-*  struct project * this_proj : the target project
-*  int rid                    : the calculation id
-*  int cid                    : the curve id
-*  int ax                     : the axis
+/*!
+  \fn void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
+
+  \brief prepare axis data
+
+  \param this_proj the target project
+  \param rid the calculation id
+  \param cid the curve id
+  \param ax the axis
 */
 void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
 {
@@ -144,15 +144,15 @@ void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
   labpos = this_proj -> curves[rid][cid] -> labels_pos[ax];
 }
 
-/*
-*  void draw_frame (cairo_t * cr, struct project * this_proj, int rid, int cid)
-*
-*  Usage: draw frame and axis data
-*
-*  cairo_t * cr               : the cairo drawing context to use for the draw
-*  struct project * this_proj : the target project
-*  int rid                    : the calculation id
-*  int cid                    : the curve id
+/*!
+  \fn void draw_frame (cairo_t * cr, struct project * this_proj, int rid, int cid)
+
+  \brief draw frame and axis data
+
+  \param cr the cairo drawing context to use for the draw
+  \param this_proj the target project
+  \param rid the calculation id
+  \param cid the curve id
 */
 void draw_frame (cairo_t * cr, struct project * this_proj, int rid, int cid)
 {

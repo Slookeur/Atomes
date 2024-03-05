@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm36_prot.c'
 *
-*  Contains:
+* Contains:
 *
 
   CHARMM-charmm36_prot force field, data from taken from:

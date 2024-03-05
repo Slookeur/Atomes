@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'ogl_draw.c'
 *
-*  Contains:
+* Contains:
 *
 
   - The main OpenGL drawing subroutines
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void print_matrices ();
   void setup_camera ();
@@ -76,10 +76,10 @@ extern void create_light_lists ();
 extern void create_slab_lists (struct project * this_proj);
 extern void create_volumes_lists ();
 
-/*
-*  void print_matrices ()
-*
-*  Usage: print OpenGL matrices
+/*!
+  \fn void print_matrices ()
+
+  \brief print OpenGL matrices
 */
 void print_matrices ()
 {
@@ -104,10 +104,10 @@ void print_matrices ()
   m4_print (wingl -> proj_model_view_matrix);
 }
 
-/*
-*  void setup_camera ()
-*
-*  Usage: setup OpenGL camera
+/*!
+  \fn void setup_camera ()
+
+  \brief setup OpenGL camera
 */
 void setup_camera ()
 {
@@ -127,10 +127,10 @@ void setup_camera ()
   // print_matrices();
 }
 
-/*
-*  void unrotate_camera ()
-*
-*  Usage: unrotate OpenGL camera
+/*!
+  \fn void unrotate_camera ()
+
+  \brief unrotate OpenGL camera
 */
 void unrotate_camera ()
 {
@@ -140,12 +140,12 @@ void unrotate_camera ()
   wingl -> model_view_matrix = m4_mul (wingl -> model_view_matrix, m4_quat_rotation (quat));
 }
 
-/*
-*  struct screen_string * duplicate_screen_string (struct screen_string * old_s)
-*
-*  Usage: create a copy a screen_string data structure
-*
-*  struct screen_string * old_s : the data structure to be copied
+/*!
+  \fn struct screen_string * duplicate_screen_string (struct screen_string * old_s)
+
+  \brief create a copy a screen_string data structure
+
+  \param old_s the data structure to be copied
 */
 struct screen_string * duplicate_screen_string (struct screen_string * old_s)
 {
@@ -161,13 +161,13 @@ struct screen_string * duplicate_screen_string (struct screen_string * old_s)
   return new_s;
 }
 
-/*
-*  void duplicate_material_and_lightning (image * new_img, image * old_img)
-*
-*  Usage: copy the material and lightning parameters of an image data structure
-*
-*  image * new_img : the new image
-*  image * old_img : the old image with the data to be copied
+/*!
+  \fn void duplicate_material_and_lightning (image * new_img, image * old_img)
+
+  \brief copy the material and lightning parameters of an image data structure
+
+  \param new_img the new image
+  \param old_img the old image with the data to be copied
 */
 void duplicate_material_and_lightning (image * new_img, image * old_img)
 {
@@ -186,12 +186,12 @@ void duplicate_material_and_lightning (image * new_img, image * old_img)
   new_img -> f_g.color = old_img -> f_g.color;
 }
 
-/*
-*  image * duplicate_image (image * old_img)
-*
-*  Usage: create a copy of an image data structure
-*
-*  image * old_img : the image to copy
+/*!
+  \fn image * duplicate_image (image * old_img)
+
+  \brief create a copy of an image data structure
+
+  \param old_img the image to copy
 */
 image * duplicate_image (image * old_img)
 {
@@ -346,10 +346,10 @@ image * duplicate_image (image * old_img)
   return new_img;
 }
 
-/*
-*  void add_image ()
-*
-*  Usage: add an image to the animation
+/*!
+  \fn void add_image ()
+
+  \brief add an image to the animation
 */
 void add_image ()
 {
@@ -378,12 +378,12 @@ void add_image ()
 
 extern void update_gl_pick_colors ();
 
-/*
-*  struct atom * duplicate_atom (struct atom * at)
-*
-*  Usage: copy (partially) an atom data structure
-*
-*  struct atom * at : the atom to copy
+/*!
+  \fn struct atom * duplicate_atom (struct atom * at)
+
+  \brief copy (partially) an atom data structure
+
+  \param at the atom to copy
 */
 struct atom * duplicate_atom (struct atom * at)
 {
@@ -413,13 +413,13 @@ struct atom * duplicate_atom (struct atom * at)
   return bt;
 }
 
-/*
-*  void at_shift (struct atom * at, float * shift)
-*
-*  Usage: modify atomic coordinates to display image in cell replica
-*
-*  struct atom * at : the atom
-*  float * shift    : the shift to apply
+/*!
+  \fn void at_shift (struct atom * at, float * shift)
+
+  \brief modify atomic coordinates to display image in cell replica
+
+  \param at the atom
+  \param shift the shift to apply
 */
 void at_shift (struct atom * at, float * shift)
 {
@@ -428,13 +428,13 @@ void at_shift (struct atom * at, float * shift)
   at -> z += shift[2];
 }
 
-/*
-*  void at_unshift (struct atom * at, float * shift)
-*
-*  Usage: correct atomic coordinates modified to display image in cell replica
-*
-*  struct atom * at : the atom
-*  float * shift    : the shift to correct
+/*!
+  \fn void at_unshift (struct atom * at, float * shift)
+
+  \brief correct atomic coordinates modified to display image in cell replica
+
+  \param at the atom
+  \param shift the shift to correct
 */
 void at_unshift (struct atom * at, float * shift)
 {
@@ -443,12 +443,12 @@ void at_unshift (struct atom * at, float * shift)
   at -> z -= shift[2];
 }
 
-/*
-*  void draw (glwin * view)
-*
-*  Usage: main drawing subroutine for the OpenGL window
-*
-*  glwin * view : the target glwin
+/*!
+  \fn void draw (glwin * view)
+
+  \brief main drawing subroutine for the OpenGL window
+
+  \param view the target glwin
 */
 void draw (glwin * view)
 {

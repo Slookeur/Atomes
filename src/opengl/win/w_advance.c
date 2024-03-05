@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_advance.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the OpenGL parameters edition window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int * light_source_to_be_removed (int val, image * img, opengl_edition * ogl_edit);
 
@@ -129,15 +129,15 @@ gchar * settings[3][10] = {{"<u>Albedo:</u>",
 gchar * lpos[3] = {"x", "y", "z"};
 gchar * cpos[3] = {"r", "g", "b"};
 
-/*
-*  GtkWidget * adv_box (GtkWidget * box, char * lab, int size, float xalign)
-*
-*  Usage: create a box with markup label
-*
-*  GtkWidget * box : the GtkWidget sending the signal
-*  char * lab      : label
-*  int size        : size
-*  float xalign    : x alignement
+/*!
+  \fn GtkWidget * adv_box (GtkWidget * box, char * lab, int size, float xalign)
+
+  \brief create a box with markup label
+
+  \param box the GtkWidget sending the signal
+  \param lab label
+  \param size size
+  \param xalign x alignement
 */
 GtkWidget * adv_box (GtkWidget * box, char * lab, int size, float xalign)
 {
@@ -152,25 +152,25 @@ GtkWidget * d_close;
 int status;
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void toggled_delete_ligth (GtkCheckButton * but, gpointer data)
-*
-*  Usage: toggle delete light callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void toggled_delete_ligth (GtkCheckButton * but, gpointer data)
+
+  \brief toggle delete light callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void toggled_delete_ligth (GtkCheckButton * but, gpointer data)
 {
   if (gtk_check_button_get_active (but))
 #else
-/*
-*  G_MODULE_EXPORT void toggled_delete_ligth (GtkToggleButton * but, gpointer data)
-*
-*  Usage: toggle delete light callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void toggled_delete_ligth (GtkToggleButton * but, gpointer data)
+
+  \brief toggle delete light callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void toggled_delete_ligth (GtkToggleButton * but, gpointer data)
 {
@@ -196,14 +196,14 @@ G_MODULE_EXPORT void toggled_delete_ligth (GtkToggleButton * but, gpointer data)
 int * light_list;
 GtkWidget ** light_but;
 
-/*
-*  G_MODULE_EXPORT void run_light_source_to_be_removed (GtkDialog * win, gint response_id, gpointer data)
-*
-*  Usage: remove light source(s) - running the dialog
-*
-*  GtkDialog * win  : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_light_source_to_be_removed (GtkDialog * win, gint response_id, gpointer data)
+
+  \brief remove light source(s) - running the dialog
+
+  \param win the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_light_source_to_be_removed (GtkDialog * win, gint response_id, gpointer data)
 {
@@ -225,14 +225,14 @@ G_MODULE_EXPORT void run_light_source_to_be_removed (GtkDialog * win, gint respo
   destroy_this_dialog (win);
 }
 
-/*
-*  int * light_source_to_be_removed (int val, image * img, opengl_edition * ogl_edit)
-*
-*  Usage: remove light source(s) - creating the dialog
-*
-*  int val                   : number of light(s) to remove
-*  image * img               : the target image
-*  opengl_edition * ogl_edit : the target OpenGL edition window
+/*!
+  \fn int * light_source_to_be_removed (int val, image * img, opengl_edition * ogl_edit)
+
+  \brief remove light source(s) - creating the dialog
+
+  \param val number of light(s) to remove
+  \param img the target image
+  \param ogl_edit the target OpenGL edition window
 */
 int * light_source_to_be_removed (int val, image * img, opengl_edition * ogl_edit)
 {
@@ -266,13 +266,13 @@ int * light_source_to_be_removed (int val, image * img, opengl_edition * ogl_edi
   return light_list;
 }
 
-/*
-*  void print_light_source (Light source, int i)
-*
-*  Usage: print light source data
-*
-*  Light source : the light source
-*  int i        : the light source id
+/*!
+  \fn void print_light_source (Light source, int i)
+
+  \brief print light source data
+
+  \param source the light source
+  \param i the light source id
 */
 void print_light_source (Light source, int i)
 {
@@ -304,14 +304,14 @@ void print_light_source (Light source, int i)
      3250                 1.0        0.0014    0.000007
 */
 
-/*
-*  Light init_light_source (int type, float val, float vbl)
-*
-*  Usage: initialize a light source
-*
-*  int type  : the type of light
-*  float val :
-*  float vbl :
+/*!
+  \fn Light init_light_source (int type, float val, float vbl)
+
+  \brief initialize a light source
+
+  \param type the type of light
+  \param val
+  \param vbl
 */
 Light init_light_source (int type, float val, float vbl)
 {
@@ -350,12 +350,12 @@ Light init_light_source (int type, float val, float vbl)
   return new_light;
 }
 
-/*
-*  Light copy_light_source (Light old_sp)
-*
-*  Usage: create a copy of a light source
-*
-*  Light old_sp : the light source to copy
+/*!
+  \fn Light copy_light_source (Light old_sp)
+
+  \brief create a copy of a light source
+
+  \param old_sp the light source to copy
 */
 Light copy_light_source (Light old_sp)
 {
@@ -371,14 +371,14 @@ Light copy_light_source (Light old_sp)
   return new_sp;
 }
 
-/*
-*  Light * copy_light_sources (int dima, int dimb, Light * old_sp)
-*
-*  Usage: create a copy of a list of light sources
-*
-*  int dima       : new list size
-*  int dimb       : old list size to duplicate
-*  Light * old_sp : old light sources
+/*!
+  \fn Light * copy_light_sources (int dima, int dimb, Light * old_sp)
+
+  \brief create a copy of a list of light sources
+
+  \param dima new list size
+  \param dimb old list size to duplicate
+  \param old_sp old light sources
 */
 Light * copy_light_sources (int dima, int dimb, Light * old_sp)
 {
@@ -401,14 +401,14 @@ Light * copy_light_sources (int dima, int dimb, Light * old_sp)
   return new_sp;
 }
 
-/*
-*  void show_active_light_data (opengl_edition * ogl_win, int lid, int tid)
-*
-*  Usage: show active light data
-*
-*  opengl_edition * ogl_win : the target OpenGL edition window
-*  int lid                  : the light id
-*  int tid                  : the light type
+/*!
+  \fn void show_active_light_data (opengl_edition * ogl_win, int lid, int tid)
+
+  \brief show active light data
+
+  \param ogl_win the target OpenGL edition window
+  \param lid the light id
+  \param tid the light type
 */
 void show_active_light_data (opengl_edition * ogl_win, int lid, int tid)
 {
@@ -437,13 +437,13 @@ void show_active_light_data (opengl_edition * ogl_win, int lid, int tid)
   }
 }
 
-/*
-*  void update_light_data (int li, opengl_edition * ogl_win)
-*
-*  Usage: update light data
-*
-*  int li                   : the light id
-*  opengl_edition * ogl_win : the target OpenGL edition window
+/*!
+  \fn void update_light_data (int li, opengl_edition * ogl_win)
+
+  \brief update light data
+
+  \param li the light id
+  \param ogl_win the target OpenGL edition window
 */
 void update_light_data (int li, opengl_edition * ogl_win)
 {
@@ -473,13 +473,13 @@ void update_light_data (int li, opengl_edition * ogl_win)
 #endif
 }
 
-/*
-*  G_MODULE_EXPORT void show_light_param (GtkComboBox * box, gpointer data)
-*
-*  Usage: update light parameters based on light id in combo box
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_light_param (GtkComboBox * box, gpointer data)
+
+  \brief update light parameters based on light id in combo box
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_light_param (GtkComboBox * box, gpointer data)
 {
@@ -487,13 +487,13 @@ G_MODULE_EXPORT void show_light_param (GtkComboBox * box, gpointer data)
   update_light_data (li, (opengl_edition *)data);
 }
 
-/*
-*  void create_lights_combo (image * this_image, opengl_edition * ogl_win)
-*
-*  Usage: create light combo box
-*
-*  image * this_image       : the target image parameters
-*  opengl_edition * ogl_win : the target OpenGL edition window
+/*!
+  \fn void create_lights_combo (image * this_image, opengl_edition * ogl_win)
+
+  \brief create light combo box
+
+  \param this_image the target image parameters
+  \param ogl_win the target OpenGL edition window
 */
 void create_lights_combo (image * this_image, opengl_edition * ogl_win)
 {
@@ -511,13 +511,13 @@ void create_lights_combo (image * this_image, opengl_edition * ogl_win)
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, ogl_win -> lights_box, ogl_win -> lights, FALSE, FALSE, 10);
 }
 
-/*
-*  void add_remove_lights (int val, gpointer data)
-*
-*  Usage: add or remove lights
-*
-*  int val       : total number of light(s)
-*  gpointer data : the associated data pointer
+/*!
+  \fn void add_remove_lights (int val, gpointer data)
+
+  \brief add or remove lights
+
+  \param val total number of light(s)
+  \param data the associated data pointer
 */
 void add_remove_lights (int val, gpointer data)
 {
@@ -594,26 +594,26 @@ void add_remove_lights (int val, gpointer data)
   update (view);
 }
 
-/*
-*  G_MODULE_EXPORT void set_nlights_spin (GtkSpinButton * res, gpointer data)
-*
-*  Usage:  change the number of light(s) - spin button
-*
-*  GtkSpinButton * res : the GtkSpinButton sending the signal
-*  gpointer data       : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_nlights_spin (GtkSpinButton * res, gpointer data)
+
+  \brief  change the number of light(s) - spin button
+
+  \param res the GtkSpinButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_nlights_spin (GtkSpinButton * res, gpointer data)
 {
   add_remove_lights (gtk_spin_button_get_value_as_int(res), data);
 }
 
-/*
-*  G_MODULE_EXPORT void set_nlights (GtkEntry * res, gpointer data)
-*
-*  Usage: change the number of light(s) - entry
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_nlights (GtkEntry * res, gpointer data)
+
+  \brief change the number of light(s) - entry
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_nlights (GtkEntry * res, gpointer data)
 {
@@ -624,13 +624,13 @@ G_MODULE_EXPORT void set_nlights (GtkEntry * res, gpointer data)
   add_remove_lights (i, data);
 }
 
-/*
-*  G_MODULE_EXPORT void update_light_param (GtkEntry * res, gpointer data)
-*
-*  Usage: update light parameter
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void update_light_param (GtkEntry * res, gpointer data)
+
+  \brief update light parameter
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void update_light_param (GtkEntry * res, gpointer data)
 {
@@ -669,14 +669,14 @@ G_MODULE_EXPORT void update_light_param (GtkEntry * res, gpointer data)
   update (view);
 }
 
-/*
-*  void set_data_pos (vec3_t * vect, int pos, double v)
-*
-*  Usage: modify a vector component
-*
-*  vec3_t * vect : vector to adjust
-*  int pos       : position to adjust
-*  double v      : new value
+/*!
+  \fn void set_data_pos (vec3_t * vect, int pos, double v)
+
+  \brief modify a vector component
+
+  \param vect vector to adjust
+  \param pos position to adjust
+  \param v new value
 */
 void set_data_pos (vec3_t * vect, int pos, double v)
 {
@@ -694,13 +694,13 @@ void set_data_pos (vec3_t * vect, int pos, double v)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void set_object_pos (GtkEntry * res, gpointer data)
-*
-*  Usage: set object position
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_object_pos (GtkEntry * res, gpointer data)
+
+  \brief set object position
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_object_pos (GtkEntry * res, gpointer data)
 {
@@ -738,13 +738,13 @@ G_MODULE_EXPORT void set_object_pos (GtkEntry * res, gpointer data)
   update (view);
 }
 
-/*
-*  G_MODULE_EXPORT void set_light_type (GtkComboBox * box, gpointer data)
-*
-*  Usage: set light type callback
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_light_type (GtkComboBox * box, gpointer data)
+
+  \brief set light type callback
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_light_type (GtkComboBox * box, gpointer data)
 {
@@ -754,13 +754,13 @@ G_MODULE_EXPORT void set_light_type (GtkComboBox * box, gpointer data)
   show_active_light_data (ogl_win, li, ti);
 }
 
-/*
-*  G_MODULE_EXPORT void set_light_fix (GtkComboBox * box, gpointer data)
-*
-*  Usage: set light fix callback
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_light_fix (GtkComboBox * box, gpointer data)
+
+  \brief set light fix callback
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_light_fix (GtkComboBox * box, gpointer data)
 {
@@ -773,23 +773,23 @@ G_MODULE_EXPORT void set_light_fix (GtkComboBox * box, gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void show_this_light (GtkCheckButton * but, gpointer data)
-*
-*  Usage: show / hide this light callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_this_light (GtkCheckButton * but, gpointer data)
+
+  \brief show / hide this light callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_this_light (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void show_this_light (GtkToggleButton * but, gpointer data)
-*
-*  Usage: show / hide this light callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void show_this_light (GtkToggleButton * but, gpointer data)
+
+  \brief show / hide this light callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_this_light (GtkToggleButton * but, gpointer data)
 #endif
@@ -806,15 +806,15 @@ G_MODULE_EXPORT void show_this_light (GtkToggleButton * but, gpointer data)
   update (view);
 }
 
-/*
-*  GtkWidget * create_setting_pos (int pid, int lid, float * values, opengl_edition * ogl_win)
-*
-*  Usage: create OpenGL setting entries table
-*
-*  int pid                  : parameter id (0 = material, 1 = light direction, 2 = light position, 3 = light intensity, 4 = fog)
-*  int lid                  : parameter label id
-*  float * values           : target parameter values
-*  opengl_edition * ogl_win : the target OpenGL edition window
+/*!
+  \fn GtkWidget * create_setting_pos (int pid, int lid, float * values, opengl_edition * ogl_win)
+
+  \brief create OpenGL setting entries table
+
+  \param pid parameter id (0 = material, 1 = light direction, 2 = light position, 3 = light intensity, 4 = fog)
+  \param lid parameter label id
+  \param values target parameter values
+  \param ogl_win the target OpenGL edition window
 */
 GtkWidget * create_setting_pos (int pid, int lid, float * values, opengl_edition * ogl_win)
 {
@@ -849,13 +849,13 @@ GtkWidget * create_setting_pos (int pid, int lid, float * values, opengl_edition
   return setting_pos;
 }
 
-/*
-*  GtkWidget * lights_tab (glwin * view, opengl_edition * ogl_edit)
-*
-*  Usage: OpenGL light(s) parameters tab
-*
-*  glwin * view              : the target glwin
-*  opengl_edition * ogl_edit : the target OpenGL edition window
+/*!
+  \fn GtkWidget * lights_tab (glwin * view, opengl_edition * ogl_edit)
+
+  \brief OpenGL light(s) parameters tab
+
+  \param view the target glwin
+  \param ogl_edit the target OpenGL edition window
 */
 GtkWidget * lights_tab (glwin * view, opengl_edition * ogl_edit)
 {
@@ -940,23 +940,23 @@ GtkWidget * lights_tab (glwin * view, opengl_edition * ogl_edit)
 // ***************** MATERIAL ******************* //
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void set_use_template_toggle (GtkCheckButton * but, gpointer data)
-*
-*  Usage: use or not OpenGL material template callback GTK4
-*
-*  GtkCheckButton * but : the GtkCheckButton sending the signal
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_use_template_toggle (GtkCheckButton * but, gpointer data)
+
+  \brief use or not OpenGL material template callback GTK4
+
+  \param but the GtkCheckButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_use_template_toggle (GtkCheckButton * but, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void set_use_template_toggle (GtkToggleButton * but, gpointer data)
-*
-*  Usage: use or not OpenGL material template callback GTK3
-*
-*  GtkToggleButton * but : the GtkToggleButton sending the signal
-*  gpointer data         : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_use_template_toggle (GtkToggleButton * but, gpointer data)
+
+  \brief use or not OpenGL material template callback GTK3
+
+  \param but the GtkToggleButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_use_template_toggle (GtkToggleButton * but, gpointer data)
 #endif
@@ -986,13 +986,13 @@ G_MODULE_EXPORT void set_use_template_toggle (GtkToggleButton * but, gpointer da
   update (view);
 }
 
-/*
-*  G_MODULE_EXPORT void set_template (GtkComboBox * box, gpointer data)
-*
-*  Usage: change the OpenGL material template
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_template (GtkComboBox * box, gpointer data)
+
+  \brief change the OpenGL material template
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_template (GtkComboBox * box, gpointer data)
 {
@@ -1013,13 +1013,13 @@ G_MODULE_EXPORT void set_template (GtkComboBox * box, gpointer data)
   update (view);
 }
 
-/*
-*  G_MODULE_EXPORT void set_l_model (GtkComboBox * box, gpointer data)
-*
-*  Usage: change OpenGL lightning model
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_l_model (GtkComboBox * box, gpointer data)
+
+  \brief change OpenGL lightning model
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_l_model (GtkComboBox * box, gpointer data)
 {
@@ -1028,13 +1028,13 @@ G_MODULE_EXPORT void set_l_model (GtkComboBox * box, gpointer data)
   update (view);
 }
 
-/*
-*  void param_has_changed (gpointer data, double val)
-*
-*  Usage: update OpenGL material parameter
-*
-*  gpointer data : the associated data pointer
-*  double val    : the new value
+/*!
+  \fn void param_has_changed (gpointer data, double val)
+
+  \brief update OpenGL material parameter
+
+  \param data the associated data pointer
+  \param val the new value
 */
 void param_has_changed (gpointer data, double val)
 {
@@ -1050,13 +1050,13 @@ void param_has_changed (gpointer data, double val)
   update (view);
 }
 
-/*
-*  G_MODULE_EXPORT void update_mat_param (GtkEntry * res, gpointer data)
-*
-*  Usage: update OpenGL material parameter - entry
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void update_mat_param (GtkEntry * res, gpointer data)
+
+  \brief update OpenGL material parameter - entry
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void update_mat_param (GtkEntry * res, gpointer data)
 {
@@ -1065,15 +1065,15 @@ G_MODULE_EXPORT void update_mat_param (GtkEntry * res, gpointer data)
   param_has_changed (data, v);
 }
 
-/*
-*  G_MODULE_EXPORT gboolean scroll_scale_param (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
-*
-*  Usage: update OpenGL material parameter - scroll callback
-*
-*  GtkRange * range     : the GtkRange sending the signal
-*  GtkScrollType scroll : the associated scroll type
-*  gdouble value        : the range value
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean scroll_scale_param (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
+
+  \brief update OpenGL material parameter - scroll callback
+
+  \param range the GtkRange sending the signal
+  \param scroll the associated scroll type
+  \param value the range value
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_scale_param (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -1081,28 +1081,28 @@ G_MODULE_EXPORT gboolean scroll_scale_param (GtkRange * range, GtkScrollType scr
   return FALSE;
 }
 
-/*
-*  G_MODULE_EXPORT void scale_param (GtkRange * range, gpointer data)
-*
-*  Usage: update OpenGL material parameter - range callback
-*
-*  GtkRange * range : the GtkRange sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void scale_param (GtkRange * range, gpointer data)
+
+  \brief update OpenGL material parameter - range callback
+
+  \param range the GtkRange sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void scale_param (GtkRange * range, gpointer data)
 {
   param_has_changed (data, gtk_range_get_value (range));
 }
 
-/*
-*  G_MODULE_EXPORT gboolean scroll_scale_quality (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
-*
-*  Usage: update OpenGL quality - scroll callback
-*
-*  GtkRange * range     : the GtkRange sending the signal
-*  GtkScrollType scroll : the associated scroll type
-*  gdouble value        : the range value
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean scroll_scale_quality (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
+
+  \brief update OpenGL quality - scroll callback
+
+  \param range the GtkRange sending the signal
+  \param scroll the associated scroll type
+  \param value the range value
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_scale_quality (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -1113,13 +1113,13 @@ G_MODULE_EXPORT gboolean scroll_scale_quality (GtkRange * range, GtkScrollType s
   return FALSE;
 }
 
-/*
-*  G_MODULE_EXPORT void scale_quality (GtkRange * range, gpointer data)
-*
-*  Usage: update OpenGL quality - range callback
-*
-*  GtkRange * range : the GtkRange sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void scale_quality (GtkRange * range, gpointer data)
+
+  \brief update OpenGL quality - range callback
+
+  \param range the GtkRange sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void scale_quality (GtkRange * range, gpointer data)
 {
@@ -1129,13 +1129,13 @@ G_MODULE_EXPORT void scale_quality (GtkRange * range, gpointer data)
 #endif
 }
 
-/*
-*  GtkWidget * materials_tab (glwin * view, opengl_edition * ogl_edit)
-*
-*  Usage: OpenGL material parameters tab
-*
-*  glwin * view              : the target glwin
-*  opengl_edition * ogl_edit : the target OpenGL edition window
+/*!
+  \fn GtkWidget * materials_tab (glwin * view, opengl_edition * ogl_edit)
+
+  \brief OpenGL material parameters tab
+
+  \param view the target glwin
+  \param ogl_edit the target OpenGL edition window
 */
 GtkWidget * materials_tab (glwin * view, opengl_edition * ogl_edit)
 {
@@ -1213,14 +1213,14 @@ GtkWidget * materials_tab (glwin * view, opengl_edition * ogl_edit)
 
 // ***************** FOG ******************* //
 
-/*
-*  void fog_param_changed (gpointer data, GLfloat u, GtkRange * range)
-*
-*  Usage: update OpenGL fog parameter
-*
-*  gpointer data    : the associated data pointer
-*  GLfloat u        : the new value
-*  GtkRange * range : the GtkRange to udapte if needed
+/*!
+  \fn void fog_param_changed (gpointer data, GLfloat u, GtkRange * range)
+
+  \brief update OpenGL fog parameter
+
+  \param data the associated data pointer
+  \param u the new value
+  \param range the GtkRange to udapte if needed
 */
 void fog_param_changed (gpointer data, GLfloat u, GtkRange * range)
 {
@@ -1259,15 +1259,15 @@ void fog_param_changed (gpointer data, GLfloat u, GtkRange * range)
   update (view);
 }
 
-/*
-*  G_MODULE_EXPORT gboolean scroll_set_fog_param (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
-*
-*  Usage: update OpenGL fog parameter - scroll callback
-*
-*  GtkRange * range     : the GtkRange sending the signal
-*  GtkScrollType scroll : the associated scroll type
-*  gdouble value        : the range value
-*  gpointer data        : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean scroll_set_fog_param (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
+
+  \brief update OpenGL fog parameter - scroll callback
+
+  \param range the GtkRange sending the signal
+  \param scroll the associated scroll type
+  \param value the range value
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean scroll_set_fog_param (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data)
 {
@@ -1275,26 +1275,26 @@ G_MODULE_EXPORT gboolean scroll_set_fog_param (GtkRange * range, GtkScrollType s
   return FALSE;
 }
 
-/*
-*  G_MODULE_EXPORT void set_fog_param (GtkRange * range, gpointer data)
-*
-*  Usage: update OpenGL fog parameter - range callback
-*
-*  GtkRange * range : the GtkRange sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_fog_param (GtkRange * range, gpointer data)
+
+  \brief update OpenGL fog parameter - range callback
+
+  \param range the GtkRange sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_fog_param (GtkRange * range, gpointer data)
 {
   fog_param_changed (data, (GLfloat) gtk_range_get_value (range), range);
 }
 
-/*
-*  G_MODULE_EXPORT void set_fog_type (GtkWidget * widg, gpointer data)
-*
-*  Usage: set OpenGL fog type
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_fog_type (GtkWidget * widg, gpointer data)
+
+  \brief set OpenGL fog type
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_fog_type (GtkWidget * widg, gpointer data)
 {
@@ -1304,13 +1304,13 @@ G_MODULE_EXPORT void set_fog_type (GtkWidget * widg, gpointer data)
   update (view);
 }
 
-/*
-*  void setup_fog_dialogs (glwin * view, int fid)
-*
-*  Usage: update OpenGL fog tab based of fog type
-*
-*  glwin * view : the target glwin
-*  int fid      : the fog mode
+/*!
+  \fn void setup_fog_dialogs (glwin * view, int fid)
+
+  \brief update OpenGL fog tab based of fog type
+
+  \param view the target glwin
+  \param fid the fog mode
 */
 void setup_fog_dialogs (glwin * view, int fid)
 {
@@ -1336,13 +1336,13 @@ void setup_fog_dialogs (glwin * view, int fid)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void set_fog_mode (GtkWidget * widg, gpointer data)
-*
-*  Usage: set fog mode callback
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_fog_mode (GtkWidget * widg, gpointer data)
+
+  \brief set fog mode callback
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_fog_mode (GtkWidget * widg, gpointer data)
 {
@@ -1351,13 +1351,13 @@ G_MODULE_EXPORT void set_fog_mode (GtkWidget * widg, gpointer data)
   update (view);
 }
 
-/*
-*  GtkWidget * fog_tab (glwin * view, opengl_edition * ogl_edit)
-*
-*  Usage: OpenGL fog parameters tab
-*
-*  glwin * view              : the target glwin
-*  opengl_edition * ogl_edit : the target OpenGL edition window
+/*!
+  \fn GtkWidget * fog_tab (glwin * view, opengl_edition * ogl_edit)
+
+  \brief OpenGL fog parameters tab
+
+  \param view the target glwin
+  \param ogl_edit the target OpenGL edition window
 */
 GtkWidget * fog_tab (glwin * view, opengl_edition * ogl_edit)
 {
@@ -1416,12 +1416,12 @@ GtkWidget * fog_tab (glwin * view, opengl_edition * ogl_edit)
   return layout;
 }
 
-/*
-*  void close_advanced_opengl (gpointer data)
-*
-*  Usage: close OpenGL rendering window free data
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn void close_advanced_opengl (gpointer data)
+
+  \brief close OpenGL rendering window free data
+
+  \param data the associated data pointer
 */
 void close_advanced_opengl (gpointer data)
 {
@@ -1432,24 +1432,24 @@ void close_advanced_opengl (gpointer data)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT gboolean close_advanced (GtkWidget * window, gpointer data)
-*
-*  Usage: close OpenGL rendering advanced window callback GTK4
-*
-*  GtkWidget * window : the GtkWidget sending the signal
-*  gpointer data      : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean close_advanced (GtkWidget * window, gpointer data)
+
+  \brief close OpenGL rendering advanced window callback GTK4
+
+  \param window the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_advanced (GtkWidget * window, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT gboolean close_advanced (GtkWidget * widg, GdkEvent * event, gpointer data)
-*
-*  Usage: close OpenGL rendering advanced window callback GTK3
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  GdkEvent * event : the GdkEvent triggering the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean close_advanced (GtkWidget * widg, GdkEvent * event, gpointer data)
+
+  \brief close OpenGL rendering advanced window callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param event the GdkEvent triggering the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_advanced (GtkWidget * widg, GdkEvent * event, gpointer data)
 #endif
@@ -1458,13 +1458,13 @@ G_MODULE_EXPORT gboolean close_advanced (GtkWidget * widg, GdkEvent * event, gpo
   return FALSE;
 }
 
-/*
-*  G_MODULE_EXPORT void opengl_advanced (GtkWidget * widg, gpointer data)
-*
-*  Usage: create OpenGL rendering advanced window
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void opengl_advanced (GtkWidget * widg, gpointer data)
+
+  \brief create OpenGL rendering advanced window
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void opengl_advanced (GtkWidget * widg, gpointer data)
 {

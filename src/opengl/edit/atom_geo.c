@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_geo.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to insert a new atom coordination type during model edition
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int is_this_a_new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z);
 
@@ -33,13 +33,13 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "atom_edit.h"
 
-/*
-*  void sort_partial_geo (int ** geom, int num_a)
-*
-*  Usage: sort partial geometries
-*
-*  int ** geom : the data to sort
-*  int num_a   : the number of data point
+/*!
+  \fn void sort_partial_geo (int ** geom, int num_a)
+
+  \brief sort partial geometries
+
+  \param geom the data to sort
+  \param num_a the number of data point
 */
 void sort_partial_geo (int ** geom, int num_a)
 {
@@ -62,19 +62,19 @@ void sort_partial_geo (int ** geom, int num_a)
   }
 }
 
-/*
-*  int is_this_a_new_geo (int gid, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
-*
-*  Usage: if required create a new geometry, stored in coord, for coordination type 'gid' and chemical species 'new_sp', return geometry id
-*
-*  int gid            : the new coordination type (0 = total, 1 = partial)
-*  coord_info * obj   : the new coordination info to update
-*  int * old_z        : old Z list
-*  int old_geo        : the old coordination id
-*  int old_sp         : the old chemical species id
-*  int new_sp         : the new chemical species id
-*  coord_info * coord : the old coordination info
-*  double * new_z     : new Z list
+/*!
+  \fn int is_this_a_new_geo (int gid, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
+
+  \brief if required create a new geometry, stored in coord, for coordination type 'gid' and chemical species 'new_sp', return geometry id
+
+  \param gid the new coordination type (0 = total, 1 = partial)
+  \param obj the new coordination info to update
+  \param old_z old Z list
+  \param old_geo the old coordination id
+  \param old_sp the old chemical species id
+  \param new_sp the new chemical species id
+  \param coord the old coordination info
+  \param new_z new Z list
 */
 int is_this_a_new_geo (int gid, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
 {
@@ -209,19 +209,19 @@ int is_this_a_new_geo (int gid, coord_info * obj, int * old_z, int old_geo, int 
   return i;
 }
 
-/*
-*  int find_this_geo_id (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
-*
-*  Usage: if required create a new geometry, stored in coord, for coordination type 'id' and chemical species 'new_sp', return geometry id
-*
-*  int id             : the new coordination type (0 = total, 1 = partial)
-*  coord_info * obj   : the new coordination info to update
-*  int * old_z        : old Z list
-*  int old_geo        : the old coordination id for this coordination type
-*  int old_sp         : the old chemical species id
-*  int new_sp         : the new chemical species id
-*  coord_info * coord : the old coordination info
-*  double * new_z     : new Z list
+/*!
+  \fn int find_this_geo_id (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
+
+  \brief if required create a new geometry, stored in coord, for coordination type 'id' and chemical species 'new_sp', return geometry id
+
+  \param id the new coordination type (0 = total, 1 = partial)
+  \param obj the new coordination info to update
+  \param old_z old Z list
+  \param old_geo the old coordination id for this coordination type
+  \param old_sp the old chemical species id
+  \param new_sp the new chemical species id
+  \param coord the old coordination info
+  \param new_z new Z list
 */
 int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
 {
@@ -355,18 +355,18 @@ int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int o
   return i;
 }
 
-/*
-*  void check_coord_modification (struct project * this_proj, int * old_id, struct atom * new_list,
+/*!
+  \fn void check_coord_modification (struct project * this_proj, int * old_id, struct atom * new_list,
 *                                 struct insert_object * this_object, gboolean movtion, gboolean passivating)
-*
-*  Usage: check atom coordination modification on edition
-*
-*  struct project * this_proj         : the target project
-*  int * old_id                       : the old atom id list, if any
-*  struct atom * new_list             : the new atom(s) list
-*  struct insert_object * this_object : the object to insert, if any
-*  gboolean movtion                   : move or remove = 1, else : 0
-*  gboolean passivating               : passivate
+
+  \brief check atom coordination modification on edition
+
+  \param this_proj the target project
+  \param old_id the old atom id list, if any
+  \param new_list the new atom(s) list
+  \param this_object the object to insert, if any
+  \param else 0
+  \param passivating passivate
 */
 void check_coord_modification (struct project * this_proj, int * old_id, struct atom * new_list,
                                struct insert_object * this_object, gboolean movtion, gboolean passivating)

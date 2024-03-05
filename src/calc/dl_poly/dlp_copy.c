@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'dlp_copy.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to copy force field and related data structures
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   gboolean check_this_other_prop (int oid, int nat, struct field_prop * other);
 
@@ -49,12 +49,12 @@ If not, see <https://www.gnu.org/licenses/> */
 
 extern void print_all_field_struct (struct field_molecule * mol, int str);
 
-/*
-*  struct field_atom * duplicate_field_atom (struct field_atom * old_fat)
-*
-*  Usage: create copy of a field atom data structure
-*
-*  struct field_atom * old_fat : the field atom to duplicate
+/*!
+  \fn struct field_atom * duplicate_field_atom (struct field_atom * old_fat)
+
+  \brief create copy of a field atom data structure
+
+  \param old_fat the field atom to duplicate
 */
 struct field_atom * duplicate_field_atom (struct field_atom * old_fat)
 {
@@ -83,12 +83,12 @@ struct field_atom * duplicate_field_atom (struct field_atom * old_fat)
   return new_fat;
 }
 
-/*
-*  struct field_shell * duplicate_field_shell (struct field_shell * old_shell)
-*
-*  Usage: create copy of a field shell data structure
-*
-*  struct field_shell * old_shell : the field shell to duplicate
+/*!
+  \fn struct field_shell * duplicate_field_shell (struct field_shell * old_shell)
+
+  \brief create copy of a field shell data structure
+
+  \param old_shell the field shell to duplicate
 */
 struct field_shell * duplicate_field_shell (struct field_shell * old_shell)
 {
@@ -109,12 +109,12 @@ struct field_shell * duplicate_field_shell (struct field_shell * old_shell)
   return new_shell;
 }
 
-/*
-*  struct field_constraint * duplicate_field_constraint (struct field_constraint * old_cons)
-*
-*  Usage: create copy of a field constraint data structure
-*
-*  struct field_constraint * old_cons : the field constraint to duplicate
+/*!
+  \fn struct field_constraint * duplicate_field_constraint (struct field_constraint * old_cons)
+
+  \brief create copy of a field constraint data structure
+
+  \param old_cons the field constraint to duplicate
 */
 struct field_constraint * duplicate_field_constraint (struct field_constraint * old_cons)
 {
@@ -131,12 +131,12 @@ struct field_constraint * duplicate_field_constraint (struct field_constraint * 
   return new_cons;
 }
 
-/*
-*  struct field_pmf * duplicate_field_pmf (struct field_pmf * old_pmf)
-*
-*  Usage: create copy of a field PMF data structure
-*
-*  struct field_pmf * old_pmf : the field PMF to duplicate
+/*!
+  \fn struct field_pmf * duplicate_field_pmf (struct field_pmf * old_pmf)
+
+  \brief create copy of a field PMF data structure
+
+  \param old_pmf the field PMF to duplicate
 */
 struct field_pmf * duplicate_field_pmf (struct field_pmf * old_pmf)
 {
@@ -158,12 +158,12 @@ struct field_pmf * duplicate_field_pmf (struct field_pmf * old_pmf)
   return new_pmf;
 }
 
-/*
-*  struct field_rigid * duplicate_field_rigid (struct field_rigid * old_rig)
-*
-*  Usage: create copy of a field rigid data structure
-*
-*  struct field_rigid * old_rig : the field rigid to duplicate
+/*!
+  \fn struct field_rigid * duplicate_field_rigid (struct field_rigid * old_rig)
+
+  \brief create copy of a field rigid data structure
+
+  \param old_rig the field rigid to duplicate
 */
 struct field_rigid * duplicate_field_rigid (struct field_rigid * old_rig)
 {
@@ -179,12 +179,12 @@ struct field_rigid * duplicate_field_rigid (struct field_rigid * old_rig)
   return new_rig;
 }
 
-/*
-*  struct field_tethered * duplicate_field_tethered (struct field_tethered * old_tet)
-*
-*  Usage: create copy of a field tethered data structure
-*
-*  struct field_tethered * old_tet : the field tethered to duplicate
+/*!
+  \fn struct field_tethered * duplicate_field_tethered (struct field_tethered * old_tet)
+
+  \brief create copy of a field tethered data structure
+
+  \param old_tet the field tethered to duplicate
 */
 struct field_tethered * duplicate_field_tethered (struct field_tethered * old_tet)
 {
@@ -199,13 +199,13 @@ struct field_tethered * duplicate_field_tethered (struct field_tethered * old_te
   return new_tet;
 }
 
-/*
-*  struct field_prop * duplicate_field_prop (struct field_prop * old_prop, int ti)
-*
-*  Usage: create a copy of a field property
-*
-*  struct field_prop * old_prop : the field property to duplicate
-*  int ti                       : the type of field property
+/*!
+  \fn struct field_prop * duplicate_field_prop (struct field_prop * old_prop, int ti)
+
+  \brief create a copy of a field property
+
+  \param old_prop the field property to duplicate
+  \param ti the type of field property
 */
 struct field_prop * duplicate_field_prop (struct field_prop * old_prop, int ti)
 {
@@ -227,14 +227,14 @@ struct field_prop * duplicate_field_prop (struct field_prop * old_prop, int ti)
   return new_prop;
 }
 
-/*
-*  gboolean check_this_other_prop (int oid, int nat, struct field_prop * other)
-*
-*  Usage: check if field atom already in field property
-*
-*  int oid                   : the field atom id to search for
-*  int nat                   : the number of atoms in the field property
-*  struct field_prop * other : the field structural property to check
+/*!
+  \fn gboolean check_this_other_prop (int oid, int nat, struct field_prop * other)
+
+  \brief check if field atom already in field property
+
+  \param oid the field atom id to search for
+  \param nat the number of atoms in the field property
+  \param other the field structural property to check
 */
 gboolean check_this_other_prop (int oid, int nat, struct field_prop * other)
 {
@@ -249,14 +249,14 @@ gboolean check_this_other_prop (int oid, int nat, struct field_prop * other)
   return TRUE;
 }
 
-/*
-*  void duplicate_other_prop (int oid, struct field_struct * old_fstr, struct field_struct * new_fstr)
-*
-*  Usage: create copy of a field property 'other' list
-*
-*  int oid                        : the target field atom id
-*  struct field_struct * old_fstr : the field property to duplicate
-*  struct field_struct * new_fstr : the field property to store the results
+/*!
+  \fn void duplicate_other_prop (int oid, struct field_struct * old_fstr, struct field_struct * new_fstr)
+
+  \brief create copy of a field property 'other' list
+
+  \param oid the target field atom id
+  \param old_fstr the field property to duplicate
+  \param new_fstr the field property to store the results
 */
 void duplicate_other_prop (int oid, struct field_struct * old_fstr, struct field_struct * new_fstr)
 {
@@ -282,12 +282,12 @@ void duplicate_other_prop (int oid, struct field_struct * old_fstr, struct field
   }
 }
 
-/*
-*  struct field_struct * duplicate_field_struct (struct field_struct * old_fstr)
-*
-*  Usage: create copy of a field structural element
-*
-*  struct field_struct * old_fstr : the field structural element to duplicate
+/*!
+  \fn struct field_struct * duplicate_field_struct (struct field_struct * old_fstr)
+
+  \brief create copy of a field structural element
+
+  \param old_fstr the field structural element to duplicate
 */
 struct field_struct * duplicate_field_struct (struct field_struct * old_fstr)
 {
@@ -306,13 +306,13 @@ struct field_struct * duplicate_field_struct (struct field_struct * old_fstr)
   return new_fstr;
 }
 
-/*
-*  struct field_struct * duplicate_field_struct_list (struct field_struct * list_str, gboolean init)
-*
-*  Usage: create copy of list of field structural element(s)
-*
-*  struct field_struct * list_str : the list of field structural element(s) to duplicate
-*  gboolean init                  :
+/*!
+  \fn struct field_struct * duplicate_field_struct_list (struct field_struct * list_str, gboolean init)
+
+  \brief create copy of list of field structural element(s)
+
+  \param list_str the list of field structural element(s) to duplicate
+  \param init
 */
 struct field_struct * duplicate_field_struct_list (struct field_struct * list_str, gboolean init)
 {
@@ -331,13 +331,13 @@ struct field_struct * duplicate_field_struct_list (struct field_struct * list_st
   return str_list;
 }
 
-/*
-*  void duplicate_nbody_params (struct field_nth_body * new_fbody, struct field_nth_body * old_fbody)
-*
-*  Usage: copy field body parameter list
-*
-*  struct field_nth_body * new_fbody : the body parameters to fill
-*  struct field_nth_body * old_fbody : the body parameters to duplicate
+/*!
+  \fn void duplicate_nbody_params (struct field_nth_body * new_fbody, struct field_nth_body * old_fbody)
+
+  \brief copy field body parameter list
+
+  \param new_fbody the body parameters to fill
+  \param old_fbody the body parameters to duplicate
 */
 void duplicate_nbody_params (struct field_nth_body * new_fbody, struct field_nth_body * old_fbody)
 {
@@ -347,12 +347,12 @@ void duplicate_nbody_params (struct field_nth_body * new_fbody, struct field_nth
   new_fbody -> use = old_fbody -> use;
 }
 
-/*
-*  struct field_nth_body * duplicate_field_nth_body (struct field_nth_body * old_fbody)
-*
-*  Usage: create copy of a field body property
-*
-*  struct field_nth_body * old_fbody : the field body property to duplicate
+/*!
+  \fn struct field_nth_body * duplicate_field_nth_body (struct field_nth_body * old_fbody)
+
+  \brief create copy of a field body property
+
+  \param old_fbody the field body property to duplicate
 */
 struct field_nth_body * duplicate_field_nth_body (struct field_nth_body * old_fbody)
 {
@@ -394,12 +394,12 @@ struct field_nth_body * duplicate_field_nth_body (struct field_nth_body * old_fb
   return new_fbody;
 }
 
-/*
-*  struct field_external * duplicate_field_external (struct field_external * old_fext)
-*
-*  Usage: create copy of a field external property
-*
-*  struct field_external * old_fext : the field external property to duplicate
+/*!
+  \fn struct field_external * duplicate_field_external (struct field_external * old_fext)
+
+  \brief create copy of a field external property
+
+  \param old_fext the field external property to duplicate
 */
 struct field_external * duplicate_field_external (struct field_external * old_fext)
 {
@@ -418,12 +418,12 @@ struct field_external * duplicate_field_external (struct field_external * old_fe
   return new_fext;
 }
 
-/*
-*  struct field_molecule * duplicate_field_molecule (struct field_molecule * old_fmol)
-*
-*  Usage: create copy of a field molecule
-*
-*  struct field_molecule * old_fmol : the feld molecule to duplicate
+/*!
+  \fn struct field_molecule * duplicate_field_molecule (struct field_molecule * old_fmol)
+
+  \brief create copy of a field molecule
+
+  \param old_fmol the feld molecule to duplicate
 */
 struct field_molecule * duplicate_field_molecule (struct field_molecule * old_fmol)
 {
@@ -501,12 +501,12 @@ struct field_molecule * duplicate_field_molecule (struct field_molecule * old_fm
   return new_fmol;
 }
 
-/*
-*  classical_field * duplicate_classical_field (classical_field * init_field)
-*
-*  Usage: create copy of a force field
-*
-*  classical_field * init_field : the force field to duplicate
+/*!
+  \fn classical_field * duplicate_classical_field (classical_field * init_field)
+
+  \brief create copy of a force field
+
+  \param init_field the force field to duplicate
 */
 classical_field * duplicate_classical_field (classical_field * init_field)
 {

@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_encode.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the encoding (image/video) window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void clean_animation (glwin * view);
   void set_encoding_widget_sensitivity (gboolean video, int sensitivity);
@@ -53,13 +53,13 @@ extern char * codec_name[VIDEO_CODECS];
 extern char * image_name[IMAGE_FORMATS];
 extern gboolean spin (gpointer data);
 
-/*
-*  G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
-*
-*  Usage: set number of frames
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
+
+  \brief set number of frames
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
 {
@@ -74,13 +74,13 @@ G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
   update_entry_int (res, framesec);
 }
 
-/*
-*  G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
-*
-*  Usage: set video extra frames
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
+
+  \brief set video extra frames
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
 {
@@ -95,13 +95,13 @@ G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
   update_entry_int (res, extraframes);
 }
 
-/*
-*  G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
-*
-*  Usage: set video / image resolution
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
+
+  \brief set video / image resolution
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
 {
@@ -117,25 +117,25 @@ G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
   update_entry_int (res, video_res[id]);
 }
 
-/*
-*  G_MODULE_EXPORT void set_video_codec (GtkComboBox *ComboBoxGtk)
-*
-*  Usage: change video codec
-*
-*  GtkComboBox *ComboBoxGtk : the GtkComboBox sending the signal
+/*!
+  \fn G_MODULE_EXPORT void set_video_codec (GtkComboBox *ComboBoxGtk)
+
+  \brief change video codec
+
+  \param *ComboBoxGtk the GtkComboBox sending the signal
 */
 G_MODULE_EXPORT void set_video_codec (GtkComboBox *ComboBoxGtk)
 {
   codec = gtk_combo_box_get_active (ComboBoxGtk);
 }
 
-/*
-*  G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
-*
-*  Usage: set encoding OpenGL quality callback - spin
-*
-*  GtkSpinButton * res : the GtkSpinButton sending the signal
-*  gpointer data       : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
+
+  \brief set encoding OpenGL quality callback - spin
+
+  \param res the GtkSpinButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
 {
@@ -147,13 +147,13 @@ G_MODULE_EXPORT void set_video_opengl_spin (GtkSpinButton * res, gpointer data)
   update_entry_int (GTK_ENTRY(res), oglquality);
 }
 
-/*
-*  G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
-*
-*  Usage: set video bitrate entry callback
-*
-*  GtkEntry * res : the GtkEntry sending the signal
-*  gpointer data  : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
+
+  \brief set video bitrate entry callback
+
+  \param res the GtkEntry sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
 {
@@ -168,12 +168,12 @@ G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
   update_entry_int (res, bitrate);
 }
 
-/*
-*  void clean_animation (glwin * view)
-*
-*  Usage: clean saved animation data
-*
-*  glwin * view : the target glwin
+/*!
+  \fn void clean_animation (glwin * view)
+
+  \brief clean saved animation data
+
+  \param view the target glwin
 */
 void clean_animation (glwin * view)
 {
@@ -204,13 +204,13 @@ GtkWidget * resb;
 GtkWidget * res[2];
 GtkWidget * cod;
 
-/*
-*  void set_encoding_widget_sensitivity (gboolean video, int sensitivity)
-*
-*  Usage:
-*
-*  gboolean video  : encoding video (yes / no)
-*  int sensitivity : sensitivity
+/*!
+  \fn void set_encoding_widget_sensitivity (gboolean video, int sensitivity)
+
+  \brief
+
+  \param video encoding video (yes / no)
+  \param sensitivity sensitivity
 */
 void set_encoding_widget_sensitivity (gboolean video, int sensitivity)
 {
@@ -227,13 +227,13 @@ void set_encoding_widget_sensitivity (gboolean video, int sensitivity)
 
 GtkWidget * form;
 
-/*
-*  G_MODULE_EXPORT void set_image_format (GtkComboBox * box, gpointer data)
-*
-*  Usage: selecting the image format
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_image_format (GtkComboBox * box, gpointer data)
+
+  \brief selecting the image format
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_image_format (GtkComboBox * box, gpointer data)
 {
@@ -258,14 +258,14 @@ G_MODULE_EXPORT void set_image_format (GtkComboBox * box, gpointer data)
 GtkWidget * encoding_pb;
 gboolean encode_video;
 
-/*
-*  G_MODULE_EXPORT void run_window_encode (GtkDialog * win , gint response_id, gpointer data)
-*
-*  Usage: encoding a movie - running the dialog
-*
-*  GtkDialog * win  : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_window_encode (GtkDialog * win , gint response_id, gpointer data)
+
+  \brief encoding a movie - running the dialog
+
+  \param win the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_window_encode (GtkDialog * win , gint response_id, gpointer data)
 {
@@ -300,13 +300,13 @@ G_MODULE_EXPORT void run_window_encode (GtkDialog * win , gint response_id, gpoi
   }
 }
 
-/*
-*  void window_encode (glwin * view, gboolean video)
-*
-*  Usage: encoding a movie - creating the dialog
-*
-*  glwin * view   : the target glwin
-*  gboolean video : video (1) or image (0)
+/*!
+  \fn void window_encode (glwin * view, gboolean video)
+
+  \brief encoding a movie - creating the dialog
+
+  \param view the target glwin
+  \param video video (1) or image (0)
 */
 void window_encode (glwin * view, gboolean video)
 {

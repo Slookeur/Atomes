@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'labels.c'
 *
-*  Contains:
+* Contains:
 *
 
  - Curve labels drawing subroutines
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj);
 
@@ -34,16 +34,16 @@ If not, see <https://www.gnu.org/licenses/> */
 #include "global.h"
 #include "curve.h"
 
-/*
-*  void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
-*
-*  Usage: draw axis label
-*
-*  cairo_t * cr               : the cairo drawing context to use for the draw
-*  double val                 : the value to display
-*  int axe                    : axis (0 = x, 1 = y)
-*  int p                      : label position (0 = bottom, 1 = top)
-*  struct project * this_proj : the target project
+/*!
+  \fn void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
+
+  \brief draw axis label
+
+  \param cr the cairo drawing context to use for the draw
+  \param val the value to display
+  \param axe axis (0 = x, 1 = y)
+  \param p label position (0 = bottom, 1 = top)
+  \param this_proj the target project
 */
 void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
 {

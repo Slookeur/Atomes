@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_object.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create insert objects
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int in_object_bond_list (struct insert_object * object, int aid, int bid);
   int create_object_from_open_project (struct project * this_proj, int p);
@@ -57,12 +57,12 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "atom_edit.h"
 
-/*
-*  double get_object_dim (struct insert_object * object)
-*
-*  Usage: get estimate of an object dimension
-*
-*  struct insert_object * object :
+/*!
+  \fn double get_object_dim (struct insert_object * object)
+
+  \brief get estimate of an object dimension
+
+  \param object
 */
 double get_object_dim (struct insert_object * object)
 {
@@ -83,13 +83,13 @@ double get_object_dim (struct insert_object * object)
   return dmax+1.0;
 }
 
-/*
-*  void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
-*
-*  Usage: get the barycenter of the atomic coordinates of an object
-*
-*  struct insert_object * object : the target insert object
-*  gboolean adjust               : center object coordinates or not
+/*!
+  \fn void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
+
+  \brief get the barycenter of the atomic coordinates of an object
+
+  \param object the target insert object
+  \param adjust center object coordinates or not
 */
 void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
 {
@@ -115,18 +115,18 @@ void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
   object -> dim = get_object_dim (object);
 }
 
-/*
-*  gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at)
-*
-*  Usage: rebuild target atom id coordinates using PBC
-*
-*  struct project * this_proj    : the target project
-*  int step                      : the MD step
-*  struct insert_object * object : the target insert object
-*  int target                    : the target atom id to correct
-*  int aid                       : the atom id
-*  struct atom * at              : the target atom
-*  gboolean * checked_at         : the list of already checked/corrected atom coordinates id
+/*!
+  \fn gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at)
+
+  \brief rebuild target atom id coordinates using PBC
+
+  \param this_proj the target project
+  \param step the MD step
+  \param object the target insert object
+  \param target the target atom id to correct
+  \param aid the atom id
+  \param at the target atom
+  \param checked_at the list of already checked/corrected atom coordinates id
 */
 gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at)
 {
@@ -158,14 +158,14 @@ gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct in
   return FALSE;
 }
 
-/*
-*  void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
-*
-*  Usage: reconstruct the project bond(s)/clone(s) lists after reconstruction using PBC
-*
-*  struct project * this_proj : the target project
-*  int ifcl                   : number of clone bond(s) removed
-*  int * bcid                 : the removed clone bond(s) atoms id
+/*!
+  \fn void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
+
+  \brief reconstruct the project bond(s)/clone(s) lists after reconstruction using PBC
+
+  \param this_proj the target project
+  \param ifcl number of clone bond(s) removed
+  \param bcid the removed clone bond(s) atoms id
 */
 void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
 {
@@ -241,14 +241,14 @@ void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
   }
 }
 
-/*
-*  void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
-*
-*  Usage: reconstruct object atomic coordinates using PBC
-*
-*  struct insert_object * this_object : the target project
-*  struct project * this_proj         : the target insert object
-*  gboolean upcoord                   : reconstruction of atomic coordinates using PBC ?
+/*!
+  \fn void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
+
+  \brief reconstruct object atomic coordinates using PBC
+
+  \param this_object the target project
+  \param this_proj the target insert object
+  \param upcoord reconstruction of atomic coordinates using PBC ?
 */
 void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 {
@@ -303,14 +303,14 @@ void reconstruct_coordinates_for_object (struct project * this_proj, struct inse
   }
 }
 
-/*
-*  void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
-*
-*  Usage: correct the atomic coordinates for 'this_object'
-*
-*  struct project * this_proj         : the target project
-*  struct insert_object * this_object : the target insert object
-*  gboolean upcoord                   : reconstruction of atomic coordinates using PBC ?
+/*!
+  \fn void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
+
+  \brief correct the atomic coordinates for 'this_object'
+
+  \param this_proj the target project
+  \param this_object the target insert object
+  \param upcoord reconstruction of atomic coordinates using PBC ?
 */
 void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
 {
@@ -334,12 +334,12 @@ void correct_coordinates_for_object (struct project * this_proj, struct insert_o
   }
 }
 
-/*
-*  tint ulam_coord (glwin * view)
-*
-*  Usage: shift insertion position for object not to have overlapping objects for multiple/repeated insertions
-*
-*  glwin * view : the target glwin
+/*!
+  \fn tint ulam_coord (glwin * view)
+
+  \brief shift insertion position for object not to have overlapping objects for multiple/repeated insertions
+
+  \param view the target glwin
 */
 tint ulam_coord (glwin * view)
 {
@@ -361,12 +361,12 @@ tint ulam_coord (glwin * view)
 int being_copied;
 struct insert_object * lib_object;
 
-/*
-*  struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
-*
-*  Usage: duplicate an insert object
-*
-*  struct insert_object * old_obj : the insert object to duplicate
+/*!
+  \fn struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
+
+  \brief duplicate an insert object
+
+  \param old_obj the insert object to duplicate
 */
 struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
 {
@@ -401,12 +401,12 @@ struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
   return new_obj;
 }
 
-/*
-*  void create_object_from_library (int p)
-*
-*  Usage: create object using the molecular library
-*
-*  int p : the project id of the library molecule in the workspace
+/*!
+  \fn void create_object_from_library (int p)
+
+  \brief create object using the molecular library
+
+  \param p the project id of the library molecule in the workspace
 */
 void create_object_from_library (int p)
 {
@@ -444,14 +444,14 @@ void create_object_from_library (int p)
   lib_object -> coord -> totcoord[2] = 1;
 }
 
-/*
-*  int in_object_bond_list (struct insert_object * object, int aid, int bid)
-*
-*  Usage: is there a bond between atom aid and atom bid ?
-*
-*  struct insert_object * object : the target insert object
-*  int aid                       : 1st atom id
-*  int bid                       : 2nd atom id
+/*!
+  \fn int in_object_bond_list (struct insert_object * object, int aid, int bid)
+
+  \brief is there a bond between atom aid and atom bid ?
+
+  \param object the target insert object
+  \param aid 1st atom id
+  \param bid 2nd atom id
 */
 int in_object_bond_list (struct insert_object * object, int aid, int bid)
 {
@@ -464,15 +464,15 @@ int in_object_bond_list (struct insert_object * object, int aid, int bid)
   return 0;
 }
 
-/*
-*  void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion)
-*
-*  Usage: clean the object neigbours list
-*
-*  struct project * this_proj    : the target project
-*  struct insert_object * object : the target insert object
-*  int * new_id                  : list of atom's old id in the project 'this_proj'
-*  gboolean movtion              : reconstruction of atomic coordinates using PBC ?
+/*!
+  \fn void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion)
+
+  \brief clean the object neigbours list
+
+  \param this_proj the target project
+  \param object the target insert object
+  \param new_id list of atom's old id in the project 'this_proj'
+  \param movtion reconstruction of atomic coordinates using PBC ?
 */
 void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion)
 {
@@ -518,16 +518,16 @@ void clean_object_vois (struct project * this_proj, struct insert_object * objec
   }
 }
 
-/*
-*  void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion)
-*
-*  Usage: create the object bond list, and adjust the bond's atom id
-*
-*  struct project * proj         : the target project
-*  int o_step                    : the MD step
-*  struct insert_object * object : the target insert object
-*  int * new_id                  : list of atom's old id in the project 'this_proj'
-*  gboolean movtion              : reconstruction of atomic coordinates using PBC ?
+/*!
+  \fn void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion)
+
+  \brief create the object bond list, and adjust the bond's atom id
+
+  \param proj the target project
+  \param o_step the MD step
+  \param object the target insert object
+  \param new_id list of atom's old id in the project 'this_proj'
+  \param movtion reconstruction of atomic coordinates using PBC ?
 */
 void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion)
 {
@@ -594,19 +594,19 @@ void clean_object_bonds (struct project * proj, int o_step, struct insert_object
   if (new_id) clean_object_vois (proj, object, new_id, movtion);
 }
 
-/*
-*  void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
+/*!
+  \fn void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
 *                         int o_step, int numa, int * old_id, gboolean alloc_new_id, atom_search * remove)
 *
 * Usage: add atom list to insert object
-*
-*  struct insert_object * this_object : the target insert object
-*  struct project * this_proj         : the target project
-*  int o_step                         : the MD step
-*  int numa                           : number of atom(s)
-*  int * old_id                       : list of atom's old id in the project 'this_proj'
-*  gboolean check_bonding             : check bonding ? (partial copy or not)
-*  atom_search * remove               : remove search, if any
+
+  \param this_object the target insert object
+  \param this_proj the target project
+  \param o_step the MD step
+  \param numa number of atom(s)
+  \param old_id list of atom's old id in the project 'this_proj'
+  \param check_bonding check bonding ? (partial copy or not)
+  \param remove remove search, if any
 */
 void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
                        int o_step, int numa, int * old_id, gboolean check_bonding, atom_search * remove)
@@ -641,13 +641,13 @@ void add_object_atoms (struct insert_object * this_object, struct project * this
   g_free (new_id);
 }
 
-/*
-*  int * duplicate_z (int species, double * old_z)
-*
-*  Usage: duplicate z table when creating an object, integer is preferred to avoid comparison errors during action
-*
-*  int species    : the number of chemical species
-*  double * old_z : the old z table to duplicate
+/*!
+  \fn int * duplicate_z (int species, double * old_z)
+
+  \brief duplicate z table when creating an object, integer is preferred to avoid comparison errors during action
+
+  \param species the number of chemical species
+  \param old_z the old z table to duplicate
 *
 */
 int * duplicate_z (int species, double * old_z)
@@ -661,14 +661,14 @@ int * duplicate_z (int species, double * old_z)
   return new_z;
 }
 
-/*
-*  struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove)
-*
-*  Usage: create object from all atom(s) of the same chemical species
-*
-*  struct project * this_proj : the target project
-*  int sid                    : the species id
-*  atom_search * remove       : remove search, if any
+/*!
+  \fn struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove)
+
+  \brief create object from all atom(s) of the same chemical species
+
+  \param this_proj the target project
+  \param sid the species id
+  \param remove remove search, if any
 */
 struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove)
 {
@@ -704,12 +704,12 @@ struct insert_object * create_object_from_species (struct project * this_proj, i
   return this_object;
 }
 
-/*
-*  struct insert_object * create_object_from_selection (struct project * this_proj)
-*
-*  Usage: create object from atom selection
-*
-*  struct project * this_proj : the target project
+/*!
+  \fn struct insert_object * create_object_from_selection (struct project * this_proj)
+
+  \brief create object from atom selection
+
+  \param this_proj the target project
 */
 struct insert_object * create_object_from_selection (struct project * this_proj)
 {
@@ -754,15 +754,15 @@ struct insert_object * create_object_from_selection (struct project * this_proj)
   return this_object;
 }
 
-/*
-*  struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
-*
-*  Usage: create object from an atom and its nearest neighbors
-*
-*  struct project * this_proj : the target project
-*  int coord                  : 0 = total coordination, 1 = partial coordination
-*  int aid                    : the atom id
-*  atom_search * remove       : remove search, if any
+/*!
+  \fn struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
+
+  \brief create object from an atom and its nearest neighbors
+
+  \param this_proj the target project
+  \param coord 0 = total coordination, 1 = partial coordination
+  \param aid the atom id
+  \param remove remove search, if any
 */
 struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 {
@@ -825,15 +825,15 @@ struct insert_object * create_object_from_atom_coordination (struct project * th
   return this_object;
 }
 
-/*
-*  struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
-*
-*  Usage: create object from all the atom(s) that have the same exact coordination than the target atom
-*
-*  struct project * this_proj : the target project
-*  int coord                  : 0 = total coordination, 1 = partial coordination
-*  int aid                    : target atom id
-*  atom_search * remove       : remove search, if any
+/*!
+  \fn struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
+
+  \brief create object from all the atom(s) that have the same exact coordination than the target atom
+
+  \param this_proj the target project
+  \param coord 0 = total coordination, 1 = partial coordination
+  \param aid target atom id
+  \param remove remove search, if any
 */
 struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
 {
@@ -905,15 +905,15 @@ struct insert_object * create_object_from_overall_coordination (struct project *
   return this_object;
 }
 
-/*
-*  struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove)
-*
-*  Usage: create object from a fragment or a molecule
-*
-*  struct project * this_proj : the target project
-*  int coord                  : 2 = fragment, 3 = molecule
-*  int geo                    : fragment or molecule id
-*  atom_search * remove       : remove search, if any
+/*!
+  \fn struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove)
+
+  \brief create object from a fragment or a molecule
+
+  \param this_proj the target project
+  \param coord 2 = fragment, 3 = molecule
+  \param geo fragment or molecule id
+  \param remove remove search, if any
 */
 struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove)
 {
@@ -953,12 +953,12 @@ struct insert_object * create_object_from_frag_mol (struct project * this_proj, 
   return this_object;
 }
 
-/*
-*  void adjust_object_frag_coord (struct insert_object * object)
-*
-*  Usage: adjust object number of fragment(s)
-*
-*  struct insert_object * object : the target insert object
+/*!
+  \fn void adjust_object_frag_coord (struct insert_object * object)
+
+  \brief adjust object number of fragment(s)
+
+  \param object the target insert object
 */
 void adjust_object_frag_coord (struct insert_object * object)
 {
@@ -994,13 +994,13 @@ void adjust_object_frag_coord (struct insert_object * object)
   remove_bonds_from_project (NULL, object, NULL, & object -> at_list[0], FALSE, FALSE);
 }
 
-/*
-*  int create_object_from_open_project (struct project * this_proj, int p)
-*
-*  Usage: create object from atom(s) of a project opened in the workspace
-*
-*  struct project * this_proj : the target project
-*  int p                      : the project id of the project that contains the atom(s) to copy
+/*!
+  \fn int create_object_from_open_project (struct project * this_proj, int p)
+
+  \brief create object from atom(s) of a project opened in the workspace
+
+  \param this_proj the target project
+  \param p the project id of the project that contains the atom(s) to copy
 */
 int create_object_from_open_project (struct project * this_proj, int p)
 {
@@ -1079,15 +1079,15 @@ int create_object_from_open_project (struct project * this_proj, int p)
   return FROM_PROJECT;
 }
 
-/*
-*  void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch)
-*
-*  Usage: clean object data
-*
-*  int orig                   : - (fragmol id/species id +1), -1, or, orgin atom id
-*  int act                    : action in enum 'actions'
-*  struct project * this_proj : the target project
-*  atom_search * asearch      : the target atom search
+/*!
+  \fn void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch)
+
+  \brief clean object data
+
+  \param orig - (fragmol id/species id +1), -1, or, orgin atom id
+  \param act action in enum 'actions'
+  \param this_proj the target project
+  \param asearch the target atom search
 */
 void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch)
 {
@@ -1169,16 +1169,16 @@ void clean_this_object (int orig, int act, struct project * this_proj, atom_sear
   }
 }
 
-/*
-*  void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible)
-*
-*  Usage: to insert object in project
-*
-*  int stat                   : in enum object_types
-*  int orig                   : - (fragmol id/species id +1), -1, or, orgin atom id
-*  struct project * this_proj : the target project
-*  atom_search * asearch      : the target atom search
-*  gboolean visible           : is the model edition window visible ?
+/*!
+  \fn void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible)
+
+  \brief to insert object in project
+
+  \param stat in enum object_types
+  \param orig - (fragmol id/species id +1), -1, or, orgin atom id
+  \param this_proj the target project
+  \param asearch the target atom search
+  \param visible is the model edition window visible ?
 */
 void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible)
 {

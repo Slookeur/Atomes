@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'curve.c'
 *
-*  Contains:
+* Contains:
 *
 
  - curve management utilities
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   double scale (double axe);
 
@@ -116,12 +116,12 @@ int len9 = sizeof(dashed9) / sizeof(dashed9[0]);;
 const double pdashed[] = {1.0};
 int lenp = 1;
 
-/*
-*  thedash * selectdash (int iddash)
-*
-*  Usage: setup dash pointer
-*
-*  int iddash : the target dash
+/*!
+  \fn thedash * selectdash (int iddash)
+
+  \brief setup dash pointer
+
+  \param iddash the target dash
 */
 thedash * selectdash (int iddash)
 {
@@ -186,12 +186,12 @@ thedash * selectdash (int iddash)
   return (dashtab);
 }
 
-/*
-*  double scale (double axe)
-*
-*  Usage: find appropriate major tick spacing based on axis length
-*
-*  double axe : axis length
+/*!
+  \fn double scale (double axe)
+
+  \brief find appropriate major tick spacing based on axis length
+
+  \param axe axis length
 */
 double scale (double axe)
 {
@@ -295,14 +295,14 @@ double scale (double axe)
   return (xs);
 }
 
-/*
-*  void prep_plot (struct project * this_proj, int rid, int cid)
-*
-*  Usage: prepare curve plot (setting up variables for the plot)
-*
-*  struct project * this_proj : the target project
-*  int rid                    : the calculation id
-*  int cid                    : the curve id
+/*!
+  \fn void prep_plot (struct project * this_proj, int rid, int cid)
+
+  \brief prepare curve plot (setting up variables for the plot)
+
+  \param this_proj the target project
+  \param rid the calculation id
+  \param cid the curve id
 */
 void prep_plot (struct project * this_proj, int rid, int cid)
 {
@@ -319,13 +319,13 @@ void prep_plot (struct project * this_proj, int rid, int cid)
   YDRAW = y_max - y_min;
 }
 
-/*
-*  void clean_this_curve_window (int cid, int rid)
-*
-*  Usage: free curve window data
-*
-*  int cid : the curve id
-*  int rid : the calculation id
+/*!
+  \fn void clean_this_curve_window (int cid, int rid)
+
+  \brief free curve window data
+
+  \param cid the curve id
+  \param rid the calculation id
 */
 void clean_this_curve_window (int cid, int rid)
 {
@@ -349,14 +349,14 @@ void clean_this_curve_window (int cid, int rid)
   active_project -> curves[rid][cid] -> ndata = 0;
 }
 
-/*
-*  void set_curve_data_zero (int rid, int cid, int interv)
-*
-*  Usage: initialize curve data
-*
-*  int rid    : the calculation id
-*  int cid    : the curve id
-*  int interv : the number of data point(s)
+/*!
+  \fn void set_curve_data_zero (int rid, int cid, int interv)
+
+  \brief initialize curve data
+
+  \param rid the calculation id
+  \param cid the curve id
+  \param interv the number of data point(s)
 */
 void set_curve_data_zero (int rid, int cid, int interv)
 {
@@ -369,15 +369,15 @@ void set_curve_data_zero (int rid, int cid, int interv)
   }
 }
 
-/*
-*  void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
-*
-*  Usage: save calculation results from Fortran90
-*
-*  int * interv               : number of data point(s)
-*  double datacurve[* interv] : calculation result(s) to save
-*  int * cid                  : curve id
-*  int * rid                  : calculation id
+/*!
+  \fn void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
+
+  \brief save calculation results from Fortran90
+
+  \param interv number of data point(s)
+  \param datacurve[*interv] calculation result(s) to save
+  \param cid curve id
+  \param rid calculation id
 */
 void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
 {
@@ -402,7 +402,7 @@ void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid
     }
     else
     {
-      set_curve_data_zero (*  rid, * cid, inter);
+      set_curve_data_zero (* rid, * cid, inter);
     }
     if (* rid != SP)
     {
@@ -432,13 +432,13 @@ void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid
   }
 }
 
-/*
-*  void hide_curves (struct project * this_proj, int c)
-*
-*  Usage: for project hide all curves for a calculation
-*
-*  struct project * this_proj : the target project
-*  int c                      : the target calculation
+/*!
+  \fn void hide_curves (struct project * this_proj, int c)
+
+  \brief for project hide all curves for a calculation
+
+  \param this_proj the target project
+  \param c the target calculation
 */
 void hide_curves (struct project * this_proj, int c)
 {
@@ -462,14 +462,14 @@ void hide_curves (struct project * this_proj, int c)
   }
 }
 
-/*
-*  void remove_this_curve_from_extras (int a, int b, int c)
-*
-*  Usage: free all target (a,b,c) curve from other curve(s) extra(s)
-*
-*  int a : the target project
-*  int b : the target calculation
-*  int c : the target curve
+/*!
+  \fn void remove_this_curve_from_extras (int a, int b, int c)
+
+  \brief free all target (a,b,c) curve from other curve(s) extra(s)
+
+  \param a the target project
+  \param b the target calculation
+  \param c the target curve
 */
 void remove_this_curve_from_extras (int a, int b, int c)
 {
@@ -507,13 +507,13 @@ void remove_this_curve_from_extras (int a, int b, int c)
   }
 }
 
-/*
-*  void erase_curves (struct project * this_proj, int c)
-*
-*  Usage: free all curve(s) data
-*
-*  struct project * this_proj : the target project
-*  int c                      : the target calculation
+/*!
+  \fn void erase_curves (struct project * this_proj, int c)
+
+  \brief free all curve(s) data
+
+  \param this_proj the target project
+  \param c the target calculation
 */
 void erase_curves (struct project * this_proj, int c)
 {
@@ -543,10 +543,10 @@ void erase_curves (struct project * this_proj, int c)
   }
 }
 
-/*
-*  void update_curves ()
-*
-*  Usage: update all curve(s) rendering for all project(s) in the workspace
+/*!
+  \fn void update_curves ()
+
+  \brief update all curve(s) rendering for all project(s) in the workspace
 */
 void update_curves ()
 {
@@ -571,12 +571,12 @@ void update_curves ()
   }
 }
 
-/*
-*  void update_curve (gpointer data)
-*
-*  Usage: update curve rendering
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn void update_curve (gpointer data)
+
+  \brief update curve rendering
+
+  \param data the associated data pointer
 */
 void update_curve (gpointer data)
 {

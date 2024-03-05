@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'atom_insert.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to insert bond(s) to a project
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list);
   void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object);
@@ -32,15 +32,15 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #include "atom_edit.h"
 
-/*
-*  void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list)
-*
-*  Usage: add bond list to project bond list
-*
-*  struct project * this_proj : the target project
-*  int removed                : the number of atom(s) removed
-*  int nbd                    : the number of bond(s) to add
-*  int ** new_bond_list       : the bond list to add
+/*!
+  \fn void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list)
+
+  \brief add bond list to project bond list
+
+  \param this_proj the target project
+  \param removed the number of atom(s) removed
+  \param nbd the number of bond(s) to add
+  \param new_bond_list the bond list to add
 */
 void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list)
 {
@@ -73,15 +73,15 @@ void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int
   }
 }
 
-/*
-*  void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object)
-*
-*  Usage: add object bond(s) list to overall bond(s) list
-*
-*  int ** new_bond_list          : the bond list in the model
-*  int nat                       : the number of atom(s) in the model
-*  int nbd                       : the number of bond(s) in the model
-*  struct insert_object * object : the target insert object
+/*!
+  \fn void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object)
+
+  \brief add object bond(s) list to overall bond(s) list
+
+  \param new_bond_list the bond list in the model
+  \param nat the number of atom(s) in the model
+  \param nbd the number of bond(s) in the model
+  \param object the target insert object
 */
 void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object)
 {
@@ -96,15 +96,15 @@ void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_ob
   }
 }
 
-/*
-*  void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible)
-*
-*  Usage: prepare to insert something
-*
-*  gchar * key                : the string describing the object to insert
-*  struct project * this_proj : the target project
-*  atom_search * asearch      : the target atom search
-*  gboolean visible           : is the model edition window visible
+/*!
+  \fn void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible)
+
+  \brief prepare to insert something
+
+  \param key the string describing the object to insert
+  \param this_proj the target project
+  \param asearch the target atom search
+  \param visible is the model edition window visible
 */
 void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible)
 {
@@ -112,13 +112,13 @@ void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * 
   if (i == FROM_PROJECT || i == FROM_DATA || i > 0) to_insert_in_project (i, -1, this_proj, asearch, visible);
 }
 
-/*
-*  G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data)
-*
-*  Usage: change the object to insert
-*
-*  GtkComboBox * box : the GtkComboBox sending the signal
-*  gpointer data     : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data)
+
+  \brief change the object to insert
+
+  \param box the GtkComboBox sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data)
 {

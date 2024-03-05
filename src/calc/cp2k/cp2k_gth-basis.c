@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'cp2k_gth-basis.c'
 *
-*  Contains:
+* Contains:
 *
 
   CP2K GTH basis set, as delivered with CP2K v9.1

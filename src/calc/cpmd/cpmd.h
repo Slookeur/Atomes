@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'cpmd.h'
 *
-*  Contains: 
+* Contains:
 
 */
 
@@ -101,11 +101,12 @@ extern GtkWidget * sel_img[3];
 
 extern GtkWidget * cpmd_box (GtkWidget * box, gchar * lab, int v_space, int h_space, int dim);
 
+/*! \enum therm_types */
 enum therm_types {
-  CONTROL = -1,
-  GLOBAL = 0,
-  LOCAL = 1,
-  MOLECULE = 2
+  CONTROL = -1, /*!< -1 */
+  GLOBAL = 0, /*!< 0 */
+  LOCAL = 1, /*!< 1 */
+  MOLECULE = 2 /*!< 2 */
 };
 
 extern gchar * nosetype[3];

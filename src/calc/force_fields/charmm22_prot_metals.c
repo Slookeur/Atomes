@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'charmm22_prot_metals.c'
 *
-*  Contains:
+* Contains:
 *
 
   CHARMM-charmm22_prot_metals force field, data from taken from:

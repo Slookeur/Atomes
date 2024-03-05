@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'ringscall.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The callbacks for the ring statistics calculation dialog
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   void initrng ();
   void update_rings_menus (glwin * view);
@@ -65,10 +65,10 @@ extern G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * p
 #endif
 gboolean toggled_rings;
 
-/*
-*  void initrng ()
-*
-*  Usage: initialize the curve widgets for the ring statistics
+/*!
+  \fn void initrng ()
+
+  \brief initialize the curve widgets for the ring statistics
 */
 void initrng ()
 {
@@ -98,12 +98,12 @@ void initrng ()
 }
 
 #ifdef GTK3
-/*
-*  void update_rings_menus (glwin * view)
-*
-*  Usage: update the ring(s) menu for the glview
-*
-*  glwin * view : the glview
+/*!
+  \fn void update_rings_menus (glwin * view)
+
+  \brief update the ring(s) menu for the glview
+
+  \param view the glview
 */
 void update_rings_menus (glwin * view)
 {
@@ -130,13 +130,13 @@ void update_rings_menus (glwin * view)
 }
 #endif
 
-/*
-*  void update_rings_view (struct project * this_proj, int c)
-*
-*  Usage: update the text view for ring statistics
-*
-*  struct project * this_proj : the target project
-*  int c                      : the ring type
+/*!
+  \fn void update_rings_view (struct project * this_proj, int c)
+
+  \brief update the text view for ring statistics
+
+  \param this_proj the target project
+  \param c the ring type
 */
 void update_rings_view (struct project * this_proj, int c)
 {
@@ -355,13 +355,13 @@ void update_rings_view (struct project * this_proj, int c)
   }
 }
 
-/*
-*  void clean_rings_data (int rid, glwin * view)
-*
-*  Usage: clean a ring type data for a glview
-*
-*  int rid      : Rings type
-*  glwin * view : the glview
+/*!
+  \fn void clean_rings_data (int rid, glwin * view)
+
+  \brief clean a ring type data for a glview
+
+  \param rid Rings type
+  \param view the glview
 */
 void clean_rings_data (int rid, glwin * view)
 {
@@ -420,13 +420,13 @@ void clean_rings_data (int rid, glwin * view)
 #endif
 }
 
-/*
-*  G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
-*
-*  Usage: compute ring statistics
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
+
+  \brief compute ring statistics
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
 {
@@ -544,26 +544,26 @@ G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
   if (search > 2 && active_cell -> pbc) active_project -> dmtx = FALSE;
 }
 
-/*
-*  void save_rings_data_ (int * taille,
+/*!
+  \fn void save_rings_data_ (int * taille,
                           double ectrc[* taille],
                           double ectpna[* taille],
                           double ectmax[* taille],
                           double ectmin[* taille],
                           double * rpstep, double * ectrpst,
                           double * nampat, double * ectampat)
-*
-*  Usage : get rings statistics results form Fortran90
-*
-*  int * taille            : Number of data points
-*  double ectrc[* taille]  : RC
-*  double ectpna[* taille] : PN
-*  double ectmax[* taille] : PMAX
-*  double ectmin[* taille] : PMIN
-*  double * rpstep         : Ring(s) per MD step
-*  double * ectrpst        : Standard deviation
-*  double * nampat         : Rings not found
-*  double * ectampat       : Standard deviation
+
+  \param Usage get rings statistics results form Fortran90
+
+  \param taille Number of data points
+  \param ectrc[*taille] RC
+  \param ectpna[*taille] PN
+  \param ectmax[*taille] PMAX
+  \param ectmin[*taille] PMIN
+  \param rpstep Ring(s) per MD step
+  \param ectrpst Standard deviation
+  \param nampat Rings not found
+  \param ectampat Standard deviation
 */
 void save_rings_data_ (int * taille,
                        double ectrc[* taille],

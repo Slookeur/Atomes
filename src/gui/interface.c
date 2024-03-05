@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'interface.c'
 *
-*  Contains:
+* Contains:
 *
 
  - General message interfaces
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   int dummy_ask_ (char * question);
   int iask (char * question, char * lab, int id, GtkWidget * win);
@@ -117,12 +117,12 @@ GtkWidget * answer;
   g_free (url);
 } */
 
-/*
-*  GtkWidget * addweb (int id)
-*
-*  Usage: create a widget to present
-*
-*  int id : Add contact info (1) or not (0)
+/*!
+  \fn GtkWidget * addweb (int id)
+
+  \brief create a widget to present
+
+  \param id Add contact info (1) or not (0)
 */
 GtkWidget * addweb (int id)
 {
@@ -156,13 +156,13 @@ GtkWidget * addweb (int id)
   return (vbox);
 }
 
-/*
-*  G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
-*
-*  Usage: create the about dialog
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
+
+  \brief create the about dialog
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
 {
@@ -197,13 +197,13 @@ G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
   run_this_gtk_dialog (aboutdialog,  G_CALLBACK(destroy_this_dialog), NULL);
 }
 
-/*
-*  void show_web (GtkWidget * dialog, int id)
-*
-*  Usage: add / show web information to widget
-*
-*  GtkWidget * dialog : the GtkWidget to modify
-*  int id             : Add contact info (1) or not (0)
+/*!
+  \fn void show_web (GtkWidget * dialog, int id)
+
+  \brief add / show web information to widget
+
+  \param dialog the GtkWidget to modify
+  \param id Add contact info (1) or not (0)
 */
 void show_web (GtkWidget * dialog, int id)
 {
@@ -214,14 +214,14 @@ void show_web (GtkWidget * dialog, int id)
   show_the_widgets (box);
 }
 
-/*
-*  void show_info (char * information, int val, GtkWidget * win)
-*
-*  Usage: add / show information message to widget
-*
-*  char * information : Message
-*  int val            : Add contact info (1) or not (0)
-*  GtkWidget * win    : the GtkWidget to modify
+/*!
+  \fn void show_info (char * information, int val, GtkWidget * win)
+
+  \brief add / show information message to widget
+
+  \param information Message
+  \param val Add contact info (1) or not (0)
+  \param win the GtkWidget to modify
 */
 void show_info (char * information, int val, GtkWidget * win)
 {
@@ -241,13 +241,13 @@ void show_info (char * information, int val, GtkWidget * win)
   g_free (info);
 }
 
-/*
-*  void show_warning (char * warning, GtkWidget * win)
-*
-*  Usage: show warning
-*
-*  char * warning  : Message
-*  GtkWidget * win : Parent GtkWidget, if any
+/*!
+  \fn void show_warning (char * warning, GtkWidget * win)
+
+  \brief show warning
+
+  \param warning Message
+  \param win Parent GtkWidget, if any
 */
 void show_warning (char * warning, GtkWidget * win)
 {
@@ -255,14 +255,14 @@ void show_warning (char * warning, GtkWidget * win)
   run_this_gtk_dialog (dialog, G_CALLBACK(run_destroy_dialog), NULL);
 }
 
-/*
-*  void show_warning_ (char * warning, char * sub, char * tab)
-*
-*  Usage: show warning from Fortran90
-*
-*  char * warning : Message
-*  char * sub     : Fortan90 subroutine
-*  char * tab     : Fortran90 pointer
+/*!
+  \fn void show_warning_ (char * warning, char * sub, char * tab)
+
+  \brief show warning from Fortran90
+
+  \param warning Message
+  \param sub Fortan90 subroutine
+  \param tab Fortran90 pointer
 */
 void show_warning_ (char * warning, char * sub, char * tab)
 {
@@ -273,14 +273,14 @@ void show_warning_ (char * warning, char * sub, char * tab)
   g_free (wtot);
 }
 
-/*
-*  void show_error (char * error, int val, GtkWidget * win)
-*
-*  Usage: show error message
-*
-*  char * error    : Message
-*  int val         : Add contact info (1) or not (0)
-*  GtkWidget * win : Parent GtkWidget, if any
+/*!
+  \fn void show_error (char * error, int val, GtkWidget * win)
+
+  \brief show error message
+
+  \param error Message
+  \param val Add contact info (1) or not (0)
+  \param win Parent GtkWidget, if any
 */
 void show_error (char * error, int val, GtkWidget * win)
 {
@@ -300,14 +300,14 @@ void show_error (char * error, int val, GtkWidget * win)
   g_free (etot);
 }
 
-/*
-*  void show_error_ (char * error, char * sub, char * tab)
-*
-*  Usage: show error from Fortran90
-*
-*  char * error : Message
-*  char * sub   : Fortan90 subroutine
-*  char * tab   : Fortran90 pointer
+/*!
+  \fn void show_error_ (char * error, char * sub, char * tab)
+
+  \brief show error from Fortran90
+
+  \param error Message
+  \param sub Fortan90 subroutine
+  \param tab Fortran90 pointer
 */
 void show_error_ (char * error, char * sub, char * tab)
 {
@@ -320,14 +320,14 @@ void show_error_ (char * error, char * sub, char * tab)
 
 gboolean res_yes_no;
 
-/*
-*  G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer data)
-*
-*  Usage: ask yes or no for something: running dialog
-*
-*  GtkDialog * dial : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer data)
+
+  \brief ask yes or no for something: running dialog
+
+  \param dial the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer data)
 {
@@ -335,15 +335,15 @@ G_MODULE_EXPORT void run_yes_no (GtkDialog * dial, gint response_id, gpointer da
   destroy_this_dialog (dial);
 }
 
-/*
-*  gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
-*
-*  Usage: ask yes or no for something: prepare dialog
-*
-*  gchar * title    : Title
-*  gchar * text     : Message
-*  int type         : the type of message window
-*  GtkWidget * widg : the parent GtkWidget, if any
+/*!
+  \fn gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
+
+  \brief ask yes or no for something: prepare dialog
+
+  \param title Title
+  \param text Message
+  \param type the type of message window
+  \param widg the parent GtkWidget, if any
 */
 gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
 {
@@ -352,25 +352,25 @@ gboolean ask_yes_no (gchar * title, gchar * text, int type, GtkWidget * widg)
   return res_yes_no;
 }
 
-/*
-*  gchar * exact_name (gchar * name)
-*
-*  Usage: short cut to print string without spaces
-*
-*  gchar * name : the initial string
+/*!
+  \fn gchar * exact_name (gchar * name)
+
+  \brief short cut to print string without spaces
+
+  \param name the initial string
 */
 gchar * exact_name (gchar * name)
 {
   return substitute_string (name, " ", NULL);
 }
 
-/*
-*  GtkWidget * show_pop (char * pop, GtkWidget * pwin)
-*
-*  Usage: display pop information window
-*
-*  char * pop       : Message
-*  GtkWidget * pwin : Parent widget, if any
+/*!
+  \fn GtkWidget * show_pop (char * pop, GtkWidget * pwin)
+
+  \brief display pop information window
+
+  \param pop Message
+  \param pwin Parent widget, if any
 */
 GtkWidget * show_pop (char * pop, GtkWidget * pwin)
 {
@@ -388,24 +388,24 @@ GtkWidget * show_pop (char * pop, GtkWidget * pwin)
 }
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data)
-*
-*  Usage: Leaving atomes ?
-*
-*  GtkWindow * widget : the GtkWidget sending the signal
-*  gpointer data      : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data)
+
+  \brief Leaving atomes ?
+
+  \param widget the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean leaving_question (GtkWindow * widget, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event, gpointer data)
-*
-*  Usage: Leaving atomes ?
-*
-*  GtkWidget * widget : the GtkWidget sending the signal
-*  GdkEvent * event   : the GdkEvent triggering the signal
-*  gpointer data      : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event, gpointer data)
+
+  \brief Leaving atomes ?
+
+  \param widget the GtkWidget sending the signal
+  \param event the GdkEvent triggering the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event, gpointer data)
 #endif
@@ -421,12 +421,12 @@ G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event,
   return TRUE;
 }
 
-/*
-*  int dummy_ask_ (char * question)
-*
-*  Usage: Ask to use dummy atoms or not from Fortran90
-*
-*  char * question : Message
+/*!
+  \fn int dummy_ask_ (char * question)
+
+  \brief Ask to use dummy atoms or not from Fortran90
+
+  \param question Message
 */
 int dummy_ask_ (char * question)
 {
@@ -448,13 +448,13 @@ gchar * npt_info[3]={"1 line by step, as many lines as MD steps",
                      "3 lines by step, three times as many lines as MD steps"};
 GtkWidget * answer_info;
 
-/*
-*  G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
-*
-*  Usage: Handling the GtkComboBox in 'int iask'
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
+
+  \brief Handling the GtkComboBox in 'int iask'
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
 {
@@ -466,14 +466,14 @@ G_MODULE_EXPORT void on_answer_changed (GtkWidget * widg, gpointer data)
 
 int res_int;
 
-/*
-*  G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data)
-*
-*  Usage: enter an integer value - running the dialog
-*
-*  GtkDialog * iask : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data)
+
+  \brief enter an integer value - running the dialog
+
+  \param iask the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data)
 {
@@ -508,15 +508,15 @@ G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data
   if (done) destroy_this_dialog (iask);
 }
 
-/*
-*  int iask (char * question, char * lab, int id, GtkWidget * win)
-*
-*  Usage: enter an integer value - prepare the dialog
-*
-*  char * question : Message
-*  char * lab      : Text to use for label
-*  int id          : the required parameter id
-*  GtkWidget * win : the parent GtkWidget, if any
+/*!
+  \fn int iask (char * question, char * lab, int id, GtkWidget * win)
+
+  \brief enter an integer value - prepare the dialog
+
+  \param question Message
+  \param lab Text to use for label
+  \param id the required parameter id
+  \param win the parent GtkWidget, if any
 */
 int iask (char * question, char * lab, int id, GtkWidget * win)
 {
@@ -584,14 +584,14 @@ int iask (char * question, char * lab, int id, GtkWidget * win)
 
 gchar * res_char;
 
-/*
-*  G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data)
-*
-*  Usage: enter a string - running the dialog
-*
-*  GtkDialog * cask : the GtkDialog sending the signal
-*  gint response_id : the response id
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data)
+
+  \brief enter a string - running the dialog
+
+  \param cask the GtkDialog sending the signal
+  \param response_id the response id
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data)
 {
@@ -623,16 +623,16 @@ G_MODULE_EXPORT void run_cask (GtkDialog * cask, gint response_id, gpointer data
   if (done) destroy_this_dialog (cask);
 }
 
-/*
-*  gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
-*
-*  Usage: enter a string - prepare the dialog
-*
-*  char * question : Message
-*  char * lab      : Text to use for label
-*  int id          : the required parameter id
-*  char * old      : the initial value for the string
-*  GtkWidget * win : the parent GtkWidget, if any
+/*!
+  \fn gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
+
+  \brief enter a string - prepare the dialog
+
+  \param question Message
+  \param lab Text to use for label
+  \param id the required parameter id
+  \param old the initial value for the string
+  \param win the parent GtkWidget, if any
 */
 gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
 {
@@ -661,15 +661,15 @@ gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
   return (res_char);
 }
 
-/*
-*  void init_data_ (int * nats, int * nspc, int * stps, int * cid)
-*
-*  Usage: update project data using information from Fortran90
-*
-*  int * nats : number of atoms
-*  int * nspc : number of species
-*  int * stps : number of steps
-*  int * cid  : allocate chemistry data (1) or not (0)
+/*!
+  \fn void init_data_ (int * nats, int * nspc, int * stps, int * cid)
+
+  \brief update project data using information from Fortran90
+
+  \param nats number of atoms
+  \param nspc number of species
+  \param stps number of steps
+  \param cid allocate chemistry data (1) or not (0)
 */
 void init_data_ (int * nats, int * nspc, int * stps, int * cid)
 {
@@ -680,24 +680,24 @@ void init_data_ (int * nats, int * nspc, int * stps, int * cid)
   if (* cid) active_chem = active_project -> chemistry;
 }
 
-/*
-*  void spec_data_ (int * status, int * ind, int * atd, int * nsp,
+/*!
+  \fn void spec_data_ (int * status, int * ind, int * atd, int * nsp,
 *                   char * lbel, char * el_nme,
 *                   double * amss, double * rdus,
 *                   double * nscatt, double * xscatt)
-*
-*  Usage: update project data using information from Fortran90
-*
-*  int * status    : Update data (1) or not (0)
-*  int * ind       : the chemical species
-*  int * atd       : Z
-*  int * nsp       : Number of atoms of this species
-*  char * lbel     : Symbol
-*  char * el_nme   : Element
-*  double * amss   : M
-*  double * rdus   : Radius
-*  double * nscatt : Neutron scattering length
-*  double * xscatt : X scattering length
+
+  \brief update project data using information from Fortran90
+
+  \param status Update data (1) or not (0)
+  \param ind the chemical species
+  \param atd Z
+  \param nsp Number of atoms of this species
+  \param lbel Symbol
+  \param el_nme Element
+  \param amss M
+  \param rdus Radius
+  \param nscatt Neutron scattering length
+  \param xscatt X scattering length
 */
 void spec_data_ (int * status, int * ind, int * atd, int * nsp,
                  char * lbel, char * el_nme,
@@ -718,14 +718,14 @@ void spec_data_ (int * status, int * ind, int * atd, int * nsp,
   }
 }
 
-/*
-*  void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
-*
-*  Usage: print information in GtkTextBuffer
-*
-*  gchar * str            : the text
-*  gchar * stag           : the tags
-*  GtkTextBuffer * buffer : the GtkTextBuffer to print to
+/*!
+  \fn void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
+
+  \brief print information in GtkTextBuffer
+
+  \param str the text
+  \param stag the tags
+  \param buffer the GtkTextBuffer to print to
 */
 void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
 {
@@ -745,12 +745,12 @@ void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer)
   }
 }
 
-/*
-*  gchar * textcolor (int i)
-*
-*  Usage: setup text color keyword
-*
-*  int i : color id
+/*!
+  \fn gchar * textcolor (int i)
+
+  \brief setup text color keyword
+
+  \param i color id
 */
 gchar * textcolor (int i)
 {
@@ -788,22 +788,22 @@ gchar * textcolor (int i)
   return col;
 }
 
-/*
-*  void lattice_info_ (int * bid, double * volume, double * density,
+/*!
+  \fn void lattice_info_ (int * bid, double * volume, double * density,
                        double dvects[3][3], double rvects[3][3], double mod[3], double ang[3],
                        double f_to_c[3][3], double c_to_f[3][3])
-*
-*  Usage: lattice data from Fortran90
-*
-*  int * bid           : 0 or MD step if NPT
-*  double * volume     : volume
-*  double * density    : density
-*  double dvects[3][3] : direct space lattice vectors
-*  double rvects[3][3] : reciprocal lattice vectors
-*  double mod[3]       : modulus of lattice vectors (a,b,c)
-*  double ang[3]       : lattice angles (alpha, beta, gamma)
-*  double f_to_c[3][3] : fractional to cartesian matrix
-*  double c_to_f[3][3] : cartesian to fractional matrix
+
+  \brief lattice data from Fortran90
+
+  \param bid 0 or MD step if NPT
+  \param volume volume
+  \param density density
+  \param dvects[3][3] direct space lattice vectors
+  \param rvects[3][3] reciprocal lattice vectors
+  \param mod[3] modulus of lattice vectors (a,b,c)
+  \param ang[3] lattice angles (alpha, beta, gamma)
+  \param f_to_c[3][3] fractional to cartesian matrix
+  \param c_to_f[3][3] cartesian to fractional matrix
 */
 void lattice_info_ (int * bid, double * volume, double * density,
                     double dvects[3][3], double rvects[3][3], double mod[3], double ang[3],
@@ -851,12 +851,12 @@ void lattice_info_ (int * bid, double * volume, double * density,
   }
 }
 
-/*
-*  void send_chem_info_ (int prop[active_project -> nspec])
-*
-*  Usage: getting chemistry formula information from Fortran90
-*
-*  int prop[active_project -> nspec] : the formula
+/*!
+  \fn void send_chem_info_ (int prop[active_project -> nspec])
+
+  \brief getting chemistry formula information from Fortran90
+
+  \param prop[active_project->nspec] the formula
 */
 void send_chem_info_ (int prop[active_project -> nspec])
 {
@@ -867,16 +867,16 @@ void send_chem_info_ (int prop[active_project -> nspec])
   }
 }
 
-/*
-*  gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
-*
-*  Usage: ouput the name of a coordination sphere
-*
-*  struct project * this_proj : the target project
-*  int g                      : the coordination (0 = total, 1 = partial)
-*  int s                      : the chemical species
-*  int f                      : With markup or not
-*  GtkTextBuffer * buffer     : Output in a GtkTextBuffer, or not if NULL
+/*!
+  \fn gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
+
+  \brief ouput the name of a coordination sphere
+
+  \param this_proj the target project
+  \param g the coordination (0 = total, 1 = partial)
+  \param s the chemical species
+  \param f With markup or not
+  \param buffer Output in a GtkTextBuffer, or not if NULL
 */
 gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
 {
@@ -959,12 +959,12 @@ gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer
   return strb;
 }
 
-/*
-*  void update_after_calc (int calc)
-*
-*  Usage: To update all curve plots in the workspace after a calculation
-*
-*  int calc : Analysis id
+/*!
+  \fn void update_after_calc (int calc)
+
+  \brief To update all curve plots in the workspace after a calculation
+
+  \param calc Analysis id
 */
 void update_after_calc (int calc)
 {

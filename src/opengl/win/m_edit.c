@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'm_edit.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the 'Tools -> Edit' submenu
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
   G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data);
@@ -48,24 +48,24 @@ extern G_MODULE_EXPORT void turn_rebuild (GtkWidget * widg, gpointer data);
 #endif
 
 #ifdef GTK4
-/*
-*  G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: wrapp coordinates callback
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief wrapp coordinates callback
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 #else
-/*
-*  G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
-*
-*  Usage: wrapp coordinates callback
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
+
+  \brief wrapp coordinates callback
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 #endif
@@ -75,14 +75,14 @@ G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
-/*
-*  GtkWidget * menu_cell_edit (glwin * view , int id, int j)
-*
-*  Usage:  create the 'Edit -> Cell' submenu GTK3
-*
-*  glwin * view  : the target glwin
-*  int id        : main app (0) or popup (1)
-*  int j         : menu items sensitivity (cell + single MD step)
+/*!
+  \fn GtkWidget * menu_cell_edit (glwin * view , int id, int j)
+
+  \brief  create the 'Edit -> Cell' submenu GTK3
+
+  \param view the target glwin
+  \param id main app (0) or popup (1)
+  \param j menu items sensitivity (cell + single MD step)
 */
 GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 {
@@ -149,13 +149,13 @@ GtkWidget * menu_cell_edit (glwin * view , int id, int j)
   return menu;
 }
 
-/*
-*  GtkWidget * menu_edit (glwin * view, int id)
-*
-*  Usage: create the 'Edit' submenu GTK3
-*
-*  glwin * view : the target glwin
-*  int id       : main app (0) or popup (1)
+/*!
+  \fn GtkWidget * menu_edit (glwin * view, int id)
+
+  \brief create the 'Edit' submenu GTK3
+
+  \param view the target glwin
+  \param id main app (0) or popup (1)
 */
 GtkWidget * menu_edit (glwin * view, int id)
 {
@@ -212,14 +212,14 @@ GtkWidget * menu_edit (glwin * view, int id)
   return menu;
 }
 #else
-/*
-*  GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
-*
-*  Usage: create the 'Edit -> Cell' submenu GTK4
-*
-*  glwin * view  : the target glwin
-*  int popm      : main app (0) or popup (1)
-*  int sensitive : menu items sensitivity (cell + single MD step)
+/*!
+  \fn GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
+
+  \brief create the 'Edit -> Cell' submenu GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+  \param sensitive menu items sensitivity (cell + single MD step)
 */
 GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
 {
@@ -254,13 +254,13 @@ GMenu * menu_cell_edit (glwin * view, int popm, int sensitive)
   return menu;
 }
 
-/*
-*  GMenu * menu_atom_edit (glwin * view, int popm)
-*
-*  Usage: create the 'Edit -> Atom(s)' submenu GTK4
-*
-*  glwin * view  : the target glwin
-*  int popm      : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_atom_edit (glwin * view, int popm)
+
+  \brief create the 'Edit -> Atom(s)' submenu GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_atom_edit (glwin * view, int popm)
 {
@@ -279,14 +279,14 @@ GMenu * menu_atom_edit (glwin * view, int popm)
   return menu;
 }
 
-/*
-*  G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
-*
-*  Usage: Extract/Rebuild menu items callback GTK4
-*
-*  GSimpleAction * action : the GAction sending the signal
-*  GVariant * parameter   : GVariant parameter of the GAction
-*  gpointer data          : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief Extract/Rebuild menu items callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
@@ -313,13 +313,13 @@ G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * paramete
   }
 }
 
-/*
-*  GMenu * extract_section (glwin * view, int popm)
-*
-*  Usage: create the 'Extract/Rebuild' menu items GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * extract_section (glwin * view, int popm)
+
+  \brief create the 'Extract/Rebuild' menu items GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * extract_section (glwin * view, int popm)
 {
@@ -335,13 +335,13 @@ GMenu * extract_section (glwin * view, int popm)
   return menu;
 }
 
-/*
-*  GMenu * menu_edit (glwin * view, int popm)
-*
-*  Usage: create the 'Edit' submenu GTK4
-*
-*  glwin * view : the target glwin
-*  int popm     : main app (0) or popup (1)
+/*!
+  \fn GMenu * menu_edit (glwin * view, int popm)
+
+  \brief create the 'Edit' submenu GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
 */
 GMenu * menu_edit (glwin * view, int popm)
 {

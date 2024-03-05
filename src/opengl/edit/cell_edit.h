@@ -14,7 +14,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This header file: 'cell_edit.h'
 *
-*  Contains: 
+* Contains:
 
 */
 

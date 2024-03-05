@@ -14,13 +14,13 @@ If not, see <https://www.gnu.org/licenses/> */
 /*
 * This file: 'w_spiner.c'
 *
-*  Contains:
+* Contains:
 *
 
  - The subroutines to create the 'Spin' window
 
 *
-*  List of subroutines:
+* List of subroutines:
 
   gboolean spin (gpointer data);
 
@@ -38,12 +38,12 @@ If not, see <https://www.gnu.org/licenses/> */
 extern void save_rotation_quaternion (glwin * view);
 extern void rotate_x_y (glwin * view, double angle_x, double angle_y);
 
-/*
-*  gboolean spin (gpointer data)
-*
-*  Usage: spin
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn gboolean spin (gpointer data)
+
+  \brief spin
+
+  \param data the associated data pointer
 */
 gboolean spin (gpointer data)
 {
@@ -68,12 +68,12 @@ gboolean spin (gpointer data)
   }
 }
 
-/*
-*  static gboolean spin_wait_for_stop (gpointer data)
-*
-*  Usage: spin and wait for stop
-*
-*  gpointer data : the associated data pointer
+/*!
+  \fn static gboolean spin_wait_for_stop (gpointer data)
+
+  \brief spin and wait for stop
+
+  \param data the associated data pointer
 */
 static gboolean spin_wait_for_stop (gpointer data)
 {
@@ -88,13 +88,13 @@ static gboolean spin_wait_for_stop (gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
-*
-*  Usage: start spin
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
+
+  \brief start spin
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
 {
@@ -119,13 +119,13 @@ G_MODULE_EXPORT void spin_go (GtkButton * but, gpointer data)
   }
 }
 
-/*
-*  G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
-*
-*  Usage: stop spin
-*
-*  GtkButton * but : the GtkButton sending the signal
-*  gpointer data   : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
+
+  \brief stop spin
+
+  \param but the GtkButton sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
 {
@@ -139,13 +139,13 @@ G_MODULE_EXPORT void spin_stop (GtkButton * but, gpointer data)
   //set_sensitive_coord_menu (view, TRUE);
 }
 
-/*
-*  G_MODULE_EXPORT void window_spinner (GtkWidget * widg, gpointer data)
-*
-*  Usage: create the spin window callback
-*
-*  GtkWidget * widg : the GtkWidget sending the signal
-*  gpointer data    : the associated data pointer
+/*!
+  \fn G_MODULE_EXPORT void window_spinner (GtkWidget * widg, gpointer data)
+
+  \brief create the spin window callback
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_spinner (GtkWidget * widg, gpointer data)
 {
