@@ -164,11 +164,11 @@ typedef struct {
   // 5 = gamma
   // 6 = opacity
   GLfloat param[6];    /*!< Material parameters \n
-                         0 = lightning model \n
-                         1 = metallic \n
-                         2 = roughness \n
-                         3 = back lightning \n
-                         4 = gamma \n
+                         0 = lightning model, \n
+                         1 = metallic, \n
+                         2 = roughness, \n
+                         3 = back lightning, \n
+                         4 = gamma, \n
                          5 = opacity*/
 } Material;
 

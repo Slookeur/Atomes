@@ -601,11 +601,11 @@ struct atom {
   // 2 = Fragment
   // 3 = Molecule
   // 4 = Field object id
-  int coord[5];                   /*!< Coordination information:\n
-    0 = Total coordination,\n
-    1 = Partial coordination,\n
-    2 = Fragment,\n
-    3 = Molecule,\n
+  int coord[5];                   /*!< Coordination information: \n
+    0 = Total coordination, \n
+    1 = Partial coordination, \n
+    2 = Fragment, \n
+    3 = Molecule, \n
     4 = Field object id
    */ // Coordination information
   // 0 = All
@@ -613,11 +613,11 @@ struct atom {
   // 2 = Guttman's
   // 3 = Primitive
   // 4 = Strong
-  int ** rings[5];                /*!< Ring statistics information:\n
-    0 = All,\n
-    1 = King's,\n
-    2 = Guttman,\n
-    3 = Primitive,\n
+  int ** rings[5];                /*!< Ring statistics information: \n
+    0 = All, \n
+    1 = King's, \n
+    2 = Guttman, \n
+    3 = Primitive, \n
     4 = Strong
    */ // Rings statistics information
   int ** chain;                   /*!< Chain statistics information */
@@ -763,11 +763,11 @@ typedef struct {
 
 typedef struct {
   // 0 = Z, 1 = Mass, 2 = Radius, 3 = Neutrons, 4 = X-rays
-  double ** chem_prop; /*!< chemical properties:\n
-                            0 = Z,\n
-                            1 = Mass,\n
-                            2 = Radius,\n
-                            3 = Neutrons,\n
+  double ** chem_prop; /*!< chemical properties: \n
+                            0 = Z, \n
+                            1 = Mass, \n
+                            2 = Radius, \n
+                            3 = Neutrons, \n
                             4 = X-rays */
   int * nsps;          /*!< Number of atom(s) by chemical species */
   int * formula;       /*!< Chemical formula */
