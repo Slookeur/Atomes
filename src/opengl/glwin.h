@@ -58,44 +58,50 @@ If not, see <https://www.gnu.org/licenses/> */
 
 #define NGLOBAL_SHADERS 14
 
+/*! \enum object_types */
 enum object_types
 {
-  FROM_DATA = -8,
-  FROM_SPEC = -7,
-  FROM_MOL = -6,
-  FROM_FRAG = -5,
-  FROM_COORD_P = -4,
-  FROM_COORD_T = -3,
-  FROM_LIBRARY = -2,
-  FROM_PROJECT = -1
+  FROM_DATA    = -8, /*!< -8 */
+  FROM_SPEC    = -7, /*!< -7 */
+  FROM_MOL     = -6, /*!< -6 */
+  FROM_FRAG    = -5, /*!< -5 */
+  FROM_COORD_P = -4, /*!< -4 */
+  FROM_COORD_T = -3, /*!< -3 */
+  FROM_LIBRARY = -2, /*!< -2 */
+  FROM_PROJECT = -1  /*!< -1 */
 };
 
+/*! \enum shaders */
 enum shaders {
-  ATOMS = 0,
-  BONDS = 1,
-  SELEC = 2,
-  POLYS = 3,
-  MDBOX = 4,
-  MAXIS = 5,
-  ARROW = 6,
-  RINGS = 7,
-  PICKS = 8,
-  LABEL = 9,
-  MEASU = 10,
-  LIGHT = 11,
-  SLABS = 12,
-  VOLMS = 13
+  ATOMS =  0,  /*!< 0 */
+  BONDS =  1,  /*!< 1 */
+  SELEC =  2,  /*!< 2 */
+  POLYS =  3,  /*!< 3 */
+  MDBOX =  4,  /*!< 4 */
+  MAXIS =  5,  /*!< 5 */
+  ARROW =  6,  /*!< 6 */
+  RINGS =  7,  /*!< 7 */
+  PICKS =  8,  /*!< 8 */
+  LABEL =  9,  /*!< 9 */
+  MEASU = 10, /*!< 10 */
+  LIGHT = 11, /*!< 11 */
+  SLABS = 12, /*!< 12 */
+  VOLMS = 13  /*!< 13 */
 };
 
+/*! \struct angle */
 struct angle {
-  double angle;
-  gboolean pbc;
+  double angle;   /*!< the angle value */
+  gboolean pbc;   /*!< are PBC used ? 1 = yes, 0 = no */
 };
 
+/*! \struct distance */
 struct distance {
-  double length;
-  double x, y, z;
-  gboolean pbc;
+  double length;  /*!< the distance value */
+  double x;       /*!< x vector component */
+  double y;       /*!< y vector component */
+  double z;       /*!< z vector component */
+  gboolean pbc;   /*!< are PBC used ? 1 = yes, 0 = no */
 };
 
 typedef struct {
@@ -105,7 +111,6 @@ typedef struct {
   gboolean cloned;
   int style;
 } atom_data;
-
 
 typedef struct {
   GtkWidget * win;
@@ -136,35 +141,44 @@ typedef struct {
   GtkWidget * stop;
 } recorder;
 
+/*! \struct Light */
 typedef struct {
-  int type;           // 0 = directional, 1 = point, 2 = spot light
-  int fix;            // 0 = fix for the view, 1 = fix for the molecule
-  int show;
-  vec3_t position;
-  vec3_t direction;   // For directional and spot light
-  vec3_t intensity;   // Light colors
-  vec3_t attenuation; // Constant, linear and quadratic
-  vec3_t spot_data;   // Angle, inner and outer cutoff
+  int type;           /*!< Light type: 0 = directional, 1 = point, 2 = spot light */
+  int fix;            /*!< Light fix: 0 = fix for the view, 1 = fix for the molecule */
+  int show;           /*!< Show (1) or hide light (0) */
+  vec3_t position;    /*!< Light position */
+  vec3_t direction;   /*!< Light direction for directional and spot lights */
+  vec3_t intensity;   /*!< Light colors */
+  vec3_t attenuation; /*!< Constant, linear and quadratic attenuations */
+  vec3_t spot_data;   /*!< Angle, inner and outer spot light cutoff */
 } Light;
 
+/*! \struct Material */
 typedef struct {
-  int predefine;
-  vec3_t albedo;
+  int predefine;       /*!< Cutsom (0) or template (1) */
+  vec3_t albedo;       /*!< Albedo components */
   // 0 = lightning model
   // 2 = metallic
   // 3 = roughness
   // 4 = back lightning
   // 5 = gamma
   // 6 = opacity
-  GLfloat param[6];
+  GLfloat param[6];    /*!< Material parameters \n
+                         0 = lightning model \n
+                         1 = metallic \n
+                         2 = roughness \n
+                         3 = back lightning \n
+                         4 = gamma \n
+                         5 = opacity*/
 } Material;
 
+/*! \struct Fog */
 typedef struct {
-  int mode;       // NONE, LINEAR, EXP, EXP2
-  int based;      // Plane based or Range based
-  float density;
-  float depth[2];
-  vec3_t color;
+  int mode;         /*!< Fog mode in: none, linear (LINEAR), exponential (EXP) and exponential squared (EXP2) */
+  int based;        /*!< Fog type: plane based (0) or range based (1) */
+  float density;    /*!< Fog density */
+  float depth[2];   /*!< Fog depth: 0 = start value, 1 = end value */
+  vec3_t color;     /*!< Fog color */
 } Fog;
 
 struct screen_string {
@@ -788,7 +802,7 @@ typedef struct {
   // Color picking
   int to_be_picked;                          // Total number of objects that can be picked
   int atoms_to_be_picked;                    // Number of atoms that can be picked
-  int clones_to_be_picked;                   // Number of atoms that can be picked
+  int clones_to_be_picked;                   // Number of clones that can be picked
   int bonds_to_be_picked;                    // Number of bonds that can be picked (do not include clones)
   int * color_to_pick;                       // The different colors that can be picked
 

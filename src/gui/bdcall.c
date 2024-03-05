@@ -62,9 +62,9 @@ extern G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data
 /*!
   \fn int * save_color_map (glwin * view)
 
-  \brief
+  \brief save atoms and polyedra color maps
 
-  \param view
+  \param view the target glwin
 */
 int * save_color_map (glwin * view)
 {
@@ -77,10 +77,10 @@ int * save_color_map (glwin * view)
 /*!
   \fn void restore_color_map (glwin * view, int * colm)
 
-  \brief
+  \brief restore saved color maps
 
-  \param view
-  \param colm
+  \param view the target glwin
+  \param colm the saved color map values
 */
 void restore_color_map (glwin * view, int * colm)
 {
@@ -109,10 +109,10 @@ void restore_color_map (glwin * view, int * colm)
 /*!
   \fn void recup_dmin_dmax_ (double * min, double * max)
 
-  \brief
+  \brief retrieve min and max inter-atomic distances from Fortran
 
-  \param min
-  \param max
+  \param min the smallest inter-atomic distance
+  \param max the highest inter-atomic distance
 */
 void recup_dmin_dmax_ (double * min, double * max)
 {
@@ -123,7 +123,7 @@ void recup_dmin_dmax_ (double * min, double * max)
 /*!
   \fn void initbd ()
 
-  \brief
+  \brief initialize the curve widgets for the bond distribution
 */
 void initbd ()
 {
@@ -147,7 +147,7 @@ void initbd ()
 /*!
   \fn void initang ()
 
-  \brief
+  \brief initialize the curve widgets for the angle distribution
 */
 void initang ()
 {
@@ -191,10 +191,10 @@ void initang ()
 /*!
   \fn void initcutoffs (chemical_data * chem, int species)
 
-  \brief
+  \brief initialize bond cutoffs
 
-  \param chem
-  \param species
+  \param chem the target chemical data
+  \param species the number of chemical species
 */
 void initcutoffs (chemical_data * chem, int species)
 {
@@ -230,9 +230,7 @@ void initcutoffs (chemical_data * chem, int species)
 /*!
   \fn void cutoffsend ()
 
-  \brief
-
-  \param void
+  \brief send cutoffs to Fortran
 */
 void cutoffsend ()
 {
@@ -350,7 +348,7 @@ gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb)
 /*!
   \fn void update_ang_view (struct project * this_proj)
 
-  \brief
+  \brief update angle calculation text buffer
 
   \param this_proj the target project
 */
@@ -378,10 +376,10 @@ void update_ang_view (struct project * this_proj)
 /*!
   \fn void update_glwin_after_bonds (int bonding, int * colm)
 
-  \brief
+  \brief update glwin menus after bond calculation
 
-  \param bonding
-  \param colm
+  \param bonding calculation result (0 = failure, 1 = success)
+  \param colm saved color map to restore
 */
 void update_glwin_after_bonds (int bonding, int * colm)
 {
@@ -617,11 +615,11 @@ double bdtc;
 /*!
   \fn void coordination_info (int sp, double sac, double ssac[active_project -> nspec])
 
-  \brief
+  \brief print out coordination information
 
-  \param sp
-  \param sac
-  \param ssac[active_project->nspec]
+  \param sp the target chemical species
+  \param sac total coordination number for the target species
+  \param ssac[active_project->nspec] partial coordination number(s) for the target species
 */
 void coordination_info (int sp, double sac, double ssac[active_project -> nspec])
 {
@@ -712,9 +710,9 @@ void coordination_info (int sp, double sac, double ssac[active_project -> nspec]
   \brief retrieve partial geometry information from Fortran
 
   \param sid the target chemical species
-  \param sac
-  \param ssac[active_project->nspec]
-  \param totgsa the total number of partial coordination fort the target chemical species
+  \param sac total coordination number for the target species
+  \param ssac[active_project->nspec] partial coordination number(s) for the target species
+  \param totgsa the total number of partial coordination for the target chemical species
 */
 void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa)
 {
@@ -855,7 +853,7 @@ void env_info (int sp, int totgsa, int numgsa[totgsa])
 /*!
   \fn void update_angle_view (struct project * this_proj)
 
-  \brief update angle buffer information
+  \brief update angle calculation information text buffer
 
   \param this_proj the target project
 */
