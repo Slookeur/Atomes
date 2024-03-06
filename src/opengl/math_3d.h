@@ -16,9 +16,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 /*!
 * @file math_3d.h
 * @short Functions for OpenGL math
-* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr> \n
-          Stephan Soller <stephan.soller@helionweb.de> \n
-          Tobias Malmsheimer
+* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+* @author Stephan Soller <stephan.soller@helionweb.de>
+* @author Tobias Malmsheimer
 */
 
 /*
@@ -32,8 +32,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 /* The following was adapted from the file Math 3D v1.0
 By Stephan Soller <stephan.soller@helionweb.de> and Tobias Malmsheimer
-The original file was modified and completed to match 'atomes' needs.
+The original file was modified and completed to match 'atomes' needs. */
 
+/*
 Math 3D is a compact C99 library meant to be used with OpenGL. It provides basic
 3D vector and 4x4 matrix operations as well as functions to create transformation
 and projection matrices. The OpenGL binary layout is used so you can just upload
