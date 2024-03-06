@@ -1,15 +1,23 @@
-/* This file is part of Atomes.
+/* This file is part of the 'atomes' software
 
-Atomes is free software: you can redistribute it and/or modify it under the terms
+'atomes' is free software: you can redistribute it and/or modify it under the terms
 of the GNU Affero General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version.
 
-Atomes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+'atomes' is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License along with Atomes.
-If not, see <https://www.gnu.org/licenses/> */
+You should have received a copy of the GNU Affero General Public License along with 'atomes'.
+If not, see <https://www.gnu.org/licenses/>
+
+Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+
+/*!
+* @file atom_insert.c
+* @short Functions to insert bond(s) in a project
+* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+*/
 
 /*
 * This file: 'atom_insert.c'
@@ -17,10 +25,10 @@ If not, see <https://www.gnu.org/licenses/> */
 * Contains:
 *
 
- - The subroutines to insert bond(s) to a project
+ - The functions to insert bond(s) in a project
 
 *
-* List of subroutines:
+* List of functions:
 
   void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list);
   void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object);

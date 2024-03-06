@@ -1,15 +1,23 @@
-/* This file is part of Atomes.
+/* This file is part of the 'atomes' software
 
-Atomes is free software: you can redistribute it and/or modify it under the terms
+'atomes' is free software: you can redistribute it and/or modify it under the terms
 of the GNU Affero General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version.
 
-Atomes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+'atomes' is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License along with Atomes.
-If not, see <https://www.gnu.org/licenses/> */
+You should have received a copy of the GNU Affero General Public License along with 'atomes'.
+If not, see <https://www.gnu.org/licenses/>
+
+Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+
+/*!
+* @file cell_edit.c
+* @short Functions to create the cell edition window
+* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+*/
 
 /*
 * This file: 'cell_edit.c'
@@ -17,10 +25,10 @@ If not, see <https://www.gnu.org/licenses/> */
 * Contains:
 *
 
- - The subroutines to create the cell edition window
+ - The functions to create the cell edition window
 
 *
-* List of subroutines:
+* List of functions:
 
   G_MODULE_EXPORT gboolean close_cell (GtkWindow * widg, gpointer data);
   G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointer data);
@@ -151,7 +159,7 @@ GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
 #endif
     if (doit)
     {
-      j = (i < 2) ? i+1: i+2;
+      j = (i < 2) ? i+1 : i+2;
       str = g_strdup_printf ("<b>%s</b>", edit_names[j]);
       gtk_notebook_insert_page (GTK_NOTEBOOK(notebook), cell_tab (i, this_proj), markup_label(str, -1, -1, 0.0, 0.5), i);
       if (i > 1) widget_set_sensitive (gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i), (this_proj -> steps) > 1 ? 0 : 1);

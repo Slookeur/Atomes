@@ -1,15 +1,23 @@
-/* This file is part of Atomes.
+/* This file is part of the 'atomes' software
 
-Atomes is free software: you can redistribute it and/or modify it under the terms
+'atomes' is free software: you can redistribute it and/or modify it under the terms
 of the GNU Affero General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version.
 
-Atomes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+'atomes' is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License along with Atomes.
-If not, see <https://www.gnu.org/licenses/> */
+You should have received a copy of the GNU Affero General Public License along with 'atomes'.
+If not, see <https://www.gnu.org/licenses/>
+
+Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+
+/*!
+* @file save_opengl.c
+* @short Functions to save OpenGL information in the atomes project file format
+* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+*/
 
 /*
 * This file: 'save_opengl.c'
@@ -17,10 +25,10 @@ If not, see <https://www.gnu.org/licenses/> */
 * Contains:
 *
 
- - The subroutines to write OpenGL information in the atomes project file format
+ - The functions to save OpenGL information in the atomes project file format
 
 *
-* List of subroutines:
+* List of functions:
 
   int save_atom_a (FILE * fp, struct project * this_proj, int s, int a);
   int save_atom_b (FILE * fp, struct project * this_proj, int s, int a);

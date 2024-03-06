@@ -1,15 +1,25 @@
-/* This file is part of Atomes.
+/* This file is part of the 'atomes' software
 
-Atomes is free software: you can redistribute it and/or modify it under the terms
+'atomes' is free software: you can redistribute it and/or modify it under the terms
 of the GNU Affero General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version.
 
-Atomes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+'atomes' is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License along with Atomes.
-If not, see <https://www.gnu.org/licenses/> */
+You should have received a copy of the GNU Affero General Public License along with 'atomes'.
+If not, see <https://www.gnu.org/licenses/>
+
+Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+
+/*!
+* @file d_box.c
+* @short Functions to prepare the OpenGL rendering for the box(es) \n
+         Functions to prepare the OpenGL rendering for the slab(s) \n
+         Functions to prepare the OpenGL rendering for the volume(s)
+* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+*/
 
 /*
 * This file: 'd_box.c'
@@ -17,12 +27,12 @@ If not, see <https://www.gnu.org/licenses/> */
 * Contains:
 *
 
- - The subroutines to prepare the box(s) OpenGL rendering
- - The subroutines to prepare the slab(s) OpenGL rendering
- - The subroutines to prepare the volume(s) OpenGL rendering
+ - The functions to prepare the OpenGL rendering for the box(es)
+ - The functions to prepare the OpenGL rendering for the slab(s)
+ - The functions to prepare the OpenGL rendering for the volume(s)
 
 *
-* List of subroutines:
+* List of functions:
 
   int create_box_lists ();
 

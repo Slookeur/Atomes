@@ -1,26 +1,38 @@
-/* This file is part of Atomes.
+/* This file is part of the 'atomes' software
 
-Atomes is free software: you can redistribute it and/or modify it under the terms
+'atomes' is free software: you can redistribute it and/or modify it under the terms
 of the GNU Affero General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version.
 
-Atomes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+'atomes' is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License along with Atomes.
-If not, see <https://www.gnu.org/licenses/> */
+You should have received a copy of the GNU Affero General Public License along with 'atomes'.
+If not, see <https://www.gnu.org/licenses/>
+
+Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+
+/*!
+* @file math_3d.h
+* @short Functions for OpenGL math
+* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr> \n
+          Stephan Soller <stephan.soller@helionweb.de> \n
+          Tobias Malmsheimer
+*/
 
 /*
 * This header file: 'math_3d.h'
 *
 * Contains:
 
+ - Functions for OpenGL math
+
 */
 
 /* The following was adapted from the file Math 3D v1.0
 By Stephan Soller <stephan.soller@helionweb.de> and Tobias Malmsheimer
-The original file was modified and completed to match Atomes needs.
+The original file was modified and completed to match 'atomes' needs.
 
 Math 3D is a compact C99 library meant to be used with OpenGL. It provides basic
 3D vector and 4x4 matrix operations as well as functions to create transformation

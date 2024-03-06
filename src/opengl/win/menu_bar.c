@@ -1,15 +1,24 @@
-/* This file is part of Atomes.
+/* This file is part of the 'atomes' software
 
-Atomes is free software: you can redistribute it and/or modify it under the terms
+'atomes' is free software: you can redistribute it and/or modify it under the terms
 of the GNU Affero General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version.
 
-Atomes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+'atomes' is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License along with Atomes.
-If not, see <https://www.gnu.org/licenses/> */
+You should have received a copy of the GNU Affero General Public License along with 'atomes'.
+If not, see <https://www.gnu.org/licenses/>
+
+Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+
+/*!
+* @file menu_bar.c
+* @short Functions to create the menu bar of the OpenGL window \n
+         Functions to create the menu items for the menu bar and the pop up menu
+* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+*/
 
 /*
 * This file: 'menu_bar.c'
@@ -17,11 +26,11 @@ If not, see <https://www.gnu.org/licenses/> */
 * Contains:
 *
 
- - The subroutine to create the menu bar of the OpenGL window
- - The subroutine to create the menu items for the menu bar and the pop up menu
+ - The functions to create the menu bar of the OpenGL window
+ - The functions to create the menu items for the menu bar and the pop up menu
 
 *
-* List of subroutines:
+* List of functions:
 
   void append_opengl_item (glwin * view, GMenu * menu, const gchar * name, const gchar * key, int mpop, int item_id,
                            gchar * accel, int image_format, gpointer icon,

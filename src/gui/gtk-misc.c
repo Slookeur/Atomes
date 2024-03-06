@@ -1,15 +1,25 @@
-/* This file is part of Atomes.
+/* This file is part of the 'atomes' software
 
-Atomes is free software: you can redistribute it and/or modify it under the terms
+'atomes' is free software: you can redistribute it and/or modify it under the terms
 of the GNU Affero General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version.
 
-Atomes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+'atomes' is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License along with Atomes.
-If not, see <https://www.gnu.org/licenses/> */
+You should have received a copy of the GNU Affero General Public License along with 'atomes'.
+If not, see <https://www.gnu.org/licenses/>
+
+Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+
+/*!
+* @file gtk-misc.c
+* @short GTK3/GTK4 utility subroutines, instead of having pre-processor flags everywhere in the code. \n
+         Whenever I need to use a GTK function that changed between v3 and v4, \n
+         I created an home made function declared in this file, and deal then here with the potential GTK versions issues.
+* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+*/
 
 /*
 * This file: 'gtk-misc.c'
@@ -18,11 +28,11 @@ If not, see <https://www.gnu.org/licenses/> */
 *
 
  - GTK3/GTK4 utility subroutines, instead of having pre-processor flags everywhere in the code
-   when ever I need to use a GTK function that changed between v3 and v4, I use an home made
-   function in this file, and deal then here with the potential GTK versions issues.
+   Whenever I need to use a GTK function that changed between v3 and v4,
+   I created an home made function declared in this file, and deal then here with the potential GTK versions issues.
 
 *
-* List of subroutines:
+* List of functions:
 
   gboolean is_the_widget_visible (GtkWidget * widg);
   gboolean file_chooser_set_file_name (GtkFileChooser * chooser, gchar * filename);

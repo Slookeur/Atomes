@@ -1,15 +1,24 @@
-/* This file is part of Atomes.
+/* This file is part of the 'atomes' software
 
-Atomes is free software: you can redistribute it and/or modify it under the terms
+'atomes' is free software: you can redistribute it and/or modify it under the terms
 of the GNU Affero General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version.
 
-Atomes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+'atomes' is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License along with Atomes.
-If not, see <https://www.gnu.org/licenses/> */
+You should have received a copy of the GNU Affero General Public License along with 'atomes'.
+If not, see <https://www.gnu.org/licenses/>
+
+Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+
+/*!
+* @file initchain.c
+* @short Functions collecting chain(s) data from Fortran90 \n
+         Functions allocating chain(s) data from Fortran90
+* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+*/
 
 /*
 * This file: 'initchain.c'
@@ -17,11 +26,11 @@ If not, see <https://www.gnu.org/licenses/> */
 * Contains:
 *
 
- - subroutines collecting chain(s) data from Fortran90
- - subroutines allocating chain(s) data from Fortran90
+ - The functions collecting chain(s) data from Fortran90
+ - The functions allocating chain(s) data from Fortran90
 
 *
-* List of subroutines:
+* List of functions:
 
   void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta]);
   void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num]);

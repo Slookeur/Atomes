@@ -1,15 +1,25 @@
-/* This file is part of Atomes.
+/* This file is part of the 'atomes' software
 
-Atomes is free software: you can redistribute it and/or modify it under the terms
+'atomes' is free software: you can redistribute it and/or modify it under the terms
 of the GNU Affero General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version.
 
-Atomes is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+'atomes' is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
 without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the GNU General Public License for more details.
 
-You should have received a copy of the GNU Affero General Public License along with Atomes.
-If not, see <https://www.gnu.org/licenses/> */
+You should have received a copy of the GNU Affero General Public License along with 'atomes'.
+If not, see <https://www.gnu.org/licenses/>
+
+Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+
+/*!
+* @file d_selection.c
+* @short Functions to prepare the OpenGL rendering of the selected: atom(s), clone(s), bond(s) and clone bond(s) \n
+         Functions to prepare the unique color rendering for picking the atom(s) and bond(s)
+
+* @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+*/
 
 /*
 * This file: 'd_selection.c'
@@ -17,11 +27,11 @@ If not, see <https://www.gnu.org/licenses/> */
 * Contains:
 *
 
- - The subroutines to prepare the selected atom(s), clone(s), bond(s) and clone bond(s) OpenGL rendering
- - The subroutines to prepare the atom(s) and bond(s) picking y unique color rendering
+ - The functions to prepare the OpenGL rendering of the selected: atom(s), clone(s), bond(s) and clone bond(s)
+ - The functions to prepare the unique color rendering for picking the atom(s) and bond(s)
 
 *
-* List of subroutines:
+* List of functions:
 
   int find_selected_clone_vertices (int style, int at);
   int find_selected_bond_vertices (int sty, int at, int sp, int bi, int pi, int cap);
