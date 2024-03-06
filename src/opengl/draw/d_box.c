@@ -351,7 +351,7 @@ int create_box_lists ()
 / *
 *  void setup_cuboid_vertices (vec3_t a, vec3_t b, int id)
 
-  \brief
+  \brief NOT USED !
 
   \param a
   \param b
@@ -499,7 +499,7 @@ vec3_t get_normal (vec3_t v1, vec3_t v2, vec3_t v3)
 /*!
   \fn double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t cpos, double paral[3][3], ColRGBA col, double slab_alpha)
 
-  \brief
+  \brief Draw cuboid vertices
 
   \param draw draw or not (1/0)
   \param SHADID shader id

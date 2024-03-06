@@ -42,7 +42,7 @@ If not, see <https://www.gnu.org/licenses/> */
 /*!
   \fn int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc)
 
-  \brief
+  \brief Look for a type of coordination sphere in a model
 
   \param this_proj the target project
   \param spec the number of chemical species

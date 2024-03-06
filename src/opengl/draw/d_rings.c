@@ -201,7 +201,7 @@ void create_ring_lists ()
             }
           }
         }
-        // m is the number of summit of the polyedra
+        // m is the number of summit of the polyhedra
         // +1 if only a 3 atom size ring to include a centroid
         m = (k == 3) ? k+1: k;
         // Then we need the max number of triangles for all these polyedron

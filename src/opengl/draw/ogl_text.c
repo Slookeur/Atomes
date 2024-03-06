@@ -635,7 +635,7 @@ void add_string_instance (struct screen_string * string, vec3_t pos, struct atom
 *
 * Usage: add a screen string to the list of screen string to render
 
-  \param text the string
+  \param text the text to render
   \param id the label id
   \param col the color
   \param pos the position
@@ -671,7 +671,7 @@ void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], 
 *
 * Usage: prepare a screen string to be rendered
 
-  \param text the string
+  \param text the text to render
   \param id the label id
   \param col the color
   \param pos the position

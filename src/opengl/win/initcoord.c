@@ -640,7 +640,7 @@ void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int 
 /*!
   \fn void init_opengl_coords (int id, int nt, int init)
 
-  \brief initialize data to
+  \brief initialize data to store the coordination data
 
   \param id the geometry id, in: [0-9]
   \param nt total number of distinct coordination

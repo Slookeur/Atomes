@@ -658,7 +658,7 @@ G_MODULE_EXPORT void edit_map_cell (GtkCellRendererText * cell, gchar * path_str
 /*!
   \fn GtkWidget * create_map_tree (struct project * this_proj)
 
-  \brief  create color map tree view
+  \brief create color map tree view
 
   \param this_proj the target project
 */

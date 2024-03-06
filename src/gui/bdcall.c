@@ -62,7 +62,7 @@ extern G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data
 /*!
   \fn int * save_color_map (glwin * view)
 
-  \brief save atoms and polyedra color maps
+  \brief save atoms and polyhedra color maps
 
   \param view the target glwin
 */

@@ -819,7 +819,7 @@ G_MODULE_EXPORT void on_data_button_released (GtkGesture * gesture, int n_press,
 /*!
   \fn G_MODULE_EXPORT gboolean on_data_button_event (GtkWidget * widget, GdkEvent * event, gpointer data)
 
-  \brief
+  \brief on button event in the curve data edition window
 
   \param widget the GtkWidget sending the signal
   \param event

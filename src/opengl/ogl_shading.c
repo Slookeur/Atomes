@@ -36,7 +36,7 @@ If not, see <https://www.gnu.org/licenses/> */
   void glsl_bind_lines (glsl_program * glsl, object_3d * obj);
   void glsl_bind_cylinders (glsl_program * glsl, object_3d * obj);
   void glsl_bind_caps (glsl_program * glsl, object_3d * obj);
-  void glsl_bind_polyedra (glsl_program * glsl, object_3d * obj);
+  void glsl_bind_polyhedra (glsl_program * glsl, object_3d * obj);
   void update_string_instances (glsl_program * glsl, object_3d * obj);
   void glsl_bind_string (glsl_program * glsl, object_3d * obj);
   void re_create_all_md_shaders (glwin * view);
@@ -370,14 +370,14 @@ void glsl_bind_caps (glsl_program * glsl, object_3d * obj)
 }
 
 /*!
-  \fn void glsl_bind_polyedra (glsl_program * glsl, object_3d * obj)
+  \fn void glsl_bind_polyhedra (glsl_program * glsl, object_3d * obj)
 
   \brief bind a 3D object polyhedra to an OpenGL shader program
 
   \param glsl the target glsl
   \param obj the 3D object polyhedra to bind
 */
-void glsl_bind_polyedra (glsl_program * glsl, object_3d * obj)
+void glsl_bind_polyhedra (glsl_program * glsl, object_3d * obj)
 {
   glsl -> array_pointer[1] = glGetAttribLocation (glsl -> id, "vertNormal");
   glsl -> array_pointer[2] = glGetAttribLocation (glsl -> id, "vertColor");
@@ -396,7 +396,7 @@ void glsl_bind_polyedra (glsl_program * glsl, object_3d * obj)
 /*!
   \fn void update_string_instances (glsl_program * glsl, object_3d * obj)
 
-  \brief
+  \brief Update OpenGL string texture instances
 
   \param glsl the target glsl
   \param obj
@@ -598,7 +598,7 @@ glsl_program * init_shader_program (int object, int object_id,
       glsl_bind_caps (glsl, glsl -> obj);
       break;
     case GLSL_POLYEDRA:
-      glsl_bind_polyedra (glsl, glsl -> obj);
+      glsl_bind_polyhedra (glsl, glsl -> obj);
       break;
     case GLSL_STRING:
       glsl_bind_string (glsl, glsl -> obj);
@@ -774,7 +774,7 @@ void init_shaders (glwin * view)
 /*!
   \fn gboolean glsl_disable_cull_face (glsl_program * glsl)
 
-  \brief
+  \brief Disable or enable cull face for OpenGL rendering
 
   \param glsl the target glsl
 */
@@ -801,7 +801,7 @@ gboolean glsl_disable_cull_face (glsl_program * glsl)
 /*!
   \fn void set_lights_data (glsl_program * glsl)
 
-  \brief
+  \brief set lightning data for an OpenGL progam
 
   \param glsl the target glsl
 */
@@ -857,7 +857,7 @@ uint16_t stipple_pattern[NDOTS]={ 0xAAAA, 0x1111, 0x0000, 0x55FF, 0x24FF, 0x3F3F
 /*!
   \fn void shading_glsl_text (glsl_program * glsl)
 
-  \brief
+  \brief Render text in OpenGL
 
   \param glsl the target glsl
 */
@@ -1011,9 +1011,9 @@ void render_this_shader (glsl_program * glsl, int ids)
 /*!
   \fn void draw_vertices (int id)
 
-  \brief
+  \brief Draw OpenGL shader program
 
-  \param id
+  \param id the ID of the program to render
 */
 void draw_vertices (int id)
 {

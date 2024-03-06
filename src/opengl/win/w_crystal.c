@@ -111,7 +111,7 @@ typdef struct cif_data{
 /*!
   \fn int cif_preview (const char * filetoread)
 
-  \brief
+  \brief NOT USED !
 
   \param filetoread
 */
@@ -133,7 +133,7 @@ int cif_preview (const char * filetoread)
 /*!
   \fn int get_cgroup (gchar * str)
 
-  \brief
+  \brief NOT USED !
 
   \param str
 */
@@ -150,7 +150,7 @@ int get_cgroup (gchar * str)
 /*!
   \fn void sort_files (int num_f)
 
-  \brief
+  \brief NOT USED !
 
   \param num_f
 */
@@ -182,7 +182,7 @@ void sort_files (int num_f)
 /*!
   \fn int get_cif_files ()
 
-  \brief
+  \brief NOT USED !
 */
 int get_cif_files ()
 {
@@ -307,7 +307,7 @@ int get_cif_files ()
 /*!
   \fn int get_num_cif ()
 
-  \brief
+  \brief NOT USED !
 */
 int get_num_cif ()
 {
@@ -317,7 +317,7 @@ int get_num_cif ()
 /*!
   \fn int get_num_group ()
 
-  \brief
+  \brief NOT USED !
 */
 int get_num_group ()
 {
@@ -327,7 +327,7 @@ int get_num_group ()
 /*!
   \fn void fill_cif_tree (GtkListStore * store)
 
-  \brief
+  \brief NOT USED !
 
   \param store
 */
@@ -353,7 +353,7 @@ void fill_cif_tree (GtkListStore * store)
 /*!
   \fn void fill_group_tree (GtkListStore * store)
 
-  \brief
+  \brief NOT USED !
 
   \param store
 */
@@ -379,7 +379,7 @@ void fill_group_tree (GtkListStore * store)
 /*!
   \fn void fill_symmetry_tree (GtkListStore * store)
 
-  \brief
+  \brief NOT USED !
 
   \param store
 */
@@ -405,7 +405,7 @@ void fill_symmetry_tree (GtkListStore * store)
 /*!
   \fn void fill_database_tree (GtkListStore * store)
 
-  \brief
+  \brief NOT USED !
 
   \param store
 */
@@ -431,7 +431,7 @@ void fill_database_tree (GtkListStore * store)
 /*!
   \fn void insert_cif_preview ()
 
-  \brief
+  \brief NOT USED !
 */
 void insert_cif_preview ()
 {
@@ -482,7 +482,7 @@ void insert_cif_preview ()
 /*!
   \fn void prepare_cif_preview (int id)
 
-  \brief
+  \brief NOT USED !
 
   \param id
 */
@@ -513,7 +513,7 @@ void prepare_cif_preview (int id)
 /*!
   \fn int get_cif_info_from_cif_node (xmlNodePtr * cnode)
 
-  \brief
+  \brief NOT USED !
 
   \param cnode
 */
@@ -526,7 +526,7 @@ int get_cif_info_from_cif_node (xmlNodePtr * cnode)
 /*!
   \fn void prepare_cif_list (int dba, int sym, int spg)
 
-  \brief
+  \brief NOT USED !
 
   \param dba
   \param sym
@@ -577,7 +577,7 @@ void prepare_cif_list (int dba, int sym, int spg)
 /*!
   \fn int open_cif_database (gchar * filetoread)
 
-  \brief
+  \brief NOT USED !
 
   \param filetoread
 */

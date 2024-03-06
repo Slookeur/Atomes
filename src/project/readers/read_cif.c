@@ -523,7 +523,7 @@ int cif_get_value (gchar * kroot, gchar * keyw, int linec, int lstart, gchar ** 
 /*!
   \fn int cif_file_get_data_in_loop (int linec, int lid)
 
-  \brief
+  \brief get the number of "_" motifs in a line
 
   \param linec Total number of lines
   \param lid Line to reach
@@ -1054,7 +1054,7 @@ gboolean cif_get_atomic_coordinates (int linec)
 /*!
   \fn int get_space_group_from_hm (gchar * hmk)
 
-  \brief
+  \brief retrieve space group using the HM Key
 
   \param hmk
 */

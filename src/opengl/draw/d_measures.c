@@ -100,7 +100,7 @@ void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int
 /*!
   \fn void set_measure_color (int selected, int id, int num)
 
-  \brief
+  \brief set measure color
 
   \param selected total number of selected atom(s)
   \param id measured element id number
@@ -129,7 +129,7 @@ void set_measure_color (int selected, int id, int num)
   \param s measured line (0) or label (1)
   \param sa 1st atom
   \param sb 2nd atom
-*  int sc ! 3rd atom
+  \param sc 3rd atom
   \param pi 0 = mouse analysis mode, 1 = mouse edition mode
 */
 void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
@@ -184,12 +184,12 @@ void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
   \brief do things for the measured angles selection
 
   \param view the target glwin
-  \param id action to perform:
-*                          -2 = save angles selection
-*                          -1 = clean angles selection
-*                           0 = prepare OpenGL buffer data analysis mode selection measure
-*                           1 = prepare OpenGL buffer data edition mode selection measure
-*                           2 = fill angles tree store measures window
+  \param id action to perform: \n
+                           -2 = save angles selection, \n
+                           -1 = clean angles selection, \n
+                            0 = prepare OpenGL buffer data analysis mode selection measure, \n
+                            1 = prepare OpenGL buffer data edition mode selection measure, \n
+                            2 = fill angles tree store measures window
   \param pi 0 = mouse analysis mode, 1 = mouse edition mode
   \param store the tree store to fill, if any
 */
@@ -299,12 +299,12 @@ void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store)
   \brief do things for the measured dihedrals selection
 
   \param view the target glwin
-  \param id action to perform:
-*                          -2 = save dihedrals selection
-*                          -1 = clean dihedrals selection
-*                           0 = prepare OpenGL buffer data analysis mode selection measure
-*                           1 = prepare OpenGL buffer data edition mode selection measure
-*                           2 = fill dihedrals tree store measures window
+  \param id action to perform: \n
+                           -2 = save dihedrals selection \n
+                           -1 = clean dihedrals selection \n
+                            0 = prepare OpenGL buffer data analysis mode selection measure \n
+                            1 = prepare OpenGL buffer data edition mode selection measure \n
+                            2 = fill dihedrals tree store measures window
   \param pi 0 = mouse analysis mode, 1 = mouse edition mode
   \param store the tree store to fill, if any
 */
@@ -510,12 +510,12 @@ void setup_this_measured_bond (int s, int sa, int sb, int pi)
   \brief do things for the measured distances selection
 
   \param view the target glwin
-  \param id action to perform:
-*                          -2 = save bonds selection
-*                          -1 = clean bonds selection
-*                           0 = prepare OpenGL buffer data analysis mode selection measure
-*                           1 = prepare OpenGL buffer data edition mode selection measure
-*                           2 = fill bonds distances tree store measures window
+  \param id action to perform: \n
+                           -2 = save bonds selection \n
+                           -1 = clean bonds selection \n
+                            0 = prepare OpenGL buffer data analysis mode selection measure \n
+                            1 = prepare OpenGL buffer data edition mode selection measure \n
+                            2 = fill bonds distances tree store measures window
   \param pi 0 = mouse analysis mode, 1 = mouse edition mode
   \param store the tree store to fill, if any
 */

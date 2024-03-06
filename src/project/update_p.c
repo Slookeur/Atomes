@@ -43,7 +43,7 @@ extern GtkTreeStore * tool_model;
 /*!
   \fn void prep_calc_actions ()
 
-  \brief
+  \brief prepare analysis widgets
 */
 void prep_calc_actions ()
 {

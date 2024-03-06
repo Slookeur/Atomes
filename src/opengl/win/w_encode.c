@@ -207,7 +207,7 @@ GtkWidget * cod;
 /*!
   \fn void set_encoding_widget_sensitivity (gboolean video, int sensitivity)
 
-  \brief
+  \brief Adjust the sensitivity for the widgets of the encoding window
 
   \param video encoding video (yes / no)
   \param sensitivity sensitivity

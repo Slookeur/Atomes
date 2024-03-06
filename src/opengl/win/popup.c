@@ -1665,7 +1665,7 @@ G_MODULE_EXPORT void remove_the_coord (GtkWidget * widg, gpointer data)
 /*!
   \fn G_MODULE_EXPORT void replace_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 
-  \brief
+  \brief replace a coordination callback GTK4
 
   \param action the GAction sending the signal
   \param parameter GVariant parameter of the GAction
@@ -1678,7 +1678,7 @@ G_MODULE_EXPORT void replace_the_coord (GSimpleAction * action, GVariant * param
 /*!
   \fn G_MODULE_EXPORT void replace_the_coord (GtkWidget * widg, gpointer data)
 
-  \brief
+  \brief replace a coordination callback GTK3
 
   \param widg the GtkWidget sending the signal
   \param data the associated data pointer
@@ -1695,7 +1695,7 @@ G_MODULE_EXPORT void replace_the_coord (GtkWidget * widg, gpointer data)
 /*!
   \fn G_MODULE_EXPORT void copy_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
 
-  \brief
+  \brief copy a coordination callback GTK4
 
   \param action the GAction sending the signal
   \param parameter GVariant parameter of the GAction
@@ -1706,7 +1706,7 @@ G_MODULE_EXPORT void copy_the_coord (GSimpleAction * action, GVariant * paramete
 /*!
   \fn G_MODULE_EXPORT void copy_the_coord (GtkWidget * widg, gpointer data)
 
-  \brief
+  \brief copy a coordination callback GTK3
 
   \param widg the GtkWidget sending the signal
   \param data the associated data pointer

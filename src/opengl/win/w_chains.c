@@ -579,7 +579,7 @@ int get_cmax (struct project * this_proj, int step)
 /*!
   \fn int get_chain_size_index (struct project * this_proj, int s, int r)
 
-  \brief
+  \brief NOT USED !
 
   \param this_proj the target project
   \param s

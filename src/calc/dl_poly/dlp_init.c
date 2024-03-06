@@ -1403,7 +1403,7 @@ void init_all_impropers_inversions (int stru)
 /*!
   \fn int coord_sphere_multiplicity (struct atom * at, int id, gboolean set_atom_id)
 
-  \brief
+  \brief get coord sphere multiplicity in the model
 
   \param at the target atom in the model
   \param id the atom id in the fragment

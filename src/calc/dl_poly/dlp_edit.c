@@ -1989,7 +1989,7 @@ gboolean body_identicals (struct field_nth_body * body, int nbd, int * na, int *
 /*!
   \fn int get_num_vdw_max ()
 
-  \brief
+  \brief Get the number of field shell interactions
 */
 int get_num_vdw_max ()
 {

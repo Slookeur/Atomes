@@ -78,7 +78,7 @@ G_MODULE_EXPORT void wrapping_coord (GtkWidget * widg, gpointer data)
 /*!
   \fn GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 
-  \brief  create the 'Edit -> Cell' submenu GTK3
+  \brief create the 'Edit -> Cell' submenu GTK3
 
   \param view the target glwin
   \param id main app (0) or popup (1)

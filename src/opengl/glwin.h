@@ -71,7 +71,10 @@ enum object_types
   FROM_PROJECT = -1  /*!< -1 */
 };
 
-/*! \enum shaders */
+/*! \enum shaders
+
+  \brief The different types of shaders in the atomes program
+*/
 enum shaders {
   ATOMS =  0,  /*!< 0 */
   BONDS =  1,  /*!< 1 */
@@ -141,7 +144,10 @@ typedef struct {
   GtkWidget * stop;
 } recorder;
 
-/*! \struct Light */
+/*! \struct Light
+
+  \brief Light parameters for OpenGL rendering
+*/
 typedef struct {
   int type;           /*!< Light type: 0 = directional, 1 = point, 2 = spot light */
   int fix;            /*!< Light fix: 0 = fix for the view, 1 = fix for the molecule */
@@ -153,7 +159,10 @@ typedef struct {
   vec3_t spot_data;   /*!< Angle, inner and outer spot light cutoff */
 } Light;
 
-/*! \struct Material */
+/*! \struct Material
+
+  \brief Material parameters for OpenGL rendering
+*/
 typedef struct {
   int predefine;       /*!< Cutsom (0) or template (1) */
   vec3_t albedo;       /*!< Albedo components */
@@ -172,7 +181,10 @@ typedef struct {
                          5 = opacity*/
 } Material;
 
-/*! \struct Fog */
+/*! \struct Fog
+
+  \brief Fog parameters for OpenGL rendering
+*/
 typedef struct {
   int mode;         /*!< Fog mode in: none, linear (LINEAR), exponential (EXP) and exponential squared (EXP2) */
   int based;        /*!< Fog type: plane based (0) or range based (1) */
@@ -181,14 +193,18 @@ typedef struct {
   vec3_t color;     /*!< Fog color */
 } Fog;
 
+/*! \struct screen_string
+
+  \brief OpenGL string rendering
+*/
 struct screen_string {
-  int id;
-  int type;
-  char * word;
-  ColRGBA col;
-  float shift[4];
-  int num_instances;
-  float * instances;
+  int id;                         /*!< The string unique ID */
+  int type;                       /*!< The type of string (3= labels, 4 = bonds, 5= angles) */
+  char * word;                    /*!< The text to be displayed */
+  ColRGBA col;                    /*!< Color of the string */
+  float shift[4];                 /*!< The shifts (if any) on x, y, z, then visibility */
+  int num_instances;              /*!< The number of instances for that string */
+  float * instances;              /*!< The list of instances for that string */
   struct screen_string * prev;
   struct screen_string * last;
 };
@@ -212,133 +228,223 @@ struct atom_selection {
   struct selatom * last;
 };
 
+/*! \struct image
+
+  \brief a structure to describe the content of the OpenGL rendering
+*/
 typedef struct {
 
-  ColRGBA backcolor;
+  ColRGBA backcolor;                            /*!< Background color */
   // Color maps for atoms [0] and polyhedra [1]
-  int color_map[2];
+  int color_map[2];                             /*!< Color maps, 0= atoms, 1 = polyhedra */
 
-  gboolean * show_atom[2];                   // To draw or not the atom(s)
-  gboolean * show_label[2];                  // To draw or not the label(s)
-  gboolean * show_poly[9];                   // To draw or not the polyhedra
-  gboolean * show_coord[10];                 // To draw or not the coordination(s)
+  gboolean * show_atom[2];                      /*!< Daw or not the atom(s), 0 = atoms, 1 = clones */
+  gboolean * show_label[2];                     /*!< Draw or not the label(s), 0 = atoms, 1 = clones */
+  gboolean * show_poly[9];                      /*!< Draw or not the polyhedra */
+  gboolean * show_coord[10];                    /*!< Draw or not the coordination(s) */
   // Atoms
-  ColRGBA * at_color;
-  double * sphererad;
-  double * pointrad;
-  double * atomicrad;
+  ColRGBA * at_color;                           /*!< Atomic species color(s) */
+  double * sphererad;                           /*!< Sphere radii (spheres or ball and stick used as style) */
+  double * pointrad;                            /*!< Point size (points or wireframe used as style) */
+  double * atomicrad;                           /*!< Sphere radii (spacefilled used as style) */
 
   // Bonds
-  double ** bondrad;
-  double ** linerad;
-  double radall[2];
+  double ** bondrad;                            /*!< Cylinder radii (ball and stick used as style) */
+  double ** linerad;                            /*!< Line width (wireframe used as style)  */
+  double radall[2];                             /*!< Cylinder radii (cylinders used as style) */
 
   // Clones
-  gboolean draw_clones;
-  gboolean cloned_poly;
+  gboolean draw_clones;                         /*!< Draw clones: 0 = no, 1 = yes */
+  gboolean cloned_poly;                         /*!< Draw cloned ployhedra: 0 = no, 1 = yes */
 
   // Labels
   // 0 = atoms, 1 = clones, 2 = axis, 3 = measures, 4 = measure edition
-  int labels_position[5];
-  int labels_render[5];
-  int labels_scale[5];
-  gchar * labels_font[5];
-  ColRGBA * labels_color[5];
-  double labels_shift[5][3];
-  struct screen_string * labels_list[5];
+  int labels_position[5];                       /*!< Labels position: \n
+                                                    0 = atom(s), \n
+                                                    1 = clone(s), \n
+                                                    2 = axis, \n
+                                                    3 = measure(s), \n
+                                                    4 = measure(s) in edition mode */
+  int labels_render[5];                         /*!< Labels rendering mode: \n
+                                                    0 = atom(s), \n
+                                                    1 = clone(s), \n
+                                                    2 = axis, \n
+                                                    3 = measure(s), \n
+                                                    4 = measure(s) in edition mode */
+  int labels_scale[5];                          /*!< Labels scaling mode: \n
+                                                    0 = atom(s), \n
+                                                    1 = clone(s), \n
+                                                    2 = axis, \n
+                                                    3 = measure(s), \n
+                                                    4 = measure(s) in edition mode */
+  gchar * labels_font[5];                       /*!< Labels font: \n
+                                                    0 = atom(s), \n
+                                                    1 = clone(s), \n
+                                                    2 = axis, \n
+                                                    3 = measure(s), \n
+                                                    4 = measure(s) in edition mode */
+  ColRGBA * labels_color[5];                    /*!< Labels color: \n
+                                                    0 = atom(s), \n
+                                                    1 = clone(s), \n
+                                                    2 = axis, \n
+                                                    3 = measure(s), \n
+                                                    4 = measure(s) in edition mode */
+  double labels_shift[5][3];                    /*!< Labels axis shit, if any: \n
+                                                    0 = atom(s), \n
+                                                    1 = clone(s), \n
+                                                    2 = axis, \n
+                                                    3 = measure(s), \n
+                                                    4 = measure(s) in edition mode */
+  struct screen_string * labels_list[5];        /*!< Label screen strings (rendered and re-usable objects): \n
+                                                    0 = atom(s), \n
+                                                    1 = clone(s), \n
+                                                    2 = axis, \n
+                                                    3 = measure(s), \n
+                                                    4 = measure(s) in edition mode */
   // 0 =Element name, 1 = Atomic symbol, 2 = Atomic symbol + ID number, 3 = ID number
-  int labels_format[3];
-  gboolean mtilt;
-  int mpattern;
-  int mfactor;
-  double mwidth;
+  int labels_format[3];                         /*!< Label format for the atom(s) and clone(s) \n
+                                                    0 = element name, \n
+                                                    1 = atomic symbol, \n
+                                                    2 = atomic symbol + ID number (default), \n
+                                                    3 = ID number */
+  gboolean mtilt;                               /*!< Measure tilt, if any */
+  int mpattern;                                 /*!< Measure line pattern */
+  int mfactor;                                  /*!< Measure  */
+  double mwidth;                                /*!< Measure line width */
 
-  int m_is_pressed;
+  int m_is_pressed;                             /*!< is the key m pressed ? */
   // Atom selection: 0 = normal mode, 1 = edition mode
-  struct atom_selection * selected[2];
-
+  struct atom_selection * selected[2];          /*!< atom(s) selection lists \n
+                                                    0 = analysis mode, \n
+                                                    1 = edition mode */
   // Model box and partial axis data
   // BOX = 0, AXIS = 1
-  int box_axis[2];
-  double box_axis_rad[2];
-  double box_axis_line[2];
-  ColRGBA box_color;
-  ColRGBA * axis_color;
+  int box_axis[2];                              /*!< Show (1) / hide (0): \n
+                                                   0 = model box, \n
+                                                   1 = axis */
+  double box_axis_rad[2];                       /*!< Cylinder radius (if used): \n
+                                                   0 = model box, \n
+                                                   1 = axis */
+  double box_axis_line[2];                      /*!< Wireframe line width (if used):
+                                                   0 = model box, \n
+                                                   1 = axis */
+  ColRGBA box_color;                            /*!< Model box color */
   // Extra cell on a/b/c
-  int extra_cell[3];
+  int extra_cell[3];                            /*!< Extra cells (if any) on x, y and z */
 
-  double axis_length;
-  int axispos;
-  GLdouble axis_pos[3];
-
-  int axis_labels;
-  gchar * axis_title[3];
+  double axis_length;                           /*!< Axis length */
+  int axispos;                                  /*!< Axis */
+  GLdouble axis_pos[3];                         /*!< Axis position */
+  int axis_labels;                              /*!<  */
+  gchar * axis_title[3];                        /*!< Axis titles */
+  ColRGBA * axis_color;                         /*!< Axis colors, if not default */
 
  // Coordination(s)
-  ColRGBA ** spcolor[10];                    // Coordination sphere colors
+  ColRGBA ** spcolor[10];                       /*!<  Coordination sphere colors */
 
-  GLdouble p_depth;
-  GLdouble c_angle[2];                       // Cam. Angle pitch and heading
-  GLdouble c_shift[2];                       // Cam. pos x / y
-  GLdouble gnear, gfar;
-  GLdouble gleft, gright;
-  GLdouble gtop, gbottom;
-  GLdouble zoom;
+  GLdouble p_depth;                             /*!< Camera depth */
+  GLdouble c_angle[2];                          /*!< Camera angle: pitch and heading */
+  GLdouble c_shift[2];                          /*!< Camera position: x and y */
+  GLdouble gnear;                               /*!< Near plane position */
+  GLdouble gfar;                                /*!< Far plane position */
+  GLdouble gleft;                               /*!< Left plane position */
+  GLdouble gright;                              /*!< Right plane position  */
+  GLdouble gtop;                                /*!< Top plane position  */
+  GLdouble gbottom;                             /*!< Bottom plane position  */
+  GLdouble zoom;                                /*!< Zoom factor */
 
-  vec4_t rotation_quaternion;
+  vec4_t rotation_quaternion;                   /*!< Rotation quaternion */
 
   // Only for recording
-  int ** i_rings[5];
-  atom_data * at_data;
+  int ** i_rings[5];                            /*!< Ring(s) visual information, temporary buffer for movie encoding */
+  atom_data * at_data;                          /*!< Atom visual information, temporary buffer for movie encoding */
 
   // Volumes
-  gboolean show_vol[FILLED_STYLES];
-  ColRGBA vol_col[FILLED_STYLES];
-  gboolean * fm_show_vol[2][FILLED_STYLES];
-  ColRGBA * fm_vol_col[2][FILLED_STYLES];
+  gboolean show_vol[FILLED_STYLES];             /*!< Show (1) or hide (0) overall molecular volumes, calculated using: \n
+                                                   0 = covalent radii, \n
+                                                   1 = ionic radii, \n
+                                                   2 = van Der Waals radii, \n
+                                                   3 = in crystal radii */
+  ColRGBA vol_col[FILLED_STYLES];               /*!< Overall molecular volume colors, calculated using: \n
+                                                   0 = covalent radii, \n
+                                                   1 = ionic radii, \n
+                                                   2 = van Der Waals radii, \n
+                                                   3 = in crystal radii */
+  gboolean * fm_show_vol[2][FILLED_STYLES];     /*!< Show (1) or hide (0) isolated fragment(s) and molecule(s) volumes, calculated using: \n
+                                                   0 = covalent radii, \n
+                                                   1 = ionic radii, \n
+                                                   2 = van Der Waals radii, \n
+                                                   3 = in crystal radii */
+  ColRGBA * fm_vol_col[2][FILLED_STYLES];       /*!< Isolated fragment(s) and molecule(s) volume colors: \n
+                                                   0 = covalent radii, \n
+                                                   1 = ionic radii, \n
+                                                   2 = van Der Waals radii, \n
+                                                   3 = in crystal radii */
 
-  int rotation_mode;
+  int rotation_mode;                            /*!< Not used anymore, should be removed */
 
-  int style;
-  GLint quality;
-  GLint render;
-  int lights;
-  int * light_loc;
-  Light * l_ght;
-  Material m_terial;
-  Fog f_g;
+  int style;                                    /*!< Default style, in: \n
+                                                    0 = ball and stick, \n
+                                                    1 = wireframe, \n
+                                                    2 = spacefilled, \n
+                                                    2 = spheres, \n
+                                                    3 = cylinders, \n
+                                                    4 = dots */
+  int filled_type;                              /*!< Spacefilled type, in: \n
+                                                    0 = covalent radii, \n
+                                                    1 = ionic radii, \n
+                                                    2 = van Der Waals radii, \n
+                                                    3 = in crystal radii */
+  GLint quality;                                /*!< Quality of the rendering */
+  GLint render;                                 /*!< OpenGL render type, in \n
+                                                    0 = filled (default), \n
+                                                    1 = lines, \n
+                                                    2 = points */
+  int lights;                                   /*!< Number of light(s), default 3 */
+  int * light_loc;                              /*!< Lights locations (only used when drawing light spots), in \n
+                                                    0 = ambient light, not in the model, \n
+                                                    1 = spot or directional light, in the model */
+  Light * l_ght;                                /*!< Light(s) description(s), if any */
+  Material m_terial;                            /*!< Material description, if any */
+  Fog f_g;                                      /*!< Fog description, if any*/
 
-  int filled_type;
-  int step;
-  int rep;
-  int id;
+  int step;                                     /*!< The MD step, in case of trajectory */
+  int rep;                                      /*!< Representation: 0 = orthographic, 1 = perspective */
+  int id;                                       /*!< Image ID */
 } image;
 
+/*! \struct snapshot */
 struct snapshot {
-  image * img;
+  image * img;               /*!< The image structure for this snapshot */
   struct snapshot * prev;
   struct snapshot * next;
 };
 
+/*! \struct animation */
 typedef struct {
-  int frames;
+  int frames;                /*!< Number of frames or snapshots */
   struct snapshot * first;
   struct snapshot * last;
 } animation;
 
+/*! \struct colormap */
 typedef struct {
-  float ** data;                       // The value per MD step / atom for custom color map
-  ColRGBA ** colors;                   // The color per MD step / atom for custom color map
-  int points;
-  float * positions;
-  float cmin;
-  float cmax;
-  ColRGBA * values;
+  float ** data;              /*!< Data to use as custom color map, value per MD step x atom */
+  int points;                 /*!< Number of color(s) to build the custom color map */
+  ColRGBA ** colors;          /*!< Color(s) to use to build the custom color map */
+  float * positions;          /*!< Point positions, in the overall value range */
+  float cmin;                 /*!< Minimum value */
+  float cmax;                 /*!< Maximum value */
+  ColRGBA * values;           /*!< The atom(s) colors calculated using the custom color map information */
 } colormap;
 
+/*! \struct atom_search
+
+  \brief a data structure to search for atom(s) and edit the model
+*/
 typedef struct {
-  int proj;
-  int action;
+  int proj;                        /*!< Target project */
+  int action;                      /*!< Action to be performed */
   GtkWidget * atom_tree;
   GtkWidget * mode_box;
   GtkWidget * object_box;
@@ -354,15 +460,27 @@ typedef struct {
   // 0 = Unselected
   // 1 = Selected
   // 2 = All
-  int status;
+  int status;                      /*!< Atom(s) status for the search, in: \n
+                                        0 = unselected, \n
+                                        1 = selected, \n
+                                        2 = all */
   // O = Normal
   // 1 = Random
-  int mode;
+  int mode;                        /*!< Search mode, in: \n
+                                        0 = normal, \n
+                                        1 = random */
   // 0 = Atoms
   // 1 = Groups
-  int object;
-  int filter;
-  int spec;
+  int object;                      /*!< Search object, in: \n
+                                        0 = isolated atom(s), \n
+                                        1 = group of atoms */
+  int filter;                      /*!< Search filter, in: \n
+                                        0 = chemical species, \n
+                                        1 = total coordination(s), \n
+                                        2 = partial coordination(s), \n
+                                        3 = fragment(s), \n
+                                        4 = molecule(s) */
+  int spec;                        /*!< Target chemical species, if any */
   int search_digit;
   int spec_to_add;
   int num_to_add;
@@ -383,82 +501,116 @@ typedef struct {
   tint pointer[6];
 } atom_search;
 
-struct insert_object {
-  int id;
-  int origin;
-  float dim;
-  gchar * name;
-  int type;
-  int atoms;
-  int species;
-  int * old_z;
-  struct atom * at_list;
+/*! \struct insert_object
 
-  int ifcl;
-  int * bcid;
-  double occ;
-  //double * icoord;
-  double * baryc;
-  int bonds;
-  int ** ibonds;
-  //int ** coord_data;
-  coord_info * coord;
+  \brief a data structure to describe an object to work on. \n
+  the object can be one or more: \n
+    - atom(s) \n
+    - chemical species \n
+    - coordination sphere(s) (total or partial) \n
+    - fragment(s) \n
+    - molecule(s) \n
+    - selection(s) of atom(s) from any project in the workspace
+*/
+struct insert_object {
+  int id;                       /*!< Object ID */
+  int origin;                   /*!< Origin project for the object */
+  float dim;                    /*!< Maximum size in x, y or z for the object */
+  gchar * name;                 /*!< Name of the object */
+  int type;                     /*!< Type of object */
+  int atoms;                    /*!< Number of atom(s) */
+  int species;                  /*!< Number of chemical species */
+  int * old_z;                  /*!< Temporary buffer to preserve the atomic numbers */
+  struct atom * at_list;        /*!< List of atom(s) in the object */
+  int ifcl;                     /*!< Number of clone(s), if any */
+  int * bcid;                   /*!< Cloned bonds ID */
+  double occ;                   /*!< Occupancy (for crystal building purposes) */
+  double * baryc;               /*!< Position barycenter for the object */
+  int bonds;                    /*!< Number of chemical bonds */
+  int ** ibonds;                /*!< List of bonds */
+  coord_info * coord;           /*!< coordination information */
   struct insert_object * prev;
   struct insert_object * next;
 };
 
+/*! \struct wyckoff_position
+
+  \brief a structure to describe a Wyckoff position in crystallography
+*/
 typedef struct {
-  int multi;
-  gchar * let;
-  gchar * site;
-  gchar *** pos;
+  int multi;           /*!< Multiplicity */
+  gchar * let;         /*!< Letter */
+  gchar * site;        /*!< Symmetry */
+  gchar *** pos;       /*!< Coordinate(s) */
 } wyckoff_position;
 
+/*! \struct spg_setting
+
+  \brief a structure to describe the settings of a space group in crystallography
+*/
 typedef struct {
-  int origin;
-  gchar * name;
-  gchar * pos[3];
-  int nump;
-  gchar *** points;
+  int origin;          /*!< Origin */
+  gchar * name;        /*!< Name of the setting */
+  gchar * pos[3];      /*!< Lattice orientation modification(s) */
+  int nump;            /*!< Number of Wyckoff position modification(s) */
+  gchar *** points;    /*!< Wyckoff position modification(s) */
 } spg_setting;
 
+/*! \struct space_group
+
+  \brief a structure to described a space group in crystallography
+*/
 typedef struct {
-  int id;
-  gchar * name;
-  gchar * hms;
-  gchar * bravais;
-  gchar * setting;
-  int sid;
-  int nums;
-  spg_setting * settings;
-  int numw;
-  wyckoff_position * wyckoff;
-  mat4_t coord_origin;
-  mat4_t wyck_origin;
+  int id;                         /*!< ID number, in [1-230] */
+  gchar * name;                   /*!< Name */
+  gchar * hms;                    /*!< Hermann-Mauguin symbol */
+  gchar * bravais;                /*!< Type of Bravais lattice */
+  gchar * setting;                /*!< Available setting(s), if any*/
+  int sid;                        /*!< Selected setting, if any */
+  int nums;                       /*!< Number of possible setting(s) */
+  spg_setting * settings;         /*!< Space group settings */
+  int numw;                       /*!< Number of Wyckoff position(s) */
+  wyckoff_position * wyckoff;     /*!< Wyckoff position(s) */
+  mat4_t coord_origin;            /*!< Origin of the atomic coordinates */
+  mat4_t wyck_origin;             /*!< Origin of the Wyckoff positions */
 } space_group;
 
+/*! \struct box_info
+
+  \brief model box information
+*/
 typedef struct {
-  double param[2][3];
-  double vect[3][3];
-  double rvect[3][3];
-  mat4_t frac_to_cart;
-  mat4_t cart_to_frac;
-  double vol;
-  double dens;
+  double param[2][3];     /*!< Box parameters: \n
+                               0: a, b, c \n
+                               1: alpha, beta, gamma */
+  double vect[3][3];      /*!< Box vectors */
+  double rvect[3][3];     /*!< Reciprocal vectors */
+  mat4_t frac_to_cart;    /*!< Fractional to Cartesian matrix */
+  mat4_t cart_to_frac;    /*!< Cartesian to fractional matrix */
+  double vol;             /*!< Volume */
+  double dens;            /*!< Density */
 } box_info;
 
+/*! \struct
+
+  \brief Description of the periodicity
+*/
 typedef struct {
-  box_info * box;
-  int cextra[3];
-  int pbc;                  // Apply pbc (still used ?)
-  int frac;                 // Frac coordinates (still ?)
-  int ltype;                // Lattice type (0=isolated, 1= a,b,c + angles 2= vectors)
-  double volume;
-  double density;
-  gboolean npt;
-  gboolean has_a_box;
-  gboolean crystal;
-  space_group * sp_group;
+  box_info * box;         /*!< Model box description \n
+                               In the case of NPT calculation as many boxes as MD steps are described */
+  int cextra[3];          /*!< Extra boxes (if any), on x, y and z*/
+  int pbc;                /*!< Apply PBC */
+  int frac;               /*!< Are the initial coordinates fractional ? */
+  int ltype;              /*!< Lattice type, in \n
+                               0 = isolated, \n
+                               1 = a,b,c + angles, \n
+                               2 = vectors */
+  double volume;          /*!< Volume, average if NPT */
+  double density;         /*!< Density, average if NPT */
+  gboolean npt;           /*!< NPT trajectory (0 = no, 1 = yes) */
+  gboolean has_a_box;     /*!< Is there a model box ?  (0 = no, 1 = yes) */
+  gboolean crystal;       /*!< Is this a crystal ?  (0 = no, 1 = yes) */
+  space_group * sp_group; /*!< Space group in the case of a crystal */
 } cell_info;
 
 typedef struct {
@@ -638,9 +790,10 @@ typedef struct {
   GtkWidget * notebook;
 } model_edition;
 
+/*! \struct OpenGL window widget structure */
 typedef struct {
-  gboolean init;
-  int proj;
+  gboolean init;                                  /*!< Was rendering initialized (0 = no, 1 = yes) */
+  int proj;                                       /*!< Target project */
   // The entire OpenGL window
   GtkWidget * win;
   // The menu bar
@@ -716,10 +869,19 @@ typedef struct {
 
   // Action mode
   // 0 = analyze (normal), 1 = edit structure
-  int mode;
+  int mode;                                  /*!< Mouse mode, in: \n
+                                                  0 = analyze (default), \n
+                                                  1 = edition (default for new project) */
   // Selection mode
-  // 0 = atom/bond, 1 = fragment, 2 = molecule, 3 = single frag, 4 = single mol
-  int selection_mode;
+  int selection_mode;                        /*!< Mouse selection mode, in: \n
+                                                  0 = atom / bond, \n
+                                                  1 = total coordination sphere, \n
+                                                  2 = partial coordination sphere, \n
+                                                  3 = fragment, \n
+                                                  4 = molecule, \n
+                                                  5 = single fragment, \n
+                                                  6 = single molecule, \n
+                                                  7 = selection in edition mode */
 
   // For temporary backup purposes only:
   struct atom_selection * tmp_sel[2];
@@ -751,16 +913,20 @@ typedef struct {
   // Color pointers, these are used to deal with the
   // Callbacks for the OpenGL window menus, and are used
   // for atoms / box / axis ...
-  tint * colorp[64];
+  tint * colorp[64];                        /*!< Color pointers \n
+                                               these are used to deal with the Callbacks for the OpenGL window, \n
+                                               and are used for atoms / box / axis ... */
 
-  colormap * custom_map;
+  colormap * custom_map;                    /*!< User defined color map, if any */
 
-  int allbonds[2];                 // 0/1=norm/clones, overall total number of bonds
-  int ** bonds;                    // A=MD step, B=0/1=norm/clones, VALUE=number of bonds
-  int **** bondid;                 // A=MD step, B=0/1=norm/clones, C=bid, D: 0 = at_1 and 1 = at_2
+  int allbonds[2];                          /*!< Total number of chemical bond(s): \n
+                                                 0 = normal bond(s), \n
+                                                 1 = cloned bonds */
+  int ** bonds;                             /*!< Number of bond(s) by MD step, then 0/1=normal/cloned */
+  int **** bondid;                          /*!< Atoms ID in bonds, by MD step, then 0/1=norm/clones, then bond ID */
 
   // Clones
-  vec3_t ** clones;
+  vec3_t ** clones;                         /*!< List of cloned atomic coordiantes */
 
   gboolean prepare_motion;
   // Rebuild trigger switch on edition
@@ -770,19 +936,27 @@ typedef struct {
   // [1] = on copy:
   //    [0] atom_win active: 0/1 to turn off/on
   //    [1] atom_win inactive: 0/1 to turn off/on
-  gboolean rebuild[2][2];
+  gboolean rebuild[2][2];                   /*!< Rebuild trigger switch on edition: \n
+                                                 [0] = on move: \n
+                                                     [0] atom_win active: 0/1 to turn off/on \n
+                                                     [1] atom_win inactive: 0/1 to turn off/on \n
+                                                  [1] = on copy: \n
+                                                     [0] atom_win active: 0/1 to turn off/on \n
+                                                     [1] atom_win inactive: 0/1 to turn off/on */
   gboolean bonding;
-  gboolean adv_bonding[2];                   // 0 = Fragments, 1 = Molecules
-  qint ** gcid[10];                          // Geom colors pointers
+  gboolean adv_bonding[2];                   /*!< Is advanced bonding information available, \n
+                                                  0 = Fragments, \n
+                                                  1 = Molecules */
+  qint ** gcid[10];                          /*!< Geom colors pointers */
   gboolean rings;
-  int ring_max[5];                           // The largest ring size
-  int ** num_rings[5];                       // The number of rings (Search type, step, ring size)
-  int **** all_rings[5];                     // The atomic rings
-  gboolean *** show_rpoly[5];                // Show polyhedra of selected rings
+  int ring_max[5];                           /*!< The largest ring size */
+  int ** num_rings[5];                       /*!< The number of rings (search type, step, ring size) */
+  int **** all_rings[5];                     /*!< The ring(s) of atoms */
+  gboolean *** show_rpoly[5];                /*!< Show polyhedra of selected rings */
   gboolean chains;
-  int chain_max;                             // The largest chain size
-  int ** num_chains;                         // The number of chains (chain size, step)
-  int **** all_chains;                        // The atomic chains
+  int chain_max;                             /*!< The largest chain size */
+  int ** num_chains;                         /*!< The number of chains (chain size, step) */
+  int **** all_chains;                       /*!< The chain(s) of atoms */
 
   // Volumes data
   gboolean volumes;
@@ -800,11 +974,11 @@ typedef struct {
   int picked;
 
   // Color picking
-  int to_be_picked;                          // Total number of objects that can be picked
-  int atoms_to_be_picked;                    // Number of atoms that can be picked
-  int clones_to_be_picked;                   // Number of clones that can be picked
-  int bonds_to_be_picked;                    // Number of bonds that can be picked (do not include clones)
-  int * color_to_pick;                       // The different colors that can be picked
+  int to_be_picked;                          /*!< Total number of objects that can be picked */
+  int atoms_to_be_picked;                    /*!< Number of atoms that can be picked */
+  int clones_to_be_picked;                   /*!< Number of clones that can be picked */
+  int bonds_to_be_picked;                    /*!< Number of bonds that can be picked (do not include clones) */
+  int * color_to_pick;                       /*!< The different colors that can be picked */
 
   // Spinner, player
   sequencer * player;

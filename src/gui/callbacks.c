@@ -1159,9 +1159,9 @@ gchar * npt_file;
 /*!
   \fn G_MODULE_EXPORT void run_read_npt_data (GtkNativeDialog * info, gint response_id, gpointer data)
 
-  \brief
+  \brief read NPT data associated with atomic coordinates: run the dialog GTK4 callback
 
-  \param info read NPT data associated with atomic coordinates: run the dialog
+  \param info the GtkNativeDialog sending the signal
   \param response_id the response id
   \param data the associated data pointer
 */
@@ -1172,7 +1172,7 @@ G_MODULE_EXPORT void run_read_npt_data (GtkNativeDialog * info, gint response_id
 /*!
   \fn G_MODULE_EXPORT void run_read_npt_data (GtkDialog * info, gint response_id, gpointer data)
 
-  \brief read NPT data associated with atomic coordinates: run the dialog
+  \brief read NPT data associated with atomic coordinates: run the dialog GTK3 callback
 
   \param info the GtkDialog sending the signal
   \param response_id the response id

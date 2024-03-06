@@ -107,7 +107,7 @@ vec3_t get_triangle_normal (vec3_t v1, vec3_t v2, vec3_t v3)
 /*!
   \fn void setup_triangles (float * vertices, vec3_t sa, vec3_t sb, vec3_t sc)
 
-  \brief
+  \brief setup triangle veertices
 
   \param vertices
   \param sa 1st summit
@@ -343,7 +343,7 @@ gboolean check_it (int i, int j, int k, int l)
 /*!
   \fn void check_triangles (int s, GLfloat ** xyz)
 
-  \brief
+  \brief check triangle intersection
 
   \param s number of summits for the polygon
   \param xyz the coordinates of the summits
@@ -673,7 +673,7 @@ void create_poly_lists ()
                  o += coord_gl -> partial_geo[n][m][p];
               }
               p = (plot -> draw_clones) ? 1 + is_atom_cloned (k) : 1;
-              // q is the number of summit of the polyedra
+              // q is the number of summit of the polyhedra
               // +1 if only a coord 3 to include the central atom
               q = (o == 3) ? o+1: o;
               // Then we need the max number of triangle for this polyedron

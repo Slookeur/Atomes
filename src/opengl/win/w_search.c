@@ -1390,7 +1390,7 @@ void clear_fields (atom_search * asearch)
 /*!
   \fn gboolean remove_from_model (GtkTreeModel * model, GtkTreePath * path, GtkTreeIter * iter, gpointer data)
 
-  \brief
+  \brief remove from the tree model
 
   \param model the tree model
   \param path the path in the tree model
@@ -1722,7 +1722,7 @@ G_MODULE_EXPORT void set_id (GtkEntry * entry, gpointer data)
 /*!
   \fn void adjust_search_param (atom_search * asearch, struct project * this_proj, int a, int s, int c, gboolean status)
 
-  \brief
+  \brief adjust parameters for this atom search
 
   \param asearch the target atom search
   \param this_proj the target project

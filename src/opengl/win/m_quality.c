@@ -109,7 +109,7 @@ G_MODULE_EXPORT void window_quality (GtkWidget * widg, gpointer data)
 /*!
   \fn GtkWidget * menu_quality (glwin * view, int id)
 
-  \brief  create the 'OpenGL -> Quality' menu item - GTK3
+  \brief create the 'OpenGL -> Quality' menu item - GTK3
 
   \param view the target glwin
   \param id main app (0) or popup (1)

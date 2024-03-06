@@ -666,7 +666,7 @@ int render_picked (int style, gboolean cylinder, int caps, int bonds, int ncaps,
 /*!
   \fn int prepare_selection_shaders (int style, int shaders, int clone, int type, gboolean do_bonds)
 
-  \brief
+  \brief prepare selection shaders
 
   \param style rendering style
   \param shaders shader id number
@@ -799,7 +799,7 @@ int prepare_selection_shaders (int style, int shaders, int clone, int type, gboo
 /*!
   \fn int check_selection (int style, int type)
 
-  \brief
+  \brief check selection : atom(s) in selection ?
 
   \param style rendering style
   \param type 0 = mouse analysis mode, 1 = mouse edition mode

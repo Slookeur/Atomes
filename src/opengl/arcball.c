@@ -56,7 +56,7 @@ vec3_t get_arc_ball_vector (glwin * view, int x, int y)
 /*!
   \fn void arc_ball_rotation (glwin * view, int x, int y)
 
-  \brief
+  \brief Perform arcball rotation
 
   \param view the target glwin
   \param x x position

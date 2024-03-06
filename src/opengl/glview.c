@@ -1390,7 +1390,7 @@ void init_opengl (glwin * view)
 
   glShadeModel(GL_SMOOTH);
   glCullFace(GL_BACK);
-  glEnable (GL_CULL_FACE);                         // Incompatible with polyedra viz
+  glEnable (GL_CULL_FACE);                         // Incompatible with polyhedra viz
 
   glEnable (GL_COLOR_SUM_EXT);
 

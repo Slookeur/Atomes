@@ -971,7 +971,7 @@ int get_vdw (int faid)
 /*!
   \fn int get_bi (int faid)
 
-  \brief
+  \brief NOT USED !
 
   \param faid
 * /
@@ -1996,7 +1996,7 @@ int is_extra;
 /*!
   \fn gboolean is_a_match (int * data, int num, int val[4])
 
-  \brief is this match ?
+  \brief is this a match ?
 
   \param data the set of parameter(s)
   \param num the number of parameter

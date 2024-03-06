@@ -70,7 +70,7 @@ char * reg_types[NFORMATS] = {"XYZ file",
 /*!
   \fn size_t strfind (char * ida)
 
-  \brief
+  \brief size of a string without spaces
 
   \param ida
 */
@@ -78,13 +78,13 @@ size_t strfind (char * ida)
 {
   size_t a, b, c;
 
-  a=strlen(ida);
+  a = strlen(ida);
   b = 0;
   for ( c=0 ; c < a ; c++)
   {
     if (ida[c] != ' ')
     {
-      b++;
+      b ++;
     }
   }
   return b;

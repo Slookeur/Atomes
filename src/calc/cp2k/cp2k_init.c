@@ -391,7 +391,7 @@ GtkWidget * create_vdw_box (int id)
 /*!
   \fn G_MODULE_EXPORT void mol_selection_button (GtkButton * but, gpointer data)
 
-  \brief UNUSED
+  \brief NOT USED !
 
   \param but the GtkButton sending the signal
   \param data the associated data pointer
@@ -420,7 +420,7 @@ G_MODULE_EXPORT void mol_selection_button (GtkButton * but, gpointer data)
 /*!
   \fn void create_mol_selection_button (GtkWidget * box, int id)
 
-  \brief UNUSED
+  \brief NOT USED !
 
   \param box the box to insert the new widget in
   \param id the selection status

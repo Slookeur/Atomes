@@ -62,7 +62,7 @@ extern int get_to_be_selected (glwin * view);
 /*!
   \fn int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id)
 
-  \brief
+  \brief Find for a bond ID in the bond list using the atoms in the bond
 
   \param this_proj the target project
   \param i id tracker
@@ -494,7 +494,7 @@ void update_selection_list (struct atom_selection * at_list, struct atom * at, g
 /*!
   \fn void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
 
-  \brief
+  \brief process selected atom
 
   \param this_proj the target project
   \param view the target glwin
@@ -543,7 +543,7 @@ void process_selected_atom (struct project * this_proj, glwin * view, int id, in
 /*!
   \fn void process_selection (struct project * this_proj, glwin * view, int id, int ac, int pi)
 
-  \brief
+  \brief process selection
 
   \param this_proj the target project
   \param view the target glwin
