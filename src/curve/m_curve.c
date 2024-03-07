@@ -35,7 +35,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void autoscale (gpointer data);
   void action_to_plot (pointer data);
   void add_extra (ExtraSets * sets, tint * id);
-  void remove_extra (ExtraSets * sets, struct cextra * ctmp);
+  void remove_extra (ExtraSets * sets, CurveExtra * ctmp);
   void prep_extra_rid (tint * data);
   void curve_window_add_menu_bar (tint * data);
 
@@ -51,11 +51,11 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   GMenu * edit_data_section (GSimpleActionGroup * action_group, gchar * str, tint * data);
   GMenu * curve_close_section (gchar * str);
   GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * str, tint * data);
-  GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data);
+  GMenu * curve_menu_bar (project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data);
   GMenu * create_add_remove_section (GSimpleActionGroup * action_group, gchar * act, int num, tint * data);
   GMenu * autoscale_section (gchar * str);
 
-  struct cextra * init_extra (tint * id);
+  CurveExtra * init_extra (tint * id);
 
 */
 
@@ -68,7 +68,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "cedit.h"
 #include "datab.h"
 
-extern DataLayout * curve_default_layout (struct project * pid, int rid, int cid);
+extern DataLayout * curve_default_layout (project * pid, int rid, int cid);
 int ** extrarid;
 // gchar * curve_act[3]={"edit", "add", "rem"};
 
@@ -88,15 +88,15 @@ void autoscale (gpointer data)
 }
 
 /*!
-  \fn struct cextra * init_extra (tint * id)
+  \fn CurveExtra * init_extra (tint * id)
 
   \brief create extra data set
 
   \param id the associated data pointer
 */
-struct cextra * init_extra (tint * id)
+CurveExtra * init_extra (tint * id)
 {
-  struct cextra * ctmp = g_malloc0 (sizeof*ctmp);
+  CurveExtra * ctmp = g_malloc0 (sizeof*ctmp);
   ctmp -> id.a = id -> a;
   ctmp -> id.b = id -> b;
   ctmp -> id.c = id -> c;
@@ -132,14 +132,14 @@ void add_extra (ExtraSets * sets, tint * id)
 }
 
 /*!
-  \fn void remove_extra (ExtraSets * sets, struct cextra * ctmp)
+  \fn void remove_extra (ExtraSets * sets, CurveExtra * ctmp)
 
   \brief remove data from extra set(s)
 
   \param sets the extra set(s)
   \param ctmp the data set to remove from the extra set(s)
 */
-void remove_extra (ExtraSets * sets, struct cextra * ctmp)
+void remove_extra (ExtraSets * sets, CurveExtra * ctmp)
 {
   if (sets -> extras == 1)
   {
@@ -185,10 +185,10 @@ void prep_extra_rid (tint * data)
 {
   int i;
   extrarid = allocdint (nprojects, NGRAPHS);
-  struct project * this_proj = get_project_by_id (data -> a);
+  project * this_proj = get_project_by_id (data -> a);
   if (this_proj -> curves[data -> b][data -> c] -> extrac -> extras > 0)
   {
-    struct cextra * ctmp = this_proj -> curves[data -> b][data -> c] -> extrac -> first;
+    CurveExtra * ctmp = this_proj -> curves[data -> b][data -> c] -> extrac -> first;
     for (i=0; i<this_proj -> curves[data -> b][data -> c] -> extrac -> extras; i++)
     {
       extrarid[ctmp -> id.a][ctmp -> id.b] ++;
@@ -209,10 +209,10 @@ void action_to_plot (gpointer data)
   int i;
   tint * id = (tint *)data;
   gboolean remove = FALSE;
-  struct project * this_proj = get_project_by_id (activeg);
+  project * this_proj = get_project_by_id (activeg);
   if (this_proj -> curves[activer][activec] -> extrac > 0)
   {
-    struct cextra * ctmp = this_proj -> curves[activer][activec] -> extrac -> first;
+    CurveExtra * ctmp = this_proj -> curves[activer][activec] -> extrac -> first;
     for (i=0; i<this_proj -> curves[activer][activec] -> extrac -> extras; i++)
     {
       if (ctmp -> id.a == id -> a && ctmp -> id.b == id -> b && ctmp -> id.c == id -> c)
@@ -314,7 +314,7 @@ G_MODULE_EXPORT void curve_menu_bar_action (GSimpleAction * action, GVariant * p
 gboolean was_not_added (ExtraSets * sets, int a, int b, int c)
 {
   int i, j;
-  struct cextra * ctmp = sets -> first;
+  CurveExtra * ctmp = sets -> first;
   for (i=0; i<sets -> extras; i++)
   {
     if (ctmp -> id.a == a && ctmp -> id.b == b)
@@ -348,7 +348,7 @@ GMenu * curve_section (GSimpleActionGroup * action_group, gchar * act, ExtraSets
   GMenu * menu = g_menu_new ();
   gchar * str_a, * str_b, * str_c;
   gchar * text[2] = {"curve.action", "edit.data"};
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   int i;
   for (i=0; i<this_proj -> numc[b]; i++)
   {
@@ -390,7 +390,7 @@ GMenu * curve_section (GSimpleActionGroup * action_group, gchar * act, ExtraSets
 */
 GMenu * create_curve_submenu (GSimpleActionGroup * action_group, gchar * act, tint * data, gboolean add, int edit)
 {
-  struct project * this_proj;
+  project * this_proj;
   GMenu * menu = g_menu_new ();
   int i, j, k;
   gboolean * create_proj = allocbool (nprojects);
@@ -541,7 +541,7 @@ GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * st
 }
 
 /*!
-  \fn GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data)
+  \fn GMenu * curve_menu_bar (project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data)
 
   \brief create the curve window menu bar
 
@@ -550,7 +550,7 @@ GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * st
   \param str the action string
   \param data the associated data pointer
 */
-GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data)
+GMenu * curve_menu_bar (project * this_proj, GSimpleActionGroup * action_group, gchar * str, tint * data)
 {
   GMenu * menu = g_menu_new ();
   prep_extra_rid (data);
@@ -569,7 +569,7 @@ GMenu * curve_menu_bar (struct project * this_proj, GSimpleActionGroup * action_
 */
 void curve_window_add_menu_bar (tint * data)
 {
-  struct project * this_proj = get_project_by_id (data -> a);
+  project * this_proj = get_project_by_id (data -> a);
   this_proj -> curves[data -> b][data -> c] -> pos = destroy_this_widget (this_proj -> curves[data -> b][data -> c] -> pos);
   this_proj -> curves[data -> b][data -> c] -> pos = gtk_label_new (" ");
   this_proj -> curves[data -> b][data -> c] -> curve_hbox = destroy_this_widget (this_proj -> curves[data -> b][data -> c] -> curve_hbox);
@@ -607,7 +607,7 @@ GMenu * create_add_remove_section (GSimpleActionGroup * action_group, gchar * ac
   g_menu_item_set_icon (item, gicon);
   g_object_unref (gicon);
 #endif
-  struct project * this_proj = get_project_by_id (data -> a);
+  project * this_proj = get_project_by_id (data -> a);
   if (this_proj -> curves[data -> b][data -> c] -> extrac -> extras < num)
   {
     g_menu_item_set_submenu (item, (GMenuModel *)create_curve_submenu (action_group, act, data, TRUE, 0));

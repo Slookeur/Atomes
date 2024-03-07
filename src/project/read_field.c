@@ -41,8 +41,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int read_field_molecule (FILE * fp, int fid);
   int read_field_body (FILE * fp, int fid);
   int read_field_external (FILE * fp, int fid);
-  int read_dlp_field_data (FILE * fp, struct project * this_proj);
-  int read_lmp_field_data (FILE * fp, struct project * this_proj);
+  int read_dlp_field_data (FILE * fp, project * this_proj);
+  int read_lmp_field_data (FILE * fp, project * this_proj);
 
 */
 
@@ -450,14 +450,14 @@ int read_field_external (FILE * fp, int fid)
 }
 
 /*!
-  \fn int read_dlp_field_data (FILE * fp, struct project * this_proj)
+  \fn int read_dlp_field_data (FILE * fp, project * this_proj)
 
   \brief read force field data from file
 
   \param fp the file pointer
   \param this_proj the target project
 */
-int read_dlp_field_data (FILE * fp, struct project * this_proj)
+int read_dlp_field_data (FILE * fp, project * this_proj)
 {
   int i, j, k, l, m, n;
   if (fread (& i, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -569,14 +569,14 @@ int read_dlp_field_data (FILE * fp, struct project * this_proj)
 }
 
 /*!
-  \fn int read_lmp_field_data (FILE * fp, struct project * this_proj)
+  \fn int read_lmp_field_data (FILE * fp, project * this_proj)
 
   \brief read LAMMPS field data from file
 
   \param fp the file pointer
   \param this_proj the target project
 */
-int read_lmp_field_data (FILE * fp, struct project * this_proj)
+int read_lmp_field_data (FILE * fp, project * this_proj)
 {
   int i;
   if (fread (& i, sizeof(int), 1, fp) != 1) return ERROR_RW;

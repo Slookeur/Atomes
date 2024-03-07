@@ -32,7 +32,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   void initchn ();
   void update_chains_menus (glwin * view);
-  void update_chains_view (struct project * this_proj);
+  void update_chains_view (project * this_proj);
   void clean_chains_data (glwin * view);
 
   G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data);
@@ -57,7 +57,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "submenus.h"
 
 extern gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb);
-extern void clean_coord_window (struct project * this_proj);
+extern void clean_coord_window (project * this_proj);
 
 /*!
   \fn void initchn ()
@@ -99,13 +99,13 @@ void update_chains_menus (glwin * view)
 #endif
 
 /*!
-  \fn void update_chains_view (struct project * this_proj)
+  \fn void update_chains_view (project * this_proj)
 
   \brief update the chains statistics text view after the calculation
 
   \param this_proj the target project
 */
-void update_chains_view (struct project * this_proj)
+void update_chains_view (project * this_proj)
 {
   int i, j, k, l;
   gchar * nelt;
@@ -257,7 +257,7 @@ void update_chains_view (struct project * this_proj)
 */
 void clean_chains_data (glwin * view)
 {
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   if (this_proj -> coord -> totcoord[9])
   {
     if (this_proj -> coord -> ntg[9]) g_free (this_proj -> coord -> ntg[9]);

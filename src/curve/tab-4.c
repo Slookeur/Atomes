@@ -137,7 +137,7 @@ G_MODULE_EXPORT void set_axis_min (GtkEntry * res, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   int i = get_active_axis();
   if (i > -1)
   {
@@ -170,7 +170,7 @@ G_MODULE_EXPORT void set_axis_max (GtkEntry * res, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   int i = get_active_axis ();
   const gchar * m;
   m = entry_get_text (res);
@@ -201,7 +201,7 @@ G_MODULE_EXPORT void set_max_div (GtkEntry * maj, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   int i = get_active_axis ();
   const gchar * m;
   m = entry_get_text (maj);
@@ -279,7 +279,7 @@ G_MODULE_EXPORT void set_ticks_size_minor_spin (GtkSpinButton * res, gpointer da
   b = ad -> b;
   c = ad -> c;
   d = ad -> d;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   this_proj -> curves[b][c]-> mint_size[d] = gtk_spin_button_get_value_as_int(res);
   update_entry_int (GTK_ENTRY(res), this_proj -> curves[b][c] -> mint_size[d]);
   tint cd;
@@ -304,7 +304,7 @@ G_MODULE_EXPORT void set_lab_digit_spin (GtkSpinButton * res, gpointer data)
   b = ad -> b;
   c = ad -> c;
   d = ad -> d;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   this_proj -> curves[b][c]-> labels_digit[d] = gtk_spin_button_get_value_as_int(res);
   update_entry_int (GTK_ENTRY(res), this_proj -> curves[b][c] -> labels_digit[d]);
   tint cd;
@@ -329,7 +329,7 @@ G_MODULE_EXPORT void set_lab_shift_x_spin (GtkSpinButton * res, gpointer data)
   b = ad -> b;
   c = ad -> c;
   d = ad -> d;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   this_proj -> curves[b][c] -> labels_shift_x[d] = gtk_spin_button_get_value_as_int(res);
   update_entry_int (GTK_ENTRY(res), this_proj -> curves[b][c] -> labels_shift_x[d]);
   tint cd;
@@ -354,7 +354,7 @@ G_MODULE_EXPORT void set_lab_shift_y_spin (GtkSpinButton * res, gpointer data)
   b = ad -> b;
   c = ad -> c;
   d = ad -> d;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   this_proj -> curves[b][c] -> labels_shift_y[d] = gtk_spin_button_get_value_as_int(res);
   update_entry_int (GTK_ENTRY(res), this_proj -> curves[b][c]-> labels_shift_y[d]);
   tint cd;
@@ -482,7 +482,7 @@ G_MODULE_EXPORT void set_ticks_labels_font (GtkFontButton * fontb, gpointer data
   b = ad -> b;
   c = ad -> c;
   int i = get_active_axis ();
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   g_free (this_proj -> curves[b][c] -> labels_font[i]);
   this_proj -> curves[b][c] -> labels_font[i] = g_strdup_printf ("%s", gtk_font_chooser_get_font (GTK_FONT_CHOOSER(fontb)));
   update_curve (data);
@@ -570,7 +570,7 @@ G_MODULE_EXPORT void to_axis_title (GtkToggleButton * but, gpointer data)
 #endif
   {
     widget_set_sensitive (axis_title, 0);
-    struct project * this_proj = get_project_by_id(a);
+    project * this_proj = get_project_by_id(a);
     g_free (this_proj -> curves[b][c] -> axis_title[i]);
     this_proj -> curves[b][c] -> axis_title[i] = g_strdup_printf ("%s", default_title (i, c));
     update_entry_text (GTK_ENTRY(axis_title), this_proj -> curves[b][c] -> axis_title[i]);
@@ -686,7 +686,7 @@ G_MODULE_EXPORT void set_axis_legend (GtkEntry * xtit, gpointer data)
   b = ad -> b;
   c = ad -> c;
   int i = get_active_axis ();
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   g_free (this_proj -> curves[b][c] -> axis_title[i]);
   this_proj -> curves[b][c] -> axis_title[i] = g_strdup_printf ("%s", entry_get_text (xtit));
   update_curve (data);
@@ -706,7 +706,7 @@ G_MODULE_EXPORT void set_axis_title_font (GtkFontButton * fontb, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   int i = get_active_axis ();
   g_free (this_proj -> curves[b][c] -> axis_title_font[i]);
   this_proj -> curves[b][c] -> axis_title_font[i] = g_strdup_printf ("%s", gtk_font_chooser_get_font (GTK_FONT_CHOOSER(fontb)));
@@ -727,7 +727,7 @@ G_MODULE_EXPORT void set_scale (GtkComboBox * sbox, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   int i = get_active_axis ();
   this_proj -> curves[b][c] -> scale[i] = gtk_combo_box_get_active(sbox);
   widget_set_sensitive (majt, ! gtk_combo_box_get_active(sbox));
@@ -753,7 +753,7 @@ G_MODULE_EXPORT void update_axis (GtkComboBox * widg, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (widg);
   update_entry_double (GTK_ENTRY(vmin), this_proj -> curves[b][c] -> axmin[i]);
   update_entry_double (GTK_ENTRY(vmax), this_proj -> curves[b][c] -> axmax[i]);
@@ -826,7 +826,7 @@ GtkWidget * create_tab_4 (gpointer data)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 
   GtkWidget * axisbox;
 #ifdef GTK4

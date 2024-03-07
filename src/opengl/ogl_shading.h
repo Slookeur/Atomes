@@ -101,7 +101,9 @@ extern const GLchar * string_color;
 extern const GLchar * string_color_2d;
 
 /*! \struct object_3d */
-typedef struct {
+typedef struct object_3d object_3d;
+struct object_3d
+{
   int quality;             /*!< OpenGL rendering quality */
   int num_vertices;        /*!< Number of vertices to render, if any */
   int vert_buffer_size;    /*!< Buffer size for the vertices, if any  */
@@ -116,10 +118,12 @@ typedef struct {
   float shift[4];          /*!< 0 to 2, texture position shift, if any: \n
                              (0 = x_shift, 1 = y_shift, 2 = z_shift), \n
                               3 visibility (0 = normal, 1 = always) */
-} object_3d;
+};
 
 /*! \struct glsl_program */
-typedef struct {
+typedef struct glsl_program glsl_program;
+struct glsl_program
+{
   int id;                  /*!< The GLSL program ID */
   int object;              /*!< The number of 3D object(s) to render */
   GLuint vertex_shader;    /*!< The vertex shader ID */
@@ -136,6 +140,6 @@ typedef struct {
   object_3d * obj;         /*!< The 3D object(s) to render */
   float line_width;        /*!< Wireframe line width */
   ColRGBA * col;           /*!< String color */
-} glsl_program;
+};
 
 #endif

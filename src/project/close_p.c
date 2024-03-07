@@ -33,9 +33,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   void update_insert_combos ();
-  void close_project (struct project * to_close);
+  void close_project (project * to_close);
 
-  void to_close_this_project (int to_activate, struct project * this_proj);
+  void to_close_this_project (int to_activate, project * this_proj);
   G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata);
 
 */
@@ -60,7 +60,7 @@ extern GtkTreeModel * replace_combo_tree (gboolean insert, int p);
 void update_insert_combos ()
 {
   GtkTreeModel * model;
-  struct project * this_proj;
+  project * this_proj;
   GList * cell_list;
   GtkWidget * box;
   int i;
@@ -87,13 +87,13 @@ void update_insert_combos ()
 }
 
 /*!
-  \fn void close_project (struct project * to_close)
+  \fn void close_project (project * to_close)
 
   \brief close a project
 
   \param to_close the project to close
 */
-void close_project (struct project * to_close)
+void close_project (project * to_close)
 {
   int i, j, k, l;
 
@@ -224,7 +224,7 @@ void close_project (struct project * to_close)
   nprojects --;
   if (nprojects)
   {
-    struct project * this_proj = workzone.first;
+    project * this_proj = workzone.first;
     for (i=0 ; i<nprojects ; i++)
     {
       this_proj -> id = i;
@@ -299,14 +299,14 @@ void close_project (struct project * to_close)
 }
 
 /*!
-  \fn void to_close_this_project (int to_activate, struct project * this_proj)
+  \fn void to_close_this_project (int to_activate, project * this_proj)
 
   \brief to close this project
 
   \param to_activate If the workspace is not empty, activate first another project
   \param this_proj the target project
 */
-void to_close_this_project (int to_activate, struct project * this_proj)
+void to_close_this_project (int to_activate, project * this_proj)
 {
   if (nprojects > 0) close_project (this_proj);
   if (nprojects > 0)

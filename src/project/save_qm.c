@@ -30,10 +30,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int save_thermo (FILE * fp, struct thermostat * thermo);
+  int save_thermo (FILE * fp, thermostat * thermo);
   int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord);
-  int save_cpmd_data (FILE * fp, int cid, struct project * this_proj);
-  int save_cp2k_data (FILE * fp, int cid, struct project * this_proj);
+  int save_cpmd_data (FILE * fp, int cid, project * this_proj);
+  int save_cp2k_data (FILE * fp, int cid, project * this_proj);
 
 */
 
@@ -41,7 +41,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "project.h"
 
 /*
-struct thermostat {
+thermostat {
   int id;
   // For CPMD: 0 = none, 2 = controlled, 3 = nose
   // For CP2K: 0 = none, 2 = langevin, 3 = csvr, 4 = gle, 5 = nose
@@ -53,11 +53,11 @@ struct thermostat {
   double params[4];
   int natoms;
   int * list;
-  struct thermostat * next;
-  struct thermostat * prev;
+  thermostat * next;
+  thermostat * prev;
 };
 
-struct dummy_atom {
+dummy_atom {
   // 0 = type1, 1 = type2, ...
   int id;
   int type;
@@ -66,21 +66,21 @@ struct dummy_atom {
   int coord[4];
   int natoms;
   int * list;
-  struct dummy_atom * next;
-  struct dummy_atom * prev;
+  dummy_atom * next;
+  dummy_atom * prev;
 };
 
 typedef struct {
   int calc_type;
   int restart[10];
   int thermostats;
-  struct thermostat * ions_thermostat;
-  struct thermostat * elec_thermostat;
+  thermostat * ions_thermostat;
+  thermostat * elec_thermostat;
   int fixat;
   int * fixlist;
   int ** fixcoord;
   int dummies;
-  struct dummy_atom * dummy;
+  dummy_atom * dummy;
   double default_opts[17];
   double calc_opts[24];
   int ** pp;
@@ -92,7 +92,7 @@ typedef struct {
   double opts[42];
   double extra_opts[3][4];
   int thermostats;
-  struct thermostat * ions_thermostat;
+  thermostat * ions_thermostat;
   int fixat[2];
   int * fixlist[2];
   int ** fixcoord[2];
@@ -104,14 +104,14 @@ typedef struct {
 */
 
 /*!
-  \fn int save_thermo (FILE * fp, struct thermostat * thermo)
+  \fn int save_thermo (FILE * fp, thermostat * thermo)
 
   \brief save thermostat to file
 
   \param fp the file pointer
   \param thermo the thermostat to save
 */
-int save_thermo (FILE * fp, struct thermostat * thermo)
+int save_thermo (FILE * fp, thermostat * thermo)
 {
   if (fwrite (& thermo -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
   if (fwrite (& thermo -> type, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -161,7 +161,7 @@ int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
 }
 
 /*!
-  \fn int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
+  \fn int save_cpmd_data (FILE * fp, int cid, project * this_proj)
 
   \brief save CPMD data to file
 
@@ -169,7 +169,7 @@ int save_fixed_atoms (FILE * fp, int fixatoms, int * fixlist, int ** fixcoord)
   \param cid the CPMD id (0 = ab-initio, 1 = QM-MM)
   \param this_proj the target project
 */
-int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
+int save_cpmd_data (FILE * fp, int cid, project * this_proj)
 {
   int i;
   if (this_proj -> cpmd_input[cid] == NULL)
@@ -186,7 +186,7 @@ int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
   if (fwrite (& this_proj -> cpmd_input[cid] -> thermostats, sizeof(int), 1, fp) != 1) return ERROR_RW;
   if (this_proj -> cpmd_input[cid] -> thermostats)
   {
-    struct thermostat * thermo = this_proj -> cpmd_input[cid] -> ions_thermostat;
+    thermostat * thermo = this_proj -> cpmd_input[cid] -> ions_thermostat;
     i = 0;
     while (thermo)
     {
@@ -208,7 +208,7 @@ int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
   if (fwrite (& this_proj -> cpmd_input[cid] -> dummies, sizeof(int), 1, fp) != 1) return ERROR_RW;
   if (this_proj -> cpmd_input[cid] -> dummies)
   {
-    struct dummy_atom * dummy = this_proj -> cpmd_input[cid] -> dummy;
+    dummy_atom * dummy = this_proj -> cpmd_input[cid] -> dummy;
     while (dummy)
     {
       if (fwrite (& dummy -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -232,7 +232,7 @@ int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 }
 
 /*!
-  \fn int save_cp2k_data (FILE * fp, int cid, struct project * this_proj)
+  \fn int save_cp2k_data (FILE * fp, int cid, project * this_proj)
 
   \brief save CP2K data to file
 
@@ -240,7 +240,7 @@ int save_cpmd_data (FILE * fp, int cid, struct project * this_proj)
   \param cid the CP2K id (0 = ab-initio, 1 = QM-MM)
   \param this_proj the target project
 */
-int save_cp2k_data (FILE * fp, int cid, struct project * this_proj)
+int save_cp2k_data (FILE * fp, int cid, project * this_proj)
 {
   int i, j;
   if (this_proj -> cp2k_input[cid] == NULL)
@@ -260,7 +260,7 @@ int save_cp2k_data (FILE * fp, int cid, struct project * this_proj)
   if (fwrite (& this_proj -> cp2k_input[cid] -> thermostats, sizeof(int), 1, fp) != 1) return ERROR_RW;
   if (this_proj -> cp2k_input[cid] -> thermostats)
   {
-    struct thermostat * thermo = this_proj -> cp2k_input[cid] -> ions_thermostat;
+    thermostat * thermo = this_proj -> cp2k_input[cid] -> ions_thermostat;
     while (thermo)
     {
       if (save_thermo (fp, thermo) != OK) return ERROR_RW;

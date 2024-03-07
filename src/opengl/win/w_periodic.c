@@ -55,7 +55,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 #include "global.h"
 
-extern struct insertion mol[];
+extern insertion_menu mol[];
 
 atom_search * periodic_search;
 int element;

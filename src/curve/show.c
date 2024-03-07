@@ -91,7 +91,7 @@ void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpo
   activer = rid;
   cairo_surface_t * surface;
 
-  struct project * this_proj = get_project_by_id(pid);
+  project * this_proj = get_project_by_id(pid);
 
   where = this_proj -> curves[rid][cid] -> format;
   // g_print ("where= %d, width = %d, height= %d\n", where, width, height);
@@ -188,7 +188,7 @@ void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpo
 // let's go for the plot
 // first we start by the possible extra curves
   i = 0;
-  struct cextra * ctmp = this_proj -> curves[rid][cid] -> extrac -> last;
+  CurveExtra * ctmp = this_proj -> curves[rid][cid] -> extrac -> last;
   for ( j=0 ; j < this_proj -> curves[rid][cid] -> extrac -> extras + 1; j++ )
   {
     if (this_proj -> curves[rid][cid] -> draw_id == j)

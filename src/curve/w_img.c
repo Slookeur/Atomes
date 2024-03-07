@@ -209,7 +209,7 @@ G_MODULE_EXPORT void run_write_image (GtkDialog * info, gint response_id, gpoint
   if (response_id == GTK_RESPONSE_ACCEPT)
   {
     curve_image_file = file_chooser_get_file_name (chooser);
-    struct project * this_proj = get_project_by_id (cd -> a);
+    project * this_proj = get_project_by_id (cd -> a);
     this_proj -> curves[cd -> b][cd -> c] -> format = forme + 1;
 #ifdef GTK3
     show_curve (NULL, NULL, data);
@@ -245,7 +245,7 @@ void write_image (gpointer curetow)
                        "SVG file (*.svg)",
                        "EPS file (*.eps)"};
   GtkFileFilter * filter;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   if (forme == -1)
   {
     show_warning ("To save an image please enter a file format", this_proj -> curves[b][c] -> window);
@@ -340,7 +340,7 @@ void save_image (gpointer cdata)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   save_img = dialog_cancel_apply ("Export image", this_proj -> curves[b][c] -> window, FALSE);
   gtk_window_set_resizable (GTK_WINDOW (save_img), FALSE);
 #ifndef GTK4

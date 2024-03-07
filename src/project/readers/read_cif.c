@@ -77,7 +77,7 @@ extern int read_space_group (builder_edition * cbuilder, int spg);
 extern gchar * wnpos[3];
 extern void get_wyck_char (float val, int ax, int bx);
 extern space_group * duplicate_space_group (space_group * spg);
-extern int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
+extern int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
 extern void sort (int dim, int * tab);
 
 FILE * cifp;

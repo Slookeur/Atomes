@@ -246,7 +246,7 @@ extern GLfloat ** allocdGLfloat (int xal, int yal);
 extern GLfloat initlights[4][4];
 extern gboolean pick;
 extern glwin * wingl;
-extern struct project * proj_gl;
+extern project * proj_gl;
 extern coord_info * coord_gl;
 extern box_info * box_gl;
 extern cell_info * cell_gl;
@@ -262,14 +262,14 @@ extern int field_object;
 extern GLenum ogl_texture;
 
 extern gboolean create_bond (int ac, int bid, int ba, int bb, int sel, double length);
-extern void draw_cylinder_bond (struct atom a, struct atom b, int bid, int ci, int bi);
-extern void draw_cylinder_bond_to_pick (struct atom a, struct atom b, int bid);
-extern void draw_wireframe_bond (struct atom a, struct atom b, int ci, int bi);
+extern void draw_cylinder_bond (atom a, atom b, int bid, int ci, int bi);
+extern void draw_cylinder_bond_to_pick (atom a, atom b, int bid);
+extern void draw_wireframe_bond (atom a, atom b, int ci, int bi);
 extern gboolean create_atom (GLUquadricObj * quadric, int aid, int ac, int sp, int sel);
 
 extern void draw_vertices (int id);
-extern void draw_atom_to_pick (struct atom at);
-extern void draw_atom (struct atom at, double al);
+extern void draw_atom_to_pick (atom at);
+extern void draw_atom (atom at, double al);
 extern void draw_rings_gl (int se, int ge, int ta, int id);
 extern void draw_box ();
 extern void prepare_cuboid (vec3_t position, int id);
@@ -277,7 +277,7 @@ extern void prepare_axis ();
 extern void draw (glwin * view);
 extern void render_all_strings (int glsl, int id);
 extern void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3],
-                            struct atom * at, struct atom * bt, struct atom * ct);
+                            atom * at, atom * bt, atom * ct);
 
 ColRGBA init_color (int id, int numid);
 ColRGBA set_default_color (int z);
@@ -304,7 +304,7 @@ void reshape (glwin * view, int width, int height);
 void zoom (glwin * view, int delta);
 
 void init_opengl (glwin * view);
-void init_camera (struct project * this_proj, gboolean get_depth);
+void init_camera (project * this_proj, gboolean get_depth);
 
 #ifdef GTKGLAREA
   G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data);
@@ -316,23 +316,23 @@ void init_camera (struct project * this_proj, gboolean get_depth);
 
 extern void debug_image (image img, int i);
 
-extern struct distance distance_2d (struct atom * at, struct atom * bt);
-extern struct distance distance_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt);
-extern struct angle angle_2d (struct atom * at, struct atom * bt, struct atom * ct);
-extern struct angle angle_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct);
-extern struct angle dihedral_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct, struct atom * dt);
+extern struct distance distance_2d (atom * at, atom * bt);
+extern struct distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt);
+extern struct angle angle_2d (atom * at, atom * bt, atom * ct);
+extern struct angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct);
+extern struct angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
 
-extern struct atom * duplicate_atom (struct atom * at);
-extern void at_shift (struct atom * at, float * shift);
-extern void at_unshift (struct atom * at, float * shift);
-extern int check_label_numbers (struct project * this_proj, int types);
+extern atom * duplicate_atom (atom * at);
+extern void at_shift (atom * at, float * shift);
+extern void at_unshift (atom * at, float * shift);
+extern int check_label_numbers (project * this_proj, int types);
 
 extern mat4_t create_axis_matrices (int type);
 extern mat4_t create_label_matrices ();
 
 extern int nbs, nbl, nba;
 extern void re_create_all_md_shaders (glwin * view);
-extern void re_create_md_shaders (int nshaders, int shaders[nshaders], struct project * this_proj);
+extern void re_create_md_shaders (int nshaders, int shaders[nshaders], project * this_proj);
 extern void cleaning_shaders (glwin * view, int shader);
 extern void init_default_shaders (glwin * view);
 extern void init_shaders(glwin * view);
@@ -341,16 +341,16 @@ extern glsl_program * init_shader_program (int object, int object_id,
                                            const GLchar * vertex, const GLchar * geometry, const GLchar * fragment,
                                            GLenum type_of_vertices, int narray, int nunif, gboolean lightning, object_3d * obj);
 
-extern void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add);
+extern void update_selection_list (atom_selection * at_list, atom * at, gboolean add);
 extern void update_all_selections (glwin * view, int pi);
 extern void save_all_selections (glwin * view, int pi);
 
-extern void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi);
+extern void process_selected_atom (project * this_proj, glwin * view, int id, int ac, int se, int pi);
 
 extern void update_selection_tree (glwin * view, int pi, int id);
 extern void update_all_menus (glwin * view, int nats);
 
-extern gboolean is_coord_in_menu (int id, struct project * this_proj);
+extern gboolean is_coord_in_menu (int id, project * this_proj);
 
 extern atom_search * free_this_search_data (atom_search * this_search);
 #ifdef GTK3
@@ -363,11 +363,13 @@ extern G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant *
 extern void popup_selection (glwin * view, double ptx, double pty, int se, int pe, int ai, int bi, int ac);
 extern void popup_main_menu (glwin * view, double ptx, double pty);
 
-typedef struct {
+typedef struct gl_pop_info gl_pop_info;
+struct gl_pop_info
+{
   int action;
   double x, y;
   int pts[5];
-} gl_pop_info;
+};
 
 extern gl_pop_info to_pop;
 

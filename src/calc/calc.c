@@ -42,7 +42,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void confirm_selection (GtkDialog * dialog, gint response_id, gpointer data);
   G_MODULE_EXPORT void create_field (GtkWidget * widg, gpointer data);
 
-  struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel);
+  atom_selection * duplicate_ogl_selection (atom_selection * old_sel);
 
 */
 
@@ -56,15 +56,15 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 extern void create_classical_force_field (int p, int f);
 extern void create_qm_input_file (int c, int p, int s);
-extern void create_new_project_using_data (struct atom_selection * selection);
+extern void create_new_project_using_data (atom_selection * selection);
 extern int selected_aspec;
 extern int num_bonds (int i);
 extern int num_angles (int i);
 extern int num_dihedrals (int i);
-extern struct selatom * new_selatom (int id, int sp);
+extern atom_in_selection * new_atom_in_selection (int id, int sp);
 
 GtkWidget * qm_assistant;
-struct project * qm_proj;
+project * qm_proj;
 glwin * qm_view;
 coord_info * qm_coord;
 GtkTextBuffer * qmbuffer[MAXDATAQM+2];
@@ -110,17 +110,17 @@ void field_question (gchar * question, GCallback handler, gpointer data)
 }
 
 /*!
-  \fn struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel)
+  \fn atom_selection * duplicate_ogl_selection (atom_selection * old_sel)
 
   \brief copy an atom selection
 
   \param old_sel the atom selection to copy
 */
-struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel)
+atom_selection * duplicate_ogl_selection (atom_selection * old_sel)
 {
   int i, j;
-  struct selatom * at, * bt;
-  struct atom_selection * new_sel = g_malloc0 (sizeof*new_sel);
+  atom_in_selection * at, * bt;
+  atom_selection * new_sel = g_malloc0 (sizeof*new_sel);
   if (! old_sel -> selected) return new_sel;
   new_sel -> selected = old_sel -> selected;
   at = old_sel -> first;
@@ -128,13 +128,13 @@ struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel
   {
     if (! i)
     {
-      new_sel -> first = new_selatom (at -> id, at -> sp);
+      new_sel -> first = new_atom_in_selection (at -> id, at -> sp);
       bt = new_sel -> first;
       new_sel -> last = NULL;
     }
     else
     {
-      bt -> next = new_selatom (at -> id, at -> sp);
+      bt -> next = new_atom_in_selection (at -> id, at -> sp);
       bt -> next -> prev = bt;
       bt = bt -> next;
     }
@@ -182,7 +182,7 @@ struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel
 void unselect_all_atoms (glwin * view)
 {
   int i, j, k;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   for (i=0; i<2; i++)
   {
     save_all_selections (view, i);
@@ -218,14 +218,14 @@ void unselect_all_atoms (glwin * view)
 void restore_ogl_selection (glwin * view)
 {
   int i, j, k, l;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   unselect_all_atoms (view);
   for (i=0; i<2; i++)
   {
     view -> anim -> last -> img -> selected[i] = duplicate_ogl_selection (view -> tmp_sel[i]);
     if (view -> anim -> last -> img -> selected[i] -> selected)
     {
-      struct selatom * at = view -> anim -> last -> img -> selected[i] -> first;
+      atom_in_selection * at = view -> anim -> last -> img -> selected[i] -> first;
       while (at)
       {
         for (j=0; j<this_proj -> steps; j++)
@@ -264,7 +264,7 @@ void restore_ogl_selection (glwin * view)
 void preserve_ogl_selection (glwin * view)
 {
   int h, i, j, k, l;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   h = view -> anim -> last -> img -> step;
   k = 0;
   for (i=0; i<2; i++)

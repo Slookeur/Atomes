@@ -42,8 +42,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float alpha);
   void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha, float delta);
   void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha);
-  void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float al, float * vertices);
-  void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, struct atom * at, struct atom * bt, float * vertices);
+  void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, atom * at, atom * bt, float al, float * vertices);
+  void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, atom * at, atom * bt, float * vertices);
   void setup_all_cylinder_vertices (int style, gboolean to_pick, int cap, int bi, float * vertices);
   void setup_line_vertices (int style, int cap, int bi, int sa, int sb, float * vertices);
 
@@ -347,7 +347,7 @@ void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA co
 int vs_bid;
 
 /*!
-  \fn void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float al, float * vertices)
+  \fn void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, atom * at, atom * bt, float al, float * vertices)
 
   \brief prepare the OpenGL rendering data of a bond / clone bond
 
@@ -362,7 +362,7 @@ int vs_bid;
   \param al the opacity (bond: 1.0, clone bond: 0.5)
   \param vertices the OpenGL buffer data to fill
 */
-void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float al, float * vertices)
+void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, atom * at, atom * bt, float al, float * vertices)
 {
   float alpha = 1.0;
   float delta = 0.0;
@@ -429,7 +429,7 @@ void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int b
 }
 
 /*!
-  \fn void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, struct atom * at, struct atom * bt, float * vertices)
+  \fn void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, atom * at, atom * bt, float * vertices)
 
   \brief prepare a bond OpenGL rendering
 
@@ -444,7 +444,7 @@ void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int b
   \param bt 2nd atom
   \param vertices the OpenGL buffer data to fill
 */
-void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, struct atom * at, struct atom * bt, float * vertices)
+void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, int bid, atom * at, atom * bt, float * vertices)
 {
   if (bi == 0)
   {
@@ -452,7 +452,7 @@ void prepare_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, 
   }
   else
   {
-    struct atom * tmp_a, * tmp_b;
+    atom * tmp_a, * tmp_b;
     float x, y, z;
     int sign;
     sign = 1;

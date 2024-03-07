@@ -950,21 +950,21 @@ GtkTreeIter field_iter;
 int atom_init = PARTIAL_COORD_AND_SPEC; //SPEC_ONLY;
 classical_field * tmp_field;
 glwin * tmp_view = NULL;
-struct project * tmp_proj;
+project * tmp_proj;
 coord_info * tmp_coord;
-struct field_molecule * tmp_fmol;
-struct molecule * tmp_mol;
-struct field_atom * tmp_fat, * tmp_fbt, * tmp_fct, * tmp_fdt;
-struct field_shell * tmp_fshell;
-struct field_constraint * tmp_fcons;
-struct field_pmf * tmp_fpmf;
-struct field_rigid * tmp_frig;
-struct field_tethered * tmp_ftet;
-struct field_prop * tmp_fprop;
-struct field_struct * tmp_fstr;
-struct field_nth_body * tmp_fbody;
-struct field_nth_body * new_body;
-struct field_external * tmp_fext;
+field_molecule * tmp_fmol;
+molecule * tmp_mol;
+field_atom* tmp_fat, * tmp_fbt, * tmp_fct, * tmp_fdt;
+field_shell * tmp_fshell;
+field_constraint * tmp_fcons;
+field_pmf * tmp_fpmf;
+field_rigid * tmp_frig;
+field_tethered * tmp_ftet;
+field_prop * tmp_fprop;
+field_struct * tmp_fstr;
+field_nth_body * tmp_fbody;
+field_nth_body * new_body;
+field_external * tmp_fext;
 
 //GtkWidget * view[13];
 GtkWidget * aview;
@@ -986,7 +986,7 @@ extern gboolean tersoff_question ();
 extern void check_tersoffs (int id, int key);
 extern void check_to_visualize_properties (int id);
 extern int get_num_vdw_max ();
-extern gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd);
+extern gchar * get_body_element_name (field_nth_body * body, int aid, int nbd);
 extern void print_lammps_atom_file (GtkTextBuffer * buf);
 
 /*!
@@ -1111,7 +1111,7 @@ gchar * parameters_info (int obj, int key,  gchar ** words, float * data)
   return str;
 }
 
-extern void print_all_field_struct (struct field_molecule * mol, int str);
+extern void print_all_field_struct (field_molecule * mol, int str);
 
 /*!
   \fn void fill_field_struct (GtkTreeStore * store, int id, int mo)
@@ -1612,7 +1612,7 @@ gboolean set_nbd_but_sensitive (int nbid)
     int i, j;
     i = (nbid == 1) ? 2 : nbid;
     j = 0;
-    struct field_molecule * ftmp = tmp_field -> first_molecule;
+    field_molecule * ftmp = tmp_field -> first_molecule;
     while (ftmp)
     {
       j += ftmp -> atoms;

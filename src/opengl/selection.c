@@ -30,9 +30,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id);
-  int find_selected_bond (struct project * this_proj, int id);
-  int find_selected_atom (struct project * this_proj, int id);
+  int find_bond_in_bonds (project * this_proj, int i, int j, int b, int id);
+  int find_selected_bond (project * this_proj, int id);
+  int find_selected_atom (project * this_proj, int id);
   int num_bonds (int i);
   int num_angles (int i);
   int num_dihedrals (int i);
@@ -45,12 +45,12 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void update_bond_selection (glwin * view, int pi);
   void save_all_selections (glwin * view, int pi);
   void update_all_selections (glwin * view, int pi);
-  void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add);
-  void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi);
-  void process_selection (struct project * this_proj, glwin * view, int id, int ac, int pi);
+  void update_selection_list (atom_selection * at_list, atom * at, gboolean add);
+  void process_selected_atom (project * this_proj, glwin * view, int id, int ac, int se, int pi);
+  void process_selection (project * this_proj, glwin * view, int id, int ac, int pi);
   void process_the_hits (glwin * view, gint event_button, double ptx, double pty);
 
-  struct selatom * new_selatom (int id, int sp);
+  atom_in_selection * new_atom_in_selection (int id, int sp);
 
 */
 
@@ -68,7 +68,7 @@ extern int selected_aspec;
 extern int get_to_be_selected (glwin * view);
 
 /*!
-  \fn int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id)
+  \fn int find_bond_in_bonds (project * this_proj, int i, int j, int b, int id)
 
   \brief Find for a bond ID in the bond list using the atoms in the bond
 
@@ -78,7 +78,7 @@ extern int get_to_be_selected (glwin * view);
   \param b 0 = normal, 1 = clones
   \param id the id-th visible bond to find
 */
-int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id)
+int find_bond_in_bonds (project * this_proj, int i, int j, int b, int id)
 {
   int k, l, m;
   for (k=0; k < this_proj -> modelgl -> bonds[j][b]; k++)
@@ -104,14 +104,14 @@ int find_bond_in_bonds (struct project * this_proj, int i, int j, int b, int id)
 }
 
 /*!
-  \fn int find_selected_bond (struct project * this_proj, int id)
+  \fn int find_selected_bond (project * this_proj, int id)
 
   \brief find the selected bond based of the picked color id
 
   \param this_proj the target project
   \param id the id-th visible bond to find
 */
-int find_selected_bond (struct project * this_proj, int id)
+int find_selected_bond (project * this_proj, int id)
 {
   int i, j, k;
 
@@ -141,14 +141,14 @@ int find_selected_bond (struct project * this_proj, int id)
 }
 
 /*!
-  \fn int find_selected_atom (struct project * this_proj, int id)
+  \fn int find_selected_atom (project * this_proj, int id)
 
   \brief find the selected atom based of the picked color id
 
   \param this_proj the target project
   \param id the id-th visible atom or clone to find
 */
-int find_selected_atom (struct project * this_proj, int id)
+int find_selected_atom (project * this_proj, int id)
 {
   int i, j, k, l, m;
   i = -1;
@@ -418,23 +418,23 @@ void update_all_selections (glwin * view, int pi)
 }
 
 /*!
-  \fn struct selatom * new_selatom (int id, int sp)
+  \fn atom_in_selection * new_atom_in_selection (int id, int sp)
 
-  \brief create a selection atom
+  \brief create a selected atom
 
   \param id atom id
   \param sp atom species
 */
-struct selatom * new_selatom (int id, int sp)
+atom_in_selection * new_atom_in_selection (int id, int sp)
 {
-  struct selatom * new_sel = g_malloc0 (sizeof*new_sel);
+  atom_in_selection * new_sel = g_malloc0 (sizeof*new_sel);
   new_sel -> id = id;
   new_sel -> sp = sp;
   return new_sel;
 }
 
 /*!
-  \fn void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add)
+  \fn void update_selection_list (atom_selection * at_list, atom * at, gboolean add)
 
   \brief update the selection list adding or removing an atom
 
@@ -442,22 +442,22 @@ struct selatom * new_selatom (int id, int sp)
   \param at atom
   \param add add or remove (1/0)
 */
-void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add)
+void update_selection_list (atom_selection * at_list, atom * at, gboolean add)
 {
   int i;
-  struct selatom * selection = at_list -> first;
+  atom_in_selection * selection = at_list -> first;
 
   if (add)
   {
     selection = at_list -> last;
     if (at_list -> selected == 0)
     {
-        at_list -> first = new_selatom (at -> id, at -> sp);
+        at_list -> first = new_atom_in_selection (at -> id, at -> sp);
         at_list -> last = at_list -> first;
     }
     else
     {
-      selection -> next = new_selatom (at -> id, at -> sp);
+      selection -> next = new_atom_in_selection (at -> id, at -> sp);
       selection -> next -> prev = selection;
       at_list -> last = selection -> next;
     }
@@ -500,7 +500,7 @@ void update_selection_list (struct atom_selection * at_list, struct atom * at, g
 }
 
 /*!
-  \fn void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
+  \fn void process_selected_atom (project * this_proj, glwin * view, int id, int ac, int se, int pi)
 
   \brief process selected atom
 
@@ -511,7 +511,7 @@ void update_selection_list (struct atom_selection * at_list, struct atom * at, g
   \param se set to 0 to ensure to remove a selected atom from the list and not to add label
   \param pi selection mode (0 = normal mode, 1 = edition mode)
 */
-void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi)
+void process_selected_atom (project * this_proj, glwin * view, int id, int ac, int se, int pi)
 {
   int i;
   i = view -> anim -> last -> img -> step;
@@ -549,7 +549,7 @@ void process_selected_atom (struct project * this_proj, glwin * view, int id, in
 }
 
 /*!
-  \fn void process_selection (struct project * this_proj, glwin * view, int id, int ac, int pi)
+  \fn void process_selection (project * this_proj, glwin * view, int id, int ac, int pi)
 
   \brief process selection
 
@@ -559,7 +559,7 @@ void process_selected_atom (struct project * this_proj, glwin * view, int id, in
   \param ac atom or clone (0/1)
   \param pi selection mode (0 = normal mode, 1 = edition mode)
 */
-void process_selection (struct project * this_proj, glwin * view, int id, int ac, int pi)
+void process_selection (project * this_proj, glwin * view, int id, int ac, int pi)
 {
   int i, j, k;
   j =  view -> anim -> last -> img -> step;
@@ -614,7 +614,7 @@ void process_the_hits (glwin * view, gint event_button, double ptx, double pty)
   to_pop.pts[0] = to_pop.pts[1] = to_pop.pts[2] = to_pop.pts[3] = to_pop.pts[4] = -1;
   if (view -> picked)
   {
-    struct project * this_proj = get_project_by_id(view -> proj);
+    project * this_proj = get_project_by_id(view -> proj);
     k = (is_atom_win_active(view) || (view -> mode == EDITION && view -> selection_mode == NSELECTION-1)) ? 1 : 0;
     l = view -> anim -> last -> img -> step;
     if (j < view -> clones_to_be_picked)

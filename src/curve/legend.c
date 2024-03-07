@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid);
+  void show_legend (cairo_t * cr, project * this_proj, int rid, int cid);
 
 */
 
@@ -44,7 +44,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 extern DataLayout * get_extra_layout (int i);
 
 /*!
-  \fn void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid)
+  \fn void show_legend (cairo_t * cr, project * this_proj, int rid, int cid)
 
   \brief draw legend
 
@@ -53,7 +53,7 @@ extern DataLayout * get_extra_layout (int i);
   \param rid the calculation id
   \param cid the curve id
 */
-void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid)
+void show_legend (cairo_t * cr, project * this_proj, int rid, int cid)
 {
   double x, y, z;
   double ih, fh;
@@ -61,13 +61,13 @@ void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid)
   int w, h;
   int j, k, l, m;
   gchar * str;
-  thedash * dasht;
+  curve_dash * dasht;
 
   x = this_proj -> curves[rid][cid] -> legend_pos[0] * resol[0];
   y = this_proj -> curves[rid][cid] -> legend_pos[1] * resol[1];
 
   pango_layout_set_font_description (layout, pango_font_description_from_string (this_proj -> curves[rid][cid] -> legend_font));
-  struct cextra * ctmp;
+  CurveExtra * ctmp;
   ctmp = this_proj -> curves[rid][cid] -> extrac -> first;
   for ( j=this_proj -> curves[rid][cid] -> extrac -> extras ; j >= 0 ; j-- )
   {

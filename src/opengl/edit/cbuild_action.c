@@ -32,7 +32,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   int test_lattice (builder_edition * cbuilder);
   int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos);
-  int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
+  int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
 
   double get_val_from_setting (gchar * pos, gchar * sval);
   double get_value_from_pos (gchar * pos);
@@ -45,7 +45,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   void get_origin (space_group * spg);
   void compute_lattice_properties (cell_info * cell);
-  void clean_this_proj (struct project * this_proj, gboolean newp);
+  void clean_this_proj (project * this_proj, gboolean newp);
 
   space_group * duplicate_space_group (space_group * spg);
 
@@ -424,14 +424,14 @@ double get_val_from_wyckoff (gchar * pos, gchar * wval)
 }
 
 /*!
-  \fn void clean_this_proj (struct project * this_proj, gboolean newp)
+  \fn void clean_this_proj (project * this_proj, gboolean newp)
 
   \brief clean project and/or associated cell parameters
 
   \param this_proj the target project
   \param newp is this a new project ?
 */
-void clean_this_proj (struct project * this_proj, gboolean newp)
+void clean_this_proj (project * this_proj, gboolean newp)
 {
   int i, j;
   if (newp)
@@ -862,7 +862,7 @@ gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_c
 }
 
 /*!
-  \fn int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
+  \fn int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
 
   \brief build crystal
 
@@ -873,7 +873,7 @@ gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_c
   \param cell the cell info that contains the crystal description
   \param widg the GtkWidget sending the signal
 */
-int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
+int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
 {
   int h, i, j, k, l, m, n, o, p, q;
   space_group * sp_group = cell -> sp_group;
@@ -948,7 +948,7 @@ int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wra
   }
 
   vec3_t pos;
-  struct insert_object * object = NULL;
+  atomic_object * object = NULL;
   gboolean done;
   crystal_data * cdata = NULL;
   int occupying;
@@ -1329,7 +1329,7 @@ int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wra
   }
   cdata = free_crystal_data (cdata);
   gboolean low_occ = adjust_object_occupancy (cryst, occupying, tot_cell);
-  struct atom at, bt;
+  atom at, bt;
   struct distance dist;
   gboolean dist_chk = TRUE;
 

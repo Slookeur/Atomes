@@ -63,7 +63,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "project.h"
 #include "glwindow.h"
 
-extern void workinfo (struct project * this_proj, int i);
+extern void workinfo (project * this_proj, int i);
 extern GtkWidget * work_menu (int p, int c);
 
 GdkPixbuf * pix = NULL;
@@ -363,7 +363,7 @@ G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata)
   gchar * tmp;
   i = GPOINTER_TO_INT (edata);
   tmp = g_strdup_printf ("Please enter a new name for project N°%d", i);
-  struct project * this_proj = get_project_by_id(i);
+  project * this_proj = get_project_by_id(i);
   tmp = cask(tmp, "Project name", i, this_proj -> name, MainWindow);
   if (tmp != NULL)
   {

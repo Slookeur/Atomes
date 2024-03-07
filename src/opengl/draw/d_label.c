@@ -32,7 +32,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   int create_label_lists ();
 
-  void prepare_label (struct atom at, int id, double al);
+  void prepare_label (atom at, int id, double al);
   void clean_labels (int id);
 
   mat4_t create_label_matrices ();
@@ -59,7 +59,7 @@ mat4_t create_label_matrices ()
 }
 
 /*!
-  \fn void prepare_label (struct atom at, int id, double al)
+  \fn void prepare_label (atom at, int id, double al)
 
   \brief prepare an atomic label OpenGL rendering
 
@@ -67,7 +67,7 @@ mat4_t create_label_matrices ()
   \param id the label id
   \param al opacity
 */
-void prepare_label (struct atom at, int id, double al)
+void prepare_label (atom at, int id, double al)
 {
   int k, l;
   char * str = NULL;
@@ -159,7 +159,7 @@ int create_label_lists ()
   int nshaders = 0;
   int i, j, k;
   float x, y, z;
-  struct atom ato;
+  atom ato;
 
 #ifdef DEBUG
   g_debug ("Label LIST");

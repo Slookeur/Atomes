@@ -75,7 +75,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   GtkWidget * prepare_lattice_grid (int type, builder_edition * cbuilder, glwin * glview);
   GtkWidget * sg_info (int sg, gpointer data);
   GtkWidget * create_bl_combo (int cs, gpointer data);
-  GtkWidget * builder_win (struct project * this_proj, gpointer data);
+  GtkWidget * builder_win (project * this_proj, gpointer data);
 
   GtkTreeModel * so_combo_tree (space_group * spg);
   GtkTreeModel * sg_combo_tree (int csid, int bvid);
@@ -96,7 +96,7 @@ extern G_MODULE_EXPORT void show_sg_info (GtkButton * but, gpointer data);
 
 extern void get_origin (space_group * spg);
 extern int test_lattice (builder_edition * cbuilder);
-extern int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
+extern int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
 
 gchar * crystal_sytems[7] = {"Triclinic", "Monoclinic", "Othorhombic", "Tetragonal", "Trigonal", "Hexagonal", "Cubic"};
 gchar * bravais_keys[7][4] = {{"Primitive", NULL, NULL, NULL},
@@ -1073,7 +1073,7 @@ G_MODULE_EXPORT void add_cryst_cell (GtkSpinButton * res, gpointer data)
 G_MODULE_EXPORT void apply_build (GtkButton * but, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
-  struct project * this_proj = get_project_by_id(id);
+  project * this_proj = get_project_by_id(id);
   if (test_lattice(this_proj -> modelgl -> builder_win))
   {
     build_crystal (TRUE, this_proj, this_proj -> modelgl -> builder_win -> wrap, this_proj -> modelgl -> builder_win -> clones,
@@ -1092,7 +1092,7 @@ G_MODULE_EXPORT void apply_build (GtkButton * but, gpointer data)
 G_MODULE_EXPORT void close_build (GtkButton * but, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
-  struct project * this_proj = get_project_by_id(id);
+  project * this_proj = get_project_by_id(id);
   this_proj -> modelgl -> search_widg[7] = free_this_search_data (this_proj -> modelgl -> search_widg[7]);
   this_proj -> modelgl -> builder_win -> win = destroy_this_widget(this_proj -> modelgl -> builder_win -> win);
   g_free (this_proj -> modelgl -> builder_win);
@@ -1194,7 +1194,7 @@ G_MODULE_EXPORT void toggle_overlap (GtkToggleButton * Button, gpointer data)
 */
 G_MODULE_EXPORT void adjust_occupancy (GtkButton * but, gpointer data)
 {
-  struct project * this_proj = (struct project *)data;
+  project * this_proj = (project *)data;
   builder_edition * cbuilder = this_proj -> modelgl -> builder_win;
   GtkWidget * info = dialogmodal ("Occupancy set-up", GTK_WINDOW(cbuilder -> win));
   GtkWidget * vbox, * hbox;
@@ -1266,14 +1266,14 @@ G_MODULE_EXPORT void adjust_occupancy (GtkButton * but, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * builder_win (struct project * this_proj, gpointer data)
+  \fn GtkWidget * builder_win (project * this_proj, gpointer data)
 
   \brief create crystal builder window
 
   \param this_proj the target project
   \param data the associated data pointer
 */
-GtkWidget * builder_win (struct project * this_proj, gpointer data)
+GtkWidget * builder_win (project * this_proj, gpointer data)
 {
   int  i, j;
   gchar * str = (! this_proj -> natomes) ? g_strdup_printf ("Crystal builder - %s", this_proj -> name) : g_strdup_printf ("Crystal builder");
@@ -1448,7 +1448,7 @@ GtkWidget * builder_win (struct project * this_proj, gpointer data)
 void prepare_crystal_builder (gpointer data)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   if (this_proj -> modelgl -> builder_win == NULL)
   {
     // close_edit (NULL, GINT_TO_POINTER(this_proj -> id));

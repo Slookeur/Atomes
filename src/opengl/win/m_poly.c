@@ -83,7 +83,7 @@ G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
   int i, j;
   gboolean doit = TRUE;
   gboolean show;
-  struct project * this_proj = get_project_by_id(obj -> a);
+  project * this_proj = get_project_by_id(obj -> a);
   int s = obj -> b;
   int c = obj -> c;
   int g = obj -> d;
@@ -227,7 +227,7 @@ G_MODULE_EXPORT void cloned_poly (GtkWidget * widg, gpointer data)
 GtkWidget * mpoly (glwin * view, int jd, int id)
 {
   int i, j;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   GtkWidget * menup = gtk_menu_new ();
   if (is_coord_in_menu(id, this_proj))
   {
@@ -363,7 +363,7 @@ GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
 {
   GMenu * menu = g_menu_new ();
   GMenu * menus;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   gchar * stra,  * strb;
   int i, j, k;
   for (i=0; i<this_proj -> nspec; i++)
@@ -414,7 +414,7 @@ GMenu * menu_show_coord_poly (glwin * view, int popm, int id)
 GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
 {
   GMenu * menu = g_menu_new ();
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   if (this_proj -> coord)
   {
     int i;

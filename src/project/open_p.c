@@ -37,8 +37,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   gchar * read_this_string (FILE * fp);
 
   void initcnames (int w, int s);
-  void allocatoms (struct project * this_proj);
-  void alloc_proj_data (struct project * this_proj, int cid);
+  void allocatoms (project * this_proj);
+  void alloc_proj_data (project * this_proj, int cid);
 
   chemical_data * alloc_chem_data (int spec);
 
@@ -151,13 +151,13 @@ void initcnames (int w, int s)
 }
 
 /*!
-  \fn void allocatoms (struct project * this_proj)
+  \fn void allocatoms (project * this_proj)
 
   \brief allocate project data
 
   \param this_proj the target project
 */
-void allocatoms (struct project * this_proj)
+void allocatoms (project * this_proj)
 {
   int i, j;
   if (this_proj -> atoms != NULL)
@@ -196,14 +196,14 @@ chemical_data * alloc_chem_data (int spec)
 }
 
 /*!
-  \fn void alloc_proj_data (struct project * this_proj, int cid)
+  \fn void alloc_proj_data (project * this_proj, int cid)
 
   \brief allocate data
 
   \param this_proj the target project
   \param cid Allocate chemistry data (1/0)
 */
-void alloc_proj_data (struct project * this_proj, int cid)
+void alloc_proj_data (project * this_proj, int cid)
 {
   if (cid) this_proj -> chemistry = alloc_chem_data (this_proj -> nspec);
   allocatoms (this_proj);

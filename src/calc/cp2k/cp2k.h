@@ -82,7 +82,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #define CP2CON 39   // Def: 0
 #define CP2OUU 40   // Def: 0
 
-
 #define NCP2KCALC 7
 #define CP2NTHERM 5
 

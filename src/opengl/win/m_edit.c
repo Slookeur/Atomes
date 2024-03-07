@@ -168,7 +168,7 @@ GtkWidget * menu_cell_edit (glwin * view , int id, int j)
 GtkWidget * menu_edit (glwin * view, int id)
 {
   int i, j;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   GtkWidget * menu = gtk_menu_new ();
   GtkWidget * widg;
   if (id == 0)
@@ -275,7 +275,7 @@ GMenu * menu_atom_edit (glwin * view, int popm)
   GMenu * menu = g_menu_new ();
   gchar * act;
   int i, j;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   j = (this_proj -> steps == 1) ? 1 : 0;
   for (i=0; i<5; i++)
   {
@@ -332,7 +332,7 @@ G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * paramete
 GMenu * extract_section (glwin * view, int popm)
 {
   int i;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   GMenu * menu = g_menu_new ();
   gchar * rtext[2] = {"Extract/Rebuild on Motion", "Extract/Rebuild on Copy"};
   for (i=0; i<2; i++)
@@ -353,7 +353,7 @@ GMenu * extract_section (glwin * view, int popm)
 */
 GMenu * menu_edit (glwin * view, int popm)
 {
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   GMenu * menu = g_menu_new ();
   append_opengl_item (view, menu, "Crystal Builder", "cbuilder", popm, popm, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(crystal_window), & view -> colorp[0][0], FALSE, FALSE, FALSE, TRUE);
   append_submenu (menu, "Cell", menu_cell_edit(view, popm, (this_proj -> cell.ltype && this_proj -> steps == 1) ? 1 : 0));

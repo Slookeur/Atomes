@@ -47,8 +47,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   GtkWidget * create_dummy_box ();
 
-  struct dummy_atom * get_active_dummy (int id);
-  struct dummy_atom * init_dummy (int type, int id);
+  dummy_atom * get_active_dummy (int id);
+  dummy_atom * init_dummy (int type, int id);
 
 */
 
@@ -70,22 +70,22 @@ extern int num_cpmd_objects;
 GtkWidget * dummy_box[2];
 GtkWidget * the_dummy_box;
 GtkWidget * dummy_param_box;
-struct dummy_atom * dummy;
+dummy_atom * dummy;
 int n_dummy;
 int * old_dummy;
 GtkCellRenderer * dummy_renderer[5];
 GtkTreeViewColumn * dummy_col[5];
 
 /*!
-  \fn struct dummy_atom * get_active_dummy (int id)
+  \fn dummy_atom * get_active_dummy (int id)
 
   \brief get dummy atom by id
 
   \param id the target dummy atom id
 */
-struct dummy_atom * get_active_dummy (int id)
+dummy_atom * get_active_dummy (int id)
 {
-  struct dummy_atom * dumm = tmp_cpmd -> dummy;
+  dummy_atom * dumm = tmp_cpmd -> dummy;
   while (dumm -> id != id)
   {
     if (dumm -> next != NULL) dumm = dumm -> next;
@@ -212,16 +212,16 @@ G_MODULE_EXPORT void changed_dummy_id_box (GtkComboBox * box, gpointer data)
 }
 
 /*!
-  \fn struct dummy_atom * init_dummy (int type, int id)
+  \fn dummy_atom * init_dummy (int type, int id)
 
   \brief create dummy atom
 
   \param type the type of dummy atom to create
   \param id the id of the new dummy atom
 */
-struct dummy_atom * init_dummy (int type, int id)
+dummy_atom * init_dummy (int type, int id)
 {
-  struct dummy_atom * dumm = g_malloc0 (sizeof*dumm);
+  dummy_atom * dumm = g_malloc0 (sizeof*dumm);
   dumm -> id = id;
   dumm -> type = type;
   dumm -> show = FALSE;
@@ -353,7 +353,7 @@ G_MODULE_EXPORT void run_remove_dummy (GtkDialog * dialog, gint response_id, gpo
   int i, j;
   gboolean done = FALSE;
   int num_to_remove = GPOINTER_TO_INT(data);
-  struct dummy_atom * dumm;
+  dummy_atom * dumm;
   gchar * str;
   switch (response_id)
   {
@@ -471,7 +471,7 @@ void remove_dummy (int num_to_remove)
     gtk_tree_view_column_set_cell_data_func (dummy_col[i], dummy_renderer[i], dummy_set_visible, GINT_TO_POINTER(i), NULL);
   }
   // fill model
-  struct dummy_atom * dumm = tmp_cpmd -> dummy;
+  dummy_atom * dumm = tmp_cpmd -> dummy;
   for (i=0; i<tmp_cpmd -> dummies; i++)
   {
     gtk_tree_store_append (remove_model, & dummy_level, NULL);
@@ -516,7 +516,7 @@ void add_dummy (int extra)
     tmp_cpmd -> dummies = 1;
     extra --;
   }
-  struct dummy_atom * dumm = tmp_cpmd -> dummy;
+  dummy_atom * dumm = tmp_cpmd -> dummy;
   while (dumm -> next != NULL) dumm = dumm -> next;
   for (i=0; i<extra; i++)
   {

@@ -31,10 +31,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   void curve_default_scale (int rid, int cid);
-  void initcurve (struct project * pid, int rid, int cid);
+  void initcurve (project * pid, int rid, int cid);
   void addcurwidgets (int pid, int rid, int str);
 
-  DataLayout * curve_default_layout (struct project * pid, int rid, int cid);
+  DataLayout * curve_default_layout (project * pid, int rid, int cid);
 
 */
 
@@ -46,7 +46,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "curve.h"
 
 /*!
-  \fn DataLayout * curve_default_layout (struct project * pid, int rid, int cid)
+  \fn DataLayout * curve_default_layout (project * pid, int rid, int cid)
 
   \brief prepare the default layout for a curve
 
@@ -54,7 +54,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param rid the analysis id
   \param cid the curve id
 */
-DataLayout * curve_default_layout (struct project * pid, int rid, int cid)
+DataLayout * curve_default_layout (project * pid, int rid, int cid)
 {
   DataLayout * layout = g_malloc0 (sizeof*layout);
   layout -> datacolor.red = RED;
@@ -145,7 +145,7 @@ void curve_default_scale (int rid, int cid)
 }
 
 /*!
-  \fn void initcurve (struct project * pid, int rid, int cid)
+  \fn void initcurve (project * pid, int rid, int cid)
 
   \brief initialize curve widget
 
@@ -153,7 +153,7 @@ void curve_default_scale (int rid, int cid)
   \param rid the analysis id
   \param cid the curve id
 */
-void initcurve (struct project * pid, int rid, int cid)
+void initcurve (project * pid, int rid, int cid)
 {
   int k;
 
@@ -261,7 +261,7 @@ void addcurwidgets (int pid, int rid, int str)
   int j, k, l;
   l = 0;
   activer = rid;
-  struct project * tmp_proj = get_project_by_id(pid);
+  project * tmp_proj = get_project_by_id(pid);
   for (j=0; j<rid; j++)
   {
     l += tmp_proj -> numc[j];

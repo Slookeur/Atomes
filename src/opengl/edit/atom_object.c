@@ -30,34 +30,34 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int in_object_bond_list (struct insert_object * object, int aid, int bid);
-  int create_object_from_open_project (struct project * this_proj, int p);
+  int in_object_bond_list (atomic_object * object, int aid, int bid);
+  int create_object_from_open_project (project * this_proj, int p);
 
   int * duplicate_z (int species, double * old_z);
 
-  double get_object_dim (struct insert_object * object);
+  double get_object_dim (atomic_object * object);
 
-  gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at);
+  gboolean rebuild_atom_neighbors (project * this_proj, int step, atomic_object * object, int target, int aid, atom * at, gboolean * checked_at);
 
-  void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust);
-  void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid);
-  void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord);
-  void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord);
+  void correct_pos_and_get_dim (atomic_object * object, gboolean adjust);
+  void reconstruct_bonds (project * this_proj, int ifcl, int * bcid);
+  void reconstruct_coordinates_for_object (project * this_proj, atomic_object * this_object, gboolean upcoord);
+  void correct_coordinates_for_object (project * this_proj, atomic_object * this_object, gboolean upcoord);
   void create_object_from_library (int p);
-  void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion);
-  void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion);
-  void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
+  void clean_object_vois (project * this_proj, atomic_object * object, int * new_id, gboolean movtion);
+  void clean_object_bonds (project * proj, int o_step, atomic_object * object, int * new_id, gboolean movtion);
+  void add_object_atoms (atomic_object * this_object, project * this_proj,
                          int o_step, int numa, int * old_id, gboolean alloc_new_id, atom_search * remove);
-  void adjust_object_frag_coord (struct insert_object * object);
-  void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch);
-  void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible);
+  void adjust_object_frag_coord (atomic_object * object);
+  void clean_this_object (int orig, int act, project * this_proj, atom_search * asearch);
+  void to_insert_in_project (int stat, int orig, project * this_proj, atom_search * asearch, gboolean visible);
 
-  struct insert_object * duplicate_insert_object (struct insert_object * old_obj);
-  struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove);
-  struct insert_object * create_object_from_selection (struct project * this_proj);
-  struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove);
-  struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove);
-  struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove);
+  atomic_object * duplicate_atomic_object (atomic_object * old_obj);
+  atomic_object * create_object_from_species (project * this_proj, int sid, atom_search * remove);
+  atomic_object * create_object_from_selection (project * this_proj);
+  atomic_object * create_object_from_atom_coordination (project * this_proj, int coord, int aid, atom_search * remove);
+  atomic_object * create_object_from_overall_coordination (project * this_proj, int coord, int aid, atom_search * remove);
+  atomic_object * create_object_from_frag_mol (project * this_proj, int coord, int geo, atom_search * remove);
 
   tint ulam_coord (glwin * view);
 
@@ -66,13 +66,13 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "atom_edit.h"
 
 /*!
-  \fn double get_object_dim (struct insert_object * object)
+  \fn double get_object_dim (atomic_object * object)
 
   \brief get estimate of an object dimension
 
   \param object
 */
-double get_object_dim (struct insert_object * object)
+double get_object_dim (atomic_object * object)
 {
   double dmax = 0.0;
   vec3_t at, bt;
@@ -92,14 +92,14 @@ double get_object_dim (struct insert_object * object)
 }
 
 /*!
-  \fn void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
+  \fn void correct_pos_and_get_dim (atomic_object * object, gboolean adjust)
 
   \brief get the barycenter of the atomic coordinates of an object
 
   \param object the target insert object
   \param adjust center object coordinates or not
 */
-void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
+void correct_pos_and_get_dim (atomic_object * object, gboolean adjust)
 {
   int i;
   if (object -> baryc) g_free(object -> baryc);
@@ -124,7 +124,7 @@ void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
 }
 
 /*!
-  \fn gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at)
+  \fn gboolean rebuild_atom_neighbors (project * this_proj, int step, atomic_object * object, int target, int aid, atom * at, gboolean * checked_at)
 
   \brief rebuild target atom id coordinates using PBC
 
@@ -136,7 +136,7 @@ void correct_pos_and_get_dim (struct insert_object * object, gboolean adjust)
   \param at the target atom
   \param checked_at the list of already checked/corrected atom coordinates id
 */
-gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct insert_object * object, int target, int aid, struct atom * at, gboolean * checked_at)
+gboolean rebuild_atom_neighbors (project * this_proj, int step, atomic_object * object, int target, int aid, atom * at, gboolean * checked_at)
 {
   int i, j;
   struct distance dist;
@@ -167,7 +167,7 @@ gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct in
 }
 
 /*!
-  \fn void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
+  \fn void reconstruct_bonds (project * this_proj, int ifcl, int * bcid)
 
   \brief reconstruct the project bond(s)/clone(s) lists after reconstruction using PBC
 
@@ -175,7 +175,7 @@ gboolean rebuild_atom_neighbors (struct project * this_proj, int step, struct in
   \param ifcl number of clone bond(s) removed
   \param bcid the removed clone bond(s) atoms id
 */
-void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
+void reconstruct_bonds (project * this_proj, int ifcl, int * bcid)
 {
   int i, j, k, l;
   int o_step = this_proj -> modelgl -> anim -> last -> img -> step;
@@ -250,7 +250,7 @@ void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
 }
 
 /*!
-  \fn void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
+  \fn void reconstruct_coordinates_for_object (project * this_proj, atomic_object * this_object, gboolean upcoord)
 
   \brief reconstruct object atomic coordinates using PBC
 
@@ -258,7 +258,7 @@ void reconstruct_bonds (struct project * this_proj, int ifcl, int * bcid)
   \param this_proj the target insert object
   \param upcoord reconstruction of atomic coordinates using PBC ?
 */
-void reconstruct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
+void reconstruct_coordinates_for_object (project * this_proj, atomic_object * this_object, gboolean upcoord)
 {
   int h, i, j, k;
   if (this_proj -> coord -> totcoord[2])
@@ -312,7 +312,7 @@ void reconstruct_coordinates_for_object (struct project * this_proj, struct inse
 }
 
 /*!
-  \fn void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
+  \fn void correct_coordinates_for_object (project * this_proj, atomic_object * this_object, gboolean upcoord)
 
   \brief correct the atomic coordinates for 'this_object'
 
@@ -320,7 +320,7 @@ void reconstruct_coordinates_for_object (struct project * this_proj, struct inse
   \param this_object the target insert object
   \param upcoord reconstruction of atomic coordinates using PBC ?
 */
-void correct_coordinates_for_object (struct project * this_proj, struct insert_object * this_object, gboolean upcoord)
+void correct_coordinates_for_object (project * this_proj, atomic_object * this_object, gboolean upcoord)
 {
   if (this_object -> ifcl)
   {
@@ -367,18 +367,18 @@ tint ulam_coord (glwin * view)
 }
 
 int being_copied;
-struct insert_object * lib_object;
+atomic_object * lib_object;
 
 /*!
-  \fn struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
+  \fn atomic_object * duplicate_atomic_object (atomic_object * old_obj)
 
   \brief duplicate an insert object
 
   \param old_obj the insert object to duplicate
 */
-struct insert_object * duplicate_insert_object (struct insert_object * old_obj)
+atomic_object * duplicate_atomic_object (atomic_object * old_obj)
 {
-  struct insert_object * new_obj = g_malloc0 (sizeof*new_obj);
+  atomic_object * new_obj = g_malloc0 (sizeof*new_obj);
   new_obj -> origin = old_obj -> origin;
   new_obj -> type = old_obj -> type;
   new_obj -> dim = old_obj -> dim;
@@ -420,7 +420,7 @@ void create_object_from_library (int p)
 {
   int i, j;
   lib_object = g_malloc0 (sizeof*lib_object);
-  struct project * other_proj = get_project_by_id (p);
+  project * other_proj = get_project_by_id (p);
   i = other_proj -> natomes;
   lib_object -> type = FROM_LIBRARY;
   lib_object -> origin = p;
@@ -453,7 +453,7 @@ void create_object_from_library (int p)
 }
 
 /*!
-  \fn int in_object_bond_list (struct insert_object * object, int aid, int bid)
+  \fn int in_object_bond_list (atomic_object * object, int aid, int bid)
 
   \brief is there a bond between atom aid and atom bid ?
 
@@ -461,7 +461,7 @@ void create_object_from_library (int p)
   \param aid 1st atom id
   \param bid 2nd atom id
 */
-int in_object_bond_list (struct insert_object * object, int aid, int bid)
+int in_object_bond_list (atomic_object * object, int aid, int bid)
 {
   int i;
   for (i=0; i<object -> bonds; i++)
@@ -473,7 +473,7 @@ int in_object_bond_list (struct insert_object * object, int aid, int bid)
 }
 
 /*!
-  \fn void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion)
+  \fn void clean_object_vois (project * this_proj, atomic_object * object, int * new_id, gboolean movtion)
 
   \brief clean the object neigbours list
 
@@ -482,7 +482,7 @@ int in_object_bond_list (struct insert_object * object, int aid, int bid)
   \param new_id list of atom's old id in the project 'this_proj'
   \param movtion reconstruction of atomic coordinates using PBC ?
 */
-void clean_object_vois (struct project * this_proj, struct insert_object * object, int * new_id, gboolean movtion)
+void clean_object_vois (project * this_proj, atomic_object * object, int * new_id, gboolean movtion)
 {
   int i, j, k, l;
   int * tmpv;
@@ -527,7 +527,7 @@ void clean_object_vois (struct project * this_proj, struct insert_object * objec
 }
 
 /*!
-  \fn void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion)
+  \fn void clean_object_bonds (project * proj, int o_step, atomic_object * object, int * new_id, gboolean movtion)
 
   \brief create the object bond list, and adjust the bond's atom id
 
@@ -537,7 +537,7 @@ void clean_object_vois (struct project * this_proj, struct insert_object * objec
   \param new_id list of atom's old id in the project 'this_proj'
   \param movtion reconstruction of atomic coordinates using PBC ?
 */
-void clean_object_bonds (struct project * proj, int o_step, struct insert_object * object, int * new_id, gboolean movtion)
+void clean_object_bonds (project * proj, int o_step, atomic_object * object, int * new_id, gboolean movtion)
 {
   int h, i, j, k, l, m;
   gboolean doit;
@@ -603,7 +603,7 @@ void clean_object_bonds (struct project * proj, int o_step, struct insert_object
 }
 
 /*!
-  \fn void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
+  \fn void add_object_atoms (atomic_object * this_object, project * this_proj,
 *                         int o_step, int numa, int * old_id, gboolean alloc_new_id, atom_search * remove)
 *
 * Usage: add atom list to insert object
@@ -616,7 +616,7 @@ void clean_object_bonds (struct project * proj, int o_step, struct insert_object
   \param check_bonding check bonding ? (partial copy or not)
   \param remove remove search, if any
 */
-void add_object_atoms (struct insert_object * this_object, struct project * this_proj,
+void add_object_atoms (atomic_object * this_object, project * this_proj,
                        int o_step, int numa, int * old_id, gboolean check_bonding, atom_search * remove)
 {
   int i, j;
@@ -670,7 +670,7 @@ int * duplicate_z (int species, double * old_z)
 }
 
 /*!
-  \fn struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove)
+  \fn atomic_object * create_object_from_species (project * this_proj, int sid, atom_search * remove)
 
   \brief create object from all atom(s) of the same chemical species
 
@@ -678,10 +678,10 @@ int * duplicate_z (int species, double * old_z)
   \param sid the species id
   \param remove remove search, if any
 */
-struct insert_object * create_object_from_species (struct project * this_proj, int sid, atom_search * remove)
+atomic_object * create_object_from_species (project * this_proj, int sid, atom_search * remove)
 {
   int i, j;
-  struct insert_object * this_object =  g_malloc0 (sizeof*this_object);
+  atomic_object * this_object =  g_malloc0 (sizeof*this_object);
   int o_step = this_proj -> modelgl -> anim -> last -> img -> step;
   this_object -> name = g_strdup_printf ("%s", this_proj -> chemistry -> label[sid]);
   i = this_proj -> chemistry -> nsps[sid];
@@ -713,16 +713,16 @@ struct insert_object * create_object_from_species (struct project * this_proj, i
 }
 
 /*!
-  \fn struct insert_object * create_object_from_selection (struct project * this_proj)
+  \fn atomic_object * create_object_from_selection (project * this_proj)
 
   \brief create object from atom selection
 
   \param this_proj the target project
 */
-struct insert_object * create_object_from_selection (struct project * this_proj)
+atomic_object * create_object_from_selection (project * this_proj)
 {
   int i, j;
-  struct insert_object * this_object =  g_malloc0 (sizeof*this_object);
+  atomic_object * this_object =  g_malloc0 (sizeof*this_object);
   int o_step = this_proj -> modelgl -> anim -> last -> img -> step;
   this_object -> name = g_strdup_printf ("From selection");
   i = 0;
@@ -763,7 +763,7 @@ struct insert_object * create_object_from_selection (struct project * this_proj)
 }
 
 /*!
-  \fn struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
+  \fn atomic_object * create_object_from_atom_coordination (project * this_proj, int coord, int aid, atom_search * remove)
 
   \brief create object from an atom and its nearest neighbors
 
@@ -772,10 +772,10 @@ struct insert_object * create_object_from_selection (struct project * this_proj)
   \param aid the atom id
   \param remove remove search, if any
 */
-struct insert_object * create_object_from_atom_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
+atomic_object * create_object_from_atom_coordination (project * this_proj, int coord, int aid, atom_search * remove)
 {
   int i, j, k;
-  struct insert_object * this_object =  g_malloc0 (sizeof*this_object);
+  atomic_object * this_object =  g_malloc0 (sizeof*this_object);
   gchar * str;
   int o_step = this_proj -> modelgl -> anim -> last -> img -> step;
   i = this_proj -> atoms[o_step][aid].numv;
@@ -834,7 +834,7 @@ struct insert_object * create_object_from_atom_coordination (struct project * th
 }
 
 /*!
-  \fn struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
+  \fn atomic_object * create_object_from_overall_coordination (project * this_proj, int coord, int aid, atom_search * remove)
 
   \brief create object from all the atom(s) that have the same exact coordination than the target atom
 
@@ -843,10 +843,10 @@ struct insert_object * create_object_from_atom_coordination (struct project * th
   \param aid target atom id
   \param remove remove search, if any
 */
-struct insert_object * create_object_from_overall_coordination (struct project * this_proj, int coord, int aid, atom_search * remove)
+atomic_object * create_object_from_overall_coordination (project * this_proj, int coord, int aid, atom_search * remove)
 {
   int i, j, k, l, m, n;
-  struct insert_object * this_object =  g_malloc0 (sizeof*this_object);
+  atomic_object * this_object =  g_malloc0 (sizeof*this_object);
   int o_step = this_proj -> modelgl -> anim -> last -> img -> step;
   this_object -> coord = duplicate_coord_info (this_proj -> coord);
   this_object -> species = this_proj -> nspec;
@@ -914,7 +914,7 @@ struct insert_object * create_object_from_overall_coordination (struct project *
 }
 
 /*!
-  \fn struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove)
+  \fn atomic_object * create_object_from_frag_mol (project * this_proj, int coord, int geo, atom_search * remove)
 
   \brief create object from a fragment or a molecule
 
@@ -923,10 +923,10 @@ struct insert_object * create_object_from_overall_coordination (struct project *
   \param geo fragment or molecule id
   \param remove remove search, if any
 */
-struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove)
+atomic_object * create_object_from_frag_mol (project * this_proj, int coord, int geo, atom_search * remove)
 {
   int i, j;
-  struct insert_object * this_object =  g_malloc0 (sizeof*this_object);
+  atomic_object * this_object =  g_malloc0 (sizeof*this_object);
   if (coord == 2)
   {
     this_object -> name = g_strdup_printf ("Fragment N°%d", geo+1);
@@ -962,13 +962,13 @@ struct insert_object * create_object_from_frag_mol (struct project * this_proj, 
 }
 
 /*!
-  \fn void adjust_object_frag_coord (struct insert_object * object)
+  \fn void adjust_object_frag_coord (atomic_object * object)
 
   \brief adjust object number of fragment(s)
 
   \param object the target insert object
 */
-void adjust_object_frag_coord (struct insert_object * object)
+void adjust_object_frag_coord (atomic_object * object)
 {
   int i, j, k;
   int * corf = allocint (object -> coord -> totcoord[2]);
@@ -1003,18 +1003,18 @@ void adjust_object_frag_coord (struct insert_object * object)
 }
 
 /*!
-  \fn int create_object_from_open_project (struct project * this_proj, int p)
+  \fn int create_object_from_open_project (project * this_proj, int p)
 
   \brief create object from atom(s) of a project opened in the workspace
 
   \param this_proj the target project
   \param p the project id of the project that contains the atom(s) to copy
 */
-int create_object_from_open_project (struct project * this_proj, int p)
+int create_object_from_open_project (project * this_proj, int p)
 {
   int i, j;
   lib_object =  g_malloc0 (sizeof*lib_object);
-  struct project * other_proj;
+  project * other_proj;
   other_proj = get_project_by_id (p);
   int o_step = other_proj -> modelgl -> anim -> last -> img -> step;
   switch (this_proj -> modelgl -> other_status)
@@ -1088,7 +1088,7 @@ int create_object_from_open_project (struct project * this_proj, int p)
 }
 
 /*!
-  \fn void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch)
+  \fn void clean_this_object (int orig, int act, project * this_proj, atom_search * asearch)
 
   \brief clean object data
 
@@ -1097,10 +1097,10 @@ int create_object_from_open_project (struct project * this_proj, int p)
   \param this_proj the target project
   \param asearch the target atom search
 */
-void clean_this_object (int orig, int act, struct project * this_proj, atom_search * asearch)
+void clean_this_object (int orig, int act, project * this_proj, atom_search * asearch)
 {
-  struct insert_object * tmp_object = NULL;
-  struct insert_object * object;
+  atomic_object * tmp_object = NULL;
+  atomic_object * object;
   switch (asearch -> action)
   {
     case REPLACE:
@@ -1178,7 +1178,7 @@ void clean_this_object (int orig, int act, struct project * this_proj, atom_sear
 }
 
 /*!
-  \fn void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible)
+  \fn void to_insert_in_project (int stat, int orig, project * this_proj, atom_search * asearch, gboolean visible)
 
   \brief to insert object in project
 
@@ -1188,11 +1188,11 @@ void clean_this_object (int orig, int act, struct project * this_proj, atom_sear
   \param asearch the target atom search
   \param visible is the model edition window visible ?
 */
-void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible)
+void to_insert_in_project (int stat, int orig, project * this_proj, atom_search * asearch, gboolean visible)
 {
   int i, j;
-  struct insert_object * tmp_object = NULL;
-  struct insert_object * object;
+  atomic_object * tmp_object = NULL;
+  atomic_object * object;
   int act;
   if (asearch -> pointer[0].c == 3)
   {
@@ -1211,7 +1211,7 @@ void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_
     clean_this_object (orig, act, this_proj, asearch);
   }
 
-  if (stat == FROM_DATA) lib_object = duplicate_insert_object (copied_object);
+  if (stat == FROM_DATA) lib_object = duplicate_atomic_object (copied_object);
 
   tint ulam;
   tmp_object = NULL;
@@ -1286,14 +1286,14 @@ void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_
 
   if (this_proj -> modelgl -> atom_win -> to_be_inserted[act] == NULL)
   {
-    this_proj -> modelgl -> atom_win -> to_be_inserted[act] = duplicate_insert_object (lib_object);
+    this_proj -> modelgl -> atom_win -> to_be_inserted[act] = duplicate_atomic_object (lib_object);
     object = this_proj -> modelgl -> atom_win -> to_be_inserted[act];
   }
   else
   {
     object = this_proj -> modelgl -> atom_win -> to_be_inserted[act];
     while (object -> next) object = object -> next;
-    object -> next = duplicate_insert_object (lib_object);
+    object -> next = duplicate_atomic_object (lib_object);
     object -> next -> prev = object;
     object = object -> next;
   }

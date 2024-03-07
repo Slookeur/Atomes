@@ -31,8 +31,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol);
-  void prep_axis_data (struct project * this_proj, int rid, int cid, int ax);
-  void draw_frame (cairo_t * cr, struct project * this_proj, int rid, int cid);
+  void prep_axis_data (project * this_proj, int rid, int cid, int ax);
+  void draw_frame (cairo_t * cr, project * this_proj, int rid, int cid);
 
 */
 
@@ -55,7 +55,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 */
 void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol)
 {
-  thedash * tdash;
+  curve_dash * tdash;
 
   tdash = selectdash (da);
   cairo_set_dash (fr, tdash -> a, tdash -> b, 0.0);
@@ -122,7 +122,7 @@ void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2
 }
 
 /*!
-  \fn void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
+  \fn void prep_axis_data (project * this_proj, int rid, int cid, int ax)
 
   \brief prepare axis data
 
@@ -131,7 +131,7 @@ void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2
   \param cid the curve id
   \param ax the axis
 */
-void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
+void prep_axis_data (project * this_proj, int rid, int cid, int ax)
 {
   dogrid = this_proj -> curves[rid][cid] -> show_grid[ax];
   x_shift = this_proj -> curves[rid][cid] -> labels_shift_x[ax];
@@ -153,7 +153,7 @@ void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
 }
 
 /*!
-  \fn void draw_frame (cairo_t * cr, struct project * this_proj, int rid, int cid)
+  \fn void draw_frame (cairo_t * cr, project * this_proj, int rid, int cid)
 
   \brief draw frame and axis data
 
@@ -162,7 +162,7 @@ void prep_axis_data (struct project * this_proj, int rid, int cid, int ax)
   \param rid the calculation id
   \param cid the curve id
 */
-void draw_frame (cairo_t * cr, struct project * this_proj, int rid, int cid)
+void draw_frame (cairo_t * cr, project * this_proj, int rid, int cid)
 {
   show_frame (cr,
               this_proj -> curves[rid][cid] -> frame_type,

@@ -32,13 +32,13 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int test_this_fragment (int natomes, int fcoord, int fid, struct atom * atom_list, int * old_id, gboolean remove);
+  int test_this_fragment (int natomes, int fcoord, int fid, atom * atom_list, int * old_id, gboolean remove);
 
-  gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, struct atom * new_list, gboolean remove, gboolean passivate);
+  gboolean * remove_bonds_from_project (project * this_proj, atomic_object * this_object, int * old_id, atom * new_list, gboolean remove, gboolean passivate);
 
   void set_mol_data (int the_atom, int the_mol);
-  void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch);
-  void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch);
+  void to_remove_this_list_of_objects (project * this_proj, atom_search * asearch);
+  void to_passivate_using_the_objects (project * this_proj, atom_search * asearch);
 
 */
 
@@ -58,7 +58,7 @@ int ** neighbors;
 extern atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize);
 
 /*!
-  \fn void set_mol_data_list (int the_atom, struct atom ** mol_list, int the_mol)
+  \fn void set_mol_data_list (int the_atom, atom ** mol_list, int the_mol)
 
   \brief set molecule id for atom
 
@@ -67,7 +67,7 @@ extern atom_search * allocate_atom_search (int proj, int action, int searchid, i
   \param the_mol the molecule id
 */
 
-void set_mol_data_list (int aid, struct atom ** mol_list, int the_mol)
+void set_mol_data_list (int aid, atom ** mol_list, int the_mol)
 {
   int ab, ac, ad;
   molcounter ++;
@@ -92,7 +92,7 @@ void set_mol_data_list (int aid, struct atom ** mol_list, int the_mol)
 }
 
 /*!
-  \fn int test_this_fragment (int natomes, int fcoord, int fid, struct atom * atom_list, int * old_id, gboolean remove)
+  \fn int test_this_fragment (int natomes, int fcoord, int fid, atom * atom_list, int * old_id, gboolean remove)
 
   \brief verify that all atom(s) in the fragment are connected somehow, otherwise create new fragment
 
@@ -103,7 +103,7 @@ void set_mol_data_list (int aid, struct atom ** mol_list, int the_mol)
   \param old_id the atom(s) old id list
   \param remove remove (1) or motion (0) action
 */
-int test_this_fragment (int natomes, int fcoord, int fid, struct atom ** atom_list, int * old_id, gboolean remove)
+int test_this_fragment (int natomes, int fcoord, int fid, atom ** atom_list, int * old_id, gboolean remove)
 {
   int i, j, k, l, m, n;
   gboolean modif;
@@ -210,7 +210,7 @@ int test_this_fragment (int natomes, int fcoord, int fid, struct atom ** atom_li
 }
 
 /*!
-  \fn gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, struct atom * new_list, gboolean remove, gboolean passivate)
+  \fn gboolean * remove_bonds_from_project (project * this_proj, atomic_object * this_object, int * old_id, atom * new_list, gboolean remove, gboolean passivate)
 *
 * Usage: remove bond(s) from project
 
@@ -221,12 +221,12 @@ int test_this_fragment (int natomes, int fcoord, int fid, struct atom ** atom_li
   \param remove remove (1) or motion (0) action
   \param passivate passivate (1) or not (0)
 */
-gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_object * this_object, int * old_id, struct atom * new_list, gboolean remove, gboolean passivate)
+gboolean * remove_bonds_from_project (project * this_proj, atomic_object * this_object, int * old_id, atom * new_list, gboolean remove, gboolean passivate)
 {
   int h, i, j, k, l, m;
   int tmpbond[2];
   int ** tmpbondid[2];
-  struct atom * tmp_list;
+  atom * tmp_list;
   gboolean * frag_to_test;
   gboolean * frag_to_remove;
   gboolean * show_frag = NULL;
@@ -381,7 +381,7 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
   }
   g_free (in_frag);
   g_free (per_frag);
-  struct atom ** atom_list = g_malloc0 (nat*sizeof*atom_list);
+  atom ** atom_list = g_malloc0 (nat*sizeof*atom_list);
   tmp_list = new_list;
   while (tmp_list)
   {
@@ -597,18 +597,18 @@ gboolean * remove_bonds_from_project (struct project * this_proj, struct insert_
 }
 
 /*!
-  \fn void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch)
+  \fn void to_remove_this_list_of_objects (project * this_proj, atom_search * asearch)
 
   \brief prepaer to remove a list of object(s) from a project, one object after another.
 
   \param this_proj the target project
   \param asearch the target atom search
 */
-void to_remove_this_list_of_objects (struct project * this_proj, atom_search * asearch)
+void to_remove_this_list_of_objects (project * this_proj, atom_search * asearch)
 {
   int i, j;
-  struct insert_object * tmp_object;
-  struct insert_object * tmp_replace;
+  atomic_object * tmp_object;
+  atomic_object * tmp_replace;
   if (asearch -> action == REPLACE)
   {
     if (asearch -> pointer[0].c == 3)
@@ -667,18 +667,18 @@ void to_remove_this_list_of_objects (struct project * this_proj, atom_search * a
 }
 
 /*!
-  \fn void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch)
+  \fn void to_passivate_using_the_objects (project * this_proj, atom_search * asearch)
 
   \brief prepare passivation (delete of an object, then insert of another one at the same location)
 
   \param this_proj the target project
   \param asearch the target atom search
 */
-void to_passivate_using_the_objects (struct project * this_proj, atom_search * asearch)
+void to_passivate_using_the_objects (project * this_proj, atom_search * asearch)
 {
   int i, j, k, l, m;
-  struct insert_object * object = NULL;
-  struct insert_object * tmp_oba, * tmp_obb;
+  atomic_object * object = NULL;
+  atomic_object * tmp_oba, * tmp_obb;
   int filter = get_asearch_filter (asearch);
   int num_elem = asearch -> todo_size;
   int * passivate_todo = duplicate_int (num_elem, asearch -> todo);
@@ -687,12 +687,12 @@ void to_passivate_using_the_objects (struct project * this_proj, atom_search * a
   if (this_proj -> modelgl -> atom_win -> to_be_inserted[3])
   {
     tmp_oba = this_proj -> modelgl -> atom_win -> to_be_inserted[3];
-    object = duplicate_insert_object (tmp_oba);
+    object = duplicate_atomic_object (tmp_oba);
     tmp_obb = object;
     while (tmp_oba -> next)
     {
       tmp_oba = tmp_oba -> next;
-      tmp_obb -> next = duplicate_insert_object (tmp_oba);
+      tmp_obb -> next = duplicate_atomic_object (tmp_oba);
       tmp_obb = tmp_obb -> next;
     }
     g_free (this_proj -> modelgl -> atom_win -> to_be_inserted[3]);
@@ -733,12 +733,12 @@ void to_passivate_using_the_objects (struct project * this_proj, atom_search * a
             asearch -> todo[j] = 1;
             if (this_proj -> modelgl -> atom_win -> to_be_inserted[3] == NULL)
             {
-              this_proj -> modelgl -> atom_win -> to_be_inserted[3] = duplicate_insert_object (tmp_oba);
+              this_proj -> modelgl -> atom_win -> to_be_inserted[3] = duplicate_atomic_object (tmp_oba);
               tmp_obb = this_proj -> modelgl -> atom_win -> to_be_inserted[3];
             }
             else
             {
-              tmp_obb -> next = duplicate_insert_object (tmp_oba);
+              tmp_obb -> next = duplicate_atomic_object (tmp_oba);
               tmp_obb -> next -> prev = tmp_obb;
               tmp_obb = tmp_obb -> next;
             }

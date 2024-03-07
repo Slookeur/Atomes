@@ -63,15 +63,15 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void glwin_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data);
   void zoom (glwin * view, int delta);
   void rotate_x_y (glwin * view, double angle_x, double angle_y);
-  void init_camera (struct project * this_proj, int get_depth);
-  void image_init_spec_data (image * img, struct project * this_proj, int nsp);
-  void set_img_lights (struct project * this_proj, image * img);
-  void init_img (struct project * this_proj);
+  void init_camera (project * this_proj, int get_depth);
+  void image_init_spec_data (image * img, project * this_proj, int nsp);
+  void set_img_lights (project * this_proj, image * img);
+  void init_img (project * this_proj);
   void init_opengl (glwin * view);
-  void center_molecule (struct project * this_proj);
+  void center_molecule (project * this_proj);
   void center_this_molecule (glwin * view);
-  void free_glwin_spec_data (struct project * this_proj, int spec);
-  void glwin_init_spec_data (struct project * this_proj, int nspec);
+  void free_glwin_spec_data (project * this_proj, int spec);
+  void glwin_init_spec_data (project * this_proj, int nspec);
   void init_glwin (glwin * view);
   void gtk_window_change_gdk_visual (GtkWidget * win);
 
@@ -102,14 +102,14 @@ extern void process_the_hits (glwin * view, gint event_button, double ptx, doubl
 extern void arc_ball_rotation (glwin * view, int x, int y);
 extern vec3_t get_arc_ball_vector (glwin * view, int x, int y);
 extern Light init_light_source (int type, float val, float vbl);
-extern void rotate_quat (struct project * this_proj, vec4_t q, int status, int axis);
-extern void translate (struct project * this_proj, int status, int axis, vec3_t trans);
-extern vec3_t get_bary (struct project * this_proj, int status);
+extern void rotate_quat (project * this_proj, vec4_t q, int status, int axis);
+extern void translate (project * this_proj, int status, int axis, vec3_t trans);
+extern vec3_t get_bary (project * this_proj, int status);
 extern void update_labels (glwin * view);
 extern void prepare_atom_edition (gpointer data, gboolean visible);
 extern atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize);
-extern int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible);
-extern struct insert_object * create_object_from_frag_mol (struct project * this_proj, int coord, int geo, atom_search * remove);
+extern int action_atoms_from_project (project * this_proj, atom_search * asearch, gboolean visible);
+extern atomic_object * create_object_from_frag_mol (project * this_proj, int coord, int geo, atom_search * remove);
 
 GLenum ogl_texture;
 
@@ -554,7 +554,7 @@ void save_rotation_quaternion (glwin * view)
 void edit_for_motion (glwin * view)
 {
   gboolean check_edit = FALSE;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   prepare_atom_edition (& view -> colorp[0][0], FALSE);
   atom_search * move_search = allocate_atom_search (this_proj -> id, DISPL, DISPL, this_proj -> natomes);
   int ** frag = allocdint (this_proj -> coord -> totcoord[2], 2);
@@ -588,7 +588,7 @@ void edit_for_motion (glwin * view)
     }
     else
     {
-      struct insert_object * object;
+      atomic_object * object;
       for (i=0; i<this_proj -> coord -> totcoord[2]; i++)
       {
         if (frag[i][1])
@@ -1119,14 +1119,14 @@ void rotate_x_y (glwin * view, double angle_x, double angle_y)
 }
 
 /*!
-  \fn void init_camera (struct project * this_proj, int get_depth)
+  \fn void init_camera (project * this_proj, int get_depth)
 
   \brief intialize the OpenGL camera settings
 
   \param this_proj the target project
   \param get_depth estimate the OpenGL depth ? (1/0)
 */
-void init_camera (struct project * this_proj, int get_depth)
+void init_camera (project * this_proj, int get_depth)
 {
   glwin * view = this_proj -> modelgl;
   if (get_depth) view -> anim -> last -> img -> p_depth = (this_proj -> natomes) ? oglmax_ () : 50.0;
@@ -1176,7 +1176,7 @@ void init_camera (struct project * this_proj, int get_depth)
 }
 
 /*!
-  \fn void image_init_spec_data (image * img, struct project * this_proj, int nsp)
+  \fn void image_init_spec_data (image * img, project * this_proj, int nsp)
 
   \brief initialize the chemical species related pointers in an image data structure
 
@@ -1184,7 +1184,7 @@ void init_camera (struct project * this_proj, int get_depth)
   \param this_proj the target project
   \param nsp the number of chemical species
 */
-void image_init_spec_data (image * img, struct project * this_proj, int nsp)
+void image_init_spec_data (image * img, project * this_proj, int nsp)
 {
   int i, j;
   // Chemical species related
@@ -1239,14 +1239,14 @@ void image_init_spec_data (image * img, struct project * this_proj, int nsp)
 }
 
 /*!
-  \fn void set_img_lights (struct project * this_proj, image * img)
+  \fn void set_img_lights (project * this_proj, image * img)
 
   \brief initialize lightning for an image data structure
 
   \param this_proj the target project
   \param img the target image
 */
-void set_img_lights (struct project * this_proj, image * img)
+void set_img_lights (project * this_proj, image * img)
 {
   img -> lights = 3;
   if (img -> l_ght) g_free (img -> l_ght);
@@ -1267,13 +1267,13 @@ void set_img_lights (struct project * this_proj, image * img)
 }
 
 /*!
-  \fn void init_img (struct project * this_proj)
+  \fn void init_img (project * this_proj)
 
   \brief initialize an image data structure
 
   \param this_proj the target project
 */
-void init_img (struct project * this_proj)
+void init_img (project * this_proj)
 {
   int i;
   this_proj -> modelgl -> anim -> last -> img = g_malloc0(sizeof*this_proj -> modelgl -> anim -> last -> img);
@@ -1428,13 +1428,13 @@ void init_opengl (glwin * view)
 }
 
 /*!
-  \fn void center_molecule (struct project * this_proj)
+  \fn void center_molecule (project * this_proj)
 
   \brief center atomic coordinates around (0,0,0)
 
   \param this_proj the target project
 */
-void center_molecule (struct project * this_proj)
+void center_molecule (project * this_proj)
 {
   int l, i, j;
   double x, y, z;
@@ -1529,14 +1529,14 @@ void center_this_molecule (glwin * view)
 }
 
 /*!
-  \fn void free_glwin_spec_data (struct project * this_proj, int spec)
+  \fn void free_glwin_spec_data (project * this_proj, int spec)
 
   \brief free the memory used by the chemical species related data in a glwin data structure
 
   \param this_proj the target project
   \param spec the number of chemical species
 */
-void free_glwin_spec_data (struct project * this_proj, int spec)
+void free_glwin_spec_data (project * this_proj, int spec)
 {
   int i, j, k;
 
@@ -1574,14 +1574,14 @@ void free_glwin_spec_data (struct project * this_proj, int spec)
 }
 
 /*!
-  \fn void glwin_init_spec_data (struct project * this_proj, int nspec)
+  \fn void glwin_init_spec_data (project * this_proj, int nspec)
 
   \brief initialize the glwin chemical species related pointers
 
   \param this_proj the target project
   \param nspec the number of chemical species
 */
-void glwin_init_spec_data (struct project * this_proj, int nspec)
+void glwin_init_spec_data (project * this_proj, int nspec)
 {
   int i, j, k;
   for (i=0; i<NUM_COLORS; i++)
@@ -1648,9 +1648,9 @@ void glwin_init_spec_data (struct project * this_proj, int nspec)
 */
 void init_glwin (glwin * view)
 {
-  struct project * this_proj = get_project_by_id(view -> proj);    // Have to be the active project
+  project * this_proj = get_project_by_id(view -> proj);    // Have to be the active project
   view -> anim = g_malloc0 (sizeof*view -> anim);
-  struct snapshot * snap = g_malloc0 (sizeof*snap);
+  snapshot * snap = g_malloc0 (sizeof*snap);
   view -> anim -> first = snap;
   view -> anim -> last = snap;
   init_img (this_proj);

@@ -33,7 +33,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT gboolean close_event_model (GtkWindow * widg, gpointer data);
   G_MODULE_EXPORT gboolean close_event_model (GtkWidget * widg, GdkEvent * event, gpointer data);
 
-  void atoms_input_win (GtkWidget * win, struct project * this_proj, int nspec, int aoc, double * val);
+  void atoms_input_win (GtkWidget * win, project * this_proj, int nspec, int aoc, double * val);
 
   G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data);
   G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data);
@@ -59,7 +59,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "color_box.h"
 
 extern atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize);
-extern gchar * label_atpts (struct project * this_proj, glwin * view, int id);
+extern gchar * label_atpts (project * this_proj, glwin * view, int id);
 extern GtkWidget * labels_tab (glwin * view, int id);
 extern GtkWidget * selection_tab (atom_search * asearch, int nats);
 extern GtkTreeStore * atom_model;
@@ -79,7 +79,7 @@ G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data)
   tint * the_data = (tint *)data;
   int a, t;
   a = the_data -> c;
-  struct project * this_proj = get_project_by_id (the_data -> a);
+  project * this_proj = get_project_by_id (the_data -> a);
   j = this_proj -> modelgl -> anim -> last -> img -> style;
   const gchar * m = entry_get_text (res);
   double v = atof(m);
@@ -130,7 +130,7 @@ G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data)
 }
 
 /*!
-  \fn void atoms_input_win (GtkWidget * win, struct project * this_proj, int nspec, int aoc, double * val)
+  \fn void atoms_input_win (GtkWidget * win, project * this_proj, int nspec, int aoc, double * val)
 
   \brief prepare atom radii entry list
 
@@ -140,7 +140,7 @@ G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data)
   \param aoc atom(s) (0) or clone(s) (1)
   \param val radii list
 */
-void atoms_input_win (GtkWidget * win, struct project * this_proj, int nspec, int aoc, double * val)
+void atoms_input_win (GtkWidget * win, project * this_proj, int nspec, int aoc, double * val)
 {
   int i, j, k;
   GtkWidget * vbox = dialog_get_content_area (win);
@@ -229,7 +229,7 @@ G_MODULE_EXPORT void set_atom_color (GtkColorChooser * colob, gpointer data)
 {
   tint * the_data = (tint *)data;
   int a;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   a = the_data -> c;
   this_proj -> modelgl -> anim -> last -> img -> at_color[a] = get_button_color (colob);
   int shaders[2] = {ATOMS, BONDS};
@@ -266,7 +266,7 @@ G_MODULE_EXPORT void toggled_show_hide_atom (GtkToggleButton * but, gpointer dat
   k = id -> c;
   gboolean show;
 #ifdef GTK4
-  struct project * this_proj = get_project_by_id (i);
+  project * this_proj = get_project_by_id (i);
   int l, m;
   show = gtk_check_button_get_active (but);
   for (l=0; l<this_proj -> steps; l++)
@@ -316,7 +316,7 @@ G_MODULE_EXPORT void toggled_show_hide_label (GtkToggleButton * but, gpointer da
   j = id -> b;
   k = id -> c;
   gboolean show;
-  struct project * this_proj = get_project_by_id (i);
+  project * this_proj = get_project_by_id (i);
 #ifdef GTK4
   int l, m;
   show = gtk_check_button_get_active (but);
@@ -358,7 +358,7 @@ GtkWidget * prop_tab (glwin * view, int aoc)
   GtkWidget * hbox;
   GtkWidget * but;
   GtkWidget * entry;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   gchar * col[5] = {"<b>Color</b>",
                     "<b>Radius [Å]</b>",
                     "<b>Show</b>",
@@ -463,7 +463,7 @@ GtkWidget * prop_tab (glwin * view, int aoc)
 G_MODULE_EXPORT void close_model (GtkButton * but, gpointer data)
 {
   tint * dat = (tint *)data;
-  struct project * this_proj = get_project_by_id(dat -> a);
+  project * this_proj = get_project_by_id(dat -> a);
   this_proj -> modelgl -> model_win[dat -> b] -> win = destroy_this_widget (this_proj -> modelgl -> model_win[dat -> b] -> win);
   g_free (this_proj -> modelgl -> model_win[dat -> b]);
   this_proj -> modelgl -> model_win[dat -> b] = NULL;
@@ -575,7 +575,7 @@ G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * paramet
 {
   tint * the_data = (tint *) data;
   int atom_or_clone = the_data -> b;
-  struct project * this_proj = get_project_by_id (the_data -> a);
+  project * this_proj = get_project_by_id (the_data -> a);
   if (this_proj -> modelgl -> model_win[atom_or_clone] == NULL)
   {
     this_proj -> modelgl -> model_win[atom_or_clone] = g_malloc0 (sizeof*this_proj -> modelgl -> model_win[atom_or_clone]);

@@ -72,7 +72,7 @@ G_MODULE_EXPORT void set_axis_template_pos (GtkWidget * widg, gpointer data)
    BOTTOM_LEFT = 3,
    CENTER = 4 */
   tint * the_data = (tint *)data;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   int i = this_proj -> modelgl -> anim -> last -> img -> axispos;
   int j = the_data -> b;
   if (gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg) && i != j)

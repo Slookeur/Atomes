@@ -30,17 +30,17 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int get_cmin (struct project * this_proj, int step);
-  int get_cmax (struct project * this_proj, int step);
+  int get_cmin (project * this_proj, int step);
+  int get_cmax (project * this_proj, int step);
 
-  void fill_chains_model (GtkTreeStore * store, struct project * this_proj);
-  void add_this_chain_to_search_tree (struct project * this_proj);
+  void fill_chains_model (GtkTreeStore * store, project * this_proj);
+  void add_this_chain_to_search_tree (project * this_proj);
 
   G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
   G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data);
 
-  GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this);
-  GtkWidget * create_chains_search (struct project * this_proj);
+  GtkWidget * create_chains_tree (project * this_proj, gboolean fill_this);
+  GtkWidget * create_chains_search (project * this_proj);
   GtkWidget * chains_tab (glwin * view);
 
 */
@@ -138,14 +138,14 @@ G_MODULE_EXPORT void on_select_chains (GtkCellRendererToggle * cell_renderer, gc
 }
 
 /*!
-  \fn void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
+  \fn void fill_chains_model (GtkTreeStore * store, project * this_proj)
 
   \brief fill the entire chain(s) tree store
 
   \param store the GtkTreeStore to fill
   \param this_proj the target project
 */
-void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
+void fill_chains_model (GtkTreeStore * store, project * this_proj)
 {
   GtkTreeIter step_level, size_level, chain_level;
   int h, i, j, k, l;
@@ -213,14 +213,14 @@ void fill_chains_model (GtkTreeStore * store, struct project * this_proj)
 }
 
 /*!
-  \fn GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
+  \fn GtkWidget * create_chains_tree (project * this_proj, gboolean fill_this)
 
   \brief create the chain(s) search tree store
 
   \param this_proj the target project
   \param fill_this 1 = yes, 0 = no
 */
-GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
+GtkWidget * create_chains_tree (project * this_proj, gboolean fill_this)
 {
   int i, j, k;
   GtkTreeViewColumn * chains_col[7];
@@ -255,13 +255,13 @@ GtkWidget * create_chains_tree (struct project * this_proj, gboolean fill_this)
 }
 
 /*!
-  \fn void add_this_chain_to_search_tree (struct project * this_proj)
+  \fn void add_this_chain_to_search_tree (project * this_proj)
 
   \brief add chain in the search tree based on chain length and id
 
   \param this_proj the target project
 */
-void add_this_chain_to_search_tree (struct project * this_proj)
+void add_this_chain_to_search_tree (project * this_proj)
 {
   GtkTreeIter step_level, size_level, chain_level;
   GtkTreeIter new_level;
@@ -547,14 +547,14 @@ void add_this_chain_to_search_tree (struct project * this_proj)
 }
 
 /*!
-  \fn int get_cmin (struct project * this_proj, int step)
+  \fn int get_cmin (project * this_proj, int step)
 
   \brief get chain(s) min size for the MD step
 
   \param this_proj the target project
   \param step the MD step
 */
-int get_cmin (struct project * this_proj, int step)
+int get_cmin (project * this_proj, int step)
 {
   int i, j;
   for (i=0; i<this_proj -> coord -> totcoord[9]; i++)
@@ -566,14 +566,14 @@ int get_cmin (struct project * this_proj, int step)
 }
 
 /*!
-  \fn int get_cmax (struct project * this_proj, int step)
+  \fn int get_cmax (project * this_proj, int step)
 
   \brief get chain(s) max size for the MD step
 
   \param this_proj the target project
   \param step the MD step
 */
-int get_cmax (struct project * this_proj, int step)
+int get_cmax (project * this_proj, int step)
 {
   int i, j;
   for (i=this_proj -> coord -> totcoord[9]-1; i>-1; i--)
@@ -585,7 +585,7 @@ int get_cmax (struct project * this_proj, int step)
 }
 
 /*!
-  \fn int get_chain_size_index (struct project * this_proj, int s, int r)
+  \fn int get_chain_size_index (project * this_proj, int s, int r)
 
   \brief NOT USED !
 
@@ -593,7 +593,7 @@ int get_cmax (struct project * this_proj, int step)
   \param s
   \param r
 *
-int get_chain_size_index (struct project * this_proj, int s, int r)
+int get_chain_size_index (project * this_proj, int s, int r)
 {
   int i, j;
   for (i=0; i<this_proj -> coord -> totcoord[9]; i++)
@@ -620,7 +620,7 @@ G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
   const gchar * m = entry_get_text (res);
   int i, j;
   int v = (int)atof(m);
-  struct project * this_proj = get_project_by_id(dat -> a);
+  project * this_proj = get_project_by_id(dat -> a);
   coord_edition * coord = this_proj -> modelgl -> coord_win;
   switch (dat -> b)
   {
@@ -723,13 +723,13 @@ G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * create_chains_search (struct project * this_proj)
+  \fn GtkWidget * create_chains_search (project * this_proj)
 
   \brief create the chain(s) search widget
 
   \param this_proj the target project
 */
-GtkWidget * create_chains_search (struct project * this_proj)
+GtkWidget * create_chains_search (project * this_proj)
 {
   GtkWidget * chains_search = create_vbox (BSEP);
   gchar * str = g_strdup_printf ("Too many chains in your model !\n"
@@ -787,7 +787,7 @@ GtkWidget * chains_tab (glwin * view)
   gtk_widget_set_hexpand (chains, TRUE);
   gtk_widget_set_vexpand (chains, TRUE);
  int h, i, j, k;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   k = 0;
   for (h=0; h < this_proj -> steps; h++)
   {

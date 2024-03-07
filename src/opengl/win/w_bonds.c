@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void bonds_input_win (GtkWidget * win, struct project * this_proj, int nspec, int aoc, double ** val)
+  void bonds_input_win (GtkWidget * win, project * this_proj, int nspec, int aoc, double ** val)
 
   G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data);
   G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -46,7 +46,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glwindow.h"
 #include "color_box.h"
 
-extern gchar * label_cutrab (struct project * this_proj, glwin * view, int id);
+extern gchar * label_cutrab (project * this_proj, glwin * view, int id);
 
 /*!
   \fn G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
@@ -239,7 +239,7 @@ G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
 }
 
 /*!
-  \fn void bonds_input_win (GtkWidget * win, struct project * this_proj, int nspec, int aoc, double ** val)
+  \fn void bonds_input_win (GtkWidget * win, project * this_proj, int nspec, int aoc, double ** val)
 
   \brief prepare bond property entry list
 
@@ -249,7 +249,7 @@ G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
   \param aoc atom(s) (0) or clone(s) (1)
   \param val the list of value(s) to display
 */
-void bonds_input_win (GtkWidget * win, struct project * this_proj, int nspec, int aoc, double ** val)
+void bonds_input_win (GtkWidget * win, project * this_proj, int nspec, int aoc, double ** val)
 {
   int i, j, k, l, m, n;
   gchar * dim[2]={"  pts"," Å "};

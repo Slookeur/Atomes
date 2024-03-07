@@ -37,7 +37,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "global.h"
 #include "glview.h"
 
-extern void rotate_quat (struct project * this_proj, vec4_t q, int status, int axis);
+extern void rotate_quat (project * this_proj, vec4_t q, int status, int axis);
 
 vec3_t arc_ball_init;
 vec3_t arc_ball_new;

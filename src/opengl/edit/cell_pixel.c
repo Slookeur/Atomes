@@ -34,13 +34,13 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   void pix_info_ (int * na, int * nb, int * nc);
   void send_pix_info_ (int * p, int listp[27], int * ngb);
-  void update_pix_table (struct project * this_proj);
+  void update_pix_table (project * this_proj);
 
   G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data);
 
   GtkWidget * create_css_label (gchar * str, int id);
-  GtkWidget * attach_grid (struct project * this_proj, int init);
-  GtkWidget * pixels_tab (struct project * this_proj);
+  GtkWidget * attach_grid (project * this_proj, int init);
+  GtkWidget * pixels_tab (project * this_proj);
 
 */
 
@@ -107,14 +107,14 @@ GtkWidget * create_css_label (gchar * str, int id)
 }
 
 /*!
-  \fn GtkWidget * attach_grid (struct project * this_proj, int init)
+  \fn GtkWidget * attach_grid (project * this_proj, int init)
 
   \brief create pixel grid
 
   \param this_proj the target project
   \param init the target pixel
 */
-GtkWidget * attach_grid (struct project * this_proj, int init)
+GtkWidget * attach_grid (project * this_proj, int init)
 {
   GtkWidget * table = gtk_grid_new ();
   gchar * str;
@@ -160,13 +160,13 @@ GtkWidget * attach_grid (struct project * this_proj, int init)
 }
 
 /*!
-  \fn void update_pix_table (struct project * this_proj)
+  \fn void update_pix_table (project * this_proj)
 
   \brief prepare pixel table widget
 
   \param this_proj the target project
 */
-void update_pix_table (struct project * this_proj)
+void update_pix_table (project * this_proj)
 {
   int i;
   int pix[3];
@@ -222,7 +222,7 @@ void update_pix_table (struct project * this_proj)
 G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
 {
   int id = GPOINTER_TO_INT (data);
-  struct project * this_proj = get_project_by_id (id);
+  project * this_proj = get_project_by_id (id);
   const gchar * m = entry_get_text (res);
   double v = atof(m);
   int p = (int)v;
@@ -236,13 +236,13 @@ G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * pixels_tab (struct project * this_proj)
+  \fn GtkWidget * pixels_tab (project * this_proj)
 
   \brief create the PBC pixels checking tab
 
   \param this_proj the target project
 */
-GtkWidget * pixels_tab (struct project * this_proj)
+GtkWidget * pixels_tab (project * this_proj)
 {
   GtkWidget * layout = create_layout (700, 750);
   GtkWidget * vbox = add_vbox_to_layout (layout, -1, -1);

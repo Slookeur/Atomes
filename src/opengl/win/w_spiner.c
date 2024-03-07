@@ -56,7 +56,7 @@ extern void rotate_x_y (glwin * view, double angle_x, double angle_y);
 gboolean spin (gpointer data)
 {
   tint * val = (tint *) data;
-  struct project * this_proj = get_project_by_id(val -> a);
+  project * this_proj = get_project_by_id(val -> a);
 #ifdef DEBUG
 //  g_debug (":: SPIN:: a= %d, c= %d", val -> a, val -> c);
 //  g_debug (":: SPIN:: speed[c]= %d", this_proj -> modelgl -> spin_speed[val -> c]);

@@ -569,7 +569,7 @@ gboolean check_to_update_shaders (glwin * view, image * img_a, image * img_b, in
     }
   }
 
-  struct project * tmp_proj = get_project_by_id(view -> proj);
+  project * tmp_proj = get_project_by_id(view -> proj);
   coord_info * this_coord = tmp_proj -> coord;
   for (i=0; i<9; i++)
   {

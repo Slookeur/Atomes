@@ -75,9 +75,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   GtkWidget * create_nose_box (int n);
   GtkWidget * thermo_box ();
 
-  struct thermostat * get_thermo ();
-  struct thermostat * get_active_thermostat (int id);
-  struct thermostat * init_thermo (int id, int type, int sys);
+  thermostat * get_thermo ();
+  thermostat * get_active_thermostat (int id);
+  thermostat * init_thermo (int id, int type, int sys);
 
 */
 
@@ -92,7 +92,7 @@ extern void print_the_section (int s, int p, GtkTextBuffer * buffer);
 extern ColRGBA init_color (int id, int numid);
 extern void proj_unselect_all_atoms ();
 extern GtkWidget * cpmd_box (GtkWidget * box, gchar * lab, int v_space, int h_space, int dim);
-extern struct dummy_atom * get_active_dummy (int id);
+extern dummy_atom * get_active_dummy (int id);
 extern void create_dummy_param_box (int dummy_id);
 
 char * c_thermo[2][CP2NTHERM][4] = {{{"Initial temperature: ", " ", " ", " "},
@@ -157,11 +157,11 @@ gboolean fixco;
 GtkTreeStore * add_model;
 
 /*!
-  \fn struct thermostat * get_thermo ()
+  \fn thermostat * get_thermo ()
 
   \brief get QM / QM-MM ions thermostat
 */
-struct thermostat * get_thermo ()
+thermostat * get_thermo ()
 {
   if (is_cpmd)
   {
@@ -198,7 +198,7 @@ int get_num_thermo ()
 gboolean are_all_atoms_thermostated ()
 {
   int i, j;
-  struct thermostat * thermo = get_thermo();
+  thermostat * thermo = get_thermo();
   j = 0;
   if (thermo -> sys < LOCAL) return TRUE;
   for (i=0; i<get_num_thermo(); i++)
@@ -243,13 +243,13 @@ void clean_nose_widgets ()
 }
 
 /*!
-  \fn struct thermostat * get_active_thermostat (int id)
+  \fn thermostat * get_active_thermostat (int id)
 
   \brief get thermostat using id
 
   \param id the thermostat id
 */
-struct thermostat * get_active_thermostat (int id)
+thermostat * get_active_thermostat (int id)
 {
   if (id < 0)
   {
@@ -257,7 +257,7 @@ struct thermostat * get_active_thermostat (int id)
   }
   else
   {
-    struct thermostat * thermo = get_thermo ();
+    thermostat * thermo = get_thermo ();
     while (thermo -> id != id)
     {
       if (thermo -> next != NULL) thermo = thermo -> next;
@@ -375,7 +375,7 @@ G_MODULE_EXPORT void run_remove_nose_thermostat (GtkDialog * dialog, gint respon
   int num_to_remove = GPOINTER_TO_INT(data);
   gboolean done = FALSE;
   gchar * str;
-  struct thermostat * thermo;
+  thermostat * thermo;
   switch (response_id)
   {
     case GTK_RESPONSE_APPLY:
@@ -492,7 +492,7 @@ void remove_nose_thermostat (int num_to_remove)
     gtk_tree_view_column_set_cell_data_func (thermo_col[i], thermo_renderer[i], thermo_set_visible, GINT_TO_POINTER(i), NULL);
   }
   // fill model
-  struct thermostat * thermo = get_thermo();
+  thermostat * thermo = get_thermo();
   for (i=0; i<get_num_thermo(); i++)
   {
     gtk_tree_store_append (remove_model, & thermo_level, NULL);
@@ -521,7 +521,7 @@ void remove_nose_thermostat (int num_to_remove)
 }
 
 /*!
-  \fn struct thermostat * init_thermo (int id, int type, int sys)
+  \fn thermostat * init_thermo (int id, int type, int sys)
 
   \brief initialize new thermostat
 
@@ -529,9 +529,9 @@ void remove_nose_thermostat (int num_to_remove)
   \param type the type of thermostat
   \param sys the thermostat system
 */
-struct thermostat * init_thermo (int id, int type, int sys)
+thermostat * init_thermo (int id, int type, int sys)
 {
-  struct thermostat * thermo = g_malloc0 (sizeof*thermo);
+  thermostat * thermo = g_malloc0 (sizeof*thermo);
   thermo -> id = id;
   thermo -> type = type;
   thermo -> sys = sys;
@@ -586,7 +586,7 @@ void init_thermostats (int type, int elec)
 void clean_thermostat (int new_type)
 {
   int i;
-  struct thermostat * thermo = get_thermo ();
+  thermostat * thermo = get_thermo ();
   if (thermo -> sys > 0)
   {
     for (i=0; i<get_num_thermo(); i++)
@@ -621,7 +621,7 @@ G_MODULE_EXPORT void update_thermo_parameter (GtkEntry * res, gpointer data);
 */
 void nose_parameters (GtkWidget * vbox, int id, int jd, gchar ** la, gchar ** lb)
 {
-  struct thermostat * thermo = get_active_thermostat (id);
+  thermostat * thermo = get_active_thermostat (id);
   //gchar * itemp[2]={"Initial temperature:", "Target temperature:"};
   GtkWidget * hbox;
   GtkWidget * widg;
@@ -786,7 +786,7 @@ void atom_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkT
 int is_not_thermostated (int at, int therm)
 {
   int i, j;
-  struct thermostat * thermo = get_thermo ();
+  thermostat * thermo = get_thermo ();
   for (i=0; i<get_num_thermo(); i++)
   {
     for (j=0; j<thermo -> natoms; j++)
@@ -851,7 +851,7 @@ int is_fixed_atom (int at)
 */
 int in_dummy (int at, int id)
 {
-  struct dummy_atom * dummy = get_active_dummy (-(id+2));
+  dummy_atom * dummy = get_active_dummy (-(id+2));
   int i;
   if (dummy -> natoms == qm_proj -> natomes) return 2;
   for (i=0; i<dummy -> natoms; i++)
@@ -1070,8 +1070,8 @@ G_MODULE_EXPORT void run_select_atom_from_model (GtkDialog * dialog, gint respon
           }
         }
       }
-      struct thermostat * thermo;
-      struct dummy_atom * dummy;
+      thermostat * thermo;
+      dummy_atom * dummy;
       if (done)
       {
         if (the_therm < -1)
@@ -1377,7 +1377,7 @@ G_MODULE_EXPORT void atom_selection_button (GtkButton * but, gpointer data)
   else
   {
     id = 0;
-    struct thermostat * thermo = get_active_thermostat (i);
+    thermostat * thermo = get_active_thermostat (i);
     num = thermo -> natoms;
   }
   gchar * stra, * strb;
@@ -1465,7 +1465,7 @@ void create_nose_thermo_param_box (int therm_id)
   nose_id_box[1] = create_vbox (BSEP);
   cpmd_box (nose_id_box[1], str, 5, 5, 220);
   g_free (str);
-  struct thermostat * thermo = get_active_thermostat (therm_id);
+  thermostat * thermo = get_active_thermostat (therm_id);
   create_selection_button (nose_id_box[1], thermo -> natoms, 0, GINT_TO_POINTER(therm_id));
   nose_parameters (nose_id_box[1], therm_id,
                    v_thermo[!is_cpmd][thermo->type],
@@ -1546,7 +1546,7 @@ void create_selection_combo (int id, int num, int type, GCallback handler)
 void add_thermostat (int extra)
 {
   int i, j;
-  struct thermostat * thermo = get_thermo ();
+  thermostat * thermo = get_thermo ();
   j = get_num_thermo ();
   while (thermo -> next != NULL) thermo = thermo -> next;
   for (i=0; i<extra; i++)
@@ -1582,7 +1582,7 @@ G_MODULE_EXPORT void add_or_remove_thermostat (GtkSpinButton * res, gpointer dat
   int i, j, k;
   gchar * str;
   gboolean add_thermo = TRUE;
-  struct thermostat * thermo = get_thermo();
+  thermostat * thermo = get_thermo();
   if (id != get_num_thermo ())
   {
     if (id > get_num_thermo ())
@@ -1672,7 +1672,7 @@ G_MODULE_EXPORT void update_thermo_parameter (GtkEntry * res, gpointer data)
     {
       j = 0;
     }
-    struct thermostat * thermo = get_active_thermostat (j);
+    thermostat * thermo = get_active_thermostat (j);
     if (i < 2)
     {
       if (thermo -> params[i] != v)
@@ -1828,7 +1828,7 @@ G_MODULE_EXPORT void changed_thermo_box (GtkComboBox * box, gpointer data)
   if (j == 0 && i != get_thermo () -> type)
   {
     clean_thermostat (i);
-    struct thermostat * thermo = get_thermo();
+    thermostat * thermo = get_thermo();
     thermo -> sys = GLOBAL;
     prepare_therm_ions ();
   }
@@ -1873,7 +1873,7 @@ void thermo_type_box (GtkWidget * vbox, gchar * str, int id)
   }
   else
   {
-    struct thermostat * thermo = get_thermo();
+    thermostat * thermo = get_thermo();
     gtk_combo_box_set_active (GTK_COMBO_BOX(tbox), thermo -> type);
   }
   g_signal_connect (G_OBJECT (tbox), "changed", G_CALLBACK(changed_thermo_box), GINT_TO_POINTER(id));

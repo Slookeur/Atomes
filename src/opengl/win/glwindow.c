@@ -110,13 +110,15 @@ extern G_MODULE_EXPORT void edit_in_new_project (GtkWidget * widg, gpointer data
 #endif
 extern void save_rotation_quaternion (glwin * view);
 extern void rotate_x_y (glwin * view, double angle_x, double angle_y);
-extern void translate (struct project * this_proj, int status, int axis, vec3_t trans);
+extern void translate (project * this_proj, int status, int axis, vec3_t trans);
 extern int selected_aspec;
 extern int is_selected;
 extern int is_labelled;
 extern G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data);
 extern gchar * action_atoms[3];
 extern int get_selection_type (glwin * view);
+
+atomic_object * copied_object = NULL;
 
 #ifdef GTK3
 /*!
@@ -461,7 +463,7 @@ void prepare_opengl_menu_bar (glwin * view)
 #ifdef GTK3
   view -> menu_bar = gtk_menu_bar_new ();
   gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, menu_item_new_with_submenu ("OpenGL", TRUE, menu_opengl(view, 0)));
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, menu_item_new_with_submenu ("Model", this_proj -> nspec, menu_model(view, 0)));
   view -> ogl_coord[0] = create_menu_item (FALSE, "Chemistry");
   gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, view -> ogl_coord[0]);
@@ -1225,7 +1227,7 @@ void gtk_window_change_gdk_visual (GtkWidget * win)
 
 gboolean create_3d_model (int p, gboolean load)
 {
-  struct project * this_proj = get_project_by_id (p);
+  project * this_proj = get_project_by_id (p);
 #ifndef GTKGLAREA
   if (! glXQueryExtension (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), NULL, NULL))
   {
@@ -1356,7 +1358,7 @@ gboolean create_3d_model (int p, gboolean load)
 */
 void prep_model (int p)
 {
-  struct project * this_proj = get_project_by_id (p);
+  project * this_proj = get_project_by_id (p);
   gboolean rendering = FALSE;
   gboolean adv_bonding[2];
   if (this_proj -> modelgl == NULL)

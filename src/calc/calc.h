@@ -34,7 +34,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #define MAXDATAQM 7
 
 extern GtkWidget * qm_assistant;
-extern struct project * qm_proj;
+extern project * qm_proj;
 extern glwin * qm_view;
 extern coord_info * qm_coord;
 extern GtkTextBuffer * qmbuffer[MAXDATAQM+2];

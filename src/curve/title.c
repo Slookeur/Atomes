@@ -32,7 +32,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   const gchar * default_title (int ax, int c);
 
-  void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid);
+  void show_title (cairo_t * cr, project * this_proj, int rid, int cid);
 
 */
 
@@ -95,7 +95,7 @@ const gchar * default_title (int ax, int c)
 }
 
 /*!
-  \fn void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
+  \fn void show_title (cairo_t * cr, project * this_proj, int rid, int cid)
 
   \brief draw title
 
@@ -104,7 +104,7 @@ const gchar * default_title (int ax, int c)
   \param rid the calculation id
   \param cid the curve id
 */
-void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid)
+void show_title (cairo_t * cr, project * this_proj, int rid, int cid)
 {
   double x, y;
 

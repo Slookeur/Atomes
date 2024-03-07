@@ -30,8 +30,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void update_cutoffs (struct project * this_proj);
-  void cut_box (struct project * this_proj, GtkWidget * vbox);
+  void update_cutoffs (project * this_proj);
+  void cut_box (project * this_proj, GtkWidget * vbox);
 
   G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data);
   G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointer data);
@@ -46,17 +46,17 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glview.h"
 #include "glwindow.h"
 
-extern gchar * label_cutrab (struct project * this_proj, glwin * view, int id);
+extern gchar * label_cutrab (project * this_proj, glwin * view, int id);
 double * tmpcut;
 
 /*!
-  \fn void update_cutoffs (struct project * this_proj)
+  \fn void update_cutoffs (project * this_proj)
 
   \brief update bond cutoffs
 
   \param this_proj the target project
 */
-void update_cutoffs (struct project * this_proj)
+void update_cutoffs (project * this_proj)
 {
   int i, j, k;
   k = 0;
@@ -145,14 +145,14 @@ G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
 }
 
 /*!
-  \fn void cut_box (struct project * this_proj, GtkWidget * vbox)
+  \fn void cut_box (project * this_proj, GtkWidget * vbox)
 
   \brief box cutoff entries
 
   \param this_proj the target project
   \param vbox the GtkWidget sending the signal
 */
-void cut_box (struct project * this_proj, GtkWidget * vbox)
+void cut_box (project * this_proj, GtkWidget * vbox)
 {
   int i, j, k;
   GtkWidget * vbo, * hbo, * cut;

@@ -172,7 +172,6 @@ int mol_update = 0;
 
 int tmp_pixels[2];
 int * pasted_todo = NULL;
-struct insert_object * copied_object = NULL;
 
 double * xsk = NULL;
 

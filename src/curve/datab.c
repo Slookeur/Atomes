@@ -58,7 +58,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void cancel_changes (GtkWidget * widg, gpointer data);
   void edit_data (gpointer data);
 
-  static void fill_data_model (GtkListStore * store, struct project * this_proj, int b, int c);
+  static void fill_data_model (GtkListStore * store, project * this_proj, int b, int c);
 
   G_MODULE_EXPORT void edit_cell (GtkCellRendererText * cell, gchar * path_string, gchar * new_text, gpointer user_data);
   G_MODULE_EXPORT void adjust_value (GtkEntry * res, gpointer data);
@@ -70,7 +70,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void cancel_but (GtkButton * but, gpointer data);
   G_MODULE_EXPORT void validate_changes (GtkButton * but, gpointer data);
 
-  GtkWidget * setview (struct project * this_proj, int b, int c);
+  GtkWidget * setview (project * this_proj, int b, int c);
 
   GMenu * insert_place ();
   GMenu * insert_data ();
@@ -204,7 +204,7 @@ void add_to_last_row (gpointer data, gpointer user_data)
 void add_to_last_col (double cte, gpointer data)
 {
   qint * dat = (qint *)data;
-  struct project * this_proj = get_project_by_id(dat -> a);
+  project * this_proj = get_project_by_id(dat -> a);
   curve_model = gtk_tree_view_get_model (GTK_TREE_VIEW(this_proj -> curves[dat -> b][dat -> c] -> datatree));
   sel = gtk_tree_view_get_selection (GTK_TREE_VIEW(this_proj -> curves[dat -> b][dat -> c] -> datatree));
   gtk_tree_selection_select_all (sel);
@@ -244,7 +244,7 @@ void multiply_last_row (gpointer data, gpointer user_data)
 void multiply_last_col (double cte, gpointer data)
 {
   qint * dat = (qint *)data;
-  struct project * this_proj = get_project_by_id(dat -> a);
+  project * this_proj = get_project_by_id(dat -> a);
   curve_model = gtk_tree_view_get_model (GTK_TREE_VIEW(this_proj -> curves[dat -> b][dat -> c] -> datatree));
   sel = gtk_tree_view_get_selection (GTK_TREE_VIEW(this_proj -> curves[dat -> b][dat -> c] -> datatree));
   gtk_tree_selection_select_all (sel);
@@ -409,7 +409,7 @@ void delete_cell (gpointer data)
 G_MODULE_EXPORT void edit_cell (GtkCellRendererText * cell, gchar * path_string, gchar * new_text, gpointer user_data)
 {
   qint * id = (qint *)user_data;
-  struct project * this_proj = get_project_by_id (id -> a);
+  project * this_proj = get_project_by_id (id -> a);
   curve_model = gtk_tree_view_get_model(GTK_TREE_VIEW(this_proj -> curves[id -> b][id -> c] -> datatree));
   gtk_tree_model_get_iter_from_string (curve_model, & row, path_string);
   double val = atof(new_text);
@@ -842,7 +842,7 @@ G_MODULE_EXPORT gboolean on_data_button_event (GtkWidget * widget, GdkEvent * ev
 #endif
 
 /*!
-  \fn static void fill_data_model (GtkListStore * store, struct project * this_proj, int b, int c)
+  \fn static void fill_data_model (GtkListStore * store, project * this_proj, int b, int c)
 
   \brief fill curve data list store
 
@@ -851,7 +851,7 @@ G_MODULE_EXPORT gboolean on_data_button_event (GtkWidget * widget, GdkEvent * ev
   \param b the calculation id
   \param c the curve id
 */
-static void fill_data_model (GtkListStore * store, struct project * this_proj, int b, int c)
+static void fill_data_model (GtkListStore * store, project * this_proj, int b, int c)
 {
   GtkTreeIter datalevel;
   int i;
@@ -866,7 +866,7 @@ static void fill_data_model (GtkListStore * store, struct project * this_proj, i
 }
 
 /*!
-  \fn GtkWidget * setview (struct project * this_proj, int b, int c)
+  \fn GtkWidget * setview (project * this_proj, int b, int c)
 
   \brief create the curve data tree store
 
@@ -874,7 +874,7 @@ static void fill_data_model (GtkListStore * store, struct project * this_proj, i
   \param b the target calculation
   \param c the target curve
 */
-GtkWidget * setview (struct project * this_proj, int b, int c)
+GtkWidget * setview (project * this_proj, int b, int c)
 {
   GtkWidget * dataview;
   GtkListStore * datamodel;
@@ -1008,7 +1008,7 @@ G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer
 G_MODULE_EXPORT void validate_changes (GtkButton * but, gpointer data)
 {
   tint * id = (tint *)data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   curve_model = gtk_tree_view_get_model(GTK_TREE_VIEW(this_proj -> curves[id -> b][id -> c] -> datatree));
   sel = gtk_tree_view_get_selection (GTK_TREE_VIEW(this_proj -> curves[id -> b][id -> c] -> datatree));
   gtk_tree_selection_select_all (sel);
@@ -1038,7 +1038,7 @@ void edit_data (gpointer data)
 {
   GtkWidget * win;
   tint * id = (tint *)data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   if (this_proj -> curves[id -> b][id -> c] -> datatree != NULL)
   {
     win = get_top_level(GTK_WIDGET(this_proj -> curves[id -> b][id -> c] -> datatree));

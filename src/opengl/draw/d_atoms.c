@@ -38,9 +38,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   float get_sphere_radius (int style, int sp, int ac, int sel);
 
   void setup_sphere_vertice (float * vertices, vec3_t pos, ColRGBA col, float rad, float alpha);
-  void setup_this_atom (int style, gboolean to_pick, gboolean picked, struct atom * at, int ac, float * vert, float al);
+  void setup_this_atom (int style, gboolean to_pick, gboolean picked, atom * at, int ac, float * vert, float al);
   void setup_atom_vertices (int style, gboolean to_pick, float * vertices);
-  void prepare_clone (int style, gboolean to_pick, int picked, struct atom at, struct atom bt, float x, float y, float z, float * vertices);
+  void prepare_clone (int style, gboolean to_pick, int picked, atom at, atom bt, float x, float y, float z, float * vertices);
   void setup_clone_vertices (int style, gboolean to_pick, float * vertices);
   void atom_positions_colors_and_sizes (int style, gboolean to_pick, float * instances);
   void create_atom_lists (gboolean to_pick);
@@ -148,7 +148,7 @@ ColRGBA get_atom_color (int i, int j, double al, int picked, gboolean to_pick)
     }
     else if (acolorm == 5)
     {
-      struct field_molecule * fmol = get_active_field_molecule_from_model_id (proj_gl, j);
+      field_molecule * fmol = get_active_field_molecule_from_model_id (proj_gl, j);
       if (fmol)
       {
         s = proj_gl -> atoms[0][j].fid;
@@ -325,7 +325,7 @@ void setup_sphere_vertice (float * vertices, vec3_t pos, ColRGBA col, float rad,
 }
 
 /*!
-  \fn void setup_this_atom (int style, gboolean to_pick, gboolean picked, struct atom * at, int ac, float * vert, float al)
+  \fn void setup_this_atom (int style, gboolean to_pick, gboolean picked, atom * at, int ac, float * vert, float al)
 
   \brief prepare the OpenGL rendering data of an atom / clone
 
@@ -337,7 +337,7 @@ void setup_sphere_vertice (float * vertices, vec3_t pos, ColRGBA col, float rad,
   \param vert the OpenGL buffer data to fill
   \param al the opacity (atom: 1.0, clone: 0.5)
 */
-void setup_this_atom (int style, gboolean to_pick, gboolean picked, struct atom * at, int ac, float * vert, float al)
+void setup_this_atom (int style, gboolean to_pick, gboolean picked, atom * at, int ac, float * vert, float al)
 {
   int i, j, k;
   float alpha = 1.0;
@@ -422,7 +422,7 @@ int find_atom_vertices (gboolean to_pick)
 void setup_atom_vertices (int style, gboolean to_pick, float * vertices)
 {
   int i;
-  struct atom * tmp_a;
+  atom * tmp_a;
   for (i=0; i<proj_at; i++)
   {
     tmp_a = duplicate_atom (& proj_gl -> atoms[step][i]);
@@ -440,7 +440,7 @@ void setup_atom_vertices (int style, gboolean to_pick, float * vertices)
 }
 
 /*!
-  \fn void prepare_clone (int style, gboolean to_pick, int picked, struct atom at, struct atom bt, float x, float y, float z, float * vertices)
+  \fn void prepare_clone (int style, gboolean to_pick, int picked, atom at, atom bt, float x, float y, float z, float * vertices)
 
   \brief prepare the rendering data of a clone
 
@@ -454,9 +454,9 @@ void setup_atom_vertices (int style, gboolean to_pick, float * vertices)
   \param z z position
   \param vertices the OpenGL buffer data to fill
 */
-void prepare_clone (int style, gboolean to_pick, int picked, struct atom at, struct atom bt, float x, float y, float z, float * vertices)
+void prepare_clone (int style, gboolean to_pick, int picked, atom at, atom bt, float x, float y, float z, float * vertices)
 {
-  struct atom * tmp_a = duplicate_atom (& bt);
+  atom * tmp_a = duplicate_atom (& bt);
   tmp_a -> x += x;
   tmp_a -> y += y;
   tmp_a -> z += z;

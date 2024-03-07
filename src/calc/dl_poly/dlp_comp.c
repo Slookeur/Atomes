@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void compare_body (gchar * fatom, struct field_nth_body * new_body, int n_body, struct field_nth_body * old_body, int o_body);
+  void compare_body (gchar * fatom, field_nth_body * new_body, int n_body, field_nth_body * old_body, int o_body);
   void compare_non_bonded (gchar * fatom);
 
 */
@@ -41,12 +41,12 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glview.h"
 #include "dlp_field.h"
 
-struct field_nth_body * comp_fbody;
+field_nth_body * comp_fbody;
 
-extern void duplicate_nbody_params (struct field_nth_body * new_fbody, struct field_nth_body * old_fbody);
+extern void duplicate_nbody_params (field_nth_body * new_fbody, field_nth_body * old_fbody);
 
 /*!
-  \fn void compare_body (gchar * fatom, struct field_nth_body * new_body, int n_body, struct field_nth_body * old_body, int o_body)
+  \fn void compare_body (gchar * fatom, field_nth_body * new_body, int n_body, field_nth_body * old_body, int o_body)
 
   \brief compare, and if require ajdust, two lists of field body properties
 
@@ -56,14 +56,14 @@ extern void duplicate_nbody_params (struct field_nth_body * new_fbody, struct fi
   \param old_body 2nd list of field body property(ies)
   \param o_body the number of field body in this 2nd list
 */
-void compare_body (gchar * fatom, struct field_nth_body * new_body, int n_body, struct field_nth_body * old_body, int o_body)
+void compare_body (gchar * fatom, field_nth_body * new_body, int n_body, field_nth_body * old_body, int o_body)
 {
   int i, j, k, l, m, n, o, p;
-  struct field_nth_body * tmp_new = new_body;
-  struct field_nth_body * tmp_old;
-  struct field_nth_body * new_guy;
-  struct field_nth_body * old_one;
-  struct field_nth_body * new_one;
+  field_nth_body * tmp_new = new_body;
+  field_nth_body * tmp_old;
+  field_nth_body * new_guy;
+  field_nth_body * old_one;
+  field_nth_body * new_one;
   gboolean doit;
 
   for (i=0; i<n_body; i++)

@@ -68,17 +68,12 @@ extern int activeg;
 extern int activec;
 extern int activer;
 
-typedef struct {
-  int a;
-  int b;
-  int c;
-  gboolean d;
-} setdata;
-
-typedef struct {
+typedef struct curve_dash curve_dash;
+struct curve_dash
+{
   const double * a;
   int b;
-} thedash;
+};
 
 extern gint32 etime;
 extern double XDRAW, YDRAW;
@@ -105,7 +100,7 @@ extern int xmarge;
 extern int ymarge;
 extern char * curve_image_file;
 
-extern int get_curve_shift (struct project * this_proj, int b, int c);
+extern int get_curve_shift (project * this_proj, int b, int c);
 
 // Number of dash formats
 extern int ndash;
@@ -115,12 +110,12 @@ extern int len1;
 extern const double pdashed[];
 extern int lenp;
 
-extern thedash * selectdash (int iddash);
+extern curve_dash * selectdash (int iddash);
 extern double scale (double axe);
-extern void prep_plot (struct project * this_proj, int rid, int cid);
-extern void prep_axis_data (struct project * this_proj, int rid, int cid, int ax);
-extern void hide_curves (struct project * this_proj, int c);
-extern void erase_curves (struct project * this_proj, int c);
+extern void prep_plot (project * this_proj, int rid, int cid);
+extern void prep_axis_data (project * this_proj, int rid, int cid, int ax);
+extern void hide_curves (project * this_proj, int c);
+extern void erase_curves (project * this_proj, int c);
 extern void update_curves ();
 extern void update_curve (gpointer curve);
 
@@ -137,34 +132,34 @@ extern G_MODULE_EXPORT gboolean to_hide_curve (GtkWindow * thecurve, gpointer da
 #endif
 
 extern void clean_curves_data (int calc, int start, int end);
-extern void initcurve (struct project * pid, int rid, int cid);
+extern void initcurve (project * pid, int rid, int cid);
 extern void addcurwidgets (int pid, int rid, int st);
 extern void allocextra (int a, int b, int c);
 
-extern void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj);
+extern void label (cairo_t * cr, double val, int axe, int p, project * this_proj);
 
 extern void show_frame (cairo_t * cd,
                         int tf, int da, int res[2],
                         double ti, double x[2], double y[2],
                         ColRGBA dcol);
 extern void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol);
-extern void draw_frame (cairo_t * cr, struct project * this_proj, int rid, int cid);
+extern void draw_frame (cairo_t * cr, project * this_proj, int rid, int cid);
 
 extern void draw_glyph (cairo_t * in, int theglyph,
                         double x, double y, ColRGBA gcolor, double size);
 
 extern const gchar * default_title (int ax, int c);
-extern void show_title (cairo_t * cr, struct project * this_proj, int rid, int cid);
+extern void show_title (cairo_t * cr, project * this_proj, int rid, int cid);
 
-extern void autoscale_axis (struct project * this_proj, int rid, int cid, int aid);
-extern void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid);
-extern void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it);
-extern void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid);
-extern void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it);
+extern void autoscale_axis (project * this_proj, int rid, int cid, int aid);
+extern void setup_xaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid);
+extern void setup_xaxis_log (cairo_t * cr, project * this_proj, int rid, int cid, gboolean draw_it);
+extern void setup_yaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid);
+extern void setup_yaxis_log (cairo_t * cr, project * this_proj, int rid, int cid, gboolean draw_it);
 
 extern void write_curve (gpointer idata);
 extern void save_image (gpointer cdata);
-extern void remove_extra (ExtraSets * sets, struct cextra * ctmp);
+extern void remove_extra (ExtraSets * sets, CurveExtra * ctmp);
 extern void curve_window_add_menu_bar (tint * data);
 extern GtkWidget * curve_popup_menu (gpointer data);
 extern void show_curve_popup_menu (GdkEvent * event, gpointer data);
@@ -172,7 +167,7 @@ extern void show_curve_popup_menu (GdkEvent * event, gpointer data);
 void draw_curve (cairo_t * cr,
                  int cid,
                  int rid,
-                 struct project * this_proj,
+                 project * this_proj,
                  int points,
                  ColRGBA withcolor,
                  int xscale,
@@ -189,5 +184,5 @@ void draw_curve (cairo_t * cr,
                  int extra,
                  int pid);
 
-extern void show_legend (cairo_t * cr, struct project * this_proj, int rid, int cid);
+extern void show_legend (cairo_t * cr, project * this_proj, int rid, int cid);
 #endif

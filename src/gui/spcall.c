@@ -31,7 +31,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   void initsh (int str);
-  void update_spherical_view (struct project * this_proj);
+  void update_spherical_view (project * this_proj);
 
   G_MODULE_EXPORT void on_calc_sph_released (GtkWidget * widg, gpointer data);
 
@@ -92,13 +92,13 @@ void initsh (int str)
 }
 
 /*!
-  \fn void update_spherical_view (struct project * this_proj)
+  \fn void update_spherical_view (project * this_proj)
 
   \brief update the text view for spherical harmonics
 
   \param this_proj the target project
 */
-void update_spherical_view (struct project * this_proj)
+void update_spherical_view (project * this_proj)
 {
   int i, j, k, l, m;
   gchar * str;

@@ -67,7 +67,7 @@ int prepare_rings_gl (float * vertices, int se, int ge, int ta, int id, gboolean
   gboolean old_pbc;
   GLfloat *** xyz;
   struct distance d;
-  struct atom at, bt;
+  atom at, bt;
 
   xyz = alloctfloat (ta, ta, 3);
   j = -1;

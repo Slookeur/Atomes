@@ -32,17 +32,17 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   double scale (double axe);
 
-  void prep_plot (struct project * this_proj, int rid, int cid);
+  void prep_plot (project * this_proj, int rid, int cid);
   void clean_this_curve_window (int cid, int rid);
   void set_curve_data_zero (int rid, int cid, int interv);
   void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid);
-  void hide_curves (struct project * this_proj, int c);
+  void hide_curves (project * this_proj, int c);
   void remove_this_curve_from_extras (int a, int b, int c);
-  void erase_curves (struct project * this_proj, int c);
+  void erase_curves (project * this_proj, int c);
   void update_curves ();
   void update_curve (gpointer data);
 
-  thedash * selectdash (int iddash);
+  curve_dash * selectdash (int iddash);
 
 */
 
@@ -125,15 +125,15 @@ const double pdashed[] = {1.0};
 int lenp = 1;
 
 /*!
-  \fn thedash * selectdash (int iddash)
+  \fn curve_dash * selectdash (int iddash)
 
   \brief setup dash pointer
 
   \param iddash the target dash
 */
-thedash * selectdash (int iddash)
+curve_dash * selectdash (int iddash)
 {
-  thedash * dashtab;
+  curve_dash * dashtab;
   dashtab = g_malloc0 (sizeof*dashtab);
 
   if (iddash == 0)
@@ -304,7 +304,7 @@ double scale (double axe)
 }
 
 /*!
-  \fn void prep_plot (struct project * this_proj, int rid, int cid)
+  \fn void prep_plot (project * this_proj, int rid, int cid)
 
   \brief prepare curve plot (setting up variables for the plot)
 
@@ -312,7 +312,7 @@ double scale (double axe)
   \param rid the calculation id
   \param cid the curve id
 */
-void prep_plot (struct project * this_proj, int rid, int cid)
+void prep_plot (project * this_proj, int rid, int cid)
 {
   x_min = resol[0] * this_proj -> curves[rid][cid] -> frame_pos[0][0];
   x_max = resol[0] * this_proj -> curves[rid][cid] -> frame_pos[0][1];
@@ -441,14 +441,14 @@ void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid
 }
 
 /*!
-  \fn void hide_curves (struct project * this_proj, int c)
+  \fn void hide_curves (project * this_proj, int c)
 
   \brief for project hide all curves for a calculation
 
   \param this_proj the target project
   \param c the target calculation
 */
-void hide_curves (struct project * this_proj, int c)
+void hide_curves (project * this_proj, int c)
 {
   int i;
 
@@ -482,8 +482,8 @@ void hide_curves (struct project * this_proj, int c)
 void remove_this_curve_from_extras (int a, int b, int c)
 {
   int i, j, k, l;
-  struct project * this_proj;
-  struct cextra * ctmp;
+  project * this_proj;
+  CurveExtra * ctmp;
   for (i=0; i<nprojects; i++)
   {
     if (i != a)
@@ -516,14 +516,14 @@ void remove_this_curve_from_extras (int a, int b, int c)
 }
 
 /*!
-  \fn void erase_curves (struct project * this_proj, int c)
+  \fn void erase_curves (project * this_proj, int c)
 
   \brief free all curve(s) data
 
   \param this_proj the target project
   \param c the target calculation
 */
-void erase_curves (struct project * this_proj, int c)
+void erase_curves (project * this_proj, int c)
 {
   int i, j;
 
@@ -559,7 +559,7 @@ void erase_curves (struct project * this_proj, int c)
 void update_curves ()
 {
   int i, j, k;
-  struct project * this_proj;
+  project * this_proj;
   for (i=0; i<nprojects; i++)
   {
     this_proj = get_project_by_id(i);

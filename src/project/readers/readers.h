@@ -37,7 +37,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 extern int set_v_dummy (gchar * this_word);
 
 extern double get_z_from_periodic_table (gchar * lab);
-extern void allocatoms (struct project * this_proj);
+extern void allocatoms (project * this_proj);
 extern chemical_data * alloc_chem_data (int spec);
 extern FILE * coordf;
 

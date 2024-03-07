@@ -38,7 +38,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_molecule * mol_b);
 
-  void duplicate_molecule (struct molecule * new_mol, struct search_molecule * old_mol);
+  void duplicate_molecule (molecule * new_mol, struct search_molecule * old_mol);
   void allocate_mol_for_step_ (int * sid, int * mol_in_step);
   void allocate_mol_data_ ();
   void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[* nvs]);
@@ -81,17 +81,17 @@ struct search_molecule {
 int * pgeo;
 struct search_molecule * tmp_search = NULL;
 struct search_molecule ** in_calc_mol = NULL;
-extern struct molecule * tmp_mol;
+extern molecule * tmp_mol;
 
 /*!
-  \fn void duplicate_molecule (struct molecule * new_mol, struct search_molecule * old_mol)
+  \fn void duplicate_molecule (molecule * new_mol, struct search_molecule * old_mol)
 
   \brief create a copy of a molecule data structure
 
   \param new_mol the new molecule
   \param old_mol the molecule to copy
 */
-void duplicate_molecule (struct molecule * new_mol, struct search_molecule * old_mol)
+void duplicate_molecule (molecule * new_mol, struct search_molecule * old_mol)
 {
   new_mol -> id = old_mol -> id;
   new_mol -> md = old_mol -> md;

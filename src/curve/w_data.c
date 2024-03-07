@@ -85,7 +85,7 @@ G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpoint
   c = cd -> c;
   if (response_id == GTK_RESPONSE_ACCEPT)
   {
-    struct project * this_proj = get_project_by_id(a);
+    project * this_proj = get_project_by_id(a);
     this_proj -> curves[b][c] -> cfile = file_chooser_get_file_name (chooser);
     GtkFileFilter * tmp = gtk_file_chooser_get_filter (chooser);
     if (tmp == filter1)
@@ -127,7 +127,7 @@ G_MODULE_EXPORT void run_write_curve (GtkDialog * info, gint response_id, gpoint
                        & b, & c, & l, & m, & p,
                        & j, this_proj -> curves[b][c] -> title);
       j = this_proj -> curves[b][c] -> extrac -> extras;
-      struct cextra * ctmp = this_proj -> curves[b][c] -> extrac -> first;
+      CurveExtra * ctmp = this_proj -> curves[b][c] -> extrac -> first;
       for (i=0 ; i < j ; i++ )
       {
         m = m + 1;
@@ -173,7 +173,7 @@ void write_curve (gpointer idata)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   info = create_file_chooser ("Save Data",
                               GTK_WINDOW(this_proj -> curves[b][c] -> window),
                               GTK_FILE_CHOOSER_ACTION_SAVE,

@@ -32,20 +32,20 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   int * paint_bitmap (vec4_t color, GLfloat a, int cw, int ch, unsigned char * buff);
 
-  void render_string (int glsl, int id, struct screen_string * this_string);
-  void debug_string (struct screen_string  * this_string);
+  void render_string (int glsl, int id, screen_string * this_string);
+  void debug_string (screen_string  * this_string);
   void render_all_strings (int glsl, int id);
-  void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct);
-  void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct);
+  void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], atom * at, atom * bt, atom * ct);
+  void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], atom * at, atom * bt, atom * ct);
 
   static void normalize_text_size (GLenum texture,  int * width, int * height);
 
-  struct screen_string * was_not_rendered_already (char * word, struct screen_string * list);
+  screen_string * was_not_rendered_already (char * word, screen_string * list);
 
   ColRGBA * opposite_color (ColRGBA col);
 
   object_3d * create_string_texture (int cwidth, int cheight, int * pixels);
-  object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, struct screen_string * this_string);
+  object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, screen_string * this_string);
 
 */
 
@@ -286,7 +286,7 @@ object_3d * create_string_texture (int cwidth, int cheight, int * pixels)
 }
 
 /*!
-  \fn object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, struct screen_string * this_string)
+  \fn object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, screen_string * this_string)
 
   \brief OpenGL 3D pango layout object rendering
 
@@ -295,7 +295,7 @@ object_3d * create_string_texture (int cwidth, int cheight, int * pixels)
   \param id the label id
   \param this_string the screen string
 */
-object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, struct screen_string * this_string)
+object_3d * gl_pango_render_layout (PangoLayout * layout, GLenum texture, int id, screen_string * this_string)
 {
   FT_Bitmap bitmap;
   PangoRectangle prect;
@@ -407,7 +407,7 @@ ColRGBA * opposite_color (ColRGBA col)
 }
 
 /*!
-  \fn void render_string (int glsl, int id, struct screen_string * this_string)
+  \fn void render_string (int glsl, int id, screen_string * this_string)
 
   \brief render a screen string
 
@@ -415,7 +415,7 @@ ColRGBA * opposite_color (ColRGBA col)
   \param id the label id
   \param this_string the screen string to render
 */
-void render_string (int glsl, int id, struct screen_string * this_string)
+void render_string (int glsl, int id, screen_string * this_string)
 {
   int j, k, l;
   double font_size;
@@ -516,13 +516,13 @@ void render_string (int glsl, int id, struct screen_string * this_string)
 }
 
 /*!
-  \fn void debug_string (struct screen_string  * this_string)
+  \fn void debug_string (screen_string  * this_string)
 
   \brief debug screen string data
 
   \param this_string
 */
-void debug_string (struct screen_string  * this_string)
+void debug_string (screen_string  * this_string)
 {
   g_debug ("STRING:: id= %d, text:: %s", this_string -> id, this_string -> word);
   g_debug ("STRING:: color:: r= %f, g= %f, b= %f, a= %f",
@@ -550,7 +550,7 @@ void render_all_strings (int glsl, int id)
 {
   if (plot -> labels_list[id] != NULL)
   {
-    struct screen_string  * this_string = plot -> labels_list[id] -> last;
+    screen_string  * this_string = plot -> labels_list[id] -> last;
     while (this_string != NULL)
     {
       //if (glsl == MEASU) debug_string (this_string);
@@ -561,18 +561,18 @@ void render_all_strings (int glsl, int id)
 }
 
 /*!
-  \fn struct screen_string * was_not_rendered_already (char * word, struct screen_string * list)
+  \fn screen_string * was_not_rendered_already (char * word, screen_string * list)
 
   \brief check if a string was not already rendered and the corresponding screen string created
 
   \param word the string to render
   \param list the screen string list
 */
-struct screen_string * was_not_rendered_already (char * word, struct screen_string * list)
+screen_string * was_not_rendered_already (char * word, screen_string * list)
 {
   if (list != NULL)
   {
-    struct screen_string * tmp_string = list -> last;
+    screen_string * tmp_string = list -> last;
     while (tmp_string != NULL)
     {
       if (g_strcmp0 (tmp_string -> word, word) == 0)
@@ -588,7 +588,7 @@ struct screen_string * was_not_rendered_already (char * word, struct screen_stri
 }
 
 /*!
-  \fn void add_string_instance (struct screen_string * string, vec3_t pos, struct atom * at, struct atom * bt, struct atom * ct)
+  \fn void add_string_instance (screen_string * string, vec3_t pos, atom * at, atom * bt, atom * ct)
 
   \brief add an instance to a screen string
 
@@ -598,7 +598,7 @@ struct screen_string * was_not_rendered_already (char * word, struct screen_stri
   \param bt the 2nd atom, if any (bond or angle measure string)
   \param ct the 3rd atom, if any (angle measure string)
 */
-void add_string_instance (struct screen_string * string, vec3_t pos, struct atom * at, struct atom * bt, struct atom * ct)
+void add_string_instance (screen_string * string, vec3_t pos, atom * at, atom * bt, atom * ct)
 {
   int i, j;
   i = 0;
@@ -639,7 +639,7 @@ void add_string_instance (struct screen_string * string, vec3_t pos, struct atom
 }
 
 /*!
-  \fn void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct))
+  \fn void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], atom * at, atom * bt, atom * ct))
 *
 * Usage: add a screen string to the list of screen string to render
 
@@ -652,7 +652,7 @@ void add_string_instance (struct screen_string * string, vec3_t pos, struct atom
   \param bt the 2nd atom, if any (bond or angle measure string)
   \param ct the 3rd atom, if any (angle measure string)
 */
-void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct)
+void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], atom * at, atom * bt, atom * ct)
 {
   if (plot -> labels_list[id] == NULL)
   {
@@ -661,7 +661,7 @@ void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], 
   }
   else
   {
-    struct screen_string * s_tring = g_malloc0 (sizeof*s_tring);
+    screen_string * s_tring = g_malloc0 (sizeof*s_tring);
     s_tring -> prev = plot -> labels_list[id] -> last;
     s_tring -> id = plot -> labels_list[id] -> last -> id + 1;
     plot -> labels_list[id] -> last = s_tring;
@@ -675,7 +675,7 @@ void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], 
 }
 
 /*!
-  \fn void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct)
+  \fn void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], atom * at, atom * bt, atom * ct)
 *
 * Usage: prepare a screen string to be rendered
 
@@ -688,9 +688,9 @@ void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], 
   \param bt the 2nd atom, if any (bond or angle measure string)
   \param ct the 3rd atom, if any (angle measure string)
 */
-void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], struct atom * at, struct atom * bt, struct atom * ct)
+void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], atom * at, atom * bt, atom * ct)
 {
-  struct screen_string * this_string = was_not_rendered_already (text, plot -> labels_list[id]);
+  screen_string * this_string = was_not_rendered_already (text, plot -> labels_list[id]);
   if (this_string == NULL)
   {
     add_string (text, id, col, pos, lshift, at, bt, ct);

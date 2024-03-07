@@ -50,7 +50,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void cuboid_slab (mat4_t rot);
   void cylinder_slab (mat4_t rot);
   void spherical_slab ();
-  void create_slab_lists (struct project * this_proj);
+  void create_slab_lists (project * this_proj);
   void create_volumes_lists ();
 
 */
@@ -65,8 +65,8 @@ extern void setup_line_vertice (float * vertices, vec3_t pos, ColRGBA col, float
 extern void setup_sphere_vertice (float * vertices, vec3_t pos, ColRGBA col, float rad, float alpha);
 extern void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha, float delta);
 extern void setup_cap_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha);
-extern void create_slab_info (struct project * this_proj);
-extern void process_selected_atom (struct project * this_proj, glwin * view, int id, int ac, int se, int pi);
+extern void create_slab_info (project * this_proj);
+extern void process_selected_atom (project * this_proj, glwin * view, int id, int ac, int se, int pi);
 extern ColRGBA pcol;
 
 int BOX_BUFF_SIZE;
@@ -683,7 +683,7 @@ void cuboid_slab (mat4_t rot)
   for (i=0; i<proj_gl -> nspec; i++) wingl -> cell_win -> slab_lot[i] = 0;
   wingl -> cell_win -> slab_atoms = 0;
   float val, vbl;
-  struct atom slab_center;
+  atom slab_center;
   struct distance at_slab;
   slab_center.x = cat.x;
   slab_center.y = cat.y;
@@ -802,7 +802,7 @@ void cylinder_slab (mat4_t rot)
   for (i=0; i<proj_gl -> nspec; i++) wingl -> cell_win -> slab_lot[i] = 0;
   wingl -> cell_win -> slab_atoms = 0;
   vec3_t atc, patc;
-  struct atom slab_center;
+  atom slab_center;
   struct distance at_slab;
   slab_center.x = cat.x;
   slab_center.y = cat.y;
@@ -867,7 +867,7 @@ void spherical_slab ()
   vec3_t cat = vec3 (wingl -> cell_win -> cparam[6], wingl -> cell_win -> cparam[7], wingl -> cell_win -> cparam[8]);
   for (i=0; i<proj_gl -> nspec; i++) wingl -> cell_win -> slab_lot[i] = 0;
   wingl -> cell_win -> slab_atoms = 0;
-  struct atom slab_center;
+  atom slab_center;
   struct distance at_slab;
   slab_center.x = cat.x;
   slab_center.y = cat.y;
@@ -889,13 +889,13 @@ void spherical_slab ()
 }
 
 /*!
-  \fn void create_slab_lists (struct project * this_proj)
+  \fn void create_slab_lists (project * this_proj)
 
   \brief prepare slab(s) OpenGL rendering
 
   \param this_proj the target project
 */
-void create_slab_lists (struct project * this_proj)
+void create_slab_lists (project * this_proj)
 {
   wingl = this_proj -> modelgl;
   proj_gl = this_proj;

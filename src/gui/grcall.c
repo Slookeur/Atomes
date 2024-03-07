@@ -33,7 +33,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int recup_data_ (int * cd, int * rd);
 
   void initgr (int r);
-  void update_rdf_view (struct project * this_proj, int rdf);
+  void update_rdf_view (project * this_proj, int rdf);
   void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc]);
 
   G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data);
@@ -119,14 +119,14 @@ void initgr (int r)
 }
 
 /*!
-  \fn void update_rdf_view (struct project * this_proj, int rdf)
+  \fn void update_rdf_view (project * this_proj, int rdf)
 
   \brief update the project text view for the g(r)/g(k) calculation
 
   \param this_proj the target project
   \param rdf the calculation GR / GK
 */
-void update_rdf_view (struct project * this_proj, int rdf)
+void update_rdf_view (project * this_proj, int rdf)
 {
   gchar * str;
   if (this_proj -> text_buffer[rdf+OT] == NULL) this_proj -> text_buffer[rdf+OT] = add_buffer (NULL, NULL, NULL);

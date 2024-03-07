@@ -78,7 +78,7 @@ G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data)
   int j, k, o;
   j = the_data -> b;
   o = the_data -> c;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   k = this_proj -> modelgl -> anim -> last -> img -> box_axis[o];
   int dim[2]={OGL_BOX, OGL_AXIS};
   int i, m, l;

@@ -43,7 +43,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \fn void draw_curve (cairo_t * cr,
                     int cid,
                     int rid,
-                    struct project * this_proj,
+                    project * this_proj,
                     int points,
                     ColRGBA withcolor,
                     int xscale,
@@ -85,7 +85,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 void draw_curve (cairo_t * cr,
                  int cid,
                  int rid,
-                 struct project * this_proj,
+                 project * this_proj,
                  int points,
                  ColRGBA withcolor,
                  int xscale,
@@ -110,7 +110,7 @@ void draw_curve (cairo_t * cr,
   double ** plotdata;
   gboolean plot;
   gboolean dglyp;
-  thedash * dasht;
+  curve_dash * dasht;
 
   plotdata = allocddouble (points, 2);
   for ( i=0 ; i < points; i++ )

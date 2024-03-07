@@ -31,7 +31,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   int find_spec_id (int s, int z, double * list_z);
-  int search_for_new_spec (atom_edition * edit, struct insert_object * object);
+  int search_for_new_spec (atom_edition * edit, atomic_object * object);
 
   chemical_data * duplicate_chemical_data (int spec, chemical_data * chem);
 
@@ -97,14 +97,14 @@ int find_spec_id (int s, int z, double * list_z)
 }
 
 /*!
-  \fn int search_for_new_spec (atom_edition * edit, struct insert_object * object)
+  \fn int search_for_new_spec (atom_edition * edit, atomic_object * object)
 
   \brief search for new chemical species
 
   \param edit the edition window
   \param object the target insert object
 */
-int search_for_new_spec (atom_edition * edit, struct insert_object * object)
+int search_for_new_spec (atom_edition * edit, atomic_object * object)
 {
   double * tmpnzid;
 

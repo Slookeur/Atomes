@@ -32,9 +32,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   G_MODULE_EXPORT gboolean scroll_set_slab_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
 
-  void create_slab_info (struct project * this_proj);
+  void create_slab_info (project * this_proj);
   void slab_alpha_has_changed (gpointer data, GLfloat v);
-  void invert_selection (struct project * this_proj);
+  void invert_selection (project * this_proj);
 
   G_MODULE_EXPORT void setup_passivate (GtkButton * but, gpointer data);
   G_MODULE_EXPORT void set_slab_property (GtkCheckButton * but, gpointer data);
@@ -45,9 +45,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data);
   G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data);
 
-  GtkWidget * prepare_slab_box (int sid, struct project * this_proj);
-  GtkWidget * create_slab_param_combo (int sid, struct project * this_proj);
-  GtkWidget * cut_in_model (struct project * this_proj);
+  GtkWidget * prepare_slab_box (int sid, project * this_proj);
+  GtkWidget * create_slab_param_combo (int sid, project * this_proj);
+  GtkWidget * cut_in_model (project * this_proj);
 
 */
 
@@ -66,7 +66,7 @@ extern G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data
 */
 G_MODULE_EXPORT void setup_passivate (GtkButton * but, gpointer data)
 {
-  struct project * this_proj = (struct project *)data;
+  project * this_proj = (project *)data;
 
   gchar * str = g_strdup_printf ("Cell edition - %s: surface passivation", this_proj -> name);
   GtkWidget * dial = dialogmodal (prepare_for_title(str), GTK_WINDOW(this_proj -> modelgl -> cell_win -> win));
@@ -100,13 +100,13 @@ G_MODULE_EXPORT void setup_passivate (GtkButton * but, gpointer data)
 }
 
 /*!
-  \fn void create_slab_info (struct project * this_proj)
+  \fn void create_slab_info (project * this_proj)
 
   \brief create slab information widget
 
   \param this_proj the target project
 */
-void create_slab_info (struct project * this_proj)
+void create_slab_info (project * this_proj)
 {
   this_proj -> modelgl -> cell_win -> slab_info = destroy_this_widget (this_proj -> modelgl -> cell_win -> slab_info);
   this_proj -> modelgl -> cell_win -> slab_info = create_vbox (BSEP);
@@ -218,14 +218,14 @@ G_MODULE_EXPORT void set_slab_property (GtkToggleButton * but, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * prepare_slab_box (int sid, struct project * this_proj)
+  \fn GtkWidget * prepare_slab_box (int sid, project * this_proj)
 
   \brief create slab parameters widget box
 
   \param sid the type of slab
   \param this_proj the target project
 */
-GtkWidget * prepare_slab_box (int sid, struct project * this_proj)
+GtkWidget * prepare_slab_box (int sid, project * this_proj)
 {
   gchar * option[6]={"- Position the center of the slab: ", // 6, 7, 8
                      "- Size of the slab: ",                // 9, 10, 11
@@ -270,7 +270,7 @@ GtkWidget * prepare_slab_box (int sid, struct project * this_proj)
 */
 G_MODULE_EXPORT void set_slab_option (GtkComboBox * box, gpointer data)
 {
-  struct project * this_proj = (struct project *)data;
+  project * this_proj = (project *)data;
   int i, j;
   i = gtk_combo_box_get_active (box);
   for (j=0; j<6; j++)
@@ -299,14 +299,14 @@ G_MODULE_EXPORT void set_slab_option (GtkComboBox * box, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * create_slab_param_combo (int sid, struct project * this_proj)
+  \fn GtkWidget * create_slab_param_combo (int sid, project * this_proj)
 
   \brief  create slab parameters combo widget
 
   \param sid the slab type
   \param this_proj the target project
 */
-GtkWidget * create_slab_param_combo (int sid, struct project * this_proj)
+GtkWidget * create_slab_param_combo (int sid, project * this_proj)
 {
   GtkWidget * combo = create_combo ();
   gchar * options[4] = {"Position", "Size", "Angles", "Rotation"};
@@ -332,7 +332,7 @@ GtkWidget * create_slab_param_combo (int sid, struct project * this_proj)
 */
 G_MODULE_EXPORT void set_slab_type (GtkComboBox * box, gpointer data)
 {
-  struct project * this_proj = (struct project *)data;
+  project * this_proj = (project *)data;
   int i;
   for (i=0; i<3; i++) gtk_widget_hide (this_proj -> modelgl -> cell_win -> slab_hbox[i]);
   this_proj -> modelgl -> cell_win -> slab_type = i = gtk_combo_box_get_active (box);
@@ -395,13 +395,13 @@ G_MODULE_EXPORT void set_slab_alpha (GtkRange * range, gpointer data)
 }
 
 /*!
-  \fn void invert_selection (struct project * this_proj)
+  \fn void invert_selection (project * this_proj)
 
   \brief invert atom(s) selection
 
   \param this_proj the target project
 */
-void invert_selection (struct project * this_proj)
+void invert_selection (project * this_proj)
 {
   save_all_selections (this_proj -> modelgl, 0);
   int i, j, k;
@@ -461,7 +461,7 @@ void invert_selection (struct project * this_proj)
 */
 G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data)
 {
-  struct project * this_proj = (struct project *)data;
+  project * this_proj = (project *)data;
   this_proj -> modelgl -> cell_win -> cut_this_slab = TRUE;
   opengl_project_changed (this_proj -> id);
   selected_aspec = -1;
@@ -492,7 +492,7 @@ G_MODULE_EXPORT void select_this_slab (GtkButton * but, gpointer data)
 */
 G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
 {
-  struct project * this_proj = (struct project *)data;
+  project * this_proj = (project *)data;
   int is_out, i;
   if (this_proj -> modelgl-> cell_win -> slab_atoms)
   {
@@ -585,13 +585,13 @@ G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
               active_glwin -> search_widg[8] -> in_selection = this_proj -> modelgl -> search_widg[8] -> in_selection;
               active_glwin -> search_widg[8] -> todo_size = this_proj -> modelgl -> search_widg[8] -> todo_size;
               active_glwin -> search_widg[8] -> todo = duplicate_int (active_glwin -> search_widg[8] -> todo_size, this_proj -> modelgl -> search_widg[8] -> todo);
-              active_glwin -> atom_win -> to_be_inserted[3] = duplicate_insert_object (this_proj -> modelgl -> atom_win -> to_be_inserted[3]);
-              struct insert_object * tmp_a, * tmp_b;
+              active_glwin -> atom_win -> to_be_inserted[3] = duplicate_atomic_object (this_proj -> modelgl -> atom_win -> to_be_inserted[3]);
+              atomic_object * tmp_a, * tmp_b;
               tmp_a = this_proj -> modelgl -> atom_win -> to_be_inserted[3];
               tmp_b = active_glwin -> atom_win -> to_be_inserted[3];
               while (tmp_a -> next)
               {
-                tmp_b -> next = duplicate_insert_object (tmp_a -> next);
+                tmp_b -> next = duplicate_atomic_object (tmp_a -> next);
                 tmp_b -> next -> prev = tmp_b;
                 tmp_b = tmp_b -> next;
                 tmp_a = tmp_a -> next;
@@ -650,13 +650,13 @@ G_MODULE_EXPORT void cut_this_slab (GtkButton * but, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * cut_in_model (struct project * this_proj)
+  \fn GtkWidget * cut_in_model (project * this_proj)
 
   \brief create the cut slab tab
 
   \param this_proj the target project
 */
-GtkWidget * cut_in_model (struct project * this_proj)
+GtkWidget * cut_in_model (project * this_proj)
 {
   int i;
   GtkWidget * layout;

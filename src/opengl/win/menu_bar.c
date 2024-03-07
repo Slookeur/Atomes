@@ -291,7 +291,7 @@ void menu_bar_attach_color_palettes (glwin * view, GtkWidget * menu_bar)
   */
   int i, j, k, l, m;
   gchar * str;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   // Box
   if (! gtk_popover_menu_bar_add_child ((GtkPopoverMenuBar *)menu_bar, color_palette (view, -1, -1, -1), "set-box-color.0"))
   {

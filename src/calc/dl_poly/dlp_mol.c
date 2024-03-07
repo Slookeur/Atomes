@@ -34,10 +34,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   void clean_up_molecules_info (gboolean usel);
   void set_sensitive_mol (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
-  void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol);
+  void clear_field_atoms (field_molecule * fmol, field_atom* at, int mols, int * mol);
   void molecule_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
-  void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart);
-  void prepare_atoms_to_merge (struct field_atom * at, struct field_molecule * new_mol, struct field_molecule * old_mol);
+  void merge_all_atoms_to_mol (field_molecule * new_mol, int mstart);
+  void prepare_atoms_to_merge (field_atom* at, field_molecule * new_mol, field_molecule * old_mol);
 
   G_MODULE_EXPORT void select_mol (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
   G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint response_id, gpointer data);
@@ -45,7 +45,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint response_id, gpointer data);
   G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data);
 
-  struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol);
+  field_atom* new_atom_to_merge (int id, field_molecule * fmol);
 
 */
 
@@ -58,15 +58,15 @@ int active_col;
 int a_mol, b_mol;
 int * new_mol;
 extern ColRGBA init_color (int id, int numid);
-struct field_molecule * to_remove;
+field_molecule * to_remove;
 GtkWidget * remove_label;
 GtkCellRenderer * remove_renderer[5];
 GtkTreeViewColumn * remove_col[5];
 gboolean removing = FALSE;
 extern void field_unselect_all ();
-extern gchar * set_field_atom_name (struct field_atom * ato, struct field_molecule * mol);
-extern void find_atom_id_in_field_molecule (struct field_molecule * fmol);
-extern void viz_fragment (struct field_molecule * fmol, int id, int viz);
+extern gchar * set_field_atom_name (field_atom* ato, field_molecule * mol);
+extern void find_atom_id_in_field_molecule (field_molecule * fmol);
+extern void viz_fragment (field_molecule * fmol, int id, int viz);
 extern void check_to_visualize_properties (int id);
 
 /*!
@@ -215,7 +215,7 @@ G_MODULE_EXPORT void select_mol (GtkCellRendererToggle * cell_renderer, gchar * 
 dint ** atomd_id_save;
 
 /*!
-  \fn void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol)
+  \fn void clear_field_atoms (field_molecule * fmol, field_atom* at, int mols, int * mol)
 
   \brief clean the field atom from a list of atom(s)
 
@@ -224,7 +224,7 @@ dint ** atomd_id_save;
   \param mols the number of fragment(s) for this molecule
   \param mol the list of fragment id
 */
-void clear_field_atoms (struct field_molecule * fmol, struct field_atom * at, int mols, int * mol)
+void clear_field_atoms (field_molecule * fmol, field_atom* at, int mols, int * mol)
 {
   int i, j, k, l;
   l = 0;
@@ -353,8 +353,8 @@ G_MODULE_EXPORT void run_add_molecule_to_field (GtkDialog * dialog, gint respons
         if (selection_confirmed)
         {
           done = TRUE;
-          struct field_molecule * old_fmol = get_active_field_molecule(row_id);
-          struct field_molecule * next_fmol = duplicate_field_molecule (old_fmol);
+          field_molecule * old_fmol = get_active_field_molecule(row_id);
+          field_molecule * next_fmol = duplicate_field_molecule (old_fmol);
           get_active_field_molecule(tmp_field -> molecules-1) -> next = next_fmol;
           next_fmol -> prev = get_active_field_molecule(tmp_field -> molecules-1);
           next_fmol -> id = tmp_field -> molecules;
@@ -527,16 +527,16 @@ G_MODULE_EXPORT void add_molecule_to_field (GSimpleAction * action, GVariant * p
 }
 
 /*!
-  \fn void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
+  \fn void merge_all_atoms_to_mol (field_molecule * new_mol, int mstart)
 
   \brief merge all field atoms to another field molecule
 
   \param new_mol the field molecule to merge the atom(s) with
   \param mstart the fragment id to start with
 */
-void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
+void merge_all_atoms_to_mol (field_molecule * new_mol, int mstart)
 {
-  struct field_atom * fat, * fbt;
+  field_atom* fat, * fbt;
   fat = get_active_atom (new_mol -> id, new_mol -> atoms-1);
   int i, j, k, l, m, n;
   for (i=0; i<fat -> num; i++)
@@ -562,7 +562,7 @@ void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
 }
 
 /*!
-  \fn void prepare_atoms_to_merge (struct field_atom * at, struct field_molecule * new_mol, struct field_molecule * old_mol)
+  \fn void prepare_atoms_to_merge (field_atom* at, field_molecule * new_mol, field_molecule * old_mol)
 
   \brief update the data for the newly 'merged' field atom
 
@@ -570,7 +570,7 @@ void merge_all_atoms_to_mol (struct field_molecule * new_mol, int mstart)
   \param new_mol the target molecule to merge with
   \param old_mol the molecule to remove
 */
-void prepare_atoms_to_merge (struct field_atom * at, struct field_molecule * new_mol, struct field_molecule * old_mol)
+void prepare_atoms_to_merge (field_atom* at, field_molecule * new_mol, field_molecule * old_mol)
 {
   int i, j;
   int * saved_list = allocint (at -> num);
@@ -603,16 +603,16 @@ void prepare_atoms_to_merge (struct field_atom * at, struct field_molecule * new
 }
 
 /*!
-  \fn struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
+  \fn field_atom* new_atom_to_merge (int id, field_molecule * fmol)
 
   \brief merge field atoms from a field molecule
 
   \param id the id of the new field atom
   \param fmol the field molecule for of the atoms
 */
-struct field_atom * new_atom_to_merge (int id, struct field_molecule * fmol)
+field_atom* new_atom_to_merge (int id, field_molecule * fmol)
 {
-  struct field_atom * fat, * fbt;
+  field_atom* fat, * fbt;
   fat = g_malloc (sizeof*fat);
   fat -> id = id;
   fat -> sp = -1;
@@ -654,7 +654,7 @@ G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint resp
       if (a_mol)
       {
         done = TRUE;
-        struct field_molecule * to_merge = get_active_field_molecule(new_mol[0]);
+        field_molecule * to_merge = get_active_field_molecule(new_mol[0]);
         int * old_mol = allocint (to_merge -> multi);
         for (i=0; i<to_merge -> multi; i++) old_mol[i] = to_merge -> fragments[i];
         g_free (to_merge -> fragments);
@@ -751,7 +751,7 @@ G_MODULE_EXPORT void run_remove_molecule_from_field (GtkDialog * rmol, gint resp
 */
 G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
-  to_remove = (struct field_molecule *) data;
+  to_remove = (field_molecule *) data;
   int i, j;
   field_object = 0;
   gchar * str = g_strdup_printf ("Select the molecule to merge molecule \"%s\" with", to_remove -> name);

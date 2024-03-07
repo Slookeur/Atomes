@@ -48,15 +48,18 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <libswscale/swscale.h>
 
 // a wrapper around a single output AVStream
-typedef struct VideoStream {
+typedef struct VideoStream VideoStream;
+struct VideoStream
+{
     AVStream * st;
     AVCodecContext * cc;
     AVFrame * frame;
     struct SwsContext * sws_ctx;
-} VideoStream;
+};
 
-
-typedef struct{
+typedef struct video_options video_options;
+struct video_options
+{
   int proj;
   int framesec;
   int extraframes;
@@ -64,7 +67,7 @@ typedef struct{
   int oglquality;
   int bitrate;
   int * video_res;
-} video_options;
+};
 
 extern void render_image (glwin * view, video_options * iopts);
 extern void save_movie (glwin * view, video_options * vopts);

@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int this_body_has_atom (struct field_nth_body * body, char * name);
+  int this_body_has_atom (field_nth_body * body, char * name);
 
   gboolean is_this_object_a_match (int fsid, int nat, int * ffc, int * fpar);
 
@@ -98,7 +98,7 @@ extern GtkWidget * param_prop_param_box (int pid);
 extern gchar * get_this_vdw_string ();
 extern G_MODULE_EXPORT void markup_action_renderer (GtkCellRendererCombo * cell, GtkCellEditable * editable, gchar * path_string, gpointer data);
 extern int get_num_vdw_max ();
-extern gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd);
+extern gchar * get_body_element_name (field_nth_body * body, int aid, int nbd);
 
 #define NUCOL 8
 
@@ -445,7 +445,7 @@ void update_result_list (int sid, struct object_match * new_match)
 void fill_update_model (GtkTreeStore * store)
 {
   GtkTreeIter prop_level, struct_level;
-  struct field_atom * upat;
+  field_atom* upat;
   int g, h, i, j;
   gchar * str;
   gchar * stra, * strb, * strc, * strd, * stre;
@@ -1113,7 +1113,7 @@ void check_this_fprop (int fsid, int fpid, int ssid, int * fat, int * fsp)
   int i, j, k;
   int * ffat, * ffsp;
   gboolean update = TRUE;
-  struct field_atom * tmpat;
+  field_atom* tmpat;
   i = struct_id(fsid+7);
   for (j=0; j<i; j++)
   {
@@ -1148,14 +1148,14 @@ void check_this_fprop (int fsid, int fpid, int ssid, int * fat, int * fsp)
 }
 
 /*!
-  \fn int this_body_has_atom (struct field_nth_body * body, char * name)
+  \fn int this_body_has_atom (field_nth_body * body, char * name)
 
   \brief check if non bonded potential has this field atom
 
   \param body the non bonded potential to check
   \param name the name of the target field atom
 */
-int this_body_has_atom (struct field_nth_body * body, char * name)
+int this_body_has_atom (field_nth_body * body, char * name)
 {
   int i, j, k, l , m;
   m = 0;
@@ -1310,7 +1310,7 @@ void check_atom_for_updates ()
   int i, j, k, l;
   int * fsp;
   gboolean update_this = FALSE;
-  struct field_prop * oth;
+  field_prop * oth;
 
   // Lookup for this atoms in bonds, etc ... and if parameters, then look for update is all atoms are field auto
   // Field struct (bonds, bond rest., angles, angles rest., dih, tors. rest., imp., vdw.)

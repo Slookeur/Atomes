@@ -30,9 +30,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void autoscale_axis (struct project * this_proj, int rid, int cid, int aid);
-  void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid);
-  void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it);
+  void autoscale_axis (project * this_proj, int rid, int cid, int aid);
+  void setup_yaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid);
+  void setup_yaxis_log (cairo_t * cr, project * this_proj, int rid, int cid, gboolean draw_it);
 
 */
 
@@ -43,7 +43,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "curve.h"
 
 /*!
-  \fn void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
+  \fn void autoscale_axis (project * this_proj, int rid, int cid, int aid)
 
   \brief autoscale axis
 
@@ -52,7 +52,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param cid the curve id
   \param aid the axis id
 */
-void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
+void autoscale_axis (project * this_proj, int rid, int cid, int aid)
 {
   int i, j, k, l, m, n;
   if (! aid && (rid == RI ||rid == CH))
@@ -74,8 +74,8 @@ void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
       this_proj -> curves[rid][cid] -> axmin[aid] = min(this_proj -> curves[rid][cid] -> axmin[aid],
                                                      this_proj -> curves[rid][cid] -> data[aid][i]);
     }
-    struct cextra * ctmp = this_proj -> curves[rid][cid] -> extrac -> first;
-    struct project * that_proj;
+    CurveExtra * ctmp = this_proj -> curves[rid][cid] -> extrac -> first;
+    project * that_proj;
     for ( j=0 ; j < this_proj -> curves[rid][cid] -> extrac -> extras ; j++ )
     {
       m = ctmp -> id.a;
@@ -109,7 +109,7 @@ void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
 }
 
 /*!
-  \fn void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
+  \fn void setup_yaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid)
 
   \brief setup y axis using a linear scale
 
@@ -118,7 +118,7 @@ void autoscale_axis (struct project * this_proj, int rid, int cid, int aid)
   \param rid the analysis id
   \param cid the curve id
 */
-void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
+void setup_yaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid)
 {
   int k, i;
   double u, v;
@@ -220,7 +220,7 @@ void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int 
 }
 
 /*!
-  \fn void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
+  \fn void setup_yaxis_log (cairo_t * cr, project * this_proj, int rid, int cid, gboolean draw_it)
 
   \brief setup y axis using a log scale
 
@@ -230,7 +230,7 @@ void setup_yaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int 
   \param cid the curve id
   \param draw_it 1/0 draw or not
 */
-void setup_yaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
+void setup_yaxis_log (cairo_t * cr, project * this_proj, int rid, int cid, gboolean draw_it)
 {
   int i, k, l;
   gboolean istrue;

@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int save_project_curve (FILE * fp, int wid, struct project * this_proj, int rid, int cid);
+  int save_project_curve (FILE * fp, int wid, project * this_proj, int rid, int cid);
 
   gboolean write_data_layout (FILE * fp, DataLayout * layout);
 
@@ -63,7 +63,7 @@ gboolean write_data_layout (FILE * fp, DataLayout * layout)
 }
 
 /*!
-  \fn int save_project_curve (FILE * fp, int wid, struct project * this_proj, int rid, int cid)
+  \fn int save_project_curve (FILE * fp, int wid, project * this_proj, int rid, int cid)
 
   \brief save project curve to file
 
@@ -73,7 +73,7 @@ gboolean write_data_layout (FILE * fp, DataLayout * layout)
   \param rid the calculation to save
   \param cid the curve id to save
 */
-int save_project_curve (FILE * fp, int wid, struct project * this_proj, int rid, int cid)
+int save_project_curve (FILE * fp, int wid, project * this_proj, int rid, int cid)
 {
   int i, j;
   if (wid > 0)
@@ -166,7 +166,7 @@ int save_project_curve (FILE * fp, int wid, struct project * this_proj, int rid,
     if (fwrite (& this_proj -> curves[rid][cid] -> extrac -> extras, sizeof(int), 1, fp) != 1) return ERROR_RW;
     if (this_proj -> curves[rid][cid] -> extrac -> extras > 0)
     {
-      struct cextra * ctmp = this_proj -> curves[rid][cid] -> extrac -> first;
+      CurveExtra * ctmp = this_proj -> curves[rid][cid] -> extrac -> first;
       for (i=0; i<this_proj -> curves[rid][cid] -> extrac -> extras; i++)
       {
         if (fwrite (& ctmp -> id.a, sizeof(int), 1, fp) != 1) return ERROR_RW;

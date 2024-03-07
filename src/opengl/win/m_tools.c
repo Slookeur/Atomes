@@ -31,7 +31,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   void set_motion_sensitive (glwin * view, int status);
-  void invert_visible (struct project * this_proj);
+  void invert_visible (project * this_proj);
 
   G_MODULE_EXPORT void set_selection_mode (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data);
@@ -66,7 +66,7 @@ extern G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void create_field (GtkWidget * widg, gpointer data);
 extern gboolean spin (gpointer data);
-extern void check_hidden_visible (struct project * this_proj);
+extern void check_hidden_visible (project * this_proj);
 
 char * input_types[NINPUTS] = {"Classical: DL-POLY",
                                "Classical: LAMMPS",
@@ -133,7 +133,7 @@ void set_motion_sensitive (glwin * view, int status)
 G_MODULE_EXPORT void set_selection_mode (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *)data;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   int i = this_proj -> modelgl -> selection_mode;
   int j = the_data -> b;
 #ifdef GTK4
@@ -172,7 +172,7 @@ G_MODULE_EXPORT void set_selection_mode (GtkWidget * widg, gpointer data)
 G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *)data;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   int i = this_proj -> modelgl -> mode;
   int j = the_data -> b;
 
@@ -247,13 +247,13 @@ G_MODULE_EXPORT void set_mode (GtkWidget * widg, gpointer data)
 }
 
 /*!
-  \fn void invert_visible (struct project * this_proj)
+  \fn void invert_visible (project * this_proj)
 
   \brief invert visible atom(s)
 
   \param this_proj the target project
 */
-void invert_visible (struct project * this_proj)
+void invert_visible (project * this_proj)
 {
   int i, j, k;
   for (i=0; i<this_proj -> steps; i++)
@@ -278,7 +278,7 @@ void invert_visible (struct project * this_proj)
 G_MODULE_EXPORT void invert_this (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *)data;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   switch (the_data -> b)
   {
     case 0:

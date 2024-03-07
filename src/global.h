@@ -394,7 +394,7 @@ extern int mol_update;
 
 extern int tmp_pixels[2];
 extern int * pasted_todo;
-extern struct insert_object * copied_object;
+extern atomic_object * copied_object;
 
 extern GMainLoop * Event_loop[5];
 
@@ -447,6 +447,7 @@ extern tint cut_lab;
 #define LINE_SIZE 160
 
 /*! \struct line_node */
+typedef struct line_node line_node;
 struct line_node
 {
   gchar * line;              /*!< Size max = LINE_SIZE */
@@ -457,7 +458,9 @@ struct line_node
 /*! \struct coord_file
   \brief Atomic coordinates file, data container
 */
-typedef struct {
+typedef struct coord_file coord_file;
+struct coord_file
+{
   int natomes;                             /*!< Number of atom(s) */
   int steps;                               /*!< Number of MD step(s) */
   int nspec;                               /*!< Number of chemical species */
@@ -485,30 +488,36 @@ typedef struct {
   int * mislab;                            /*!< */
   int * lmislab;                           /*!< */
   gchar ** label;                          /*!< List of chemical elements */
-} coord_file;
+};
 
 /*! \struct MouseState
   \brief Data structure used for zoom in / out on curve widget
 */
-typedef struct {
+typedef struct MouseState MouseState;
+struct MouseState
+{
   gint start_x;                 /*!< Initial x position */
   gint start_y;                 /*!< Initial y position */
   gint time;                    /*!< Time */
   gboolean MouseIsDown;         /*!< Is the mouse button up (0) or down (1) */
-} MouseState;
+};
 
 /*! \struct CurveState
   \brief Data structure used for zoom in / out on curve widget
 */
-typedef struct {
+typedef struct CurveState CurveState;
+struct CurveState
+{
   MouseState mouseState;        /*!< Mouse status information */
   tint * id;                    /*!< Curve data pointer */
-} CurveState;
+};
 
 /*! \struct DataLayout
   \brief Cruve layout information
 */
-typedef struct {
+typedef struct DataLayout DataLayout;
+struct DataLayout
+{
   ColRGBA datacolor;             /*!< Data color */
   double thickness;              /*!< Data line thickness */
   int dash;                      /*!< Data line style */
@@ -519,29 +528,37 @@ typedef struct {
   double hwidth;                 /*!< Histogram width */
   double hopac;                  /*!< Histogram color opacity */
   int hpos;                      /*!< Histogram is transparent ? */
-} DataLayout;
+};
 
-/*! \struct cextra
+/*! \struct CurveExtra
   \brief Extra curve(s) data information
 */
-struct cextra {
+typedef struct CurveExtra CurveExtra;
+struct CurveExtra
+{
   tint id;                       /*!< Curve data pointer */
   DataLayout * layout;           /*!< Curve layout information */
-  struct cextra * prev;
-  struct cextra * next;
+  CurveExtra * prev;
+  CurveExtra * next;
 };
 
 /*! \struct ExtraSets
   \brief List of extra data sets for a curve
 */
-typedef struct {
+typedef struct ExtraSets ExtraSets;
+struct ExtraSets
+{
   int extras;                    /*!< Number of extra data sets, if any */
-  struct cextra * first;         /*!< First data set of the list, if any */
-  struct cextra * last;          /*!< Last data set of the list, if any */
-} ExtraSets;
+  CurveExtra * first;         /*!< First data set of the list, if any */
+  CurveExtra * last;          /*!< Last data set of the list, if any */
+};
 
-/*! \struct curve */
-typedef struct {
+/*! \struct curve
+  \brief The curve data structure
+*/
+typedef struct Curve Curve;
+struct Curve
+{
   int cid;                       /*!< Curve id */
   int ndata;                     /*!< number of data points */
   double * data[2];              /*!< X and Y data */
@@ -620,7 +637,7 @@ typedef struct {
   int action_id;                 /*!< Unique Id to identify actions */
   CurveState state;              /*!< Curve state */
   GSimpleActionGroup * action_group;
-} curve;
+};
 
 /*! \def MAXDATC
   \brief Number of tabs for the description of the classical calculation
@@ -632,7 +649,9 @@ typedef struct {
 */
 #define MAXDATA 21
 
-typedef struct {
+typedef struct classical_field classical_field;
+struct classical_field
+{
   gboolean prepare_file[2];
   // Field and Config files
   gboolean afp[MAXDATC+MAXDATA];
@@ -661,9 +680,11 @@ typedef struct {
   double * thermo_opts;
   double * md_opts;
   double * out_opts;
-} classical_field;
+};
 
-struct thermostat {
+typedef struct thermostat thermostat;
+struct thermostat
+{
   int id;
   // For CPMD: 0 = none, 2 = controlled, 3 = nose
   // For CP2K: 0 = none, 2 = langevin, 3 = csvr, 4 = gle, 5 = nose
@@ -675,11 +696,13 @@ struct thermostat {
   double params[4];
   int natoms;
   int * list;
-  struct thermostat * next;
-  struct thermostat * prev;
+  thermostat * next;
+  thermostat * prev;
 };
 
-struct dummy_atom {
+typedef struct dummy_atom dummy_atom;
+struct dummy_atom
+{
   // 0 = type1, 1 = type2, ...
   int id;
   int type;
@@ -691,33 +714,37 @@ struct dummy_atom {
   int * list;
   int numv;
   int * vois;
-  struct dummy_atom * next;
-  struct dummy_atom * prev;
+  dummy_atom * next;
+  dummy_atom * prev;
 };
 
-typedef struct {
+typedef struct cpmd cpmd;
+struct cpmd
+{
   int calc_type;
   int restart[10];
   int thermostats;
-  struct thermostat * ions_thermostat;
-  struct thermostat * elec_thermostat;
+  thermostat * ions_thermostat;
+  thermostat * elec_thermostat;
   int fixat;
   int * fixlist;
   int ** fixcoord;
   int dummies;
-  struct dummy_atom * dummy;
+  dummy_atom * dummy;
   double default_opts[17];
   double calc_opts[24];
   int ** pp;
   gchar * info;
-} cpmd;
+};
 
-typedef struct {
+typedef struct cp2k cp2k;
+struct cp2k
+{
   int input_type;
   double opts[42];
   double extra_opts[3][4];
   int thermostats;
-  struct thermostat * ions_thermostat;
+  thermostat * ions_thermostat;
   int fixat[2];
   int * fixlist[2];
   int ** fixcoord[2];
@@ -725,10 +752,12 @@ typedef struct {
   gchar *** spec_files;
   int ** spec_data;
   gchar * info;
-} cp2k;
+};
 
 /*! \struct molecule */
-struct molecule {
+typedef struct molecule molecule;
+struct molecule
+{
   int id;                         /*!< Molecule id number */
   int md;                         /*!< MD step */
   int multiplicity;               /*!< Multiplicity */
@@ -741,22 +770,28 @@ struct molecule {
 /*! \struct model
   \brief Data stucture to describe the topology
 */
-typedef struct {
+typedef struct model model;
+struct model
+{
   int * mol_by_step;              /*!< Num of mol by steps */
-  struct molecule ** mols;        /*!< List of molecules by steps */
-} model;
+  molecule ** mols;        /*!< List of molecules by steps */
+};
 
 /*! \struct element_data
   \brief element description used for the periodic table defined in 'w_periodic.c'
 */
-typedef struct {
+typedef struct element_data element_data;
+struct element_data
+{
   gchar * lab;      /*!< Label */
   gchar * name;     /*!< Name */
   int Z;            /*!< Atomic number */
   float M;          /*!< Atomic mass */
-} element_data;
+};
 
-typedef struct {
+typedef struct chemical_data chemical_data;
+struct chemical_data
+{
   // 0 = Z, 1 = Mass, 2 = Radius, 3 = Neutrons, 4 = X-rays
   double ** chem_prop; /*!< chemical properties: \n
                             0 = Z, \n
@@ -770,12 +805,14 @@ typedef struct {
   char ** element;     /*!< Element name(s) */
   double ** cutoffs;   /*!< partial cutoff(s) */
   double grtotcutoff;  /*!< Total cutoff */
-} chemical_data;
+};
 
 /*! \struct insertion
   \brief Data structure for the insertion pop-up menu
 */
-struct insertion {
+typedef struct insertion_menu insertion_menu;
+struct insertion_menu
+{
   gchar * type;
   gchar * object;
   double Z;
@@ -785,7 +822,9 @@ struct insertion {
 /*! \struct atom
   \brief The data structure for an atom
 */
-struct atom {
+typedef struct atom atom;
+struct atom
+{
   int id;                        /*!< The atom's id in the model */ // The id in the model
   int sp;                        /*!< The chemical species */ // The chemical species
   // The coordinates
@@ -826,14 +865,16 @@ struct atom {
   gboolean pick[2];               /*!< Selected / Unselected (0 = atom, 1 = clone) */
   gboolean cloned;                /*!< Clone(s) ? (0 = no, 1 = yes) */
   int style;                      /*!< Rendering style if not global */
-  struct atom * prev;
-  struct atom * next;
+  atom * prev;
+  atom * next;
 };
 
 /*! \struct project
   \brief The data structure for the 'atomes' project
 */
-struct project {
+typedef struct project project;
+struct project
+{
   /*
      General parameters
   */
@@ -854,7 +895,7 @@ struct project {
   chemical_data * chemistry;           /*!< Chemical data */
   coord_info * coord;                  /*!< Coordination(s) data */
   cell_info cell;                      /*!< Periodicity data */
-  struct atom ** atoms;                /*!< Atom list: atoms[steps][natomes] */
+  atom ** atoms;                /*!< Atom list: atoms[steps][natomes] */
   /*
      Analysis related parameters
   */
@@ -905,7 +946,7 @@ struct project {
   GtkTextBuffer * text_buffer[NITEMS]; /*!< The text buffer for the results of the calculations */
   tint * idcc[NGRAPHS];                /*!< Pointers for the curves */
   int numwid;                          /*!< total number of curves for this project */
-  curve ** curves[NGRAPHS];            /*!< The curves, graph for the results of the calculations */
+  Curve ** curves[NGRAPHS];            /*!< The curves, graph for the results of the calculations */
   /*
      OpenGL related parameters
   */
@@ -929,14 +970,16 @@ struct project {
   int actif_pix;                       /*!< Not used anymore see 'cell_pixel.c' */
 #endif
 
-  struct project * next;
-  struct project * prev;
+  project * next;
+  project * prev;
 };
 
-typedef struct {
-  struct project * first;
-  struct project * last;
-}  workspace;
+typedef struct workspace workspace;
+struct workspace
+{
+  project * first;
+  project * last;
+};
 
 extern gchar * edition_action_names[3];
 extern gchar * analyze_action_names[9];
@@ -949,20 +992,20 @@ extern void remove_edition_and_analyze_actions ();
 
 extern GtkApplication * AtomesApp;
 extern workspace workzone;
-extern struct project * proj;
+extern project * proj;
 extern chemical_data * active_chem;
 extern coord_info * active_coord;
 extern cell_info * active_cell;
 extern box_info * active_box;
 extern image * active_image;
 extern glwin * active_glwin;
-extern struct project * active_project;
-extern struct project * opengl_project;
+extern project * active_project;
+extern project * opengl_project;
 extern element_data periodic_table_info[];
 
-extern struct project * get_project_by_id (int p);
+extern project * get_project_by_id (int p);
 extern void opengl_project_changed (int id);
-extern gboolean in_md_shaders (struct project * this_proj, int id);
+extern gboolean in_md_shaders (project * this_proj, int id);
 extern void recreate_all_shaders (glwin * view);
 extern gboolean is_atom_win_active (glwin * view);
 

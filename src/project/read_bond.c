@@ -38,7 +38,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "project.h"
 #include "glview.h"
 
-extern void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
+extern void new_coord_menus (project * this_proj, coord_info * coord, int new_spec, int nmols,
                              gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
                              gboolean update_it, gboolean update_mol);
 

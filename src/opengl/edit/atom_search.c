@@ -37,9 +37,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data);
   G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data);
 
-  GtkWidget * create_search_box (int aid, struct project * this_proj);
-  GtkWidget * create_action_combo (int id, struct project * this_proj);
-  GtkWidget * action_tab (int aid, struct project * this_proj);
+  GtkWidget * create_search_box (int aid, project * this_proj);
+  GtkWidget * create_action_combo (int id, project * this_proj);
+  GtkWidget * action_tab (int aid, project * this_proj);
 
 */
 
@@ -112,14 +112,14 @@ G_MODULE_EXPORT void turn_bonding_on (GtkToggleButton * but, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * create_search_box (int aid, struct project * this_proj)
+  \fn GtkWidget * create_search_box (int aid, project * this_proj)
 
   \brief create the action search widget
 
   \param aid the action id
   \param this_proj the target project
 */
-GtkWidget * create_search_box (int aid, struct project * this_proj)
+GtkWidget * create_search_box (int aid, project * this_proj)
 {
   gchar * appl[5] = {" Move atom(s)", " Replace atom(s)", " Remove atom(s)", " Insert atom(s)", " Move atom(s)"};
   gchar * img[4]= {EDITA, LIST_REM, LIST_ADD, MEDIA_PLAY};
@@ -185,7 +185,7 @@ GtkWidget * create_search_box (int aid, struct project * this_proj)
 G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
 {
   tint * id = (tint *)data;
-  struct project * this_proj = get_project_by_id (id -> a);
+  project * this_proj = get_project_by_id (id -> a);
   int i, j, k;
   i = gtk_combo_box_get_active (box);
   this_proj -> modelgl -> search_widg[id -> c] -> status = i;
@@ -206,14 +206,14 @@ G_MODULE_EXPORT void set_atoms_for_action (GtkComboBox * box, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * create_action_combo (int id, struct project * this_proj)
+  \fn GtkWidget * create_action_combo (int id, project * this_proj)
 
   \brief create action combo box
 
   \param id the action id
   \param this_proj the target project
 */
-GtkWidget * create_action_combo (int id, struct project * this_proj)
+GtkWidget * create_action_combo (int id, project * this_proj)
 {
   GtkWidget * combo;
   if (id == 3 || id == 5)
@@ -256,7 +256,7 @@ GtkWidget * create_action_combo (int id, struct project * this_proj)
 G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
 {
   tint * dat = (tint *)data;
-  struct project * this_proj = get_project_by_id (dat -> a);
+  project * this_proj = get_project_by_id (dat -> a);
   int i;
   for (i=0; i<3; i++)
   {
@@ -271,14 +271,14 @@ G_MODULE_EXPORT void expanding_atoms (GtkWidget * exp, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * action_tab (int aid, struct project * this_proj)
+  \fn GtkWidget * action_tab (int aid, project * this_proj)
 
   \brief create model edtion action tab
 
   \param aid the action id
   \param this_proj the target project
 */
-GtkWidget * action_tab (int aid, struct project * this_proj)
+GtkWidget * action_tab (int aid, project * this_proj)
 {
   gchar * action[7] = {"moved", "replaced", "removed", "inserted", "moved randomly", " ", "passivated"};
   GtkWidget * vbox = create_vbox (BSEP);

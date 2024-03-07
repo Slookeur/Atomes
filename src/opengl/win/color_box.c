@@ -107,7 +107,7 @@ cairo_surface_t * col_surface (double r, double g, double b, int x, int y)
 G_MODULE_EXPORT void set_back_color (GtkWidget * widg, gpointer data)
 {
   tint * col = (tint *) data;
-  struct project * this_proj = get_project_by_id(col -> a);
+  project * this_proj = get_project_by_id(col -> a);
   get_color (& this_proj -> modelgl -> anim -> last -> img -> backcolor, col -> b);
   this_proj -> modelgl -> create_shaders[MEASU] = TRUE;
   update (this_proj -> modelgl);
@@ -124,7 +124,7 @@ G_MODULE_EXPORT void set_back_color (GtkWidget * widg, gpointer data)
 G_MODULE_EXPORT void set_box_color (GtkWidget * widg, gpointer data)
 {
   tint * col = (tint *) data;
-  struct project * this_proj = get_project_by_id(col -> a);
+  project * this_proj = get_project_by_id(col -> a);
   get_color (& this_proj -> modelgl -> anim -> last -> img -> box_color, col -> b);
   this_proj -> modelgl -> create_shaders[MDBOX] = TRUE;
   update (this_proj -> modelgl);
@@ -141,7 +141,7 @@ G_MODULE_EXPORT void set_box_color (GtkWidget * widg, gpointer data)
 G_MODULE_EXPORT void set_at_color (GtkWidget * widg, gpointer data)
 {
   tint * col = (tint *) data;
-  struct project * this_proj = get_project_by_id(col -> a);
+  project * this_proj = get_project_by_id(col -> a);
   get_color (& this_proj -> modelgl -> anim -> last -> img -> at_color[col -> c], col -> b);
   int shaders[2] = {ATOMS, BONDS};
   re_create_md_shaders (2, shaders, this_proj);
@@ -161,7 +161,7 @@ G_MODULE_EXPORT void set_at_color (GtkWidget * widg, gpointer data)
 G_MODULE_EXPORT void set_rings_color (GtkWidget * widg, gpointer data)
 {
   qint * col = (qint *)data;
-  struct project * this_proj = get_project_by_id(col -> a);
+  project * this_proj = get_project_by_id(col -> a);
   get_color (& this_proj -> modelgl -> anim -> last -> img -> spcolor[4+col -> b][0][col -> c], col -> d);
   int shaders[1] = {RINGS};
   re_create_md_shaders (1, shaders, this_proj);
@@ -179,7 +179,7 @@ G_MODULE_EXPORT void set_rings_color (GtkWidget * widg, gpointer data)
 G_MODULE_EXPORT void set_total_coord_color (GtkWidget * widg, gpointer data)
 {
   qint * col = (qint *)data;
-  struct project * this_proj = get_project_by_id(col -> a);
+  project * this_proj = get_project_by_id(col -> a);
   get_color (& this_proj -> modelgl -> anim -> last -> img -> spcolor[0][col -> b][col -> c], col -> d);
   int shaders[2] = {ATOMS, BONDS};
   re_create_md_shaders (2, shaders, this_proj);
@@ -199,7 +199,7 @@ G_MODULE_EXPORT void set_total_coord_color (GtkWidget * widg, gpointer data)
 G_MODULE_EXPORT void set_partial_coord_color (GtkWidget * widg, gpointer data)
 {
   qint * col = (qint *)data;
-  struct project * this_proj = get_project_by_id(col -> a);
+  project * this_proj = get_project_by_id(col -> a);
   get_color (& this_proj -> modelgl -> anim -> last -> img -> spcolor[1][col -> b][col -> c], col -> d);
   int shaders[2] = {ATOMS, BONDS};
   re_create_md_shaders (2, shaders, this_proj);
@@ -219,7 +219,7 @@ G_MODULE_EXPORT void set_partial_coord_color (GtkWidget * widg, gpointer data)
 G_MODULE_EXPORT void set_frag_mol_color (GtkWidget * widg, gpointer data)
 {
   qint * col = (qint *)data;
-  struct project * this_proj = get_project_by_id(col -> a);
+  project * this_proj = get_project_by_id(col -> a);
   get_color (& this_proj -> modelgl -> anim -> last -> img -> spcolor[col -> b][0][col -> c], col -> d);
   int shaders[2] = {ATOMS, BONDS};
   re_create_md_shaders (2, shaders, this_proj);
@@ -266,7 +266,7 @@ GtkWidget * color_box (glwin * view, int ideo, int spec, int geo)
 // #endif
   ColRGBA but_col;
 #endif
-  struct project * this_proj = get_project_by_id(p);
+  project * this_proj = get_project_by_id(p);
   l = 0;
   for (l=0; l<64; l++)
   {
@@ -412,7 +412,7 @@ GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo)
   GtkWidget * but;
   GtkWidget * coltable = gtk_grid_new ();
   ColRGBA but_col;
-  struct project * this_proj = get_project_by_id(p);
+  project * this_proj = get_project_by_id(p);
   l = 0;
   for (l=0; l<64; l++)
   {

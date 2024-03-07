@@ -15,7 +15,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 /*!
 * @file popup.c
-* @short Functions to create the OpenGL window popup menus: 
+* @short Functions to create the OpenGL window popup menus:
           - The main popup menu \n
           - The contextual, atom or bond related, popup menus
 * @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
@@ -36,7 +36,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   int get_to_be_selected (glwin * view);
   int get_style (gchar * str);
-  int check_label_numbers (struct project * this_proj, int types);
+  int check_label_numbers (project * this_proj, int types);
 
   gchar * get_object_from_action (GSimpleAction * action);
 
@@ -46,8 +46,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void copy_bond_selection ();
   void remove_object ();
   void insert_object (int action, gpointer data);
-  void check_hidden_visible (struct project * this_proj);
-  void create_new_project_using_data (struct atom_selection * selection);
+  void check_hidden_visible (project * this_proj);
+  void create_new_project_using_data (atom_selection * selection);
   void add_style_sub_menu (GtkWidget * item, GCallback handler, gpointer data);
   void add_edition_sub_menu (GtkWidget * item, GCallback handler, gpointer data);
   void create_selection_item (GMenu * menu, glwin * view, gchar * str, gchar * act, int aid, int mid, int gid, int cid, int aoc, GCallback handler, gpointer data);
@@ -152,18 +152,18 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #define CONTEXTACT 12
 
 extern atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize);
-extern void check_all_trees (struct project * this_proj);
-extern int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible);
+extern void check_all_trees (project * this_proj);
+extern int action_atoms_from_project (project * this_proj, atom_search * asearch, gboolean visible);
 extern G_MODULE_EXPORT void opengl_advanced (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data);
 extern void apply_project (gboolean showtools);
 extern GtkWidget * field_atom_menu (int p, int s, int a, int f);
-extern void reset_coordinates (struct project * this_proj, int status);
-extern vec3_t get_bary (struct project * this_proj, int status);
-extern void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible);
-extern struct insertion mol[];
-extern struct selatom * new_selatom (int id, int sp);
+extern void reset_coordinates (project * this_proj, int status);
+extern vec3_t get_bary (project * this_proj, int status);
+extern void prepare_to_instert (gchar * key, project * this_proj, atom_search * asearch, gboolean visible);
+extern insertion_menu mol[];
+extern atom_in_selection * new_atom_in_selection (int id, int sp);
 extern int inserted_from_lib;
 extern void duplicate_material_and_lightning (image * new_img, image * old_img);
 #ifdef GTK4
@@ -181,7 +181,7 @@ int selected_bspec;
 int is_selected;
 int is_labelled;
 int is_filled;
-struct atom_selection * bond_selection = NULL;
+atom_selection * bond_selection = NULL;
 
 tint atoid[CONTEXTACT][4];
 dint btoid;
@@ -283,7 +283,7 @@ int get_style (gchar * str)
 */
 atom_search * free_this_search_data (atom_search * this_search)
 {
-  struct project * this_proj = get_project_by_id(this_search -> proj);
+  project * this_proj = get_project_by_id(this_search -> proj);
   g_free (this_search);
   clean_other_window_after_edit (this_proj);
   if (this_proj -> modelgl -> atom_win)
@@ -311,7 +311,7 @@ atom_search * free_this_search_data (atom_search * this_search)
 void to_remove_this_object (int type, gpointer data)
 {
   int i, j;
-  struct selatom * selat;
+  atom_in_selection * selat;
   tint * sel;
   prepare_atom_edition (& opengl_project -> modelgl -> colorp[0][0], FALSE);
   remove_search = allocate_atom_search (opengl_project -> id, REMOVE, REMOVE, opengl_project -> natomes);
@@ -466,7 +466,7 @@ void to_replace_this_object (int type, GtkWidget * widg, gpointer data)
 #endif
 {
   int h, i, j;
-  struct selatom * selat;
+  atom_in_selection * selat;
   tint * sel;
   gboolean replace = TRUE;
   if (opengl_project -> modelgl -> cell_win)
@@ -585,7 +585,7 @@ void copy_bond_selection ()
     copied_object = NULL;
   }
   pasted_todo = allocint (opengl_project -> natomes);
-  struct selatom * selat = bond_selection -> first;
+  atom_in_selection * selat = bond_selection -> first;
   while (selat)
   {
     pasted_todo[selat -> id] = 1;
@@ -740,8 +740,8 @@ G_MODULE_EXPORT void add_object (GtkWidget * widg, gpointer data)
   else if (copied_object)
   {
     tint ul = ulam_coord (opengl_project -> modelgl);
-    opengl_project -> modelgl -> atom_win -> to_be_inserted[1] = duplicate_insert_object (copied_object);
-    struct insert_object * object = opengl_project -> modelgl -> atom_win -> to_be_inserted[1];
+    opengl_project -> modelgl -> atom_win -> to_be_inserted[1] = duplicate_atomic_object (copied_object);
+    atomic_object * object = opengl_project -> modelgl -> atom_win -> to_be_inserted[1];
     int i;
     for (i=0; i<object -> atoms; i++)
     {
@@ -859,13 +859,13 @@ G_MODULE_EXPORT void copy_this_atom (GtkWidget * widg, gpointer data)
 }
 
 /*!
-  \fn void check_hidden_visible (struct project * this_proj)
+  \fn void check_hidden_visible (project * this_proj)
 
   \brief check how many atom(s) are visible
 
   \param this_proj the target project
 */
-void check_hidden_visible (struct project * this_proj)
+void check_hidden_visible (project * this_proj)
 {
   int i, j, k, l, m;
   int ** num;
@@ -1029,14 +1029,14 @@ G_MODULE_EXPORT void show_hide_this_atom (GtkWidget * widg, gpointer data)
 }
 
 /*!
-  \fn int check_label_numbers (struct project * this_proj, int types)
+  \fn int check_label_numbers (project * this_proj, int types)
 
   \brief check how many atom label(s) are visible
 
   \param this_proj the target project
   \param types 0 = atoms, 1 = clones, 2 = all
 */
-int check_label_numbers (struct project * this_proj, int types)
+int check_label_numbers (project * this_proj, int types)
 {
   int h, i, j, k, l;
   int start, end;
@@ -2051,18 +2051,18 @@ G_MODULE_EXPORT void style_the_coord (GtkWidget * widg, gpointer data)
 }
 
 /*!
-  \fn void create_new_project_using_data (struct atom_selection * selection)
+  \fn void create_new_project_using_data (atom_selection * selection)
 
   \brief create new project using an atom selection
 
   \param selection the atom selection to use
 */
-void create_new_project_using_data (struct atom_selection * selection)
+void create_new_project_using_data (atom_selection * selection)
 {
   int i, j, k, l;
   int nspec = 0;
   int * pos_sp, * specs;
-  struct selatom * tmp;
+  atom_in_selection * tmp;
 
   pos_sp = allocint (opengl_project -> nspec);
   specs = allocint (opengl_project -> nspec);
@@ -2195,8 +2195,8 @@ G_MODULE_EXPORT void edit_in_new_project (GtkWidget * widg, gpointer data)
 {
   tint * sel = (tint * )data;
   int h, i, j;
-  struct atom_selection * selected;
-  struct selatom * tmp_a;
+  atom_selection * selected;
+  atom_in_selection * tmp_a;
   selected = g_malloc0 (sizeof*selected);
   h = get_to_be_selected (opengl_project -> modelgl);
   if (! sel -> b)
@@ -2215,12 +2215,12 @@ G_MODULE_EXPORT void edit_in_new_project (GtkWidget * widg, gpointer data)
         {
           if (selected -> first)
           {
-            tmp_a -> next = new_selatom (i, opengl_project -> atoms[j][i].sp);
+            tmp_a -> next = new_atom_in_selection (i, opengl_project -> atoms[j][i].sp);
             tmp_a = tmp_a -> next;
           }
           else
           {
-            selected -> first = new_selatom (i, opengl_project -> atoms[j][i].sp);
+            selected -> first = new_atom_in_selection (i, opengl_project -> atoms[j][i].sp);
             tmp_a = selected -> first;
           }
         }
@@ -2237,12 +2237,12 @@ G_MODULE_EXPORT void edit_in_new_project (GtkWidget * widg, gpointer data)
       {
         if (selected -> first)
         {
-          tmp_a -> next = new_selatom (i, opengl_project -> atoms[j][i].sp);
+          tmp_a -> next = new_atom_in_selection (i, opengl_project -> atoms[j][i].sp);
           tmp_a = tmp_a -> next;
         }
         else
         {
-          selected -> first = new_selatom (i, opengl_project -> atoms[j][i].sp);
+          selected -> first = new_atom_in_selection (i, opengl_project -> atoms[j][i].sp);
           tmp_a = selected -> first;
         }
       }
@@ -2278,8 +2278,8 @@ G_MODULE_EXPORT void edit_coord (GtkWidget * widg, gpointer data)
 {
   tint * sel = (tint * )data;
   int i, j;
-  struct atom_selection * selected;
-  struct selatom * tmp_a;
+  atom_selection * selected;
+  atom_in_selection * tmp_a;
   gboolean save_it;
 
   selected = g_malloc0 (sizeof*selected);
@@ -2305,12 +2305,12 @@ G_MODULE_EXPORT void edit_coord (GtkWidget * widg, gpointer data)
     {
       if (selected -> first)
       {
-        tmp_a -> next = new_selatom (i, opengl_project -> atoms[j][i].sp);
+        tmp_a -> next = new_atom_in_selection (i, opengl_project -> atoms[j][i].sp);
         tmp_a = tmp_a -> next;
       }
       else
       {
-        selected -> first = new_selatom (i, opengl_project -> atoms[j][i].sp);
+        selected -> first = new_atom_in_selection (i, opengl_project -> atoms[j][i].sp);
         tmp_a = selected -> first;
       }
       selected -> selected ++;
@@ -2344,8 +2344,8 @@ G_MODULE_EXPORT void edit_atoms (GtkWidget * widg, gpointer data)
 #endif
 {
   int i, j;
-  struct atom_selection * selected;
-  struct selatom * tmp_a;
+  atom_selection * selected;
+  atom_in_selection * tmp_a;
 
   selected = g_malloc0 (sizeof*selected);
   j = opengl_project -> modelgl -> anim -> last -> img -> step;
@@ -2355,12 +2355,12 @@ G_MODULE_EXPORT void edit_atoms (GtkWidget * widg, gpointer data)
     {
       if (selected -> first)
       {
-        tmp_a -> next = new_selatom (i, opengl_project -> atoms[j][i].sp);
+        tmp_a -> next = new_atom_in_selection (i, opengl_project -> atoms[j][i].sp);
         tmp_a = tmp_a -> next;
       }
       else
       {
-        selected -> first = new_selatom (i, opengl_project -> atoms[j][i].sp);
+        selected -> first = new_atom_in_selection (i, opengl_project -> atoms[j][i].sp);
         tmp_a = selected -> first;
       }
       selected -> selected ++;
@@ -2640,9 +2640,9 @@ G_MODULE_EXPORT void select_action_for_this_bond (GtkWidget * widg, gpointer dat
       // 11 = copy
       bond_selection = g_malloc0(sizeof*bond_selection);
       s = opengl_project -> modelgl -> anim -> last -> img -> step;
-      bond_selection -> first = new_selatom (selected_atom, opengl_project -> atoms[s][selected_atom].sp);
+      bond_selection -> first = new_atom_in_selection (selected_atom, opengl_project -> atoms[s][selected_atom].sp);
       bond_selection -> selected ++;
-      bond_selection -> first -> next = new_selatom (selected_btom, opengl_project -> atoms[s][selected_btom].sp);
+      bond_selection -> first -> next = new_atom_in_selection (selected_btom, opengl_project -> atoms[s][selected_btom].sp);
       bond_selection -> selected ++;
       switch (i)
       {
@@ -2705,9 +2705,9 @@ G_MODULE_EXPORT void select_action_for_this_bond (GtkWidget * widg, gpointer dat
       // 11 = copy
       bond_selection = g_malloc0(sizeof*bond_selection);
       s = opengl_project -> modelgl -> anim -> last -> img -> step;
-      bond_selection -> first = new_selatom (selected_atom, opengl_project -> atoms[s][selected_atom].sp);
+      bond_selection -> first = new_atom_in_selection (selected_atom, opengl_project -> atoms[s][selected_atom].sp);
       bond_selection -> selected ++;
-      bond_selection -> first -> next = new_selatom (selected_btom, opengl_project -> atoms[s][selected_btom].sp);
+      bond_selection -> first -> next = new_atom_in_selection (selected_btom, opengl_project -> atoms[s][selected_btom].sp);
       bond_selection -> selected ++;
       switch (i)
       {
@@ -2765,7 +2765,7 @@ G_MODULE_EXPORT void select_action_for_all_bonds (GtkWidget * widg, gpointer dat
   gboolean doit;
   gboolean eqtc, eqpc;
   bond_selection = NULL;
-  struct selatom * tmp_a;
+  atom_in_selection * tmp_a;
   if (mid == 6 || mid == 6+CONTEXTACT || mid == 6+2*CONTEXTACT) wait_for_style = TRUE;
   for (h=0; h<2; h++)
   {
@@ -2873,16 +2873,16 @@ G_MODULE_EXPORT void select_action_for_all_bonds (GtkWidget * widg, gpointer dat
           if (! bond_selection)
           {
             bond_selection = g_malloc0 (sizeof*bond_selection);
-            bond_selection -> first = new_selatom (j, opengl_project -> atoms[s][j].sp);
+            bond_selection -> first = new_atom_in_selection (j, opengl_project -> atoms[s][j].sp);
             tmp_a = bond_selection -> first;
           }
           else
           {
-            tmp_a -> next = new_selatom (j, opengl_project -> atoms[s][j].sp);
+            tmp_a -> next = new_atom_in_selection (j, opengl_project -> atoms[s][j].sp);
             tmp_a = tmp_a -> next;
           }
           bond_selection -> selected ++;
-          tmp_a -> next = new_selatom (k, opengl_project -> atoms[s][k].sp);
+          tmp_a -> next = new_atom_in_selection (k, opengl_project -> atoms[s][k].sp);
           tmp_a = tmp_a -> next;
           bond_selection -> selected ++;
         }
@@ -3342,7 +3342,7 @@ GtkWidget * selection_menu (glwin * view, int ati, int bti, int aoc, int mid, GC
   GtkWidget * sel;
   GtkWidget * menu = gtk_menu_new ();
 #endif
-  struct project * this_proj = get_project_by_id(p);
+  project * this_proj = get_project_by_id(p);
   spa = this_proj -> atoms[s][ati].sp;
   if (bti > -1) spb = this_proj -> atoms[s][bti].sp;
   if (bti < 0 && (((mid == 5 || mid == 6) && this_proj -> atoms[s][ati].show[aoc])
@@ -3603,7 +3603,7 @@ void analyze_popup_attach_color_palettes (glwin * view, GtkWidget * menu, int at
   https://gitlab.gnome.org/GNOME/gtk/-/issues/5955
   */
   int i, j;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   // The chemical species of the atom in selection
   if (! gtk_popover_menu_add_child ((GtkPopoverMenu *)menu, color_palette (view, ato*this_proj -> nspec+spc, -1, -1), "set-asp-7.7"))
   {
@@ -4033,7 +4033,7 @@ void analyze_menu_attach_color_palettes (glwin * view, GtkWidget * menu)
   */
   int i, j, k, l, m;
   gchar * str;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   // Box
   if (! gtk_popover_menu_add_child ((GtkPopoverMenu *)menu, color_palette (view, -1, -1, -1), "set-box-color.0"))
   {

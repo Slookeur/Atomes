@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int get_curve_shift (struct project * this_proj, int b, int c);
+  int get_curve_shift (project * this_proj, int b, int c);
 
   G_MODULE_EXPORT gboolean view_curve_popup (GtkWidget * widget, gpointer data);
   G_MODULE_EXPORT gboolean on_motion_notify_event (GtkWidget * widget, GdkEventMotion * event, gpointer data);
@@ -111,7 +111,7 @@ void curve_zoom_in_out (gboolean state, gdouble event_x, gdouble event_y, gpoint
   a = cstate -> id -> a;
   b = cstate -> id -> b;
   c = cstate -> id -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   int curve_shift = get_curve_shift (this_proj,b,c);
 #ifdef GTK4
   event_y -= (double) curve_shift;
@@ -340,7 +340,7 @@ void curve_button_event (GdkEvent * event, double event_x, double event_y, guint
   a = activeg = cstate -> id -> a;
   b = activer = cstate -> id -> b;
   c = activec = cstate -> id -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 #ifdef GTK4
   int curve_shift = get_curve_shift (this_proj, b, c);
 #endif
@@ -565,7 +565,7 @@ G_MODULE_EXPORT gboolean on_curve_key_pressed (GtkEventControllerKey * self, gui
 #endif
 
 /*!
-  \fn int get_curve_shift (struct project * this_proj, int b, int c)
+  \fn int get_curve_shift (project * this_proj, int b, int c)
 
   \brief get cruve window size shift
 
@@ -573,7 +573,7 @@ G_MODULE_EXPORT gboolean on_curve_key_pressed (GtkEventControllerKey * self, gui
   \param b the calculation id
   \param c the curve id
 */
-int get_curve_shift (struct project * this_proj, int b, int c)
+int get_curve_shift (project * this_proj, int b, int c)
 {
   return gtk_widget_get_allocated_height (this_proj -> curves[b][c] -> window) - gtk_widget_get_allocated_height (this_proj -> curves[b][c] -> plot);
 }
@@ -589,7 +589,7 @@ int get_curve_shift (struct project * this_proj, int b, int c)
 G_MODULE_EXPORT void on_curve_realize (GtkWidget * widg, gpointer data)
 {
   tint * id = (tint *)data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   resize_this_window (this_proj -> curves[id -> b][id -> c] -> window,
                       this_proj -> curves[id -> b][id -> c] -> wsize[0],
                       this_proj -> curves[id -> b][id -> c] -> wsize[1]+get_curve_shift (this_proj, id -> b, id -> c));
@@ -607,7 +607,7 @@ GtkWidget * create_curve (tint * data)
   GtkWidget * Curve, * vbox;
 
   activec = data -> c;
-  struct project * this_proj = get_project_by_id(data -> a);
+  project * this_proj = get_project_by_id(data -> a);
   gchar * str = g_strdup_printf ("%s - %s", prepare_for_title (this_proj -> name), this_proj -> curves[data -> b][data -> c] -> name);
   Curve = create_win (str, MainWindow, FALSE, TRUE);
   activer = data -> b;

@@ -30,10 +30,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int read_atom_a (FILE * fp, struct project * this_proj, int s, int a);
-  int read_atom_b (FILE * fp, struct project * this_proj, int s, int a);
+  int read_atom_a (FILE * fp, project * this_proj, int s, int a);
+  int read_atom_b (FILE * fp, project * this_proj, int s, int a);
   int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size, int steps);
-  int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid);
+  int read_opengl_image (FILE * fp, project * this_proj, image * img, int sid);
 
 */
 
@@ -43,7 +43,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "initcoord.h"
 
 /*!
-  \fn int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
+  \fn int read_atom_a (FILE * fp, project * this_proj, int s, int a)
 
   \brief read atom properties from file (a)
 
@@ -52,7 +52,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param s the MD step
   \param a the atom number
 */
-int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
+int read_atom_a (FILE * fp, project * this_proj, int s, int a)
 {
   if (fread (& this_proj -> atoms[s][a].id, sizeof(int), 1, fp) != 1) return ERROR_RW;
   if (fread (& this_proj -> atoms[s][a].sp, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -65,7 +65,7 @@ int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 }
 
 /*!
-  \fn int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
+  \fn int read_atom_b (FILE * fp, project * this_proj, int s, int a)
 
   \brief read atom properties from file (b)
 
@@ -74,7 +74,7 @@ int read_atom_a (FILE * fp, struct project * this_proj, int s, int a)
   \param s the MD step
   \param a the atom number
 */
-int read_atom_b (FILE * fp, struct project * this_proj, int s, int a)
+int read_atom_b (FILE * fp, project * this_proj, int s, int a)
 {
   if (fread (this_proj -> atoms[s][a].show, sizeof(gboolean), 2, fp) != 2) return ERROR_RW;
   if (fread (this_proj -> atoms[s][a].label, sizeof(gboolean), 2, fp) != 2) return ERROR_RW;
@@ -272,7 +272,7 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
 }
 
 /*!
-  \fn int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
+  \fn int read_opengl_image (FILE * fp, project * this_proj, image * img, int sid)
 
   \brief read OpenGL image properties from file
 
@@ -281,7 +281,7 @@ int read_rings_chains_data (FILE * fp, glwin * view, int type, int rid, int size
   \param img the latest image to store the data
   \param sid the number of chemical species
 */
-int read_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
+int read_opengl_image (FILE * fp, project * this_proj, image * img, int sid)
 {
   int i, j, k, l, m, n;
   gboolean val;

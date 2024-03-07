@@ -83,7 +83,7 @@ int read_project_curve (FILE * fp, int wid, int pid)
   {
     pic = pid;
   }
-  struct project * this_proj = get_project_by_id (pic);
+  project * this_proj = get_project_by_id (pic);
   if (fread (& rid, sizeof(int), 1, fp) != 1) return ERROR_RW;
   if (fread (& cid, sizeof(int), 1, fp) != 1) return ERROR_RW;
   if (fread (& this_proj -> curves[rid][cid] -> displayed, sizeof(gboolean), 1, fp) != 1) return ERROR_RW;
@@ -180,7 +180,7 @@ int read_project_curve (FILE * fp, int wid, int pid)
     {
       this_proj -> curves[rid][cid] -> extrac -> first = g_malloc0 (sizeof*this_proj -> curves[rid][cid] -> extrac -> first);
       this_proj -> curves[rid][cid] -> extrac -> last = g_malloc0 (sizeof*this_proj -> curves[rid][cid] -> extrac -> last);
-      struct cextra * ctmp = this_proj -> curves[rid][cid] -> extrac -> first;
+      CurveExtra * ctmp = this_proj -> curves[rid][cid] -> extrac -> first;
       for (i=0; i<this_proj -> curves[rid][cid] -> extrac -> extras; i++)
       {
         if (fread (& ctmp -> id.a, sizeof(int), 1, fp) != 1) return ERROR_RW;

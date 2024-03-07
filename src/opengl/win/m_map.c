@@ -33,13 +33,13 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  gboolean setup_custom_color_map (float * data, struct project * this_proj, gboolean init);
-  gboolean open_save_map (FILE * fp, int act, struct project * this_proj);
+  gboolean setup_custom_color_map (float * data, project * this_proj, gboolean init);
+  gboolean open_save_map (FILE * fp, int act, project * this_proj);
   gboolean use_custom_color_map (int p);
 
   void init_map_range (colormap * map, int pts);
   void update_color_map ();
-  void fill_map_model (GtkTreeStore * store, struct project * this_proj);
+  void fill_map_model (GtkTreeStore * store, project * this_proj);
 
   G_MODULE_EXPORT void set_point_position (GtkSpinButton * res, gpointer data);
   G_MODULE_EXPORT void set_point_color (GtkColorChooser * colob, gpointer data);
@@ -59,7 +59,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   GtkWidget * create_css_color_bar (colormap * map);
   GtkWidget * create_map_buttons ();
-  GtkWidget * create_map_tree (struct project * this_proj);
+  GtkWidget * create_map_tree (project * this_proj);
   GtkWidget * mapw (glwin * view, int m, int mi, int mid, int cid, gchar * str);
   GtkWidget * menump (glwin * view, gchar * ncm, int mid, int id, int cid);
   GtkWidget * menu_map (glwin * view,  int id);
@@ -67,7 +67,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   GMenu * menump (glwin * view, int popm, int mid, int cid);
   GMenu * menu_map (glwin * view, int popm);
 
-  colormap * allocate_color_map (int pts, struct project * this_proj);
+  colormap * allocate_color_map (int pts, project * this_proj);
 
 */
 
@@ -178,14 +178,14 @@ void init_map_range (colormap * map, int pts)
 }
 
 /*!
-  \fn colormap * allocate_color_map (int pts, struct project * this_proj)
+  \fn colormap * allocate_color_map (int pts, project * this_proj)
 
   \brief allocate custom color map data
 
   \param pts the number of data point(s) to create
   \param this_proj the target project
 */
-colormap * allocate_color_map (int pts, struct project * this_proj)
+colormap * allocate_color_map (int pts, project * this_proj)
 {
   colormap * map = g_malloc0 (sizeof*map);
   map -> data = g_malloc (this_proj -> steps*sizeof*map -> data);
@@ -200,7 +200,7 @@ colormap * allocate_color_map (int pts, struct project * this_proj)
 }
 
 /*!
-  \fn gboolean setup_custom_color_map (float * data, struct project * this_proj, gboolean init)
+  \fn gboolean setup_custom_color_map (float * data, project * this_proj, gboolean init)
 
   \brief prepare the custom color map data
 
@@ -208,7 +208,7 @@ colormap * allocate_color_map (int pts, struct project * this_proj)
   \param this_proj the target project
   \param init initialize color map (0= no, 1= yes)
 */
-gboolean setup_custom_color_map (float * data, struct project * this_proj, gboolean init)
+gboolean setup_custom_color_map (float * data, project * this_proj, gboolean init)
 {
   int i, j, k;
   gboolean action;
@@ -410,7 +410,7 @@ void update_color_map ()
 */
 G_MODULE_EXPORT void add_map_points (GtkSpinButton * res, gpointer data)
 {
-  //struct project * this_proj = get_project_by_id(GPOINTER_TO_INT(data));
+  //project * this_proj = get_project_by_id(GPOINTER_TO_INT(data));
   int id = gtk_spin_button_get_value_as_int (res);
   if (id >= 2 && id != tmp_map -> points)
   {
@@ -475,7 +475,7 @@ G_MODULE_EXPORT void run_custom_mize_map (GtkDialog * win, gint response_id, gpo
 {
   if (response_id == GTK_RESPONSE_APPLY)
   {
-    struct project * this_proj = (struct project *)data;
+    project * this_proj = (project *)data;
     the_map -> cmax = tmp_map -> cmax;
     the_map -> cmin = tmp_map -> cmin;
     the_map -> points = tmp_map -> points;
@@ -501,7 +501,7 @@ G_MODULE_EXPORT void run_custom_mize_map (GtkDialog * win, gint response_id, gpo
 */
 G_MODULE_EXPORT void custom_mize_map (GtkWidget * but, gpointer data)
 {
-  struct project * this_proj = get_project_by_id(GPOINTER_TO_INT(data));
+  project * this_proj = get_project_by_id(GPOINTER_TO_INT(data));
   GtkWidget * win = dialogmodal ("Edit color map", GTK_WINDOW(this_proj -> modelgl -> win));
   gtk_dialog_add_button (GTK_DIALOG(win), "Apply", GTK_RESPONSE_APPLY);
   gtk_widget_set_size_request (win, 300, -1);
@@ -586,14 +586,14 @@ G_MODULE_EXPORT void custom_mize_map (GtkWidget * but, gpointer data)
 }*/
 
 /*!
-  \fn void fill_map_model (GtkTreeStore * store, struct project * this_proj)
+  \fn void fill_map_model (GtkTreeStore * store, project * this_proj)
 
   \brief fill color map tree strore
 
   \param store the GtkTreeStore to fill
   \param this_proj the target project
 */
-void fill_map_model (GtkTreeStore * store, struct project * this_proj)
+void fill_map_model (GtkTreeStore * store, project * this_proj)
 {
   GtkTreeIter step_level, atom_level;
   int h, i, j;
@@ -638,7 +638,7 @@ void fill_map_model (GtkTreeStore * store, struct project * this_proj)
 G_MODULE_EXPORT void edit_map_cell (GtkCellRendererText * cell, gchar * path_string, gchar * new_text, gpointer data)
 {
   int i, j;
-  struct project * this_proj = get_project_by_id(GPOINTER_TO_INT(data));
+  project * this_proj = get_project_by_id(GPOINTER_TO_INT(data));
   GtkTreeIter iter;
   GtkTreePath * path = gtk_tree_path_new_from_string (path_string);
   gtk_tree_model_get_iter (GTK_TREE_MODEL(map_model), & iter, path);
@@ -665,13 +665,13 @@ G_MODULE_EXPORT void edit_map_cell (GtkCellRendererText * cell, gchar * path_str
 }
 
 /*!
-  \fn GtkWidget * create_map_tree (struct project * this_proj)
+  \fn GtkWidget * create_map_tree (project * this_proj)
 
   \brief create color map tree view
 
   \param this_proj the target project
 */
-GtkWidget * create_map_tree (struct project * this_proj)
+GtkWidget * create_map_tree (project * this_proj)
 {
   int i, j, k;
   GtkTreeViewColumn * map_col[4];
@@ -714,7 +714,7 @@ G_MODULE_EXPORT void run_edit_data_map (GtkDialog * win, gint response_id, gpoin
 {
   if (response_id == GTK_RESPONSE_APPLY)
   {
-    struct project * this_proj = get_project_by_id(GPOINTER_TO_INT(data));
+    project * this_proj = get_project_by_id(GPOINTER_TO_INT(data));
     setup_custom_color_map (tmp_data, this_proj, FALSE);
     int shaders[2] = {ATOMS, BONDS};
     re_create_md_shaders (2, shaders, this_proj);
@@ -734,7 +734,7 @@ G_MODULE_EXPORT void run_edit_data_map (GtkDialog * win, gint response_id, gpoin
 */
 G_MODULE_EXPORT void edit_data_map (GtkWidget * but, gpointer data)
 {
-  struct project * this_proj = get_project_by_id(GPOINTER_TO_INT(data));
+  project * this_proj = get_project_by_id(GPOINTER_TO_INT(data));
   GtkWidget * win = dialogmodal ("Edit color map data", GTK_WINDOW(this_proj -> modelgl -> win));
   gtk_dialog_add_button (GTK_DIALOG(win), "Apply", GTK_RESPONSE_APPLY);
   gtk_widget_set_size_request (win, 250, 600);
@@ -758,7 +758,7 @@ G_MODULE_EXPORT void edit_data_map (GtkWidget * but, gpointer data)
 }
 
 /*!
-  \fn gboolean open_save_map (FILE * fp, int act, struct project * this_proj)
+  \fn gboolean open_save_map (FILE * fp, int act, project * this_proj)
 
   \brief open or save a custom color map to file
 
@@ -766,7 +766,7 @@ G_MODULE_EXPORT void edit_data_map (GtkWidget * but, gpointer data)
   \param act action (0 = read, 1 = write)
   \param this_proj the target project
 */
-gboolean open_save_map (FILE * fp, int act, struct project * this_proj)
+gboolean open_save_map (FILE * fp, int act, project * this_proj)
 {
   int i, j;
   if (act == 0)
@@ -886,7 +886,7 @@ G_MODULE_EXPORT void open_save_data_map (GtkWidget * but, gpointer data)
   GtkFileChooserAction act[2] = {GTK_FILE_CHOOSER_ACTION_OPEN, GTK_FILE_CHOOSER_ACTION_SAVE};
   gchar * title[2] = {"Opening custom map for ", "Saving custom map for "};
   osmap.a = GPOINTER_TO_INT (data);
-  struct project * this_proj = get_project_by_id(osmap.a);
+  project * this_proj = get_project_by_id(osmap.a);
   gchar * str;
   gboolean open_save = FALSE;
   if (the_map != NULL)
@@ -978,7 +978,7 @@ G_MODULE_EXPORT void run_use_color_map (GtkDialog * win, gint response_id, gpoin
 */
 gboolean use_custom_color_map (int p)
 {
-  struct project * this_proj = get_project_by_id(p);
+  project * this_proj = get_project_by_id(p);
   GtkWidget * win = dialogmodal ("Custom color map settings", GTK_WINDOW(this_proj -> modelgl -> win));
   gtk_dialog_add_button (GTK_DIALOG(win), "Apply", GTK_RESPONSE_APPLY);
   GtkWidget * vbox = dialog_get_content_area (win);
@@ -1011,7 +1011,7 @@ gboolean use_custom_color_map (int p)
 G_MODULE_EXPORT void set_color_map (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *) data;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   the_map = this_proj -> modelgl -> custom_map;
   int i, j, k, l;
   j = the_data -> b;

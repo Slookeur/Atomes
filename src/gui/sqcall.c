@@ -31,7 +31,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   void initsq (int r);
-  void update_sq_view (struct project * this_proj, int sqk);
+  void update_sq_view (project * this_proj, int sqk);
   void save_xsk_ (int * interv, double datacurve[* interv]);
 
   G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data);
@@ -113,14 +113,14 @@ void initsq (int r)
 }
 
 /*!
-  \fn void update_sq_view (struct project * this_proj, int sqk)
+  \fn void update_sq_view (project * this_proj, int sqk)
 
   \brief update the text view for s(q) / s(k) calculation
 
   \param this_proj the target project
   \param sqk s(q) (SQ) or s(k) (SK)
 */
-void update_sq_view (struct project * this_proj, int sqk)
+void update_sq_view (project * this_proj, int sqk)
 {
   gchar * str;
   if (this_proj -> text_buffer[sqk+OT] == NULL) this_proj -> text_buffer[sqk+OT] = add_buffer (NULL, NULL, NULL);

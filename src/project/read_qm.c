@@ -30,11 +30,11 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int read_thermo (FILE * fp, struct thermostat * thermo);
+  int read_thermo (FILE * fp, thermostat * thermo);
   int read_fixed_atoms_cpmd (FILE * fp, cpmd * cpmd_input);
   int read_fixed_atoms_cp2k (FILE * fp, cp2k * cp2k_input, int idf);
-  int read_cpmd_data (FILE * fp, int cid, struct project * this_proj);
-  int read_cp2k_data (FILE * fp, int cid, struct project * this_proj);
+  int read_cpmd_data (FILE * fp, int cid, project * this_proj);
+  int read_cp2k_data (FILE * fp, int cid, project * this_proj);
 
 */
 
@@ -42,14 +42,14 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "project.h"
 
 /*!
-  \fn int read_thermo (FILE * fp, struct thermostat * thermo)
+  \fn int read_thermo (FILE * fp, thermostat * thermo)
 
   \brief read thermostat information from file
 
   \param fp the file pointer
   \param thermo the thermostat to store the data
 */
-int read_thermo (FILE * fp, struct thermostat * thermo)
+int read_thermo (FILE * fp, thermostat * thermo)
 {
   if (fread (& thermo -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
   if (fread (& thermo -> type, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -122,7 +122,7 @@ int read_fixed_atoms_cp2k (FILE * fp, cp2k * cp2k_input, int idf)
 }
 
 /*!
-  \fn int read_cpmd_data (FILE * fp, int cid, struct project * this_proj)
+  \fn int read_cpmd_data (FILE * fp, int cid, project * this_proj)
 
   \brief read CPMD data from file
 
@@ -130,7 +130,7 @@ int read_fixed_atoms_cp2k (FILE * fp, cp2k * cp2k_input, int idf)
   \param cid CPMD id (0 = ab-initio, 1 = QM-MM)
   \param this_proj the target project
 */
-int read_cpmd_data (FILE * fp, int cid, struct project * this_proj)
+int read_cpmd_data (FILE * fp, int cid, project * this_proj)
 {
   int i;
   if (fread (& i, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -143,7 +143,7 @@ int read_cpmd_data (FILE * fp, int cid, struct project * this_proj)
   if (this_proj -> cpmd_input[cid] -> thermostats)
   {
     this_proj -> cpmd_input[cid] -> ions_thermostat = g_malloc0 (sizeof*this_proj -> cpmd_input[cid] -> ions_thermostat);
-    struct thermostat * thermo = this_proj -> cpmd_input[cid] -> ions_thermostat;
+    thermostat * thermo = this_proj -> cpmd_input[cid] -> ions_thermostat;
     for (i=0; i<this_proj -> cpmd_input[cid] -> thermostats; i++)
     {
       if (read_thermo (fp, thermo) != OK) return ERROR_RW;
@@ -169,7 +169,7 @@ int read_cpmd_data (FILE * fp, int cid, struct project * this_proj)
   if (this_proj -> cpmd_input[cid] -> dummies)
   {
     this_proj -> cpmd_input[cid] -> dummy = g_malloc0 (sizeof*this_proj -> cpmd_input[cid] -> dummy);
-    struct dummy_atom * dummy = this_proj -> cpmd_input[cid] -> dummy;
+    dummy_atom * dummy = this_proj -> cpmd_input[cid] -> dummy;
     for (i=0; i < this_proj -> cpmd_input[cid] -> dummies; i ++)
     {
       if (fread (& dummy -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -205,7 +205,7 @@ int read_cpmd_data (FILE * fp, int cid, struct project * this_proj)
 }
 
 /*!
-  \fn int read_cp2k_data (FILE * fp, int cid, struct project * this_proj)
+  \fn int read_cp2k_data (FILE * fp, int cid, project * this_proj)
 
   \brief read CP2K data from file
 
@@ -213,7 +213,7 @@ int read_cpmd_data (FILE * fp, int cid, struct project * this_proj)
   \param cid CP2K id (0 = ab-initio, 1 = QM-MM)
   \param this_proj the target project
 */
-int read_cp2k_data (FILE * fp, int cid, struct project * this_proj)
+int read_cp2k_data (FILE * fp, int cid, project * this_proj)
 {
   int i, j;
   if (fread (& i, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -229,7 +229,7 @@ int read_cp2k_data (FILE * fp, int cid, struct project * this_proj)
   if (this_proj -> cp2k_input[cid] -> thermostats)
   {
     this_proj -> cp2k_input[cid] -> ions_thermostat = g_malloc0 (sizeof*this_proj -> cp2k_input[cid] -> ions_thermostat);
-    struct thermostat * thermo = this_proj -> cp2k_input[cid] -> ions_thermostat;
+    thermostat * thermo = this_proj -> cp2k_input[cid] -> ions_thermostat;
     for (i=0; i<this_proj -> cp2k_input[cid] -> thermostats; i++)
     {
       if (read_thermo (fp, thermo) != OK) return ERROR_RW;

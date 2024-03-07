@@ -30,16 +30,16 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc);
+  int test_this_coord (project * this_proj, int spec, int gid, int cid, int minc, int maxc);
 
-  void print_coord_info (struct project * this_proj, coord_info * coord);
-  void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
+  void print_coord_info (project * this_proj, coord_info * coord);
+  void clean_coords_and_geoms (project * this_proj, atom_edition * edit,
                                int new_spec, int rem, int adds, int * spid, int *** tmpgeo,
                                gboolean * showcoord[2], gboolean * showpoly[2]);
-  void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
+  void new_coord_menus (project * this_proj, coord_info * coord, int new_spec, int nmols,
                         gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
                         gboolean update_it, gboolean update_mol);
-  void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag);
+  void recover_opengl_data (project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag);
 
   coord_info * duplicate_coord_info (coord_info * old_coord);
 
@@ -48,7 +48,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "atom_edit.h"
 
 /*!
-  \fn int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc)
+  \fn int test_this_coord (project * this_proj, int spec, int gid, int cid, int minc, int maxc)
 
   \brief Look for a type of coordination sphere in a model
 
@@ -59,7 +59,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param minc min value for coordination id
   \param maxc max value for coordination id
 */
-int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int minc, int maxc)
+int test_this_coord (project * this_proj, int spec, int gid, int cid, int minc, int maxc)
 {
   int i, j, k, l;
   l = 0;
@@ -77,14 +77,14 @@ int test_this_coord (struct project * this_proj, int spec, int gid, int cid, int
 }
 
 /*!
-  \fn void print_coord_info (struct project * this_proj, coord_info * coord)
+  \fn void print_coord_info (project * this_proj, coord_info * coord)
 
   \brief print coordination info
 
   \param this_proj the target project
   \param coord the target coordination info
 */
-void print_coord_info (struct project * this_proj, coord_info * coord)
+void print_coord_info (project * this_proj, coord_info * coord)
 {
   int * min_bs, * max_bs;
   int i, j, k, l, m;
@@ -222,7 +222,7 @@ coord_info * duplicate_coord_info (coord_info * old_coord)
 }
 
 /*!
-  \fn void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
+  \fn void clean_coords_and_geoms (project * this_proj, atom_edition * edit,
 *                               int new_spec, int rem, int adds, int * spid, int *** tmpgeo,
 *                               gboolean * showcoord[2], gboolean * showpoly[2])
 
@@ -238,7 +238,7 @@ coord_info * duplicate_coord_info (coord_info * old_coord)
   \param showcoord[2] the coordination show status
   \param showpoly[2] the polyhedra show status
 */
-void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
+void clean_coords_and_geoms (project * this_proj, atom_edition * edit,
                              int new_spec, int rem, int adds, int * spid, int *** tmpgeo,
                              gboolean * showcoord[2], gboolean * showpoly[2])
 {
@@ -400,7 +400,7 @@ void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
 }
 
 /*!
-  \fn void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
+  \fn void new_coord_menus (project * this_proj, coord_info * coord, int new_spec, int nmols,
 *                        gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
 *                        gboolean update_it, gboolean update_frag, gboolean update_mol)
 *
@@ -416,7 +416,7 @@ void clean_coords_and_geoms (struct project * this_proj, atom_edition * edit,
   \param update_it update atoms data (and GTK3 menus)
   \param update_mol update molecule(s) data
 */
-void new_coord_menus (struct project * this_proj, coord_info * coord, int new_spec, int nmols,
+void new_coord_menus (project * this_proj, coord_info * coord, int new_spec, int nmols,
                       gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
                       gboolean update_it, gboolean update_mol)
 {
@@ -533,7 +533,7 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
 }
 
 /*!
-  \fn void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag)
+  \fn void recover_opengl_data (project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag)
 
   \brief recover image pointer data and OpenGL window menu structure
 
@@ -546,7 +546,7 @@ void new_coord_menus (struct project * this_proj, coord_info * coord, int new_sp
   \param tmpgeo the new number of coordination [c] by chemical species [s] 'coorrd -> ntg[c][s]'
   \param showfrag the saved fragment(s) show information
 */
-void recover_opengl_data (struct project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag)
+void recover_opengl_data (project * this_proj, int nmols, int add, int rem, int * num, int * rec, int *** tmpgeo, gboolean * showfrag)
 {
   // Now OpenGL data
   int old_spec = this_proj -> nspec;

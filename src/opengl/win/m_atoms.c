@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  gchar * label_atpts (struct project * this_proj, glwin * view, int id);
+  gchar * label_atpts (project * this_proj, glwin * view, int id);
 
   G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data);
@@ -61,7 +61,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 extern G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data);
 
 /*!
-  \fn gchar * label_atpts (struct project * this_proj, glwin * view, int id)
+  \fn gchar * label_atpts (project * this_proj, glwin * view, int id)
 
   \brief prepare the text of a menu item in the 'Model -> Atom(s)' submenu
 
@@ -69,7 +69,7 @@ extern G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data)
   \param view the target glwin
   \param id the type of label to prepare
 */
-gchar * label_atpts (struct project * this_proj, glwin * view, int id)
+gchar * label_atpts (project * this_proj, glwin * view, int id)
 {
   int i;
   gchar * mot;
@@ -130,7 +130,7 @@ G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
   int j = the_data -> b;
   int k = the_data -> c;
   int l, m;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   gboolean v = gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg);
   if (widg != this_proj -> modelgl -> ogl_spec[j][k])
   {
@@ -161,7 +161,7 @@ G_MODULE_EXPORT void show_hide_labels (GtkWidget * widg, gpointer data)
   tint * id = (tint *) data;
   int j = id -> b;
   int k = id -> c;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   gboolean v = gtk_check_menu_item_get_active ((GtkCheckMenuItem *)widg);
   if (widg != this_proj -> modelgl -> ogl_lab[j][k])
   {
@@ -199,7 +199,7 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GtkWidget * widg, gpointer data)
   int j = id -> b;
   int k;
   gboolean show = TRUE;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   for (k=0; k<this_proj -> nspec; k++)
   {
     if (plot -> show_label[j][k]) show = FALSE;
@@ -262,7 +262,7 @@ GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
   GtkWidget * mshow = gtk_menu_new ();
   gchar * str;
   gboolean sensitive = (! at) ? TRUE : view -> anim -> last -> img -> draw_clones;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   if (id == 0)
   {
     view -> ogl_spec[at] = g_malloc (this_proj -> nspec*sizeof*view -> ogl_spec[at]);
@@ -313,7 +313,7 @@ GtkWidget * show_atoms_submenu (glwin * view, int id, int at)
 GtkWidget * color_atoms_submenu (glwin * view, int id, int at)
 {
   GtkWidget * menuc = gtk_menu_new ();
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   gchar * str;
   GtkWidget * sp;
   int i, j;
@@ -363,7 +363,7 @@ GtkWidget * label_atoms_submenu (glwin * view, int id, int at)
   gtk_menu_shell_append ((GtkMenuShell *)menul, l_show);
   GtkWidget * mshow = gtk_menu_new ();
   gtk_menu_item_set_submenu ((GtkMenuItem *)l_show, mshow);
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   gchar * str;
   gboolean sensitive = (! at) ? TRUE : view -> anim -> last -> img -> draw_clones;
   if (id == 0)
@@ -435,7 +435,7 @@ GtkWidget * menu_atoms (glwin * view, int id, int at)
   int i;
   GtkWidget * widg;
   gchar * str;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   GtkWidget * menua = gtk_menu_new ();
   gtk_menu_shell_append ((GtkMenuShell *)menua, menu_item_new_with_submenu ("Show", TRUE, show_atoms_submenu (view, id, at)));
   if (at == 1 && id == 0)
@@ -534,7 +534,7 @@ G_MODULE_EXPORT void show_hide_atoms (GSimpleAction * action, GVariant * paramet
   int l, m;
   gboolean doit = TRUE;
   gboolean show;
-  struct project * this_proj = get_project_by_id (the_data -> a);
+  project * this_proj = get_project_by_id (the_data -> a);
   GVariant * state;
   if (action)
   {
@@ -591,7 +591,7 @@ G_MODULE_EXPORT void show_hide_labels (GSimpleAction * action, GVariant * parame
   int k = the_data -> c;
   gboolean doit = TRUE;
   gboolean show;
-  struct project * this_proj = get_project_by_id (the_data -> a);
+  project * this_proj = get_project_by_id (the_data -> a);
   GVariant * state;
   if (action)
   {
@@ -654,7 +654,7 @@ G_MODULE_EXPORT void show_hide_all_atom_labels (GSimpleAction * action, GVariant
   // Neither check, nor radio
   tint * id = (tint *) data;
   int i, j, k;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   i = id -> b;
   gboolean show = ! this_proj -> atoms[0][0].label[i];
   for (j=0; j<this_proj -> steps; j++)
@@ -686,7 +686,7 @@ GMenu * label_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
   append_opengl_item (view, menu, "Show/Hide All", (at) ? "clones-labels-all" : "atoms-labels-all", popm, popm, NULL, IMG_NONE, NULL,
                       FALSE, G_CALLBACK(show_hide_all_atom_labels), & view -> colorp[at][0], FALSE, FALSE, FALSE, sensitive);
   GMenu * smenu = g_menu_new ();
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   gchar * str;
   int i;
   for (i=0; i< this_proj -> nspec; i++)
@@ -725,7 +725,7 @@ GMenu * color_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
   GMenu * menu = g_menu_new ();
   GMenu * menuc;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   gchar * stra, * strb;
   int i;
   for (i=0; i< this_proj -> nspec; i++)
@@ -765,7 +765,7 @@ GMenu * show_atoms_submenu (glwin * view, int popm, int at, gboolean sensitive)
 {
   GMenu * menu = g_menu_new ();
   gchar * str;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   int i;
   for (i=0; i<this_proj -> nspec; i++)
   {

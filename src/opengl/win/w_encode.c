@@ -186,8 +186,8 @@ G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
 void clean_animation (glwin * view)
 {
   int i;
-  struct snapshot * shot = view -> anim -> first;
-  struct snapshot * del;
+  snapshot * shot = view -> anim -> first;
+  snapshot * del;
   for (i=0; i < view -> anim -> frames-1; i++)
   {
     del = shot;

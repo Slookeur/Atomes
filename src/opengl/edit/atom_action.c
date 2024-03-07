@@ -30,16 +30,16 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible);
+  int action_atoms_from_project (project * this_proj, atom_search * asearch, gboolean visible);
 
-  gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_search * asearch, gboolean editing);
+  gboolean do_we_have_objects_in_selection (project * this_proj, atom_search * asearch, gboolean editing);
 
-  void free_dummies (struct dummy_atom * tmp_pick);
-  void clean_this_project (struct project * this_proj);
-  void clean_motion_search (struct project * this_proj, atom_search * asearch, int sid);
-  void clean_all_trees (atom_search * asearch, struct project * this_proj);
-  void apply_action (struct project * this_proj, atom_search * asearch);
-  void prepare_random_action (struct project * this_proj, atom_search * asearch);
+  void free_dummies (dummy_atom * tmp_pick);
+  void clean_this_project (project * this_proj);
+  void clean_motion_search (project * this_proj, atom_search * asearch, int sid);
+  void clean_all_trees (atom_search * asearch, project * this_proj);
+  void apply_action (project * this_proj, atom_search * asearch);
+  void prepare_random_action (project * this_proj, atom_search * asearch);
 
   G_MODULE_EXPORT void take_action (GtkButton * but, gpointer data);
 
@@ -51,13 +51,13 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "curve.h"
 
 /*!
-  \fn void free_dummies (struct dummy_atom * tmp_pick)
+  \fn void free_dummies (dummy_atom * tmp_pick)
 
   \brief free atom dummy list
 
   \param tmp_pick the atom dummy list to free
 */
-void free_dummies (struct dummy_atom * tmp_pick)
+void free_dummies (dummy_atom * tmp_pick)
 {
   while (tmp_pick)
   {
@@ -76,13 +76,13 @@ void free_dummies (struct dummy_atom * tmp_pick)
 }
 
 /*!
-  \fn void clean_this_project (struct project * this_proj)
+  \fn void clean_this_project (project * this_proj)
 
   \brief clean project data for the edition process
 
   \param this_proj the target project
 */
-void clean_this_project (struct project * this_proj)
+void clean_this_project (project * this_proj)
 {
   int i, j;
   opengl_project_changed (this_proj -> id);
@@ -163,7 +163,7 @@ void clean_this_project (struct project * this_proj)
 }
 
 /*!
-  \fn void clean_motion_search (struct project * this_proj, atom_search * asearch, int sid)
+  \fn void clean_motion_search (project * this_proj, atom_search * asearch, int sid)
 
   \brief clean atom search motion data
 
@@ -171,7 +171,7 @@ void clean_this_project (struct project * this_proj)
   \param asearch the target atom search
   \param sid motion id
 */
-void clean_motion_search (struct project * this_proj, atom_search * asearch, int sid)
+void clean_motion_search (project * this_proj, atom_search * asearch, int sid)
 {
   int i;
   if (asearch -> in_selection)
@@ -180,7 +180,7 @@ void clean_motion_search (struct project * this_proj, atom_search * asearch, int
     asearch -> in_selection = 0;
     if (this_proj -> modelgl -> atom_win -> to_be_moved[sid])
     {
-      struct insert_object * object = this_proj -> modelgl -> atom_win -> to_be_moved[sid];
+      atomic_object * object = this_proj -> modelgl -> atom_win -> to_be_moved[sid];
       while (object -> next)
       {
         object = object -> next;
@@ -195,7 +195,7 @@ void clean_motion_search (struct project * this_proj, atom_search * asearch, int
 }
 
 /*!
-  \fn int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible)
+  \fn int action_atoms_from_project (project * this_proj, atom_search * asearch, gboolean visible)
 
   \brief apply atom edition action to project (motion, remove, replace, insert, random move)
 
@@ -203,14 +203,14 @@ void clean_motion_search (struct project * this_proj, atom_search * asearch, int
   \param asearch the target atom search
   \param visible is the 'model edition' window visible (1/0)
 */
-int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible)
+int action_atoms_from_project (project * this_proj, atom_search * asearch, gboolean visible)
 {
   int i, j, k, l, m, n, o, p;
-  struct dummy_atom * to_rem, * to_add;
-  struct dummy_atom * tmp_rem, * tmp_add;
-  struct insert_object * object_list = NULL;
-  struct insert_object * tmp_list;
-  struct insert_object * object, * tmp_obj;
+  dummy_atom * to_rem, * to_add;
+  dummy_atom * tmp_rem, * tmp_add;
+  atomic_object * object_list = NULL;
+  atomic_object * tmp_list;
+  atomic_object * object, * tmp_obj;
   int remove, extra, nmols;
   int act = (asearch -> pointer[0].c == 3) ? 0 : (asearch -> pointer[0].c == 5) ? 1 : 3;
 
@@ -285,12 +285,12 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
         asearch -> in_selection --;
         if (! object_list)
         {
-          object_list = duplicate_insert_object (object);
+          object_list = duplicate_atomic_object (object);
           tmp_list = object_list;
         }
         else
         {
-          tmp_list -> next = duplicate_insert_object (object);
+          tmp_list -> next = duplicate_atomic_object (object);
           tmp_list -> next -> prev = tmp_list;
           tmp_list = tmp_list -> next;
         }
@@ -484,8 +484,8 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
     return remove;
   }
 
-  struct atom * new_list = NULL;
-  struct atom * tmp_new = NULL;
+  atom * new_list = NULL;
+  atom * tmp_new = NULL;
   gboolean * showfrag;
   int ** tmpgeo[2];
   int new_atoms = 0;
@@ -689,7 +689,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
       tmp_add = tmp_add -> next;
     }
 
-    struct insert_object * object = object_list;
+    atomic_object * object = object_list;
     i = 0;
     while (object)
     {
@@ -1007,14 +1007,14 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
 }
 
 /*!
-  \fn void clean_all_trees (atom_search * asearch, struct project * this_proj)
+  \fn void clean_all_trees (atom_search * asearch, project * this_proj)
 
   \brief clean all tree models in the 'model edition' window
 
   \param asearch the target atom search
   \param this_proj the target project
 */
-void clean_all_trees (atom_search * asearch, struct project * this_proj)
+void clean_all_trees (atom_search * asearch, project * this_proj)
 {
   int i, j;
   for (i=0; i<5; i++)
@@ -1025,7 +1025,7 @@ void clean_all_trees (atom_search * asearch, struct project * this_proj)
       if (this_proj -> modelgl -> search_widg[INSERT] -> in_selection)
       {
         allocate_todo (this_proj -> modelgl -> search_widg[i+2], this_proj -> modelgl -> search_widg[INSERT] -> in_selection);
-        struct insert_object * object = this_proj -> modelgl -> atom_win -> to_be_inserted[1];
+        atomic_object * object = this_proj -> modelgl -> atom_win -> to_be_inserted[1];
         j = 0;
         while (object)
         {
@@ -1089,14 +1089,14 @@ void clean_all_trees (atom_search * asearch, struct project * this_proj)
 }
 
 /*!
-  \fn void apply_action (struct project * this_proj, atom_search * asearch)
+  \fn void apply_action (project * this_proj, atom_search * asearch)
 
   \brief apply edition action
 
   \param this_proj the target project
   \param asearch the target atom search
 */
-void apply_action (struct project * this_proj, atom_search * asearch)
+void apply_action (project * this_proj, atom_search * asearch)
 {
   gchar * str;
   gchar * appl[3] = {"replaced", "removed", "inserted"};
@@ -1160,20 +1160,20 @@ void apply_action (struct project * this_proj, atom_search * asearch)
 }
 
 /*!
-  \fn void prepare_random_action (struct project * this_proj, atom_search * asearch)
+  \fn void prepare_random_action (project * this_proj, atom_search * asearch)
 
   \brief prepare random action
 
   \param this_proj the target project
   \param asearch the target atom search
 */
-void prepare_random_action (struct project * this_proj, atom_search * asearch)
+void prepare_random_action (project * this_proj, atom_search * asearch)
 {
   int i, j, k, l, m, n, o, p, q;
   double test, prob;
-  struct insert_object * object = NULL;
-  struct insert_object * tmp_oba, * tmp_obb;
-  struct molecule * molfc;
+  atomic_object * object = NULL;
+  atomic_object * tmp_oba, * tmp_obb;
+  molecule * molfc;
   int max_num, total_num;
   gboolean lets_do_this = (asearch -> action == REMOVE || (asearch -> action == REPLACE && this_proj -> modelgl -> atom_win -> to_be_inserted[0])) ? TRUE : FALSE;
   if (lets_do_this)
@@ -1188,12 +1188,12 @@ void prepare_random_action (struct project * this_proj, atom_search * asearch)
     if (asearch -> action == REPLACE && this_proj -> modelgl -> atom_win -> to_be_inserted[0])
     {
       tmp_oba = this_proj -> modelgl -> atom_win -> to_be_inserted[0];
-      object = duplicate_insert_object (tmp_oba);
+      object = duplicate_atomic_object (tmp_oba);
       tmp_obb = object;
       while (tmp_oba -> next)
       {
         tmp_oba = tmp_oba -> next;
-        tmp_obb -> next = duplicate_insert_object (tmp_oba);
+        tmp_obb -> next = duplicate_atomic_object (tmp_oba);
         tmp_obb = tmp_obb -> next;
       }
       g_free (this_proj -> modelgl -> atom_win -> to_be_inserted[0]);
@@ -1323,12 +1323,12 @@ void prepare_random_action (struct project * this_proj, atom_search * asearch)
                   {
                     if (this_proj -> modelgl -> atom_win -> to_be_inserted[0] == NULL)
                     {
-                      this_proj -> modelgl -> atom_win -> to_be_inserted[0] = duplicate_insert_object (tmp_oba);
+                      this_proj -> modelgl -> atom_win -> to_be_inserted[0] = duplicate_atomic_object (tmp_oba);
                       tmp_obb = this_proj -> modelgl -> atom_win -> to_be_inserted[0];
                     }
                     else
                     {
-                      tmp_obb -> next = duplicate_insert_object (tmp_oba);
+                      tmp_obb -> next = duplicate_atomic_object (tmp_oba);
                       tmp_obb -> next -> prev = tmp_obb;
                       tmp_obb = tmp_obb -> next;
                     }
@@ -1357,7 +1357,7 @@ void prepare_random_action (struct project * this_proj, atom_search * asearch)
 }
 
 /*!
-  \fn gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_search * asearch, gboolean editing)
+  \fn gboolean do_we_have_objects_in_selection (project * this_proj, atom_search * asearch, gboolean editing)
 
   \brief check for object(s) in selection to apply action
 
@@ -1365,7 +1365,7 @@ void prepare_random_action (struct project * this_proj, atom_search * asearch)
   \param asearch the target atom search
   \param editing actually going for action (1) or simply counting elements (0)
 */
-gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_search * asearch, gboolean editing)
+gboolean do_we_have_objects_in_selection (project * this_proj, atom_search * asearch, gboolean editing)
 {
   int i, j, k, l, m, n, o, p, q;
   gboolean taking_action = FALSE;
@@ -1409,9 +1409,9 @@ gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_searc
       int object = get_asearch_object (asearch);
       int pass_size;
       int * pass_todo = NULL;
-      struct insert_object * passivating_object = NULL;
-      struct insert_object * pao = NULL;
-      struct insert_object * pio = NULL;
+      atomic_object * passivating_object = NULL;
+      atomic_object * pao = NULL;
+      atomic_object * pio = NULL;
       float * tmp_msd = NULL;
       if (asearch -> passivating)
       {
@@ -1587,13 +1587,13 @@ gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_searc
                           pass_todo[n] = asearch -> todo[l];
                           if (! passivating_object)
                           {
-                            passivating_object = duplicate_insert_object (pio);
+                            passivating_object = duplicate_atomic_object (pio);
                             pao = passivating_object;
                             pao -> id = n;
                           }
                           else
                           {
-                            pao -> next = duplicate_insert_object (pio);
+                            pao -> next = duplicate_atomic_object (pio);
                             pao -> id = n;
                             pao -> next -> prev = pao;
                             pao = pao -> next;
@@ -1610,13 +1610,13 @@ gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_searc
                           pass_todo[n] = asearch -> todo[l];
                           if (! passivating_object)
                           {
-                            passivating_object = duplicate_insert_object (pio);
+                            passivating_object = duplicate_atomic_object (pio);
                             pao = passivating_object;
                             pao -> id = n;
                           }
                           else
                           {
-                            pao -> next = duplicate_insert_object (pio);
+                            pao -> next = duplicate_atomic_object (pio);
                             pao -> id = n;
                             pao -> next -> prev = pao;
                             pao = pao -> next;
@@ -1636,13 +1636,13 @@ gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_searc
                           pass_todo[n] = asearch -> todo[l];
                           if (! passivating_object)
                           {
-                            passivating_object = duplicate_insert_object (pio);
+                            passivating_object = duplicate_atomic_object (pio);
                             pao = passivating_object;
                             pao -> id = n;
                           }
                           else
                           {
-                            pao -> next = duplicate_insert_object (pio);
+                            pao -> next = duplicate_atomic_object (pio);
                             pao -> id = n;
                             pao -> next -> prev = pao;
                             pao = pao -> next;
@@ -1661,13 +1661,13 @@ gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_searc
                             pass_todo[n] =  asearch -> todo[l];
                             if (! passivating_object)
                             {
-                              passivating_object = duplicate_insert_object (pio);
+                              passivating_object = duplicate_atomic_object (pio);
                               pao = passivating_object;
                               pao -> id = n;
                             }
                             else
                             {
-                              pao -> next = duplicate_insert_object (pio);
+                              pao -> next = duplicate_atomic_object (pio);
                               pao -> id = n;
                               pao -> next -> prev = pao;
                               pao = pao -> next;
@@ -1681,13 +1681,13 @@ gboolean do_we_have_objects_in_selection (struct project * this_proj, atom_searc
                         pass_todo[l] = asearch -> todo[l];
                         if (! passivating_object)
                         {
-                          passivating_object = duplicate_insert_object (pio);
+                          passivating_object = duplicate_atomic_object (pio);
                           pao = passivating_object;
                           pao -> id = l;
                         }
                         else
                         {
-                          pao -> next = duplicate_insert_object (pio);
+                          pao -> next = duplicate_atomic_object (pio);
                           pao -> id = l;
                           pao -> next -> prev = pao;
                           pao = pao -> next;
@@ -2010,7 +2010,7 @@ atom_search * duplicate_atom_search (atom_search * asearch)
 G_MODULE_EXPORT void take_action (GtkButton * but, gpointer data)
 {
   tint * id = (tint *)data;
-  struct project * this_proj = get_project_by_id (id -> a);
+  project * this_proj = get_project_by_id (id -> a);
   int i;
   i = id -> c;
   atom_search * this_search = duplicate_atom_search (this_proj -> modelgl -> search_widg[i]);

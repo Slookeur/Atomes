@@ -30,18 +30,18 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int get_rmin (struct project * this_proj, int rid, int step);
-  int get_rmax (struct project * this_proj, int rid, int step);
+  int get_rmin (project * this_proj, int rid, int step);
+  int get_rmax (project * this_proj, int rid, int step);
 
   void rings_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
-  void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int rid);
-  void add_this_ring_to_search_tree (struct project * this_proj, int rid);
+  void fill_rings_model (GtkTreeStore * store, project * this_proj, int rid);
+  void add_this_ring_to_search_tree (project * this_proj, int rid);
 
   G_MODULE_EXPORT void on_select_rings (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
   G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data);
 
-  GtkWidget * create_rings_tree (struct project * this_proj, int rid, gboolean fill_this);
-  GtkWidget * create_rings_search (struct project * this_proj, int rid);
+  GtkWidget * create_rings_tree (project * this_proj, int rid, gboolean fill_this);
+  GtkWidget * create_rings_search (project * this_proj, int rid);
   GtkWidget * rings_tab (glwin * view, int rid);
 
 */
@@ -166,7 +166,7 @@ void rings_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, Gtk
 {
   tint * id = (tint *)data;
   int i, j, k;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   i = id -> b;
   j = (this_proj -> steps > 1) ? 1: 0;
   gtk_tree_model_get (mod, iter, j, & k, -1);
@@ -243,7 +243,7 @@ void rings_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, Gtk
 }
 
 /*!
-  \fn void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int rid)
+  \fn void fill_rings_model (GtkTreeStore * store, project * this_proj, int rid)
 
   \brief fill the entire ring(s) tree store
 
@@ -251,7 +251,7 @@ void rings_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, Gtk
   \param this_proj the target project
   \param rid the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
 */
-void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int rid)
+void fill_rings_model (GtkTreeStore * store, project * this_proj, int rid)
 {
   GtkTreeIter step_level, size_level, ring_level;
   int h, i, j, k, l;
@@ -324,7 +324,7 @@ void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int rid
 }
 
 /*!
-  \fn GtkWidget * create_rings_tree (struct project * this_proj, int rid, gboolean fill_this)
+  \fn GtkWidget * create_rings_tree (project * this_proj, int rid, gboolean fill_this)
 
   \brief create the ring(s) search tree store
 
@@ -332,7 +332,7 @@ void fill_rings_model (GtkTreeStore * store, struct project * this_proj, int rid
   \param rid the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
   \param fill_this 1 = yes, 0 = no
 */
-GtkWidget * create_rings_tree (struct project * this_proj, int rid, gboolean fill_this)
+GtkWidget * create_rings_tree (project * this_proj, int rid, gboolean fill_this)
 {
   int i, j, k;
   GtkTreeViewColumn * rings_col[7];
@@ -367,14 +367,14 @@ GtkWidget * create_rings_tree (struct project * this_proj, int rid, gboolean fil
 }
 
 /*!
-  \fn void add_this_ring_to_search_tree (struct project * this_proj, int rid)
+  \fn void add_this_ring_to_search_tree (project * this_proj, int rid)
 
   \brief add ring in the search tree based on ring size and id
 
   \param this_proj the target project
   \param rid the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
 */
-void add_this_ring_to_search_tree (struct project * this_proj, int rid)
+void add_this_ring_to_search_tree (project * this_proj, int rid)
 {
   GtkTreeIter step_level, size_level, ring_level;
   GtkTreeIter new_level;
@@ -678,7 +678,7 @@ void add_this_ring_to_search_tree (struct project * this_proj, int rid)
 }
 
 /*!
-  \fn int get_rmin (struct project * this_proj, int rid, int step)
+  \fn int get_rmin (project * this_proj, int rid, int step)
 
   \brief get ring(s) max size for the MD step
 
@@ -686,7 +686,7 @@ void add_this_ring_to_search_tree (struct project * this_proj, int rid)
   \param rid the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
   \param step the MD step
 */
-int get_rmin (struct project * this_proj, int rid, int step)
+int get_rmin (project * this_proj, int rid, int step)
 {
   int i, j;
   for (i=0; i<this_proj -> coord -> totcoord[rid+4]; i++)
@@ -698,7 +698,7 @@ int get_rmin (struct project * this_proj, int rid, int step)
 }
 
 /*!
-  \fn int get_rmax (struct project * this_proj, int g, int step)
+  \fn int get_rmax (project * this_proj, int g, int step)
 
   \brief get ring(s) min size for the MD step
 
@@ -706,7 +706,7 @@ int get_rmin (struct project * this_proj, int rid, int step)
   \param rid the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
   \param step the MD step
 */
-int get_rmax (struct project * this_proj, int rid, int step)
+int get_rmax (project * this_proj, int rid, int step)
 {
   int i, j;
   for (i=this_proj -> coord -> totcoord[rid+4]-1; i>-1; i--)
@@ -733,7 +733,7 @@ G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
   int rid;
   const gchar * m = entry_get_text (res);
   v = (int)atof(m);
-  struct project * this_proj = get_project_by_id(dat -> a);
+  project * this_proj = get_project_by_id(dat -> a);
   coord_edition * coord = this_proj -> modelgl -> coord_win;
   for (i=0; i<5; i++)
   {
@@ -843,14 +843,14 @@ G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * create_rings_search (struct project * this_proj, int rid)
+  \fn GtkWidget * create_rings_search (project * this_proj, int rid)
 
   \brief create the ring(s) search widget
 
   \param this_proj the target project
   \param rid the type of ring(s), 0 = All, 1 = King, 2 = Guttman, 3 = Primtive, 4 = Strong
 */
-GtkWidget * create_rings_search (struct project * this_proj, int rid)
+GtkWidget * create_rings_search (project * this_proj, int rid)
 {
   GtkWidget * rings_search = create_vbox (BSEP);
   gchar * str = g_strdup_printf ("Too many <b>%s</b> rings in your model !\n"
@@ -909,7 +909,7 @@ GtkWidget * rings_tab (glwin * view, int rid)
   gtk_widget_set_hexpand (rings, TRUE);
   gtk_widget_set_vexpand (rings, TRUE);
   int h, i, j, k;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   k = 0;
   for (h=0; h < this_proj -> steps; h++)
   {

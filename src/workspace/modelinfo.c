@@ -32,9 +32,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   void print_spg_name (gchar * str , GtkTextBuffer * buffer);
   void print_spg_setting (gchar * init, GtkTextBuffer * buffer);
-  void model_info (struct project * this_proj, GtkTextBuffer * buffer);
+  void model_info (project * this_proj, GtkTextBuffer * buffer);
   void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf);
-  void opengl_info (struct project * this_proj, GtkTextBuffer * buf);
+  void opengl_info (project * this_proj, GtkTextBuffer * buf);
 
 */
 
@@ -103,14 +103,14 @@ void print_spg_setting (gchar * init, GtkTextBuffer * buffer)
 }
 
 /*!
-  \fn void model_info (struct project * this_proj, GtkTextBuffer * buffer)
+  \fn void model_info (project * this_proj, GtkTextBuffer * buffer)
 
   \brief display model information in GtkTexBuffer
 
   \param this_proj the target project
   \param buffer the GtkTextBuffer
 */
-void model_info (struct project * this_proj, GtkTextBuffer * buffer)
+void model_info (project * this_proj, GtkTextBuffer * buffer)
 {
   int i, j, k;
   double v;
@@ -342,14 +342,14 @@ void print_this_ogl_stuff (gchar * text, GLenum name, GtkTextBuffer * buf)
 }
 
 /*!
-  \fn void opengl_info (struct project * this_proj, GtkTextBuffer * buf)
+  \fn void opengl_info (project * this_proj, GtkTextBuffer * buf)
 
   \brief display OpenGL information in a GtkTextBuffer
 
   \param this_proj the target project
   \param buf the GtkTextBuffer
 */
-void opengl_info (struct project * this_proj, GtkTextBuffer * buf)
+void opengl_info (project * this_proj, GtkTextBuffer * buf)
 {
   int i, j, k, l;
   i = j = k = l = -1;

@@ -86,7 +86,7 @@ GtkWidget * tilt;
 G_MODULE_EXPORT void set_measure_style (GtkComboBox * box, gpointer data)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   this_proj -> modelgl -> anim -> last -> img -> mpattern = gtk_combo_box_get_active (box);
   this_proj -> modelgl -> create_shaders[MEASU] = TRUE;
   update (this_proj -> modelgl);
@@ -104,7 +104,7 @@ G_MODULE_EXPORT void set_labels_format (GtkComboBox * box, gpointer data)
 {
   tint * id = (tint *) data;
   int i = gtk_combo_box_get_active (box);
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   if (i != this_proj -> modelgl -> anim -> last -> img -> labels_format[id -> b])
   {
     this_proj -> modelgl -> anim -> last -> img -> labels_format[id -> b] = i;
@@ -126,7 +126,7 @@ G_MODULE_EXPORT void set_labels_render (GtkComboBox * box, gpointer data)
 {
   tint * id = (tint *) data;
   int i = gtk_combo_box_get_active (box);
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   if (i != this_proj -> modelgl -> anim -> last -> img -> labels_render[id -> b])
   {
     this_proj -> modelgl -> anim -> last -> img -> labels_render[id -> b] = i;
@@ -193,7 +193,7 @@ G_MODULE_EXPORT void use_atom_default_colors (GtkToggleButton * but, gpointer da
 #endif
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   int b = id -> b;
   gboolean val;
 #ifdef GTK4
@@ -232,7 +232,7 @@ G_MODULE_EXPORT void use_atom_default_colors (GtkToggleButton * but, gpointer da
 G_MODULE_EXPORT void set_labels_font (GtkFontButton * fontb, gpointer data)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   g_free (this_proj -> modelgl -> anim -> last -> img -> labels_font[id -> b]);
   this_proj -> modelgl -> anim -> last -> img -> labels_font[id -> b] = g_strdup_printf ("%s", gtk_font_chooser_get_font (GTK_FONT_CHOOSER(fontb)));
   if (id -> b < 2)
@@ -261,7 +261,7 @@ G_MODULE_EXPORT void set_labels_font (GtkFontButton * fontb, gpointer data)
 G_MODULE_EXPORT void set_label_color (GtkColorChooser * colob, gpointer data)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   this_proj -> modelgl -> anim -> last -> img -> labels_color[id -> b][id -> c] = get_button_color (colob);
   if (id -> b < 2) this_proj -> modelgl -> create_shaders[LABEL] = TRUE;
   if (id -> b == 3 || id -> b == 4) this_proj -> modelgl -> create_shaders[MEASU] = TRUE;
@@ -279,7 +279,7 @@ G_MODULE_EXPORT void set_label_color (GtkColorChooser * colob, gpointer data)
 G_MODULE_EXPORT void set_labels_position (GtkComboBox * box, gpointer data)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   this_proj -> modelgl -> anim -> last -> img -> labels_position[id -> b] = gtk_combo_box_get_active (box);
   if (id -> b < 2) this_proj -> modelgl -> create_shaders[LABEL] = TRUE;
   if (id -> b == 3 || id -> b == 4) this_proj -> modelgl -> create_shaders[MEASU] = TRUE;
@@ -297,7 +297,7 @@ G_MODULE_EXPORT void set_labels_position (GtkComboBox * box, gpointer data)
 void label_shift_has_changed (gpointer data, double value)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   int i = id -> b / 10;
   int j = id -> b - i * 10;
   this_proj -> modelgl -> anim -> last -> img -> labels_shift[i][j] = value;
@@ -357,7 +357,7 @@ G_MODULE_EXPORT void set_labels_scale (GtkToggleButton * but, gpointer data)
 #endif
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
 #ifdef GTK4
   this_proj -> modelgl -> anim -> last -> img -> labels_scale[id -> b] = gtk_check_button_get_active (but);
 #else
@@ -380,7 +380,7 @@ G_MODULE_EXPORT void set_labels_scale (GtkToggleButton * but, gpointer data)
 G_MODULE_EXPORT void set_labels_tilt (GtkComboBox * box, gpointer data)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   this_proj -> modelgl -> anim -> last -> img -> mtilt = gtk_combo_box_get_active (box);
   if (id -> b < 2) this_proj -> modelgl -> create_shaders[LABEL] = TRUE;
   if (id -> b == 3 || id -> b == 4) this_proj -> modelgl  -> create_shaders[MEASU] = TRUE;
@@ -398,7 +398,7 @@ G_MODULE_EXPORT void set_labels_tilt (GtkComboBox * box, gpointer data)
 void mesure_factor_has_changed (gpointer data, double value)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   this_proj -> modelgl -> anim -> last -> img -> mfactor = (int)value;
   this_proj -> modelgl  -> create_shaders[MEASU] = TRUE;
   update (this_proj -> modelgl);
@@ -444,7 +444,7 @@ G_MODULE_EXPORT void set_measure_factor (GtkRange * range, gpointer data)
 void measure_width_has_changed (gpointer data, double value)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   this_proj -> modelgl -> anim -> last -> img -> mwidth = value;
   this_proj -> modelgl  -> create_shaders[MEASU] = TRUE;
   update (this_proj -> modelgl);
@@ -505,7 +505,7 @@ G_MODULE_EXPORT void enable_lines (GtkToggleButton * but, gpointer data)
 #endif
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   int i;
 #ifdef GTK4
   i = gtk_check_button_get_active (but);
@@ -539,7 +539,7 @@ GtkWidget * labels_tab (glwin * view, int lid)
   int i;
   gchar * lpos[3] = {"x", "y", "z"};
 
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
 
   GtkWidget * tbox = create_vbox (BSEP);
   GtkWidget * vbox = create_vbox (5);

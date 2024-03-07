@@ -100,7 +100,7 @@ void update_labels (glwin * view)
 void camera_has_changed (gdouble value, gpointer data)
 {
   tint * cid = (tint *)data;
-  struct project * this_proj = get_project_by_id(cid -> a);
+  project * this_proj = get_project_by_id(cid -> a);
   double v;
   switch (cid -> b)
   {
@@ -368,7 +368,7 @@ G_MODULE_EXPORT void representation_advanced (GtkWidget * widg, gpointer data)
 G_MODULE_EXPORT void set_rep (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *)data;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   int i, j;
   i = this_proj -> modelgl -> anim -> last -> img -> rep;
   j = the_data -> b;

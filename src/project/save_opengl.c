@@ -30,10 +30,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int save_atom_a (FILE * fp, struct project * this_proj, int s, int a);
-  int save_atom_b (FILE * fp, struct project * this_proj, int s, int a);
+  int save_atom_a (FILE * fp, project * this_proj, int s, int a);
+  int save_atom_b (FILE * fp, project * this_proj, int s, int a);
   int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_max, int ** num_data, gboolean *** show, int **** all_data);
-  int save_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid);
+  int save_opengl_image (FILE * fp, project * this_proj, image * img, int sid);
 
 */
 
@@ -42,7 +42,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glwin.h"
 
 /*!
-  \fn int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
+  \fn int save_atom_a (FILE * fp, project * this_proj, int s, int a)
 
   \brief save atom data to file (a)
 
@@ -51,7 +51,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param s the MD step
   \param a the atom number
 */
-int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
+int save_atom_a (FILE * fp, project * this_proj, int s, int a)
 {
   if (fwrite (& this_proj -> atoms[s][a].id, sizeof(int), 1, fp) != 1) return ERROR_RW;
   if (fwrite (& this_proj -> atoms[s][a].sp, sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -64,7 +64,7 @@ int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
 }
 
 /*!
-  \fn int save_atom_b (FILE * fp, struct project * this_proj, int s, int a)
+  \fn int save_atom_b (FILE * fp, project * this_proj, int s, int a)
 
   \brief save atom data to file (b)
 
@@ -73,7 +73,7 @@ int save_atom_a (FILE * fp, struct project * this_proj, int s, int a)
   \param s the MD step
   \param a the atom number
 */
-int save_atom_b (FILE * fp, struct project * this_proj, int s, int a)
+int save_atom_b (FILE * fp, project * this_proj, int s, int a)
 {
   if (fwrite (this_proj -> atoms[s][a].show, sizeof(gboolean), 2, fp) != 2) return ERROR_RW;
   if (fwrite (this_proj -> atoms[s][a].label, sizeof(gboolean), 2, fp) != 2) return ERROR_RW;
@@ -122,7 +122,7 @@ int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_m
 }
 
 /*!
-  \fn int save_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
+  \fn int save_opengl_image (FILE * fp, project * this_proj, image * img, int sid)
 
   \brief save OpenGL image properties to file
 
@@ -131,7 +131,7 @@ int save_rings_chains_data (FILE * fp, int type, int size, int steps, int data_m
   \param img the image that contains the data
   \param sid the number of chemical species
 */
-int save_opengl_image (FILE * fp, struct project * this_proj, image * img, int sid)
+int save_opengl_image (FILE * fp, project * this_proj, image * img, int sid)
 {
   int i, j, k, l;
   gboolean val;
@@ -434,7 +434,7 @@ int save_opengl_image (FILE * fp, struct project * this_proj, image * img, int s
     if (fwrite (& img -> selected[i] -> selected, sizeof(int), 1, fp) != 1) return ERROR_RW;
     if (img -> selected[i] -> selected)
     {
-      struct selatom * at = img -> selected[i] -> first;
+      atom_in_selection * at = img -> selected[i] -> first;
       for (j=0; j<img -> selected[i] -> selected; j++)
       {
         if (fwrite (& at -> id, sizeof(int), 1, fp) != 1) return ERROR_RW;

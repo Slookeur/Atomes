@@ -37,7 +37,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   GLuint * alloc_shader_pointer (GLuint * pointer, int shaders);
   GLuint * glsl_add_lights (glsl_program * glsl);
 
-  gboolean in_md_shaders (struct project * this_proj, int id);
+  gboolean in_md_shaders (project * this_proj, int id);
   gboolean glsl_disable_cull_face (glsl_program * glsl);
 
   void set_light_uniform_location (GLuint * lightning, int id, int j, int k, char * string);
@@ -50,7 +50,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void update_string_instances (glsl_program * glsl, object_3d * obj);
   void glsl_bind_string (glsl_program * glsl, object_3d * obj);
   void re_create_all_md_shaders (glwin * view);
-  void re_create_md_shaders (int nshaders, int shaders[nshaders], struct project * this_proj);
+  void re_create_md_shaders (int nshaders, int shaders[nshaders], project * this_proj);
   void cleaning_shaders (glwin * view, int shader);
   void recreate_all_shaders (glwin * view);
   void init_default_shaders (glwin * view);
@@ -622,14 +622,14 @@ glsl_program * init_shader_program (int object, int object_id,
 }
 
 /*!
-  \fn gboolean in_md_shaders (struct project * this_proj, int id)
+  \fn gboolean in_md_shaders (project * this_proj, int id)
 
   \brief is this shader MD dependent ?
 
   \param this_proj the target project
   \param id the shader id
 */
-gboolean in_md_shaders (struct project * this_proj, int id)
+gboolean in_md_shaders (project * this_proj, int id)
 {
   if (id == ATOMS) return TRUE;
   if (id == BONDS) return TRUE;
@@ -651,7 +651,7 @@ gboolean in_md_shaders (struct project * this_proj, int id)
 void re_create_all_md_shaders (glwin * view)
 {
   int i, j;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   for (i=0; i<NGLOBAL_SHADERS; i++)
   {
     if (in_md_shaders (this_proj, i))
@@ -662,7 +662,7 @@ void re_create_all_md_shaders (glwin * view)
 }
 
 /*!
-  \fn void re_create_md_shaders (int nshaders, int shaders[nshaders], struct project * this_proj)
+  \fn void re_create_md_shaders (int nshaders, int shaders[nshaders], project * this_proj)
 
   \brief re-initialize some MD dependent OpenGL shaders
 
@@ -670,7 +670,7 @@ void re_create_all_md_shaders (glwin * view)
   \param shaders[nshaders] the list of shaders
   \param this_proj the target project
 */
-void re_create_md_shaders (int nshaders, int shaders[nshaders], struct project * this_proj)
+void re_create_md_shaders (int nshaders, int shaders[nshaders], project * this_proj)
 {
   int i, j, k;
   for (i=0; i<nshaders; i++)
@@ -757,7 +757,7 @@ void init_default_shaders (glwin * view)
 void init_shaders (glwin * view)
 {
   int i, j;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   for (i=0; i<NGLOBAL_SHADERS; i++)
   {
     view -> ogl_glsl[i] = NULL;

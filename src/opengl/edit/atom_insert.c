@@ -30,9 +30,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list);
-  void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object);
-  void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible);
+  void add_bonds_to_project (project * this_proj, int removed, int nbd, int ** new_bond_list);
+  void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, atomic_object * object);
+  void prepare_to_instert (gchar * key, project * this_proj, atom_search * asearch, gboolean visible);
 
   G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data);
 
@@ -41,7 +41,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "atom_edit.h"
 
 /*!
-  \fn void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list)
+  \fn void add_bonds_to_project (project * this_proj, int removed, int nbd, int ** new_bond_list)
 
   \brief add bond list to project bond list
 
@@ -50,7 +50,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param nbd the number of bond(s) to add
   \param new_bond_list the bond list to add
 */
-void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int ** new_bond_list)
+void add_bonds_to_project (project * this_proj, int removed, int nbd, int ** new_bond_list)
 {
   int i, j;
   int ** tmpbondid = NULL;
@@ -82,7 +82,7 @@ void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int
 }
 
 /*!
-  \fn void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object)
+  \fn void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, atomic_object * object)
 
   \brief add object bond(s) list to overall bond(s) list
 
@@ -91,7 +91,7 @@ void add_bonds_to_project (struct project * this_proj, int removed, int nbd, int
   \param nbd the number of bond(s) in the model
   \param object the target insert object
 */
-void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_object * object)
+void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, atomic_object * object)
 {
   int i;
   if (object -> bonds)
@@ -105,7 +105,7 @@ void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_ob
 }
 
 /*!
-  \fn void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible)
+  \fn void prepare_to_instert (gchar * key, project * this_proj, atom_search * asearch, gboolean visible)
 
   \brief prepare to insert something
 
@@ -114,7 +114,7 @@ void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, struct insert_ob
   \param asearch the target atom search
   \param visible is the model edition window visible
 */
-void prepare_to_instert (gchar * key, struct project * this_proj, atom_search * asearch, gboolean visible)
+void prepare_to_instert (gchar * key, project * this_proj, atom_search * asearch, gboolean visible)
 {
   int i = get_selected_object_id (visible, this_proj -> id,  key, asearch);
   if (i == FROM_PROJECT || i == FROM_DATA || i > 0) to_insert_in_project (i, -1, this_proj, asearch, visible);
@@ -138,7 +138,7 @@ G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data)
     gtk_tree_model_get_value (cmodel, & iter, 0, & val);
     tint * dat = (tint *)data;
     gchar * str = g_strdup_printf ("%s", (char *)g_value_get_string (& val));
-    struct project * this_proj = get_project_by_id (dat -> a);
+    project * this_proj = get_project_by_id (dat -> a);
     prepare_to_instert (str, this_proj, this_proj -> modelgl -> search_widg[dat -> c], TRUE);
     g_free (str);
   }

@@ -32,7 +32,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   G_MODULE_EXPORT gboolean scroll_shift_coord (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
 
-  void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density);
+  void modify_coordinates_in_lattice (project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density);
   void shift_it (vec3_t shift, int refresh, int proj);
   void adjust_it (int refresh, int proj);
   void shift_has_changed (gpointer data, double val);
@@ -43,16 +43,16 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void wrap_coord (GtkCheckButton * but, gpointer data);
   G_MODULE_EXPORT void wrap_coord (GtkToggleButton * but, gpointer data);
 
-  GtkWidget * create_cell_entries (struct project * this_proj, int i);
-  GtkWidget * create_shift_box (struct project * this_proj);
-  GtkWidget * shift_center_tab (struct project * this_proj);
+  GtkWidget * create_cell_entries (project * this_proj, int i);
+  GtkWidget * create_shift_box (project * this_proj);
+  GtkWidget * shift_center_tab (project * this_proj);
 
 */
 
 #include "cell_edit.h"
 
 /*!
-  \fn void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density)
+  \fn void modify_coordinates_in_lattice (project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density)
 
   \brief modify atomic coordinates in lattice
 
@@ -62,7 +62,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param refresh refresh rendering data
   \param density 0= shift, 1 = density modification
 */
-void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density)
+void modify_coordinates_in_lattice (project * this_proj, mat4_t * dlat, mat4_t * drec, int refresh, int density)
 {
   vec3_t pos;
   vec3_t res;
@@ -205,7 +205,7 @@ void modify_coordinates_in_lattice (struct project * this_proj, mat4_t * dlat, m
 */
 void shift_it (vec3_t shift, int refresh, int proj)
 {
-  struct project * this_proj = get_project_by_id (proj);
+  project * this_proj = get_project_by_id (proj);
   translate (this_proj, -1, 0, shift);
   modify_coordinates_in_lattice (this_proj, NULL, NULL, refresh, 0);
 }
@@ -222,7 +222,7 @@ void shift_it (vec3_t shift, int refresh, int proj)
 void adjust_it (int refresh, int proj)
 {
   int i, j;
-  struct project * this_proj = get_project_by_id (proj);
+  project * this_proj = get_project_by_id (proj);
   box_info * box = & this_proj -> cell.box[0];
   mat4_t rec = mat4 (box -> rvect[0][0], box -> rvect[0][1], box -> rvect[0][2], 0.0,
                      box -> rvect[1][0], box -> rvect[1][1], box -> rvect[1][2], 0.0,
@@ -260,7 +260,7 @@ void shift_has_changed (gpointer data, double val)
 {
   tint * dat = (tint *)data;
   int i, j, k, l;
-  struct project * this_proj = get_project_by_id (dat -> a);
+  project * this_proj = get_project_by_id (dat -> a);
   cell_edition * cedit = this_proj -> modelgl -> cell_win;
   l = (this_proj -> cell.npt) ? this_proj -> modelgl -> anim -> last -> img -> step : 0;
   if (dat -> b < 3)
@@ -392,14 +392,14 @@ G_MODULE_EXPORT void shift_coord (GtkRange * range, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * create_cell_entries (struct project * this_proj, int i)
+  \fn GtkWidget * create_cell_entries (project * this_proj, int i)
 
   \brief create the cell entry widgets
 
   \param this_proj the target project
   \param i target parameter/action id (shift, cut, density)
 */
-GtkWidget * create_cell_entries (struct project * this_proj, int i)
+GtkWidget * create_cell_entries (project * this_proj, int i)
 {
   int j, k, l, m;
   gchar * str;
@@ -470,13 +470,13 @@ GtkWidget * create_cell_entries (struct project * this_proj, int i)
 }
 
 /*!
-  \fn GtkWidget * create_shift_box (struct project * this_proj)
+  \fn GtkWidget * create_shift_box (project * this_proj)
 
   \brief create shift box widgets
 
   \param this_proj the target project
 */
-GtkWidget * create_shift_box (struct project * this_proj)
+GtkWidget * create_shift_box (project * this_proj)
 {
   GtkWidget * vbox = create_vbox (BSEP);
   int i;
@@ -551,13 +551,13 @@ G_MODULE_EXPORT void wrap_coord (GtkToggleButton * but, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * shift_center_tab (struct project * this_proj)
+  \fn GtkWidget * shift_center_tab (project * this_proj)
 
   \brief create the shift cell center tab
 
   \param this_proj the target project
 */
-GtkWidget * shift_center_tab (struct project * this_proj)
+GtkWidget * shift_center_tab (project * this_proj)
 {
   GtkWidget * layout = create_layout (350, 250);
   glwin * view = this_proj -> modelgl;

@@ -86,7 +86,7 @@ void update_selection (glwin * view, int o_step)
 {
   int i, j, k;
   i = view -> anim -> last -> img -> step;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   for (k=0; k<2; k++)
   {
     view -> anim -> last -> img -> selected[k] -> selected = 0;
@@ -193,7 +193,7 @@ G_MODULE_EXPORT void seq_go_previous (GtkButton * but, gpointer data)
 G_MODULE_EXPORT void seq_go_next (GtkButton * but, gpointer data)
 {
   glwin * view = (glwin *) data;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   if (view -> anim -> last -> img -> step < this_proj -> steps-1)
   {
     sequence (view, view -> anim -> last -> img -> step, view -> anim -> last -> img -> step + 1);
@@ -241,7 +241,7 @@ G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data)
   glwin * view = (glwin *) data;
   const gchar * m = entry_get_text (res);
   int s = (int)atof(m);
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   if (s > 0 && s <= this_proj -> steps)
   {
     sequence (view, view -> anim -> last -> img -> step, s-1);

@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int save_bonding (FILE * fp, struct project * this_proj);
+  int save_bonding (FILE * fp, project * this_proj);
 
 */
 
@@ -40,14 +40,14 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "initcoord.h"
 
 /*!
-  \fn int save_bonding (FILE * fp, struct project * this_proj)
+  \fn int save_bonding (FILE * fp, project * this_proj)
 
   \brief save bonding information to file
 
   \param fp the file pointer
   \param this_proj the target project
 */
-int save_bonding (FILE * fp, struct project * this_proj)
+int save_bonding (FILE * fp, project * this_proj)
 {
   int i, j, k;
   image * img = this_proj -> modelgl -> anim -> last -> img;

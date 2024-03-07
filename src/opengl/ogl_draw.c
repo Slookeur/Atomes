@@ -35,12 +35,12 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void unrotate_camera ();
   void duplicate_material_and_lightning (image * new_img, image * old_img);
   void add_image ();
-  void at_shift (struct atom * at, float * shift);
-  void at_unshift (struct atom * at, float * shift);
+  void at_shift (atom * at, float * shift);
+  void at_unshift (atom * at, float * shift);
   void draw (glwin * view);
 
-  struct screen_string * duplicate_screen_string (struct screen_string * old_s);
-  struct atom * duplicate_atom (struct atom * at);
+  screen_string * duplicate_screen_string (screen_string * old_s);
+  atom * duplicate_atom (atom * at);
 
   image * duplicate_image (image * old_img);
 
@@ -53,11 +53,11 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 extern ColRGBA init_color (int id, int numid);
 extern Light * copy_light_sources (int dima, int dimb, Light * old_sp);
-extern struct atom_selection * duplicate_ogl_selection (struct atom_selection * old_sel);
+extern atom_selection * duplicate_ogl_selection (atom_selection * old_sel);
 double x, y, z;
 GLUquadricObj * quadric;
 glwin * wingl;
-struct project * proj_gl;
+project * proj_gl;
 int proj_sp;
 int proj_at;
 coord_info * coord_gl;
@@ -81,7 +81,7 @@ extern int create_pick_lists ();
 extern int create_label_lists ();
 extern void create_measures_lists ();
 extern void create_light_lists ();
-extern void create_slab_lists (struct project * this_proj);
+extern void create_slab_lists (project * this_proj);
 extern void create_volumes_lists ();
 
 /*!
@@ -149,15 +149,15 @@ void unrotate_camera ()
 }
 
 /*!
-  \fn struct screen_string * duplicate_screen_string (struct screen_string * old_s)
+  \fn screen_string * duplicate_screen_string (screen_string * old_s)
 
   \brief create a copy a screen_string data structure
 
   \param old_s the data structure to be copied
 */
-struct screen_string * duplicate_screen_string (struct screen_string * old_s)
+screen_string * duplicate_screen_string (screen_string * old_s)
 {
-  struct screen_string * new_s = g_malloc0 (sizeof*new_s);
+  screen_string * new_s = g_malloc0 (sizeof*new_s);
   new_s -> word = g_strdup_printf ("%s", old_s -> word);
   new_s -> col = old_s -> col;
   int i;
@@ -262,7 +262,7 @@ image * duplicate_image (image * old_img)
     new_img -> axis_color = duplicate_color (3, old_img -> axis_color);
   }
 
-  struct screen_string * stmp_a, * stmp_b;
+  screen_string * stmp_a, * stmp_b;
 
   for (i=0; i<5; i++)
   {
@@ -361,7 +361,7 @@ image * duplicate_image (image * old_img)
 */
 void add_image ()
 {
-  struct snapshot * nextsnap = g_malloc0 (sizeof*nextsnap);
+  snapshot * nextsnap = g_malloc0 (sizeof*nextsnap);
   nextsnap -> img = duplicate_image (plot);
   nextsnap -> img -> id ++;
 
@@ -387,15 +387,15 @@ void add_image ()
 extern void update_gl_pick_colors ();
 
 /*!
-  \fn struct atom * duplicate_atom (struct atom * at)
+  \fn atom * duplicate_atom (atom * at)
 
   \brief copy (partially) an atom data structure
 
   \param at the atom to copy
 */
-struct atom * duplicate_atom (struct atom * at)
+atom * duplicate_atom (atom * at)
 {
-  struct atom * bt = g_malloc0 (sizeof*bt);
+  atom * bt = g_malloc0 (sizeof*bt);
   bt -> x = at -> x;
   bt -> y = at -> y;
   bt -> z = at -> z;
@@ -422,14 +422,14 @@ struct atom * duplicate_atom (struct atom * at)
 }
 
 /*!
-  \fn void at_shift (struct atom * at, float * shift)
+  \fn void at_shift (atom * at, float * shift)
 
   \brief modify atomic coordinates to display image in cell replica
 
   \param at the atom
   \param shift the shift to apply
 */
-void at_shift (struct atom * at, float * shift)
+void at_shift (atom * at, float * shift)
 {
   at -> x += shift[0];
   at -> y += shift[1];
@@ -437,14 +437,14 @@ void at_shift (struct atom * at, float * shift)
 }
 
 /*!
-  \fn void at_unshift (struct atom * at, float * shift)
+  \fn void at_unshift (atom * at, float * shift)
 
   \brief correct atomic coordinates modified to display image in cell replica
 
   \param at the atom
   \param shift the shift to correct
 */
-void at_unshift (struct atom * at, float * shift)
+void at_unshift (atom * at, float * shift)
 {
   at -> x -= shift[0];
   at -> y -= shift[1];

@@ -35,26 +35,26 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   gboolean show_field_object (int id, int jd, int kd);
 
   void field_selection (int i, int viz, int lab, int aid);
-  void viz_fragment (struct field_molecule * fmol, int id, int viz);
+  void viz_fragment (field_molecule * fmol, int id, int viz);
   void field_unselect_all ();
   void visualize_bonds (int viz, int aid,
-                         struct field_atom * at,
-                         struct field_atom * bt);
+                         field_atom* at,
+                         field_atom* bt);
   void visualize_angles (int viz, int aid,
-                         struct field_atom * at,
-                         struct field_atom * bt,
-                         struct field_atom * ct);
+                         field_atom* at,
+                         field_atom* bt,
+                         field_atom* ct);
   void visualize_dihedrals (int viz, int did,
-                            struct field_atom * at,
-                            struct field_atom * bt,
-                            struct field_atom * ct,
-                            struct field_atom * dt);
+                            field_atom* at,
+                            field_atom* bt,
+                            field_atom* ct,
+                            field_atom* dt);
   void visualize_imp_inv (int viz, int dih, int iid,
-                          struct field_atom * at,
-                          struct field_atom * bt,
-                          struct field_atom * ct,
-                          struct field_atom * dt);
-  void visualize_body (int viz, int bd, struct field_nth_body * body);
+                          field_atom* at,
+                          field_atom* bt,
+                          field_atom* ct,
+                          field_atom* dt);
+  void visualize_body (int viz, int bd, field_nth_body * body);
   void select_object (int id, int jd, int kd);
   void visualize_single_struct (int id, int jd, int kd, int * ids);
   void visualize_object (int id, int jd, int kd);
@@ -75,7 +75,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 tint toviz;
 
 extern int is_special[MAXDATA][11];
-extern void update_selection_list (struct atom_selection * at_list, struct atom * at, gboolean add);
+extern void update_selection_list (atom_selection * at_list, atom * at, gboolean add);
 extern void init_default_shaders (glwin * view);
 
 /*!
@@ -104,7 +104,7 @@ void field_selection (int i, int viz, int lab, int aid)
 }
 
 /*!
-  \fn void viz_fragment (struct field_molecule * fmol, int id, int viz)
+  \fn void viz_fragment (field_molecule * fmol, int id, int viz)
 
   \brief show / hide fragment
 
@@ -112,7 +112,7 @@ void field_selection (int i, int viz, int lab, int aid)
   \param id the fragment id
   \param viz visualization status (0 = hide, 1 = show)
 */
-void viz_fragment (struct field_molecule * fmol, int id, int viz)
+void viz_fragment (field_molecule * fmol, int id, int viz)
 {
   int i;
   for (i=0; i<tmp_proj -> natomes; i++)
@@ -138,8 +138,8 @@ extern gboolean in_bond (int at, int bd[2]);
 
 /*!
   \fn void visualize_bonds (int viz, int aid,
-*                         struct field_atom * at,
-*                         struct field_atom * bt)
+*                         field_atom* at,
+*                         field_atom* bt)
 
   \brief show / hide bond / bond restraint
 
@@ -149,8 +149,8 @@ extern gboolean in_bond (int at, int bd[2]);
   \param bt 2nd field atom
 */
 void visualize_bonds (int viz, int bid,
-                      struct field_atom * at,
-                      struct field_atom * bt)
+                      field_atom* at,
+                      field_atom* bt)
 {
   int i, j, k, l;
   for (i=0; i<at -> num; i++)
@@ -170,9 +170,9 @@ void visualize_bonds (int viz, int bid,
 
 /*!
   \fn void visualize_angles (int viz, int aid,
-*                         struct field_atom * at,
-*                         struct field_atom * bt,
-*                         struct field_atom * ct)
+*                         field_atom* at,
+*                         field_atom* bt,
+*                         field_atom* ct)
 
   \brief show / hide angle / angle restraint
 
@@ -183,9 +183,9 @@ void visualize_bonds (int viz, int bid,
   \param ct 3rd field atom
 */
 void visualize_angles (int viz, int aid,
-                       struct field_atom * at,
-                       struct field_atom * bt,
-                       struct field_atom * ct)
+                       field_atom* at,
+                       field_atom* bt,
+                       field_atom* ct)
 {
   int i, j, k, l, m, n;
   for (i=0; i<at -> num; i++)
@@ -213,10 +213,10 @@ void visualize_angles (int viz, int aid,
 
 /*!
   \fn void visualize_dihedrals (int viz, int did,
-*                            struct field_atom * at,
-*                            struct field_atom * bt,
-*                            struct field_atom * ct,
-*                            struct field_atom * dt)
+*                            field_atom* at,
+*                            field_atom* bt,
+*                            field_atom* ct,
+*                            field_atom* dt)
 
   \brief show / hide dihedral / dihedral restraint
 
@@ -228,10 +228,10 @@ void visualize_angles (int viz, int aid,
   \param dt 4th field atom
 */
 void visualize_dihedrals (int viz, int did,
-                          struct field_atom * at,
-                          struct field_atom * bt,
-                          struct field_atom * ct,
-                          struct field_atom * dt)
+                          field_atom* at,
+                          field_atom* bt,
+                          field_atom* ct,
+                          field_atom* dt)
 {
   int i, j, k, l, m, n, o, p;
   for (i=0; i<tmp_fat -> num; i++)
@@ -267,10 +267,10 @@ void visualize_dihedrals (int viz, int did,
 
 /*!
   \fn void visualize_imp_inv (int viz, int dih, int iid,
-*                          struct field_atom * at,
-*                          struct field_atom * bt,
-*                          struct field_atom * ct,
-*                          struct field_atom * dt)
+*                          field_atom* at,
+*                          field_atom* bt,
+*                          field_atom* ct,
+*                          field_atom* dt)
 
   \brief show / hide improper or inversion
 
@@ -283,10 +283,10 @@ void visualize_dihedrals (int viz, int did,
   \param dt 4th field atom
 */
 void visualize_imp_inv (int viz, int dih, int iid,
-                        struct field_atom * at,
-                        struct field_atom * bt,
-                        struct field_atom * ct,
-                        struct field_atom * dt)
+                        field_atom* at,
+                        field_atom* bt,
+                        field_atom* ct,
+                        field_atom* dt)
 {
   int i, j, k, l, m, n, o, p;
   for (i=0; i<tmp_fat -> num; i++)
@@ -330,7 +330,7 @@ void visualize_imp_inv (int viz, int dih, int iid,
 }
 
 /*!
-  \fn void visualize_body (int viz, int bd, struct field_nth_body * body)
+  \fn void visualize_body (int viz, int bd, field_nth_body * body)
 
   \brief show / hide non bonded interaction
 
@@ -338,7 +338,7 @@ void visualize_imp_inv (int viz, int dih, int iid,
   \param bd the type of non bonded interaction
   \param body the target non bonded interaction
 */
-void visualize_body (int viz, int bd, struct field_nth_body * body)
+void visualize_body (int viz, int bd, field_nth_body * body)
 {
   int h, i, j, k, l;
   l = body_at (body -> bd);
@@ -552,7 +552,7 @@ void visualize_single_struct (int id, int jd, int kd, int * ids)
 void visualize_object (int id, int jd, int kd)
 {
   int l, m, n, o, p, q, r, s;
-  struct field_atom * tshell;
+  field_atom* tshell;
   field_object = id;
   num_field_objects = get_field_objects (id, kd);
   switch (id)
@@ -737,7 +737,7 @@ void visualize_object (int id, int jd, int kd)
 void check_to_visualize_properties_for_this_field_mol (int pid, int mol)
 {
   int h, i, j;
-  struct field_prop * propv;
+  field_prop * propv;
   h = toviz.c;
   toviz.c = 1;
   tmp_fmol = get_active_field_molecule (mol);

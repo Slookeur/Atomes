@@ -31,7 +31,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   void print_info_section (GtkTextBuffer * buf);
-  void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf);
+  void print_this_thermostat (thermostat * thermo, int id, GtkTextBuffer * buf);
   void print_thermostat (GtkTextBuffer * buf);
   void print_restart (GtkTextBuffer * buf);
   void print_cpmd_section (GtkTextBuffer * buf);
@@ -49,7 +49,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "calc.h"
 #include "cpmd.h"
 
-extern struct dummy_atom * get_active_dummy (int id);
+extern dummy_atom * get_active_dummy (int id);
 
 int cpmd_sym[NSYM] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 14};
 
@@ -70,7 +70,7 @@ void print_info_section (GtkTextBuffer * buf)
 }
 
 /*!
-  \fn void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf)
+  \fn void print_this_thermostat (thermostat * thermo, int id, GtkTextBuffer * buf)
 
   \brief print CPMD thermostat parameters
 
@@ -78,7 +78,7 @@ void print_info_section (GtkTextBuffer * buf)
   \param id 0 = ionic, 1 = fictitious electronic
   \param buf the GtkTextBuffer to print into
 */
-void print_this_thermostat (struct thermostat * thermo, int id, GtkTextBuffer * buf)
+void print_this_thermostat (thermostat * thermo, int id, GtkTextBuffer * buf)
 {
   int i, j, k, l, m;
   gchar * temp[2]={"TEMPERATURE", "TEMPERATURE ELECTRONS"};
@@ -611,7 +611,7 @@ void print_atoms_section (GtkTextBuffer * buf)
     str = g_strdup_printf ("  DUMMY ATOMS\n    %d\n", tmp_cpmd -> dummies);
     print_info (str, NULL, buf);
     g_free (str);
-    struct dummy_atom * dumm;
+    dummy_atom * dumm;
     for (i=0; i<tmp_cpmd -> dummies; i++)
     {
       dumm = get_active_dummy (i);

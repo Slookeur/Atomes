@@ -34,9 +34,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   void set_sensitive_atom (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
   void atom_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
-  void clean_old_atom (struct field_atom * at, int atos, int * atid);
-  void adjust_field_struct (int oid, int k, struct field_struct * olds);
-  void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda);
+  void clean_old_atom (field_atom* at, int atos, int * atid);
+  void adjust_field_struct (int oid, int k, field_struct * olds);
+  void merging_atoms (field_atom* to_merge, field_atom* to_remove, gboolean upda);
 
   G_MODULE_EXPORT void select_field_atom (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data);
   G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_id, gpointer data);
@@ -58,7 +58,7 @@ int a_ato;
 extern int * astr;
 extern int vdw_id;
 extern ColRGBA init_color (int id, int numid);
-struct field_atom * at_to_remove;
+field_atom* at_to_remove;
 GtkTreeViewColumn * ato_col[4];
 GtkCellRenderer * ato_cell[4];
 extern GtkWidget * remove_label;
@@ -168,7 +168,7 @@ G_MODULE_EXPORT void select_field_atom (GtkCellRendererToggle * cell_renderer, g
 }
 
 /*!
-  \fn void clean_old_atom (struct field_atom * at, int atos, int * atid)
+  \fn void clean_old_atom (field_atom* at, int atos, int * atid)
 
   \brief remove atom list from field atom
 
@@ -176,7 +176,7 @@ G_MODULE_EXPORT void select_field_atom (GtkCellRendererToggle * cell_renderer, g
   \param atos the number of atom(s) to remove
   \param atid the list of atom(s) id to remove
 */
-void clean_old_atom (struct field_atom * at, int atos, int * atid)
+void clean_old_atom (field_atom* at, int atos, int * atid)
 {
   int h, i, j, k, l, m;
   gboolean save;
@@ -221,9 +221,9 @@ void clean_old_atom (struct field_atom * at, int atos, int * atid)
   g_free (dlist);
 }
 
-// extern void print_all_field_struct (struct field_molecule * mol, int str);
+// extern void print_all_field_struct (field_molecule * mol, int str);
 /*!
-  \fn void adjust_field_struct (int oid, int k, struct field_struct * olds)
+  \fn void adjust_field_struct (int oid, int k, field_struct * olds)
 
   \brief adjust field molecule structural property
 
@@ -231,11 +231,11 @@ void clean_old_atom (struct field_atom * at, int atos, int * atid)
   \param k the type of structural property to adjust
   \param olds the field molecule structural property to adjust
 */
-void adjust_field_struct (int oid, int k, struct field_struct * olds)
+void adjust_field_struct (int oid, int k, field_struct * olds)
 {
   int i, j;
   gboolean doit;
-  struct field_struct * str;
+  field_struct * str;
   i = struct_id(k);
   int * aids = allocint (i);
 
@@ -340,7 +340,7 @@ G_MODULE_EXPORT void run_add_atom_dialog (GtkDialog * add_dialog, gint response_
           tmp_fmol -> atoms ++;
           clean_old_atom (tmp_fat, a_ato, new_at);
           g_free (new_at);
-          struct field_struct * struct_saved[8];
+          field_struct * struct_saved[8];
           for (k=0; k<8; k++)
           {
             struct_saved[k] = duplicate_field_struct_list (tmp_fmol -> first_struct[k], FALSE);
@@ -566,7 +566,7 @@ G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint res
 }
 
 /*!
-  \fn void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda)
+  \fn void merging_atoms (field_atom* to_merge, field_atom* to_remove, gboolean upda)
 
   \brief merge the field atom to remove with already other field atom
 
@@ -574,7 +574,7 @@ G_MODULE_EXPORT void run_select_atom_dialog (GtkDialog * select_dialog, gint res
   \param to_remove the field atom to remove
   \param upda update field atom(s) data lists
 */
-void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda)
+void merging_atoms (field_atom* to_merge, field_atom* to_remove, gboolean upda)
 {
   int * tmp_ato = allocint (to_merge -> num + to_remove -> num);
   int * tmp_atd = allocint (to_merge -> num + to_remove -> num);
@@ -660,7 +660,7 @@ G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint
       if (a_ato)
       {
         i = gtk_combo_box_get_active(GTK_COMBO_BOX(combo_mol[0]));
-        struct field_atom * to_merge = get_active_atom(i, new_at[0]);
+        field_atom* to_merge = get_active_atom(i, new_at[0]);
         str = g_strdup_printf ("Merging with atom N°%d - %s !\nIs this correct ?",
                                new_at[0]+1, to_merge -> name);
         selection_confirmed = FALSE;
@@ -670,7 +670,7 @@ G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint
         {
           done = TRUE;
           merging_atoms (to_merge, at_to_remove, TRUE);
-          struct field_struct * struct_saved[8];
+          field_struct * struct_saved[8];
           for (k=0; k<8; k++)
           {
             struct_saved[k] = duplicate_field_struct_list (tmp_fmol -> first_struct[k], FALSE);
@@ -730,7 +730,7 @@ G_MODULE_EXPORT void run_remove_atom_from_field_molecule (GtkDialog * rmol, gint
 */
 G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
 {
-  at_to_remove = (struct field_atom *) data;
+  at_to_remove = (field_atom*) data;
   int i, j;
   field_object = 1;
   gchar * str = g_strdup_printf ("Select the field atom to merge atom \"%s\" with", at_to_remove -> name);

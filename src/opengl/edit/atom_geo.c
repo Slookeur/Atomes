@@ -32,11 +32,11 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   int is_this_a_new_geo (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z);
 
-  gboolean is_in_atom_list (int aid, struct atom * new_list);
+  gboolean is_in_atom_list (int aid, atom * new_list);
 
   void sort_partial_geo (int ** geom, int num_a);
-  void check_coord_modification (struct project * this_proj, int * old_id, struct atom * new_list,
-                                 struct insert_object * this_object, gboolean movtion, gboolean passivating);
+  void check_coord_modification (project * this_proj, int * old_id, atom * new_list,
+                                 atomic_object * this_object, gboolean movtion, gboolean passivating);
 */
 
 #include "atom_edit.h"
@@ -364,8 +364,8 @@ int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int o
 }
 
 /*!
-  \fn void check_coord_modification (struct project * this_proj, int * old_id, struct atom * new_list,
-*                                 struct insert_object * this_object, gboolean movtion, gboolean passivating)
+  \fn void check_coord_modification (project * this_proj, int * old_id, atom * new_list,
+*                                 atomic_object * this_object, gboolean movtion, gboolean passivating)
 
   \brief check atom coordination modification on edition
 
@@ -376,10 +376,10 @@ int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int o
   \param else 0
   \param passivating passivate
 */
-void check_coord_modification (struct project * this_proj, int * old_id, struct atom * new_list,
-                               struct insert_object * this_object, gboolean movtion, gboolean passivating)
+void check_coord_modification (project * this_proj, int * old_id, atom * new_list,
+                               atomic_object * this_object, gboolean movtion, gboolean passivating)
 {
-  struct atom * tmp_new;
+  atom * tmp_new;
   int g, h, i, j, k, l, m, n;
   gboolean correct_it;
   int * new_z = allocint (this_proj -> nspec);

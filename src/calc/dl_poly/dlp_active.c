@@ -30,37 +30,37 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid);
-  struct field_molecule * get_active_field_molecule (int a);
-  struct field_nth_body * get_active_body (int a, int b);
-  struct field_external * get_active_external (int a);
-  struct field_atom * get_active_atom (int a, int b);
-  struct field_shell * get_active_shell (int a, int b);
-  struct field_constraint * get_active_constraint (int a, int b);
-  struct field_pmf * get_active_pmf (int a, int b);
-  struct field_rigid * get_active_rigid (int a, int b);
-  struct field_tethered * get_active_tethered (int a, int b);
-  struct field_prop * get_active_prop (struct  field_prop * pr, int a);
-  struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids);
-  struct field_struct * get_active_struct (int s, int a, int b);
+  field_molecule * get_active_field_molecule_from_model_id (project * this_proj, int aid);
+  field_molecule * get_active_field_molecule (int a);
+  field_nth_body * get_active_body (int a, int b);
+  field_external * get_active_external (int a);
+  field_atom* get_active_atom (int a, int b);
+  field_shell * get_active_shell (int a, int b);
+  field_constraint * get_active_constraint (int a, int b);
+  field_pmf * get_active_pmf (int a, int b);
+  field_rigid * get_active_rigid (int a, int b);
+  field_tethered * get_active_tethered (int a, int b);
+  field_prop * get_active_prop (struct  field_prop * pr, int a);
+  field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids);
+  field_struct * get_active_struct (int s, int a, int b);
 
 */
 
 #include "dlp_field.h"
 
 /*!
-  \fn struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid)
+  \fn field_molecule * get_active_field_molecule_from_model_id (project * this_proj, int aid)
 
   \brief retrieve field molecule from overall atom id in the model
 
   \param this_proj the target project
   \param aid the target atom id
 */
-struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid)
+field_molecule * get_active_field_molecule_from_model_id (project * this_proj, int aid)
 {
   int i;
-  struct field_molecule * fmol = this_proj -> force_field[activef] -> first_molecule;
-  struct field_atom * fat;
+  field_molecule * fmol = this_proj -> force_field[activef] -> first_molecule;
+  field_atom* fat;
   while (fmol)
   {
     fat = fmol -> first_atom;
@@ -78,16 +78,16 @@ struct field_molecule * get_active_field_molecule_from_model_id (struct project 
 }
 
 /*!
-  \fn struct field_molecule * get_active_field_molecule (int a)
+  \fn field_molecule * get_active_field_molecule (int a)
 
   \brief retrieve field molecule
 
   \param a the id of the field molecule to retrieve
 */
-struct field_molecule * get_active_field_molecule (int a)
+field_molecule * get_active_field_molecule (int a)
 {
   int i;
-  struct field_molecule * tfmol = tmp_field -> first_molecule;
+  field_molecule * tfmol = tmp_field -> first_molecule;
   for (i=0; i<a; i++)
   {
     if (tfmol -> next != NULL) tfmol = tfmol -> next;
@@ -96,17 +96,17 @@ struct field_molecule * get_active_field_molecule (int a)
 }
 
 /*!
-  \fn struct field_nth_body * get_active_body (int a, int b)
+  \fn field_nth_body * get_active_body (int a, int b)
 
   \brief retrieve field nth body interaction
 
   \param a the id of the body interaction to retrieve
   \param b the type of body interaction
 */
-struct field_nth_body * get_active_body (int a, int b)
+field_nth_body * get_active_body (int a, int b)
 {
   int i;
-  struct field_nth_body * body;
+  field_nth_body * body;
   body = tmp_field -> first_body[b];
   for (i=0; i<a; i++)
   {
@@ -116,16 +116,16 @@ struct field_nth_body * get_active_body (int a, int b)
 }
 
 /*!
-  \fn struct field_external * get_active_external (int a)
+  \fn field_external * get_active_external (int a)
 
   \brief retrieve external field property
 
   \param a the id of the external field property to retrieve
 */
-struct field_external * get_active_external (int a)
+field_external * get_active_external (int a)
 {
   int i;
-  struct field_external * external;
+  field_external * external;
   external = tmp_field -> first_external;
   for (i=0; i<a; i++)
   {
@@ -135,17 +135,17 @@ struct field_external * get_active_external (int a)
 }
 
 /*!
-  \fn struct field_atom * get_active_atom (int a, int b)
+  \fn field_atom* get_active_atom (int a, int b)
 
   \brief retrieve field atom
 
   \param a the id of the field molecule
   \param b the id of the field atom to retrieve
 */
-struct field_atom * get_active_atom (int a, int b)
+field_atom* get_active_atom (int a, int b)
 {
   int i;
-  struct field_atom * ato;
+  field_atom* ato;
   ato = get_active_field_molecule (a) -> first_atom;
   for (i=0; i<b; i++)
   {
@@ -155,17 +155,17 @@ struct field_atom * get_active_atom (int a, int b)
 }
 
 /*!
-  \fn struct field_shell * get_active_shell (int a, int b)
+  \fn field_shell * get_active_shell (int a, int b)
 
   \brief retrieve shell property
 
   \param a the id of the field molecule
   \param b the id of the shell property to retrieve
 */
-struct field_shell * get_active_shell (int a, int b)
+field_shell * get_active_shell (int a, int b)
 {
   int i;
-  struct field_shell * shl;
+  field_shell * shl;
   shl = get_active_field_molecule (a) -> first_shell;
   for (i=0; i<b; i++)
   {
@@ -175,17 +175,17 @@ struct field_shell * get_active_shell (int a, int b)
 }
 
 /*!
-  \fn struct field_constraint * get_active_constraint (int a, int b)
+  \fn field_constraint * get_active_constraint (int a, int b)
 
   \brief retrieve constraint property
 
   \param a the id of the field molecule
   \param b the id of the constraint to retrieve
 */
-struct field_constraint * get_active_constraint (int a, int b)
+field_constraint * get_active_constraint (int a, int b)
 {
   int i;
-  struct field_constraint * cons;
+  field_constraint * cons;
   cons = get_active_field_molecule (a) -> first_constraint;
   for (i=0; i<b; i++)
   {
@@ -195,17 +195,17 @@ struct field_constraint * get_active_constraint (int a, int b)
 }
 
 /*!
-  \fn struct field_pmf * get_active_pmf (int a, int b)
+  \fn field_pmf * get_active_pmf (int a, int b)
 
   \brief retrieve PMF property
 
   \param a the id of the field molecule
   \param b the id of the PMF property to retrieve
 */
-struct field_pmf * get_active_pmf (int a, int b)
+field_pmf * get_active_pmf (int a, int b)
 {
   int i;
-  struct field_pmf * pmf;
+  field_pmf * pmf;
   pmf = get_active_field_molecule (a) -> first_pmf;
   for (i=0; i<b; i++)
   {
@@ -215,17 +215,17 @@ struct field_pmf * get_active_pmf (int a, int b)
 }
 
 /*!
-  \fn struct field_rigid * get_active_rigid (int a, int b)
+  \fn field_rigid * get_active_rigid (int a, int b)
 
   \brief retrieve rigid property
 
   \param a the id of the field molecule
   \param b the id of the rigid property to retrieve
 */
-struct field_rigid * get_active_rigid (int a, int b)
+field_rigid * get_active_rigid (int a, int b)
 {
   int i;
-  struct field_rigid * rig;
+  field_rigid * rig;
   rig = get_active_field_molecule (a) -> first_rigid;
   for (i=0; i<b; i++)
   {
@@ -235,17 +235,17 @@ struct field_rigid * get_active_rigid (int a, int b)
 }
 
 /*!
-  \fn struct field_tethered * get_active_tethered (int a, int b)
+  \fn field_tethered * get_active_tethered (int a, int b)
 
   \brief retrieve tethered property
 
   \param a the id of the field molecule
   \param b the id of the tethered to retrieve
 */
-struct field_tethered * get_active_tethered (int a, int b)
+field_tethered * get_active_tethered (int a, int b)
 {
   int i;
-  struct field_tethered * tet;
+  field_tethered * tet;
   tet = get_active_field_molecule (a) -> first_tethered;
   for (i=0; i<b; i++)
   {
@@ -255,16 +255,16 @@ struct field_tethered * get_active_tethered (int a, int b)
 }
 
 /*!
-  \fn struct field_prop * get_active_prop (struct  field_prop * pr, int a)
+  \fn field_prop * get_active_prop (struct  field_prop * pr, int a)
 
   \brief the field molecule structural property id to retrieve
 
   \param pr the pointer on the field molecule properties to browse
   \param a the id of the field molecule property to retrieve
 */
-struct field_prop * get_active_prop (struct  field_prop * pr, int a)
+field_prop * get_active_prop (struct  field_prop * pr, int a)
 {
-  struct field_prop * prop;
+  field_prop * prop;
   prop = pr;
   int i;
   for (i=0; i<a; i++)
@@ -275,7 +275,7 @@ struct field_prop * get_active_prop (struct  field_prop * pr, int a)
 }
 
 /*!
-  \fn struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids)
+  \fn field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids)
 
   \brief retrieve field molecule structural property using atoms
 
@@ -283,9 +283,9 @@ struct field_prop * get_active_prop (struct  field_prop * pr, int a)
   \param ti the number of atoms for this property
   \param ids the atoms to search for
 */
-struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids)
+field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids)
 {
-  struct field_prop * prop = NULL;
+  field_prop * prop = NULL;
   prop = pr;
   gboolean done;
   int i;
@@ -307,7 +307,7 @@ struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti
 }
 
 /*!
-  \fn struct field_struct * get_active_struct (int s, int a, int b)
+  \fn field_struct * get_active_struct (int s, int a, int b)
 
   \brief retrieve field structural property
 
@@ -315,10 +315,10 @@ struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti
   \param a the field molecule id
   \param b the structural property id to retrieve
 */
-struct field_struct * get_active_struct (int s, int a, int b)
+field_struct * get_active_struct (int s, int a, int b)
 {
   int i;
-  struct field_struct * str;
+  field_struct * str;
   str = get_active_field_molecule (a) -> first_struct[s];
   for (i=0; i<b; i++)
   {

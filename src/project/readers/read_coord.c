@@ -57,9 +57,9 @@ extern int open_trj_file (int linec);
 extern int open_vas_file (int linec);
 extern int open_cif_file (int linec);
 extern int open_hist_file (int linec);
-extern void allocatoms (struct project * this_proj);
+extern void allocatoms (project * this_proj);
 extern chemical_data * alloc_chem_data (int spec);
-extern int build_crystal (gboolean visible, struct project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
+extern int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
 extern const gchar * dfi[2];
 
 FILE * coordf;

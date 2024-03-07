@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  gboolean is_coord_in_menu (int id, struct project * this_proj);
+  gboolean is_coord_in_menu (int id, project * this_proj);
 
   void detach_frag_mol_menu (glwin * view, int id, int jd);
 
@@ -64,14 +64,14 @@ extern GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo);
 #endif
 
 /*!
-  \fn gboolean is_coord_in_menu (int id, struct project * this_proj)
+  \fn gboolean is_coord_in_menu (int id, project * this_proj)
 
   \brief is this coordination in a menu ?
 
   \param id the coordination type
   \param this_proj the target project
 */
-gboolean is_coord_in_menu (int id, struct project * this_proj)
+gboolean is_coord_in_menu (int id, project * this_proj)
 {
   if (((id == 2 || id == 3) && this_proj -> coord -> totcoord[id] <= COORD_MAX_MENU) || id < 2 || id > 3)
   {
@@ -111,7 +111,7 @@ G_MODULE_EXPORT void show_hide_coord (GtkWidget * widg, gpointer data)
   int c, g, s;
   gboolean doit = TRUE;
   gboolean show;
-  struct project * this_proj = get_project_by_id(cid -> a);
+  project * this_proj = get_project_by_id(cid -> a);
   s = cid -> b;
   c = cid -> c;
   g = cid -> d;
@@ -286,7 +286,7 @@ GtkWidget * add_menu_coord (glwin * view, int id, int jd)
   int i, j;
   GtkWidget * widg;
   GtkWidget * menucts;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   GtkWidget * menuct = gtk_menu_new ();
   if (is_coord_in_menu(jd, this_proj))
   {
@@ -499,7 +499,7 @@ GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
 {
   GMenu * menu = g_menu_new ();
   GMenu * menus;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   gchar * stra,  * strb;
   int i, j, k;
   for (i=0; i<this_proj -> nspec; i++)
@@ -573,7 +573,7 @@ G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * par
 GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
 {
   GMenu * menu = g_menu_new ();
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   if (active_coord -> totcoord[id] <= COORD_MAX_MENU)
   {
     gchar * stra, * strb;
@@ -618,7 +618,7 @@ GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
     menus = g_menu_new ();
     append_submenu (menu, (id < 9) ? "Atoms In Ring(s) of Size " : "Atoms In Chain(s) of Size ", menus);
   }
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   gchar * rin = g_strdup_printf ("rcol-%d", id);
   gchar * str;
   int i;
@@ -653,7 +653,7 @@ GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
 GMenu * add_menu_coord (glwin * view, int popm, int id)
 {
   GMenu * menu = g_menu_new ();
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   gchar * menu_name[2] = {"Show/Hide", "Color"};
   if (is_coord_in_menu(id, this_proj))
   {

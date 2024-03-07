@@ -40,7 +40,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int get_cif_info_from_cif_node (xmlNodePtr * cnode);
   int open_cif_database (gchar * filetoread);
   int prepare_data_base (int db);
-  int build_crystal_from_cif_database (struct project * this_proj);
+  int build_crystal_from_cif_database (project * this_proj);
 
   void sort_files (int num_f);
   void fill_cif_tree (GtkListStore * store);
@@ -83,10 +83,10 @@ extern void gtk_window_change_gdk_visual (GtkWidget * win);
 #endif // GTK3
 extern gboolean create_3d_model (int p, gboolean load);
 extern G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data);
-extern void init_camera (struct project * this_proj, gboolean get_depth);
-extern void alloc_proj_data (struct project * this_proj, int cid);
-extern int action_atoms_from_project (struct project * this_proj, atom_search * asearch, int status, gboolean visible);
-extern void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible);
+extern void init_camera (project * this_proj, gboolean get_depth);
+extern void alloc_proj_data (project * this_proj, int cid);
+extern int action_atoms_from_project (project * this_proj, atom_search * asearch, int status, gboolean visible);
+extern void to_insert_in_project (int stat, int orig, project * this_proj, atom_search * asearch, gboolean visible);
 extern void create_object_from_library (int p);
 GtkListStore * database_store;
 GtkTreeIter first_database_iter;
@@ -105,7 +105,7 @@ gchar ** cif_file_name;
 gchar ** cif_name;
 GtkWidget * cif_preview_box = NULL;
 GtkWidget * cif_preview_plot = NULL;
-struct project * cif_proj = NULL;
+project * cif_proj = NULL;
 gchar * other_name[5];
 int o_names;
 
@@ -765,13 +765,13 @@ GtkWidget * cif_tree (GtkListStore * store, int id, gchar * name)
 }
 
 /*!
-  \fn int build_crystal_from_cif_database (struct project * this_proj)
+  \fn int build_crystal_from_cif_database (project * this_proj)
 
   \brief create crystal database window
 
   \param this_proj the target project
 */
-int build_crystal_from_cif_database (struct project * this_proj)
+int build_crystal_from_cif_database (project * this_proj)
 {
   int active = activep;
   int res;

@@ -32,7 +32,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   int get_page_from_geo_coord (glwin * view, int geo, int coord);
 
-  gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j);
+  gboolean add_geo (int poly, project * this_proj, int g, int i, int j);
 
   G_MODULE_EXPORT gboolean scroll_set_poly_alpha (GtkRange * range, GtkScrollType scroll, gdouble value, gpointer data);
   G_MODULE_EXPORT gboolean close_event_coord (GtkWindow * widg, gpointer data);
@@ -40,7 +40,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   void poly_alpha_has_changed (gpointer data, GLfloat v);
   void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRGBA col);
-  void add_this_frag_mol_to_search_tree (struct project * this_proj, int geo, int gid);
+  void add_this_frag_mol_to_search_tree (project * this_proj, int geo, int gid);
   void set_this_frag_mol_color (gpointer data, GtkTreePath * path);
 
   G_MODULE_EXPORT void toggled_show_hide_coord (GtkCheckButton * widg, gpointer data);
@@ -66,8 +66,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data);
 
   GtkWidget * coord_tab (glwin * view, int geo, int poly);
-  GtkWidget * create_frag_mol_tree (struct project * this_proj, int geo);
-  GtkWidget * create_frag_mol_search (struct project * this_proj, int geo);
+  GtkWidget * create_frag_mol_tree (project * this_proj, int geo);
+  GtkWidget * create_frag_mol_search (project * this_proj, int geo);
   GtkWidget * fragmol_tab (glwin * view, int geo);
   GtkWidget * param_tab (glwin * view);
   GtkWidget * advanced_coord_properties (glwin * view, int page);
@@ -120,7 +120,7 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
   qint * the_data = (qint *)data;
   int i, j, k;
   int s, g, c;
-  struct project * this_proj = get_project_by_id (the_data -> a);
+  project * this_proj = get_project_by_id (the_data -> a);
   s = the_data -> b;
   g = the_data -> d;
   c = the_data -> c;
@@ -307,7 +307,7 @@ G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer da
   qint * the_data = (qint *)data;
   int i, j, k;
   int s, g, c;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   s = the_data -> b;
   g = the_data -> d;
   c = the_data -> c;
@@ -371,7 +371,7 @@ G_MODULE_EXPORT void set_color_frag_mol (GtkColorChooser * colob, gpointer data)
 {
   qint * cid = (qint *)data;
   int c, g;
-  struct project * this_proj = get_project_by_id(cid -> a);
+  project * this_proj = get_project_by_id(cid -> a);
   g = cid -> b;
   c = cid -> c;
   this_proj -> modelgl -> anim -> last -> img -> spcolor[g][0][c] = get_button_color (colob);
@@ -392,7 +392,7 @@ G_MODULE_EXPORT void set_color_coord (GtkColorChooser * colob, gpointer data)
 {
   qint * cid = (qint *)data;
   int c, g, s;
-  struct project * this_proj = get_project_by_id(cid -> a);
+  project * this_proj = get_project_by_id(cid -> a);
   s = cid -> b;
   c = cid -> c;
   g = cid -> d;
@@ -415,7 +415,7 @@ void poly_alpha_has_changed (gpointer data, GLfloat v)
 {
   qint * cid = (qint *)data;
   int c, g, s;
-  struct project * this_proj = get_project_by_id(cid -> a);
+  project * this_proj = get_project_by_id(cid -> a);
   s = cid -> b;
   c = cid -> c;
   g = cid -> d;
@@ -456,7 +456,7 @@ G_MODULE_EXPORT void set_poly_alpha (GtkRange * range, gpointer data)
 }
 
 /*!
-  \fn gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j)
+  \fn gboolean add_geo (int poly, project * this_proj, int g, int i, int j)
 
   \brief test add this geometry data to the tree store or not ?
 
@@ -466,7 +466,7 @@ G_MODULE_EXPORT void set_poly_alpha (GtkRange * range, gpointer data)
   \param i target chemical species or 0
   \param j geometry id number
 */
-gboolean add_geo (int poly, struct project * this_proj, int g, int i, int j)
+gboolean add_geo (int poly, project * this_proj, int g, int i, int j)
 {
   if (! poly)
   {
@@ -606,7 +606,7 @@ GtkWidget * coord_tab (glwin * view, int geo, int poly)
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, wb, markup_label(col[j], scol[j], -1, 0.5, 0.5), FALSE, FALSE, 5);
   }
   k = 0;
-  struct project * this_proj = get_project_by_id(p);
+  project * this_proj = get_project_by_id(p);
   m = (geo < 2) ? this_proj -> nspec : 1;
   if ((geo < 2 || (geo == 9 && view -> chain_max) || (geo > 3 && geo < 9 && view -> ring_max[geo-4])) && this_proj -> coord -> totcoord[geo] > 0)
   {
@@ -751,7 +751,7 @@ void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRG
 }
 
 /*!
-  \fn void add_this_frag_mol_to_search_tree (struct project * this_proj, int geo, int gid)
+  \fn void add_this_frag_mol_to_search_tree (project * this_proj, int geo, int gid)
 
   \brief add fragment or molecule in the search tree
 
@@ -759,7 +759,7 @@ void set_frag_mol_cell_background (GtkListStore * store, GtkTreeIter iter, ColRG
   \param geo 2 = fragment(s) or 3 = molecule(s)
   \param gid fragment or molecule id number to add
 */
-void add_this_frag_mol_to_search_tree (struct project * this_proj, int geo, int gid)
+void add_this_frag_mol_to_search_tree (project * this_proj, int geo, int gid)
 {
   GtkTreeIter id_level;
   GtkTreeIter new_level;
@@ -886,14 +886,14 @@ G_MODULE_EXPORT void to_set_this_frag_mol_color (GtkTreeView * tree_view, GtkTre
 }
 
 /*!
-  \fn GtkWidget * create_frag_mol_tree (struct project * this_proj, int geo)
+  \fn GtkWidget * create_frag_mol_tree (project * this_proj, int geo)
 
   \brief create the fragment(s) / molecule(s) search tree store
 
   \param this_proj the target project
   \param geo 2 = fragment(s) or 3 = molecule(s)
 */
-GtkWidget * create_frag_mol_tree (struct project * this_proj, int geo)
+GtkWidget * create_frag_mol_tree (project * this_proj, int geo)
 {
   int i;
   GtkTreeViewColumn * frag_mol_col[7];
@@ -942,7 +942,7 @@ G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data)
   tint * dat = (tint * )data;
   const gchar * m = entry_get_text (res);
   int v = (int)atof(m);
-  struct project * this_proj = get_project_by_id(dat -> a);
+  project * this_proj = get_project_by_id(dat -> a);
   int g = dat -> b;
   if (v > 0 && v <= this_proj -> coord -> totcoord[g])
   {
@@ -955,14 +955,14 @@ G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * create_frag_mol_search (struct project * this_proj, int geo)
+  \fn GtkWidget * create_frag_mol_search (project * this_proj, int geo)
 
   \brief create the frgament(s)/molecule(s) search widget
 
   \param this_proj the target project
   \param geo 2 = fragment(s) or 3 = molecule(s)
 */
-GtkWidget * create_frag_mol_search (struct project * this_proj, int geo)
+GtkWidget * create_frag_mol_search (project * this_proj, int geo)
 {
   GtkWidget * frag_mol_search = create_vbox (BSEP);
   gchar * obj[2] = {"fragment", "molecule"};
@@ -1009,7 +1009,7 @@ GtkWidget * fragmol_tab (glwin * view, int geo)
   GtkWidget * fragmol = create_scroll (box, -1, -1, GTK_SHADOW_NONE);
   gtk_widget_set_hexpand (fragmol, TRUE);
   gtk_widget_set_vexpand (fragmol, TRUE);
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   i =  this_proj -> coord -> totcoord[geo];
   if (i >  10000)
   {

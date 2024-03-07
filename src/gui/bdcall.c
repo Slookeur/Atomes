@@ -41,12 +41,12 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void initcutoffs (chemical_data * chem, int species);
   void cutoffsend ();
   void prep_ogl_bonds ();
-  void update_ang_view (struct project * this_proj);
+  void update_ang_view (project * this_proj);
   void update_glwin_after_bonds (int bonding, int * colm);
   void coordination_info (int sp, double sac, double ssac[active_project -> nspec]);
   void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa);
   void env_info (int sp, int totgsa, int numgsa[totgsa]);
-  void update_angle_view (struct project * this_proj);
+  void update_angle_view (project * this_proj);
   void envout_ (int * sid, int * totgsa, int numgsa[* totgsa]);
 
   G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data);
@@ -64,7 +64,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "initcoord.h"
 
 extern G_MODULE_EXPORT void set_color_map (GtkWidget * widg, gpointer data);
-extern void clean_coord_window (struct project * this_proj);
+extern void clean_coord_window (project * this_proj);
 extern G_MODULE_EXPORT void set_filter_changed (GtkComboBox * box, gpointer data);
 
 /*!
@@ -354,13 +354,13 @@ gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb)
 }
 
 /*!
-  \fn void update_ang_view (struct project * this_proj)
+  \fn void update_ang_view (project * this_proj)
 
   \brief update angle calculation text buffer
 
   \param this_proj the target project
 */
-void update_ang_view (struct project * this_proj)
+void update_ang_view (project * this_proj)
 {
   gchar * str;
   if (this_proj -> text_buffer[AN+OT] == NULL) this_proj -> text_buffer[AN+OT] = add_buffer (NULL, NULL, NULL);
@@ -859,13 +859,13 @@ void env_info (int sp, int totgsa, int numgsa[totgsa])
 
 
 /*!
-  \fn void update_angle_view (struct project * this_proj)
+  \fn void update_angle_view (project * this_proj)
 
   \brief update angle calculation information text buffer
 
   \param this_proj the target project
 */
-void update_angle_view (struct project * this_proj)
+void update_angle_view (project * this_proj)
 {
   gchar * str;
   if (this_proj -> text_buffer[AN+OT] == NULL) this_proj -> text_buffer[AN+OT] = add_buffer (NULL, NULL, NULL);

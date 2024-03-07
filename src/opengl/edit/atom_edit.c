@@ -35,9 +35,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT gboolean delete_action (GtkWindow * widg, gpointer data);
   G_MODULE_EXPORT gboolean delete_action (GtkWidget * widg, GdkEvent * event, gpointer data);
 
-  void clean_coord_window (struct project * this_proj);
-  void clean_other_window_after_edit (struct project * this_proj);
-  void clean_atom_win (struct project * this_proj);
+  void clean_coord_window (project * this_proj);
+  void clean_other_window_after_edit (project * this_proj);
+  void clean_atom_win (project * this_proj);
   void prepare_atom_edition (gpointer data, gboolean visible);
 
   G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data);
@@ -47,8 +47,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter, gpointer data);
   G_MODULE_EXPORT void action_window (GtkWidget * widg, gpointer data);
 
-  GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox);
-  GtkWidget * create_edition_window (struct project * this_proj);
+  GtkWidget * create_atom_notebook (project * this_proj, GtkWidget * vbox);
+  GtkWidget * create_edition_window (project * this_proj);
 
   atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize);
 
@@ -78,13 +78,13 @@ gboolean is_atom_win_active (glwin * view)
 }
 
 /*!
-  \fn void clean_coord_window (struct project * this_proj)
+  \fn void clean_coord_window (project * this_proj)
 
   \brief update the environment configuration window after edtion
 
   \param this_proj the target project
 */
-void clean_coord_window (struct project * this_proj)
+void clean_coord_window (project * this_proj)
 {
   if (this_proj -> modelgl -> coord_win)
   {
@@ -101,13 +101,13 @@ void clean_coord_window (struct project * this_proj)
 }
 
 /*!
-  \fn void clean_other_window_after_edit (struct project * this_proj)
+  \fn void clean_other_window_after_edit (project * this_proj)
 
   \brief update other windows after model edition if required
 
   \param this_proj the target project
 */
-void clean_other_window_after_edit (struct project * this_proj)
+void clean_other_window_after_edit (project * this_proj)
 {
   int i;
   clean_coord_window (this_proj);
@@ -153,13 +153,13 @@ void clean_other_window_after_edit (struct project * this_proj)
 }
 
 /*!
-  \fn void clean_atom_win (struct project * this_proj)
+  \fn void clean_atom_win (project * this_proj)
 
   \brief clean model edition data
 
   \param this_proj the target project
 */
-void clean_atom_win (struct project * this_proj)
+void clean_atom_win (project * this_proj)
 {
   this_proj -> modelgl -> anim -> last -> img -> box_axis[AXIS] = this_proj -> modelgl -> atom_win -> old_axis;
   this_proj -> modelgl -> atom_win -> win = destroy_this_widget (this_proj -> modelgl -> atom_win -> win);
@@ -202,7 +202,7 @@ void clean_atom_win (struct project * this_proj)
 G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
-  struct project * this_proj = get_project_by_id(id);
+  project * this_proj = get_project_by_id(id);
   gboolean leave = (this_proj -> modelgl -> was_moved) ? ask_yes_no("Leaving without saving ?",
                                                                     "To preserve atom(s) displacement(s) press the 'Apply' button\n"
                                                                     "Otherwise initial atom positions will be restored ...\n"
@@ -280,7 +280,7 @@ G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer d
 #endif
   {
     tint * id = (tint *)data;
-    struct project * this_proj = get_project_by_id (id -> a);
+    project * this_proj = get_project_by_id (id -> a);
     if (ask_yes_no("Reset", "Reset and get back to initial coordinates ?\n This will affect all atoms !",
                     GTK_MESSAGE_WARNING, this_proj -> modelgl -> atom_win -> win))
     {
@@ -325,7 +325,7 @@ G_MODULE_EXPORT void set_reset_transformation (GtkToggleButton * but, gpointer d
 G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
-  struct project * this_proj = get_project_by_id(id);
+  project * this_proj = get_project_by_id(id);
   int h, i, j;
   i = this_proj -> modelgl -> mode;
   this_proj -> modelgl -> mode = ANALYZE;
@@ -355,14 +355,14 @@ G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
+  \fn GtkWidget * create_atom_notebook (project * this_proj, GtkWidget * vbox)
 
   \brief create the model edition notebook
 
   \param this_proj the target project
   \param vbox the GtkWidget sending the signal
 */
-GtkWidget * create_atom_notebook (struct project * this_proj, GtkWidget * vbox)
+GtkWidget * create_atom_notebook (project * this_proj, GtkWidget * vbox)
 {
   GtkWidget * notebook = gtk_notebook_new ();
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, notebook, FALSE, FALSE, 0);
@@ -409,13 +409,13 @@ atom_search * allocate_atom_search (int proj, int action, int searchid, int tsiz
 }
 
 /*!
-  \fn GtkWidget * create_edition_window (struct project * this_proj)
+  \fn GtkWidget * create_edition_window (project * this_proj)
 
   \brief create the model edition window
 
   \param this_proj the target project
 */
-GtkWidget * create_edition_window (struct project * this_proj)
+GtkWidget * create_edition_window (project * this_proj)
 {
   gchar * str = g_strdup_printf ("Model edition - %s", this_proj -> name);
   this_proj -> modelgl -> was_moved = FALSE;
@@ -459,7 +459,7 @@ GtkWidget * create_edition_window (struct project * this_proj)
 void prepare_atom_edition (gpointer data, gboolean visible)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   int i;
   if (this_proj -> modelgl -> atom_win == NULL)
   {

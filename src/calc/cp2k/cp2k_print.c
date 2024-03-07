@@ -199,10 +199,10 @@ gchar * scf_wrestart[3][3]={{"JUST_ENERGY ","OUT_STEPS","        ! => Write rest
 
 gchar * cp2kincludes[3] = {"forces.inc", "system.inc", "motion.inc"};
 
-gchar * thermostat[4] = {"\n    &THERMOSTAT\n",
-                         "      TYPE ",
-                         "\n      REGION ",
-                         "    &END THERMOSTAT"};
+gchar * thermostatr[4] = {"\n    &THERMOSTAT\n",
+                          "      TYPE ",
+                          "\n      REGION ",
+                          "    &END THERMOSTAT"};
 
 gchar * cp2k_thermo[4] = {"AD_LANGEVIN", "CSVR", "GLE", "NOSE"};
 
@@ -437,7 +437,7 @@ void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
 {
   int i, j, k, l, m;
   gchar * str;
-  struct thermostat * thermo = tmp_cp2k -> ions_thermostat;
+  thermostat * thermo = tmp_cp2k -> ions_thermostat;
   for (i=0; i<n_thermo; i++)
   {
     if (n_thermo > 1)
@@ -446,10 +446,10 @@ void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
       print_info (str, NULL, buffer);
       g_free (str);
     }
-    print_info (thermostat[0], NULL, buffer);
-    print_info (thermostat[1], NULL, buffer);
+    print_info (thermostatr[0], NULL, buffer);
+    print_info (thermostatr[1], NULL, buffer);
     print_info (cp2k_thermo[thermo -> type-1], "red", buffer);
-    print_info (thermostat[2], NULL, buffer);
+    print_info (thermostatr[2], NULL, buffer);
     print_info (thermo_region[thermo -> sys], "red", buffer);
     if (thermo -> sys > 0)
     {
@@ -505,7 +505,7 @@ void print_thermostat_cp2k (int n_thermo, GtkTextBuffer * buffer)
 
     if (thermo -> next != NULL) thermo = thermo -> next;
   }
-  print_info (thermostat[3], NULL, buffer);
+  print_info (thermostatr[3], NULL, buffer);
 }
 
 /*!

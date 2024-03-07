@@ -53,8 +53,7 @@ gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
 void print_info  (gchar * str, gchar * stag, GtkTextBuffer * buffer);
 gchar * textcolor (int i);
 
-
-gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer);
+gchar * env_name (project * this_proj, int g, int s, int f, GtkTextBuffer * buffer);
 void init_data_ (int * nats, int * nspc, int * stps, int * cid);
 void update_after_calc (int calc);
 

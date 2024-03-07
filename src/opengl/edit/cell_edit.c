@@ -37,9 +37,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data);
   G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data);
 
-  GtkWidget * cell_tab (int i, struct project * this_proj);
-  GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox);
-  GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data);
+  GtkWidget * cell_tab (int i, project * this_proj);
+  GtkWidget * create_cell_notebook (project * this_proj, GtkWidget * vbox);
+  GtkWidget * create_cell_edition_window (project * this_proj, gpointer data);
 
 */
 
@@ -57,7 +57,7 @@ gchar * edit_names[7] = {"Wrap All Atoms in", "Shift Center", "Add Extra(s)", "C
 */
 G_MODULE_EXPORT void close_cell_edit (GtkButton * but, gpointer data)
 {
-  struct project * this_proj = (struct project *)data;
+  project * this_proj = (project *)data;
   int i;
   for (i=0; i<3; i++) this_proj -> modelgl -> cshift[i] = this_proj -> modelgl -> cell_win -> cparam[i];
   this_proj -> modelgl -> cell_win -> win = destroy_this_widget (this_proj -> modelgl -> cell_win -> win);
@@ -95,14 +95,14 @@ G_MODULE_EXPORT gboolean close_cell (GtkWidget * widg, GdkEvent * event, gpointe
 }
 
 /*!
-  \fn GtkWidget * cell_tab (int i, struct project * this_proj)
+  \fn GtkWidget * cell_tab (int i, project * this_proj)
 
   \brief create the 'i'th cell tab
 
   \param i the cell tab id
   \param this_proj the target project
 */
-GtkWidget * cell_tab (int i, struct project * this_proj)
+GtkWidget * cell_tab (int i, project * this_proj)
 {
   switch (i)
   {
@@ -131,14 +131,14 @@ GtkWidget * cell_tab (int i, struct project * this_proj)
 }
 
 /*!
-  \fn GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
+  \fn GtkWidget * create_cell_notebook (project * this_proj, GtkWidget * vbox)
 
   \brief create the cell edition notebook
 
   \param this_proj the target project
   \param vbox the GtkWidget sending the signal
 */
-GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
+GtkWidget * create_cell_notebook (project * this_proj, GtkWidget * vbox)
 {
   GtkWidget * notebook = gtk_notebook_new ();
   gchar * str;
@@ -172,14 +172,14 @@ GtkWidget * create_cell_notebook (struct project * this_proj, GtkWidget * vbox)
 }
 
 /*!
-  \fn GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data)
+  \fn GtkWidget * create_cell_edition_window (project * this_proj, gpointer data)
 
   \brief create the cell editon window
 
   \param this_proj the target project
   \param data the associated data pointer
 */
-GtkWidget * create_cell_edition_window (struct project * this_proj, gpointer data)
+GtkWidget * create_cell_edition_window (project * this_proj, gpointer data)
 {
   gchar * str = g_strdup_printf ("Cell edition - %s", this_proj -> name);
   GtkWidget * win = create_win (str, this_proj -> modelgl -> win, FALSE, FALSE);
@@ -226,7 +226,7 @@ G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data)
 {
   tint * id = (tint *) data;
   int i;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   if (this_proj -> modelgl -> cell_win == NULL)
   {
     this_proj -> modelgl -> cell_win = g_malloc0 (sizeof*this_proj -> modelgl -> cell_win);

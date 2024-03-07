@@ -32,7 +32,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   void initrng ();
   void update_rings_menus (glwin * view);
-  void update_rings_view (struct project * this_proj, int c);
+  void update_rings_view (project * this_proj, int c);
   void clean_rings_data (int rid, glwin * view);
   void save_rings_data_ (int * taille,
                          double ectrc[* taille],
@@ -65,7 +65,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 extern GtkWidget * prep_rings_menu (glwin * view, int id);
 extern gboolean run_distance_matrix (GtkWidget * widg, int calc, int up_ngb);
-extern void clean_coord_window (struct project * this_proj);
+extern void clean_coord_window (project * this_proj);
 #ifdef GTK3
 extern G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data);
 #else
@@ -139,14 +139,14 @@ void update_rings_menus (glwin * view)
 #endif
 
 /*!
-  \fn void update_rings_view (struct project * this_proj, int c)
+  \fn void update_rings_view (project * this_proj, int c)
 
   \brief update the text view for ring statistics
 
   \param this_proj the target project
   \param c the ring type
 */
-void update_rings_view (struct project * this_proj, int c)
+void update_rings_view (project * this_proj, int c)
 {
   int i, j, k;
   gchar * nelt;
@@ -373,7 +373,7 @@ void update_rings_view (struct project * this_proj, int c)
 */
 void clean_rings_data (int rid, glwin * view)
 {
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   view -> ring_max[rid] = 0;
   int i, j;
 #ifdef GTK3

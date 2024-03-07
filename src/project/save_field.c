@@ -41,8 +41,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int save_field_molecule (FILE * fp, int fid);
   int save_field_body (FILE * fp, int fid);
   int save_field_external (FILE * fp, int fid);
-  int save_dlp_field_data (FILE * fp, struct project * this_proj);
-  int save_lmp_field_data (FILE * fp, struct project * this_proj);
+  int save_dlp_field_data (FILE * fp, project * this_proj);
+  int save_lmp_field_data (FILE * fp, project * this_proj);
 
 */
 
@@ -59,13 +59,13 @@ typedef struct {
   int energy_unit;
   int atom_init;
   int molecules;
-  struct field_molecule * first_molecule;
+  field_molecule * first_molecule;
   int nbody[5];
-  struct field_nth_body * first_body[5];
+  field_nth_body * first_body[5];
   // Tersoff potential cross terms
   double ** cross;
   int extern_fields;
-  struct field_external * first_external;
+  field_external * first_external;
 
   // Control file
   double sys_opts[17];
@@ -400,14 +400,14 @@ int save_field_external (FILE * fp, int fid)
 }
 
 /*!
-  \fn int save_dlp_field_data (FILE * fp, struct project * this_proj)
+  \fn int save_dlp_field_data (FILE * fp, project * this_proj)
 
   \brief save force field data to file
 
   \param fp the file pointer
   \param this_proj the target project
 */
-int save_dlp_field_data (FILE * fp, struct project * this_proj)
+int save_dlp_field_data (FILE * fp, project * this_proj)
 {
   int i, j;
   if (this_proj -> force_field[0] == NULL)
@@ -481,14 +481,14 @@ int save_dlp_field_data (FILE * fp, struct project * this_proj)
 }
 
 /*!
-  \fn int save_lmp_field_data (FILE * fp, struct project * this_proj)
+  \fn int save_lmp_field_data (FILE * fp, project * this_proj)
 
   \brief save LAMMPS force field data to file
 
   \param fp the file pointer
   \param this_proj the target project
 */
-int save_lmp_field_data (FILE * fp, struct project * this_proj)
+int save_lmp_field_data (FILE * fp, project * this_proj)
 {
   int i;
   if (this_proj -> force_field[1] == NULL)

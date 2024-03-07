@@ -149,7 +149,9 @@ enum dlp_atom_types {
   OTHER                  = 3 /*!< 3 */
 };
 
-struct field_prop {
+typedef struct field_prop field_prop;
+struct field_prop
+{
   int pid;
   int fpid;
   int key;
@@ -157,11 +159,13 @@ struct field_prop {
   float * val;
   gboolean show;
   gboolean use;
-  struct field_prop * next;
-  struct field_prop * prev;
+  field_prop * next;
+  field_prop * prev;
 };
 
-struct field_atom {
+typedef struct field_atom field_atom;
+struct field_atom
+{
   int id;
   int fid;  // Id among force field
   int afid; // Atoms id among force field atoms
@@ -179,11 +183,13 @@ struct field_atom {
   int * list;
   // ID of atoms for the DL_POLY molecule
   int * list_id;
-  struct field_atom * prev;
-  struct field_atom * next;
+  field_atom* prev;
+  field_atom* next;
 };
 
-struct field_shell {
+typedef struct field_shell field_shell;
+struct field_shell
+{
   int id;
   // 0 = select the field atom to CS
   // 1 = 0= all, 1 = selection
@@ -195,22 +201,26 @@ struct field_shell {
   gboolean vdw;
   gboolean show;
   gboolean use;
-  struct field_shell * prev;
-  struct field_shell * next;
+  field_shell * prev;
+  field_shell * next;
 };
 
-struct field_constraint {
+typedef struct field_constraint field_constraint;
+struct field_constraint
+{
   int id;
   int ia[2];
   float av;
   float length;
   gboolean show;
   gboolean use;
-  struct field_constraint * prev;
-  struct field_constraint * next;
+  field_constraint * prev;
+  field_constraint * next;
 };
 
-struct field_pmf {
+typedef struct field_pmf field_pmf;
+struct field_pmf
+{
   int id;
   float av;
   float length;
@@ -219,48 +229,56 @@ struct field_pmf {
   float * weight[2];
   gboolean show;
   gboolean use;
-  struct field_pmf * prev;
-  struct field_pmf * next;
+  field_pmf * prev;
+  field_pmf * next;
 };
 
-struct field_rigid {
+typedef struct field_rigid field_rigid;
+struct field_rigid
+{
   int id;
   int num;
   int * list;
   gboolean show;
   gboolean use;
-  struct field_rigid * prev;
-  struct field_rigid * next;
+  field_rigid * prev;
+  field_rigid * next;
 };
 
-struct field_tethered {
+typedef struct field_tethered field_tethered;
+struct field_tethered
+{
   int id;
   int num;
   int key;
   float * val;
   gboolean show;
   gboolean use;
-  struct field_tethered * prev;
-  struct field_tethered * next;
+  field_tethered * prev;
+  field_tethered * next;
 };
 
 // See field molecule for details
-struct field_struct {
+typedef struct field_struct field_struct;
+struct field_struct
+{
   // Struct id (0 = Bonds, 2 = Angles, 4 = dihedrals ...)
   int st;
   int id;
   int num;
   int * aid;  // Field atom id
   float av;
-  struct field_prop * def;
-  struct field_prop * other;
-  struct field_struct * prev;
-  struct field_struct * next;
+  field_prop * def;
+  field_prop * other;
+  field_struct * prev;
+  field_struct * next;
 };
 
 // Non-bonded interactions follow
 // N body (Vdw, Metal, Tersoff, 3b, 4b)
-struct field_nth_body {
+typedef struct field_nth_body field_nth_body;
+struct field_nth_body
+{
   // Body Id 0=Vdw, 1= Metal ...
   int bd;
   int id;
@@ -272,29 +290,35 @@ struct field_nth_body {
   float * val;
   gboolean show;
   gboolean use;
-  struct field_nth_body * prev;
-  struct field_nth_body * next;
+  field_nth_body * prev;
+  field_nth_body * next;
 };
 
-struct field_external{
+typedef struct field_external field_external;
+struct field_external
+{
   int id;
   int key;
   float * val;
   gboolean use;
-  struct field_external * prev;
-  struct field_external * next;
+  field_external * prev;
+  field_external * next;
 };
 
 /* simplified atom data structure */
-struct field_neighbor{
+typedef struct field_neighbor field_neighbor;
+struct field_neighbor
+{
   int id;               // atom id in molecule/fragment
   int num;              // number of neighbor(s)
   int * vois;           // list of neighbor(s)
-  struct field_neighbor * prev;
-  struct field_neighbor * next;
+  field_neighbor * prev;
+  field_neighbor * next;
 };
 
-struct field_molecule{
+typedef struct field_molecule field_molecule;
+struct field_molecule
+{
   int id;
   gchar * name;
   struct molecule * mol;
@@ -302,17 +326,17 @@ struct field_molecule{
   int * fragments;
   dint ** atoms_id;
   int atoms;
-  struct field_atom * first_atom;
+  field_atom* first_atom;
   int shells;
-  struct field_shell * first_shell;
+  field_shell * first_shell;
   int constraints;
-  struct field_constraint * first_constraint;
+  field_constraint * first_constraint;
   int pmfs;
-  struct field_pmf * first_pmf;
+  field_pmf * first_pmf;
   int rigids;
-  struct field_rigid * first_rigid;
+  field_rigid * first_rigid;
   int tethered;
-  struct field_tethered * first_tethered;
+  field_tethered * first_tethered;
   // 0 = bonds
   // 1 = bonds restraints
   // 2 = angles
@@ -322,11 +346,11 @@ struct field_molecule{
   // 6 = impropers
   // 7 = inversions
   int nstruct[8];
-  struct field_struct * first_struct[8];
+  field_struct * first_struct[8];
   gboolean show;
   gboolean show_id;
-  struct field_molecule * next;
-  struct field_molecule * prev;
+  field_molecule * next;
+  field_molecule * prev;
 };
 
 extern GtkWidget * field_assistant;
@@ -353,21 +377,20 @@ extern float internal_to_other[5];
 extern classical_field * tmp_field;
 extern glwin * tmp_view;
 extern coord_info * tmp_coord;
-extern struct project * tmp_proj;
-extern struct field_molecule * tmp_fmol;
-extern struct molecule * tmp_mol;
-extern struct field_atom * tmp_fat, * tmp_fbt, * tmp_fct, * tmp_fdt;
-extern struct field_shell * tmp_fshell;
-extern struct field_constraint * tmp_fcons;
-extern struct field_pmf * tmp_fpmf;
-extern struct field_rigid * tmp_frig;
-extern struct field_tethered * tmp_ftet;
-extern struct field_prop * tmp_fprop;
-extern struct field_struct * tmp_fstr;
-extern struct field_nth_body * tmp_fbody;
-extern struct field_nth_body * comp_fbody;
-extern struct field_external * tmp_fext;
-
+extern project * tmp_proj;
+extern field_molecule * tmp_fmol;
+extern molecule * tmp_mol;
+extern field_atom* tmp_fat, * tmp_fbt, * tmp_fct, * tmp_fdt;
+extern field_shell * tmp_fshell;
+extern field_constraint * tmp_fcons;
+extern field_pmf * tmp_fpmf;
+extern field_rigid * tmp_frig;
+extern field_tethered * tmp_ftet;
+extern field_prop * tmp_fprop;
+extern field_struct * tmp_fstr;
+extern field_nth_body * tmp_fbody;
+extern field_nth_body * comp_fbody;
+extern field_external * tmp_fext;
 
 extern int row_id;
 extern tint toviz;
@@ -391,15 +414,15 @@ extern int body_at (int b);
 
 // Init field elements
 extern int prepare_field_struct (int ids, int sid, int yes_no_num, int * aid);
-extern int test_for_bonds (struct field_atom * at, struct field_atom * bt);
-extern int test_for_angles (struct field_atom * at,
-                            struct field_atom * bt,
-                            struct field_atom * ct);
-extern int test_for_dihedrals (struct field_atom * at,
-                               struct field_atom * bt,
-                               struct field_atom * ct,
-                               struct field_atom * dt);
-extern void clean_field_struct_list (struct field_struct * stru);
+extern int test_for_bonds (field_atom* at, field_atom* bt);
+extern int test_for_angles (field_atom* at,
+                            field_atom* bt,
+                            field_atom* ct);
+extern int test_for_dihedrals (field_atom* at,
+                               field_atom* bt,
+                               field_atom* ct,
+                               field_atom* dt);
+extern void clean_field_struct_list (field_struct * stru);
 
 // Create force field data structure
 extern void set_mol_num_label ();
@@ -414,51 +437,51 @@ extern classical_field * create_force_field_data_structure (int ai);
 extern int * duplicate_int (int num, int * old_val);
 extern gboolean * duplicate_bool (int num, gboolean * old_val);
 extern float * duplicate_float (int num, float * old_val);
-extern struct field_atom * duplicate_field_atom (struct field_atom * old_fat);
-extern struct field_shell * duplicate_field_shell (struct field_shell * old_shell);
-extern struct field_constraint * duplicate_field_constraint (struct field_constraint * old_cons);
-extern struct field_rigid * duplicate_field_rigid (struct field_rigid * old_rig);
-extern struct field_tethered * duplicate_field_tethered (struct field_tethered * old_tet);
-extern struct field_prop * duplicate_field_prop (struct field_prop * old_prop, int ti);
-extern void duplicate_other_prop (int oid, struct field_struct * old_fstr, struct field_struct * new_fstr);
-extern struct field_struct * duplicate_field_struct (struct field_struct * old_fstr);
-extern struct field_struct * duplicate_field_struct_list (struct field_struct * list_str, gboolean init);
-extern struct field_nth_body * duplicate_field_nth_body (struct field_nth_body * old_nth_body);
-extern struct field_molecule * duplicate_field_molecule (struct field_molecule * old_fmol);
+extern field_atom* duplicate_field_atom (field_atom* old_fat);
+extern field_shell * duplicate_field_shell (field_shell * old_shell);
+extern field_constraint * duplicate_field_constraint (field_constraint * old_cons);
+extern field_rigid * duplicate_field_rigid (field_rigid * old_rig);
+extern field_tethered * duplicate_field_tethered (field_tethered * old_tet);
+extern field_prop * duplicate_field_prop (field_prop * old_prop, int ti);
+extern void duplicate_other_prop (int oid, field_struct * old_fstr, field_struct * new_fstr);
+extern field_struct * duplicate_field_struct (field_struct * old_fstr);
+extern field_struct * duplicate_field_struct_list (field_struct * list_str, gboolean init);
+extern field_nth_body * duplicate_field_nth_body (field_nth_body * old_nth_body);
+extern field_molecule * duplicate_field_molecule (field_molecule * old_fmol);
 extern classical_field * duplicate_dlpoly_field (classical_field * init_field);
 
 // Init field element:
-extern struct field_atom * init_field_atom (int id, int type, int at, int nat, int coo, int * list);
-extern struct field_shell * init_field_shell (int id, int ia, int ib);
-extern struct field_constraint * init_field_constraint (int id, int ia, int ib);
-extern struct field_pmf * init_field_pmf (int id, int num[2], int * list[2], float * w[2]);
-extern struct field_rigid * init_field_rigid (int id, int num, int * list);
-extern struct field_tethered * init_field_tethered (int id, int num);
-extern struct field_prop * init_field_prop (int ti, int key, gboolean show, gboolean use);
-extern struct field_struct * init_field_struct (int st, int ai, int an, int * aid);
-extern struct field_nth_body * init_field_nth_body (int bi, int bd, int * na, int ** ma, int ** ba);
-extern struct field_external * init_field_external (int bi);
+extern field_atom* init_field_atom (int id, int type, int at, int nat, int coo, int * list);
+extern field_shell * init_field_shell (int id, int ia, int ib);
+extern field_constraint * init_field_constraint (int id, int ia, int ib);
+extern field_pmf * init_field_pmf (int id, int num[2], int * list[2], float * w[2]);
+extern field_rigid * init_field_rigid (int id, int num, int * list);
+extern field_tethered * init_field_tethered (int id, int num);
+extern field_prop * init_field_prop (int ti, int key, gboolean show, gboolean use);
+extern field_struct * init_field_struct (int st, int ai, int an, int * aid);
+extern field_nth_body * init_field_nth_body (int bi, int bd, int * na, int ** ma, int ** ba);
+extern field_external * init_field_external (int bi);
 extern void init_all_field_struct (gboolean init);
 extern int init_vdw (gboolean init);
-extern void setup_field_molecule_neighbors (int i, struct project * this_proj);
+extern void setup_field_molecule_neighbors (int i, project * this_proj);
 
 // Get active field element:
 extern int get_position_in_field_atom_from_model_id (int fat, int at);
-extern int get_field_atom_id_from_model_id (struct field_molecule * fmol, int at);
-extern struct field_molecule * get_active_field_molecule_from_model_id (struct project * this_proj, int aid);
-extern int get_fragment_atom_id_from_model_id (struct field_molecule * fmol, int at);
-extern struct field_molecule * get_active_field_molecule (int a);
-extern struct field_nth_body * get_active_body (int a, int b);
-extern struct field_external * get_active_external (int a);
-extern struct field_atom * get_active_atom (int a, int b);
-extern struct field_shell * get_active_shell (int a, int b);
-extern struct field_constraint * get_active_constraint (int a, int b);
-extern struct field_pmf * get_active_pmf (int a, int b);
-extern struct field_rigid * get_active_rigid (int a, int b);
-extern struct field_tethered * get_active_tethered (int a, int b);
-extern struct field_prop * get_active_prop (struct  field_prop * pr, int a);
-extern struct field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids);
-extern struct field_struct * get_active_struct (int s, int a, int b);
+extern int get_field_atom_id_from_model_id (field_molecule * fmol, int at);
+extern field_molecule * get_active_field_molecule_from_model_id (project * this_proj, int aid);
+extern int get_fragment_atom_id_from_model_id (field_molecule * fmol, int at);
+extern field_molecule * get_active_field_molecule (int a);
+extern field_nth_body * get_active_body (int a, int b);
+extern field_external * get_active_external (int a);
+extern field_atom* get_active_atom (int a, int b);
+extern field_shell * get_active_shell (int a, int b);
+extern field_constraint * get_active_constraint (int a, int b);
+extern field_pmf * get_active_pmf (int a, int b);
+extern field_rigid * get_active_rigid (int a, int b);
+extern field_tethered * get_active_tethered (int a, int b);
+extern field_prop * get_active_prop (struct  field_prop * pr, int a);
+extern field_prop * get_active_prop_using_atoms (struct  field_prop * pr, int ti, int * ids);
+extern field_struct * get_active_struct (int s, int a, int b);
 extern int get_struct_id_from_atom_id (int ids, int * aid);
 
 // Field objects visualization:
@@ -471,7 +494,7 @@ extern G_MODULE_EXPORT void on_toggle_visualize_or_select_object (GtkCellRendere
 extern G_MODULE_EXPORT void visualize_or_select_all_elements (GtkTreeViewColumn * col, gpointer data);
 
 // Field molecule callbacks
-extern void adjust_field_prop (int fil, int sti, struct field_prop * tmp, int * ids, int key);
+extern void adjust_field_prop (int fil, int sti, field_prop * tmp, int * ids, int key);
 extern gchar * remove_text (int i, int j, gchar * str);
 extern G_MODULE_EXPORT void select_atom_id_from_fied_molecule (GtkButton * but, gpointer data);
 extern G_MODULE_EXPORT void edit_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -482,10 +505,10 @@ extern G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, 
 extern G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GVariant * parameter, gpointer data);
 
 // OGL utils
-extern struct distance distance_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt);
-extern struct angle angle_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct);
-extern struct angle dihedral_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct, struct atom * dt);
-extern struct angle inversion_3d (cell_info * cell, int mdstep, struct atom * at, struct atom * bt, struct atom * ct, struct atom * dt);
+extern struct distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt);
+extern struct angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct);
+extern struct angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
+extern struct angle inversion_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
 
 // Print
 extern gchar * parameters_info (int obj, int key,  gchar ** words, float * data);
@@ -494,16 +517,16 @@ extern void print_dlp_field (GtkTextBuffer * buf);
 extern void print_dlp_config (GtkTextBuffer * buf);
 extern void print_dlp_control (GtkTextBuffer * buf);
 extern void print_dlp_improper_inversion (int di, GtkTextBuffer * buf,
-                                          struct field_struct * dh, int fi,
+                                          field_struct * dh, int fi,
                                           GtkTreeStore * store, GtkTreeIter * iter);
 extern void print_dlp_dihedral (int di, GtkTextBuffer * buf,
-                                struct field_struct * dh, int fi,
+                                field_struct * dh, int fi,
                                 GtkTreeStore * store, GtkTreeIter * iter);
 extern void print_dlp_angle (int ai, GtkTextBuffer * buf,
-                             struct field_struct * an, int fi,
+                             field_struct * an, int fi,
                              GtkTreeStore * store, GtkTreeIter * iter);
 extern void print_dlp_bond (int bi, GtkTextBuffer * buf,
-                            struct field_struct * bd, int fi,
+                            field_struct * bd, int fi,
                             GtkTreeStore * store, GtkTreeIter * iter);
 
 extern G_MODULE_EXPORT void setup_this_force_field (int id);

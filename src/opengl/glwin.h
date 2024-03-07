@@ -115,7 +115,9 @@ struct angle {
 };
 
 /*! \struct distance */
-struct distance {
+typedef struct distance distance;
+struct distance
+{
   double length;  /*!< the distance value */
   double x;       /*!< x vector component */
   double y;       /*!< y vector component */
@@ -123,24 +125,30 @@ struct distance {
   gboolean pbc;   /*!< are PBC used ? 1 = yes, 0 = no */
 };
 
-typedef struct {
+typedef struct atom_data atom_data;
+struct atom_data
+{
   gboolean show[2];
   gboolean label[2];
   gboolean pick[2];
   gboolean cloned;
   int style;
-} atom_data;
+};
 
-typedef struct {
+typedef struct spinner spinner;
+struct spinner
+{
   GtkWidget * win;
   GtkWidget * right;
   GtkWidget * left;
   GtkWidget * up;
   GtkWidget * down;
   GtkWidget * stop;
-} spinner;
+};
 
-typedef struct {
+typedef struct sequencer sequencer;
+struct sequencer
+{
   GtkWidget * win;
   GtkWidget * first;
   GtkWidget * last;
@@ -152,19 +160,23 @@ typedef struct {
   GtkWidget * loop;
   GtkWidget * fast;
   GtkWidget * slow;
-} sequencer;
+};
 
-typedef struct {
+typedef struct recorder recorder;
+struct recorder
+{
   GtkWidget * win;
   GtkWidget * rec;
   GtkWidget * stop;
-} recorder;
+};
 
 /*! \struct Light
 
   \brief Light parameters for OpenGL rendering
 */
-typedef struct {
+typedef struct Light Light;
+struct Light
+{
   int type;           /*!< Light type: 0 = directional, 1 = point, 2 = spot light */
   int fix;            /*!< Light fix: 0 = fix for the view, 1 = fix for the molecule */
   int show;           /*!< Show (1) or hide light (0) */
@@ -173,13 +185,15 @@ typedef struct {
   vec3_t intensity;   /*!< Light colors */
   vec3_t attenuation; /*!< Constant, linear and quadratic attenuations */
   vec3_t spot_data;   /*!< Angle, inner and outer spot light cutoff */
-} Light;
+};
 
 /*! \struct Material
 
   \brief Material parameters for OpenGL rendering
 */
-typedef struct {
+typedef struct Material Material;
+struct Material
+{
   int predefine;       /*!< Cutsom (0) or template (1) */
   vec3_t albedo;       /*!< Albedo components */
   // 0 = lightning model
@@ -195,25 +209,29 @@ typedef struct {
                          3 = back lightning, \n
                          4 = gamma, \n
                          5 = opacity*/
-} Material;
+};
 
 /*! \struct Fog
 
   \brief Fog parameters for OpenGL rendering
 */
-typedef struct {
+typedef struct Fog Fog;
+struct Fog
+{
   int mode;         /*!< Fog mode in: none, linear (LINEAR), exponential (EXP) and exponential squared (EXP2) */
   int based;        /*!< Fog type: plane based (0) or range based (1) */
   float density;    /*!< Fog density */
   float depth[2];   /*!< Fog depth: 0 = start value, 1 = end value */
   vec3_t color;     /*!< Fog color */
-} Fog;
+};
 
 /*! \struct screen_string
 
   \brief OpenGL string rendering
 */
-struct screen_string {
+typedef struct screen_string screen_string;
+struct screen_string
+{
   int id;                         /*!< The string unique ID */
   int type;                       /*!< The type of string (3= labels, 4 = bonds, 5= angles) */
   char * word;                    /*!< The text to be displayed */
@@ -221,18 +239,22 @@ struct screen_string {
   float shift[4];                 /*!< The shifts (if any) on x, y, z, then visibility */
   int num_instances;              /*!< The number of instances for that string */
   float * instances;              /*!< The list of instances for that string */
-  struct screen_string * prev;
-  struct screen_string * last;
+  screen_string * prev;
+  screen_string * last;
 };
 
-struct selatom {
+typedef struct atom_in_selection atom_in_selection;
+struct atom_in_selection
+{
   int id;
   int sp;
-  struct selatom * prev;
-  struct selatom * next;
+  atom_in_selection * prev;
+  atom_in_selection * next;
 };
 
-struct atom_selection {
+typedef struct atom_selection atom_selection;
+struct atom_selection
+{
   int selected;
   int * selected_bonds;
   ColRGBA * bond_colors;
@@ -240,16 +262,17 @@ struct atom_selection {
   ColRGBA * angle_colors;
   int * selected_dihedrals;
   ColRGBA * dihedral_colors;
-  struct selatom * first;
-  struct selatom * last;
+  atom_in_selection * first;
+  atom_in_selection * last;
 };
 
 /*! \struct image
 
   \brief a structure to describe the content of the OpenGL rendering
 */
-typedef struct {
-
+typedef struct image image;
+struct image
+{
   ColRGBA backcolor;                            /*!< Background color */
   // Color maps for atoms [0] and polyhedra [1]
   int color_map[2];                             /*!< Color maps, 0= atoms, 1 = polyhedra */
@@ -330,7 +353,7 @@ typedef struct {
 
   int m_is_pressed;                             /*!< is the key m pressed ? */
   // Atom selection: 0 = normal mode, 1 = edition mode
-  struct atom_selection * selected[2];          /*!< atom(s) selection lists \n
+  atom_selection * selected[2];          /*!< atom(s) selection lists \n
                                                     0 = analysis mode, \n
                                                     1 = edition mode */
   // Model box and partial axis data
@@ -427,24 +450,30 @@ typedef struct {
   int step;                                     /*!< The MD step, in case of trajectory */
   int rep;                                      /*!< Representation: 0 = orthographic, 1 = perspective */
   int id;                                       /*!< Image ID */
-} image;
+};
 
-/*! \struct snapshot */
-struct snapshot {
+/*! \snapshot */
+typedef struct snapshot snapshot;
+struct snapshot
+{
   image * img;               /*!< The image structure for this snapshot */
-  struct snapshot * prev;
-  struct snapshot * next;
+  snapshot * prev;
+  snapshot * next;
 };
 
 /*! \struct animation */
-typedef struct {
+typedef struct animation animation;
+struct animation
+{
   int frames;                /*!< Number of frames or snapshots */
-  struct snapshot * first;
-  struct snapshot * last;
-} animation;
+  snapshot * first;
+  snapshot * last;
+};
 
 /*! \struct colormap */
-typedef struct {
+typedef struct colormap colormap;
+struct colormap
+{
   float ** data;              /*!< Data to use as custom color map, value per MD step x atom */
   int points;                 /*!< Number of color(s) to build the custom color map */
   ColRGBA ** colors;          /*!< Color(s) to use to build the custom color map */
@@ -452,13 +481,15 @@ typedef struct {
   float cmin;                 /*!< Minimum value */
   float cmax;                 /*!< Maximum value */
   ColRGBA * values;           /*!< The atom(s) colors calculated using the custom color map information */
-} colormap;
+};
 
 /*! \struct atom_search
 
   \brief a data structure to search for atom(s) and edit the model
 */
-typedef struct {
+typedef struct atom_search atom_search;
+struct atom_search
+{
   int proj;                        /*!< Target project */
   int action;                      /*!< Action to be performed */
   GtkWidget * atom_tree;
@@ -515,9 +546,9 @@ typedef struct {
   int todo_size;
   int * todo;
   tint pointer[6];
-} atom_search;
+};
 
-/*! \struct insert_object
+/*! \struct atomic_object
 
   \brief a data structure to describe an object to work on. \n
   the object can be one or more: \n
@@ -528,7 +559,9 @@ typedef struct {
     - molecule(s) \n
     - selection(s) of atom(s) from any project in the workspace
 */
-struct insert_object {
+typedef struct atomic_object atomic_object;
+struct atomic_object
+{
   int id;                       /*!< Object ID */
   int origin;                   /*!< Origin project for the object */
   float dim;                    /*!< Maximum size in x, y or z for the object */
@@ -545,38 +578,44 @@ struct insert_object {
   int bonds;                    /*!< Number of chemical bonds */
   int ** ibonds;                /*!< List of bonds */
   coord_info * coord;           /*!< coordination information */
-  struct insert_object * prev;
-  struct insert_object * next;
+  atomic_object * prev;
+  atomic_object * next;
 };
 
 /*! \struct wyckoff_position
 
   \brief a structure to describe a Wyckoff position in crystallography
 */
-typedef struct {
+typedef struct wyckoff_position wyckoff_position;
+struct wyckoff_position
+{
   int multi;           /*!< Multiplicity */
   gchar * let;         /*!< Letter */
   gchar * site;        /*!< Symmetry */
   gchar *** pos;       /*!< Coordinate(s) */
-} wyckoff_position;
+};
 
 /*! \struct spg_setting
 
   \brief a structure to describe the settings of a space group in crystallography
 */
-typedef struct {
+typedef struct spg_setting spg_setting;
+struct spg_setting
+{
   int origin;          /*!< Origin */
   gchar * name;        /*!< Name of the setting */
   gchar * pos[3];      /*!< Lattice orientation modification(s) */
   int nump;            /*!< Number of Wyckoff position modification(s) */
   gchar *** points;    /*!< Wyckoff position modification(s) */
-} spg_setting;
+};
 
 /*! \struct space_group
 
   \brief a structure to described a space group in crystallography
 */
-typedef struct {
+typedef struct space_group space_group;
+struct space_group
+{
   int id;                         /*!< ID number, in [1-230] */
   gchar * name;                   /*!< Name */
   gchar * hms;                    /*!< Hermann-Mauguin symbol */
@@ -589,13 +628,15 @@ typedef struct {
   wyckoff_position * wyckoff;     /*!< Wyckoff position(s) */
   mat4_t coord_origin;            /*!< Origin of the atomic coordinates */
   mat4_t wyck_origin;             /*!< Origin of the Wyckoff positions */
-} space_group;
+};
 
 /*! \struct box_info
 
   \brief model box information
 */
-typedef struct {
+typedef struct box_info box_info;
+struct box_info
+{
   double param[2][3];     /*!< Box parameters: \n
                                0: a, b, c \n
                                1: alpha, beta, gamma */
@@ -605,13 +646,15 @@ typedef struct {
   mat4_t cart_to_frac;    /*!< Cartesian to fractional matrix */
   double vol;             /*!< Volume */
   double dens;            /*!< Density */
-} box_info;
+};
 
 /*! \struct
 
   \brief Description of the periodicity
 */
-typedef struct {
+typedef struct cell_info cell_info;
+struct cell_info
+{
   box_info * box;         /*!< Model box description \n
                                In the case of NPT calculation as many boxes as MD steps are described */
   int cextra[3];          /*!< Extra boxes (if any), on x, y and z*/
@@ -627,9 +670,11 @@ typedef struct {
   gboolean has_a_box;     /*!< Is there a model box ?  (0 = no, 1 = yes) */
   gboolean crystal;       /*!< Is this a crystal ?  (0 = no, 1 = yes) */
   space_group * sp_group; /*!< Space group in the case of a crystal */
-} cell_info;
+};
 
-typedef struct {
+typedef struct builder_edition builder_edition;
+struct builder_edition
+{
   GtkWidget * win;
   GtkWidget * bh_box;
   GtkWidget * bv_box[2];
@@ -659,9 +704,11 @@ typedef struct {
   gboolean clones;
   int extrac[3];
   tint pointers[3][3];
-} builder_edition;
+};
 
-typedef struct {
+typedef struct atom_edition atom_edition;
+struct atom_edition
+{
   GtkWidget * win;
   GtkWidget * vbox;
   GtkWidget * notebook;
@@ -688,15 +735,17 @@ typedef struct {
   // 1 = INSERT
   // 2 = CBUILD
   // 3 = PASSIVATE
-  struct insert_object * to_be_inserted[4];
-  struct insert_object * to_be_moved[2];
+  atomic_object * to_be_inserted[4];
+  atomic_object * to_be_moved[2];
   int adv_bonding[2];
   coord_info * coord;
   int add_spec;
   double * new_z;
-} atom_edition;
+};
 
-typedef struct {
+typedef struct cell_edition cell_edition;
+struct cell_edition
+{
   GtkWidget * win;
   GtkWidget * notebook;
   GtkWidget * put_in_box;
@@ -729,9 +778,11 @@ typedef struct {
   double cparam[21];
   double initbox[3];
   dint slab_pointer[5];
-} cell_edition;
+};
 
-typedef struct {
+typedef struct opengl_edition opengl_edition;
+struct opengl_edition
+{
   GtkWidget * win;
   GtkWidget * templates;
   GtkWidget * param_mat;
@@ -761,9 +812,11 @@ typedef struct {
   int proj;
   dint pointer[6];
   tint pos_pointer[5][3];
-} opengl_edition;
+};
 
-typedef struct {
+typedef struct coord_edition coord_edition;
+struct coord_edition
+{
   GtkWidget * win;
   GtkWidget * notebook;
   GtkTreeStore * rings_model[5];
@@ -773,15 +826,19 @@ typedef struct {
   GtkWidget * rilab[5][3];
   int cst, csz, ch;
   GtkWidget * chlab[3];
-} coord_edition;
+};
 
-typedef struct {
+typedef struct measures measures;
+struct measures
+{
   GtkWidget * win;
   GtkWidget * label;
   GtkWidget * selection_tree[3];
-} measures;
+};
 
-typedef struct {
+typedef struct volumes volumes;
+struct volumes
+{
   GtkWidget * win;
   // All model
   GtkWidget * compb[FILLED_STYLES];
@@ -799,15 +856,21 @@ typedef struct {
   GtkWidget * fm_vvbox[2];
   int ngeov[2];
   int * geov_id[2];
-} volumes;
+};
 
-typedef struct {
+typedef struct model_edition model_edition;
+struct model_edition
+{
   GtkWidget * win;
   GtkWidget * notebook;
-} model_edition;
+};
 
-/*! \struct OpenGL window widget structure */
-typedef struct {
+/*! \struct glwin
+
+  \brief OpenGL window widget structure */
+typedef struct glwin glwin;
+struct glwin
+{
   gboolean init;                                  /*!< Was rendering initialized (0 = no, 1 = yes) */
   int proj;                                       /*!< Target project */
   // The entire OpenGL window
@@ -900,7 +963,7 @@ typedef struct {
                                                   7 = selection in edition mode */
 
   // For temporary backup purposes only:
-  struct atom_selection * tmp_sel[2];
+  atom_selection * tmp_sel[2];
   int * stored_labels[2];
 
   int other_status;
@@ -1024,6 +1087,6 @@ typedef struct {
 
   int action_id;
   GSimpleActionGroup * action_group;
-} glwin;
+};
 
 #endif

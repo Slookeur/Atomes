@@ -31,7 +31,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   int save_this_string (FILE * fp, gchar * string);
-  int save_project (FILE * fp, struct project * this_proj, int npi);
+  int save_project (FILE * fp, project * this_proj, int npi);
 
 */
 
@@ -73,7 +73,7 @@ int save_this_string (FILE * fp, gchar * string)
 }
 
 /*!
-  \fn int save_project (FILE * fp, struct project * this_proj, int npi)
+  \fn int save_project (FILE * fp, project * this_proj, int npi)
 
   \brief save project to file
 
@@ -81,7 +81,7 @@ int save_this_string (FILE * fp, gchar * string)
   \param this_proj the target project
   \param npi the total number of projects in the workspace
 */
-int save_project (FILE * fp, struct project * this_proj, int npi)
+int save_project (FILE * fp, project * this_proj, int npi)
 {
   int i, j, k;
   gchar * ver;

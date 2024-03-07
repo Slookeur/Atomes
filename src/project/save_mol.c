@@ -30,16 +30,16 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int save_atom_m (FILE * fp, struct project * this_proj, int s, int a);
-  int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp);
-  int save_mol (FILE * fp, struct project * this_proj);
+  int save_atom_m (FILE * fp, project * this_proj, int s, int a);
+  int save_this_mol (FILE * fp, project * this_proj, molecule * tmp);
+  int save_mol (FILE * fp, project * this_proj);
 
 */
 
 #include "global.h"
 #include "project.h"
 
-/*struct molecule {
+/*molecule {
   int id;                                 // Molecule id number
   int md;                                 // MD step
   int multiplicity;                       // Multiplicity
@@ -47,18 +47,18 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int natoms;                             // Number of atoms
   int nspec;                              // Number of chemical species
   int * species;                          // Number of atom by species
-  struct atom ** atoms;                   // The list of all atoms
+  atom ** atoms;                   // The list of all atoms
   int nbonds;                             // Number of chemical bonds
   int ** pbonds;                          // Number of chemical bonds by geometries
   int nangles;                            // Number of bond angles
   int *** pangles;                        // Number of bond angles by geometries
   int ** lgeo;                            // list of coordination spheres (by species)
-  struct molecule * next;
-  struct molecule * prev;
+  molecule * next;
+  molecule * prev;
 };*/
 
 /*!
-  \fn int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
+  \fn int save_atom_m (FILE * fp, project * this_proj, int s, int a)
 
   \brief save atom data to file
 
@@ -67,7 +67,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param s the MD step
   \param a the atom number
 */
-int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
+int save_atom_m (FILE * fp, project * this_proj, int s, int a)
 {
   if (fwrite (& this_proj -> atoms[s][a].coord[2], sizeof(int), 1, fp) != 1) return ERROR_RW;
   if (fwrite (& this_proj -> atoms[s][a].coord[3], sizeof(int), 1, fp) != 1) return ERROR_RW;
@@ -75,7 +75,7 @@ int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
 }
 
 /*!
-  \fn int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
+  \fn int save_this_mol (FILE * fp, project * this_proj, molecule * tmp)
 
   \brief save this molecule data to file
 
@@ -83,7 +83,7 @@ int save_atom_m (FILE * fp, struct project * this_proj, int s, int a)
   \param this_proj the target project
   \param tmp the molecule that contains the data
 */
-int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
+int save_this_mol (FILE * fp, project * this_proj, molecule * tmp)
 {
   if (fwrite (& tmp -> id, sizeof(int), 1, fp) != 1) return 0;
   if (fwrite (& tmp -> md, sizeof(int), 1, fp) != 1) return 0;
@@ -96,14 +96,14 @@ int save_this_mol (FILE * fp, struct project * this_proj, struct molecule * tmp)
 }
 
 /*!
-  \fn int save_mol (FILE * fp, struct project * this_proj)
+  \fn int save_mol (FILE * fp, project * this_proj)
 
   \brief save molecule information to file
 
   \param fp the file pointer
   \param this_proj the target project
 */
-int save_mol (FILE * fp, struct project * this_proj)
+int save_mol (FILE * fp, project * this_proj)
 {
   int i, j;
   i = 0;

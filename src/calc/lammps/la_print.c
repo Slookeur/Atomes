@@ -31,20 +31,20 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   int get_mol_id_from_model_id (int at);
-  int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_struct * dh);
-  int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struct * an);
-  int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct * bd);
-  int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_check);
-  int get_type_struct_to_print (struct field_molecule * tfmol, int sid);
+  int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, field_struct * dh);
+  int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, field_struct * an);
+  int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, field_struct * bd);
+  int is_this_new_prop (int sid, field_prop * init, field_prop * to_check);
+  int get_type_struct_to_print (field_molecule * tfmol, int sid);
   int get_different_atoms ();
 
-  gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * bt);
+  gboolean are_different_field_atoms (field_atom* at, field_atom* bt);
 
   void print_lammps_mass (GtkTextBuffer * buf);
   void print_lammps_atoms (GtkTextBuffer * buf);
   void print_lammps_atom_file (GtkTextBuffer * buf);
 
-  struct field_atom * get_print_atom (int aid);
+  field_atom* get_print_atom (int aid);
 
 */
 
@@ -81,10 +81,10 @@ enum lammps_atom_types { // comments = corresponding data file formats
 
 extern gboolean in_bond (int at, int bd[2]);
 extern int get_num_vdw_max ();
-extern gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd);
-extern int get_num_struct_to_print (struct field_molecule * fmol, int sid);
-extern gboolean are_identical_prop (int ti, int ai, struct field_prop * pro_a, struct field_prop * pro_b);
-extern void merging_atoms (struct field_atom * to_merge, struct field_atom * to_remove, gboolean upda);
+extern gchar * get_body_element_name (field_nth_body * body, int aid, int nbd);
+extern int get_num_struct_to_print (field_molecule * fmol, int sid);
+extern gboolean are_identical_prop (int ti, int ai, field_prop * pro_a, field_prop * pro_b);
+extern void merging_atoms (field_atom* to_merge, field_atom* to_remove, gboolean upda);
 extern char * vect_comp[3];
 
 /*!
@@ -98,7 +98,7 @@ int get_mol_id_from_model_id (int at)
 {
   int i;
   tmp_fmol = tmp_field -> first_molecule;
-  struct field_atom * fat;
+  field_atom* fat;
   while (tmp_fmol)
   {
     fat = tmp_fmol -> first_atom;
@@ -115,10 +115,10 @@ int get_mol_id_from_model_id (int at)
   return -1;
 }
 
-struct field_prop * print_prop[8];
+field_prop * print_prop[8];
 
 /*!
-  \fn int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_struct * dh)
+  \fn int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, field_struct * dh)
 
   \brief print LAMMPS dihedral
 
@@ -127,11 +127,11 @@ struct field_prop * print_prop[8];
   \param buf the GtkTextBuffer to print into
   \param dh the structural property to print
 */
-int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_struct * dh)
+int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, field_struct * dh)
 {
   int a, c, i, j, k, l, m, n, o, p;
   gchar * str;
-  struct field_prop * tp_prop;
+  field_prop * tp_prop;
   gboolean same_atom = FALSE;
   gboolean * already_done;
   if (tmp_fat -> id == tmp_fdt -> id && tmp_fbt -> id && tmp_fct -> id)
@@ -187,7 +187,7 @@ int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_st
 }
 
 /*!
-  \fn int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struct * an)
+  \fn int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, field_struct * an)
 
   \brief print LAMMPS angle
 
@@ -196,11 +196,11 @@ int print_lammps_dihedral (int did, int di, GtkTextBuffer * buf, struct field_st
   \param buf the GtkTextBuffer to print into
   \param an the structural property to print
 */
-int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struct * an)
+int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, field_struct * an)
 {
   int i, j, k, l, m, o, p, q;
   gchar * str;
-  struct field_prop * tp_prop;
+  field_prop * tp_prop;
   int * ids = allocint(3);
   gboolean same_atom = FALSE;
   gboolean * already_done;
@@ -249,7 +249,7 @@ int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struc
 }
 
 /*!
-  \fn int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct * bd)
+  \fn int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, field_struct * bd)
 
   \brief print LAMMPS bond
 
@@ -258,11 +258,11 @@ int print_lammps_angle (int aid, int ai, GtkTextBuffer * buf, struct field_struc
   \param buf the GtkTextBuffer to print into
   \param bd the structural property to print
 */
-int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct * bd)
+int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, field_struct * bd)
 {
   int i, j, k, l, m, n;
   gchar * str;
-  struct field_prop * tp_prop;
+  field_prop * tp_prop;
   int * ids = allocint(2);
   gboolean same_atom = FALSE;
   gboolean * already_done;
@@ -302,7 +302,7 @@ int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct
 }
 
 /*!
-  \fn int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_check)
+  \fn int is_this_new_prop (int sid, field_prop * init, field_prop * to_check)
 
   \brief check if field property exists, if not add it
 
@@ -310,9 +310,9 @@ int print_lammps_bond (int bid, int bi, GtkTextBuffer * buf, struct field_struct
   \param init the initial field property pointer
   \param to_check the field property to check
 */
-int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_check)
+int is_this_new_prop (int sid, field_prop * init, field_prop * to_check)
 {
-  struct field_prop * tmp_pr = init;
+  field_prop * tmp_pr = init;
   gboolean add_prop = TRUE;
   while (tmp_pr)
   {
@@ -339,14 +339,14 @@ int is_this_new_prop (int sid, struct field_prop * init, struct field_prop * to_
 }
 
 /*!
-  \fn int get_type_struct_to_print (struct field_molecule * tfmol, int sid)
+  \fn int get_type_struct_to_print (field_molecule * tfmol, int sid)
 
   \brief build the list of 'sid' type structural property(ies) to print
 
   \param tfmol the field molecule
   \param sid the type of structural
 */
-int get_type_struct_to_print (struct field_molecule * tfmol, int sid)
+int get_type_struct_to_print (field_molecule * tfmol, int sid)
 {
   int pid = 0;
   tmp_fstr = tfmol -> first_struct[sid];
@@ -389,17 +389,17 @@ int get_type_struct_to_print (struct field_molecule * tfmol, int sid)
   return pid;
 }
 
-struct field_atom * all_at;
+field_atom* all_at;
 
 /*!
-  \fn gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * bt)
+  \fn gboolean are_different_field_atoms (field_atom* at, field_atom* bt)
 
   \brief check if two field atoms are different
 
   \param at 1st field atom
   \param bt 2nd field atom
 */
-gboolean are_different_field_atoms (struct field_atom * at, struct field_atom * bt)
+gboolean are_different_field_atoms (field_atom* at, field_atom* bt)
 {
   if (g_strcmp0(at -> name, bt -> name) != 0) return TRUE;
   if (at -> sp != bt -> sp) return TRUE;
@@ -480,13 +480,13 @@ void print_lammps_mass (GtkTextBuffer * buf)
 }
 
 /*!
-  \fn struct field_atom * get_print_atom (int aid)
+  \fn field_atom* get_print_atom (int aid)
 
   \brief get LAMMPS field atom
 
   \param aid the atom id to find
 */
-struct field_atom * get_print_atom (int aid)
+field_atom* get_print_atom (int aid)
 {
   int i;
   tmp_fat = all_at;
@@ -511,8 +511,8 @@ struct field_atom * get_print_atom (int aid)
 void print_lammps_atoms (GtkTextBuffer * buf)
 {
   int i; //, j, k;
-  // * struct field_molecule * la_mol;
-  struct field_atom * la_ats;
+  // * field_molecule * la_mol;
+  field_atom* la_ats;
   gchar * pos, * atid, * atype; //* molid, * amass;
   gchar * str;
   print_info ("\nAtoms\n\n", "bold", buf);

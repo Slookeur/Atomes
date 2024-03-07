@@ -36,8 +36,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int sml_preview (const char * filetoread);
   int get_family (gchar * str);
   int get_sml_files ();
-  int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch);
-  int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch);
+  int select_from_library (gboolean visible, project * this_proj, atom_search * asearch);
+  int insert_this_project_from_lib (int id, gboolean visible, project * this_proj, atom_search * asearch);
 
   double get_z_from_periodic_table (gchar * lab);
 
@@ -190,7 +190,7 @@ element_data periodic_table_info[] = {
   {"Og", "Oganesson", 118, 294},
   {"D", "Deuterium", 1, 2.014000}};
 
-struct insertion mol[] = {
+insertion_menu mol[] = {
     { "Atom", NULL, -1, 0 },
     { NULL, "H", 1, 1 },
     { NULL, "B", 5, 1 },
@@ -274,8 +274,8 @@ extern void gtk_window_change_gdk_visual (GtkWidget * win);
 extern gboolean create_3d_model (int p, gboolean load);
 extern G_MODULE_EXPORT void on_realize (GtkGLArea * area, gpointer data);
 extern xmlNodePtr findnode (xmlNodePtr startnode, char * nname);
-extern int action_atoms_from_project (struct project * this_proj, atom_search * asearch, gboolean visible);
-extern void to_insert_in_project (int stat, int orig, struct project * this_proj, atom_search * asearch, gboolean visible);
+extern int action_atoms_from_project (project * this_proj, atom_search * asearch, gboolean visible);
+extern void to_insert_in_project (int stat, int orig, project * this_proj, atom_search * asearch, gboolean visible);
 extern void create_object_from_library (int p);
 extern atom_search * remove_search;
 GtkListStore * family_store;
@@ -289,7 +289,7 @@ gchar ** sml_file_name;
 gchar ** mol_name;
 GtkWidget * lib_preview_box = NULL;
 GtkWidget * lib_preview_plot = NULL;
-struct project * lib_proj = NULL;
+project * lib_proj = NULL;
 gchar * other_name[5];
 int o_names;
 int inserted_from_lib;
@@ -1046,7 +1046,7 @@ G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id,
 {
   gboolean done = FALSE;
   atom_search * asearch = (atom_search *)data;
-  struct project * this_proj = get_project_by_id (asearch -> proj);
+  project * this_proj = get_project_by_id (asearch -> proj);
   GtkWidget * vbox;
   switch (response_id)
   {
@@ -1080,7 +1080,7 @@ G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id,
 }
 
 /*!
-  \fn int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch)
+  \fn int select_from_library (gboolean visible, project * this_proj, atom_search * asearch)
 
   \brief select object to insert from the library
 
@@ -1088,7 +1088,7 @@ G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id,
   \param this_proj the target project
   \param asearch the target atom search
 */
-int select_from_library (gboolean visible, struct project * this_proj, atom_search * asearch)
+int select_from_library (gboolean visible, project * this_proj, atom_search * asearch)
 {
   int active = activep;
   lib_visible = visible;
@@ -1132,7 +1132,7 @@ int select_from_library (gboolean visible, struct project * this_proj, atom_sear
 }
 
 /*!
-  \fn int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch)
+  \fn int insert_this_project_from_lib (int id, gboolean visible, project * this_proj, atom_search * asearch)
 
   \brief insert object from the library
 
@@ -1141,7 +1141,7 @@ int select_from_library (gboolean visible, struct project * this_proj, atom_sear
   \param this_proj the target project
   \param asearch the target atom search
 */
-int insert_this_project_from_lib (int id, gboolean visible, struct project * this_proj, atom_search * asearch)
+int insert_this_project_from_lib (int id, gboolean visible, project * this_proj, atom_search * asearch)
 {
   sml_file_name = mol_name = NULL;
   int family[6] = {0, 3, 9, 9, 15, 17};

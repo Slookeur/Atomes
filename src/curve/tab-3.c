@@ -88,7 +88,7 @@ cairo_surface_t * draw_legend_surface (int da, double ti, ColRGBA dcol, ColRGBA 
 {
   cairo_surface_t * cst;
   cairo_t * tcst;
-  thedash * tdash;
+  curve_dash * tdash;
   cst = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 80, 80);
   tcst = cairo_create (cst);
   tdash = selectdash (da);
@@ -134,7 +134,7 @@ G_MODULE_EXPORT void show_data_legend (GtkToggleButton * leg, gpointer data)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 #ifdef GTK4
   this_proj -> curves[b][c] -> show_legend = gtk_check_button_get_active (leg);
 #else
@@ -166,7 +166,7 @@ void set_legend_box_style (gpointer data)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   pix = draw_legend_surface (this_proj -> curves[b][c] -> legend_box_dash,
                              this_proj -> curves[b][c] -> legend_box_thickness,
                              this_proj -> curves[b][c] -> legend_box_color,
@@ -209,7 +209,7 @@ G_MODULE_EXPORT void show_data_legend_box (GtkToggleButton * bleg, gpointer data
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 #ifdef GTK4
   this_proj -> curves[b][c] -> show_legend_box = gtk_check_button_get_active (bleg);
 #else
@@ -233,7 +233,7 @@ G_MODULE_EXPORT void set_legend_font (GtkFontButton * fontb, gpointer data)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   g_free (this_proj -> curves[b][c] -> legend_font);
   this_proj -> curves[b][c] -> legend_font = g_strdup_printf ("%s", gtk_font_chooser_get_font (GTK_FONT_CHOOSER(fontb)));
   update_curve (data);
@@ -253,7 +253,7 @@ G_MODULE_EXPORT void set_legend_color (GtkColorChooser * colob, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   this_proj -> curves[b][c] -> legend_color = get_button_color (colob);
   set_legend_box_style (data);
 }
@@ -279,7 +279,7 @@ G_MODULE_EXPORT void set_legend_pos (GtkEntry * entry, gpointer data)
   d = ad -> d;
   f = entry_get_text (entry);
   z = atof(f);
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   if (z >= 0.0 && z <= 1.0)
   {
     this_proj -> curves[b][c] -> legend_pos[d] = z;
@@ -331,7 +331,7 @@ G_MODULE_EXPORT void set_legend_box_thickness (GtkEntry * entry, gpointer data)
   b = cd -> b;
   c = cd -> c;
   str = entry_get_text (entry);
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   this_proj -> curves[b][c] -> legend_box_thickness = atof(str);
   update_entry_double (entry, this_proj -> curves[b][c] -> legend_box_thickness);
   set_legend_box_style (data);
@@ -376,7 +376,7 @@ GtkWidget * create_tab_3 (gpointer data)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 
   GtkWidget * legendbox = create_vbox (BSEP);
   GtkWidget * leghbox = create_hbox (0);

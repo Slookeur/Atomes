@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void clean_atom_style (struct project * this_proj);
+  void clean_atom_style (project * this_proj);
   void update_menus (glwin * view);
 
   G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data);
@@ -49,7 +49,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glview.h"
 #include "glwindow.h"
 
-extern gchar * label_atpts (struct project * this_proj, glwin * view, int id);
+extern gchar * label_atpts (project * this_proj, glwin * view, int id);
 
 char * text_styles[OGL_STYLES] = {"Ball and stick",
                                   "Wireframe",
@@ -64,13 +64,13 @@ char * text_filled[FILLED_STYLES] = {"Covalent radius",
                                      "In crystal radius"};
 
 /*!
-  \fn void clean_atom_style (struct project * this_proj)
+  \fn void clean_atom_style (project * this_proj)
 
   \brief clean all atom(s) possible alternative rendering styles
 
   \param this_proj the target project
 */
-void clean_atom_style (struct project * this_proj)
+void clean_atom_style (project * this_proj)
 {
   int i, j;
   for (i=0; i<this_proj -> steps; i++)
@@ -171,7 +171,7 @@ void update_menus (glwin * view)
 G_MODULE_EXPORT void set_style (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *)data;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   int s = the_data -> b;
   int st = (s >= OGL_STYLES) ? SPACEFILL : s;
   int ft = (s >= OGL_STYLES) ? s - OGL_STYLES * (s/OGL_STYLES) : NONE;

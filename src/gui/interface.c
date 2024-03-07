@@ -41,7 +41,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   gchar * exact_name (gchar * name);
   gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win);
   gchar * textcolor (int i);
-  gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer);
+  gchar * env_name (project * this_proj, int g, int s, int f, GtkTextBuffer * buffer);
 
   void show_web (GtkWidget * dialog, int id);
   void show_info (char * information, int val, GtkWidget * win);
@@ -876,7 +876,7 @@ void send_chem_info_ (int prop[active_project -> nspec])
 }
 
 /*!
-  \fn gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
+  \fn gchar * env_name (project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
 
   \brief ouput the name of a coordination sphere
 
@@ -886,7 +886,7 @@ void send_chem_info_ (int prop[active_project -> nspec])
   \param f With markup or not
   \param buffer Output in a GtkTextBuffer, or not if NULL
 */
-gchar * env_name (struct project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
+gchar * env_name (project * this_proj, int g, int s, int f, GtkTextBuffer * buffer)
 {
   int l, m;
   gchar * spec = exact_name(this_proj -> chemistry -> label[s]);
@@ -978,7 +978,7 @@ void update_after_calc (int calc)
 {
   int i, j;
   tint cd;
-  struct project * this_proj;
+  project * this_proj;
   for (i=0; i<nprojects; i++)
   {
     this_proj = get_project_by_id(i);

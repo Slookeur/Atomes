@@ -56,7 +56,7 @@ gchar * text_renders[OGL_RENDERS] = {"Filled", "Lines", "Points"};
 G_MODULE_EXPORT void set_render (GtkWidget * widg, gpointer data)
 {
   tint * the_data = (tint *)data;
-  struct project * this_proj = get_project_by_id(the_data -> a);
+  project * this_proj = get_project_by_id(the_data -> a);
   int i = this_proj -> modelgl -> anim -> last -> img -> render;
   int j = the_data -> b;
 #ifdef GTK3

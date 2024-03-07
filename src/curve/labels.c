@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj);
+  void label (cairo_t * cr, double val, int axe, int p, project * this_proj);
 
 */
 
@@ -43,7 +43,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "curve.h"
 
 /*!
-  \fn void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
+  \fn void label (cairo_t * cr, double val, int axe, int p, project * this_proj)
 
   \brief draw axis label
 
@@ -53,7 +53,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param p label position (0 = bottom, 1 = top)
   \param this_proj the target project
 */
-void label (cairo_t * cr, double val, int axe, int p, struct project * this_proj)
+void label (cairo_t * cr, double val, int axe, int p, project * this_proj)
 {
   gchar * label;
   gchar * lab;

@@ -93,8 +93,8 @@ int tmp_pbc, tmp_frac;
 int tmp_xcor, tmp_lat;
 dint t_box[9];
 extern double * tmpcut;
-extern void update_cutoffs (struct project * this_proj);
-extern void cut_box (struct project * this_proj, GtkWidget * vbox);
+extern void update_cutoffs (project * this_proj);
+extern void cut_box (project * this_proj, GtkWidget * vbox);
 
 /*!
   \fn G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)

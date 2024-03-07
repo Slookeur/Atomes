@@ -30,11 +30,11 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  gboolean ** duplicate_geom_info (struct project * this_proj);
-  gboolean ** duplicate_poly_info (struct project * this_proj);
+  gboolean ** duplicate_geom_info (project * this_proj);
+  gboolean ** duplicate_poly_info (project * this_proj);
 
-  void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboolean ** pshow);
-  void sens_superbut (struct project * this_proj);
+  void restore_coord_and_poly_info (project * proj, gboolean ** cshow, gboolean ** pshow);
+  void sens_superbut (project * this_proj);
   void super_celling (glwin * view);
 
   G_MODULE_EXPORT void super_cell (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -46,17 +46,17 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "cell_edit.h"
 #include "atom_edit.h"
 
-extern void clean_coord_window (struct project * this_proj);
-extern GtkWidget * cell_tab (int i, struct project * this_proj);
+extern void clean_coord_window (project * this_proj);
+extern GtkWidget * cell_tab (int i, project * this_proj);
 
 /*!
-  \fn gboolean ** duplicate_geom_info (struct project * this_proj)
+  \fn gboolean ** duplicate_geom_info (project * this_proj)
 
   \brief duplicate coordinations show status
 
   \param this_proj the target project
 */
-gboolean ** duplicate_geom_info (struct project * this_proj)
+gboolean ** duplicate_geom_info (project * this_proj)
 {
   int i, j;
   gboolean ** show = g_malloc (2*sizeof*show);
@@ -72,13 +72,13 @@ gboolean ** duplicate_geom_info (struct project * this_proj)
 }
 
 /*!
-  \fn gboolean ** duplicate_poly_info (struct project * this_proj)
+  \fn gboolean ** duplicate_poly_info (project * this_proj)
 
   \brief duplicate polyhedra show status
 
   \param this_proj the target project
 */
-gboolean ** duplicate_poly_info (struct project * this_proj)
+gboolean ** duplicate_poly_info (project * this_proj)
 {
   int i, j;
   gboolean ** show = g_malloc (2*sizeof*show);
@@ -94,7 +94,7 @@ gboolean ** duplicate_poly_info (struct project * this_proj)
 }
 
 /*!
-  \fn void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboolean ** pshow)
+  \fn void restore_coord_and_poly_info (project * proj, gboolean ** cshow, gboolean ** pshow)
 
   \brief restore show status after
 
@@ -102,7 +102,7 @@ gboolean ** duplicate_poly_info (struct project * this_proj)
   \param cshow the saved coordination show status
   \param pshow the saved polyhedra show status
 */
-void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboolean ** pshow)
+void restore_coord_and_poly_info (project * proj, gboolean ** cshow, gboolean ** pshow)
 {
   int i, j;
   for (i=0; i<2; i++)
@@ -132,13 +132,13 @@ void restore_coord_and_poly_info (struct project * proj, gboolean ** cshow, gboo
 }
 
 /*!
-  \fn void sens_superbut (struct project * this_proj)
+  \fn void sens_superbut (project * this_proj)
 
   \brief adjust 'Create super-cell' button sensitivity
 
   \param this_proj the target project
 */
-void sens_superbut (struct project * this_proj)
+void sens_superbut (project * this_proj)
 {
   int i, j;
   if (this_proj -> modelgl -> record)

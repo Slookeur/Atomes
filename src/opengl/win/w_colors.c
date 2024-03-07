@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void window_color (struct project * this_proj, glwin * view, int wc_cid);
+  void window_color (project * this_proj, glwin * view, int wc_cid);
 
   G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data);
   G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -65,7 +65,7 @@ int wc_cid;
 */
 G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data)
 {
-  struct project * this_proj = (struct project *)data;
+  project * this_proj = (project *)data;
 
   if (response_id == GTK_RESPONSE_OK)
   {
@@ -94,7 +94,7 @@ G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpoint
 }
 
 /*!
-  \fn void window_color (struct project * this_proj, glwin * view, int wc_cid)
+  \fn void window_color (project * this_proj, glwin * view, int wc_cid)
 
   \brief window color chooser - creating the dialog
 
@@ -102,7 +102,7 @@ G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpoint
   \param view the target glwin
   \param wc_cid the object to change color
 */
-void window_color (struct project * this_proj, glwin * view, int wc_cid)
+void window_color (project * this_proj, glwin * view, int wc_cid)
 {
   gchar * str;
   GdkRGBA col;
@@ -218,7 +218,7 @@ G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
 {
   tint * id = (tint *) data;
   // g_debug ("Atom color:: proj= %d, id -> b= %d, id -> c= %d", id -> a,  id -> b, id -> c);
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   window_color (this_proj, this_proj -> modelgl, id -> c);
   int shaders[3] = {ATOMS, BONDS, SELEC};
   re_create_md_shaders (3, shaders, this_proj);
@@ -239,7 +239,7 @@ G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, 
 {
   qint * cid = (qint *)data;
   int c, g, s;
-  struct project * this_proj = get_project_by_id(cid -> a);
+  project * this_proj = get_project_by_id(cid -> a);
   s = cid -> b;
   c = cid -> c;
   g = cid -> d;
@@ -280,7 +280,7 @@ G_MODULE_EXPORT void window_color_coord (GtkWidget * widg, gpointer data)
   qint * cid = (qint *)data;
   gchar * str;
   int c, g, s;
-  struct project * this_proj = get_project_by_id(cid -> a);
+  project * this_proj = get_project_by_id(cid -> a);
   s = cid -> b;
   c = cid -> c;
   g = cid -> d;

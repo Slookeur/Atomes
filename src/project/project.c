@@ -33,7 +33,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void save_pos_ (int * nat, int lot[* nat], int * num, double xpos[* num], double ypos[* num], double zpos[* num]);
   void send_steps_ (int * steps);
 
-  struct project * get_project_by_id (int p);
+  project * get_project_by_id (int p);
 
 */
 
@@ -44,14 +44,14 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "bind.h"
 
 workspace workzone;
-struct project * active_project = NULL;
+project * active_project = NULL;
 chemical_data * active_chem = NULL;
 coord_info * active_coord = NULL;
 cell_info * active_cell = NULL;
 box_info * active_box = NULL;
 image * active_image = NULL;
 glwin * active_glwin = NULL;
-struct project * opengl_project = NULL;
+project * opengl_project = NULL;
 
 /*!
   \fn void save_pos_ (int * nat, int lot[* nat], int * num, double xpos[* num], double ypos[* num], double zpos[* num])
@@ -111,15 +111,15 @@ void send_steps_ (int * steps)
 }
 
 /*!
-  \fn struct project * get_project_by_id (int p)
+  \fn project * get_project_by_id (int p)
 
   \brief get project pointer using id number
 
   \param p the id number
 */
-struct project * get_project_by_id (int p)
+project * get_project_by_id (int p)
 {
-  struct project * tmp = workzone.first;
+  project * tmp = workzone.first;
   int i;
   for (i=0; i<nprojects; i++)
   {

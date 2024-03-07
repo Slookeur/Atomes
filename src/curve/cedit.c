@@ -102,12 +102,12 @@ void prepbox (int k, int l, int m)
   int i, n, o, p;
   gchar * str;
 
-  struct project * extra_proj;
-  struct project * this_proj = get_project_by_id(k);
+  project * extra_proj;
+  project * this_proj = get_project_by_id(k);
   str = g_strdup_printf ("%s - %s", prepare_for_title(this_proj -> name), this_proj -> curves[l][m] -> name);
   combo_text_append (setcolorbox, str);
   g_free (str);
-  struct cextra * ctmp = this_proj -> curves[l][m] -> extrac -> first;
+  CurveExtra * ctmp = this_proj -> curves[l][m] -> extrac -> first;
   for ( i=0 ; i < this_proj -> curves[l][m] -> extrac -> extras ; i++ )
   {
     n = ctmp -> id.a;
@@ -169,7 +169,7 @@ static void fill_proj_model (GtkTreeStore * store)
   GtkTreeIter projlevel;
   GtkTreeIter calclevel;
   GtkTreeIter curvelevel;
-  struct project * this_proj;
+  project * this_proj;
   int i, j, k;
   int start, end, step;
   gboolean append;
@@ -363,7 +363,7 @@ void edit_curve (gpointer data)
   g_debug ("CEDIT: a= %d, b= %d, c= %d", a, b, c);
 #endif
 
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 
   ctext[0] = "x ∈ [0.0, 1.0]";
   ctext[1] = "y ∈ [0.0, 1.0]";

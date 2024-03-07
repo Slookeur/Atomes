@@ -32,12 +32,12 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   int prepare_measure_shaders (int type, int shaders);
 
-  void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int pi);
+  void draw_angle_label (atom * at, atom * bt, atom * ct, int pi);
   void set_measure_color (int selected, int id, int num);
   void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi);
   void angles_loop (glwin * view, int id, int pi, GtkTreeStore * store);
   void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store);
-  void draw_bond_label (struct atom * at, struct atom * bt, int pi);
+  void draw_bond_label (atom * at, atom * bt, int pi);
   void setup_this_measured_bond (int s, int sa, int sb, int pi);
   void bonds_loop (glwin * view, int id, int pi, GtkTreeStore * store);
   void create_measures_lists ();
@@ -66,8 +66,8 @@ extern int ** tmp_object_id[3];
 int type_of_measure;
 int measures_drawing;
 
-struct selatom * tmp_a, * tmp_b, * tmp_c, * tmp_d;
-struct atom * ta, * tb, * tc, * td, * te, * tf;
+atom_in_selection * tmp_a, * tmp_b, * tmp_c, * tmp_d;
+atom * ta, * tb, * tc, * td, * te, * tf;
 struct distance dist_ba, dist_bc;
 int * shift;
 double dist;
@@ -78,7 +78,7 @@ ColRGBA col;
 ColRGBA col_gdk;
 
 /*!
-  \fn void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int pi)
+  \fn void draw_angle_label (atom * at, atom * bt, atom * ct, int pi)
 
   \brief prepare an measured angle label OpenGL rendering
 
@@ -87,7 +87,7 @@ ColRGBA col_gdk;
   \param ct 3rd atom
   \param pi 0 = mouse analysis mode, 1 = mouse edition mode
 */
-void draw_angle_label (struct atom * at, struct atom * bt, struct atom * ct, int pi)
+void draw_angle_label (atom * at, atom * bt, atom * ct, int pi)
 {
   struct angle real_theta = angle_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt, ct);
   gchar * str;
@@ -146,7 +146,7 @@ void setup_this_measured_angle (int s, int sa, int sb, int sc, int pi)
   float shift[3];
   int p, q, r;
   vec3_t pos_a, pos_b, pos_c;
-  struct atom * at, * bt, * ct;
+  atom * at, * bt, * ct;
   at = & proj_gl -> atoms[step][sa];
   bt = & proj_gl -> atoms[step][sb];
   ct = & proj_gl -> atoms[step][sc];
@@ -427,7 +427,7 @@ void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 }
 
 /*!
-  \fn void draw_bond_label (struct atom * at, struct atom * bt, int pi)
+  \fn void draw_bond_label (atom * at, atom * bt, int pi)
 
   \brief prepare a measured distance OpenGL rendering
 
@@ -435,7 +435,7 @@ void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
   \param bt 2nd atom
   \param pi 0 = mouse analysis mode, 1 = mouse edition mode
 */
-void draw_bond_label (struct atom * at, struct atom * bt, int pi)
+void draw_bond_label (atom * at, atom * bt, int pi)
 {
   struct distance dist = distance_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt);
   vec3_t pos;
@@ -477,7 +477,7 @@ void setup_this_measured_bond (int s, int sa, int sb, int pi)
   float shift[3];
   int p, q, r;
   vec3_t pos_a, pos_b;
-  struct atom * at, * bt;
+  atom * at, * bt;
   at = & proj_gl -> atoms[step][sa];
   bt = & proj_gl -> atoms[step][sb];
 

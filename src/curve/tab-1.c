@@ -113,7 +113,7 @@ G_MODULE_EXPORT void set_window_size (GtkEntry * maj, gpointer data)
   b = ad -> b;
   c = ad -> c;
   d = ad -> d;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   int shift = get_curve_shift (this_proj, b, c);
   text[0] = "X size must be > 0";
   text[1] = "Y size must be > 0";
@@ -207,7 +207,7 @@ G_MODULE_EXPORT void set_title (GtkToggleButton * but, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 #ifdef GTK4
   this_proj -> curves[b][c] -> show_title = gtk_check_button_get_active (but);
 #else
@@ -243,7 +243,7 @@ G_MODULE_EXPORT void set_title_default (GtkToggleButton * but, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 #ifdef GTK4
   this_proj -> curves[b][c] -> default_title = gtk_check_button_get_active (but);
 #else
@@ -273,7 +273,7 @@ G_MODULE_EXPORT void set_title_custom (GtkEntry * tit, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   g_free (this_proj -> curves[b][c] -> title);
   this_proj -> curves[b][c] -> title = g_strdup_printf ("%s", entry_get_text (tit));
   update_entry_text (tit, this_proj -> curves[b][c] -> title);
@@ -294,7 +294,7 @@ G_MODULE_EXPORT void set_title_font (GtkFontButton * fontb, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   g_free (this_proj -> curves[b][c] -> title_font);
   this_proj -> curves[b][c] -> title_font = g_strdup_printf ("%s", gtk_font_chooser_get_font (GTK_FONT_CHOOSER(fontb)));
   update_curve (data);
@@ -314,7 +314,7 @@ G_MODULE_EXPORT void set_title_color (GtkColorChooser * colob, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   this_proj -> curves[b][c] -> title_color = get_button_color (colob);
   update_curve (data);
 }
@@ -337,7 +337,7 @@ G_MODULE_EXPORT void set_title_pos (GtkEntry * entry, gpointer data)
   b = ad -> b;
   c = ad -> c;
   d = ad -> d;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   p = entry_get_text (entry);
   v = atof(p);
   if (v >= 0.0 && v <= 1.0)
@@ -369,7 +369,7 @@ void set_frame_style (gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   surf = draw_frame_surface (this_proj -> curves[b][c] -> frame_type,
                              this_proj -> curves[b][c] -> frame_dash,
                              this_proj -> curves[b][c] -> frame_thickness,
@@ -415,7 +415,7 @@ G_MODULE_EXPORT void set_show_frame (GtkToggleButton * but, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 #ifdef GTK4
   this_proj -> curves[b][c] -> show_frame = gtk_check_button_get_active (but);
 #else
@@ -439,7 +439,7 @@ G_MODULE_EXPORT void set_background_color (GtkColorChooser * colob, gpointer dat
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   this_proj -> curves[b][c] -> backcolor = get_button_color (colob);
   set_data_style (data);
 }
@@ -496,7 +496,7 @@ G_MODULE_EXPORT void set_frame_thickness (GtkEntry * entry, gpointer data)
   b = ad -> b;
   c = ad -> c;
   str = entry_get_text (entry);
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   this_proj -> curves[b][c] -> frame_thickness = atof(str);
   update_entry_double (entry, this_proj -> curves[b][c] -> frame_thickness);
   set_frame_style (data);
@@ -516,7 +516,7 @@ G_MODULE_EXPORT void set_frame_color (GtkColorChooser * colob, gpointer data)
   a = ad -> a;
   b = ad -> b;
   c = ad -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   this_proj -> curves[b][c] -> frame_color = get_button_color (colob);
   set_frame_style (data);
 }
@@ -539,7 +539,7 @@ G_MODULE_EXPORT void set_frame_pos (GtkEntry * fen, gpointer data)
   b = cd -> b;
   c = cd -> c;
   d = cd -> d;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   m = entry_get_text (fen);
   z= atof(m);
   if (d < 2)
@@ -637,7 +637,7 @@ GtkWidget * create_tab_1 (gpointer data)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   // Axis related signals
   for ( i=0 ; i < 2 ; i++ )
   {

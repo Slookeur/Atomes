@@ -50,7 +50,7 @@ G_MODULE_EXPORT void add_cell (GtkSpinButton * res, gpointer data)
 {
   tint * dat = (tint *)data;
   int i;
-  struct project * this_proj = get_project_by_id (dat -> a);
+  project * this_proj = get_project_by_id (dat -> a);
   image * last = this_proj -> modelgl -> anim -> last -> img;
   i = max(last -> extra_cell[0], last -> extra_cell[1]);
   i = max(i, last -> extra_cell[2]);

@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  gchar * label_cutrab (struct project * this_proj, glwin * view, int id);
+  gchar * label_cutrab (project * this_proj, glwin * view, int id);
 
   GtkWidget * create_bond_menu_item (gchar * str, GtkWidget * menu);
   GtkWidget * create_bond_layout_widget (gchar * str, GtkWidget * widg, int va, tint * data);
@@ -56,7 +56,7 @@ extern G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
 #endif
 
 /*!
-  \fn gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
+  \fn gchar * label_cutrab (project * this_proj, glwin * view, int id)
 
   \brief prepare the text of a menu item in the 'Model -> Bond(s)' submenu
 
@@ -64,7 +64,7 @@ extern G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
   \param view the target glwin
   \param id the type of label to prepare
 */
-gchar * label_cutrab (struct project * this_proj, glwin * view, int id)
+gchar * label_cutrab (project * this_proj, glwin * view, int id)
 {
   int i, j, k, m;
   gchar * mot;

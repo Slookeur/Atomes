@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void init_curves_and_calc (struct project * this_proj);
+  void init_curves_and_calc (project * this_proj);
   void init_project (gboolean alloc_box);
 
 */
@@ -45,13 +45,13 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glwindow.h"
 
 /*!
-  \fn void init_curves_and_calc (struct project * this_proj)
+  \fn void init_curves_and_calc (project * this_proj)
 
   \brief for a project reset analysis, curves, data to not performed
 
   \param this_proj the target project
 */
-void init_curves_and_calc (struct project * this_proj)
+void init_curves_and_calc (project * this_proj)
 {
   int i;
   for (i=0; i<NGRAPHS; i++)
@@ -72,7 +72,7 @@ void init_curves_and_calc (struct project * this_proj)
 void init_project (gboolean alloc_box)
 {
   int i;
-  struct project * new_proj = g_malloc0 (sizeof*proj);
+  project * new_proj = g_malloc0 (sizeof*proj);
   nprojects ++;
   activep = nprojects - 1;
   new_proj -> id = activep;

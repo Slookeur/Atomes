@@ -531,7 +531,7 @@ void add_remove_lights (int val, gpointer data)
 {
   int i, j, k, m;
   glwin * view = (glwin *)data;
-  struct project * this_proj = get_project_by_id(view -> proj);
+  project * this_proj = get_project_by_id(view -> proj);
   image * this_image = view -> anim -> last -> img;
   gboolean delete_ligth;
   i = this_image -> lights;

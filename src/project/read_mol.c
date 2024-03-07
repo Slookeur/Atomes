@@ -31,7 +31,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   int read_atom_m (FILE * fp, int s, int a);
-  int read_this_mol (FILE * fp, struct molecule * tmp);
+  int read_this_mol (FILE * fp, molecule * tmp);
   int read_mol (FILE * fp);
 
 */
@@ -41,7 +41,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "initcoord.h"
 #include "submenus.h"
 
-extern void duplicate_molecule (struct molecule * new_mol, struct molecule * old_mol);
+extern void duplicate_molecule (molecule * new_mol, molecule * old_mol);
 
 /*!
   \fn int read_atom_m (FILE * fp, int s, int a)
@@ -60,14 +60,14 @@ int read_atom_m (FILE * fp, int s, int a)
 }
 
 /*!
-  \fn int read_this_mol (FILE * fp, struct molecule * tmp)
+  \fn int read_this_mol (FILE * fp, molecule * tmp)
 
   \brief read molecule data
 
   \param fp the file pointer
   \param tmp the molecule to store the data
 */
-int read_this_mol (FILE * fp, struct molecule * tmp)
+int read_this_mol (FILE * fp, molecule * tmp)
 {
   if (fread (& tmp -> id, sizeof(int), 1, fp) != 1) return 0;
   if (fread (& tmp -> md, sizeof(int), 1, fp) != 1) return 0;
@@ -109,7 +109,7 @@ int read_mol (FILE * fp)
     active_project -> modelfc -> mols[i] = g_malloc0 (active_project -> modelfc -> mol_by_step[i]*sizeof*active_project -> modelfc -> mols[i]);
   }
 
-  struct molecule * tmp = g_malloc0(sizeof*tmp);
+  molecule * tmp = g_malloc0(sizeof*tmp);
   for (i=0; i<active_project -> steps; i++)
   {
     for (j=0; j<active_project -> modelfc -> mol_by_step[i]; j++)

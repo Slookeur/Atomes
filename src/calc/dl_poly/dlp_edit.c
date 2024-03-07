@@ -32,16 +32,16 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   int get_num_vdw_max ();
 
-  gboolean are_identical_prop (int ti, int ai, struct field_prop * pro_a, struct field_prop * pro_b);
+  gboolean are_identical_prop (int ti, int ai, field_prop * pro_a, field_prop * pro_b);
   gboolean tersoff_question ();
-  gboolean body_identicals (struct field_nth_body * body, int nbd, int * na, int ** ma, int ** ba);
+  gboolean body_identicals (field_nth_body * body, int nbd, int * na, int ** ma, int ** ba);
 
   gchar * get_this_vdw_string ();
   gchar * field_str (int a);
   gchar * body_str (int a);
-  gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd);
+  gchar * get_body_element_name (field_nth_body * body, int aid, int nbd);
 
-  void adjust_field_prop (int fil, int sti, struct field_prop * tmp, int * ids, int key);
+  void adjust_field_prop (int fil, int sti, field_prop * tmp, int * ids, int key);
   void select_atom_set_color (GtkCellRenderer * renderer, int i);
   void select_atom_set_cmv (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data);
   void update_field_dist (float v);
@@ -71,7 +71,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void add_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data);
   G_MODULE_EXPORT void remove_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data);
 
-  GtkWidget * combo_cross (struct field_nth_body * body);
+  GtkWidget * combo_cross (field_nth_body * body);
   GtkWidget * parameters_box (int obj, int key,  gchar ** words, float * data);
   GtkWidget * param_prop_param_box (int pid);
 
@@ -101,7 +101,7 @@ extern void field_selection (int i, int viz, int lab, int aid);
 extern void field_unselect_all ();
 extern void compare_non_bonded (gchar * fatom);
 extern void visualize_single_struct (int id, int jd, int kd, int * ids);
-extern void visualize_body (int viz, int bd, struct field_nth_body * body);
+extern void visualize_body (int viz, int bd, field_nth_body * body);
 extern void init_default_shaders (glwin * view);
 extern GtkWidget * create_field_prop_combo (int f, int is_moy);
 extern void check_atom_for_updates ();
@@ -123,7 +123,7 @@ int is_moy;
 int * edit_atids;
 
 /*!
-  \fn gboolean are_identical_prop (int ti, int ai, struct field_prop * pro_a, struct field_prop * pro_b)
+  \fn gboolean are_identical_prop (int ti, int ai, field_prop * pro_a, field_prop * pro_b)
 
   \brief are the 2 field property identicals ?
 
@@ -132,7 +132,7 @@ int * edit_atids;
   \param pro_a 1st field property
   \param pro_b 2nd field property
 */
-gboolean are_identical_prop (int ti, int ai, struct field_prop * pro_a, struct field_prop * pro_b)
+gboolean are_identical_prop (int ti, int ai, field_prop * pro_a, field_prop * pro_b)
 {
   if (pro_a -> key != pro_b -> key) return FALSE;
   if (pro_a -> use != pro_b -> use) return FALSE;
@@ -150,7 +150,7 @@ gboolean are_identical_prop (int ti, int ai, struct field_prop * pro_a, struct f
 }
 
 /*!
-  \fn void adjust_field_prop (int fil, int sti, struct field_prop * tmp, int * ids, int key)
+  \fn void adjust_field_prop (int fil, int sti, field_prop * tmp, int * ids, int key)
 
   \brief adjust field property
 
@@ -160,12 +160,12 @@ gboolean are_identical_prop (int ti, int ai, struct field_prop * pro_a, struct f
   \param ids the list of field atoms
   \param key the key value to adjust
 */
-void adjust_field_prop (int fil, int sti, struct field_prop * tmp, int * ids, int key)
+void adjust_field_prop (int fil, int sti, field_prop * tmp, int * ids, int key)
 {
   int i, j, k, l;
   gboolean add;
   add = FALSE;
-  struct field_prop * pro, * ptmp;
+  field_prop * pro, * ptmp;
   if (ids[0] < 0)
   {
     // Default prop
@@ -458,20 +458,20 @@ G_MODULE_EXPORT void changed_cross_combo (GtkComboBox * box, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * combo_cross (struct field_nth_body * body)
+  \fn GtkWidget * combo_cross (field_nth_body * body)
 
   \brief create field cross configuration widgets
 
   \param body the pointer on the first non bonded field structure
 */
-GtkWidget * combo_cross (struct field_nth_body * body)
+GtkWidget * combo_cross (field_nth_body * body)
 {
  GtkWidget * combo;
  combo = create_combo ();
  g_signal_connect (G_OBJECT(combo), "changed", G_CALLBACK(changed_cross_combo), NULL);
  if (tmp_field -> first_body[2] && tmp_fbody -> na[0] > -1)
  {
-   struct field_nth_body * obody;
+   field_nth_body * obody;
    obody = tmp_field -> first_body[2];
    while (obody)
    {
@@ -999,7 +999,7 @@ G_MODULE_EXPORT void field_molecule_select_atom_id (GtkCellRendererToggle * cell
   else
   {
     h = vdw_id = sel_at[0][i-1];
-    struct field_nth_body * tmp_fbo = tmp_field -> first_body[0];
+    field_nth_body * tmp_fbo = tmp_field -> first_body[0];
     for (k=0; k<tmp_field -> nbody[0]; k++)
     {
       if (tmp_fbo -> id == h)
@@ -1317,7 +1317,7 @@ G_MODULE_EXPORT void select_atom_id_from_fied_molecule (GtkButton * but, gpointe
   }
   else
   {
-    struct field_nth_body * tmp_fbo = tmp_field -> first_body[0];
+    field_nth_body * tmp_fbo = tmp_field -> first_body[0];
     k = 0;
     for (i=0; i<tmp_field -> nbody[0]; i++)
     {
@@ -1448,7 +1448,7 @@ G_MODULE_EXPORT void select_atom_id_from_fied_molecule (GtkButton * but, gpointe
   else if (active_sel > 10)
   {
     m = active_sel-11;
-    struct field_nth_body * tmp_fbo = tmp_field -> first_body[0];
+    field_nth_body * tmp_fbo = tmp_field -> first_body[0];
     k = 0;
     for (i=0; i<tmp_field -> nbody[0]; i++)
     {
@@ -1800,7 +1800,7 @@ G_MODULE_EXPORT void selection_button (GtkButton * but, gpointer data)
   {
     if (tmp_fpmf -> num[0] > 0 && tmp_fpmf -> num[1] > 0)
     {
-      struct atom at[2][tmp_fmol -> multi];
+      atom at[2][tmp_fmol -> multi];
       float ma[2][tmp_fmol -> multi];
       gboolean all_zero = TRUE;
       float v;
@@ -1923,7 +1923,7 @@ G_MODULE_EXPORT void changed_atom_combo (GtkComboBox * box, gpointer data)
 }
 
 /*!
-  \fn gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd)
+  \fn gchar * get_body_element_name (field_nth_body * body, int aid, int nbd)
 
   \brief get field body potential element name
 
@@ -1931,7 +1931,7 @@ G_MODULE_EXPORT void changed_atom_combo (GtkComboBox * box, gpointer data)
   \param aid the atom id, if any
   \param nbd the body potential id
 */
-gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd)
+gchar * get_body_element_name (field_nth_body * body, int aid, int nbd)
 {
   int i, j;
   i = body -> ma[aid][0];
@@ -1947,7 +1947,7 @@ gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd)
 }
 
 /*!
-  \fn gboolean body_identicals (struct field_nth_body * body, int nbd, int * na, int ** ma, int ** ba)
+  \fn gboolean body_identicals (field_nth_body * body, int nbd, int * na, int ** ma, int ** ba)
 
   \brief are these non bonded potentials identicals ?
 
@@ -1957,7 +1957,7 @@ gchar * get_body_element_name (struct field_nth_body * body, int aid, int nbd)
   \param ma 1st potential data
   \param ba 2nd potential data
 */
-gboolean body_identicals (struct field_nth_body * body, int nbd, int * na, int ** ma, int ** ba)
+gboolean body_identicals (field_nth_body * body, int nbd, int * na, int ** ma, int ** ba)
 {
   gchar * stra, * strb, * strc, * strd;
   int i, j;
@@ -2002,8 +2002,8 @@ gboolean body_identicals (struct field_nth_body * body, int nbd, int * na, int *
 int get_num_vdw_max ()
 {
   int i;
-  struct field_molecule * molff;
-  struct field_shell * shellff;
+  field_molecule * molff;
+  field_shell * shellff;
   molff = tmp_field -> first_molecule;
   i = 0;
   while (molff)
@@ -2030,10 +2030,10 @@ int get_num_vdw_max ()
 void adjust_vdw_interactions (gboolean add_shell)
 {
   int i, j, k, l, m, n;
-  struct field_molecule * molff;
-  struct field_atom * atff;
-  struct field_shell * shellff;
-  struct field_nth_body * bodyff;
+  field_molecule * molff;
+  field_atom* atff;
+  field_shell * shellff;
+  field_nth_body * bodyff;
 
   i = get_num_vdw_max ();
   m = i * (i+1) / 2;
@@ -2925,7 +2925,7 @@ void edit_parameters (int f, int id)
 void update_tersoffs (int id, int key)
 {
   int i;
-  struct field_nth_body * bod = tmp_field -> first_body[2];
+  field_nth_body * bod = tmp_field -> first_body[2];
   for (i=0; i<tmp_field -> nbody[2]; i++)
   {
     if (i != id)
@@ -3060,7 +3060,7 @@ G_MODULE_EXPORT void add_field_prop (GSimpleAction * action, GVariant * paramete
   int i, j, k, l, m;
   gboolean save_it;
   i = GPOINTER_TO_INT (data);
-  struct field_molecule * fmol;
+  field_molecule * fmol;
   if (i < MOLIMIT)
   {
     j = gtk_combo_box_get_active (GTK_COMBO_BOX(combo_mol[i-1]));

@@ -121,7 +121,7 @@ cairo_surface_t * draw_surface (int aspect, double hwidth, double hopac, int da,
 {
   cairo_surface_t * cst;
   cairo_t * tcst;
-  thedash * tdash;
+  curve_dash * tdash;
   double x, y;
   double x1, x2, y1, y2;
   switch (aspect)
@@ -196,7 +196,7 @@ cairo_surface_t * draw_surface (int aspect, double hwidth, double hopac, int da,
 DataLayout * get_extra_layout (int i)
 {
   int j;
-  struct cextra * ctmp = get_project_by_id(a) -> curves[b][c] -> extrac -> first;
+  CurveExtra * ctmp = get_project_by_id(a) -> curves[b][c] -> extrac -> first;
   for (j=0; j<i; j++)
   {
     ctmp = ctmp -> next;
@@ -220,7 +220,7 @@ void set_data_style (gpointer data)
   b = cd -> b;
   c = cd -> c;
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   DataLayout * layout;
   if (i > 0)
   {
@@ -339,7 +339,7 @@ G_MODULE_EXPORT void set_data_color (GtkColorChooser * colob, gpointer data)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (i > 0)
   {
@@ -371,7 +371,7 @@ G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
   c = cd -> c;
   wid = entry_get_text (thickd);
   k = atof(wid);
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (k > 0.0)
   {
@@ -419,7 +419,7 @@ G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
   c = cd -> c;
   wid = entry_get_text (glsize);
   k = atof(wid);
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (k > 0.0)
   {
@@ -467,7 +467,7 @@ G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
   c = cd -> c;
   wid = entry_get_text (entry);
   k = atof(wid);
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (k > 0.0)
   {
@@ -515,7 +515,7 @@ G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
   c = cd -> c;
   wid = entry_get_text (entry);
   k = atof(wid);
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (k >= 0.0 && k <= 1.0)
   {
@@ -590,7 +590,7 @@ G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
   c = cd -> c;
   wid = entry_get_text (glfreq);
   j = atof(wid);
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (j > 0)
   {
@@ -721,8 +721,8 @@ static void fill_org_model (GtkListStore * store, gpointer data)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id (a);
-  struct cextra * ctmp;
+  project * this_proj = get_project_by_id (a);
+  CurveExtra * ctmp;
   ctmp = this_proj -> curves[b][c] -> extrac -> first;
   if (this_proj -> curves[b][c] -> draw_id == this_proj -> curves[b][c] -> extrac -> extras)
   {
@@ -771,8 +771,8 @@ G_MODULE_EXPORT void move_back_front (GtkTreeModel * tree_model, GtkTreePath * p
   gboolean done;
   int i, j, k, l, m;
   tint cbid;
-  struct cextra * ctmpa, * ctmpb, * ctmpc, * ctmpd;
-  struct project * this_proj = get_project_by_id(cid -> a);
+  CurveExtra * ctmpa, * ctmpb, * ctmpc, * ctmpd;
+  project * this_proj = get_project_by_id(cid -> a);
   l = this_proj -> curves[cid -> b][cid -> c] -> extrac -> extras;
   m = gtk_combo_box_get_active (GTK_COMBO_BOX (setcolorbox));
   if (m > 0)
@@ -953,7 +953,7 @@ G_MODULE_EXPORT void set_bshift (GtkToggleButton * shift, gpointer data)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 #ifdef GTK4
   this_proj -> curves[b][c] -> bshift = gtk_check_button_get_active (shift);
 #else
@@ -980,7 +980,7 @@ GtkWidget * create_tab_2 (gpointer data)
   a = cd -> a;
   b = cd -> b;
   c = cd -> c;
-  struct project * this_proj = get_project_by_id(a);
+  project * this_proj = get_project_by_id(a);
 
   const int naspects = 2;
   char * aspects[2];

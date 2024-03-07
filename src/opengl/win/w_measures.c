@@ -110,8 +110,8 @@ void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store)
 {
   GtkTreeIter bond_level;
   gchar * str_a, * str_b, * str_c;
-  struct project * this_proj = get_project_by_id(p);
-  struct atom * at, * bt;
+  project * this_proj = get_project_by_id(p);
+  atom * at, * bt;
   gboolean pbc = this_proj -> cell.pbc;
   struct distance dist;
   int s = this_proj -> modelgl -> anim -> last -> img -> step;
@@ -159,8 +159,8 @@ void fill_angle_model_row (int p, int a, int b, int c, GtkTreeStore * store)
 {
   GtkTreeIter angle_level;
   gchar * str_a, * str_b, * str_c, * str_d;
-  struct project * this_proj = get_project_by_id(p);
-  struct atom * at, * bt, * ct;
+  project * this_proj = get_project_by_id(p);
+  atom * at, * bt, * ct;
   gboolean pbc = this_proj -> cell.pbc;
   struct angle theta;
   int s = this_proj -> modelgl -> anim -> last -> img -> step;
@@ -214,8 +214,8 @@ void fill_dihedral_model_row (int p, int a, int b, int c, int d, GtkTreeStore * 
 {
   GtkTreeIter dihedral_level;
   gchar * str_a, * str_b, * str_c, * str_d, * str_e;
-  struct project * this_proj = get_project_by_id(p);
-  struct atom * at, * bt, * ct, * dt;
+  project * this_proj = get_project_by_id(p);
+  atom * at, * bt, * ct, * dt;
   gboolean pbc = this_proj -> cell.pbc;
   struct angle phi;
   int s = this_proj -> modelgl -> anim -> last -> img -> step;
@@ -296,7 +296,7 @@ void measure_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, Gtk
   tint * dat = (tint *) data;
   gboolean docolor = FALSE;
   gtk_tree_model_get (mod, iter, 0, & i, -1);
-  struct project * this_proj = get_project_by_id(dat -> a);
+  project * this_proj = get_project_by_id(dat -> a);
   image * img = this_proj -> modelgl -> anim -> last -> img;
   int pi = get_selection_type (this_proj -> modelgl);
   if (img -> selected[pi] -> selected)

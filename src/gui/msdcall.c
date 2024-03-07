@@ -31,7 +31,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   void initmsd ();
-  void update_msd_view (struct project * this_proj);
+  void update_msd_view (project * this_proj);
 
   G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data);
 
@@ -112,13 +112,13 @@ void initmsd ()
 }
 
 /*!
-  \fn void update_msd_view (struct project * this_proj)
+  \fn void update_msd_view (project * this_proj)
 
   \brief update the project text view for the MSD calculation
 
   \param this_proj the target project
 */
-void update_msd_view (struct project * this_proj)
+void update_msd_view (project * this_proj)
 {
   gchar * str;
   if (this_proj -> text_buffer[MS+OT] == NULL) this_proj -> text_buffer[MS+OT] = add_buffer (NULL, NULL, NULL);

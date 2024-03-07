@@ -30,8 +30,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid);
-  void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it);
+  void setup_xaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid);
+  void setup_xaxis_log (cairo_t * cr, project * this_proj, int rid, int cid, gboolean draw_it);
 
 */
 
@@ -42,7 +42,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "curve.h"
 
 /*!
-  \fn void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
+  \fn void setup_xaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid)
 
   \brief setup x axis using a linear scale
 
@@ -51,7 +51,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param rid the analysis id
   \param cid the curve id
 */
-void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int cid)
+void setup_xaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid)
 {
   int k;
   double u, v;
@@ -150,7 +150,7 @@ void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int 
 }
 
 /*!
-  \fn void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
+  \fn void setup_xaxis_log (cairo_t * cr, project * this_proj, int rid, int cid, gboolean draw_it)
 
   \brief setup x axis using a log scale
 
@@ -160,7 +160,7 @@ void setup_xaxis_linear (cairo_t * cr, struct project * this_proj, int rid, int 
   \param cid the curve id
   \param draw_it 1/0 draw or not
 */
-void setup_xaxis_log (cairo_t * cr, struct project * this_proj, int rid, int cid, gboolean draw_it)
+void setup_xaxis_log (cairo_t * cr, project * this_proj, int rid, int cid, gboolean draw_it)
 {
   int i, k, l;
   gboolean istrue;

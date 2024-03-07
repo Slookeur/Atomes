@@ -30,10 +30,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void debugiocurve (struct project * this_proj, gboolean win, int rid, int cid, gchar * iost);
-  void debug_lattice_info (struct project * this_proj, gchar * iost);
-  void debugioproj (struct project * this_proj, gchar * iost);
-  void debug_chemical_information (struct project * this_proj);
+  void debugiocurve (project * this_proj, gboolean win, int rid, int cid, gchar * iost);
+  void debug_lattice_info (project * this_proj, gchar * iost);
+  void debugioproj (project * this_proj, gchar * iost);
+  void debug_chemical_information (project * this_proj);
 
 */
 
@@ -41,7 +41,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "project.h"
 
 /*!
-  \fn void debugiocurve (struct project * this_proj, gboolean win, int rid, int cid, gchar * iost)
+  \fn void debugiocurve (project * this_proj, gboolean win, int rid, int cid, gchar * iost)
 
   \brief debug and print some info about the curves in a project
 
@@ -51,7 +51,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param cid curve id
   \param iost input or output information
 */
-void debugiocurve (struct project * this_proj, gboolean win, int rid, int cid, gchar * iost)
+void debugiocurve (project * this_proj, gboolean win, int rid, int cid, gchar * iost)
 {
   g_debug (" ");
   g_debug ("IODEBUG: %s: pid= %d, rid= %d, cid= %d", iost, this_proj -> id, rid, cid);
@@ -173,14 +173,14 @@ void debugiocurve (struct project * this_proj, gboolean win, int rid, int cid, g
 }
 
 /*!
-  \fn void debug_lattice_info (struct project * this_proj, gchar * iost)
+  \fn void debug_lattice_info (project * this_proj, gchar * iost)
 
   \brief debug lattice data
 
   \param this_proj the target project
   \param iost input or output information
 */
-void debug_lattice_info (struct project * this_proj, gchar * iost)
+void debug_lattice_info (project * this_proj, gchar * iost)
 {
   g_debug ("IODEBUG::%s:: lattice debug", iost);
   cell_info * debug_cell = & this_proj -> cell;
@@ -199,14 +199,14 @@ void debug_lattice_info (struct project * this_proj, gchar * iost)
 }
 
 /*!
-  \fn void debugioproj (struct project * this_proj, gchar * iost)
+  \fn void debugioproj (project * this_proj, gchar * iost)
 
   \brief debug project info
 
   \param this_proj the target project
   \param iost input or output information
 */
-void debugioproj (struct project * this_proj, gchar * iost)
+void debugioproj (project * this_proj, gchar * iost)
 {
   int i, j;
 
@@ -281,13 +281,13 @@ void debugioproj (struct project * this_proj, gchar * iost)
 }
 
 /*!
-  \fn void debug_chemical_information (struct project * this_proj)
+  \fn void debug_chemical_information (project * this_proj)
 
   \brief debug chemical data info
 
   \param this_proj the target project
 */
-void debug_chemical_information (struct project * this_proj)
+void debug_chemical_information (project * this_proj)
 {
   g_debug ("Number of species: %d", this_proj -> nspec);
   int i;

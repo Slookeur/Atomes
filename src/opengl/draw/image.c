@@ -105,7 +105,7 @@ G_MODULE_EXPORT void run_render_image (GtkDialog * info, gint response_id, gpoin
     destroy_this_dialog (info);
 #endif
     init_frame_buffer (iopts -> video_res[0], iopts -> video_res[1]);
-    struct project * this_proj = get_project_by_id (iopts -> proj);
+    project * this_proj = get_project_by_id (iopts -> proj);
     glwin * view = this_proj -> modelgl;
     init_opengl (view);
     int i, x, y, q;

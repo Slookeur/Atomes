@@ -35,13 +35,13 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   double cap_volume (double ht, double dh);
   double get_sphere_caps_volume (double dab, double rad, double rbd);
   double sphere_volume (double rad);
-  double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, int gcid);
-  double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang);
-  double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int gid);
+  double get_atoms_volume (project * this_proj, int rid, int sid, int gid, int gcid);
+  double molecular_volume (int nats, atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang);
+  double get_atoms_box (project * this_proj, int rid, int sid, int geo, int gid);
 
   void clean_volumes_data (glwin * view);
-  void adjust_vol_md_step (struct project * this_proj, int geo);
-  void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin * view, int geo);
+  void adjust_vol_md_step (project * this_proj, int geo);
+  void add_frag_mol_vol_data (GtkWidget * vbox, project * this_proj, glwin * view, int geo);
 
   G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data);
   G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data);
@@ -56,7 +56,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data);
   G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data);
 
-  GtkWidget * frag_mol_volume_search (struct project * this_proj, int g);
+  GtkWidget * frag_mol_volume_search (project * this_proj, int g);
   GtkWidget * frag_mol_volume_tab (glwin * view, int geo);
   GtkWidget * vol_model_tab (glwin * view);
 
@@ -176,7 +176,7 @@ double sphere_volume (double rad)
 }
 
 /*!
-  \fn double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, int gcid)
+  \fn double get_atoms_volume (project * this_proj, int rid, int sid, int gid, int gcid)
 
   \brief compute exact atomic volume for all system or fragment or molecule
 
@@ -186,7 +186,7 @@ double sphere_volume (double rad)
   \param gid -1 = all system, 2 = fragment(s), 3 = molecule(s)
   \param gcid fragment or molecule id number
 */
-double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, int gcid)
+double get_atoms_volume (project * this_proj, int rid, int sid, int gid, int gcid)
 {
   int i, j, k, l, m, n, o;
   double vol = 0.0;
@@ -254,7 +254,7 @@ double get_atoms_volume (struct project * this_proj, int rid, int sid, int gid, 
 double vamin[3], vamax[3];
 
 /*!
-  \fn double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang)
+  \fn double molecular_volume (int nats, atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang)
 
   \brief compute volume
 
@@ -266,7 +266,7 @@ double vamin[3], vamax[3];
   \param b_ang y axis rotation angle
   \param c_ang z axis rotation angle
 */
-double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang)
+double molecular_volume (int nats, atom * ats_vol, double baryc[3], double * rvdws, double a_ang, double b_ang, double c_ang)
 {
   double paral[3][3];
   mat4_t rot;
@@ -313,7 +313,7 @@ double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], doubl
 }
 
 /*!
-  \fn double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int gid)
+  \fn double get_atoms_box (project * this_proj, int rid, int sid, int geo, int gid)
 
   \brief find volume box parameters for object
 
@@ -323,7 +323,7 @@ double molecular_volume (int nats, struct atom * ats_vol, double baryc[3], doubl
   \param geo -1 = all system, 2 = fragment(s), 3 = molecule(s)
   \param gid fragment or molecule id number
 */
-double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int gid)
+double get_atoms_box (project * this_proj, int rid, int sid, int geo, int gid)
 {
   int i, j;
   double * rvdws = allocdouble (this_proj -> nspec);
@@ -337,8 +337,8 @@ double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int
   double val, vbl;
   int finess = pow (10, this_proj -> modelgl -> volume_win -> angp);
   int nats;
-  struct atom * ats_vol = NULL;
-  struct insert_object * object = NULL;
+  atom * ats_vol = NULL;
+  atomic_object * object = NULL;
   gboolean rtmp;
   double * baryc;
   switch (geo)
@@ -445,7 +445,7 @@ double get_atoms_box (struct project * this_proj, int rid, int sid, int geo, int
 G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
 {
   tint * dat = (tint *)data;
-  struct project * this_proj = get_project_by_id (dat -> a);
+  project * this_proj = get_project_by_id (dat -> a);
   int i;
   for (i=0; i<this_proj -> steps; i++) this_proj -> modelgl -> atoms_ppvolume[dat -> b][i] = get_atoms_box (this_proj, dat -> b, i, -1, 0);
   this_proj -> modelgl -> comp_vol[dat -> b] = TRUE;
@@ -465,14 +465,14 @@ G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
 }
 
 /*!
-  \fn void adjust_vol_md_step (struct project * this_proj, int geo)
+  \fn void adjust_vol_md_step (project * this_proj, int geo)
 
   \brief update volume value labels
 
   \param this_proj the target project
   \param geo 2 = fragment(s), 3 = molecule(s)
 */
-void adjust_vol_md_step (struct project * this_proj, int geo)
+void adjust_vol_md_step (project * this_proj, int geo)
 {
   int i, j, k;
   k = this_proj -> modelgl -> volume_win -> sid[geo-2];
@@ -536,7 +536,7 @@ G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
 {
   int i, j;
   qint * dat = (qint *)data;
-  struct project * this_proj = get_project_by_id (dat -> a);
+  project * this_proj = get_project_by_id (dat -> a);
   int sid = this_proj -> modelgl -> volume_win -> sid[dat -> b-2];
   if (dat -> b == 2)
   {
@@ -602,7 +602,7 @@ G_MODULE_EXPORT void show_volumes (GtkToggleButton * but, gpointer data)
 #endif
 {
   tint * dat = (tint *)data;
-  struct project * this_proj = get_project_by_id (dat -> a);
+  project * this_proj = get_project_by_id (dat -> a);
 #ifdef GTK4
   this_proj -> modelgl -> anim -> last -> img -> show_vol[dat -> b] = gtk_check_button_get_active (but);
 #else
@@ -636,7 +636,7 @@ G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
 #endif
 {
   qint * dat = (qint *)data;
-  struct project * this_proj = get_project_by_id (dat -> a);
+  project * this_proj = get_project_by_id (dat -> a);
 #ifdef GTK4
   this_proj -> modelgl -> anim -> last -> img -> fm_show_vol[dat -> b-2][dat -> d][dat -> c] = gtk_check_button_get_active (but);
 #else
@@ -658,7 +658,7 @@ G_MODULE_EXPORT void fm_show_volumes (GtkToggleButton * but, gpointer data)
 G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
 {
   tint * id = (tint *) data;
-  struct project * this_proj = get_project_by_id(id -> a);
+  project * this_proj = get_project_by_id(id -> a);
   this_proj -> modelgl -> anim -> last -> img -> vol_col[id -> b] = get_button_color (colob);
   int shaders[1] = {VOLMS};
   re_create_md_shaders (1, shaders, this_proj);
@@ -676,7 +676,7 @@ G_MODULE_EXPORT void set_volume_color (GtkColorChooser * colob, gpointer data)
 G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data)
 {
   qint * dat = (qint *)data;
-  struct project * this_proj = get_project_by_id (dat -> a);
+  project * this_proj = get_project_by_id (dat -> a);
   this_proj -> modelgl -> anim -> last -> img -> fm_vol_col[dat -> b-2][dat -> d][dat -> c] = get_button_color (colob);
   int shaders[1] = {VOLMS};
   re_create_md_shaders (1, shaders, this_proj);
@@ -694,13 +694,13 @@ G_MODULE_EXPORT void fm_set_volume_color (GtkColorChooser * colob, gpointer data
 G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
 {
   qint * dat = (qint *)data;
-  struct project * this_proj = get_project_by_id (dat -> a);
+  project * this_proj = get_project_by_id (dat -> a);
   this_proj -> modelgl -> volume_win -> sid[dat -> b-2] = gtk_spin_button_get_value_as_int(res);
   adjust_vol_md_step (this_proj, dat -> b);
 }
 
 /*!
-  \fn void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin * view, int geo)
+  \fn void add_frag_mol_vol_data (GtkWidget * vbox, project * this_proj, glwin * view, int geo)
 
   \brief add fragment / molecule volume data to the search tab
 
@@ -709,7 +709,7 @@ G_MODULE_EXPORT void set_md_step_vol (GtkSpinButton * res, gpointer data)
   \param view the target glwin
   \param geo 2 = fragment(s), 3 = molecule(s)
 */
-void add_frag_mol_vol_data (GtkWidget * vbox, struct project * this_proj, glwin * view, int geo)
+void add_frag_mol_vol_data (GtkWidget * vbox, project * this_proj, glwin * view, int geo)
 {
   gchar * name_geo[2] = {"fragment", "molecule"};
   gchar * fmo[2] = {"Fragment", "Molecule"};
@@ -824,7 +824,7 @@ G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
   tint * dat = (tint * )data;
   const gchar * m = entry_get_text (res);
   int v = (int)atof(m);
-  struct project * this_proj = get_project_by_id(dat -> a);
+  project * this_proj = get_project_by_id(dat -> a);
   int g = dat -> b;
   if (v > 0 && v <= this_proj -> coord -> totcoord[g])
   {
@@ -865,14 +865,14 @@ G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
+  \fn GtkWidget * frag_mol_volume_search (project * this_proj, int g)
 
   \brief create the fragment(s) / molecule(s) search widget
 
   \param this_proj the target project
   \param g 2 = fragment(s), 3 = molecule(s)
 */
-GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
+GtkWidget * frag_mol_volume_search (project * this_proj, int g)
 {
   GtkWidget * frag_mol_search = create_vbox (BSEP);
   gchar * obj[2] = {"fragment", "molecule"};
@@ -908,7 +908,7 @@ GtkWidget * frag_mol_volume_search (struct project * this_proj, int g)
 GtkWidget * frag_mol_volume_tab (glwin * view, int geo)
 {
   GtkWidget * vbox = create_vbox (BSEP);
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   GtkWidget * hbox;
   gchar * str;
   if (this_proj -> steps > 1)
@@ -1002,7 +1002,7 @@ G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
   int i = gtk_combo_box_get_active (box);
   if (i != view -> volume_win -> angp)
   {
-    struct project * this_proj = get_project_by_id (view -> proj);
+    project * this_proj = get_project_by_id (view -> proj);
     view -> volume_win -> angp = i;
     int j, k;
     for (i=0; i<FILLED_STYLES; i++)
@@ -1044,7 +1044,7 @@ GtkWidget * vol_model_tab (glwin * view)
   abox (vbox, "<u>Volume(s) occupied by all the atom(s):</u>", 5);
   GtkWidget * hbox;
   int i, j;
-  struct project * this_proj = get_project_by_id (view -> proj);
+  project * this_proj = get_project_by_id (view -> proj);
   GtkWidget * hhbox;
   gchar * str;
   double vof;
@@ -1134,7 +1134,7 @@ G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data)
   if (view -> volume_win == NULL)
   {
     view -> volume_win = g_malloc0 (sizeof*view -> volume_win);
-    struct project * this_proj = get_project_by_id (view -> proj);
+    project * this_proj = get_project_by_id (view -> proj);
     gchar * str = g_strdup_printf ("%s - volumes", this_proj -> name);
     view -> volume_win -> win = create_win (str, view -> win, FALSE, FALSE);
     gtk_widget_set_size_request (view -> volume_win -> win, 450, 420);

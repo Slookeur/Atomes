@@ -435,7 +435,7 @@ G_MODULE_EXPORT void on_open_save_activate (GtkWidget * widg, gpointer data)
   const gchar * file_name[2]={"Project file (*.apf)", "Workspace file (*.awf)"};
   const gchar * file_ext[2]={"*.apf", "*.awf"};
   GtkFileChooserAction act[2]={GTK_FILE_CHOOSER_ACTION_OPEN, GTK_FILE_CHOOSER_ACTION_SAVE};
-  struct project * this_proj = get_project_by_id (activew);
+  project * this_proj = get_project_by_id (activew);
   int pactive = activep;
   i = GPOINTER_TO_INT (data);
   run_os = FALSE;

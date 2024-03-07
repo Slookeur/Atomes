@@ -43,7 +43,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void setup_tetrahedron (float * vertices, GLfloat ** xyz);
   void get_centroid (GLfloat ** xyz, int id);
   void check_triangles (int s, GLfloat ** xyz);
-  void prepare_poly_gl (float * vertices, struct atom at, int c);
+  void prepare_poly_gl (float * vertices, atom at, int c);
   void create_poly_lists ();
 
   vec3_t get_triangle_normal (vec3_t v1, vec3_t v2, vec3_t v3);
@@ -504,7 +504,7 @@ void check_triangles (int s, GLfloat ** xyz)
 }
 
 /*!
-  \fn void prepare_poly_gl (float * vertices, struct atom at, int c)
+  \fn void prepare_poly_gl (float * vertices, atom at, int c)
 
   \brief prepare the OpenGL rendering of a polyhedron
 
@@ -512,7 +512,7 @@ void check_triangles (int s, GLfloat ** xyz)
   \param at the atom origin of the polyhedron
   \param c the coordination (0= total, 1= partial)
 */
-void prepare_poly_gl (float * vertices, struct atom at, int c)
+void prepare_poly_gl (float * vertices, atom at, int c)
 {
   int j, k, l;
   gboolean clones;
@@ -559,7 +559,7 @@ void prepare_poly_gl (float * vertices, struct atom at, int c)
       }
       else if (pcolorm == 5)
       {
-        struct field_molecule * fmol = get_active_field_molecule_from_model_id (proj_gl, at.id);
+        field_molecule * fmol = get_active_field_molecule_from_model_id (proj_gl, at.id);
         if (fmol)
         {
           l = proj_gl -> atoms[0][at.id].fid;

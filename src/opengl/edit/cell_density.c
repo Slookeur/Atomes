@@ -35,7 +35,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void set_rescaling (GtkCheckButton * but, gpointer data);
   G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data);
 
-  GtkWidget * adjust_density_tab (struct project * this_proj);
+  GtkWidget * adjust_density_tab (project * this_proj);
 
 */
 
@@ -110,13 +110,13 @@ G_MODULE_EXPORT void set_rescaling (GtkToggleButton * but, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * adjust_density_tab (struct project * this_proj)
+  \fn GtkWidget * adjust_density_tab (project * this_proj)
 
   \brief create the density tab
 
   \param this_proj the target project
 */
-GtkWidget * adjust_density_tab (struct project * this_proj)
+GtkWidget * adjust_density_tab (project * this_proj)
 {
   GtkWidget * layout = create_layout (350, 400);
   GtkWidget * vbox = create_vbox (BSEP);

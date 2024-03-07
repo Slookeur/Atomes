@@ -44,7 +44,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int create_pick_lists ();
 
   void setup_selected_clone_vertices (int style, int at, int pi, float * vertices);
-  void prepare_selected_bond (int sty, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices);
+  void prepare_selected_bond (int sty, int cap, int bi, int pi, atom * at, atom * bt, float * vertices);
   void setup_all_selected_bond_vertices (int sty, int cap, int bi, int at, int sb, int pi, float * vertices);
   void prepare_selected (int style, gboolean cylinder, int clone, int type);
   void prepare_picked (int style, gboolean cylinder, int clone, int type);
@@ -65,9 +65,9 @@ extern void setup_sphere_vertice (float * vertices, vec3_t pos, ColRGBA col, flo
 extern void setup_cylinder_vertice (float * vertices, vec3_t pos_a, vec3_t pos_b, ColRGBA col, float rad, float alpha);
 extern void setup_triangles (float * vertices, vec3_t sa, vec3_t sb, vec3_t sc);
 extern float get_bond_radius (int sty, int ac, int at, int b, int sel);
-extern void setup_this_atom (int style, gboolean to_pick, int picked, struct atom * at, int ac, float * vert, float al);
-extern void prepare_clone (int style, gboolean to_pick, int picked, struct atom at, struct atom bt, float x, float y, float z, float * vertices);
-extern void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, struct atom * at, struct atom * bt, float al, float * vertices);
+extern void setup_this_atom (int style, gboolean to_pick, int picked, atom * at, int ac, float * vert, float al);
+extern void prepare_clone (int style, gboolean to_pick, int picked, atom at, atom bt, float x, float y, float z, float * vertices);
+extern void setup_this_bond (int sty, gboolean to_pick, gboolean picked, int cap, int bi, int pi, atom * at, atom * bt, float al, float * vertices);
 
 /*!
   \fn void setup_selected_clone_vertices (int style, int at, int pi, float * vertices)
@@ -235,7 +235,7 @@ int get_clone_id (int at, int bt)
 }
 
 /*!
-  \fn void prepare_selected_bond (int sty, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices)
+  \fn void prepare_selected_bond (int sty, int cap, int bi, int pi, atom * at, atom * bt, float * vertices)
 
   \brief prepare the rendering of a selected bond
 
@@ -247,7 +247,7 @@ int get_clone_id (int at, int bt)
   \param bt 2nd atom
   \param vertices the OpenGL buffer data to fill
 */
-void prepare_selected_bond (int sty, int cap, int bi, int pi, struct atom * at, struct atom * bt, float * vertices)
+void prepare_selected_bond (int sty, int cap, int bi, int pi, atom * at, atom * bt, float * vertices)
 {
   if (bi == 0)
   {
@@ -255,7 +255,7 @@ void prepare_selected_bond (int sty, int cap, int bi, int pi, struct atom * at, 
   }
   else
   {
-    struct atom * tmp_a, * tmp_b;
+    atom * tmp_a, * tmp_b;
     struct distance d = distance_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt);
 
     tmp_a = duplicate_atom (at);
@@ -376,7 +376,7 @@ int *** nbonds[NUM_STYLES][2];
 void prepare_selected (int style, gboolean cylinder, int clone, int type)
 {
   int h, i, j;
-  struct selatom * sel;
+  atom_in_selection * sel;
   npbds[style][type] = npcps[style][type] = 0;
   if (cylinder)
   {
@@ -501,7 +501,7 @@ void prepare_picked (int style, gboolean cylinder, int clone, int type)
 int render_selected (int style, gboolean cylinder, int caps, int bonds, int ncaps, int type, int clone, int shader)
 {
   int h, i, j, k, l;
-  struct selatom * sel;
+  atom_in_selection * sel;
   object_3d * cyl, * cap;
   if (cylinder)
   {
@@ -688,7 +688,7 @@ int prepare_selection_shaders (int style, int shaders, int clone, int type, gboo
 {
   int j;
   int nshaders = 0;
-  struct selatom * sel;
+  atom_in_selection * sel;
   gboolean doit;
   gboolean sphere = TRUE;
   gboolean cylinder = FALSE;
@@ -816,7 +816,7 @@ int prepare_selection_shaders (int style, int shaders, int clone, int type, gboo
 */
 int check_selection (int style, int type)
 {
-  struct selatom * sel;
+  atom_in_selection * sel;
   int j, k;
   k = 0;
   if (plot -> selected[type] -> selected)
