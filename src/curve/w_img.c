@@ -50,6 +50,11 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "interface.h"
 #include "curve.h"
 
+typedef struct {
+  GtkWidget * a;
+  GtkWidget * b;
+} dwidget;
+
 double back_alpha;
 dwidget thedata;
 int forme;

@@ -15,7 +15,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 /*!
 * @file popup.c
-* @short Functions to create the OpenGL window popup menus:
+* @short Functions to create the OpenGL window popup menus: 
           - The main popup menu \n
           - The contextual, atom or bond related, popup menus
 * @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>

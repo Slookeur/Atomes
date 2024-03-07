@@ -38,7 +38,6 @@ extern int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader);
 extern xmlNodePtr findnode (xmlNodePtr startnode, char * nname);
 extern gchar * groups[230];
 extern gchar * hmsymbols[230];
-extern cif_file * this_cif;
 extern dint t_box[9];
 extern double tmp_box[2][3];
 extern double tmp_vect[3][3];

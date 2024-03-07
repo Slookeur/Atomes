@@ -961,7 +961,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
       this_proj -> modelgl -> saved_coord[i] = NULL;
       init_coordinates (this_proj, i, FALSE, TRUE);
     }
-    this_proj -> was_moved = FALSE;
+    this_proj -> modelgl -> was_moved = FALSE;
     this_proj -> modelgl -> atom_win -> rebuilt[0] = FALSE;
     this_proj -> modelgl -> atom_win -> rebuilt[1] = FALSE;
     if (this_proj -> modelgl -> atom_win -> msd) g_free (this_proj -> modelgl -> atom_win -> msd);
@@ -973,7 +973,7 @@ int action_atoms_from_project (struct project * this_proj, atom_search * asearch
   }
   else if (visible && (asearch -> action == DISPL || asearch -> action == RANMOVE))
   {
-    this_proj -> was_moved = TRUE;
+    this_proj -> modelgl -> was_moved = TRUE;
     clean_motion_search (this_proj, this_proj -> modelgl -> search_widg[(asearch -> action == DISPL) ? 6 : 2], (asearch -> action == DISPL) ? 1 : 0);
     if (asearch -> action == RANMOVE) motion_to_zero (this_proj -> modelgl -> search_widg[2]);
   }

@@ -15,9 +15,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 /*!
 * @file cell_pixel.c
-* @short Not used anymore \n
-         Functions to create the pixel debugging tab for the cell edition window \n
-         This was only used when DEBUG option was activated at build time
+* @short Functions to create the pixel debugging tab for the cell edition window \n
+         This is only used when DEBUG option is activated at build time
 * @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 */
 

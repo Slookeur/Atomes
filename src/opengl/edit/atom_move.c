@@ -691,7 +691,7 @@ void random_move (struct project * this_proj, atom_search * asearch)
     active_project_changed (i);
     recons = TRUE;
   }
-  this_proj -> was_moved = TRUE;
+  this_proj -> modelgl -> was_moved = TRUE;
   init_default_shaders (this_proj -> modelgl);
 #ifdef GTK3
   // GTK3 Menu Action To Check
@@ -945,7 +945,7 @@ void update_coordinates (struct project * this_proj, int status, int axis, int a
   if (v3_length(trans) != 0.0 || r != 0.0)
   {
     move_selection (this_proj, action, axis, trans, r);
-    this_proj -> was_moved = TRUE;
+    this_proj -> modelgl -> was_moved = TRUE;
     this_proj -> modelgl -> atom_win -> old_param[status][axis][action] = this_proj -> modelgl -> atom_win -> new_param[status][axis][action];
     init_default_shaders (this_proj -> modelgl);
     update (this_proj -> modelgl);

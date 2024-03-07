@@ -1347,8 +1347,6 @@ gboolean create_3d_model (int p, gboolean load)
   }
 }
 
-
-
 /*!
   \fn void prep_model (int p)
 

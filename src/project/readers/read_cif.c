@@ -85,8 +85,6 @@ char * line_ptr;
 int * keylines = NULL;
 int cif_loop_id;
 
-cif_file * this_cif = NULL;
-
 gchar * cif_coord_opts[40][2] = {{"b1", "Monoclinic unique axis b, cell choice 1, abc"},    // 0
                                  {"b2", "Monoclinic unique axis b, cell choice 2, abc"},    // 1
                                  {"b3", "Monoclinic unique axis b, cell choice 3, abc"},    // 2

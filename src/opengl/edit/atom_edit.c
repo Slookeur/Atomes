@@ -203,11 +203,11 @@ G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
   struct project * this_proj = get_project_by_id(id);
-  gboolean leave = (this_proj -> was_moved) ? ask_yes_no("Leaving without saving ?",
-                                            "To preserve atom(s) displacement(s) press the 'Apply' button\n"
-                                            "Otherwise initial atom positions will be restored ...\n"
-                                            "\t\t\t Are you sure to leave ?" ,
-                                            GTK_MESSAGE_QUESTION, this_proj -> modelgl -> atom_win -> win) : TRUE;
+  gboolean leave = (this_proj -> modelgl -> was_moved) ? ask_yes_no("Leaving without saving ?",
+                                                                    "To preserve atom(s) displacement(s) press the 'Apply' button\n"
+                                                                    "Otherwise initial atom positions will be restored ...\n"
+                                                                    "\t\t\t Are you sure to leave ?" ,
+                                                                    GTK_MESSAGE_QUESTION, this_proj -> modelgl -> atom_win -> win) : TRUE;
   if (leave && this_proj -> modelgl -> atom_win)
   {
     int h;
@@ -221,7 +221,7 @@ G_MODULE_EXPORT void close_edit (GtkButton * but, gpointer data)
       g_free (this_proj -> modelgl -> search_widg[h]);
       this_proj -> modelgl -> search_widg[h]= NULL;
     }
-    this_proj -> was_moved = FALSE;
+    this_proj -> modelgl -> was_moved = FALSE;
     clean_atom_win (this_proj);
   }
 }
@@ -350,7 +350,7 @@ G_MODULE_EXPORT void apply_edit (GtkButton * but, gpointer data)
     g_free (this_proj -> modelgl -> saved_coord[h]);
     this_proj -> modelgl -> saved_coord[h] = save_coordinates (this_proj, h);
   }
-  this_proj -> was_moved = FALSE;
+  this_proj -> modelgl -> was_moved = FALSE;
   //clean_atom_win (this_proj);
 }
 
@@ -418,7 +418,7 @@ atom_search * allocate_atom_search (int proj, int action, int searchid, int tsiz
 GtkWidget * create_edition_window (struct project * this_proj)
 {
   gchar * str = g_strdup_printf ("Model edition - %s", this_proj -> name);
-  this_proj -> was_moved = FALSE;
+  this_proj -> modelgl -> was_moved = FALSE;
   GtkWidget * win = create_win (str, this_proj -> modelgl -> win, FALSE, FALSE);
   g_free (str);
   int i, j;

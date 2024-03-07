@@ -941,6 +941,7 @@ typedef struct {
   vec3_t ** clones;                         /*!< List of cloned atomic coordiantes */
 
   gboolean prepare_motion;
+  gboolean was_moved;
   // Rebuild trigger switch on edition
   // [0] = on move:
   //    [0] atom_win active: 0/1 to turn off/on
