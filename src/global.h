@@ -228,10 +228,13 @@ enum ImageFormats {
 
 #define IODEBUG FALSE
 
-#define MAXDATC 8
-#define MAXDATA 21
-
+/*! \def ATOM_LIMIT
+  \brief Atom number limit to compute fragment(s) and molecule(s) analysis automatically
+*/
 #define ATOM_LIMIT 100000
+/*!< \def STEP_LIMIT
+  \brief MD step number limit to compute fragment(s) and molecule(s) analysis automatically
+*/
 #define STEP_LIMIT 10000
 
 #define OK            0
@@ -606,6 +609,16 @@ typedef struct {
   GSimpleActionGroup * action_group;
 } curve;
 
+/*! \def MAXDATC
+  \brief Number of tabs for the description of the classical calculation
+*/
+#define MAXDATC 8
+
+/*! \def MAXDATA
+  \brief Number of tabs for the description of the classical force field
+*/
+#define MAXDATA 21
+
 typedef struct {
   gboolean prepare_file[2];
   // Field and Config files
@@ -828,19 +841,19 @@ struct project {
   chemical_data * chemistry;           /*!< Chemical data */
   coord_info * coord;                  /*!< Coordination(s) data */
   cell_info cell;                      /*!< Periodicity data */
-  struct atom ** atoms;                /*!< Atoms */
+  struct atom ** atoms;                /*!< Atom list: atoms[steps][natomes] */
   /*
      Analysis related parameters
   */
   gboolean runok[NGRAPHS];             /*!< Analysis calculation availability */
   gboolean initok[NGRAPHS];            /*!< Curves initizalization  */
   gboolean visok[NGRAPHS];             /*!< Analysis calculation confirmation */
-  int xcor;                            /*!< S(q) X-rays calculation f(q) (1) or approximated (0) */
+  int xcor;                            /*!< S(q) X-rays type of calculation: f(q) (1) or approximated (0) */
   gboolean runc[3];                    /*!< Trigger to run bonds, angles and molecules analysis */
   // gr, sq, sk, gftt, bd, an, frag-mol, ch, sp, msd
   int numc[NGRAPHS];                   /*!< Number of curves: \n 0 = gr, \n 1 = sq, \n 2 = sk, \n 3 = gftt, \n 4 = bd, \n 5 = an, \n 6 = frag-mol, \n 7 = ch, \n 8 = sp, \n 9 = msd */
   int num_delta[NGRAPHS];              /*!< Number of x points: \n 0 = gr, \n 1 = sq, \n 2 = sk, \n 3 = gftt, \n 4 = bd, \n 5 = an, \n 6 = frag-mol, \n 7 = ch, \n 8 = sp, \n 9 = msd */
-  double calc_time[NGRAPHS];           /*!< calculation time: \n 0 = gr, \n 1 = sq, \n 2 = sk, \n 3 = gftt, \n 4 = bd, \n 5 = an, \n 6 = frag-mol, \n 7 = ch, \n 8 = sp, \n 9 = msd */
+  double calc_time[NGRAPHS];           /*!< Calculation time: \n 0 = gr, \n 1 = sq, \n 2 = sk, \n 3 = gftt, \n 4 = bd, \n 5 = an, \n 6 = frag-mol, \n 7 = ch, \n 8 = sp, \n 9 = msd */
   double delta[NGRAPHS];               /*!< Discretization: \n 0 = gr, \n 1 = sq, \n 2 = sk, \n 3 = gftt, \n 4 = bd, \n 5 = an, \n 6 = frag-mol, \n 7 = ch, \n 8 = sp, \n 9 = msd */
   double min[NGRAPHS];                 /*!< Minimum x value: \n 0 = gr, \n 1 = sq, \n 2 = sk, \n 3 = gftt, \n 4 = bd, \n 5 = an, \n 6 = frag-mol, \n 7 = ch, \n 8 = sp, \n 9 = msd */
   double max[NGRAPHS];                 /*!< Maximum x value: \n 0 = gr, \n 1 = sq, \n 2 = sk, \n 3 = gftt, \n 4 = bd, \n 5 = an, \n 6 = frag-mol, \n 7 = ch, \n 8 = sp, \n 9 = msd */

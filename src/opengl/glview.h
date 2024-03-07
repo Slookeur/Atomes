@@ -33,31 +33,109 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #ifndef GL_VIEW_H_
 #define GL_VIEW_H_
 
+/*! \def QUALITY
+  \brief Default OpenGL quality (number of polygons)
+*/
 #define QUALITY 30
+/*! \def DEFAULT_STYLE
+  \brief Default OpenGL style: ball and stick
+*/
 #define DEFAULT_STYLE 1
+
 #define DEFAULT_SIZE 1
-#define DEFAULT_LIGHTING  1.00
-#define DEFAULT_METALLIC  0.35
-#define DEFAULT_ROUGHNESS 0.15
-#define DEFAULT_AO        1.00
-#define DEFAULT_GAMMA     1.50
-#define DEFAULT_OPACITY   1.00
+/*! \def DEFAULT_LIGHTNING
+  \brief Default OpenGL material ligthning
+*/
+#define DEFAULT_LIGHTNING          1.00
+
+/*! \def DEFAULT_METALLIC
+  \brief Default OpenGL material metallic
+*/
+#define DEFAULT_METALLIC           0.35
+
+/*! \def DEFAULT_ROUGHNESS
+  \brief Default OpenGL material roughness
+*/
+#define DEFAULT_ROUGHNESS          0.15
+
+/*! \def DEFAULT_AMBIANT_OCCLUSION
+  \brief Default OpenGL material ambiant occlusion
+*/
+#define DEFAULT_AMBIANT_OCCLUSION  1.00
+
+/*! \def DEFAULT_GAMMA_CORRECTION
+  \brief Default OpenGL material gamma correction
+*/
+#define DEFAULT_GAMMA_CORRECTION   1.50
+
+/*! \def DEFAULT_OPACITY
+  \brief Default OpenGL opacity
+*/
+#define DEFAULT_OPACITY            1.00
 
 // default light data
+/*! \def MAX_LIGHTS
+  \brief Maximum number of light sources
+*/
 #define MAX_LIGHTS 10
+
+/*! \def DEFAULT_INTENSITY
+  \brief Default light intensity
+*/
 #define DEFAULT_INTENSITY 10.0
 
+/*! \def NEAR_PLANE
+  \brief Default value for the OpenGL near plane
+*/
 #define NEAR_PLANE 1.0
-#define FAR_PLANE 10.0
-#define CAMERA_ANGLE_X 5.0    // pitch in degree
-#define CAMERA_ANGLE_Y -25.0  // heading in degree
-#define CAMERA_ANGLE_Z 0.0    // Toll in degree
-#define ZOOM 1.5              //
-#define ZOOM_FACTOR 0.05      //
-#define ZOOM_MAX 0.001        //
 
+/*! \def FAR_PLANE
+  \brief Default value for the OpenGL far plane
+*/
+#define FAR_PLANE 10.0
+
+/*! \def CAMERA_ANGLE_X
+  \brief Default value for the OpenGL camera pitch in °
+*/
+#define CAMERA_ANGLE_X 5.0    // Pitch in degree
+
+/*! \def CAMERA_ANGLE_Y
+  \brief Default value for the OpenGL camera heading in °
+*/
+#define CAMERA_ANGLE_Y -25.0  // Heading in degree
+
+/*! \def CAMERA_ANGLE_Z
+  \brief Default value for the OpenGL camera toll in °
+*/
+#define CAMERA_ANGLE_Z 0.0
+
+/*! \def ZOOM
+  \brief Default value for the OpenGL zoom
+*/
+#define ZOOM 1.5
+
+/*! \def ZOOM_FACTOR
+  \brief Default value for the OpenGL zoom factor
+*/
+#define ZOOM_FACTOR 0.05
+
+/*! \def ZOOM_MAX
+  \brief Maximum value for the OpenGL zoom factor
+*/
+#define ZOOM_MAX 0.001
+
+/*! \def REFRESH
+  \brief Refresh time for spinning the OpenGL window in milliseconds
+*/
 #define REFRESH 10
+
+/*! \def MAX_IN_SELECTION
+  \brief Maximum number of atoms in selection to display measure information
+*/
 #define MAX_IN_SELECTION 21
+/*! \def COORD_MAX_MENU
+  \brief Maximum number of fragments or molecules to build the related menu items
+*/
 #define COORD_MAX_MENU 20
 
 /*! \enum radii */

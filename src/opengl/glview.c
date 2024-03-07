@@ -1347,11 +1347,11 @@ void init_img (struct project * this_proj)
   set_img_lights (this_proj, img);
   img -> m_terial.predefine = 4;
   img -> m_terial.albedo = vec3(0.5, 0.5, 0.5);
-  img -> m_terial.param[0] = DEFAULT_LIGHTING;
+  img -> m_terial.param[0] = DEFAULT_LIGHTNING;
   img -> m_terial.param[1] = DEFAULT_METALLIC;
   img -> m_terial.param[2] = DEFAULT_ROUGHNESS;
-  img -> m_terial.param[3] = DEFAULT_AO;
-  img -> m_terial.param[4] = DEFAULT_GAMMA;
+  img -> m_terial.param[3] = DEFAULT_AMBIANT_OCCLUSION;
+  img -> m_terial.param[4] = DEFAULT_GAMMA_CORRECTION;
   img -> m_terial.param[5] = DEFAULT_OPACITY;
 
   img -> f_g.density = 0.005;
