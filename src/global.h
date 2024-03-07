@@ -86,35 +86,45 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 // dint, tint and qint structures are used for pointer purposes.
 // dint, tint, qint, ColRGBA and coord_info structures must be defined before including 'glwin.h'
-typedef struct {
+typedef struct dint dint;
+struct dint
+{
   int a;
   int b;
-} dint;
+};
 
-typedef struct {
+typedef struct tint tint;
+struct tint
+{
   int a;
   int b;
   int c;
-} tint;
+};
 
-typedef struct {
+typedef struct qint qint;
+struct qint
+{
   int a;
   int b;
   int c;
   int d;
-} qint;
+};
 
-typedef struct {
+typedef struct ColRGBA  ColRGBA;
+struct ColRGBA
+{
   float red;
   float green;
   float blue;
   float alpha;
-} ColRGBA;
+};
 
 /*! \struct coord_info
   \brief Data structure to store coordination information
 */
-typedef struct {
+typedef struct coord_info coord_info;
+struct coord_info
+{
   int species;            /*!< The number of chemical species */
   // 0 = tot
   // 1 = partial
@@ -134,7 +144,7 @@ typedef struct {
   int *** partial_geo;    /*!< The list of partial geometries */
   int cmin;               /*!< The minimum coordination number */
   int cmax;               /*!< The Maximum coordination number */
-} coord_info;
+};
 
 #include "glwin.h"
 
