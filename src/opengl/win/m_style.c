@@ -51,6 +51,18 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 extern gchar * label_atpts (struct project * this_proj, glwin * view, int id);
 
+char * text_styles[OGL_STYLES] = {"Ball and stick",
+                                  "Wireframe",
+                                  "Spacefilled",
+                                  "Spheres",
+                                  "Cylinders",
+                                  "Dots"};
+
+char * text_filled[FILLED_STYLES] = {"Covalent radius",
+                                     "Ionic radius",
+                                     "van Der Waals radius",
+                                     "In crystal radius"};
+
 /*!
   \fn void clean_atom_style (struct project * this_proj)
 

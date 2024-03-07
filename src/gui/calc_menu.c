@@ -84,6 +84,8 @@ extern G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer d
 extern G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void on_calc_sph_released (GtkWidget * widg, gpointer data);
+extern gchar * calc_img[NCALCS-2];
+
 GtkWidget * calc_win = NULL;
 GtkWidget * ba_entry[2];
 int search_type;

@@ -387,7 +387,7 @@ int open_coord_file (gchar * filename, int fti)
       active_project -> chemistry = alloc_chem_data (active_project -> nspec);
       active_project_changed (activep);
       k = l = 0;
-      reader_info (file_ext[fti], "Number of species", active_project -> nspec);
+      reader_info (coord_files_ext[fti], "Number of species", active_project -> nspec);
       for (i=0; i<active_project -> nspec; i++)
       {
         j = (int)this_reader -> z[i];
@@ -414,16 +414,16 @@ int open_coord_file (gchar * filename, int fti)
           active_chem -> chem_prop[CHEM_N][i] = set_neutron_ (& j);
         }
         active_chem -> nsps[i] = this_reader -> nsps[i];
-        g_print ("Reading coordinates [%s]:\t %s, nsps[%d]= %d\n", file_ext[fti], active_chem -> label[i], i+1, active_chem -> nsps[i]);
+        g_print ("Reading coordinates [%s]:\t %s, nsps[%d]= %d\n", coord_files_ext[fti], active_chem -> label[i], i+1, active_chem -> nsps[i]);
         active_chem -> chem_prop[CHEM_Z][i] = this_reader -> z[i];
       }
     }
     else
     {
-      reader_info (file_ext[fti], "Number of species", active_project -> nspec);
+      reader_info (coord_files_ext[fti], "Number of species", active_project -> nspec);
       for (i=0; i<active_project -> nspec; i++)
       {
-        g_print ("Reading coordinates [%s]:\t %s, nsps[%d]= %d\n", file_ext[fti], active_chem -> label[i], i+1, active_chem -> nsps[i]);
+        g_print ("Reading coordinates [%s]:\t %s, nsps[%d]= %d\n", coord_files_ext[fti], active_chem -> label[i], i+1, active_chem -> nsps[i]);
       }
     }
   }

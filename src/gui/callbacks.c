@@ -83,6 +83,22 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "cell_edit.h"
 #include "readers.h"
 
+char * coord_files[NCFORMATS+1] = {"XYZ file",
+                                   "XYZ file - NPT",
+                                   "Chem3D file",
+                                   "CPMD trajectory",
+                                   "CPMD trajectory - NPT",
+                                   "VASP trajectory",
+                                   "VASP trajectory - NPT",
+                                   "Protein Data Bank file",
+                                   "Protein Data Bank file",
+                                   "Crystallographic information",
+                                   "DL-POLY HISTORY file",
+                                   "ISAACS Project File"};
+
+char * coord_files_ext[NCFORMATS+1]={"xyz", "xyz", "c3d", "trj", "trj", "xdatcar", "xdatcar",
+                                    "pdb", "ent", "cif", "hist", "ipf"};
+
 char ** las;
 void initcwidgets ();
 extern G_MODULE_EXPORT void on_edit_activate (GtkWidget * widg, gpointer data);
@@ -1401,7 +1417,7 @@ void open_this_coordinate_file (int format)
     g_print ("Time to open coordinate file: %s\n", calculation_time(FALSE, get_calc_time (start_time, stop_time)));
     active_project -> tfile = format;
     gchar * str = g_path_get_basename (active_project -> coordfile);
-    active_project -> name = g_strdup_printf ("%s", substitute_string (str, g_strdup_printf (".%s", file_ext[format]), NULL));
+    active_project -> name = g_strdup_printf ("%s", substitute_string (str, g_strdup_printf (".%s", coord_files_ext[format]), NULL));
     g_free (str);
     on_edit_activate (NULL, GINT_TO_POINTER(0));
     if (format != 1 && format != 4 && format != 6 && format != 9 && format != 10) on_edit_activate (NULL, GINT_TO_POINTER(4));
@@ -1600,7 +1616,7 @@ G_MODULE_EXPORT void on_coord_port (GtkWidget * widg, gpointer data)
       filter[j] = gtk_file_filter_new();
       if (i == 0)
       {
-        tmp_str = g_strdup_printf ("%s (*.%s)", coord_files[j], file_ext[j]);
+        tmp_str = g_strdup_printf ("%s (*.%s)", coord_files[j], coord_files_ext[j]);
       }
       else
       {
@@ -1610,7 +1626,7 @@ G_MODULE_EXPORT void on_coord_port (GtkWidget * widg, gpointer data)
       g_free (tmp_str);
       if (i == 0)
       {
-        tmp_str = g_strdup_printf ("*.%s", file_ext[j]);
+        tmp_str = g_strdup_printf ("*.%s", coord_files_ext[j]);
       }
       else
       {

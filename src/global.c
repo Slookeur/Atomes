@@ -68,13 +68,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#define NCALCS 12
-#define NGRAPHS 10
-#define OGL_STYLES 6
-#define FILLED_STYLES 4
-#define NCFORMATS 11
-#define NDOTS 8
-
 #define BILLION  1000000000L;
 
 #ifdef G_OS_WIN32
@@ -141,65 +134,11 @@ gchar * PACKAGE_SGTC = NULL;
 #endif
 gchar * ATOMES_CONFIG = NULL;
 gchar * ATOMES_URL = "https://atomes.ipcms.fr";
-
 gchar * mode_name[2]={"Analysis", "Edition"};
-gchar * calc_img[NCALCS-2];
-gchar * graph_img[NGRAPHS];
-gchar * dots[NDOTS];
 gchar * bravais_img[14];
 gchar * ifield[8];
 gchar * projfile = NULL;
 char * ifbug="\nIf this is a bug please report it to:";
-
-char * coord_files[NCFORMATS+1] = {"XYZ file",
-                                   "XYZ file - NPT",
-                                   "Chem3D file",
-                                   "CPMD trajectory",
-                                   "CPMD trajectory - NPT",
-                                   "VASP trajectory",
-                                   "VASP trajectory - NPT",
-                                   "Protein Data Bank file",
-                                   "Protein Data Bank file",
-                                   "Crystallographic information",
-                                   "DL-POLY HISTORY file",
-                                   "ISAACS Project File"};
-
-char * file_ext[NCFORMATS+1]={"xyz", "xyz", "c3d", "trj", "trj", "xdatcar", "xdatcar",
-                              "pdb", "ent", "cif", "hist", "ipf"};
-
-char * text_styles[OGL_STYLES] = {"Ball and stick",
-                                  "Wireframe",
-                                  "Spacefilled",
-                                  "Spheres",
-                                  "Cylinders",
-                                  "Dots"};
-
-char * text_filled[FILLED_STYLES] = {"Covalent radius",
-                                     "Ionic radius",
-                                     "van Der Waals radius",
-                                     "In crystal radius"};
-
-char * calc_name[NCALCS-2] = {"g(r)/G(r)",
-                              "S(q) from FFT[g(r)]",
-                              "S(q) from Debye equation",
-                              "g(r)/G(r) from FFT[S(q)]",
-                              "Bonds and angles",
-                              "Ring statistics",
-                              "Chain statistics",
-                              "Spherical harmonics",
-                              "Mean Squared Displacement",
-                              "Bond valence"};
-
-char * graph_name[NGRAPHS] = {"g(r)/G(r)",
-                              "S(q) from FFT[g(r)]",
-                              "S(q) from Debye equation",
-                              "g(r)/G(r) from FFT[S(q)]",
-                              "Bonds properties",
-                              "Angle distributions",
-                              "Ring statistics",
-                              "Chain statistics",
-                              "Spherical harmonics",
-                              "Mean Squared Displacement"};
 
 char * rings_type[5] = {"All (No rules)",
                         "King's",

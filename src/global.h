@@ -232,6 +232,7 @@ enum ImageFormats {
   \brief Atom number limit to compute fragment(s) and molecule(s) analysis automatically
 */
 #define ATOM_LIMIT 100000
+
 /*!< \def STEP_LIMIT
   \brief MD step number limit to compute fragment(s) and molecule(s) analysis automatically
 */
@@ -251,17 +252,32 @@ enum ImageFormats {
 #define ERROR_CHAINS 11
 #define ERROR_MOL    12
 
+/*!< \def CHEM_PARAMS
+  \brief Number of chemical parameters
+*/
+#define CHEM_PARAMS 5
 #define CHEM_Z 0
 #define CHEM_M 1
 #define CHEM_R 2
 #define CHEM_N 3
 #define CHEM_X 4
 
-#define NCFORMATS 11
 #define NDOTS 8
-#define CHEM_PARAMS 5
+
+/*!< \def NCALCS
+  \brief Number of analysis
+*/
 #define NCALCS 12
+
+/*!< \def NGRAPHS
+  \brief Number of analysis with results in curve window(s)
+*/
 #define NGRAPHS 10
+
+/*!< \def NCFORMATS
+  \brief Number atomic coordinates file formats
+*/
+#define NCFORMATS 11
 
 #define NITEMS 16
 #define OT 4
@@ -348,7 +364,6 @@ extern gchar * ATOMES_CONFIG;
 extern gchar * ATOMES_URL;
 
 extern gchar * mode_name[2];
-extern gchar * calc_img[NCALCS-2];
 extern gchar * graph_img[NGRAPHS];
 extern gchar * dots[NDOTS];
 extern gchar * bravais_img[14];
@@ -356,9 +371,7 @@ extern gchar * ifield[8];
 extern gchar * projfile;
 extern char * ifbug;
 extern char * coord_files[NCFORMATS+1];
-extern char * file_ext[NCFORMATS+1];
-extern char * text_styles[OGL_STYLES];
-extern char * text_filled[FILLED_STYLES];
+extern char * coord_files_ext[NCFORMATS+1];
 extern char * calc_name[NCALCS-2];
 extern char * graph_name[NGRAPHS] ;
 extern char * rings_type[5];

@@ -100,6 +100,32 @@ extern G_MODULE_EXPORT void on_calc_activate (GtkWidget * widg, gpointer data);
 GtkWidget * MainEvent;
 #endif
 
+gchar * dots[NDOTS];
+gchar * calc_img[NCALCS-2];
+gchar * graph_img[NGRAPHS];
+
+char * calc_name[NCALCS-2] = {"g(r)/G(r)",
+                              "S(q) from FFT[g(r)]",
+                              "S(q) from Debye equation",
+                              "g(r)/G(r) from FFT[S(q)]",
+                              "Bonds and angles",
+                              "Ring statistics",
+                              "Chain statistics",
+                              "Spherical harmonics",
+                              "Mean Squared Displacement",
+                              "Bond valence"};
+
+char * graph_name[NGRAPHS] = {"g(r)/G(r)",
+                              "S(q) from FFT[g(r)]",
+                              "S(q) from Debye equation",
+                              "g(r)/G(r) from FFT[S(q)]",
+                              "Bonds properties",
+                              "Angle distributions",
+                              "Ring statistics",
+                              "Chain statistics",
+                              "Spherical harmonics",
+                              "Mean Squared Displacement"};
+
 tint cut_sel;
 tint cut_lab;
 dint davect[9];

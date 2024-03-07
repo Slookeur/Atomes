@@ -54,8 +54,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #define BOX 0
 #define AXIS 1
 
-#define OGL_STYLES 6
-#define FILLED_STYLES 4
 #define OGL_RENDERS 3
 #define OGL_BOX 8
 #define OGL_AXIS 13
@@ -103,6 +101,12 @@ enum shaders {
   SLABS = 12, /*!< 12 */
   VOLMS = 13  /*!< 13 */
 };
+
+#define FILLED_STYLES 4
+#define OGL_STYLES 6
+
+extern char * text_styles[OGL_STYLES];
+extern char * text_filled[FILLED_STYLES];
 
 /*! \struct angle */
 struct angle {
