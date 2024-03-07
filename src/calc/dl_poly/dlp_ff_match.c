@@ -41,7 +41,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   gchar * get_this_prop_param (int sid, int key, int calc, int newp, float * val);
   gchar * get_this_prop_string (int sid, int oid, int type, int calc);
 
-  void update_result_list (int sid, struct object_match * new_match);
+  void update_result_list (int sid, field_object_match * new_match);
   void fill_update_model (GtkTreeStore * store);
   void get_update_tree_data (GtkWidget * tree, gpointer data, GtkTreePath * path);
   void ff_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data);
@@ -64,7 +64,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   GtkTreeModel * global_render_tree ();
 
   struct field_data * get_ff_data (int i, int j);
-  struct object_match * duplicate_match (struct object_match * old_m);
+  field_object_match * duplicate_match (field_object_match * old_m);
 
   dint get_visible (gboolean result, gchar * the_name);
 
@@ -90,8 +90,8 @@ extern GtkWidget * afftype;
 extern GtkWidget * field_key_combo;
 extern GtkWidget * p_box;
 extern GtkWidget * param_box;
-struct object_match * up_match[9];
-struct object_match * tmp_match, * other_match;
+field_object_match * up_match[9];
+field_object_match * tmp_match, * other_match;
 struct field_data * ff_data;
 
 extern GtkWidget * param_prop_param_box (int pid);
@@ -109,7 +109,7 @@ GtkWidget * ff_p_combo[2];
 GtkTreeStore * update_model;
 dint up;
 GtkTreeModel * prop_to_up;
-struct object_match * tmp_res[9];
+field_object_match * tmp_res[9];
 dint pup[2];
 gboolean vdw_same_atom;
 
@@ -365,15 +365,15 @@ gchar * get_this_prop_string (int sid, int oid, int type, int calc)
 }
 
 /*!
-  \fn struct object_match * duplicate_match (struct object_match * old_m)
+  \fn field_object_match * duplicate_match (field_object_match * old_m)
 
   \brief create a copy of a field match
 
   \param old_m the field match to duplicate
 */
-struct object_match * duplicate_match (struct object_match * old_m)
+field_object_match * duplicate_match (field_object_match * old_m)
 {
-  struct object_match * new_m = g_malloc0 (sizeof*new_m);
+  field_object_match * new_m = g_malloc0 (sizeof*new_m);
   new_m -> id = old_m -> id;
   new_m -> obj = old_m -> obj;
   new_m -> oid = old_m -> oid;
@@ -383,18 +383,18 @@ struct object_match * duplicate_match (struct object_match * old_m)
 }
 
 /*!
-  \fn void update_result_list (int sid, struct object_match * new_match)
+  \fn void update_result_list (int sid, field_object_match * new_match)
 
   \brief update avialable parameter list
 
   \param sid the type of field property
   \param new_match the field match
 */
-void update_result_list (int sid, struct object_match * new_match)
+void update_result_list (int sid, field_object_match * new_match)
 {
   if (tmp_res[sid])
   {
-    struct object_match * map, * mbp;
+    field_object_match * map, * mbp;
     map = duplicate_match (new_match);
     mbp = tmp_res[sid];
     while (mbp)

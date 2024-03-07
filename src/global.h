@@ -119,7 +119,7 @@ struct ColRGBA
   float alpha;
 };
 
-/*! \struct coord_info
+/*! \typedef coord_info
   \brief Data structure to store coordination information
 */
 typedef struct coord_info coord_info;
@@ -456,7 +456,7 @@ extern tint cut_lab;
 // Data structures
 #define LINE_SIZE 160
 
-/*! \struct line_node */
+/*! \typedef line_node */
 typedef struct line_node line_node;
 struct line_node
 {
@@ -465,7 +465,7 @@ struct line_node
   struct line_node * prev;
 };
 
-/*! \struct coord_file
+/*! \typedef coord_file
   \brief Atomic coordinates file, data container
 */
 typedef struct coord_file coord_file;
@@ -500,7 +500,7 @@ struct coord_file
   gchar ** label;                          /*!< List of chemical elements */
 };
 
-/*! \struct MouseState
+/*! \typedef MouseState
   \brief Data structure used for zoom in / out on curve widget
 */
 typedef struct MouseState MouseState;
@@ -512,7 +512,7 @@ struct MouseState
   gboolean MouseIsDown;         /*!< Is the mouse button up (0) or down (1) */
 };
 
-/*! \struct CurveState
+/*! \typedef CurveState
   \brief Data structure used for zoom in / out on curve widget
 */
 typedef struct CurveState CurveState;
@@ -522,7 +522,7 @@ struct CurveState
   tint * id;                    /*!< Curve data pointer */
 };
 
-/*! \struct DataLayout
+/*! \typedef DataLayout
   \brief Cruve layout information
 */
 typedef struct DataLayout DataLayout;
@@ -540,7 +540,7 @@ struct DataLayout
   int hpos;                      /*!< Histogram is transparent ? */
 };
 
-/*! \struct CurveExtra
+/*! \typedef CurveExtra
   \brief Extra curve(s) data information
 */
 typedef struct CurveExtra CurveExtra;
@@ -552,7 +552,7 @@ struct CurveExtra
   CurveExtra * next;
 };
 
-/*! \struct ExtraSets
+/*! \typedef ExtraSets
   \brief List of extra data sets for a curve
 */
 typedef struct ExtraSets ExtraSets;
@@ -563,7 +563,7 @@ struct ExtraSets
   CurveExtra * last;          /*!< Last data set of the list, if any */
 };
 
-/*! \struct curve
+/*! \typedef curve
   \brief The curve data structure
 */
 typedef struct Curve Curve;
@@ -764,7 +764,7 @@ struct cp2k
   gchar * info;
 };
 
-/*! \struct molecule */
+/*! \typedef molecule */
 typedef struct molecule molecule;
 struct molecule
 {
@@ -777,7 +777,7 @@ struct molecule
   int * species;                  /*!< Number of atom by species */
 };
 
-/*! \struct model
+/*! \typedef model
   \brief Data stucture to describe the topology
 */
 typedef struct model model;
@@ -787,7 +787,7 @@ struct model
   molecule ** mols;        /*!< List of molecules by steps */
 };
 
-/*! \struct element_data
+/*! \typedef element_data
   \brief element description used for the periodic table defined in 'w_periodic.c'
 */
 typedef struct element_data element_data;
@@ -817,7 +817,7 @@ struct chemical_data
   double grtotcutoff;  /*!< Total cutoff */
 };
 
-/*! \struct insertion
+/*! \typedef insertion
   \brief Data structure for the insertion pop-up menu
 */
 typedef struct insertion_menu insertion_menu;
@@ -829,7 +829,7 @@ struct insertion_menu
   int ats;
 };
 
-/*! \struct atom
+/*! \typedef atom
   \brief The data structure for an atom
 */
 typedef struct atom atom;
@@ -879,7 +879,7 @@ struct atom
   atom * next;
 };
 
-/*! \struct project
+/*! \typedef project
   \brief The data structure for the 'atomes' project
 */
 typedef struct project project;

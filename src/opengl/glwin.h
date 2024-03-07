@@ -108,13 +108,13 @@ enum shaders {
 extern char * text_styles[OGL_STYLES];
 extern char * text_filled[FILLED_STYLES];
 
-/*! \struct angle */
+/*! \typedef angle */
 struct angle {
   double angle;   /*!< the angle value */
   gboolean pbc;   /*!< are PBC used ? 1 = yes, 0 = no */
 };
 
-/*! \struct distance */
+/*! \typedef distance */
 typedef struct distance distance;
 struct distance
 {
@@ -170,7 +170,7 @@ struct recorder
   GtkWidget * stop;
 };
 
-/*! \struct Light
+/*! \typedef Light
 
   \brief Light parameters for OpenGL rendering
 */
@@ -187,7 +187,7 @@ struct Light
   vec3_t spot_data;   /*!< Angle, inner and outer spot light cutoff */
 };
 
-/*! \struct Material
+/*! \typedef Material
 
   \brief Material parameters for OpenGL rendering
 */
@@ -211,7 +211,7 @@ struct Material
                          5 = opacity*/
 };
 
-/*! \struct Fog
+/*! \typedef Fog
 
   \brief Fog parameters for OpenGL rendering
 */
@@ -225,7 +225,7 @@ struct Fog
   vec3_t color;     /*!< Fog color */
 };
 
-/*! \struct screen_string
+/*! \typedef screen_string
 
   \brief OpenGL string rendering
 */
@@ -266,7 +266,7 @@ struct atom_selection
   atom_in_selection * last;
 };
 
-/*! \struct image
+/*! \typedef image
 
   \brief a structure to describe the content of the OpenGL rendering
 */
@@ -461,7 +461,7 @@ struct snapshot
   snapshot * next;
 };
 
-/*! \struct animation */
+/*! \typedef animation */
 typedef struct animation animation;
 struct animation
 {
@@ -470,7 +470,7 @@ struct animation
   snapshot * last;
 };
 
-/*! \struct colormap */
+/*! \typedef colormap */
 typedef struct colormap colormap;
 struct colormap
 {
@@ -483,7 +483,7 @@ struct colormap
   ColRGBA * values;           /*!< The atom(s) colors calculated using the custom color map information */
 };
 
-/*! \struct atom_search
+/*! \typedef atom_search
 
   \brief a data structure to search for atom(s) and edit the model
 */
@@ -548,7 +548,7 @@ struct atom_search
   tint pointer[6];
 };
 
-/*! \struct atomic_object
+/*! \typedef atomic_object
 
   \brief a data structure to describe an object to work on. \n
   the object can be one or more: \n
@@ -582,7 +582,7 @@ struct atomic_object
   atomic_object * next;
 };
 
-/*! \struct wyckoff_position
+/*! \typedef wyckoff_position
 
   \brief a structure to describe a Wyckoff position in crystallography
 */
@@ -595,7 +595,7 @@ struct wyckoff_position
   gchar *** pos;       /*!< Coordinate(s) */
 };
 
-/*! \struct spg_setting
+/*! \typedef spg_setting
 
   \brief a structure to describe the settings of a space group in crystallography
 */
@@ -609,7 +609,7 @@ struct spg_setting
   gchar *** points;    /*!< Wyckoff position modification(s) */
 };
 
-/*! \struct space_group
+/*! \typedef space_group
 
   \brief a structure to described a space group in crystallography
 */
@@ -630,7 +630,7 @@ struct space_group
   mat4_t wyck_origin;             /*!< Origin of the Wyckoff positions */
 };
 
-/*! \struct box_info
+/*! \typedef box_info
 
   \brief model box information
 */
@@ -648,7 +648,7 @@ struct box_info
   double dens;            /*!< Density */
 };
 
-/*! \struct
+/*! \typedef
 
   \brief Description of the periodicity
 */
@@ -865,7 +865,7 @@ struct model_edition
   GtkWidget * notebook;
 };
 
-/*! \struct glwin
+/*! \typedef glwin
 
   \brief OpenGL window widget structure */
 typedef struct glwin glwin;

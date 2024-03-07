@@ -100,7 +100,7 @@ extern const GLchar * string_vertex;
 extern const GLchar * string_color;
 extern const GLchar * string_color_2d;
 
-/*! \struct object_3d */
+/*! \typedef object_3d */
 typedef struct object_3d object_3d;
 struct object_3d
 {
@@ -120,7 +120,7 @@ struct object_3d
                               3 visibility (0 = normal, 1 = always) */
 };
 
-/*! \struct glsl_program */
+/*! \typedef glsl_program */
 typedef struct glsl_program glsl_program;
 struct glsl_program
 {

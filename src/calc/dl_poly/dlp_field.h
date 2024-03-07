@@ -146,7 +146,7 @@ enum dlp_atom_types {
   TOTAL_COORD_AND_SPEC   = 1, /*!< 1 */
   // Partial coord + spec
   PARTIAL_COORD_AND_SPEC = 2, /*!< 2 */
-  OTHER                  = 3 /*!< 3 */
+  OTHER                  = 3  /*!< 3 */
 };
 
 typedef struct field_prop field_prop;
@@ -353,6 +353,29 @@ struct field_molecule
   field_molecule * prev;
 };
 
+typedef struct field_object_match field_object_match;
+struct field_object_match
+{
+  int id;
+  int obj;
+  int oid;
+  int type;
+  gboolean use;
+  field_object_match * next;
+  field_object_match * prev;
+};
+
+typedef struct field_data field_data;
+struct field_data
+{
+  int key;
+  int ** atoms_z;
+  int ** atoms_id;
+  int npar;
+  float ** param;
+  char ** info;
+};
+
 extern GtkWidget * field_assistant;
 extern gchar * celemts[MAXDATC];
 extern GtkWidget * vbox_control (int f);
@@ -531,28 +554,9 @@ extern void print_dlp_bond (int bi, GtkTextBuffer * buf,
 
 extern G_MODULE_EXPORT void setup_this_force_field (int id);
 
-struct object_match {
-  int id;
-  int obj;
-  int oid;
-  int type;
-  gboolean use;
-  struct object_match * next;
-  struct object_match * prev;
-};
-
-extern struct object_match * field_objects_id[6];
-extern struct object_match * tmp_obj_id;
+extern field_object_match * field_objects_id[6];
+extern field_object_match * tmp_obj_id;
 extern float get_force_field_atom_mass (int sp, int num);
-
-struct field_data{
-  int key;
-  int ** atoms_z;
-  int ** atoms_id;
-  int npar;
-  float ** param;
-  char ** info;
-};
 
 extern int ff_unit;
 extern struct field_data * ff_bonds[3];

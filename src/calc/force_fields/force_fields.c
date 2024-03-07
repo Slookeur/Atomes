@@ -750,8 +750,8 @@ void print_object_dim_and_key_tables (int fid)
   fprintf (fp, "  </ff-data>\n");
 }
 
-struct object_match ** all_data[10];
-struct object_match * om_tmp;
+field_object_match ** all_data[10];
+field_object_match * om_tmp;
 
 /*!
   \fn void set_data (int pid, int obj, int oid, int faid)
@@ -1932,8 +1932,8 @@ void print_vdw_table (int fid, int inum)
 }
 
 
-struct object_match * field_objects_id[6] = {NULL, NULL, NULL, NULL, NULL, NULL};
-struct object_match * tmp_obj_id;
+field_object_match * field_objects_id[6] = {NULL, NULL, NULL, NULL, NULL, NULL};
+field_object_match * tmp_obj_id;
 
 char *** ff_atoms;
 // 0 = Quadratic, 1 = Quartic, 2 = Morse
@@ -2048,7 +2048,7 @@ void find_object_ijkl (int hid, int foid, int oid, int sa, int za, int sb, int z
   val[2] = zc;
   val[3] = zd;
   gboolean do_this_id, save_this_id;
-  struct object_match * test_obj_id;
+  field_object_match * test_obj_id;
   for (h=0; h<2+hid; h++)
   {
     if (ff_objects[h+foid] > 0)
