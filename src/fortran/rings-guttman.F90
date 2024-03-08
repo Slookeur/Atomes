@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file rings-guttman.F90
-! @short Guttman's ring statistics
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file rings-guttman.F90
+!! @short Guttman ring statistics
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER FUNCTION GUTTMAN_RINGS()
 

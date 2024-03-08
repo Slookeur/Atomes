@@ -275,8 +275,8 @@ G_MODULE_EXPORT void select_dummy (GtkCellRendererToggle * cell_renderer, gchar 
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void dummy_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -294,8 +294,8 @@ void dummy_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTr
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void dummy_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)

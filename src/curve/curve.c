@@ -378,12 +378,12 @@ void set_curve_data_zero (int rid, int cid, int interv)
 }
 
 /*!
-  \fn void save_curve_ (int * interv, double datacurve[* interv], int * cid, int * rid)
+  \fn void save_curve_ (int * interv, double datacurve[*interv], int * cid, int * rid)
 
   \brief save calculation results from Fortran90
 
   \param interv number of data point(s)
-  \param datacurve[*interv] calculation result(s) to save
+  \param datacurve calculation result(s) to save
   \param cid curve id
   \param rid calculation id
 */

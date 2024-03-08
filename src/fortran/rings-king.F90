@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file rings-king.F90
-! @short King's ring statistics
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file rings-king.F90
+!! @short King ring statistics
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 SUBROUTINE SETUP_CPAT_VPAT_RING (NAT, STR, CONT, VOIS, CPT, VPT)
 

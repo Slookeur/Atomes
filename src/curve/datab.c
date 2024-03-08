@@ -403,8 +403,8 @@ void delete_cell (gpointer data)
 
   \param cell the GtkCellRendererText sending the signal
   \param path_string the path in the tree model
-   gchar * new_text           : the string describing the new value
-   gpointer data              : the associated data pointer
+  \param new_text the string describing the new value
+  \param user_data the associated data pointer
 */
 G_MODULE_EXPORT void edit_cell (GtkCellRendererText * cell, gchar * path_string, gchar * new_text, gpointer user_data)
 {
@@ -945,9 +945,9 @@ GtkWidget * setview (project * this_proj, int b, int c)
 /*!
   \fn void cancel_changes (GtkWidget * widg, gpointer data)
 
-  \brief Usage: cancel curve data edition
+  \brief cancel curve data edition
+
   \param widg the GtkWidget sending the signal
-  \param data the associated data pointer
   \param data the associated data pointer
 */
 void cancel_changes (GtkWidget * widg, gpointer data)
@@ -960,9 +960,9 @@ void cancel_changes (GtkWidget * widg, gpointer data)
 /*!
   \fn G_MODULE_EXPORT void cancel_but (GtkButton * but, gpointer data)
 
-  \brief Usage: cancel curve data edition button callback
+  \brief cancel curve data edition button callback
+
   \param but the GtkButton sending the signal
-  \param data the associated data pointer
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void cancel_but (GtkButton * but, gpointer data)
@@ -974,9 +974,9 @@ G_MODULE_EXPORT void cancel_but (GtkButton * but, gpointer data)
 /*!
   \fn G_MODULE_EXPORT gboolean cancel_win (GtkWindow * win, gpointer data)
 
-  \brief Usage: cancel curve data edition callback GTK4
+  \brief cancel curve data edition callback GTK4
+
   \param win the GtkWindow sending the signal
-  \param data the associated data pointer
   \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean cancel_win (GtkWindow * win, gpointer data)
@@ -985,9 +985,9 @@ G_MODULE_EXPORT gboolean cancel_win (GtkWindow * win, gpointer data)
   \fn G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer data)
 
   \brief cancel curve data edition callback GTK3
+
   \param win the GtkWidget sending the signal
   \param event the GdkEvent triggering the signal
-  \param data the associated data pointer
   \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer data)
@@ -1001,8 +1001,8 @@ G_MODULE_EXPORT gboolean cancel_win (GtkWidget * win, GdkEvent * event, gpointer
   \fn G_MODULE_EXPORT void validate_changes (GtkButton * but, gpointer data)
 
   \brief apply data edition changes
+
   \param but the GtkButton sending the signal
-  \param data the associated data pointer
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void validate_changes (GtkButton * but, gpointer data)

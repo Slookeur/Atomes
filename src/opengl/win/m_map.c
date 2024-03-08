@@ -628,7 +628,7 @@ void fill_map_model (GtkTreeStore * store, project * this_proj)
 /*!
   \fn G_MODULE_EXPORT void edit_map_cell (GtkCellRendererText * cell, gchar * path_string, gchar * new_text, gpointer data)
 
-  \param Usage render color map tree store cell
+  \brief render color map tree store cell
 
   \param cell the GtkCellRendererText to render
   \param path_string the path in the tree store

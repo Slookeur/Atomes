@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file dmtx.F90
-! @short Distance matrix calculation
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file dmtx.F90
+!! @short Distance matrix calculation
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 SUBROUTINE PRINT_THIS_PIXEL (TPS, TPIX, PIXL, pix)
 

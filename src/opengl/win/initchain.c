@@ -52,7 +52,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param st the MD step
   \param ta the chain size
   \param ri the chain id
-  \param nchain[*ta] the chain element(s)
+  \param nchain the chain element(s)
 */
 void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
 {
@@ -64,7 +64,7 @@ void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
 }
 
 /*!
-  \fn void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
+  \fn void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[*num])
 
   \brief allocate atom chains data from Fortran90 information
 
@@ -72,7 +72,7 @@ void send_chains_opengl_ (int * st, int * ta, int * ri, int nchain[* ta])
   \param at the atom id
   \param ta the chain size
   \param num the number of chain(s)
-  \param nchain[*num] the chain id(s)
+  \param nchain the chain id(s)
 */
 void send_atom_chains_id_opengl_ (int * st, int * at, int * ta, int * num, int nchain[* num])
 {

@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file allochem.F90
-! @short Memory allocation for chemistry buffers
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file allochem.F90
+!! @short Memory allocation for chemistry buffers
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER FUNCTION ALLOCHEM ()
 

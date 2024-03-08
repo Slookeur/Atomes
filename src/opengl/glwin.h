@@ -109,7 +109,9 @@ extern char * text_styles[OGL_STYLES];
 extern char * text_filled[FILLED_STYLES];
 
 /*! \typedef angle */
-struct angle {
+typedef struct angle angle;
+struct angle
+{
   double angle;   /*!< the angle value */
   gboolean pbc;   /*!< are PBC used ? 1 = yes, 0 = no */
 };
@@ -452,7 +454,7 @@ struct image
   int id;                                       /*!< Image ID */
 };
 
-/*! \snapshot */
+/*! \typedef snapshot */
 typedef struct snapshot snapshot;
 struct snapshot
 {
@@ -648,7 +650,7 @@ struct box_info
   double dens;            /*!< Density */
 };
 
-/*! \typedef
+/*! \typedef cell_info
 
   \brief Description of the periodicity
 */

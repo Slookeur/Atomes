@@ -1209,7 +1209,7 @@ G_MODULE_EXPORT void on_qm_assistant_prepare (GtkAssistant * assistant, GtkWidge
 
   \param i tab id
   \param j last tab id
-  \param print[2] basis and pseudopotential printing status
+  \param print basis and pseudopotential printing status
 */
 gboolean go_for_it (int i, int j, gboolean print[2])
 {

@@ -93,8 +93,8 @@ G_MODULE_EXPORT void select_frag (GtkCellRendererToggle * cell_renderer, gchar *
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void frag_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -111,8 +111,8 @@ void frag_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkT
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void frag_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)

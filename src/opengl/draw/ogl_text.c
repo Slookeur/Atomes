@@ -639,15 +639,15 @@ void add_string_instance (screen_string * string, vec3_t pos, atom * at, atom * 
 }
 
 /*!
-  \fn void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], atom * at, atom * bt, atom * ct))
-*
-* Usage: add a screen string to the list of screen string to render
+  \fn void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], atom * at, atom * bt, atom * ct)
+
+  \brief Add a screen string to the list of screen string to render
 
   \param text the text to render
   \param id the label id
   \param col the color
   \param pos the position
-  \param lshift[3] label position shift on x, y and z, if any
+  \param lshift label position shift on x, y and z, if any
   \param at the 1st atom, if any (bond or angle measure string)
   \param bt the 2nd atom, if any (bond or angle measure string)
   \param ct the 3rd atom, if any (angle measure string)
@@ -676,14 +676,14 @@ void add_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], 
 
 /*!
   \fn void prepare_string (char * text, int id, ColRGBA col, vec3_t pos, float lshift[3], atom * at, atom * bt, atom * ct)
-*
-* Usage: prepare a screen string to be rendered
+
+  \brief prepare a screen string to be rendered
 
   \param text the text to render
   \param id the label id
   \param col the color
   \param pos the position
-  \param lshift[3] label position shift on x, y and z, if any
+  \param lshift label position shift on x, y and z, if any
   \param at the 1st atom, if any (bond or angle measure string)
   \param bt the 2nd atom, if any (bond or angle measure string)
   \param ct the 3rd atom, if any (angle measure string)

@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file writedata.F90
-! @short Export curve data using data received from C
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file writedata.F90
+!! @short Export curve data using data received from C
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 CHARACTER (LEN=35) FUNCTION ylegend (job, nleg, idl)
 

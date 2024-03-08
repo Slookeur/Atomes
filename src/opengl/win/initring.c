@@ -40,7 +40,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glwindow.h"
 
 /*!
-  \fn void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+1])
+  \fn void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[*ta+1])
 
   \brief get single ring data for the glwin from Fortran90
 
@@ -48,7 +48,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   \param st the MD step
   \param ta size of the ring
   \param ri ring size id
-  \param nring[*ta+1] ring's atom list
+  \param nring ring's atom list
 */
 void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+1])
 {
@@ -61,7 +61,7 @@ void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+
 }
 
 /*!
-  \fn void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * num, int ring[* num])
+  \fn void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * num, int ring[*num])
 
   \brief get rings data for an atom from Fortran90
 
@@ -70,7 +70,7 @@ void send_rings_opengl_ (int * id, int * st, int * ta, int * ri, int nring[* ta+
   \param id type of ring
   \param ta size of the ring
   \param num number of ring(s) of that size
-  \param ring[*num] the list(s) of atoms of the(these) ring(s)
+  \param ring the list(s) of atoms of the(these) ring(s)
 */
 void send_atom_rings_id_opengl_ (int * st, int * at, int * id, int * ta, int * num, int ring[* num])
 {

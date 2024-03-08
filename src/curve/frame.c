@@ -72,10 +72,10 @@ void prep_frame (cairo_t * fr, int da, double ti, ColRGBA dcol)
   \param cd the cairo drawing context to use for the draw
   \param tf frame type
   \param da dash type
-  \param res[2] image size
+  \param res image size
   \param ti line width
-  \param x[2] x positions (right, left)
-  \param y[2] y positions (top, bottom)
+  \param x x positions (right, left)
+  \param y y positions (top, bottom)
   \param dcol color
 */
 void show_frame (cairo_t * cd, int tf, int da, int res[2], double ti, double x[2], double y[2], ColRGBA dcol)

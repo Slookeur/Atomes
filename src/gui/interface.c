@@ -806,12 +806,12 @@ gchar * textcolor (int i)
   \param bid 0 or MD step if NPT
   \param volume volume
   \param density density
-  \param dvects[3][3] direct space lattice vectors
-  \param rvects[3][3] reciprocal lattice vectors
-  \param mod[3] modulus of lattice vectors (a,b,c)
-  \param ang[3] lattice angles (alpha, beta, gamma)
-  \param f_to_c[3][3] fractional to cartesian matrix
-  \param c_to_f[3][3] cartesian to fractional matrix
+  \param dvects direct space lattice vectors
+  \param rvects reciprocal lattice vectors
+  \param mod modulus of lattice vectors (a,b,c)
+  \param ang lattice angles (alpha, beta, gamma)
+  \param f_to_c fractional to cartesian matrix
+  \param c_to_f cartesian to fractional matrix
 */
 void lattice_info_ (int * bid, double * volume, double * density,
                     double dvects[3][3], double rvects[3][3], double mod[3], double ang[3],
@@ -860,11 +860,11 @@ void lattice_info_ (int * bid, double * volume, double * density,
 }
 
 /*!
-  \fn void send_chem_info_ (int prop[active_project -> nspec])
+  \fn void send_chem_info_ (int prop[active_project->nspec])
 
   \brief getting chemistry formula information from Fortran90
 
-  \param prop[active_project->nspec] the formula
+  \param prop the formula
 */
 void send_chem_info_ (int prop[active_project -> nspec])
 {

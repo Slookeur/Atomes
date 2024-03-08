@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file xyz.F90
-! @short Write XYZ atomic coordinates
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file xyz.F90
+!! @short Write XYZ atomic coordinates
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION read_xyz (xyz_f, lxyz, is_npt) BIND (C,NAME='read_xyz_')
 

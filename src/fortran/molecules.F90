@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file molecules.F90
-! @short Fragment(s) and molecule(s) analysis
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file molecules.F90
+!! @short Fragment(s) and molecule(s) analysis
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 LOGICAL FUNCTION ADD_MOL(this_mol, MOL_ID, STEP_ID)
 

@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file resrings.F90
-! @short Export results of ring and chain statistics to C
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file resrings.F90
+!! @short Export results of ring and chain statistics to C
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER FUNCTION RECRINGS(VID)
 

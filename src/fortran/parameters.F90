@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file parameters.F90
-! @short Global variable declarations
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file parameters.F90
+!! @short Global variable declarations
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 !################################################################
 !   This is the atomes code main include file which contains:

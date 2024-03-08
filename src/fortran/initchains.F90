@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file initchains.F90
-! @short Initialize chain statistics
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file initchains.F90
+!! @short Initialize chain statistics
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION initchains (VTLT, VAAA, VACA, VHOMO, V121, VTAILLC, VNUMA) BIND (C,NAME='initchains_')
 

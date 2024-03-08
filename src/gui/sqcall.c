@@ -218,12 +218,12 @@ G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data)
 }
 
 /*!
-  \fn void save_xsk_ (int * interv, double datacurve[* interv])
+  \fn void save_xsk_ (int * interv, double datacurve[*interv])
 
   \brief get s(k) calculation results form Fortran90
 
   \param interv number of data point (delta r/q)
-  \param datacurve[*interv] calculation result
+  \param datacurve calculation result
 */
 void save_xsk_ (int * interv, double datacurve[* interv])
 {

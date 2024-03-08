@@ -304,7 +304,7 @@ GtkWidget * create_coord_menu (int p, char * name, gboolean va, GtkWidget * menu
   \param sp the chemical species
   \param id the partial coordination id
   \param ngsp the number of chemical species
-  \param coord[*ngsp] the list of partial coordination(s) for that chemical species and coordination id
+  \param coord the list of partial coordination(s) for that chemical species and coordination id
 */
 void partial_geo_out_ (int * sp, int * id, int * ngsp, int coord[* ngsp])
 {
@@ -330,14 +330,14 @@ void allocate_partial_geo_ (int * sp, int * ngsp)
 }
 
 /*!
-  \fn void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp])
+  \fn void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[*ngsp])
 
   \brief getting atomic coordinations data from Fortran90, and related GTK3 menu elements creation
 
   \param id 0 for total coordination(s), 1 for partial coordination(s)
   \param sp the chemical species
   \param ngsp the number of distinct coordination(s) for that chemical species
-  \param coordt[*ngsp] the list of coordination(s) for that chemical species
+  \param coordt the list of coordination(s) for that chemical species
 */
 void init_menu_coordinations_ (int * id, int * sp, int * ngsp, int coordt[* ngsp])
 {
@@ -557,14 +557,14 @@ void init_menu_fragmol_ (int * id)
 }
 
 /*!
-  \fn void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init)
+  \fn void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[*ngsp], int * init)
 
   \brief getting rings statistics data from Fortran90, and related GTK3 menu elements creation
 
-  \param coo the coord type, for rings: color_box.c color_box.h glwindow.c glwindow.h initchain.c initcoord.c initcoord.h initmol.c initring.c m_anim.c m_atoms.c m_axis.c m_back.c m_bonds.c m_box.c m_clones.c m_coord.c m_edit.c menu_bar.c m_map.c m_poly.c m_proj.c m_quality.c m_render.c m_rep.c m_style.c m_tools.c popup.c res submenus.h w_advance.c w_atoms.c w_axis.c w_bonds.c w_box.c w_chains.c w_colors.c w_coord.c w_crystal.c w_cutoffs.c w_encode.c w_labels.c w_library.c w_measures.c w_periodic.c w_record.c w_rings.c w_search.c w_sequencer.c w_spiner.c w_volumes.c ids + 4, for chains: 9
+  \param coo the coord type
   \param ids the ring(s) type in [0-4], or 0 for the chains
   \param ngsp the total number of distinct ring size(s)
-  \param coordt[*ngsp] the list of ring size(s) with rings
+  \param coordt the list of ring size(s) with rings
   \param init initialize some visual information (1/0)
 */
 void init_menurings_ (int * coo, int * ids, int * ngsp, int coordt[* ngsp], int * init)
@@ -703,7 +703,7 @@ void init_opengl_coords (int id, int nt, int init)
 }
 
 /*!
-  \fn void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[* num])
+  \fn void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[*num])
 
   \brief coordination information from Fortran90
 
@@ -712,7 +712,7 @@ void init_opengl_coords (int id, int nt, int init)
   \param cmin min value for the total coordination
   \param cmax max value for the total coordination
   \param nt total number of distinct coordination
-  \param coord[*num] the values for each atom
+  \param coord the values for each atom
 */
 void send_coord_opengl_ (int * id, int * num, int * cmin, int * cmax, int * nt, int coord[* num])
 {

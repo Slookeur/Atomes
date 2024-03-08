@@ -974,7 +974,7 @@ G_MODULE_EXPORT void repeat_move (GtkSpinButton * res, gpointer data)
   \param this_proj the target project
   \param i selection status, 0 = non selected atom(s), 1 = selected atom(s), 2 = all atom(s)
   \param j axis, 0 = model, 1 = eye
-  \param 5 rotation)
+  \param k parameter to update: x, y, z or alpha, beta, gamma
 */
 void update_range_and_entry (project * this_proj, int i, int j, int k)
 {

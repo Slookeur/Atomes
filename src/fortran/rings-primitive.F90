@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file rings-primitive.F90
-! @short Primitive and strong ring statistics
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file rings-primitive.F90
+!! @short Primitive and strong ring statistics
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER FUNCTION PRIMITIVE_RINGS ()
 

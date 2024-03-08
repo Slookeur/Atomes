@@ -263,7 +263,7 @@ extern ColRGBA init_color (int id, int numid);
 /*!
   \fn void measure_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 
-  \param Usage show / hide cell renderer in the measures tree store
+  \brief show / hide cell renderer in the measures tree store
 
   \param col the tree view column
   \param renderer the column renderer
@@ -282,7 +282,7 @@ void measure_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, G
 /*!
   \fn void measure_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 
-  \param Usage set renderer color in the measures tree store
+  \brief set renderer color in the measures tree store
 
   \param col the tree view column
   \param renderer the column renderer
@@ -326,7 +326,7 @@ void measure_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, Gtk
 /*!
   \fn void dihedral_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 
-  \param Usage
+  \brief
 
   \param col the tree view column
   \param renderer the column renderer
@@ -348,7 +348,7 @@ void dihedral_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * r
 /*!
   \fn void measure_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 
-  \param Usage
+  \brief
 
   \param col the tree view column
   \param renderer the column renderer
@@ -600,9 +600,9 @@ GtkWidget * create_selection_tree (glwin * view, int sid, int mid)
   \fn GtkWidget * measurment_tab (glwin * view, int sid, mid)
 
   \brief create measurement tab
+
   \param view the target glwin
   \param sid the type of selection (0 = analysis mode, 1 = edition mode)
-  \param mid the type of measurement (0 = bonds, 1 = angles, 2 = dihedrals)
   \param mid the type of measurement (0 = bonds, 1 = angles, 2 = dihedrals)
 */
 GtkWidget * measurment_tab (glwin * view, int sid, int mid)
@@ -617,8 +617,8 @@ GtkWidget * measurment_tab (glwin * view, int sid, int mid)
   \fn gchar * create_measure_label (glwin * view, int sid)
 
   \brief create the text information for the number of atom(s) in selection
+
   \param view the target glwin
-  \param sid the type of selection (0 = analysis mode, 1 = edition mode)
   \param sid the type of selection (0 = analysis mode, 1 = edition mode)
 */
 gchar * create_measure_label (glwin * view, int sid)
@@ -640,9 +640,9 @@ gchar * create_measure_label (glwin * view, int sid)
   \fn void update_label_selection (glwin * view, int sid)
 
   \brief update the text information for the number of atoms/measures in selection
+
   \param view the target glwin
-  \param pi the type of selection (0 = analysis mode, 1 = edition mode)
-  \param pi the type of selection (0 = analysis mode, 1 = edition mode)
+  \param sid the type of selection (0 = analysis mode, 1 = edition mode)
 */
 void update_label_selection (glwin * view, int sid)
 {
@@ -656,8 +656,8 @@ extern GtkWidget * labels_tab (glwin * view, int id);
   \fn G_MODULE_EXPORT void close_ml (GtkButton * but, gpointer data)
 
   \brief measurements style edition window close button
+
   \param but the GtkButton sending the signal
-  \param data the associated data pointer
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void close_ml (GtkButton * but, gpointer data)
@@ -669,8 +669,8 @@ G_MODULE_EXPORT void close_ml (GtkButton * but, gpointer data)
   \fn G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data)
 
   \brief measurements style edition window
+
   \param but the GtkButton sending the signal
-  \param data the associated data pointer
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void measure_labels (GtkButton * but, gpointer data)
@@ -707,9 +707,9 @@ G_MODULE_EXPORT gboolean close_measure_event (GtkWindow * widg, gpointer data)
   \fn G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event, gpointer data)
 
   \brief measurements window close event callback GTK3
+
   \param widg the GtkWidget sending the signal
   \param event the GdkEvent triggering the signal
-  \param data the associated data pointer
   \param data the associated data pointer
 */
 G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event, gpointer data)
@@ -731,7 +731,7 @@ G_MODULE_EXPORT gboolean close_measure_event (GtkWidget * widg, GdkEvent * event
   \fn G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data)
 
   \brief create the measurements window
-  \param widg the GtkWidget sending the signal
+
   \param widg the GtkWidget sending the signal
   \param data the associated data pointer
 */

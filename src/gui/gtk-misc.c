@@ -273,6 +273,7 @@ void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gb
 
   \brief Add a GtkWidget in a GtkBox at the initial position
 
+  \param orientation horizontal or vertical
   \param widg the GtkBox
   \param child the GtkWidget to add
   \param expand GTK3 only: expandable
@@ -1835,11 +1836,11 @@ GtkWidget * radio_button (gchar * text, int dimx, int dimy, gboolean state, GCal
   \brief create a simple button
 
   \param text the message to display
-  \param format the image format
+  \param image_format the image format
   \param image the name of the stock image
   \param dimx the x size
   \param dimy the y size
-  \param relief Should appear pressed or not (1/0)
+  \param relief button should appear pressed or not (1/0)
   \param handler the callback for the button
   \param data the associated data pointer
 */

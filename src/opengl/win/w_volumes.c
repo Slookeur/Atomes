@@ -260,7 +260,7 @@ double vamin[3], vamax[3];
 
   \param nats number of atoms
   \param ats_vol the list of atom(s)
-  \param baryc[3] barycenter of the atomic coordinates
+  \param baryc barycenter of the atomic coordinates
   \param rvdws the list of atomic radius (ii)
   \param a_ang x axis rotation angle
   \param b_ang y axis rotation angle

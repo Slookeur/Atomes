@@ -419,8 +419,8 @@ float * allocfloat (int  val)
 
   \brief allocate a float ** pointer
 
-  \param wal 1st dimension size of the pointer to allocate
-  \param xal 2nd dimension size of the pointer to allocate
+  \param xal 1st dimension size of the pointer to allocate
+  \param yal 2nd dimension size of the pointer to allocate
 */
 float ** allocdfloat (int xal, int yal)
 {

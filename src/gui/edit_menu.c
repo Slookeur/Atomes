@@ -492,8 +492,8 @@ void edit_chem (GtkWidget * vbox)
 
   \brief is the cell properly described to use PBC ?
 
-  \param box[2][3] lattice parameters
-  \param vect[2][3] lattice vectors
+  \param box lattice parameters
+  \param vect lattice vectors
 */
 gboolean test_vol (double box[2][3], double vect[3][3])
 {
@@ -527,8 +527,8 @@ gboolean test_vol (double box[2][3], double vect[3][3])
 
   \param pbc
   \param frac fractional coordinates
-  \param box[2][3] lattice parameters
-  \param vect[2][3] lattice vectors
+  \param box lattice parameters
+  \param vect lattice vectors
 */
 gboolean test_pbc (int pbc, int frac, double box[2][3], double vect[3][3])
 {
@@ -735,7 +735,7 @@ void edit_bonds (GtkWidget * vbox)
 
   \brief create an edition dialog: run the dialog
 
-  \param dial the GtkDialog sending the signal
+  \param win the GtkDialog sending the signal
   \param response_id the response id
   \param data the associated data pointer
 */
@@ -829,8 +829,7 @@ G_MODULE_EXPORT void run_on_edit_activate (GtkDialog * win, gint response_id, gp
 
   \brief create an edition dialog - prepare the dialog
 
-  \param dial the GtkDialog sending the signal
-  \param response_id the response id
+  \param widg the GtkWidget sending the signal
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void on_edit_activate (GtkWidget * widg, gpointer data)

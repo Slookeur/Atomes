@@ -621,13 +621,13 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
 double bdtc;
 
 /*!
-  \fn void coordination_info (int sp, double sac, double ssac[active_project -> nspec])
+  \fn void coordination_info (int sp, double sac, double ssac[active_project->nspec])
 
   \brief print out coordination information
 
   \param sp the target chemical species
   \param sac total coordination number for the target species
-  \param ssac[active_project->nspec] partial coordination number(s) for the target species
+  \param ssac partial coordination number(s) for the target species
 */
 void coordination_info (int sp, double sac, double ssac[active_project -> nspec])
 {
@@ -713,13 +713,13 @@ void coordination_info (int sp, double sac, double ssac[active_project -> nspec]
 }
 
 /*!
-  \fn void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa)
+  \fn void coordout_ (int * sid, double * sac, double ssac[active_project->nspec], int * totgsa)
 
   \brief retrieve partial geometry information from Fortran90
 
   \param sid the target chemical species
   \param sac total coordination number for the target species
-  \param ssac[active_project->nspec] partial coordination number(s) for the target species
+  \param ssac partial coordination number(s) for the target species
   \param totgsa the total number of partial coordination for the target chemical species
 */
 void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa)
@@ -784,7 +784,7 @@ void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], i
 
   \param sp the target chemcial species
   \param totgsa the total number of partial coordination(s)
-  \param numgsa[totgsa] the number of coordination(s) by coordination type
+  \param numgsa the number of coordination(s) by coordination type
 */
 void env_info (int sp, int totgsa, int numgsa[totgsa])
 {
@@ -882,13 +882,13 @@ void update_angle_view (project * this_proj)
 }
 
 /*!
-  \fn void envout_ (int * sid, int * totgsa, int numgsa[* totgsa])
+  \fn void envout_ (int * sid, int * totgsa, int numgsa[*totgsa])
 
   \brief retrieve environment information for target chemical species from Fortran
 
   \param sid the target chemical speceis
   \param totgsa the total number of partial coordination(s)
-  \param numgsa[*totgsa] the number of coordination(s) by coordination type
+  \param numgsa the number of coordination(s) by coordination type
 */
 void envout_ (int * sid, int * totgsa, int numgsa[* totgsa])
 {

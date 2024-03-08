@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file spherical.F90
-! @short Spherical harmonics analysis
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file spherical.F90
+!! @short Spherical harmonics analysis
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 ! Bond order parameter from spherical harmonics
 

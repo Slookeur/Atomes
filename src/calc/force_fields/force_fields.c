@@ -2009,7 +2009,7 @@ int is_extra;
 
   \param data the set of parameter(s)
   \param num the number of parameter
-  \param val[4] the target value(s)
+  \param val the target value(s)
 */
 gboolean is_a_match (int * data, int num, int val[4])
 {

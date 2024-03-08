@@ -102,7 +102,7 @@ extern qint dataxe[2];
 extern int a, b, c, d;
 
 /*!
-  \fn cairo_surface_t * draw_surface (int aspect, double hwidth, double hopac, int da, double ti, ColRGBA dcol, ColRGBA bcol,  int tglyph, double tgsize)
+  \fn cairo_surface_t * draw_surface (int aspect, double hwidth, double hopac, int da, double ti, ColRGBA dcol, ColRGBA bcol, int tglyph, double tgsize)
 
   \brief draw the data set preview
 
@@ -115,7 +115,6 @@ extern int a, b, c, d;
   \param bcol the background color
   \param tglyph the glyphe type
   \param tgsize the glyph size
-  \param data the associated data pointer
 */
 cairo_surface_t * draw_surface (int aspect, double hwidth, double hopac, int da, double ti, ColRGBA dcol, ColRGBA bcol,  int tglyph, double tgsize)
 {

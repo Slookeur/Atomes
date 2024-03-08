@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file lattice.F90
-! @short Lattice properties
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file lattice.F90
+!! @short Lattice properties
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION add_cells (NP, NPS, sizec) BIND (C,NAME='add_cells_')
 

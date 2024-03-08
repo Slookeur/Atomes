@@ -71,7 +71,7 @@ void pix_info_ (int * na, int * nb, int * nc)
   \brief retrieve pixel information from Fortran90
 
   \param p the pixel id
-  \param listp[27] the neighbor list for pixel id
+  \param listp the neighbor list for pixel id
   \param ngb the number of neighbor for pixel id
 */
 void send_pix_info_ (int * p, int listp[27], int * ngb)

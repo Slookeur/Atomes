@@ -554,24 +554,24 @@ G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
 
 /*!
   \fn void save_rings_data_ (int * taille,
-                          double ectrc[* taille],
-                          double ectpna[* taille],
-                          double ectmax[* taille],
-                          double ectmin[* taille],
+                          double ectrc[*taille],
+                          double ectpna[*taille],
+                          double ectmax[*taille],
+                          double ectmin[*taille],
                           double * rpstep, double * ectrpst,
                           double * nampat, double * ectampat)
 
-  \param Usage get rings statistics results form Fortran90
+  \brief get rings statistics results form Fortran90
 
-  \param taille Number of data points
-  \param ectrc[*taille] RC
-  \param ectpna[*taille] PN
-  \param ectmax[*taille] PMAX
-  \param ectmin[*taille] PMIN
-  \param rpstep Ring(s) per MD step
+  \param taille number of data points
+  \param ectrc Rc (RINGS method)
+  \param ectpna Pn (RINGS method)
+  \param ectmax Pmax (RINGS method)
+  \param ectmin Pmin (RINGS method)
+  \param rpstep ring(s) per MD step
   \param ectrpst Standard deviation
-  \param nampat Rings not found
-  \param ectampat Standard deviation
+  \param nampat rings not found
+  \param ectampat standard deviation
 */
 void save_rings_data_ (int * taille,
                        double ectrc[* taille],

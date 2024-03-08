@@ -683,7 +683,7 @@ GtkWidget * coord_tab (glwin * view, int geo, int poly)
 /*!
   \fn G_MODULE_EXPORT void on_select_frag_mol (GtkCellRendererToggle * cell_renderer, gchar * string_path, gpointer data)
 
-  \param Usage tree store action on cell selection
+  \brief tree store action on cell selection
 
   \param cell_renderer the GtkCellRendererToggle sending the signal
   \param string_path the path in the tree view

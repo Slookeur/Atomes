@@ -146,8 +146,8 @@ void clean_up_molecules_info (gboolean usel)
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void set_sensitive_mol (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -294,8 +294,8 @@ void clear_field_atoms (field_molecule * fmol, field_atom* at, int mols, int * m
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void molecule_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)

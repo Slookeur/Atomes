@@ -61,7 +61,6 @@ int fitc = 0;
   \brief initialize the curve widgets for the g(r)/g(k)
 
   \param r GR = real space, GK = FFT
-  \param s
 */
 void initgr (int r)
 {
@@ -225,13 +224,13 @@ G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
 }
 
 /*!
-  \fn void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
+  \fn void sendcutoffs_ (int * nc, double * totc, double partc[*nc][*nc])
 
   \brief bond cutoff from Fortran90
 
   \param nc number of species
   \param totc total cutoff
-  \param nc] partials cutoff
+  \param partc partials cutoff
 */
 void sendcutoffs_ (int * nc, double * totc, double partc[* nc][* nc])
 {

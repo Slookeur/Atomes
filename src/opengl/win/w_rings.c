@@ -698,7 +698,7 @@ int get_rmin (project * this_proj, int rid, int step)
 }
 
 /*!
-  \fn int get_rmax (project * this_proj, int g, int step)
+  \fn int get_rmax (project * this_proj, int rid, int step)
 
   \brief get ring(s) min size for the MD step
 

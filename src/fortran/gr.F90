@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file gr.F90
-! @short g(r) analysis: direct real space calculation
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file gr.F90
+!! @short g(r) analysis: direct real space calculation
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION g_of_r (NDR, DTR, FCR) BIND (C,NAME='g_of_r_')
 

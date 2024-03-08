@@ -328,10 +328,10 @@ G_MODULE_EXPORT void set_numa (GtkEntry * entry, gpointer data)
 
   \brief create a combo box for the rings statistics calculation
 
-  \param str Label of the combo box
-  \param num Number of values to insert in the combo box
-  \param list_item[num] Text data to insert in the combo boc
-  \param id Id of the box to create
+  \param str label of the combo box
+  \param num number of values to insert in the combo box
+  \param list_item text data to insert in the combo boc
+  \param id id of the box to create
 */
 GtkWidget * combox_rings (gchar * str, int num, gchar * list_item[num], int id)
 {
@@ -600,7 +600,7 @@ G_MODULE_EXPORT void run_toggle_bond (GtkDialog * info, gint response_id, gpoint
 
   \brief bond properties detailed saving and prepare the dialog
 
-  \param but the GtkCheckButton sending the signal
+  \param Button the GtkCheckButton sending the signal
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void toggle_bond (GtkCheckButton * Button, gpointer data)
@@ -610,7 +610,7 @@ G_MODULE_EXPORT void toggle_bond (GtkCheckButton * Button, gpointer data)
 
   \brief activate bond properties detailed saving and prepare the dialog
 
-  \param but the GtkToggleButton sending the signal
+  \param Button the GtkToggleButton sending the signal
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void toggle_bond (GtkToggleButton * Button, gpointer data)

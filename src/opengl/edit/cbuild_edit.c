@@ -931,7 +931,7 @@ void adjust_sg_combo (builder_edition * cbuilder, int cs, int bl)
 
   \brief change bravais lattice
 
-  \param combo the GtkComboBox sending the signal
+  \param box the GtkComboBox sending the signal
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_bl (GtkComboBox * box, gpointer data)
@@ -973,7 +973,7 @@ GtkWidget * create_bl_combo (int cs, gpointer data)
 
   \brief change the crystal system
 
-  \param combo the GtkComboBox sending the signal
+  \param box the GtkComboBox sending the signal
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_cs (GtkComboBox * box, gpointer data)

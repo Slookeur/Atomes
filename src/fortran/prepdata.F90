@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file prepdata.F90
-! @short First level analysis of atomic coordinates
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file prepdata.F90
+!! @short First level analysis of atomic coordinates
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 #if defined (HAVE_CONFIG_H)
 #  include <config.h>

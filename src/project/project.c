@@ -54,16 +54,16 @@ glwin * active_glwin = NULL;
 project * opengl_project = NULL;
 
 /*!
-  \fn void save_pos_ (int * nat, int lot[* nat], int * num, double xpos[* num], double ypos[* num], double zpos[* num])
+  \fn void save_pos_ (int * nat, int lot[*nat], int * num, double xpos[*num], double ypos[*num], double zpos[*num])
 
   \brief retrieve atomic coordinates from Fortran90
 
   \param nat Number of atoms
-  \param nat] List of chemical species by atoms
+  \param lot List of chemical species by atoms
   \param num Number of coordinates (NA x NS)
-  \param xpos[*num] x coordinates
-  \param ypos[*num] y coordinates
-  \param zpos[*num] z coordinates
+  \param xpos x coordinates
+  \param ypos y coordinates
+  \param zpos z coordinates
 */
 void save_pos_ (int * nat, int lot[* nat], int * num, double xpos[* num], double ypos[* num], double zpos[* num])
 {

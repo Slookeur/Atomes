@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file escs.F90
-! @short Edge and Corner sharing tetrahedra analysis
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file escs.F90
+!! @short Edge and Corner sharing tetrahedra analysis
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 LOGICAL FUNCTION EESCS ()
 

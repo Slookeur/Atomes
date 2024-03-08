@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file trj.F90
-! @short Unused: Read atomic coordinates in CPMD trajectory format - old version
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file trj.F90
+!! @short Unused: read atomic coordinates in CPMD trajectory format - old version
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 
 INTEGER (KIND=c_int) FUNCTION read_trj (trj_f, ltrj, natrj, nbstrj, is_npt) BIND (C,NAME='read_trj_')

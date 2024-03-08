@@ -211,8 +211,8 @@ int test_this_fragment (int natomes, int fcoord, int fid, atom ** atom_list, int
 
 /*!
   \fn gboolean * remove_bonds_from_project (project * this_proj, atomic_object * this_object, int * old_id, atom * new_list, gboolean remove, gboolean passivate)
-*
-* Usage: remove bond(s) from project
+
+  \brief remove bond(s) from project
 
   \param this_proj the target project
   \param this_object the target insert object, if any

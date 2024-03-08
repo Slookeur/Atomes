@@ -247,7 +247,7 @@ void setup_box_vertices (vec3_t ax, vec3_t bx, float * c_vert, float * s_vert)
 
   \brief prepare a box OpenGL rendering
 
-  \param *) the function to use a render
+  \param c_func the function to use a render
   \param verts OpenGL cylinder/line data buffer to fill
   \param serts OpenGL sphere data buffer to fill, or NULL
 */
@@ -509,14 +509,14 @@ vec3_t get_normal (vec3_t v1, vec3_t v2, vec3_t v3)
 /*!
   \fn double draw_cuboid (gboolean draw, int SHADID, int shadnum, mat4_t rot, vec3_t cpos, double paral[3][3], ColRGBA col, double slab_alpha)
 
-  \brief Draw cuboid vertices
+  \brief draw cuboid vertices
 
   \param draw draw or not (1/0)
   \param SHADID shader id
   \param shadnum shader number
   \param rot rotation matrix
   \param cpos position of center of slab
-  \param paral[3][3] cell parameters
+  \param paral cell parameters
   \param col slab color
   \param slab_alpha slab opacity
 */

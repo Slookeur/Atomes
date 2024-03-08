@@ -527,12 +527,12 @@ G_MODULE_EXPORT void enable_lines (GtkToggleButton * but, gpointer data)
 }
 
 /*!
-  \fn GtkWidget * labels_tab (glwin * view, int id)
+  \fn GtkWidget * labels_tab (glwin * view, int lid)
 
   \brief create atomic label(s) tab for the atom(s) / clone(s) window
 
   \param view the target glwin
-  \param id label type (0 = atoms, 1 = clones, 3 = analysis measures, 4 = edition mode measures)
+  \param lid label type (0 = atoms, 1 = clones, 3 = analysis measures, 4 = edition mode measures)
 */
 GtkWidget * labels_tab (glwin * view, int lid)
 {

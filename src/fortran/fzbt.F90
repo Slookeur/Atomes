@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file fzbt.F90
-! @short Partial structure factors: Faber-Ziman and Bathia-Thornton analysis
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file fzbt.F90
+!! @short Partial structure factors: Faber-Ziman and Bathia-Thornton analysis
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 LOGICAL FUNCTION FZBT (NDQ)
 

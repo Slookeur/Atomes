@@ -479,7 +479,6 @@ GtkWidget * menu_rings (glwin * view, int id)
 GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handler, gpointer data)
 {
   GMenu *  menu = g_menu_new ();
-  \param 473: GMenu color_box.c color_box.h glwindow.c glwindow.h initchain.c initcoord.c initcoord.h initmol.c initring.c m_anim.c m_atoms.c m_axis.c m_back.c m_bonds.c m_box.c m_clones.c m_coord.c m_edit.c menu_bar.c m_map.c m_poly.c m_proj.c m_quality.c m_render.c m_rep.c m_style.c m_tools.c popup.c res submenus.h w_advance.c w_atoms.c w_axis.c w_bonds.c w_box.c w_chains.c w_colors.c w_coord.c w_crystal.c w_cutoffs.c w_encode.c w_labels.c w_library.c w_measures.c w_periodic.c w_record.c w_rings.c w_search.c w_sequencer.c w_spiner.c w_volumes.c menu = g_menu_new (); 473: GMenu color_box.c color_box.h glwindow.c glwindow.h initchain.c initcoord.c initcoord.h initmol.c initring.c m_anim.c m_atoms.c m_axis.c m_back.c m_bonds.c m_box.c m_clones.c m_coord.c m_edit.c menu_bar.c m_map.c m_poly.c m_proj.c m_quality.c m_render.c m_rep.c m_style.c m_tools.c popup.c res submenus.h w_advance.c w_atoms.c w_axis.c w_bonds.c w_box.c w_chains.c w_colors.c w_coord.c w_crystal.c w_cutoffs.c w_encode.c w_labels.c w_library.c w_measures.c w_periodic.c w_record.c w_rings.c w_search.c w_sequencer.c w_spiner.c w_volumes.c menu = g_menu_new ();
   append_opengl_item (view, menu, act, act, popm, id, NULL, IMG_NONE, NULL, TRUE, NULL, NULL, FALSE, FALSE, FALSE, FALSE);
   append_opengl_item (view, menu, "More colors ...", act, popm, id, NULL, IMG_NONE, NULL, FALSE, handler, data, FALSE, FALSE, FALSE, TRUE);
   return menu;
@@ -489,10 +488,10 @@ GMenu * color_item (glwin * view, gchar * act, int popm, int id, GCallback handl
   \fn GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
 
   \brief create the coordination 'Show' or 'Color' submenus
+
   \param view the target glwin
   \param popm main app (0) or popup (1)
   \param id coordination type
-  \param mid 0 = show, 1 = color
   \param mid 0 = show, 1 = color
 */
 GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
@@ -550,9 +549,9 @@ GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
   \fn G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data)
 
   \brief open advancedd coordination properties GTK4 callback
+
   \param action the GAction sending the signal
   \param parameter GVariant parameter of the GAction
-  \param data the associated data pointer
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -564,10 +563,10 @@ G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * par
   \fn GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
 
   \brief create a fragment/molecule coordination submenu
+
   \param view the target glwin
   \param popm main app (0) or popup (1)
   \param id coordination type
-  \param mid 0 = show, 1 = color
   \param mid 0 = show, 1 = color
 */
 GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
@@ -603,10 +602,10 @@ GMenu * menu_show_frag_mol (glwin * view, int popm, int id, int mid)
   \fn GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
 
   \brief create a ring coordination submenu
+
   \param view the target glwin
   \param popm main app (0) or popup (1)
   \param id coordination type
-  \param mid 0 = show, 1 = color
   \param mid 0 = show, 1 = color
 */
 GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
@@ -645,9 +644,9 @@ GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
   \fn GMenu * add_menu_coord (glwin * view, int popm, int id)
 
   \brief create a coordination type submenu
+
   \param view the target glwin
   \param popm main app (0) or popup (1)
-  \param id coordination type
   \param id coordination type
 */
 GMenu * add_menu_coord (glwin * view, int popm, int id)
@@ -683,8 +682,8 @@ GMenu * add_menu_coord (glwin * view, int popm, int id)
   \fn GMenu * menu_coord (glwin * view, int popm)
 
   \brief create the 'Coordination' submenu GTK4
+
   \param view the target glwin
-  \param popm main app (0) or popup (1)
   \param popm main app (0) or popup (1)
 */
 GMenu * menu_coord (glwin * view, int popm)
@@ -699,7 +698,7 @@ GMenu * menu_coord (glwin * view, int popm)
   \fn GMenu * menu_rings (glwin * view, int popm)
 
   \brief create the 'Ring(s)' submenu GTK4
-  \param view the target glwin
+
   \param view the target glwin
   \param popm main app (0) or popup (1)
 */

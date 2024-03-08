@@ -236,7 +236,7 @@ int cp2k_is_pseudo_in_database (int sp)
   \param sp the chemical species
   \param sp_id the list of entries to save
   \param n_basis_pseudo the number of element(s) to check
-  \param bp_elem[n_basis_pseudo] the string list to check
+  \param bp_elem the string list to check
 */
 int prepare_cp2k_basis_pseudo_list (int sp, int * sp_id, int n_basis_pseudo, char * bp_elem[n_basis_pseudo])
 {

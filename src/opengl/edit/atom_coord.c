@@ -235,8 +235,8 @@ coord_info * duplicate_coord_info (coord_info * old_coord)
   \param adds the number of new chemical species
   \param spid the number of atom(s) by chemical species
   \param tmpgeo the new number of coordination [c] by chemical species [s] 'coorrd -> ntg[c][s]'
-  \param showcoord[2] the coordination show status
-  \param showpoly[2] the polyhedra show status
+  \param showcoord the coordination show status
+  \param showpoly the polyhedra show status
 */
 void clean_coords_and_geoms (project * this_proj, atom_edition * edit,
                              int new_spec, int rem, int adds, int * spid, int *** tmpgeo,
@@ -403,15 +403,15 @@ void clean_coords_and_geoms (project * this_proj, atom_edition * edit,
   \fn void new_coord_menus (project * this_proj, coord_info * coord, int new_spec, int nmols,
 *                        gboolean * showcoord[2], gboolean * showpoly[2], gboolean * showfrag,
 *                        gboolean update_it, gboolean update_frag, gboolean update_mol)
-*
-* Usage: update coordination(s), fragment(s) and molecule(s) OpenGL menus and associated data pointers
+
+  \brief update coordination(s), fragment(s) and molecule(s) OpenGL menus and associated data pointers
 
   \param this_proj the target project
   \param coord the target coordination info data structure
   \param new_spec the number of chemical species
   \param nmols the number of fragment(s) to add
-  \param showcoord[2] the coordination show status
-  \param showpoly[2] the polyhedra show status
+  \param showcoord the coordination show status
+  \param showpoly the polyhedra show status
   \param showfrag the fragment show status
   \param update_it update atoms data (and GTK3 menus)
   \param update_mol update molecule(s) data

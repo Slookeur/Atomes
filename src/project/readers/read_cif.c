@@ -703,7 +703,7 @@ void check_for_to_lab (int ato, gchar * stlab)
   \brief get atoms data from the CIF file
 
   \param lin Line to reach
-  \param cid[8] Positions on the line for the data to read
+  \param cid positions on the line for the data to read
 */
 gboolean cif_file_get_atoms_data (int lin, int cid[8])
 {

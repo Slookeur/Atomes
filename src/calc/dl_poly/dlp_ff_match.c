@@ -899,8 +899,8 @@ static gboolean update_rend (GtkTreeModel * model, GtkTreeIter * iter, gpointer 
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void field_set_markup_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)

@@ -563,7 +563,7 @@ struct ExtraSets
   CurveExtra * last;          /*!< Last data set of the list, if any */
 };
 
-/*! \typedef curve
+/*! \typedef Curve
   \brief The curve data structure
 */
 typedef struct Curve Curve;
@@ -817,7 +817,7 @@ struct chemical_data
   double grtotcutoff;  /*!< Total cutoff */
 };
 
-/*! \typedef insertion
+/*! \typedef insertion_menu
   \brief Data structure for the insertion pop-up menu
 */
 typedef struct insertion_menu insertion_menu;

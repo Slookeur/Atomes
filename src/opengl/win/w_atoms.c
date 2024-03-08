@@ -136,7 +136,7 @@ G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data)
 
   \param win the GtkWidget sending the signal
   \param this_proj the target project
-  \param npsec total number of chemical species
+  \param nspec total number of chemical species
   \param aoc atom(s) (0) or clone(s) (1)
   \param val radii list
 */

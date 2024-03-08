@@ -373,14 +373,14 @@ G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
 }
 
 /*!
-  \fn void save_chains_data_ (int * taille, double ectrc[* taille], double * rpstep, double * ectrpst)
+  \fn void save_chains_data_ (int * taille, double ectrc[*taille], double * rpstep, double * ectrpst)
 
   \brief get chains statistics results form Fortran90
 
-  \param taille Number of data points
-  \param taille] Results
-  \param rpstep Chains per MD step
-  \param ectrpst Standard deviation
+  \param taille number of data points
+  \param ectrc standard deviation per MD step
+  \param rpstep chains per MD step
+  \param ectrpst standard deviation
 */
 void save_chains_data_ (int * taille, double ectrc[* taille], double * rpstep, double * ectrpst)
 {

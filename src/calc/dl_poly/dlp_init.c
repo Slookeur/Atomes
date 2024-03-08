@@ -438,9 +438,9 @@ field_constraint * init_field_constraint (int id, int ia, int ib)
   \brief initialize new field mean force potential
 
   \param id the id of the new field PMF
-  \param num[2] the numbers of atom(s)
-  \param list[2] the lists of atom(s)
-  \param w[2] the weight list
+  \param num the numbers of atom(s)
+  \param list the lists of atom(s)
+  \param w the weight list
 */
 field_pmf * init_field_pmf (int id, int num[2], int * list[2], float * w[2])
 {
@@ -887,7 +887,7 @@ void init_all_atoms (int i)
   \brief is atom at in bond bd
 
   \param at the target atom id
-  \param bd[2] the bond atoms id
+  \param bd the bond atoms id
 */
 gboolean in_bond (int at, int bd[2])
 {

@@ -202,7 +202,7 @@ void allocate_mol_data_ ()
 }
 
 /*!
-  \fn void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[* nvs])
+  \fn void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[*nvs])
 
   \brief update molecule typology information from Fortran90
 
@@ -210,7 +210,7 @@ void allocate_mol_data_ ()
   \param mol the molecule id
   \param aid the atom id
   \param nvs the number of neighbor(s) for this atom
-  \param neigh[*nvs] the list of neighbor(s) for this atom
+  \param neigh the list of neighbor(s) for this atom
 */
 void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[* nvs])
 {
@@ -280,7 +280,7 @@ void update_mol_details (struct search_molecule * mol, int sp, int cp)
 }
 
 /*!
-  \fn void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_mol[* sps], int atom_in_mol[* ats])
+  \fn void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_mol[*sps], int atom_in_mol[*ats])
 
   \brief overall molecule information from Fortran90
 
@@ -288,8 +288,8 @@ void update_mol_details (struct search_molecule * mol, int sp, int cp)
   \param mol the molecule id
   \param ats the number of atom(s) in the molecule
   \param sps the number of chemical species in the molecule
-  \param spec_in_mol[*sps] the number of atom(s) by chemical species in the molecule
-  \param atom_in_mol[*ats] the list of atom(s) in the molecule
+  \param spec_in_mol the number of atom(s) by chemical species in the molecule
+  \param atom_in_mol the list of atom(s) in the molecule
 */
 void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_mol[* sps], int atom_in_mol[* ats])
 {
@@ -394,8 +394,8 @@ gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_
 
   \param val_a multiplicity for molecule a
   \param val_b multiplicity for molecule b
-  \param table_a[val_a] the list of molecular fragment(s) for molecule a
-  \param table_a[val_a] the list of molecular fragment(s) for molecule b
+  \param table_a the list of molecular fragment(s) for molecule a
+  \param table_b the list of molecular fragment(s) for molecule b
 */
 int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_b])
 {
@@ -546,12 +546,12 @@ void setup_menu_molecules_ ()
 }
 
 /*!
-  \fn void setup_fragments_ (int * sid, int coord[active_project -> natomes])
+  \fn void setup_fragments_ (int * sid, int coord[active_project->natomes])
 
   \brief atom(s) fragment(s) information from Fortran90
 
   \param sid the MD step
-  \param coord[active_project->natomes] the fragment(s) information
+  \param coord the fragment(s) information
 */
 void setup_fragments_ (int * sid, int coord[active_project -> natomes])
 {

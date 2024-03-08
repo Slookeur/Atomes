@@ -667,7 +667,7 @@ void re_create_all_md_shaders (glwin * view)
   \brief re-initialize some MD dependent OpenGL shaders
 
   \param nshaders the number of shader(s) to initialize
-  \param shaders[nshaders] the list of shaders
+  \param shaders the list of shaders
   \param this_proj the target project
 */
 void re_create_md_shaders (int nshaders, int shaders[nshaders], project * this_proj)

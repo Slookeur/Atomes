@@ -218,11 +218,11 @@ int is_this_a_new_geo (int gid, coord_info * obj, int * old_z, int old_geo, int 
 }
 
 /*!
-  \fn int find_this_geo_id (int id, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
+  \fn int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int old_sp, int new_sp, coord_info * coord, double * new_z)
 
-  \brief if required create a new geometry, stored in coord, for coordination type 'id' and chemical species 'new_sp', return geometry id
+  \brief if required create a new geometry, stored in coord, for coordination type 'gid' and chemical species 'new_sp', return geometry id
 
-  \param id the new coordination type (0 = total, 1 = partial)
+  \param gid the new coordination type (0 = total, 1 = partial)
   \param obj the new coordination info to update
   \param old_z old Z list
   \param old_geo the old coordination id for this coordination type
@@ -365,7 +365,7 @@ int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int o
 
 /*!
   \fn void check_coord_modification (project * this_proj, int * old_id, atom * new_list,
-*                                 atomic_object * this_object, gboolean movtion, gboolean passivating)
+*                                    atomic_object * this_object, gboolean movtion, gboolean passivating)
 
   \brief check atom coordination modification on edition
 
@@ -373,7 +373,7 @@ int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int o
   \param old_id the old atom id list, if any
   \param new_list the new atom(s) list
   \param this_object the object to insert, if any
-  \param else 0
+  \param movtion motion (1) or removal (2)
   \param passivating passivate
 */
 void check_coord_modification (project * this_proj, int * old_id, atom * new_list,

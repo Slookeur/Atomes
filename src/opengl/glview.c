@@ -313,16 +313,16 @@ ColRGBA set_default_color (int z)
 
 /*!
   \fn void update_bonds_ (int * bd, int * stp,
-*                      int * bdim, int bda[* bdim], int bdb[* bdim],
-*                      double * x, double * y, double * z)
+*                         int * bdim, int bda[*bdim], int bdb[*bdim],
+*                         double * x, double * y, double * z)
 
   \brief update bonding information from Fortran90
 
   \param bd bonds (0) or clones (1)
   \param stp the MD step
   \param bdim number of bonds (or clone bonds)
-  \param bda[*bdim] bond "ab" list atom a
-  \param bdb[*bdim] bond "ab" list atom b
+  \param bda bond "ab" list atom a
+  \param bdb bond "ab" list atom b
   \param x clone(s) x coordinates
   \param y clone(s) y coordinates
   \param z clone(s) z coordinates

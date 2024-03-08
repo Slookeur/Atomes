@@ -604,16 +604,16 @@ void clean_object_bonds (project * proj, int o_step, atomic_object * object, int
 
 /*!
   \fn void add_object_atoms (atomic_object * this_object, project * this_proj,
-*                         int o_step, int numa, int * old_id, gboolean alloc_new_id, atom_search * remove)
-*
-* Usage: add atom list to insert object
+*                            int o_step, int numa, int * old_id, gboolean alloc_new_id, atom_search * remove)
+
+  \brief add atom list to insert object
 
   \param this_object the target insert object
   \param this_proj the target project
   \param o_step the MD step
   \param numa number of atom(s)
   \param old_id list of atom's old id in the project 'this_proj'
-  \param check_bonding check bonding ? (partial copy or not)
+  \param alloc_new_id check_bonding check bonding ? (partial copy or not)
   \param remove remove search, if any
 */
 void add_object_atoms (atomic_object * this_object, project * this_proj,

@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file allocbonds.F90
-! @short Memory allocation for bonding properties analysis
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file allocbonds.F90
+!! @short Memory allocation for bonding properties analysis
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 LOGICAL FUNCTION ALLOCEDCO (alloc)
 

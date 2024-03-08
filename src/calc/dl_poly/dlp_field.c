@@ -1200,8 +1200,10 @@ void fill_field_struct (GtkTreeStore * store, int id, int mo)
 
 /*!
   \fn void fill_field_body (GtkTreeStore * store, int id)
-*
-0
+
+  \brief classical force field fill the tree store with non bonded parameter(s)
+
+  \param store the tree store to fill
   \param id the type of non bonded interaction
 */
 void fill_field_body (GtkTreeStore * store, int id)
@@ -3141,8 +3143,8 @@ G_MODULE_EXPORT gboolean on_field_button_event (GtkWidget * widget, GdkEvent * e
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void field_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3179,8 +3181,8 @@ void field_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTr
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void field_set_markup_box (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3199,8 +3201,8 @@ void field_set_markup_box (GtkTreeViewColumn * col, GtkCellRenderer * renderer, 
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void field_set_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3249,8 +3251,8 @@ void field_set_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkT
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void field_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3283,8 +3285,8 @@ void field_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, Gtk
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void field_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3300,8 +3302,8 @@ void field_set_color_and_markup (GtkTreeViewColumn * col, GtkCellRenderer * rend
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void field_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3317,8 +3319,8 @@ void field_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * ren
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void prop_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3336,8 +3338,8 @@ void prop_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * rend
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void pmf_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3364,8 +3366,8 @@ void pmf_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * rende
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void rig_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3384,8 +3386,8 @@ void rig_set_color_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * rende
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void field_set_color_markup_and_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3402,8 +3404,8 @@ void field_set_color_markup_and_visible (GtkTreeViewColumn * col, GtkCellRendere
 
   \param col the target GtkTreeViewColumn
   \param renderer the target cell renderer
-  \param GtkTreeModel the target tree model
-  \param GtkTreeIter the target tree iter
+  \param mod the target tree model
+  \param iter the target tree iter
   \param data the associated data pointer
 */
 void field_set_color_markup_and_visible_box (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
@@ -3508,7 +3510,7 @@ void get_field_iter_and_edit (gchar * path_string, gpointer data)
 
   \param cell the GtkTreeView sending the signal
   \param editable the editable
-  \param path_string, the path in the tree model
+  \param path_string the path in the tree model
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_edit_field_prop (GtkCellRenderer * cell, GtkCellEditable * editable, gchar * path_string, gpointer data)

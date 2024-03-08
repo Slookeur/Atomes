@@ -241,7 +241,7 @@ static void ffmpeg_encoder_set_frame_yuv_from_rgb (uint8_t * rgb, VideoStream * 
 /*!
   \fn static GLubyte * capture_opengl_image (unsigned int width, unsigned int height)
 
-  \param Usage capture an OpenGL image from an OpenGL rendering
+  \brief capture an OpenGL image from an OpenGL rendering
 */
 static GLubyte * capture_opengl_image (unsigned int width, unsigned int height)
 {
@@ -362,7 +362,7 @@ static void write_video_frame (AVFormatContext * f_context, VideoStream * vs, in
 /*!
   \fn static AVFrame * alloc_video_frame (AVCodecContext * cc)
 
-  \param Usage allocate a video frame using a codec context
+  \brief allocate a video frame using a codec context
 
   \param cc the codec context
 */
@@ -387,7 +387,7 @@ static AVFrame * alloc_video_frame (AVCodecContext * cc)
 /*!
   \fn AVCodecContext * add_codec_context (AVFormatContext * fc, const AVCodec * vc, video_options * vopts)
 
-  \param Usage create a video codec context
+  \brief create a video codec context
 
   \param fc the format context
   \param vc the codec

@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file chains_ogl.F90
-! @short Send chain statistics data to C for OpenGL rendering
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file chains_ogl.F90
+!! @short Send chain statistics data to C for OpenGL rendering
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER FUNCTION CHAINS_TO_OGL (STEP, NRI, RSAVED)
 

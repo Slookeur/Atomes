@@ -13,9 +13,10 @@
 !
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
-! @file sq.F90
-! @short S(q) analysis: Fourier transform calculation
-! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+!>
+!! @file sq.F90
+!! @short S(q) analysis: Fourier transform calculation
+!! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION s_of_q (QMAX, QMIN, NQ) BIND (C,NAME='s_of_q_')
 

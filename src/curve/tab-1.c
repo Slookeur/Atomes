@@ -154,8 +154,8 @@ G_MODULE_EXPORT void set_window_size (GtkEntry * maj, gpointer data)
   \param tf frame type
   \param da frame dash
   \param ti frame thickness
-  \param x[2] x positions (min / max)
-  \param y[2] y positions (min / max)
+  \param x x positions (min / max)
+  \param y y positions (min / max)
   \param dcol frame color
   \param bcol background color
 */
