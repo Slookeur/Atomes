@@ -558,7 +558,7 @@ struct CurveExtra
 typedef struct ExtraSets ExtraSets;
 struct ExtraSets
 {
-  int extras;                    /*!< Number of extra data sets, if any */
+  int extras;                 /*!< Number of extra data sets, if any */
   CurveExtra * first;         /*!< First data set of the list, if any */
   CurveExtra * last;          /*!< Last data set of the list, if any */
 };
@@ -783,7 +783,7 @@ struct molecule
 typedef struct model model;
 struct model
 {
-  int * mol_by_step;              /*!< Num of mol by steps */
+  int * mol_by_step;       /*!< Num of mol by steps */
   molecule ** mols;        /*!< List of molecules by steps */
 };
 
