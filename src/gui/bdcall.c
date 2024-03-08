@@ -238,7 +238,7 @@ void initcutoffs (chemical_data * chem, int species)
 /*!
   \fn void cutoffsend ()
 
-  \brief send cutoffs to Fortran
+  \brief send cutoffs to Fortran90
 */
 void cutoffsend ()
 {
@@ -715,7 +715,7 @@ void coordination_info (int sp, double sac, double ssac[active_project -> nspec]
 /*!
   \fn void coordout_ (int * sid, double * sac, double ssac[active_project -> nspec], int * totgsa)
 
-  \brief retrieve partial geometry information from Fortran
+  \brief retrieve partial geometry information from Fortran90
 
   \param sid the target chemical species
   \param sac total coordination number for the target species

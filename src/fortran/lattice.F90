@@ -189,7 +189,7 @@ INTERFACE
   END SUBROUTINE
 END INTERFACE
 
-! Transition from C/Gtk to Fortran !
+! Transition from C/Gtk to Fortran90 !
 lattice = 0
 
 if (lid .eq. 0) then
