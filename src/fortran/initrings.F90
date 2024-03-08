@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file initrings.F90
-! @short 
+! @short Initialize ring statistics
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 LOGICAL FUNCTION ALLOCRINGS()

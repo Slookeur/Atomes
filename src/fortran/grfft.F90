@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file grfft.F90
-! @short 
+! @short g(r) analysis: Fourier transform calculation
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION g_of_r_fft (NDR, DTR, MMX) BIND (c,name='g_of_r_fft_')

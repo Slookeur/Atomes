@@ -14,13 +14,13 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file allocbonds.F90
-! @short
+! @short Memory allocation for bonding properties analysis
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 LOGICAL FUNCTION ALLOCEDCO (alloc)
 
 !
-! Memory allocation for Edge and Corner sharing
+! Memory allocation for Edge and Corner sharing analysis
 !
 
 USE PARAMETERS

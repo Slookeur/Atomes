@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file pdb.F90
-! @short 
+! @short Unused: Read atomic coordinates in PDB format - old version
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION read_pdb (pdb_f, lpdb) BIND (C,NAME='read_pdb_')

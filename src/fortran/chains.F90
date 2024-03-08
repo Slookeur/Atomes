@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file chains.F90
-! @short 
+! @short Chain statistics
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 SUBROUTINE SETUP_CPAT_VPAT_CHAIN (CONT, VOIS, STR, CPT, VPT)

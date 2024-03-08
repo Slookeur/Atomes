@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file utils.F90
-! @short 
+! @short Global function declarations
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 !

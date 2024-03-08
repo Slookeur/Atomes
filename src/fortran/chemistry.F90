@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file chemistry.F90
-! @short 
+! @short Basic chemistry analysis
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION chemistry () BIND (C,NAME='chemistry_')

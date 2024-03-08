@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file c3d.F90
-! @short 
+! @short Write Chem3D atomic coordinates
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION read_c3d (c3d_f, lc3d) BIND (C,NAME='read_c3d_')

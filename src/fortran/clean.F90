@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file init.F90
-! @short 
+! @short Clean up Fortran data
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 #if defined (HAVE_CONFIG_H)

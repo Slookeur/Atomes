@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file dvtb.F90
-! @short 
+! @short Model expansion for algorithmic purposes
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 LOGICAL FUNCTION dvtbox(ST, NAS, NAT, NPOS)

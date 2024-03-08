@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file vas.F90
-! @short 
+! @short nused: Read atomic coordinates in VASP trajectory format - old version
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION read_vas(vas_f, lvas, navas, nbsvas, is_npt) BIND (C,NAME='read_vas_')

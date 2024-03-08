@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file mendeleiev.F90
-! @short 
+! @short Periodic table and diffraction data
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 MODULE MENDELEIEV

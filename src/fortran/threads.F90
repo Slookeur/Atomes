@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file threads.F90
-! @short 
+! @short OpenMP utility functions
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER FUNCTION GET_THREAD_START (NOBJ, NTHREADS, THREAD_ID)

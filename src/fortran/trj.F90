@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file trj.F90
-! @short 
+! @short Unused: Read atomic coordinates in CPMD trajectory format - old version
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 

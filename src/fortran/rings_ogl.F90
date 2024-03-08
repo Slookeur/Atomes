@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file rings_ogl.F90
-! @short 
+! @short Send ring statistics data to C for OpenGL rendering
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER FUNCTION RINGS_TO_OGL (STEP, IDSEARCH, NRI, RSAVED, OSAVED)

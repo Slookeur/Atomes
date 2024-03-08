@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file angles.F90
-! @short 
+! @short Distribution of bond angles and dihedrals
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION bond_angles(nda) BIND (C,NAME='bond_angles_')

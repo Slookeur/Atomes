@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file cqvf.F90
-! @short 
+! @short q vectors selection for the reciprocal calculation of the S(k)
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION cqvf (QMAX, QMIN, NQ, PROBA, LIMQ) BIND (C,NAME='cqvf_')

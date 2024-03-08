@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file bonds.F90
-! @short 
+! @short Bonding properties
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION bonding (scf, sbf, adv, bdist, bmin, delt_ij, sfil) BIND (C,NAME='bonding_')

@@ -14,7 +14,7 @@
 ! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
 !
 ! @file sk.F90
-! @short 
+! @short S(k) analysis: direct reciprocal space calculation
 ! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
 INTEGER (KIND=c_int) FUNCTION s_of_k (NQ, XA) BIND (C,NAME='s_of_k_')
