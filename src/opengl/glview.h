@@ -16,7 +16,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 /*!
 * @file glview.h
 * @short Variable declarations related to the OpenGL window \n
-         Function declaration related to the OpenGL window
+         Function declarations related to the OpenGL window
 * @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 */
 

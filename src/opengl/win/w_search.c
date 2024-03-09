@@ -15,7 +15,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 /*!
 * @file w_search.c
-* @short Functions to create the object search widgets, for: \n
+* @short Functions to create the object search widgets, for:
    - The atom(s) / clone(s) advanced window \n
    - The model edition window (move, remove, replace, insert, random move) \n
    - The crystal builder window

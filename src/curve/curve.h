@@ -15,7 +15,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 /*!
 * @file curve.h
-* @short Variable declarations for the curve widget \
+* @short Variable declarations for the curve widget \n
          Functions for interactions with the curve widget
 * @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 */
