@@ -42,7 +42,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int prepare_data_base (int db);
   int build_crystal_from_cif_database (project * this_proj);
 
-  void sort_files (int num_f);
+  void sort_crystal_files (int num_c);
   void fill_cif_tree (GtkListStore * store);
   void fill_group_tree (GtkListStore * store);
   void fill_symmetry_tree (GtkListStore * store);
@@ -109,14 +109,6 @@ project * cif_proj = NULL;
 gchar * other_name[5];
 int o_names;
 
-typdef struct cif_data{
-  gchar * file_name;
-  gchar * name;
-  gchar * group;
-  gchar * formula;
-  int species;
-};
-
 /*!
   \fn int cif_preview (const char * filetoread)
 
@@ -157,19 +149,19 @@ int get_cgroup (gchar * str)
 }
 
 /*!
-  \fn void sort_files (int num_f)
+  \fn void sort_crystal_files (int num_c)
 
   \brief NOT USED !
 
-  \param num_f
+  \param num_c number of file(s) to sort
 */
-void sort_files (int num_f)
+void sort_crystal_files (int num_c)
 {
   int i, j;
   gchar * str = NULL;
-  for(i=0;i<num_f;i++)
+  for(i=0;i<num_c;i++)
   {
-    for(j=i+1;j<num_f;j++)
+    for(j=i+1;j<num_c;j++)
     {
        if(strcmp(cif_name[i],cif_name[j])>0)
        {
@@ -182,7 +174,7 @@ void sort_files (int num_f)
        }
     }
   }
-  for(i=0;i<num_f;i++)
+  for(i=0;i<num_c;i++)
   {
     cif_name[i] = check_xml_string(cif_name[i]);
   }
@@ -308,7 +300,7 @@ int get_cif_files ()
     }
 
 #endif
-    sort_files (val);
+    sort_crystal_files (val);
   }
   return val;
 }

@@ -18,6 +18,9 @@
 !! @short Export curve data using data received from C
 !! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
+! The following code should be ignored by Doxygen
+!!\cond
+
 CHARACTER (LEN=35) FUNCTION ylegend (job, nleg, idl)
 
 USE PARAMETERS
@@ -750,6 +753,8 @@ endif
 
 END FUNCTION
 
+!!\endcond
+
 SUBROUTINE prep_file (scf, sfi, tfile, &
                       scalex, scaley, mdc, rdc, idc) BIND (C,NAME='prep_file_')
 
@@ -764,6 +769,7 @@ CHARACTER (LEN=scf) :: sfile
 REAL (KIND=c_double), INTENT(IN) :: mdc
 CHARACTER (LEN=5) :: xaxis="xaxis", yaxis="yaxis"
 CHARACTER (LEN=65) :: xlabel
+
 INTERFACE
   CHARACTER(LEN=65) FUNCTION xlegend (job, nleg, idl, cdc)
     INTEGER, INTENT(IN) :: job, nleg, idl
@@ -839,7 +845,6 @@ INTERFACE
     INTEGER, INTENT(IN) :: job, nleg, idl
   END FUNCTION
 END INTERFACE
-
 
 do i=1, lcname
   cname(i:i) = cstring(i)
