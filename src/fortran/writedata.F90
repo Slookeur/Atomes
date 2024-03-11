@@ -18,9 +18,6 @@
 !! @short Export curve data using data received from C
 !! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
-! The following code should be ignored by Doxygen
-!!\cond
-
 CHARACTER (LEN=35) FUNCTION ylegend (job, nleg, idl)
 
 USE PARAMETERS
@@ -752,8 +749,6 @@ else
 endif
 
 END FUNCTION
-
-!!\endcond
 
 SUBROUTINE prep_file (scf, sfi, tfile, &
                       scalex, scaley, mdc, rdc, idc) BIND (C,NAME='prep_file_')

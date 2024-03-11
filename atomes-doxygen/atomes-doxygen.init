@@ -342,7 +342,7 @@ OPTIMIZE_OUTPUT_SLICE  = NO
 #
 # Note see also the list of default file extension mappings.
 
-EXTENSION_MAPPING      =
+EXTENSION_MAPPING      = F90=FortranFree
 
 # If the MARKDOWN_SUPPORT tag is enabled then doxygen pre-processes all comments
 # according to the Markdown format, which allows for more readable
@@ -1032,7 +1032,8 @@ EXCLUDE_SYMLINKS       = NO
 # Note that the wildcards are matched against the file with absolute path, so to
 # exclude all test directories for example use the pattern */test/*
 
-EXCLUDE_PATTERNS       = ROOTDIR/files/codeblocks-files/atomes/src/calc/force_fields/amber*c \
+EXCLUDE_PATTERNS       = ROOTDIR/files/codeblocks-files/atomes/src/version.h \
+			ROOTDIR/files/codeblocks-files/atomes/src/calc/force_fields/amber*c \
 			ROOTDIR/files/codeblocks-files/atomes/src/calc/force_fields/c*.c \
 			ROOTDIR/files/codeblocks-files/atomes/src/calc/force_fields/o*.c \
 			ROOTDIR/files/codeblocks-files/atomes/src/calc/force_fields/p*.c \
