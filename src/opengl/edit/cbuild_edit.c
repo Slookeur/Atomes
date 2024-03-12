@@ -464,15 +464,15 @@ int get_sg_num (GtkComboBox * box)
 void adjust_lattice_parameters (builder_edition * cbuilder)
 {
   int i, j, k;
-  j = get_sg_num(GTK_COMBO_BOX(cbuilder -> sg_combo));
-  k = get_crystal_id(j);
+  j = get_sg_num (GTK_COMBO_BOX(cbuilder -> sg_combo));
+  k = get_crystal_id (j);
   box_info * box = & cbuilder -> cell.box[0];
   switch (k)
   {
     case 1:
       box -> param[1][0] = 90.0;
-      box -> vect[1][1] = box -> vect[2][2] = box -> vect[0][0];
       box -> vect[0][1] = box -> vect[0][2] = 0.0;
+      box -> vect[2][0] = box -> vect[2][1] = 0.0;
       break;
     case 2:
       box -> param[1][0] = box -> param[1][1] = box -> param[1][2] = 90.0;
@@ -492,12 +492,12 @@ void adjust_lattice_parameters (builder_edition * cbuilder)
       }
       else
       {
-        box -> param[1][0] = box -> param[1][1] = box -> param[1][2] = 90.0;
+        box -> param[1][0] = box -> param[1][1] = 90.0;
+        box -> param[1][2] = 120.0;
       }
       box -> vect[1][1] = box -> vect[0][0];
       box -> vect[0][1] = box -> vect[0][2] = 0.0;
       box -> vect[1][0] = box -> vect[1][2] = 0.0;
-      box -> vect[2][0] = box -> vect[2][1] = 0.0;
       break;
     case 5:
       box -> param[0][1] = box -> param[0][0];

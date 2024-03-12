@@ -341,15 +341,24 @@ int test_lattice (builder_edition * cbuilder, cell_info * cif_cell)
     compute_lattice_properties (cell);
   }
 
-  if (j < 3)
+  // Strictly different or possibly different ?
+  /*if (j < 3)
   {
-    if (! (box -> param[0][0] != box -> param[0][1] && box -> param[0][0] != box -> param[0][2] && box -> param[0][1] != box -> param[0][2]))
+    if (box -> param[0][0] == box -> param[0][1] || box -> param[0][0] == box -> param[0][2] || box -> param[0][1] == box -> param[0][2])
     {
       // Box error: a, b, c not all different
       return 0;
     }
-  }
+  }*/
 
+  if (j == 3 || j == 4 || j == 5)
+  {
+    if (box -> param[0][0] != box -> param[0][1])
+    {
+      // Box error: a and b must be equal
+      return 0;
+    }
+  }
   if (j == 2 || j == 3 || j == 6)
   {
     if (box -> param[1][0] != 90.0 || box -> param[1][1] != 90.0 || box -> param[1][2] != 90.0)
@@ -361,26 +370,34 @@ int test_lattice (builder_edition * cbuilder, cell_info * cif_cell)
 
   switch (j)
   {
+    // Strictly different or possibly different ?
+    /*
     case 0:
       if (! (box -> param[1][0] != box -> param[1][1] && box -> param[1][0] != box -> param[1][2] && box -> param[1][1] != box -> param[1][2]))
       {
-        // Angle error: alpha, beta, gamma not all differents
+        // Angle error: alpha, beta, gamma not all different
        return 0;
       }
       break;
+    */
     case 1:
-      if (box -> param[1][0] != 90.0 || box -> param[1][1] != 90.0)
+      if (box -> param[1][0] != 90.0)
       {
-        // Angle error: alpha and gamma must be = 90
+        // Angle error: alpha must be = 90
+        return 0;
+      }
+      else if (box -> param[1][1] != 90.0 && box -> param[1][2] != 90.0)
+      {
+        // Angle error: beta or gamma must be = 90
         return 0;
       }
       break;
     case 4:
       if (cell -> sp_group -> name[0] != 'R')
       {
-        if (box -> param[1][0] != 90.0 || box -> param[1][1] != 90 || box -> param[1][2] != 120.0)
+        if (box -> param[1][0] != 90.0 || box -> param[1][1] != 90.0 || box -> param[1][2] != 120.0)
         {
-          // Angle error: alpha and beta must be = 90, gamma must be = 120
+          // Angle error: alpha and beta must be equal= 90, gamma must be = 120
           return 0;
         }
       }
@@ -391,17 +408,22 @@ int test_lattice (builder_edition * cbuilder, cell_info * cif_cell)
           // Angle error: alpha, beta, gamma must all be equal
           return 0;
         }
+        else if (box -> param[0][0] != box -> param[0][2])
+        {
+          // Box error: a, b and c must all be equal
+          return 0;
+        }
       }
       break;
     case 5:
-      if (box -> param[1][0] != 90.0 || box -> param[1][1] != 90 || box -> param[1][2] != 120.0)
+      if (box -> param[1][0] != 90.0 || box -> param[1][1] != 90.0 || box -> param[1][2] != 120.0)
       {
         // Angle error: alpha and beta must be = 90, gamma must be = 120
         return 0;
       }
       break;
     case 6:
-      if (box -> param[0][0] != box -> param[0][1] || box -> param[0][0] != box -> param[0][1] || box -> param[0][1] != box -> param[0][2])
+      if (box -> param[0][0] != box -> param[0][1] || box -> param[0][0] != box -> param[0][2] || box -> param[0][1] != box -> param[0][2])
       {
         // Box error: a, b, c not all equal
         return 0;
