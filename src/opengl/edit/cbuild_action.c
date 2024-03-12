@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int test_lattice (builder_edition * cbuilder);
+  int test_lattice (builder_edition * cbuilder, cell_info * cif_cell);
   int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos);
   int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
 
@@ -65,7 +65,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "readers.h"
 #include <ctype.h>
 
-extern int get_bravais_id (int spg);
+extern int get_crystal_id (int spg);
 
 gchar * tmp_pos = NULL;
 
@@ -300,86 +300,113 @@ void compute_lattice_properties (cell_info * cell)
 }
 
 /*!
-  \fn int test_lattice (builder_edition * cbuilder)
+  \fn int test_lattice (builder_edition * cbuilder, cell_info * cif_cell)
 
   \brief test lattice parameters
 
   \param cbuilder the builder edition with the lattice parameters
+  \param cif_cell the cell information when testing CIF file
 */
-int test_lattice (builder_edition * cbuilder)
+int test_lattice (builder_edition * cbuilder, cell_info * cif_cell)
 {
   int i, j;
-  cell_info * cell = & cbuilder -> cell;
+  cell_info * cell = (cbuilder) ? & cbuilder -> cell : cif_cell;
   box_info * box = & cell -> box[0];
   i = cell -> sp_group -> id;
-  j = get_bravais_id (i);
+  j = get_crystal_id (i);
 
-  if (! cell -> ltype)
+  if (cbuilder)
   {
-    // Adjust a,b,c,alpha,beta,gamma and compute vectors
-    if (j == 3 || j == 4 || j == 6)
+    if (! cell -> ltype)
     {
-      box -> param[1][1] = box -> param[1][2] = box -> param[1][0];
+      // Adjust a,b,c,alpha,beta,gamma and compute vectors
+      if (j == 3 || j == 4 || j == 6)
+      {
+        box -> param[1][1] = box -> param[1][2] = box -> param[1][0];
+      }
+      if (j == 3 || (j == 4 && cell -> sp_group -> name[0] == 'P') || j == 5)
+      {
+        box -> param[0][1] = box -> param[0][0];
+      }
+      else if ((j == 4 && cell -> sp_group -> name[0] == 'R') || j == 6)
+      {
+        box -> param[0][1] = box -> param[0][2] = box -> param[0][0];
+      }
     }
-    if (j == 3 || (j == 4 && cell -> sp_group -> name[0] == 'P') || j == 5)
+    if (! test_vol(box -> param, box -> vect))
     {
-      box -> param[0][1] = box -> param[0][0];
+      show_warning ("Please describe properly the lattice parameters", cbuilder -> win);
+      return 0;
     }
-    else if ((j == 4 && cell -> sp_group -> name[0] == 'R') || j == 6)
-    {
-      box -> param[0][1] = box -> param[0][2] = box -> param[0][0];
-    }
+    compute_lattice_properties (cell);
   }
 
-  if (! test_vol(box -> param, box -> vect))
-  {
-    show_warning ("Please describe properly the lattice parameters", cbuilder -> win);
-    return 0;
-  }
-
-  compute_lattice_properties (cell);
   if (j < 3)
   {
     if (! (box -> param[0][0] != box -> param[0][1] && box -> param[0][0] != box -> param[0][2] && box -> param[0][1] != box -> param[0][2]))
     {
-      // Box error a,b,c not all differents
+      // Box error: a, b, c not all different
       return 0;
     }
   }
-  if (j == 0)
+
+  if (j == 2 || j == 3 || j == 6)
   {
-    if (! (box -> param[1][0] != box -> param[1][1] && box -> param[1][0] != box -> param[1][2] && box -> param[1][1] != box -> param[1][2]))
+    if (box -> param[1][0] != 90.0 || box -> param[1][1] != 90.0 || box -> param[1][2] != 90.0)
     {
-      // Box error alpha,beta,gamma not all differents
+      // Angle error: alpha, beta and gamma must be = 90
       return 0;
     }
   }
-  else if (j == 1)
+
+  switch (j)
   {
-    if (box -> param[1][1] != 90.0 && box -> param[1][2] != 90.0)
-    {
-      // Angle Error alpha or gamma must be = 90
-      return 0;
-    }
-  }
-  else if (j == 3 || j == 5)
-  {
-    if (box -> param[0][0] == box -> param[0][2])
-    {
-      // Angle Error alpha gamma must different than gamma
-      return 0;
-    }
-  }
-  else if (j == 4)
-  {
-    if (cell -> sp_group -> name[0] != 'R')
-    {
-      if (box -> param[0][0] == box -> param[0][2])
+    case 0:
+      if (! (box -> param[1][0] != box -> param[1][1] && box -> param[1][0] != box -> param[1][2] && box -> param[1][1] != box -> param[1][2]))
       {
-        // Angle Error alpha gamma must different than gamma
+        // Angle error: alpha, beta, gamma not all differents
+       return 0;
+      }
+      break;
+    case 1:
+      if (box -> param[1][0] != 90.0 || box -> param[1][1] != 90.0)
+      {
+        // Angle error: alpha and gamma must be = 90
         return 0;
       }
-    }
+      break;
+    case 4:
+      if (cell -> sp_group -> name[0] != 'R')
+      {
+        if (box -> param[1][0] != 90.0 || box -> param[1][1] != 90 || box -> param[1][2] != 120.0)
+        {
+          // Angle error: alpha and beta must be = 90, gamma must be = 120
+          return 0;
+        }
+      }
+      else
+      {
+        if (box -> param[1][0] != box -> param[1][1] || box -> param[1][0] != box -> param[1][2] || box -> param[1][1] != box -> param[1][2])
+        {
+          // Angle error: alpha, beta, gamma must all be equal
+          return 0;
+        }
+      }
+      break;
+    case 5:
+      if (box -> param[1][0] != 90.0 || box -> param[1][1] != 90 || box -> param[1][2] != 120.0)
+      {
+        // Angle error: alpha and beta must be = 90, gamma must be = 120
+        return 0;
+      }
+      break;
+    case 6:
+      if (box -> param[0][0] != box -> param[0][1] || box -> param[0][0] != box -> param[0][1] || box -> param[0][1] != box -> param[0][2])
+      {
+        // Box error: a, b, c not all equal
+        return 0;
+      }
+      break;
   }
   return 1;
 }

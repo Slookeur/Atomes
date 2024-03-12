@@ -289,9 +289,12 @@ void model_info (project * this_proj, GtkTextBuffer * buffer)
   for (i=0; i<this_proj -> nspec; i++)
   {
     print_info (this_proj -> chemistry -> label[i], "bold", buffer);
-    str = g_strdup_printf ("%d", this_proj -> chemistry -> formula[i]);
-    print_info (str, "sub", buffer);
-    g_free (str);
+    if (this_proj -> chemistry -> formula[i] != 1)
+    {
+      str = g_strdup_printf ("%d", this_proj -> chemistry -> formula[i]);
+      print_info (str, "sub", buffer);
+      g_free (str);
+    }
     print_info (" ", NULL, buffer);
   }
   if (this_proj -> cell.volume != 0.0)

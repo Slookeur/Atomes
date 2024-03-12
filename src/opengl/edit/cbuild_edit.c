@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  int get_bravais_id (int spg);
+  int get_crystal_id (int spg);
   int get_bravais_img_id (int spg);
   int get_sg_num (GtkComboBox * box);
   int read_space_group (builder_edition * cbuilder, int spg);
@@ -95,7 +95,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 extern G_MODULE_EXPORT void show_sg_info (GtkButton * but, gpointer data);
 
 extern void get_origin (space_group * spg);
-extern int test_lattice (builder_edition * cbuilder);
+extern int test_lattice (builder_edition * cbuilder, cell_info * cif_cell);
 extern int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
 
 gchar * crystal_sytems[7] = {"Triclinic", "Monoclinic", "Othorhombic", "Tetragonal", "Trigonal", "Hexagonal", "Cubic"};
@@ -118,13 +118,13 @@ int nsg_bv[7]={2, 13, 59, 68,  25,  27,  36};
 int min_bv[7]={0,  2, 15, 74, 142, 167, 194};
 
 /*!
-  \fn int get_bravais_id (int spg)
+  \fn int get_crystal_id (int spg)
 
   \brief get the bravais lattice id from space group id
 
   \param spg the target space group id
 */
-int get_bravais_id (int spg)
+int get_crystal_id (int spg)
 {
   if (spg < 3)
   {
@@ -465,7 +465,7 @@ void adjust_lattice_parameters (builder_edition * cbuilder)
 {
   int i, j, k;
   j = get_sg_num(GTK_COMBO_BOX(cbuilder -> sg_combo));
-  k = get_bravais_id(j);
+  k = get_crystal_id(j);
   box_info * box = & cbuilder -> cell.box[0];
   switch (k)
   {
@@ -863,7 +863,7 @@ void adjust_bv_img (builder_edition * cbuilder)
 void adjust_lattice_constraints (builder_edition * cbuilder)
 {
   if (cbuilder -> ltc_cons) cbuilder -> ltc_cons = destroy_this_widget(cbuilder -> ltc_cons);
-  gchar * str = g_strdup_printf ("<b>%s</b>", latt_info[get_bravais_id (cbuilder -> cell.sp_group -> id)]);
+  gchar * str = g_strdup_printf ("<b>%s</b>", latt_info[get_crystal_id (cbuilder -> cell.sp_group -> id)]);
   cbuilder -> ltc_cons = markup_label(str, 150, -1, 0.0, 0.5);
   g_free (str);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, cbuilder -> ltc_box, cbuilder -> ltc_cons, FALSE, FALSE, 5);
@@ -1074,7 +1074,7 @@ G_MODULE_EXPORT void apply_build (GtkButton * but, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
   project * this_proj = get_project_by_id(id);
-  if (test_lattice(this_proj -> modelgl -> builder_win))
+  if (test_lattice(this_proj -> modelgl -> builder_win, NULL))
   {
     build_crystal (TRUE, this_proj, this_proj -> modelgl -> builder_win -> wrap, this_proj -> modelgl -> builder_win -> clones,
                                   & this_proj -> modelgl -> builder_win -> cell, this_proj -> modelgl -> builder_win -> win);
@@ -1312,7 +1312,7 @@ GtkWidget * builder_win (project * this_proj, gpointer data)
 
   cbuilder -> ltc_box = create_hbox (0);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, cbuilder -> ltc_box, markup_label("Lattice constraints: ", 150, -1, 0.0, 0.5), FALSE, FALSE, 5);
-  str = g_strdup_printf ("<b>%s</b>", latt_info[get_bravais_id (1)]);
+  str = g_strdup_printf ("<b>%s</b>", latt_info[get_crystal_id (1)]);
   cbuilder -> ltc_cons = markup_label(str, 150, -1, 0.0, 0.5);
   g_free (str);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, cbuilder -> ltc_box, cbuilder -> ltc_cons, FALSE, FALSE, 5);

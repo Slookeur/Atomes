@@ -39,6 +39,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int get_space_group_from_hm (gchar * hmk);
   int get_setting_from_hm (gchar * hmk, int end);
   int group_info_from_hm_key (int spg, gchar * key_hm);
+  int cif_get_space_group (int linec);
   int open_cif_file (int linec);
 
   float get_atom_coord (gchar * line, int mid);
@@ -47,7 +48,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   gboolean cif_file_get_atoms_data (int lin, int cid[8]);
   gboolean cif_get_atomic_coordinates (int linec);
   gboolean cif_get_cell_data (int linec);
-  gboolean cif_get_space_group (int linec);
 
   gchar * get_cif_word (gchar * mot);
   gchar * get_atom_label (gchar * line, int lid);
@@ -73,6 +73,7 @@ extern int get_atom_id_from_periodic_table (atom_search * asearch);
 extern double get_z_from_periodic_table (gchar * lab);
 extern void get_origin (space_group * spg);
 extern void compute_lattice_properties (cell_info * cell);
+extern int test_lattice (builder_edition * cbuilder, cell_info * cif_cell);
 extern int read_space_group (builder_edition * cbuilder, int spg);
 extern gchar * wnpos[3];
 extern void get_wyck_char (float val, int ax, int bx);
@@ -718,7 +719,7 @@ gboolean cif_file_get_atoms_data (int lin, int cid[8])
   for (i=0; i<this_reader -> natomes; i++)
   {
     cline = g_strdup_printf ("%s", coord_line[i+lin]);
-    str = get_atom_label (cline, (cid[0] != -1) ? cid[0] : cid[1]);
+    str = get_atom_label (cline, (cid[0]) ? cid[0] : cid[1]);
     v = get_z_from_periodic_table (str);
     #pragma omp critical
     {
@@ -756,7 +757,7 @@ gboolean cif_file_get_atoms_data (int lin, int cid[8])
   for (i=0; i<this_reader -> natomes; i++)
   {
     cline = g_strdup_printf ("%s", tail -> line);
-    str = get_atom_label (cline, (cid[0] != -1) ? cid[0] : cid[1]);
+    str = get_atom_label (cline, (cid[0]) ? cid[0] : cid[1]);
     v = get_z_from_periodic_table (str);
     if (v)
     {
@@ -1357,13 +1358,13 @@ gboolean cif_get_cell_data (int linec)
 }
 
 /*!
-  \fn gboolean cif_get_space_group (int linec)
+  \fn int cif_get_space_group (int linec)
 
   \brief get the space group from the CIF file
 
   \param linec Total number of lines
 */
-gboolean cif_get_space_group (int linec)
+int cif_get_space_group (int linec)
 {
   gchar * symkey[2] = {"int_tables_number", "group_it_number"};
   gchar * str = NULL;
@@ -1432,7 +1433,7 @@ gboolean cif_get_space_group (int linec)
     }
   }
   gchar * lat;
-  gboolean res = TRUE;
+  int res = spg;
   if (spg > 1)
   {
     if (cif_get_value ("_space_group", "it_coordinate_system_code", linec, 0, & str, FALSE, FALSE, FALSE))
@@ -1446,7 +1447,7 @@ gboolean cif_get_space_group (int linec)
           {
             if (spg < 3 || spg > 15)
             {
-              res = FALSE;
+              res = 0;
               break;
             }
             if (str[0] == '-')
@@ -1478,7 +1479,7 @@ gboolean cif_get_space_group (int linec)
           {
             if (spg < 16 || spg > 74)
             {
-              res = FALSE;
+              res = 0;
               break;
             }
             k = 0;
@@ -1511,7 +1512,7 @@ gboolean cif_get_space_group (int linec)
           {
             if (spg < 75 || (spg > 142 && spg < 195))
             {
-              res = FALSE;
+              res = 0;
               break;
             }
             j = i - 36;
@@ -1522,7 +1523,7 @@ gboolean cif_get_space_group (int linec)
           {
             if (spg < 143 || spg > 165)
             {
-              res = FALSE;
+              res = 0;
               break;
             }
             j = i - 38;
@@ -1572,6 +1573,17 @@ gboolean cif_get_space_group (int linec)
         this_reader -> setting = ! this_reader -> setting;
       }
     }
+
+    // Test space group vs. box parameters:
+    this_reader -> lattice.sp_group -> sid = this_reader -> setting;
+    if (! test_lattice (NULL, & this_reader -> lattice))
+    {
+      str = g_strdup_printf ("<b>Space group</b> and <b>lattice paramters</b> are not compatible !\n"
+                             "\nCheck a, b, c, and &#x3B1;, &#x3B2;, &#x263;, with the type of crystal system.");
+      add_reader_info (str, 0);
+      g_free (str);
+      res = -1;
+    }
   }
   this_reader -> lattice.sp_group -> sid = this_reader -> setting;
   get_origin (this_reader -> lattice.sp_group);
@@ -1591,19 +1603,25 @@ int open_cif_file (int linec)
   int i, j;
   if (cif_get_cell_data (linec))
   {
-    if (cif_get_space_group (linec))
+    i = cif_get_space_group (linec);
+    if (i > 0)
     {
 #ifdef DEBUG
       g_debug ("CIF:: SP setting:: %d, name= %s", this_reader -> setting+1, this_reader -> lattice.sp_group -> settings[this_reader -> setting].name);
 #endif
       if (this_reader -> lattice.sp_group) get_origin (this_reader -> lattice.sp_group);
     }
-    else
+    else if (! i)
     {
       // No space group found
 #ifdef DEBUG
       g_debug ("CIF:: Impossible to retrieve space group information !");
 #endif
+    }
+    else
+    {
+      // Error in space group
+      return 3;
     }
   }
   if (cif_get_atomic_coordinates (linec))

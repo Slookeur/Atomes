@@ -56,7 +56,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 extern double get_value_from_pos (gchar * pos);
 extern double get_val_from_wyckoff (gchar * pos, gchar * wval);
-extern int get_bravais_id (int spg);
+extern int get_crystal_id (int spg);
 extern int get_bravais_img_id (int spg);
 extern gchar * frac_string (gchar * init);
 extern gchar * get_num_string (gchar * str);
@@ -559,7 +559,7 @@ G_MODULE_EXPORT void show_sg_info (GtkWidget * but, gpointer data)
 
   hbox = create_hbox (0);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, markup_label("Lattice constraints: ", xsize, -1, 0.0, 0.5), FALSE, FALSE, 5);
-  str = g_strdup_printf ("<b>%s</b>", latt_info[get_bravais_id (spg -> id)]);
+  str = g_strdup_printf ("<b>%s</b>", latt_info[get_crystal_id (spg -> id)]);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, markup_label(str, 150, -1, 0.0, 0.5), FALSE, FALSE, 5);
   g_free (str);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, ivbox[0], hbox, FALSE, FALSE, 5);
