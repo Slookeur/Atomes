@@ -49,7 +49,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void update_sa_info (int sid);
   void prepare_sp_box ();
   void cell_data_from_pdb_ (float * a, float * b, float * c, float * alp, float * bet, float * gam);
-  void open_this_coordinate_file (int format);
+  void open_this_coordinate_file (int format, gchar * proj_name);
 
   G_MODULE_EXPORT void on_close_workspace (GtkWidget * widg, gpointer data);
   G_MODULE_EXPORT void run_on_open_save_active (GtkNativeDialog * info, gint response_id, gpointer data);
@@ -92,12 +92,13 @@ char * coord_files[NCFORMATS+1] = {"XYZ file",
                                    "VASP trajectory - NPT",
                                    "Protein Data Bank file",
                                    "Protein Data Bank file",
-                                   "Crystallographic information",
+                                   "Crystallographic information (crystal build)",
+                                   "Crystallographic information (symmetry positions)",
                                    "DL-POLY HISTORY file",
                                    "ISAACS Project File"};
 
 char * coord_files_ext[NCFORMATS+1]={"xyz", "xyz", "c3d", "trj", "trj", "xdatcar", "xdatcar",
-                                    "pdb", "ent", "cif", "hist", "ipf"};
+                                    "pdb", "ent", "cif", "cif", "hist", "ipf"};
 
 char ** las;
 void initcwidgets ();
@@ -1322,12 +1323,16 @@ int open_coordinate_file (int id)
       result = read_pdb_ (active_project -> coordfile, & length);
       break;
     case 9:
-      // CIF file
+      // CIF file building the crystal
       result = open_coord_file (active_project -> coordfile, 9);
       break;
     case 10:
-      // DL-POLY file
+      // CIF file using symmetry positions
       result = open_coord_file (active_project -> coordfile, 10);
+      break;
+    case 11:
+      // DL-POLY file
+      result = open_coord_file (active_project -> coordfile, 11);
       break;
     default:
       result = 2;
@@ -1337,7 +1342,7 @@ int open_coordinate_file (int id)
   g_print ("Time to read atomic coordinates: %s\n", calculation_time(FALSE, get_calc_time (sta_time, sto_time)));
   if (this_reader)
   {
-    if (this_reader -> info && ! silent_input)
+    if (this_reader -> info && (! silent_input || cif_use_symmetry_positions))
     {
       switch (this_reader -> mid)
       {
@@ -1360,6 +1365,7 @@ int open_coordinate_file (int id)
       if (this_reader -> lmislab) g_free (this_reader -> lmislab);
       if (this_reader -> coord) g_free (this_reader -> coord);
       if (this_reader -> lot) g_free (this_reader -> lot);
+      if (this_reader -> sym_pos) g_free (this_reader -> sym_pos);
       if (this_reader -> wyckoff) g_free (this_reader -> wyckoff);
       if (this_reader -> occupancy) g_free (this_reader -> occupancy);
       if (this_reader -> multi) g_free (this_reader -> multi);
@@ -1401,13 +1407,14 @@ GtkFileFilter * filter[NCFORMATS+1];
 int pactive;
 
 /*!
-  \fn void open_this_coordinate_file (int format)
+  \fn void open_this_coordinate_file (int format, gchar * proj_name)
 
   \brief open coordinate file format, if successful add to workspace
 
   \param format the format of the file that contains the atomic coordinates
+  \param the project name to use, if any
 */
-void open_this_coordinate_file (int format)
+void open_this_coordinate_file (int format, gchar * proj_name)
 {
   active_project -> newproj = FALSE;
   clock_gettime (CLOCK_MONOTONIC, & start_time);
@@ -1416,11 +1423,18 @@ void open_this_coordinate_file (int format)
     clock_gettime (CLOCK_MONOTONIC, & stop_time);
     g_print ("Time to open coordinate file: %s\n", calculation_time(FALSE, get_calc_time (start_time, stop_time)));
     active_project -> tfile = format;
-    gchar * str = g_path_get_basename (active_project -> coordfile);
-    active_project -> name = g_strdup_printf ("%s", substitute_string (str, g_strdup_printf (".%s", coord_files_ext[format]), NULL));
-    g_free (str);
+    if (proj_name)
+    {
+      active_project -> name = g_strdup_printf ("%s", proj_name);
+    }
+    else
+    {
+      gchar * str = g_path_get_basename (active_project -> coordfile);
+      active_project -> name = g_strdup_printf ("%s", substitute_string (str, g_strdup_printf (".%s", coord_files_ext[format]), NULL));
+      g_free (str);
+    }
     on_edit_activate (NULL, GINT_TO_POINTER(0));
-    if (format != 1 && format != 4 && format != 6 && format != 9 && format != 10) on_edit_activate (NULL, GINT_TO_POINTER(4));
+    if (format != 1 && format != 4 && format != 6 && format != 9 && format != 10 && format != 11) on_edit_activate (NULL, GINT_TO_POINTER(4));
     initcutoffs (active_chem, active_project -> nspec);
     on_edit_activate (NULL, GINT_TO_POINTER(2));
     active_project_changed (activep);
@@ -1429,7 +1443,7 @@ void open_this_coordinate_file (int format)
     chemistry_ ();
     apply_project (TRUE);
     active_project_changed (activep);
-    if (format == 9 && active_cell -> has_a_box)
+    if ((format == 9 || format == 10) && active_cell -> has_a_box)
     {
 #ifdef GTK3
       gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_rep[0], TRUE);
@@ -1442,6 +1456,16 @@ void open_this_coordinate_file (int format)
       active_glwin -> wrapped = TRUE;
     }
     add_project_to_workspace ();
+    if (format == 9 && cif_use_symmetry_positions)
+    {
+      gchar * file_name = g_strdup_printf ("%s", active_project -> coordfile);
+      gchar * proj_name = g_strdup_printf ("%s - symmetry position(s)", active_project -> name);
+      init_project (TRUE);
+      active_project -> coordfile = g_strdup_printf ("%s", file_name);
+      g_free (file_name);
+      open_this_coordinate_file (10, proj_name);
+      g_free (proj_name);
+    }
   }
   else
   {
@@ -1500,7 +1524,7 @@ G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpoi
         {
           j = iask ("Please select the file format of the atomic coordinates", "Select format :", 2, MainWindow);
         }
-        open_this_coordinate_file (j);
+        open_this_coordinate_file (j, NULL);
       }
       else
       {

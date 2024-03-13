@@ -336,12 +336,13 @@ int open_coord_file (gchar * filename, int fti)
     {
       res = open_pdb_file (i);
     }
-    else if (fti == 9)
+    else if (fti == 9 || fti == 10)
     {
+      if (fti == 10) cif_use_symmetry_positions = TRUE;
       this_reader -> cartesian = FALSE;
       res = open_cif_file (i);
     }
-    else if (fti == 10)
+    else if (fti == 11)
     {
       res = open_hist_file (i);
     }
@@ -361,10 +362,34 @@ int open_coord_file (gchar * filename, int fti)
       {
         // this_reader -> lattice.sp_group -> sid = 2;
         // get_origin (this_reader -> lattice.sp_group);
-        if (! build_crystal (FALSE, active_project, TRUE, FALSE, & this_reader -> lattice, MainWindow))
+        if (! cif_use_symmetry_positions)
         {
-          add_reader_info ("Error trying to build crystal using the CIF file parameters !", 0);
-          res = 3;
+          i = build_crystal (FALSE, active_project, TRUE, FALSE, & this_reader -> lattice, MainWindow);
+          if (! i)
+          {
+            add_reader_info ("Error trying to build crystal using the CIF file parameters !\n"
+                             "This usually comes from: \n"
+                             "\t - incorrect space group description\n"
+                             "\t - incomplete space group description\n"
+                             "\t - missing space group setting\n"
+                             "\t - incorrect space group setting\n", 0);
+            res = 3;
+          }
+          else if (i > 1)
+          {
+            add_reader_info ("Potential issue(s) when building crystal !\n"
+                             "This usually comes from: \n"
+                             "\t - incorrect space group description\n"
+                             "\t - incomplete space group description\n"
+                             "\t - missing space group setting\n"
+                             "\t - incorrect space group setting\n", 1);
+            this_reader -> setting = ! this_reader -> setting;
+            if (this_reader -> num_sym_pos)
+            {
+              add_reader_info ("\nAnother model will be built using included symmetry positions\n", 1);
+              cif_use_symmetry_positions = TRUE;
+            }
+          }
         }
       }
     }
@@ -417,6 +442,7 @@ int open_coord_file (gchar * filename, int fti)
         g_print ("Reading coordinates [%s]:\t %s, nsps[%d]= %d\n", coord_files_ext[fti], active_chem -> label[i], i+1, active_chem -> nsps[i]);
         active_chem -> chem_prop[CHEM_Z][i] = this_reader -> z[i];
       }
+      cif_use_symmetry_positions = FALSE;
     }
     else
     {

@@ -186,6 +186,7 @@ gboolean check_label = TRUE;
 gboolean object_motion = FALSE;
 gboolean selected_status = FALSE;
 gboolean silent_input = FALSE;
+gboolean cif_use_symmetry_positions = FALSE;
 
 struct timespec start_time;
 struct timespec stop_time;

@@ -36,6 +36,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int cif_file_get_number_of_atoms (int linec, int lid, int nelem);
   int get_loop_line_id (int linec, int lid);
   int get_loop_line_for_key (gchar * key_a, gchar * key_b, int linec);
+  int cif_file_get_number_of_positions (int linec, int lid);
   int get_space_group_from_hm (gchar * hmk);
   int get_setting_from_hm (gchar * hmk, int end);
   int group_info_from_hm_key (int spg, gchar * key_hm);
@@ -47,6 +48,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   gboolean get_missing_z_from_user ();
   gboolean cif_file_get_atoms_data (int lin, int cid[8]);
   gboolean cif_get_atomic_coordinates (int linec);
+  gboolean cif_get_symmetry_positions (int linec);
   gboolean cif_get_cell_data (int linec);
 
   gchar * get_cif_word (gchar * mot);
@@ -80,6 +82,8 @@ extern void get_wyck_char (float val, int ax, int bx);
 extern space_group * duplicate_space_group (space_group * spg);
 extern int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
 extern void sort (int dim, int * tab);
+
+extern gchar * tmp_pos;
 
 FILE * cifp;
 char * line_ptr;
@@ -408,7 +412,7 @@ int cif_get_value (gchar * kroot, gchar * keyw, int linec, int lstart, gchar ** 
         res = -1;
         goto endi;
       }
-      str_w = get_cif_word(this_word);
+      str_w = get_cif_word (this_word);
       str_w = g_ascii_strdown (str_w, strlen(str_w));
       if (strlen(str_w) == l)
       {
@@ -1059,6 +1063,103 @@ gboolean cif_get_atomic_coordinates (int linec)
 }
 
 /*!
+  \fn int cif_file_get_number_of_positions (int linec, int lid)
+
+  \brief get the number of symmetry positions
+
+  \param linec Total number of lines
+  \param lid Line to reach
+*/
+int cif_file_get_number_of_positions (int linec, int lid)
+{
+  gboolean res = FALSE;
+  int i = 0;
+  while (! res)
+  {
+    this_line = g_strdup_printf ("%s", coord_line[lid+i]);
+    this_word = strtok (this_line, " ");
+    if (this_word[0] == '_' || g_strcmp0(this_word, "loop_") == 0)
+    {
+      res = TRUE;
+      break;
+    }
+    else
+    {
+      i ++;
+    }
+  }
+  if (i)
+  {
+    this_reader -> sym_pos = g_malloc0(i*sizeof*this_reader -> sym_pos);
+    int j, k;
+    gchar * str;
+    for (j=0; j<i; j++)
+    {
+      this_reader -> sym_pos[j] = g_malloc0(3*sizeof*this_reader -> sym_pos[j]);
+      this_line = g_strdup_printf ("%s", coord_line[lid+j]);
+      this_word = strtok (this_line, " ");
+      str = g_strdup_printf ("%d", j+1);
+      this_line = g_strdup_printf ("%s", coord_line[lid+j]);
+      if (g_strcmp0(this_word, str) == 0)
+      {
+        g_free (this_line);
+        this_line = NULL;
+        for (k=strlen(this_word); k<strlen(coord_line[lid+j]); k++)
+        {
+          if (! this_line)
+          {
+            this_line = g_strdup_printf ("%c", coord_line[lid+j][k]);
+          }
+          else
+          {
+            this_line = g_strdup_printf ("%s%c", this_line, coord_line[lid+j][k]);
+          }
+        }
+      }
+      g_free (str);
+      this_line = substitute_string (this_line, "'", NULL);
+      this_line = substitute_string (this_line, ",", " ");
+      this_word = strtok (this_line, " ");
+      for (k=0; k<3; k++)
+      {
+         this_reader -> sym_pos[j][k] = g_strdup_printf ("%s", this_word);
+         this_word = strtok (NULL, " ");
+      }
+    }
+  }
+  return i;
+}
+
+/*!
+  \fn gboolean cif_get_symmetry_positions (int linec)
+
+  \brief read the symmetry positions from the CIF file
+
+  \param linec Total number of lines
+*/
+gboolean cif_get_symmetry_positions (int linec)
+{
+  gchar * pos_key[2]={"_symmetry_equiv_pos_as", "_space_group_symop_operation"};
+  gchar * str;
+  int loop_line;
+  int line_id;
+  int i;
+  for (i=0; i<2; i++)
+  {
+    loop_line = get_loop_line_for_key (pos_key[i], "xyz", linec);
+    if (loop_line)
+    {
+      line_id = cif_get_value (pos_key[i], "xyz", linec, loop_line, & str, FALSE, FALSE, TRUE);
+      break;
+    }
+  }
+  if (! loop_line) return FALSE;
+  // Read lines after the instruction, as many positions as line until _ or loop
+  this_reader -> num_sym_pos = cif_file_get_number_of_positions (linec, line_id);
+  return TRUE;
+}
+
+/*!
   \fn int get_space_group_from_hm (gchar * hmk)
 
   \brief retrieve space group using the HM Key
@@ -1600,7 +1701,7 @@ int cif_get_space_group (int linec)
 int open_cif_file (int linec)
 {
   int res;
-  int i, j;
+  int i, j, k, l;
   if (cif_get_cell_data (linec))
   {
     i = cif_get_space_group (linec);
@@ -1623,6 +1724,20 @@ int open_cif_file (int linec)
       // Error in space group
       return 3;
     }
+  }
+  // Reading positions
+  if (cif_get_symmetry_positions (linec))
+  {
+    if (! cif_use_symmetry_positions && this_reader -> num_sym_pos)
+    {
+      add_reader_info ("Symmetry position(s) in CIF file\n", 1);
+      this_reader -> setting = ! this_reader -> setting;
+    }
+  }
+  if (cif_use_symmetry_positions && ! this_reader -> num_sym_pos)
+  {
+    add_reader_info ("No symmetry position(s) in CIF file\n", 0);
+    return 3;
   }
   if (cif_get_atomic_coordinates (linec))
   {
@@ -1649,6 +1764,63 @@ int open_cif_file (int linec)
       }
     }
     res = 0;
+    if (cif_use_symmetry_positions)
+    {
+      this_reader -> cartesian = TRUE;
+      active_project -> steps = 1;
+      active_project -> natomes = this_reader -> natomes * this_reader -> num_sym_pos;
+      allocatoms (active_project);
+      double spgpos[3][4];
+      vec3_t f_pos, c_pos;
+      mat4_t pos_mat;
+      i = 0;
+      for (j=0; j<this_reader -> num_sym_pos; j++)
+      {
+        for (k=0; k<3; k++)
+        {
+          tmp_pos = g_strdup_printf ("%s", this_reader -> sym_pos[j][k]);
+          for (l=0; l<3; l++)
+          {
+            spgpos[k][l] = get_val_from_wyckoff (vect_comp[l], this_reader -> sym_pos[j][k]);
+          }
+          if (tmp_pos)
+          {
+            spgpos[k][3] = get_value_from_pos (tmp_pos);
+            g_free (tmp_pos);
+            tmp_pos = NULL;
+          }
+          else
+          {
+            spgpos[k][3] = 0.0;
+          }
+        }
+        pos_mat = mat4 (spgpos[0][0], spgpos[0][1], spgpos[0][2], spgpos[0][3],
+                        spgpos[1][0], spgpos[1][1], spgpos[1][2], spgpos[1][3],
+                        spgpos[2][0], spgpos[2][1], spgpos[2][2], spgpos[2][3],
+                        0.0, 0.0, 0.0, 1.0);
+        for (k=0; k<this_reader -> natomes; k++)
+        {
+          f_pos = vec3 (this_reader -> coord[k][0], this_reader -> coord[k][1], this_reader -> coord[k][2]);
+          f_pos = m4_mul_coord (pos_mat, f_pos);
+          c_pos = m4_mul_coord (this_reader -> lattice.box[0].frac_to_cart, f_pos);
+          active_project -> atoms[0][i].x = c_pos.x;
+          active_project -> atoms[0][i].y = c_pos.y;
+          active_project -> atoms[0][i].z = c_pos.z;
+          active_project -> atoms[0][i].sp = this_reader -> lot[k];
+          i ++;
+        }
+      }
+      g_free (this_reader -> lot);
+      this_reader -> lot = allocint (i);
+      for (j=0; j<i; j++)
+      {
+        this_reader -> lot[j] = active_project -> atoms[0][j].sp;
+      }
+      for (i=0; i<this_reader -> nspec; i++)
+      {
+        this_reader -> nsps[i] *= this_reader -> num_sym_pos;
+      }
+    }
   }
   else
   {

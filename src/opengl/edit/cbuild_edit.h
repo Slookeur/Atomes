@@ -49,6 +49,8 @@ extern atom_search * insert_search;
 extern gboolean test_vol (double box[2][3], double vect[3][3]);
 extern G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data);
 extern G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data);
+extern double get_value_from_pos (gchar * pos);
+extern double get_val_from_wyckoff (gchar * pos, gchar * wval);
 #ifdef GTK4
 extern G_MODULE_EXPORT void to_update_box (GtkEditable * widg, gpointer data);
 extern G_MODULE_EXPORT void to_update_vect (GtkEditable * widg, gpointer data);

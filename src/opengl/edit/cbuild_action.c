@@ -925,6 +925,7 @@ gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_c
 int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg)
 {
   int h, i, j, k, l, m, n, o, p, q;
+  int build_res = 1;
   space_group * sp_group = cell -> sp_group;
   box_info * box = & cell -> box[0];
   gchar * str;
@@ -1078,8 +1079,8 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
           cdata -> coord[i] = g_malloc0(n*sizeof*cdata -> coord[i]);
           cdata -> insert[i] = m4_mul_coord (sp_group -> coord_origin, vec3(object -> baryc[0], object -> baryc[1], object -> baryc[2]));
 #ifdef DEBUG
-          g_debug ("at_orig= %d, pos.x= %f, pos.y= %f, pos.z= %f", i+1, object -> baryc[0], object -> baryc[1], object -> baryc[2]);
-          g_debug ("at_calc= %d, pos.x= %f, pos.y= %f, pos.z= %f", i+1, cdata -> insert[i].x, cdata -> insert[i].y, cdata -> insert[i].z);
+          // g_debug ("at_orig= %d, pos.x= %f, pos.y= %f, pos.z= %f", i+1, object -> baryc[0], object -> baryc[1], object -> baryc[2]);
+          // g_debug ("at_calc= %d, pos.x= %f, pos.y= %f, pos.z= %f", i+1, cdata -> insert[i].x, cdata -> insert[i].y, cdata -> insert[i].z);
 #endif
           n = 0;
           for (o=0; o<npoints; o++)
@@ -1094,7 +1095,7 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
                 cdata -> coord[i][n].y = pos.y;
                 cdata -> coord[i][n].z = pos.z;
 #ifdef DEBUG
-                g_debug ("      c.x= %f, c.y= %f, c.z= %f", cdata -> coord[i][n].x, cdata -> coord[i][n].y, cdata -> coord[i][n].z);
+                // g_debug ("      c.x= %f, c.y= %f, c.z= %f", cdata -> coord[i][n].x, cdata -> coord[i][n].y, cdata -> coord[i][n].z);
 #endif
                 cdata -> at_type[i][n] = 1;
                 n ++;
@@ -1137,6 +1138,7 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
             str = g_strdup_printf ("%s size (%f Ang.) is bigger than the min(<b><i>a,b,c</i></b>)\n"
                                    "If you build the crystal the final structure is likely to be crowded !\n"
                                    "Continue anyway ?", object -> name, object -> dim);
+            build_res = 2;
             if (! ask_yes_no("This object might be too big !" , str, GTK_MESSAGE_WARNING, widg))
             {
               g_free (str);
@@ -1411,6 +1413,7 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
                     // g_print ("i= %d, j= %d, k= %d, m= %d, d= %f\n", i, j, k, m, dist.length);
                     if (dist_chk)
                     {
+                      build_res = 3;
                       if (ask_yes_no ("Inter-object distance(s) < 0.5 Ang. !",
                                       "Inter-object distance(s) &lt; 0.5 Ang. !\n\n\t\tContinue and leave a single object at each position ?", GTK_MESSAGE_WARNING, widg))
                       {
@@ -1663,5 +1666,5 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
                           "\t <b>3)</b> Increase the number of unit cells up to get rid of this message.";
     show_warning (low_warning, widg);
   }
-  return 1;
+  return build_res;
 }

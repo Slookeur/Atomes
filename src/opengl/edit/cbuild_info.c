@@ -54,8 +54,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glview.h"
 #include "cbuild_edit.h"
 
-extern double get_value_from_pos (gchar * pos);
-extern double get_val_from_wyckoff (gchar * pos, gchar * wval);
 extern int get_crystal_id (int spg);
 extern int get_bravais_img_id (int spg);
 extern gchar * frac_string (gchar * init);

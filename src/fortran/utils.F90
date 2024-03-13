@@ -152,7 +152,7 @@ enddo
 
 if (.not.PBC) goto 001
 
-! Test if the simulation box is cubic-like symetric
+! Test if the simulation box is cubic-like symmetric
 ! For that we check the lattice angles
 if (THE_BOX(SID)%GLASS) then
 
@@ -169,7 +169,6 @@ else
     Nij(R1) = Nij(R1) - AnINT(Nij(R1))
   enddo
   Rij = MATMUL(Nij,THE_BOX(SID)%fractocart)
-
 
 endif
 

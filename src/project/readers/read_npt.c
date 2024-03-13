@@ -49,8 +49,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   extern ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 #endif
 
-extern void file_get_to_line (FILE * this_file, int line_id);
-
 FILE * cellp;
 
 typedef struct {

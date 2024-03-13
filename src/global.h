@@ -287,7 +287,7 @@ enum ImageFormats {
 /*!< \def NCFORMATS
   \brief Number atomic coordinates file formats
 */
-#define NCFORMATS 11
+#define NCFORMATS 12
 
 #define NITEMS 16
 #define OT 4
@@ -417,6 +417,7 @@ extern gboolean check_label;
 extern gboolean object_motion;
 extern gboolean selected_status;
 extern gboolean silent_input;
+extern gboolean cif_use_symmetry_positions;
 
 extern struct timespec start_time;
 extern struct timespec stop_time;
@@ -487,6 +488,8 @@ struct coord_file
   // The following line is only used for DL_POLY history files:
   int traj;                                /*!< */
   // The following lines are only used for CIF files:
+  int num_sym_pos;                         /*!< Number of symmetry positions, if any */
+  gchar *** sym_pos;                       /*!< The symmetry positions, if any */
   int setting;                             /*!< Space group setting */
   int * wyckoff;                           /*!< Wyckoff positions */
   double * occupancy;                      /*!< Site(s) occupancy */

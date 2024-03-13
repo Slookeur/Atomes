@@ -92,14 +92,14 @@ gboolean with_workspace = FALSE;
 */
 int test_this_arg (gchar * arg)
 {
-  char * fext[14]={"-awf", "-apf", " -xyz", "NULL", "-c3d", "-trj", "NULL", "-xdatcar", "NULL", "-pdb", "-ent", "-cif", "-hist", "-ipf"};
+  char * fext[15]={"-awf", "-apf", " -xyz", "NULL", "-c3d", "-trj", "NULL", "-xdatcar", "NULL", "-pdb", "-ent", "-cif", "NULL", "-hist", "-ipf"};
   int i, j;
   i = strlen(arg);
   gchar * str = g_ascii_strdown (arg, i);
-  for (j=0; j<14; j++) if (g_strcmp0 (str, fext[j]) == 0) return j+1;
+  for (j=0; j<15; j++) if (g_strcmp0 (str, fext[j]) == 0) return j+1;
   gchar * aext = g_strdup_printf ("%c%c%c%c", str[i-4], str[i-3], str[i-2], str[i-1]);
-  char * eext[14]={".awf", ".apf", ".xyz", "NULL", ".c3d", ".trj", "NULL", "tcar", "NULL", ".pdb", ".ent", ".cif", "hist", ".ipf"};
-  for (j=0; j<14; j++) if (g_strcmp0 (aext, eext[j]) == 0) return -(j+1);
+  char * eext[15]={".awf", ".apf", ".xyz", "NULL", ".c3d", ".trj", "NULL", "tcar", "NULL", ".pdb", ".ent", ".cif", "NULL", "hist", ".ipf"};
+  for (j=0; j<15; j++) if (g_strcmp0 (aext, eext[j]) == 0) return -(j+1);
   g_free (str);
   g_free (aext);
   return 0;
@@ -413,7 +413,7 @@ void open_this_data_file (int file_type, gchar * file_name)
         read_this_file (2, file_name);
       }
       break;
-    case 14:
+    case 15:
       init_project (TRUE);
       open_this_isaacs_xml_file (g_strdup_printf ("%s", file_name), activep, FALSE);
       break;
@@ -439,7 +439,7 @@ void open_this_data_file (int file_type, gchar * file_name)
           {
             init_project (TRUE);
             active_project -> coordfile =  g_strdup_printf ("%s\\%s", filedir, (gchar *)ffd.cFileName);
-            open_this_coordinate_file (file_type-3);
+            open_this_coordinate_file (file_type-3, NULL);
           }
           while (FindNextFile(hFind, &ffd) != 0)
           {
@@ -447,7 +447,7 @@ void open_this_data_file (int file_type, gchar * file_name)
             {
               init_project (TRUE);
               active_project -> coordfile = g_strdup_printf ("%s\\%s", filedir, (gchar *)ffd.cFileName);
-              open_this_coordinate_file (file_type-3);
+              open_this_coordinate_file (file_type-3, NULL);
             }
           }
         }
@@ -462,7 +462,7 @@ void open_this_data_file (int file_type, gchar * file_name)
             {
               init_project (TRUE);
               active_project -> coordfile = g_strdup_printf ("%s/%s", filedir, dir -> d_name);
-              open_this_coordinate_file (file_type-3);
+              open_this_coordinate_file (file_type-3, NULL);
             }
           }
           closedir(d);
@@ -474,7 +474,7 @@ void open_this_data_file (int file_type, gchar * file_name)
       {
         init_project (TRUE);
         active_project -> coordfile = g_strdup_printf ("%s", file_name);
-        open_this_coordinate_file (file_type-3);
+        open_this_coordinate_file (file_type-3, NULL);
       }
       break;
   }
