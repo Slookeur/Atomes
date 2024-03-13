@@ -51,6 +51,7 @@ extern G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data);
 extern G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data);
 extern double get_value_from_pos (gchar * pos);
 extern double get_val_from_wyckoff (gchar * pos, gchar * wval);
+extern int pos_not_saved (vec3_t * all_pos, int num_pos, vec3_t pos);
 #ifdef GTK4
 extern G_MODULE_EXPORT void to_update_box (GtkEditable * widg, gpointer data);
 extern G_MODULE_EXPORT void to_update_vect (GtkEditable * widg, gpointer data);

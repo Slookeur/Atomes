@@ -1768,10 +1768,12 @@ int open_cif_file (int linec)
     {
       this_reader -> cartesian = TRUE;
       active_project -> steps = 1;
-      active_project -> natomes = this_reader -> natomes * this_reader -> num_sym_pos;
-      allocatoms (active_project);
       double spgpos[3][4];
+      int max_pos = this_reader -> num_sym_pos * this_reader -> natomes;
+      int * tmp_nsps = allocint (this_reader -> nspec);
+      int * tmp_lot = allocint (max_pos);
       vec3_t f_pos, c_pos;
+      vec3_t * all_pos = g_malloc0 (max_pos*sizeof*all_pos);
       mat4_t pos_mat;
       i = 0;
       for (j=0; j<this_reader -> num_sym_pos; j++)
@@ -1803,23 +1805,34 @@ int open_cif_file (int linec)
           f_pos = vec3 (this_reader -> coord[k][0], this_reader -> coord[k][1], this_reader -> coord[k][2]);
           f_pos = m4_mul_coord (pos_mat, f_pos);
           c_pos = m4_mul_coord (this_reader -> lattice.box[0].frac_to_cart, f_pos);
-          active_project -> atoms[0][i].x = c_pos.x;
-          active_project -> atoms[0][i].y = c_pos.y;
-          active_project -> atoms[0][i].z = c_pos.z;
-          active_project -> atoms[0][i].sp = this_reader -> lot[k];
-          i ++;
+          if (pos_not_saved(all_pos, i, c_pos) > 0)
+          {
+            all_pos[i].x = c_pos.x;
+            all_pos[i].y = c_pos.y;
+            all_pos[i].z = c_pos.z;
+            l = this_reader -> lot[k];
+            tmp_lot[i] = l;
+            tmp_nsps[l] ++;
+            i ++;
+          }
         }
       }
+      active_project -> natomes = i;
+      allocatoms (active_project);
       g_free (this_reader -> lot);
-      this_reader -> lot = allocint (i);
-      for (j=0; j<i; j++)
+      this_reader -> lot = allocint (active_project -> natomes);
+      for (i=0; i<active_project -> natomes; i++)
       {
-        this_reader -> lot[j] = active_project -> atoms[0][j].sp;
+        active_project -> atoms[0][i].id = i;
+        active_project -> atoms[0][i].sp = this_reader -> lot[i] = tmp_lot[i];
+        active_project -> atoms[0][i].x = all_pos[i].x;
+        active_project -> atoms[0][i].y = all_pos[i].y;
+        active_project -> atoms[0][i].z = all_pos[i].z;
       }
-      for (i=0; i<this_reader -> nspec; i++)
-      {
-        this_reader -> nsps[i] *= this_reader -> num_sym_pos;
-      }
+      g_free (tmp_lot);
+      g_free (this_reader -> nsps);
+      this_reader -> nsps = duplicate_int (this_reader -> nspec, tmp_nsps);
+      g_free (tmp_nsps);
     }
   }
   else
