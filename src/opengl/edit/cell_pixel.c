@@ -44,7 +44,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 */
 
-#ifdef DEBUG
+#ifdef DEBUG_PIXELS
 
 #include "cell_edit.h"
 
@@ -94,14 +94,24 @@ void send_pix_info_ (int * p, int listp[27], int * ngb)
 GtkWidget * create_css_label (gchar * str, int id)
 {
   gchar * colo[2] = {"white", "yellow"};
-  gchar * backcol = g_strdup_printf ("label#color {\n"
-                                     "  background-color: blue;\n"
-                                     "  color: %s;\n"
-                                     "}", colo[id]);
+  gchar * backcol;
+  if (id)
+  {
+    backcol = g_strdup_printf ("label#icolor {\n"
+                               "  background-color: red;\n"
+                               "  color: %s;\n}", colo[id]);
+  }
+  else
+  {
+    backcol = g_strdup_printf ("label#color {\n"
+                               "  background-color: blue;\n"
+                               "  color: %s;\n}", colo[id]);
+
+  }
   provide_gtk_css (backcol);
   g_free (backcol);
   GtkWidget * lab = markup_label(str, 50, 50, 0.5, 0.5);
-  gtk_widget_set_name (lab, "color");
+  gtk_widget_set_name (lab, (id) ? "icolor" : "color");
   gtk_widget_show (lab);
   return lab;
 }
@@ -206,7 +216,7 @@ void update_pix_table (project * this_proj)
   for (i=0; i<3; i++)
   {
     this_proj -> pix_tab[i] = attach_grid (this_proj, pix[i]);
-    add_box_child_start (GTK_ORIENTATION_HORIZONTAL, this_proj -> pix_box, this_proj -> pix_tab[i], FALSE, FALSE, 20);
+    add_box_child_start (GTK_ORIENTATION_VERTICAL, this_proj -> pix_box, this_proj -> pix_tab[i], FALSE, FALSE, 20);
   }
   show_the_widgets (this_proj -> pix_box);
 }
@@ -253,11 +263,13 @@ GtkWidget * pixels_tab (project * this_proj)
   g_free (str);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, create_entry(G_CALLBACK(set_pix), 100, 15, FALSE, GINT_TO_POINTER(this_proj -> id)), FALSE, FALSE, 10);
   this_proj -> actif_pix = 1;
-  this_proj -> pix_box = create_hbox (0);
-  add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, this_proj -> pix_box, FALSE, FALSE, 5);
+  GtkWidget * scroll = create_scroll (vbox, 700, 750, GTK_SHADOW_ETCHED_IN);
+  this_proj -> pix_box = create_vbox (0);
+  // add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, this_proj -> pix_box, FALSE, FALSE, 5);
+  add_container_child (CONTAINER_SCR, scroll, this_proj -> pix_box);
   this_proj -> pix_tab[0] = this_proj -> pix_tab[1] = this_proj -> pix_tab[2] = NULL;
   update_pix_table (this_proj);
   return layout;
 }
 
-#endif // DEBUG
+#endif // DEBUG_PIXELS

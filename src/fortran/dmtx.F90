@@ -18,7 +18,7 @@
 !! @short Distance matrix calculation
 !! @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 
-SUBROUTINE PRINT_THIS_PIXEL (TPS, TPIX, PIXL, pix)
+SUBROUTINE PRINT_THIS_PIXEL (TPS, TPIX, PIXL, pix, atoms)
 
 USE PARAMETERS
 
@@ -26,24 +26,29 @@ IMPLICIT NONE
 
 TYPE (PIXEL), DIMENSION(TPS), INTENT(IN) :: TPIX
 TYPE (PIXEL), INTENT(IN) :: PIXL
+LOGICAL, INTENT(IN) :: atoms
 INTEGER, INTENT(IN) :: TPS, pix
 INTEGER :: PA, PB
 
-write (6, *)
-write (6, '("Pixel ID:: ",i10)') pix
-write (6, '("    Number of pixel neighbors:: ",i4)') PIXL%NEIGHBOR
+write (6, '("Pixel= ",i4)') pix
 do PA=1, PIXL%NEIGHBOR
   PB = PIXL%IDNEIGH(PA)
-  write (6, '("        N(",i4,")= ",i10," contains: ",i4," atom(s)")') PA, PIXL%IDNEIGH(PA), TPIX(PB)%ATOMS
+  if (atoms) then
+    write (6, '("        N(",i4,")= ",i10," contains: ",i4," atom(s)")') PA, PIXL%IDNEIGH(PA), TPIX(PB)%ATOMS
+  else
+    write (6, '("        N(",i4,")= ",i10)') PA, PIXL%IDNEIGH(PA)
+  endif
 enddo
 write (6, *)
-do PA=1, PIXL%ATOMS
-  write (6, '("        At(",i4,")= ",i10)') PA, PIXL%ATOM_ID(PA)
-enddo
-write (6, *)
+if (atoms) then
+  do PA=1, PIXL%ATOMS
+    write (6, '("        At(",i4,")= ",i10)') PA, PIXL%ATOM_ID(PA)
+  enddo
+  write (6, *)
+endif
 
 END SUBROUTINE
-!3, 2, 3,   7, 1, 5
+
 SUBROUTINE SET_SHIFT (shift, ai, bi, ci, npa, npb, npc)
 
   IMPLICIT NONE
@@ -51,102 +56,63 @@ SUBROUTINE SET_SHIFT (shift, ai, bi, ci, npa, npb, npc)
   INTEGER, DIMENSION(3,3,3), INTENT(INOUT) :: shift
   INTEGER, INTENT(IN) :: ai, bi, ci
   INTEGER, INTENT(IN) :: npa, npb, npc
-  INTEGER :: nab
+  INTEGER :: nab, abc
 
   nab = npa*npb
+  abc = nab*npc
+  ! Standard pixel positions:
+
+  ! Lower level
+  !shift(1,1,1) = nab+npa+1
+  !shift(1,1,2) = nab+npa
+  !shift(1,1,3) = nab+npa-1
+  !shift(1,2,1) = nab+1
+  !shift(1,2,2) = nab
+  !shift(1,2,3) = nab-1
+  !shift(1,3,1) = nab-npa+1
+  !shift(1,3,2) = nab-npa
+  !shift(1,3,3) = nab-npa-1
+
+  ! Same level
+  !shift(2,1,1) = npa+1
+  !shift(2,1,2) = npa
+  !shift(2,1,3) = npa-1
+  !shift(2,2,1) = 1
+  !shift(2,2,2) = 0
+  !shift(2,2,3) = -1
+  !shift(2,3,1) = -npa+1
+  !shift(2,3,2) = -npa
+  !shift(2,3,3) = -npa-1
+
+  ! Higher level
+  !shift(3,1,1) = npa+1-nab
+  !shift(3,1,2) = npa-nab
+  !shift(3,1,3) = npa-1-nab
+  !shift(3,2,1) = 1-nab
+  !shift(3,2,2) = -nab
+  !shift(3,2,3) = -1-nab
+  !shift(3,3,1) = -npa+1-nab
+  !shift(3,3,2) = -npa-nab
+  !shift(3,3,3) = -npa-1-nab
+
+  ! The shift is to compensate PBC
 
   if (ai .eq. 1) then
-    shift(1,:,:) = npa
+    shift (1,:,:) = npa
   else if (ai .eq. npa) then
-    shift(3,3,:) = -3*npa
+    shift (3,:,:) = - npa
   endif
 
-  if (bi .eq. npb) then
-    shift(:,3,3) = shift(:,3,3) - 3*nab
-    if (ai .eq. npa) then
-      shift(3,:,3) = shift(3,:,3) - npa
-      shift(3,3,3) = shift(3,3,3) + 3*npa
-      if (npc .eq. 1) then
-        shift(3,3,2) = shift(3,3,2) + nab
-      endif
-    endif
-    if (npc .eq. 1) then
-      shift (:,1,2) = shift (:,1,2) + nab - npa
-    endif
-  else if (bi .eq. 1) then
-    shift(:,1,1) = shift(:,1,1) + 3*nab
-    if (ai .eq. npa) then
-      shift(3,1,1) = shift(3,1,1) - npa
-      shift(3,3,1) = shift(3,3,1) + npa
-    endif
-    if (npc .eq. 1) then
-      shift (:,1,2) = shift (:,1,2) + nab
-    endif
+  if (bi .eq. 1) then
+    shift (:,1,:) = shift (:,1,:) + nab
+  else if (bi .eq. npb) then
+    shift (:,3,:) = shift (:,3,:) - nab
   endif
 
-  if (ci .eq. npc) then
-    shift(:,:,3) = - nab * npc
-    if (ai .eq. 1) then
-      shift(1,:,3) = shift(1,:,3) + npa
-    else if (ai .eq. npa) then
-      shift(3,3,3) = shift(3,3,3) - 3*npa
-    endif
-    if (bi .eq. 1) then
-      shift(:,1,1) = shift(:,1,1) - nab
-      shift(:,1,3) = shift(:,1,3) + nab
-      if (ai .eq. npa) then
-        shift(3,1,2) = shift(3,1,2) - npa
-        shift(3,1,3) = shift(3,1,3) - npa
-        shift(3,2,:) = shift(3,2,:) - npa
-        shift(3,3,:) = shift(3,3,:) + 2*npa
-        shift(3,3,1) = shift(3,3,1) - npa
-      endif
-    else if (bi .eq. npb) then
-      shift(:,3,3) = - 2*nab
-      shift(:,3,1) = shift(:,3,1) - nab
-      shift(:,3,2) = - nab * npc
-      if (ai .eq. 1) then
-        shift(1,3,1) = shift(1,3,1) - npa
-        shift(1,3,:) = shift(1,3,:) + npa
-      else if (ai .eq. npa) then
-        shift (3,:,:) = shift (3,:,:) - npa
-        shift (3,3,1) = shift (3,3,1) + 3*npa
-      endif
-      if (npc .eq. 1) then
-        shift (:,1,2) = shift (:,1,2) - nab + npa
-      endif
-    endif
-  else if (ci .eq. 1) then
-    shift(:,:,1) = nab * npc
-    if (ai .eq. 1) then
-      shift(1,:,1) =  shift(1,:,1) + npa
-    else if (ai .eq. npa) then
-      shift(3,:,1) =  shift(3,:,1) - npa
-    endif
-    if (bi .eq. 1) then
-      if (npc .gt. 1) then
-        shift(:,1,2) = shift(:,1,2) + 2*nab
-      else
-        shift(:,1,2) = shift(:,1,2) + nab
-      endif
-      shift(:,1,1) = shift(:,1,1) + nab
-      if (ai .eq. npa) then
-        shift(3,1,2) = shift(3,1,2) - npa
-        shift(3,3,2) = shift(3,3,2) + npa
-      endif
-    else if (bi .eq. npb) then
-      shift(:,3,3) = - 2*nab
-      shift(:,3,1) = shift(:,3,1) - nab
-      if (ai .eq. 1) then
-        shift(1,3,3) = shift(1,3,3) + npa
-      else if (ai .eq. npa) then
-        shift(3,:,3) = shift(3,:,3) - npa
-        shift(3,1,3) = 0
-      endif
-      if (npc .eq. 1) then
-        shift(:,3,2) = shift(:,3,2) - nab
-      endif
-    endif
+  if (ci .eq. 1) then
+    shift (:,:,1) = shift (:,:,1) + abc
+  else if (ci .eq. npc) then
+    shift (:,:,3) = shift (:,:,3) - abc
   endif
 
 END SUBROUTINE
@@ -162,6 +128,7 @@ INTEGER :: PIA, PIB, PIC, PID
 INTEGER :: TPIXD, ADAPT_CUT
 DOUBLE PRECISION :: ICUT, INID
 DOUBLE PRECISION :: MPSIZE
+DOUBLE PRECISION :: NEW_MPSIZE
 DOUBLE PRECISION :: TARGETDP
 DOUBLE PRECISION :: RHONUM
 
@@ -227,17 +194,14 @@ if (PBC) then
   do PIA=1, 3
     RHONUM=RHONUM/(THE_BOX(1)%modv(PIA))
   enddo
-  if (RHONUM .lt. 0.01) ADAPT_CUT=1
+  if (RHONUM.lt.0.01) ADAPT_CUT=1
 endif
-
-! write (6, *) "ICUT= ",ICUT,", NP= ",NP,", NPS= ",NPS
 
 do TPIXD=1, ADAPT_CUT
 
 ! MPSIZE is the modifier
   CUTF=ICUT*MPSIZE
   CUTF=1.0d0/CUTF
-  ! write (6, *) "TPIXD= ",TPIXD,", MPSIZE= ",MPSIZE,", CUTF= ",CUTF
   do PIA=1, 3
     isize(PIA) = INT(abs(pmax(PIA))*CUTF)
     if (PBC) then
@@ -264,16 +228,109 @@ do TPIXD=1, ADAPT_CUT
     PIA = isize(1)*isize(2)*isize(3)
     INID = NP
     INID = INID/PIA
-    MPSIZE = (TARGETDP/INID)**(1.0/3.0)
+    NEW_MPSIZE = (TARGETDP/INID)**(1.0/3.0)
+    if (NEW_MPSIZE .gt. MPSIZE) then
+      ! Adpatation only if the cutoff increases
+      ! Otherwise we add more pixels
+      MPSIZE = NEW_MPSIZE
+    endif
   endif
 enddo
 
 #ifdef DEBUG
-    write (6, '("NBX= ",i10)') GETNBX
-    write (6, '("isize:: x= ",I4,", y= ",I4,", z= ",I4)') isize(1), isize(2), isize(3)
+  write (6, '("NBX= ",i10)') GETNBX
+  write (6, '("isize:: x= ",I4,", y= ",I4,", z= ",I4)') isize(1), isize(2), isize(3)
 #endif
 
 END FUNCTION
+
+SUBROUTINE PRINT_PIXEL_GRID ()
+
+USE PARAMETERS
+
+IMPLICIT NONE
+
+INTEGER :: pix, pid, cid, did, eid, ai, bi, ci
+INTEGER :: init_a, end_a
+INTEGER :: init_b, end_b
+INTEGER :: init_c, end_c
+INTEGER, DIMENSION(3) :: dim
+INTEGER, DIMENSION(3,3,3) :: shift
+LOGICAL :: dclo
+
+dim(1) = -1
+dim(2) = 0
+dim(3) = 1
+call pix_info (isize(1), isize(2), isize(3))
+
+allocate(THEPIX(abc))
+
+pix=1
+
+do ci=1, isize(3)
+  do bi=1, isize(2)
+    do ai=1, isize(1)
+      shift(:,:,:) = 0
+      if (PBC .and. .not.CALC_PRINGS) then
+        call SET_SHIFT (shift, ai, bi, ci, isize(1), isize(2), isize(3))
+        dclo=.false.
+      else
+        if (ai.eq.1 .or. ai.eq.isize(1)) dclo=.true.
+        if (bi.eq.1 .or. bi.eq.isize(2)) dclo=.true.
+        if (ci.eq.1 .or. ci.eq.isize(3)) dclo=.true.
+      endif
+      init_a = 1
+      end_a = 3
+      if (isize(1) .eq. 1) then
+        init_a = 2
+        end_a = 2
+      endif
+      init_b = 1
+      end_b = 3
+      if (isize(2) .eq. 1) then
+        init_b = 2
+        end_b = 2
+      endif
+      init_c = 1
+      end_c = 3
+      if (isize(3) .eq. 1) then
+        init_c = 2
+         end_c = 2
+       endif
+      pid = 0
+      do cid=init_a, end_a
+        do did=init_b, end_b
+          do eid=init_c, end_c
+            pid = pid + 1
+            THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + dim(eid) * isize(1) * isize(2)
+            THEPIX(pix)%IDNEIGH(pid) = THEPIX(pix)%IDNEIGH(pid) + shift (cid,did,eid)
+            if (dclo) then
+              if (ai.eq.1 .and. cid.eq.1) then
+                pid = pid - 1
+              else if (ai.eq.isize(1) .and. cid.eq.3) then
+                pid = pid - 1
+              else if (bi.eq.1 .and. did.eq.1) then
+                pid = pid - 1
+              else if (bi.eq.isize(2) .and. did.eq.3) then
+                pid = pid - 1
+              else if (ci.eq.1 .and. eid.eq.1) then
+                pid = pid - 1
+              else if (ci.eq.isize(3) .and. eid.eq.3) then
+                pid = pid - 1
+              endif
+            endif
+          enddo
+        enddo
+      enddo
+      THEPIX(pix)%NEIGHBOR = pid
+      call send_pix_info (pix-1, THEPIX(pix)%IDNEIGH, pid)
+      ! call PRINT_THIS_PIXEL (abc, THEPIX, THEPIX(pix), pix, .false.)
+      pix = pix + 1
+    enddo
+  enddo
+enddo
+
+END SUBROUTINE
 
 LOGICAL FUNCTION DISTMTX(NAN, LAN, LOOKNGB, UPNGB)
 
@@ -316,7 +373,7 @@ INTEGER :: pid, cid, did, eid, fid, ai, bi, ci
 INTEGER :: init_a, end_a
 INTEGER :: init_b, end_b
 INTEGER :: init_c, end_c
-INTEGER, DIMENSION(3) :: dim
+INTEGER, DIMENSION(3) :: dim = (/-1, 0, 1/)
 INTEGER, DIMENSION(3,3,3) :: shift
 #ifdef OPENMP
 INTEGER :: NUMTH
@@ -434,6 +491,14 @@ endif
 
 if (ALL_ATOMS) DOATOMS=.true.
 
+TOOM=.false.
+
+#ifdef DEBUG
+#ifdef DEBUG_PIXELS
+  call PRINT_PIXEL_GRID ()
+#endif
+#endif
+
 if (DOATOMS) then
 ! OpemMP on Atoms
   if (NAN.lt.NUMTH) NUMTH=NAN
@@ -465,12 +530,12 @@ if (DOATOMS) then
     !$OMP& RC, RD, RF, RG, RH, RI, RJ, RK, RL, RM, pixpos, XYZ, &
     !$OMP& RN, RO, RP, RQ, RS, RT, RU, RV, RW, RX, RY, RZ, ERR, ai, bi, ci, &
     !$OMP& IS_CLONE, CALCMAT, Dij, Rij, Dik, BA, BB, CA, CB, XC, YC, ZC, &
-    !$OMP& pid, cid, did, eid, fid, init_a, end_a, init_b, end_b, init_c, end_c, dim, dclo) &
+    !$OMP& pid, cid, did, eid, fid, init_a, end_a, init_b, end_b, init_c, end_c, dclo) &
     !$OMP& SHARED(NUMTH, SAT, NS, NA, NNA, NAN, LAN, NSP, LOOKNGB, UPNGB, DISTMTX, &
     !$OMP& NBX, PBC, THE_BOX, NCELLS, isize, pmin, pmax, abc, ab, A_START, A_END, NOHP, MAXN, CUTF, &
     !$OMP& POA, FULLPOS, Gr_TMP, CALC_PRINGS, MAXBD, MINBD, CONTJ, VOISJ, RA, RB, &
     !$OMP& LA_COUNT, CORTA, CORNERA, EDGETA, EDGEA, DEFTA, DEFA, &
-    !$OMP& ALC, ALC_TAB, TOOM, TOOI, PIXR, POUT)
+    !$OMP& ALC, ALC_TAB, TOOM, TOOI, PIXR, POUT, dim)
     THREAD_NUM = OMP_GET_THREAD_NUM ()
     ATOM_START = GET_THREAD_START (NNA, NUMTH, THREAD_NUM)
     ATOM_END = GET_THREAD_END (NNA, NUMTH, THREAD_NUM)
@@ -560,9 +625,6 @@ if (DOATOMS) then
       else
         if ((PBC .and. RC.ge.A_START .and. RC.le.A_END) .or. .not.PBC) then
           if (.not.THEPIX(pix)%TOCHECK) then
-            dim(1) = -1
-            dim(2) = 0
-            dim(3) = 1
             ai = pixpos(1) + 1
             bi = pixpos(2) + 1
             ci = pixpos(3) + 1
@@ -570,10 +632,6 @@ if (DOATOMS) then
             shift(:,:,:) = 0
             if (PBC .and. .not.CALC_PRINGS) then
               call SET_SHIFT (shift, ai, bi, ci, isize(1), isize(2), isize(3))
-               if (pix .eq. 14 .and. THREAD_NUM.eq.6) then
-                 write (6, *) "ai= ",ai,", bi= ",bi,", ci= ",ci
-                 write (6, *) shift
-              endif
               dclo=.false.
             else
               if (ai.eq.1 .or. ai.eq.isize(1)) dclo=.true.
@@ -604,15 +662,9 @@ if (DOATOMS) then
             do cid=init_a, end_a
               do did=init_b, end_b
                  do eid=init_c, end_c
-                   pid = pid+1
-                   fid = dim(eid) * isize(1) * isize(2)
-                   if (pix .eq. 14 .and. THREAD_NUM.eq.6) then
-                     write (6, *) "cid= ",cid,", did= ",did,", eid= ",eid,", fid= ",fid
-                     write (6, *) "dim(cid)= ",dim(cid),", dim(did)*isize(1)= ",dim(did) * isize(1), &
-                     ", shift(cid,did,eid)= ",shift (cid,did,eid)
-                     write (6, *) "Total= ", pix + dim(cid) + dim(did) * isize(1) + fid + shift (cid,did,eid)
-                   endif
-                   THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + fid + shift (cid,did,eid)
+                   pid = pid + 1
+                   THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + dim(eid) * isize(1) * isize(2)
+                   THEPIX(pix)%IDNEIGH(pid) = THEPIX(pix)%IDNEIGH(pid) + shift (cid,did,eid)
                    if (dclo) then
                      if (ai.eq.1 .and. cid.eq.1) then
                        pid = pid - 1
@@ -631,23 +683,6 @@ if (DOATOMS) then
                 enddo
               enddo
             enddo
-            ! Check for neighbor twice present in list (small cell issue)
-            !if  (isize(1).eq.1 .or. isize(2).eq.1 .or. isize(3).eq.1) then
-            !  do while ()
-            !    eid=pid
-            !    do cid=1, eid-1
-            !      do did=cid+1, eid
-            !        if (THEPIX(pix)%IDNEIGH(cid) .eq. THEPIX(pix)%IDNEIGH(did)) then
-           !           do fid=did, eid-1
-            !            THEPIX(pix)%IDNEIGH(fid) = THEPIX(pix)%IDNEIGH(fid+1)
-            !            pid = pid-1
-            !            goto 000
-            !          enddo
-            !        endif
-            !      enddo
-             !   enddo
-            !  enddo
-            !endif
             THEPIX(pix)%NEIGHBOR = pid
           endif
           THEPIX(pix)%TOCHECK=.true.
@@ -666,11 +701,9 @@ if (DOATOMS) then
       do RH=1, THEPIX(RD)%NEIGHBOR
         RI = THEPIX(RD)%IDNEIGH(RH)
         RJ = THEPIX(RI)%ATOMS
-        if (RC .eq. 64) write (6, *) "64, Pixel_RI= ",RD
         do RK=1, RJ
           RL = THEPIX(RI)%ATOM_ID(RK)
           if (RL .ne. RC) then
-            if (RC .eq. 64) write (6, *) "64, RL= ",RL
             if ((RC.ge.A_START .and. RC.le.A_END) .or. (RL.ge.A_START .and. RL.le.A_END)) then
               RM = RL - (RL/NAN)*NAN
               if (RM .eq. 0) RM=NAN
@@ -723,9 +756,6 @@ if (DOATOMS) then
                     else
                       RP = RF
                       RQ = RM
-                    endif
-                    if (RP .eq. 64) then
-                      write (6, *) "THREAD_NUM= ",THREAD_NUM,"N(64) = ",RQ,", IS_CLONE= ",IS_CLONE
                     endif
                     CONTJ(RP,SAT)=CONTJ(RP,SAT)+1
                     if (CONTJ(RP,SAT) .gt. MAXN) then
@@ -934,12 +964,12 @@ else
   !$OMP& RA, RB, RC, RD, RF, RG, RH, RI, RJ, RK, RL, RM, &
   !$OMP& RN, RO, RP, RQ, RS, RT, RU, RV, RW, RX, RY, RZ, ERR, &
   !$OMP& IS_CLONE, CALCMAT, Dij, Rij, Dik, BA, BB, CA, CB, XC, YC, ZC, POA, &
-  !$OMP& pid, cid, did, eid, fid, init_a, end_a, init_b, end_b, init_c, end_c, dim, dclo) &
+  !$OMP& pid, cid, did, eid, fid, init_a, end_a, init_b, end_b, init_c, end_c, dclo) &
   !$OMP& SHARED(NUMTH, NS, NA, NNA, NAN, LAN, NSP, LOOKNGB, UPNGB, DISTMTX, &
   !$OMP& NBX, PBC, THE_BOX, NCELLS, isize, pmin, pmax, abc, ab, A_START, A_END, NOHP, MAXN, CUTF, &
   !$OMP& FULLPOS, CONTJ, VOISJ, Gr_TMP, CALC_PRINGS, MAXBD, MINBD, &
   !$OMP& LA_COUNT, CORTA, CORNERA, EDGETA, EDGEA, DEFTA, DEFA, &
-  !$OMP& ALC, ALC_TAB, TOOM, TOOI, PIXR, POUT)
+  !$OMP& ALC, ALC_TAB, TOOM, TOOI, PIXR, POUT, dim)
 #endif
 
   if (allocated(THEPIX)) deallocate(THEPIX)
