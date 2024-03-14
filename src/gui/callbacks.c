@@ -1412,7 +1412,7 @@ int pactive;
   \brief open coordinate file format, if successful add to workspace
 
   \param format the format of the file that contains the atomic coordinates
-  \param the project name to use, if any
+  \param proj_name the project name to use, if any
 */
 void open_this_coordinate_file (int format, gchar * proj_name)
 {
