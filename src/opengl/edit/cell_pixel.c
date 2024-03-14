@@ -203,7 +203,7 @@ void update_pix_table (project * this_proj)
   pix[1] *= (this_proj -> pix[0]*this_proj -> pix[1]);
 
   // Seed for top grid
-  if (this_proj -> actif_pix >= this_proj -> pix[0]*this_proj -> pix[1]*(this_proj -> pix[2]-1))
+  if (this_proj -> actif_pix > this_proj -> pix[0]*this_proj -> pix[1]*(this_proj -> pix[2]-1))
   {
     pix[2] = 0;
   }
