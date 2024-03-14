@@ -1554,6 +1554,11 @@ G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpoi
           to_read_pos ();
         }
         int length = strlen (active_project -> coordfile);
+        for (l=1; l<active_project -> nspec+1; l++)
+        {
+          m = strlen(active_chem -> label[l-1]);
+          send_label_ (& l, & m, active_chem -> label[l-1]);
+        }
         switch (j)
         {
           case 0:

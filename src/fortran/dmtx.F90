@@ -494,9 +494,7 @@ if (ALL_ATOMS) DOATOMS=.true.
 TOOM=.false.
 
 #ifdef DEBUG
-#ifdef DEBUG_PIXELS
   call PRINT_PIXEL_GRID ()
-#endif
 #endif
 
 if (DOATOMS) then

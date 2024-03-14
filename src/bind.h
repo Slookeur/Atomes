@@ -31,6 +31,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #ifndef BIND_H_
 #define BIND_H_
 
+extern void send_label_ (int *,
+                         int *,
+                         char *);
+
 extern int write_xyz_ (char *,
                        int *,
                        int *,
@@ -62,11 +66,6 @@ extern int read_vas_ (char *,
                       int *,
                       int *,
                       int *);
-
-extern int getnspec_ (int *);
-
-extern void getlabel_ (int *,
-                       char *);
 
 extern double fdmax_ (int *);
 extern double fkmin_ (int *);
@@ -158,10 +157,6 @@ extern int molecules_ (int *,
 extern int bond_angles_ (int *);
 extern int bond_diedrals_ (int *);
 extern int dihedrals_for_mol_ ();
-
-extern void label_spec_ (int *,
-                         int *,
-                         int *);
 
 extern int initrings_ (int *,
                        int *,

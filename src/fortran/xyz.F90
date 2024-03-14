@@ -116,6 +116,22 @@ endif
 
 END FUNCTION
 
+SUBROUTINE send_label (sp_id, sp_ln, spec_label) BIND (C,NAME='send_label_')
+
+USE PARAMETERS
+
+IMPLICIT NONE
+
+INTEGER (KIND=c_int), INTENT(IN) :: sp_id, sp_ln
+CHARACTER (KIND=c_char), DIMENSION(sp_ln), INTENT(IN) :: spec_label
+
+TL(sp_id)="  "
+do i=1, sp_ln
+  TL(sp_id)(i:i) = spec_label(i)
+enddo
+
+END SUBROUTINE
+
 INTEGER (KIND=c_int) FUNCTION write_xyz (xyz_f, lxyz, fxyz, txyz) BIND (C,NAME='write_xyz_')
 
 !

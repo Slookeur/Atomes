@@ -44,7 +44,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 */
 
-#ifdef DEBUG_PIXELS
+#ifdef DEBUG
 
 #include "cell_edit.h"
 
@@ -254,22 +254,20 @@ G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
 */
 GtkWidget * pixels_tab (project * this_proj)
 {
-  GtkWidget * layout = create_layout (700, 750);
-  GtkWidget * vbox = add_vbox_to_layout (layout, -1, -1);
+  GtkWidget * vbox = create_vbox (BSEP);
   GtkWidget * hbox = create_hbox (0);
-  add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, FALSE, FALSE, 5);
   gchar * str = g_strdup_printf ("\tSelect pixel to check, from 1 to %d:", this_proj -> pix[0]*this_proj -> pix[1]*this_proj->pix[2]);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, markup_label(str, -1, -1, 0.0, 0.5), FALSE, FALSE, 10);
   g_free (str);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, create_entry(G_CALLBACK(set_pix), 100, 15, FALSE, GINT_TO_POINTER(this_proj -> id)), FALSE, FALSE, 10);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, FALSE, FALSE, 5);
+  GtkWidget * scroll = create_scroll (vbox, 700, 350, GTK_SHADOW_ETCHED_IN);
   this_proj -> actif_pix = 1;
-  GtkWidget * scroll = create_scroll (vbox, 700, 750, GTK_SHADOW_ETCHED_IN);
   this_proj -> pix_box = create_vbox (0);
-  // add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, this_proj -> pix_box, FALSE, FALSE, 5);
-  add_container_child (CONTAINER_SCR, scroll, this_proj -> pix_box);
   this_proj -> pix_tab[0] = this_proj -> pix_tab[1] = this_proj -> pix_tab[2] = NULL;
   update_pix_table (this_proj);
-  return layout;
+  add_container_child (CONTAINER_SCR, scroll, this_proj -> pix_box);
+  return vbox;
 }
 
-#endif // DEBUG_PIXELS
+#endif // DEBUG

@@ -65,7 +65,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 extern void save_rotation_quaternion (glwin * view);
 extern void rotate_x_y (glwin * view, double angle_x, double angle_y);
-extern G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data);
 #ifdef GTK4
 extern G_MODULE_EXPORT void set_full_screen (GSimpleAction * action, GVariant * parameter, gpointer data);
 #else

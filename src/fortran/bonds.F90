@@ -679,18 +679,25 @@ do i=1, NS
     enddo
   enddo
 enddo
-oglmax=0.0d0
-do l=1,3
-  oglmax = oglmax + (pmax(l)-pmin(l))**2
-enddo
-oglmax = 2.0*sqrt(oglmax)
 
-dmax = 0.0d0
-do l=1, NCELLS
-  dmax = max(dmax, THE_BOX(l)%maxv)
+allocate (NFULLPOS(2,3,1))
+do l=1, 3
+  NFULLPOS(1,l,1) = pmin(l)
+  NFULLPOS(2,l,1) = pmax(l)
 enddo
+call CALCRIJ (1, 2, -2, 1, 1)
+deallocate (NFULLPOS)
 
-if (oglmax < dmax) oglmax = dmax*2.0;
+if (PBC) then
+  oglmax = sqrt(Dij)
+  dmax = 0.0d0
+  do l=1, NCELLS
+    dmax = max(dmax, THE_BOX(l)%maxv)
+  enddo
+  if (oglmax < dmax) oglmax = dmax*3.0;
+else
+  oglmax=2.0*sqrt(Dij)
+endif
 
 if (oglmax .lt. 10.0) oglmax = 10.0
 

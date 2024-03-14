@@ -145,10 +145,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   GMenuItem * create_menu_item (gboolean add_mnemo, gchar * name, gchar * action);
 
-  GMenuItem * create_menu_item (gboolean add_mnemo, gchar * name, gchar * action);
-
-  GListModel * file_chooser_get_file_names (GtkFileChooser * chooser);
-
   GListModel * file_chooser_get_file_names (GtkFileChooser * chooser);
 
   ColRGBA * duplicate_color (int num, ColRGBA * col);
