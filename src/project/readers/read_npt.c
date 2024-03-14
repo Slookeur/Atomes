@@ -51,10 +51,12 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 FILE * cellp;
 
-typedef struct {
+typedef struct cell_file cell_file;
+struct cell_file
+{
   cell_info lattice;
   gchar * info;
-} cell_file;
+};
 
 cell_file * this_cell;
 

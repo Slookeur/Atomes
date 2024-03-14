@@ -67,8 +67,8 @@ coord_file * this_reader;
 gchar ** coord_line = NULL;
 gchar * this_line = NULL;
 char * this_word;
-struct line_node * head = NULL;
-struct line_node * tail = NULL;
+line_node * head = NULL;
+line_node * tail = NULL;
 
 /*!
   \fn void add_reader_info (gchar * info, int mid)

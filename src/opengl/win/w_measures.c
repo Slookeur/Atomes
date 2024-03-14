@@ -113,7 +113,7 @@ void fill_bond_model_row (int p, int a, int b, GtkTreeStore * store)
   project * this_proj = get_project_by_id(p);
   atom * at, * bt;
   gboolean pbc = this_proj -> cell.pbc;
-  struct distance dist;
+  distance dist;
   int s = this_proj -> modelgl -> anim -> last -> img -> step;
   at = & this_proj -> atoms[s][a];
   bt = & this_proj -> atoms[s][b];
@@ -162,7 +162,7 @@ void fill_angle_model_row (int p, int a, int b, int c, GtkTreeStore * store)
   project * this_proj = get_project_by_id(p);
   atom * at, * bt, * ct;
   gboolean pbc = this_proj -> cell.pbc;
-  struct angle theta;
+  angle theta;
   int s = this_proj -> modelgl -> anim -> last -> img -> step;
   at = & this_proj -> atoms[s][a];
   bt = & this_proj -> atoms[s][b];
@@ -217,7 +217,7 @@ void fill_dihedral_model_row (int p, int a, int b, int c, int d, GtkTreeStore * 
   project * this_proj = get_project_by_id(p);
   atom * at, * bt, * ct, * dt;
   gboolean pbc = this_proj -> cell.pbc;
-  struct angle phi;
+  angle phi;
   int s = this_proj -> modelgl -> anim -> last -> img -> step;
   at = & this_proj -> atoms[s][a];
   bt = & this_proj -> atoms[s][b];

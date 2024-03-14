@@ -61,7 +61,7 @@ int hist_get_data (int linec)
 #ifdef OPENMP
   this_line = g_strdup_printf ("%s", coord_line[1]);
 #else
-  struct line_node * tmp_line;
+  line_node * tmp_line;
   tail = head;
   tmp_line = tail;
   tail = tail -> next;
@@ -296,7 +296,7 @@ int hist_get_content ()
     }
   }
 #else
-  struct line_node * tmp_line;
+  line_node * tmp_line;
   tmp_line = tail;
   tail = tail -> next;
   g_free (tmp_line);

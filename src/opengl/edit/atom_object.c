@@ -139,7 +139,7 @@ void correct_pos_and_get_dim (atomic_object * object, gboolean adjust)
 gboolean rebuild_atom_neighbors (project * this_proj, int step, atomic_object * object, int target, int aid, atom * at, gboolean * checked_at)
 {
   int i, j;
-  struct distance dist;
+  distance dist;
   for (i=0; i<at -> numv; i++)
   {
     j = at -> vois[i];

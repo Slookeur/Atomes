@@ -3725,7 +3725,7 @@ void popup_selection (glwin * view, double ptx, double pty, int spe, int mmod, i
     btoid.a = opengl_project -> atoms[s][bti].coord[0];
     btoid.b = opengl_project -> atoms[s][bti].coord[1];
     selected_bspec = opengl_project -> atoms[s][bti].sp;
-    struct distance dist = distance_3d (& opengl_project -> cell, (opengl_project -> cell.npt) ? s : 0, & opengl_project -> atoms[s][ati], & opengl_project -> atoms[s][bti]);
+    distance dist = distance_3d (& opengl_project -> cell, (opengl_project -> cell.npt) ? s : 0, & opengl_project -> atoms[s][ati], & opengl_project -> atoms[s][bti]);
     if (aoc == 0)
     {
       str = g_strdup_printf ("%s<sub>%d</sub> - %s<sub>%d</sub>",

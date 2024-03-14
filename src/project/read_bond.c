@@ -52,7 +52,7 @@ extern void new_coord_menus (project * this_proj, coord_info * coord, int new_sp
 int read_bonding (FILE * fp)
 {
   int i, j, k, l, m;
-  struct distance clo;
+  distance clo;
   coord_info * coord = g_malloc0 (sizeof*coord);
   coord -> species = active_project -> nspec;
   image * img = active_glwin -> anim -> last -> img;

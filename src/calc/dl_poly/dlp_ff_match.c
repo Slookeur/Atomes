@@ -63,7 +63,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   GtkTreeModel * global_render_tree ();
 
-  struct field_data * get_ff_data (int i, int j);
+  field_data * get_ff_data (int i, int j);
   field_object_match * duplicate_match (field_object_match * old_m);
 
   dint get_visible (gboolean result, gchar * the_name);
@@ -92,7 +92,7 @@ extern GtkWidget * p_box;
 extern GtkWidget * param_box;
 field_object_match * up_match[9];
 field_object_match * tmp_match, * other_match;
-struct field_data * ff_data;
+field_data * ff_data;
 
 extern GtkWidget * param_prop_param_box (int pid);
 extern gchar * get_this_vdw_string ();
@@ -208,14 +208,14 @@ gboolean is_this_object_a_match (int fsid, int nat, int * ffc, int * fpar)
 }
 
 /*!
-  \fn struct field_data * get_ff_data (int i, int j)
+  \fn field_data * get_ff_data (int i, int j)
 
   \brief retrieve field property from database
 
   \param i the type of field property
   \param j the id of the force field database, if any
 */
-struct field_data * get_ff_data (int i, int j)
+field_data * get_ff_data (int i, int j)
 {
   switch (i/2)
   {

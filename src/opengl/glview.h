@@ -316,11 +316,11 @@ void init_camera (project * this_proj, gboolean get_depth);
 
 extern void debug_image (image img, int i);
 
-extern struct distance distance_2d (atom * at, atom * bt);
-extern struct distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt);
-extern struct angle angle_2d (atom * at, atom * bt, atom * ct);
-extern struct angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct);
-extern struct angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
+extern distance distance_2d (atom * at, atom * bt);
+extern distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt);
+extern angle angle_2d (atom * at, atom * bt, atom * ct);
+extern angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct);
+extern angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
 
 extern atom * duplicate_atom (atom * at);
 extern void at_shift (atom * at, float * shift);

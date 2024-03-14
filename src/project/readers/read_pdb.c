@@ -71,19 +71,21 @@ double get_z_from_pdb_name (char * name)
 int pdb_get_atoms_data (int linec)
 {
   int h, i, j, k, l;
-  struct pdb_atom {
+  typedef struct pdb_atom pdb_atom;
+  struct pdb_atom
+  {
     int id;
     int sp;
     double nz;
     double x, y, z;
-    struct pdb_atom * prev;
-    struct pdb_atom * next;
+    pdb_atom * prev;
+    pdb_atom * next;
   };
 #ifdef OPENMP
   int res;
   int numth = omp_get_max_threads ();
-  struct pdb_atom ** first_at = g_malloc0(numth*sizeof*first_at);
-  struct pdb_atom * other_at = NULL;
+  pdb_atom ** first_at = g_malloc0(numth*sizeof*first_at);
+  pdb_atom * other_at = NULL;
   gchar * saved_line;
   gboolean add_spec;
   h = 0;

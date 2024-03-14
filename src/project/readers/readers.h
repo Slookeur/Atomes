@@ -46,8 +46,8 @@ extern gchar * this_line;
 extern char * this_word;
 extern gchar ** coord_line;
 
-extern struct line_node * head;
-extern struct line_node * tail;
+extern line_node * head;
+extern line_node * tail;
 
 extern void add_reader_info (gchar * info, int mid);
 extern void reader_info (gchar * type, gchar * sinf, int val);

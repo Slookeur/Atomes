@@ -32,12 +32,12 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   double arc_cos (double val);
 
-  struct distance distance_2d (atom * at, atom * bt);
-  struct distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt);
-  struct angle angle_2d (atom * at, atom * bt, atom * ct);
-  struct angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct);
-  struct angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
-  struct angle inversion_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
+  distance distance_2d (atom * at, atom * bt);
+  distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt);
+  angle angle_2d (atom * at, atom * bt, atom * ct);
+  angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct);
+  angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
+  angle inversion_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
 
 */
 
@@ -50,16 +50,16 @@ extern gboolean field_color;
 extern ColRGBA init_color (int id, int numid);
 
 /*!
-  \fn struct distance distance_2d (atom * at, atom * bt)
+  \fn distance distance_2d (atom * at, atom * bt)
 
   \brief distance between atom a and b in 2D
 
   \param at atom a
   \param bt atom b
 */
-struct distance distance_2d (atom * at, atom * bt)
+distance distance_2d (atom * at, atom * bt)
 {
-  struct distance dist;
+  distance dist;
   dist.pbc = FALSE;
   dist.x = at -> x - bt -> x;
   dist.y = at -> y - bt -> y;
@@ -69,7 +69,7 @@ struct distance distance_2d (atom * at, atom * bt)
 }
 
 /*!
-  \fn struct distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt)
+  \fn distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt)
 
   \brief distance between atom a and b in 3D
 
@@ -78,9 +78,9 @@ struct distance distance_2d (atom * at, atom * bt)
   \param at atom a
   \param bt atom b
 */
-struct distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt)
+distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt)
 {
-  struct distance dist;
+  distance dist;
   double tmp;
   vec3_t dij;
   dist.pbc = FALSE;
@@ -145,7 +145,7 @@ double arc_cos (double val)
 }
 
 /*!
-  \fn struct angle angle_2d (atom * at, atom * bt, atom * ct)
+  \fn angle angle_2d (atom * at, atom * bt, atom * ct)
 
   \brief angle between atom a, b and c in 2D
 
@@ -153,11 +153,11 @@ double arc_cos (double val)
   \param bt atom b
   \param ct atom c
 */
-struct angle angle_2d (atom * at, atom * bt, atom * ct)
+angle angle_2d (atom * at, atom * bt, atom * ct)
 {
-  struct angle theta;
-  struct distance dist_a = distance_2d (bt, at);
-  struct distance dist_b = distance_2d (bt, ct);
+  angle theta;
+  distance dist_a = distance_2d (bt, at);
+  distance dist_b = distance_2d (bt, ct);
   theta.pbc = FALSE;
   double v = 0.0;
   v = dist_a.x*dist_b.x + dist_a.y*dist_b.y;
@@ -166,7 +166,7 @@ struct angle angle_2d (atom * at, atom * bt, atom * ct)
 }
 
 /*!
-  \fn struct angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct)
+  \fn angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct)
 
   \brief angle between atom a, b and c in 3D
 
@@ -176,11 +176,11 @@ struct angle angle_2d (atom * at, atom * bt, atom * ct)
   \param bt atom b
   \param ct atom c
 */
-struct angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct)
+angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct)
 {
-  struct angle theta;
-  struct distance dist_a = distance_3d (cell, mdstep, bt, at);
-  struct distance dist_b = distance_3d (cell, mdstep, bt, ct);
+  angle theta;
+  distance dist_a = distance_3d (cell, mdstep, bt, at);
+  distance dist_b = distance_3d (cell, mdstep, bt, ct);
   theta.pbc = FALSE;
   if (dist_a.pbc || dist_b.pbc) theta.pbc = TRUE;
   double v = 0.0;
@@ -190,7 +190,7 @@ struct angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom 
 }
 
 /*!
-  \fn struct angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt)
+  \fn angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt)
 
   \brief dihedral between atom a, b, c and d in 3D
 
@@ -201,12 +201,12 @@ struct angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom 
   \param ct atom c
   \param dt atom d
 */
-struct angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt)
+angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt)
 {
-  struct angle phi;
-  struct distance dist_a = distance_3d (cell, mdstep, at, bt);
-  struct distance dist_b = distance_3d (cell, mdstep, bt, ct);
-  struct distance dist_c = distance_3d (cell, mdstep, ct, dt);
+  angle phi;
+  distance dist_a = distance_3d (cell, mdstep, at, bt);
+  distance dist_b = distance_3d (cell, mdstep, bt, ct);
+  distance dist_c = distance_3d (cell, mdstep, ct, dt);
   vec3_t u, v;
 
   if (dist_a.pbc || dist_b.pbc || dist_c.pbc) phi.pbc = TRUE;
@@ -226,7 +226,7 @@ struct angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, at
 }
 
 /*!
-  \fn struct angle inversion_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt)
+  \fn angle inversion_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt)
 
   \brief inversion angle between atom a, b, c and d in 3D
 
@@ -237,12 +237,12 @@ struct angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, at
   \param ct atom c
   \param dt atom d
 */
-struct angle inversion_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt)
+angle inversion_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt)
 {
-  struct angle inv;
-  struct distance dist_a = distance_3d (cell, mdstep, bt, at);
-  struct distance dist_b = distance_3d (cell, mdstep, ct, at);
-  struct distance dist_c = distance_3d (cell, mdstep, at, dt);
+  angle inv;
+  distance dist_a = distance_3d (cell, mdstep, bt, at);
+  distance dist_b = distance_3d (cell, mdstep, ct, at);
+  distance dist_c = distance_3d (cell, mdstep, at, dt);
   vec3_t u, v, w, x;
 
   if (dist_a.pbc || dist_b.pbc || dist_c.pbc) inv.pbc = TRUE;

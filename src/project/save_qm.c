@@ -40,69 +40,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "global.h"
 #include "project.h"
 
-/*
-thermostat {
-  int id;
-  // For CPMD: 0 = none, 2 = controlled, 3 = nose
-  // For CP2K: 0 = none, 2 = langevin, 3 = csvr, 4 = gle, 5 = nose
-  int type;
-  // For CPMD: 0 = global, 1 = local
-  // For CP2K: 0 = global, 1 = local, 2 = molecule
-  int sys;
-  gboolean show;
-  double params[4];
-  int natoms;
-  int * list;
-  thermostat * next;
-  thermostat * prev;
-};
-
-dummy_atom {
-  // 0 = type1, 1 = type2, ...
-  int id;
-  int type;
-  gboolean show;
-  double xyz[3];
-  int coord[4];
-  int natoms;
-  int * list;
-  dummy_atom * next;
-  dummy_atom * prev;
-};
-
-typedef struct {
-  int calc_type;
-  int restart[10];
-  int thermostats;
-  thermostat * ions_thermostat;
-  thermostat * elec_thermostat;
-  int fixat;
-  int * fixlist;
-  int ** fixcoord;
-  int dummies;
-  dummy_atom * dummy;
-  double default_opts[17];
-  double calc_opts[24];
-  int ** pp;
-  gchar * info;
-} cpmd;
-
-typedef struct {
-  int input_type;
-  double opts[42];
-  double extra_opts[3][4];
-  int thermostats;
-  thermostat * ions_thermostat;
-  int fixat[2];
-  int * fixlist[2];
-  int ** fixcoord[2];
-  gchar * files[5];
-  gchar *** spec_files;
-  int ** spec_data;
-  gchar * info;
-} cp2k;
-*/
-
 /*!
   \fn int save_thermo (FILE * fp, thermostat * thermo)
 

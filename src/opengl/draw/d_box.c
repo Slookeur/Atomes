@@ -684,7 +684,7 @@ void cuboid_slab (mat4_t rot)
   wingl -> cell_win -> slab_atoms = 0;
   float val, vbl;
   atom slab_center;
-  struct distance at_slab;
+  distance at_slab;
   slab_center.x = cat.x;
   slab_center.y = cat.y;
   slab_center.z = cat.z;
@@ -803,7 +803,7 @@ void cylinder_slab (mat4_t rot)
   wingl -> cell_win -> slab_atoms = 0;
   vec3_t atc, patc;
   atom slab_center;
-  struct distance at_slab;
+  distance at_slab;
   slab_center.x = cat.x;
   slab_center.y = cat.y;
   slab_center.z = cat.z;
@@ -868,7 +868,7 @@ void spherical_slab ()
   for (i=0; i<proj_gl -> nspec; i++) wingl -> cell_win -> slab_lot[i] = 0;
   wingl -> cell_win -> slab_atoms = 0;
   atom slab_center;
-  struct distance at_slab;
+  distance at_slab;
   slab_center.x = cat.x;
   slab_center.y = cat.y;
   slab_center.z = cat.z;

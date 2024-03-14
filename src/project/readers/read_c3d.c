@@ -238,7 +238,7 @@ int c3d_get_atom_coordinates ()
   g_free (coord_line);
   if (res == 2) return 2;
 #else
-  struct line_node * tmp_line;
+  line_node * tmp_line;
   tail = head;
   k = 0;
   for (i=0; i<active_project -> steps; i++)

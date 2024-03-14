@@ -170,7 +170,7 @@ int vas_get_atom_coordinates (int sli)
     }
   }
 #else
-  struct line_node * tmp_line;
+  line_node * tmp_line;
   tail = head;
   k = 0;
   for (i=0; i<sli; i++)

@@ -81,6 +81,7 @@ extern gchar * wnpos[3];
 extern void get_wyck_char (float val, int ax, int bx);
 extern space_group * duplicate_space_group (space_group * spg);
 extern int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
+extern distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt);
 extern void sort (int dim, int * tab);
 
 extern gchar * tmp_pos;
@@ -1767,6 +1768,7 @@ int open_cif_file (int linec)
     if (cif_use_symmetry_positions)
     {
       this_reader -> cartesian = TRUE;
+      compute_lattice_properties (active_cell);
       active_project -> steps = 1;
       double spgpos[3][4];
       int max_pos = this_reader -> num_sym_pos * this_reader -> natomes;
@@ -1775,6 +1777,10 @@ int open_cif_file (int linec)
       vec3_t f_pos, c_pos;
       vec3_t * all_pos = g_malloc0 (max_pos*sizeof*all_pos);
       mat4_t pos_mat;
+      atom at, bt;
+      distance dist;
+      gboolean dist_message = TRUE;
+      gboolean save_it;
       i = 0;
       for (j=0; j<this_reader -> num_sym_pos; j++)
       {
@@ -1805,7 +1811,31 @@ int open_cif_file (int linec)
           f_pos = vec3 (this_reader -> coord[k][0], this_reader -> coord[k][1], this_reader -> coord[k][2]);
           f_pos = m4_mul_coord (pos_mat, f_pos);
           c_pos = m4_mul_coord (this_reader -> lattice.box[0].frac_to_cart, f_pos);
-          if (pos_not_saved(all_pos, i, c_pos) > 0)
+          at.x = c_pos.x;
+          at.y = c_pos.y;
+          at.z = c_pos.z;
+          save_it = TRUE;
+          for (l=0; l<i; l++)
+          {
+            bt.x = all_pos[l].x;
+            bt.y = all_pos[l].y;
+            bt.z = all_pos[l].z;
+            dist = distance_3d (active_cell, 0, & at, & bt);
+            if (dist.length < 0.1)
+            {
+               if (dist_message)
+               {
+                 add_reader_info ("Atom(s) at equivalent positions have been removed\n"
+                                  "to ensure the consistency of the model\n"
+                                  "when using <b>P</b>eriodic <b>B</b>oundary <b>C</b>onditions\n ", 1);
+                 this_reader -> setting = ! this_reader -> setting;
+                 dist_message = FALSE;
+               }
+               save_it = FALSE;
+               break;
+            }
+          }
+          if (save_it)
           {
             all_pos[i].x = c_pos.x;
             all_pos[i].y = c_pos.y;

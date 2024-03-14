@@ -39,7 +39,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   int get_num_struct_to_print (field_molecule * fmol, int sid);
   int get_pbc ();
 
-  gboolean print_this_imp_inv (struct imp_inv * inv, int di, int a, int b, int c, int d);
+  gboolean print_this_imp_inv (imp_inv * inv, int di, int a, int b, int c, int d);
   gboolean member_of_atom (field_atom* fat, int id);
   gboolean print_ana ();
 
@@ -213,17 +213,19 @@ void print_all_field_struct (field_molecule * mol, int str)
 #endif
 }
 
-struct imp_inv{
+typedef struct imp_inv imp_inv;
+struct imp_inv
+{
   int a;
   int b;
   int c;
   int d;
-  struct imp_inv * next;
-  struct imp_inv * prev;
+  imp_inv * next;
+  imp_inv * prev;
 };
 
 /*!
-  \fn gboolean print_this_imp_inv (struct imp_inv * inv, int di, int a, int b, int c, int d)
+  \fn gboolean print_this_imp_inv (imp_inv * inv, int di, int a, int b, int c, int d)
 
   \brief print this improper / inversion structure or not (already printed) ?
 
@@ -234,7 +236,7 @@ struct imp_inv{
   \param c 3rd atom id
   \param d 4th atom id
 */
-gboolean print_this_imp_inv (struct imp_inv * inv, int di, int a, int b, int c, int d)
+gboolean print_this_imp_inv (imp_inv * inv, int di, int a, int b, int c, int d)
 {
   if (! inv) return TRUE;
   while (inv)
@@ -302,8 +304,8 @@ void print_dlp_improper_inversion (int di, GtkTextBuffer * buf, field_struct * d
   float w;
   GtkTreeIter di_level;
   int * ids = allocint(4);
-  struct imp_inv * first_imp_inv = NULL;
-  struct imp_inv * this_ii = NULL;
+  imp_inv * first_imp_inv = NULL;
+  imp_inv * this_ii = NULL;
 
   for (i=0; i<tmp_fat -> num; i++)
   {

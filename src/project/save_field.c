@@ -51,7 +51,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "dlp_field.h"
 
 /*
-typedef struct {
+typedef struct field field
+struct field
+{
   gboolean prepare_file[2];
   // Field and Config files
   gboolean afp[MAXDATC+MAXDATA];
@@ -80,8 +82,7 @@ typedef struct {
   double thermo_opts[10];
   double md_opts[20];
   double out_opts[31];
-
-} field;
+};
 
 */
 

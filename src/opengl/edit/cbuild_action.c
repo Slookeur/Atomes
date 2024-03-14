@@ -577,7 +577,9 @@ space_group * duplicate_space_group (space_group * spg)
   return new_spg;
 }
 
-typedef struct {
+typedef struct crystal_data crystal_data;
+struct  crystal_data
+{
   int objects;
   int spec;
   double * z;
@@ -595,7 +597,7 @@ typedef struct {
   vec3_t * insert;
   vec3_t ** coord;
   vec3_t ** position;
-} crystal_data;
+};
 
 /*!
   \fn crystal_data * allocate_crystal_data (int objects, int species)
@@ -1381,7 +1383,7 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
   cdata = free_crystal_data (cdata);
   gboolean low_occ = adjust_object_occupancy (cryst, occupying, tot_cell);
   atom at, bt;
-  struct distance dist;
+  distance dist;
   gboolean dist_chk = TRUE;
 
   if (! cryst -> overlapping)

@@ -68,7 +68,7 @@ int measures_drawing;
 
 atom_in_selection * tmp_a, * tmp_b, * tmp_c, * tmp_d;
 atom * ta, * tb, * tc, * td, * te, * tf;
-struct distance dist_ba, dist_bc;
+distance dist_ba, dist_bc;
 int * shift;
 double dist;
 
@@ -89,7 +89,7 @@ ColRGBA col_gdk;
 */
 void draw_angle_label (atom * at, atom * bt, atom * ct, int pi)
 {
-  struct angle real_theta = angle_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt, ct);
+  angle real_theta = angle_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt, ct);
   gchar * str;
   if (real_theta.pbc)
   {
@@ -437,7 +437,7 @@ void dihedrals_loop (glwin * view, int id, int pi, GtkTreeStore * store)
 */
 void draw_bond_label (atom * at, atom * bt, int pi)
 {
-  struct distance dist = distance_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt);
+  distance dist = distance_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt);
   vec3_t pos;
   if (dist.pbc)
   {

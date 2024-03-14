@@ -43,7 +43,7 @@ enddo
 write (6, *)
 
 END SUBROUTINE
-
+!3, 2, 3,   7, 1, 5
 SUBROUTINE SET_SHIFT (shift, ai, bi, ci, npa, npb, npc)
 
   IMPLICIT NONE
@@ -570,6 +570,10 @@ if (DOATOMS) then
             shift(:,:,:) = 0
             if (PBC .and. .not.CALC_PRINGS) then
               call SET_SHIFT (shift, ai, bi, ci, isize(1), isize(2), isize(3))
+               if (pix .eq. 14 .and. THREAD_NUM.eq.6) then
+                 write (6, *) "ai= ",ai,", bi= ",bi,", ci= ",ci
+                 write (6, *) shift
+              endif
               dclo=.false.
             else
               if (ai.eq.1 .or. ai.eq.isize(1)) dclo=.true.
@@ -602,6 +606,12 @@ if (DOATOMS) then
                  do eid=init_c, end_c
                    pid = pid+1
                    fid = dim(eid) * isize(1) * isize(2)
+                   if (pix .eq. 14 .and. THREAD_NUM.eq.6) then
+                     write (6, *) "cid= ",cid,", did= ",did,", eid= ",eid,", fid= ",fid
+                     write (6, *) "dim(cid)= ",dim(cid),", dim(did)*isize(1)= ",dim(did) * isize(1), &
+                     ", shift(cid,did,eid)= ",shift (cid,did,eid)
+                     write (6, *) "Total= ", pix + dim(cid) + dim(did) * isize(1) + fid + shift (cid,did,eid)
+                   endif
                    THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + fid + shift (cid,did,eid)
                    if (dclo) then
                      if (ai.eq.1 .and. cid.eq.1) then
@@ -621,6 +631,23 @@ if (DOATOMS) then
                 enddo
               enddo
             enddo
+            ! Check for neighbor twice present in list (small cell issue)
+            !if  (isize(1).eq.1 .or. isize(2).eq.1 .or. isize(3).eq.1) then
+            !  do while ()
+            !    eid=pid
+            !    do cid=1, eid-1
+            !      do did=cid+1, eid
+            !        if (THEPIX(pix)%IDNEIGH(cid) .eq. THEPIX(pix)%IDNEIGH(did)) then
+           !           do fid=did, eid-1
+            !            THEPIX(pix)%IDNEIGH(fid) = THEPIX(pix)%IDNEIGH(fid+1)
+            !            pid = pid-1
+            !            goto 000
+            !          enddo
+            !        endif
+            !      enddo
+             !   enddo
+            !  enddo
+            !endif
             THEPIX(pix)%NEIGHBOR = pid
           endif
           THEPIX(pix)%TOCHECK=.true.
@@ -639,9 +666,11 @@ if (DOATOMS) then
       do RH=1, THEPIX(RD)%NEIGHBOR
         RI = THEPIX(RD)%IDNEIGH(RH)
         RJ = THEPIX(RI)%ATOMS
+        if (RC .eq. 64) write (6, *) "64, Pixel_RI= ",RD
         do RK=1, RJ
           RL = THEPIX(RI)%ATOM_ID(RK)
           if (RL .ne. RC) then
+            if (RC .eq. 64) write (6, *) "64, RL= ",RL
             if ((RC.ge.A_START .and. RC.le.A_END) .or. (RL.ge.A_START .and. RL.le.A_END)) then
               RM = RL - (RL/NAN)*NAN
               if (RM .eq. 0) RM=NAN
@@ -695,7 +724,9 @@ if (DOATOMS) then
                       RP = RF
                       RQ = RM
                     endif
-
+                    if (RP .eq. 64) then
+                      write (6, *) "THREAD_NUM= ",THREAD_NUM,"N(64) = ",RQ,", IS_CLONE= ",IS_CLONE
+                    endif
                     CONTJ(RP,SAT)=CONTJ(RP,SAT)+1
                     if (CONTJ(RP,SAT) .gt. MAXN) then
                       TOOM=.true.

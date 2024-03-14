@@ -62,11 +62,6 @@ extern ColRGBA get_atom_color (int i, int j, double al, int picked, gboolean to_
 extern vec3_t model_position;
 extern int nbs;
 
-struct bond_rotation {
-  double x, y, z;
-  double angle;
-};
-
 /*!
   \fn int cylinder_vertices (int qual)
 

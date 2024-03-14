@@ -510,7 +510,7 @@ gboolean * remove_bonds_from_project (project * this_proj, atomic_object * this_
         // g_debug ("i= %d, tmpbond[%d]= %d", i, i, tmpbond[i]);
       }
     }
-    struct distance clo;
+    distance clo;
     for (i=0; i<2; i++)
     {
       if (this_proj -> modelgl -> bonds[0][i])

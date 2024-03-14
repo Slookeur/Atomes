@@ -182,7 +182,7 @@ int trj_get_atom_coordinates ()
     }
   }
 #else
-  struct line_node * tmp_line;
+  line_node * tmp_line;
   tail = head;
   k = 0;
   for (i=0; i<active_project -> steps; i++)

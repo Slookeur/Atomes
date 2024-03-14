@@ -1059,16 +1059,18 @@ void print_atom_table (int fid)
   fprintf (fp, "  </atoms>\n");
 }
 
-struct bond{
+typedef struct f_bond f_bond;
+struct f_bond
+{
   int a;
   int b;
   float v[2];
-  struct bond * next;
-  struct bond * prev;
+  f_bond * next;
+  f_bond * prev;
 };
 
-struct bond * the_bonds[2];
-struct bond * tmpbd;
+f_bond * the_bonds[2];
+f_bond * tmpbd;
 
 /*!
   \fn gboolean not_done (int eid, int a, int b)
@@ -1297,17 +1299,19 @@ void print_bond_table (int fid, int inum)
   }
 }
 
-struct angl{
+typedef struct f_angl f_angl;
+struct f_angl
+{
   int a;
   int b;
   int c;
   float v[2];
-  struct angl * next;
-  struct angl * prev;
+  f_angl * next;
+  f_angl * prev;
 };
 
-struct angl * the_angles[2];
-struct angl * tmpan;
+f_angl * the_angles[2];
+f_angl * tmpan;
 
 /*!
   \fn gboolean not_done_an (int eid, int a, int b, int c)
@@ -1938,12 +1942,12 @@ field_object_match * tmp_obj_id;
 char *** ff_atoms;
 // 0 = Quadratic, 1 = Quartic, 2 = Morse
 
-struct field_data * ff_bonds[3];
-struct field_data * ff_angles[2];
-struct field_data * ff_dih[2];
-struct field_data * ff_imp;
-struct field_data * ff_inv;
-struct field_data * ff_vdw;
+field_data * ff_bonds[3];
+field_data * ff_angles[2];
+field_data * ff_dih[2];
+field_data * ff_imp;
+field_data * ff_inv;
+field_data * ff_vdw;
 
 int ff_unit;
 int * ff_objects;
@@ -2373,7 +2377,7 @@ gchar * open_field_file (int field)
   xmlTextReaderPtr reader;
   xmlNodePtr racine, f_node;
   xmlNodePtr n_node, m_node, o_node;
-  struct field_data * ff_data;
+  field_data * ff_data;
   xmlAttrPtr prop;
   const xmlChar fml[7]="ff-xml";
   gchar * data_nodes[11]={"atoms", "bonds-h", "bonds-q", "bonds-m", "angles-h", "angles-q",

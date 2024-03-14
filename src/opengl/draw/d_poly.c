@@ -517,7 +517,7 @@ void prepare_poly_gl (float * vertices, atom at, int c)
   int j, k, l;
   gboolean clones;
   GLfloat ** xyz;
-  struct distance d;
+  distance d;
   xyz = allocdfloat (at.numv+1, 3);
   clones = FALSE;
   for (l=0; l < at.numv; l++)

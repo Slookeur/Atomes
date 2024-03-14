@@ -83,7 +83,7 @@ void setup_selected_clone_vertices (int style, int at, int pi, float * vertices)
 {
   int i, j;
   gboolean doit;
-  struct distance d;
+  distance d;
   for (i=0; i < proj_gl -> atoms[step][at].numv; i++)
   {
     j = proj_gl -> atoms[step][at].vois[i];
@@ -123,7 +123,7 @@ int find_selected_clone_vertices (int style, int at)
 {
   int i, j, k;
   gboolean doit = FALSE;
-  struct distance d;
+  distance d;
   if (in_movie_encoding && plot -> at_data != NULL)
   {
     if (plot -> at_data[at].show[1] && plot -> at_data[at].style == style) doit = TRUE;
@@ -160,7 +160,7 @@ int find_selected_clone_vertices (int style, int at)
 int find_selected_bond_vertices (int sty, int at, int sp, int bi, int pi, int cap)
 {
   int i, j, k, l, m, n;
-  struct distance dist;
+  distance dist;
   gboolean show_a, show_b, show_c, show_d;
   l = 0;
   if (in_movie_encoding && plot -> at_data != NULL)
@@ -256,7 +256,7 @@ void prepare_selected_bond (int sty, int cap, int bi, int pi, atom * at, atom * 
   else
   {
     atom * tmp_a, * tmp_b;
-    struct distance d = distance_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt);
+    distance d = distance_3d (cell_gl, (cell_gl -> npt) ? step : 0, at, bt);
 
     tmp_a = duplicate_atom (at);
     tmp_b = duplicate_atom (at);
@@ -303,7 +303,7 @@ void prepare_selected_bond (int sty, int cap, int bi, int pi, atom * at, atom * 
 void setup_all_selected_bond_vertices (int sty, int cap, int bi, int at, int sb, int pi, float * vertices)
 {
   int i, j, k, l, m;
-  struct distance dist;
+  distance dist;
   gboolean show_a, show_b, show_c, show_d;
   if (in_movie_encoding && plot -> at_data != NULL)
   {

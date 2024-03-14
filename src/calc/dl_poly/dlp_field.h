@@ -528,10 +528,10 @@ extern G_MODULE_EXPORT void remove_molecule_from_field (GSimpleAction * action, 
 extern G_MODULE_EXPORT void remove_atom_from_field_molecule (GSimpleAction * action, GVariant * parameter, gpointer data);
 
 // OGL utils
-extern struct distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt);
-extern struct angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct);
-extern struct angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
-extern struct angle inversion_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
+extern distance distance_3d (cell_info * cell, int mdstep, atom * at, atom * bt);
+extern angle angle_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct);
+extern angle dihedral_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
+extern angle inversion_3d (cell_info * cell, int mdstep, atom * at, atom * bt, atom * ct, atom * dt);
 
 // Print
 extern gchar * parameters_info (int obj, int key,  gchar ** words, float * data);
@@ -559,11 +559,11 @@ extern field_object_match * tmp_obj_id;
 extern float get_force_field_atom_mass (int sp, int num);
 
 extern int ff_unit;
-extern struct field_data * ff_bonds[3];
-extern struct field_data * ff_angles[2];
-extern struct field_data * ff_dih[2];
-extern struct field_data * ff_imp;
-extern struct field_data * ff_inv;
-extern struct field_data * ff_vdw;
+extern field_data * ff_bonds[3];
+extern field_data * ff_angles[2];
+extern field_data * ff_dih[2];
+extern field_data * ff_imp;
+extern field_data * ff_inv;
+extern field_data * ff_vdw;
 extern int ** extraz_id;
 #endif

@@ -192,7 +192,7 @@ double get_atoms_volume (project * this_proj, int rid, int sid, int gid, int gci
   double vol = 0.0;
   double cap_vol = 0.0;
   double * rvdws = allocdouble (this_proj -> nspec);
-  struct distance dist;
+  distance dist;
   for (i=0; i<this_proj -> nspec; i++)
   {
     j = (int)this_proj -> chemistry -> chem_prop[CHEM_Z][i];

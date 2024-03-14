@@ -36,20 +36,20 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_b]);
 
-  gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_molecule * mol_b);
+  gboolean are_identical_molecules (search_molecule * mol_a, search_molecule * mol_b);
 
-  void duplicate_molecule (molecule * new_mol, struct search_molecule * old_mol);
+  void duplicate_molecule (molecule * new_mol, search_molecule * old_mol);
   void allocate_mol_for_step_ (int * sid, int * mol_in_step);
   void allocate_mol_data_ ();
   void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[* nvs]);
-  void update_mol_details (struct search_molecule * mol, int sp, int cp);
+  void update_mol_details (search_molecule * mol, int sp, int cp);
   void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_mol[* sps], int atom_in_mol[* ats]);
-  void free_search_molecule_data (struct search_molecule * smol);
+  void free_search_molecule_data (search_molecule * smol);
   void setup_molecules_ (int * stepid);
   void setup_menu_molecules_ ();
   void setup_fragments_ (int * sid, int coord[active_project -> natomes]);
 
-  struct search_molecule * duplicate_search_molecule (struct search_molecule * old_mol);
+  search_molecule * duplicate_search_molecule (search_molecule * old_mol);
 
 */
 
@@ -60,7 +60,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glwindow.h"
 #include "initcoord.h"
 
-struct search_molecule {
+typedef struct search_molecule search_molecule;
+struct search_molecule
+{
   int id;                                 // Molecule id number
   int md;                                 // MD step
   int multiplicity;                       // Multiplicity
@@ -74,24 +76,24 @@ struct search_molecule {
   int nangles;                            // Number of bond angles
   int *** pangles;                        // Number of bond angles by geometries
   int ** lgeo;                            // list of coordination spheres (by species)
-  struct search_molecule * next;
-  struct search_molecule * prev;
+  search_molecule * next;
+  search_molecule * prev;
 };
 
 int * pgeo;
-struct search_molecule * tmp_search = NULL;
-struct search_molecule ** in_calc_mol = NULL;
+search_molecule * tmp_search = NULL;
+search_molecule ** in_calc_mol = NULL;
 extern molecule * tmp_mol;
 
 /*!
-  \fn void duplicate_molecule (molecule * new_mol, struct search_molecule * old_mol)
+  \fn void duplicate_molecule (molecule * new_mol, search_molecule * old_mol)
 
   \brief create a copy of a molecule data structure
 
   \param new_mol the new molecule
   \param old_mol the molecule to copy
 */
-void duplicate_molecule (molecule * new_mol, struct search_molecule * old_mol)
+void duplicate_molecule (molecule * new_mol, search_molecule * old_mol)
 {
   new_mol -> id = old_mol -> id;
   new_mol -> md = old_mol -> md;
@@ -103,15 +105,15 @@ void duplicate_molecule (molecule * new_mol, struct search_molecule * old_mol)
 }
 
 /*!
-  \fn struct search_molecule * duplicate_search_molecule (struct search_molecule * old_mol)
+  \fn search_molecule * duplicate_search_molecule (search_molecule * old_mol)
 
   \brief create a copy of a search molecule data structure
 
   \param old_mol the search molecule data structure to copy
 */
-struct search_molecule * duplicate_search_molecule (struct search_molecule * old_mol)
+search_molecule * duplicate_search_molecule (search_molecule * old_mol)
 {
-  struct search_molecule * new_mol = g_malloc0(sizeof*new_mol);
+  search_molecule * new_mol = g_malloc0(sizeof*new_mol);
   new_mol -> id = old_mol -> id;
   new_mol -> md = old_mol -> md;
   new_mol -> multiplicity = old_mol -> multiplicity;
@@ -215,7 +217,7 @@ void allocate_mol_data_ ()
 void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[* nvs])
 {
   int i, j, k, l, m, n, o, p, q, r, s, t, u;
-  struct search_molecule * tmp_mol = & in_calc_mol[* stp - 1][* mol - 1];
+  search_molecule * tmp_mol = & in_calc_mol[* stp - 1][* mol - 1];
   i = active_project -> atoms[* stp - 1][* aid - 1].sp;
   j = active_project -> atoms[* stp - 1][* aid - 1].coord[1];
   k = pgeo[i] + j;
@@ -249,7 +251,7 @@ void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[
 }
 
 /*!
-  \fn void update_mol_details (struct search_molecule * mol, int sp, int cp)
+  \fn void update_mol_details (search_molecule * mol, int sp, int cp)
 
   \brief update molecule information
 
@@ -257,7 +259,7 @@ void send_mol_neighbors_ (int * stp, int * mol, int * aid, int * nvs, int neigh[
   \param sp the chemical species
   \param cp the partial coordination id
 */
-void update_mol_details (struct search_molecule * mol, int sp, int cp)
+void update_mol_details (search_molecule * mol, int sp, int cp)
 {
   int i, j, k, l, m;
   for (i=0; i<active_project -> nspec; i++)
@@ -294,7 +296,7 @@ void update_mol_details (struct search_molecule * mol, int sp, int cp)
 void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_mol[* sps], int atom_in_mol[* ats])
 {
   int i, j, k, l;
-  struct search_molecule * tmp_mol = & in_calc_mol[* stp - 1][* mol - 1];
+  search_molecule * tmp_mol = & in_calc_mol[* stp - 1][* mol - 1];
   tmp_mol -> id = * mol - 1;
   tmp_mol -> md = * stp - 1;
   tmp_mol -> multiplicity = 1;
@@ -325,14 +327,14 @@ void send_mol_details_ (int * stp, int * mol, int * ats, int * sps, int spec_in_
 }
 
 /*!
-  \fn gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_molecule * mol_b)
+  \fn gboolean are_identical_molecules (search_molecule * mol_a, search_molecule * mol_b)
 
   \brief test if 2 molecules are identicals
 
   \param mol_a the 1st molecule
   \param mol_b the 2nd molecule
 */
-gboolean are_identical_molecules (struct search_molecule * mol_a, struct search_molecule * mol_b)
+gboolean are_identical_molecules (search_molecule * mol_a, search_molecule * mol_b)
 {
   int i, j, k;
 /*#ifdef DEBUG
@@ -415,13 +417,13 @@ int * merge_mol_data (int val_a, int val_b, int table_a[val_a], int table_b[val_
 }
 
 /*!
-  \fn void free_search_molecule_data (struct search_molecule * smol)
+  \fn void free_search_molecule_data (search_molecule * smol)
 
   \brief free search molecule data structure
 
   \param smol the search molecule data structure to free
 */
-void free_search_molecule_data (struct search_molecule * smol)
+void free_search_molecule_data (search_molecule * smol)
 {
   int i, j;
   g_free (smol -> atoms);
@@ -455,9 +457,9 @@ void free_search_molecule_data (struct search_molecule * smol)
 void setup_molecules_ (int * stepid)
 {
   int i, j, k, l, m, n;
-  struct search_molecule * mtmp_at, * mtmp_bt;
-  struct search_molecule * first_mol = NULL;
-  struct search_molecule * tmp_mol;
+  search_molecule * mtmp_at, * mtmp_bt;
+  search_molecule * first_mol = NULL;
+  search_molecule * tmp_mol;
   gboolean add_it;
   i = * stepid -1;
   j = 0;
