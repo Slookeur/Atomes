@@ -62,6 +62,9 @@ extern chemical_data * alloc_chem_data (int spec);
 extern int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboolean show_clones, cell_info * cell, GtkWidget * widg);
 extern const gchar * dfi[2];
 
+extern atom_search * cif_search;
+extern atomic_object * cif_object;
+
 FILE * coordf;
 coord_file * this_reader;
 gchar ** coord_line = NULL;
@@ -186,7 +189,7 @@ int set_v_dummy (gchar * this_word)
   \brief Fill the species for each atom and the associated data
 
   \param v Z
-  \param ato Total number of atoms
+  \param ato the atom id
 */
 void check_for_species (double v, int ato)
 {
@@ -451,6 +454,19 @@ int open_coord_file (gchar * filename, int fti)
       {
         g_print ("Reading coordinates [%s]:\t %s, nsps[%d]= %d\n", coord_files_ext[fti], active_chem -> label[i], i+1, active_chem -> nsps[i]);
       }
+    }
+  }
+  if (! (fti == 9 && cif_use_symmetry_positions) || res)
+  {
+    if (cif_search)
+    {
+      g_free (cif_search);
+      cif_search = NULL;
+    }
+    if (cif_object)
+    {
+      g_free (cif_object);
+      cif_object = NULL;
     }
   }
   return res;

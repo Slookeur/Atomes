@@ -1361,8 +1361,6 @@ int open_coordinate_file (int id)
       if (this_reader -> nsps) g_free (this_reader -> nsps);
       if (this_reader -> label) g_free (this_reader -> label);
       if (this_reader -> mislab) g_free (this_reader -> mislab);
-      if (this_reader -> smislab) g_free (this_reader -> smislab);
-      if (this_reader -> lmislab) g_free (this_reader -> lmislab);
       if (this_reader -> coord) g_free (this_reader -> coord);
       if (this_reader -> lot) g_free (this_reader -> lot);
       if (this_reader -> sym_pos) g_free (this_reader -> sym_pos);

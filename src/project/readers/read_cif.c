@@ -45,7 +45,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   float get_atom_coord (gchar * line, int mid);
 
-  gboolean get_missing_z_from_user ();
+  gboolean get_missing_object_from_user ();
   gboolean cif_file_get_atoms_data (int lin, int cid[8]);
   gboolean cif_get_atomic_coordinates (int linec);
   gboolean cif_get_symmetry_positions (int linec);
@@ -66,6 +66,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "bind.h"
 #include "interface.h"
 #include "project.h"
+#include "atom_edit.h"
 #include "cbuild_edit.h"
 #include "readers.h"
 #include <ctype.h>
@@ -277,51 +278,55 @@ int get_atom_wyckoff (gchar * line, int wid)
 
 GtkWidget ** img_cif;
 atom_search * cif_search;
+atomic_object * cif_object;
 
 /*!
-  \fn G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data)
+  \fn G_MODULE_EXPORT void set_cif_to_insert (GtkComboBox * box, gpointer data)
 
-  \brief Select a chemical species to correct error in CIF file
+  \brief change the object to insert at an empty cif position
 
-  \param but the GtkButton sending the signal
+  \param box the GtkComboBox sending the signal
   \param data the associated data pointer
 */
-G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data)
+G_MODULE_EXPORT void set_cif_to_insert (GtkComboBox * box, gpointer data)
 {
-  int i, j;
+  GValue val = {0, };
+  int i, j, k;
   i = GPOINTER_TO_INT(data);
-  j = get_atom_id_from_periodic_table (cif_search);
-  gchar * stra, * strb;
-  if (! j)
+  GtkTreeModel * cmodel = gtk_combo_box_get_model (box);
+  GtkTreeIter iter;
+  gchar * str;
+  gboolean done = TRUE;
+  if (gtk_combo_box_get_active_iter (box, & iter))
   {
-    stra = g_strdup_printf ("Not picked yet !");
-    strb = g_strdup_printf (DELETEB);
-    this_reader -> lmislab[i] = 0;
-    this_reader -> stolab ++;
+    gtk_tree_model_get_value (cmodel, & iter, 0, & val);
+    str = g_strdup_printf ("%s", (char *)g_value_get_string (& val));
+    j = get_selected_object_id (FALSE, activep, str, cif_search);
+    to_insert_in_project (j, i, active_project, cif_search, FALSE);
+    if (j > 0)
+    {
+      gtk_tree_store_set (GTK_TREE_STORE(cmodel), & iter, 0, periodic_table_info[j].lab, -1);
+    }
+    cif_search -> todo[i]  = (! j) ? 0 : 1;
+    if (! j) done = FALSE;
+    cif_search -> in_selection = 0;
+    for (k=0; k<this_reader -> stolab; k++) cif_search -> in_selection += cif_search -> todo[k];
   }
-  else
-  {
-    stra = g_strdup_printf ("%s", periodic_table_info[j].name);
-    strb = g_strdup_printf (APPLY);
-    this_reader -> lmislab[i] = j;
-    this_reader -> stolab --;
-  }
-  set_image_from_icon_name (img_cif[i], strb);
-  gtk_button_set_label (but, stra);
-  gtk_widget_set_size_request (GTK_WIDGET(but), 150, -1);
-  g_free (stra);
-  g_free (strb);
+  str = (done) ? g_strdup_printf (APPLY) : g_strdup_printf (DELETEB);
+  set_image_from_icon_name (img_cif[i], str);
+  g_free (str);
+  if (! done) gtk_combo_box_set_active (box, 0);
 }
 
 /*!
-  \fn gboolean get_missing_z_from_user ()
+  \fn gboolean get_missing_object_from_user ()
 
   \brief get missing atomic number in CIF file from the user
 */
-gboolean get_missing_z_from_user ()
+gboolean get_missing_object_from_user ()
 {
-  this_reader -> lmislab = allocint (this_reader -> stolab);
-  cif_search = g_malloc0 (sizeof*cif_search);
+  cif_search = allocate_atom_search (activep, REPLACE, 0, this_reader -> stolab);
+  cif_object = NULL;
   GtkWidget * info = dialogmodal ("Error while reading CIF file", GTK_WINDOW(MainWindow));
   GtkWidget * vbox, * hbox;
   gchar * str;
@@ -330,29 +335,45 @@ gboolean get_missing_z_from_user ()
                     "it is required to provide a suitable value for each and every missing parameter(s).</b>"
                     "\n\nPlease select an atom type for the following object(s):";
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label (labpick, 200, -1, 0.5, 0.5), FALSE, FALSE, 10);
-  img_cif = g_malloc0(this_reader -> tolab*sizeof*img_cif);
+  img_cif = g_malloc0(this_reader -> stolab*sizeof*img_cif);
   GtkWidget * but;
-  int j;
-  for (j=0; j<this_reader -> tolab; j++)
+  GtkCellRenderer * renderer;
+  GtkTreeModel * model;
+  GList * cell_list;
+  int i;
+  for (i=0; i<this_reader -> stolab; i++)
   {
     hbox = create_hbox(0);
     add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, FALSE, FALSE, 5);
-    str = g_strdup_printf ("Type N°%d:\t<b>%s</b>", j+1, this_reader -> label[j]);
+    str = g_strdup_printf ("Type N°%d:\t<b>%s</b>", i+1, this_reader -> label[i]);
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, markup_label(str, 150, -1, 0.0, 0.5), FALSE, FALSE, 20);
     g_free (str);
-    img_cif[j] = stock_image (DELETEB);
-    but = create_button ("Not picked yet !", IMG_NONE, NULL, 150, -1, GTK_RELIEF_NORMAL, G_CALLBACK(select_cif_species), GINT_TO_POINTER(j));
+    img_cif[i] = stock_image (DELETEB);
+    model = replace_combo_tree (TRUE, activep);
+    but = gtk_combo_box_new_with_model (model);
+    g_object_unref (model);
+    renderer = gtk_cell_renderer_combo_new ();
+    gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (but), renderer, TRUE);
+    gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (but), renderer, "text", 0, NULL);
+    gtk_combo_box_set_active (GTK_COMBO_BOX(but), 0);
+    g_signal_connect (G_OBJECT(but), "changed", G_CALLBACK(set_cif_to_insert), GINT_TO_POINTER(i));
+    cell_list = gtk_cell_layout_get_cells(GTK_CELL_LAYOUT(but));
+    if(cell_list && cell_list -> data)
+    {
+      gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(but), cell_list -> data, "markup", 0, NULL);
+    }
+    // but = create_button ("Not picked yet !", IMG_NONE, NULL, 150, -1, GTK_RELIEF_NORMAL, G_CALLBACK(select_cif_species), GINT_TO_POINTER(i));
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, but, FALSE, FALSE, 0);
-    add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, img_cif[j], FALSE, FALSE, 30);
+    add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, img_cif[i], FALSE, FALSE, 30);
   }
 
   gchar * endpick = "In case of a molecule: insert an extra type of atom and run a substitution afterwards.";
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label (endpick, 200, -1, 0.5, 0.5), FALSE, FALSE, 10);
   run_this_gtk_dialog (info, G_CALLBACK(run_destroy_dialog), NULL);
   g_free (img_cif);
-  g_free (cif_search);
+  // g_free (cif_search);
   destroy_this_widget (info);
-  return (! this_reader -> stolab) ? TRUE : FALSE;
+  return (cif_search -> in_selection == this_reader -> stolab) ? TRUE : FALSE;
 }
 
 #ifndef OPENMP
@@ -667,6 +688,7 @@ void check_for_to_lab (int ato, gchar * stlab)
 {
   int i, j;
   j = -1;
+  // First is the labe of 'ato' already listed
   for (i=0; i<this_reader -> stolab; i++)
   {
     if (g_strcmp0(this_reader -> label[i], stlab) == 0)
@@ -675,19 +697,6 @@ void check_for_to_lab (int ato, gchar * stlab)
       break;
     }
   }
-  if (this_reader -> mislab)
-  {
-    this_reader -> mislab = g_realloc (this_reader -> mislab, (this_reader -> tolab+1)*sizeof*this_reader -> mislab);
-    this_reader -> smislab = g_realloc (this_reader -> smislab, (this_reader -> tolab+1)*sizeof*this_reader -> smislab);
-  }
-  else
-  {
-    this_reader -> mislab = g_malloc0 (1*sizeof*this_reader -> mislab);
-    this_reader -> smislab = g_malloc0 (1*sizeof*this_reader -> smislab);
-  }
-  this_reader -> mislab[this_reader -> tolab] = ato;
-  this_reader -> smislab[this_reader -> tolab] = (j < 0) ? this_reader -> stolab : j;
-  this_reader -> tolab ++;
   if (j < 0)
   {
     if (this_reader -> label)
@@ -701,6 +710,16 @@ void check_for_to_lab (int ato, gchar * stlab)
     this_reader -> label[this_reader -> stolab] = g_strdup_printf ("%s", stlab);
     this_reader -> stolab ++;
   }
+  if (this_reader -> mislab)
+  {
+    this_reader -> mislab = g_realloc (this_reader -> mislab, (this_reader -> tolab+1)*sizeof*this_reader -> mislab);
+  }
+  else
+  {
+    this_reader -> mislab = g_malloc0 (1*sizeof*this_reader -> mislab);
+  }
+  this_reader -> mislab[this_reader -> tolab] = ato;
+  this_reader -> tolab ++;
 }
 
 /*!
@@ -713,7 +732,7 @@ void check_for_to_lab (int ato, gchar * stlab)
 */
 gboolean cif_file_get_atoms_data (int lin, int cid[8])
 {
-  int i, j, k, l;
+  int i, j;
   double v;
   gchar * str;
   gboolean done = TRUE;
@@ -802,15 +821,17 @@ gboolean cif_file_get_atoms_data (int lin, int cid[8])
 
   if (! done)
   {
-    done = get_missing_z_from_user ();
+    done = (cif_search) ? TRUE : get_missing_object_from_user ();
     if (done)
     {
-      for (i=0; i<this_reader -> tolab; i++)
+      atomic_object * tmp_obj = cif_object;
+      i = 0;
+      while (tmp_obj)
       {
         j = this_reader -> mislab[i];
-        k = this_reader -> smislab[i];
-        l = this_reader -> lmislab[k];
-        check_for_species ((double)l, j);
+        if (tmp_obj -> type > 0) check_for_species ((double)tmp_obj -> type, j);
+        i ++;
+        tmp_obj = tmp_obj -> next;
       }
     }
   }
@@ -1840,6 +1861,7 @@ int open_cif_file (int linec)
             all_pos[i].x = c_pos.x;
             all_pos[i].y = c_pos.y;
             all_pos[i].z = c_pos.z;
+            // Insert object ?!
             l = this_reader -> lot[k];
             tmp_lot[i] = l;
             tmp_nsps[l] ++;

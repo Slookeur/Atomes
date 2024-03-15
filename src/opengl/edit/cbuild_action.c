@@ -61,11 +61,13 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "bind.h"
 #include "project.h"
 #include "workspace.h"
+#include "atom_edit.h"
 #include "cbuild_edit.h"
 #include "readers.h"
 #include <ctype.h>
 
 extern int get_crystal_id (int spg);
+extern atomic_object * cif_object;
 
 gchar * tmp_pos = NULL;
 
@@ -1014,19 +1016,38 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
     this_proj -> modelgl = g_malloc0(sizeof*this_proj -> modelgl);
     prepare_atom_edition (& point, FALSE);
     this_proj -> modelgl -> search_widg[7] = allocate_atom_search (this_proj -> id, INSERT, 7, this_reader -> natomes);
+    gboolean do_obj;
     for (i=0; i<this_reader -> natomes; i++)
     {
-      j = this_reader -> lot[i];
-      if (this_reader -> z[j] == -1.0)
+      do_obj = FALSE;
+      for (j=0; j<this_reader -> tolab; j++)
       {
-        insert_this_project_from_lib (0, FALSE, this_proj, this_proj -> modelgl -> search_widg[7]);
+        if (this_reader -> mislab[j] == i)
+        {
+          do_obj = TRUE;
+          break;
+        }
+      }
+      if (do_obj)
+      {
+        if (! object)
+        {
+          this_proj -> modelgl -> atom_win -> to_be_inserted[2] = duplicate_atomic_object (get_atomic_object_by_origin(cif_object, j, 0));
+          object = this_proj -> modelgl -> atom_win -> to_be_inserted[2];
+        }
+        else
+        {
+          object -> next = duplicate_atomic_object (get_atomic_object_by_origin(cif_object, j, 0));
+        }
+        // insert_this_project_from_lib (0, FALSE, this_proj, this_proj -> modelgl -> search_widg[7]);
       }
       else
       {
+        j = this_reader -> lot[i];
         to_insert_in_project ((int)this_reader -> z[j], -1, this_proj, this_proj -> modelgl -> search_widg[7], FALSE);
       }
       this_proj -> modelgl -> search_widg[7] -> todo[i] = 1;
-      if (i == 0)
+      if (! object)
       {
         object = this_proj -> modelgl -> atom_win -> to_be_inserted[2];
       }

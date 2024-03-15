@@ -1053,7 +1053,7 @@ G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id,
     case GTK_RESPONSE_APPLY:
       vbox = dialog_get_content_area ((GtkWidget *)lib);
       widget_set_sensitive (vbox, FALSE);
-      this_proj -> modelgl -> other_status = 2;
+      if (this_proj -> modelgl) this_proj -> modelgl -> other_status = 2;
       create_object_from_library (lib_proj -> id);
       active_project_changed (activep);
       if (asearch -> action == INSERT)
@@ -1061,17 +1061,28 @@ G_MODULE_EXPORT void run_select_from_library (GtkDialog * lib, gint response_id,
         to_insert_in_project (FROM_LIBRARY, -1, this_proj, asearch, lib_visible);
         if (! lib_visible)
         {
-          gboolean vis = (this_proj -> modelgl -> atom_win) ? this_proj -> modelgl -> atom_win -> visible : FALSE;
+          gboolean vis;
+          if (this_proj -> modelgl)
+          {
+            vis = (this_proj -> modelgl -> atom_win) ? this_proj -> modelgl -> atom_win -> visible : FALSE;
+          }
+          else
+          {
+            vis = FALSE;
+          }
           inserted_from_lib += action_atoms_from_project (this_proj, asearch, vis);
         }
-        this_proj -> modelgl -> nth_copy ++;
+        if (this_proj -> modelgl) this_proj -> modelgl -> nth_copy ++;
       }
       lib_res = FROM_LIBRARY;
       widget_set_sensitive (vbox, TRUE);
       if (asearch -> action == REPLACE) done = TRUE;
       break;
     default:
-      if (this_proj -> modelgl -> mode == EDITION) asearch -> todo[0] = 0;
+      if (this_proj -> modelgl)
+      {
+        if (this_proj -> modelgl -> mode == EDITION) asearch -> todo[0] = 0;
+      }
       lib_res = 0;
       done = TRUE;
       break;
@@ -1092,7 +1103,7 @@ int select_from_library (gboolean visible, project * this_proj, atom_search * as
 {
   int active = activep;
   lib_visible = visible;
-  GtkWidget * lib = dialogmodal ("Library", GTK_WINDOW(this_proj -> modelgl -> win));
+  GtkWidget * lib = dialogmodal ("Library", GTK_WINDOW((this_proj -> modelgl) ? this_proj -> modelgl -> win : MainWindow));
 #ifdef GTK3
 #ifdef GTKGLAREA
 #ifndef G_OS_WIN32
@@ -1120,7 +1131,8 @@ int select_from_library (gboolean visible, project * this_proj, atom_search * as
   gtk_tree_selection_select_iter (libselect[1], & first_mol_iter);
   show_the_widgets (lib);
   prepare_preview (active, 0, TRUE);
-  this_proj -> modelgl -> nth_copy = inserted_from_lib = 0;
+  if (this_proj -> modelgl) this_proj -> modelgl -> nth_copy = 0;
+  inserted_from_lib = 0;
   run_this_gtk_dialog (lib, G_CALLBACK(run_select_from_library), asearch);
   active_project_changed (active);
   if (sml_file_name != NULL) g_free (sml_file_name);
@@ -1151,7 +1163,7 @@ int insert_this_project_from_lib (int id, gboolean visible, project * this_proj,
   if (get_sml_files ())
   {
     prepare_preview (active, molec[id], FALSE);
-    this_proj -> modelgl -> other_status = 2;
+    if (this_proj -> modelgl) this_proj -> modelgl -> other_status = 2;
     create_object_from_library (lib_proj -> id);
     if (asearch -> action == INSERT)
     {

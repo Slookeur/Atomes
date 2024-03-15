@@ -168,34 +168,15 @@ int is_this_a_new_geo (int gid, coord_info * obj, int * old_z, int old_geo, int 
   }
 
   // If we keep going then this is a new type of coordination sphere
-  int * tmpgeol = NULL;
+  j = coord -> ntg[gid][new_sp];
   if (! gid)
   {
-    tmpgeol = allocint (coord -> ntg[gid][new_sp]+1);
-    for (j=0; j<coord -> ntg[gid][new_sp]; j++)
-    {
-      tmpgeol[j] = coord -> geolist[gid][new_sp][j];
-    }
-    tmpgeol[j] = obj -> geolist[gid][old_sp][old_geo];
+    coord -> geolist[gid][new_sp] = g_realloc (coord -> geolist[gid][new_sp], (j+1)*sizeof*coord -> geolist[gid][new_sp]);
+    coord -> geolist[gid][new_sp][coord -> ntg[gid][new_sp]] = obj -> geolist[gid][old_sp][old_geo];
   }
   else
   {
-    int ** tmp_part = NULL;
-    tmp_part = g_malloc0 (coord -> ntg[1][new_sp]*sizeof*tmp_part);
-    for (j=0; j<coord -> ntg[1][new_sp]; j++)
-    {
-      tmp_part[j] = duplicate_int (coord -> species, coord -> partial_geo[new_sp][j]);
-    }
-    g_free (coord -> partial_geo[new_sp]);
-    coord -> partial_geo[new_sp] = g_malloc0 ((coord -> ntg[1][new_sp]+1)*sizeof*coord -> partial_geo[new_sp]);
-    if (tmp_part)
-    {
-      for (j=0; j<coord -> ntg[1][new_sp]; j++)
-      {
-        coord -> partial_geo[new_sp][j] = duplicate_int (coord -> species, tmp_part[j]);
-      }
-      g_free (tmp_part);
-    }
+    coord -> partial_geo[new_sp] = g_realloc (coord -> partial_geo[new_sp], (j+1)*sizeof*coord -> partial_geo[new_sp]);
     coord -> partial_geo[new_sp][j] = allocint (coord -> species);
     for (k=0; k<obj -> species; k++)
     {
@@ -208,12 +189,6 @@ int is_this_a_new_geo (int gid, coord_info * obj, int * old_z, int old_geo, int 
   }
   coord -> ntg[gid][new_sp] ++;
   coord -> totcoord[gid] ++;
-  if (! gid)
-  {
-    if (coord -> geolist[gid][new_sp] != NULL) g_free (coord -> geolist[gid][new_sp]);
-    coord -> geolist[gid][new_sp] = duplicate_int (coord -> ntg[gid][new_sp], tmpgeol);
-    g_free (tmpgeol);
-  }
   return i;
 }
 
@@ -319,32 +294,12 @@ int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int o
   }
 
   // If we keep going then this is a new type of coordination sphere
-  int * tmpgeol = NULL;
-  tmpgeol = allocint (coord -> ntg[gid][new_sp]+1);
-  for (j=0; j<coord -> ntg[gid][new_sp]; j++)
-  {
-    tmpgeol[j] = coord -> geolist[gid][new_sp][j];
-  }
-  tmpgeol[j] = obj -> geolist[gid][old_sp][old_geo];
-
+  j = coord -> ntg[gid][new_sp];
+  coord -> geolist[gid][new_sp] = g_realloc (coord -> geolist[gid][new_sp], (j+1)*sizeof*coord -> geolist[gid][new_sp]);
+  coord -> geolist[gid][new_sp][j] = obj -> geolist[gid][old_sp][old_geo];
   if (gid)
   {
-    int ** tmp_part = NULL;
-    tmp_part = g_malloc0 (coord -> ntg[1][new_sp]*sizeof*tmp_part);
-    for (j=0; j<coord -> ntg[1][new_sp]; j++)
-    {
-      tmp_part[j] = duplicate_int (coord -> species, coord -> partial_geo[new_sp][j]);
-    }
-    g_free (coord -> partial_geo[new_sp]);
-    coord -> partial_geo[new_sp] = g_malloc0 ((coord -> ntg[1][new_sp]+1)*sizeof*coord -> partial_geo[new_sp]);
-    if (tmp_part)
-    {
-      for (j=0; j<coord -> ntg[1][new_sp]; j++)
-      {
-        coord -> partial_geo[new_sp][j] = duplicate_int (coord -> species, tmp_part[j]);
-      }
-      g_free (tmp_part);
-    }
+    coord -> partial_geo[new_sp] = g_realloc (coord -> partial_geo[new_sp], (j+1)*sizeof*coord -> partial_geo[new_sp]);
     coord -> partial_geo[new_sp][j] = allocint (coord -> species);
     for (k=0; k<obj -> species; k++)
     {
@@ -357,9 +312,6 @@ int find_this_geo_id (int gid, coord_info * obj, int * old_z, int old_geo, int o
   }
   coord -> ntg[gid][new_sp] ++;
   coord -> totcoord[gid] ++;
-  if (coord -> geolist[gid][new_sp] != NULL) g_free (coord -> geolist[gid][new_sp]);
-  coord -> geolist[gid][new_sp] = duplicate_int (coord -> ntg[gid][new_sp], tmpgeol);
-  g_free (tmpgeol);
   return i;
 }
 
@@ -483,7 +435,7 @@ void check_coord_modification (project * this_proj, int * old_id, atom * new_lis
                 l = tmp_new -> coord[this_proj -> modelgl -> search_widg[8] -> filter-1];
                 break;
             }
-            if (get_insert_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[3], l, 0))  new_old_id[j] = abs(old_id[j]);
+            if (get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[3], l, 0))  new_old_id[j] = abs(old_id[j]);
           }
         }
         else

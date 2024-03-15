@@ -485,6 +485,7 @@ struct coord_file
   cell_info lattice;                       /*!< Description of the periodicity */
   int mid;                                 /*!< Message type (0 = error, 1 = warning), if any */
   gchar * info;                            /*!< Information message, if required */
+  gchar ** label;                          /*!< VAS or TRJ: list of chemical labels, \n CIF: Label list of mis-labelled object(s) */
   // The following line is only used for DL_POLY history files:
   int traj;                                /*!< */
   // The following lines are only used for CIF files:
@@ -495,12 +496,9 @@ struct coord_file
   double * occupancy;                      /*!< Site(s) occupancy */
   int ** occupied;                         /*!< Occupancy status */
   int * multi;                             /*!< Multiplicity */
-  int stolab;                              /*!< Number of chemical species to label */
-  int * smislab;                           /*!< */
-  int tolab;                               /*!< Number of labelled chemical species */
-  int * mislab;                            /*!< */
-  int * lmislab;                           /*!< */
-  gchar ** label;                          /*!< List of chemical elements */
+  int tolab;                               /*!< Number of atom(s) mis-labelled */
+  int stolab;                              /*!< Number of object(s) to label */
+  int * mislab;                            /*!< List of mis-labelled object(s) */
 };
 
 /*! \typedef MouseState

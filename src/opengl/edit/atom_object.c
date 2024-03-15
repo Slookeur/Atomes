@@ -65,6 +65,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 #include "atom_edit.h"
 
+extern atomic_object * cif_object;
+
 /*!
   \fn double get_object_dim (atomic_object * object)
 
@@ -1104,7 +1106,7 @@ void clean_this_object (int orig, int act, project * this_proj, atom_search * as
   switch (asearch -> action)
   {
     case REPLACE:
-      object = this_proj -> modelgl -> atom_win -> to_be_inserted[act];
+      object = (this_proj -> modelgl) ? this_proj -> modelgl -> atom_win -> to_be_inserted[act] : cif_object;
       break;
     default:
       object = this_proj -> modelgl -> atom_win -> to_be_moved[act];
@@ -1143,12 +1145,26 @@ void clean_this_object (int orig, int act, project * this_proj, atom_search * as
         if (object -> next != NULL)
         {
           object = object -> next;
-          g_free (this_proj -> modelgl -> atom_win -> to_be_inserted[act]);
+          if (this_proj -> modelgl)
+          {
+            g_free (this_proj -> modelgl -> atom_win -> to_be_inserted[act]);
+          }
+          else
+          {
+            g_free (cif_object);
+          }
           object -> prev = NULL;
           switch (asearch -> action)
           {
             case REPLACE:
-              this_proj -> modelgl -> atom_win -> to_be_inserted[act] = object;
+              if (this_proj -> modelgl)
+              {
+                this_proj -> modelgl -> atom_win -> to_be_inserted[act] = object;
+              }
+              else
+              {
+                cif_object = object;
+              }
               break;
             default:
               this_proj -> modelgl -> atom_win -> to_be_moved[act] = object;
@@ -1161,7 +1177,14 @@ void clean_this_object (int orig, int act, project * this_proj, atom_search * as
           switch (asearch -> action)
           {
             case REPLACE:
-              object = this_proj -> modelgl -> atom_win -> to_be_inserted[act] = NULL;
+              if (this_proj -> modelgl)
+              {
+                object = this_proj -> modelgl -> atom_win -> to_be_inserted[act] = NULL;
+              }
+              else
+              {
+                object = cif_object = NULL;
+              }
               break;
             default:
               object = this_proj -> modelgl -> atom_win -> to_be_moved[act] = NULL;
@@ -1206,7 +1229,7 @@ void to_insert_in_project (int stat, int orig, project * this_proj, atom_search 
   {
     act = asearch -> pointer[0].c - 5;
   }
-  if ((! act || act == 3) && this_proj -> modelgl -> atom_win -> to_be_inserted[act])
+  if (! this_proj -> modelgl || ((! act || act == 3) && this_proj -> modelgl -> atom_win -> to_be_inserted[act]))
   {
     clean_this_object (orig, act, this_proj, asearch);
   }
@@ -1218,10 +1241,16 @@ void to_insert_in_project (int stat, int orig, project * this_proj, atom_search 
   vec3_t coor_ins = vec3 (0.0,0.0,0.0);
   if (! visible)
   {
-    if (act > 0 && this_proj -> modelgl -> anim && ! this_proj -> modelgl -> builder_win)
+    if (act > 0)
     {
-      this_proj -> modelgl -> insert_coords = get_insertion_coordinates (this_proj -> modelgl);
-      coor_ins = this_proj -> modelgl -> insert_coords;
+      if (this_proj -> modelgl)
+      {
+        if (this_proj -> modelgl -> anim && ! this_proj -> modelgl -> builder_win)
+        {
+          this_proj -> modelgl -> insert_coords = get_insertion_coordinates (this_proj -> modelgl);
+          coor_ins = this_proj -> modelgl -> insert_coords;
+        }
+      }
     }
     else if (! act)
     {
@@ -1282,20 +1311,39 @@ void to_insert_in_project (int stat, int orig, project * this_proj, atom_search 
     }
   }
 
-  ulam = ulam_coord (this_proj -> modelgl);
-
-  if (this_proj -> modelgl -> atom_win -> to_be_inserted[act] == NULL)
+  if (this_proj -> modelgl)
   {
-    this_proj -> modelgl -> atom_win -> to_be_inserted[act] = duplicate_atomic_object (lib_object);
-    object = this_proj -> modelgl -> atom_win -> to_be_inserted[act];
+    ulam = ulam_coord (this_proj -> modelgl);
+    if (this_proj -> modelgl -> atom_win -> to_be_inserted[act] == NULL)
+    {
+      this_proj -> modelgl -> atom_win -> to_be_inserted[act] = duplicate_atomic_object (lib_object);
+      object = this_proj -> modelgl -> atom_win -> to_be_inserted[act];
+    }
+    else
+    {
+      object = this_proj -> modelgl -> atom_win -> to_be_inserted[act];
+      while (object -> next) object = object -> next;
+      object -> next = duplicate_atomic_object (lib_object);
+      object -> next -> prev = object;
+      object = object -> next;
+    }
   }
   else
   {
-    object = this_proj -> modelgl -> atom_win -> to_be_inserted[act];
-    while (object -> next) object = object -> next;
-    object -> next = duplicate_atomic_object (lib_object);
-    object -> next -> prev = object;
-    object = object -> next;
+    ulam.a = ulam.b = ulam.c = 0.0;
+    if (cif_object == NULL)
+    {
+      cif_object = duplicate_atomic_object (lib_object);
+      object = cif_object;
+    }
+    else
+    {
+      object = cif_object;
+      while (object -> next) object = object -> next;
+      object -> next = duplicate_atomic_object (lib_object);
+      object -> next -> prev = object;
+      object = object -> next;
+    }
   }
   if (act)
   {

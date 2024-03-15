@@ -53,31 +53,18 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 void add_bonds_to_project (project * this_proj, int removed, int nbd, int ** new_bond_list)
 {
   int i, j;
-  int ** tmpbondid = NULL;
   if (nbd)
   {
     i = this_proj -> modelgl -> bonds[0][0];
-    tmpbondid = allocdint (i+nbd, 2);
-    for (j=0; j<i; j++)
-    {
-      tmpbondid[j][0] = this_proj -> modelgl -> bondid[0][0][j][0];
-      tmpbondid[j][1] = this_proj -> modelgl -> bondid[0][0][j][1];
-    }
-    if (this_proj -> modelgl -> allbonds[0]) g_free (this_proj -> modelgl -> bondid[0][0]);
-    this_proj -> modelgl -> bondid[0][0] = allocdint (i+nbd, 2);
-    for (j=0; j<i; j++)
-    {
-      this_proj -> modelgl -> bondid[0][0][j][0] = tmpbondid[j][0];
-      this_proj -> modelgl -> bondid[0][0][j][1] = tmpbondid[j][1];
-    }
+    this_proj -> modelgl -> bondid[0][0] = g_realloc (this_proj -> modelgl -> bondid[0][0], (i+nbd)*sizeof*this_proj -> modelgl -> bondid[0][0]);
     for (j=0; j<nbd; j++)
     {
+      this_proj -> modelgl -> bondid[0][0][j+i] = allocint (2);
       this_proj -> modelgl -> bondid[0][0][j+i][0] = new_bond_list[j][0] + this_proj -> natomes - removed;
       this_proj -> modelgl -> bondid[0][0][j+i][1] = new_bond_list[j][1] + this_proj -> natomes - removed;
     }
     this_proj -> modelgl -> bonds[0][0] += nbd;
     this_proj -> modelgl -> allbonds[0] += nbd;
-    g_free (tmpbondid);
   }
 }
 
@@ -116,7 +103,7 @@ void add_bonds_to_list (int ** new_bond_list, int nat, int nbd, atomic_object * 
 */
 void prepare_to_instert (gchar * key, project * this_proj, atom_search * asearch, gboolean visible)
 {
-  int i = get_selected_object_id (visible, this_proj -> id,  key, asearch);
+  int i = get_selected_object_id (visible, this_proj -> id, key, asearch);
   if (i == FROM_PROJECT || i == FROM_DATA || i > 0) to_insert_in_project (i, -1, this_proj, asearch, visible);
 }
 
@@ -144,4 +131,3 @@ G_MODULE_EXPORT void set_atoms_to_insert (GtkComboBox * box, gpointer data)
   }
   gtk_combo_box_set_active (box, 0);
 }
-

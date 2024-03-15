@@ -1383,7 +1383,7 @@ gboolean do_we_have_objects_in_selection (project * this_proj, atom_search * ase
         if (asearch -> todo[l]) i++;
         if (asearch -> action == REPLACE)
         {
-          if (get_insert_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[0], -(l+3), 0))
+          if (get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[0], -(l+3), 0))
           {
             if (asearch -> todo[l]) j ++;
           }
@@ -1569,7 +1569,7 @@ gboolean do_we_have_objects_in_selection (project * this_proj, atom_search * ase
           for (l=0; l<asearch -> todo_size; l++)
           {
             if (asearch -> todo[l]) i ++;
-            pio = get_insert_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[m], l, 0);
+            pio = get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[m], l, 0);
             if (pio)
             {
               if (asearch -> todo[l])

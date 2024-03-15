@@ -106,8 +106,6 @@ int find_spec_id (int s, int z, double * list_z)
 */
 int search_for_new_spec (atom_edition * edit, atomic_object * object)
 {
-  double * tmpnzid;
-
   coord_info * coord = edit -> coord;
   int i, j, k, l, m;
   i = 0;
@@ -119,13 +117,9 @@ int search_for_new_spec (atom_edition * edit, atomic_object * object)
       if (k < 0)
       {
         i ++;
-        tmpnzid = allocdouble (coord -> species+i);
-        for (l=0; l<coord -> species+i-1; l++) tmpnzid[l] = edit -> new_z[l];
-        tmpnzid[l] = (double)object -> old_z[j];
-        if (edit -> new_z) g_free (edit -> new_z);
-        edit -> new_z = duplicate_double (coord -> species+i, tmpnzid);
-        g_free (tmpnzid);
-      }
+        edit -> new_z = g_realloc (edit -> new_z, (coord -> species+i)*sizeof*edit -> new_z);
+        edit -> new_z[coord -> species+i-1] = (double)object -> old_z[j];
+       }
     }
   }
 

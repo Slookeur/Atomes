@@ -404,7 +404,7 @@ atom_search * allocate_atom_search (int proj, int action, int searchid, int tsiz
   }
   asearch -> recompute_bonding = FALSE;
   if (searchid != 5) allocate_todo (asearch, tsize);
-  clean_picked_and_labelled (asearch, TRUE);
+  if (get_project_by_id(proj) -> modelgl) clean_picked_and_labelled (asearch, TRUE);
   return asearch;
 }
 

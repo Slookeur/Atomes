@@ -50,7 +50,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glview.h"
 
 extern GtkTreeStore * tool_model;
-extern GtkTreeModel * replace_combo_tree (gboolean insert, int p);
+extern GtkTreeModel * replace_combo_tree (gboolean insert, int proj);
 
 /*!
   \fn void update_insert_combos ()

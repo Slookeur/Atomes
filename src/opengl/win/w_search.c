@@ -99,9 +99,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   GtkWidget * prepare_box_too_much (atom_search * asearch);
   GtkWidget * selection_tab (atom_search * asearch, int nats);
 
-  GtkTreeModel * replace_combo_tree (gboolean insert, int p);
+  GtkTreeModel * replace_combo_tree (gboolean insert, int proj);
 
-  atomic_object * get_insert_object_by_origin (atomic_object * first, int oid, int aid);
+  atomic_object * get_atomic_object_by_origin (atomic_object * first, int oid, int aid);
 
 */
 
@@ -463,7 +463,7 @@ void check_all_trees (project * this_proj)
 }
 
 /*!
-  \fn atomic_object * get_insert_object_by_origin (atomic_object * first, int oid, int aid)
+  \fn atomic_object * get_atomic_object_by_origin (atomic_object * first, int oid, int aid)
 
   \brief get insert object from a list by id
 
@@ -471,7 +471,7 @@ void check_all_trees (project * this_proj)
   \param oid object origin id (type of origin)
   \param aid object id
 */
-atomic_object * get_insert_object_by_origin (atomic_object * first, int oid, int aid)
+atomic_object * get_atomic_object_by_origin (atomic_object * first, int oid, int aid)
 {
   atomic_object * object = first;
   while (object)
@@ -702,7 +702,7 @@ void append_to_model (GtkTreeIter * atom_level, atom_search * asearch, gboolean 
       gtk_tree_store_set (asearch -> atom_model, atom_level, TOPIC, asearch -> todo[i], -1);
       if (asearch -> action == REPLACE)
       {
-        object = get_insert_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[0], i, 0);
+        object = get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[0], i, 0);
         gtk_tree_store_set (asearch -> atom_model, atom_level, TOPIC+1, (object) ? object -> name : "Select ...", TOPIC+3, h, -1);
       }
       break;
@@ -973,7 +973,7 @@ void fill_atom_model (atom_search * asearch, project * this_proj)
                     if (asearch -> action == REPLACE && asearch -> in_selection)
                     {
                       picked_names[h] = adjust_picked (picked_names[h],
-                                                       get_insert_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[n], (asearch -> mode) ? -(h+3) : (asearch -> passivating) ? h : i, 0),
+                                                       get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[n], (asearch -> mode) ? -(h+3) : (asearch -> passivating) ? h : i, 0),
                                                        doit);
                       doit = FALSE;
                     }
@@ -999,7 +999,7 @@ void fill_atom_model (atom_search * asearch, project * this_proj)
                   if (asearch -> action == REPLACE && asearch -> in_selection)
                   {
                     picked_names[h] = adjust_picked (picked_names[h],
-                                                     get_insert_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[n], (asearch -> mode) ? -(h+3) : (asearch -> passivating) ? h : i, 0),
+                                                     get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[n], (asearch -> mode) ? -(h+3) : (asearch -> passivating) ? h : i, 0),
                                                      doit);
                   }
                   if (asearch -> action != REPLACE || n || ! picked_names[h] || asearch -> mode) break;
@@ -1029,7 +1029,7 @@ void fill_atom_model (atom_search * asearch, project * this_proj)
                     if (asearch -> action == REPLACE && asearch -> in_selection)
                     {
                       picked_names[h] = adjust_picked (picked_names[h],
-                                                       get_insert_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[n], (asearch -> mode) ? -(h+3) : (asearch -> passivating) ? h : i, 0),
+                                                       get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[n], (asearch -> mode) ? -(h+3) : (asearch -> passivating) ? h : i, 0),
                                                        doit);
                     }
                     if (asearch -> action != REPLACE || n || ! picked_names[h] || asearch -> mode) break;
@@ -2542,7 +2542,7 @@ G_MODULE_EXPORT void changed_action_renderer (GtkCellRendererCombo * combo, gcha
       {
         j = (asearch -> mode) ? h - 2 : abs(h) - 1;
         to_insert_in_project (i, j, this_proj, asearch, TRUE);
-        str = (asearch -> mode) ? g_strdup_printf ("%s", get_insert_object_by_origin(this_proj -> modelgl -> atom_win -> to_be_inserted[k], j, 0) -> name) : g_strdup_printf ("For all: %s", get_insert_object_by_origin(this_proj -> modelgl -> atom_win -> to_be_inserted[k], j, 0) -> name);
+        str = (asearch -> mode) ? g_strdup_printf ("%s", get_atomic_object_by_origin(this_proj -> modelgl -> atom_win -> to_be_inserted[k], j, 0) -> name) : g_strdup_printf ("For all: %s", get_atomic_object_by_origin(this_proj -> modelgl -> atom_win -> to_be_inserted[k], j, 0) -> name);
         gtk_tree_store_set (asearch -> atom_model, iter, TOPIC+1, str, -1);
         g_free (str);
       }
@@ -2566,11 +2566,11 @@ G_MODULE_EXPORT void changed_action_renderer (GtkCellRendererCombo * combo, gcha
               gtk_tree_model_get (GTK_TREE_MODEL(asearch -> atom_model), & child, IDCOL, & j, -1);
               j --;
               to_insert_in_project (i, j, this_proj, asearch, TRUE);
-              gtk_tree_store_set (asearch -> atom_model, & child, TOPIC+1, get_insert_object_by_origin(this_proj -> modelgl -> atom_win -> to_be_inserted[k], j, 0) -> name, -1);
+              gtk_tree_store_set (asearch -> atom_model, & child, TOPIC+1, get_atomic_object_by_origin(this_proj -> modelgl -> atom_win -> to_be_inserted[k], j, 0) -> name, -1);
               dothis =  gtk_tree_model_iter_next (GTK_TREE_MODEL(asearch -> atom_model), & child);
             }
           }
-          str = g_strdup_printf ("For all: %s", get_insert_object_by_origin(this_proj -> modelgl -> atom_win -> to_be_inserted[k], j, 0) -> name);
+          str = g_strdup_printf ("For all: %s", get_atomic_object_by_origin(this_proj -> modelgl -> atom_win -> to_be_inserted[k], j, 0) -> name);
           gtk_tree_store_set (asearch -> atom_model, iter, TOPIC+1, str, -1);
           g_free (str);
         }
@@ -2605,14 +2605,14 @@ G_MODULE_EXPORT void changed_action_renderer (GtkCellRendererCombo * combo, gcha
 }
 
 /*!
-  \fn GtkTreeModel * replace_combo_tree (gboolean insert, int p)
+  \fn GtkTreeModel * replace_combo_tree (gboolean insert, int proj)
 
   \brief replace combo box in the tree view
 
   \param insert add 'Select ...' combo box item
   \param p target crystal builder project id
 */
-GtkTreeModel * replace_combo_tree (gboolean insert, int p)
+GtkTreeModel * replace_combo_tree (gboolean insert, int proj)
 {
   GtkTreeIter iter, iter2, iter3;
   GtkTreeStore *store;
@@ -2675,10 +2675,13 @@ GtkTreeModel * replace_combo_tree (gboolean insert, int p)
     gtk_tree_store_append (store, &iter, NULL);
     gtk_tree_store_set (store, & iter, 0, "Copied data", -1);
   }
-  if (get_project_by_id(p) -> modelgl -> builder_win)
+  if (get_project_by_id(proj) -> modelgl)
   {
-    gtk_tree_store_append (store, &iter, NULL);
-    gtk_tree_store_set (store, & iter, 0, "Empty position", -1);
+    if (get_project_by_id(proj) -> modelgl -> builder_win)
+    {
+      gtk_tree_store_append (store, &iter, NULL);
+      gtk_tree_store_set (store, & iter, 0, "Empty position", -1);
+    }
   }
   return GTK_TREE_MODEL (store);
 }
@@ -2749,7 +2752,7 @@ G_MODULE_EXPORT void set_i_coord (GtkEntry * res, gpointer data)
   int ax = GPOINTER_TO_INT (data);
   project * this_proj = get_project_by_id (csearch -> proj);
   int oid = (csearch -> pointer[0].c == 5) ? 1 : 2;
-  atomic_object * object = get_insert_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[oid], 0, atom_to_edit+1);
+  atomic_object * object = get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[oid], 0, atom_to_edit+1);
   object -> baryc[ax] = v;
   update_entry_double (res, object -> baryc[ax]);
 }
@@ -2913,7 +2916,7 @@ void get_coord_iter_and_edit (gchar * path_string, gpointer data, GtkWidget * wi
           break;
         default:
           i = (csearch -> pointer[0].c == 5) ? 1 : 2;
-          iobj = get_insert_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[i], 0, atom_to_edit+1);
+          iobj = get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[i], 0, atom_to_edit+1);
           if (cid -> b - TOLAB)
           {
             str = g_strdup_printf ("Site occupancy for %s", prepare_for_title(iobj -> name));
