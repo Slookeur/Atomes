@@ -2610,7 +2610,7 @@ G_MODULE_EXPORT void changed_action_renderer (GtkCellRendererCombo * combo, gcha
   \brief replace combo box in the tree view
 
   \param insert add 'Select ...' combo box item
-  \param p target crystal builder project id
+  \param proj target crystal builder project id
 */
 GtkTreeModel * replace_combo_tree (gboolean insert, int proj)
 {

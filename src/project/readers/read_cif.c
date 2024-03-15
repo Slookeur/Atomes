@@ -55,10 +55,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   gchar * get_atom_label (gchar * line, int lid);
   gchar * get_string_from_origin (space_group * spg);
 
+  G_MODULE_EXPORT void set_cif_to_insert (GtkComboBox * box, gpointer data);
   void file_get_to_line (int line_id);
   void check_for_to_lab (int ato, gchar * stlab);
-
-  G_MODULE_EXPORT void select_cif_species (GtkButton * but, gpointer data);
 
 */
 
@@ -362,7 +361,6 @@ gboolean get_missing_object_from_user ()
     {
       gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(but), cell_list -> data, "markup", 0, NULL);
     }
-    // but = create_button ("Not picked yet !", IMG_NONE, NULL, 150, -1, GTK_RELIEF_NORMAL, G_CALLBACK(select_cif_species), GINT_TO_POINTER(i));
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, but, FALSE, FALSE, 0);
     add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, img_cif[i], FALSE, FALSE, 30);
   }
