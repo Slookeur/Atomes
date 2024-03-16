@@ -1801,6 +1801,11 @@ int open_cif_file (int linec)
       gboolean dist_message = TRUE;
       gboolean save_it;
       i = 0;
+      // Determine the number of object positions only
+      // this_reader -> num_sym_pos * this_reader -> tolab;
+      // Allocate a table of that size (integer) to store the id
+      // Allocate a table of that size (integer) to store the object type
+      // For occupancy allocate a third table for occupancy at that position
       for (j=0; j<this_reader -> num_sym_pos; j++)
       {
         for (k=0; k<3; k++)
@@ -1825,6 +1830,7 @@ int open_cif_file (int linec)
                         spgpos[1][0], spgpos[1][1], spgpos[1][2], spgpos[1][3],
                         spgpos[2][0], spgpos[2][1], spgpos[2][2], spgpos[2][3],
                         0.0, 0.0, 0.0, 1.0);
+        // What about occupancy ?
         for (k=0; k<this_reader -> natomes; k++)
         {
           f_pos = vec3 (this_reader -> coord[k][0], this_reader -> coord[k][1], this_reader -> coord[k][2]);
@@ -1859,7 +1865,18 @@ int open_cif_file (int linec)
             all_pos[i].x = c_pos.x;
             all_pos[i].y = c_pos.y;
             all_pos[i].z = c_pos.z;
+           for (l=0; l<this_reader -> tolab; l++)
+           {
+             if (this_reader -> mislab[l] == k)
+             {
+                // This is an object
+                // Store the position id for this object
+                // Store the object type for this position
+
+             }
+           }
             // Insert object ?!
+
             l = this_reader -> lot[k];
             tmp_lot[i] = l;
             tmp_nsps[l] ++;
