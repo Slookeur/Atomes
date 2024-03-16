@@ -496,9 +496,10 @@ struct coord_file
   double * occupancy;                      /*!< Site(s) occupancy */
   int ** occupied;                         /*!< Occupancy status */
   int * multi;                             /*!< Multiplicity */
-  int tolab;                               /*!< Number of atom(s) mis-labelled */
-  int stolab;                              /*!< Number of object(s) to label */
-  int * mislab;                            /*!< List of mis-labelled object(s) */
+  int atom_unlabelled;                     /*!< Number of atom(s) unlabelled */
+  int * u_atom_list;                       /*!< List of unlabelled atom(s) */
+  int object_to_insert;                    /*!< Number of object(s) to label */
+  int * object_list;                       /*!< List of object to insert by atom(s) */
 };
 
 /*! \typedef MouseState

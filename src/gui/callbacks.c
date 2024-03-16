@@ -1360,7 +1360,7 @@ int open_coordinate_file (int id)
       if (this_reader -> z) g_free (this_reader -> z);
       if (this_reader -> nsps) g_free (this_reader -> nsps);
       if (this_reader -> label) g_free (this_reader -> label);
-      if (this_reader -> mislab) g_free (this_reader -> mislab);
+      if (this_reader -> object_list) g_free (this_reader -> object_list);
       if (this_reader -> coord) g_free (this_reader -> coord);
       if (this_reader -> lot) g_free (this_reader -> lot);
       if (this_reader -> sym_pos) g_free (this_reader -> sym_pos);

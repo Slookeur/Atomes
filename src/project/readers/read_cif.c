@@ -309,7 +309,7 @@ G_MODULE_EXPORT void set_cif_to_insert (GtkComboBox * box, gpointer data)
     cif_search -> todo[i]  = (! j) ? 0 : 1;
     if (! j) done = FALSE;
     cif_search -> in_selection = 0;
-    for (k=0; k<this_reader -> stolab; k++) cif_search -> in_selection += cif_search -> todo[k];
+    for (k=0; k<this_reader -> object_to_insert; k++) cif_search -> in_selection += cif_search -> todo[k];
   }
   str = (done) ? g_strdup_printf (APPLY) : g_strdup_printf (DELETEB);
   set_image_from_icon_name (img_cif[i], str);
@@ -324,7 +324,7 @@ G_MODULE_EXPORT void set_cif_to_insert (GtkComboBox * box, gpointer data)
 */
 gboolean get_missing_object_from_user ()
 {
-  cif_search = allocate_atom_search (activep, REPLACE, 0, this_reader -> stolab);
+  cif_search = allocate_atom_search (activep, REPLACE, 0, this_reader -> object_to_insert);
   cif_object = NULL;
   GtkWidget * info = dialogmodal ("Error while reading CIF file", GTK_WINDOW(MainWindow));
   GtkWidget * vbox, * hbox;
@@ -334,13 +334,13 @@ gboolean get_missing_object_from_user ()
                     "it is required to provide a suitable value for each and every missing parameter(s).</b>"
                     "\n\nPlease select an atom type for the following object(s):";
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label (labpick, 200, -1, 0.5, 0.5), FALSE, FALSE, 10);
-  img_cif = g_malloc0(this_reader -> stolab*sizeof*img_cif);
+  img_cif = g_malloc0(this_reader -> object_to_insert*sizeof*img_cif);
   GtkWidget * but;
   GtkCellRenderer * renderer;
   GtkTreeModel * model;
   GList * cell_list;
   int i;
-  for (i=0; i<this_reader -> stolab; i++)
+  for (i=0; i<this_reader -> object_to_insert; i++)
   {
     hbox = create_hbox(0);
     add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, FALSE, FALSE, 5);
@@ -369,9 +369,8 @@ gboolean get_missing_object_from_user ()
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label (endpick, 200, -1, 0.5, 0.5), FALSE, FALSE, 10);
   run_this_gtk_dialog (info, G_CALLBACK(run_destroy_dialog), NULL);
   g_free (img_cif);
-  // g_free (cif_search);
   destroy_this_widget (info);
-  return (cif_search -> in_selection == this_reader -> stolab) ? TRUE : FALSE;
+  return (cif_search -> in_selection == this_reader -> object_to_insert) ? TRUE : FALSE;
 }
 
 #ifndef OPENMP
@@ -686,8 +685,8 @@ void check_for_to_lab (int ato, gchar * stlab)
 {
   int i, j;
   j = -1;
-  // First is the labe of 'ato' already listed
-  for (i=0; i<this_reader -> stolab; i++)
+  // First is the label of 'ato' already listed
+  for (i=0; i<this_reader -> object_to_insert; i++)
   {
     if (g_strcmp0(this_reader -> label[i], stlab) == 0)
     {
@@ -699,25 +698,29 @@ void check_for_to_lab (int ato, gchar * stlab)
   {
     if (this_reader -> label)
     {
-      this_reader -> label = g_realloc (this_reader -> label, (this_reader -> stolab+1)*sizeof*this_reader -> label);
+      this_reader -> label = g_realloc (this_reader -> label, (this_reader -> object_to_insert+1)*sizeof*this_reader -> label);
     }
     else
     {
       this_reader -> label = g_malloc0 (1*sizeof*this_reader -> label);
     }
-    this_reader -> label[this_reader -> stolab] = g_strdup_printf ("%s", stlab);
-    this_reader -> stolab ++;
+    this_reader -> label[this_reader -> object_to_insert] = g_strdup_printf ("%s", stlab);
+    this_reader -> object_to_insert ++;
+    j = this_reader -> object_to_insert-1;
   }
-  if (this_reader -> mislab)
+  if (this_reader -> object_list)
   {
-    this_reader -> mislab = g_realloc (this_reader -> mislab, (this_reader -> tolab+1)*sizeof*this_reader -> mislab);
+    this_reader -> object_list = g_realloc (this_reader -> object_list, (this_reader -> atom_unlabelled+1)*sizeof*this_reader -> object_list);
+    this_reader -> u_atom_list = g_realloc (this_reader -> u_atom_list, (this_reader -> atom_unlabelled+1)*sizeof*this_reader -> u_atom_list);
   }
   else
   {
-    this_reader -> mislab = g_malloc0 (1*sizeof*this_reader -> mislab);
+    this_reader -> object_list = g_malloc0 (1*sizeof*this_reader -> object_list);
+    this_reader -> u_atom_list = g_malloc0 (1*sizeof*this_reader -> u_atom_list);
   }
-  this_reader -> mislab[this_reader -> tolab] = ato;
-  this_reader -> tolab ++;
+  this_reader -> object_list[this_reader -> atom_unlabelled] = j;
+  this_reader -> u_atom_list[this_reader -> atom_unlabelled] = ato;
+  this_reader -> atom_unlabelled ++;
 }
 
 /*!
@@ -826,7 +829,7 @@ gboolean cif_file_get_atoms_data (int lin, int cid[8])
       i = 0;
       while (tmp_obj)
       {
-        j = this_reader -> mislab[i];
+        j = this_reader -> object_list[i];
         if (tmp_obj -> type > 0) check_for_species ((double)tmp_obj -> type, j);
         i ++;
         tmp_obj = tmp_obj -> next;
@@ -1721,7 +1724,7 @@ int cif_get_space_group (int linec)
 int open_cif_file (int linec)
 {
   int res;
-  int i, j, k, l;
+  int i, j, k, l, m;
   if (cif_get_cell_data (linec))
   {
     i = cif_get_space_group (linec);
@@ -1791,20 +1794,28 @@ int open_cif_file (int linec)
       active_project -> steps = 1;
       double spgpos[3][4];
       int max_pos = this_reader -> num_sym_pos * this_reader -> natomes;
+      int max_obj = this_reader -> num_sym_pos * this_reader -> atom_unlabelled;
       int * tmp_nsps = allocint (this_reader -> nspec);
       int * tmp_lot = allocint (max_pos);
+      // Determine the number of object positions only
+      // this_reader -> num_sym_pos * this_reader -> atom_unlabelled;
+      // Allocate a table of that size (integer) to store the id
+      // Allocate a table of that size (integer) to store the object type
+      int * obj_id = NULL;
+      int * obj_type = NULL;
+      if (this_reader -> atom_unlabelled)
+      {
+        obj_id = allocint (max_obj);
+        obj_type = allocint (max_obj);
+      }
       vec3_t f_pos, c_pos;
       vec3_t * all_pos = g_malloc0 (max_pos*sizeof*all_pos);
       mat4_t pos_mat;
       atom at, bt;
       distance dist;
       gboolean dist_message = TRUE;
-      gboolean save_it;
-      i = 0;
-      // Determine the number of object positions only
-      // this_reader -> num_sym_pos * this_reader -> tolab;
-      // Allocate a table of that size (integer) to store the id
-      // Allocate a table of that size (integer) to store the object type
+      gboolean save_it, is_object;
+      i = m = 0;
       // For occupancy allocate a third table for occupancy at that position
       for (j=0; j<this_reader -> num_sym_pos; j++)
       {
@@ -1865,21 +1876,26 @@ int open_cif_file (int linec)
             all_pos[i].x = c_pos.x;
             all_pos[i].y = c_pos.y;
             all_pos[i].z = c_pos.z;
-           for (l=0; l<this_reader -> tolab; l++)
-           {
-             if (this_reader -> mislab[l] == k)
-             {
+            is_object = FALSE;
+            for (l=0; l<this_reader -> atom_unlabelled; l++)
+            {
+              if (this_reader -> u_atom_list[l] == k)
+              {
                 // This is an object
+                is_object = TRUE;
                 // Store the position id for this object
+                obj_id[m]= i;
                 // Store the object type for this position
-
-             }
-           }
-            // Insert object ?!
-
-            l = this_reader -> lot[k];
-            tmp_lot[i] = l;
-            tmp_nsps[l] ++;
+                obj_type[m]= this_reader -> object_list[l];
+                m ++;
+              }
+            }
+            if (! is_object)
+            {
+              l = this_reader -> lot[k];
+              tmp_lot[i] = l;
+              tmp_nsps[l] ++;
+            }
             i ++;
           }
         }
