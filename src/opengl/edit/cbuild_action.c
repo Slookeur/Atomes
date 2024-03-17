@@ -1032,12 +1032,12 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
       {
         if (! object)
         {
-          this_proj -> modelgl -> atom_win -> to_be_inserted[2] = duplicate_atomic_object (get_atomic_object_by_origin(cif_object, this_reader -> object_list[j], 0));
+          this_proj -> modelgl -> atom_win -> to_be_inserted[2] = duplicate_atomic_object (get_atomic_object_by_origin (cif_object, this_reader -> object_list[j], 0));
           object = this_proj -> modelgl -> atom_win -> to_be_inserted[2];
         }
         else
         {
-          object -> next = duplicate_atomic_object (get_atomic_object_by_origin(cif_object, this_reader -> object_list[j], 0));
+          object -> next = duplicate_atomic_object (get_atomic_object_by_origin (cif_object, this_reader -> object_list[j], 0));
         }
         // insert_this_project_from_lib (0, FALSE, this_proj, this_proj -> modelgl -> search_widg[7]);
       }

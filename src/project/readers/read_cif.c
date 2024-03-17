@@ -1795,6 +1795,8 @@ int open_cif_file (int linec)
       double spgpos[3][4];
       int max_pos = this_reader -> num_sym_pos * this_reader -> natomes;
       int max_obj = this_reader -> num_sym_pos * this_reader -> atom_unlabelled;
+      // nspec depends on the species in the objects
+      // So analyze each object before the next step
       int * tmp_nsps = allocint (this_reader -> nspec);
       int * tmp_lot = allocint (max_pos);
       // Determine the number of object positions only
@@ -1888,8 +1890,10 @@ int open_cif_file (int linec)
                 // Store the object type for this position
                 obj_type[m]= this_reader -> object_list[l];
                 m ++;
+                n +=  get_atomic_object_by_origin (cif_object, this_reader -> object_list[l], 0) -> atoms;
               }
             }
+            tmp_lot[i] = -1;
             if (! is_object)
             {
               l = this_reader -> lot[k];
@@ -1900,17 +1904,31 @@ int open_cif_file (int linec)
           }
         }
       }
-      active_project -> natomes = i;
+      active_project -> natomes = i+n-m;
       allocatoms (active_project);
       g_free (this_reader -> lot);
       this_reader -> lot = allocint (active_project -> natomes);
-      for (i=0; i<active_project -> natomes; i++)
+      atomic_object * c_obj;
+      k = l = 0;
+      for (j=0; j<i; j++)
       {
-        active_project -> atoms[0][i].id = i;
-        active_project -> atoms[0][i].sp = this_reader -> lot[i] = tmp_lot[i];
-        active_project -> atoms[0][i].x = all_pos[i].x;
-        active_project -> atoms[0][i].y = all_pos[i].y;
-        active_project -> atoms[0][i].z = all_pos[i].z;
+        if (tmp_lot[j] < 0)
+        {
+          // Inserting an object
+          c_obj = get_atomic_object_by_origin (cif_object, obj_type[l], 0) -> atoms;
+
+          l ++;
+          k += c_obj -> atoms;
+        }
+        else
+        {
+          active_project -> atoms[0][k].id = k;
+          active_project -> atoms[0][k].sp = tmp_lot[j];
+          active_project -> atoms[0][k].x = all_pos[j].x;
+          active_project -> atoms[0][k].y = all_pos[j].y;
+          active_project -> atoms[0][k].z = all_pos[j].z;
+          k ++;
+        }
       }
       g_free (tmp_lot);
       g_free (this_reader -> nsps);
