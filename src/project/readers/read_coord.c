@@ -302,7 +302,7 @@ int open_coord_file (gchar * filename, int fti)
     else
     {
       tail -> next = g_malloc0 (sizeof*tail -> next);
-      if (fti == 9)
+      if (fti == 9 || fti == 10)
       {
         tail -> next -> prev = g_malloc0 (sizeof*tail -> next -> prev);
         tail -> next -> prev = tail;

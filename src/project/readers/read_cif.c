@@ -1099,7 +1099,12 @@ int cif_file_get_number_of_positions (int linec, int lid)
   int i = 0;
   while (! res)
   {
+#ifdef OPENMP
     this_line = g_strdup_printf ("%s", coord_line[lid+i]);
+#else
+    file_get_to_line (lid+i);
+    this_line = g_strdup_printf ("%s", tail -> line);
+#endif
     this_word = strtok (this_line, " ");
     if (this_word[0] == '_' || g_strcmp0(this_word, "loop_") == 0)
     {
@@ -1116,30 +1121,37 @@ int cif_file_get_number_of_positions (int linec, int lid)
     this_reader -> sym_pos = g_malloc0(i*sizeof*this_reader -> sym_pos);
     int j, k;
     gchar * str;
+    gchar * sym_pos_line;
     for (j=0; j<i; j++)
     {
       this_reader -> sym_pos[j] = g_malloc0(3*sizeof*this_reader -> sym_pos[j]);
-      this_line = g_strdup_printf ("%s", coord_line[lid+j]);
+#ifdef OPENMP
+      sym_pos_line = g_strdup_printf ("%s", coord_line[lid+j]);
+#else
+      file_get_to_line (lid+j);
+      sym_pos_line = g_strdup_printf ("%s", tail -> line);
+#endif
+      this_line = g_strdup_printf ("%s", sym_pos_line);
       this_word = strtok (this_line, " ");
       str = g_strdup_printf ("%d", j+1);
-      this_line = g_strdup_printf ("%s", coord_line[lid+j]);
       if (g_strcmp0(this_word, str) == 0)
       {
         g_free (this_line);
         this_line = NULL;
-        for (k=strlen(this_word); k<strlen(coord_line[lid+j]); k++)
+        for (k=strlen(this_word); k<strlen(sym_pos_line); k++)
         {
           if (! this_line)
           {
-            this_line = g_strdup_printf ("%c", coord_line[lid+j][k]);
+            this_line = g_strdup_printf ("%c", sym_pos_line[k]);
           }
           else
           {
-            this_line = g_strdup_printf ("%s%c", this_line, coord_line[lid+j][k]);
+            this_line = g_strdup_printf ("%s%c", this_line, sym_pos_line[k]);
           }
         }
       }
       g_free (str);
+      g_free (sym_pos_line);
       this_line = substitute_string (this_line, "'", NULL);
       this_line = substitute_string (this_line, ",", " ");
       this_word = strtok (this_line, " ");
@@ -1724,7 +1736,7 @@ int cif_get_space_group (int linec)
 int open_cif_file (int linec)
 {
   int res;
-  int i, j, k, l, m;
+  int i, j, k, l, m, n, o;
   if (cif_get_cell_data (linec))
   {
     i = cif_get_space_group (linec);
@@ -1795,9 +1807,8 @@ int open_cif_file (int linec)
       double spgpos[3][4];
       int max_pos = this_reader -> num_sym_pos * this_reader -> natomes;
       int max_obj = this_reader -> num_sym_pos * this_reader -> atom_unlabelled;
-      // nspec depends on the species in the objects
-      // So analyze each object before the next step
-      int * tmp_nsps = allocint (this_reader -> nspec);
+      gboolean dist_message = TRUE;
+      gboolean save_it, is_object;
       int * tmp_lot = allocint (max_pos);
       // Determine the number of object positions only
       // this_reader -> num_sym_pos * this_reader -> atom_unlabelled;
@@ -1815,9 +1826,7 @@ int open_cif_file (int linec)
       mat4_t pos_mat;
       atom at, bt;
       distance dist;
-      gboolean dist_message = TRUE;
-      gboolean save_it, is_object;
-      i = m = 0;
+      i = m = n = 0;
       // For occupancy allocate a third table for occupancy at that position
       for (j=0; j<this_reader -> num_sym_pos; j++)
       {
@@ -1869,6 +1878,7 @@ int open_cif_file (int linec)
                  this_reader -> setting = ! this_reader -> setting;
                  dist_message = FALSE;
                }
+               // Because of this entire species might be removed
                save_it = FALSE;
                break;
             }
@@ -1891,6 +1901,7 @@ int open_cif_file (int linec)
                 obj_type[m]= this_reader -> object_list[l];
                 m ++;
                 n +=  get_atomic_object_by_origin (cif_object, this_reader -> object_list[l], 0) -> atoms;
+                break;
               }
             }
             tmp_lot[i] = -1;
@@ -1898,16 +1909,14 @@ int open_cif_file (int linec)
             {
               l = this_reader -> lot[k];
               tmp_lot[i] = l;
-              tmp_nsps[l] ++;
             }
             i ++;
           }
         }
       }
+      int * spec_num = allocint (120);
       active_project -> natomes = i+n-m;
       allocatoms (active_project);
-      g_free (this_reader -> lot);
-      this_reader -> lot = allocint (active_project -> natomes);
       atomic_object * c_obj;
       k = l = 0;
       for (j=0; j<i; j++)
@@ -1915,15 +1924,27 @@ int open_cif_file (int linec)
         if (tmp_lot[j] < 0)
         {
           // Inserting an object
-          c_obj = get_atomic_object_by_origin (cif_object, obj_type[l], 0) -> atoms;
-
+          c_obj = get_atomic_object_by_origin (cif_object, obj_type[l], 0);
+          for (m=0; m<c_obj -> atoms; m++)
+          {
+            active_project -> atoms[0][k].id = k;
+            n = c_obj -> at_list[m].sp;
+            o = c_obj -> old_z[n];
+            spec_num[o] ++;
+            active_project -> atoms[0][k].sp = o;
+            active_project -> atoms[0][k].x = all_pos[j].x + c_obj -> at_list[m].x;
+            active_project -> atoms[0][k].y = all_pos[j].y + c_obj -> at_list[m].y;
+            active_project -> atoms[0][k].z = all_pos[j].z + c_obj -> at_list[m].z;
+            k ++;
+          }
           l ++;
-          k += c_obj -> atoms;
         }
         else
         {
           active_project -> atoms[0][k].id = k;
-          active_project -> atoms[0][k].sp = tmp_lot[j];
+          o = (int)this_reader -> z[tmp_lot[j]];
+          spec_num[o] ++;
+          active_project -> atoms[0][k].sp = o;
           active_project -> atoms[0][k].x = all_pos[j].x;
           active_project -> atoms[0][k].y = all_pos[j].y;
           active_project -> atoms[0][k].z = all_pos[j].z;
@@ -1932,8 +1953,40 @@ int open_cif_file (int linec)
       }
       g_free (tmp_lot);
       g_free (this_reader -> nsps);
-      this_reader -> nsps = duplicate_int (this_reader -> nspec, tmp_nsps);
+      int * tmp_nsps = allocint (120);
+      int * tmp_spid = allocint (120);
+      i = 0;
+      for (j=0; j<120; j++)
+      {
+        if (spec_num[j])
+        {
+          tmp_nsps[i] = spec_num[j];
+          tmp_spid[j] = i;
+          i++;
+        }
+      }
+      this_reader -> nspec = i;
+      this_reader -> nsps = allocint (i);
+      for (i=0; i<this_reader -> nspec; i++) this_reader -> nsps[i] = tmp_nsps[i];
       g_free (tmp_nsps);
+      g_free (this_reader -> z);
+      this_reader -> z = allocdouble(i);
+      i = 0;
+      for (j=0; j<120; j++)
+      {
+        if (spec_num[j])
+        {
+          this_reader -> z[i] = (double)j;
+          i ++;
+        }
+      }
+      for (i=0; i<active_project -> natomes; i++)
+      {
+        j = active_project -> atoms[0][i].sp;
+        k = tmp_spid[j];
+        active_project -> atoms[0][i].sp = k;
+      }
+      g_free (tmp_spid);
     }
   }
   else

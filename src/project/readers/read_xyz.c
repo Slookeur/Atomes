@@ -52,7 +52,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 int xyz_get_atom_coordinates ()
 {
   int i, j, k;
-  int v_dummy;
   double v;
   gchar * lia[4] = {"a", "b", "c", "d"};
   this_reader -> nspec = 0;
@@ -62,6 +61,7 @@ int xyz_get_atom_coordinates ()
   this_reader -> z = allocdouble (1);
   this_reader -> nsps = allocint (1);
 #ifdef OPENMP
+  int v_dummy;
   int res;
   int numth = omp_get_max_threads ();
   gboolean doatoms =  FALSE;
@@ -244,7 +244,6 @@ int xyz_get_atom_coordinates ()
         return 2;
       }
       v = get_z_from_periodic_table (this_word);
-      if ()
       if (v)
       {
         if (! i) check_for_species (v, j);
