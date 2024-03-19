@@ -369,7 +369,6 @@ gboolean get_missing_object_from_user ()
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, markup_label (endpick, 200, -1, 0.5, 0.5), FALSE, FALSE, 10);
   run_this_gtk_dialog (info, G_CALLBACK(run_destroy_dialog), NULL);
   g_free (img_cif);
-  destroy_this_widget (info);
   return (cif_search -> in_selection == this_reader -> object_to_insert) ? TRUE : FALSE;
 }
 
@@ -1736,7 +1735,7 @@ int cif_get_space_group (int linec)
 int open_cif_file (int linec)
 {
   int res;
-  int i, j, k, l, m, n, o;
+  int i, j, k, l, m, n;
   if (cif_get_cell_data (linec))
   {
     i = cif_get_space_group (linec);
@@ -1806,152 +1805,217 @@ int open_cif_file (int linec)
       active_project -> steps = 1;
       double spgpos[3][4];
       int max_pos = this_reader -> num_sym_pos * this_reader -> natomes;
-      int max_obj = this_reader -> num_sym_pos * this_reader -> atom_unlabelled;
-      gboolean dist_message = TRUE;
-      gboolean save_it, is_object;
-      int * tmp_lot = allocint (max_pos);
-      // Determine the number of object positions only
-      // this_reader -> num_sym_pos * this_reader -> atom_unlabelled;
-      // Allocate a table of that size (integer) to store the id
-      // Allocate a table of that size (integer) to store the object type
-      int * obj_id = NULL;
-      int * obj_type = NULL;
-      if (this_reader -> atom_unlabelled)
-      {
-        obj_id = allocint (max_obj);
-        obj_type = allocint (max_obj);
-      }
+      gboolean dist_message = FALSE;
+      gboolean save_it;
       vec3_t f_pos, c_pos;
-      vec3_t * all_pos = g_malloc0 (max_pos*sizeof*all_pos);
+      gboolean * save_pos = allocbool (max_pos);
       mat4_t pos_mat;
       atom at, bt;
       distance dist;
-      i = m = n = 0;
-      // For occupancy allocate a third table for occupancy at that position
-      for (j=0; j<this_reader -> num_sym_pos; j++)
+      vec3_t * all_pos = g_malloc0(max_pos*sizeof*all_pos);
+      double * all_occ = allocdouble (max_pos);
+      int * all_lot = allocint (max_pos);
+      int * insert_pos = allocint (this_reader -> natomes);
+      double u;
+      l = m = 0;
+      for (i=0; i<this_reader -> num_sym_pos; i++)
       {
-        for (k=0; k<3; k++)
+        for (j=0; j<3; j++)
         {
-          tmp_pos = g_strdup_printf ("%s", this_reader -> sym_pos[j][k]);
-          for (l=0; l<3; l++)
+          tmp_pos = g_strdup_printf ("%s", this_reader -> sym_pos[i][j]);
+          for (k=0; k<3; k++)
           {
-            spgpos[k][l] = get_val_from_wyckoff (vect_comp[l], this_reader -> sym_pos[j][k]);
+            spgpos[j][k] = get_val_from_wyckoff (vect_comp[k], this_reader -> sym_pos[i][j]);
           }
           if (tmp_pos)
           {
-            spgpos[k][3] = get_value_from_pos (tmp_pos);
+            spgpos[j][3] = get_value_from_pos (tmp_pos);
             g_free (tmp_pos);
             tmp_pos = NULL;
           }
           else
           {
-            spgpos[k][3] = 0.0;
+            spgpos[j][3] = 0.0;
           }
         }
         pos_mat = mat4 (spgpos[0][0], spgpos[0][1], spgpos[0][2], spgpos[0][3],
                         spgpos[1][0], spgpos[1][1], spgpos[1][2], spgpos[1][3],
                         spgpos[2][0], spgpos[2][1], spgpos[2][2], spgpos[2][3],
                         0.0, 0.0, 0.0, 1.0);
-        // What about occupancy ?
-        for (k=0; k<this_reader -> natomes; k++)
+        for (j=0; j<this_reader -> natomes; j++)
         {
-          f_pos = vec3 (this_reader -> coord[k][0], this_reader -> coord[k][1], this_reader -> coord[k][2]);
+          f_pos = vec3 (this_reader -> coord[j][0], this_reader -> coord[j][1], this_reader -> coord[j][2]);
           f_pos = m4_mul_coord (pos_mat, f_pos);
           c_pos = m4_mul_coord (this_reader -> lattice.box[0].frac_to_cart, f_pos);
-          at.x = c_pos.x;
-          at.y = c_pos.y;
-          at.z = c_pos.z;
-          save_it = TRUE;
-          for (l=0; l<i; l++)
+          all_lot[l] = this_reader -> lot[j];
+          all_pos[l].x = c_pos.x;
+          all_pos[l].y = c_pos.y;
+          all_pos[l].z = c_pos.z;
+          for (k=0; k<this_reader -> atom_unlabelled; k++)
           {
-            bt.x = all_pos[l].x;
-            bt.y = all_pos[l].y;
-            bt.z = all_pos[l].z;
-            dist = distance_3d (active_cell, 0, & at, & bt);
-            if (dist.length < 0.1)
+            if (this_reader -> u_atom_list[k] == j)
             {
-               if (dist_message)
-               {
-                 add_reader_info ("Atom(s) at equivalent positions have been removed\n"
-                                  "to ensure the consistency of the model\n"
-                                  "when using <b>P</b>eriodic <b>B</b>oundary <b>C</b>onditions\n ", 1);
-                 this_reader -> setting = ! this_reader -> setting;
-                 dist_message = FALSE;
-               }
-               // Because of this entire species might be removed
-               save_it = FALSE;
-               break;
+              all_lot[l] = - (this_reader -> object_list[k] + 1);
+              break;
             }
           }
-          if (save_it)
+          save_it = TRUE;
+          if (i)
           {
-            all_pos[i].x = c_pos.x;
-            all_pos[i].y = c_pos.y;
-            all_pos[i].z = c_pos.z;
-            is_object = FALSE;
-            for (l=0; l<this_reader -> atom_unlabelled; l++)
+            u = this_reader -> occupancy[j] * this_reader -> num_sym_pos;
+            if ((double)(insert_pos[j]+1) > u)
             {
-              if (this_reader -> u_atom_list[l] == k)
+              save_it = FALSE;
+            }
+            else
+            {
+              at.x = all_pos[l].x;
+              at.y = all_pos[l].y;
+              at.z = all_pos[l].z;
+              for (k=0; k<l; k++)
               {
-                // This is an object
-                is_object = TRUE;
-                // Store the position id for this object
-                obj_id[m]= i;
-                // Store the object type for this position
-                obj_type[m]= this_reader -> object_list[l];
-                m ++;
-                n +=  get_atomic_object_by_origin (cif_object, this_reader -> object_list[l], 0) -> atoms;
-                break;
+                bt.x = all_pos[k].x;
+                bt.y = all_pos[k].y;
+                bt.z = all_pos[k].z;
+                dist = distance_3d (active_cell, 0, & at, & bt);
+                g_debug ("i= %d, l= %d, k= %d, length= %f", i, l, k, dist.length);
+                if (dist.length < 0.1)
+                {
+                  save_it = FALSE;
+                  break;
+                }
               }
             }
-            tmp_lot[i] = -1;
-            if (! is_object)
+          }
+          g_debug ("save_it= %d", save_it);
+          all_occ[l] = this_reader -> occupancy[j];
+          save_pos[l] = save_it;
+          l ++;
+          if (save_it)
+          {
+            insert_pos[j] ++;
+            m ++;
+          }
+        }
+      }
+      g_free (insert_pos);
+      crystal_data * cryst = allocate_crystal_data (m, this_reader -> nspec + this_reader -> object_to_insert);
+      g_free (cryst -> insert);
+      cryst -> insert = g_malloc0(max_pos*sizeof*cryst -> insert);
+      i = 0;
+      int * cryst_lot = allocint (cryst -> objects);
+      for (j=0; j<max_pos; j++)
+      {
+        if (save_pos[j])
+        {
+          cryst -> coord[i] = g_malloc0(sizeof*cryst -> coord[i]);
+          cryst -> coord[i][0].x = all_pos[j].x;
+          cryst -> coord[i][0].y = all_pos[j].y;
+          cryst -> coord[i][0].z = all_pos[j].z;
+          cryst -> pos_by_object[i] = 1;
+          cryst -> occupancy[i] = all_occ[j];
+          cryst_lot[i] = all_lot[j];
+          if (all_lot[j] < 0)
+          {
+            cryst -> at_by_object[i] = get_atomic_object_by_origin (cif_object, - all_lot[j] - 1, 0) -> atoms;
+          }
+          else
+          {
+            cryst -> at_by_object[i] = 1;
+          }
+          i ++;
+        }
+      }
+      g_free (all_lot);
+      g_free (all_occ);
+      g_free (all_pos);
+      g_free (save_pos);
+      /*double u;
+      for (j=0; j<cryst -> objects; j++)
+      {
+        for (k=0; k<2; k++)
+        {
+          i = 1;
+          u = cryst -> occupancy[j];
+          if (u < 0.0 || u > 1.0)
+          {
+            cryst = free_crystal_data (cryst);
+            add_reader_info ("Impossible to build crystal: check occupancy !\n", 0);
+            return 3;
+          }
+          for (l=0; l<cryst -> objects; l++)
+          {
+            if (l != j)
             {
-              l = this_reader -> lot[k];
-              tmp_lot[i] = l;
+              if (fabs(cryst -> coord[j][0].x - cryst -> coord[l][0].x) < 0.1
+               && fabs(cryst -> coord[j][0].y - cryst -> coord[l][0].y) < 0.1
+               && fabs(cryst -> coord[j][0].z - cryst -> coord[l][0].z) < 0.1)
+               {
+                i ++;
+                u += cryst -> occupancy[l];
+                if (u > 1.00001)
+                {
+                  cryst = free_crystal_data (cryst);
+                  add_reader_info ("Impossible to build crystal: check occupancy !\n", 0);
+                  return 3;
+                }
+                if (k)
+                {
+                  cryst -> sites[j][i] = l;
+                }
+              }
             }
+          }
+          if (! k)
+          {
+            cryst -> sites[j] = allocint(i+1);
+            cryst -> sites[j][0] = i;
+            cryst -> sites[j][1] = j;
+            if (i > 1) cryst -> shared_sites = TRUE;
+          }
+        }
+      }
+      adjust_object_occupancy (cryst, 0, 1);*/
+
+      i = 0;
+      for (j=0; j<cryst -> objects; j++)
+      {
+        i += cryst -> at_by_object[j] * cryst -> pos_by_object[j];
+      }
+      active_project -> natomes = i;
+      allocatoms (active_project);
+      atomic_object * c_obj;
+      int * spec_num = allocint (120);
+      i = 0;
+      for (j=0; j<cryst -> objects; j++)
+      {
+        if (cryst_lot[j] < 0)
+        {
+          k = - cryst_lot[j] - 1;
+          c_obj = get_atomic_object_by_origin (cif_object, k, 0);
+          for (l=0; l<c_obj -> atoms; l++)
+          {
+            m = c_obj -> at_list[l].sp;
+            n = c_obj -> old_z[m];
+            spec_num[n] ++;
+            active_project -> atoms[0][i].sp = n;
+            active_project -> atoms[0][i].x = cryst -> coord[j][0].x + c_obj -> at_list[l].x;
+            active_project -> atoms[0][i].y = cryst -> coord[j][0].y + c_obj -> at_list[l].y;
+            active_project -> atoms[0][i].z = cryst -> coord[j][0].z + c_obj -> at_list[l].z;
             i ++;
           }
         }
-      }
-      int * spec_num = allocint (120);
-      active_project -> natomes = i+n-m;
-      allocatoms (active_project);
-      atomic_object * c_obj;
-      k = l = 0;
-      for (j=0; j<i; j++)
-      {
-        if (tmp_lot[j] < 0)
-        {
-          // Inserting an object
-          c_obj = get_atomic_object_by_origin (cif_object, obj_type[l], 0);
-          for (m=0; m<c_obj -> atoms; m++)
-          {
-            active_project -> atoms[0][k].id = k;
-            n = c_obj -> at_list[m].sp;
-            o = c_obj -> old_z[n];
-            spec_num[o] ++;
-            active_project -> atoms[0][k].sp = o;
-            active_project -> atoms[0][k].x = all_pos[j].x + c_obj -> at_list[m].x;
-            active_project -> atoms[0][k].y = all_pos[j].y + c_obj -> at_list[m].y;
-            active_project -> atoms[0][k].z = all_pos[j].z + c_obj -> at_list[m].z;
-            k ++;
-          }
-          l ++;
-        }
         else
         {
-          active_project -> atoms[0][k].id = k;
-          o = (int)this_reader -> z[tmp_lot[j]];
-          spec_num[o] ++;
-          active_project -> atoms[0][k].sp = o;
-          active_project -> atoms[0][k].x = all_pos[j].x;
-          active_project -> atoms[0][k].y = all_pos[j].y;
-          active_project -> atoms[0][k].z = all_pos[j].z;
-          k ++;
+          k = (int)this_reader -> z[cryst_lot[j]];
+          spec_num[k] ++;
+          active_project -> atoms[0][i].sp = k;
+          active_project -> atoms[0][i].x = cryst -> coord[j][0].x;
+          active_project -> atoms[0][i].y = cryst -> coord[j][0].y;
+          active_project -> atoms[0][i].z = cryst -> coord[j][0].z;
+          i ++;
         }
       }
-      g_free (tmp_lot);
       g_free (this_reader -> nsps);
       int * tmp_nsps = allocint (120);
       int * tmp_spid = allocint (120);
@@ -1987,6 +2051,13 @@ int open_cif_file (int linec)
         active_project -> atoms[0][i].sp = k;
       }
       g_free (tmp_spid);
+      if (dist_message)
+      {
+        add_reader_info ("Object(s) at equivalent positions have been removed\n"
+                         "to ensure the consistency of the model\n"
+                         "when using <b>P</b>eriodic <b>B</b>oundary <b>C</b>onditions\n ", 1);
+        this_reader -> setting = ! this_reader -> setting;
+      }
     }
   }
   else

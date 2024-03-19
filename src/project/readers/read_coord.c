@@ -440,12 +440,12 @@ int open_coord_file (gchar * filename, int fti)
             g_free (str);
           }
           active_chem -> chem_prop[CHEM_N][i] = set_neutron_ (& j);
+          active_chem -> chem_prop[CHEM_X][i] = active_chem -> chem_prop[CHEM_Z][i];
         }
         active_chem -> nsps[i] = this_reader -> nsps[i];
         g_print ("Reading coordinates [%s]:\t %s, nsps[%d]= %d\n", coord_files_ext[fti], active_chem -> label[i], i+1, active_chem -> nsps[i]);
         active_chem -> chem_prop[CHEM_Z][i] = this_reader -> z[i];
       }
-      cif_use_symmetry_positions = FALSE;
     }
     else
     {
@@ -468,6 +468,7 @@ int open_coord_file (gchar * filename, int fti)
       g_free (cif_object);
       cif_object = NULL;
     }
+    cif_use_symmetry_positions = FALSE;
   }
   return res;
 }

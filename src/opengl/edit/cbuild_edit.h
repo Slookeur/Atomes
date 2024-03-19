@@ -34,6 +34,28 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "global.h"
 #include <libxml/xmlreader.h>
 
+typedef struct crystal_data crystal_data;
+struct crystal_data
+{
+  int objects;
+  int spec;
+  double * z;
+  int ** lot;
+  int ** at_type;
+  int * nsps;
+  int * at_by_object;
+  int * pos_by_object;
+  double * occupancy;
+  gboolean overlapping;
+  int ** sites;
+  gboolean shared_sites;
+  gboolean with_holes;
+  gboolean * holes;
+  vec3_t * insert;
+  vec3_t ** coord;
+  vec3_t ** position;
+};
+
 extern int clean_xml_data (xmlDoc * doc, xmlTextReaderPtr reader);
 extern xmlNodePtr findnode (xmlNodePtr startnode, char * nname);
 extern gchar * groups[230];
@@ -51,6 +73,9 @@ extern G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data);
 extern G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data);
 extern double get_value_from_pos (gchar * pos);
 extern double get_val_from_wyckoff (gchar * pos, gchar * wval);
+extern crystal_data * allocate_crystal_data (int objects, int species);
+extern crystal_data * free_crystal_data (crystal_data * cryst);
+extern gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_cell);
 #ifdef GTK4
 extern G_MODULE_EXPORT void to_update_box (GtkEditable * widg, gpointer data);
 extern G_MODULE_EXPORT void to_update_vect (GtkEditable * widg, gpointer data);

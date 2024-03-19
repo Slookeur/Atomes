@@ -846,6 +846,7 @@ int action_atoms_from_project (project * this_proj, atom_search * asearch, gbool
         newchem -> chem_prop[CHEM_M][i] = set_mass_ (& m);
         newchem -> chem_prop[CHEM_R][i] = set_radius_ (& m, & n);
         newchem -> chem_prop[CHEM_N][i] = set_neutron_ (& m);
+        newchem -> chem_prop[CHEM_X][i] = newchem -> chem_prop[CHEM_Z][i];
         i ++;
       }
     }

@@ -579,28 +579,6 @@ space_group * duplicate_space_group (space_group * spg)
   return new_spg;
 }
 
-typedef struct crystal_data crystal_data;
-struct  crystal_data
-{
-  int objects;
-  int spec;
-  double * z;
-  int ** lot;
-  int ** at_type;
-  int * nsps;
-  int * at_by_object;
-  int * pos_by_object;
-  double * occupancy;
-  gboolean overlapping;
-  int ** sites;
-  gboolean shared_sites;
-  gboolean with_holes;
-  gboolean * holes;
-  vec3_t * insert;
-  vec3_t ** coord;
-  vec3_t ** position;
-};
-
 /*!
   \fn crystal_data * allocate_crystal_data (int objects, int species)
 
@@ -763,7 +741,7 @@ gboolean adjust_object_occupancy (crystal_data * cryst, int occupying, int tot_c
         k = cryst -> sites[i][j+1];
 #ifdef DEBUG
         g_debug ("\tj= %d, k= %d, sites[%d][0]= %d, occ[%d]= %f, pos_by_objects[%d]= %d",
-                      j+1, k+1, k+1, cryst -> sites[k][0], k+1, cryst -> occupancy[k], k+1, cryst -> pos_by_object[k]);
+                 j+1, k+1, k+1, cryst -> sites[k][0], k+1, cryst -> occupancy[k], k+1, cryst -> pos_by_object[k]);
 #endif
         if (cryst -> sites[k][0] > -1)
         {
@@ -1544,6 +1522,7 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
       active_chem -> chem_prop[CHEM_M][k] = set_mass_ (& j);
       active_chem -> chem_prop[CHEM_R][k] = set_radius_ (& j, & l);
       active_chem -> chem_prop[CHEM_N][k] = set_neutron_ (& j);
+      active_chem -> chem_prop[CHEM_X][k] = active_chem -> chem_prop[CHEM_Z][k];
 #ifdef DEBUG
       g_debug ("CRYSTAL:: spec= %d, label= %s, nsps= %d", k+1, active_chem -> label[k], active_chem -> nsps[k]);
 #endif
