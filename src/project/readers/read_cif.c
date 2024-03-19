@@ -276,8 +276,8 @@ int get_atom_wyckoff (gchar * line, int wid)
 }
 
 GtkWidget ** img_cif;
-atom_search * cif_search;
-atomic_object * cif_object;
+atom_search * cif_search = NULL;
+atomic_object * cif_object = NULL;
 
 /*!
   \fn G_MODULE_EXPORT void set_cif_to_insert (GtkComboBox * box, gpointer data)
@@ -745,6 +745,7 @@ gboolean cif_file_get_atoms_data (int lin, int cid[8])
     cline = g_strdup_printf ("%s", coord_line[i+lin]);
     str = get_atom_label (cline, (cid[0]) ? cid[0] : cid[1]);
     v = get_z_from_periodic_table (str);
+    g_debug ("str= %s, v= %f", str, v);
     #pragma omp critical
     {
       if (v)
@@ -822,18 +823,6 @@ gboolean cif_file_get_atoms_data (int lin, int cid[8])
   if (! done)
   {
     done = (cif_search) ? TRUE : get_missing_object_from_user ();
-    if (done)
-    {
-      atomic_object * tmp_obj = cif_object;
-      i = 0;
-      while (tmp_obj)
-      {
-        j = this_reader -> object_list[i];
-        if (tmp_obj -> type > 0) check_for_species ((double)tmp_obj -> type, j);
-        i ++;
-        tmp_obj = tmp_obj -> next;
-      }
-    }
   }
   return done;
 }
@@ -1815,7 +1804,70 @@ int open_cif_file (int linec)
       vec3_t * all_pos = g_malloc0(max_pos*sizeof*all_pos);
       double * all_occ = allocdouble (max_pos);
       int * all_lot = allocint (max_pos);
-      int * insert_pos = allocint (this_reader -> natomes);
+      int * cif_pos = allocint (this_reader -> natomes);
+      double ** cryst_pos = allocddouble (this_reader -> natomes, 3);
+      double ** occ_pos = g_malloc0(sizeof*occ_pos);
+      int ** lot_pos = g_malloc0(sizeof*lot_pos)
+      int num_pos = 0;
+      int max_pos = 0;
+      for (i=0; i<2; i++)
+      {
+        for (j=0; j<this_reader -> natomes; j++)
+        {
+          if (! j)
+          {
+            num_pos = 0;
+            for (k=0; k<3; k++) cryst_pos[num_pos][k] = this_reader -> coord[j][k];
+            if (i)
+            {
+              occ_pos[num_pos][0] = this_reader -> occupancy[j];
+              lot_pos[num_pos][0] = this_reader -> lot[j];
+            }
+            num_pos ++;
+            max_pos = 1;
+          }
+          else
+          {
+            save_it = TRUE;
+            for (k=0; k<num_pos; k++)
+            {
+              if (this_reader -> coord[j][0] == cryst_pos[k][0]
+                && this_reader -> coord[j][1] != cryst_pos[k][1]
+                && this_reader -> coord[j][2] != cryst_pos[k][2])
+              {
+                save_it = FALSE;
+                break;
+              }
+            }
+            if (save_it)
+            {
+              for (k=0; k<3; k++) cryst_pos[num_pos][k] = this_reader -> coord[j][k];
+              if (i)
+              {
+                occ_pos[num_pos][0] = this_reader -> occupancy[j];
+                lot_pos[num_pos][0] = this_reader -> lot[j];
+              }
+              num_pos ++;
+            }
+            else
+            {
+              if (i)
+              {
+                occ_pos[k][cif_pos[k]] = this_reader -> occupancy[j];
+                lot_pos[k][cif_pos[k]] = this_reader -> lot[j];
+              }
+              cif_pos[k] ++;
+              max_pos = max (max_pos; cif_pos[k]);
+            }
+          }
+        }
+        if (! i)
+        {
+          occ_pos = allocddouble (num_pos, max_pos);
+          lot_pos = allocddint (um_pos, max_pos);
+        }
+      }
+
       double u;
       l = m = 0;
       for (i=0; i<this_reader -> num_sym_pos; i++)
@@ -1842,12 +1894,12 @@ int open_cif_file (int linec)
                         spgpos[1][0], spgpos[1][1], spgpos[1][2], spgpos[1][3],
                         spgpos[2][0], spgpos[2][1], spgpos[2][2], spgpos[2][3],
                         0.0, 0.0, 0.0, 1.0);
-        for (j=0; j<this_reader -> natomes; j++)
+        for (j=0; j<num_pos; j++)
         {
-          f_pos = vec3 (this_reader -> coord[j][0], this_reader -> coord[j][1], this_reader -> coord[j][2]);
+          f_pos = vec3 (cryst_pos[j][0], cryst_pos[j][1], cryst_pos[j][2]);
           f_pos = m4_mul_coord (pos_mat, f_pos);
           c_pos = m4_mul_coord (this_reader -> lattice.box[0].frac_to_cart, f_pos);
-          all_lot[l] = this_reader -> lot[j];
+
           all_pos[l].x = c_pos.x;
           all_pos[l].y = c_pos.y;
           all_pos[l].z = c_pos.z;
@@ -1860,45 +1912,29 @@ int open_cif_file (int linec)
             }
           }
           save_it = TRUE;
-          if (i)
+          at.x = all_pos[l].x;
+          at.y = all_pos[l].y;
+          at.z = all_pos[l].z;
+          for (k=0; k<l; k++)
           {
-            u = this_reader -> occupancy[j] * this_reader -> num_sym_pos;
-            if ((double)(insert_pos[j]+1) > u)
+            bt.x = all_pos[k].x;
+            bt.y = all_pos[k].y;
+            bt.z = all_pos[k].z;
+            dist = distance_3d (active_cell, 0, & at, & bt);
+            if (dist.length < 0.1)
             {
               save_it = FALSE;
-            }
-            else
-            {
-              at.x = all_pos[l].x;
-              at.y = all_pos[l].y;
-              at.z = all_pos[l].z;
-              for (k=0; k<l; k++)
-              {
-                bt.x = all_pos[k].x;
-                bt.y = all_pos[k].y;
-                bt.z = all_pos[k].z;
-                dist = distance_3d (active_cell, 0, & at, & bt);
-                g_debug ("i= %d, l= %d, k= %d, length= %f", i, l, k, dist.length);
-                if (dist.length < 0.1)
-                {
-                  save_it = FALSE;
-                  break;
-                }
-              }
+              break;
             }
           }
-          g_debug ("save_it= %d", save_it);
-          all_occ[l] = this_reader -> occupancy[j];
           save_pos[l] = save_it;
           l ++;
-          if (save_it)
-          {
-            insert_pos[j] ++;
-            m ++;
-          }
+          if (save_it) m ++;
         }
       }
-      g_free (insert_pos);
+
+
+
       crystal_data * cryst = allocate_crystal_data (m, this_reader -> nspec + this_reader -> object_to_insert);
       g_free (cryst -> insert);
       cryst -> insert = g_malloc0(max_pos*sizeof*cryst -> insert);
@@ -1913,8 +1949,9 @@ int open_cif_file (int linec)
           cryst -> coord[i][0].y = all_pos[j].y;
           cryst -> coord[i][0].z = all_pos[j].z;
           cryst -> pos_by_object[i] = 1;
-          cryst -> occupancy[i] = all_occ[j];
-          cryst_lot[i] = all_lot[j];
+
+          //cryst -> occupancy[i] = all_occ[j];
+          //cryst_lot[i] = all_lot[j];
           if (all_lot[j] < 0)
           {
             cryst -> at_by_object[i] = get_atomic_object_by_origin (cif_object, - all_lot[j] - 1, 0) -> atoms;

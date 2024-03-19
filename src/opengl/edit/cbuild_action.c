@@ -1008,6 +1008,7 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
       }
       if (do_obj)
       {
+        g_debug ("do_obj , i= %d, j= %d, obj_list[%d]= %d", i, j, j, this_reader -> object_list[j]);
         if (! object)
         {
           this_proj -> modelgl -> atom_win -> to_be_inserted[2] = duplicate_atomic_object (get_atomic_object_by_origin (cif_object, this_reader -> object_list[j], 0));
