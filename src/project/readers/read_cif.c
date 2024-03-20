@@ -1139,6 +1139,7 @@ int cif_file_get_number_of_positions (int linec, int lid)
           }
         }
       }
+      g_free (k_word);
       g_free (str);
       g_free (sym_pos_line);
       this_line = substitute_string (this_line, "'", NULL);
