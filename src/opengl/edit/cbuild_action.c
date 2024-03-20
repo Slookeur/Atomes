@@ -1017,7 +1017,6 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
         {
           object -> next = duplicate_atomic_object (get_atomic_object_by_origin (cif_object, this_reader -> object_list[j], 0));
         }
-        // insert_this_project_from_lib (0, FALSE, this_proj, this_proj -> modelgl -> search_widg[7]);
       }
       else
       {

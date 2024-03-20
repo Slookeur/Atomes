@@ -46,7 +46,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   static void fill_workspace (GtkTreeStore * store);
 
   G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data);
-  G_MODULE_IMPORT void workspace_ondc (GtkTreeView * treeview,
+  G_MODULE_EXPORT void workspace_ondc (GtkTreeView * treeview,
                                        GtkTreePath * path,
                                        GtkTreeViewColumn  * col,
                                        gpointer data);
@@ -245,21 +245,21 @@ int find_proj_by_path (GtkTreePath * path)
 }
 
 /*!
-  \fn G_MODULE_IMPORT void workspace_ondc (GtkTreeView * treeview,
-*                                       GtkTreePath * path,
-*                                       GtkTreeViewColumn  * col,
-*                                       gpointer data)
+  \fn G_MODULE_EXPORT void workspace_ondc (GtkTreeView * treeview,
+                                           GtkTreePath * path,
+                                           GtkTreeViewColumn  * col,
+                                           gpointer data)
 
   \brief do something after Double Click in the workspace tree
-*- DC on a project name: activate this project
-*- DC elsewhere: display related information
+    - DC on a project name: activate this project
+    - DC elsewhere: display related information
 
   \param treeview the GtkTreeView
   \param path the GtkTreePath
   \param col the GtkTreeViewColumn
   \param data the associated data pointer
 */
-G_MODULE_IMPORT void workspace_ondc (GtkTreeView * treeview,
+G_MODULE_EXPORT void workspace_ondc (GtkTreeView * treeview,
                                      GtkTreePath * path,
                                      GtkTreeViewColumn  * col,
                                      gpointer data)
@@ -325,9 +325,6 @@ G_MODULE_IMPORT void workspace_ondc (GtkTreeView * treeview,
     }
   }
 }
-
-#define MOUSE_ACTIONS 2
-extern char * window_mouse[MOUSE_ACTIONS];
 
 /*!
   \fn void correct_this_window_title (GtkWidget * win, gchar * str)

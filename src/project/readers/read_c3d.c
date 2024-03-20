@@ -54,7 +54,6 @@ extern void check_for_species (double v, int ato);
 int c3d_get_atom_coordinates ()
 {
   int i, j, k;
-  int v_dummy;
   double v;
   gchar * lia[5] = {"a", "b", "c", "d", "e"};
   this_reader -> nspec = 0;
@@ -64,6 +63,7 @@ int c3d_get_atom_coordinates ()
   this_reader -> z = allocdouble (1);
   this_reader -> nsps = allocint (1);
 #ifdef OPENMP
+  int v_dummy;
   int res;
   int numth = omp_get_max_threads ();
   gboolean doatoms =  FALSE;

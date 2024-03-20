@@ -745,7 +745,6 @@ gboolean cif_file_get_atoms_data (int lin, int cid[8])
     cline = g_strdup_printf ("%s", coord_line[i+lin]);
     str = get_atom_label (cline, (cid[0]) ? cid[0] : cid[1]);
     v = get_z_from_periodic_table (str);
-    g_debug ("str= %s, v= %f", str, v);
     #pragma omp critical
     {
       if (v)
@@ -1725,6 +1724,7 @@ int open_cif_file (int linec)
 {
   int res;
   int i, j, k, l, m, n;
+
   if (cif_get_cell_data (linec))
   {
     i = cif_get_space_group (linec);
@@ -1735,7 +1735,7 @@ int open_cif_file (int linec)
 #endif
       if (this_reader -> lattice.sp_group) get_origin (this_reader -> lattice.sp_group);
     }
-    else if (! i)
+    else if (i == 0)
     {
       // No space group found
 #ifdef DEBUG

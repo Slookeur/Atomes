@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId=4DA2F2FC-AD2D-414A-8197-0DD52F1593D2
 AppName=Atomes
-AppVerName=Atomes 1.1.13
+AppVerName=Atomes 1.1.14
 AppPublisher=CNRS
 AppPublisherURL=https://atomes.ipcms.fr/
 AppSupportURL=https://atomes.ipcms.fr/
@@ -39,71 +39,75 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 function InitializeSetup(): Boolean;
 begin
   Result := TRUE;
+  if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.13', 'Version') then begin
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    Result := FALSE;
+  end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.12', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.11', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.10', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.9', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.8', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.7', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.6', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.5', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.4', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.3', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.2', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.1', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.0', 'Version') then begin
-    MsgBox('An older version of Atomes has been detected on your computer:' #13#13 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
   end;
 end;
 
 [Registry]
 Root: HKLM; Subkey: "Software\IPCMS\ATOMES"; Flags: uninsdeletekeyifempty
-Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.13"; Flags: uninsdeletekey
-Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.13"; ValueType: string; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletekey
-Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.13"; ValueType: string; ValueName: "Version"; ValueData: "1.1.13"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.14"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Version"; ValueData: "1.1.14"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\IPCMS\ATOMES"; Flags: uninsdeletekeyifempty
-Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.13"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.13"; ValueType: string; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.13"; ValueType: string; ValueName: "Version"; ValueData: "1.1.13"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.13"; ValueType: string; ValueName: "Name"; ValueData: "Atomes"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.13"; ValueType: string; ValueName: "Company"; ValueData: "Institut de Physique et Chimie des Matériaux de Strasbourg"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.14"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Version"; ValueData: "1.1.14"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Name"; ValueData: "Atomes"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Company"; ValueData: "Institut de Physique et Chimie des Matériaux de Strasbourg"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\Classes\.awf\OpenWithProgids"; ValueType: string; ValueName: "AtomesWorkspaceFile.awf"; ValueData: ""; Flags: uninsdeletevalue
 Root: HKA; Subkey: "Software\Classes\AtomesWorkspaceFile.awf"; ValueType: string; ValueName: ""; ValueData: "Atomes Workspace File"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\Classes\AtomesWorkspaceFile.awf\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "atomes-workspace.ico"; Flags: uninsdeletekey
