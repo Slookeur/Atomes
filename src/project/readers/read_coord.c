@@ -386,7 +386,6 @@ int open_coord_file (gchar * filename, int fti)
                              "\t - incomplete space group description\n"
                              "\t - missing space group setting\n"
                              "\t - incorrect space group setting\n", 1);
-            this_reader -> setting = ! this_reader -> setting;
             if (this_reader -> num_sym_pos)
             {
               add_reader_info ("\nAnother model will be built using included symmetry positions\n", 1);

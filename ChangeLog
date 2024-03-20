@@ -1,4 +1,17 @@
-2023-28-02 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+2024-20-03 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+         Release of version 1.1.14
+         * Bug corrections:
+	 	X-rays g(r): 'CHEM_X' parameter was 0.0
+         * Improvements:
+	 	Option to build model from CIF file using symmetry positions when available 'read_cif.c'
+		Object(s) can be used to fill CIF file unknown positions 'read_cif.c' and 'cbuild_action.c'
+		Distance matrix calculation 'dmtx.F90' minor adjustments and improvements
+		Imrpovement of the automatic evaluation of the OpenGL model depth 'bonds.F90'
+		Pixel debug is now available in DEBUG mode
+		overall code cleaning
+		atomes code is now entirely commented in Doxygen format
+
+2024-28-02 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.13
          * Bug corrections:
 	 	Surface passivation: 'cell_cut.c' and 'atom_action.c'

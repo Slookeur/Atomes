@@ -1691,7 +1691,7 @@ int cif_get_space_group (int linec)
         str = g_strdup_printf ("<b>Space group</b>: found trigonal space group N°%d-%s, %s setting\n"
                              "but the lattice parameters were found in %s format ...\n"
                              "\t ... the space group setting was modified accordingly !",
-                               spg, groups[spg-1], setc[this_reader -> setting], setc[!this_reader -> setting]);
+                               spg, groups[spg-1], setc[this_reader -> setting], setc[! this_reader -> setting]);
         add_reader_info (str, 1);
         g_free (str);
         this_reader -> setting = ! this_reader -> setting;
@@ -1754,7 +1754,6 @@ int open_cif_file (int linec)
     if (! cif_use_symmetry_positions && this_reader -> num_sym_pos)
     {
       add_reader_info ("Symmetry position(s) in CIF file\n", 1);
-      this_reader -> setting = ! this_reader -> setting;
     }
   }
   if (cif_use_symmetry_positions && ! this_reader -> num_sym_pos)
@@ -1795,21 +1794,22 @@ int open_cif_file (int linec)
       double spgpos[3][4];
       int max_pos = this_reader -> num_sym_pos * this_reader -> natomes;
       gboolean dist_message = FALSE;
+      gboolean low_occ = FALSE;
       gboolean save_it;
       vec3_t f_pos, c_pos;
       gboolean * save_pos = allocbool (max_pos);
       mat4_t pos_mat;
       atom at, bt;
       distance dist;
+      double u;
       vec3_t * all_pos = g_malloc0(max_pos*sizeof*all_pos);
-      double * all_occ = allocdouble (max_pos);
-      int * all_lot = allocint (max_pos);
+      int * all_origin = allocint (max_pos);
       int * cif_pos = allocint (this_reader -> natomes);
       double ** cryst_pos = allocddouble (this_reader -> natomes, 3);
       double ** occ_pos = g_malloc0(sizeof*occ_pos);
-      int ** lot_pos = g_malloc0(sizeof*lot_pos)
+      int ** lot_pos = g_malloc0(sizeof*lot_pos);
       int num_pos = 0;
-      int max_pos = 0;
+      int pos_max = 0;
       for (i=0; i<2; i++)
       {
         for (j=0; j<this_reader -> natomes; j++)
@@ -1818,13 +1818,14 @@ int open_cif_file (int linec)
           {
             num_pos = 0;
             for (k=0; k<3; k++) cryst_pos[num_pos][k] = this_reader -> coord[j][k];
+            cif_pos[num_pos] = 1;
             if (i)
             {
               occ_pos[num_pos][0] = this_reader -> occupancy[j];
               lot_pos[num_pos][0] = this_reader -> lot[j];
             }
             num_pos ++;
-            max_pos = 1;
+            pos_max = 1;
           }
           else
           {
@@ -1832,8 +1833,8 @@ int open_cif_file (int linec)
             for (k=0; k<num_pos; k++)
             {
               if (this_reader -> coord[j][0] == cryst_pos[k][0]
-                && this_reader -> coord[j][1] != cryst_pos[k][1]
-                && this_reader -> coord[j][2] != cryst_pos[k][2])
+               && this_reader -> coord[j][1] == cryst_pos[k][1]
+               && this_reader -> coord[j][2] == cryst_pos[k][2])
               {
                 save_it = FALSE;
                 break;
@@ -1842,6 +1843,7 @@ int open_cif_file (int linec)
             if (save_it)
             {
               for (k=0; k<3; k++) cryst_pos[num_pos][k] = this_reader -> coord[j][k];
+              cif_pos[num_pos] = 1;
               if (i)
               {
                 occ_pos[num_pos][0] = this_reader -> occupancy[j];
@@ -1857,18 +1859,30 @@ int open_cif_file (int linec)
                 lot_pos[k][cif_pos[k]] = this_reader -> lot[j];
               }
               cif_pos[k] ++;
-              max_pos = max (max_pos; cif_pos[k]);
+              pos_max = max (pos_max, cif_pos[k]);
             }
           }
         }
         if (! i)
         {
-          occ_pos = allocddouble (num_pos, max_pos);
-          lot_pos = allocddint (um_pos, max_pos);
+          occ_pos = allocddouble (num_pos, pos_max);
+          lot_pos = allocdint (num_pos, pos_max);
         }
       }
-
-      double u;
+      for (i=0; i<num_pos; i++)
+      {
+        u = 0;
+        for (j=0; j<cif_pos[i]; j++)
+        {
+          u += occ_pos[i][j];
+        }
+        if (u < 1.0)
+        {
+          low_occ = TRUE;
+          break;
+        }
+      }
+      int * all_id = allocint (num_pos);
       l = m = 0;
       for (i=0; i<this_reader -> num_sym_pos; i++)
       {
@@ -1899,18 +1913,10 @@ int open_cif_file (int linec)
           f_pos = vec3 (cryst_pos[j][0], cryst_pos[j][1], cryst_pos[j][2]);
           f_pos = m4_mul_coord (pos_mat, f_pos);
           c_pos = m4_mul_coord (this_reader -> lattice.box[0].frac_to_cart, f_pos);
-
           all_pos[l].x = c_pos.x;
           all_pos[l].y = c_pos.y;
           all_pos[l].z = c_pos.z;
-          for (k=0; k<this_reader -> atom_unlabelled; k++)
-          {
-            if (this_reader -> u_atom_list[k] == j)
-            {
-              all_lot[l] = - (this_reader -> object_list[k] + 1);
-              break;
-            }
-          }
+          all_origin[l] = j;
           save_it = TRUE;
           at.x = all_pos[l].x;
           at.y = all_pos[l].y;
@@ -1923,97 +1929,91 @@ int open_cif_file (int linec)
             dist = distance_3d (active_cell, 0, & at, & bt);
             if (dist.length < 0.1)
             {
+              dist_message = TRUE;
               save_it = FALSE;
               break;
             }
           }
           save_pos[l] = save_it;
           l ++;
-          if (save_it) m ++;
+          if (save_it)
+          {
+            all_id[j] ++;
+            m ++;
+          }
         }
       }
-
-
-
-      crystal_data * cryst = allocate_crystal_data (m, this_reader -> nspec + this_reader -> object_to_insert);
-      g_free (cryst -> insert);
-      cryst -> insert = g_malloc0(max_pos*sizeof*cryst -> insert);
+      double prob;
+      gboolean pick_it;
+      gboolean ** taken_pos = g_malloc0 (num_pos*sizeof*taken_pos);
+      int ** site_lot = g_malloc0 (num_pos*sizeof*site_lot);
+      clock_t CPU_time;
+      int tot_pos = 0;
+      for (i=0; i<num_pos; i++)
+      {
+        taken_pos[i] = allocbool(all_id[i]);
+        site_lot[i] = allocint(all_id[i]);
+        for (j=0; j<cif_pos[i]; j++)
+        {
+          u = occ_pos[i][j]*all_id[i];
+          if (u < 1.0 && tot_pos < all_id[i]) u = 1.0;
+          k = lot_pos[i][j];
+          l = 0;
+          while (l < (int)u)
+          {
+            CPU_time = clock ();
+            m = (CPU_time - (j+17)*all_id[i]);
+            prob = random3_(& m);
+            m = round (prob * (all_id[i]-1));
+            pick_it = ! taken_pos[i][m];
+            if (pick_it)
+            {
+              site_lot[i][m] = k;
+              taken_pos[i][m] = TRUE;
+              l ++;
+              tot_pos ++;
+            }
+          }
+        }
+      }
+      crystal_data * cryst = allocate_crystal_data (tot_pos, this_reader -> nspec + this_reader -> object_to_insert);
       i = 0;
       int * cryst_lot = allocint (cryst -> objects);
+      int * from_origin = allocint (num_pos);
       for (j=0; j<max_pos; j++)
       {
         if (save_pos[j])
         {
-          cryst -> coord[i] = g_malloc0(sizeof*cryst -> coord[i]);
-          cryst -> coord[i][0].x = all_pos[j].x;
-          cryst -> coord[i][0].y = all_pos[j].y;
-          cryst -> coord[i][0].z = all_pos[j].z;
-          cryst -> pos_by_object[i] = 1;
-
-          //cryst -> occupancy[i] = all_occ[j];
-          //cryst_lot[i] = all_lot[j];
-          if (all_lot[j] < 0)
+          k = all_origin[j];
+          l = from_origin[k];
+          if (taken_pos[k][l])
           {
-            cryst -> at_by_object[i] = get_atomic_object_by_origin (cif_object, - all_lot[j] - 1, 0) -> atoms;
+            cryst -> coord[i] = g_malloc0(sizeof*cryst -> coord[i]);
+            cryst -> coord[i][0].x = all_pos[j].x;
+            cryst -> coord[i][0].y = all_pos[j].y;
+            cryst -> coord[i][0].z = all_pos[j].z;
+            cryst -> pos_by_object[i] = 1;
+            cryst_lot[i] = site_lot[k][l];
+            if (cryst_lot[i] < 0)
+            {
+              cryst -> at_by_object[i] = get_atomic_object_by_origin (cif_object, - cryst_lot[i] - 1, 0) -> atoms;
+            }
+            else
+            {
+              cryst -> at_by_object[i] = 1;
+            }
+            i ++;
           }
-          else
-          {
-            cryst -> at_by_object[i] = 1;
-          }
-          i ++;
+          from_origin[k] ++;
         }
       }
-      g_free (all_lot);
-      g_free (all_occ);
+      g_free (site_lot);
+      g_free (all_origin);
+      g_free (from_origin);
       g_free (all_pos);
       g_free (save_pos);
-      /*double u;
-      for (j=0; j<cryst -> objects; j++)
-      {
-        for (k=0; k<2; k++)
-        {
-          i = 1;
-          u = cryst -> occupancy[j];
-          if (u < 0.0 || u > 1.0)
-          {
-            cryst = free_crystal_data (cryst);
-            add_reader_info ("Impossible to build crystal: check occupancy !\n", 0);
-            return 3;
-          }
-          for (l=0; l<cryst -> objects; l++)
-          {
-            if (l != j)
-            {
-              if (fabs(cryst -> coord[j][0].x - cryst -> coord[l][0].x) < 0.1
-               && fabs(cryst -> coord[j][0].y - cryst -> coord[l][0].y) < 0.1
-               && fabs(cryst -> coord[j][0].z - cryst -> coord[l][0].z) < 0.1)
-               {
-                i ++;
-                u += cryst -> occupancy[l];
-                if (u > 1.00001)
-                {
-                  cryst = free_crystal_data (cryst);
-                  add_reader_info ("Impossible to build crystal: check occupancy !\n", 0);
-                  return 3;
-                }
-                if (k)
-                {
-                  cryst -> sites[j][i] = l;
-                }
-              }
-            }
-          }
-          if (! k)
-          {
-            cryst -> sites[j] = allocint(i+1);
-            cryst -> sites[j][0] = i;
-            cryst -> sites[j][1] = j;
-            if (i > 1) cryst -> shared_sites = TRUE;
-          }
-        }
-      }
-      adjust_object_occupancy (cryst, 0, 1);*/
-
+      g_free (taken_pos);
+      g_free (all_id);
       i = 0;
       for (j=0; j<cryst -> objects; j++)
       {
@@ -2088,12 +2088,20 @@ int open_cif_file (int linec)
         active_project -> atoms[0][i].sp = k;
       }
       g_free (tmp_spid);
+      if (low_occ)
+      {
+        add_reader_info ("The crystal will be created however some objects might be missing,\n"
+                         "Occupancy is too low compared to the number of site(s) per cell.\n\n"
+                         "<b>To build a crystal matching the defined occupancy</b>:\n"
+                         "\t <b>1)</b> If you are trying to read a CIF file, use the crystal builder instead.\n"
+                         "\t <b>2)</b> Modify the occupancy set-up to 'Completely random'.\n"
+                         "\t <b>3)</b> Increase the number of unit cells up to get rid of this message.\n\n", 1);
+      }
       if (dist_message)
       {
         add_reader_info ("Object(s) at equivalent positions have been removed\n"
                          "to ensure the consistency of the model\n"
                          "when using <b>P</b>eriodic <b>B</b>oundary <b>C</b>onditions\n ", 1);
-        this_reader -> setting = ! this_reader -> setting;
       }
     }
   }

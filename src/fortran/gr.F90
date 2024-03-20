@@ -299,7 +299,6 @@ SUML=SUML*SUML
 XSUML=XSUML*XSUML
 
 ! Attention bi(NSCATTL(i) dans le code) en fm et bi² en barn = fm*fm*1e-2 = 1e-24cm²
-
 do i=1, NDR
   do j=1, NSP
     do k=1, NSP
@@ -316,6 +315,7 @@ do i=1, NDR
 
 
   XGrTOT(i) = XGrTOT(i)/XSUML
+  ! write (6, *) "i= ",i,", xg(r)= ",XGrTOT(i)
   Drx(i) = XGgrTOT(i)
   Trx(i) =  Drx(i) + 4.0*PI*(NA/MEANVOL)*(i-0.5)*DTR*XSUML
   XGgrTOT(i) = XGgrTOT(i)/XSUML

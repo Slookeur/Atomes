@@ -227,10 +227,16 @@ int open_project (FILE * fp, int npi)
   if (fread (ver, sizeof(char), i, fp) != i) return ERROR_PROJECT;
 
   gboolean labels_in_file = FALSE;
+  gboolean correct_x = TRUE;
   // test on ver for version
   if (g_strcmp0(ver, "%\n% project file v-2.6\n%\n") == 0)
   {
     labels_in_file = TRUE;
+  }
+  else if (g_strcmp0(ver, "%\n% project file v-2.7\n%\n") == 0)
+  {
+    labels_in_file = TRUE;
+    correct_x = FALSE;
   }
 
  #ifdef DEBUG
@@ -329,6 +335,13 @@ int open_project (FILE * fp, int npi)
     for (i=0; i<CHEM_PARAMS; i++)
     {
       if (fread (active_chem -> chem_prop[i], sizeof(double), active_project -> nspec, fp) != active_project -> nspec) return ERROR_PROJECT;
+    }
+    if (correct_x)
+    {
+      for (i=0; i<active_project -> nspec; i++)
+      {
+        active_chem -> chem_prop[CHEM_X][i] = active_chem -> chem_prop[CHEM_Z][i];
+      }
     }
     if (fread (& active_chem -> grtotcutoff, sizeof(double), 1, fp) != 1) return ERROR_PROJECT;
     for ( i = 0 ; i < active_project -> nspec ; i ++ )
