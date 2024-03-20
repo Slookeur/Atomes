@@ -315,7 +315,6 @@ do i=1, NDR
 
 
   XGrTOT(i) = XGrTOT(i)/XSUML
-  ! write (6, *) "i= ",i,", xg(r)= ",XGrTOT(i)
   Drx(i) = XGgrTOT(i)
   Trx(i) =  Drx(i) + 4.0*PI*(NA/MEANVOL)*(i-0.5)*DTR*XSUML
   XGgrTOT(i) = XGgrTOT(i)/XSUML
