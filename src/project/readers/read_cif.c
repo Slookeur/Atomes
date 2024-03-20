@@ -1108,6 +1108,7 @@ int cif_file_get_number_of_positions (int linec, int lid)
     this_reader -> sym_pos = g_malloc0(i*sizeof*this_reader -> sym_pos);
     int j, k;
     gchar * str;
+    gchar * k_word;
     gchar * sym_pos_line;
     for (j=0; j<i; j++)
     {
@@ -1120,12 +1121,13 @@ int cif_file_get_number_of_positions (int linec, int lid)
 #endif
       this_line = g_strdup_printf ("%s", sym_pos_line);
       this_word = strtok (this_line, " ");
+      k_word = g_strdup_printf ("%s", this_word);
       str = g_strdup_printf ("%d", j+1);
-      if (g_strcmp0(this_word, str) == 0)
+      if (g_strcmp0(k_word, str) == 0)
       {
         g_free (this_line);
         this_line = NULL;
-        for (k=strlen(this_word); k<strlen(sym_pos_line); k++)
+        for (k=strlen(k_word); k<strlen(sym_pos_line); k++)
         {
           if (! this_line)
           {
