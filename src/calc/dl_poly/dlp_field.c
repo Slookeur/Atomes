@@ -4335,13 +4335,14 @@ void add_classical_assistant_pages (int p)
   }
   i = MAXDATC+MAXDATA+1;
   fibox[i] = create_vbox (BSEP);
-  info = g_strdup_printf ("<b>   Finalize the creation of the DL-POLY input file(s) now !</b>");
+
+  info = g_strdup_printf ("<b>   Finalize the creation of the %s input file(s) now !</b>", (activef) ? "LAMMPS" : "DL-POLY");
   add_box_child_start (GTK_ORIENTATION_VERTICAL, fibox[i], markup_label(info, -1, -1, 0.5, 0.5), TRUE, TRUE, 100);
   g_free (info);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, fibox[i], markup_label("\n \t<b>Note: </b>You can re-open this assistant later if required to adjust your choices\n", -1, -1, 0.0, 0.5),
                        FALSE, FALSE, 0);
   gtk_assistant_append_page (assist, fibox[i]);
-  gtk_assistant_set_page_title (assist, fibox[i], "Create the DL-POLY input file(s) now !");
+  gtk_assistant_set_page_title (assist, fibox[i], (activef) ? "Create the LAMMPS input file(s) now !" : "Create the DL-POLY input file(s) now !");
   gtk_assistant_set_page_type (assist, fibox[i], GTK_ASSISTANT_PAGE_CONFIRM);
   gtk_assistant_set_page_complete (assist, fibox[i], TRUE);
   gtk_assistant_update_buttons_state (assist);
