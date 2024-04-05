@@ -1043,6 +1043,10 @@ G_MODULE_EXPORT void on_smoother_released (GtkButton * button, gpointer data)
   l = GPOINTER_TO_INT(data);
   if (active_project -> visok[l])
   {
+    if (l == 2)
+    {
+      xsk = duplicate_double(active_project -> curves[l][0] -> ndata, active_project -> curves[l][0] -> data[0]);
+    }
     i = 1;
     smooth_and_save_ (active_project -> curves[l][i-1] -> data[0],
                       active_project -> curves[l][i-1] -> data[1],
@@ -1156,6 +1160,11 @@ G_MODULE_EXPORT void on_smoother_released (GtkButton * button, gpointer data)
                           & active_project -> curves[l][i-1] -> ndata,
                           & l);
       }
+    }
+    if (l == 2)
+    {
+      g_free (xsk);
+      xsk = NULL;
     }
     fill_tool_model ();
     gtk_widget_show (curvetoolbox);
