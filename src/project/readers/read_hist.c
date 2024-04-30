@@ -43,7 +43,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <ctype.h>
 #include "cbuild_edit.h"
 #include "readers.h"
-#include <omp.h>
+#ifdef OPENMP
+#  include <omp.h>
+#endif
 
 extern void check_for_species (double v, int ato);
 

@@ -69,7 +69,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "cbuild_edit.h"
 #include "readers.h"
 #include <ctype.h>
-#include <omp.h>
+#ifdef OPENMP
+#  include <omp.h>
+#endif
 
 extern int get_atom_id_from_periodic_table (atom_search * asearch);
 extern double get_z_from_periodic_table (gchar * lab);

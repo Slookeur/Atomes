@@ -44,9 +44,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "project.h"
 #include "bind.h"
 #include "readers.h"
-
-#include <omp.h>
 #include <ctype.h>
+#ifdef OPENMP
+#  include <omp.h>
+#endif
 
 /*!
   \fn double get_z_from_pdb_name (char * name)

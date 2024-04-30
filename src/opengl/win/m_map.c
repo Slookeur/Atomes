@@ -1272,7 +1272,7 @@ GMenu * menump (glwin * view, int popm, int mid, int cid)
 GMenu * menu_map (glwin * view, int popm)
 {
   GMenu * menu = g_menu_new ();
-  append_submenu (menu, "Atoms & Bonds", menump(view, popm, 0, view -> anim -> last -> img -> color_map[0]));
+  append_submenu (menu, "Atoms &amp; Bonds", menump(view, popm, 0, view -> anim -> last -> img -> color_map[0]));
   append_submenu (menu, "Polyhedra", menump(view, popm, 1, view -> anim -> last -> img -> color_map[1]));
   return menu;
 }

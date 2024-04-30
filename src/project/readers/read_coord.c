@@ -47,8 +47,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "interface.h"
 #include "project.h"
 #include "bind.h"
-#include <omp.h>
 #include "cbuild_edit.h"
+#ifdef OPENMP
+#  include <omp.h>
+#endif
 
 extern int open_xyz_file (int linec);
 extern int open_c3d_file (int linec);

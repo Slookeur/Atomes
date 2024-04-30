@@ -53,7 +53,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void update_this_neighbor_ (int * stp, int * at, int * iv, int * nv);
   void update (glwin * view);
   void transform (glwin * view, double aspect);
-  void reshape (glwin * view, int width, int height);
+  void reshape (glwin * view, int width, int height, gboolean use_ratio);
   void save_rotation_quaternion (glwin * view);
   void edit_for_motion (glwin * view);
   void motion (glwin * view, gint x, gint y, GdkModifierType state);
@@ -502,23 +502,27 @@ void transform (glwin * view, double aspect)
 }
 
 /*!
-  \fn void reshape (glwin * view, int width, int height)
+  \fn void reshape (glwin * view, int width, int height, gboolean use_ratio)
 
   \brief reshape (resize) the OpenGL window
 
   \param view the target glwin
   \param width new with
   \param height new height
+  \param use_ratio use widget rendering ratio
 */
-void reshape (glwin * view, int width, int height)
+void reshape (glwin * view, int width, int height, gboolean use_ratio)
 {
   double aspect;
   int scale = 1.0;
-  if (view -> win)
+  if (use_ratio)
   {
-    if (GTK_IS_WIDGET(view -> win))
+    if (view -> win)
     {
-      scale = gtk_widget_get_scale_factor (view -> win);
+      if (GTK_IS_WIDGET(view -> win))
+      {
+        scale = gtk_widget_get_scale_factor (view -> win);
+      }
     }
   }
   glViewport (0, 0, (GLsizei) scale * width, (GLsizei) scale * height);
@@ -769,13 +773,13 @@ void render_this_gl_window (glwin * view, GtkWidget * widg, gint button)
   if (glXMakeCurrent (GDK_WINDOW_XDISPLAY (win), GDK_WINDOW_XID (win), view -> glcontext))
 #endif
   {
-    reshape (view, view -> pixels[0], view -> pixels[1]);
+    reshape (view, view -> pixels[0], view -> pixels[1], TRUE);
     draw (view);
     if (view -> to_pick)
     {
       if (button) process_the_hits (view, button, ptx, pty);
       view -> to_pick = FALSE;
-      reshape (view, view -> pixels[0], view -> pixels[1]);
+      reshape (view, view -> pixels[0], view -> pixels[1], TRUE);
       draw (view);
     }
 #ifdef GTKGLAREA

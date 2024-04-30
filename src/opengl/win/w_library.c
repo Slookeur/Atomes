@@ -1106,9 +1106,11 @@ int select_from_library (gboolean visible, project * this_proj, atom_search * as
   GtkWidget * lib = dialogmodal ("Library", GTK_WINDOW((this_proj -> modelgl) ? this_proj -> modelgl -> win : MainWindow));
 #ifdef GTK3
 #ifdef GTKGLAREA
+#ifndef OSX
 #ifndef G_OS_WIN32
   if (! atomes_visual) gtk_window_change_gdk_visual (lib);
 #endif // G_OS_WIN32
+#endif // OSX
 #endif // GTKGLAREA
 #endif // GTK3
   gtk_dialog_add_button (GTK_DIALOG(lib), (asearch -> action == REPLACE) ? "Replace" : "Insert", GTK_RESPONSE_APPLY);

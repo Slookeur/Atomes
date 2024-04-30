@@ -1187,6 +1187,7 @@ G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
+#ifndef OSX
 #ifndef G_OS_WIN32
 /*!
   \fn void gtk_window_change_gdk_visual (GtkWidget * win)
@@ -1224,6 +1225,7 @@ void gtk_window_change_gdk_visual (GtkWidget * win)
 }
 #endif
 #endif
+#endif
 
 gboolean create_3d_model (int p, gboolean load)
 {
@@ -1252,8 +1254,10 @@ gboolean create_3d_model (int p, gboolean load)
       this_proj -> modelgl -> win = create_win (str, MainWindow, FALSE, TRUE);
 #ifdef GTK3
 #ifdef GTKGLAREA
+#ifndef OSX
 #ifndef G_OS_WIN32
       if (! atomes_visual) gtk_window_change_gdk_visual (this_proj -> modelgl -> win);
+#endif
 #endif
 #endif
 #endif

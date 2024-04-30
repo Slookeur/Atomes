@@ -41,8 +41,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "interface.h"
 #include "project.h"
 #include "bind.h"
-#include <omp.h>
 #include "readers.h"
+#ifdef OPENMP
+#  include <omp.h>
+#endif
 
 /*!
   \fn int trj_get_atom_coordinates ()
