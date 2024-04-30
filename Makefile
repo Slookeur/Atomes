@@ -146,20 +146,35 @@ ifeq ($(WINDOWS),1)
   CPPFLAGS =
   LDFLG = -static-libgcc -static-libgfortran -lz -liphlpapi
 
-  IGTK = -pthread -mms-bitfields -IC:/msys64/mingw64/include/gtk-3.0 -IC:/msys64/mingw64/include/cairo \
-	-IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/atk-1.0 -IC:/msys64/mingw64/include/cairo \
-	-IC:/msys64/mingw64/include/gdk-pixbuf-2.0 -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/libxml2 \
-	-IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/fribidi -IC:/msys64/mingw64/include \
-	-IC:/msys64/mingw64/include/cairo -IC:/msys64/mingw64/include/pixman-1 -IC:/msys64/mingw64/include \
-	-IC:/msys64/mingw64/lib/libffi-3.2.1/include -IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/freetype2 \
-	-IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/libpng16 -IC:/msys64/mingw64/include \
-	-IC:/msys64/mingw64/include/harfbuzz -IC:/msys64/mingw64/include/glib-2.0 -IC:/msys64/mingw64/lib/glib-2.0/include -IC:/msys64/mingw64/include
+  ifeq ($(GTKV), 4)
+    IGTK = -pthread -mms-bitfields -IC:/msys64/mingw64/include/gtk-4.0 -IC:/msys64/mingw64/include/cairo \
+		-IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/gdk-pixbuf-2.0 \
+		-IC:/msys64/mingw64/include -IC:/msys64/mingw64/include/libxml2 \
+		-IC:/msys64/mingw64/include/fribidi -IC:/msys64/mingw64/include \
+		-IC:/msys64/mingw64/include/pixman-1 -IC:/msys64/mingw64/include/harfbuzz \
+		-IC:/msys64/mingw64/include/freetype2 -IC:/msys64/mingw64/include/webp -DLIBDEFLATE_DLL \
+		-IC:/msys64/mingw64/include/graphene-1.0 -IC:/msys64/mingw64/lib/graphene-1.0/include -mfpmath=sse -msse -msse2 \
+		-IC:/msys64/mingw64/include/libpng16 \
+		-IC:/msys64/mingw64/include/glib-2.0 -IC:/msys64/mingw64/lib/glib-2.0/include
 
-  LGTK = -LC:/msys64/mingw64/lib -lgtk-3 -lgdk-3 -lz -lgdi32 -limm32 -lshell32 -lole32 \
-	-Wl,-luuid -lwinmm -ldwmapi -lsetupapi -lcfgmgr32 -lpangowin32-1.0 -lpangocairo-1.0 \
-	-latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lepoxy -lxml2 -lpangoft2-1.0 \
-	-lpango-1.0 -lgobject-2.0 -lglib-2.0 -lintl -lfontconfig -lfreetype -lavutil -lavcodec -lavformat -lswscale
+    LGTK = -LC:/msys64/mingw64/lib -lgtk-4 -lpangowin32-1.0 -lharfbuzz -lpangocairo-1.0 -lpango-1.0 -lgdk_pixbuf-2.0 \
+		-lcairo-gobject -lcairo -lgraphene-1.0 -lgio-2.0 -lglib-2.0 -lintl -lgobject-2.0 -lxml2  -lpangoft2-1.0 \
+		-lepoxy -lavutil -lavcodec -lavformat -lswscale
+  else
+    IGTK = -pthread -mms-bitfields -IC:/msys64/mingw64/include/gtk-3.0 -IC:/msys64/mingw64/include/cairo \
+		-IC:/msys64/mingw64/include/pango-1.0 -IC:/msys64/mingw64/include/atk-1.0 \
+		-IC:/msys64/mingw64/include/gdk-pixbuf-2.0 -IC:/msys64/mingw64/include/libxml2 \
+		-IC:/msys64/mingw64/include/fribidi -IC:/msys64/mingw64/include \
+		-IC:/msys64/mingw64/include/pixman-1 -IC:/msys64/mingw64/include/harfbuzz \
+		-IC:/msys64/mingw64/include/freetype2 -IC:/msys64/mingw64/include/webp -DLIBDEFLATE_DLL \
+		-IC:/msys64/mingw64/include/libpng16 \
+		-IC:/msys64/mingw64/include/glib-2.0 -IC:/msys64/mingw64/lib/glib-2.0/include
 
+    LGTK = -LC:/msys64/mingw64/lib -lgtk-3 -lgdk-3 -lz -lgdi32 -limm32 -lshell32 -lole32 \
+		-Wl,-luuid -lwinmm -ldwmapi -lsetupapi -lcfgmgr32 -lpangowin32-1.0 -lpangocairo-1.0 \
+		-latk-1.0 -lcairo-gobject -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lepoxy -lxml2 -lpangoft2-1.0 \
+		-lpango-1.0 -lgobject-2.0 -lglib-2.0 -lintl -lfontconfig -lfreetype -lavutil -lavcodec -lavformat -lswscale
+  endif
   LIB = $(LGTK)
 
   ifeq ($(MAKECMDGOALS), atomes)
