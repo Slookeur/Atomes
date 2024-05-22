@@ -440,8 +440,10 @@ void update (glwin * view)
 {
   gtk_gl_area_queue_render ((GtkGLArea *)view -> plot);
 #ifdef G_OS_WIN32
+#ifdef GTK3
   gtk_widget_hide (view -> plot);
   gtk_widget_show (view -> plot);
+#endif
 #endif
 }
 
@@ -625,61 +627,58 @@ void motion (glwin * view, gint x, gint y, GdkModifierType state)
 {
   view -> mouseAction = MOTION;
   int i;
-  if (view -> mouseStatus == CLICKED)
-  {
-    if (view -> mode == EDITION && view -> prepare_motion && view -> rebuild[0][0]) edit_for_motion (view);
+  if (view -> mode == EDITION && view -> prepare_motion && view -> rebuild[0][0]) edit_for_motion (view);
 
-    if (state & GDK_BUTTON1_MASK)
+  if (state & GDK_BUTTON1_MASK)
+  {
+    arc_ball_rotation (view, x, y);
+  }
+  else if (state & GDK_BUTTON2_MASK)
+  {
+    if (view -> mode != EDITION)
     {
-      arc_ball_rotation (view, x, y);
-    }
-    else if (state & GDK_BUTTON2_MASK)
-    {
-      if (view -> mode != EDITION)
+      view -> anim -> last -> img -> c_shift[0] -= (double) (x - view -> mouseX) / view -> pixels[0];
+      view -> anim -> last -> img -> c_shift[1] += (double) (y - view -> mouseY) / view -> pixels[1];
+      for (i=0; i<2; i++)
       {
-        view -> anim -> last -> img -> c_shift[0] -= (double) (x - view -> mouseX) / view -> pixels[0];
-        view -> anim -> last -> img -> c_shift[1] += (double) (y - view -> mouseY) / view -> pixels[1];
-        for (i=0; i<2; i++)
+        if (view -> camera_widg[i+5])
         {
-          if (view -> camera_widg[i+5])
+          if (GTK_IS_WIDGET(view -> camera_widg[i+5]))
           {
-            if (GTK_IS_WIDGET(view -> camera_widg[i+5]))
-            {
-              gtk_spin_button_set_value ((GtkSpinButton *)view -> camera_widg[i+5], - view -> anim -> last -> img -> c_shift[i]);
-            }
+            gtk_spin_button_set_value ((GtkSpinButton *)view -> camera_widg[i+5], - view -> anim -> last -> img -> c_shift[i]);
           }
         }
       }
-      else
-      {
-        vec3_t pos_a = vec3(x, - y, 0.75);
-        vec3_t pos_b = vec3(view -> mouseX, - view -> mouseY, 0.75);
-        vec3_t trans_a = v3_un_project (pos_a, view -> view_port, view -> projection_matrix);
-        vec3_t trans_b = v3_un_project (pos_b, view -> view_port, view -> projection_matrix);
-        vec3_t trans;
-        trans.x = (trans_a.x - trans_b.x);
-        trans.y = (trans_b.y - trans_a.y);
-        if (view -> anim -> last -> img -> rep == PERSPECTIVE)
-        {
-          trans.x *= view -> anim -> last -> img -> p_depth;
-          trans.y *= view -> anim -> last -> img -> p_depth;
-        }
-        trans.z = 0.0;
-        translate (get_project_by_id(view -> proj), 1, 1, trans);
-      }
     }
-    if (view -> mode == EDITION)
+    else
     {
-      init_default_shaders (view);
-#ifdef GTK3
-      // GTK3 Menu Action To Check
-      set_advanced_bonding_menus (view);
-#endif
+      vec3_t pos_a = vec3(x, - y, 0.75);
+      vec3_t pos_b = vec3(view -> mouseX, - view -> mouseY, 0.75);
+      vec3_t trans_a = v3_un_project (pos_a, view -> view_port, view -> projection_matrix);
+      vec3_t trans_b = v3_un_project (pos_b, view -> view_port, view -> projection_matrix);
+      vec3_t trans;
+      trans.x = (trans_a.x - trans_b.x);
+      trans.y = (trans_b.y - trans_a.y);
+      if (view -> anim -> last -> img -> rep == PERSPECTIVE)
+      {
+        trans.x *= view -> anim -> last -> img -> p_depth;
+        trans.y *= view -> anim -> last -> img -> p_depth;
+      }
+      trans.z = 0.0;
+      translate (get_project_by_id(view -> proj), 1, 1, trans);
     }
-    view -> mouseX = x;
-    view -> mouseY = y;
-    update (view);
   }
+  if (view -> mode == EDITION)
+  {
+    init_default_shaders (view);
+#ifdef GTK3
+    // GTK3 Menu Action To Check
+    set_advanced_bonding_menus (view);
+#endif
+  }
+  view -> mouseX = x;
+  view -> mouseY = y;
+  update (view);
 }
 
 #ifdef GTK3

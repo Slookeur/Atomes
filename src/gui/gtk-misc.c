@@ -2017,14 +2017,14 @@ GtkWidget * destroy_this_widget (GtkWidget * widg)
 #ifdef GTK3
       gtk_widget_destroy (widg);
 #else
-      GtkWidget * wid = gtk_widget_get_parent (widg);
+      /* GtkWidget * wid = gtk_widget_get_parent (widg);
       if (wid != NULL)
       {
         if (GTK_IS_WIDGET(wid))
         {
           gtk_widget_unparent (widg);
         }
-      }
+      } */
 #endif
     }
   }

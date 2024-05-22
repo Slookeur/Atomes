@@ -183,10 +183,10 @@ void view_buffer (GtkTextBuffer * buffer)
 {
   if (atomes_logo)
   {
-#ifdef GTK4
-    add_container_child (CONTAINER_SCR, MainScrol[1], NULL);
-#endif
     atomes_logo = destroy_this_widget (atomes_logo);
+#ifdef GTK4
+    gtk_scrolled_window_set_child ((GtkScrolledWindow *)MainScrol[1], NULL);
+#endif
   }
   gboolean add = FALSE;
   if (! MainView)
@@ -1097,9 +1097,7 @@ GtkWidget * create_main_window (GApplication * atomes)
   curvetoolbox = curvetbox ();
   add_project_to_workspace ();
   add_container_child (CONTAINER_WIN, window, hpaned);
-
   clean_view ();
-
   show_the_widgets (window);
 
   for (i=0; i<9; i++)

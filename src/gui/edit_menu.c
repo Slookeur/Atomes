@@ -469,7 +469,7 @@ void edit_chem (GtkWidget * vbox)
         {
           tmp_chem[i-3][j] =  active_chem -> chem_prop[i-2][j];
         }
-        chem_entry[i-3] = create_entry (G_CALLBACK(update_chemistry), 120, 15, FALSE, (gpointer)GINT_TO_POINTER(i-3));
+        chem_entry[i-3] = create_entry (G_CALLBACK(update_chemistry), 120, 15, FALSE, GINT_TO_POINTER(i-3));
         update_entry_double (GTK_ENTRY(chem_entry[i-3]), tmp_chem[i-3][0]);
         gtk_grid_attach (GTK_GRID (table), chem_entry[i-3], 2, i+2, 1, 1);
         if (i==CHEM_PARAMS+1)
