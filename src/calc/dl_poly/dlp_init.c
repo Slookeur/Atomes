@@ -2985,8 +2985,7 @@ void init_lammps_field (classical_field * new_field)
 */
 classical_field * create_force_field_data_structure (int ai)
 {
-  int i, j;
-
+  int i;
   classical_field * new_field;
   new_field = g_malloc0 (sizeof*new_field);
   tmp_field = new_field;
@@ -3004,7 +3003,6 @@ classical_field * create_force_field_data_structure (int ai)
   new_field -> molecules = tmp_proj -> modelfc -> mol_by_step[0];
   new_field -> first_molecule = g_malloc0 (sizeof*new_field -> first_molecule);
   tmp_fmol = new_field -> first_molecule;
-  j = 0;
 #ifdef DEBUG
   g_debug ("Total num of molecules: %d", tmp_proj -> modelfc -> mol_by_step[0]);
 #endif // DEBUG
@@ -3018,7 +3016,6 @@ classical_field * create_force_field_data_structure (int ai)
     g_debug (" tmp_mol -> natoms= %d", tmp_mol -> natoms);
 #endif // DEBUG
     init_field_molecule (i);
-    j += tmp_fmol -> atoms;
     if (i <  tmp_proj -> modelfc -> mol_by_step[0]-1)
     {
       tmp_fmol -> next = g_malloc0 (sizeof*tmp_fmol -> next);

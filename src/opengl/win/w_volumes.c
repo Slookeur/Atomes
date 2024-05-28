@@ -308,7 +308,7 @@ double molecular_volume (int nats, atom * ats_vol, double baryc[3], double * rvd
   paral[2][0] = 0.0;
   paral[2][1] = 0.0;
   paral[2][2] = vamax[2] - vamin[2];
-  ColRGBA null;
+  ColRGBA null; // Not used
   return draw_cuboid (FALSE, VOLMS, 0, m4_identity (), vec3(0.0,0.0,0.0), paral, null, 1.0);
 }
 

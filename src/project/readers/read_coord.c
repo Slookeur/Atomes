@@ -249,7 +249,7 @@ void check_for_species (double v, int ato)
 */
 int open_coord_file (gchar * filename, int fti)
 {
-  int res;
+  int res = 0;
 #ifdef OPENMP
   struct stat status;
   res = stat (filename, & status);

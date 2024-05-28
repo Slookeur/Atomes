@@ -521,7 +521,7 @@ classical_field * duplicate_classical_field (classical_field * init_field)
   classical_field * new_field = NULL;
   new_field = g_malloc (sizeof*new_field);
 
-  int i, j, k;
+  int i, j;
 
   // All
   for (i=0; i<MAXDATC+MAXDATA; i++) new_field -> afp[i] = init_field -> afp[i];
@@ -587,7 +587,7 @@ classical_field * duplicate_classical_field (classical_field * init_field)
       for (i=0; i<tmp_field -> nbody[2]; i++)
       {
         new_field -> cross[i] = g_malloc (tmp_field -> nbody[2]*sizeof*new_field -> cross[i]);
-        for (j=0; j<tmp_field -> nbody[2]; k++) new_field -> cross[i][j] = duplicate_double (3, init_field -> cross[i][j]);
+        for (j=0; j<tmp_field -> nbody[2]; j++) new_field -> cross[i][j] = duplicate_double (3, init_field -> cross[i][j]);
       }
     }
 

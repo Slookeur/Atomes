@@ -761,13 +761,13 @@ void render_this_gl_window (glwin * view, GtkWidget * widg, gint button)
 #endif
 {
 #ifdef GTKGLAREA
-  view -> pixels[0] = gtk_widget_get_allocated_width (GTK_WIDGET(area));
-  view -> pixels[1] = gtk_widget_get_allocated_height (GTK_WIDGET(area));
+  view -> pixels[0] = get_widget_width (GTK_WIDGET(area));
+  view -> pixels[1] = get_widget_height (GTK_WIDGET(area));
   gtk_gl_area_make_current (area);
   if (gtk_gl_area_get_error (area) == NULL)
 #else
-  view -> pixels[0] = gtk_widget_get_allocated_width (widg);
-  view -> pixels[1] = gtk_widget_get_allocated_height (widg);
+  view -> pixels[0] = get_widget_width (widg);
+  view -> pixels[1] = get_widget_height (widg);
   GdkWindow * win = gtk_widget_get_window (widg);
   if (glXMakeCurrent (GDK_WINDOW_XDISPLAY (win), GDK_WINDOW_XID (win), view -> glcontext))
 #endif
@@ -1096,7 +1096,7 @@ void rotate_x_y (glwin * view, double angle_x, double angle_y)
   int i;
   for (i=0; i<2; i++)
   {
-    if (abs(view -> anim -> last -> img -> c_angle[i]) > 180.0) view -> anim -> last -> img -> c_angle[i] = 0.0;
+    if (fabs(view -> anim -> last -> img -> c_angle[i]) > 180.0) view -> anim -> last -> img -> c_angle[i] = 0.0;
     if (view -> camera_widg[i+3])
     {
       if (GTK_IS_WIDGET(view -> camera_widg[i+3]))

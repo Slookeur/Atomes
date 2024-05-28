@@ -154,6 +154,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   GdkRGBA colrgba_togtkrgba (ColRGBA col);
 
+  int get_widget_width (GtkWidget * widg);
+  int get_widget_height (GtkWidget * widg);
+
 */
 
 #include "global.h"
@@ -1474,7 +1477,7 @@ GtkWidget * gtk3_menu_item (GtkWidget * menu, gchar * name,
                             gboolean accel, guint key, GdkModifierType mod,
                             gboolean check, gboolean radio, gboolean status)
 {
-  GtkWidget * item;
+  GtkWidget * item = NULL;
   GtkWidget * icon = NULL;
   GtkWidget * lab = NULL;
 
@@ -2366,5 +2369,37 @@ void add_gtk_close_event (GtkWidget * widg, GCallback handler, gpointer data)
   g_signal_connect (G_OBJECT (widg), "close-request", handler, data);
 #else
   g_signal_connect (G_OBJECT (widg), "delete-event", handler, data);
+#endif
+}
+
+/*!
+  \fn int get_widget_width (GtkWidget * widg)
+
+  \brief retrive GtkWidget width
+
+  \param widg the GtkWidget
+*/
+int get_widget_width (GtkWidget * widg)
+{
+#ifdef GTK3
+  return gtk_widget_get_allocated_width (widg);
+#else
+  return gtk_widget_get_width (widg);
+#endif
+}
+
+/*!
+  \fn int get_widget_height (GtkWidget * widg)
+
+  \brief retrive GtkWidget height
+
+  \param widg the GtkWidget
+*/
+int get_widget_height (GtkWidget * widg)
+{
+#ifdef GTK3
+  return gtk_widget_get_allocated_height (widg);
+#else
+  return gtk_widget_get_height (widg);
 #endif
 }

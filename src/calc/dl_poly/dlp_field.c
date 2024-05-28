@@ -4477,13 +4477,11 @@ G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
   GtkWidget * aview;
   gchar * ff_files[2][3] = {{"CONTROL", "FIELD" , "CONFIG"}, {"LAMMPS.IN", "LAMMPS.DATA", ""}};
   int num_files[2] = {3, 2};
-  int i, j;
-  j = -1;
+  int i;
   for (i=0; i<num_files[activef]; i++)
   {
     if ((i==0 && tmp_field -> prepare_file[0]) || (i > 0 && tmp_field -> prepare_file[1]))
     {
-      j ++;
       scrollsets = create_scroll (NULL, 700, 350, GTK_SHADOW_ETCHED_IN);
       aview = create_text_view (-1, -1, 0, 1, NULL, NULL, NULL);
       add_container_child (CONTAINER_SCR, scrollsets, aview);

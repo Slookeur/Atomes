@@ -1237,6 +1237,9 @@ extern void provide_gtk_css (gchar * css);
 extern double get_calc_time (struct timespec start, struct timespec stop);
 extern gchar * calculation_time (gboolean modelv, double ctime);
 
+extern int get_widget_width (GtkWidget * widg);
+extern int get_widget_height (GtkWidget * widg);
+
 typedef struct {
   GCallback handler;
   gpointer data;

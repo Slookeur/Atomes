@@ -1788,10 +1788,9 @@ G_MODULE_EXPORT void show_hide_the_coord (GtkWidget * widg, gpointer data)
 #endif
 {
   tint * sel = (tint * )data;
-  int i, j, k;
+  int i, j;
   for (i=0; i<opengl_project -> steps; i++)
   {
-    k = 0;
     for (j=0; j<opengl_project -> natomes; j++)
     {
       if (sel -> a < 2)
@@ -1808,7 +1807,6 @@ G_MODULE_EXPORT void show_hide_the_coord (GtkWidget * widg, gpointer data)
         {
           opengl_project -> atoms[i][j].show[0] = sel -> c;
           opengl_project -> atoms[i][j].show[1] = sel -> c;
-          k ++;
         }
       }
     }

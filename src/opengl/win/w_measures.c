@@ -293,6 +293,7 @@ void measure_set_visible (GtkTreeViewColumn * col, GtkCellRenderer * renderer, G
 void measure_set_color (GtkTreeViewColumn * col, GtkCellRenderer * renderer, GtkTreeModel * mod, GtkTreeIter * iter, gpointer data)
 {
   int i, j;
+  j = 0;
   tint * dat = (tint *) data;
   gboolean docolor = FALSE;
   gtk_tree_model_get (mod, iter, 0, & i, -1);

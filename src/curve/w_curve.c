@@ -575,7 +575,7 @@ G_MODULE_EXPORT gboolean on_curve_key_pressed (GtkEventControllerKey * self, gui
 */
 int get_curve_shift (project * this_proj, int b, int c)
 {
-  return gtk_widget_get_allocated_height (this_proj -> curves[b][c] -> window) - gtk_widget_get_allocated_height (this_proj -> curves[b][c] -> plot);
+  return get_widget_height (this_proj -> curves[b][c] -> window) - get_widget_height (this_proj -> curves[b][c] -> plot);
 }
 
 /*!

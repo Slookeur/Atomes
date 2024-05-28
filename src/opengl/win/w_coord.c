@@ -1327,17 +1327,13 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
   gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, 0, 0), markup_label("Total coordination(s) <b>[TC]</b>", -1, -1, 0.0, 0.5));
   gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, 1, 0), markup_label("Partial coordination(s) <b>[PC]</b>", -1, -1, 0.0, 0.5));
 
-  int i, j, k;
-  j = 2;
-  k = 0;
+  int i;
   if (view -> rings)
   {
     for (i=0; i<5; i++)
     {
       if (view -> ring_max[i])
       {
-        j ++;
-        k ++;
         str = g_strdup_printf ("%s ring(s) <b>[%s]</b>", rings_type[i], rings_short[i]);
         gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, i+4, 0), markup_label(str, -1, -1, 0.0, 0.5));
         g_free (str);
@@ -1346,13 +1342,9 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
   }
   if (view -> chains && view -> chain_max)
   {
-    j ++;
     gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, 9, 0), markup_label("Chain(s)", -1, -1, 0.0, 0.5));
   }
-
-  j ++;
   gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, 0, 1), markup_label("Polyhedra from <b>TC</b>", -1, -1, 0.0, 0.5));
-  j ++;
   gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, 1, 1), markup_label("Polyhedra from <b>PC</b>", -1, -1, 0.0, 0.5));
   if (view -> rings)
   {
@@ -1360,7 +1352,6 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
     {
       if (view -> ring_max[i])
       {
-        j ++;
         str = g_strdup_printf ("Polyhedra from <b>%s</b>", rings_short[i]);
         gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, i+4, 1), markup_label(str, -1, -1, 0.0, 0.5));
         g_free (str);
@@ -1370,12 +1361,10 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
 
   if (view -> adv_bonding[0])
   {
-    j ++;
     gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), fragmol_tab (view, 2), markup_label ("Fragment(s)", -1, -1, 0.0, 0.5));
   }
   if (view -> adv_bonding[1])
   {
-    j ++;
     gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), fragmol_tab (view, 3), markup_label ("Molecule(s)", -1, -1, 0.0, 0.5));
   }
 
@@ -1385,7 +1374,6 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
     {
       if (view -> ring_max[i])
       {
-        j ++;
         str = g_strdup_printf ("Isolated ring(s) from <b>%s</b>", rings_short[i]);
         gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), rings_tab (view, i), markup_label(str, -1, -1, 0.0, 0.5));
         g_free (str);
@@ -1395,7 +1383,6 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
 
   if (view -> chains && view -> chain_max)
   {
-     j ++;
      gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), chains_tab (view), markup_label("Isolated chain(s)", -1, -1, 0.0, 0.5));
   }
 

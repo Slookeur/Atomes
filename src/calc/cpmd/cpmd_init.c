@@ -1230,7 +1230,7 @@ gboolean go_for_it (int i, int j, gboolean print[2])
 */
 G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
 {
-  int i, j, k, l, c;
+  int i, j, k, c;
   c = GPOINTER_TO_INT(data);
   gchar * ptitle[5] = {"CP2K input file", "forces.inc", "system.inc", "motion.inc", "coord.inc"};
   gchar * wtite[2] = {" input file preview", " input files preview"};
@@ -1238,13 +1238,13 @@ G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
   GtkWidget * scrollsets;
   GtkWidget * aview;
   GtkWidget * notebook;
-  l = 0;
+  k = 0;
   gboolean print[2];
   if (c)
   {
     j = 6;
     notebook = gtk_notebook_new ();
-    if (tmp_cp2k -> opts[CP2RUN] > 1.0 && tmp_cp2k -> opts[CP2RUN] < 4.0) l = 1;
+    if (tmp_cp2k -> opts[CP2RUN] > 1.0 && tmp_cp2k -> opts[CP2RUN] < 4.0) k = 1;
     if (tmp_cp2k -> input_type)
     {
       str = g_strdup_printf ("%s %s", co_type[c], wtite[1]);
@@ -1286,24 +1286,22 @@ G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
   {
     scrollsets = create_scroll (dialog_get_content_area(preview), 700, 350, GTK_SHADOW_ETCHED_IN);
   }
-  k = -1;
-  for (i=0; i<j+l; i++)
+  for (i=0; i<j+k; i++)
   {
-    if (! c || (c && go_for_it(i, j+l, print)))
+    if (! c || (c && go_for_it(i, j+k, print)))
     {
-      k ++;
       aview = create_text_view (-1, -1, 0, 1, NULL, NULL, NULL);
       if (c)
       {
         scrollsets = create_scroll (NULL, 700, 350, GTK_SHADOW_ETCHED_IN);
         add_container_child (CONTAINER_SCR, scrollsets, aview);
-        if (i > j+l-3)
+        if (i > j+k-3)
         {
-          str = g_strdup_printf ("%s", tmp_cp2k -> files[i-(j+l-3)]);
+          str = g_strdup_printf ("%s", tmp_cp2k -> files[i-(j+k-3)]);
         }
         else
         {
-          str = g_strdup_printf ("%s", ptitle[(i == j-3+l) ? 4 : i]);
+          str = g_strdup_printf ("%s", ptitle[(i == j-3+k) ? 4 : i]);
         }
         gtk_notebook_append_page (GTK_NOTEBOOK(notebook), scrollsets, gtk_label_new (str));
         g_free (str);
@@ -1315,9 +1313,9 @@ G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
     }
     if (c)
     {
-      if (tmp_cp2k -> input_type || i != j+l-3)
+      if (tmp_cp2k -> input_type || i != j+k-3)
       {
-        print_cp2k ((i >= j+l-3) ? i+1-l: i, gtk_text_view_get_buffer(GTK_TEXT_VIEW(aview)));
+        print_cp2k ((i >= j+k-3) ? i+1-k: i, gtk_text_view_get_buffer(GTK_TEXT_VIEW(aview)));
       }
     }
     else

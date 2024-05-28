@@ -117,7 +117,7 @@ void update_cutoffs (project * this_proj)
     }
     else
     {
-      update_project (this_proj -> id);
+      update_project ();
       on_calc_bonds_released (NULL, NULL);
     }
   }

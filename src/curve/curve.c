@@ -300,7 +300,7 @@ double scale (double axe)
   {
     xs = 100000.0;
   }
-  return (xs);
+  return xs;
 }
 
 /*!

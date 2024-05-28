@@ -740,7 +740,7 @@ GtkWidget * param_prop_param_box (int pid)
 G_MODULE_EXPORT void changed_field_key_combo (GtkComboBox * box, gpointer data)
 {
   int i, j;
-  gboolean changeit;
+  gboolean changeit = FALSE;
   i = GPOINTER_TO_INT(data);
   j = gtk_combo_box_get_active (box);
   if (i > 6 && i < MOLIMIT)
@@ -755,7 +755,6 @@ G_MODULE_EXPORT void changed_field_key_combo (GtkComboBox * box, gpointer data)
   }
   else
   {
-    changeit = FALSE;
     switch (i)
     {
       case 6:
@@ -1666,7 +1665,8 @@ G_MODULE_EXPORT void selection_button (GtkButton * but, gpointer data)
   select_atom_id_from_fied_molecule (NULL, data);
   int i, j, k, l, m, n, o, p, q, r;
   i = GPOINTER_TO_INT(data);
-  gchar * stra, * strb;
+  gchar * stra = NULL;
+  gchar * strb = NULL;
   if (i == 2 || i == 3)
   {
     j=i-2;

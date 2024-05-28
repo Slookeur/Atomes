@@ -101,6 +101,7 @@ ColRGBA color_axis (int id)
 mat4_t create_axis_matrices (int type)
 {
   GLfloat x, y, z;
+  x = y = z = 0.0;
   float from_edge = 50.0;
   vec3_t win_coord;
   GLfloat sx = (GLfloat)wingl -> pixels[0];
@@ -111,7 +112,6 @@ mat4_t create_axis_matrices (int type)
   mat4_t axis_model_view_matrix;
   if (plot -> axispos == CENTER)
   {
-    x = y = 0.0;
     if (plot -> rep == ORTHOGRAPHIC)
     {
       x = 0.5 * sx;
@@ -149,7 +149,6 @@ mat4_t create_axis_matrices (int type)
       y = plot -> axis_pos[1] * sy / 100.0;
     }
   }
-  z = 0.0;
   win_coord = v3_un_project (vec3(x, y, z), wingl -> view_port, axis_projection_matrix);
   win_coord.z = 1.0;
   //print_axis_matrices (win_coord);

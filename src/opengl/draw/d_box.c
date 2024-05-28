@@ -630,7 +630,7 @@ void cuboid_slab (mat4_t rot)
   tmp = (cang[0] - cang[1]*cang[2]) / sang[2];
   paral[2][1] = wingl -> cell_win -> cparam[11] * tmp;
   paral[2][2] = wingl -> cell_win -> cparam[11] * sqrt(sang[1]*sang[1] - tmp*tmp);
-  ColRGBA null;
+  ColRGBA null; // Not used
   wingl -> cell_win -> slab_vol = draw_cuboid (! wingl -> cell_win -> cut_this_slab, SLABS, 0, rot,
                                                vec3(wingl -> cell_win -> cparam[6], wingl -> cell_win -> cparam[7], wingl -> cell_win -> cparam[8]),
                                                paral, null, wingl -> cell_win -> slab_alpha);

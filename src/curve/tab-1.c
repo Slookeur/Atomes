@@ -651,8 +651,8 @@ GtkWidget * create_tab_1 (gpointer data)
   ghbox = create_hbox (0);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox, ghbox, FALSE, FALSE, 15);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, ghbox, markup_label("Size:", 50, 35, 1.0, 0.5), FALSE, FALSE, 20);
-  xlgt = gtk_widget_get_allocated_width (this_proj -> curves[b][c] -> plot);
-  ylgt = gtk_widget_get_allocated_height (this_proj -> curves[b][c] -> plot);
+  xlgt = get_widget_width (this_proj -> curves[b][c] -> plot);
+  ylgt = get_widget_height (this_proj -> curves[b][c] -> plot);
   update_entry_int (GTK_ENTRY(xyp[0]), xlgt);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, ghbox, xyp[0], FALSE, FALSE, 0);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, ghbox, markup_label("x", -1, -1, 0.5, 0.5), FALSE, FALSE, 10);

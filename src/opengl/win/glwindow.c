@@ -1174,7 +1174,7 @@ G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
   glwin * view = (glwin *)data;
   int * pix = get_project_by_id(view -> proj) -> tmp_pixels;
   int shift = 0;
-  if (GTK_IS_WIDGET(view -> menu_bar)) shift = gtk_widget_get_allocated_height (view -> menu_bar);
+  if (GTK_IS_WIDGET(view -> menu_bar)) shift = get_widget_height (view -> menu_bar);
   if (pix[0] > 0 && pix[1] > 0)
   {
     resize_this_window (view -> win, pix[0], pix[1]+shift);
