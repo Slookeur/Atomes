@@ -1427,7 +1427,11 @@ void init_opengl (glwin * view)
   glHint (GL_FOG_HINT, GL_NICEST);
   glHint (GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // Really Nice Perspective Calculations
 
+#ifdef OSX
+  ogl_texture = GL_TEXTURE_RECTANGLE_ARB;
+#else
   ogl_texture = (is_GLExtension_Supported("GL_ARB_texture_rectangle")) ? GL_TEXTURE_RECTANGLE_ARB : GL_TEXTURE_2D;
+#endif // OSX
 }
 
 /*!
