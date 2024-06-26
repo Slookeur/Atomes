@@ -74,10 +74,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #  define max(a,b) (a>=b?a:b)
 #  define min(a,b) (a<=b?a:b)
 #  include <epoxy/gl.h>
-#  ifdef __APPLE__
-#    include <OpenGL/glu.h>
+#  include <GL/glu.h>
+#  ifdef OSX
+#    include <GL/glx.h>
 #  else
-#    include <GL/glu.h>
 #    include <epoxy/glx.h>
 #  endif
 #endif
