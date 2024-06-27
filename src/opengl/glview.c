@@ -57,7 +57,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void save_rotation_quaternion (glwin * view);
   void edit_for_motion (glwin * view);
   void motion (glwin * view, gint x, gint y, GdkModifierType state);
-  void render_this_gl_window (glwin * view, GtkGLArea * area, gint button, double ptx, double pty);
+  void render_this_gl_window (glwin * view, GtkGLArea * area);
   void render_this_gl_window (glwin * view, GtkWidget * widg, gint button);
   void glwin_lib_pressed (double x, double y, guint event_type, int event_button, gpointer data);
   void glwin_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data);
@@ -736,17 +736,14 @@ G_MODULE_EXPORT void on_glwin_pointer_motion (GtkEventControllerMotion * motc, g
 
 #ifdef GTKGLAREA
 /*!
-  \fn void render_this_gl_window (glwin * view, GtkGLArea * area, gint button, double ptx, double pty)
+  \fn void render_this_gl_window (glwin * view, GtkGLArea * area)
 
   \brief render the OpenGL window
 
   \param view the target glwin
   \param area the target GtkGLArea
-  \param button the button id
-  \param ptx x position
-  \param pty y position
 */
-void render_this_gl_window (glwin * view, GtkGLArea * area, gint button, double ptx, double pty)
+void render_this_gl_window (glwin * view, GtkGLArea * area)
 #else
 /*!
   \fn void render_this_gl_window (glwin * view, GtkWidget * widg, gint button)
@@ -776,7 +773,7 @@ void render_this_gl_window (glwin * view, GtkWidget * widg, gint button)
     draw (view);
     if (view -> to_pick)
     {
-      if (button) process_the_hits (view, button, ptx, pty);
+      if (view -> mouseButton) process_the_hits (view, view -> mouseButton, view -> mouseX, view -> mouseY);
       view -> to_pick = FALSE;
       reshape (view, view -> pixels[0], view -> pixels[1], TRUE);
       draw (view);
@@ -809,6 +806,7 @@ void glwin_lib_pressed (double x, double y, guint event_type, guint event_button
       view -> mouseStatus = CLICKED;
       view -> mouseX = x;
       view -> mouseY = y;
+      view -> mouseButton = event_button;
       if (event_button == 1)
       {
         save_rotation_quaternion (view);
@@ -896,6 +894,7 @@ void glwin_button_event (double event_x, double event_y, guint event_button, gui
       view -> mouseStatus = CLICKED;
       view -> mouseX = event_x;
       view -> mouseY = event_y;
+      view -> mouseButton = event_button;
       clock_gettime (CLOCK_MONOTONIC, & start_time);
       if (event_button == 1 || event_button == 3)
       {
@@ -904,7 +903,8 @@ void glwin_button_event (double event_x, double event_y, guint event_button, gui
         view -> nth_copy = 0;
         view -> insert_coords = get_insertion_coordinates (view);
 #ifdef GTKGLAREA
-        render_this_gl_window (view, GTK_GL_AREA(view -> plot), event_button, event_x, event_y);
+        view -> to_pick = TRUE;
+        update (view);
 #else
         render_this_gl_window (view, plot, event_button);
 #endif
@@ -912,12 +912,12 @@ void glwin_button_event (double event_x, double event_y, guint event_button, gui
       break;
     case GDK_BUTTON_RELEASE:
       view -> mouseStatus = RELEASED;
+      view -> mouseButton = 0;
       clock_gettime (CLOCK_MONOTONIC, & stop_time);
       if (get_calc_time (start_time, stop_time) < 0.4)
       {
-        view -> to_pick = TRUE;
 #ifdef GTKGLAREA
-        render_this_gl_window (view, GTK_GL_AREA(view -> plot), event_button, event_x, event_y);
+        update (view);
 #else
         render_this_gl_window (view, plot, event_button);
 #endif
@@ -1818,7 +1818,7 @@ G_MODULE_EXPORT gboolean on_expose (GtkWidget * widg, cairo_t * cr, gpointer dat
   if (event && event -> type == GDK_EXPOSE && ((GdkEventExpose *)event) -> count > 0) return TRUE;
 #endif
 #ifdef GTKGLAREA
-  render_this_gl_window (view, area, 0, 0.0, 0.0);
+  render_this_gl_window (view, area);
 #else
   render_this_gl_window (view, widg, 0);
 #endif
