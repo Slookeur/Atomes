@@ -103,7 +103,7 @@ GtkWidget * calc_window (int i)
 #ifndef GTK4
   /* GtkWidget * apply_button =
   button_set_image (GTK_BUTTON(apply_button), calc_name[i], IMG_FILE, (gpointer)calc_img[i]);
-  gtk_widget_show (apply_button); */
+  show_the_widgets (apply_button); */
 #endif
   return calc_dialog;
 }
@@ -929,23 +929,23 @@ G_MODULE_EXPORT void expand_opt (GtkWidget * exp, gpointer data)
   {
     if (i == 1)
     {
-      gtk_widget_hide (avbox);
+      hide_the_widgets (avbox);
     }
     else
     {
-      gtk_widget_hide (smbox);
+      hide_the_widgets (smbox);
     }
   }
   else
   {
     if (i == 1)
     {
-      gtk_widget_show (avbox);
+      show_the_widgets (avbox);
 
     }
     else
     {
-      gtk_widget_show (smbox);
+      show_the_widgets (smbox);
     }
   }
   gtk_widget_set_size_request (exp, -1, -1);
@@ -1020,11 +1020,11 @@ G_MODULE_EXPORT void on_show_curve_toolbox (GtkWidget * widg, gpointer data)
 {
   if (! is_the_widget_visible (curvetoolbox))
   {
-    gtk_widget_show (curvetoolbox);
+    show_the_widgets (curvetoolbox);
   }
   else
   {
-    gtk_widget_hide (curvetoolbox);
+    hide_the_widgets (curvetoolbox);
   }
 }
 
@@ -1167,7 +1167,7 @@ G_MODULE_EXPORT void on_smoother_released (GtkButton * button, gpointer data)
       xsk = NULL;
     }
     fill_tool_model ();
-    gtk_widget_show (curvetoolbox);
+    show_the_widgets (curvetoolbox);
     if (l == 0 || l == 3)
     {
       for (i=0; i<4; i=i+3) update_after_calc (i);
@@ -1339,22 +1339,22 @@ G_MODULE_EXPORT void run_on_calc_activate (GtkDialog * dial, gint response_id, g
         case RI-1:
           if (test_rings ())
           {
-            //gtk_widget_show (spinner);
+            //show_the_widgets (spinner);
             //gtk_spinner_start (GTK_SPINNER(spinner));
             on_calc_rings_released (calc_win, NULL);
             toggled_rings = FALSE;
             //gtk_spinner_stop (GTK_SPINNER(spinner));
-            //gtk_widget_hide (spinner);
+            //hide_the_widgets (spinner);
           }
           break;
         case CH-1:
           if (test_rings ())
           {
-            //gtk_widget_show (spinner);
+            //show_the_widgets (spinner);
             //gtk_spinner_start (GTK_SPINNER(spinner));
             on_calc_chains_released (calc_win, NULL);
             //gtk_spinner_stop (GTK_SPINNER(spinner));
-            //gtk_widget_hide (spinner);
+            //hide_the_widgets (spinner);
           }
           break;
         case SP-1:
@@ -1426,6 +1426,6 @@ G_MODULE_EXPORT void on_calc_activate (GtkWidget * widg, gpointer data)
   /*GtkWidget * spinner = gtk_spinner_new ();
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, spinner, FALSE, FALSE, 0);
   gtk_widget_set_size_request (spinner, -1, 30);
-  gtk_widget_hide (spinner);*/
+  hide_the_widgets (spinner);*/
   run_this_gtk_dialog (calc_win, G_CALLBACK(run_on_calc_activate), data);
 }

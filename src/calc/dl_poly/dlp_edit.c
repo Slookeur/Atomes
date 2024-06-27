@@ -1015,8 +1015,8 @@ G_MODULE_EXPORT void field_molecule_select_atom_id (GtkCellRendererToggle * cell
   init_default_shaders (tmp_view);
   j = (active_sel > 5 && active_sel < 8) ? 1 : 0;
   gtk_tree_store_set (* model, & iter, 3+j, toviz.c, -1);
-  gtk_widget_hide (add_tree);
-  gtk_widget_show (add_tree);
+  hide_the_widgets (add_tree);
+  show_the_widgets (add_tree);
 }
 
 /*!
@@ -1760,7 +1760,7 @@ G_MODULE_EXPORT void selection_button (GtkButton * but, gpointer data)
       cross_box = destroy_this_widget (cross_box);
       cross_box = combo_cross (tmp_fbody);
       add_box_child_start (GTK_ORIENTATION_HORIZONTAL, cross_hbox, cross_box, FALSE, FALSE, 0);
-      gtk_widget_show (cross_box);
+      show_the_widgets (cross_box);
     }
     if (tmp_fbody -> na[j] < 0)
     {
@@ -2905,7 +2905,7 @@ void edit_parameters (int f, int id)
   show_the_widgets (dialog);
   if (f == 2)
   {
-    if (tmp_fshell -> ia[0] < 0 || tmp_fshell -> ia[1] < 1) gtk_widget_hide (shell_hbox[2]);
+    if (tmp_fshell -> ia[0] < 0 || tmp_fshell -> ia[1] < 1) hide_the_widgets (shell_hbox[2]);
     if (tmp_fshell -> ia[0] < 0) widget_set_sensitive (shell_hbox[1], FALSE);
   }
 

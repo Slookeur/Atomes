@@ -49,6 +49,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   const gchar * entry_get_text (GtkEntry * entry);
 
   void show_the_widgets (GtkWidget * widg);
+  void hide_the_widgets (GtkWidget * widg);
   void widget_set_sensitive (GtkWidget * widg, gboolean sensitive);
   void add_container_child (int type, GtkWidget * widg, GtkWidget * child);
   void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding);
@@ -172,9 +173,25 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 void show_the_widgets (GtkWidget * widg)
 {
 #ifdef GTK4
-  gtk_widget_show (widg);
+  gtk_widget_set_visible (widg, TRUE);
 #else
   gtk_widget_show_all (widg);
+#endif
+}
+
+/*!
+  \fn void hide_the_widgets (GtkWidget * widg)
+
+  \brief hide GtkWidget
+
+  \param widg the GtkWidget to show
+*/
+void hide_the_widgets (GtkWidget * widg)
+{
+#ifdef GTK4
+  gtk_widget_set_visible (widg, FALSE);
+#else
+  gtk_widget_hide (widg);
 #endif
 }
 
@@ -2016,7 +2033,7 @@ GtkWidget * destroy_this_widget (GtkWidget * widg)
   {
     if (GTK_IS_WIDGET(widg))
     {
-      if (is_the_widget_visible(widg)) gtk_widget_hide (widg);
+      if (is_the_widget_visible(widg)) hide_the_widgets (widg);
 #ifdef GTK3
       gtk_widget_destroy (widg);
 #else
@@ -2350,7 +2367,7 @@ G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data)
 G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
 #endif
 {
-  gtk_widget_hide (GTK_WIDGET(win));
+  hide_the_widgets (GTK_WIDGET(win));
   return TRUE;
 }
 

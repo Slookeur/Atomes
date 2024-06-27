@@ -4084,10 +4084,10 @@ G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget *
   switch (i)
   {
     case 0:
-      // if (is_the_widget_visible(preview_but)) gtk_widget_hide (preview_but);
+      // if (is_the_widget_visible(preview_but)) hide_the_widgets (preview_but);
       break;
     case 1:
-      // if (! is_the_widget_visible(preview_but)) gtk_widget_show (preview_but);
+      // if (! is_the_widget_visible(preview_but)) show_the_widgets (preview_but);
       break;
     case MAXDATC+MAXDATA+2:
       break;
@@ -4182,7 +4182,7 @@ G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpoint
       widget_set_sensitive (field_i_prep[i], FALSE);
       field_i_obj[i] = destroy_this_widget (field_i_obj[i]);
       field_i_obj[i] = stock_image (CANCEL);
-      gtk_widget_show (field_i_obj[i]);
+      show_the_widgets (field_i_obj[i]);
       add_box_child_start (GTK_ORIENTATION_HORIZONTAL, field_i_box[i], field_i_obj[i], TRUE, TRUE, 25);
     }
     for (i=0; i<MAXDATC+MAXDATA+2; i++)
@@ -4195,7 +4195,7 @@ G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpoint
         }
       }
     }
-    gtk_widget_hide (preview_but);
+    hide_the_widgets (preview_but);
     for (i=0; i<19; i++)
     {
 #ifdef GTK4
@@ -4399,7 +4399,7 @@ void create_ff_structure (int ai, int type)
   gtk_assistant_set_page_complete (GTK_ASSISTANT (field_assistant),
                                    gtk_assistant_get_nth_page(GTK_ASSISTANT (field_assistant), 0), TRUE);
   show_the_widgets (field_assistant);
-  if (tmp_field -> md_opts[1] == 0.0) gtk_widget_hide (extra_vbox[1]);
+  if (tmp_field -> md_opts[1] == 0.0) hide_the_widgets (extra_vbox[1]);
   hide_show_this_pages (0, MAXDATC, tmp_field -> prepare_file[0], 0);
   hide_show_this_pages (MAXDATC-1, MAXDATC+MAXDATA, tmp_field -> prepare_file[1], 1);
   // return FALSE;
@@ -4430,7 +4430,7 @@ G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
           field_i_obj[0] = destroy_this_widget (field_i_obj[0]);
           field_i_obj[0] = stock_image (APPLY);
           add_box_child_start (GTK_ORIENTATION_HORIZONTAL, field_i_box[0], field_i_obj[0], TRUE, TRUE, 25);
-          gtk_widget_show (field_i_obj[0]);
+          show_the_widgets (field_i_obj[0]);
         }
         else
         {
@@ -4444,9 +4444,9 @@ G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
           widget_set_sensitive (field_i_combo[1], FALSE);
           field_i_obj[1] = destroy_this_widget (field_i_obj[1]);
           field_i_obj[1] = gtk_spinner_new ();
-          gtk_widget_show (field_i_obj[1]);
+          show_the_widgets (field_i_obj[1]);
           add_box_child_start (GTK_ORIENTATION_HORIZONTAL, field_i_box[1], field_i_obj[1], TRUE, TRUE, 25);
-          gtk_widget_show (field_i_obj[1]);
+          show_the_widgets (field_i_obj[1]);
           gtk_spinner_start (GTK_SPINNER(field_i_obj[1]));
           // gdk_threads_add_idle (create_ff_structure, GINT_TO_POINTER(j));
           create_ff_structure (j, tmp_field -> type);
@@ -4801,7 +4801,7 @@ void create_classical_force_field (int p, int f)
   else
   {
     show_the_widgets (field_assistant);
-    gtk_widget_hide (preview_but);
+    hide_the_widgets (preview_but);
   }
 
   gtk_assistant_set_forward_page_func (GTK_ASSISTANT (field_assistant), on_assistant_go_forward, NULL, NULL);

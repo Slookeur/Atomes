@@ -1320,7 +1320,7 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
   view -> coord_win -> notebook = gtk_notebook_new ();
   gtk_notebook_set_scrollable (GTK_NOTEBOOK(view -> coord_win -> notebook), TRUE);
   gtk_notebook_set_tab_pos (GTK_NOTEBOOK(view -> coord_win -> notebook), GTK_POS_LEFT);
-  gtk_widget_show (view -> coord_win -> notebook);
+  show_the_widgets (view -> coord_win -> notebook);
   gtk_widget_set_size_request (view -> coord_win -> notebook, 600, 550);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, view -> coord_win -> notebook, FALSE, FALSE, 0);
   gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), param_tab (view), gtk_label_new ("Parameters"));
@@ -1479,7 +1479,7 @@ G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data)
   }
   else if (GTK_IS_WIDGET(view -> coord_win -> win))
   {
-    gtk_widget_show (view -> coord_win -> win);
+    show_the_widgets (view -> coord_win -> win);
     gtk_notebook_set_current_page (GTK_NOTEBOOK (view -> coord_win -> notebook), page);
   }
   else

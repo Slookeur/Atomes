@@ -1275,6 +1275,13 @@ gboolean create_3d_model (int p, gboolean load)
     }
 #ifdef GTKGLAREA
     this_proj -> modelgl -> plot = gtk_gl_area_new ();
+    gtk_widget_set_can_focus (this_proj -> modelgl -> plot, TRUE);
+    gtk_widget_set_focusable (this_proj -> modelgl -> plot, TRUE);
+
+#if GTK_MINOR_VERSION >= 12
+   // Disable OpenGL ES
+   gtk_gl_area_set_allowed_apis (GTK_GL_AREA(this_proj -> modelgl -> plot), GDK_GL_API_GL);
+#endif
 #else
     this_proj -> modelgl -> plot = gtk_drawing_area_new ();
 #endif
@@ -1436,11 +1443,11 @@ void prep_model (int p)
   {
     if (gtk_widget_get_visible(this_proj -> modelgl -> win))
     {
-      gtk_widget_hide (this_proj -> modelgl -> win);
+      hide_the_widgets (this_proj -> modelgl -> win);
     }
     else
     {
-      gtk_widget_show (this_proj -> modelgl -> win);
+      show_the_widgets (this_proj -> modelgl -> win);
     }
   }
 }

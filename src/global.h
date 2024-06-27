@@ -1077,6 +1077,7 @@ extern void gtk_label_align (GtkWidget * lab, float ax, float ay);
 extern gchar * prepare_for_title (gchar * init);
 
 extern void show_the_widgets (GtkWidget * widg);
+extern void hide_the_widgets (GtkWidget * widg);
 extern gboolean is_the_widget_visible (GtkWidget * widg);
 extern void widget_set_sensitive (GtkWidget * widg, gboolean sensitive);
 

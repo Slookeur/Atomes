@@ -755,16 +755,16 @@ G_MODULE_EXPORT void changed_calc_box (GtkComboBox * box, gpointer data)
   {
     gtk_label_set_text (GTK_LABEL(calc_label), g_strdup_printf ("<u>%s option(s)</u>", calc_ds[i]));
     gtk_label_set_use_markup (GTK_LABEL(calc_label), TRUE);
-    gtk_widget_hide (calc_box[tmp_cpmd -> calc_type]);
-    gtk_widget_show (calc_box[i]);
+    hide_the_widgets (calc_box[tmp_cpmd -> calc_type]);
+    show_the_widgets (calc_box[i]);
     tmp_cpmd -> calc_type = i;
     if (tmp_cpmd -> calc_type != 2)
     {
-      gtk_widget_hide (electron_box);
+      hide_the_widgets (electron_box);
     }
     else
     {
-      gtk_widget_show (electron_box);
+      show_the_widgets (electron_box);
     }
     for (i=1; i<4; i++) print_the_section (i, 0, qmbuffer[i]);
   }
@@ -1194,10 +1194,10 @@ G_MODULE_EXPORT void on_qm_assistant_prepare (GtkAssistant * assistant, GtkWidge
   switch (i)
   {
     case 0:
-      if (is_the_widget_visible(qm_preview_but)) gtk_widget_hide (qm_preview_but);
+      if (is_the_widget_visible(qm_preview_but)) hide_the_widgets (qm_preview_but);
       break;
     default:
-      if (! is_the_widget_visible(qm_preview_but)) gtk_widget_show (qm_preview_but);
+      if (! is_the_widget_visible(qm_preview_but)) show_the_widgets (qm_preview_but);
       break;
   }
 }
@@ -1711,10 +1711,10 @@ void create_qm_input_file (int c, int p, int s)
   show_the_widgets (qm_assistant);
   if (c == 0)
   {
-    for (i=0; i<NCPMDCALC; i++) gtk_widget_hide (calc_box[i]);
-    gtk_widget_show (calc_box[tmp_cpmd -> calc_type]);
-    if (tmp_cpmd -> calc_type != 2) gtk_widget_hide (electron_box);
+    for (i=0; i<NCPMDCALC; i++) hide_the_widgets (calc_box[i]);
+    show_the_widgets (calc_box[tmp_cpmd -> calc_type]);
+    if (tmp_cpmd -> calc_type != 2) hide_the_widgets (electron_box);
   }
-  gtk_widget_hide (qm_preview_but);
+  hide_the_widgets (qm_preview_but);
 }
 

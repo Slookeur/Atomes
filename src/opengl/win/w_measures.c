@@ -769,6 +769,6 @@ G_MODULE_EXPORT void window_measures (GtkWidget * widg, gpointer data)
   }
   else
   {
-    gtk_widget_show (view -> measure_win -> win);
+    show_the_widgets (view -> measure_win -> win);
   }
 }

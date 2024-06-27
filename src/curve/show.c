@@ -312,7 +312,7 @@ void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpo
 void hide_curve (gpointer data)
 {
   tint * idc = (tint *)data;
-  gtk_widget_hide (get_project_by_id(idc -> a) -> curves[idc -> b][idc -> c] -> window);
+  hide_the_widgets (get_project_by_id(idc -> a) -> curves[idc -> b][idc -> c] -> window);
   if (idc -> a == activep)
   {
     adjust_tool_model (idc -> b, idc -> c, get_project_by_id(idc -> a) -> curves[idc -> b][idc -> c] -> path);

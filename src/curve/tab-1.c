@@ -381,7 +381,7 @@ void set_frame_style (gpointer data)
   frame_style_area = create_image_from_data (IMG_SURFACE, (gpointer)surf);
   cairo_surface_destroy (surf);
   widget_set_sensitive (frame_style_area, this_proj -> curves[b][c] -> show_frame);
-  gtk_widget_show (frame_style_area);
+  show_the_widgets (frame_style_area);
 #ifdef GTK4
   gtk_widget_set_hexpand (frame_style_area, TRUE);
 #endif

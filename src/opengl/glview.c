@@ -441,8 +441,8 @@ void update (glwin * view)
   gtk_gl_area_queue_render ((GtkGLArea *)view -> plot);
 #ifdef G_OS_WIN32
 #ifdef GTK3
-  gtk_widget_hide (view -> plot);
-  gtk_widget_show (view -> plot);
+  hide_the_widgets (view -> plot);
+  show_the_widgets (view -> plot);
 #endif
 #endif
 }

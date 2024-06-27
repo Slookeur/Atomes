@@ -137,7 +137,7 @@ GtkWidget * create_css_color_bar (colormap * map)
   provide_gtk_css (gradient);
   colob = gtk_image_new ();
   gtk_widget_set_name (colob, "gradient");
-  gtk_widget_show (colob);
+  show_the_widgets (colob);
   //gtk_widget_set_size_request (colob, 100, 400);
   g_free (gradient);
   return colob;
