@@ -108,7 +108,7 @@ G_MODULE_EXPORT void update_box (GtkEntry * entry, gpointer data)
 {
   dint * id = (dint *)data;
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (v >= 0.0)
   {
     tmp_box[id -> a][id -> b] = v;
@@ -195,7 +195,7 @@ G_MODULE_EXPORT void toggle_frac (GtkToggleButton * Button, gpointer data)
 G_MODULE_EXPORT void update_vect (GtkEntry * entry, gpointer data)
 {
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   update_entry_double (entry, v);
 }
 
@@ -221,7 +221,7 @@ G_MODULE_EXPORT void run_vectors (GtkDialog * win, gint response_id, gpointer da
       for (k=0; k<3; k++)
       {
         m = entry_get_text (GTK_ENTRY(vect_entry[i]));
-        v = atof(m);
+        v = string_to_double ((gpointer)m);
         tmp_vect[j][k] = v;
         i ++;
       }
@@ -338,7 +338,7 @@ G_MODULE_EXPORT void update_chemistry (GtkEntry * entry, gpointer data)
   int i = gtk_combo_box_get_active (GTK_COMBO_BOX(spec_box));
   int j = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   tmp_chem[j][i] = v;
   update_entry_double (entry, v);
 }

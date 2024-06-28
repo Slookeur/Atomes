@@ -453,13 +453,13 @@ int sml_preview (const char * filetoread)
   if (chem_node == NULL) return clean_xml_data (doc, reader);
   at_node = findnode (chem_node -> children, "atoms");
   if (at_node == NULL) return clean_xml_data (doc, reader);
-  lib_proj -> natomes = (int)atof((char *)xmlNodeGetContent(at_node));
+  lib_proj -> natomes = (int)string_to_double ((gpointer)xmlNodeGetContent(at_node));
 
   sp_node = findnode (chem_node -> children, "species");
   if (sp_node == NULL) return clean_xml_data (doc, reader);
   spec_node = sp_node -> properties -> children;
   if (spec_node == NULL) return clean_xml_data (doc, reader);
-  lib_proj -> nspec = (int)atof((char *)xmlNodeGetContent(spec_node));
+  lib_proj -> nspec = (int)string_to_double ((gpointer)xmlNodeGetContent(spec_node));
   if (lib_proj -> natomes < 1 || lib_proj -> nspec < 1) return clean_xml_data (doc, reader);
   alloc_proj_data (lib_proj, 1);
   lab_node = sp_node -> children;
@@ -478,7 +478,7 @@ int sml_preview (const char * filetoread)
       if (lot_node == NULL) return clean_xml_data (doc, reader);
       if (g_strcmp0 ("num",(char *)xspec -> name) == 0)
       {
-        lib_proj -> chemistry -> nsps[i] = (int)atof((char *)xmlNodeGetContent(lot_node));
+        lib_proj -> chemistry -> nsps[i] = (int)string_to_double ((gpointer)xmlNodeGetContent(lot_node));
         lib_proj -> chemistry -> chem_prop[CHEM_Z][i] = get_z_from_periodic_table (lib_proj -> chemistry -> label[i]);
         k = (int)lib_proj -> chemistry -> chem_prop[CHEM_Z][i];
         lib_proj -> chemistry -> chem_prop[CHEM_M][i] = periodic_table_info[k].M;
@@ -506,24 +506,29 @@ int sml_preview (const char * filetoread)
       if (lot_node == NULL) return clean_xml_data (doc, reader);
       if (g_strcmp0 ("x",(char *)xspec -> name) == 0)
       {
-        lib_proj -> atoms[0][i].x = atof((char *)xmlNodeGetContent(lot_node));
+        lib_proj -> atoms[0][i].x = string_to_double ((gpointer)xmlNodeGetContent(lot_node));
       }
       else if (g_strcmp0 ("y",(char *)xspec -> name) == 0)
       {
-        lib_proj -> atoms[0][i].y = atof((char *)xmlNodeGetContent(lot_node));
+        lib_proj -> atoms[0][i].y = string_to_double ((gpointer)xmlNodeGetContent(lot_node));
       }
       else if (g_strcmp0 ("z",(char *)xspec -> name) == 0)
       {
-        lib_proj -> atoms[0][i].z = atof((char *)xmlNodeGetContent(lot_node));
+        g_debug ("i= %d, z= %s", i, (char *)xmlNodeGetContent(lot_node));
+        lib_proj -> atoms[0][i].z = string_to_double ((gpointer)xmlNodeGetContent(lot_node));
       }
       else if (g_strcmp0 ("sp",(char *)xspec -> name) == 0)
       {
-        lib_proj -> atoms[0][i].sp = (int)atof((char *)xmlNodeGetContent(lot_node));
+        lib_proj -> atoms[0][i].sp = (int)string_to_double ((gpointer)xmlNodeGetContent(lot_node));
         lib_proj -> atoms[0][i].show[0] = TRUE;
       }
       xspec = xspec -> next;
     }
     coord_node = coord_node -> next;
+  }
+  for (i=0; i<lib_proj -> natomes; i++)
+  {
+    g_debug ("i= %d, x= %f, y= %f, z= %f", i, lib_proj -> atoms[0][i].x, lib_proj -> atoms[0][i].y, lib_proj -> atoms[0][i].z);
   }
   pbc_node = findnode (racine -> children, "lattice");
   if (pbc_node != NULL)
@@ -1162,6 +1167,7 @@ int insert_this_project_from_lib (int id, gboolean visible, project * this_proj,
   int molec[6] = {0, 8, 36, 21, 11, 0};
   int active = activep;
   the_family = family[id];
+  g_debug ("active= %d, the_family= %d", active, the_family);
   if (get_sml_files ())
   {
     prepare_preview (active, molec[id], FALSE);

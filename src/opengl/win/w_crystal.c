@@ -608,7 +608,7 @@ int open_cif_database (gchar * filetoread)
     node = racine -> children;
     node = findnode (racine -> children, "num-cif");
     if (node == NULL) return clean_xml_data (doc, reader);
-    total_num_cif = (int)atof((char *)xmlNodeGetContent(node));
+    total_num_cif = (int)string_to_double ((gpointer)xmlNodeGetContent(node));
     sym_node = findnode (racine -> children, "sym-cif");
     if (sym_node == NULL) return clean_xml_data (doc, reader);
     int i, j;
@@ -616,7 +616,7 @@ int open_cif_database (gchar * filetoread)
     {
       node = findnode (sym_node, sym_list[i]);
       if (node == NULL) return clean_xml_data (doc, reader);
-      j = (int)atof((char *)xmlNodeGetContent(node));
+      j = (int)string_to_double ((gpointer)xmlNodeGetContent(node));
       group_names_by_sym[i] = calloc(j, sizeof*group_names_by_sym[i]);
       num_cif_by_sym_group[i] = calloc(j, sizeof*num_cif_by_sym_group[i]);
       num_group_by_sym[i] = j;
@@ -631,7 +631,7 @@ int open_cif_database (gchar * filetoread)
           if (cif_node == NULL) return clean_xml_data (doc, reader);
           if (strcmp("num_cif", (char *)cif_node -> name) == 0)
           {
-            num_cif_by_sym_group[i][j] = (int)atof((char *)xmlNodeGetContent(cif_node));
+            num_cif_by_sym_group[i][j] = (int)string_to_double ((gpointer)xmlNodeGetContent(cif_node));
           }
         }
         group_names_by_sym[i][j] = g_strdup_printf ("%s", (char *)xmlNodeGetContent(group));

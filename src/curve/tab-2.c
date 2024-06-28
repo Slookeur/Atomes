@@ -369,7 +369,7 @@ G_MODULE_EXPORT void set_data_thickness (GtkEntry * thickd, gpointer data)
   b = cd -> b;
   c = cd -> c;
   wid = entry_get_text (thickd);
-  k = atof(wid);
+  k = string_to_double ((gpointer)wid);
   project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (k > 0.0)
@@ -417,7 +417,7 @@ G_MODULE_EXPORT void set_data_glyph_size (GtkEntry * glsize, gpointer data)
   b = cd -> b;
   c = cd -> c;
   wid = entry_get_text (glsize);
-  k = atof(wid);
+  k = string_to_double ((gpointer)wid);
   project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (k > 0.0)
@@ -465,7 +465,7 @@ G_MODULE_EXPORT void set_data_hist_width (GtkEntry * entry, gpointer data)
   b = cd -> b;
   c = cd -> c;
   wid = entry_get_text (entry);
-  k = atof(wid);
+  k = string_to_double ((gpointer)wid);
   project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (k > 0.0)
@@ -513,7 +513,7 @@ G_MODULE_EXPORT void set_data_hist_opac (GtkEntry * entry, gpointer data)
   b = cd -> b;
   c = cd -> c;
   wid = entry_get_text (entry);
-  k = atof(wid);
+  k = string_to_double ((gpointer)wid);
   project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (k >= 0.0 && k <= 1.0)
@@ -588,7 +588,7 @@ G_MODULE_EXPORT void set_data_glyph_freq (GtkEntry * glfreq, gpointer data)
   b = cd -> b;
   c = cd -> c;
   wid = entry_get_text (glfreq);
-  j = atof(wid);
+  j = string_to_double ((gpointer)wid);
   project * this_proj = get_project_by_id(a);
   i = gtk_combo_box_get_active (GTK_COMBO_BOX(setcolorbox));
   if (j > 0)

@@ -268,7 +268,7 @@ G_MODULE_EXPORT void update_cp2k_option (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   switch (i)
   {
     case CP2VDW:
@@ -553,7 +553,7 @@ G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (tmp_cp2k -> opts[i] != v)
   {
     tmp_cp2k -> opts[i] = v;

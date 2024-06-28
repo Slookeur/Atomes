@@ -883,7 +883,7 @@ static gboolean update_rend (GtkTreeModel * model, GtkTreeIter * iter, gpointer 
     gtk_tree_path_free(path);
     if (g_strcmp0 (str, "0") == 0) return TRUE;
     vis = get_visible (FALSE, NULL);
-    int p = (int)atof(str);
+    int p = (int)string_to_double ((gpointer)str);
     g_free (str);
     if (p > vis.a && p < vis.a+vis.b+1) return TRUE;
   }

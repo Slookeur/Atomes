@@ -1278,10 +1278,6 @@ gboolean create_3d_model (int p, gboolean load)
     gtk_widget_set_can_focus (this_proj -> modelgl -> plot, TRUE);
 #ifdef GTK4
     gtk_widget_set_focusable (this_proj -> modelgl -> plot, TRUE);
-#if GTK_MINOR_VERSION >= 12
-   // Disable OpenGL ES
-   gtk_gl_area_set_allowed_apis (GTK_GL_AREA(this_proj -> modelgl -> plot), GDK_GL_API_GL);
-#endif
 #endif
 #else
     this_proj -> modelgl -> plot = gtk_drawing_area_new ();

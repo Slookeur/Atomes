@@ -493,7 +493,7 @@ G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data
     if (i == 0 || i > 3)
     {
       riask = entry_get_text (GTK_ENTRY(answer));
-      res_int = atof(riask);
+      res_int = string_to_double ((gpointer)riask);
       if (i > 4)
       {
         if (res_int > 0 && res_int < i+1)

@@ -125,14 +125,14 @@ double get_value_from_pos (gchar * pos)
     char * p = NULL;
     double u, v;
     p = strtok(pos, "/");
-    u  = atof(p);
+    u  = string_to_double ((gpointer)p);
     p = strtok(NULL, "/");
-    v = atof(p);
+    v = string_to_double ((gpointer)p);
     return u/v;
   }
   else
   {
-    return atof(pos);
+    return string_to_double ((gpointer)pos);
   }
 }
 

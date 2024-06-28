@@ -823,7 +823,7 @@ G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
 {
   tint * dat = (tint * )data;
   const gchar * m = entry_get_text (res);
-  int v = (int)atof(m);
+  int v = (int)string_to_double ((gpointer)m);
   project * this_proj = get_project_by_id(dat -> a);
   int g = dat -> b;
   if (v > 0 && v <= this_proj -> coord -> totcoord[g])

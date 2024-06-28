@@ -357,6 +357,7 @@ void opengl_info (project * this_proj, GtkTextBuffer * buf)
   int i, j, k, l;
   i = j = k = l = -1;
 
+  gtk_gl_area_make_current ((GtkGLArea *)this_proj -> modelgl -> plot);
   gchar * str;
   print_info ("\n\nOpenGL driver information\n\n", "heading", buf);
   print_info ("\tOpenGL Version  \t\t\t: ", NULL, buf);

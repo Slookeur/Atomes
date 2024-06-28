@@ -278,7 +278,7 @@ G_MODULE_EXPORT void set_legend_pos (GtkEntry * entry, gpointer data)
   c = ad -> c;
   d = ad -> d;
   f = entry_get_text (entry);
-  z = atof(f);
+  z = string_to_double ((gpointer)f);
   project * this_proj = get_project_by_id(a);
   if (z >= 0.0 && z <= 1.0)
   {
@@ -332,7 +332,7 @@ G_MODULE_EXPORT void set_legend_box_thickness (GtkEntry * entry, gpointer data)
   c = cd -> c;
   str = entry_get_text (entry);
   project * this_proj = get_project_by_id(a);
-  this_proj -> curves[b][c] -> legend_box_thickness = atof(str);
+  this_proj -> curves[b][c] -> legend_box_thickness = string_to_double ((gpointer)str);
   update_entry_double (entry, this_proj -> curves[b][c] -> legend_box_thickness);
   set_legend_box_style (data);
 }

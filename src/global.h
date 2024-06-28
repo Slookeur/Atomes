@@ -45,6 +45,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <locale.h>
+#ifdef OSX
+#include <xlocale.h>
+#endif
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
@@ -1235,6 +1238,7 @@ extern void file_chooser_set_current_folder (GtkFileChooser * chooser);
 extern GtkWidget * get_top_level (GtkWidget * widg);
 
 extern void provide_gtk_css (gchar * css);
+extern double string_to_double (gpointer string);
 extern double get_calc_time (struct timespec start, struct timespec stop);
 extern gchar * calculation_time (gboolean modelv, double ctime);
 

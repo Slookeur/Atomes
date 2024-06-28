@@ -954,7 +954,7 @@ G_MODULE_EXPORT void update_sa (GtkEntry * res, gpointer data)
   }
   else
   {
-    v= (int)atof(m);
+    v= (int)string_to_double ((gpointer)m);
     if (v > 0)
     {
       this_reader -> nsps[read_spec] = v;
@@ -1042,7 +1042,7 @@ G_MODULE_EXPORT void update_at_sp (GtkEntry * res, gpointer data)
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
   gboolean up = FALSE;
-  v = (int)atof(m);
+  v = (int)string_to_double ((gpointer)m);
   if (i == 0)
   {
     this_reader -> natomes = (v > 0) ? v : 0;

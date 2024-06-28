@@ -294,9 +294,8 @@ GtkWidget * create_splash_window ()
   image = gtk_image_new_from_file (PACKAGE_LOGO);
 #endif
   add_container_child (CONTAINER_WIN, splash_window, image);
-
-  show_the_widgets (splash_window);
   gtk_window_set_transient_for ((GtkWindow *)splash_window, (GtkWindow *)MainWindow);
+  show_the_widgets (splash_window);
   return splash_window;
 }
 
@@ -490,7 +489,7 @@ void open_this_data_file (int file_type, gchar * file_name)
 */
 G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
 {
-GtkSettings * default_settings = gtk_settings_get_default ();
+  GtkSettings * default_settings = gtk_settings_get_default ();
 #ifdef GTK3
   g_object_set (default_settings, "gtk-button-images", TRUE, NULL);
   g_object_set (default_settings, "gtk-application-prefer-dark-theme", TRUE, NULL);

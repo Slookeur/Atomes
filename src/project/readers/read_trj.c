@@ -99,7 +99,7 @@ int trj_get_atom_coordinates ()
           res = 2;
           goto enda;
         }
-        active_project -> atoms[i][j].x = atof(this_word);
+        active_project -> atoms[i][j].x = string_to_double ((gpointer)this_word);
         this_word = strtok_r (NULL, " ", & saved_line);
         if (! this_word)
         {
@@ -107,7 +107,7 @@ int trj_get_atom_coordinates ()
           res = 2;
           goto enda;
         }
-        active_project -> atoms[i][j].y = atof(this_word);
+        active_project -> atoms[i][j].y = string_to_double ((gpointer)this_word);
         this_word = strtok_r (NULL, " ", & saved_line);
         if (! this_word)
         {
@@ -115,7 +115,7 @@ int trj_get_atom_coordinates ()
           res = 2;
           goto enda;
         }
-        active_project -> atoms[i][j].z = atof(this_word);
+        active_project -> atoms[i][j].z = string_to_double ((gpointer)this_word);
         g_free (this_line);
         enda:;
       }
@@ -148,7 +148,7 @@ int trj_get_atom_coordinates ()
           res = 2;
           goto ends;
         }
-        active_project -> atoms[i][j].x = atof(this_word) * 0.52917721;
+        active_project -> atoms[i][j].x = string_to_double ((gpointer)this_word) * 0.52917721;
         this_word = strtok_r (NULL, " ", & saved_line);
         if (! this_word)
         {
@@ -156,7 +156,7 @@ int trj_get_atom_coordinates ()
           res = 2;
           goto ends;
         }
-        active_project -> atoms[i][j].y = atof(this_word) * 0.52917721;
+        active_project -> atoms[i][j].y = string_to_double ((gpointer)this_word) * 0.52917721;
         this_word = strtok_r (NULL, " ", & saved_line);
         if (! this_word)
         {
@@ -164,7 +164,7 @@ int trj_get_atom_coordinates ()
           res = 2;
           goto ends;
         }
-        active_project -> atoms[i][j].z = atof(this_word) * 0.52917721;
+        active_project -> atoms[i][j].z = string_to_double ((gpointer)this_word) * 0.52917721;
         g_free (this_line);
       }
       ends:;
@@ -204,21 +204,21 @@ int trj_get_atom_coordinates ()
         format_error (i+1, j+1, lia[1], k);
         return 2;
       }
-      active_project -> atoms[i][j].x = atof(this_word) * 0.52917721;
+      active_project -> atoms[i][j].x = string_to_double ((gpointer)this_word) * 0.52917721;
       this_word = strtok (NULL, " ");
       if (! this_word)
       {
         format_error (i+1, j+1, lia[2], k);
         return 2;
       }
-      active_project -> atoms[i][j].y = atof(this_word) * 0.52917721;
+      active_project -> atoms[i][j].y = string_to_double ((gpointer)this_word) * 0.52917721;
       this_word = strtok (NULL, " ");
       if (! this_word)
       {
         format_error (i+1, j+1, lia[3], k);
         return 2;
       }
-      active_project -> atoms[i][j].z = atof(this_word) * 0.52917721;
+      active_project -> atoms[i][j].z = string_to_double ((gpointer)this_word) * 0.52917721;
       tmp_line = tail;
       tail = tail -> next;
       g_free (tmp_line);

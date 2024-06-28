@@ -1692,7 +1692,7 @@ void init_glwin (glwin * view)
   init_shaders (view);
   this_proj -> initgl = TRUE;
 #ifdef GTK4
-  update_menu_bar (view);
+  if (view -> win) update_menu_bar (view);
 #endif
 }
 

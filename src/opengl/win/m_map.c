@@ -433,7 +433,7 @@ G_MODULE_EXPORT void update_cmin_max (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   gboolean update_cmap = FALSE;
   switch (i)
   {
@@ -652,7 +652,7 @@ G_MODULE_EXPORT void edit_map_cell (GtkCellRendererText * cell, gchar * path_str
     i = -1;
     gtk_tree_model_get (GTK_TREE_MODEL(map_model), & iter, 1, & j, -1);
   }
-  tmp_data[(-i-1)*this_proj -> natomes + j - 1] = atof(new_text);
+  tmp_data[(-i-1)*this_proj -> natomes + j - 1] = string_to_double ((gpointer)new_text);
   if (this_proj -> steps > 1)
   {
     gtk_tree_store_set (map_model, & iter, 3, tmp_data[(-i-1)*this_proj -> natomes + j - 1], -1);
@@ -1213,7 +1213,7 @@ G_MODULE_EXPORT void change_color_radio (GSimpleAction * action, GVariant * para
     {
       col = g_strdup_printf ("%c%c", color[lgt-4], color[lgt-3]);
     }
-    i = (int)atof(col);
+    i = (int)string_to_double ((gpointer)col);
     set_color_map (NULL, & view -> colorp[i][0]);
     g_free (dot);
     g_free (col);

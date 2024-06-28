@@ -82,7 +82,7 @@ G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data)
   project * this_proj = get_project_by_id (the_data -> a);
   j = this_proj -> modelgl -> anim -> last -> img -> style;
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   int s = this_proj -> nspec;
   if (j == WIREFRAME || j == PUNT)
   {

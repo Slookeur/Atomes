@@ -136,7 +136,7 @@ G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
   const gchar * m;
   int id = GPOINTER_TO_INT(data);
   m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (v >= 0.0)
   {
     tmpcut[id] = (v < 0.5) ? 0.5 : v;

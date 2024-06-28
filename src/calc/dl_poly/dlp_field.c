@@ -2400,7 +2400,7 @@ G_MODULE_EXPORT void changed_field_key_renderer (GtkCellRendererCombo * combo, g
           for (n=1; n<o+1; n++)
           {
             gtk_tree_model_get (GTK_TREE_MODEL(field_model[i]), iter, n, & str, -1);
-            ids[n-1] = (int) atof(str) - 1;
+            ids[n-1] = (int) string_to_double ((gpointer)str) - 1;
           }
           adjust_field_prop (i-7, o, NULL, ids, l);
           gtk_tree_store_set (field_model[i], iter, field_v[i], parameters_info (i-6, l, vars, get_active_prop_using_atoms(tmp_fstr -> other, o, ids) -> val), -1);
@@ -3450,7 +3450,7 @@ G_MODULE_EXPORT void edit_field_cell (GtkCellRendererText * cell, gchar * path_s
   gtk_tree_model_get_iter (GTK_TREE_MODEL(field_model[j]), & iter, path);
   gtk_tree_model_get (GTK_TREE_MODEL(field_model[j]), & iter, 0, & k, -1);
   l = gtk_combo_box_get_active (GTK_COMBO_BOX(combo_mol[j-1]));
-  float val = atof(new_text);
+  float val = string_to_double ((gpointer)new_text);
   k --;
   if (i == 0) get_active_atom (l, k) -> mass = val;
   if (i == 1) get_active_atom (l, k) -> charge = val;

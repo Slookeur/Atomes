@@ -143,9 +143,9 @@ G_MODULE_EXPORT void set_axis_min (GtkEntry * res, gpointer data)
   {
     const gchar * m;
     m = entry_get_text (res);
-    if (atof(m) < this_proj -> curves[b][c] -> axmax[i])
+    if (string_to_double ((gpointer)m) < this_proj -> curves[b][c] -> axmax[i])
     {
-      this_proj -> curves[b][c] -> axmin[i] = atof(m);
+      this_proj -> curves[b][c] -> axmin[i] = string_to_double ((gpointer)m);
     }
     else
     {
@@ -174,9 +174,9 @@ G_MODULE_EXPORT void set_axis_max (GtkEntry * res, gpointer data)
   int i = get_active_axis ();
   const gchar * m;
   m = entry_get_text (res);
-  if (atof(m) > this_proj -> curves[b][c] -> axmin[i])
+  if (string_to_double ((gpointer)m) > this_proj -> curves[b][c] -> axmin[i])
   {
-    this_proj -> curves[b][c] -> axmax[i] = atof(m);
+    this_proj -> curves[b][c] -> axmax[i] = string_to_double ((gpointer)m);
   }
   else
   {
@@ -205,7 +205,7 @@ G_MODULE_EXPORT void set_max_div (GtkEntry * maj, gpointer data)
   int i = get_active_axis ();
   const gchar * m;
   m = entry_get_text (maj);
-  tmp = atof(m);
+  tmp = string_to_double ((gpointer)m);
   if (tmp != 0.0)
   {
     this_proj -> curves[b][c] -> majt[i] = tmp;

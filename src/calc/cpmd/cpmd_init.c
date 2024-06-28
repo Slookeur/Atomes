@@ -314,7 +314,7 @@ G_MODULE_EXPORT void update_cpmd_parameter (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   tmp_cpmd -> default_opts[i] = v;
   if (i == DEFGC)
   {
@@ -581,7 +581,7 @@ G_MODULE_EXPORT void update_calc_parameter (GtkEntry * res, gpointer data)
   int i, j;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i==STEPO || i==STEPG || i==STEPC || i==STEPB || i==KSUNO || i==NBAND)
   {
     j = (int) v;

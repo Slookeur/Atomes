@@ -240,7 +240,7 @@ G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data)
 {
   glwin * view = (glwin *) data;
   const gchar * m = entry_get_text (res);
-  int s = (int)atof(m);
+  int s = (int)string_to_double ((gpointer)m);
   project * this_proj = get_project_by_id(view -> proj);
   if (s > 0 && s <= this_proj -> steps)
   {

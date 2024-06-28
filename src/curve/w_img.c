@@ -76,7 +76,7 @@ G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
   text[0] = "X size must be > 0";
   text[1] = "Y size must be > 0";
   m = entry_get_text (val);
-  i = atof(m);
+  i = string_to_double ((gpointer)m);
   if (i > 0)
   {
     resol[j] = i;

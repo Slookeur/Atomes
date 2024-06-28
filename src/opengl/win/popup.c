@@ -256,7 +256,7 @@ int get_style (gchar * str)
   is_filled = NONE;
 #ifdef GTK4
   i = strlen (str);
-  return (int) atof ((const gchar *)g_strdup_printf ("%c", str[i-1]));
+  return (int) string_to_double ((gpointer)g_strdup_printf ("%c", str[i-1]));
 #else
   for (i=0; i<OGL_STYLES; i++)
   {

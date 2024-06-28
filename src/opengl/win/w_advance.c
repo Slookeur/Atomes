@@ -628,7 +628,7 @@ G_MODULE_EXPORT void set_nlights (GtkEntry * res, gpointer data)
   int i;
   const gchar * m;
   m = entry_get_text (res);
-  i = (int) atof(m);
+  i = (int) string_to_double ((gpointer)m);
   add_remove_lights (i, data);
 }
 
@@ -649,7 +649,7 @@ G_MODULE_EXPORT void update_light_param (GtkEntry * res, gpointer data)
     int li = gtk_combo_box_get_active (GTK_COMBO_BOX(view -> opengl_win -> lights));
     Light * this_light = & view -> anim -> last -> img -> l_ght[li];
     const gchar * m = entry_get_text (res);
-    double v = atof(m);
+    double v = string_to_double ((gpointer)m);
     switch (lid -> b)
     {
       case 0:
@@ -714,7 +714,7 @@ G_MODULE_EXPORT void set_object_pos (GtkEntry * res, gpointer data)
 {
   tint * id = (tint *)data;
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   glwin * view = get_project_by_id(id -> a) -> modelgl;
   image * this_image = view -> anim -> last -> img;
   if (id -> b == 0)
@@ -1069,7 +1069,7 @@ void param_has_changed (gpointer data, double val)
 G_MODULE_EXPORT void update_mat_param (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   param_has_changed (data, v);
 }
 

@@ -446,7 +446,7 @@ int get_sg_num (GtkComboBox * box)
     if (str)
     {
       num = g_strdup_printf ("%c%c%c", str[0], str[1], str[2]);
-      i = (int) atof (num);
+      i = (int) string_to_double ((gpointer)num);
       g_free (str);
       g_free (num);
     }
@@ -600,7 +600,7 @@ G_MODULE_EXPORT void update_cb_vect (GtkEntry * entry, gpointer data)
 {
   tint * id = (tint *)data;
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   get_project_by_id(id -> a) -> modelgl -> builder_win -> cell.box[0].vect[id -> b][id -> c] = v;
   update_entry_double (entry, v);
 }
@@ -617,7 +617,7 @@ G_MODULE_EXPORT void update_cb_box (GtkEntry * entry, gpointer data)
 {
   tint * id = (tint *)data;
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (v >= 0.0)
   {
     get_project_by_id(id -> a) -> modelgl -> builder_win -> cell.box[0].param[id -> b][id -> c] = v;

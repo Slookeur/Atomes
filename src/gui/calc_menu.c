@@ -120,7 +120,7 @@ G_MODULE_EXPORT void set_max (GtkEntry * entry, gpointer data)
 {
   int c = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (v > 0)
   {
     if (active_project -> max[c] != v)
@@ -146,7 +146,7 @@ G_MODULE_EXPORT void set_delta (GtkEntry * entry, gpointer data)
 {
   int c = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   int i, j, k;
   i = (int)v;
   if (c == RI)
@@ -300,7 +300,7 @@ void calc_msd (GtkWidget * vbox)
 G_MODULE_EXPORT void set_numa (GtkEntry * entry, gpointer data)
 {
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   int i, j;
   i = (int)v;
   if (i > 0)
@@ -964,7 +964,7 @@ G_MODULE_EXPORT void set_advanced_sq (GtkEntry * entry, gpointer data)
 {
   int c = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (v != active_project -> sk_advanced[c])
   {
     if (c == 0 && (v < 0.0 || v > 1.0))
@@ -996,7 +996,7 @@ G_MODULE_EXPORT void set_sfact (GtkEntry * entry, gpointer data)
   const gchar * m;
   int i = GPOINTER_TO_INT(data);
   m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (v <= 0.0 || v >= 1.0)
   {
     show_warning ("The smoothing factor must be between 0.0 and 1.0", calc_win);

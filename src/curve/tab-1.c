@@ -119,7 +119,7 @@ G_MODULE_EXPORT void set_window_size (GtkEntry * maj, gpointer data)
   text[1] = "Y size must be > 0";
   m = entry_get_text (maj);
 
-  i = atof(m);
+  i = string_to_double ((gpointer)m);
   if (i > 0)
   {
     switch (d)
@@ -339,7 +339,7 @@ G_MODULE_EXPORT void set_title_pos (GtkEntry * entry, gpointer data)
   d = ad -> d;
   project * this_proj = get_project_by_id(a);
   p = entry_get_text (entry);
-  v = atof(p);
+  v = string_to_double ((gpointer)p);
   if (v >= 0.0 && v <= 1.0)
   {
     this_proj -> curves[b][c] -> title_pos[d] = v;
@@ -497,7 +497,7 @@ G_MODULE_EXPORT void set_frame_thickness (GtkEntry * entry, gpointer data)
   c = ad -> c;
   str = entry_get_text (entry);
   project * this_proj = get_project_by_id(a);
-  this_proj -> curves[b][c] -> frame_thickness = atof(str);
+  this_proj -> curves[b][c] -> frame_thickness = string_to_double ((gpointer)str);
   update_entry_double (entry, this_proj -> curves[b][c] -> frame_thickness);
   set_frame_style (data);
 }
@@ -541,7 +541,7 @@ G_MODULE_EXPORT void set_frame_pos (GtkEntry * fen, gpointer data)
   d = cd -> d;
   project * this_proj = get_project_by_id(a);
   m = entry_get_text (fen);
-  z= atof(m);
+  z= string_to_double ((gpointer)m);
   if (d < 2)
   {
     if (d == 0)

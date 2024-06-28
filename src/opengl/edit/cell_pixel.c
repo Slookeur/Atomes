@@ -234,7 +234,7 @@ G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
   int id = GPOINTER_TO_INT (data);
   project * this_proj = get_project_by_id (id);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   int p = (int)v;
   int n = this_proj-> pix[0] * this_proj -> pix[1] * this_proj -> pix[2];
   if (p > 0 && p <= n)
