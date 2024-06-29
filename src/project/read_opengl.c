@@ -640,7 +640,6 @@ int read_opengl_image (FILE * fp, project * this_proj, image * img, int sid)
 #endif
   this_proj -> modelgl -> labelled = check_label_numbers (this_proj, 2);
 #ifdef GTK4
-  update_menu_bar (this_proj -> modelgl);
   for (i=0; i<2; i++)
   {
     for (j=0; j<sid; j++)
@@ -671,6 +670,7 @@ int read_opengl_image (FILE * fp, project * this_proj, image * img, int sid)
       }
     }
   }
+  update_menu_bar (this_proj -> modelgl);
 #endif
   return OK;
 }

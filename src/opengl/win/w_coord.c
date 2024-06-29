@@ -171,7 +171,7 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
       }
       else if (g > 3 && g < 9)
       {
-        name = g_strdup_printf ("set-rshow-%d.%d.0", this_proj -> coord -> geolist[g][0][c], j);
+        name = g_strdup_printf ("set-rshow-%d.%d.0", g, j);
       }
       g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
       g_free (name);
@@ -340,7 +340,7 @@ G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer da
     }
     else if (g > 3 && g < 9)
     {
-      name = g_strdup_printf ("set-%d-p.%d.0", this_proj -> coord -> geolist[g][0][c], j);
+      name = g_strdup_printf ("set-%d-p.%d.0", g, j);
     }
     g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
     g_free (name);
@@ -551,7 +551,6 @@ GtkWidget * coord_tab (glwin * view, int geo, int poly)
                           "<b>Ring(s) size</b>",
                           "<b>Chain(s) size</b>", "<b>Show <sup>*</sup></b>", "<b>Label <sup>*</sup></b>", "<b>Pick <sup>*</sup></b>"};
   int scol[15] = {100, 70, 65, 40, 40, 150, 70, 75, 55, 55, 100, 100, 60, 50, 55};
-
   GtkWidget * box = create_vbox (BSEP);
   GtkWidget * coord = create_scroll (box, -1, -1, GTK_SHADOW_NONE);
   gtk_widget_set_hexpand (coord, TRUE);
