@@ -928,15 +928,9 @@ G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, doubl
   if (gtk_gesture_single_get_current_button ((GtkGestureSingle * )gesture) == GDK_BUTTON_SECONDARY)
   {
     GdkRectangle rect;
-    rect.x = x;
-    rect.y = y;
-    rect.width = 1;
-    rect.height = 1;
     GtkWidget * popover = work_menu (-1, -1);
     gtk_widget_set_parent (popover, MainWindow);
-    gtk_popover_set_has_arrow (GTK_POPOVER(popover), FALSE);
-    gtk_popover_set_pointing_to (GTK_POPOVER(popover), & rect);
-    gtk_popover_popup (GTK_POPOVER(popover));
+    pop_menu_at_pointer (popover, x, y);
   }
 }
 
