@@ -421,8 +421,8 @@ GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
     gchar * stra,  * strb;
     for (i=0; i<this_proj -> coord -> totcoord[id]; i++)
     {
-      stra = g_strdup_printf ("%d", id);
-      strb = g_strdup_printf ("%s-p", stra);
+      stra = g_strdup_printf ("%d", this_proj -> coord -> geolist[id][0][i]);
+      strb = g_strdup_printf ("%d-%s-p", id, stra);
       append_opengl_item (view, menu, stra, strb, popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_poly), & view -> gcid[id][i][id],
                           TRUE, view -> anim -> last -> img -> show_poly[id][i], FALSE, TRUE);
       g_free (stra);

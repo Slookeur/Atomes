@@ -171,7 +171,7 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
       }
       else if (g > 3 && g < 9)
       {
-        name = g_strdup_printf ("set-rshow-%d.%d.0", g, j);
+        name = g_strdup_printf ("set-%d-%d-coord.%d.0", g, this_proj -> coord -> geolist[g][0][j], j);
       }
       g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
       g_free (name);
@@ -340,7 +340,7 @@ G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer da
     }
     else if (g > 3 && g < 9)
     {
-      name = g_strdup_printf ("set-%d-p.%d.0", g, j);
+      name = g_strdup_printf ("set-%d-%d-p.%d.0", g, this_proj -> coord -> geolist[g][0][j], j);
     }
     g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
     g_free (name);
