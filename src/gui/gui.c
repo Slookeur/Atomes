@@ -173,11 +173,11 @@ shortcuts main_shortcuts[] = {
 GtkShortcut * shortcut_list[G_N_ELEMENTS (main_shortcuts)];
 
 /*!
-  \fn void shortcuts_window ()
+  \fn GtkWidget * shortcuts_window ()
 
   \brief Create the shortcuts information window
 */
-void shortcuts_window ()
+GtkWidget * shortcuts_window ()
 {
   GtkShortcutsWindow * win = g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", FALSE, NULL);
   //create_win ("Shortcuts", MainWindow, FALSE, FALSE);
@@ -258,8 +258,9 @@ void shortcuts_window ()
   add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_section, (GtkWidget *)project_group, FALSE, FALSE, 0);
   add_container_child(CONTAINER_WIN, (GtkWidget *)win, (GtkWidget *)short_cut_section);
 #endif
-  add_gtk_close_event ((GtkWidget *)win, G_CALLBACK(destroy_this_window), NULL);
+  add_gtk_close_event ((GtkWidget *)win, G_CALLBACK(destroy_this_window), GINT_TO_POINTER(1));
   show_the_widgets((GtkWidget *)win);
+  return (GtkWidget *)win;
 }
 
 /*!
@@ -661,7 +662,7 @@ G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * 
 #ifdef GTK4
   else if (g_strcmp0 (name, "help.shortcuts") == 0)
   {
-    if (! atomes_shortcuts) shortcuts_window ();
+    if (! atomes_shortcuts) atomes_shortcuts = shortcuts_window ();
   }
 #endif
   g_free (name);

@@ -446,7 +446,7 @@ GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolea
 {
   GtkWidget * win;
   win = new_gtk_window ();
-  gtk_window_set_title (GTK_WINDOW(win), prepare_for_title(str));
+  if (str) gtk_window_set_title (GTK_WINDOW(win), prepare_for_title(str));
   gtk_window_set_resizable (GTK_WINDOW (win), TRUE);
 #ifdef GTK3
   gtk_window_set_attached_to (GTK_WINDOW (win), parent);
@@ -2341,7 +2341,10 @@ G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event,
 #endif
 {
   destroy_this_widget (GTK_WIDGET(win));
-  win = NULL;
+  if (data)
+  {
+    if (GPOINTER_TO_INT(data)) atomes_shortcuts = NULL;
+  }
   return TRUE;
 }
 
