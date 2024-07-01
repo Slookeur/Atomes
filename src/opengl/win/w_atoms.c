@@ -567,7 +567,7 @@ G_MODULE_EXPORT void atom_properties (GtkWidget * widg, gpointer data)
   \brief atom(s) propery callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * parameter, gpointer data)

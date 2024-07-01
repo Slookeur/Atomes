@@ -519,7 +519,7 @@ void prepare_atom_edition (gpointer data, gboolean visible)
   \brief open model edition window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void action_window (GSimpleAction * action, GVariant * parameter, gpointer data)

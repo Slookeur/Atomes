@@ -63,7 +63,7 @@ extern G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVarian
   \brief show / hide polyhedra callback - GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -165,7 +165,7 @@ G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
   \brief cloned polyehdra callback - GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void cloned_poly (GSimpleAction * action, GVariant * parameter, gpointer data)

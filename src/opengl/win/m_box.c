@@ -308,7 +308,7 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
   \brief handle the 'box/axis' show/hide signal GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -352,7 +352,7 @@ G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * para
   \brief handle a box/axis radio menu item signal GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * parameter, gpointer data)

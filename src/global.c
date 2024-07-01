@@ -220,6 +220,7 @@ GtkWidget * curvetoolbox = NULL;
 GtkWidget * progressbar = NULL;
 GtkWidget * MainScrol[2];
 GtkWidget * atomes_logo = NULL;
+GtkWidget * atomes_shortcuts = NULL;
 GtkWidget * calc_dialog = NULL;
 GtkWidget * register_button = NULL;
 

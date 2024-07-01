@@ -148,7 +148,7 @@ void window_color (project * this_proj, glwin * view)
   \brief to run background color selection window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -177,7 +177,7 @@ G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
   \brief to run box color selection window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -207,7 +207,7 @@ G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
   \brief to run atom color selection window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -269,7 +269,7 @@ G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, 
   \brief create a window to select a color callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data)

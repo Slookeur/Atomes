@@ -2341,6 +2341,7 @@ G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event,
 #endif
 {
   destroy_this_widget (GTK_WIDGET(win));
+  win = NULL;
   return TRUE;
 }
 

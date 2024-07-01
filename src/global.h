@@ -436,6 +436,7 @@ extern GtkWidget * curvetoolbox;
 extern GtkWidget * progressbar;
 extern GtkWidget * MainScrol[2];
 extern GtkWidget * atomes_logo;
+extern GtkWidget * atomes_shortcuts;
 extern GtkWidget * calc_dialog;
 extern GtkWidget * register_button;
 

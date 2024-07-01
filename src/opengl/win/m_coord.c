@@ -90,7 +90,7 @@ gboolean is_coord_in_menu (int id, project * this_proj)
   \brief show/hide coordination callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -551,7 +551,7 @@ GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
   \brief open advancedd coordination properties GTK4 callback
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data)

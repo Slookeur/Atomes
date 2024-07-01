@@ -208,7 +208,7 @@ GtkWidget * create_cell_edition_window (project * this_proj, gpointer data)
   \brief create the cell edition window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)
