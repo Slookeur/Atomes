@@ -130,8 +130,6 @@ tint cut_lab;
 dint davect[9];
 ColRGBA std[6];
 
-#ifdef GTK4
-
 /*!
   \typedef shortcuts
 
@@ -142,11 +140,14 @@ struct shortcuts
 {
   gchar * description;                                       /*!< Shortcut description */
   gchar * subtitle;                                          /*!< Shortcut subtitle */
+#ifdef GTK4
   GtkShortcutTrigger * (* create_trigger_func) (gint key);   /*!< Shortcut trigger function */
+#endif
   gint key;                                                  /*!< Shortcut key */
   gchar * accelerator;                                       /*!< Shortcut accelerator */
 };
 
+#ifdef GTK4
 /*!
   \fn GtkShortcutTrigger * create_ctrl_key (gint key)
 
@@ -169,6 +170,18 @@ shortcuts main_shortcuts[] = {
   { "New project", "create new atomes project", create_ctrl_key, GDK_KEY_n, "<Ctrl>n" },
   { "Open project", "open atomes project", create_ctrl_key, GDK_KEY_o, "<Ctrl>o" }
 };
+#else
+shortcuts main_shortcuts[] = {
+  { "About", "open about dialog", GDK_KEY_a, "<Ctrl>a" },
+  { "Periodic table", "open periodic table", GDK_KEY_p, "<Ctrl>p" },
+  { "Quit", "quit atomes", GDK_KEY_q, "<Ctrl>q" },
+  { "Open workspace", "open atomes workspace",  GDK_KEY_w, "<Ctrl>w" },
+  { "Save workspace", "save atomes workspace", GDK_KEY_s, "<Ctrl>s" },
+  { "Close workspace", "close atomes workspace", GDK_KEY_c, "<Ctrl>c" },
+  { "New project", "create new atomes project", GDK_KEY_n, "<Ctrl>n" },
+  { "Open project", "open atomes project", GDK_KEY_o, "<Ctrl>o" }
+};
+#endif
 
 GtkShortcut * shortcut_list[G_N_ELEMENTS (main_shortcuts)];
 
@@ -180,13 +193,10 @@ GtkShortcut * shortcut_list[G_N_ELEMENTS (main_shortcuts)];
 GtkWidget * shortcuts_window ()
 {
   GtkShortcutsWindow * win = g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", FALSE, NULL);
-  //create_win ("Shortcuts", MainWindow, FALSE, FALSE);
   GtkShortcutsSection * short_cut_section = g_object_new (GTK_TYPE_SHORTCUTS_SECTION, "max-height", 10, "visible", TRUE, NULL);
-
   GtkShortcutsGroup * general_group = g_object_new (GTK_TYPE_SHORTCUTS_GROUP, "visible", 1, "title", "General", NULL);
   GtkShortcutsGroup * workspace_group = g_object_new (GTK_TYPE_SHORTCUTS_GROUP, "visible", 1, "title", "Workspace", "view", "View", NULL);
   GtkShortcutsGroup * project_group = g_object_new (GTK_TYPE_SHORTCUTS_GROUP, "visible", 1, "title", "Projects", "view", "View", NULL);
-
   GtkShortcutsShortcut * shortcut;
   int i;
   /// G_N_ELEMENTS (shortcuts)
@@ -203,8 +213,12 @@ GtkWidget * shortcuts_window ()
                              "subtitle-set",  FALSE,
                              "direction",     GTK_TEXT_DIR_LTR,
                              NULL );
+#ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
   gtk_shortcuts_group_add_shortcut (general_group, shortcut);
+#else
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)general_group, (GtkWidget *)shortcut, FALSE, FALSE, 0);
+#endif
 #else
   add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)general_group, (GtkWidget *)shortcut, FALSE, FALSE, 0);
 #endif
@@ -222,8 +236,12 @@ GtkWidget * shortcuts_window ()
                              "subtitle-set",  FALSE,
                              "direction",     GTK_TEXT_DIR_LTR,
                              NULL );
+#ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
   gtk_shortcuts_group_add_shortcut (workspace_group, shortcut);
+#else
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)workspace_group, (GtkWidget *)shortcut, FALSE, FALSE, 0);
+#endif
 #else
   add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)workspace_group, (GtkWidget *)shortcut, FALSE, FALSE, 0);
 #endif
@@ -241,17 +259,28 @@ GtkWidget * shortcuts_window ()
                              "subtitle-set",  FALSE,
                              "direction",     GTK_TEXT_DIR_LTR,
                              NULL );
+#ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
   gtk_shortcuts_group_add_shortcut (project_group, shortcut);
 #else
   add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)project_group, (GtkWidget *)shortcut, FALSE, FALSE, 0);
 #endif
+#else
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)project_group, (GtkWidget *)shortcut, FALSE, FALSE, 0);
+#endif
   }
+#ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
   gtk_shortcuts_section_add_group (short_cut_section, general_group);
   gtk_shortcuts_section_add_group (short_cut_section, workspace_group);
   gtk_shortcuts_section_add_group (short_cut_section, project_group);
   gtk_shortcuts_window_add_section (win, short_cut_section);
+#else
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_section, (GtkWidget *)general_group, FALSE, FALSE, 0);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_section, (GtkWidget *)workspace_group, FALSE, FALSE, 0);
+  add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_section, (GtkWidget *)project_group, FALSE, FALSE, 0);
+  add_container_child(CONTAINER_WIN, (GtkWidget *)win, (GtkWidget *)short_cut_section);
+#endif
 #else
   add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_section, (GtkWidget *)general_group, FALSE, FALSE, 0);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_section, (GtkWidget *)workspace_group, FALSE, FALSE, 0);
@@ -308,11 +337,17 @@ static gboolean shortcut_activated (GtkWidget * widget, GVariant * unused, gpoin
   return TRUE;
 }
 
+/*!
+  \fn void prepare_shortcut_triggers (GtkWidget * win)
+
+  \brief Prepare keyboard shortcut triggers
+
+  \param the widget to associate the shorcuts with
+*/
 void prepare_shortcut_triggers (GtkWidget * win)
 {
-  guint i;
-  GtkEventController *controller;
-
+  GtkEventController * controller;
+  int i;
   for (i = 0; i < G_N_ELEMENTS (main_shortcuts); i++)
   {
     controller = gtk_shortcut_controller_new ();
@@ -324,8 +359,6 @@ void prepare_shortcut_triggers (GtkWidget * win)
     gtk_shortcut_controller_add_shortcut (GTK_SHORTCUT_CONTROLLER (controller), shortcut_list[i]);
   }
 }
-
-#endif
 
 #ifdef GTK3
 /*!
