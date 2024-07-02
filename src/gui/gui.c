@@ -183,7 +183,9 @@ shortcuts main_shortcuts[] = {
 };
 #endif
 
+#ifdef GTK4
 GtkShortcut * shortcut_list[G_N_ELEMENTS (main_shortcuts)];
+#endif
 
 /*!
   \fn GtkWidget * shortcuts_window ()
@@ -199,7 +201,6 @@ GtkWidget * shortcuts_window ()
   GtkShortcutsGroup * project_group = g_object_new (GTK_TYPE_SHORTCUTS_GROUP, "visible", 1, "title", "Projects", "view", "View", NULL);
   GtkShortcutsShortcut * shortcut;
   int i;
-  /// G_N_ELEMENTS (shortcuts)
   for (i=0; i<3; i++)
   {
     shortcut = g_object_new (GTK_TYPE_SHORTCUTS_SHORTCUT,
@@ -292,6 +293,7 @@ GtkWidget * shortcuts_window ()
   return (GtkWidget *)win;
 }
 
+#ifdef GTK4
 /*!
   \fn static gboolean shortcut_activated (GtkWidget * widget, GVariant * unused, gpointer key)
 
@@ -359,6 +361,7 @@ void prepare_shortcut_triggers (GtkWidget * win)
     gtk_shortcut_controller_add_shortcut (GTK_SHORTCUT_CONTROLLER (controller), shortcut_list[i]);
   }
 }
+#endif
 
 #ifdef GTK3
 /*!
@@ -692,12 +695,10 @@ G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * 
   {
     create_about_dialog (NULL, data);
   }
-#ifdef GTK4
   else if (g_strcmp0 (name, "help.shortcuts") == 0)
   {
     if (! atomes_shortcuts) atomes_shortcuts = shortcuts_window ();
   }
-#endif
   g_free (name);
 }
 
