@@ -122,10 +122,9 @@ struct ColRGBA
   float alpha;
 };
 
-/*!
-  \typedef shortcuts
+/*! \typedef shortcuts
 
-  \brief Data structure to store keyboard shortcuts information
+  \brief keyboard shortcuts information
 */
 typedef struct shortcuts shortcuts;
 struct shortcuts
@@ -136,8 +135,20 @@ struct shortcuts
   gchar * accelerator;                                       /*!< Shortcut accelerator */
 };
 
+/*! \typedef atomes_action
+
+  \brief action information data structure
+*/
+typedef struct atomes_action atomes_action;
+struct atomes_action
+{
+  gchar * action_name;                                       /*!< The name of the action */
+  gpointer action_data;                                      /*!< The associated data pointer */
+};
+
 /*! \typedef coord_info
-  \brief Data structure to store coordination information
+
+  \brief coordination information data structure
 */
 typedef struct coord_info coord_info;
 struct coord_info
@@ -256,7 +267,7 @@ enum ImageFormats {
 #define IODEBUG FALSE
 
 /*! \def ATOM_LIMIT
-  \brief Atom number limit to compute fragment(s) and molecule(s) analysis automatically
+  \brief atom number limit to compute fragment(s) and molecule(s) analysis automatically
 */
 #define ATOM_LIMIT 100000
 
@@ -280,7 +291,7 @@ enum ImageFormats {
 #define ERROR_MOL    12
 
 /*!< \def CHEM_PARAMS
-  \brief Number of chemical parameters
+  \brief number of chemical parameters
 */
 #define CHEM_PARAMS 5
 #define CHEM_Z 0
@@ -292,17 +303,17 @@ enum ImageFormats {
 #define NDOTS 8
 
 /*!< \def NCALCS
-  \brief Number of analysis
+  \brief number of analysis
 */
 #define NCALCS 12
 
 /*!< \def NGRAPHS
-  \brief Number of analysis with results in curve window(s)
+  \brief number of analysis with results in curve window(s)
 */
 #define NGRAPHS 10
 
 /*!< \def NCFORMATS
-  \brief Number atomic coordinates file formats
+  \brief number atomic coordinates file formats
 */
 #define NCFORMATS 12
 
@@ -485,7 +496,8 @@ struct line_node
 };
 
 /*! \typedef coord_file
-  \brief Atomic coordinates file, data container
+
+  \brief atomic coordinates file, data container
 */
 typedef struct coord_file coord_file;
 struct coord_file
@@ -521,7 +533,8 @@ struct coord_file
 };
 
 /*! \typedef MouseState
-  \brief Data structure used for zoom in / out on curve widget
+
+  \brief data structure to store mouse information on curve widget
 */
 typedef struct MouseState MouseState;
 struct MouseState
@@ -533,7 +546,8 @@ struct MouseState
 };
 
 /*! \typedef CurveState
-  \brief Data structure used for zoom in / out on curve widget
+
+  \brief data structure used for zoom in / out on curve widget
 */
 typedef struct CurveState CurveState;
 struct CurveState
@@ -543,7 +557,8 @@ struct CurveState
 };
 
 /*! \typedef DataLayout
-  \brief Cruve layout information
+
+  \brief curve layout information
 */
 typedef struct DataLayout DataLayout;
 struct DataLayout
@@ -561,7 +576,8 @@ struct DataLayout
 };
 
 /*! \typedef CurveExtra
-  \brief Extra curve(s) data information
+
+  \brief extra curve(s) data information
 */
 typedef struct CurveExtra CurveExtra;
 struct CurveExtra
@@ -573,7 +589,8 @@ struct CurveExtra
 };
 
 /*! \typedef ExtraSets
-  \brief List of extra data sets for a curve
+
+  \brief list of extra data sets for a curve
 */
 typedef struct ExtraSets ExtraSets;
 struct ExtraSets
@@ -584,7 +601,8 @@ struct ExtraSets
 };
 
 /*! \typedef Curve
-  \brief The curve data structure
+
+  \brief curve data structure
 */
 typedef struct Curve Curve;
 struct Curve
@@ -785,7 +803,10 @@ struct cp2k
   gchar * info;
 };
 
-/*! \typedef molecule */
+/*! \typedef molecule
+
+  \brief the molecule data structure
+*/
 typedef struct molecule molecule;
 struct molecule
 {
@@ -799,7 +820,8 @@ struct molecule
 };
 
 /*! \typedef model
-  \brief Data stucture to describe the topology
+
+  \brief data structure to describe the topology
 */
 typedef struct model model;
 struct model
@@ -809,6 +831,7 @@ struct model
 };
 
 /*! \typedef element_data
+
   \brief element description used for the periodic table defined in 'w_periodic.c'
 */
 typedef struct element_data element_data;
@@ -820,6 +843,10 @@ struct element_data
   float M;          /*!< Atomic mass */
 };
 
+/*! \typedef chemical_data
+
+  \brief a structure to store some chemical information
+*/
 typedef struct chemical_data chemical_data;
 struct chemical_data
 {
@@ -839,7 +866,8 @@ struct chemical_data
 };
 
 /*! \typedef insertion_menu
-  \brief Data structure for the insertion pop-up menu
+
+  \brief data structure for the insertion pop-up menu
 */
 typedef struct insertion_menu insertion_menu;
 struct insertion_menu
@@ -851,7 +879,8 @@ struct insertion_menu
 };
 
 /*! \typedef atom
-  \brief The data structure for an atom
+
+  \brief atom data structure
 */
 typedef struct atom atom;
 struct atom
@@ -901,7 +930,8 @@ struct atom
 };
 
 /*! \typedef project
-  \brief The data structure for the 'atomes' project
+
+  \brief data structure for the 'atomes' project
 */
 typedef struct project project;
 struct project
@@ -1005,6 +1035,10 @@ struct project
   project * prev;
 };
 
+/*! \typedef workspace
+
+  \brief data structure for the 'atomes' workspace
+*/
 typedef struct workspace workspace;
 struct workspace
 {
@@ -1012,8 +1046,8 @@ struct workspace
   project * last;
 };
 
-extern gchar * edition_action_names[3];
-extern gchar * analyze_action_names[9];
+extern atomes_action edition_acts[];
+extern atomes_action analyze_acts[];
 extern GSimpleAction * edition_actions[3];
 extern GSimpleAction * analyze_actions[9];
 extern void add_action (GSimpleAction * action);

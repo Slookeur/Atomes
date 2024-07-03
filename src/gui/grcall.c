@@ -210,7 +210,7 @@ G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
   prepostcalc (widg, TRUE, GR, i, 1.0);
   if (! i)
   {
-    remove_action (analyze_action_names[SQ]);
+    remove_action (analyze_acts[SQ].action_name);
     show_error ("The RDF's calculation has failed", 0, widg);
   }
   else

@@ -761,7 +761,6 @@ G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpo
 #else
     destroy_this_dialog (info);
 #endif
-    if (osp.a == 0) to_close_this_project (osp.b, active_project);
   }
 }
 

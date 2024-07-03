@@ -195,19 +195,6 @@ struct timespec stop_time;
 double opac = 0.75;
 double pi = 3.141592653589793238462643383279502884197;
 
-gchar * edition_action_names[3] = {"edit.chemistry",
-                                   "edit.periodicity",
-                                   "edit.cutoffs"};
-
-gchar * analyze_action_names[9] = {"analyze.gr",
-                                   "analyze.sq",
-                                   "analyze.sk",
-                                   "analyze.gk",
-                                   "analyze.bonds",
-                                   "analyze.rings",
-                                   "analyze.chains",
-                                   "analyze.sp",
-                                   "analyze.msd"};
 GSimpleAction * edition_actions[3];
 GSimpleAction * analyze_actions[9];
 

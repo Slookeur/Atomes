@@ -272,7 +272,7 @@ G_MODULE_EXPORT void on_calc_sk_released (GtkWidget * widg, gpointer data)
     prepostcalc (widg, TRUE, SK, j, 1.0);
     if (! j)
     {
-      remove_action (analyze_action_names[GK]);
+      remove_action (analyze_acts[GK].action_name);
       show_error ("The S(q) calculation has failed", 0, widg);
     }
     else

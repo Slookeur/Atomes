@@ -103,6 +103,20 @@ gchar * dots[NDOTS];
 gchar * calc_img[NCALCS-2];
 gchar * graph_img[NGRAPHS];
 
+atomes_action edition_acts[] = {{"edit.chemistry",   GINT_TO_POINTER(0)},
+                                {"edit.periodicity", GINT_TO_POINTER(1)},
+                                {"edit.cutoffs",     GINT_TO_POINTER(2)}};
+
+atomes_action analyze_acts[] = {{"analyze.gr",     GINT_TO_POINTER(0)},
+                                {"analyze.sq",     GINT_TO_POINTER(1)},
+                                {"analyze.sk",     GINT_TO_POINTER(2)},
+                                {"analyze.gk",     GINT_TO_POINTER(3)},
+                                {"analyze.bonds",  GINT_TO_POINTER(4)},
+                                {"analyze.rings",  GINT_TO_POINTER(5)},
+                                {"analyze.chains", GINT_TO_POINTER(6)},
+                                {"analyze.sp",     GINT_TO_POINTER(7)},
+                                {"analyze.msd",    GINT_TO_POINTER(8)}};
+
 char * calc_name[NCALCS-2] = {"g(r)/G(r)",
                               "S(q) from FFT[g(r)]",
                               "S(q) from Debye equation",
@@ -396,7 +410,7 @@ void remove_action (gchar * action_name)
 void remove_edition_actions ()
 {
   int i;
-  for (i=0; i<3; i++) remove_action (edition_action_names[i]);
+  for (i=0; i<G_N_ELEMENTS(edition_acts); i++) remove_action (edition_acts[i].action_name);
 }
 
 /*!
@@ -408,7 +422,7 @@ void remove_edition_and_analyze_actions ()
 {
   remove_edition_actions ();
   int i;
-  for (i=0; i<9; i++) remove_action (analyze_action_names[i]);
+  for (i=0; i<G_N_ELEMENTS(analyze_acts); i++) remove_action (analyze_acts[i].action_name);
 }
 
 /*!
@@ -1070,59 +1084,42 @@ GtkWidget * create_main_window (GApplication * atomes)
   gtk_window_set_resizable (GTK_WINDOW(window), TRUE);
   gtk_widget_set_size_request (window, 900, 450);
 
+  atomes_action main_actions[] = {{ "workspace.open", GINT_TO_POINTER(2)},
+                                  { "workspace.save",  GINT_TO_POINTER(3)},
+                                  { "workspace.save-as",  GINT_TO_POINTER(3)},
+                                  { "workspace.close", GINT_TO_POINTER(1)},
+                                  { "project.new", NULL},
+                                  { "project.open", GINT_TO_POINTER(0)},
+                                  { "project.save", GINT_TO_POINTER(1) },
+                                  { "project.save-as", GINT_TO_POINTER(1)},
+                                  { "project.close", NULL},
+                                  { "export.isaacs", GINT_TO_POINTER(1)},
+                                  { "export.coordinates", GINT_TO_POINTER(1)},
+                                  { "import.isaacs", GINT_TO_POINTER(0)},
+                                  { "import.coordinates", GINT_TO_POINTER(0)},
+                                  { "program.quit",  NULL},
+                                  { "analyze.tool-box", NULL},
+                                  { "help.periodic", NULL},
+                                  { "help.about", NULL},
+                                  { "help.shortcuts", NULL}};
+
   GSimpleAction * main_act[18];
-  main_act[0]  = g_simple_action_new ("workspace.open", NULL);
-  main_act[1]  = g_simple_action_new ("workspace.save", NULL);
-  main_act[2]  = g_simple_action_new ("workspace.save-as", NULL);
-  main_act[3]  = g_simple_action_new ("workspace.close", NULL);
-  main_act[4]  = g_simple_action_new ("project.new", NULL);
-  main_act[5]  = g_simple_action_new ("project.open", NULL);
-  main_act[6]  = g_simple_action_new ("project.save", NULL);
-  main_act[7]  = g_simple_action_new ("project.save-as", NULL);
-  main_act[8]  = g_simple_action_new ("project.close", NULL);
-  main_act[9]  = g_simple_action_new ("export.isaacs", NULL);
-  main_act[10] = g_simple_action_new ("export.coordinates", NULL);
-  main_act[11] = g_simple_action_new ("import.isaacs", NULL);
-  main_act[12] = g_simple_action_new ("import.coordinates", NULL);
-  main_act[13] = g_simple_action_new ("program.quit", NULL);
-  main_act[14] = g_simple_action_new ("analyze.tool-box", NULL);
-  main_act[15] = g_simple_action_new ("help.periodic", NULL);
-  main_act[16] = g_simple_action_new ("help.about", NULL);
-  main_act[17] = g_simple_action_new ("help.shortcuts", NULL);
-
-  for (i=0; i<3; i++) edition_actions[i] = g_simple_action_new (edition_action_names[i], NULL);
-  for (i=0; i<9; i++) analyze_actions[i] = g_simple_action_new (analyze_action_names[i], NULL);
-
-  for (i=0; i<18; i++) add_action (main_act[i]);
-
-  g_signal_connect (main_act[0], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(2));
-  g_signal_connect (main_act[1], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(3));
-  g_signal_connect (main_act[2], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(3));
-  g_signal_connect (main_act[3], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(1));
-  g_signal_connect (main_act[4], "activate", G_CALLBACK(atomes_menu_bar_action), NULL);
-  g_signal_connect (main_act[5], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(0));
-  g_signal_connect (main_act[6], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(1));
-  g_signal_connect (main_act[7], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(1));
-  g_signal_connect (main_act[8], "activate", G_CALLBACK(atomes_menu_bar_action), NULL);
-  g_signal_connect (main_act[9], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(1));
-  g_signal_connect (main_act[10], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(1));
-  g_signal_connect (main_act[11], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(0));
-  g_signal_connect (main_act[12], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(0));
-  g_signal_connect (main_act[13], "activate", G_CALLBACK(atomes_menu_bar_action), NULL);
-  for (i=0; i<3; i++)
+  for (i=0; i<G_N_ELEMENTS(main_actions); i++)
   {
-    g_signal_connect (edition_actions[i], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(i));
+    main_act[i] = g_simple_action_new (main_actions[i].action_name, NULL);
+    add_action (main_act[i]);
+    g_signal_connect (main_act[i], "activate", G_CALLBACK(atomes_menu_bar_action), main_actions[i].action_data);
   }
-  for (i=0; i<NCALCS-3; i++)
+  for (i=0; i<G_N_ELEMENTS(edition_acts); i++)
   {
-    g_signal_connect (analyze_actions[i], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(i));
+    edition_actions[i] = g_simple_action_new (edition_acts[i].action_name, NULL);
+    g_signal_connect (edition_actions[i], "activate", G_CALLBACK(atomes_menu_bar_action), edition_acts[i].action_data);
   }
-  for (i=0; i<4; i++)
+  for (i=0; i<G_N_ELEMENTS(analyze_acts); i++)
   {
-    g_signal_connect (main_act[14+i], "activate", G_CALLBACK(atomes_menu_bar_action), NULL);
+    analyze_actions[i] = g_simple_action_new (analyze_acts[i].action_name, NULL);
+    g_signal_connect (analyze_actions[i], "activate", G_CALLBACK(atomes_menu_bar_action), analyze_acts[i].action_data);
   }
-
-// #endif
 
   /*GtkBuilder * builder = gtk_builder_new_from_file ("menus/main.ui");
   GMenuModel * model = G_MENU_MODEL (gtk_builder_get_object (builder, "atomes_menu_bar"));
