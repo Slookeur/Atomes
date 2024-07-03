@@ -620,13 +620,14 @@ GtkWidget * create_curve (tint * data)
   curve_action_id ++;
   this_proj -> curves[data -> b][data -> c] -> action_id = curve_action_id;
   this_proj -> curves[data -> b][data -> c] -> action_group = g_simple_action_group_new ();
-  GSimpleAction * curve_action[4];
+  GSimpleAction * curve_action[5];
   curve_action[0] = g_simple_action_new ("save.data", NULL);
   curve_action[1] = g_simple_action_new ("close.curve", NULL);
   curve_action[2] = g_simple_action_new ("edit.curve", NULL);
   curve_action[3] = g_simple_action_new ("save.image", NULL);
+  curve_action[4] = g_simple_action_new ("shortcuts.curve", NULL);
   int i;
-  for (i=0; i<4; i++)
+  for (i=0; i<5; i++)
   {
     g_action_map_add_action (G_ACTION_MAP(this_proj -> curves[data -> b][data -> c] -> action_group), G_ACTION(curve_action[i]));
     g_signal_connect (curve_action[i], "activate", G_CALLBACK(curve_menu_bar_action), data);

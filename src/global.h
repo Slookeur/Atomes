@@ -601,6 +601,7 @@ struct Curve
   GtkWidget * curve_hbox;
   GtkWidget * window;            /*!< Widget for the window */
   GtkWidget * pos;               /*!< Mouse cursor position in graph */
+  GtkWidget * shortcuts;         /*!< Shortcuts window */
   int wsize[2];                  /*!< Curve window size */
   GtkWidget * datatree;          /*!< Widget for the selection tree */
   qint idcol[2];                 /*!< For navigation in the list view */

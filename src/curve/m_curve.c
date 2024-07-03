@@ -69,8 +69,26 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "datab.h"
 
 extern DataLayout * curve_default_layout (project * pid, int rid, int cid);
+extern GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int groups, int shortcut_by_group[groups],
+                                     gchar * section_names[sections], gchar * group_names[groups], shortcuts shortcs[]);
 int ** extrarid;
 // gchar * curve_act[3]={"edit", "add", "rem"};
+
+gchar * curve_section_names[]={ "Curve window"};
+int curve_group_by_section[] = { 2 };
+gchar * curve_group_names[]={"Edition", "Export"};
+int curve_shortcut_by_group[] = { 3, 2 };
+
+shortcuts curve_shortcuts[] = {
+//
+// Global
+//
+  { "Autoscale", "Autoscale", GDK_KEY_a, "<Ctrl>a" },
+  { "Edit curve", "Edit curve", GDK_KEY_e, "<Ctrl>e" },
+  { "Close curve", "Close curve", GDK_KEY_c, "<Ctrl>c" },
+  { "Export data", "Export data", GDK_KEY_s, "<Ctrl>s" },
+  { "Save image", "Save image", GDK_KEY_i, "<Ctrl>i" }
+};
 
 /*!
   \fn void autoscale (gpointer data)
@@ -299,6 +317,13 @@ G_MODULE_EXPORT void curve_menu_bar_action (GSimpleAction * action, GVariant * p
   {
     autoscale (data);
   }
+  else if (g_strcmp0 (name, "shortcuts.curve") == 0)
+  {
+    tint * id = (tint *)data;
+    get_project_by_id(id -> a) -> curves[id -> b][id -> c] -> shortcuts = destroy_this_widget (get_project_by_id(id -> a) -> curves[id -> b][id -> c] -> shortcuts);
+    get_project_by_id(id -> a) -> curves[id -> b][id -> c] -> shortcuts = shortcuts_window (G_N_ELEMENTS(curve_group_by_section), curve_group_by_section, G_N_ELEMENTS(curve_shortcut_by_group),
+                                                                                            curve_shortcut_by_group, curve_section_names, curve_group_names, curve_shortcuts);
+  }
 }
 
 /*!
@@ -520,6 +545,22 @@ GMenu * curve_close_section (gchar * str)
 }
 
 /*!
+  \fn GMenu * curve_help_menu (gchar * str)
+
+  \brief create the help menu item
+
+  \param str the action string
+*/
+GMenu * curve_help_menu (gchar * str)
+{
+  GMenu * menu = g_menu_new ();
+  gchar * act = g_strdup_printf ("%s.shortcuts.curve", str);
+  append_menu_item (menu, "Shortcuts", (const gchar *)act, NULL, NULL, IMG_NONE, NULL, FALSE, FALSE, FALSE, NULL);
+  g_free (act);
+  return menu;
+}
+
+/*!
   \fn GMenu * create_data_menu (GSimpleActionGroup * action_group, int pop, gchar * str, tint * data)
 
   \brief create the save data submenu
@@ -557,6 +598,7 @@ GMenu * curve_menu_bar (project * this_proj, GSimpleActionGroup * action_group, 
   append_submenu (menu, "Data", create_data_menu(action_group, 0, str, data));
   g_free (extrarid);
   append_submenu (menu, "Curve", create_curve_menu(str));
+  append_submenu (menu, "Help", curve_help_menu(str));
   return menu;
 }
 
@@ -667,13 +709,14 @@ GtkWidget * curve_popup_menu (gpointer data)
   int i, j;
   CurveState * cstate = (CurveState *)data;
   GSimpleActionGroup * curve_popup_actions = g_simple_action_group_new ();
-  GSimpleAction * curve_popup_action[5];
+  GSimpleAction * curve_popup_action[6];
   curve_popup_action[0] = g_simple_action_new ("save.data", NULL);
   curve_popup_action[1] = g_simple_action_new ("close.curve", NULL);
   curve_popup_action[2] = g_simple_action_new ("edit.curve", NULL);
   curve_popup_action[3] = g_simple_action_new ("save.image", NULL);
   curve_popup_action[4] = g_simple_action_new ("autoscale.curve", NULL);
-  for (i=0; i<5; i++)
+  curve_popup_action[5] = g_simple_action_new ("shortcuts.curve", NULL);
+  for (i=0; i<6; i++)
   {
     g_action_map_add_action (G_ACTION_MAP(curve_popup_actions), G_ACTION(curve_popup_action[i]));
     g_signal_connect (curve_popup_action[i], "activate", G_CALLBACK(curve_menu_bar_action), cstate -> id);
@@ -699,6 +742,7 @@ GtkWidget * curve_popup_menu (gpointer data)
   g_menu_append_section (menu, NULL, (GMenuModel *)create_add_remove_section(curve_popup_actions, str, i, cstate -> id));
   g_menu_append_section (menu, NULL, (GMenuModel *)autoscale_section(str));
   g_menu_append_section (menu, NULL, (GMenuModel *)curve_close_section(str));
+  g_menu_append_section (menu, NULL, (GMenuModel *)curve_help_menu(str));
   g_free (extrarid);
 #ifdef GTK4
   curve_pop_menu = gtk_popover_menu_new_from_model_full ((GMenuModel *)menu, GTK_POPOVER_MENU_NESTED);

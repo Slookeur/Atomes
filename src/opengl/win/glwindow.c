@@ -122,7 +122,7 @@ extern GtkWidget * shortcuts_window (int sections, int group_by_section[sections
 
 atomic_object * copied_object = NULL;
 
-gchar * opengl_section_names[]={ "Global", "Analysis mode", "Edition mode" };
+gchar * opengl_section_names[]={ "General", "Analysis mode", "Edition mode" };
 int opengl_group_by_section[] = { 5, 4, 3 };
 gchar * opengl_group_names[]={"Styles", "Measures", "Selection mode", "Window management", "Mouse mode",
                               "Camera rotation", "Camera motion", "Camera spin", "Model interaction",
@@ -451,7 +451,7 @@ G_MODULE_EXPORT void view_shortcuts (GtkWidget * widg, gpointer data)
 #endif
 {
   glwin * view = (glwin *)data;
-  view -> shortcuts = destroy_this_widget(view -> shortcuts);
+  view -> shortcuts = destroy_this_widget (view -> shortcuts);
   view -> shortcuts = shortcuts_window (G_N_ELEMENTS(opengl_group_by_section), opengl_group_by_section, G_N_ELEMENTS(opengl_shortcut_by_group),
                                         opengl_shortcut_by_group, opengl_section_names, opengl_group_names, opengl_shortcuts);
 }
