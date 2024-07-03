@@ -578,7 +578,7 @@ GtkWidget * menu_view (glwin * view, int popm)
 */
 GtkWidget * menu_help (glwin * view, int popm)
 {
-  GtkWidget * menu
+  GtkWidget * menu;
   menu = gtk_menu_new ();
   gtk3_menu_item (menu, "Shortcuts", IMG_NONE, NULL, G_CALLBACK(view_shortcuts), (gpointer)view, FALSE, 0, 0, FALSE, FALSE, FALSE);
   return menu;

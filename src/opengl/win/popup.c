@@ -171,6 +171,7 @@ extern GSimpleActionGroup * view_pop_actions;
 extern G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
 extern GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo);
 #endif
+extern G_MODULE_EXPORT void view_shortcuts (GSimpleAction * action, GVariant * parameter, gpointer data);
 atom_search * remove_search = NULL;
 atom_search * insert_search = NULL;
 
