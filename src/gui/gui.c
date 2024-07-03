@@ -130,254 +130,107 @@ tint cut_lab;
 dint davect[9];
 ColRGBA std[6];
 
-/*!
-  \typedef shortcuts
-
-  \brief Data structure to store keyboard shortcuts information
-*/
-typedef struct shortcuts shortcuts;
-struct shortcuts
-{
-  gchar * description;                                       /*!< Shortcut description */
-  gchar * subtitle;                                          /*!< Shortcut subtitle */
-#ifdef GTK4
-  GtkShortcutTrigger * (* create_trigger_func) (gint key);   /*!< Shortcut trigger function */
-#endif
-  gint key;                                                  /*!< Shortcut key */
-  gchar * accelerator;                                       /*!< Shortcut accelerator */
+shortcuts main_shortcuts[] = {
+  { "About", "open about dialog",  GDK_KEY_a, "<Ctrl>a" },
+  { "Periodic table", "open periodic table",  GDK_KEY_p, "<Ctrl>p" },
+  { "Quit", "quit atomes",  GDK_KEY_q, "<Ctrl>q" },
+//};
+//{
+  { "Open workspace", "open atomes workspace",  GDK_KEY_w, "<Ctrl>w" },
+  { "Save workspace", "save atomes workspace",  GDK_KEY_s, "<Ctrl>s" },
+  { "Close workspace", "close atomes workspace",  GDK_KEY_c, "<Ctrl>c" },
+//};
+//{
+  { "New project", "create new atomes project",  GDK_KEY_n, "<Ctrl>n" },
+  { "Open project", "open atomes project",  GDK_KEY_o, "<Ctrl>o" }
 };
 
-#ifdef GTK4
-/*!
-  \fn GtkShortcutTrigger * create_ctrl_key (gint key)
-
-  \brief Add shortcut trigger with Ctrl modifier
-
-  \param key the original keyboard GDK key number
-*/
-static GtkShortcutTrigger * create_ctrl_key (gint key)
-{
-  return gtk_keyval_trigger_new (key, GDK_CONTROL_MASK);
-}
-
-shortcuts main_shortcuts[1][3][3] = {{
-  {{ "About", "open about dialog", create_ctrl_key, GDK_KEY_a, "<Ctrl>a" },
-   { "Periodic table", "open periodic table", create_ctrl_key, GDK_KEY_p, "<Ctrl>p" },
-   { "Quit", "quit atomes", create_ctrl_key, GDK_KEY_q, "<Ctrl>q" }},
-  {{ "Open workspace", "open atomes workspace", create_ctrl_key, GDK_KEY_w, "<Ctrl>w" },
-  { "Save workspace", "save atomes workspace", create_ctrl_key, GDK_KEY_s, "<Ctrl>s" },
-   { "Close workspace", "close atomes workspace", create_ctrl_key, GDK_KEY_c, "<Ctrl>c" }},
-  {{ "New project", "create new atomes project", create_ctrl_key, GDK_KEY_n, "<Ctrl>n" },
-   { "Open project", "open atomes project", create_ctrl_key, GDK_KEY_o, "<Ctrl>o" },
-   { NULL, NULL, NULL, 0, NULL}}
-}};
-
-/*shortcuts opengl_analyze_cuts[3][3][3] = {{
-  {{ "Atom(s) color map", "change atom(s) color map", NULL, GDK_KEY_a, "a" },
-   { "Polyhedra color map", "change polyhedra color map", NULL, GDK_KEY_p, "p" },
-   { "Ball and stick", "change global style to ball and stick", NULL, GDK_KEY_b, "b" }},
-   { "Cylinders", "change global style to cylinders", NULL, GDK_KEY_w, "w" },
-   { "Spheres", "change global style to spheres", NULL, GDK_KEY_s, "s" },
-   { "Covalent radius", "change global style to cylinders", NULL, GDK_KEY_o, "o" },
-   { "Ionic radius", "change global style to cylinders", NULL, GDK_KEY_i, "i" },
-   { "Van der Waals radius", "change global style to van der Waals radius", NULL, GDK_KEY_v, "v" },
-   { "In crystal radius", "change global style to in crystal radius", NULL, GDK_KEY_r, "r" },
-   { "Wireframe", "change global style to wireframe", NULL, GDK_KEY_w, "w" }},
-  {{ "Show all mesures for the selected atoms, pressed:\n"
-      "once: display inter-atomic distance(s)\n"
-      "twice: display inter-atomic angles\n"
-      "third time: hide measures", NULL, GDK_KEY, m, "m"}
-
-      },
-  {{ "Rotate right", "rotate right", NULL, GDK_KEY_Right, "Right"" },
-   { "Rotate left", "rotate left", NULL, GDK_KEY_Left, "Left" },
-   { "Rotate up", "rotate up", NULL, GDK_KEY_Up, "Up" },
-   { "Rotate down", "rotate down", NULL, GDK_KEY_Down, "Down" },
-    },
-  {{ "Spin right", "rotate right", create_ctrl_shit_key, GDK_KEY_Right, "<Ctrl><Shift>Right" },
-   { "Spin left", "rotate left", create_ctrl_shit_key, GDK_KEY_Left, "<Ctrl><Shift>Left" },
-   { "Spin up", "rotate up", create_ctrl_shit_key, GDK_KEY_Up, "<Ctrl><Shift>Up" },
-   { "Spin down", "rotate down", create_ctrl_shit_key, GDK_KEY_Down, "<Ctrl><Shift>Down" },
-  }
-
-  { "Save workspace", "save atomes workspace", create_ctrl_key, GDK_KEY_s, "<Ctrl>s" },
-   { "Close workspace", "close atomes workspace", create_ctrl_key, GDK_KEY_c, "<Ctrl>c" }},
-  {{ "New project", "create new atomes project", create_ctrl_key, GDK_KEY_n, "<Ctrl>n" },
-   { "Open project", "open atomes project", create_ctrl_key, GDK_KEY_o, "<Ctrl>o" },
-   { NULL, NULL, NULL, 0, NULL}}
-}};*/
-
-#else
-shortcuts main_shortcuts[1][3][3] = {{
-  {{ "About", "open about dialog", GDK_KEY_a, "<Ctrl>a" },
-   { "Periodic table", "open periodic table", GDK_KEY_p, "<Ctrl>p" },
-   { "Quit", "quit atomes", GDK_KEY_q, "<Ctrl>q" }},
-  {{ "Open workspace", "open atomes workspace",  GDK_KEY_w, "<Ctrl>w" },
-   { "Save workspace", "save atomes workspace", GDK_KEY_s, "<Ctrl>s" },
-   { "Close workspace", "close atomes workspace", GDK_KEY_c, "<Ctrl>c" }},
-  {{ "New project", "create new atomes project", GDK_KEY_n, "<Ctrl>n" },
-   { "Open project", "open atomes project", GDK_KEY_o, "<Ctrl>o" },
-   { NULL, NULL, 0, NULL }}
-}};
-#endif
-gchar * main_name[1][3] = {{"General", "Workspace", "Projects"}};
+gchar * main_section_names[] = { "Main" };
+int main_group_by_section[] = { 3 };
+gchar * main_group_names[] = { "General", "Workspace", "Projects" };
+int main_shortcut_by_group[] = { 3, 3, 2 };
 
 /*!
-  \fn GtkWidget * shortcuts_window ()
+  \fn GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int groups, int shortcut_by_group[groups],
+*                                   gchar * section_names[sections], gchar * group_names[groups], shortcuts shortcs[])
 
   \brief Create the shortcuts information window
 
   \param sections number of shortcut sections
-  \param groups number of shortcut groups by section
-  \param shorts number of shortcuts by group
-  \param shortc shortcuts information
+  \param group_by_section number of group by section
+  \param groups number of groups
+  \param shortcut_by_group number of shortcuts by group
+  \param shortcs shortcuts information
 */
-GtkWidget * shortcuts_window (int sections, int groups, int shorts, gchar * group_names[sections][groups], shortcuts shortcs[sections][groups][shorts])
+GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int groups, int shortcut_by_group[groups],
+                              gchar * section_names[sections], gchar * group_names[groups], shortcuts shortcs[])
 {
-  GtkShortcutsWindow * win = g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "section-name", "smain" , "modal", FALSE, "resizable", FALSE, NULL);
-
+  GtkShortcutsWindow * win = g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, NULL);
   GtkShortcutsSection * short_cut_section[sections];
-  GtkShortcutsGroup * short_cut_group[sections][groups];
+  GtkShortcutsGroup * short_cut_group[groups];
   GtkShortcutsShortcut * shortcut;
-  int i, j, k;
+#ifdef GTK4
+#if GTK_MINOR_VERSION < 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION < 4)
+  GtkWidget * sections_box = create_vbox (0);
+#endif
+#endif // GTK4
+  int i, j, k, l, m;
+  l = m = 0;
   for (i=0; i<sections; i++)
   {
-    short_cut_section[i] = g_object_new (GTK_TYPE_SHORTCUTS_SECTION, "visible", TRUE, "section-name", "smain", NULL);
-    for (j=0; j<groups; j++)
+    short_cut_section[i] = g_object_new (GTK_TYPE_SHORTCUTS_SECTION, "visible", TRUE, "title", section_names[i], "section-name", section_names[i], NULL);
+    for (j=0; j<group_by_section[i]; j++, l++)
     {
-      if (group_names[i][j])
+      short_cut_group[l] = g_object_new (GTK_TYPE_SHORTCUTS_GROUP, "visible", TRUE, "title", group_names[l], NULL);
+      for (k=0; k<shortcut_by_group[l]; k++, m++)
       {
-        short_cut_group[i][j] = g_object_new (GTK_TYPE_SHORTCUTS_GROUP, "visible", TRUE, "title", group_names[i][j], NULL);
-        for (k=0; k<shorts; k++)
-        {
-          if (shortcs[i][j][k].description)
-          {
-            shortcut = g_object_new (GTK_TYPE_SHORTCUTS_SHORTCUT,
-                                     "visible",       TRUE,
-                                     "shortcut-type", GTK_SHORTCUT_ACCELERATOR,
-                                     "accelerator",   shortcs[i][j][k].accelerator,
-                                     "title",         shortcs[i][j][k].description,
-                                     NULL );
+        shortcut = g_object_new (GTK_TYPE_SHORTCUTS_SHORTCUT,
+                                 "visible",       TRUE,
+                                 "shortcut-type", GTK_SHORTCUT_ACCELERATOR,
+                                 "accelerator",   shortcs[m].accelerator,
+                                 "title",         shortcs[m].description,
+                                 NULL );
 #ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
-          gtk_shortcuts_group_add_shortcut (short_cut_group[i][j], shortcut);
+        gtk_shortcuts_group_add_shortcut (short_cut_group[l], shortcut);
 #else
-          add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_group[i][j], (GtkWidget *)shortcut, FALSE, FALSE, 0);
+        add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_group[l], (GtkWidget *)shortcut, FALSE, FALSE, 0);
 #endif
 #else
-          gtk_container_add (GTK_CONTAINER((GtkWidget *)short_cut_group[i][j]), (GtkWidget *)shortcut);
+        gtk_container_add (GTK_CONTAINER((GtkWidget *)short_cut_group[l]), (GtkWidget *)shortcut);
 #endif
-        }
       }
 #ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
-      gtk_shortcuts_section_add_group (short_cut_section[i], short_cut_group[i][j]);
+      gtk_shortcuts_section_add_group (short_cut_section[i], short_cut_group[l]);
 #else
-      add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_section[i], (GtkWidget *)short_cut_group[i][j], FALSE, FALSE, 0);
+      add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_section[i], (GtkWidget *)short_cut_group[l], FALSE, FALSE, 0);
 #endif
 #else
-      gtk_container_add (GTK_CONTAINER((GtkWidget *)short_cut_section[i]), (GtkWidget *)short_cut_group[i][j]);
+      gtk_container_add (GTK_CONTAINER((GtkWidget *)short_cut_section[i]), (GtkWidget *)short_cut_group[l]);
 #endif
-      }
     }
 #ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
     gtk_shortcuts_window_add_section (win, short_cut_section[i]);
 #else
-    add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)win, (GtkWidget *)short_cut_section[i], FALSE, FALSE, 0);
+    // gtk_widget_set_parent ((GtkWidget *)short_cut_section[i], (GtkWidget *)win)
+    // if (gtk_widget_get_first_child ((GtkWidget * )win) != NULL) g_debug ("There is a child !");
+    add_box_child_start (GTK_ORIENTATION_VERTICAL, sections_box, (GtkWidget *)short_cut_section[i], FALSE, FALSE, 0);
 #endif
 #else
     gtk_container_add (GTK_CONTAINER((GtkWidget *)win), (GtkWidget *)short_cut_section[i]);
 #endif
   }
-  add_gtk_close_event ((GtkWidget *)win, G_CALLBACK(destroy_this_window), GINT_TO_POINTER(1));
+#ifdef GTK4
+#if GTK_MINOR_VERSION < 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION < 4)
+   gtk_window_set_child ((GtkWindow *)win, sections_box);
+#endif
+#endif
+  add_gtk_close_event ((GtkWidget *)win, G_CALLBACK(destroy_this_window), NULL);
   show_the_widgets ((GtkWidget *)win);
   return (GtkWidget *)win;
 }
-
-#ifdef GTK4
-/*!
-  \fn static gboolean shortcut_activated (GtkWidget * widget, GVariant * unused, gpointer key)
-
-  \brief Handle keyboard shortcuts
-
-  \param widget the widget sending the signal
-  \param unused parameter GVariant parameter of the GAction, if any
-  \param key the original keyboard key pressed
-*/
-static gboolean shortcut_activated (GtkWidget * widget, GVariant * unused, gpointer key)
-{
-  int val = GPOINTER_TO_INT(key);
-  switch (val)
-  {
-    case GDK_KEY_a:
-      create_about_dialog (NULL, NULL);
-      break;
-    case GDK_KEY_c:
-      on_close_workspace (NULL, GINT_TO_POINTER(1));
-      break;
-    case GDK_KEY_n:
-      on_create_new_project (NULL, NULL);
-      break;
-    case GDK_KEY_o:
-      on_open_save_activate (NULL, GINT_TO_POINTER(0));
-      break;
-    case GDK_KEY_p:
-      get_atom_id_from_periodic_table (NULL);
-      break;
-    case GDK_KEY_q:
-      leaving_question (NULL, NULL);
-      break;
-    case GDK_KEY_s:
-      on_save_as_activate (NULL, GINT_TO_POINTER(3));
-      break;
-    case GDK_KEY_t:
-      on_show_curve_toolbox (NULL, NULL);
-      break;
-    case GDK_KEY_w:
-      on_open_save_activate (NULL, GINT_TO_POINTER(2));
-      break;
-  }
-  return TRUE;
-}
-
-/*!
-  \fn void prepare_shortcut_triggers (GtkWidget * win, int sections, int groups, int shorts, shortcuts shortc[sections][groups][shorts])
-
-  \brief Prepare keyboard shortcut triggers
-
-  \param win the widget to associate the shorcuts with
-  \param sections number of shortcut sections
-  \param groups number of shortcut groups by section
-  \param shorts number of shortcuts by group
-  \param shortc shortcuts information
-*/
-void prepare_shortcut_triggers (GtkWidget * win, int sections, int groups, int shorts, shortcuts shortc[sections][groups][shorts])
-{
-  GtkEventController * controller;
-  GtkShortcut ** shortcut_list = g_malloc0 (sections*groups*shorts*sizeof*shortcut_list);
-  int i, j, k, l;
-  l = 0;
-  for (i=0; i<sections; i++)
-  {
-    for (j=0; j<groups; j++)
-    {
-      for (k=0; k<shorts; k ++, l ++)
-      {
-        if (shortc[i][j][k].description)
-        {
-          controller = gtk_shortcut_controller_new ();
-          gtk_event_controller_set_propagation_phase (controller, GTK_PHASE_CAPTURE);
-          gtk_widget_add_controller (win, controller);
-          shortcut_list[l] = gtk_shortcut_new (shortc[i][j][k].create_trigger_func(shortc[i][j][k].key),
-                                               gtk_callback_action_new (shortcut_activated, GINT_TO_POINTER(shortc[i][j][k].key), NULL));
-          gtk_shortcut_controller_add_shortcut (GTK_SHORTCUT_CONTROLLER (controller), shortcut_list[l]);
-        }
-      }
-    }
-  }
-}
-#endif
 
 #ifdef GTK3
 /*!
@@ -713,7 +566,9 @@ G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * 
   }
   else if (g_strcmp0 (name, "help.shortcuts") == 0)
   {
-    if (! atomes_shortcuts) atomes_shortcuts = shortcuts_window (1, 3, 3, main_name, main_shortcuts);
+    atomes_shortcuts = destroy_this_widget (atomes_shortcuts);
+    atomes_shortcuts = shortcuts_window (G_N_ELEMENTS(main_group_by_section), main_group_by_section, G_N_ELEMENTS(main_shortcut_by_group),
+                                         main_shortcut_by_group, main_section_names, main_group_names, main_shortcuts);
   }
   g_free (name);
 }
@@ -1169,6 +1024,23 @@ G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, doubl
     pop_menu_at_pointer (popover, x, y);
   }
 }
+
+/*!
+  \fn G_MODULE_EXPORT gboolean on_atomes_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
+
+  \brief the GtkEventController for the keyboard button press event
+
+  \param self the GtkEventController sending the signal
+  \param keyval the
+  \param keycode the key pressed
+  \param state the keyboard modifier (Ctrl, Alt ... if any)
+  \param data the associated data pointer
+*/
+G_MODULE_EXPORT gboolean on_atomes_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data)
+{
+  atomes_key_pressed (keyval, state);
+  return TRUE;
+}
 #endif
 
 /*!
@@ -1269,7 +1141,7 @@ GtkWidget * create_main_window (GApplication * atomes)
 #else
   add_widget_gesture_and_key_action (window, "atomes-context-click", G_CALLBACK(atomes_popup_menu), NULL,
                                              NULL, NULL, NULL,
-                                             NULL, NULL, NULL,
+                                             "atomes-key-pressed", G_CALLBACK(on_atomes_pressed), NULL,
                                              NULL, NULL, NULL, NULL, NULL, NULL);
 #endif
   add_gtk_close_event (window, G_CALLBACK(leaving_question), NULL);
@@ -1397,8 +1269,5 @@ GtkWidget * create_main_window (GApplication * atomes)
   cut_sel.a = cut_sel.b = 0;
   cut_sel.c = 1;
   cut_lab.a = cut_lab.b = cut_lab.c = 0;
-#ifdef GTK4
-  prepare_shortcut_triggers (window, 1, 3, 3, main_shortcuts);
-#endif
   return window;
 }

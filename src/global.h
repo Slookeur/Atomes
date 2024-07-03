@@ -122,6 +122,20 @@ struct ColRGBA
   float alpha;
 };
 
+/*!
+  \typedef shortcuts
+
+  \brief Data structure to store keyboard shortcuts information
+*/
+typedef struct shortcuts shortcuts;
+struct shortcuts
+{
+  gchar * description;                                       /*!< Shortcut description */
+  gchar * subtitle;                                          /*!< Shortcut subtitle */
+  gint key;                                                  /*!< Shortcut key */
+  gchar * accelerator;                                       /*!< Shortcut accelerator */
+};
+
 /*! \typedef coord_info
   \brief Data structure to store coordination information
 */

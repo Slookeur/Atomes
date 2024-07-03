@@ -2341,10 +2341,6 @@ G_MODULE_EXPORT gboolean destroy_this_window (GtkWidget * win, GdkEvent * event,
 #endif
 {
   destroy_this_widget (GTK_WIDGET(win));
-  if (data)
-  {
-    if (GPOINTER_TO_INT(data)) atomes_shortcuts = NULL;
-  }
   return TRUE;
 }
 

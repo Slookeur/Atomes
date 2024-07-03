@@ -4156,6 +4156,7 @@ void popup_main_menu (glwin * view, double ptx, double pty)
   }
   g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_reset(view, 1));
   g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_fullscreen(view, 1));
+  g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_shortcuts(view, 1));
 
   menu = gtk_popover_menu_new_from_model_full ((GMenuModel *)gmenu, GTK_POPOVER_MENU_NESTED);
   if (view -> mode == ANALYZE) analyze_menu_attach_color_palettes (view, menu);
@@ -4228,6 +4229,8 @@ void popup_main_menu (glwin * view, double ptx, double pty)
   {
     gtk3_menu_item (menu, "Exit Fullscreen", IMG_STOCK, (gpointer)FULLSCREEN, G_CALLBACK(set_full_screen), (gpointer)view, TRUE, GDK_KEY_Escape, 0, FALSE, FALSE, FALSE);
   }
+  add_menu_separator (menu);
+  gtk3_menu_item (menu, "Shortcuts", IMG_NONE, NULL, G_CALLBACK(view_shortcuts), (gpointer)view, FALSE, 0, 0, FALSE, FALSE, FALSE);
   pop_menu_at_pointer (menu, NULL);
 #endif
 }

@@ -1091,6 +1091,7 @@ struct glwin
 
   int action_id;
   GSimpleActionGroup * action_group;
+  GtkWidget * shortcuts;
 };
 
 #endif
