@@ -180,22 +180,29 @@ GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int 
                               gchar * section_names[sections], gchar * group_names[groups], shortcuts shortcs[])
 {
   GtkShortcutsWindow * win = g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, NULL);
-  GtkShortcutsSection * short_cut_section[sections];
-  GtkShortcutsGroup * short_cut_group[groups];
+  GtkShortcutsSection * shortcut_section[sections];
+  GtkShortcutsGroup * shortcut_group[groups];
   GtkShortcutsShortcut * shortcut;
 #ifdef GTK4
 #if GTK_MINOR_VERSION < 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION < 4)
-  GtkWidget * sections_box = create_vbox (0);
+  GtkWidget * sections_book = gtk_notebook_new ();
+  gtk_notebook_set_scrollable (GTK_NOTEBOOK(sections_book), TRUE);
+  gtk_notebook_set_tab_pos (GTK_NOTEBOOK(sections_book), GTK_POS_TOP);
 #endif
 #endif // GTK4
   int i, j, k, l, m;
   l = m = 0;
   for (i=0; i<sections; i++)
   {
-    short_cut_section[i] = g_object_new (GTK_TYPE_SHORTCUTS_SECTION, "visible", TRUE, "title", section_names[i], "section-name", section_names[i], NULL);
+    shortcut_section[i] = g_object_new (GTK_TYPE_SHORTCUTS_SECTION, "visible", TRUE, "title", section_names[i], "section-name", section_names[i], NULL);
+#ifdef GTK4
+#if GTK_MINOR_VERSION < 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION < 4)
+  gtk_orientable_set_orientation ((GtkOrientable *)shortcut_section[i], GTK_ORIENTATION_HORIZONTAL);
+#endif
+#endif
     for (j=0; j<group_by_section[i]; j++, l++)
     {
-      short_cut_group[l] = g_object_new (GTK_TYPE_SHORTCUTS_GROUP, "visible", TRUE, "title", group_names[l], NULL);
+      shortcut_group[l] = g_object_new (GTK_TYPE_SHORTCUTS_GROUP, "visible", TRUE, "title", group_names[l], NULL);
       for (k=0; k<shortcut_by_group[l]; k++, m++)
       {
         shortcut = g_object_new (GTK_TYPE_SHORTCUTS_SHORTCUT,
@@ -206,39 +213,37 @@ GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int 
                                  NULL );
 #ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
-        gtk_shortcuts_group_add_shortcut (short_cut_group[l], shortcut);
+        gtk_shortcuts_group_add_shortcut (shortcut_group[l], shortcut);
 #else
-        add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_group[l], (GtkWidget *)shortcut, FALSE, FALSE, 0);
+        add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)shortcut_group[l], (GtkWidget *)shortcut, FALSE, FALSE, 0);
 #endif
 #else
-        gtk_container_add (GTK_CONTAINER((GtkWidget *)short_cut_group[l]), (GtkWidget *)shortcut);
+        gtk_container_add (GTK_CONTAINER((GtkWidget *)shortcut_group[l]), (GtkWidget *)shortcut);
 #endif
       }
 #ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
-      gtk_shortcuts_section_add_group (short_cut_section[i], short_cut_group[l]);
+      gtk_shortcuts_section_add_group (shortcut_section[i], shortcut_group[l]);
 #else
-      add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)short_cut_section[i], (GtkWidget *)short_cut_group[l], FALSE, FALSE, 0);
+      add_box_child_start (GTK_ORIENTATION_HORIZONTAL, (GtkWidget *)shortcut_section[i], (GtkWidget *)shortcut_group[l], FALSE, FALSE, 0);
 #endif
 #else
-      gtk_container_add (GTK_CONTAINER((GtkWidget *)short_cut_section[i]), (GtkWidget *)short_cut_group[l]);
+      gtk_container_add (GTK_CONTAINER((GtkWidget *)shortcut_section[i]), (GtkWidget *)shortcut_group[l]);
 #endif
     }
 #ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
-    gtk_shortcuts_window_add_section (win, short_cut_section[i]);
+    gtk_shortcuts_window_add_section (win, shortcut_section[i]);
 #else
-    // gtk_widget_set_parent ((GtkWidget *)short_cut_section[i], (GtkWidget *)win)
-    // if (gtk_widget_get_first_child ((GtkWidget * )win) != NULL) g_debug ("There is a child !");
-    add_box_child_start (GTK_ORIENTATION_VERTICAL, sections_box, (GtkWidget *)short_cut_section[i], FALSE, FALSE, 0);
+    gtk_notebook_append_page (GTK_NOTEBOOK(sections_book), (GtkWidget *)shortcut_section[i], gtk_label_new (section_names[i]));
 #endif
 #else
-    gtk_container_add (GTK_CONTAINER((GtkWidget *)win), (GtkWidget *)short_cut_section[i]);
+    gtk_container_add (GTK_CONTAINER((GtkWidget *)win), (GtkWidget *)shortcut_section[i]);
 #endif
   }
 #ifdef GTK4
 #if GTK_MINOR_VERSION < 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION < 4)
-   gtk_window_set_child ((GtkWindow *)win, sections_box);
+   gtk_window_set_child ((GtkWindow*) win, sections_book);
 #endif
 #endif
   add_gtk_close_event ((GtkWidget *)win, G_CALLBACK(destroy_this_window), NULL);

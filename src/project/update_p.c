@@ -59,7 +59,7 @@ void prep_calc_actions ()
 {
   int i;
   // Depends on the number of calculations available
-  for (i=0; i<G_N_ELEMENTS(analyze_acts); i++)
+  for (i=0; i<G_N_ELEMENTS(analyze_actions); i++)
   {
     if (i < AN)
     {
