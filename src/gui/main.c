@@ -277,10 +277,11 @@ GtkWidget * create_splash_window ()
   GtkWidget * image;
 #ifdef GTK4
   image = gtk_picture_new_for_filename (PACKAGE_LOGO);
-  gchar * backcol = g_strdup_printf ("window#background {\n"
-                                     "  background-color: rgba(255, 255, 255, 0.0);}");
+  gchar * backcol = g_strdup_printf ("window#splash {\n"
+                                     "  background: none;"
+                                     "  background-color: rgba(255, 255, 255, 0);}");
   provide_gtk_css (backcol);
-  gtk_widget_set_name (splash_window, "background");
+  gtk_widget_set_name (splash_window, "splash");
   g_free (backcol);
 #else
   gtk_window_set_type_hint (GTK_WINDOW (splash_window), GDK_WINDOW_TYPE_HINT_SPLASHSCREEN);

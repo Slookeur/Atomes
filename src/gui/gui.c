@@ -1271,5 +1271,6 @@ GtkWidget * create_main_window (GApplication * atomes)
   cut_sel.a = cut_sel.b = 0;
   cut_sel.c = 1;
   cut_lab.a = cut_lab.b = cut_lab.c = 0;
+
   return window;
 }

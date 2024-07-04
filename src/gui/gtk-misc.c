@@ -2007,7 +2007,11 @@ void provide_gtk_css (gchar * css)
 {
   GtkCssProvider * provider = gtk_css_provider_new ();
 #ifdef GTK4
+#if GTK_MINOR_VERSION < 12
   gtk_css_provider_load_from_data (provider, css, -1);
+#else
+  gtk_css_provider_load_from_string (provider, css);
+#endif
   gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                               GTK_STYLE_PROVIDER(provider),
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);

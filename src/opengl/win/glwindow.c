@@ -163,8 +163,13 @@ shortcuts opengl_shortcuts[] = {
   { "Enter fullscreen", "Enter fullscreen", GDK_KEY_f, "<Ctrl>f" },
   { "Exit fullscreen", "Exit fullscreen", GDK_KEY_Escape, "Escape" },
 //
+#ifdef OSX
+  { "Analysis mode", "Analysis mode", GDK_KEY_a, "<Meta>a" },
+  { "Edition mode", "Edition mode", GDK_KEY_e, "<Meta>e" },
+#else
   { "Analysis mode", "Analysis mode", GDK_KEY_a, "<Alt>a" },
   { "Edition mode", "Edition mode", GDK_KEY_e, "<Alt>e" },
+#endif
 //
 // Analysis
 //
@@ -898,7 +903,11 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         }
       }
 #ifdef GTK4
+#ifdef OSX
+      else if (state & GDK_META_MASK)
+#else
       else if (state & GDK_ALT_MASK)
+#endif
 #else
       else if (state & GDK_MOD1_MASK)
 #endif
@@ -1019,7 +1028,11 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
           coord_properties (NULL, & view -> colorp[30][0]);
         }
 #ifdef GTK4
+#ifdef OSX
+        else if (state & GDK_META_MASK)
+#else
         else if (state & GDK_ALT_MASK)
+#endif
 #else
         else if (state & GDK_MOD1_MASK)
 #endif
