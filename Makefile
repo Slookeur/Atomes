@@ -20,12 +20,12 @@ WINDOWS = 0
 GTKV = 3
 ifeq ($(GTKV),4)
   DGTK = -DGTK4 -DGTKGLAREA -DGDK_DISABLE_DEPRECATION_WARNINGS
-  IGTK = `pkg-config --cflags gtk4 epoxy libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
-  LGTK = `pkg-config --libs gtk4 epoxy libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
+  IGTK = `pkg-config --cflags gtk4 epoxy glu libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
+  LGTK = `pkg-config --libs gtk4 epoxy glu libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
 else
   DGTK = -DGTK3 -DGTKGLAREA -DMENU_ICONS
-  IGTK = `pkg-config --cflags gtk+-3.0 epoxy libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
-  LGTK = `pkg-config --libs gtk+-3.0 epoxy libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
+  IGTK = `pkg-config --cflags gtk+-3.0 epoxy glu libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
+  LGTK = `pkg-config --libs gtk+-3.0 epoxy glu libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
 endif
 
 # OpenMP
@@ -51,68 +51,7 @@ ifeq ($(LINUX),1)
   LIBS = $(LGTK) -lm -lgfortran
 
   DOS = -DLINUX
-  CPPFLAGS =  -DPACKAGE_DATA_DIR=\"\" \
-	-DPACKAGE_LOCALE_DIR=\"\" \
-	-DPACKAGE_LIB_DIR=\""library"\" \
-	-DPACKAGE_LOGO=\""pixmaps/logo.png"\" \
-	-DPACKAGE_LAGPL=\""pixmaps/logo-agpl.png"\" \
-	-DPACKAGE_LABOUT=\""pixmaps/logo-about.png"\" \
-	-DPACKAGE_TD=\""pixmaps/td.png"\" \
-	-DPACKAGE_MOL=\""pixmaps/molecule.png"\" \
-	-DPACKAGE_IMP=\""pixmaps/import.png"\" \
-	-DPACKAGE_CON=\""pixmaps/convert.png"\" \
-	-DPACKAGE_IMG=\""pixmaps/image.png"\" \
-	-DPACKAGE_PDF=\""pixmaps/pdf.png"\" \
-	-DPACKAGE_SVG=\""pixmaps/svg.png"\" \
-	-DPACKAGE_EPS=\""pixmaps/eps.png"\" \
-	-DPACKAGE_PNG=\""pixmaps/png.png"\" \
-	-DPACKAGE_JPG=\""pixmaps/jpg.png"\" \
-	-DPACKAGE_BMP=\""pixmaps/bmp.png"\" \
-	-DPACKAGE_TIFF=\""pixmaps/tiff.png"\" \
-	-DPACKAGE_EDIT=\""pixmaps/cedit.png"\" \
-	-DPACKAGE_VOID=\""pixmaps/void.png"\" \
-	-DPACKAGE_GR=\""pixmaps/gr.png"\" \
-	-DPACKAGE_SQ=\""pixmaps/sq.png"\" \
-	-DPACKAGE_AN=\""pixmaps/an.png"\" \
-	-DPACKAGE_BD=\""pixmaps/bd.png"\" \
-	-DPACKAGE_RI=\""pixmaps/ri.png"\" \
-	-DPACKAGE_CH=\""pixmaps/ch.png"\" \
-	-DPACKAGE_SP=\""pixmaps/sp.png"\" \
-	-DPACKAGE_MS=\""pixmaps/ms.png"\" \
-	-DPACKAGE_OGL=\""pixmaps/opengl.png"\" \
-	-DPACKAGE_OGLM=\""pixmaps/mol.png"\" \
-	-DPACKAGE_OGLC=\""pixmaps/mol.png"\" \
-	-DPACKAGE_PRO=\""pixmaps/prop.png"\" \
-	-DPACKAGE_SET=\""pixmaps/settings.png"\" \
-	-DPACKAGE_DOTA=\""pixmaps/dots/dots-a.png"\" \
-	-DPACKAGE_DOTB=\""pixmaps/dots/dots-b.png"\" \
-	-DPACKAGE_DOTC=\""pixmaps/dots/dots-c.png"\" \
-	-DPACKAGE_DOTD=\""pixmaps/dots/dots-d.png"\" \
-	-DPACKAGE_DOTE=\""pixmaps/dots/dots-e.png"\" \
-	-DPACKAGE_DOTF=\""pixmaps/dots/dots-f.png"\" \
-	-DPACKAGE_DOTG=\""pixmaps/dots/dots-g.png"\" \
-	-DPACKAGE_DOTH=\""pixmaps/dots/dots-h.png"\" \
-	-DPACKAGE_DOTI=\""pixmaps/dots/dots-i.png"\" \
-	-DPACKAGE_DFBD=\""pixmaps/field/bd.png"\" \
-	-DPACKAGE_DFAN=\""pixmaps/field/an.png"\" \
-	-DPACKAGE_DFDI=\""pixmaps/field/di.png"\" \
-	-DPACKAGE_DFTD=\""pixmaps/field/td.png"\" \
-	-DPACKAGE_DFIN=\""pixmaps/field/in.png"\" \
-	-DPACKAGE_SGCP=\""pixmaps/bravais/Cubic-P.png"\" \
-	-DPACKAGE_SGCI=\""pixmaps/bravais/Cubic-I.png"\" \
-	-DPACKAGE_SGCF=\""pixmaps/bravais/Cubic-F.png"\" \
-	-DPACKAGE_SGHP=\""pixmaps/bravais/Hexagonal.png"\" \
-	-DPACKAGE_SGTR=\""pixmaps/bravais/Trigonal-R.png"\" \
-	-DPACKAGE_SGTI=\""pixmaps/bravais/Tetragonal-I.png"\" \
-	-DPACKAGE_SGTP=\""pixmaps/bravais/Tetragonal-P.png"\" \
-	-DPACKAGE_SGOP=\""pixmaps/bravais/Orthorhombic-P.png"\" \
-	-DPACKAGE_SGOI=\""pixmaps/bravais/Orthorhombic-I.png"\" \
-	-DPACKAGE_SGOC=\""pixmaps/bravais/Orthorhombic-C.png"\" \
-	-DPACKAGE_SGOF=\""pixmaps/bravais/Orthorhombic-F.png"\" \
-	-DPACKAGE_SGMP=\""pixmaps/bravais/Monoclinic-P.png"\" \
-	-DPACKAGE_SGMI=\""pixmaps/bravais/Monoclinic-I.png"\" \
-	-DPACKAGE_SGTC=\""pixmaps/bravais/Triclinic.png"\"
-
+  CPPFLAGS = -DPACKAGE_PREFIX=\"./\"
   LDFLGS = $(DOMP)
 
   RM = rm
@@ -248,7 +187,6 @@ PROGRAM = atomes
 SOURCES_F90 := $(wildcard $(FOR)*.F90)
 OBJECTS_F90 := $(patsubst $(FOR)%.F90, $(OBJ)%.o, $(SOURCES_F90))
 MODOBJECTS_F90 := $(OBJ)mendeleiev.o $(OBJ)parameters.o
-
 
 OBJECTS_c = $(OBJ)global.o $(OBJ_GUI) $(OBJ_WORK) $(OBJ_PROJ) $(OBJ_CURVE) \
 			$(OBJ_CALC) $(OBJ_POLY) $(OBJ_LAMMPS) $(OBJ_FIELD) $(OBJ_CPMD) $(OBJ_CP2K) $(OBJ_OGL)
@@ -450,7 +388,6 @@ OBJ_CEDIT = \
 	$(OBJ)cell_pixel.o \
 	$(OBJ)cell_edit.o
 
-
 OBJ_AEDIT = \
 	$(OBJ)atom_action.o \
 	$(OBJ)atom_coord.o \
@@ -523,11 +460,16 @@ SOURCES_h = \
 	$(GLWIN)initcoord.h \
 	$(GLDRAW)movie.h
 
+
+OGL_TEST_PROG = atomes_opengl_testing
+
+OGL_TEST = $(OBJ)atomes-opengl-testing.o
+
 # The rule to build the executable
 
-atomes: version exe
+atomes: version ogl exe
 
-debug: version exe
+debug: version ogl exe
 
 version:
 	$(ECHO) "#define FC \""$(FC) $(FCVER)"\"" > src/version.h
@@ -540,6 +482,9 @@ all:
 	$(CP) $(BIN)/atomes$(EXT) $(BIN)/atomes-debug$(EXT)
 	$(MAKE) clean
 	$(MAKE) atomes
+
+ogl:$(OGL_TEST)
+	$(LD) -o $(BIN)$(OGL_TEST_PROG) $(OGL_TEST) $(DEFS) $(LDFLAGS)
 
 exe:$(OBJECTS)
 	$(LD) -o $(BIN)$(PROGRAM) $(OBJECTS) $(DEFS) $(LDFLAGS)
@@ -603,6 +548,9 @@ $(OBJ)%.o: $(FOR)%.F90
 # Dependency so that Fortran module files are compiled first
 $(filter-out $(MODOBJECTS_F90), $(OBJECTS_F90)): $(MODOBJECTS_F90)
 
+# OpenGL testing files:
+$(OBJ)atomes-opengl-testing.o:
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atomes-opengl-testing.o $(SRC)testing/atomes-opengl-testing.c $(INCLUDES)
 
 # C files:
 $(OBJ)global.o:
@@ -646,7 +594,7 @@ $(OBJ)grcall.o:
 $(OBJ)sqcall.o:
 	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)sqcall.o $(GUI)sqcall.c $(INCLUDES)
 $(OBJ)ringscall.o:
-	$(CC) -c $(CFLAGS) -DOPENMP $(DEFS) -o $(OBJ)ringscall.o $(GUI)ringscall.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)ringscall.o $(GUI)ringscall.c $(INCLUDES)
 $(OBJ)chainscall.o:
 	$(CC) -c $(CFLAGS) $(DEFS) -o $(OBJ)chainscall.o $(GUI)chainscall.c $(INCLUDES)
 $(OBJ)msdcall.o:

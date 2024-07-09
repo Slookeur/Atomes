@@ -73,9 +73,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 #ifdef G_OS_WIN32
 gchar * PACKAGE_PREFIX = NULL;
+#endif
 gchar * PACKAGE_LIB_DIR = NULL;
 gchar * PACKAGE_DATA_DIR = NULL;
-gchar * PACKAGE_LOCALE_DIR = NULL;
 gchar * PACKAGE_IMP = NULL;
 gchar * PACKAGE_CON = NULL;
 gchar * PACKAGE_IMG = NULL;
@@ -132,7 +132,6 @@ gchar * PACKAGE_SGOF = NULL;
 gchar * PACKAGE_SGMP = NULL;
 gchar * PACKAGE_SGMI = NULL;
 gchar * PACKAGE_SGTC = NULL;
-#endif
 gchar * ATOMES_CONFIG = NULL;
 gchar * ATOMES_URL = "https://atomes.ipcms.fr";
 gchar * mode_name[2]={"Analysis", "Edition"};

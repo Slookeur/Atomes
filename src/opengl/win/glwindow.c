@@ -1480,7 +1480,6 @@ gboolean create_3d_model (int p, gboolean load)
                                                                        "glwin-pointer-motion", G_CALLBACK(on_glwin_pointer_motion), this_proj -> modelgl,
                                                                        NULL, NULL, NULL);
     }
-    // add_window_gesture_action (window, "opengl-context-click", "pressed", G_CALLBACK(on_pressed_gl), NULL);
 #else
     g_signal_connect (G_OBJECT (this_proj -> modelgl -> plot), "motion-notify-event", G_CALLBACK(on_motion), this_proj -> modelgl);
     g_signal_connect (G_OBJECT (this_proj -> modelgl -> plot), "button-release-event", G_CALLBACK(on_glwin_button_event), this_proj -> modelgl);

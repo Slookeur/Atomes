@@ -303,7 +303,7 @@ G_MODULE_EXPORT gboolean on_glwin_pointer_scoll (GtkEventControllerScroll * even
 void reshape (glwin * view, int width, int height, gboolean use_ratio);
 void zoom (glwin * view, int delta);
 
-void init_opengl (glwin * view);
+void init_opengl ();
 void init_camera (project * this_proj, gboolean get_depth);
 
 #ifdef GTKGLAREA

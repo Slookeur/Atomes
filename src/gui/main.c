@@ -563,6 +563,48 @@ G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
 }
 
 /*!
+  \fn int check_opengl_rendering ()
+
+  \brief check the initialization parameters for an OpenGL context
+*/
+int check_opengl_rendering ()
+{
+  GError * error = NULL;
+  gchar * proc_name;
+#ifdef G_OS_WIN32
+  proc_name = g_build_filename (PACKAGE_PREFIX, "atomes_opengl_testing", NULL);
+#else
+  proc_name = g_build_filename ("atomes_opengl_testing", NULL);
+#endif
+  GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_name, NULL);
+  g_free (proc_name);
+  g_subprocess_wait (proc, NULL, & error);
+  gchar * ogl_info = NULL;
+  int res = g_subprocess_get_exit_status (proc);
+  switch (res)
+  {
+    case 1:
+      ogl_info = g_strdup_printf ("Fatal error on OpenGL initialization: trying to adjust environment !");
+      break;
+    case -2:
+      ogl_info = g_strdup_printf ("Impossible to initialize the OpenGL 3D rendering !");
+      break;
+    case -1:
+      ogl_info = g_strdup_printf ("GDK visual must be modified to initialize the OpenGL context !");
+      break;
+    default:
+      break;
+  }
+  if (ogl_info)
+  {
+    g_print ("%s\n", ogl_info);
+    g_free (ogl_info);
+    ogl_info = NULL;
+  }
+  return res;
+}
+
+/*!
   \fn int main (int argc, char *argv[])
 
   \brief initalization of the atomes program
@@ -578,9 +620,10 @@ int main (int argc, char *argv[])
   FreeConsole ();
   PACKAGE_PREFIX = g_win32_get_package_installation_directory_of_module (NULL);
   // g_win32_get_package_installation_directory (NULL, NULL);
+#endif
   PACKAGE_LIB_DIR = g_build_filename (PACKAGE_PREFIX, "library", NULL);
   PACKAGE_DATA_DIR = g_build_filename (PACKAGE_PREFIX, "pixmaps", NULL);
-  PACKAGE_LOCALE_DIR = g_build_filename (PACKAGE_PREFIX, "locale", NULL);
+  PACKAGE_IMP = g_build_filename (PACKAGE_PREFIX, "pixmaps/import.png", NULL);
   PACKAGE_IMP = g_build_filename (PACKAGE_PREFIX, "pixmaps/import.png", NULL);
   PACKAGE_CON = g_build_filename (PACKAGE_PREFIX, "pixmaps/convert.png", NULL);
   PACKAGE_IMG = g_build_filename (PACKAGE_PREFIX, "pixmaps/image.png", NULL);
@@ -637,12 +680,14 @@ int main (int argc, char *argv[])
   PACKAGE_SGMP = g_build_filename (PACKAGE_PREFIX, "pixmaps/bravais/Monoclinic-P.png", NULL);
   PACKAGE_SGMI = g_build_filename (PACKAGE_PREFIX, "pixmaps/bravais/Monoclinic-I.png", NULL);
   PACKAGE_SGTC = g_build_filename (PACKAGE_PREFIX, "pixmaps/bravais/Triclinic.png", NULL);
+
+/*#ifdef G_OS_WIN32
   ATOMES_CONFIG = g_build_filename (PACKAGE_PREFIX, "atomes.cfg", NULL);
-#endif // G_OS_WIN32
-#ifdef LINUX
-  struct passwd * pw = getpwuid(getuid());
+#else
+  struct passwd * pw = getpwuid (getuid());
   ATOMES_CONFIG = g_strdup_printf ("%s/.atomes.cfg", pw -> pw_dir);
-#endif
+#endif*/
+
   int i, j, k;
   switch (argc)
   {
@@ -722,8 +767,20 @@ int main (int argc, char *argv[])
       break;
   }
 
+
   if (RUNC)
   {
+    int opengl_context = check_opengl_rendering ();
+    if (opengl_context == 1)
+    {
+      g_setenv ("GSK_RENDERER", "gl", TRUE);
+      g_setenv ("GDK_DEBUG", "gl-prefer-gl", TRUE);
+      opengl_context = check_opengl_rendering ();
+      if (opengl_context > 0 || opengl_context == -2)
+      {
+        return 1;
+      }
+    }
     // setlocale(LC_ALL,"en_US");
     gtk_disable_setlocale ();
 #if GLIB_MINOR_VERSION < 74

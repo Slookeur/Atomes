@@ -67,7 +67,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void image_init_spec_data (image * img, project * this_proj, int nsp);
   void set_img_lights (project * this_proj, image * img);
   void init_img (project * this_proj);
-  void init_opengl (glwin * view);
+  void init_opengl ();
   void center_molecule (project * this_proj);
   void center_this_molecule (glwin * view);
   void free_glwin_spec_data (project * this_proj, int spec);
@@ -1383,20 +1383,17 @@ gboolean is_GLExtension_Supported (const char * extension)
 }
 
 /*!
-  \fn void init_opengl (glwin * view)
+  \fn void init_opengl ()
 
-  \brief initialize OpenGL rendering parameters for a glwin pointer
-
-  \param view the target glwin
+  \brief initialize OpenGL rendering parameters
 */
-void init_opengl (glwin * view)
+void init_opengl ()
 {
   glEnable (GL_DEPTH_TEST);
   glDepthMask (GL_TRUE);
   glDepthFunc (GL_LEQUAL);
   glDepthRange (0.0f, 1.0f);
   glClearDepth (1.0f);
-
   glEnable (GL_NORMALIZE);
 
   glShadeModel(GL_SMOOTH);
@@ -1688,7 +1685,7 @@ void init_glwin (glwin * view)
   // On normal motion and copy rebuild:
   view -> rebuild[0][0] = view -> rebuild[1][0] = (this_proj -> steps > 1) ? FALSE : TRUE;
   view -> init = TRUE;
-  init_opengl (view);
+  init_opengl ();
   init_shaders (view);
   this_proj -> initgl = TRUE;
 #ifdef GTK4

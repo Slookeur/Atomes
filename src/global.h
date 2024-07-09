@@ -57,6 +57,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <math.h>
 
 #include <gtk/gtk.h>
+#ifndef GTK4
+#  include <gtk/gtkx.h>
+#endif
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -176,9 +179,6 @@ struct coord_info
 
 #include "glwin.h"
 
-#ifndef GTK4
-#  include <gtk/gtkx.h>
-#endif
 #define MEDIA_NEXT "media-skip-forward"
 #define MEDIA_PREV "media-skip-backward"
 #define MEDIA_LAST "go-last"
@@ -338,9 +338,9 @@ enum ImageFormats {
 
 #ifdef G_OS_WIN32
 extern gchar * PACKAGE_PREFIX;
+#endif
 extern gchar * PACKAGE_LIB_DIR;
 extern gchar * PACKAGE_DATA_DIR;
-extern gchar * PACKAGE_LOCALE_DIR;
 extern gchar * PACKAGE_IMP;
 extern gchar * PACKAGE_CON;
 extern gchar * PACKAGE_IMG;
@@ -397,7 +397,6 @@ extern gchar * PACKAGE_SGOF;
 extern gchar * PACKAGE_SGMP;
 extern gchar * PACKAGE_SGMI;
 extern gchar * PACKAGE_SGTC;
-#endif
 extern gchar * ATOMES_CONFIG;
 extern gchar * ATOMES_URL;
 
