@@ -228,7 +228,6 @@ void init_opengl ()
 
   glHint (GL_FOG_HINT, GL_NICEST);
   glHint (GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // Really Nice Perspective Calculations
-  int ogl_texture = (is_GLExtension_Supported("GL_ARB_texture_rectangle")) ? GL_TEXTURE_RECTANGLE_ARB : GL_TEXTURE_2D;
 }
 
 /*!
@@ -319,8 +318,7 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
-#ifndef OSX
-#ifndef G_OS_WIN32
+#ifdef LINUX
 /*!
   \fn void gtk_window_change_gdk_visual (GtkWidget * win)
 
@@ -357,17 +355,14 @@ void gtk_window_change_gdk_visual (GtkWidget * win)
 }
 #endif
 #endif
-#endif
 
 GtkWidget * create_opengl_window (GApplication * app)
 {
   GtkWidget * win = gtk_application_window_new (GTK_APPLICATION(app));
 #ifdef GTK3
 #ifdef GTKGLAREA
-#ifndef OSX
-#ifndef G_OS_WIN32
+#ifdef LINUX
   if (! opengl_visual) gtk_window_change_gdk_visual (win);
-#endif
 #endif
 #endif
 #endif
@@ -420,7 +415,6 @@ void test_opengl_window (GApplication * app)
 */
 G_MODULE_EXPORT void run_opengl_test (GApplication * app, gpointer data)
 {
-  GtkSettings * default_settings = gtk_settings_get_default ();
   test_opengl_window (app);
   g_application_quit (app);
 }

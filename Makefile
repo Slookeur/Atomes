@@ -550,7 +550,7 @@ $(filter-out $(MODOBJECTS_F90), $(OBJECTS_F90)): $(MODOBJECTS_F90)
 
 # OpenGL testing files:
 $(OBJ)atomes-opengl-testing.o:
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atomes-opengl-testing.o $(SRC)testing/atomes-opengl-testing.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atomes-opengl-testing.o $(SRC)opengl-testing/atomes-opengl-testing.c $(INCLUDES)
 
 # C files:
 $(OBJ)global.o:
