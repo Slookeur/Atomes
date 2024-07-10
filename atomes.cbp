@@ -3230,7 +3230,7 @@
 			<Option target="debug" />
 			<Option target="clean" />
 		</Unit>
-		<Unit filename="src/startup_testing/startup_testing.c">
+		<Unit filename="src/startup-testing/startup_testing.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/workspace/modelinfo.c">
