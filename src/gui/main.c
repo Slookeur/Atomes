@@ -572,9 +572,9 @@ int check_opengl_rendering ()
   GError * error = NULL;
   gchar * proc_name;
 #ifdef G_OS_WIN32
-  proc_name = g_build_filename (PACKAGE_PREFIX, "atomes_opengl_testing", NULL);
+  proc_name = g_build_filename (PACKAGE_PREFIX, "atomes_startup_testing", NULL);
 #else
-  proc_name = g_build_filename ("atomes_opengl_testing", NULL);
+  proc_name = g_build_filename (PACKAGE_PREFIX, "atomes_startup_testing", NULL);
 #endif
   GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_name, NULL);
   g_free (proc_name);

@@ -461,7 +461,7 @@ SOURCES_h = \
 	$(GLDRAW)movie.h
 
 
-OGL_TEST_PROG = startup_testing
+OGL_TEST_PROG = atomes_startup_testing
 
 OGL_TEST = $(OBJ)startup_testing.o
 
@@ -492,40 +492,40 @@ exe:$(OBJECTS)
 # Special targets
 
 cleangui:
-	$(RM) $(RMFLAGS) $(OBJ_GUI) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_GUI) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleanwork:
-	$(RM) $(RMFLAGS) $(OBJ_WORK) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_WORK) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleanproj:
-	$(RM) $(RMFLAGS) $(OBJ_PROJ) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_PROJ) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleancalc:
-	$(RM) $(RMFLAGS) $(OBJ_CALC) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_CALC) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleanpoly:
-	$(RM) $(RMFLAGS) $(OBJ_POLY) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_POLY) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleanfield:
-	$(RM) $(RMFLAGS) $(OBJ_FIELD) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_FIELD) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleancpmd:
-	$(RM) $(RMFLAGS) $(OBJ_CPMD) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_CPMD) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleancp2k:
-	$(RM) $(RMFLAGS) $(OBJ_CP2K) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_CP2K) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleancurve:
-	$(RM) $(RMFLAGS) $(OBJ_CURVE) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_CURVE) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleanedit:
-	$(RM) $(RMFLAGS) $(OBJ_CEDIT) $(OBJ_AEDIT) $(OBJ_CBUILD) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_CEDIT) $(OBJ_AEDIT) $(OBJ_CBUILD) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleanogl:
-	$(RM) $(RMFLAGS) $(OBJ_OGL) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJ_OGL) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleanc:
-	$(RM) $(RMFLAGS) $(OBJECTS_c) $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJECTS_c) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleanf:
 	$(RM) $(RMFLAGS) $(OBJECTS_F90) $(BIN)$(PROGRAM)
@@ -533,7 +533,7 @@ cleanf:
 	$(RM) $(RMFLAGS) $(OBJ)*.mod
 
 clean:
-	$(RM) $(RMFLAGS) $(OBJECTS) *.mod $(OBJ)*.mod $(BIN)$(PROGRAM)
+	$(RM) $(RMFLAGS) $(OBJECTS) *.mod $(OBJ)*.mod $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 clear:
 	$(RM) $(RMFLAGS) $(OBJECTS) *.mod $(OBJ)*.mod

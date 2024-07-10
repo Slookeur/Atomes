@@ -25,7 +25,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
-#ifndef GTK4
+#ifdef GTK3
 #  include <gtk/gtkx.h>
 #endif
 
@@ -161,7 +161,9 @@ GtkWidget * destroy_this_widget (GtkWidget * widg)
     if (GTK_IS_WIDGET(widg))
     {
       if (is_the_widget_visible(widg)) hide_the_widgets (widg);
-      destroy_this_widget (widg);
+#ifdef GTK3
+      gtk_widget_destroy (widg);
+#endif
     }
   }
   return NULL;
@@ -386,6 +388,7 @@ GtkWidget * create_opengl_window (GApplication * app)
 #endif
   g_signal_connect (G_OBJECT (area), "realize", G_CALLBACK(on_realize), NULL);
   show_the_widgets (win);
+  return win;
 }
 
 /*!
@@ -401,15 +404,16 @@ void test_opengl_window (GApplication * app)
 #ifdef GTK3
 #ifdef GTKGLAREA
 #ifndef G_OS_WIN32
-  if (opengl_visual == 0)
+  g_print ("So far so good ogl opengl_visual= %d\n", opengl_visual);
+  if (! opengl_visual)
   {
-    destroy_this_widget (win);
+    win = destroy_this_widget (win);
     win = create_opengl_window (app);
   }
 #endif // G_OS_WIN32
 #endif // GTKGLAREA
 #endif // GTK3
-  destroy_this_widget (win);
+  win = destroy_this_widget (win);
 }
 
 /*!
