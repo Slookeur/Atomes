@@ -461,9 +461,9 @@ SOURCES_h = \
 	$(GLDRAW)movie.h
 
 
-OGL_TEST_PROG = atomes_opengl_testing
+OGL_TEST_PROG = startup_testing
 
-OGL_TEST = $(OBJ)atomes-opengl-testing.o
+OGL_TEST = $(OBJ)startup_testing.o
 
 # The rule to build the executable
 
@@ -549,8 +549,8 @@ $(OBJ)%.o: $(FOR)%.F90
 $(filter-out $(MODOBJECTS_F90), $(OBJECTS_F90)): $(MODOBJECTS_F90)
 
 # OpenGL testing files:
-$(OBJ)atomes-opengl-testing.o:
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)atomes-opengl-testing.o $(SRC)opengl-testing/atomes-opengl-testing.c $(INCLUDES)
+$(OBJ)startup_testing.o:
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)startup_testing.o $(SRC)startup_testing/startup_testing.c $(INCLUDES)
 
 # C files:
 $(OBJ)global.o:

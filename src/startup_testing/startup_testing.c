@@ -14,8 +14,8 @@ If not, see <https://www.gnu.org/licenses/>
 Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 /*!
-* @file test-opengl.c
-* @short Testing OpenGL configuration for the atomes program
+* @file startup_testing.c
+* @short Startup testing of OpenGL configuration for the atomes program
 * @author Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
 */
 
@@ -356,6 +356,13 @@ void gtk_window_change_gdk_visual (GtkWidget * win)
 #endif
 #endif
 
+/*!
+  \fn GtkWidget * create_opengl_window (GApplication * app)
+
+  \brief create the test OpenGL window
+
+  \param app the target GApplication
+*/
 GtkWidget * create_opengl_window (GApplication * app)
 {
   GtkWidget * win = gtk_application_window_new (GTK_APPLICATION(app));
