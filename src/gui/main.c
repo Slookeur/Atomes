@@ -770,17 +770,21 @@ int main (int argc, char *argv[])
 
   if (RUNC)
   {
-    int opengl_context = check_opengl_rendering ();
-    if (opengl_context == 1)
+    atomes_visual = check_opengl_rendering ();
+    if (atomes_visual == 1)
     {
+      // Fatal error, trying again adapting environment
       g_setenv ("GSK_RENDERER", "gl", TRUE);
       g_setenv ("GDK_DEBUG", "gl-prefer-gl", TRUE);
-      opengl_context = check_opengl_rendering ();
-      if (opengl_context > 0 || opengl_context == -2)
-      {
-        return 1;
-      }
+      atomes_visual = check_opengl_rendering ();
     }
+    if (atomes_visual > 0 || atomes_visual == -2)
+    {
+      // No way to initialize an OpenGL context: must quit
+      return 1;
+    }
+    atomes_visual = ! (abs(atomes_visual));
+
     // setlocale(LC_ALL,"en_US");
     gtk_disable_setlocale ();
 #if GLIB_MINOR_VERSION < 74

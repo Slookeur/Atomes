@@ -550,7 +550,7 @@ $(filter-out $(MODOBJECTS_F90), $(OBJECTS_F90)): $(MODOBJECTS_F90)
 
 # OpenGL testing files:
 $(OBJ)startup_testing.o:
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)startup_testing.o $(SRC)startup_testing/startup_testing.c $(INCLUDES)
+	$(CC) -c $(CPPFLAGS) $(CFLAGS) $(DEFS) -o $(OBJ)startup_testing.o $(SRC)startup-testing/startup_testing.c $(INCLUDES)
 
 # C files:
 $(OBJ)global.o:

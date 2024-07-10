@@ -1343,8 +1343,7 @@ G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
-#ifndef OSX
-#ifndef G_OS_WIN32
+#ifdef LINUX
 /*!
   \fn void gtk_window_change_gdk_visual (GtkWidget * win)
 
@@ -1381,7 +1380,6 @@ void gtk_window_change_gdk_visual (GtkWidget * win)
 }
 #endif
 #endif
-#endif
 
 gboolean create_3d_model (int p, gboolean load)
 {
@@ -1410,10 +1408,8 @@ gboolean create_3d_model (int p, gboolean load)
       this_proj -> modelgl -> win = create_win (str, MainWindow, FALSE, TRUE);
 #ifdef GTK3
 #ifdef GTKGLAREA
-#ifndef OSX
-#ifndef G_OS_WIN32
+#ifdef LINUX
       if (! atomes_visual) gtk_window_change_gdk_visual (this_proj -> modelgl -> win);
-#endif
 #endif
 #endif
 #endif
@@ -1533,61 +1529,34 @@ void prep_model (int p)
       show_the_widgets (this_proj -> modelgl -> win);
       destroy_this_widget (dummy);*/
       show_the_widgets (this_proj -> modelgl -> win);
+    }
+    if (this_proj -> initgl)
+    {
+      active_project_changed (p);
 #ifdef GTK3
-#ifdef GTKGLAREA
-#ifndef G_OS_WIN32
-      if (atomes_visual == 0 && ! this_proj -> initgl)
+      // GTK3 Menu Action To Check
+      active_glwin -> ogl_box_axis[0] = g_malloc0 (OGL_BOX*sizeof*active_glwin -> ogl_box_axis[0]);
+      active_glwin -> ogl_box_axis[1] = g_malloc0 (OGL_AXIS*sizeof*active_glwin -> ogl_box_axis[1]);
+#endif
+      prepare_opengl_menu_bar (active_glwin);
+      if (reading_input)
       {
-        this_proj -> modelgl -> plot = destroy_this_widget (this_proj -> modelgl -> plot);
-        this_proj -> modelgl -> menu_bar = destroy_this_widget (this_proj -> modelgl -> menu_bar);
-        this_proj -> modelgl -> win = destroy_this_widget (this_proj -> modelgl -> win);
-        create_3d_model (p, TRUE);
-        show_the_widgets (this_proj -> modelgl -> win);
-      }
-#endif // G_OS_WIN32
-#endif // GTKGLAREA
-#endif // GTK3
-      if (atomes_visual < 0)
-      {
-        this_proj -> modelgl -> plot = destroy_this_widget (this_proj -> modelgl -> plot);
-        this_proj -> modelgl -> menu_bar = destroy_this_widget (this_proj -> modelgl -> menu_bar);
-        this_proj -> modelgl -> win = destroy_this_widget (this_proj -> modelgl -> win);
+        adv_bonding[0] = (active_project -> natomes > ATOM_LIMIT) ? 0 : tmp_adv_bonding[0];
+        adv_bonding[1] = (active_project -> steps > STEP_LIMIT) ? 0 : tmp_adv_bonding[1];
+        frag_update = (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
+        mol_update = (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
       }
       else
       {
-        rendering = TRUE;
+        frag_update = (force_mol) ? 1 : (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
+        mol_update = (force_mol) ? 1 : (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
+        adv_bonding[0] = adv_bonding[1] = TRUE;
       }
-    }
-    if (rendering)
-    {
-      if (this_proj -> initgl)
+      if (active_project -> natomes && adv_bonding[0] && adv_bonding[1])
       {
-        active_project_changed (p);
-#ifdef GTK3
-        // GTK3 Menu Action To Check
-        active_glwin -> ogl_box_axis[0] = g_malloc0 (OGL_BOX*sizeof*active_glwin -> ogl_box_axis[0]);
-        active_glwin -> ogl_box_axis[1] = g_malloc0 (OGL_AXIS*sizeof*active_glwin -> ogl_box_axis[1]);
-#endif
-        prepare_opengl_menu_bar (active_glwin);
-        if (reading_input)
-        {
-          adv_bonding[0] = (active_project -> natomes > ATOM_LIMIT) ? 0 : tmp_adv_bonding[0];
-          adv_bonding[1] = (active_project -> steps > STEP_LIMIT) ? 0 : tmp_adv_bonding[1];
-          frag_update = (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
-          mol_update = (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
-        }
-        else
-        {
-          frag_update = (force_mol) ? 1 : (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
-          mol_update = (force_mol) ? 1 : (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
-          adv_bonding[0] = adv_bonding[1] = TRUE;
-        }
-        if (active_project -> natomes && adv_bonding[0] && adv_bonding[1])
-        {
-          bonds_update = 1;
-          active_project -> runc[0] = FALSE;
-          on_calc_bonds_released (NULL, NULL);
-        }
+        bonds_update = 1;
+        active_project -> runc[0] = FALSE;
+        on_calc_bonds_released (NULL, NULL);
       }
     }
   }

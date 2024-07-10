@@ -466,12 +466,15 @@ int main (int argc, char * argv[])
     switch (opengl_visual)
     {
       case 0:
+        // X11 default
         return -1;
         break;
       case -1:
+        // Impossible
         return -2;
         break;
       default:
+        // Gtk default (0) or impossible with fatal error (1)
         return status;
         break;
     }

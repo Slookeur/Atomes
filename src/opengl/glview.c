@@ -1763,22 +1763,10 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
   }
   else
   {
-#ifdef GTK3
-#ifdef GTKGLAREA
-#ifndef G_OS_WIN32
-    if (atomes_visual)
-    {
-      atomes_visual = 0;
-      goto end;
-    }
-#endif
-#endif
-#endif
     gchar * errm = g_strdup_printf ("Impossible to initialize the OpenGL 3D rendering ! \n %s\n", err -> message);
     g_error_free (err);
     show_error (errm, 0, MainWindow);
     g_free (errm);
-    atomes_visual = -1;
   }
 #ifdef GTK3
   end:;
