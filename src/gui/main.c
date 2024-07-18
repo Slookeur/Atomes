@@ -54,7 +54,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <libavutil/avutil.h>
 #include <libavformat/avformat.h>
 #include <libswscale/swscale.h>
-
 #include "version.h"
 #include "global.h"
 #include "bind.h"
@@ -369,7 +368,6 @@ void open_this_data_file (int file_type, gchar * file_name)
           for (i=1; i<strlen(file_name)-1; i++) filedir = g_strdup_printf ("%s%c", filedir, file_name[i]);
         }
 #ifdef G_OS_WIN32
-        ffd;
         hFind = FindFirstFile (filedir, & ffd);
         if (hFind != INVALID_HANDLE_VALUE)
         {
@@ -431,7 +429,6 @@ void open_this_data_file (int file_type, gchar * file_name)
           for (i=1; i<strlen(file_name)-1; i++) filedir = g_strdup_printf ("%s%c", filedir, file_name[i]);
         }
 #ifdef G_OS_WIN32
-        ffd;
         hFind = FindFirstFile (filedir, & ffd);
         if (hFind != INVALID_HANDLE_VALUE)
         {
@@ -491,11 +488,11 @@ void open_this_data_file (int file_type, gchar * file_name)
 G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
 {
   GtkSettings * default_settings = gtk_settings_get_default ();
+#ifndef G_OS_WIN32
+  g_object_set (default_settings, "gtk-application-prefer-dark-theme", TRUE, NULL);
+#endif
 #ifdef GTK3
   g_object_set (default_settings, "gtk-button-images", TRUE, NULL);
-  g_object_set (default_settings, "gtk-application-prefer-dark-theme", TRUE, NULL);
-#else
-  g_object_set (default_settings, "gtk-application-prefer-dark-theme", TRUE, NULL);
 #endif
 #ifdef G_OS_WIN32
 #ifdef GTK3
@@ -570,17 +567,39 @@ G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
 int check_opengl_rendering ()
 {
   GError * error = NULL;
-  gchar * proc_name;
+  gchar * proc_dir = NULL;
 #ifdef G_OS_WIN32
-  proc_name = g_build_filename (PACKAGE_PREFIX, "atomes_startup_testing", NULL);
+  proc_dir = g_build_filename (PACKAGE_PREFIX, "bin", NULL);
+  const char * proc_name = "atomes_startup_testing.exe";
 #else
-  proc_name = g_build_filename (PACKAGE_PREFIX, "atomes_startup_testing", NULL);
+  proc_dir = g_build_filename (PACKAGE_LIBEXEC, NULL);
+  const char * proc_name = "atomes_startup_testing";
 #endif
-  GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_name, NULL);
-  g_free (proc_name);
+  // g_print ("proc_dir= %s\n", proc_dir);
+  gchar * proc_path = g_build_filename (proc_dir, proc_name, NULL);
+  // g_print ("proc_path= %s\n", proc_path);
+#ifdef CODEBLOCKS
+  GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
+#else
+  GSubprocessLauncher * proc_launch = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_NONE);
+  g_subprocess_launcher_set_cwd (proc_launch, proc_dir);
+  GSubprocess * proc = g_subprocess_launcher_spawn (proc_launch, & error, proc_name, NULL);
+#endif
+  // g_print ("subprocess: %p\n", proc);
+  if (error)
+  {
+    g_print ("error: %s\n", error -> message);
+    g_clear_error (& error);
+  }
   g_subprocess_wait (proc, NULL, & error);
-  gchar * ogl_info = NULL;
   int res = g_subprocess_get_exit_status (proc);
+  g_clear_object (& proc);
+#ifndef CODEBLOCKS
+  g_clear_object (& proc_launch);
+#endif
+  g_free (proc_path);
+  g_free (proc_dir);
+  gchar * ogl_info = NULL;
   switch (res)
   {
     case 1:
@@ -617,7 +636,9 @@ int main (int argc, char *argv[])
   gboolean RUNC = FALSE;
 
 #ifdef G_OS_WIN32
+#ifndef DEBUG
   FreeConsole ();
+#endif
   PACKAGE_PREFIX = g_win32_get_package_installation_directory_of_module (NULL);
   // g_win32_get_package_installation_directory (NULL, NULL);
 #endif
@@ -767,7 +788,6 @@ int main (int argc, char *argv[])
       break;
   }
 
-
   if (RUNC)
   {
     atomes_visual = check_opengl_rendering ();
@@ -783,6 +803,9 @@ int main (int argc, char *argv[])
       // No way to initialize an OpenGL context: must quit
       return 1;
     }
+#ifdef OSX
+    g_setenv ("GSK_RENDERER", "gl", TRUE);
+#endif
     atomes_visual = ! (abs(atomes_visual));
 
     // setlocale(LC_ALL,"en_US");

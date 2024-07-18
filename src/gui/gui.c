@@ -179,7 +179,12 @@ int main_shortcut_by_group[] = { 3, 3, 2 };
 GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int groups, int shortcut_by_group[groups],
                               gchar * section_names[sections], gchar * group_names[groups], shortcuts shortcs[])
 {
-  GtkShortcutsWindow * win = g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, NULL);
+  GtkShortcutsWindow * win = NULL;
+#ifdef G_OS_WIN32
+  g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, "deletable", TRUE, NULL);
+#else
+  g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, NULL);
+#endif
   GtkShortcutsSection * shortcut_section[sections];
   GtkShortcutsGroup * shortcut_group[groups];
   GtkShortcutsShortcut * shortcut;

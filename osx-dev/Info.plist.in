@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleName</key>
+	<string>@PACKAGE@</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+        <key>CFBundleDisplayName</key>
+        <string>@PACKAGE@</string>
+	<key>CFBundleExecutable</key>
+	<string>@PACKAGE@</string>
+	<key>CFBundleIdentifier</key>
+	<string>fr.ipcms.atomes</string>
+	<key>CFBundleGetInfoString</key>
+	<string>@PACKAGE_STRING@</string>
+	<key>CFBundleShortVersionString</key>
+	<string>@</string>
+	<key>CFBundleLongVersionString</key>
+	<string>@PACKAGE_VERSION@</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>CFBundleSignature</key>
+	<string>atomes</string>
+	<key>CFBundleIconFile</key>
+	<string>atomes.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>atomes.app</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>awf</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>atomes-workspace.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>atomes workspace file</string>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>apf</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>atomes-project.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>atomes project file</string>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+		</dict>
+	</array>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright 2024, Dr. Sebastien Le Roux</string>
+</dict>
+</plist>

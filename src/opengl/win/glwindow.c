@@ -1518,7 +1518,6 @@ gboolean create_3d_model (int p, gboolean load)
 void prep_model (int p)
 {
   project * this_proj = get_project_by_id (p);
-  gboolean rendering = FALSE;
   gboolean adv_bonding[2];
   if (this_proj -> modelgl == NULL)
   {

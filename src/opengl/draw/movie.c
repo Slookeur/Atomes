@@ -1254,7 +1254,7 @@ G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointe
     view -> pixels[0] = vopts -> video_res[0];
     view -> pixels[1] = vopts -> video_res[1];
     init_frame_buffer (vopts -> video_res[0], vopts -> video_res[1]);
-    init_opengl (view);
+    init_opengl ();
     re_create_all_md_shaders (view);
     recreate_all_shaders (view);
     in_movie_encoding = TRUE;

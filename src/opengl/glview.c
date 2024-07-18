@@ -1768,9 +1768,6 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
     show_error (errm, 0, MainWindow);
     g_free (errm);
   }
-#ifdef GTK3
-  end:;
-#endif
 }
 
 #ifdef GTKGLAREA

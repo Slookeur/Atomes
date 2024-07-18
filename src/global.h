@@ -57,9 +57,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <math.h>
 
 #include <gtk/gtk.h>
-#ifndef GTK4
-#  include <gtk/gtkx.h>
-#endif
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -179,6 +176,9 @@ struct coord_info
 
 #include "glwin.h"
 
+#ifndef GTK4
+#  include <gtk/gtkx.h>
+#endif
 #define MEDIA_NEXT "media-skip-forward"
 #define MEDIA_PREV "media-skip-backward"
 #define MEDIA_LAST "go-last"
