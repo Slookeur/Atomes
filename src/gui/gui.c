@@ -181,9 +181,9 @@ GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int 
 {
   GtkShortcutsWindow * win = NULL;
 #ifdef G_OS_WIN32
-  g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, "deletable", TRUE, NULL);
+  win = g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, "deletable", TRUE, NULL);
 #else
-  g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, NULL);
+  win = g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, NULL);
 #endif
   GtkShortcutsSection * shortcut_section[sections];
   GtkShortcutsGroup * shortcut_group[groups];
@@ -238,7 +238,7 @@ GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int 
     }
 #ifdef GTK4
 #if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
-    gtk_shortcuts_window_add_section (win, shortcut_section[i]);
+    gtk_shortcuts_window_add_section (GTK_SHORTCUTS_WINDOW(win), shortcut_section[i]);
 #else
     gtk_notebook_append_page (GTK_NOTEBOOK(sections_book), (GtkWidget *)shortcut_section[i], gtk_label_new (section_names[i]));
 #endif

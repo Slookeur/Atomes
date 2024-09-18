@@ -73,6 +73,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 #ifdef G_OS_WIN32
 gchar * PACKAGE_PREFIX = NULL;
+gchar * PACKAGE_LIBEXEC = NULL;
 #endif
 gchar * PACKAGE_LIB_DIR = NULL;
 gchar * PACKAGE_DATA_DIR = NULL;
