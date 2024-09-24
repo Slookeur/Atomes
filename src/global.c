@@ -76,7 +76,6 @@ gchar * PACKAGE_PREFIX = NULL;
 gchar * PACKAGE_LIBEXEC = NULL;
 #endif
 gchar * PACKAGE_LIB_DIR = NULL;
-gchar * PACKAGE_DATA_DIR = NULL;
 gchar * PACKAGE_IMP = NULL;
 gchar * PACKAGE_CON = NULL;
 gchar * PACKAGE_IMG = NULL;

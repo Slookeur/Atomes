@@ -576,14 +576,17 @@ int check_opengl_rendering ()
   const char * proc_name = "atomes_startup_testing";
 #endif
   // g_print ("proc_dir= %s\n", proc_dir);
-  gchar * proc_path = g_build_filename (proc_dir, proc_name, NULL);
+  gchar * proc_path = g_build_filename (PACKAGE_LIBEXEC, proc_name, NULL);
   // g_print ("proc_path= %s\n", proc_path);
 #ifdef CODEBLOCKS
   GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
 #else
+#ifndef OSX
   GSubprocessLauncher * proc_launch = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_NONE);
   g_subprocess_launcher_set_cwd (proc_launch, proc_dir);
   GSubprocess * proc = g_subprocess_launcher_spawn (proc_launch, & error, proc_name, NULL);
+#else
+  GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
 #endif
   // g_print ("subprocess: %p\n", proc);
   if (error)
@@ -595,7 +598,9 @@ int check_opengl_rendering ()
   int res = g_subprocess_get_exit_status (proc);
   g_clear_object (& proc);
 #ifndef CODEBLOCKS
+#ifndef OSX
   g_clear_object (& proc_launch);
+#endif
 #endif
   g_free (proc_path);
   g_free (proc_dir);
@@ -643,7 +648,6 @@ int main (int argc, char *argv[])
   // g_win32_get_package_installation_directory (NULL, NULL);
 #endif
   PACKAGE_LIB_DIR = g_build_filename (PACKAGE_PREFIX, "library", NULL);
-  PACKAGE_DATA_DIR = g_build_filename (PACKAGE_PREFIX, "pixmaps", NULL);
   PACKAGE_IMP = g_build_filename (PACKAGE_PREFIX, "pixmaps/import.png", NULL);
   PACKAGE_IMP = g_build_filename (PACKAGE_PREFIX, "pixmaps/import.png", NULL);
   PACKAGE_CON = g_build_filename (PACKAGE_PREFIX, "pixmaps/convert.png", NULL);

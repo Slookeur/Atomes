@@ -341,7 +341,6 @@ extern gchar * PACKAGE_PREFIX;
 extern gchar * PACKAGE_LIBEXEC;
 #endif
 extern gchar * PACKAGE_LIB_DIR;
-extern gchar * PACKAGE_DATA_DIR;
 extern gchar * PACKAGE_IMP;
 extern gchar * PACKAGE_CON;
 extern gchar * PACKAGE_IMG;
