@@ -588,6 +588,7 @@ int check_opengl_rendering ()
 #else
   GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
 #endif
+#endif
   // g_print ("subprocess: %p\n", proc);
   if (error)
   {
