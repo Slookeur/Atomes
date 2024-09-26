@@ -1519,6 +1519,9 @@ G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpoi
       while (tmp != filter[j]) j++;
       if (i == 0)
       {
+#ifdef OSX
+        j = NCFORMATS;
+#endif
         if (j == NCFORMATS)
         {
           j = iask ("Please select the file format of the atomic coordinates", "Select format :", 2, MainWindow);
