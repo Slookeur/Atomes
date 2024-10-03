@@ -526,10 +526,6 @@ int sml_preview (const char * filetoread)
     }
     coord_node = coord_node -> next;
   }
-  for (i=0; i<lib_proj -> natomes; i++)
-  {
-    g_debug ("i= %d, x= %f, y= %f, z= %f", i, lib_proj -> atoms[0][i].x, lib_proj -> atoms[0][i].y, lib_proj -> atoms[0][i].z);
-  }
   pbc_node = findnode (racine -> children, "lattice");
   if (pbc_node != NULL)
   {
@@ -1167,7 +1163,6 @@ int insert_this_project_from_lib (int id, gboolean visible, project * this_proj,
   int molec[6] = {0, 8, 36, 21, 11, 0};
   int active = activep;
   the_family = family[id];
-  g_debug ("active= %d, the_family= %d", active, the_family);
   if (get_sml_files ())
   {
     prepare_preview (active, molec[id], FALSE);
