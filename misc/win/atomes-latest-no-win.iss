@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId=4DA2F2FC-AD2D-414A-8197-0DD52F1593D2
 AppName=Atomes
-AppVerName=Atomes 1.1.14
+AppVerName=Atomes 1.1.15
 AppPublisher=CNRS
 AppPublisherURL=https://atomes.ipcms.fr/
 AppSupportURL=https://atomes.ipcms.fr/
@@ -17,7 +17,7 @@ DisableDirPage=yes
 DefaultGroupName=Atomes
 LicenseFile=COPYING
 OutputDir=Setup
-OutputBaseFilename=atomes-latest-setup
+OutputBaseFilename=atomes-latest-setup-no-win
 SetupIconFile=setup.ico
 UninstallDisplayIcon=setup.ico
 Compression=lzma2
@@ -39,6 +39,10 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 function InitializeSetup(): Boolean;
 begin
   Result := TRUE;
+  if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.14', 'Version') then begin
+    MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
+    Result := FALSE;
+  end;
   if RegValueExists(HKEY_LOCAL_MACHINE, 'Software\IPCMS\ATOMES\1.1.13', 'Version') then begin
     MsgBox('An older version of Atomes has been detected on your computer:' #14#14 'We recommand to uninstall this previous version before installing any other', mbConfirmation, MB_OK);
     Result := FALSE;
@@ -99,15 +103,15 @@ end;
 
 [Registry]
 Root: HKLM; Subkey: "Software\IPCMS\ATOMES"; Flags: uninsdeletekeyifempty
-Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.14"; Flags: uninsdeletekey
-Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletekey
-Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Version"; ValueData: "1.1.14"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.15"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.15"; ValueType: string; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletekey
+Root: HKLM; Subkey: "Software\IPCMS\ATOMES\1.1.15"; ValueType: string; ValueName: "Version"; ValueData: "1.1.15"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\IPCMS\ATOMES"; Flags: uninsdeletekeyifempty
-Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.14"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Version"; ValueData: "1.1.14"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Name"; ValueData: "Atomes"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.14"; ValueType: string; ValueName: "Company"; ValueData: "Institut de Physique et Chimie des Matériaux de Strasbourg"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.15"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.15"; ValueType: string; ValueName: "Path"; ValueData: "{app}"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.15"; ValueType: string; ValueName: "Version"; ValueData: "1.1.15"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.15"; ValueType: string; ValueName: "Name"; ValueData: "Atomes"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\IPCMS\ATOMES\1.1.15"; ValueType: string; ValueName: "Company"; ValueData: "Institut de Physique et Chimie des Matériaux de Strasbourg"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\Classes\.awf\OpenWithProgids"; ValueType: string; ValueName: "AtomesWorkspaceFile.awf"; ValueData: ""; Flags: uninsdeletevalue
 Root: HKA; Subkey: "Software\Classes\AtomesWorkspaceFile.awf"; ValueType: string; ValueName: ""; ValueData: "Atomes Workspace File"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\Classes\AtomesWorkspaceFile.awf\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "atomes-workspace.ico"; Flags: uninsdeletekey
@@ -190,7 +194,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "atomes\pixmaps\*"; DestDir: "{app}\pixmaps\"; Components: main; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "atomes\library\*"; DestDir: "{app}\library"; Components: main; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "atomes\bin\*"; DestDir: "{app}\bin\"; Components: main; Flags: ignoreversion
+Source: "atomes\bin-no-win\*"; DestDir: "{app}\bin\"; Components: main; Flags: ignoreversion
 Source: "atomes\etc\*"; DestDir: "{app}\etc\"; Components: main; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "atomes\lib\*"; DestDir: "{app}\lib\"; Components: main; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "atomes\share\*"; DestDir: "{app}\share\"; Components: main; Flags: ignoreversion recursesubdirs createallsubdirs

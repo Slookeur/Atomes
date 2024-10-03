@@ -404,7 +404,6 @@ void test_opengl_window (GApplication * app)
 #ifdef GTK3
 #ifdef GTKGLAREA
 #ifndef G_OS_WIN32
-  g_print ("So far so good ogl opengl_visual= %d\n", opengl_visual);
   if (! opengl_visual)
   {
     win = destroy_this_widget (win);

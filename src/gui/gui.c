@@ -56,6 +56,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   GtkWidget * create_main_window (GApplication * atomes);
 
+  GIcon * get_gicon_from_data (int format, const gchar * icon);
+
   GMenuItem * create_gmenu_item (const gchar * label, const gchar * action, const gchar * accel,
                                  const gchar * custom, int format, const gchar * icon,
                                  gboolean check, gboolean status, gboolean radio, const gchar * rstatus);
@@ -597,6 +599,14 @@ G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * 
   g_free (name);
 }
 
+/*!
+  \fn GIcon * get_gicon_from_data (int format, const gchar * icon)
+
+  \brief create a new icon using data
+
+  \param format for the data
+  \param icon image name or file name
+*/
 GIcon * get_gicon_from_data (int format, const gchar * icon)
 {
   switch (format)

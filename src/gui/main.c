@@ -584,7 +584,7 @@ int check_opengl_rendering ()
 #ifndef OSX
   GSubprocessLauncher * proc_launch = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_NONE);
   g_subprocess_launcher_set_cwd (proc_launch, proc_dir);
-  GSubprocess * proc = g_subprocess_launcher_spawn (proc_launch, & error, proc_name, NULL);
+  GSubprocess * proc = g_subprocess_launcher_spawn (proc_launch, & error, proc_path, NULL);
 #else
   GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
 #endif
