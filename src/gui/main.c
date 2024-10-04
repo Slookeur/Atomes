@@ -568,16 +568,19 @@ int check_opengl_rendering ()
 {
   GError * error = NULL;
   gchar * proc_dir = NULL;
+  gchar * proc_path = NULL;
+  const char * proc_name;
 #ifdef G_OS_WIN32
   proc_dir = g_build_filename (PACKAGE_PREFIX, "bin", NULL);
-  const char * proc_name = "atomes_startup_testing.exe";
+  proc_name = "atomes_startup_testing.exe";
+  proc_path = g_build_filename (proc_dir, proc_name, NULL);
 #else
   proc_dir = g_build_filename (PACKAGE_LIBEXEC, NULL);
-  const char * proc_name = "atomes_startup_testing";
+  proc_name = "atomes_startup_testing";
+  proc_path = g_build_filename (PACKAGE_LIBEXEC, proc_name, NULL);
 #endif
-  // g_print ("proc_dir= %s\n", proc_dir);
-  gchar * proc_path = g_build_filename (PACKAGE_LIBEXEC, proc_name, NULL);
-  // g_print ("proc_path= %s\n", proc_path);
+  g_print ("proc_dir= %s\n", proc_dir);
+  g_print ("proc_path= %s\n", proc_path);
 #ifdef CODEBLOCKS
   GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
 #else
@@ -589,7 +592,7 @@ int check_opengl_rendering ()
   GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
 #endif
 #endif
-  // g_print ("subprocess: %p\n", proc);
+  g_print ("subprocess: %p\n", proc);
   if (error)
   {
     g_print ("error: %s\n", error -> message);

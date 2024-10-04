@@ -449,6 +449,11 @@ int main (int argc, char * argv[])
     default:
       break;
   }
+#ifdef G_OS_WIN32
+#ifndef DEBUG
+  FreeConsole ();
+#endif
+#endif
   if (RUNC)
   {
     GtkApplication * TestOpenGLApp;

@@ -17,7 +17,7 @@ LINUX = 1
 WINDOWS = 0
 
 # The next line defines the GTK version !
-GTKV = 4
+GTKV = 3
 ifeq ($(GTKV),4)
   DGTK = -DGTK4 -DGTKGLAREA -DGDK_DISABLE_DEPRECATION_WARNINGS
   IGTK = `pkg-config --cflags gtk4 epoxy glu libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
@@ -51,7 +51,7 @@ ifeq ($(LINUX),1)
   LIBS = $(LGTK) -lm -lgfortran
 
   DOS = -DLINUX
-  CPPFLAGS = -DCODEBLOCKS -DPACKAGE_PREFIX=\"./\" -DPACKAGE_LIBEXEC=\"./\"
+  CPPFLAGS = -DPACKAGE_PREFIX=\"./\" -DPACKAGE_LIBEXEC=\"./\"
   LDFLGS = $(DOMP)
 
   RM = rm
@@ -136,7 +136,8 @@ ifeq ($(WINDOWS),1)
   ECHO = $(DEV)bin/echo
 
   WINDRES = $(COMP)windres
-  WINATOMES = $(OBJ)winatomes.o
+  WIN_ATOMES = $(OBJ)win_atomes.o
+  WIN_STARTUP = $(OBJ)win_startup.o
 
   EXT=".exe"
   FCVER = 10.2.0
@@ -433,7 +434,7 @@ OBJ_OGL = $(OBJ_WIN) $(OBJ_CBUILD) $(OBJ_CEDIT) $(OBJ_AEDIT) $(OBJ_DRAW) $(OBJ_G
 
 ifeq ($(WINDOWS),1)
 
-  OBJECTS = $(WINATOMES) $(OBJECTS_F90) $(OBJECTS_c)
+  OBJECTS = $(WIN_ATOMES) $(OBJECTS_F90) $(OBJECTS_c)
 
 else
 
@@ -463,7 +464,15 @@ SOURCES_h = \
 
 OGL_TEST_PROG = atomes_startup_testing
 
-OGL_TEST = $(OBJ)startup_testing.o
+ifeq ($(WINDOWS),1)
+
+  OGL_TEST = $(OBJ)startup_testing.o $(WIN_STARTUP)
+
+else
+
+  OGL_TEST = $(OBJ)startup_testing.o
+
+endif
 
 # The rule to build the executable
 
@@ -1003,5 +1012,8 @@ $(OBJ)ogl_draw.o:
 
 # Win file:
 
-$(OBJ)winatomes.o:
-	$(WINDRES) $(SRC)atomes.rc -o $(OBJ)winatomes.o
+$(OBJ)win_atomes.o:
+	$(WINDRES) $(SRC)atomes.rc -o $(OBJ)win_atomes.o
+
+$(OBJ)win_startup.o:
+	$(WINDRES) $(SRC)startup.rc -o $(OBJ)win_startup.o
