@@ -514,7 +514,6 @@ int sml_preview (const char * filetoread)
       }
       else if (g_strcmp0 ("z",(char *)xspec -> name) == 0)
       {
-        g_debug ("i= %d, z= %s", i, (char *)xmlNodeGetContent(lot_node));
         lib_proj -> atoms[0][i].z = string_to_double ((gpointer)xmlNodeGetContent(lot_node));
       }
       else if (g_strcmp0 ("sp",(char *)xspec -> name) == 0)
