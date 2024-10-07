@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>Ibca</space-group>
+  <sg-num>73</sg-num>
+  <hm-symbol>I 21/b 21/c 21/a</hm-symbol>
+  <bravais>Orthorhombic</bravais>
+  <settings num="2">
+    <set name="I_b_c_a" x="a" y="b" z="c">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="1/2"/>
+      </points>
+    </set>
+    <set name="I_c_a_b" x="b" y="a" z="-c">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="1/2"/>
+      </points>
+    </set>
+  </settings>
+  <wyckoff num="6">
+    <wyck id="1" mul="8" let="f" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x+1/2" y="-y" z="z+1/2"/>
+      <pos x="-x" y="y+1/2" z="-z+1/2"/>
+      <pos x="x+1/2" y="-y+1/2" z="-z"/>
+      <pos x="-x" y="-y" z="-z"/>
+      <pos x="x+1/2" y="y" z="-z+1/2"/>
+      <pos x="x" y="-y+1/2" z="z+1/2"/>
+      <pos x="-x+1/2" y="y+1/2" z="z"/>
+    </wyck>
+    <wyck id="2" mul="4" let="e" site="..2">
+      <pos x="0" y="1/4" z="z"/>
+      <pos x="0" y="3/4" z="-z+1/2"/>
+      <pos x="0" y="3/4" z="-z"/>
+      <pos x="0" y="1/4" z="z+1/2"/>
+    </wyck>
+    <wyck id="3" mul="4" let="d" site=".2.">
+      <pos x="1/4" y="y" z="0"/>
+      <pos x="1/4" y="-y" z="1/2"/>
+      <pos x="3/4" y="-y" z="0"/>
+      <pos x="3/4" y="y" z="1/2"/>
+    </wyck>
+    <wyck id="4" mul="4" let="c" site="2..">
+      <pos x="x" y="0" z="1/4"/>
+      <pos x="-x+1/2" y="0" z="3/4"/>
+      <pos x="-x" y="0" z="3/4"/>
+      <pos x="x+1/2" y="0" z="1/4"/>
+    </wyck>
+    <wyck id="5" mul="4" let="b" site="-1">
+      <pos x="1/4" y="1/4" z="1/4"/>
+      <pos x="1/4" y="3/4" z="3/4"/>
+      <pos x="3/4" y="3/4" z="1/4"/>
+      <pos x="3/4" y="1/4" z="3/4"/>
+    </wyck>
+    <wyck id="6" mul="4" let="a" site="-1">
+      <pos x="0" y="0" z="0"/>
+      <pos x="1/2" y="0" z="1/2"/>
+      <pos x="0" y="1/2" z="1/2"/>
+      <pos x="1/2" y="1/2" z="0"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

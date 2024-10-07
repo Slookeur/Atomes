@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P32</space-group>
+  <sg-num>145</sg-num>
+  <hm-symbol>P 32</hm-symbol>
+  <bravais>Trigonal</bravais>
+  <settings num="1">
+    <set name="P_32" x="a" y="b" z="c">
+    </set>
+  </settings>
+  <wyckoff num="1">
+    <wyck id="1" mul="3" let="a" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-y" y="x-y" z="z+2/3"/>
+      <pos x="-x+y" y="-x" z="z+1/3"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

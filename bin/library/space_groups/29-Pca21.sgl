@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>Pca21</space-group>
+  <sg-num>29</sg-num>
+  <hm-symbol>P c a 21</hm-symbol>
+  <bravais>Orthorhombic</bravais>
+  <settings num="6">
+    <set name="P_c_a_21" x="a" y="b" z="c">
+    </set>
+    <set name="P_b_c_21" x="b" y="a" z="-c">
+    </set>
+    <set name="P_21_a_b" x="c" y="a" z="b">
+    </set>
+    <set name="P_21_c_a" x="-c" y="b" z="a">
+    </set>
+    <set name="P_c_21_b" x="b" y="c" z="a">
+    </set>
+    <set name="P_b_21_a" x="a" y="-c" z="b">
+    </set>
+  </settings>
+  <wyckoff num="1">
+    <wyck id="1" mul="4" let="a" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="-y" z="z+1/2"/>
+      <pos x="x+1/2" y="-y" z="z"/>
+      <pos x="-x+1/2" y="y" z="z+1/2"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

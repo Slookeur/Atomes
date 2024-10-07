@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Force Field Library XML file -->
+<ff-xml>
+  <force-field>CHARMM 36 lipids</force-field>
+  <!--  data adapted from the file: par_all36_lipid.prm -->
+  <units>k-calories per mol</units>
+  <ff-data>
+    <atoms dim="5">29</atoms>
+    <bonds-h dim="2" pot="1">50</bonds-h>
+    <bonds-q dim="0" pot="0">0</bonds-q>
+    <bonds-m dim="0" pot="0">0</bonds-m>
+    <angles-h dim="4" pot="-1">131</angles-h>
+    <angles-q dim="0" pot="0">0</angles-q>
+    <dihedrals-c dim="3" pot="1">180</dihedrals-c>
+    <dihedrals-ccc dim="0" pot="0">0</dihedrals-ccc>
+    <impropers dim="3" pot="2">4</impropers>
+    <inversions dim="0" pot="0">0</inversions>
+    <non-bonded dim="4" pot="-1">29</non-bonded>
+  </ff-data>
+  <atoms>
+    <at label="H" mass="1.008000" key="HL" info="polar H (equivalent to protein H)"/>
+    <at label="H" mass="1.008000" key="HCL" info="charged H for PE (equivalent to protein HC)"/>
+    <at label="H" mass="1.008000" key="HOL" info="Nucleic acid phosphate hydroxyl proton"/>
+    <at label="H" mass="1.008000" key="HAL1" info="alphatic proton"/>
+    <at label="H" mass="1.008000" key="HAL2" info="alphatic proton"/>
+    <at label="H" mass="1.008000" key="HAL3" info="alphatic proton"/>
+    <at label="H" mass="1.008000" key="HEL1" info="for alkene; RHC=CR"/>
+    <at label="H" mass="1.008000" key="HEL2" info="for alkene; H2C=CR"/>
+    <at label="H" mass="1.008000" key="HBL" info="POPS SER backbone H"/>
+    <at label="C" mass="12.011000" key="CL" info="carbonyl C (acetic acid/methyl acetate)"/>
+    <at label="C" mass="12.011000" key="CTL1" info="sp3 carbon with 1 H (-CH1-)"/>
+    <at label="C" mass="12.011000" key="CTL2" info="carbon of methylene group (-CH2-)"/>
+    <at label="C" mass="12.011000" key="CTL3" info="carbon of methyl group (-CH3)"/>
+    <at label="C" mass="12.011000" key="CTL5" info="carbon of methyl group (-CH3) for tetramethylammonium"/>
+    <at label="C" mass="12.011000" key="CEL1" info="for alkene; RHC=CR"/>
+    <at label="C" mass="12.011000" key="CEL2" info="for alkene; H2C=CR"/>
+    <at label="C" mass="12.011000" key="CCL" info="for POPS"/>
+    <at label="N" mass="14.007000" key="NTL" info="ammonium nitrogen"/>
+    <at label="N" mass="14.007000" key="NH3L" info="nitrogen phosphatidylethanolamine"/>
+    <at label="O" mass="15.999400" key="OBL" info="acetic acid carboxyl oxygen (e. to protein OB)"/>
+    <at label="O" mass="15.999400" key="OCL" info="acetate oxygen"/>
+    <at label="O" mass="15.999400" key="OSL" info="ester oxygen"/>
+    <at label="O" mass="15.999400" key="O2L" info="Nucleic acid =O in phosphate or sulfate"/>
+    <at label="O" mass="15.999400" key="OHL" info="Nucleic acid phosphate hydroxyl oxygen"/>
+    <at label="O" mass="15.999400" key="OSLP" info="Phosphate oxygen, to avoid conflict with methylacetate type O"/>
+    <at label="P" mass="30.974000" key="PL" info="phosphorus"/>
+    <at label="S" mass="32.060000" key="SL" info="Sulfate sulfur"/>
+    <at label="C" mass="12.011000" key="CRL1" info="sp3 carbon with 1 H on a ring (-CH1-) for sterols"/>
+    <at label="C" mass="12.011000" key="CRL2" info="carbon of methylene group on a ring (-CH2-) for sterols"/>
+  </atoms>
+  <bonds-h>
+  <!-- Quadratic bonds:
+
+    V(R) = K x (R - R0)^2
+    With:
+      - K = spring constant (kcal mol^-1 A^-2)
+      - R = bond distance (A)
+      - R0 = equilibrium distance (A)
+   -->
+    <bd-h a="12" b="9" z_a="6" z_b="6" K="200.000000" R_zero="1.522000" info="methyl acetate"/>
+    <bd-h a="11" b="9" z_a="6" z_b="6" K="200.000000" R_zero="1.522000" info="methyl acetate"/>
+    <bd-h a="10" b="9" z_a="6" z_b="6" K="200.000000" R_zero="1.522000" info="methyl acetate"/>
+    <bd-h a="10" b="16" z_a="6" z_b="6" K="200.000000" R_zero="1.522000" info="for POPS"/>
+    <bd-h a="19" b="9" z_a="8" z_b="6" K="750.000000" R_zero="1.220000" info="methyl acetate"/>
+    <bd-h a="20" b="9" z_a="8" z_b="6" K="525.000000" R_zero="1.260000" info="acetate, protein"/>
+    <bd-h a="20" b="16" z_a="8" z_b="6" K="525.000000" R_zero="1.260000" info="for POPS"/>
+    <bd-h a="21" b="9" z_a="8" z_b="6" K="150.000000" R_zero="1.334000" info="methyl acetate"/>
+    <bd-h a="24" b="9" z_a="8" z_b="6" K="150.000000" R_zero="1.334000" info="methyl acetate"/>
+    <bd-h a="23" b="9" z_a="8" z_b="6" K="230.000000" R_zero="1.400000" info="methyl acetate"/>
+    <bd-h a="2" b="23" z_a="1" z_b="8" K="545.000000" R_zero="0.960000" info="acetic acid"/>
+    <bd-h a="10" b="3" z_a="6" z_b="1" K="309.000000" R_zero="1.111000" info="alkanes, 3/92"/>
+    <bd-h a="10" b="8" z_a="6" z_b="1" K="330.000000" R_zero="1.080000" info="for POPS"/>
+    <bd-h a="11" b="4" z_a="6" z_b="1" K="309.000000" R_zero="1.111000" info="alkanes, 4/98"/>
+    <bd-h a="12" b="5" z_a="6" z_b="1" K="322.000000" R_zero="1.111000" info="alkanes, 4/98"/>
+    <bd-h a="12" b="21" z_a="6" z_b="8" K="340.000000" R_zero="1.430000" info="phosphate"/>
+    <bd-h a="11" b="21" z_a="6" z_b="8" K="340.000000" R_zero="1.430000" info="phosphate"/>
+    <bd-h a="10" b="21" z_a="6" z_b="8" K="340.000000" R_zero="1.430000" info="phosphate"/>
+    <bd-h a="12" b="24" z_a="6" z_b="8" K="340.000000" R_zero="1.430000" info=" "/>
+    <bd-h a="11" b="24" z_a="6" z_b="8" K="340.000000" R_zero="1.430000" info=" "/>
+    <bd-h a="10" b="24" z_a="6" z_b="8" K="340.000000" R_zero="1.430000" info=" "/>
+    <bd-h a="21" b="25" z_a="8" z_b="15" K="270.000000" R_zero="1.600000" info="phosphate"/>
+    <bd-h a="24" b="25" z_a="8" z_b="15" K="270.000000" R_zero="1.600000" info=" "/>
+    <bd-h a="22" b="25" z_a="8" z_b="15" K="580.000000" R_zero="1.480000" info="phosphate"/>
+    <bd-h a="23" b="25" z_a="8" z_b="15" K="237.000000" R_zero="1.590000" info="phosphate"/>
+    <bd-h a="18" b="1" z_a="7" z_b="1" K="410.000000" R_zero="1.040000" info="ethanolamine"/>
+    <bd-h a="18" b="10" z_a="7" z_b="6" K="200.000000" R_zero="1.480000" info="for POPS"/>
+    <bd-h a="18" b="11" z_a="7" z_b="6" K="261.000000" R_zero="1.510000" info="ethanolamine"/>
+    <bd-h a="17" b="11" z_a="7" z_b="6" K="215.000000" R_zero="1.510000" info="tetramethylammonium"/>
+    <bd-h a="17" b="13" z_a="7" z_b="6" K="215.000000" R_zero="1.510000" info="tetramethylammonium"/>
+    <bd-h a="13" b="0" z_a="6" z_b="1" K="300.000000" R_zero="1.080000" info="tetramethylammonium"/>
+    <bd-h a="11" b="0" z_a="6" z_b="1" K="300.000000" R_zero="1.080000" info="tetramethylammonium"/>
+    <bd-h a="10" b="10" z_a="6" z_b="6" K="222.500000" R_zero="1.500000" info="alkanes, 3/92"/>
+    <bd-h a="10" b="11" z_a="6" z_b="6" K="222.500000" R_zero="1.538000" info="alkanes, 3/92"/>
+    <bd-h a="10" b="12" z_a="6" z_b="6" K="222.500000" R_zero="1.538000" info="alkanes, 3/92"/>
+    <bd-h a="11" b="11" z_a="6" z_b="6" K="222.500000" R_zero="1.530000" info="alkanes, 3/92"/>
+    <bd-h a="11" b="12" z_a="6" z_b="6" K="222.500000" R_zero="1.528000" info="alkanes, 3/92"/>
+    <bd-h a="12" b="12" z_a="6" z_b="6" K="222.500000" R_zero="1.530000" info="alkanes, 3/92"/>
+    <bd-h a="23" b="10" z_a="8" z_b="6" K="428.000000" R_zero="1.420000" info="glycerol"/>
+    <bd-h a="23" b="11" z_a="8" z_b="6" K="428.000000" R_zero="1.420000" info="glycerol"/>
+    <bd-h a="23" b="12" z_a="8" z_b="6" K="428.000000" R_zero="1.420000" info="glycerol"/>
+    <bd-h a="26" b="22" z_a="16" z_b="8" K="540.000000" R_zero="1.448000" info="methylsulfate"/>
+    <bd-h a="26" b="21" z_a="16" z_b="8" K="250.000000" R_zero="1.575000" info="methylsulfate"/>
+    <bd-h a="15" b="15" z_a="6" z_b="6" K="510.000000" R_zero="1.330000" info="ethene yin,adm jr., 12/95"/>
+    <bd-h a="7" b="15" z_a="1" z_b="6" K="365.000000" R_zero="1.100000" info="propene; from ethene, yin,adm jr., 12/95"/>
+    <bd-h a="14" b="12" z_a="6" z_b="6" K="383.000000" R_zero="1.504000" info="butene, yin,adm jr., 12/95"/>
+    <bd-h a="14" b="15" z_a="6" z_b="6" K="500.000000" R_zero="1.342000" info="propene, yin,adm jr., 12/95"/>
+    <bd-h a="6" b="14" z_a="1" z_b="6" K="360.500000" R_zero="1.100000" info="propene, yin,adm jr., 12/95"/>
+    <bd-h a="14" b="11" z_a="6" z_b="6" K="365.000000" R_zero="1.502000" info="butene; from propene, yin,adm jr., 12/95"/>
+    <bd-h a="14" b="14" z_a="6" z_b="6" K="440.000000" R_zero="1.340000" info="butene, yin,adm jr., 12/95"/>
+  </bonds-h>
+  <angles-h>
+  <!-- Quadratic angles + Urey-Bradley (UB) parameters:
+
+    V(Theta) = K x (Theta - Theta0)^2
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Theta = angle (°)
+      - Theta0 = equilibrium angle(°)
+    V(S) = Kub x (R - Rub)^2
+    With:
+      - Kub = spring constant (kcal mol^-1 A^-2)
+      - S = distance 1-3 (A)
+      - S0 = equilibrium distance 1-3 (A)   -->
+    <ang-h a="19" b="9" c="12" z_a="8" z_b="6" z_c="6" K="70.000000" Theta_zero="125.000000" Kub="20.000000" S_zero="2.442000" info="methyl acetate"/>
+    <ang-h a="19" b="9" c="11" z_a="8" z_b="6" z_c="6" K="70.000000" Theta_zero="125.000000" Kub="20.000000" S_zero="2.442000" info="methyl acetate"/>
+    <ang-h a="19" b="9" c="10" z_a="8" z_b="6" z_c="6" K="70.000000" Theta_zero="125.000000" Kub="20.000000" S_zero="2.442000" info="methyl acetate"/>
+    <ang-h a="21" b="9" c="19" z_a="8" z_b="6" z_c="8" K="90.000000" Theta_zero="125.900000" Kub="160.000000" S_zero="2.257600" info="acetic acid"/>
+    <ang-h a="9" b="21" c="10" z_a="6" z_b="8" z_c="6" K="40.000000" Theta_zero="109.600000" Kub="30.000000" S_zero="2.265100" info="methyl acetate"/>
+    <ang-h a="9" b="21" c="11" z_a="6" z_b="8" z_c="6" K="40.000000" Theta_zero="109.600000" Kub="30.000000" S_zero="2.265100" info="methyl acetate"/>
+    <ang-h a="9" b="21" c="12" z_a="6" z_b="8" z_c="6" K="40.000000" Theta_zero="109.600000" Kub="30.000000" S_zero="2.265100" info="methyl acetate"/>
+    <ang-h a="4" b="11" c="9" z_a="1" z_b="6" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="30.000000" S_zero="2.163000" info="methyl acetate"/>
+    <ang-h a="5" b="12" c="9" z_a="1" z_b="6" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="30.000000" S_zero="2.163000" info="methyl acetate"/>
+    <ang-h a="11" b="11" c="9" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="alkane"/>
+    <ang-h a="11" b="10" c="16" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="for POPS"/>
+    <ang-h a="12" b="11" c="9" z_a="6" z_b="6" z_c="6" K="52.000000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="alkane"/>
+    <ang-h a="21" b="9" c="12" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="109.000000" Kub="20.000000" S_zero="2.326000" info="methyl acetate"/>
+    <ang-h a="21" b="9" c="11" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="109.000000" Kub="20.000000" S_zero="2.326000" info="methyl acetate"/>
+    <ang-h a="21" b="9" c="10" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="109.000000" Kub="20.000000" S_zero="2.326000" info="methyl acetate"/>
+    <ang-h a="23" b="9" c="19" z_a="8" z_b="6" z_c="8" K="50.000000" Theta_zero="123.000000" Kub="210.000000" S_zero="2.262000" info="acetic acid"/>
+    <ang-h a="20" b="9" c="11" z_a="8" z_b="6" z_c="6" K="40.000000" Theta_zero="118.000000" Kub="50.000000" S_zero="2.388000" info="acetate"/>
+    <ang-h a="20" b="9" c="12" z_a="8" z_b="6" z_c="6" K="40.000000" Theta_zero="118.000000" Kub="50.000000" S_zero="2.388000" info="acetate"/>
+    <ang-h a="20" b="9" c="20" z_a="8" z_b="6" z_c="8" K="100.000000" Theta_zero="124.000000" Kub="70.000000" S_zero="2.225000" info="acetate"/>
+    <ang-h a="20" b="16" c="20" z_a="8" z_b="6" z_c="8" K="100.000000" Theta_zero="124.000000" Kub="70.000000" S_zero="2.225000" info="for POPS"/>
+    <ang-h a="20" b="16" c="10" z_a="8" z_b="6" z_c="6" K="40.000000" Theta_zero="118.000000" Kub="50.000000" S_zero="2.388000" info="for POPS"/>
+    <ang-h a="23" b="9" c="12" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="110.500000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="23" b="9" c="11" z_a="8" z_b="6" z_c="6" K="55.000000" Theta_zero="110.500000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="2" b="23" c="9" z_a="1" z_b="8" z_c="6" K="55.000000" Theta_zero="115.000000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="21" b="10" c="10" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid, PIP"/>
+    <ang-h a="21" b="10" c="11" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="21" b="10" c="12" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="21" b="11" c="10" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="21" b="11" c="11" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="21" b="11" c="12" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="24" b="10" c="10" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid, PIP"/>
+    <ang-h a="24" b="10" c="11" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="24" b="10" c="12" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="24" b="11" c="10" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="24" b="11" c="11" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="24" b="11" c="12" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="acetic acid"/>
+    <ang-h a="4" b="11" c="4" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="109.000000" Kub="5.400000" S_zero="1.802000" info="alkane, 3/92"/>
+    <ang-h a="5" b="12" c="5" z_a="1" z_b="6" z_c="1" K="35.500000" Theta_zero="108.400000" Kub="5.400000" S_zero="1.802000" info="alkane, 3/92"/>
+    <ang-h a="3" b="10" c="21" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="4" b="11" c="21" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="5" b="12" c="21" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="3" b="10" c="24" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="4" b="11" c="24" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="5" b="12" c="24" z_a="1" z_b="6" z_c="8" K="60.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="10" b="21" c="25" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="phosphate, PIP"/>
+    <ang-h a="11" b="21" c="25" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="phosphate"/>
+    <ang-h a="12" b="21" c="25" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="phosphate"/>
+    <ang-h a="10" b="24" c="25" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="phosphate, PIP"/>
+    <ang-h a="11" b="24" c="25" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="phosphate"/>
+    <ang-h a="12" b="24" c="25" z_a="6" z_b="8" z_c="15" K="20.000000" Theta_zero="120.000000" Kub="35.000000" S_zero="2.330000" info="phosphate"/>
+    <ang-h a="2" b="23" c="25" z_a="1" z_b="8" z_c="15" K="30.000000" Theta_zero="115.000000" Kub="40.000000" S_zero="2.300000" info="phosphate"/>
+    <ang-h a="21" b="25" c="21" z_a="8" z_b="15" z_c="8" K="80.000000" Theta_zero="104.300000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="21" b="25" c="22" z_a="8" z_b="15" z_c="8" K="98.900000" Theta_zero="111.600000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="21" b="25" c="23" z_a="8" z_b="15" z_c="8" K="48.100000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="24" b="25" c="24" z_a="8" z_b="15" z_c="8" K="80.000000" Theta_zero="104.300000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="24" b="25" c="22" z_a="8" z_b="15" z_c="8" K="98.900000" Theta_zero="111.600000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="24" b="25" c="23" z_a="8" z_b="15" z_c="8" K="48.100000" Theta_zero="108.000000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="22" b="25" c="22" z_a="8" z_b="15" z_c="8" K="120.000000" Theta_zero="120.000000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="22" b="25" c="23" z_a="8" z_b="15" z_c="8" K="98.900000" Theta_zero="108.230000" Kub="0.000000" S_zero="0.000000" info="phosphate"/>
+    <ang-h a="17" b="11" c="0" z_a="7" z_b="6" z_c="1" K="40.000000" Theta_zero="109.500000" Kub="27.000000" S_zero="2.130000" info="tetramethylammonium"/>
+    <ang-h a="17" b="13" c="0" z_a="7" z_b="6" z_c="1" K="40.000000" Theta_zero="109.500000" Kub="27.000000" S_zero="2.130000" info="tetramethylammonium"/>
+    <ang-h a="0" b="11" c="0" z_a="1" z_b="6" z_c="1" K="24.000000" Theta_zero="109.500000" Kub="28.000000" S_zero="1.767000" info="tetramethylammonium"/>
+    <ang-h a="0" b="13" c="0" z_a="1" z_b="6" z_c="1" K="24.000000" Theta_zero="109.500000" Kub="28.000000" S_zero="1.767000" info="tetramethylammonium"/>
+    <ang-h a="11" b="17" c="11" z_a="6" z_b="7" z_c="6" K="60.000000" Theta_zero="109.500000" Kub="26.000000" S_zero="2.466000" info="tetraethylammonium, from CTL5 NTL CTL2"/>
+    <ang-h a="13" b="17" c="11" z_a="6" z_b="7" z_c="6" K="60.000000" Theta_zero="109.500000" Kub="26.000000" S_zero="2.466000" info="tetramethylammonium"/>
+    <ang-h a="13" b="17" c="13" z_a="6" z_b="7" z_c="6" K="60.000000" Theta_zero="109.500000" Kub="26.000000" S_zero="2.466000" info="tetramethylammonium"/>
+    <ang-h a="0" b="11" c="11" z_a="1" z_b="6" z_c="6" K="33.430000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane"/>
+    <ang-h a="0" b="11" c="12" z_a="1" z_b="6" z_c="6" K="33.430000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane"/>
+    <ang-h a="3" b="10" c="10" z_a="1" z_b="6" z_c="6" K="34.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane, 3/92"/>
+    <ang-h a="3" b="10" c="11" z_a="1" z_b="6" z_c="6" K="34.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane, 3/92"/>
+    <ang-h a="3" b="10" c="12" z_a="1" z_b="6" z_c="6" K="34.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane, 3/92"/>
+    <ang-h a="4" b="11" c="10" z_a="1" z_b="6" z_c="6" K="26.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane, 4/98"/>
+    <ang-h a="4" b="11" c="11" z_a="1" z_b="6" z_c="6" K="26.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane, 4/98"/>
+    <ang-h a="4" b="11" c="12" z_a="1" z_b="6" z_c="6" K="34.600000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane, 4/98"/>
+    <ang-h a="5" b="12" c="10" z_a="1" z_b="6" z_c="6" K="33.430000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane, 4/98"/>
+    <ang-h a="5" b="12" c="11" z_a="1" z_b="6" z_c="6" K="34.600000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane, 4/98"/>
+    <ang-h a="5" b="12" c="12" z_a="1" z_b="6" z_c="6" K="37.500000" Theta_zero="110.100000" Kub="22.530000" S_zero="2.179000" info="alkane, 4/98"/>
+    <ang-h a="8" b="10" c="16" z_a="1" z_b="6" z_c="6" K="50.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="for POPS"/>
+    <ang-h a="8" b="10" c="11" z_a="1" z_b="6" z_c="6" K="35.000000" Theta_zero="111.000000" Kub="0.000000" S_zero="0.000000" info="for POPS"/>
+    <ang-h a="17" b="11" c="11" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="115.000000" Kub="0.000000" S_zero="0.000000" info="tetramethylammonium"/>
+    <ang-h a="17" b="11" c="12" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="115.000000" Kub="0.000000" S_zero="0.000000" info="tetramethylammonium"/>
+    <ang-h a="1" b="18" c="11" z_a="1" z_b="7" z_c="6" K="33.000000" Theta_zero="109.500000" Kub="4.000000" S_zero="2.056000" info="ethanolamine"/>
+    <ang-h a="1" b="18" c="10" z_a="1" z_b="7" z_c="6" K="30.000000" Theta_zero="109.500000" Kub="20.000000" S_zero="2.074000" info="for POPS"/>
+    <ang-h a="1" b="18" c="1" z_a="1" z_b="7" z_c="1" K="41.000000" Theta_zero="109.500000" Kub="0.000000" S_zero="0.000000" info="ethanolamine"/>
+    <ang-h a="18" b="11" c="11" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="ethanolamine"/>
+    <ang-h a="18" b="11" c="4" z_a="7" z_b="6" z_c="1" K="45.000000" Theta_zero="107.500000" Kub="35.000000" S_zero="2.083600" info="ethanolamine"/>
+    <ang-h a="10" b="10" c="10" z_a="6" z_b="6" z_c="6" K="53.350000" Theta_zero="111.000000" Kub="8.000000" S_zero="2.561000" info="alkane, 3/92"/>
+    <ang-h a="18" b="10" c="16" z_a="7" z_b="6" z_c="6" K="43.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="for POPS"/>
+    <ang-h a="18" b="10" c="11" z_a="7" z_b="6" z_c="6" K="67.700000" Theta_zero="110.000000" Kub="0.000000" S_zero="0.000000" info="for POPS"/>
+    <ang-h a="18" b="10" c="8" z_a="7" z_b="6" z_c="1" K="51.500000" Theta_zero="107.500000" Kub="0.000000" S_zero="0.000000" info="for POPS"/>
+    <ang-h a="10" b="10" c="11" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="glycerol"/>
+    <ang-h a="10" b="10" c="12" z_a="6" z_b="6" z_c="6" K="53.350000" Theta_zero="108.500000" Kub="8.000000" S_zero="2.561000" info="alkane, 3/92"/>
+    <ang-h a="10" b="11" c="10" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="glycerol"/>
+    <ang-h a="10" b="11" c="11" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="glycerol"/>
+    <ang-h a="10" b="11" c="12" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="glycerol"/>
+    <ang-h a="11" b="10" c="11" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="glycerol"/>
+    <ang-h a="11" b="10" c="12" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="glycerol"/>
+    <ang-h a="11" b="11" c="11" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.600000" Kub="11.160000" S_zero="2.561000" info="alkane, 3/92"/>
+    <ang-h a="11" b="11" c="12" z_a="6" z_b="6" z_c="6" K="58.000000" Theta_zero="115.000000" Kub="8.000000" S_zero="2.561000" info="alkane, 3/92"/>
+    <ang-h a="12" b="10" c="12" z_a="6" z_b="6" z_c="6" K="58.350000" Theta_zero="113.500000" Kub="11.160000" S_zero="2.561000" info="glycerol"/>
+    <ang-h a="2" b="23" c="10" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="glycerol"/>
+    <ang-h a="2" b="23" c="11" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="glycerol"/>
+    <ang-h a="2" b="23" c="12" z_a="1" z_b="8" z_c="6" K="57.500000" Theta_zero="106.000000" Kub="0.000000" S_zero="0.000000" info="glycerol"/>
+    <ang-h a="23" b="10" c="10" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="glycerol, PIP"/>
+    <ang-h a="23" b="10" c="11" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="glycerol"/>
+    <ang-h a="23" b="11" c="10" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="glycerol"/>
+    <ang-h a="23" b="11" c="11" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="glycerol"/>
+    <ang-h a="23" b="11" c="12" z_a="8" z_b="6" z_c="6" K="75.700000" Theta_zero="110.100000" Kub="0.000000" S_zero="0.000000" info="glycerol"/>
+    <ang-h a="23" b="10" c="3" z_a="8" z_b="6" z_c="1" K="45.900000" Theta_zero="108.890000" Kub="0.000000" S_zero="0.000000" info="glycerol"/>
+    <ang-h a="23" b="11" c="4" z_a="8" z_b="6" z_c="1" K="45.900000" Theta_zero="108.890000" Kub="0.000000" S_zero="0.000000" info="glycerol"/>
+    <ang-h a="23" b="12" c="5" z_a="8" z_b="6" z_c="1" K="45.900000" Theta_zero="108.890000" Kub="0.000000" S_zero="0.000000" info="glycerol"/>
+    <ang-h a="22" b="26" c="22" z_a="8" z_b="16" z_c="8" K="130.000000" Theta_zero="109.470000" Kub="35.000000" S_zero="2.450000" info="methylsulfate"/>
+    <ang-h a="22" b="26" c="21" z_a="8" z_b="16" z_c="8" K="85.000000" Theta_zero="98.000000" Kub="0.000000" S_zero="0.000000" info="methylsulfate"/>
+    <ang-h a="11" b="21" c="26" z_a="6" z_b="8" z_c="16" K="15.000000" Theta_zero="109.000000" Kub="27.000000" S_zero="1.900000" info="methylsulfate"/>
+    <ang-h a="12" b="21" c="26" z_a="6" z_b="8" z_c="16" K="15.000000" Theta_zero="109.000000" Kub="27.000000" S_zero="1.900000" info="methylsulfate"/>
+    <ang-h a="14" b="14" c="11" z_a="6" z_b="6" z_c="6" K="48.000000" Theta_zero="123.500000" Kub="0.000000" S_zero="0.000000" info="from 2-butene, yin,adm jr., 12/95"/>
+    <ang-h a="14" b="14" c="12" z_a="6" z_b="6" z_c="6" K="48.000000" Theta_zero="123.500000" Kub="0.000000" S_zero="0.000000" info="2-butene, yin,adm jr., 12/95"/>
+    <ang-h a="15" b="14" c="11" z_a="6" z_b="6" z_c="6" K="48.000000" Theta_zero="126.000000" Kub="0.000000" S_zero="0.000000" info="1-butene; from propene, yin,adm jr., 12/95"/>
+    <ang-h a="15" b="14" c="12" z_a="6" z_b="6" z_c="6" K="47.000000" Theta_zero="125.200000" Kub="0.000000" S_zero="0.000000" info="propene, yin,adm jr., 12/95"/>
+    <ang-h a="6" b="14" c="14" z_a="1" z_b="6" z_c="6" K="52.000000" Theta_zero="119.500000" Kub="0.000000" S_zero="0.000000" info="2-butene, yin,adm jr., 12/95"/>
+    <ang-h a="6" b="14" c="15" z_a="1" z_b="6" z_c="6" K="42.000000" Theta_zero="118.000000" Kub="0.000000" S_zero="0.000000" info="propene, yin,adm jr., 12/95"/>
+    <ang-h a="6" b="14" c="11" z_a="1" z_b="6" z_c="6" K="40.000000" Theta_zero="116.000000" Kub="0.000000" S_zero="0.000000" info="1-butene; from propene, yin,adm jr., 12/95"/>
+    <ang-h a="6" b="14" c="12" z_a="1" z_b="6" z_c="6" K="22.000000" Theta_zero="117.000000" Kub="0.000000" S_zero="0.000000" info="propene, yin,adm jr., 12/95"/>
+    <ang-h a="7" b="15" c="14" z_a="1" z_b="6" z_c="6" K="45.000000" Theta_zero="120.500000" Kub="0.000000" S_zero="0.000000" info="propene, yin,adm jr., 12/95"/>
+    <ang-h a="7" b="15" c="15" z_a="1" z_b="6" z_c="6" K="55.500000" Theta_zero="120.500000" Kub="0.000000" S_zero="0.000000" info="ethene, yin,adm jr., 12/95"/>
+    <ang-h a="7" b="15" c="7" z_a="1" z_b="6" z_c="1" K="19.000000" Theta_zero="119.000000" Kub="0.000000" S_zero="0.000000" info="propene, yin,adm jr., 12/95"/>
+    <ang-h a="14" b="11" c="11" z_a="6" z_b="6" z_c="6" K="32.000000" Theta_zero="112.200000" Kub="0.000000" S_zero="0.000000" info="1-butene; from propene, yin,adm jr., 12/95"/>
+    <ang-h a="14" b="11" c="12" z_a="6" z_b="6" z_c="6" K="32.000000" Theta_zero="112.200000" Kub="0.000000" S_zero="0.000000" info="1-butene; from propene, yin,adm jr., 12/95"/>
+    <ang-h a="4" b="11" c="14" z_a="1" z_b="6" z_c="6" K="45.000000" Theta_zero="111.500000" Kub="0.000000" S_zero="0.000000" info="1-butene; from propene, yin,adm jr., 12/95"/>
+    <ang-h a="5" b="12" c="14" z_a="1" z_b="6" z_c="6" K="42.000000" Theta_zero="111.500000" Kub="0.000000" S_zero="0.000000" info="2-butene, yin,adm jr., 12/95"/>
+    <ang-h a="14" b="11" c="14" z_a="6" z_b="6" z_c="6" K="30.000000" Theta_zero="114.000000" Kub="0.000000" S_zero="0.000000" info="1,4-dipentene, adm jr., 2/00"/>
+  </angles-h>
+  <dihedrals-c>
+  <!-- Dihedrals / torsions:
+
+    V(Phi) = K x (1 + cos(n x Phi - Phi0))
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Phi = dihedral angle (°)
+      - n = multiplicity
+      - Phi0 = phase shift angle (°)  -->
+    <dih-c a="-1" b="10" c="23" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.140000" Phi_zero="0.000000" n="3.000000" info="glycerol"/>
+    <dih-c a="-1" b="11" c="23" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.140000" Phi_zero="0.000000" n="3.000000" info="glycerol"/>
+    <dih-c a="-1" b="12" c="23" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.140000" Phi_zero="0.000000" n="3.000000" info="glycerol"/>
+    <dih-c a="20" b="16" c="10" d="18" z_a="8" z_b="6" z_c="6" z_d="7" K="3.200000" Phi_zero="180.000000" n="2.000000" info="for POPS"/>
+    <dih-c a="19" b="9" c="11" d="4" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="acetic acid"/>
+    <dih-c a="19" b="9" c="12" d="5" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="acetic acid"/>
+    <dih-c a="21" b="9" c="11" d="4" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="acetic acid"/>
+    <dih-c a="21" b="9" c="12" d="5" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="acetic acid"/>
+    <dih-c a="24" b="9" c="11" d="4" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="acetic acid"/>
+    <dih-c a="24" b="9" c="12" d="5" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="180.000000" n="6.000000" info="acetic acid"/>
+    <dih-c a="19" b="9" c="21" d="10" z_a="8" z_b="6" z_c="8" z_d="6" K="0.965000" Phi_zero="180.000000" n="1.000000" info="methyl acetate"/>
+    <dih-c a="19" b="9" c="21" d="10" z_a="8" z_b="6" z_c="8" z_d="6" K="3.850000" Phi_zero="180.000000" n="2.000000" info="methyl acetate"/>
+    <dih-c a="19" b="9" c="21" d="11" z_a="8" z_b="6" z_c="8" z_d="6" K="0.965000" Phi_zero="180.000000" n="1.000000" info="methyl acetate"/>
+    <dih-c a="19" b="9" c="21" d="11" z_a="8" z_b="6" z_c="8" z_d="6" K="3.850000" Phi_zero="180.000000" n="2.000000" info="methyl acetate"/>
+    <dih-c a="19" b="9" c="21" d="12" z_a="8" z_b="6" z_c="8" z_d="6" K="0.965000" Phi_zero="180.000000" n="1.000000" info="methyl acetate"/>
+    <dih-c a="19" b="9" c="21" d="12" z_a="8" z_b="6" z_c="8" z_d="6" K="3.850000" Phi_zero="180.000000" n="2.000000" info="methyl acetate"/>
+    <dih-c a="-1" b="9" c="21" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="2.050000" Phi_zero="180.000000" n="2.000000" info="methyl acetate"/>
+    <dih-c a="-1" b="11" c="9" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.050000" Phi_zero="180.000000" n="6.000000" info="methyl acetate"/>
+    <dih-c a="-1" b="12" c="9" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.050000" Phi_zero="180.000000" n="6.000000" info="methyl acetate"/>
+    <dih-c a="-1" b="9" c="23" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="2.050000" Phi_zero="180.000000" n="2.000000" info="acetic acid"/>
+    <dih-c a="-1" b="10" c="16" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.050000" Phi_zero="180.000000" n="6.000000" info="for POPS"/>
+    <dih-c a="4" b="11" c="9" d="23" z_a="1" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="180.000000" n="6.000000" info=" "/>
+    <dih-c a="5" b="12" c="9" d="23" z_a="1" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="180.000000" n="6.000000" info=" "/>
+    <dih-c a="25" b="24" c="11" d="10" z_a="15" z_b="8" z_c="6" z_d="6" K="0.407000" Phi_zero="0.000000" n="2.000000" info="Phos-gly, 8/05"/>
+    <dih-c a="25" b="24" c="11" d="10" z_a="15" z_b="8" z_c="6" z_d="6" K="0.241000" Phi_zero="180.000000" n="1.000000" info="Phos-gly, 8/05"/>
+    <dih-c a="25" b="24" c="11" d="11" z_a="15" z_b="8" z_c="6" z_d="6" K="0.407000" Phi_zero="0.000000" n="2.000000" info="Phos-gly, 8/05"/>
+    <dih-c a="25" b="24" c="11" d="11" z_a="15" z_b="8" z_c="6" z_d="6" K="0.241000" Phi_zero="180.000000" n="1.000000" info="Phos-gly, 8/05"/>
+    <dih-c a="21" b="25" c="21" d="10" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info="phosphate, new NA, 4/98, adm jr., PIP"/>
+    <dih-c a="21" b="25" c="21" d="10" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info="phosphate, new NA, 4/98, adm jr., PIP"/>
+    <dih-c a="21" b="25" c="21" d="10" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr., PIP"/>
+    <dih-c a="24" b="25" c="24" d="10" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info="phosphate, new NA, 4/98, adm jr., PIP"/>
+    <dih-c a="24" b="25" c="24" d="10" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info="phosphate, new NA, 4/98, adm jr., PIP"/>
+    <dih-c a="24" b="25" c="24" d="10" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr., PIP"/>
+    <dih-c a="24" b="25" c="24" d="11" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="24" b="25" c="24" d="11" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="24" b="25" c="24" d="11" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="22" b="25" c="24" d="11" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="22" b="25" c="21" d="11" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="24" b="25" c="24" d="12" z_a="8" z_b="15" z_c="8" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="24" b="25" c="24" d="12" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="2.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="24" b="25" c="24" d="12" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="180.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="22" b="25" c="24" d="10" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr., PIP"/>
+    <dih-c a="22" b="25" c="21" d="10" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr., PIP"/>
+    <dih-c a="22" b="25" c="24" d="12" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="22" b="25" c="21" d="12" z_a="8" z_b="15" z_c="8" z_d="6" K="0.100000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="23" b="25" c="21" d="10" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="terminal phosphate, PIP"/>
+    <dih-c a="23" b="25" c="21" d="10" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="terminal phosphate, PIP"/>
+    <dih-c a="23" b="25" c="21" d="11" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="terminal phosphate"/>
+    <dih-c a="23" b="25" c="21" d="11" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="terminal phosphate"/>
+    <dih-c a="23" b="25" c="21" d="12" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="terminal phosphate"/>
+    <dih-c a="23" b="25" c="21" d="12" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="terminal phosphate"/>
+    <dih-c a="23" b="25" c="24" d="11" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="terminal phosphate"/>
+    <dih-c a="23" b="25" c="24" d="11" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="terminal phosphate"/>
+    <dih-c a="23" b="25" c="24" d="12" z_a="8" z_b="15" z_c="8" z_d="6" K="0.950000" Phi_zero="0.000000" n="2.000000" info="terminal phosphate"/>
+    <dih-c a="23" b="25" c="24" d="12" z_a="8" z_b="15" z_c="8" z_d="6" K="0.500000" Phi_zero="0.000000" n="3.000000" info="terminal phosphate"/>
+    <dih-c a="-1" b="23" c="25" d="-1" z_a="-1" z_b="8" z_c="15" z_d="-1" K="0.300000" Phi_zero="0.000000" n="3.000000" info="terminal phosphate"/>
+    <dih-c a="-1" b="10" c="21" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="-1" b="11" c="21" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="-1" b="12" c="21" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="-1" b="10" c="24" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="-1" b="11" c="24" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="-1" b="12" c="24" d="-1" z_a="-1" z_b="6" z_c="8" z_d="-1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="phosphate, new NA, 4/98, adm jr."/>
+    <dih-c a="10" b="11" c="9" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="-0.150000" Phi_zero="180.000000" n="1.000000" info="methyl propionate, 12/92"/>
+    <dih-c a="10" b="11" c="9" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.530000" Phi_zero="180.000000" n="2.000000" info="methyl propionate, 12/92"/>
+    <dih-c a="11" b="11" c="9" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="6.000000" info="glycerol and propl ester, 6/07"/>
+    <dih-c a="11" b="11" c="9" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.030000" Phi_zero="180.000000" n="3.000000" info="glycerol and propl ester, 6/07"/>
+    <dih-c a="11" b="11" c="9" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.432000" Phi_zero="180.000000" n="2.000000" info="glycerol and propl ester, 6/07"/>
+    <dih-c a="11" b="11" c="9" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.332000" Phi_zero="0.000000" n="1.000000" info="glycerol and propl ester, 6/07"/>
+    <dih-c a="12" b="11" c="9" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="6.000000" info="glycerol and propl ester, 6/07"/>
+    <dih-c a="12" b="11" c="9" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.030000" Phi_zero="180.000000" n="3.000000" info="glycerol and propl ester, 6/07"/>
+    <dih-c a="12" b="11" c="9" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.432000" Phi_zero="180.000000" n="2.000000" info="glycerol and propl ester, 6/07"/>
+    <dih-c a="12" b="11" c="9" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.332000" Phi_zero="0.000000" n="1.000000" info="glycerol and propl ester, 6/07"/>
+    <dih-c a="12" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="180.000000" n="5.000000" info="propyl ester, 6/07"/>
+    <dih-c a="12" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.317000" Phi_zero="180.000000" n="3.000000" info="propyl ester, 6/07"/>
+    <dih-c a="12" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.557000" Phi_zero="0.000000" n="2.000000" info="propyl ester, 6/07"/>
+    <dih-c a="12" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.753000" Phi_zero="0.000000" n="1.000000" info="propyl ester, 6/07"/>
+    <dih-c a="11" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="180.000000" n="5.000000" info="propyl ester, 6/07"/>
+    <dih-c a="11" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.317000" Phi_zero="180.000000" n="3.000000" info="propyl ester, 6/07"/>
+    <dih-c a="11" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.557000" Phi_zero="0.000000" n="2.000000" info="propyl ester, 6/07"/>
+    <dih-c a="11" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.753000" Phi_zero="0.000000" n="1.000000" info="propyl ester, 6/07"/>
+    <dih-c a="21" b="11" c="10" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="-0.429000" Phi_zero="60.000000" n="4.000000" info="glycerol, 8/08"/>
+    <dih-c a="21" b="11" c="10" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="0.614000" Phi_zero="0.000000" n="3.000000" info="glycerol, 8/08"/>
+    <dih-c a="21" b="11" c="10" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="-0.115000" Phi_zero="60.000000" n="2.000000" info="glycerol, 8/08"/>
+    <dih-c a="21" b="11" c="10" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="0.703000" Phi_zero="180.000000" n="1.000000" info="glycerol, 8/08"/>
+    <dih-c a="24" b="11" c="10" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="4.000000" info="Fit to QM, theta2, 07/08 jbk"/>
+    <dih-c a="24" b="11" c="10" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="0.607000" Phi_zero="180.000000" n="3.000000" info="Fit to QM, theta2, 07/08 jbk"/>
+    <dih-c a="24" b="11" c="10" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="0.254000" Phi_zero="60.000000" n="2.000000" info="Fit to QM, theta2, 07/08 jbk"/>
+    <dih-c a="24" b="11" c="10" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="2.016000" Phi_zero="180.000000" n="1.000000" info="Fit to QM, theta2, 07/08 jbk"/>
+    <dih-c a="24" b="11" c="11" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="4.000000" info="Fit to QM, theta2, 07/08 jbk"/>
+    <dih-c a="24" b="11" c="11" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="0.607000" Phi_zero="180.000000" n="3.000000" info="Fit to QM, theta2, 07/08 jbk"/>
+    <dih-c a="24" b="11" c="11" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="0.254000" Phi_zero="60.000000" n="2.000000" info="Fit to QM, theta2, 07/08 jbk"/>
+    <dih-c a="24" b="11" c="11" d="21" z_a="8" z_b="6" z_c="6" z_d="8" K="2.016000" Phi_zero="180.000000" n="1.000000" info="Fit to QM, theta2, 07/08 jbk"/>
+    <dih-c a="12" b="10" c="11" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info="glycerol, theta3"/>
+    <dih-c a="11" b="10" c="11" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info="glycerol, theta3"/>
+    <dih-c a="12" b="11" c="11" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info="glycerol, theta3"/>
+    <dih-c a="11" b="11" c="11" d="21" z_a="6" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info="glycerol, theta3"/>
+    <dih-c a="9" b="21" c="10" d="11" z_a="6" z_b="8" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="4.000000" info="glycerol, beta1 6/07"/>
+    <dih-c a="9" b="21" c="10" d="11" z_a="6" z_b="8" z_c="6" z_d="6" K="0.150000" Phi_zero="180.000000" n="3.000000" info="glycerol, beta1 6/07"/>
+    <dih-c a="9" b="21" c="10" d="11" z_a="6" z_b="8" z_c="6" z_d="6" K="1.453000" Phi_zero="180.000000" n="2.000000" info="glycerol, beta1 6/07"/>
+    <dih-c a="9" b="21" c="10" d="11" z_a="6" z_b="8" z_c="6" z_d="6" K="0.837000" Phi_zero="180.000000" n="1.000000" info="glycerol, beta1 6/07"/>
+    <dih-c a="9" b="21" c="10" d="12" z_a="6" z_b="8" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" n="4.000000" info="glycerol, beta1 6/07"/>
+    <dih-c a="9" b="21" c="10" d="12" z_a="6" z_b="8" z_c="6" z_d="6" K="0.150000" Phi_zero="180.000000" n="3.000000" info="glycerol, beta1 6/07"/>
+    <dih-c a="9" b="21" c="10" d="12" z_a="6" z_b="8" z_c="6" z_d="6" K="1.453000" Phi_zero="180.000000" n="2.000000" info="glycerol, beta1 6/07"/>
+    <dih-c a="9" b="21" c="10" d="12" z_a="6" z_b="8" z_c="6" z_d="6" K="0.837000" Phi_zero="180.000000" n="1.000000" info="glycerol, beta1 6/07"/>
+    <dih-c a="9" b="21" c="11" d="10" z_a="6" z_b="8" z_c="6" z_d="6" K="0.267000" Phi_zero="180.000000" n="3.000000" info="glycerol, gamma1 6/07"/>
+    <dih-c a="9" b="21" c="11" d="10" z_a="6" z_b="8" z_c="6" z_d="6" K="0.173000" Phi_zero="0.000000" n="2.000000" info="glycerol, gamma1 6/07"/>
+    <dih-c a="9" b="21" c="11" d="10" z_a="6" z_b="8" z_c="6" z_d="6" K="0.781000" Phi_zero="180.000000" n="1.000000" info="glycerol, gamma1 6/07"/>
+    <dih-c a="-1" b="11" c="17" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.260000" Phi_zero="0.000000" n="3.000000" info="tetramethylammonium"/>
+    <dih-c a="-1" b="13" c="17" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.230000" Phi_zero="0.000000" n="3.000000" info="tetramethylammonium"/>
+    <dih-c a="-1" b="10" c="18" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.100000" Phi_zero="0.000000" n="3.000000" info="for POPS"/>
+    <dih-c a="-1" b="11" c="18" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.100000" Phi_zero="0.000000" n="3.000000" info="ethanolamine"/>
+    <dih-c a="18" b="11" c="11" d="23" z_a="7" z_b="6" z_c="6" z_d="8" K="0.700000" Phi_zero="180.000000" n="1.000000" info="ethanolamine"/>
+    <dih-c a="18" b="11" c="11" d="24" z_a="7" z_b="6" z_c="6" z_d="8" K="0.700000" Phi_zero="180.000000" n="1.000000" info="ethanolamine"/>
+    <dih-c a="17" b="11" c="11" d="23" z_a="7" z_b="6" z_c="6" z_d="8" K="4.300000" Phi_zero="180.000000" n="1.000000" info="choline, 12/92"/>
+    <dih-c a="17" b="11" c="11" d="23" z_a="7" z_b="6" z_c="6" z_d="8" K="-0.400000" Phi_zero="180.000000" n="3.000000" info="choline, 12/92"/>
+    <dih-c a="17" b="11" c="11" d="24" z_a="7" z_b="6" z_c="6" z_d="8" K="3.300000" Phi_zero="180.000000" n="1.000000" info="choline, 12/92"/>
+    <dih-c a="17" b="11" c="11" d="24" z_a="7" z_b="6" z_c="6" z_d="8" K="-0.400000" Phi_zero="180.000000" n="3.000000" info="choline, 12/92"/>
+    <dih-c a="-1" b="10" c="10" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.200000" Phi_zero="0.000000" n="3.000000" info="alkane, 3/92"/>
+    <dih-c a="-1" b="10" c="11" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.200000" Phi_zero="0.000000" n="3.000000" info="alkane, 3/92"/>
+    <dih-c a="-1" b="10" c="12" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.200000" Phi_zero="0.000000" n="3.000000" info="alkane, 3/92"/>
+    <dih-c a="-1" b="11" c="11" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.190000" Phi_zero="0.000000" n="3.000000" info="alkane, 4/98, yin and mackerell"/>
+    <dih-c a="-1" b="11" c="12" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.160000" Phi_zero="0.000000" n="3.000000" info="alkane, 4/98, yin and mackerell"/>
+    <dih-c a="-1" b="12" c="12" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.152500" Phi_zero="0.000000" n="3.000000" info="alkane, 4/98, yin and mackerell"/>
+    <dih-c a="12" b="11" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.060000" Phi_zero="0.000000" n="2.000000" info="alkane, 7/08, jbk"/>
+    <dih-c a="12" b="11" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.035000" Phi_zero="0.000000" n="5.000000" info="alkane, 7/08, jbk"/>
+    <dih-c a="11" b="11" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.162000" Phi_zero="0.000000" n="2.000000" info="alkane, 7/08, jbk"/>
+    <dih-c a="11" b="11" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.047000" Phi_zero="180.000000" n="3.000000" info="alkane, 7/08, jbk"/>
+    <dih-c a="11" b="11" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.105000" Phi_zero="0.000000" n="4.000000" info="alkane, 7/08, jbk"/>
+    <dih-c a="11" b="11" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.177000" Phi_zero="0.000000" n="5.000000" info="alkane, 7/08, jbk"/>
+    <dih-c a="11" b="11" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.101000" Phi_zero="0.000000" n="2.000000" info="alkane, 7/08, jbk"/>
+    <dih-c a="11" b="11" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.142000" Phi_zero="180.000000" n="3.000000" info="alkane, 7/08, jbk"/>
+    <dih-c a="11" b="11" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.074000" Phi_zero="0.000000" n="4.000000" info="alkane, 7/08, jbk"/>
+    <dih-c a="11" b="11" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.097000" Phi_zero="0.000000" n="5.000000" info="alkane, 7/08, jbk"/>
+    <dih-c a="5" b="12" c="21" d="26" z_a="1" z_b="6" z_c="8" z_d="16" K="0.000000" Phi_zero="0.000000" n="3.000000" info="methylsulfate"/>
+    <dih-c a="11" b="21" c="26" d="22" z_a="6" z_b="8" z_c="16" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info="methylsulfate"/>
+    <dih-c a="12" b="21" c="26" d="22" z_a="6" z_b="8" z_c="16" z_d="8" K="0.000000" Phi_zero="0.000000" n="3.000000" info="methylsulfate"/>
+    <dih-c a="6" b="14" c="14" d="6" z_a="1" z_b="6" z_c="6" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="2-butene, adm jr., 8/98 update"/>
+    <dih-c a="12" b="14" c="14" d="6" z_a="6" z_b="6" z_c="6" z_d="1" K="1.000000" Phi_zero="180.000000" n="2.000000" info="2-butene, adm jr., 8/98 update"/>
+    <dih-c a="-1" b="14" c="14" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.450000" Phi_zero="180.000000" n="1.000000" info="2-butene, adm jr., 4/04"/>
+    <dih-c a="-1" b="14" c="14" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="8.500000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="-1" b="15" c="15" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="4.900000" Phi_zero="180.000000" n="2.000000" info="ethene, yin,adm jr., 12/95"/>
+    <dih-c a="11" b="14" c="15" d="7" z_a="6" z_b="6" z_c="6" z_d="1" K="5.200000" Phi_zero="180.000000" n="2.000000" info="propene, yin,adm jr., 12/95"/>
+    <dih-c a="12" b="14" c="15" d="7" z_a="6" z_b="6" z_c="6" z_d="1" K="5.200000" Phi_zero="180.000000" n="2.000000" info="propene, yin,adm jr., 12/95"/>
+    <dih-c a="6" b="14" c="15" d="7" z_a="1" z_b="6" z_c="6" z_d="1" K="5.200000" Phi_zero="180.000000" n="2.000000" info="propene, yin,adm jr., 12/95"/>
+    <dih-c a="14" b="14" c="11" d="4" z_a="6" z_b="6" z_c="6" z_d="1" K="0.300000" Phi_zero="180.000000" n="3.000000" info="adm jr., 4/04"/>
+    <dih-c a="14" b="14" c="12" d="5" z_a="6" z_b="6" z_c="6" z_d="1" K="0.300000" Phi_zero="180.000000" n="3.000000" info="adm jr., 4/04"/>
+    <dih-c a="14" b="14" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.910000" Phi_zero="180.000000" n="1.000000" info="adm jr., 11/09, end fix jbk"/>
+    <dih-c a="14" b="14" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.180000" Phi_zero="180.000000" n="2.000000" info="adm jr., 11/09"/>
+    <dih-c a="14" b="14" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.170000" Phi_zero="180.000000" n="3.000000" info="adm jr., 11/09"/>
+    <dih-c a="14" b="14" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.910000" Phi_zero="180.000000" n="1.000000" info="adm jr., 11/09"/>
+    <dih-c a="14" b="14" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.180000" Phi_zero="180.000000" n="2.000000" info="adm jr., 11/09"/>
+    <dih-c a="14" b="14" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.170000" Phi_zero="180.000000" n="3.000000" info="adm jr., 11/09"/>
+    <dih-c a="14" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.140000" Phi_zero="180.000000" n="1.000000" info="adm jr., 11/09, add jbk for DHA"/>
+    <dih-c a="14" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.170000" Phi_zero="0.000000" n="2.000000" info="adm jr., 11/09, add jbk for DHA"/>
+    <dih-c a="14" b="11" c="11" d="9" z_a="6" z_b="6" z_c="6" z_d="6" K="0.050000" Phi_zero="180.000000" n="3.000000" info="adm jr., 11/09, add jbk for DHA"/>
+    <dih-c a="14" b="11" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.140000" Phi_zero="180.000000" n="1.000000" info="adm jr., 11/09"/>
+    <dih-c a="14" b="11" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.170000" Phi_zero="0.000000" n="2.000000" info="adm jr., 11/09"/>
+    <dih-c a="14" b="11" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.050000" Phi_zero="180.000000" n="3.000000" info="adm jr., 11/09"/>
+    <dih-c a="14" b="11" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.140000" Phi_zero="180.000000" n="1.000000" info="adm jr., 11/09"/>
+    <dih-c a="14" b="11" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.170000" Phi_zero="0.000000" n="2.000000" info="adm jr., 11/09"/>
+    <dih-c a="14" b="11" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.050000" Phi_zero="180.000000" n="3.000000" info="adm jr., 11/09"/>
+    <dih-c a="15" b="14" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="0.500000" Phi_zero="180.000000" n="1.000000" info="1-butene, adm jr., 2/00 update"/>
+    <dih-c a="15" b="14" c="11" d="11" z_a="6" z_b="6" z_c="6" z_d="6" K="1.300000" Phi_zero="180.000000" n="3.000000" info="1-butene, adm jr., 2/00 update"/>
+    <dih-c a="15" b="14" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="0.500000" Phi_zero="180.000000" n="1.000000" info="1-butene, adm jr., 2/00 update"/>
+    <dih-c a="15" b="14" c="11" d="12" z_a="6" z_b="6" z_c="6" z_d="6" K="1.300000" Phi_zero="180.000000" n="3.000000" info="1-butene, adm jr., 2/00 update"/>
+    <dih-c a="15" b="14" c="11" d="4" z_a="6" z_b="6" z_c="6" z_d="1" K="0.120000" Phi_zero="0.000000" n="3.000000" info="1-butene, yin,adm jr., 12/95"/>
+    <dih-c a="15" b="14" c="12" d="5" z_a="6" z_b="6" z_c="6" z_d="1" K="0.050000" Phi_zero="180.000000" n="3.000000" info="propene, yin,adm jr., 12/95"/>
+    <dih-c a="6" b="14" c="11" d="11" z_a="1" z_b="6" z_c="6" z_d="6" K="0.120000" Phi_zero="0.000000" n="3.000000" info="butene, yin,adm jr., 12/95"/>
+    <dih-c a="6" b="14" c="11" d="12" z_a="1" z_b="6" z_c="6" z_d="6" K="0.120000" Phi_zero="0.000000" n="3.000000" info="butene, yin,adm jr., 12/95"/>
+    <dih-c a="6" b="14" c="11" d="4" z_a="1" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="butene, adm jr., 2/00 update"/>
+    <dih-c a="6" b="14" c="12" d="5" z_a="1" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info="butene, adm jr., 2/00 update"/>
+    <dih-c a="15" b="14" c="11" d="14" z_a="6" z_b="6" z_c="6" z_d="6" K="1.200000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="15" b="14" c="11" d="14" z_a="6" z_b="6" z_c="6" z_d="6" K="0.400000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="15" b="14" c="11" d="14" z_a="6" z_b="6" z_c="6" z_d="6" K="1.300000" Phi_zero="180.000000" n="3.000000" info=" "/>
+    <dih-c a="14" b="11" c="14" d="6" z_a="6" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="2.000000" info=" "/>
+    <dih-c a="14" b="11" c="14" d="6" z_a="6" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="14" b="14" c="11" d="14" z_a="6" z_b="6" z_c="6" z_d="6" K="0.850000" Phi_zero="180.000000" n="1.000000" info=" "/>
+    <dih-c a="14" b="14" c="11" d="14" z_a="6" z_b="6" z_c="6" z_d="6" K="0.300000" Phi_zero="180.000000" n="2.000000" info=" "/>
+    <dih-c a="14" b="14" c="11" d="14" z_a="6" z_b="6" z_c="6" z_d="6" K="0.260000" Phi_zero="0.000000" n="3.000000" info=" "/>
+    <dih-c a="14" b="14" c="11" d="14" z_a="6" z_b="6" z_c="6" z_d="6" K="0.096000" Phi_zero="0.000000" n="4.000000" info=" "/>
+  </dihedrals-c>
+  <impropers>
+  <!-- Impropers:  V(Phi) = K x (Phi - Phi0)^2
+
+    With:
+      - K = spring constant (kcal mol^-1 rad^-2)
+      - Phi = angle (°)
+      - Phi0 = equilibrium angle (°)  -->
+    <imp a="19" b="-1" c="-1" d="9" z_a="8" z_b="-1" z_c="-1" z_d="6" K="100.000000" Phi_zero="0.000000" info="acetic acid"/>
+    <imp a="7" b="7" c="15" d="15" z_a="1" z_b="1" z_c="6" z_d="6" K="3.000000" Phi_zero="0.000000" info="ethene, yin,adm jr., 12/95"/>
+    <imp a="20" b="-1" c="-1" d="9" z_a="8" z_b="-1" z_c="-1" z_d="6" K="96.000000" Phi_zero="0.000000" info="acetate"/>
+    <imp a="20" b="-1" c="-1" d="16" z_a="8" z_b="-1" z_c="-1" z_d="6" K="96.000000" Phi_zero="0.000000" info="for POPS"/>
+  </impropers>
+  <non-bonded>
+  <!-- Non-bonded 12-6
+  0= Key_a, 1= Epslion, 2= R0 (A), 3=  FF info
+
+  Non-bonded (12-6): V(rij) =  Epslion(ij) x [(R0(ij)/rij)^12 - 2 x (R0(ij)/rij)^6]
+  With:
+  Epslion(ij) = sqrt(Epslion(i) x Epslion(j))  and Epslion(i) (kcal mol^-1)
+  R0(ij)= (R0(i) + R0(j))/2  and R0(i) (A)
+  -->
+    <non-bd a="2" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="3" z_a="1" Ei="-0.022000" Ri="1.320000" Eii="0.000000" Rii="0.000000" info="3/92"/>
+    <non-bd a="4" z_a="1" Ei="-0.028000" Ri="1.340000" Eii="0.000000" Rii="0.000000" info="yin and mackerell, 4/98"/>
+    <non-bd a="5" z_a="1" Ei="-0.024000" Ri="1.340000" Eii="0.000000" Rii="0.000000" info="yin and mackerell, 4/98"/>
+    <non-bd a="8" z_a="1" Ei="-0.022000" Ri="1.320000" Eii="0.000000" Rii="0.000000" info="POPS"/>
+    <non-bd a="1" z_a="1" Ei="-0.046000" Ri="0.224500" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="0" z_a="1" Ei="-0.046000" Ri="0.700000" Eii="0.000000" Rii="0.000000" info="H on NC4+"/>
+    <non-bd a="6" z_a="1" Ei="-0.031000" Ri="1.250000" Eii="0.000000" Rii="0.000000" info="yin,adm jr., 12/95"/>
+    <non-bd a="7" z_a="1" Ei="-0.026000" Ri="1.260000" Eii="0.000000" Rii="0.000000" info="yin,adm jr., 12/95"/>
+    <non-bd a="9" z_a="6" Ei="-0.070000" Ri="2.000000" Eii="0.000000" Rii="0.000000" info="acetate update"/>
+    <non-bd a="16" z_a="6" Ei="-0.070000" Ri="2.000000" Eii="0.000000" Rii="0.000000" info="POPS"/>
+    <non-bd a="10" z_a="6" Ei="-0.020000" Ri="2.275000" Eii="-0.010000" Rii="1.900000" info="alkane, 3/92"/>
+    <non-bd a="11" z_a="6" Ei="-0.056000" Ri="2.010000" Eii="-0.010000" Rii="1.900000" info="alkane, 4/98, yin, adm jr."/>
+    <non-bd a="12" z_a="6" Ei="-0.078000" Ri="2.040000" Eii="-0.010000" Rii="1.900000" info="alkane, 4/98, yin, adm jr."/>
+    <non-bd a="13" z_a="6" Ei="-0.080000" Ri="2.060000" Eii="-0.010000" Rii="1.900000" info="old CTL3"/>
+    <non-bd a="14" z_a="6" Ei="-0.068000" Ri="2.090000" Eii="0.000000" Rii="0.000000" info="yin,adm jr., 12/95"/>
+    <non-bd a="15" z_a="6" Ei="-0.064000" Ri="2.080000" Eii="0.000000" Rii="0.000000" info="yin,adm jr., 12/95"/>
+    <non-bd a="27" z_a="6" Ei="-0.036000" Ri="2.010000" Eii="-0.010000" Rii="1.900000" info="CGAFF, jbk add for cholesterol"/>
+    <non-bd a="28" z_a="6" Ei="-0.060000" Ri="2.020000" Eii="-0.010000" Rii="1.900000" info="CPEN, cyclopentane, 8/06 viv (jbk add)"/>
+    <non-bd a="19" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="-0.120000" Rii="1.400000" info=" "/>
+    <non-bd a="20" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="22" z_a="8" Ei="-0.120000" Ri="1.700000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="23" z_a="8" Ei="-0.152100" Ri="1.770000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="21" z_a="8" Ei="-0.100000" Ri="1.650000" Eii="0.000000" Rii="0.000000" info="ether parameter"/>
+    <non-bd a="24" z_a="8" Ei="-0.100000" Ri="1.650000" Eii="0.000000" Rii="0.000000" info="ether parameter"/>
+    <non-bd a="18" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="17" z_a="7" Ei="-0.200000" Ri="1.850000" Eii="0.000000" Rii="0.000000" info="all other nitogens"/>
+    <non-bd a="26" z_a="16" Ei="-0.470000" Ri="2.100000" Eii="0.000000" Rii="0.000000" info=" "/>
+    <non-bd a="25" z_a="15" Ei="-0.585000" Ri="2.150000" Eii="0.000000" Rii="0.000000" info="Jr."/>
+  </non-bonded>
+</ff-xml>

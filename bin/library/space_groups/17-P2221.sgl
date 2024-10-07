@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P2221</space-group>
+  <sg-num>17</sg-num>
+  <hm-symbol>P 2 2 21</hm-symbol>
+  <bravais>Orthorhombic</bravais>
+  <settings num="3">
+    <set name="P_2_2_21" x="a" y="b" z="c">
+    </set>
+    <set name="P_21_2_2" x="c" y="a" z="b">
+    </set>
+    <set name="P_2_21_2" x="b" y="c" z="a">
+    </set>
+  </settings>
+  <wyckoff num="5">
+    <wyck id="1" mul="4" let="e" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="-y" z="z+1/2"/>
+      <pos x="-x" y="y" z="-z+1/2"/>
+      <pos x="x" y="-y" z="-z"/>
+    </wyck>
+    <wyck id="2" mul="2" let="d" site=".2.">
+      <pos x="1/2" y="y" z="1/4"/>
+      <pos x="1/2" y="-y" z="3/4"/>
+    </wyck>
+    <wyck id="3" mul="2" let="c" site=".2.">
+      <pos x="0" y="y" z="1/4"/>
+      <pos x="0" y="-y" z="3/4"/>
+    </wyck>
+    <wyck id="4" mul="2" let="b" site="2..">
+      <pos x="x" y="1/2" z="0"/>
+      <pos x="-x" y="1/2" z="1/2"/>
+    </wyck>
+    <wyck id="5" mul="2" let="a" site="2..">
+      <pos x="x" y="0" z="0"/>
+      <pos x="-x" y="0" z="1/2"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

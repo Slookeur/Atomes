@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P213</space-group>
+  <sg-num>198</sg-num>
+  <hm-symbol>P 21 3</hm-symbol>
+  <bravais>Cubic</bravais>
+  <settings num="1">
+    <set name="P_21_3" x="a" y="b" z="c">
+    </set>
+  </settings>
+  <wyckoff num="2">
+    <wyck id="1" mul="12" let="b" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x+1/2" y="-y" z="z+1/2"/>
+      <pos x="-x" y="y+1/2" z="-z+1/2"/>
+      <pos x="x+1/2" y="-y+1/2" z="-z"/>
+      <pos x="z" y="x" z="y"/>
+      <pos x="z+1/2" y="-x+1/2" z="-y"/>
+      <pos x="-z+1/2" y="-x" z="y+1/2"/>
+      <pos x="-z" y="x+1/2" z="-y+1/2"/>
+      <pos x="y" y="z" z="x"/>
+      <pos x="-y" y="z+1/2" z="-x+1/2"/>
+      <pos x="y+1/2" y="-z+1/2" z="-x"/>
+      <pos x="-y+1/2" y="-z" z="x+1/2"/>
+    </wyck>
+    <wyck id="2" mul="4" let="a" site=".3.">
+      <pos x="x" y="x" z="x"/>
+      <pos x="-x+1/2" y="-x" z="x+1/2"/>
+      <pos x="-x" y="x+1/2" z="-x+1/2"/>
+      <pos x="x+1/2" y="-x+1/2" z="-x"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

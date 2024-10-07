@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>Aem2</space-group>
+  <sg-num>39</sg-num>
+  <hm-symbol>A e m 2</hm-symbol>
+  <bravais>Orthorhombic</bravais>
+  <settings num="6">
+    <set name="A_e_m_2" x="a" y="b" z="c">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="0" y="1/2" z="1/2"/>
+      </points>
+    </set>
+    <set name="B_m_e_2" x="b" y="a" z="-c">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="0" z="1/2"/>
+      </points>
+    </set>
+    <set name="B_2_e_m" x="c" y="a" z="b">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="0" z="1/2"/>
+      </points>
+    </set>
+    <set name="C_2_m_e" x="-c" y="b" z="a">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="0"/>
+      </points>
+    </set>
+    <set name="C_m_2_e" x="b" y="c" z="a">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="0"/>
+      </points>
+    </set>
+    <set name="A_e_2_m" x="a" y="-c" z="b">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="0" y="1/2" z="1/2"/>
+      </points>
+    </set>
+  </settings>
+  <wyckoff num="4">
+    <wyck id="1" mul="4" let="d" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="-y" z="z"/>
+      <pos x="x" y="-y+1/2" z="z"/>
+      <pos x="-x" y="y+1/2" z="z"/>
+    </wyck>
+    <wyck id="2" mul="2" let="c" site=".m.">
+      <pos x="x" y="1/4" z="z"/>
+      <pos x="-x" y="3/4" z="z"/>
+    </wyck>
+    <wyck id="3" mul="2" let="b" site="..2">
+      <pos x="1/2" y="0" z="z"/>
+      <pos x="1/2" y="1/2" z="z"/>
+    </wyck>
+    <wyck id="4" mul="2" let="a" site="..2">
+      <pos x="0" y="0" z="z"/>
+      <pos x="0" y="1/2" z="z"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

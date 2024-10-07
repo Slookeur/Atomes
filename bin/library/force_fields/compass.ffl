@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Force Field Library XML file -->
+<ff-xml>
+  <force-field>COMPASS</force-field>
+  <!--  data adapted from the file: compass.frc -->
+  <units>k-calories per mol</units>
+  <ff-data>
+    <atoms dim="5">45</atoms>
+    <bonds-h dim="0" pot="0">0</bonds-h>
+    <bonds-q dim="4" pot="6">54</bonds-q>
+    <bonds-m dim="0" pot="0">0</bonds-m>
+    <angles-h dim="0" pot="0">0</angles-h>
+    <angles-q dim="4" pot="2">94</angles-q>
+    <dihedrals-c dim="0" pot="0">0</dihedrals-c>
+    <dihedrals-ccc dim="4" pot="-4">95</dihedrals-ccc>
+    <impropers dim="0" pot="0">0</impropers>
+    <inversions dim="2" pot="2">22</inversions>
+    <non-bonded dim="2" pot="-2">46</non-bonded>
+  </ff-data>
+  <atoms>
+    <at label="Ar" mass="39.94400" key="ar" info=" "/>
+    <at label="C" mass="12.01115" key="c3a" info="carbon "/>
+    <at label="C" mass="12.01115" key="c1o" info="in CO"/>
+    <at label="C" mass="12.01115" key="c2=" info="in CO2 and CS2"/>
+    <at label="C" mass="12.01115" key="c3'" info="carbon [one polar substituent]"/>
+    <at label="C" mass="12.01115" key="c4" info="sp3 carbon"/>
+    <at label="C" mass="12.01115" key="c41o" info="sp3, in methanol"/>
+    <at label="C" mass="12.01115" key="c43o" info="sp3 in secondary alcohols"/>
+    <at label="C" mass="12.01115" key="c43" info="carbon with three heavy atoms attached"/>
+    <at label="C" mass="12.01115" key="c44" info="carbon with four heavy atoms attached"/>
+    <at label="C" mass="12.01115" key="c4o" info="carbon "/>
+    <at label="C" mass="12.01115" key="c4z" info="sp3, bonded to -N3"/>
+    <at label="H" mass="1.00797" key="h1" info="hydrogen "/>
+    <at label="H" mass="1.00797" key="h1h" info="in H2"/>
+    <at label="H" mass="1.00797" key="h1o" info="polar hydrogen, bonded to O,F"/>
+    <at label="He" mass="4.00300" key="he" info=" "/>
+    <at label="Kr" mass="83.80000" key="kr" info=" "/>
+    <at label="N" mass="14.00670" key="n1n" info="in N2"/>
+    <at label="N" mass="14.00670" key="n1o" info="in NO"/>
+    <at label="N" mass="14.00670" key="n1z" info="terminal atom in -N3"/>
+    <at label="N" mass="14.00670" key="n2=" info=" "/>
+    <at label="N" mass="14.00670" key="n2o" info="in NO2"/>
+    <at label="N" mass="14.00670" key="n2t" info="central atom in -N3"/>
+    <at label="N" mass="14.00670" key="n2z" info="first atom in -N3"/>
+    <at label="N" mass="14.00670" key="n3m" info="nitrogen in amides without hydrogen"/>
+    <at label="N" mass="14.00670" key="n3o" info="in nitro group"/>
+    <at label="Ne" mass="20.18300" key="ne" info=" "/>
+    <at label="O" mass="15.99940" key="o1=" info="in NO2 and SO2 [and carbonyl]"/>
+    <at label="O" mass="15.99940" key="o1=*" info="in CO2"/>
+    <at label="O" mass="15.99940" key="o12" info="in nitro group (-NO2)"/>
+    <at label="O" mass="15.99940" key="o1c" info="in CO"/>
+    <at label="O" mass="15.99940" key="o1n" info="in NO"/>
+    <at label="O" mass="15.99940" key="o1o" info="in O2"/>
+    <at label="O" mass="15.99940" key="o2" info="oxygen with two bonds attached"/>
+    <at label="O" mass="15.99940" key="o2e" info="oxygen "/>
+    <at label="O" mass="15.99940" key="o2h" info="oxygen "/>
+    <at label="O" mass="15.99940" key="o2n" info="in nitrates"/>
+    <at label="O" mass="15.99940" key="o2s" info="oxygen "/>
+    <at label="O" mass="15.99940" key="o2z" info="in siloxanes and zeolites"/>
+    <at label="P" mass="30.97380" key="p4=" info=" "/>
+    <at label="S" mass="32.06400" key="s1=" info="in CS2"/>
+    <at label="S" mass="32.06400" key="s2=" info="in SO2"/>
+    <at label="Si" mass="28.08600" key="si4" info="silicon with four bonds attached"/>
+    <at label="Si" mass="28.08600" key="si4c" info="subset of si4, non-hydrogen atom attached [siloxanes]"/>
+    <at label="Xe" mass="131.30000" key="xe" info=" "/>
+  </atoms>
+  <bonds-q>
+  <!-- Quartic bonds:
+
+    V(R) = K x (R - R0)^2  +  K' x (R - R0)^3  +  K'' x (R - R0)^4
+    With:
+      - K, K' and K'' = nth order spring constants (kcal mol^-1 A^-2)
+      - R = bond distance (A)
+      - R0 = equilibrium distance (A)   -->
+    <bd-q a="1" b="1" z_a="6" z_b="6" K="470.836100" R_zero="1.417000" KK="-627.617900" KKK="1327.634500" info="Ver. 1.0, Ref. 1"/>
+    <bd-q a="1" b="5" z_a="6" z_b="6" K="321.902100" R_zero="1.501000" KK="-521.820800" KKK="572.162800" info="Ver. 1.0, Ref. 1"/>
+    <bd-q a="1" b="12" z_a="6" z_b="1" K="372.825100" R_zero="1.098200" KK="-803.452600" KKK="894.317300" info="Ver. 1.0, Ref. 1"/>
+    <bd-q a="5" b="5" z_a="6" z_b="6" K="299.670000" R_zero="1.530000" KK="-501.770000" KKK="679.810000" info="Ver. 1.0, Ref. 1"/>
+    <bd-q a="5" b="12" z_a="6" z_b="1" K="345.000000" R_zero="1.101000" KK="-691.890000" KKK="844.600000" info="Ver. 1.0, Ref. 1"/>
+    <bd-q a="38" b="42" z_a="8" z_b="14" K="350.123200" R_zero="1.640000" KK="-517.342400" KKK="673.706700" info="Ver. 1.0, Ref. 2"/>
+    <bd-q a="1" b="33" z_a="6" z_b="8" K="428.879800" R_zero="1.376800" KK="-738.235000" KKK="1114.965500" info="Ver. 1.0, Ref. 3"/>
+    <bd-q a="1" b="34" z_a="6" z_b="8" K="428.879800" R_zero="1.376800" KK="-738.235100" KKK="1114.965500" info="Ver. 1.0, Ref. 3"/>
+    <bd-q a="1" b="35" z_a="6" z_b="8" K="428.879800" R_zero="1.376800" KK="-738.235100" KKK="1114.965500" info="Ver. 1.0, Ref. 3"/>
+    <bd-q a="5" b="34" z_a="6" z_b="8" K="400.395400" R_zero="1.420000" KK="-835.195100" KKK="1313.014200" info="Ver. 1.0, Ref. 3"/>
+    <bd-q a="5" b="35" z_a="6" z_b="8" K="400.395400" R_zero="1.420000" KK="-835.195100" KKK="1313.014200" info="Ver. 1.0, Ref. 3"/>
+    <bd-q a="12" b="35" z_a="1" z_b="8" K="540.363300" R_zero="0.949400" KK="-1311.866300" KKK="2132.444600" info="Ver. 1.0, Ref. 3"/>
+    <bd-q a="1" b="20" z_a="6" z_b="7" K="350.000000" R_zero="1.400000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="1" b="39" z_a="6" z_b="15" K="197.702000" R_zero="1.789000" KK="-332.251000" KKK="325.716000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="5" b="20" z_a="6" z_b="7" K="337.060000" R_zero="1.474000" KK="-147.370000" KKK="213.633000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="5" b="39" z_a="6" z_b="15" K="218.140000" R_zero="1.800000" KK="-329.511000" KKK="290.349000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="-10" b="39" z_a="-10" z_b="15" K="158.777000" R_zero="2.000000" KK="-239.129000" KKK="210.084000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="-10" b="39" z_a="-10" z_b="15" K="340.000000" R_zero="1.565000" KK="-882.384000" KKK="1197.919000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="12" b="20" z_a="1" z_b="7" K="540.112000" R_zero="1.031000" KK="-1500.295200" KKK="2431.008000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="12" b="39" z_a="1" z_b="15" K="285.204000" R_zero="1.430000" KK="-575.685000" KKK="677.846000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="20" b="39" z_a="7" z_b="15" K="393.006000" R_zero="1.598000" KK="-751.405000" KKK="767.431000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="24" b="39" z_a="7" z_b="15" K="329.000000" R_zero="1.678000" KK="-713.795000" KKK="902.919000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="33" b="39" z_a="8" z_b="15" K="333.098000" R_zero="1.600000" KK="-726.623000" KKK="924.620000" info="Ver. 1.0, Ref. 4"/>
+    <bd-q a="13" b="13" z_a="1" z_b="1" K="414.218500" R_zero="0.741200" KK="-805.654900" KKK="914.129600" info="Ver. 1.0, Ref. 5"/>
+    <bd-q a="17" b="17" z_a="7" z_b="7" K="1651.373000" R_zero="1.097700" KK="-4069.317800" KKK="5984.962900" info="Ver. 1.0, Ref. 5"/>
+    <bd-q a="32" b="32" z_a="8" z_b="8" K="846.715000" R_zero="1.207400" KK="-2247.176000" KKK="3478.990000" info="Ver. 1.0, Ref. 5"/>
+    <bd-q a="2" b="30" z_a="6" z_b="8" K="1368.767600" R_zero="1.128300" KK="-3157.000700" KKK="4247.529800" info="Ver. 1.0, Ref. 5"/>
+    <bd-q a="18" b="31" z_a="7" z_b="8" K="1147.836200" R_zero="1.150600" KK="-3167.734900" KKK="5099.581100" info="Ver. 1.0, Ref. 5"/>
+    <bd-q a="27" b="41" z_a="8" z_b="16" K="730.838700" R_zero="1.430800" KK="-1531.791000" KKK="1859.775300" info="Ver. 1.0, Ref. 5"/>
+    <bd-q a="3" b="27" z_a="6" z_b="8" K="1161.342100" R_zero="1.160000" KK="-2564.570600" KKK="3932.873500" info="Ver. 1.0, Ref. 5"/>
+    <bd-q a="21" b="27" z_a="7" z_b="8" K="620.000000" R_zero="1.193000" KK="-1808.601800" KKK="3077.591800" info="Ver. 1.0, Ref. 5"/>
+    <bd-q a="3" b="40" z_a="6" z_b="16" K="559.006500" R_zero="1.554000" KK="-1348.663300" KKK="1248.860400" info="Ver. 1.0, Ref. 5"/>
+    <bd-q a="1" b="25" z_a="6" z_b="7" K="313.832900" R_zero="1.430000" KK="-568.608700" KKK="600.959700" info="Ver. 1.0, Ref. 6"/>
+    <bd-q a="5" b="25" z_a="6" z_b="7" K="301.605100" R_zero="1.474000" KK="-535.702800" KKK="555.042000" info="Ver. 1.0, Ref. 6"/>
+    <bd-q a="5" b="36" z_a="6" z_b="8" K="400.395400" R_zero="1.435000" KK="-835.195100" KKK="1313.014200" info="Ver. 1.0, Ref. 6"/>
+    <bd-q a="12" b="25" z_a="1" z_b="7" K="439.934600" R_zero="1.040000" KK="-943.730700" KKK="1180.931800" info="Ver. 1.0, Ref. 6"/>
+    <bd-q a="25" b="27" z_a="7" z_b="8" K="765.066400" R_zero="1.210000" KK="-2070.283000" KKK="2793.321800" info="Ver. 1.0, Ref. 6"/>
+    <bd-q a="25" b="36" z_a="7" z_b="8" K="300.000000" R_zero="1.402000" KK="-1000.000000" KKK="2000.000000" info="Ver. 1.0, Ref. 6"/>
+    <bd-q a="4" b="34" z_a="6" z_b="8" K="368.730900" R_zero="1.375000" KK="-832.478400" KKK="1274.023100" info="Ver. 1.0, Ref. 7"/>
+    <bd-q a="4" b="5" z_a="6" z_b="6" K="312.371900" R_zero="1.514000" KK="-465.829000" KKK="473.830000" info="Ver. 1.0, Ref. 7"/>
+    <bd-q a="4" b="27" z_a="6" z_b="8" K="823.794800" R_zero="1.216000" KK="-1878.793900" KKK="2303.531000" info="Ver. 1.0, Ref. 7"/>
+    <bd-q a="4" b="1" z_a="6" z_b="6" K="339.357400" R_zero="1.489000" KK="-655.723600" KKK="670.236200" info="Ver. 1.0, Ref. 7"/>
+    <bd-q a="4" b="24" z_a="6" z_b="7" K="359.159100" R_zero="1.385000" KK="-558.473000" KKK="1146.381000" info="Ver. 1.0, Ref. 7"/>
+    <bd-q a="1" b="24" z_a="6" z_b="7" K="344.045200" R_zero="1.395000" KK="-652.120800" KKK="1022.224200" info="Ver. 1.0, Ref. 7"/>
+    <bd-q a="19" b="19" z_a="7" z_b="7" K="1337.745000" R_zero="1.135400" KK="-2675.490000" KKK="3121.404900" info="Ver. 1.0, Ref. 9"/>
+    <bd-q a="23" b="22" z_a="7" z_b="7" K="720.334500" R_zero="1.234300" KK="-1542.668900" KKK="1799.780400" info="Ver. 1.0, Ref. 9"/>
+    <bd-q a="22" b="19" z_a="7" z_b="7" K="1198.745000" R_zero="1.135400" KK="-2675.490000" KKK="3121.404900" info="Ver. 1.0, Ref. 9"/>
+    <bd-q a="23" b="5" z_a="7" z_b="6" K="324.457800" R_zero="1.481400" KK="-648.915600" KKK="757.068100" info="Ver. 1.0, Ref. 9"/>
+    <bd-q a="23" b="12" z_a="7" z_b="1" K="440.162300" R_zero="1.022100" KK="-960.324600" KKK="1120.378700" info="Ver. 1.0, Ref. 9"/>
+    <bd-q a="1" b="42" z_a="6" z_b="14" K="233.243300" R_zero="1.863400" KK="-276.869200" KKK="161.665900" info="Ver. 1.0, Ref. 10"/>
+    <bd-q a="5" b="42" z_a="6" z_b="14" K="189.653600" R_zero="1.899500" KK="-279.421000" KKK="307.513500" info="Ver. 1.0, Ref. 10"/>
+    <bd-q a="12" b="42" z_a="1" z_b="14" K="202.779800" R_zero="1.478300" KK="-305.360300" KKK="280.268500" info="Ver. 1.0, Ref. 10"/>
+    <bd-q a="42" b="42" z_a="14" z_b="14" K="114.216400" R_zero="2.338400" KK="-140.421200" KKK="80.708400" info="Ver. 1.0, Ref. 10"/>
+    <bd-q a="5" b="24" z_a="6" z_b="7" K="350.000000" R_zero="1.400000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+  </bonds-q>
+  <angles-q>
+  <!-- Quartic angles:
+
+    V(Theta) = K x (Theta - Theta0)^2  +  K' x (Theta - Theta0)^3  +  K' x (Theta - Theta0)^4
+    With:
+      - K, K' and K'' = nth order spring constant (kcal mol^-1 rad^-nth)
+      - Theta = angle (°)
+      - Theta0 = equilibrium angle (°)   -->
+    <ang-q a="1" b="1" c="1" z_a="6" z_b="6" z_c="6" K="61.022600" Theta_zero="118.900000" KK="-34.993100" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <ang-q a="1" b="1" c="5" z_a="6" z_b="6" z_c="6" K="44.714800" Theta_zero="120.050000" KK="-22.735200" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <ang-q a="1" b="1" c="12" z_a="6" z_b="6" z_c="1" K="35.155800" Theta_zero="117.940000" KK="-12.468200" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <ang-q a="1" b="5" c="1" z_a="6" z_b="6" z_c="6" K="44.323400" Theta_zero="111.000000" KK="-9.445400" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <ang-q a="1" b="5" c="5" z_a="6" z_b="6" z_c="6" K="43.959400" Theta_zero="108.400000" KK="-8.392400" KKK="-9.337900" info="Ver. 1.0, Ref. 1"/>
+    <ang-q a="1" b="5" c="12" z_a="6" z_b="6" z_c="1" K="44.323400" Theta_zero="111.000000" KK="-9.445400" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <ang-q a="5" b="5" c="5" z_a="6" z_b="6" z_c="6" K="39.516000" Theta_zero="112.670000" KK="-7.443000" KKK="-9.558300" info="Ver. 1.0, Ref. 1"/>
+    <ang-q a="5" b="5" c="12" z_a="6" z_b="6" z_c="1" K="41.453000" Theta_zero="110.770000" KK="-10.604000" KKK="5.129000" info="Ver. 1.0, Ref. 1"/>
+    <ang-q a="12" b="5" c="12" z_a="1" z_b="6" z_c="1" K="39.641000" Theta_zero="107.660000" KK="-12.921000" KKK="-2.431800" info="Ver. 1.0, Ref. 1"/>
+    <ang-q a="12" b="38" c="42" z_a="1" z_b="8" z_c="14" K="23.776400" Theta_zero="122.800000" KK="-19.815200" KKK="9.633100" info="Ver. 1.0, Ref. 2"/>
+    <ang-q a="42" b="38" c="42" z_a="14" z_b="8" z_c="14" K="8.500000" Theta_zero="159.000000" KK="-13.418800" KKK="-4.178500" info="Ver. 1.0, Ref. 2"/>
+    <ang-q a="1" b="42" c="38" z_a="6" z_b="14" z_c="8" K="23.021800" Theta_zero="114.906000" KK="-31.399300" KKK="24.981400" info="Ver. 1.0, Ref. 2"/>
+    <ang-q a="5" b="42" c="38" z_a="6" z_b="14" z_c="8" K="23.021800" Theta_zero="114.906000" KK="-31.399300" KKK="24.981400" info="Ver. 1.0, Ref. 2"/>
+    <ang-q a="12" b="42" c="38" z_a="1" z_b="14" z_c="8" K="57.664300" Theta_zero="107.400000" KK="-10.650600" KKK="4.627400" info="Ver. 1.0, Ref. 2"/>
+    <ang-q a="38" b="42" c="38" z_a="8" z_b="14" z_c="8" K="70.306900" Theta_zero="110.700000" KK="-6.937500" KKK="0.000000" info="Ver. 1.0, Ref. 2"/>
+    <ang-q a="1" b="1" c="33" z_a="6" z_b="6" z_c="8" K="73.678100" Theta_zero="123.420000" KK="-21.678700" KKK="0.000000" info="Ver. 1.0, Ref. 3"/>
+    <ang-q a="5" b="5" c="33" z_a="6" z_b="6" z_c="8" K="54.538100" Theta_zero="111.270000" KK="-8.364200" KKK="-13.083800" info="Ver. 1.0, Ref. 3"/>
+    <ang-q a="12" b="5" c="33" z_a="1" z_b="6" z_c="8" K="58.544600" Theta_zero="108.728000" KK="-10.808800" KKK="-12.400600" info="Ver. 1.0, Ref. 3"/>
+    <ang-q a="1" b="33" c="5" z_a="6" z_b="8" z_c="6" K="38.973900" Theta_zero="102.969500" KK="-6.259500" KKK="-8.171000" info="Ver. 1.0, Ref. 3"/>
+    <ang-q a="1" b="33" c="12" z_a="6" z_b="8" z_c="1" K="53.125000" Theta_zero="108.190000" KK="-8.501600" KKK="0.000000" info="Ver. 1.0, Ref. 3"/>
+    <ang-q a="5" b="33" c="5" z_a="6" z_b="8" z_c="6" K="35.745400" Theta_zero="104.500000" KK="-10.006700" KKK="-6.272900" info="Ver. 1.0, Ref. 3"/>
+    <ang-q a="5" b="33" c="12" z_a="6" z_b="8" z_c="1" K="52.706100" Theta_zero="105.800000" KK="-12.109000" KKK="-9.868100" info="Ver. 1.0, Ref. 3"/>
+    <ang-q a="1" b="1" c="20" z_a="6" z_b="6" z_c="7" K="60.000000" Theta_zero="120.000000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="1" b="1" c="39" z_a="6" z_b="6" z_c="15" K="47.841000" Theta_zero="120.001000" KK="-15.229000" KKK="-10.907000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="5" b="5" c="20" z_a="6" z_b="6" z_c="7" K="55.242000" Theta_zero="117.317000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="12" b="5" c="20" z_a="1" z_b="6" z_c="7" K="62.731000" Theta_zero="107.499000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="12" b="5" c="39" z_a="1" z_b="6" z_c="15" K="33.830000" Theta_zero="110.886000" KK="-7.043000" KKK="-7.246000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="5" b="20" c="12" z_a="6" z_b="7" z_c="1" K="37.262000" Theta_zero="117.200000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="12" b="20" c="12" z_a="1" z_b="7" z_c="1" K="31.091000" Theta_zero="110.910000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="12" b="20" c="39" z_a="1" z_b="7" z_c="15" K="26.068000" Theta_zero="120.000000" KK="-8.298000" KKK="-5.943000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="39" b="20" c="39" z_a="15" z_b="7" z_c="15" K="23.868000" Theta_zero="135.000000" KK="-8.736000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="5" b="24" c="39" z_a="6" z_b="7" z_c="15" K="25.001000" Theta_zero="120.083000" KK="-6.117000" KKK="-5.457000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="12" b="24" c="39" z_a="1" z_b="7" z_c="15" K="25.001000" Theta_zero="120.083000" KK="-6.117000" KKK="-5.457000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="5" b="33" c="39" z_a="6" z_b="8" z_c="15" K="35.001000" Theta_zero="118.283000" KK="-10.360000" KKK="-7.870000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="12" b="33" c="39" z_a="1" z_b="8" z_c="15" K="26.031000" Theta_zero="117.000000" KK="-5.828000" KKK="-5.620000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="1" b="39" c="1" z_a="6" z_b="15" z_c="6" K="56.185000" Theta_zero="110.231000" KK="-17.316000" KKK="-12.728000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="1" b="39" c="12" z_a="6" z_b="15" z_c="1" K="36.185000" Theta_zero="108.231000" KK="-6.488000" KKK="-7.646000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="1" b="39" c="20" z_a="6" z_b="15" z_c="7" K="63.062000" Theta_zero="109.600000" KK="-19.740000" KKK="-14.329000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="1" b="39" c="24" z_a="6" z_b="15" z_c="7" K="70.977000" Theta_zero="108.165000" KK="-11.548000" KKK="-15.109000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="1" b="39" c="33" z_a="6" z_b="15" z_c="8" K="71.977000" Theta_zero="107.365000" KK="-10.943000" KKK="-15.290000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="5" b="39" c="5" z_a="6" z_b="15" z_c="6" K="48.232000" Theta_zero="102.500000" KK="-5.798000" KKK="-9.966000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="5" b="39" c="12" z_a="6" z_b="15" z_c="1" K="52.071000" Theta_zero="102.900000" KK="-6.468000" KKK="-10.773000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="5" b="39" c="20" z_a="6" z_b="15" z_c="7" K="47.366000" Theta_zero="119.300000" KK="-14.641000" KKK="-10.736000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="12" b="39" c="12" z_a="1" z_b="15" z_c="1" K="39.695000" Theta_zero="101.408000" KK="-5.134000" KKK="-8.227000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="12" b="39" c="20" z_a="1" z_b="15" z_c="7" K="45.978000" Theta_zero="110.033000" KK="-14.052000" KKK="-10.399000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="12" b="39" c="24" z_a="1" z_b="15" z_c="7" K="68.257000" Theta_zero="103.978000" KK="-9.221000" KKK="-14.174000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="12" b="39" c="33" z_a="1" z_b="15" z_c="8" K="73.257000" Theta_zero="103.978000" KK="-9.897000" KKK="-15.212000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="20" b="39" c="20" z_a="7" z_b="15" z_c="7" K="90.523000" Theta_zero="125.000000" KK="-20.801000" KKK="-19.602000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="20" b="39" c="24" z_a="7" z_b="15" z_c="7" K="89.923000" Theta_zero="123.215000" KK="-32.612000" KKK="-21.096000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="20" b="39" c="33" z_a="7" z_b="15" z_c="8" K="99.923000" Theta_zero="112.215000" KK="-32.093000" KKK="-22.821000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="24" b="39" c="24" z_a="7" z_b="15" z_c="7" K="85.769000" Theta_zero="107.100000" KK="-5.779000" KKK="-17.489000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="24" b="39" c="33" z_a="7" z_b="15" z_c="8" K="86.769000" Theta_zero="108.300000" KK="-5.175000" KKK="-17.671000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="33" b="39" c="33" z_a="8" z_b="15" z_c="8" K="86.769000" Theta_zero="107.500000" KK="-4.570000" KKK="-17.852000" info="Ver. 1.0, Ref. 4"/>
+    <ang-q a="27" b="3" c="27" z_a="8" z_b="6" z_c="8" K="57.100000" Theta_zero="180.000000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 5"/>
+    <ang-q a="40" b="3" c="40" z_a="16" z_b="6" z_c="16" K="48.000000" Theta_zero="180.000000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 5"/>
+    <ang-q a="27" b="21" c="27" z_a="8" z_b="7" z_c="8" K="150.000000" Theta_zero="134.100000" KK="-82.101300" KKK="-40.000500" info="Ver. 1.0, Ref. 5"/>
+    <ang-q a="27" b="41" c="27" z_a="8" z_b="16" z_c="8" K="115.262700" Theta_zero="119.300000" KK="-35.627800" KKK="-26.126100" info="Ver. 1.0, Ref. 5"/>
+    <ang-q a="1" b="1" c="25" z_a="6" z_b="6" z_c="7" K="29.243600" Theta_zero="118.800000" KK="-8.849500" KKK="-6.602000" info="Ver. 1.0, Ref. 6"/>
+    <ang-q a="12" b="5" c="25" z_a="1" z_b="6" z_c="7" K="54.931800" Theta_zero="107.000000" KK="-9.133300" KKK="-11.543400" info="Ver. 1.0, Ref. 6"/>
+    <ang-q a="12" b="5" c="36" z_a="1" z_b="6" z_c="8" K="58.544600" Theta_zero="108.728000" KK="-10.808800" KKK="-12.400600" info="Ver. 1.0, Ref. 6"/>
+    <ang-q a="1" b="25" c="27" z_a="6" z_b="7" z_c="8" K="63.940400" Theta_zero="117.700000" KK="-18.452400" KKK="-14.312900" info="Ver. 1.0, Ref. 6"/>
+    <ang-q a="5" b="25" c="27" z_a="6" z_b="7" z_c="8" K="64.522800" Theta_zero="117.500000" KK="-18.458200" KKK="-14.421500" info="Ver. 1.0, Ref. 6"/>
+    <ang-q a="12" b="25" c="27" z_a="1" z_b="7" z_c="8" K="53.803400" Theta_zero="115.700000" KK="-14.199100" KKK="-11.870800" info="Ver. 1.0, Ref. 6"/>
+    <ang-q a="27" b="25" c="27" z_a="8" z_b="7" z_c="8" K="95.103500" Theta_zero="128.000000" KK="-47.424000" KKK="-27.916400" info="Ver. 1.0, Ref. 6"/>
+    <ang-q a="5" b="36" c="25" z_a="6" z_b="8" z_c="7" K="55.745400" Theta_zero="108.500000" KK="-10.006700" KKK="-6.272900" info="Ver. 1.0, Ref. 6"/>
+    <ang-q a="5" b="5" c="36" z_a="6" z_b="6" z_c="8" K="54.538100" Theta_zero="105.000000" KK="-8.364200" KKK="-13.083800" info="Ver. 1.0, Ref. 6"/>
+    <ang-q a="36" b="25" c="27" z_a="8" z_b="7" z_c="8" K="85.522800" Theta_zero="112.800000" KK="-18.458200" KKK="-14.421500" info="Ver. 1.0, Ref. 6"/>
+    <ang-q a="4" b="33" c="5" z_a="6" z_b="8" z_c="6" K="38.973900" Theta_zero="109.000000" KK="-6.259500" KKK="-8.171000" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="4" b="5" c="12" z_a="6" z_b="6" z_c="1" K="38.083300" Theta_zero="107.859400" KK="-17.507400" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="4" b="24" c="4" z_a="6" z_b="7" z_c="6" K="76.310500" Theta_zero="121.955600" KK="-26.316600" KKK="-17.694400" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="1" b="1" c="4" z_a="6" z_b="6" z_c="6" K="71.259800" Theta_zero="116.064000" KK="-15.827300" KKK="2.050600" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="1" b="4" c="24" z_a="6" z_b="6" z_c="7" K="84.837700" Theta_zero="108.440000" KK="-19.964000" KKK="2.740500" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="1" b="4" c="27" z_a="6" z_b="6" z_c="8" K="72.316700" Theta_zero="125.532000" KK="-16.065000" KKK="2.081800" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="1" b="1" c="24" z_a="6" z_b="6" z_c="7" K="73.273800" Theta_zero="120.764000" KK="-27.403300" KKK="13.392000" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="1" b="24" c="4" z_a="6" z_b="7" z_c="6" K="47.113100" Theta_zero="120.070000" KK="-32.559200" KKK="13.125700" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="27" b="4" c="33" z_a="8" z_b="6" z_c="8" K="98.681300" Theta_zero="118.985500" KK="-22.248500" KKK="10.367300" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="27" b="4" c="5" z_a="8" z_b="6" z_c="6" K="65.101600" Theta_zero="119.300000" KK="-17.976600" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="33" b="4" c="5" z_a="8" z_b="6" z_c="6" K="88.863100" Theta_zero="100.318200" KK="-3.832300" KKK="-7.980200" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="24" b="4" c="27" z_a="7" z_b="6" z_c="8" K="92.572000" Theta_zero="121.542000" KK="-34.480000" KKK="-11.187100" info="Ver. 1.0, Ref. 7"/>
+    <ang-q a="23" b="22" c="19" z_a="7" z_b="7" z_c="7" K="47.789900" Theta_zero="171.621100" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 9"/>
+    <ang-q a="22" b="23" c="12" z_a="7" z_b="7" z_c="1" K="55.763500" Theta_zero="110.034500" KK="0.661800" KKK="0.002200" info="Ver. 1.0, Ref. 9"/>
+    <ang-q a="22" b="23" c="5" z_a="7" z_b="7" z_c="6" K="82.629400" Theta_zero="113.501700" KK="0.984500" KKK="0.003300" info="Ver. 1.0, Ref. 9"/>
+    <ang-q a="23" b="5" c="12" z_a="7" z_b="6" z_c="1" K="52.780300" Theta_zero="107.974400" KK="0.661500" KKK="0.002300" info="Ver. 1.0, Ref. 9"/>
+    <ang-q a="23" b="5" c="5" z_a="7" z_b="6" z_c="6" K="77.938700" Theta_zero="110.990000" KK="0.949900" KKK="0.003300" info="Ver. 1.0, Ref. 9"/>
+    <ang-q a="1" b="1" c="42" z_a="6" z_b="6" z_c="14" K="30.468900" Theta_zero="120.000000" KK="-23.543900" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+    <ang-q a="5" b="5" c="42" z_a="6" z_b="6" z_c="14" K="39.516000" Theta_zero="112.670000" KK="-7.443000" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+    <ang-q a="12" b="5" c="42" z_a="1" z_b="6" z_c="14" K="28.772100" Theta_zero="112.035500" KK="-13.952300" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+    <ang-q a="1" b="42" c="12" z_a="6" z_b="14" z_c="1" K="41.949700" Theta_zero="109.593200" KK="-42.363900" KKK="48.144200" info="Ver. 1.0, Ref. 10"/>
+    <ang-q a="5" b="42" c="5" z_a="6" z_b="14" z_c="6" K="36.206900" Theta_zero="113.185500" KK="-20.393900" KKK="20.017200" info="Ver. 1.0, Ref. 10"/>
+    <ang-q a="5" b="42" c="12" z_a="6" z_b="14" z_c="1" K="36.483200" Theta_zero="112.097700" KK="-12.809400" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+    <ang-q a="12" b="42" c="12" z_a="1" z_b="14" z_c="1" K="32.541500" Theta_zero="108.605100" KK="-8.316400" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+    <ang-q a="5" b="42" c="42" z_a="6" z_b="14" z_c="14" K="19.469200" Theta_zero="113.000000" KK="-34.347100" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+    <ang-q a="12" b="42" c="42" z_a="1" z_b="14" z_c="14" K="22.506200" Theta_zero="112.089300" KK="-11.592600" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+    <ang-q a="42" b="42" c="42" z_a="14" z_b="14" z_c="14" K="24.950100" Theta_zero="114.267600" KK="-19.594900" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+  </angles-q>
+  <dihedrals-ccc>
+  <!-- Dihedrals / torsions
+
+    V(Phi) = K x (Phi - Phi0)^2  +  K' x (Phi - Phi0)^3  +  K'' x (Phi - Phi0)^4
+    With:
+      - K, K' and K'' = nth order spring constant (kcal mol^-1 rad^-nth)
+      - Phi = dihedral angle (°)
+      - Phi0 = phase shift angle (°)  -->
+    <dih-ccc a="1" b="1" c="1" d="1" z_a="6" z_b="6" z_c="6" z_d="6" K="8.366700" Phi_zero="0.000000" KK="1.200000" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="1" b="1" c="1" d="5" z_a="6" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" KK="4.407200" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="1" b="1" c="1" d="12" z_a="6" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" KK="3.966100" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="5" b="1" c="1" d="12" z_a="6" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" KK="1.559000" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="12" b="1" c="1" d="12" z_a="1" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" KK="2.350000" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="1" b="1" c="5" d="1" z_a="6" z_b="6" z_c="6" z_d="6" K="-0.280200" Phi_zero="0.000000" KK="-0.067800" KKK="-0.012200" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="1" b="1" c="5" d="5" z_a="6" z_b="6" z_c="6" z_d="6" K="-0.280200" Phi_zero="0.000000" KK="-0.067800" KKK="-0.012200" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="1" b="1" c="5" d="12" z_a="6" z_b="6" z_c="6" z_d="1" K="-0.280200" Phi_zero="0.000000" KK="-0.067800" KKK="-0.012200" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="1" b="5" c="5" d="12" z_a="6" z_b="6" z_c="6" z_d="1" K="-0.022800" Phi_zero="0.000000" KK="0.028000" KKK="-0.186300" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="5" b="5" c="5" d="5" z_a="6" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" KK="0.051400" KKK="-0.143000" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="5" b="5" c="5" d="12" z_a="6" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.031600" KKK="-0.168100" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="12" b="5" c="5" d="12" z_a="1" z_b="6" z_c="6" z_d="1" K="-0.143200" Phi_zero="0.000000" KK="0.061700" KKK="-0.153000" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="-1" b="1" c="1" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="4.500000" KKK="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="-1" b="5" c="5" d="-1" z_a="-1" z_b="6" z_c="6" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.153000" info="Ver. 1.0, Ref. 1"/>
+    <dih-ccc a="12" b="38" c="42" d="5" z_a="1" z_b="8" z_c="14" z_d="6" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.050000" info="Ver. 1.0, Ref. 2"/>
+    <dih-ccc a="12" b="38" c="42" d="12" z_a="1" z_b="8" z_c="14" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.050000" info="Ver. 1.0, Ref. 2"/>
+    <dih-ccc a="12" b="38" c="42" d="38" z_a="1" z_b="8" z_c="14" z_d="8" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.050000" info="Ver. 1.0, Ref. 2"/>
+    <dih-ccc a="42" b="38" c="42" d="5" z_a="14" z_b="8" z_c="14" z_d="6" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.010000" info="Ver. 1.0, Ref. 2"/>
+    <dih-ccc a="42" b="38" c="42" d="12" z_a="14" z_b="8" z_c="14" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.010000" info="Ver. 1.0, Ref. 2"/>
+    <dih-ccc a="42" b="38" c="42" d="38" z_a="14" z_b="8" z_c="14" z_d="8" K="-0.225000" Phi_zero="0.000000" KK="0.000000" KKK="-0.010000" info="Ver. 1.0, Ref. 2"/>
+    <dih-ccc a="-1" b="38" c="42" d="-1" z_a="-1" z_b="8" z_c="14" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.010000" info="Ver. 1.0, Ref. 2"/>
+    <dih-ccc a="1" b="1" c="1" d="33" z_a="6" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" KK="4.849800" KKK="0.000000" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="12" b="1" c="1" d="33" z_a="1" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" KK="1.723400" KKK="0.000000" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="1" b="1" c="33" d="5" z_a="6" z_b="6" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" KK="1.500000" KKK="0.000000" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="1" b="1" c="33" d="12" z_a="6" z_b="6" z_c="8" z_d="1" K="-0.690000" Phi_zero="0.000000" KK="0.509700" KKK="0.009500" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="5" b="5" c="5" d="33" z_a="6" z_b="6" z_c="6" z_d="8" K="0.713700" Phi_zero="0.000000" KK="0.266000" KKK="-0.254500" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="12" b="5" c="5" d="33" z_a="1" z_b="6" z_c="6" z_d="8" K="-0.143500" Phi_zero="0.000000" KK="0.253000" KKK="-0.090500" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="33" b="5" c="5" d="33" z_a="8" z_b="6" z_c="6" z_d="8" K="1.100000" Phi_zero="0.000000" KK="-0.050000" KKK="-0.144100" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="5" b="5" c="33" d="5" z_a="6" z_b="6" z_c="8" z_d="6" K="-0.400000" Phi_zero="0.000000" KK="-0.402800" KKK="-0.245000" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="5" b="5" c="33" d="12" z_a="6" z_b="6" z_c="8" z_d="1" K="-0.673200" Phi_zero="0.000000" KK="-0.477800" KKK="-0.167000" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="12" b="5" c="33" d="1" z_a="1" z_b="6" z_c="8" z_d="6" K="0.951300" Phi_zero="0.000000" KK="0.115500" KKK="0.072000" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="12" b="5" c="33" d="5" z_a="1" z_b="6" z_c="8" z_d="6" K="0.530200" Phi_zero="0.000000" KK="0.000000" KKK="-0.396600" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="12" b="5" c="33" d="12" z_a="1" z_b="6" z_c="8" z_d="1" K="0.186300" Phi_zero="0.000000" KK="-0.433800" KKK="-0.212100" info="Ver. 1.0, Ref. 3"/>
+    <dih-ccc a="1" b="1" c="1" d="39" z_a="6" z_b="6" z_c="6" z_d="15" K="0.000000" Phi_zero="0.000000" KK="5.477000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="1" c="1" d="39" z_a="1" z_b="6" z_c="6" z_d="15" K="0.000000" Phi_zero="0.000000" KK="2.270000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="1" b="1" c="39" d="12" z_a="6" z_b="6" z_c="15" z_d="1" K="-0.272000" Phi_zero="0.000000" KK="1.190000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="1" b="1" c="39" d="20" z_a="6" z_b="6" z_c="15" z_d="7" K="-0.272000" Phi_zero="0.000000" KK="1.190000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="5" b="5" c="5" d="20" z_a="6" z_b="6" z_c="6" z_d="7" K="0.097000" Phi_zero="0.000000" KK="0.072000" KKK="-0.258000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="5" c="5" d="20" z_a="1" z_b="6" z_c="6" z_d="7" K="-0.151000" Phi_zero="0.000000" KK="0.010000" KKK="-0.186000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="5" b="5" c="20" d="12" z_a="6" z_b="6" z_c="7" z_d="1" K="-5.072000" Phi_zero="0.000000" KK="-0.498000" KKK="-0.438000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="5" c="20" d="12" z_a="1" z_b="6" z_c="7" z_d="1" K="1.266000" Phi_zero="0.000000" KK="-0.774000" KKK="0.038000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="5" c="39" d="5" z_a="1" z_b="6" z_c="15" z_d="6" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.068000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="5" c="39" d="12" z_a="1" z_b="6" z_c="15" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.068000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="5" c="39" d="20" z_a="1" z_b="6" z_c="15" z_d="7" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.068000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="20" c="39" d="1" z_a="1" z_b="7" z_c="15" z_d="6" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.350000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="20" c="39" d="5" z_a="1" z_b="7" z_c="15" z_d="6" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.369000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="20" c="39" d="12" z_a="1" z_b="7" z_c="15" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.350000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="20" c="39" d="33" z_a="1" z_b="7" z_c="15" z_d="8" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.350000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="39" b="20" c="39" d="12" z_a="15" z_b="7" z_c="15" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="39" b="20" c="39" d="20" z_a="15" z_b="7" z_c="15" z_d="7" K="1.800000" Phi_zero="0.000000" KK="0.500000" KKK="2.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="24" c="39" d="12" z_a="1" z_b="7" z_c="15" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="24" c="39" d="20" z_a="1" z_b="7" z_c="15" z_d="7" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="24" c="39" d="33" z_a="1" z_b="7" z_c="15" z_d="8" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="33" c="39" d="12" z_a="1" z_b="8" z_c="15" z_d="1" K="5.708000" Phi_zero="0.000000" KK="2.118000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="33" c="39" d="20" z_a="1" z_b="8" z_c="15" z_d="7" K="5.708000" Phi_zero="0.000000" KK="2.118000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="12" b="33" c="39" d="33" z_a="1" z_b="8" z_c="15" z_d="8" K="5.708000" Phi_zero="0.000000" KK="2.118000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="-1" b="33" c="39" d="-1" z_a="-1" z_b="8" z_c="15" z_d="-1" K="5.708000" Phi_zero="0.000000" KK="2.118000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="-1" b="1" c="20" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="1.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="-1" b="1" c="39" d="-1" z_a="-1" z_b="6" z_c="15" z_d="-1" K="-0.272000" Phi_zero="0.000000" KK="1.190000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="-1" b="5" c="20" d="-1" z_a="-1" z_b="6" z_c="7" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.020000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="-1" b="5" c="39" d="-1" z_a="-1" z_b="6" z_c="15" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.068000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="-1" b="20" c="39" d="-1" z_a="-1" z_b="7" z_c="15" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.350000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="-1" b="24" c="39" d="-1" z_a="-1" z_b="7" z_c="15" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <dih-ccc a="1" b="1" c="1" d="25" z_a="6" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" KK="7.212400" KKK="0.000000" info="Ver. 1.0, Ref. 6"/>
+    <dih-ccc a="12" b="1" c="1" d="25" z_a="1" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" KK="2.912600" KKK="0.000000" info="Ver. 1.0, Ref. 6"/>
+    <dih-ccc a="1" b="1" c="25" d="27" z_a="6" z_b="6" z_c="7" z_d="8" K="0.000000" Phi_zero="0.000000" KK="1.160000" KKK="0.000000" info="Ver. 1.0, Ref. 6"/>
+    <dih-ccc a="5" b="5" c="25" d="27" z_a="6" z_b="6" z_c="7" z_d="8" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.350000" info="Ver. 1.0, Ref. 6"/>
+    <dih-ccc a="12" b="5" c="25" d="27" z_a="1" z_b="6" z_c="7" z_d="8" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.350000" info="Ver. 1.0, Ref. 6"/>
+    <dih-ccc a="5" b="5" c="33" d="25" z_a="6" z_b="6" z_c="8" z_d="7" K="0.000000" Phi_zero="0.000000" KK="-0.400000" KKK="-0.200000" info="Ver. 1.0, Ref. 6"/>
+    <dih-ccc a="27" b="25" c="33" d="5" z_a="8" z_b="7" z_c="8" z_d="6" K="0.000000" Phi_zero="0.000000" KK="2.000000" KKK="0.000000" info="Ver. 1.0, Ref. 6"/>
+    <dih-ccc a="4" b="1" c="1" d="1" z_a="6" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" KK="4.628200" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="4" b="1" c="1" d="12" z_a="6" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" KK="2.167000" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="4" b="24" c="1" d="1" z_a="6" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" KK="0.650000" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="4" b="24" c="4" d="30" z_a="6" z_b="7" z_c="6" z_d="8" K="-0.406600" Phi_zero="0.000000" KK="1.251300" KKK="-0.750700" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="4" b="33" c="5" d="5" z_a="6" z_b="8" z_c="6" z_d="6" K="0.130200" Phi_zero="0.000000" KK="-0.325000" KKK="0.113400" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="4" b="33" c="5" d="12" z_a="6" z_b="8" z_c="6" z_d="1" K="0.951300" Phi_zero="0.000000" KK="0.115500" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="1" b="1" c="4" d="27" z_a="6" z_b="6" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" KK="0.780000" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="1" b="1" c="1" d="24" z_a="6" z_b="6" z_c="6" z_d="7" K="0.000000" Phi_zero="0.000000" KK="3.404000" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="1" b="24" c="4" d="27" z_a="6" z_b="7" z_c="6" z_d="8" K="0.000000" Phi_zero="0.000000" KK="2.052100" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="5" b="33" c="4" d="5" z_a="6" z_b="8" z_c="6" z_d="6" K="-2.559400" Phi_zero="0.000000" KK="2.201300" KKK="0.032500" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="5" b="33" c="4" d="27" z_a="6" z_b="8" z_c="6" z_d="8" K="0.890500" Phi_zero="0.000000" KK="3.264400" KKK="0.264600" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="27" b="4" c="5" d="12" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="33" b="4" c="5" d="12" z_a="8" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="24" b="1" c="1" d="12" z_a="7" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" KK="3.404000" KKK="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <dih-ccc a="12" b="23" c="22" d="19" z_a="1" z_b="7" z_c="7" z_d="7" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.263700" info="Ver. 1.0, Ref. 9"/>
+    <dih-ccc a="5" b="23" c="22" d="19" z_a="6" z_b="7" z_c="7" z_d="7" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.182300" info="Ver. 1.0, Ref. 9"/>
+    <dih-ccc a="22" b="23" c="5" d="12" z_a="7" z_b="7" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.218100" info="Ver. 1.0, Ref. 9"/>
+    <dih-ccc a="22" b="23" c="5" d="5" z_a="7" z_b="7" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.202100" info="Ver. 1.0, Ref. 9"/>
+    <dih-ccc a="23" b="5" c="5" d="12" z_a="7" z_b="6" z_c="6" z_d="1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.225900" info="Ver. 1.0, Ref. 9"/>
+    <dih-ccc a="1" b="1" c="1" d="42" z_a="6" z_b="6" z_c="6" z_d="14" K="0.000000" Phi_zero="0.000000" KK="4.327000" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+    <dih-ccc a="12" b="1" c="1" d="42" z_a="1" z_b="6" z_c="6" z_d="14" K="0.000000" Phi_zero="0.000000" KK="1.509300" KKK="0.000000" info="Ver. 1.0, Ref. 10"/>
+    <dih-ccc a="1" b="1" c="42" d="-1" z_a="6" z_b="6" z_c="14" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.023100" info="Ver. 1.0, Ref. 10"/>
+    <dih-ccc a="5" b="5" c="42" d="42" z_a="6" z_b="6" z_c="14" z_d="14" K="-0.350000" Phi_zero="0.000000" KK="0.000000" KKK="-0.065700" info="Ver. 1.0, Ref. 10"/>
+    <dih-ccc a="-1" b="5" c="42" d="-1" z_a="-1" z_b="6" z_c="14" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.065700" info="Ver. 1.0, Ref. 10"/>
+    <dih-ccc a="-1" b="42" c="42" d="-1" z_a="-1" z_b="14" z_c="14" z_d="-1" K="0.000000" Phi_zero="0.000000" KK="0.000000" KKK="-0.065700" info="Ver. 1.0, Ref. 10"/>
+  </dihedrals-ccc>
+  <inversions>
+  <!-- Inversions
+  0= Key_a, 1= Key_b, 2= Key_c, 3= Key_d, 4= K, 5= Phi0, 7= FF info
+
+  V(φ) = K x (Phi - Phi0)^2
+  With:
+    - K = spring constant (kcal mol^-1 rad^-2)
+    - Phi = angle (°)
+    - Phi0 = equilibrium angle (°)  -->
+    <inv a="1" b="1" c="1" d="1" z_a="6" z_b="6" z_c="6" z_d="6" K="7.179400" Phi_zero="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <inv a="1" b="1" c="1" d="5" z_a="6" z_b="6" z_c="6" z_d="6" K="7.815300" Phi_zero="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <inv a="1" b="1" c="1" d="12" z_a="6" z_b="6" z_c="6" z_d="1" K="4.891200" Phi_zero="0.000000" info="Ver. 1.0, Ref. 1"/>
+    <inv a="1" b="1" c="1" d="33" z_a="6" z_b="6" z_c="6" z_d="8" K="13.042100" Phi_zero="0.000000" info="Ver. 1.0, Ref. 3"/>
+    <inv a="1" b="1" c="1" d="20" z_a="6" z_b="6" z_c="6" z_d="7" K="8.000000" Phi_zero="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <inv a="1" b="1" c="1" d="39" z_a="6" z_b="6" z_c="6" z_d="15" K="6.709000" Phi_zero="0.000000" info="Ver. 1.0, Ref. 4"/>
+    <inv a="1" b="1" c="1" d="25" z_a="6" z_b="6" z_c="6" z_d="7" K="0.919400" Phi_zero="0.000000" info="Ver. 1.0, Ref. 6"/>
+    <inv a="25" b="1" c="27" d="27" z_a="7" z_b="6" z_c="8" z_d="8" K="36.261200" Phi_zero="0.000000" info="Ver. 1.0, Ref. 6"/>
+    <inv a="25" b="5" c="27" d="27" z_a="7" z_b="6" z_c="8" z_d="8" K="44.306200" Phi_zero="0.000000" info="Ver. 1.0, Ref. 6"/>
+    <inv a="25" b="12" c="27" d="27" z_a="7" z_b="1" z_c="8" z_d="8" K="38.558100" Phi_zero="0.000000" info="Ver. 1.0, Ref. 6"/>
+    <inv a="25" b="27" c="27" d="33" z_a="7" z_b="8" z_c="8" z_d="8" K="45.000000" Phi_zero="0.000000" info="Ver. 1.0, Ref. 6"/>
+    <inv a="4" b="4" c="24" d="1" z_a="6" z_b="6" z_c="7" z_d="6" K="0.000000" Phi_zero="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <inv a="1" b="4" c="1" d="1" z_a="6" z_b="6" z_c="6" z_d="6" K="17.052600" Phi_zero="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <inv a="24" b="4" c="4" d="1" z_a="7" z_b="6" z_c="6" z_d="6" K="0.000000" Phi_zero="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <inv a="1" b="1" c="24" d="1" z_a="6" z_b="6" z_c="7" z_d="6" K="17.052600" Phi_zero="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <inv a="1" b="1" c="1" d="24" z_a="6" z_b="6" z_c="6" z_d="7" K="17.052600" Phi_zero="0.000000" info="Ver. !1.0, Ref. 7"/>
+    <inv a="4" b="1" c="24" d="27" z_a="6" z_b="6" z_c="7" z_d="8" K="30.000000" Phi_zero="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <inv a="1" b="1" c="4" d="1" z_a="6" z_b="6" z_c="6" z_d="6" K="17.052600" Phi_zero="0.000000" info="Ver. !1.0, Ref. 7"/>
+    <inv a="4" b="1" c="27" d="24" z_a="6" z_b="6" z_c="8" z_d="7" K="30.000000" Phi_zero="0.000000" info="Ver. !1.0, Ref. 7"/>
+    <inv a="27" b="1" c="4" d="24" z_a="8" z_b="6" z_c="6" z_d="7" K="30.000000" Phi_zero="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <inv a="4" b="5" c="33" d="27" z_a="6" z_b="6" z_c="8" z_d="8" K="46.926400" Phi_zero="0.000000" info="Ver. 1.0, Ref. 7"/>
+    <inv a="1" b="1" c="42" d="1" z_a="6" z_b="6" z_c="14" z_d="6" K="5.365400" Phi_zero="0.000000" info="Ver. 1.0, Ref. 10"/>
+  </inversions>
+  <non-bonded>
+  <!-- Non-bonded 9-6
+  0= Key_a, 1= Epslion, 2= R0 (A), 3=  FF info
+
+  Non-bonded (9-6): V(rij) =  Epslion(ij) x [2 x (R0(ij)/rij)^9 - 3 x (R0(ij)/rij)^6]
+  With:
+  Epslion(ij) = 2 x sqrt(Epslion(i) x Epslion(j)) x R0(i)^3 x R0(j)^3 / [ R0(i)^6 + R0(j)^6 ]      and Epslion(i) (kcal mol^-1)
+  R0(ij)= ((R0(i)^6 + R0(j)^6)/2) ^ 1/6      and R0(i) (A)
+  -->
+    <non-bd a="1" z_a="6" Ei="3.915000" Ri="0.068000" info="Ver. 1.0, Ref. 1"/>
+    <non-bd a="5" z_a="6" Ei="3.854000" Ri="0.062000" info="Ver. 1.0, Ref. 1"/>
+    <non-bd a="8" z_a="6" Ei="3.854000" Ri="0.040000" info="Ver. 1.0, Ref. 1"/>
+    <non-bd a="9" z_a="6" Ei="3.854000" Ri="0.020000" info="Ver. 1.0, Ref. 1"/>
+    <non-bd a="12" z_a="1" Ei="2.878000" Ri="0.023000" info="Ver. 1.0, Ref. 1"/>
+    <non-bd a="38" z_a="8" Ei="3.300000" Ri="0.080000" info="Ver. 1.0, Ref. 2"/>
+    <non-bd a="42" z_a="14" Ei="4.405000" Ri="0.198000" info="Ver. 1.0, Ref. 2"/>
+    <non-bd a="43" z_a="14" Ei="4.290000" Ri="0.131000" info="Ver. 1.0, Ref. 2"/>
+    <non-bd a="10" z_a="6" Ei="3.815000" Ri="0.068000" info="Ver. 1.0, Ref. 3"/>
+    <non-bd a="14" z_a="1" Ei="1.087000" Ri="0.008000" info="Ver. 1.0, Ref. 3"/>
+    <non-bd a="33" z_a="8" Ei="3.300000" Ri="0.080000" info="Ver. 1.0, Ref. 3"/>
+    <non-bd a="34" z_a="8" Ei="3.300000" Ri="0.120000" info="Ver. 1.0, Ref. 3"/>
+    <non-bd a="35" z_a="8" Ei="3.580000" Ri="0.096000" info="Ver. 1.0, Ref. 3"/>
+    <non-bd a="20" z_a="7" Ei="3.830000" Ri="0.096000" info="Ver. 1.0, Ref. 4"/>
+    <non-bd a="39" z_a="15" Ei="4.295000" Ri="0.065000" info="Ver. 1.0, Ref. 4"/>
+    <non-bd a="15" z_a="2" Ei="2.900000" Ri="0.005000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="26" z_a="10" Ei="3.200000" Ri="0.055000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="0" z_a="18" Ei="3.880000" Ri="0.200000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="16" z_a="36" Ei="4.300000" Ri="0.280000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="44" z_a="54" Ei="4.260000" Ri="0.390000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="13" z_a="1" Ei="1.421000" Ri="0.021600" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="17" z_a="7" Ei="3.800800" Ri="0.059800" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="2" z_a="6" Ei="4.012000" Ri="0.053000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="32" z_a="8" Ei="3.475800" Ri="0.078000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="30" z_a="8" Ei="3.602000" Ri="0.085000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="18" z_a="7" Ei="3.460000" Ri="0.128000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="31" z_a="8" Ei="3.300000" Ri="0.156000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="3" z_a="6" Ei="3.915000" Ri="0.068000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="41" z_a="16" Ei="4.047000" Ri="0.125000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="21" z_a="7" Ei="3.529000" Ri="0.333000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="27" z_a="8" Ei="3.430000" Ri="0.192000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="28" z_a="8" Ei="3.360000" Ri="0.067000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="40" z_a="16" Ei="4.007000" Ri="0.313000" info="Ver. 1.0, Ref. 5"/>
+    <non-bd a="25" z_a="7" Ei="3.760000" Ri="0.048000" info="Ver. 1.0, Ref. 6"/>
+    <non-bd a="29" z_a="8" Ei="3.400000" Ri="0.048000" info="Ver. 1.0, Ref. 6"/>
+    <non-bd a="36" z_a="8" Ei="3.650000" Ri="0.200000" info="Ver. 1.0, Ref. 6"/>
+    <non-bd a="4" z_a="6" Ei="3.900000" Ri="0.064000" info="Ver. 1.0, Ref. 7"/>
+    <non-bd a="24" z_a="7" Ei="3.720000" Ri="0.150000" info="Ver. 1.0, Ref. 7"/>
+    <non-bd a="37" z_a="8" Ei="3.300000" Ri="0.096000" info="Ver. 1.0, Ref. 7"/>
+    <non-bd a="10" z_a="6" Ei="3.870000" Ri="0.074800" info="Ver. 1.1, Ref. 8"/>
+    <non-bd a="6" z_a="6" Ei="3.870000" Ri="0.108000" info="Ver. 1.1, Ref. 8"/>
+    <non-bd a="7" z_a="6" Ei="3.815000" Ri="0.068000" info="Ver. 1.2, Ref. 10"/>
+    <non-bd a="11" z_a="6" Ei="3.650000" Ri="0.080000" info="Ver. 1.0, Ref. 9"/>
+    <non-bd a="19" z_a="7" Ei="3.520000" Ri="0.085000" info="Ver. 1.0, Ref. 9"/>
+    <non-bd a="22" z_a="7" Ei="3.300000" Ri="0.050000" info="Ver. 1.0, Ref. 9"/>
+    <non-bd a="23" z_a="7" Ei="3.400000" Ri="0.120000" info="Ver. 1.0, Ref. 9"/>
+  </non-bonded>
+</ff-xml>

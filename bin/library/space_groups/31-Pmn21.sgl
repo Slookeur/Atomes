@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>Pmn21</space-group>
+  <sg-num>31</sg-num>
+  <hm-symbol>P m n 21</hm-symbol>
+  <bravais>Orthorhombic</bravais>
+  <settings num="6">
+    <set name="P_m_n_21" x="a" y="b" z="c">
+    </set>
+    <set name="P_n_m_21" x="b" y="a" z="-c">
+    </set>
+    <set name="P_21_m_n" x="c" y="a" z="b">
+    </set>
+    <set name="P_21_n_m" x="-c" y="b" z="a">
+    </set>
+    <set name="P_n_21_m" x="b" y="c" z="a">
+    </set>
+    <set name="P_m_21_n" x="a" y="-c" z="b">
+    </set>
+  </settings>
+  <wyckoff num="2">
+    <wyck id="1" mul="4" let="b" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x+1/2" y="-y" z="z+1/2"/>
+      <pos x="x+1/2" y="-y" z="z+1/2"/>
+      <pos x="-x" y="y" z="z"/>
+    </wyck>
+    <wyck id="2" mul="2" let="a" site="m..">
+      <pos x="0" y="y" z="z"/>
+      <pos x="1/2" y="-y" z="z+1/2"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

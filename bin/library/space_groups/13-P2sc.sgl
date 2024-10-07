@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P2/c</space-group>
+  <sg-num>13</sg-num>
+  <hm-symbol>P 1 2/c 1</hm-symbol>
+  <bravais>Monoclinic</bravais>
+  <settings num="9">
+    <set name="P_1_2sc_1" x="a" y="b" z="c">
+    </set>
+    <set name="P_1_2sn_1" x="-a-c" y="b" z="a">
+    </set>
+    <set name="P_1_2sa_1" x="c" y="b" z="-a-c">
+    </set>
+    <set name="P_1_1_2sa" x="c" y="a" z="b">
+    </set>
+    <set name="P_1_1_2sn" x="a" y="-a-c" z="b">
+    </set>
+    <set name="P_1_1_2sb" x="-a-c" y="c" z="b">
+    </set>
+    <set name="P_2sb_1_1" x="b" y="c" z="a">
+    </set>
+    <set name="P_2sn_1_1" x="b" y="a" z="-a-c">
+    </set>
+    <set name="P_2sc_1_1" x="b" y="-a-c" z="c">
+    </set>
+  </settings>
+  <wyckoff num="7">
+    <wyck id="1" mul="4" let="g" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="y" z="-z+1/2"/>
+      <pos x="-x" y="-y" z="-z"/>
+      <pos x="x" y="-y" z="z+1/2"/>
+    </wyck>
+    <wyck id="2" mul="2" let="f" site="2">
+      <pos x="1/2" y="y" z="1/4"/>
+      <pos x="1/2" y="-y" z="3/4"/>
+    </wyck>
+    <wyck id="3" mul="2" let="e" site="2">
+      <pos x="0" y="y" z="1/4"/>
+      <pos x="0" y="-y" z="3/4"/>
+    </wyck>
+    <wyck id="4" mul="2" let="d" site="-1">
+      <pos x="1/2" y="0" z="0"/>
+      <pos x="1/2" y="0" z="1/2"/>
+    </wyck>
+    <wyck id="5" mul="2" let="c" site="-1">
+      <pos x="0" y="1/2" z="0"/>
+      <pos x="0" y="1/2" z="1/2"/>
+    </wyck>
+    <wyck id="6" mul="2" let="b" site="-1">
+      <pos x="1/2" y="1/2" z="0"/>
+      <pos x="1/2" y="1/2" z="1/2"/>
+    </wyck>
+    <wyck id="7" mul="2" let="a" site="-1">
+      <pos x="0" y="0" z="0"/>
+      <pos x="0" y="0" z="1/2"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P41212</space-group>
+  <sg-num>92</sg-num>
+  <hm-symbol>P 41 21 2</hm-symbol>
+  <bravais>Tetragonal</bravais>
+  <settings num="1">
+    <set name="P_41_21_2" x="a" y="b" z="c">
+    </set>
+  </settings>
+  <wyckoff num="2">
+    <wyck id="1" mul="8" let="b" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="-y" z="z+1/2"/>
+      <pos x="-y+1/2" y="x+1/2" z="z+1/4"/>
+      <pos x="y+1/2" y="-x+1/2" z="z+3/4"/>
+      <pos x="-x+1/2" y="y+1/2" z="-z+1/4"/>
+      <pos x="x+1/2" y="-y+1/2" z="-z+3/4"/>
+      <pos x="y" y="x" z="-z"/>
+      <pos x="-y" y="-x" z="-z+1/2"/>
+    </wyck>
+    <wyck id="2" mul="4" let="a" site="..2">
+      <pos x="x" y="x" z="0"/>
+      <pos x="-x" y="-x" z="1/2"/>
+      <pos x="-x+1/2" y="x+1/2" z="1/4"/>
+      <pos x="x+1/2" y="-x+1/2" z="3/4"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

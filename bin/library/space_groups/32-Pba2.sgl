@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>Pba2</space-group>
+  <sg-num>32</sg-num>
+  <hm-symbol>P b a 2</hm-symbol>
+  <bravais>Orthorhombic</bravais>
+  <settings num="3">
+    <set name="P_b_a_2" x="a" y="b" z="c">
+    </set>
+    <set name="P_2_c_b" x="c" y="a" z="b">
+    </set>
+    <set name="P_c_2_a" x="b" y="c" z="a">
+    </set>
+  </settings>
+  <wyckoff num="3">
+    <wyck id="1" mul="4" let="c" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="-y" z="z"/>
+      <pos x="x+1/2" y="-y+1/2" z="z"/>
+      <pos x="-x+1/2" y="y+1/2" z="z"/>
+    </wyck>
+    <wyck id="2" mul="2" let="b" site="..2">
+      <pos x="0" y="1/2" z="z"/>
+      <pos x="1/2" y="0" z="z"/>
+    </wyck>
+    <wyck id="3" mul="2" let="a" site="..2">
+      <pos x="0" y="0" z="z"/>
+      <pos x="1/2" y="1/2" z="z"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>I4cm</space-group>
+  <sg-num>108</sg-num>
+  <hm-symbol>I 4 c m</hm-symbol>
+  <bravais>Tetragonal</bravais>
+  <settings num="1">
+    <set name="I_4_c_m" x="a" y="b" z="c">
+      <points num="2">
+        <pt x="0" y="0" z="0"/>
+        <pt x="1/2" y="1/2" z="1/2"/>
+      </points>
+    </set>
+  </settings>
+  <wyckoff num="4">
+    <wyck id="1" mul="8" let="d" site="1">
+      <pos x="x" y="y" z="z"/>
+      <pos x="-x" y="-y" z="z"/>
+      <pos x="-y" y="x" z="z"/>
+      <pos x="y" y="-x" z="z"/>
+      <pos x="x" y="-y" z="z+1/2"/>
+      <pos x="-x" y="y" z="z+1/2"/>
+      <pos x="-y" y="-x" z="z+1/2"/>
+      <pos x="y" y="x" z="z+1/2"/>
+    </wyck>
+    <wyck id="2" mul="4" let="c" site="..m">
+      <pos x="x" y="x+1/2" z="z"/>
+      <pos x="-x" y="-x+1/2" z="z"/>
+      <pos x="-x+1/2" y="x" z="z"/>
+      <pos x="x+1/2" y="-x" z="z"/>
+    </wyck>
+    <wyck id="3" mul="2" let="b" site="2.mm">
+      <pos x="1/2" y="0" z="z"/>
+      <pos x="0" y="1/2" z="z"/>
+    </wyck>
+    <wyck id="4" mul="2" let="a" site="4..">
+      <pos x="0" y="0" z="z"/>
+      <pos x="0" y="0" z="z+1/2"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Space group info XML file -->
+<sg-xml>
+  <space-group>P1</space-group>
+  <sg-num>1</sg-num>
+  <hm-symbol>P 1</hm-symbol>
+  <bravais>Triclinic</bravais>
+  <settings num="1">
+    <set name="P_1" x="a" y="b" z="c">
+    </set>
+  </settings>
+  <wyckoff num="1">
+    <wyck id="1" mul="1" let="a" site="1">
+      <pos x="x" y="y" z="z"/>
+    </wyck>
+  </wyckoff>
+</sg-xml>
