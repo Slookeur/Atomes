@@ -559,7 +559,7 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
           active_project -> calc_time[RI] = get_calc_time (start_time, stop_time);
           active_project_changed (activep);
           prepostcalc (widg, TRUE, -1, statusb, 1.0);
-          if (widg != NULL) gtk_widget_show (curvetoolbox);
+          if (widg != NULL) show_the_widgets (curvetoolbox);
         }
         else
         {
@@ -591,7 +591,7 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
         }
         else
         {
-          if (widg != NULL) gtk_widget_show (curvetoolbox);
+          if (widg != NULL) show_the_widgets (curvetoolbox);
           if (! active_project -> runc[0]) update_ang_view (active_project);
         }
       }
@@ -609,7 +609,7 @@ G_MODULE_EXPORT void on_calc_bonds_released (GtkWidget * widg, gpointer data)
   fill_tool_model ();
   if (widg)
   {
-    gtk_widget_show (curvetoolbox);
+    show_the_widgets (curvetoolbox);
   }
   else
   {

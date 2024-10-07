@@ -35,7 +35,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 * List of functions:
 
   G_MODULE_EXPORT gboolean pop_menu (GtkWidget * widget, GdkEventButton * event, gpointer data);
-  G_MODULE_EXPORT gboolean on_atomes_pressed (GtkEventControllerKey * self, guint keyval, guint keycode, GdkModifierType state, gpointer data);
 
   void clean_view ();
   void view_buffer (GtkTextBuffer * buffer);
@@ -56,6 +55,8 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, double x, double y, gpointer data);
 
   GtkWidget * create_main_window (GApplication * atomes);
+
+  GIcon * get_gicon_from_data (int format, const gchar * icon);
 
   GMenuItem * create_gmenu_item (const gchar * label, const gchar * action, const gchar * accel,
                                  const gchar * custom, int format, const gchar * icon,
@@ -104,6 +105,20 @@ gchar * dots[NDOTS];
 gchar * calc_img[NCALCS-2];
 gchar * graph_img[NGRAPHS];
 
+atomes_action edition_acts[] = {{"edit.chemistry",   GINT_TO_POINTER(0)},
+                                {"edit.periodicity", GINT_TO_POINTER(1)},
+                                {"edit.cutoffs",     GINT_TO_POINTER(2)}};
+
+atomes_action analyze_acts[] = {{"analyze.gr",     GINT_TO_POINTER(0)},
+                                {"analyze.sq",     GINT_TO_POINTER(1)},
+                                {"analyze.sk",     GINT_TO_POINTER(2)},
+                                {"analyze.gk",     GINT_TO_POINTER(3)},
+                                {"analyze.bonds",  GINT_TO_POINTER(4)},
+                                {"analyze.rings",  GINT_TO_POINTER(5)},
+                                {"analyze.chains", GINT_TO_POINTER(6)},
+                                {"analyze.sp",     GINT_TO_POINTER(7)},
+                                {"analyze.msd",    GINT_TO_POINTER(8)}};
+
 char * calc_name[NCALCS-2] = {"g(r)/G(r)",
                               "S(q) from FFT[g(r)]",
                               "S(q) from Debye equation",
@@ -130,6 +145,118 @@ tint cut_sel;
 tint cut_lab;
 dint davect[9];
 ColRGBA std[6];
+
+shortcuts main_shortcuts[] = {
+  { "About", "open about dialog",  GDK_KEY_a, "<Ctrl>a" },
+  { "Periodic table", "open periodic table",  GDK_KEY_p, "<Ctrl>p" },
+  { "Quit", "quit atomes",  GDK_KEY_q, "<Ctrl>q" },
+//};
+//{
+  { "Open workspace", "open atomes workspace",  GDK_KEY_w, "<Ctrl>w" },
+  { "Save workspace", "save atomes workspace",  GDK_KEY_s, "<Ctrl>s" },
+  { "Close workspace", "close atomes workspace",  GDK_KEY_c, "<Ctrl>c" },
+//};
+//{
+  { "New project", "create new atomes project",  GDK_KEY_n, "<Ctrl>n" },
+  { "Open project", "open atomes project",  GDK_KEY_o, "<Ctrl>o" }
+};
+
+gchar * main_section_names[] = { "Main" };
+int main_group_by_section[] = { 3 };
+gchar * main_group_names[] = { "General", "Workspace", "Projects" };
+int main_shortcut_by_group[] = { 3, 3, 2 };
+
+/*!
+  \fn GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int groups, int shortcut_by_group[groups],
+*                                   gchar * section_names[sections], gchar * group_names[groups], shortcuts shortcs[])
+
+  \brief Create the shortcuts information window
+
+  \param sections number of shortcut sections
+  \param group_by_section number of group by section
+  \param groups number of groups
+  \param shortcut_by_group number of shortcuts by group
+  \param shortcs shortcuts information
+*/
+GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int groups, int shortcut_by_group[groups],
+                              gchar * section_names[sections], gchar * group_names[groups], shortcuts shortcs[])
+{
+  GtkShortcutsWindow * win = NULL;
+#ifdef G_OS_WIN32
+  win = g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, "deletable", TRUE, NULL);
+#else
+  win = g_object_new (GTK_TYPE_SHORTCUTS_WINDOW, "modal", FALSE, "resizable", TRUE, NULL);
+#endif
+  GtkShortcutsSection * shortcut_section[sections];
+  GtkShortcutsGroup * shortcut_group[groups];
+  GtkShortcutsShortcut * shortcut;
+#ifdef GTK4
+#if GTK_MINOR_VERSION < 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION < 4)
+  GtkWidget * sections_book = gtk_notebook_new ();
+  gtk_notebook_set_scrollable (GTK_NOTEBOOK(sections_book), TRUE);
+  gtk_notebook_set_tab_pos (GTK_NOTEBOOK(sections_book), GTK_POS_TOP);
+#endif
+#endif // GTK4
+  int i, j, k, l, m;
+  l = m = 0;
+  for (i=0; i<sections; i++)
+  {
+    shortcut_section[i] = g_object_new (GTK_TYPE_SHORTCUTS_SECTION, "visible", TRUE, "title", section_names[i], "section-name", section_names[i], NULL);
+#ifdef GTK4
+#if GTK_MINOR_VERSION < 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION < 4)
+  gtk_orientable_set_orientation ((GtkOrientable *)shortcut_section[i], GTK_ORIENTATION_HORIZONTAL);
+#endif
+#endif
+    for (j=0; j<group_by_section[i]; j++, l++)
+    {
+      shortcut_group[l] = g_object_new (GTK_TYPE_SHORTCUTS_GROUP, "visible", TRUE, "title", group_names[l], NULL);
+      for (k=0; k<shortcut_by_group[l]; k++, m++)
+      {
+        shortcut = g_object_new (GTK_TYPE_SHORTCUTS_SHORTCUT,
+                                 "visible",       TRUE,
+                                 "shortcut-type", GTK_SHORTCUT_ACCELERATOR,
+                                 "accelerator",   shortcs[m].accelerator,
+                                 "title",         shortcs[m].description,
+                                 NULL );
+#ifdef GTK4
+#if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
+        gtk_shortcuts_group_add_shortcut (shortcut_group[l], shortcut);
+#else
+        add_box_child_start (GTK_ORIENTATION_VERTICAL, (GtkWidget *)shortcut_group[l], (GtkWidget *)shortcut, FALSE, FALSE, 0);
+#endif
+#else
+        gtk_container_add (GTK_CONTAINER((GtkWidget *)shortcut_group[l]), (GtkWidget *)shortcut);
+#endif
+      }
+#ifdef GTK4
+#if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
+      gtk_shortcuts_section_add_group (shortcut_section[i], shortcut_group[l]);
+#else
+      add_box_child_start (GTK_ORIENTATION_HORIZONTAL, (GtkWidget *)shortcut_section[i], (GtkWidget *)shortcut_group[l], FALSE, FALSE, 0);
+#endif
+#else
+      gtk_container_add (GTK_CONTAINER((GtkWidget *)shortcut_section[i]), (GtkWidget *)shortcut_group[l]);
+#endif
+    }
+#ifdef GTK4
+#if GTK_MINOR_VERSION > 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION >= 4)
+    gtk_shortcuts_window_add_section (GTK_SHORTCUTS_WINDOW(win), shortcut_section[i]);
+#else
+    gtk_notebook_append_page (GTK_NOTEBOOK(sections_book), (GtkWidget *)shortcut_section[i], gtk_label_new (section_names[i]));
+#endif
+#else
+    gtk_container_add (GTK_CONTAINER((GtkWidget *)win), (GtkWidget *)shortcut_section[i]);
+#endif
+  }
+#ifdef GTK4
+#if GTK_MINOR_VERSION < 14 || (GTK_MINOR_VERSION == 14 && GTK_MICRO_VERSION < 4)
+   gtk_window_set_child ((GtkWindow*) win, sections_book);
+#endif
+#endif
+  add_gtk_close_event ((GtkWidget *)win, G_CALLBACK(destroy_this_window), NULL);
+  show_the_widgets ((GtkWidget *)win);
+  return (GtkWidget *)win;
+}
 
 #ifdef GTK3
 /*!
@@ -183,10 +310,10 @@ void view_buffer (GtkTextBuffer * buffer)
 {
   if (atomes_logo)
   {
-#ifdef GTK4
-    add_container_child (CONTAINER_SCR, MainScrol[1], NULL);
-#endif
     atomes_logo = destroy_this_widget (atomes_logo);
+#ifdef GTK4
+    gtk_scrolled_window_set_child ((GtkScrolledWindow *)MainScrol[1], NULL);
+#endif
   }
   gboolean add = FALSE;
   if (! MainView)
@@ -263,17 +390,6 @@ void atomes_key_pressed (guint keyval, GdkModifierType state)
   }
 }
 
-#ifdef GTK3
-/* gboolean on_atomes_pressed (GtkWidget * widg, GdkEventKey * event, gpointer data)
-{
-  if (event -> type == GDK_KEY_PRESS)
-  {
-    atomes_key_pressed (event-> keyval, event -> state);
-  }
-  return FALSE;
-} */
-#endif
-
 /*!
   \fn void add_action (GSimpleAction * action)
 
@@ -306,7 +422,7 @@ void remove_action (gchar * action_name)
 void remove_edition_actions ()
 {
   int i;
-  for (i=0; i<3; i++) remove_action (edition_action_names[i]);
+  for (i=0; i<G_N_ELEMENTS(edition_acts); i++) remove_action (edition_acts[i].action_name);
 }
 
 /*!
@@ -318,7 +434,7 @@ void remove_edition_and_analyze_actions ()
 {
   remove_edition_actions ();
   int i;
-  for (i=0; i<9; i++) remove_action (analyze_action_names[i]);
+  for (i=0; i<G_N_ELEMENTS(analyze_acts); i++) remove_action (analyze_acts[i].action_name);
 }
 
 /*!
@@ -340,7 +456,7 @@ G_MODULE_EXPORT void show_periodic_table (GtkWidget * widg, gpointer data)
   \brief atomes menu bar actions
 
   \param action the GAction sending the signal the GSimpleAction sending the signal
-  \param parameter GVariant parameter of the GAction the parameter of the action, if any
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -474,13 +590,23 @@ G_MODULE_EXPORT void atomes_menu_bar_action (GSimpleAction * action, GVariant * 
   {
     create_about_dialog (NULL, data);
   }
-  /*else if (g_strcmp0 (name, "help.register") == 0)
+  else if (g_strcmp0 (name, "help.shortcuts") == 0)
   {
-    register_atomes (NULL, data);
-  }*/
+    atomes_shortcuts = destroy_this_widget (atomes_shortcuts);
+    atomes_shortcuts = shortcuts_window (G_N_ELEMENTS(main_group_by_section), main_group_by_section, G_N_ELEMENTS(main_shortcut_by_group),
+                                         main_shortcut_by_group, main_section_names, main_group_names, main_shortcuts);
+  }
   g_free (name);
 }
 
+/*!
+  \fn GIcon * get_gicon_from_data (int format, const gchar * icon)
+
+  \brief create a new icon using data
+
+  \param format for the data
+  \param icon image name or file name
+*/
 GIcon * get_gicon_from_data (int format, const gchar * icon)
 {
   switch (format)
@@ -537,8 +663,8 @@ void widget_add_action (GSimpleActionGroup * action_group, const gchar * act, GC
 
 /*!
   \fn GMenuItem * create_gmenu_item (const gchar * label, const gchar * action, const gchar * accel,
-*                                 const gchar * custom, int format, const gchar * icon,
-*                                 gboolean check, gboolean status, gboolean radio, const gchar * rstatus)
+*                                    const gchar * custom, int format, const gchar * icon,
+*                                    gboolean check, gboolean status, gboolean radio, const gchar * rstatus)
 
   \brief create menu item
 
@@ -612,8 +738,8 @@ void append_submenu (GMenu * menu, const gchar * label, GMenu * submenu)
 
 /*!
   \fn void append_menu_item (GMenu * menu, const gchar * label, const gchar * action, const gchar * accel,
-*                         const gchar * custom, int format, const gchar * icon,
-*                         gboolean check, gboolean status, gboolean radio, const gchar * rstatus)
+*                            const gchar * custom, int format, const gchar * icon,
+*                            gboolean check, gboolean status, gboolean radio, const gchar * rstatus)
 
   \brief create a menu item, then append it to a menu
 
@@ -891,8 +1017,8 @@ GMenu * create_help_menu ()
 {
   GMenu * menu = g_menu_new ();
   append_menu_item (menu, "Periodic Table", "app.help.periodic", "<CTRL>P", NULL, IMG_STOCK, ABOUT, FALSE, FALSE, FALSE, NULL);
+  append_menu_item (menu, "Shortcuts", "app.help.shortcuts", NULL, NULL, IMG_STOCK, ABOUT, FALSE, FALSE, FALSE, NULL);
   append_menu_item (menu, "About", "app.help.about", "<CTRL>A", NULL, IMG_STOCK, ABOUT, FALSE, FALSE, FALSE, NULL);
-  // append_menu_item (menu, "Register", "app.help.register", NULL, NULL, IMG_STOCK, ABOUT, FALSE, FALSE, FALSE, NULL);
   return menu;
 }
 
@@ -927,16 +1053,9 @@ G_MODULE_EXPORT void atomes_popup_menu (GtkGesture * gesture, int n_press, doubl
 {
   if (gtk_gesture_single_get_current_button ((GtkGestureSingle * )gesture) == GDK_BUTTON_SECONDARY)
   {
-    GdkRectangle rect;
-    rect.x = x;
-    rect.y = y;
-    rect.width = 1;
-    rect.height = 1;
     GtkWidget * popover = work_menu (-1, -1);
     gtk_widget_set_parent (popover, MainWindow);
-    gtk_popover_set_has_arrow (GTK_POPOVER(popover), FALSE);
-    gtk_popover_set_pointing_to (GTK_POPOVER(popover), & rect);
-    gtk_popover_popup (GTK_POPOVER(popover));
+    pop_menu_at_pointer (popover, x, y);
   }
 }
 
@@ -985,58 +1104,42 @@ GtkWidget * create_main_window (GApplication * atomes)
   gtk_window_set_resizable (GTK_WINDOW(window), TRUE);
   gtk_widget_set_size_request (window, 900, 450);
 
-  GSimpleAction * main_act[17];
-  main_act[0]  = g_simple_action_new ("workspace.open", NULL);
-  main_act[1]  = g_simple_action_new ("workspace.save", NULL);
-  main_act[2]  = g_simple_action_new ("workspace.save-as", NULL);
-  main_act[3]  = g_simple_action_new ("workspace.close", NULL);
-  main_act[4]  = g_simple_action_new ("project.new", NULL);
-  main_act[5]  = g_simple_action_new ("project.open", NULL);
-  main_act[6]  = g_simple_action_new ("project.save", NULL);
-  main_act[7]  = g_simple_action_new ("project.save-as", NULL);
-  main_act[8]  = g_simple_action_new ("project.close", NULL);
-  main_act[9]  = g_simple_action_new ("export.isaacs", NULL);
-  main_act[10] = g_simple_action_new ("export.coordinates", NULL);
-  main_act[11] = g_simple_action_new ("import.isaacs", NULL);
-  main_act[12] = g_simple_action_new ("import.coordinates", NULL);
-  main_act[13] = g_simple_action_new ("program.quit", NULL);
-  main_act[14] = g_simple_action_new ("analyze.tool-box", NULL);
-  main_act[15] = g_simple_action_new ("help.periodic", NULL);
-  main_act[16] = g_simple_action_new ("help.about", NULL);
+  atomes_action main_actions[] = {{ "workspace.open", GINT_TO_POINTER(2)},
+                                  { "workspace.save",  GINT_TO_POINTER(3)},
+                                  { "workspace.save-as",  GINT_TO_POINTER(3)},
+                                  { "workspace.close", GINT_TO_POINTER(1)},
+                                  { "project.new", NULL},
+                                  { "project.open", GINT_TO_POINTER(0)},
+                                  { "project.save", GINT_TO_POINTER(1) },
+                                  { "project.save-as", GINT_TO_POINTER(1)},
+                                  { "project.close", NULL},
+                                  { "export.isaacs", GINT_TO_POINTER(1)},
+                                  { "export.coordinates", GINT_TO_POINTER(1)},
+                                  { "import.isaacs", GINT_TO_POINTER(0)},
+                                  { "import.coordinates", GINT_TO_POINTER(0)},
+                                  { "program.quit",  NULL},
+                                  { "analyze.tool-box", NULL},
+                                  { "help.periodic", NULL},
+                                  { "help.about", NULL},
+                                  { "help.shortcuts", NULL}};
 
-  for (i=0; i<3; i++) edition_actions[i] = g_simple_action_new (edition_action_names[i], NULL);
-  for (i=0; i<9; i++) analyze_actions[i] = g_simple_action_new (analyze_action_names[i], NULL);
-
-  for (i=0; i<17; i++) add_action (main_act[i]);
-
-  g_signal_connect (main_act[0], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(2));
-  g_signal_connect (main_act[1], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(3));
-  g_signal_connect (main_act[2], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(3));
-  g_signal_connect (main_act[3], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(1));
-  g_signal_connect (main_act[4], "activate", G_CALLBACK(atomes_menu_bar_action), NULL);
-  g_signal_connect (main_act[5], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(0));
-  g_signal_connect (main_act[6], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(1));
-  g_signal_connect (main_act[7], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(1));
-  g_signal_connect (main_act[8], "activate", G_CALLBACK(atomes_menu_bar_action), NULL);
-  g_signal_connect (main_act[9], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(1));
-  g_signal_connect (main_act[10], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(1));
-  g_signal_connect (main_act[11], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(0));
-  g_signal_connect (main_act[12], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(0));
-  g_signal_connect (main_act[13], "activate", G_CALLBACK(atomes_menu_bar_action), NULL);
-  for (i=0; i<3; i++)
+  GSimpleAction * main_act[18];
+  for (i=0; i<G_N_ELEMENTS(main_actions); i++)
   {
-    g_signal_connect (edition_actions[i], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(i));
+    main_act[i] = g_simple_action_new (main_actions[i].action_name, NULL);
+    add_action (main_act[i]);
+    g_signal_connect (main_act[i], "activate", G_CALLBACK(atomes_menu_bar_action), main_actions[i].action_data);
   }
-  for (i=0; i<NCALCS-3; i++)
+  for (i=0; i<G_N_ELEMENTS(edition_acts); i++)
   {
-    g_signal_connect (analyze_actions[i], "activate", G_CALLBACK(atomes_menu_bar_action), GINT_TO_POINTER(i));
+    edition_actions[i] = g_simple_action_new (edition_acts[i].action_name, NULL);
+    g_signal_connect (edition_actions[i], "activate", G_CALLBACK(atomes_menu_bar_action), edition_acts[i].action_data);
   }
-  for (i=0; i<3; i++)
+  for (i=0; i<G_N_ELEMENTS(analyze_acts); i++)
   {
-    g_signal_connect (main_act[14+i], "activate", G_CALLBACK(atomes_menu_bar_action), NULL);
+    analyze_actions[i] = g_simple_action_new (analyze_acts[i].action_name, NULL);
+    g_signal_connect (analyze_actions[i], "activate", G_CALLBACK(atomes_menu_bar_action), analyze_acts[i].action_data);
   }
-
-// #endif
 
   /*GtkBuilder * builder = gtk_builder_new_from_file ("menus/main.ui");
   GMenuModel * model = G_MENU_MODEL (gtk_builder_get_object (builder, "atomes_menu_bar"));
@@ -1046,7 +1149,6 @@ GtkWidget * create_main_window (GApplication * atomes)
   gtk_application_window_set_show_menubar (GTK_APPLICATION_WINDOW(window), TRUE);
 
 #ifdef GTK3
-  // g_signal_connect (G_OBJECT(window), "key-press-event", G_CALLBACK(on_atomes_pressed), NULL);
   MainEvent = gtk_event_box_new ();
   gtk_widget_add_events (MainEvent,
                          GDK_EXPOSURE_MASK | GDK_POINTER_MOTION_MASK |
@@ -1097,9 +1199,7 @@ GtkWidget * create_main_window (GApplication * atomes)
   curvetoolbox = curvetbox ();
   add_project_to_workspace ();
   add_container_child (CONTAINER_WIN, window, hpaned);
-
   clean_view ();
-
   show_the_widgets (window);
 
   for (i=0; i<9; i++)

@@ -182,6 +182,6 @@ G_MODULE_EXPORT void window_spinner (GtkWidget * widg, gpointer data)
   }
   else
   {
-    gtk_widget_show (view -> spiner -> win);
+    show_the_widgets (view -> spiner -> win);
   }
 }

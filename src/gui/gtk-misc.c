@@ -49,6 +49,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   const gchar * entry_get_text (GtkEntry * entry);
 
   void show_the_widgets (GtkWidget * widg);
+  void hide_the_widgets (GtkWidget * widg);
   void widget_set_sensitive (GtkWidget * widg, gboolean sensitive);
   void add_container_child (int type, GtkWidget * widg, GtkWidget * child);
   void add_box_child_end (GtkWidget * widg, GtkWidget * child, gboolean expand, gboolean fill, int padding);
@@ -154,6 +155,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
   GdkRGBA colrgba_togtkrgba (ColRGBA col);
 
+  int get_widget_width (GtkWidget * widg);
+  int get_widget_height (GtkWidget * widg);
+
 */
 
 #include "global.h"
@@ -169,9 +173,25 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 void show_the_widgets (GtkWidget * widg)
 {
 #ifdef GTK4
-  gtk_widget_show (widg);
+  gtk_widget_set_visible (widg, TRUE);
 #else
   gtk_widget_show_all (widg);
+#endif
+}
+
+/*!
+  \fn void hide_the_widgets (GtkWidget * widg)
+
+  \brief hide GtkWidget
+
+  \param widg the GtkWidget to show
+*/
+void hide_the_widgets (GtkWidget * widg)
+{
+#ifdef GTK4
+  gtk_widget_set_visible (widg, FALSE);
+#else
+  gtk_widget_hide (widg);
 #endif
 }
 
@@ -426,7 +446,7 @@ GtkWidget * create_win (gchar * str, GtkWidget * parent, gboolean modal, gboolea
 {
   GtkWidget * win;
   win = new_gtk_window ();
-  gtk_window_set_title (GTK_WINDOW(win), prepare_for_title(str));
+  if (str) gtk_window_set_title (GTK_WINDOW(win), prepare_for_title(str));
   gtk_window_set_resizable (GTK_WINDOW (win), TRUE);
 #ifdef GTK3
   gtk_window_set_attached_to (GTK_WINDOW (win), parent);
@@ -1474,7 +1494,7 @@ GtkWidget * gtk3_menu_item (GtkWidget * menu, gchar * name,
                             gboolean accel, guint key, GdkModifierType mod,
                             gboolean check, gboolean radio, gboolean status)
 {
-  GtkWidget * item;
+  GtkWidget * item = NULL;
   GtkWidget * icon = NULL;
   GtkWidget * lab = NULL;
 
@@ -1987,7 +2007,11 @@ void provide_gtk_css (gchar * css)
 {
   GtkCssProvider * provider = gtk_css_provider_new ();
 #ifdef GTK4
+#if GTK_MINOR_VERSION < 12
   gtk_css_provider_load_from_data (provider, css, -1);
+#else
+  gtk_css_provider_load_from_string (provider, css);
+#endif
   gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                               GTK_STYLE_PROVIDER(provider),
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -2013,18 +2037,18 @@ GtkWidget * destroy_this_widget (GtkWidget * widg)
   {
     if (GTK_IS_WIDGET(widg))
     {
-      if (is_the_widget_visible(widg)) gtk_widget_hide (widg);
+      if (is_the_widget_visible(widg)) hide_the_widgets (widg);
 #ifdef GTK3
       gtk_widget_destroy (widg);
 #else
-      GtkWidget * wid = gtk_widget_get_parent (widg);
+      /* GtkWidget * wid = gtk_widget_get_parent (widg);
       if (wid != NULL)
       {
         if (GTK_IS_WIDGET(wid))
         {
           gtk_widget_unparent (widg);
         }
-      }
+      } */
 #endif
     }
   }
@@ -2347,7 +2371,7 @@ G_MODULE_EXPORT gboolean hide_this_window (GtkWindow * win, gpointer data)
 G_MODULE_EXPORT gboolean hide_this_window (GtkWidget * win, GdkEvent * event, gpointer data)
 #endif
 {
-  gtk_widget_hide (GTK_WIDGET(win));
+  hide_the_widgets (GTK_WIDGET(win));
   return TRUE;
 }
 
@@ -2366,5 +2390,37 @@ void add_gtk_close_event (GtkWidget * widg, GCallback handler, gpointer data)
   g_signal_connect (G_OBJECT (widg), "close-request", handler, data);
 #else
   g_signal_connect (G_OBJECT (widg), "delete-event", handler, data);
+#endif
+}
+
+/*!
+  \fn int get_widget_width (GtkWidget * widg)
+
+  \brief retrive GtkWidget width
+
+  \param widg the GtkWidget
+*/
+int get_widget_width (GtkWidget * widg)
+{
+#ifdef GTK3
+  return gtk_widget_get_allocated_width (widg);
+#else
+  return gtk_widget_get_width (widg);
+#endif
+}
+
+/*!
+  \fn int get_widget_height (GtkWidget * widg)
+
+  \brief retrive GtkWidget height
+
+  \param widg the GtkWidget
+*/
+int get_widget_height (GtkWidget * widg)
+{
+#ifdef GTK3
+  return gtk_widget_get_allocated_height (widg);
+#else
+  return gtk_widget_get_height (widg);
 #endif
 }

@@ -123,7 +123,7 @@ int cell_get_lattice (int format)
           add_cell_info (g_strdup_printf ("Wrong file format - error at step %d !", i+1));
           return 0;
         }
-        this_cell -> lattice.box[i].param[j][k] = atof(this_word);
+        this_cell -> lattice.box[i].param[j][k] = string_to_double ((gpointer)this_word);
         k ++;
         this_word = strtok (NULL, " ");
         if (! this_word)
@@ -131,7 +131,7 @@ int cell_get_lattice (int format)
           add_cell_info (g_strdup_printf ("Wrong file format - error at step %d !", i+1));
           return 0;
         }
-        this_cell -> lattice.box[i].param[j][k] = atof(this_word);
+        this_cell -> lattice.box[i].param[j][k] = string_to_double ((gpointer)this_word);
         k ++;
         this_word = strtok (NULL, " ");
         if (! this_word)
@@ -139,7 +139,7 @@ int cell_get_lattice (int format)
           add_cell_info (g_strdup_printf ("Wrong file format - error at step %d !", i+1));
           return 0;
         }
-        this_cell -> lattice.box[i].param[j][k] = atof(this_word);
+        this_cell -> lattice.box[i].param[j][k] = string_to_double ((gpointer)this_word);
       }
     }
     else
@@ -162,7 +162,7 @@ int cell_get_lattice (int format)
           add_cell_info (g_strdup_printf ("Wrong file format - error at step %d !", i+1));
           return 0;
         }
-        this_cell -> lattice.box[i].vect[j][k] = atof(this_word);
+        this_cell -> lattice.box[i].vect[j][k] = string_to_double ((gpointer)this_word);
         k ++;
         this_word = strtok (NULL, " ");
         if (! this_word)
@@ -170,7 +170,7 @@ int cell_get_lattice (int format)
           add_cell_info (g_strdup_printf ("Wrong file format - error at step %d !", i+1));
           return 0;
         }
-        this_cell -> lattice.box[i].vect[j][k] = atof(this_word);
+        this_cell -> lattice.box[i].vect[j][k] = string_to_double ((gpointer)this_word);
         k ++;
         this_word = strtok (NULL, " ");
         if (! this_word)
@@ -178,7 +178,7 @@ int cell_get_lattice (int format)
           add_cell_info (g_strdup_printf ("Wrong file format - error at step %d !", i+1));
           return 0;
         }
-        this_cell -> lattice.box[i].vect[j][k] = atof(this_word);
+        this_cell -> lattice.box[i].vect[j][k] = string_to_double ((gpointer)this_word);
       }
     }
   }

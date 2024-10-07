@@ -1046,7 +1046,7 @@ void range_has_changed (gpointer data, double v)
 G_MODULE_EXPORT void set_move (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   range_has_changed (data, v);
 }
 

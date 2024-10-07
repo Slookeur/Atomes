@@ -48,6 +48,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   double *** alloctdouble (int xal, int yal, int zal);
   double **** allocqdouble (int wal, int xal, int yal, int zal);
   double * duplicate_double (int num, double * old_val);
+  double string_to_double (gpointer string);
   double get_calc_time (struct timespec start, struct timespec stop);
 
   gboolean * allocbool (int  val);
@@ -72,9 +73,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 
 #ifdef G_OS_WIN32
 gchar * PACKAGE_PREFIX = NULL;
+gchar * PACKAGE_LIBEXEC = NULL;
+#endif
 gchar * PACKAGE_LIB_DIR = NULL;
-gchar * PACKAGE_DATA_DIR = NULL;
-gchar * PACKAGE_LOCALE_DIR = NULL;
 gchar * PACKAGE_IMP = NULL;
 gchar * PACKAGE_CON = NULL;
 gchar * PACKAGE_IMG = NULL;
@@ -131,7 +132,6 @@ gchar * PACKAGE_SGOF = NULL;
 gchar * PACKAGE_SGMP = NULL;
 gchar * PACKAGE_SGMI = NULL;
 gchar * PACKAGE_SGTC = NULL;
-#endif
 gchar * ATOMES_CONFIG = NULL;
 gchar * ATOMES_URL = "https://atomes.ipcms.fr";
 gchar * mode_name[2]={"Analysis", "Edition"};
@@ -162,7 +162,7 @@ int activef = 0;
 int inactep = 0;
 int activew = 0;
 int statusval;
-int atomes_visual = 1; // OpenGL visual: 1 = GTK default, 0 = X11 default (GTK3 + GtkGLArea only), -1 = no OpenGL
+int atomes_visual = 1; // OpenGL visual: 1 = GTK default, 0 = X11 default (GTK3 + GtkGLArea only), Else = no OpenGL
 // Loop Id for the dialogs
 int dialog_id = -1;
 
@@ -194,19 +194,6 @@ struct timespec stop_time;
 double opac = 0.75;
 double pi = 3.141592653589793238462643383279502884197;
 
-gchar * edition_action_names[3] = {"edit.chemistry",
-                                   "edit.periodicity",
-                                   "edit.cutoffs"};
-
-gchar * analyze_action_names[9] = {"analyze.gr",
-                                   "analyze.sq",
-                                   "analyze.sk",
-                                   "analyze.gk",
-                                   "analyze.bonds",
-                                   "analyze.rings",
-                                   "analyze.chains",
-                                   "analyze.sp",
-                                   "analyze.msd"};
 GSimpleAction * edition_actions[3];
 GSimpleAction * analyze_actions[9];
 
@@ -219,6 +206,7 @@ GtkWidget * curvetoolbox = NULL;
 GtkWidget * progressbar = NULL;
 GtkWidget * MainScrol[2];
 GtkWidget * atomes_logo = NULL;
+GtkWidget * atomes_shortcuts = NULL;
 GtkWidget * calc_dialog = NULL;
 GtkWidget * register_button = NULL;
 
@@ -623,6 +611,25 @@ double * duplicate_double (int num, double * old_val)
   int i;
   for (i=0; i<num; i++) new_val[i] = old_val[i];
   return new_val;
+}
+
+
+/*!
+  \fn double string_to_double (gpointer string)
+
+  \brief convert string to double
+
+  \param string the string to convert
+*/
+double string_to_double (gpointer string)
+{
+  char * endPtr = NULL;
+  double value = strtod ((char *)string, & endPtr);
+  if (endPtr == (char *)string)
+  {
+     g_print ("Error in string format: %s - value == %lf\n", endPtr, value);
+  }
+  return value;
 }
 
 /*!

@@ -227,7 +227,7 @@ G_MODULE_EXPORT void on_calc_sph_released (GtkWidget * widg, gpointer data)
     else
     {
       update_spherical_view (active_project);
-      gtk_widget_show (curvetoolbox);
+      show_the_widgets (curvetoolbox);
     }
   }
   else

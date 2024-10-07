@@ -306,7 +306,7 @@ void super_celling (glwin * view)
   \brief create super cell menu callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void super_cell (GSimpleAction * action, GVariant * parameter, gpointer data)

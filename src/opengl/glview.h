@@ -300,10 +300,10 @@ G_MODULE_EXPORT void on_glwin_button_released (GtkGesture * gesture, int n_press
 G_MODULE_EXPORT void on_glwin_pointer_motion (GtkEventControllerMotion * motion, gdouble x, gdouble y, gpointer data);
 G_MODULE_EXPORT gboolean on_glwin_pointer_scoll (GtkEventControllerScroll * event, gdouble dx, gdouble dy, gpointer data);
 #endif
-void reshape (glwin * view, int width, int height);
+void reshape (glwin * view, int width, int height, gboolean use_ratio);
 void zoom (glwin * view, int delta);
 
-void init_opengl (glwin * view);
+void init_opengl ();
 void init_camera (project * this_proj, gboolean get_depth);
 
 #ifdef GTKGLAREA

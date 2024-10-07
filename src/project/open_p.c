@@ -377,7 +377,7 @@ int open_project (FILE * fp, int npi)
         for (i=0; i<NGRAPHS; i++) if (active_project -> initok[i]) initcnames (i, 0);
         if (fread (& i, sizeof(int), 1, fp) != 1) return ERROR_PROJECT;
 #ifdef DEBUG
-        g_debug ("\n**********************************************\ni= %d\n**********************************************\n", i);
+        g_debug ("\n**********************************************\n curves to read= %d\n**********************************************\n", i);
 #endif
         if (i != 0)
         {

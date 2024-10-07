@@ -72,8 +72,8 @@ G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
 #endif
   if (i == 1)
   {
-    if (is_the_widget_visible(width_box)) gtk_widget_hide (width_box);
-    if (! is_the_widget_visible(radius_box)) gtk_widget_show (radius_box);
+    if (is_the_widget_visible(width_box)) hide_the_widgets (width_box);
+    if (! is_the_widget_visible(radius_box)) show_the_widgets (radius_box);
 #ifdef GTK4
 
 #else
@@ -83,8 +83,8 @@ G_MODULE_EXPORT void set_box_combo_style (GtkWidget * widg, gpointer data)
   }
   else if (i == 0)
   {
-    if (is_the_widget_visible(radius_box)) gtk_widget_hide (radius_box);
-    if (! is_the_widget_visible(width_box)) gtk_widget_show (width_box);
+    if (is_the_widget_visible(radius_box)) hide_the_widgets (radius_box);
+    if (! is_the_widget_visible(width_box)) show_the_widgets (width_box);
 #ifdef GTK3
     // GTK3 Menu Action To Check
     gtk_check_menu_item_set_active ((GtkCheckMenuItem *)opengl_project -> modelgl -> ogl_box_axis[0][1], TRUE);
@@ -161,7 +161,7 @@ G_MODULE_EXPORT void set_color_box (GtkColorChooser * colob, gpointer data)
   \brief create the box edition window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void box_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -234,11 +234,11 @@ G_MODULE_EXPORT void box_advanced (GtkWidget * widg, gpointer data)
   show_the_widgets (win);
    if (view -> anim -> last -> img -> box_axis[BOX] == CYLINDERS)
   {
-    gtk_widget_hide (width_box);
+    hide_the_widgets (width_box);
   }
   else
   {
-    gtk_widget_hide (radius_box);
+    hide_the_widgets (radius_box);
   }
   dialog_id ++;
   Event_loop[dialog_id] = g_main_loop_new (NULL, FALSE);

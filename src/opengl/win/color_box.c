@@ -277,11 +277,11 @@ GtkWidget * color_box (glwin * view, int ideo, int spec, int geo)
     but = gtk3_menu_item (NULL, NULL, IMG_SURFACE, (gpointer)surface, NULL, NULL, FALSE, 0, 0, FALSE, FALSE, FALSE);
 /* #else
     GtkWidget * but_img =  create_image_from_data (IMG_SURFACE, surface);
-    gtk_widget_show (but_img);
+    show_the_widgets (but_img);
     but = gtk_button_new ();
     add_container_child (CONTAINER_BUT, but, but_img);
     gtk_button_set_has_frame ((GtkButton *)but, FALSE);
-    gtk_widget_show (but);
+    show_the_widgets (but);
 #endif */
     cairo_surface_destroy (surface);
 #endif
@@ -419,11 +419,11 @@ GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo)
     get_color (& but_col, l);
     cairo_surface_t * surface = col_surface (but_col.red, but_col.green, but_col.blue, 12, 12);
     GtkWidget * but_img =  create_image_from_data (IMG_SURFACE, surface);
-    gtk_widget_show (but_img);
+    show_the_widgets (but_img);
     but = gtk_button_new ();
     add_container_child (CONTAINER_BUT, but, but_img);
     gtk_button_set_has_frame ((GtkButton *)but, FALSE);
-    gtk_widget_show (but);
+    show_the_widgets (but);
     cairo_surface_destroy (surface);
     if (ideo < -2)
     {

@@ -300,7 +300,7 @@ double scale (double axe)
   {
     xs = 100000.0;
   }
-  return (xs);
+  return xs;
 }
 
 /*!
@@ -460,7 +460,7 @@ void hide_curves (project * this_proj, int c)
       {
         if (is_the_widget_visible(this_proj -> curves[c][i] -> window))
         {
-          gtk_widget_hide(this_proj -> curves[c][i] -> window);
+          hide_the_widgets (this_proj -> curves[c][i] -> window);
           adjust_tool_model (c, i, this_proj -> curves[c][i] -> path);
           g_free (this_proj -> curves[c][i] -> path);
           this_proj -> curves[c][i] -> path = NULL;

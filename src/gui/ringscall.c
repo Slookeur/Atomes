@@ -541,7 +541,7 @@ G_MODULE_EXPORT void on_calc_rings_released (GtkWidget * widg, gpointer data)
       break;
     }
   }
-  gtk_widget_show (curvetoolbox);
+  show_the_widgets (curvetoolbox);
   clean_coord_window (active_project);
 #ifdef GTK3
   update_rings_menus (active_glwin);

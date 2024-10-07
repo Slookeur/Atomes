@@ -171,7 +171,7 @@ G_MODULE_EXPORT void on_calc_msd_released (GtkWidget * widg, gpointer data)
   else
   {
     update_msd_view (active_project);
-    gtk_widget_show (curvetoolbox);
+    show_the_widgets (curvetoolbox);
   }
   fill_tool_model ();
 }

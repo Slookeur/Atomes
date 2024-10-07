@@ -364,7 +364,7 @@ G_MODULE_EXPORT void on_calc_chains_released (GtkWidget * widg, gpointer data)
     active_glwin -> chain_max = active_project -> csparam[5];
     update_chains_view (active_project);
   }
-  gtk_widget_show (curvetoolbox);
+  show_the_widgets (curvetoolbox);
   clean_coord_window (active_project);
   fill_tool_model ();
 #ifdef GTK3

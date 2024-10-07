@@ -60,7 +60,7 @@ G_MODULE_EXPORT void update_bond_parameter (GtkEntry * res, gpointer data)
 {
   int id = GPOINTER_TO_INT(data);
   const gchar * n = entry_get_text (res);
-  double v = atof(n);
+  double v = string_to_double ((gpointer)n);
   int j, k, l, m;
   int a, b, s;
   s =  opengl_project -> nspec;
@@ -308,7 +308,7 @@ void bonds_input_win (GtkWidget * win, project * this_proj, int nspec, int aoc, 
   \brief update bond parameter callback - creating the dialog GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_bond_parameter (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -357,7 +357,7 @@ G_MODULE_EXPORT void set_bond_parameter (GtkWidget * widg, gpointer data)
   \brief create bond(s) configuration window(s) callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)

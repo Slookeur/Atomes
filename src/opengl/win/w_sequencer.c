@@ -240,7 +240,7 @@ G_MODULE_EXPORT void seq_go_to (GtkEntry * res, gpointer data)
 {
   glwin * view = (glwin *) data;
   const gchar * m = entry_get_text (res);
-  int s = (int)atof(m);
+  int s = (int)string_to_double ((gpointer)m);
   project * this_proj = get_project_by_id(view -> proj);
   if (s > 0 && s <= this_proj -> steps)
   {
@@ -505,6 +505,6 @@ G_MODULE_EXPORT void window_sequencer (GtkWidget * widg, gpointer data)
   }
   else
   {
-    gtk_widget_show (view -> player -> win);
+    show_the_widgets (view -> player -> win);
   }
 }

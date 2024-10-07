@@ -119,7 +119,7 @@ G_MODULE_EXPORT void set_window_size (GtkEntry * maj, gpointer data)
   text[1] = "Y size must be > 0";
   m = entry_get_text (maj);
 
-  i = atof(m);
+  i = string_to_double ((gpointer)m);
   if (i > 0)
   {
     switch (d)
@@ -339,7 +339,7 @@ G_MODULE_EXPORT void set_title_pos (GtkEntry * entry, gpointer data)
   d = ad -> d;
   project * this_proj = get_project_by_id(a);
   p = entry_get_text (entry);
-  v = atof(p);
+  v = string_to_double ((gpointer)p);
   if (v >= 0.0 && v <= 1.0)
   {
     this_proj -> curves[b][c] -> title_pos[d] = v;
@@ -381,7 +381,7 @@ void set_frame_style (gpointer data)
   frame_style_area = create_image_from_data (IMG_SURFACE, (gpointer)surf);
   cairo_surface_destroy (surf);
   widget_set_sensitive (frame_style_area, this_proj -> curves[b][c] -> show_frame);
-  gtk_widget_show (frame_style_area);
+  show_the_widgets (frame_style_area);
 #ifdef GTK4
   gtk_widget_set_hexpand (frame_style_area, TRUE);
 #endif
@@ -497,7 +497,7 @@ G_MODULE_EXPORT void set_frame_thickness (GtkEntry * entry, gpointer data)
   c = ad -> c;
   str = entry_get_text (entry);
   project * this_proj = get_project_by_id(a);
-  this_proj -> curves[b][c] -> frame_thickness = atof(str);
+  this_proj -> curves[b][c] -> frame_thickness = string_to_double ((gpointer)str);
   update_entry_double (entry, this_proj -> curves[b][c] -> frame_thickness);
   set_frame_style (data);
 }
@@ -541,7 +541,7 @@ G_MODULE_EXPORT void set_frame_pos (GtkEntry * fen, gpointer data)
   d = cd -> d;
   project * this_proj = get_project_by_id(a);
   m = entry_get_text (fen);
-  z= atof(m);
+  z= string_to_double ((gpointer)m);
   if (d < 2)
   {
     if (d == 0)
@@ -651,8 +651,8 @@ GtkWidget * create_tab_1 (gpointer data)
   ghbox = create_hbox (0);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, graphbox, ghbox, FALSE, FALSE, 15);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, ghbox, markup_label("Size:", 50, 35, 1.0, 0.5), FALSE, FALSE, 20);
-  xlgt = gtk_widget_get_allocated_width (this_proj -> curves[b][c] -> plot);
-  ylgt = gtk_widget_get_allocated_height (this_proj -> curves[b][c] -> plot);
+  xlgt = get_widget_width (this_proj -> curves[b][c] -> plot);
+  ylgt = get_widget_height (this_proj -> curves[b][c] -> plot);
   update_entry_int (GTK_ENTRY(xyp[0]), xlgt);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, ghbox, xyp[0], FALSE, FALSE, 0);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, ghbox, markup_label("x", -1, -1, 0.5, 0.5), FALSE, FALSE, 10);

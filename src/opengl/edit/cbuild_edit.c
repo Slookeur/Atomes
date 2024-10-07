@@ -446,7 +446,7 @@ int get_sg_num (GtkComboBox * box)
     if (str)
     {
       num = g_strdup_printf ("%c%c%c", str[0], str[1], str[2]);
-      i = (int) atof (num);
+      i = (int) string_to_double ((gpointer)num);
       g_free (str);
       g_free (num);
     }
@@ -600,7 +600,7 @@ G_MODULE_EXPORT void update_cb_vect (GtkEntry * entry, gpointer data)
 {
   tint * id = (tint *)data;
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   get_project_by_id(id -> a) -> modelgl -> builder_win -> cell.box[0].vect[id -> b][id -> c] = v;
   update_entry_double (entry, v);
 }
@@ -617,7 +617,7 @@ G_MODULE_EXPORT void update_cb_box (GtkEntry * entry, gpointer data)
 {
   tint * id = (tint *)data;
   const gchar * m = entry_get_text (entry);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (v >= 0.0)
   {
     get_project_by_id(id -> a) -> modelgl -> builder_win -> cell.box[0].param[id -> b][id -> c] = v;
@@ -737,7 +737,7 @@ G_MODULE_EXPORT void set_so (GtkComboBox * box, gpointer data)
   cbuilder -> so_info = markup_label(frac_string(str), -1, -1, 0.5, 0.5);
   g_free (str);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, cbuilder -> so_box, cbuilder -> so_info, FALSE, FALSE, 10);
-  gtk_widget_show (cbuilder -> so_info);
+  show_the_widgets (cbuilder -> so_info);
   cbuilder -> cell.sp_group -> sid = i;
   get_origin (cbuilder -> cell.sp_group);
 }
@@ -984,7 +984,7 @@ G_MODULE_EXPORT void set_cs (GtkComboBox * box, gpointer data)
   cbuilder -> bl_combo = create_bl_combo (i, data);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, cbuilder -> bl_box, cbuilder -> bl_combo, FALSE, FALSE, 0);
   adjust_sg_combo (cbuilder, i, 0);
-  gtk_widget_show (cbuilder -> bl_combo);
+  show_the_widgets (cbuilder -> bl_combo);
 }
 
 #ifdef GTK4
@@ -1467,7 +1467,7 @@ void prepare_crystal_builder (gpointer data)
   \brief create the crystal build window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void crystal_window (GSimpleAction * action, GVariant * parameter, gpointer data)

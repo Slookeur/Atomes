@@ -74,7 +74,7 @@ G_MODULE_EXPORT void set_video_frames (GtkEntry * res, gpointer data)
   const gchar * n;
   int frs;
   n = entry_get_text (res);
-  frs = atof(n);
+  frs = string_to_double ((gpointer)n);
   if (frs > 0)
   {
     framesec = frs;
@@ -95,7 +95,7 @@ G_MODULE_EXPORT void set_video_extra_frames (GtkEntry * res, gpointer data)
   const gchar * n;
   int exf;
   n = entry_get_text (res);
-  exf = atof(n);
+  exf = string_to_double ((gpointer)n);
   if (exf >= 0)
   {
     extraframes = exf;
@@ -117,7 +117,7 @@ G_MODULE_EXPORT void set_video_res (GtkEntry * res, gpointer data)
   int vres;
   int id = GPOINTER_TO_INT(data);
   n = entry_get_text (res);
-  vres = atof(n);
+  vres = string_to_double ((gpointer)n);
   if (vres > 0)
   {
     video_res[id] = vres;
@@ -168,7 +168,7 @@ G_MODULE_EXPORT void set_video_bitrate (GtkEntry * res, gpointer data)
   const gchar * n;
   int bit;
   n = entry_get_text (res);
-  bit = atof(n);
+  bit = string_to_double ((gpointer)n);
   if (bit > 0)
   {
     bitrate = bit;

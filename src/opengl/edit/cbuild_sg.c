@@ -544,7 +544,7 @@ int get_this_group_data (space_group * spg,  xmlNodePtr racine)
     if (num_node == NULL) return 0;
     if (g_strcmp0 ("num",(char *)s_node -> name) == 0)
     {
-      val = (int) atof((char *)xmlNodeGetContent(num_node));
+      val = (int) string_to_double ((gpointer)xmlNodeGetContent(num_node));
     }
     s_node = s_node -> next;
   }
@@ -570,7 +570,7 @@ int get_this_group_data (space_group * spg,  xmlNodePtr racine)
         }
         else if (g_strcmp0 ("origin",(char *)s_node -> name) == 0)
         {
-          spg -> settings[j].origin = (int)atof((char *)xmlNodeGetContent(the_setting));
+          spg -> settings[j].origin = (int)string_to_double ((gpointer)xmlNodeGetContent(the_setting));
         }
         else if (g_strcmp0 ("x",(char *)s_node -> name) == 0)
         {
@@ -597,7 +597,7 @@ int get_this_group_data (space_group * spg,  xmlNodePtr racine)
           if (num_node == NULL) return 0;
           if (g_strcmp0 ("num",(char *)p_node -> name) == 0)
           {
-            val = (int) atof((char *)xmlNodeGetContent(num_node));
+            val = (int) string_to_double ((gpointer)xmlNodeGetContent(num_node));
           }
           p_node = p_node -> next;
         }
@@ -679,7 +679,7 @@ space_group * read_sg_xml_file (const char * filetoread)
 
     node = findnode (racine -> children, "sg-num");
     if (node == NULL) return clean_sgl_data (doc, reader);
-    spg -> id = (int) atof((char *)xmlNodeGetContent(node));
+    spg -> id = (int) string_to_double ((gpointer)xmlNodeGetContent(node));
 
     node = findnode (racine -> children, "hm-symbol");
     if (node == NULL) return clean_sgl_data (doc, reader);
@@ -702,7 +702,7 @@ space_group * read_sg_xml_file (const char * filetoread)
       if (num_node == NULL) return clean_sgl_data (doc, reader);
       if (g_strcmp0 ("num",(char *)c_node -> name) == 0)
       {
-        spg -> numw = (int) atof((char *)xmlNodeGetContent(num_node));
+        spg -> numw = (int) string_to_double ((gpointer)xmlNodeGetContent(num_node));
       }
       c_node = c_node -> next;
     }
@@ -723,7 +723,7 @@ space_group * read_sg_xml_file (const char * filetoread)
           if (the_wyck == NULL) return clean_sgl_data (doc, reader);
           if (g_strcmp0 ("mul",(char *)w_node -> name) == 0)
           {
-            spg -> wyckoff[i].multi = (int)atof((char *)xmlNodeGetContent(the_wyck));
+            spg -> wyckoff[i].multi = (int)string_to_double ((gpointer)xmlNodeGetContent(the_wyck));
           }
           else if (g_strcmp0 ("let",(char *)w_node -> name) == 0)
           {

@@ -198,7 +198,7 @@ void menu_axis (GtkWidget * menu_ab, glwin * view, int id)
   \brief handle change axis position signal GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void change_axis_pos_radio (GSimpleAction * action, GVariant * parameter, gpointer data)

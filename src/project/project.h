@@ -89,7 +89,7 @@ extern void hide_current_project (project * to_hide);
 extern void active_project_changed (int id);
 extern void opengl_project_changed (int id);
 extern G_MODULE_EXPORT void on_close_activate (GtkWidget * widg, gpointer cdata);
-extern void add_project ();
+extern void add_project (GtkTreeStore * store, int i);
 
 extern void debugiocurve (project * this_proj, gboolean win, int rid, int cid, gchar * iost);
 extern void debugioproj (project * this_proj, gchar * iost);

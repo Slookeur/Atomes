@@ -1653,7 +1653,7 @@ G_MODULE_EXPORT void update_thermo_parameter (GtkEntry * res, gpointer data)
   int i, j;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i < 0)
   {
     if (tmp_cpmd -> elec_thermostat -> params[i+2] != v)

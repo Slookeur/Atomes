@@ -425,23 +425,23 @@ void show_active_light_data (opengl_edition * ogl_win, int lid, int tid)
   int i;
   for (i=0; i<2; i++)
   {
-    if (is_the_widget_visible(ogl_win -> light_b_coord[i])) gtk_widget_hide (ogl_win -> light_b_coord[i]);
-    if (is_the_widget_visible(ogl_win -> light_b_entry[i])) gtk_widget_hide (ogl_win -> light_b_entry[i]);
+    if (is_the_widget_visible(ogl_win -> light_b_coord[i])) hide_the_widgets (ogl_win -> light_b_coord[i]);
+    if (is_the_widget_visible(ogl_win -> light_b_entry[i])) hide_the_widgets (ogl_win -> light_b_entry[i]);
     if ((i == 0 && this_light -> type != 0) || (i == 1 && this_light -> type != 1))
     {
-      gtk_widget_show (ogl_win -> light_b_coord[i]);
+      show_the_widgets (ogl_win -> light_b_coord[i]);
     }
   }
-  if (this_light -> type > 0) gtk_widget_show (ogl_win -> light_b_entry[0]);
-  if (this_light -> type > 1) gtk_widget_show (ogl_win -> light_b_entry[1]);
+  if (this_light -> type > 0) show_the_widgets (ogl_win -> light_b_entry[0]);
+  if (this_light -> type > 1) show_the_widgets (ogl_win -> light_b_entry[1]);
 
-  if (is_the_widget_visible(ogl_win -> light_show)) gtk_widget_hide (ogl_win -> light_show);
-  if (is_the_widget_visible(ogl_win -> advanced_light_box)) gtk_widget_hide (ogl_win -> advanced_light_box);
+  if (is_the_widget_visible(ogl_win -> light_show)) hide_the_widgets (ogl_win -> light_show);
+  if (is_the_widget_visible(ogl_win -> advanced_light_box)) hide_the_widgets (ogl_win -> advanced_light_box);
   widget_set_sensitive (ogl_win -> light_type, lid);
   if (this_light -> type != 0)
   {
-    gtk_widget_show (ogl_win -> advanced_light_box);
-    gtk_widget_show (ogl_win -> light_show);
+    show_the_widgets (ogl_win -> advanced_light_box);
+    show_the_widgets (ogl_win -> light_show);
   }
 }
 
@@ -596,7 +596,7 @@ void add_remove_lights (int val, gpointer data)
   view -> create_shaders[LIGHT] = TRUE;
   view -> opengl_win -> lights = destroy_this_widget (view -> opengl_win -> lights);
   create_lights_combo (this_image, view -> opengl_win);
-  gtk_widget_show (view -> opengl_win -> lights);
+  show_the_widgets (view -> opengl_win -> lights);
   gtk_combo_box_set_active (GTK_COMBO_BOX(view -> opengl_win -> lights), 0);
   update_light_data (0, view -> opengl_win);
   update (view);
@@ -628,7 +628,7 @@ G_MODULE_EXPORT void set_nlights (GtkEntry * res, gpointer data)
   int i;
   const gchar * m;
   m = entry_get_text (res);
-  i = (int) atof(m);
+  i = (int) string_to_double ((gpointer)m);
   add_remove_lights (i, data);
 }
 
@@ -649,7 +649,7 @@ G_MODULE_EXPORT void update_light_param (GtkEntry * res, gpointer data)
     int li = gtk_combo_box_get_active (GTK_COMBO_BOX(view -> opengl_win -> lights));
     Light * this_light = & view -> anim -> last -> img -> l_ght[li];
     const gchar * m = entry_get_text (res);
-    double v = atof(m);
+    double v = string_to_double ((gpointer)m);
     switch (lid -> b)
     {
       case 0:
@@ -714,7 +714,7 @@ G_MODULE_EXPORT void set_object_pos (GtkEntry * res, gpointer data)
 {
   tint * id = (tint *)data;
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   glwin * view = get_project_by_id(id -> a) -> modelgl;
   image * this_image = view -> anim -> last -> img;
   if (id -> b == 0)
@@ -1069,7 +1069,7 @@ void param_has_changed (gpointer data, double val)
 G_MODULE_EXPORT void update_mat_param (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   param_has_changed (data, v);
 }
 
@@ -1326,21 +1326,21 @@ void setup_fog_dialogs (glwin * view, int fid)
   this_fog -> mode = fid;
   if (this_fog -> mode)
   {
-    gtk_widget_show (view -> opengl_win -> param_fog);
+    show_the_widgets (view -> opengl_win -> param_fog);
     if (this_fog -> mode == 1)
     {
-      gtk_widget_show (view -> opengl_win -> depth_box);
-      gtk_widget_hide (view -> opengl_win -> dens_box);
+      show_the_widgets (view -> opengl_win -> depth_box);
+      hide_the_widgets (view -> opengl_win -> dens_box);
     }
     else
     {
-      gtk_widget_hide (view -> opengl_win -> depth_box);
-      gtk_widget_show (view -> opengl_win -> dens_box);
+      hide_the_widgets (view -> opengl_win -> depth_box);
+      show_the_widgets (view -> opengl_win -> dens_box);
     }
   }
   else
   {
-    gtk_widget_hide (view -> opengl_win -> param_fog);
+    hide_the_widgets (view -> opengl_win -> param_fog);
   }
 }
 
@@ -1501,7 +1501,7 @@ G_MODULE_EXPORT void opengl_advanced (GtkWidget * widg, gpointer data)
     gtk_widget_set_size_request (vbox, 650 , 630);
 #endif
     GtkWidget * notebook = gtk_notebook_new ();
-    gtk_widget_show (notebook);
+    show_the_widgets (notebook);
 #ifdef GTK4
    gtk_widget_set_vexpand (notebook, TRUE);
 #endif

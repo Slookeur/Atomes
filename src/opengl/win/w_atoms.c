@@ -82,7 +82,7 @@ G_MODULE_EXPORT void update_atom_size (GtkEntry * res, gpointer data)
   project * this_proj = get_project_by_id (the_data -> a);
   j = this_proj -> modelgl -> anim -> last -> img -> style;
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   int s = this_proj -> nspec;
   if (j == WIREFRAME || j == PUNT)
   {
@@ -567,7 +567,7 @@ G_MODULE_EXPORT void atom_properties (GtkWidget * widg, gpointer data)
   \brief atom(s) propery callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -583,11 +583,11 @@ G_MODULE_EXPORT void atom_properties (GSimpleAction * action, GVariant * paramet
     show_the_widgets (this_proj -> modelgl -> model_win[atom_or_clone] -> win);
     if (this_proj -> natomes < 10000)
     {
-      gtk_widget_hide (this_proj -> modelgl -> search_widg[atom_or_clone] -> info[1]);
+      hide_the_widgets (this_proj -> modelgl -> search_widg[atom_or_clone] -> info[1]);
     }
     else
     {
-      gtk_widget_hide (this_proj -> modelgl -> search_widg[atom_or_clone] -> id_box);
+      hide_the_widgets (this_proj -> modelgl -> search_widg[atom_or_clone] -> id_box);
     }
   }
   if (GTK_IS_WIDGET(this_proj -> modelgl -> model_win[atom_or_clone] -> win))

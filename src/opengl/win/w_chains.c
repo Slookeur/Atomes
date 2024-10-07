@@ -619,7 +619,7 @@ G_MODULE_EXPORT void update_chains_search (GtkEntry * res, gpointer data)
   gchar * str;
   const gchar * m = entry_get_text (res);
   int i, j;
-  int v = (int)atof(m);
+  int v = (int)string_to_double ((gpointer)m);
   project * this_proj = get_project_by_id(dat -> a);
   coord_edition * coord = this_proj -> modelgl -> coord_win;
   switch (dat -> b)

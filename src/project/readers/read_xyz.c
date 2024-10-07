@@ -41,8 +41,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "interface.h"
 #include "project.h"
 #include "bind.h"
-#include <omp.h>
 #include "readers.h"
+#ifdef OPENMP
+#  include <omp.h>
+#endif
 
 /*!
   \fn int xyz_get_atom_coordinates ()
@@ -120,7 +122,7 @@ int xyz_get_atom_coordinates ()
             res = 2;
             goto enda;
           }
-          active_project -> atoms[i][j].x = atof(this_word);
+          active_project -> atoms[i][j].x = string_to_double ((gpointer)this_word);
           this_word = strtok_r (NULL, " ", & saved_line);
           if (! this_word)
           {
@@ -128,7 +130,7 @@ int xyz_get_atom_coordinates ()
             res = 2;
             goto enda;
           }
-          active_project -> atoms[i][j].y = atof(this_word);
+          active_project -> atoms[i][j].y = string_to_double ((gpointer)this_word);
           this_word = strtok_r (NULL, " ", & saved_line);
           if (! this_word)
           {
@@ -136,7 +138,7 @@ int xyz_get_atom_coordinates ()
             res = 2;
             goto enda;
           }
-          active_project -> atoms[i][j].z = atof(this_word);
+          active_project -> atoms[i][j].z = string_to_double ((gpointer)this_word);
         }
         else
         {
@@ -190,7 +192,7 @@ int xyz_get_atom_coordinates ()
             res = 2;
             goto ends;
           }
-          active_project -> atoms[i][j].x = atof(this_word);
+          active_project -> atoms[i][j].x = string_to_double ((gpointer)this_word);
           this_word = strtok_r (NULL, " ", & saved_line);
           if (! this_word)
           {
@@ -198,7 +200,7 @@ int xyz_get_atom_coordinates ()
             res = 2;
             goto ends;
           }
-          active_project -> atoms[i][j].y = atof(this_word);
+          active_project -> atoms[i][j].y = string_to_double ((gpointer)this_word);
           this_word = strtok_r (NULL, " ", & saved_line);
           if (! this_word)
           {
@@ -206,7 +208,7 @@ int xyz_get_atom_coordinates ()
             res = 2;
             goto ends;
           }
-          active_project -> atoms[i][j].z = atof(this_word);
+          active_project -> atoms[i][j].z = string_to_double ((gpointer)this_word);
         }
         else
         {
@@ -253,21 +255,21 @@ int xyz_get_atom_coordinates ()
           format_error (i+1, j+1, lia[1], k+j);
           return 2;
         }
-        active_project -> atoms[i][j].x = atof(this_word);
+        active_project -> atoms[i][j].x = string_to_double ((gpointer)this_word);
         this_word = strtok (NULL, " ");
         if (! this_word)
         {
           format_error (i+1, j+1, lia[2], k+j);
           return 2;
         }
-        active_project -> atoms[i][j].y = atof(this_word);
+        active_project -> atoms[i][j].y = string_to_double ((gpointer)this_word);
         this_word = strtok (NULL, " ");
         if (! this_word)
         {
           format_error (i+1, j+1, lia[3], k+j);
           return 2;
         }
-        active_project -> atoms[i][j].z = atof(this_word);
+        active_project -> atoms[i][j].z = string_to_double ((gpointer)this_word);
       }
       else
       {
@@ -311,7 +313,7 @@ int open_xyz_file (int linec)
     res = 2;
     goto end;
   }
-  this_reader -> natomes = (int)atof(this_word);
+  this_reader -> natomes = (int)string_to_double ((gpointer)this_word);
   reader_info ("xyz", "Number of atoms", this_reader -> natomes);
   g_free (this_line);
   if (linec%(this_reader -> natomes + 2) != 0)
@@ -334,7 +336,7 @@ int open_xyz_file (int linec)
     res = 2;
     goto end;
   }
-  this_reader -> natomes = (int)atof(this_word);
+  this_reader -> natomes = (int)string_to_double ((gpointer)this_word);
   reader_info ("xyz", "Number of atoms", this_reader -> natomes);
   g_free (this_line);
   if (linec%(this_reader -> natomes + 2) != 0)

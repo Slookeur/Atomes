@@ -273,7 +273,7 @@ static GLubyte * capture_opengl_image (unsigned int width, unsigned int height)
 void fill_image (VideoStream * vs, int width, int height, glwin * view)
 {
   // opengl call is here !!!
-  reshape (view, width, height);
+  reshape (view, width, height, FALSE);
   draw (view);
   // Might need some correction(s) here for HiDPI screens
   GLubyte * image = capture_opengl_image (width, height);
@@ -1254,7 +1254,7 @@ G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointe
     view -> pixels[0] = vopts -> video_res[0];
     view -> pixels[1] = vopts -> video_res[1];
     init_frame_buffer (vopts -> video_res[0], vopts -> video_res[1]);
-    init_opengl (view);
+    init_opengl ();
     re_create_all_md_shaders (view);
     recreate_all_shaders (view);
     in_movie_encoding = TRUE;
@@ -1267,7 +1267,7 @@ G_MODULE_EXPORT void run_save_movie (GtkDialog * info, gint response_id, gpointe
     in_movie_encoding = FALSE;
     re_create_all_md_shaders (view);
     recreate_all_shaders (view);
-    reshape (view, x, y);
+    reshape (view, x, y, TRUE);
     update (view);
   }
   else

@@ -44,9 +44,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "project.h"
 #include "bind.h"
 #include "readers.h"
-
-#include <omp.h>
 #include <ctype.h>
+#ifdef OPENMP
+#  include <omp.h>
+#endif
 
 /*!
   \fn double get_z_from_pdb_name (char * name)
@@ -125,9 +126,9 @@ int pdb_get_atoms_data (int linec)
             res = 0;
             goto ends;
           }
-          if (k == 8) other_at -> x = atof(this_word);
-          if (k == 9) other_at -> y = atof(this_word);
-          if (k == 10) other_at -> z = atof(this_word);
+          if (k == 8) other_at -> x = string_to_double ((gpointer)this_word);
+          if (k == 9) other_at -> y = string_to_double ((gpointer)this_word);
+          if (k == 10) other_at -> z = string_to_double ((gpointer)this_word);
           if (k == 12)
           {
             other_at -> nz = get_z_from_pdb_name (this_word);

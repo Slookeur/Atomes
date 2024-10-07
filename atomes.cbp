@@ -1229,7 +1229,6 @@
 		<Unit filename="src/fortran/fzbt.F90" />
 		<Unit filename="src/fortran/gr.F90" />
 		<Unit filename="src/fortran/grfft.F90" />
-		<Unit filename="src/fortran/init.F90" />
 		<Unit filename="src/fortran/initchains.F90" />
 		<Unit filename="src/fortran/initrings.F90" />
 		<Unit filename="src/fortran/lattice.F90" />
@@ -1354,11 +1353,6 @@
 			<Option target="debug" />
 			<Option target="clean" />
 		</Unit>
-		<Unit filename="src/gui/gui.h">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-		</Unit>
 		<Unit filename="src/gui/initc.c">
 			<Option compilerVar="CC" />
 			<Option target="atomes" />
@@ -1474,13 +1468,6 @@
 			<Option target="cleancalc" />
 			<Option target="cleanogl" />
 		</Unit>
-		<Unit filename="src/gui/xmlrw.h">
-			<Option target="atomes" />
-			<Option target="debug" />
-			<Option target="clean" />
-			<Option target="cleanc" />
-		</Unit>
-		<Unit filename="src/lic/valid.h" />
 		<Unit filename="src/opengl/arcball.c">
 			<Option compilerVar="CC" />
 			<Option target="atomes" />
@@ -3243,7 +3230,9 @@
 			<Option target="debug" />
 			<Option target="clean" />
 		</Unit>
-		<Unit filename="src/regdata.h" />
+		<Unit filename="src/startup-testing/startup_testing.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/workspace/modelinfo.c">
 			<Option compilerVar="CC" />
 			<Option target="atomes" />

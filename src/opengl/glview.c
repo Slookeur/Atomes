@@ -53,11 +53,11 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void update_this_neighbor_ (int * stp, int * at, int * iv, int * nv);
   void update (glwin * view);
   void transform (glwin * view, double aspect);
-  void reshape (glwin * view, int width, int height);
+  void reshape (glwin * view, int width, int height, gboolean use_ratio);
   void save_rotation_quaternion (glwin * view);
   void edit_for_motion (glwin * view);
   void motion (glwin * view, gint x, gint y, GdkModifierType state);
-  void render_this_gl_window (glwin * view, GtkGLArea * area, gint button, double ptx, double pty);
+  void render_this_gl_window (glwin * view, GtkGLArea * area);
   void render_this_gl_window (glwin * view, GtkWidget * widg, gint button);
   void glwin_lib_pressed (double x, double y, guint event_type, int event_button, gpointer data);
   void glwin_button_event (double event_x, double event_y, guint event_button, guint event_type, guint32 event_time, gpointer data);
@@ -67,7 +67,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   void image_init_spec_data (image * img, project * this_proj, int nsp);
   void set_img_lights (project * this_proj, image * img);
   void init_img (project * this_proj);
-  void init_opengl (glwin * view);
+  void init_opengl ();
   void center_molecule (project * this_proj);
   void center_this_molecule (glwin * view);
   void free_glwin_spec_data (project * this_proj, int spec);
@@ -440,8 +440,10 @@ void update (glwin * view)
 {
   gtk_gl_area_queue_render ((GtkGLArea *)view -> plot);
 #ifdef G_OS_WIN32
-  gtk_widget_hide (view -> plot);
-  gtk_widget_show (view -> plot);
+#ifdef GTK3
+  hide_the_widgets (view -> plot);
+  show_the_widgets (view -> plot);
+#endif
 #endif
 }
 
@@ -502,23 +504,27 @@ void transform (glwin * view, double aspect)
 }
 
 /*!
-  \fn void reshape (glwin * view, int width, int height)
+  \fn void reshape (glwin * view, int width, int height, gboolean use_ratio)
 
   \brief reshape (resize) the OpenGL window
 
   \param view the target glwin
   \param width new with
   \param height new height
+  \param use_ratio use widget rendering ratio
 */
-void reshape (glwin * view, int width, int height)
+void reshape (glwin * view, int width, int height, gboolean use_ratio)
 {
   double aspect;
   int scale = 1.0;
-  if (view -> win)
+  if (use_ratio)
   {
-    if (GTK_IS_WIDGET(view -> win))
+    if (view -> win)
     {
-      scale = gtk_widget_get_scale_factor (view -> win);
+      if (GTK_IS_WIDGET(view -> win))
+      {
+        scale = gtk_widget_get_scale_factor (view -> win);
+      }
     }
   }
   glViewport (0, 0, (GLsizei) scale * width, (GLsizei) scale * height);
@@ -621,61 +627,58 @@ void motion (glwin * view, gint x, gint y, GdkModifierType state)
 {
   view -> mouseAction = MOTION;
   int i;
-  if (view -> mouseStatus == CLICKED)
-  {
-    if (view -> mode == EDITION && view -> prepare_motion && view -> rebuild[0][0]) edit_for_motion (view);
+  if (view -> mode == EDITION && view -> prepare_motion && view -> rebuild[0][0]) edit_for_motion (view);
 
-    if (state & GDK_BUTTON1_MASK)
+  if (state & GDK_BUTTON1_MASK)
+  {
+    arc_ball_rotation (view, x, y);
+  }
+  else if (state & GDK_BUTTON2_MASK)
+  {
+    if (view -> mode != EDITION)
     {
-      arc_ball_rotation (view, x, y);
-    }
-    else if (state & GDK_BUTTON2_MASK)
-    {
-      if (view -> mode != EDITION)
+      view -> anim -> last -> img -> c_shift[0] -= (double) (x - view -> mouseX) / view -> pixels[0];
+      view -> anim -> last -> img -> c_shift[1] += (double) (y - view -> mouseY) / view -> pixels[1];
+      for (i=0; i<2; i++)
       {
-        view -> anim -> last -> img -> c_shift[0] -= (double) (x - view -> mouseX) / view -> pixels[0];
-        view -> anim -> last -> img -> c_shift[1] += (double) (y - view -> mouseY) / view -> pixels[1];
-        for (i=0; i<2; i++)
+        if (view -> camera_widg[i+5])
         {
-          if (view -> camera_widg[i+5])
+          if (GTK_IS_WIDGET(view -> camera_widg[i+5]))
           {
-            if (GTK_IS_WIDGET(view -> camera_widg[i+5]))
-            {
-              gtk_spin_button_set_value ((GtkSpinButton *)view -> camera_widg[i+5], - view -> anim -> last -> img -> c_shift[i]);
-            }
+            gtk_spin_button_set_value ((GtkSpinButton *)view -> camera_widg[i+5], - view -> anim -> last -> img -> c_shift[i]);
           }
         }
       }
-      else
-      {
-        vec3_t pos_a = vec3(x, - y, 0.75);
-        vec3_t pos_b = vec3(view -> mouseX, - view -> mouseY, 0.75);
-        vec3_t trans_a = v3_un_project (pos_a, view -> view_port, view -> projection_matrix);
-        vec3_t trans_b = v3_un_project (pos_b, view -> view_port, view -> projection_matrix);
-        vec3_t trans;
-        trans.x = (trans_a.x - trans_b.x);
-        trans.y = (trans_b.y - trans_a.y);
-        if (view -> anim -> last -> img -> rep == PERSPECTIVE)
-        {
-          trans.x *= view -> anim -> last -> img -> p_depth;
-          trans.y *= view -> anim -> last -> img -> p_depth;
-        }
-        trans.z = 0.0;
-        translate (get_project_by_id(view -> proj), 1, 1, trans);
-      }
     }
-    if (view -> mode == EDITION)
+    else
     {
-      init_default_shaders (view);
-#ifdef GTK3
-      // GTK3 Menu Action To Check
-      set_advanced_bonding_menus (view);
-#endif
+      vec3_t pos_a = vec3(x, - y, 0.75);
+      vec3_t pos_b = vec3(view -> mouseX, - view -> mouseY, 0.75);
+      vec3_t trans_a = v3_un_project (pos_a, view -> view_port, view -> projection_matrix);
+      vec3_t trans_b = v3_un_project (pos_b, view -> view_port, view -> projection_matrix);
+      vec3_t trans;
+      trans.x = (trans_a.x - trans_b.x);
+      trans.y = (trans_b.y - trans_a.y);
+      if (view -> anim -> last -> img -> rep == PERSPECTIVE)
+      {
+        trans.x *= view -> anim -> last -> img -> p_depth;
+        trans.y *= view -> anim -> last -> img -> p_depth;
+      }
+      trans.z = 0.0;
+      translate (get_project_by_id(view -> proj), 1, 1, trans);
     }
-    view -> mouseX = x;
-    view -> mouseY = y;
-    update (view);
   }
+  if (view -> mode == EDITION)
+  {
+    init_default_shaders (view);
+#ifdef GTK3
+    // GTK3 Menu Action To Check
+    set_advanced_bonding_menus (view);
+#endif
+  }
+  view -> mouseX = x;
+  view -> mouseY = y;
+  update (view);
 }
 
 #ifdef GTK3
@@ -733,17 +736,14 @@ G_MODULE_EXPORT void on_glwin_pointer_motion (GtkEventControllerMotion * motc, g
 
 #ifdef GTKGLAREA
 /*!
-  \fn void render_this_gl_window (glwin * view, GtkGLArea * area, gint button, double ptx, double pty)
+  \fn void render_this_gl_window (glwin * view, GtkGLArea * area)
 
   \brief render the OpenGL window
 
   \param view the target glwin
   \param area the target GtkGLArea
-  \param button the button id
-  \param ptx x position
-  \param pty y position
 */
-void render_this_gl_window (glwin * view, GtkGLArea * area, gint button, double ptx, double pty)
+void render_this_gl_window (glwin * view, GtkGLArea * area)
 #else
 /*!
   \fn void render_this_gl_window (glwin * view, GtkWidget * widg, gint button)
@@ -758,24 +758,24 @@ void render_this_gl_window (glwin * view, GtkWidget * widg, gint button)
 #endif
 {
 #ifdef GTKGLAREA
-  view -> pixels[0] = gtk_widget_get_allocated_width (GTK_WIDGET(area));
-  view -> pixels[1] = gtk_widget_get_allocated_height (GTK_WIDGET(area));
+  view -> pixels[0] = get_widget_width (GTK_WIDGET(area));
+  view -> pixels[1] = get_widget_height (GTK_WIDGET(area));
   gtk_gl_area_make_current (area);
   if (gtk_gl_area_get_error (area) == NULL)
 #else
-  view -> pixels[0] = gtk_widget_get_allocated_width (widg);
-  view -> pixels[1] = gtk_widget_get_allocated_height (widg);
+  view -> pixels[0] = get_widget_width (widg);
+  view -> pixels[1] = get_widget_height (widg);
   GdkWindow * win = gtk_widget_get_window (widg);
   if (glXMakeCurrent (GDK_WINDOW_XDISPLAY (win), GDK_WINDOW_XID (win), view -> glcontext))
 #endif
   {
-    reshape (view, view -> pixels[0], view -> pixels[1]);
+    reshape (view, view -> pixels[0], view -> pixels[1], TRUE);
     draw (view);
     if (view -> to_pick)
     {
-      if (button) process_the_hits (view, button, ptx, pty);
+      if (view -> mouseButton) process_the_hits (view, view -> mouseButton, view -> mouseX, view -> mouseY);
       view -> to_pick = FALSE;
-      reshape (view, view -> pixels[0], view -> pixels[1]);
+      reshape (view, view -> pixels[0], view -> pixels[1], TRUE);
       draw (view);
     }
 #ifdef GTKGLAREA
@@ -806,6 +806,7 @@ void glwin_lib_pressed (double x, double y, guint event_type, guint event_button
       view -> mouseStatus = CLICKED;
       view -> mouseX = x;
       view -> mouseY = y;
+      view -> mouseButton = event_button;
       if (event_button == 1)
       {
         save_rotation_quaternion (view);
@@ -893,6 +894,7 @@ void glwin_button_event (double event_x, double event_y, guint event_button, gui
       view -> mouseStatus = CLICKED;
       view -> mouseX = event_x;
       view -> mouseY = event_y;
+      view -> mouseButton = event_button;
       clock_gettime (CLOCK_MONOTONIC, & start_time);
       if (event_button == 1 || event_button == 3)
       {
@@ -901,7 +903,8 @@ void glwin_button_event (double event_x, double event_y, guint event_button, gui
         view -> nth_copy = 0;
         view -> insert_coords = get_insertion_coordinates (view);
 #ifdef GTKGLAREA
-        render_this_gl_window (view, GTK_GL_AREA(view -> plot), event_button, event_x, event_y);
+        view -> to_pick = TRUE;
+        update (view);
 #else
         render_this_gl_window (view, plot, event_button);
 #endif
@@ -909,12 +912,12 @@ void glwin_button_event (double event_x, double event_y, guint event_button, gui
       break;
     case GDK_BUTTON_RELEASE:
       view -> mouseStatus = RELEASED;
+      view -> mouseButton = 0;
       clock_gettime (CLOCK_MONOTONIC, & stop_time);
       if (get_calc_time (start_time, stop_time) < 0.4)
       {
-        view -> to_pick = TRUE;
 #ifdef GTKGLAREA
-        render_this_gl_window (view, GTK_GL_AREA(view -> plot), event_button, event_x, event_y);
+        update (view);
 #else
         render_this_gl_window (view, plot, event_button);
 #endif
@@ -1093,7 +1096,7 @@ void rotate_x_y (glwin * view, double angle_x, double angle_y)
   int i;
   for (i=0; i<2; i++)
   {
-    if (abs(view -> anim -> last -> img -> c_angle[i]) > 180.0) view -> anim -> last -> img -> c_angle[i] = 0.0;
+    if (fabs(view -> anim -> last -> img -> c_angle[i]) > 180.0) view -> anim -> last -> img -> c_angle[i] = 0.0;
     if (view -> camera_widg[i+3])
     {
       if (GTK_IS_WIDGET(view -> camera_widg[i+3]))
@@ -1380,20 +1383,17 @@ gboolean is_GLExtension_Supported (const char * extension)
 }
 
 /*!
-  \fn void init_opengl (glwin * view)
+  \fn void init_opengl ()
 
-  \brief initialize OpenGL rendering parameters for a glwin pointer
-
-  \param view the target glwin
+  \brief initialize OpenGL rendering parameters
 */
-void init_opengl (glwin * view)
+void init_opengl ()
 {
   glEnable (GL_DEPTH_TEST);
   glDepthMask (GL_TRUE);
   glDepthFunc (GL_LEQUAL);
   glDepthRange (0.0f, 1.0f);
   glClearDepth (1.0f);
-
   glEnable (GL_NORMALIZE);
 
   glShadeModel(GL_SMOOTH);
@@ -1424,7 +1424,11 @@ void init_opengl (glwin * view)
   glHint (GL_FOG_HINT, GL_NICEST);
   glHint (GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // Really Nice Perspective Calculations
 
+#ifdef OSX
+  ogl_texture = GL_TEXTURE_RECTANGLE_ARB;
+#else
   ogl_texture = (is_GLExtension_Supported("GL_ARB_texture_rectangle")) ? GL_TEXTURE_RECTANGLE_ARB : GL_TEXTURE_2D;
+#endif // OSX
 }
 
 /*!
@@ -1681,11 +1685,11 @@ void init_glwin (glwin * view)
   // On normal motion and copy rebuild:
   view -> rebuild[0][0] = view -> rebuild[1][0] = (this_proj -> steps > 1) ? FALSE : TRUE;
   view -> init = TRUE;
-  init_opengl (view);
+  init_opengl ();
   init_shaders (view);
   this_proj -> initgl = TRUE;
 #ifdef GTK4
-  update_menu_bar (view);
+  if (view -> win) update_menu_bar (view);
 #endif
 }
 
@@ -1759,26 +1763,11 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
   }
   else
   {
-#ifdef GTK3
-#ifdef GTKGLAREA
-#ifndef G_OS_WIN32
-    if (atomes_visual)
-    {
-      atomes_visual = 0;
-      goto end;
-    }
-#endif
-#endif
-#endif
     gchar * errm = g_strdup_printf ("Impossible to initialize the OpenGL 3D rendering ! \n %s\n", err -> message);
     g_error_free (err);
     show_error (errm, 0, MainWindow);
     g_free (errm);
-    atomes_visual = -1;
   }
-#ifdef GTK3
-  end:;
-#endif
 }
 
 #ifdef GTKGLAREA
@@ -1811,7 +1800,7 @@ G_MODULE_EXPORT gboolean on_expose (GtkWidget * widg, cairo_t * cr, gpointer dat
   if (event && event -> type == GDK_EXPOSE && ((GdkEventExpose *)event) -> count > 0) return TRUE;
 #endif
 #ifdef GTKGLAREA
-  render_this_gl_window (view, area, 0, 0.0, 0.0);
+  render_this_gl_window (view, area);
 #else
   render_this_gl_window (view, widg, 0);
 #endif

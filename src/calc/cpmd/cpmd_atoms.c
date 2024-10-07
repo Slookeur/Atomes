@@ -106,7 +106,7 @@ G_MODULE_EXPORT void update_dummy_coord (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   dummy -> xyz[i] = v;
   update_entry_double (res, dummy -> xyz[i]);
   print_the_section (8, 0, qmbuffer[8]);

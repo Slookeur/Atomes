@@ -84,6 +84,7 @@ extern GMenu * prepare_model_menu (glwin * view, int popm);
 extern GMenu * prepare_coord_menu (glwin * view, int popm);
 extern GMenu * menu_view (glwin * view, int id);
 extern GMenu * menu_anim (glwin * view, int popm);
+extern GMenu * menu_shortcuts (glwin * view, int popm);
 #endif
 
 #endif

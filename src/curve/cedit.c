@@ -146,14 +146,14 @@ void set_set (int a, int b, int c)
   setcolorbox = destroy_this_widget (setcolorbox);
   setcolorbox = create_combo ();
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, thesetbox, setcolorbox, FALSE, FALSE, 0);
-  gtk_widget_show(setcolorbox);
+  show_the_widgets (setcolorbox);
   action_to_plot (& get_project_by_id(a) -> idcc[b][c]);
   prepbox (activeg, activer, activec);
   choose_set (GTK_COMBO_BOX(setcolorbox), NULL);
   orgtree = destroy_this_widget (orgtree);
 
   add_container_child (CONTAINER_SCR, datascroll, create_org_list(& get_project_by_id(activeg) -> idcc[activer][activec]));
-  gtk_widget_show (orgtree);
+  show_the_widgets (orgtree);
   widget_set_sensitive (orgtree, get_project_by_id(activeg) -> curves[activer][activec] -> extrac -> extras);
 }
 
@@ -404,11 +404,11 @@ void edit_curve (gpointer data)
 
   if (gtk_combo_box_get_active (GTK_COMBO_BOX(data_aspect)))
   {
-    gtk_widget_hide (Glyph_box);
+    hide_the_widgets (Glyph_box);
   }
   else
   {
-    gtk_widget_hide (Hist_box);
+    hide_the_widgets (Hist_box);
   }
 
   g_signal_connect (G_OBJECT(edit_box), "response", G_CALLBACK(run_curve_edit), NULL);

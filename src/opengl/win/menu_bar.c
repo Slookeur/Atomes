@@ -65,6 +65,7 @@ extern GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo);
 extern G_MODULE_EXPORT void opengl_advanced (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data);
 extern G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data);
+extern G_MODULE_EXPORT void view_shortcuts (GSimpleAction * action, GVariant * parameter, gpointer data);
 GSimpleActionGroup * view_pop_actions;
 
 /*!
@@ -73,7 +74,7 @@ GSimpleActionGroup * view_pop_actions;
   \brief open OpenGL advanced configuration window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_opengl_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -87,7 +88,7 @@ G_MODULE_EXPORT void to_opengl_advanced (GSimpleAction * action, GVariant * para
   \brief render image from OpenGL window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_render_gl_image (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -241,6 +242,21 @@ GMenu * prepare_coord_menu (glwin * view, int popm)
 }
 
 /*!
+  \fn GMenu * menu_shortcuts (glwin * view, int popm)
+
+  \brief create shortcuts menu GTK4
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+*/
+GMenu * menu_shortcuts (glwin * view, int popm)
+{
+  GMenu * menu = g_menu_new ();
+  append_opengl_item (view, menu, "Shortcuts", "shortcuts", popm, popm, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(view_shortcuts), (gpointer)view, FALSE, FALSE, FALSE, TRUE);
+  return menu;
+}
+
+/*!
   \fn GMenu * opengl_menu_bar (glwin * view)
 
   \brief create OpenGL window menu GTK4
@@ -264,6 +280,7 @@ GMenu * opengl_menu_bar (glwin * view)
   append_submenu (menu, "Tools", menu_tools(view, 0));
   append_submenu (menu, "View", menu_view(view, 0));
   append_submenu (menu, "Animate", menu_anim(view, 0));
+  append_submenu (menu, "Help", menu_shortcuts(view, 0));
   return menu;
 }
 
@@ -393,14 +410,11 @@ GtkWidget * opengl_window_create_menu_bar (glwin * view)
 
   GtkWidget * menu_bar = gtk_popover_menu_bar_new_from_model ((GMenuModel *)opengl_menu_bar(view));
   menu_bar_attach_color_palettes (view, menu_bar);
+  add_box_child_start (GTK_ORIENTATION_HORIZONTAL, view -> menu_box, menu_bar, FALSE, FALSE, 0);
   opengl_project_changed (activev);
   gchar * str = g_strdup_printf ("gl-%d", view -> action_id);
-  gtk_widget_insert_action_group (menu_bar, str, G_ACTION_GROUP(view -> action_group));
+  gtk_widget_insert_action_group (view -> menu_box, str, G_ACTION_GROUP(view -> action_group));
   g_free (str);
-
-
-  add_box_child_start (GTK_ORIENTATION_HORIZONTAL, view -> menu_box, menu_bar, FALSE, FALSE, 0);
-
   show_the_widgets (menu_bar);
   return menu_bar;
 }

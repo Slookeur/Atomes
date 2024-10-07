@@ -88,8 +88,8 @@ G_MODULE_EXPORT void set_box_axis_style (GtkWidget * widg, gpointer data)
   {
     this_proj -> modelgl -> anim -> last -> img -> box_axis[o] = NONE - 1;
     gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_box_axis[o][l], FALSE);
-    gtk_widget_show (this_proj -> modelgl -> ogl_box_axis[o][3+2*(m-1)]);
-    gtk_widget_hide (this_proj -> modelgl -> ogl_box_axis[o][3+2*(l-1)]);
+    show_the_widgets (this_proj -> modelgl -> ogl_box_axis[o][3+2*(m-1)]);
+    hide_the_widgets (this_proj -> modelgl -> ogl_box_axis[o][3+2*(l-1)]);
     if (widg != this_proj -> modelgl -> ogl_box_axis[o][(k == NONE) ? 1 : m])
     {
       gtk_check_menu_item_set_active ((GtkCheckMenuItem *)this_proj -> modelgl -> ogl_box_axis[o][(k == NONE) ? 1 : m], TRUE);
@@ -308,7 +308,7 @@ GtkWidget * menu_box_axis (glwin * view, int id, int ab)
   \brief handle the 'box/axis' show/hide signal GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -352,7 +352,7 @@ G_MODULE_EXPORT void show_hide_box_axis (GSimpleAction * action, GVariant * para
   \brief handle a box/axis radio menu item signal GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void change_box_axis_radio (GSimpleAction * action, GVariant * parameter, gpointer data)

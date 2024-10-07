@@ -561,7 +561,7 @@ GtkWidget * create_css_button (int p, int id, int r, int c)
   g_signal_connect (motion, "enter", G_CALLBACK(on_element_motion_enter), & table_p[id-1]);
   gtk_widget_add_controller (but, GTK_EVENT_CONTROLLER (motion));
 #endif
-  gtk_widget_show (but);
+  show_the_widgets (but);
   return but;
 }
 
@@ -591,7 +591,7 @@ GtkWidget * create_css_group (int p, int i)
   gchar * str = g_strdup_printf ("group-%d-%d", p, i);
   gtk_widget_set_name (lab, str);
   g_free (str);
-  gtk_widget_show (lab);
+  show_the_widgets (lab);
   return lab;
 }
 

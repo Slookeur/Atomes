@@ -125,14 +125,14 @@ double get_value_from_pos (gchar * pos)
     char * p = NULL;
     double u, v;
     p = strtok(pos, "/");
-    u  = atof(p);
+    u  = string_to_double ((gpointer)p);
     p = strtok(NULL, "/");
-    v = atof(p);
+    v = string_to_double ((gpointer)p);
     return u/v;
   }
   else
   {
-    return atof(pos);
+    return string_to_double ((gpointer)pos);
   }
 }
 
@@ -1613,7 +1613,7 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
         set_mode (active_glwin -> ogl_mode[0], & active_glwin -> colorp[0][0]);
 #endif
       }
-      gtk_widget_show (active_glwin -> win);
+      show_the_widgets (active_glwin -> win);
       gtk_button_set_label (GTK_BUTTON(active_glwin -> builder_win -> pbut), "Build (new project)");
       if (active_glwin -> atom_win)
       {

@@ -341,7 +341,7 @@ G_MODULE_EXPORT void update_atom_parameter (GtkEntry * res, gpointer data)
   const gchar * m = entry_get_text (res);
   if (i > -1)
   {
-    v = atof(m);
+    v = string_to_double ((gpointer)m);
     update_entry_double (res, v);
   }
   switch (i)
@@ -390,7 +390,7 @@ G_MODULE_EXPORT void update_field_parameter (GtkEntry * res, gpointer data)
 {
   int i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   update_entry_double (res, v);
   if (object_is > 0 && object_is < 9)
   {
@@ -432,7 +432,7 @@ G_MODULE_EXPORT void update_cross_parameter (GtkEntry * res, gpointer data)
   int j, k;
   k = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   update_entry_double (res, v);
   j = gtk_combo_box_get_active (GTK_COMBO_BOX(cross_box));
   cross[tmp_fbody -> id][j][k] = cross[j][tmp_fbody -> id][k] = v;
@@ -740,7 +740,7 @@ GtkWidget * param_prop_param_box (int pid)
 G_MODULE_EXPORT void changed_field_key_combo (GtkComboBox * box, gpointer data)
 {
   int i, j;
-  gboolean changeit;
+  gboolean changeit = FALSE;
   i = GPOINTER_TO_INT(data);
   j = gtk_combo_box_get_active (box);
   if (i > 6 && i < MOLIMIT)
@@ -755,7 +755,6 @@ G_MODULE_EXPORT void changed_field_key_combo (GtkComboBox * box, gpointer data)
   }
   else
   {
-    changeit = FALSE;
     switch (i)
     {
       case 6:
@@ -1016,8 +1015,8 @@ G_MODULE_EXPORT void field_molecule_select_atom_id (GtkCellRendererToggle * cell
   init_default_shaders (tmp_view);
   j = (active_sel > 5 && active_sel < 8) ? 1 : 0;
   gtk_tree_store_set (* model, & iter, 3+j, toviz.c, -1);
-  gtk_widget_hide (add_tree);
-  gtk_widget_show (add_tree);
+  hide_the_widgets (add_tree);
+  show_the_widgets (add_tree);
 }
 
 /*!
@@ -1158,7 +1157,7 @@ G_MODULE_EXPORT void edit_unit_weight (GtkCellRendererText * cell, gchar * path_
   GtkTreePath * path = gtk_tree_path_new_from_string (path_string);
   gtk_tree_model_get_iter (GTK_TREE_MODEL(* model), & iter, path);
   gtk_tree_model_get (GTK_TREE_MODEL(* model), & iter, 0, & i, -1);
-  val_at[i] = atof(new_text);
+  val_at[i] = string_to_double ((gpointer)new_text);
 }
 
 /*!
@@ -1666,7 +1665,8 @@ G_MODULE_EXPORT void selection_button (GtkButton * but, gpointer data)
   select_atom_id_from_fied_molecule (NULL, data);
   int i, j, k, l, m, n, o, p, q, r;
   i = GPOINTER_TO_INT(data);
-  gchar * stra, * strb;
+  gchar * stra = NULL;
+  gchar * strb = NULL;
   if (i == 2 || i == 3)
   {
     j=i-2;
@@ -1760,7 +1760,7 @@ G_MODULE_EXPORT void selection_button (GtkButton * but, gpointer data)
       cross_box = destroy_this_widget (cross_box);
       cross_box = combo_cross (tmp_fbody);
       add_box_child_start (GTK_ORIENTATION_HORIZONTAL, cross_hbox, cross_box, FALSE, FALSE, 0);
-      gtk_widget_show (cross_box);
+      show_the_widgets (cross_box);
     }
     if (tmp_fbody -> na[j] < 0)
     {
@@ -2714,7 +2714,7 @@ void edit_parameters (int f, int id)
           for (k=0; k<m; k++)
           {
             gtk_tree_model_get (GTK_TREE_MODEL(field_model[f]), & field_iter, k+1, & ba, -1);
-            edit_atids[k] =  (int) atof (ba) - 1;
+            edit_atids[k] =  (int) string_to_double ((gpointer)ba) - 1;
             if (k == m-1) str = g_strdup_printf ("%s</b> and <b>", str);
             str = g_strdup_printf ("%s%s", str, ba);
             if (m > 2 && k < m-1) str = g_strdup_printf ("%s</b>, <b>", str);
@@ -2905,7 +2905,7 @@ void edit_parameters (int f, int id)
   show_the_widgets (dialog);
   if (f == 2)
   {
-    if (tmp_fshell -> ia[0] < 0 || tmp_fshell -> ia[1] < 1) gtk_widget_hide (shell_hbox[2]);
+    if (tmp_fshell -> ia[0] < 0 || tmp_fshell -> ia[1] < 1) hide_the_widgets (shell_hbox[2]);
     if (tmp_fshell -> ia[0] < 0) widget_set_sensitive (shell_hbox[1], FALSE);
   }
 
@@ -2987,7 +2987,7 @@ void check_tersoffs (int id, int key)
   \brief edit field property callback
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void edit_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -3052,7 +3052,7 @@ G_MODULE_EXPORT void edit_field_prop (GSimpleAction * action, GVariant * paramet
   \brief add field property callback
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void add_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -3292,7 +3292,7 @@ G_MODULE_EXPORT void add_field_prop (GSimpleAction * action, GVariant * paramete
   \brief remove field property callback
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void remove_field_prop (GSimpleAction * action, GVariant * parameter, gpointer data)

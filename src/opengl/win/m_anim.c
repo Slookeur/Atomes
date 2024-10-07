@@ -92,7 +92,7 @@ GtkWidget * menu_anim (glwin * view, int id)
   \brief handle the spinner window creation signal
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_spin (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -106,7 +106,7 @@ G_MODULE_EXPORT void to_spin (GSimpleAction * action, GVariant * parameter, gpoi
   \brief handle the sequencer window creation signal
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_seq (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -120,7 +120,7 @@ G_MODULE_EXPORT void to_seq (GSimpleAction * action, GVariant * parameter, gpoin
   \brief handle the recorder window creation signal
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_rec (GSimpleAction * action, GVariant * parameter, gpointer data)

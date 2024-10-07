@@ -172,6 +172,6 @@ G_MODULE_EXPORT void window_recorder (GtkWidget * widg, gpointer data)
   }
   else
   {
-    gtk_widget_show (view -> rec -> win);
+    show_the_widgets (view -> rec -> win);
   }
 }

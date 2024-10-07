@@ -117,8 +117,106 @@ extern int is_labelled;
 extern G_MODULE_EXPORT void on_create_new_project (GtkWidget * widg, gpointer data);
 extern gchar * action_atoms[3];
 extern int get_selection_type (glwin * view);
+extern GtkWidget * shortcuts_window (int sections, int group_by_section[sections], int groups, int shortcut_by_group[groups],
+                                     gchar * section_names[sections], gchar * group_names[groups], shortcuts shortcs[]);
 
 atomic_object * copied_object = NULL;
+
+gchar * opengl_section_names[]={ "General", "Analysis mode", "Edition mode" };
+int opengl_group_by_section[] = { 5, 4, 3 };
+gchar * opengl_group_names[]={"Styles", "Measures", "Selection mode", "Window management", "Mouse mode",
+                              "Camera rotation", "Camera motion", "Camera spin", "Model interaction",
+                              "Coordinates rotation", "Coordinates translation", "Model interaction"};
+int opengl_shortcut_by_group[] = { 10, 1, 4, 6, 2, // Global
+                                    4, 6, 6, 3,    // Analysis
+                                    4, 6, 6 };     // Edition
+
+shortcuts opengl_shortcuts[] = {
+//
+// Global
+//
+  { "Atom(s) color map", "change atom(s) color map", GDK_KEY_a, "a" },
+  { "Polyhedra color map", "change polyhedra color map", GDK_KEY_p, "p" },
+  { "Ball and stick", "change global style to ball and stick", GDK_KEY_b, "b" },
+  { "Cylinders", "change global style to cylinders", GDK_KEY_w, "w" },
+  { "Spheres", "change global style to spheres", GDK_KEY_s, "s" },
+  { "Covalent radius", "change global style to cylinders", GDK_KEY_o, "o" },
+  { "Ionic radius", "change global style to cylinders", GDK_KEY_i, "i" },
+  { "Van der Waals radius", "change global style to van der Waals radius", GDK_KEY_v, "v" },
+  { "In crystal radius", "change global style to in crystal radius", GDK_KEY_r, "r" },
+  { "Wireframe", "change global style to wireframe", GDK_KEY_w, "w" },
+//
+  { "All measures for the selection, pressed:\n\n"
+    "\t- 1st time: show inter-atomic distance(s)\n"
+    "\t- 2nd time: show inter-atomic angles\n"
+    "\t- 3rd time: hide measures", "Show measures", GDK_KEY_m, "m" },
+//
+  { "Atom", "atom selection mode", GDK_KEY_a, "<Shift>a" },
+  { "Coordination", "coordination sphere selection mode", GDK_KEY_c, "<Shift>c" },
+  { "Fragment", "fragment selection mode", GDK_KEY_f, "<Shift>f" },
+  { "Molecule", "molecule selection mode", GDK_KEY_m, "<Shift>m" },
+//
+  { "Environments", "Environments window",  GDK_KEY_e, "<Ctrl>e" },
+  { "Measures", "Measures window",  GDK_KEY_m, "<Ctrl>m" },
+  { "Recorder", "Recorder window",  GDK_KEY_r, "<Ctrl>r" },
+  { "Create new project", "Create new project",  GDK_KEY_n, "<Ctrl>n" },
+  { "Enter fullscreen", "Enter fullscreen", GDK_KEY_f, "<Ctrl>f" },
+  { "Exit fullscreen", "Exit fullscreen", GDK_KEY_Escape, "Escape" },
+//
+#ifdef OSX
+  { "Analysis mode", "Analysis mode", GDK_KEY_a, "<Meta>a" },
+  { "Edition mode", "Edition mode", GDK_KEY_e, "<Meta>e" },
+#else
+  { "Analysis mode", "Analysis mode", GDK_KEY_a, "<Alt>a" },
+  { "Edition mode", "Edition mode", GDK_KEY_e, "<Alt>e" },
+#endif
+//
+// Analysis
+//
+  { "Rotate right", "rotate right", GDK_KEY_Right, "Right" },
+  { "Rotate left", "rotate left", GDK_KEY_Left, "Left" },
+  { "Rotate up", "rotate up", GDK_KEY_Up, "Up" },
+  { "Rotate down", "rotate down", GDK_KEY_Down, "Down" },
+//
+  { "Move right", "move camera right", GDK_KEY_Right, "<Ctrl>Right" },
+  { "Move left", "move camera left", GDK_KEY_Left, "<Ctrl>Left" },
+  { "Move up", "move camera up", GDK_KEY_Up, "<Ctrl>Up" },
+  { "Move down", "move camera down", GDK_KEY_Down, "<Ctrl>Down" },
+  { "Zoom in", "zoom camera in", GDK_KEY_Down, "<Shift>Up" },
+  { "Zoom out", "zoom camera out", GDK_KEY_Down, "<Shift>Down" },
+//
+  { "Spin right", "rotate right", GDK_KEY_Right, "<Ctrl><Shift>Right" },
+  { "Spin left", "rotate left", GDK_KEY_Left, "<Ctrl><Shift>Left" },
+  { "Spin up", "rotate up", GDK_KEY_Up, "<Ctrl><Shift>Up" },
+  { "Spin down", "rotate down", GDK_KEY_Down, "<Ctrl><Shift>Down" },
+  { "Pause / restart", "pause / restart spinning", GDK_KEY_space, "space" },
+  { "Stop", "stop spinning",  GDK_KEY_s, "<Ctrl>s" },
+//
+  { "Label / unlabel all atom(s)", "Label / unlabel all atom(s)",  GDK_KEY_l, "<Ctrl>l" },
+  { "Select / unselect all atom(s)", "Select / unselect all atom(s)",  GDK_KEY_a, "<Ctrl>a" },
+  { "Copy selection", "Copy selection",  GDK_KEY_c, "<Ctrl>c" },
+//
+// Edition
+//
+  { "Rotate right", "rotate right", GDK_KEY_Right, "Right" },
+  { "Rotate left", "rotate left", GDK_KEY_Left, "Left" },
+  { "Rotate up", "rotate up", GDK_KEY_Up, "Up" },
+  { "Rotate down", "rotate down", GDK_KEY_Down, "Down" },
+//
+  { "Translate right", "move camera right", GDK_KEY_Right, "<Ctrl>Right" },
+  { "Translate left", "move camera left", GDK_KEY_Left, "<Ctrl>Left" },
+  { "Translate up", "move camera up", GDK_KEY_Up, "<Ctrl>Up" },
+  { "Translate down", "move camera down", GDK_KEY_Down, "<Ctrl>Down" },
+  { "Zoom in", "zoom camera in", GDK_KEY_Up, "<Shift>Up" },
+  { "Zoom out", "zoom camera out", GDK_KEY_Down, "<Shift>Down" },
+//
+  { "Label / unlabel all atom(s)", "Label / unlabel all atom(s)",  GDK_KEY_l, "<Ctrl>l" },
+  { "Select / unselect all atom(s)", "Select / unselect all atom(s)",  GDK_KEY_a, "<Ctrl>a" },
+  { "Copy all selection", "Copy selection",  GDK_KEY_c, "<Ctrl>c" },
+  { "Cut selection", "Cut selection",  GDK_KEY_x, "<Ctrl>x" },
+  { "Paste selection", "Paste selection",  GDK_KEY_v, "<Ctrl>v" },
+  { "Delete selection", "Delete selection", GDK_KEY_Delete, "Delete" }
+};
 
 #ifdef GTK3
 /*!
@@ -334,6 +432,35 @@ G_MODULE_EXPORT void render_gl_image (GtkWidget * widg, gpointer data)
   window_encode (view, FALSE);
 }
 
+#ifdef GTK4
+/*!
+  \fn G_MODULE_EXPORT void view_shortcuts (GSimpleAction * action, GVariant * parameter, gpointer data)
+
+  \brief view OpenGL window shortcuts callback GTK4
+
+  \param action the GAction sending the signal
+  \param parameter GVariant parameter of the GAction, if any
+  \param data the associated data pointer
+*/
+G_MODULE_EXPORT void view_shortcuts (GSimpleAction * action, GVariant * parameter, gpointer data)
+#else
+/*!
+  \fn G_MODULE_EXPORT void view_shortcuts (GtkWidget * widg, gpointer data)
+
+  \brief OpenGL window shortcuts callback GTK3
+
+  \param widg the GtkWidget sending the signal
+  \param data the associated data pointer
+*/
+G_MODULE_EXPORT void view_shortcuts (GtkWidget * widg, gpointer data)
+#endif
+{
+  glwin * view = (glwin *)data;
+  view -> shortcuts = destroy_this_widget (view -> shortcuts);
+  view -> shortcuts = shortcuts_window (G_N_ELEMENTS(opengl_group_by_section), opengl_group_by_section, G_N_ELEMENTS(opengl_shortcut_by_group),
+                                        opengl_shortcut_by_group, opengl_section_names, opengl_group_names, opengl_shortcuts);
+}
+
 #ifdef GTK3
 
 /*!
@@ -445,6 +572,22 @@ GtkWidget * menu_view (glwin * view, int popm)
   menu_items_view (menu, view, popm);
   return menu;
 }
+
+/*!
+  \fn GtkWidget * menu_help (glwin * view, int popm)
+
+  \brief create the 'Help' submenu GTK3
+
+  \param view the target glwin
+  \param popm main app (0) or popup (1)
+*/
+GtkWidget * menu_help (glwin * view, int popm)
+{
+  GtkWidget * menu;
+  menu = gtk_menu_new ();
+  gtk3_menu_item (menu, "Shortcuts", IMG_NONE, NULL, G_CALLBACK(view_shortcuts), (gpointer)view, FALSE, 0, 0, FALSE, FALSE, FALSE);
+  return menu;
+}
 #endif
 
 /*!
@@ -475,10 +618,15 @@ void prepare_opengl_menu_bar (glwin * view)
   gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, menu_item_new_with_submenu ("Tools", TRUE, menu_tools(view, 0)));
   gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, menu_item_new_with_submenu ("View", TRUE, menu_view(view, 0)));
   gtk_menu_shell_append ((GtkMenuShell *)view -> menu_bar, menu_anim (view, 0));
+
   show_the_widgets (view -> menu_bar);
 
   if (this_proj -> nspec) update_all_menus (view, this_proj -> natomes);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, view -> menu_box, view -> menu_bar, TRUE, TRUE, 0);
+  GtkWidget * menu = gtk_menu_bar_new ();
+  gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Help", TRUE, menu_help(view, 0)));
+  add_box_child_end (view -> menu_box, menu, FALSE, FALSE, 0);
+  show_the_widgets (menu);
   show_the_widgets (view -> menu_bar);
 #else
   update_menu_bar (view);
@@ -755,7 +903,11 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         }
       }
 #ifdef GTK4
+#ifdef OSX
+      else if (state & GDK_META_MASK)
+#else
       else if (state & GDK_ALT_MASK)
+#endif
 #else
       else if (state & GDK_MOD1_MASK)
 #endif
@@ -876,7 +1028,11 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
           coord_properties (NULL, & view -> colorp[30][0]);
         }
 #ifdef GTK4
+#ifdef OSX
+        else if (state & GDK_META_MASK)
+#else
         else if (state & GDK_ALT_MASK)
+#endif
 #else
         else if (state & GDK_MOD1_MASK)
 #endif
@@ -1174,7 +1330,7 @@ G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
   glwin * view = (glwin *)data;
   int * pix = get_project_by_id(view -> proj) -> tmp_pixels;
   int shift = 0;
-  if (GTK_IS_WIDGET(view -> menu_bar)) shift = gtk_widget_get_allocated_height (view -> menu_bar);
+  if (GTK_IS_WIDGET(view -> menu_bar)) shift = get_widget_height (view -> menu_bar);
   if (pix[0] > 0 && pix[1] > 0)
   {
     resize_this_window (view -> win, pix[0], pix[1]+shift);
@@ -1187,7 +1343,7 @@ G_MODULE_EXPORT void on_win_realize (GtkWidget * widg, gpointer data)
 }
 
 #ifdef GTK3
-#ifndef G_OS_WIN32
+#ifdef LINUX
 /*!
   \fn void gtk_window_change_gdk_visual (GtkWidget * win)
 
@@ -1252,7 +1408,7 @@ gboolean create_3d_model (int p, gboolean load)
       this_proj -> modelgl -> win = create_win (str, MainWindow, FALSE, TRUE);
 #ifdef GTK3
 #ifdef GTKGLAREA
-#ifndef G_OS_WIN32
+#ifdef LINUX
       if (! atomes_visual) gtk_window_change_gdk_visual (this_proj -> modelgl -> win);
 #endif
 #endif
@@ -1271,6 +1427,10 @@ gboolean create_3d_model (int p, gboolean load)
     }
 #ifdef GTKGLAREA
     this_proj -> modelgl -> plot = gtk_gl_area_new ();
+    gtk_widget_set_can_focus (this_proj -> modelgl -> plot, TRUE);
+#ifdef GTK4
+    gtk_widget_set_focusable (this_proj -> modelgl -> plot, TRUE);
+#endif
 #else
     this_proj -> modelgl -> plot = gtk_drawing_area_new ();
 #endif
@@ -1316,7 +1476,6 @@ gboolean create_3d_model (int p, gboolean load)
                                                                        "glwin-pointer-motion", G_CALLBACK(on_glwin_pointer_motion), this_proj -> modelgl,
                                                                        NULL, NULL, NULL);
     }
-    // add_window_gesture_action (window, "opengl-context-click", "pressed", G_CALLBACK(on_pressed_gl), NULL);
 #else
     g_signal_connect (G_OBJECT (this_proj -> modelgl -> plot), "motion-notify-event", G_CALLBACK(on_motion), this_proj -> modelgl);
     g_signal_connect (G_OBJECT (this_proj -> modelgl -> plot), "button-release-event", G_CALLBACK(on_glwin_button_event), this_proj -> modelgl);
@@ -1359,7 +1518,6 @@ gboolean create_3d_model (int p, gboolean load)
 void prep_model (int p)
 {
   project * this_proj = get_project_by_id (p);
-  gboolean rendering = FALSE;
   gboolean adv_bonding[2];
   if (this_proj -> modelgl == NULL)
   {
@@ -1370,61 +1528,34 @@ void prep_model (int p)
       show_the_widgets (this_proj -> modelgl -> win);
       destroy_this_widget (dummy);*/
       show_the_widgets (this_proj -> modelgl -> win);
+    }
+    if (this_proj -> initgl)
+    {
+      active_project_changed (p);
 #ifdef GTK3
-#ifdef GTKGLAREA
-#ifndef G_OS_WIN32
-      if (atomes_visual == 0 && ! this_proj -> initgl)
+      // GTK3 Menu Action To Check
+      active_glwin -> ogl_box_axis[0] = g_malloc0 (OGL_BOX*sizeof*active_glwin -> ogl_box_axis[0]);
+      active_glwin -> ogl_box_axis[1] = g_malloc0 (OGL_AXIS*sizeof*active_glwin -> ogl_box_axis[1]);
+#endif
+      prepare_opengl_menu_bar (active_glwin);
+      if (reading_input)
       {
-        this_proj -> modelgl -> plot = destroy_this_widget (this_proj -> modelgl -> plot);
-        this_proj -> modelgl -> menu_bar = destroy_this_widget (this_proj -> modelgl -> menu_bar);
-        this_proj -> modelgl -> win = destroy_this_widget (this_proj -> modelgl -> win);
-        create_3d_model (p, TRUE);
-        show_the_widgets (this_proj -> modelgl -> win);
-      }
-#endif // G_OS_WIN32
-#endif // GTKGLAREA
-#endif // GTK3
-      if (atomes_visual < 0)
-      {
-        this_proj -> modelgl -> plot = destroy_this_widget (this_proj -> modelgl -> plot);
-        this_proj -> modelgl -> menu_bar = destroy_this_widget (this_proj -> modelgl -> menu_bar);
-        this_proj -> modelgl -> win = destroy_this_widget (this_proj -> modelgl -> win);
+        adv_bonding[0] = (active_project -> natomes > ATOM_LIMIT) ? 0 : tmp_adv_bonding[0];
+        adv_bonding[1] = (active_project -> steps > STEP_LIMIT) ? 0 : tmp_adv_bonding[1];
+        frag_update = (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
+        mol_update = (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
       }
       else
       {
-        rendering = TRUE;
+        frag_update = (force_mol) ? 1 : (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
+        mol_update = (force_mol) ? 1 : (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
+        adv_bonding[0] = adv_bonding[1] = TRUE;
       }
-    }
-    if (rendering)
-    {
-      if (this_proj -> initgl)
+      if (active_project -> natomes && adv_bonding[0] && adv_bonding[1])
       {
-        active_project_changed (p);
-#ifdef GTK3
-        // GTK3 Menu Action To Check
-        active_glwin -> ogl_box_axis[0] = g_malloc0 (OGL_BOX*sizeof*active_glwin -> ogl_box_axis[0]);
-        active_glwin -> ogl_box_axis[1] = g_malloc0 (OGL_AXIS*sizeof*active_glwin -> ogl_box_axis[1]);
-#endif
-        prepare_opengl_menu_bar (active_glwin);
-        if (reading_input)
-        {
-          adv_bonding[0] = (active_project -> natomes > ATOM_LIMIT) ? 0 : tmp_adv_bonding[0];
-          adv_bonding[1] = (active_project -> steps > STEP_LIMIT) ? 0 : tmp_adv_bonding[1];
-          frag_update = (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
-          mol_update = (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
-        }
-        else
-        {
-          frag_update = (force_mol) ? 1 : (active_project -> natomes > ATOM_LIMIT) ? 0 : 1;
-          mol_update = (force_mol) ? 1 : (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
-          adv_bonding[0] = adv_bonding[1] = TRUE;
-        }
-        if (active_project -> natomes && adv_bonding[0] && adv_bonding[1])
-        {
-          bonds_update = 1;
-          active_project -> runc[0] = FALSE;
-          on_calc_bonds_released (NULL, NULL);
-        }
+        bonds_update = 1;
+        active_project -> runc[0] = FALSE;
+        on_calc_bonds_released (NULL, NULL);
       }
     }
   }
@@ -1432,11 +1563,11 @@ void prep_model (int p)
   {
     if (gtk_widget_get_visible(this_proj -> modelgl -> win))
     {
-      gtk_widget_hide (this_proj -> modelgl -> win);
+      hide_the_widgets (this_proj -> modelgl -> win);
     }
     else
     {
-      gtk_widget_show (this_proj -> modelgl -> win);
+      show_the_widgets (this_proj -> modelgl -> win);
     }
   }
 }

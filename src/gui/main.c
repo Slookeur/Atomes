@@ -54,7 +54,6 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <libavutil/avutil.h>
 #include <libavformat/avformat.h>
 #include <libswscale/swscale.h>
-
 #include "version.h"
 #include "global.h"
 #include "bind.h"
@@ -277,10 +276,11 @@ GtkWidget * create_splash_window ()
   GtkWidget * image;
 #ifdef GTK4
   image = gtk_picture_new_for_filename (PACKAGE_LOGO);
-  gchar * backcol = g_strdup_printf ("window#background {\n"
-                                     "  background-color: rgba(255, 255, 255, 0.0);}");
+  gchar * backcol = g_strdup_printf ("window#splash {\n"
+                                     "  background: none;"
+                                     "  background-color: rgba(255, 255, 255, 0);}");
   provide_gtk_css (backcol);
-  gtk_widget_set_name (splash_window, "background");
+  gtk_widget_set_name (splash_window, "splash");
   g_free (backcol);
 #else
   gtk_window_set_type_hint (GTK_WINDOW (splash_window), GDK_WINDOW_TYPE_HINT_SPLASHSCREEN);
@@ -294,9 +294,8 @@ GtkWidget * create_splash_window ()
   image = gtk_image_new_from_file (PACKAGE_LOGO);
 #endif
   add_container_child (CONTAINER_WIN, splash_window, image);
-
-  show_the_widgets (splash_window);
   gtk_window_set_transient_for ((GtkWindow *)splash_window, (GtkWindow *)MainWindow);
+  show_the_widgets (splash_window);
   return splash_window;
 }
 
@@ -369,7 +368,6 @@ void open_this_data_file (int file_type, gchar * file_name)
           for (i=1; i<strlen(file_name)-1; i++) filedir = g_strdup_printf ("%s%c", filedir, file_name[i]);
         }
 #ifdef G_OS_WIN32
-        ffd;
         hFind = FindFirstFile (filedir, & ffd);
         if (hFind != INVALID_HANDLE_VALUE)
         {
@@ -431,7 +429,6 @@ void open_this_data_file (int file_type, gchar * file_name)
           for (i=1; i<strlen(file_name)-1; i++) filedir = g_strdup_printf ("%s%c", filedir, file_name[i]);
         }
 #ifdef G_OS_WIN32
-        ffd;
         hFind = FindFirstFile (filedir, & ffd);
         if (hFind != INVALID_HANDLE_VALUE)
         {
@@ -490,8 +487,11 @@ void open_this_data_file (int file_type, gchar * file_name)
 */
 G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
 {
-#ifdef GTK3
   GtkSettings * default_settings = gtk_settings_get_default ();
+#ifndef G_OS_WIN32
+  g_object_set (default_settings, "gtk-application-prefer-dark-theme", TRUE, NULL);
+#endif
+#ifdef GTK3
   g_object_set (default_settings, "gtk-button-images", TRUE, NULL);
 #endif
 #ifdef G_OS_WIN32
@@ -560,9 +560,82 @@ G_MODULE_EXPORT void run_program (GApplication * app, gpointer data)
 }
 
 /*!
+  \fn int check_opengl_rendering ()
+
+  \brief check the initialization parameters for an OpenGL context
+*/
+int check_opengl_rendering ()
+{
+  GError * error = NULL;
+  gchar * proc_dir = NULL;
+  gchar * proc_path = NULL;
+  const char * proc_name;
+#ifdef G_OS_WIN32
+  proc_dir = g_build_filename (PACKAGE_PREFIX, "bin", NULL);
+  proc_name = "atomes_startup_testing.exe";
+  proc_path = g_build_filename (proc_dir, proc_name, NULL);
+#else
+  proc_dir = g_build_filename (PACKAGE_LIBEXEC, NULL);
+  proc_name = "atomes_startup_testing";
+  proc_path = g_build_filename (PACKAGE_LIBEXEC, proc_name, NULL);
+#endif
+  g_print ("proc_dir= %s\n", proc_dir);
+  g_print ("proc_path= %s\n", proc_path);
+#ifdef CODEBLOCKS
+  GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
+#else
+#ifndef OSX
+  GSubprocessLauncher * proc_launch = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_NONE);
+  g_subprocess_launcher_set_cwd (proc_launch, proc_dir);
+  GSubprocess * proc = g_subprocess_launcher_spawn (proc_launch, & error, proc_path, NULL);
+#else
+  GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
+#endif
+#endif
+  g_print ("subprocess: %p\n", proc);
+  if (error)
+  {
+    g_print ("error: %s\n", error -> message);
+    g_clear_error (& error);
+  }
+  g_subprocess_wait (proc, NULL, & error);
+  int res = g_subprocess_get_exit_status (proc);
+  g_clear_object (& proc);
+#ifndef CODEBLOCKS
+#ifndef OSX
+  g_clear_object (& proc_launch);
+#endif
+#endif
+  g_free (proc_path);
+  g_free (proc_dir);
+  gchar * ogl_info = NULL;
+  switch (res)
+  {
+    case 1:
+      ogl_info = g_strdup_printf ("Fatal error on OpenGL initialization: trying to adjust environment !");
+      break;
+    case -2:
+      ogl_info = g_strdup_printf ("Impossible to initialize the OpenGL 3D rendering !");
+      break;
+    case -1:
+      ogl_info = g_strdup_printf ("GDK visual must be modified to initialize the OpenGL context !");
+      break;
+    default:
+      break;
+  }
+  if (ogl_info)
+  {
+    g_print ("%s\n", ogl_info);
+    g_free (ogl_info);
+    ogl_info = NULL;
+  }
+  return res;
+}
+
+/*!
   \fn int main (int argc, char *argv[])
 
-  \brief initalization of the atomes program
+  \brief initialization of the atomes program
 
   \param argc number of argument(s) on the command line
   \param *argv[] list of argument(s) on the command line
@@ -572,12 +645,14 @@ int main (int argc, char *argv[])
   gboolean RUNC = FALSE;
 
 #ifdef G_OS_WIN32
+#ifndef DEBUG
   FreeConsole ();
+#endif
   PACKAGE_PREFIX = g_win32_get_package_installation_directory_of_module (NULL);
   // g_win32_get_package_installation_directory (NULL, NULL);
+#endif
   PACKAGE_LIB_DIR = g_build_filename (PACKAGE_PREFIX, "library", NULL);
-  PACKAGE_DATA_DIR = g_build_filename (PACKAGE_PREFIX, "pixmaps", NULL);
-  PACKAGE_LOCALE_DIR = g_build_filename (PACKAGE_PREFIX, "locale", NULL);
+  PACKAGE_IMP = g_build_filename (PACKAGE_PREFIX, "pixmaps/import.png", NULL);
   PACKAGE_IMP = g_build_filename (PACKAGE_PREFIX, "pixmaps/import.png", NULL);
   PACKAGE_CON = g_build_filename (PACKAGE_PREFIX, "pixmaps/convert.png", NULL);
   PACKAGE_IMG = g_build_filename (PACKAGE_PREFIX, "pixmaps/image.png", NULL);
@@ -634,12 +709,14 @@ int main (int argc, char *argv[])
   PACKAGE_SGMP = g_build_filename (PACKAGE_PREFIX, "pixmaps/bravais/Monoclinic-P.png", NULL);
   PACKAGE_SGMI = g_build_filename (PACKAGE_PREFIX, "pixmaps/bravais/Monoclinic-I.png", NULL);
   PACKAGE_SGTC = g_build_filename (PACKAGE_PREFIX, "pixmaps/bravais/Triclinic.png", NULL);
+
+/*#ifdef G_OS_WIN32
   ATOMES_CONFIG = g_build_filename (PACKAGE_PREFIX, "atomes.cfg", NULL);
-#endif // G_OS_WIN32
-#ifdef LINUX
-  struct passwd * pw = getpwuid(getuid());
+#else
+  struct passwd * pw = getpwuid (getuid());
   ATOMES_CONFIG = g_strdup_printf ("%s/.atomes.cfg", pw -> pw_dir);
-#endif
+#endif*/
+
   int i, j, k;
   switch (argc)
   {
@@ -721,13 +798,33 @@ int main (int argc, char *argv[])
 
   if (RUNC)
   {
+    atomes_visual = check_opengl_rendering ();
+    if (atomes_visual == 1)
+    {
+      // Fatal error, trying again adapting environment
+      g_setenv ("GSK_RENDERER", "gl", TRUE);
+      g_setenv ("GDK_DEBUG", "gl-prefer-gl", TRUE);
+      atomes_visual = check_opengl_rendering ();
+    }
+    if (atomes_visual > 0 || atomes_visual == -2)
+    {
+      // No way to initialize an OpenGL context: must quit
+      return 1;
+    }
+#ifdef OSX
+    g_setenv ("GSK_RENDERER", "gl", TRUE);
+#endif
+    atomes_visual = ! (abs(atomes_visual));
+
     // setlocale(LC_ALL,"en_US");
     gtk_disable_setlocale ();
 #if GLIB_MINOR_VERSION < 74
-    AtomesApp = gtk_application_new (g_strdup_printf ("atomes.prog-%d", (int)clock()), G_APPLICATION_FLAGS_NONE);
+    AtomesApp = gtk_application_new (g_strdup_printf ("fr.ipcms.atomes.prog-%d", (int)clock()), G_APPLICATION_FLAGS_NONE);
 #else
-    AtomesApp = gtk_application_new (g_strdup_printf ("atomes.prog-%d", (int)clock()), G_APPLICATION_DEFAULT_FLAGS);
+    AtomesApp = gtk_application_new (g_strdup_printf ("fr.ipcms.atomes.prog-%d", (int)clock()), G_APPLICATION_DEFAULT_FLAGS);
 #endif
+    GError * error = NULL;
+    g_application_register (G_APPLICATION(AtomesApp), NULL, & error);
     g_signal_connect (G_OBJECT(AtomesApp), "activate", G_CALLBACK(run_program), NULL);
     int status = g_application_run (G_APPLICATION (AtomesApp), 0, NULL);
     g_object_unref (AtomesApp);

@@ -120,7 +120,7 @@ void autoscale_axis (project * this_proj, int rid, int cid, int aid)
 */
 void setup_yaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid)
 {
-  int k, i;
+  int k;
   double u, v;
 
   k = cxy[1] / mticks;
@@ -128,7 +128,6 @@ void setup_yaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid)
   if (k * mticks < cxy[1]) v = mticks - v;
   v = fabs(v);
   if (k * mticks > fabs(cxy[1])) v = mticks - v;
-  i=0;
   for ( u = 0.0 ; u < ymax ; u = u + mticks )
   {
     if (y_min + (u + v) * YDRAW / ymax >= y_max)
@@ -154,7 +153,6 @@ void setup_yaxis_linear (cairo_t * cr, project * this_proj, int rid, int cid)
           label (cr, cxy[1] + v + u, 1, 1, this_proj);
           break;
       }
-      i++;
       switch (tickpos)
       {
         case 0:

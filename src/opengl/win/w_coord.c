@@ -171,7 +171,7 @@ G_MODULE_EXPORT void toggled_show_hide_coord (GtkToggleButton * widg, gpointer d
       }
       else if (g > 3 && g < 9)
       {
-        name = g_strdup_printf ("set-rshow-%d.%d.0", this_proj -> coord -> geolist[g][0][c], j);
+        name = g_strdup_printf ("set-%d-%d-coord.%d.0", g, this_proj -> coord -> geolist[g][0][j], j);
       }
       g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
       g_free (name);
@@ -340,7 +340,7 @@ G_MODULE_EXPORT void toggled_show_hide_poly (GtkToggleButton * widg, gpointer da
     }
     else if (g > 3 && g < 9)
     {
-      name = g_strdup_printf ("set-%d-p.%d.0", this_proj -> coord -> geolist[g][0][c], j);
+      name = g_strdup_printf ("set-%d-%d-p.%d.0", g, this_proj -> coord -> geolist[g][0][j], j);
     }
     g_action_group_activate_action ((GActionGroup *)this_proj -> modelgl -> action_group, (const gchar *)name, NULL);
     g_free (name);
@@ -551,7 +551,6 @@ GtkWidget * coord_tab (glwin * view, int geo, int poly)
                           "<b>Ring(s) size</b>",
                           "<b>Chain(s) size</b>", "<b>Show <sup>*</sup></b>", "<b>Label <sup>*</sup></b>", "<b>Pick <sup>*</sup></b>"};
   int scol[15] = {100, 70, 65, 40, 40, 150, 70, 75, 55, 55, 100, 100, 60, 50, 55};
-
   GtkWidget * box = create_vbox (BSEP);
   GtkWidget * coord = create_scroll (box, -1, -1, GTK_SHADOW_NONE);
   gtk_widget_set_hexpand (coord, TRUE);
@@ -941,7 +940,7 @@ G_MODULE_EXPORT void update_frag_mol_search (GtkEntry * res, gpointer data)
 {
   tint * dat = (tint * )data;
   const gchar * m = entry_get_text (res);
-  int v = (int)atof(m);
+  int v = (int)string_to_double ((gpointer)m);
   project * this_proj = get_project_by_id(dat -> a);
   int g = dat -> b;
   if (v > 0 && v <= this_proj -> coord -> totcoord[g])
@@ -1320,24 +1319,20 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
   view -> coord_win -> notebook = gtk_notebook_new ();
   gtk_notebook_set_scrollable (GTK_NOTEBOOK(view -> coord_win -> notebook), TRUE);
   gtk_notebook_set_tab_pos (GTK_NOTEBOOK(view -> coord_win -> notebook), GTK_POS_LEFT);
-  gtk_widget_show (view -> coord_win -> notebook);
+  show_the_widgets (view -> coord_win -> notebook);
   gtk_widget_set_size_request (view -> coord_win -> notebook, 600, 550);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, view -> coord_win -> notebook, FALSE, FALSE, 0);
   gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), param_tab (view), gtk_label_new ("Parameters"));
   gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, 0, 0), markup_label("Total coordination(s) <b>[TC]</b>", -1, -1, 0.0, 0.5));
   gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, 1, 0), markup_label("Partial coordination(s) <b>[PC]</b>", -1, -1, 0.0, 0.5));
 
-  int i, j, k;
-  j = 2;
-  k = 0;
+  int i;
   if (view -> rings)
   {
     for (i=0; i<5; i++)
     {
       if (view -> ring_max[i])
       {
-        j ++;
-        k ++;
         str = g_strdup_printf ("%s ring(s) <b>[%s]</b>", rings_type[i], rings_short[i]);
         gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, i+4, 0), markup_label(str, -1, -1, 0.0, 0.5));
         g_free (str);
@@ -1346,13 +1341,9 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
   }
   if (view -> chains && view -> chain_max)
   {
-    j ++;
     gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, 9, 0), markup_label("Chain(s)", -1, -1, 0.0, 0.5));
   }
-
-  j ++;
   gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, 0, 1), markup_label("Polyhedra from <b>TC</b>", -1, -1, 0.0, 0.5));
-  j ++;
   gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, 1, 1), markup_label("Polyhedra from <b>PC</b>", -1, -1, 0.0, 0.5));
   if (view -> rings)
   {
@@ -1360,7 +1351,6 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
     {
       if (view -> ring_max[i])
       {
-        j ++;
         str = g_strdup_printf ("Polyhedra from <b>%s</b>", rings_short[i]);
         gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), coord_tab (view, i+4, 1), markup_label(str, -1, -1, 0.0, 0.5));
         g_free (str);
@@ -1370,12 +1360,10 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
 
   if (view -> adv_bonding[0])
   {
-    j ++;
     gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), fragmol_tab (view, 2), markup_label ("Fragment(s)", -1, -1, 0.0, 0.5));
   }
   if (view -> adv_bonding[1])
   {
-    j ++;
     gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), fragmol_tab (view, 3), markup_label ("Molecule(s)", -1, -1, 0.0, 0.5));
   }
 
@@ -1385,7 +1373,6 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
     {
       if (view -> ring_max[i])
       {
-        j ++;
         str = g_strdup_printf ("Isolated ring(s) from <b>%s</b>", rings_short[i]);
         gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), rings_tab (view, i), markup_label(str, -1, -1, 0.0, 0.5));
         g_free (str);
@@ -1395,7 +1382,6 @@ GtkWidget * advanced_coord_properties (glwin * view, int page)
 
   if (view -> chains && view -> chain_max)
   {
-     j ++;
      gtk_notebook_append_page (GTK_NOTEBOOK(view -> coord_win -> notebook), chains_tab (view), markup_label("Isolated chain(s)", -1, -1, 0.0, 0.5));
   }
 
@@ -1492,7 +1478,7 @@ G_MODULE_EXPORT void coord_properties (GtkWidget * widg, gpointer data)
   }
   else if (GTK_IS_WIDGET(view -> coord_win -> win))
   {
-    gtk_widget_show (view -> coord_win -> win);
+    show_the_widgets (view -> coord_win -> win);
     gtk_notebook_set_current_page (GTK_NOTEBOOK (view -> coord_win -> notebook), page);
   }
   else

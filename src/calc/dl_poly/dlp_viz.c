@@ -867,7 +867,7 @@ G_MODULE_EXPORT void on_toggle_visualize_or_select_object (GtkCellRendererToggle
       for (m=1; m<l+1; m++)
       {
         gtk_tree_model_get (GTK_TREE_MODEL(field_model[i]), & iter, m, & str, -1);
-        n = (int) atof(str) - 1;
+        n = (int) string_to_double ((gpointer)str) - 1;
         ids[m-1] = n;
       }
       gtk_tree_model_get (GTK_TREE_MODEL(field_model[i]), & iter, field_v[i]+1, & m, -1);

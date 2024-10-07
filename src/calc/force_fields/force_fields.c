@@ -1131,8 +1131,8 @@ void print_this_bond (int eid, int h, int fid, int inum, char * at_a, char * at_
       }
       tmpbd -> a = find_atom_id (0, aaa);
       tmpbd -> b = find_atom_id (0, bbb);
-      tmpbd -> v[0] = atof (the_bond[2]);
-      tmpbd -> v[1] = atof (the_bond[3]);
+      tmpbd -> v[0] = string_to_double ((gpointer)the_bond[2]);
+      tmpbd -> v[1] = string_to_double ((gpointer)the_bond[3]);
     }
     fprintf (fp, "    <%s a=\"%d\" b=\"%d\" z_a=\"%d\" z_b=\"%d\"",
                        node[h], find_atom_id (0, aaa), find_atom_id (0, bbb),
@@ -1142,20 +1142,20 @@ void print_this_bond (int eid, int h, int fid, int inum, char * at_a, char * at_
       case 0:
         if (fid == CVFF || fid == CVFF_AUG || fid == CFF91 || fid == PCFF)
         {
-          fprintf (fp, " K=\"%f\" R_zero=\"%f\"", atof (the_bond[3]), atof (the_bond[2]));
+          fprintf (fp, " K=\"%f\" R_zero=\"%f\"", string_to_double ((gpointer)the_bond[3]), string_to_double ((gpointer)the_bond[2]));
         }
         else
         {
-          fprintf (fp, " K=\"%f\" R_zero=\"%f\"", atof (the_bond[2]), atof (the_bond[3]));
+          fprintf (fp, " K=\"%f\" R_zero=\"%f\"", string_to_double ((gpointer)the_bond[2]), string_to_double ((gpointer)the_bond[3]));
         }
         j = 4;
         break;
       case 1:
-        fprintf (fp, " K=\"%f\" R_zero=\"%f\" KK=\"%f\" KKK=\"%f\"", atof (the_bond[3]), atof (the_bond[2]), atof (the_bond[4]), atof (the_bond[5]));
+        fprintf (fp, " K=\"%f\" R_zero=\"%f\" KK=\"%f\" KKK=\"%f\"", string_to_double ((gpointer)the_bond[3]), string_to_double ((gpointer)the_bond[2]), string_to_double ((gpointer)the_bond[4]), string_to_double ((gpointer)the_bond[5]));
         j = 6;
         break;
       case 2:
-        fprintf (fp, " D=\"%f\" R_zero=\"%f\" Alpha=\"%f\"", atof (the_bond[3]), atof (the_bond[2]), atof (the_bond[4]));
+        fprintf (fp, " D=\"%f\" R_zero=\"%f\" Alpha=\"%f\"", string_to_double ((gpointer)the_bond[3]), string_to_double ((gpointer)the_bond[2]), string_to_double ((gpointer)the_bond[4]));
         j = 5;
         break;
     }
@@ -1168,7 +1168,7 @@ void print_this_bond (int eid, int h, int fid, int inum, char * at_a, char * at_
   else if (eid > -1)
   {
     g_debug ("Done:: tmpbd -> a= %d, tmpbd -> b= %d, tmpbd -> v[0]= %f, tmpbd -> v[1]= %f, this.v[0]= %f, this.v[1]=%f",
-                     tmpbd -> a, tmpbd -> b, tmpbd -> v[0], tmpbd -> v[1], atof (the_bond[2]), atof (the_bond[3]));
+                     tmpbd -> a, tmpbd -> b, tmpbd -> v[0], tmpbd -> v[1], string_to_double ((gpointer)the_bond[2]), string_to_double ((gpointer)the_bond[3]));
   }
   g_free (aaa);
   g_free (bbb);
@@ -1377,8 +1377,8 @@ void print_this_angle (int eid, int h, int fid, int inum, int ub, char * at_a, c
       tmpan -> a = find_atom_id (0, aaa);
       tmpan -> b = find_atom_id (0, bbb);
       tmpan -> c = find_atom_id (0, ccc);
-      tmpan -> v[0] = atof (the_angle[3]);
-      tmpan -> v[1] = atof (the_angle[4]);
+      tmpan -> v[0] = string_to_double ((gpointer)the_angle[3]);
+      tmpan -> v[1] = string_to_double ((gpointer)the_angle[4]);
     }
     fprintf (fp, "    <%s a=\"%d\" b=\"%d\" c=\"%d\" z_a=\"%d\" z_b=\"%d\" z_c=\"%d\"",
              node[h], find_atom_id (0, aaa), find_atom_id (0, bbb), find_atom_id (0, ccc),
@@ -1388,21 +1388,21 @@ void print_this_angle (int eid, int h, int fid, int inum, int ub, char * at_a, c
       case 0:
         if (fid >= CVFF && fid < COMPASS)
         {
-          fprintf (fp, " K=\"%f\" Theta_zero=\"%f\"", atof (the_angle[4]), atof (the_angle[3]));
+          fprintf (fp, " K=\"%f\" Theta_zero=\"%f\"", string_to_double ((gpointer)the_angle[4]), string_to_double ((gpointer)the_angle[3]));
         }
         else
         {
-          fprintf (fp, " K=\"%f\" Theta_zero=\"%f\"", atof (the_angle[3]), atof (the_angle[4]));
+          fprintf (fp, " K=\"%f\" Theta_zero=\"%f\"", string_to_double ((gpointer)the_angle[3]), string_to_double ((gpointer)the_angle[4]));
         }
         if (ub)
         {
-          fprintf (fp, " Kub=\"%f\" S_zero=\"%f\"", atof (the_angle[5]), atof (the_angle[6]));
+          fprintf (fp, " Kub=\"%f\" S_zero=\"%f\"", string_to_double ((gpointer)the_angle[5]), string_to_double ((gpointer)the_angle[6]));
         }
         j = (ub) ? 7 : 5;
         break;
       case 1:
-        fprintf (fp, " K=\"%f\" Theta_zero=\"%f\" KK=\"%f\" KKK=\"%f\"", atof (the_angle[4]), atof (the_angle[3]),
-                                                                         atof (the_angle[5]), atof (the_angle[6]));
+        fprintf (fp, " K=\"%f\" Theta_zero=\"%f\" KK=\"%f\" KKK=\"%f\"", string_to_double ((gpointer)the_angle[4]), string_to_double ((gpointer)the_angle[3]),
+                                                                         string_to_double ((gpointer)the_angle[5]), string_to_double ((gpointer)the_angle[6]));
         j = 7;
         break;
     }
@@ -1415,7 +1415,7 @@ void print_this_angle (int eid, int h, int fid, int inum, int ub, char * at_a, c
   else if (eid > -1)
   {
     g_debug ("Done:: tmpan -> a= %d, tmpan -> b= %d, tmpan -> c= %d, tmpan -> v[0]= %f, tmpan -> v[1]= %f, this.v[0]= %f, this.v[1]=%f",
-                     tmpan -> a, tmpan -> b, tmpan -> c, tmpan -> v[0], tmpan -> v[1], atof (the_angle[3]), atof (the_angle[4]));
+                     tmpan -> a, tmpan -> b, tmpan -> c, tmpan -> v[0], tmpan -> v[1], string_to_double ((gpointer)the_angle[3]), string_to_double ((gpointer)the_angle[4]));
   }
   g_free (aaa);
   g_free (bbb);
@@ -1713,20 +1713,20 @@ void print_dihedral_table (int fid, int inum)
           case 0:
             if (fid < 4)
             {
-              fprintf (fp, " K=\"%f\" Phi_zero=\"%f\" n=\"%f\"", atof (field_dihedrals[h][i][5]) / atof (field_dihedrals[h][i][4]),
-                                                                 atof (field_dihedrals[h][i][6]), atof (field_dihedrals[h][i][7]));
+              fprintf (fp, " K=\"%f\" Phi_zero=\"%f\" n=\"%f\"", string_to_double ((gpointer)field_dihedrals[h][i][5]) / string_to_double ((gpointer)field_dihedrals[h][i][4]),
+                                                                 string_to_double ((gpointer)field_dihedrals[h][i][6]), string_to_double ((gpointer)field_dihedrals[h][i][7]));
               j = 8;
             }
             else
             {
-              fprintf (fp, " K=\"%f\" Phi_zero=\"%f\" n=\"%f\"", atof (field_dihedrals[h][i][4]), atof (field_dihedrals[h][i][6]),
-                                                                 atof (field_dihedrals[h][i][5]));
+              fprintf (fp, " K=\"%f\" Phi_zero=\"%f\" n=\"%f\"", string_to_double ((gpointer)field_dihedrals[h][i][4]), string_to_double ((gpointer)field_dihedrals[h][i][6]),
+                                                                 string_to_double ((gpointer)field_dihedrals[h][i][5]));
               j = 7;
             }
             break;
           case 1:
-            fprintf (fp, " K=\"%f\" Phi_zero=\"%f\" KK=\"%f\" KKK=\"%f\"", atof (field_dihedrals[h][i][4]), atof (field_dihedrals[h][i][5]),
-                                                                           atof (field_dihedrals[h][i][6]), atof (field_dihedrals[h][i][8]));
+            fprintf (fp, " K=\"%f\" Phi_zero=\"%f\" KK=\"%f\" KKK=\"%f\"", string_to_double ((gpointer)field_dihedrals[h][i][4]), string_to_double ((gpointer)field_dihedrals[h][i][5]),
+                                                                           string_to_double ((gpointer)field_dihedrals[h][i][6]), string_to_double ((gpointer)field_dihedrals[h][i][8]));
             j = 10;
             break;
         }
@@ -1776,22 +1776,22 @@ void print_improper_table (int fid, int inum)
       g_free (ddd);
       if (fid < 4)
       {
-        fprintf (fp, " K=\"%f\" Phi_zero=\"%f\" n=\"%f\"", atof (field_impropers[i][4]), atof (field_impropers[i][5]), atof (field_impropers[i][6]));
+        fprintf (fp, " K=\"%f\" Phi_zero=\"%f\" n=\"%f\"", string_to_double ((gpointer)field_impropers[i][4]), string_to_double ((gpointer)field_impropers[i][5]), string_to_double ((gpointer)field_impropers[i][6]));
         j = 7;
       }
       else if (wid == 3)
       {
-        fprintf (fp," K=\"%f\" Phi_zero=\"%f\" n=\"%f\"", atof (field_impropers[i][4]), atof (field_impropers[i][6]), atof (field_impropers[i][5]));
+        fprintf (fp," K=\"%f\" Phi_zero=\"%f\" n=\"%f\"", string_to_double ((gpointer)field_impropers[i][4]), string_to_double ((gpointer)field_impropers[i][6]), string_to_double ((gpointer)field_impropers[i][5]));
         j = 7;
       }
       else if (fid > AMBER99 && fid < CVFF)
       {
-        fprintf (fp, " K=\"%f\" Phi_zero=\"%f\"", atof (field_impropers[i][4]), atof (field_impropers[i][6]));
+        fprintf (fp, " K=\"%f\" Phi_zero=\"%f\"", string_to_double ((gpointer)field_impropers[i][4]), string_to_double ((gpointer)field_impropers[i][6]));
         j = 7;
       }
       else
       {
-        fprintf (fp, " K=\"%f\" Phi_zero=\"%f\"", atof (field_impropers[i][4]), atof (field_impropers[i][5]));
+        fprintf (fp, " K=\"%f\" Phi_zero=\"%f\"", string_to_double ((gpointer)field_impropers[i][4]), string_to_double ((gpointer)field_impropers[i][5]));
         j = 6;
       }
       if (field_dim[inum] > j)
@@ -1830,7 +1830,7 @@ void print_inversion_table (int fid, int inum)
       fprintf (fp, "    <inv a=\"%d\" b=\"%d\" c=\"%d\" d=\"%d\" z_a=\"%d\" z_b=\"%d\" z_c=\"%d\" z_d=\"%d\" K=\"%f\" Phi_zero=\"%f\"",
                find_atom_id (1, aaa), find_atom_id (1, bbb), find_atom_id (1, ccc), find_atom_id (1, ddd),
                find_atom_z (aaa), find_atom_z (bbb), find_atom_z (ccc), find_atom_z (ddd),
-               atof (field_inversions[i][4]), atof (field_inversions[i][5]));
+               string_to_double ((gpointer)field_inversions[i][4]), string_to_double ((gpointer)field_inversions[i][5]));
       g_free (aaa);
       g_free (bbb);
       g_free (ccc);
@@ -1884,21 +1884,21 @@ void print_vdw_table (int fid, int inum)
       g_free (aaa);
       if (did == 1)
       {
-        fprintf (fp, " A=\"%f\" B= \"%f\"", atof (field_vdw[i][1]), atof (field_vdw[i][2]));
+        fprintf (fp, " A=\"%f\" B= \"%f\"", string_to_double ((gpointer)field_vdw[i][1]), string_to_double ((gpointer)field_vdw[i][2]));
       }
       else
       {
         if (fid <= AMBER99)
         {
-          fprintf (fp, " Ei=\"%f\" Ri=\"%f\"", atof (field_vdw[i][2]), atof (field_vdw[i][1]));
+          fprintf (fp, " Ei=\"%f\" Ri=\"%f\"", string_to_double ((gpointer)field_vdw[i][2]), string_to_double ((gpointer)field_vdw[i][1]));
         }
         else
         {
-          fprintf (fp, " Ei=\"%f\" Ri=\"%f\"", atof (field_vdw[i][1+cid]), atof (field_vdw[i][2+cid]));
+          fprintf (fp, " Ei=\"%f\" Ri=\"%f\"", string_to_double ((gpointer)field_vdw[i][1+cid]), string_to_double ((gpointer)field_vdw[i][2+cid]));
         }
         if ((fid >= CHARMM22P && fid <= CHARMMSI) || fid > COMPASS)
         {
-          fprintf (fp, " Eii=\"%f\" Rii=\"%f\"", atof (field_vdw[i][3+2*cid]), atof (field_vdw[i][4+2*cid]));
+          fprintf (fp, " Eii=\"%f\" Rii=\"%f\"", string_to_double ((gpointer)field_vdw[i][3+2*cid]), string_to_double ((gpointer)field_vdw[i][4+2*cid]));
         }
       }
       j = wdi[wid]+1+2*cid;
@@ -1919,7 +1919,7 @@ void print_vdw_table (int fid, int inum)
               if(g_strcmp0 (field_equi[0][k][l], " ") != 0)
               {
                 fprintf (fp, "    <non-bd a=\"%d\" z_a=\"%d\"", find_atom_id (0, field_equi[0][k][l]), find_atom_z (field_vdw[i][0]));
-                fprintf (fp, " Ei=\"%f\" Ri=\"%f\"", atof (field_vdw[i][2]), atof (field_vdw[i][1]));
+                fprintf (fp, " Ei=\"%f\" Ri=\"%f\"", string_to_double ((gpointer)field_vdw[i][2]), string_to_double ((gpointer)field_vdw[i][1]));
                 if (field_dim[inum] > j)
                 {
                   fprintf (fp, " info=\"Equi. to %s\"", field_vdw[i][0]);
@@ -2291,7 +2291,7 @@ float get_force_field_atom_mass (int sp, int num)
   g_debug ("sp= %d, atoms_id[%d]= %d, num= %d", sp, sp, atoms_id[sp], num);
   if (atoms_id[sp] > 0 && num >= 0 && num <= atoms_id[sp])
   {
-    return atof(ff_atoms[atoms_id_list[sp][num]][1]);
+    return string_to_double ((gpointer)ff_atoms[atoms_id_list[sp][num]][1]);
   }
   else
   {
@@ -2483,7 +2483,7 @@ gchar * open_field_file (int field)
         clean_this_field_data (doc, reader);
         return NULL;
       }
-      ff_objects[i] = (int)atof((char *)xmlNodeGetContent(m_node));
+      ff_objects[i] = (int)string_to_double ((gpointer)xmlNodeGetContent(m_node));
       if (ff_objects[i] < 0)
       {
         g_warning ("Error reading FF file %s, ff-data, ff_objects[%d] = %d < 0 ?!", filetoread, i, ff_objects[i]);
@@ -2510,15 +2510,15 @@ gchar * open_field_file (int field)
           }
           if (g_strcmp0 ("dim",(char *)prop -> name) == 0)
           {
-            ff_dim[i] = (int) atof((char *)xmlNodeGetContent(o_node));
+            ff_dim[i] = (int) string_to_double ((gpointer)xmlNodeGetContent(o_node));
           }
           /*else if (g_strcmp0 ("info",(char *)prop -> name) == 0)
           {
-            ff_info[i] = (int)atof((char *)xmlNodeGetContent(o_node));
+            ff_info[i] = (int)string_to_double ((gpointer)xmlNodeGetContent(o_node));
           }*/
           else if (g_strcmp0 ("pot",(char *)prop -> name) == 0)
           {
-            ff_key[i-1] = (int)atof((char *)xmlNodeGetContent(o_node));
+            ff_key[i-1] = (int)string_to_double ((gpointer)xmlNodeGetContent(o_node));
           }
           prop = prop -> next;
         }
@@ -2650,35 +2650,35 @@ gchar * open_field_file (int field)
               default:
                 if (g_strcmp0 ("a",(char *)prop -> name) == 0)
                 {
-                  ff_data -> atoms_id[j][0] = (int) atof((char *)xmlNodeGetContent(o_node));
+                  ff_data -> atoms_id[j][0] = (int) string_to_double ((gpointer)xmlNodeGetContent(o_node));
                 }
                 else if (g_strcmp0 ("b",(char *)prop -> name) == 0)
                 {
-                  ff_data -> atoms_id[j][1] = (int) atof((char *)xmlNodeGetContent(o_node));
+                  ff_data -> atoms_id[j][1] = (int) string_to_double ((gpointer)xmlNodeGetContent(o_node));
                 }
                 else if (g_strcmp0 ("c",(char *)prop -> name) == 0)
                 {
-                  ff_data -> atoms_id[j][2] = (int) atof((char *)xmlNodeGetContent(o_node));
+                  ff_data -> atoms_id[j][2] = (int) string_to_double ((gpointer)xmlNodeGetContent(o_node));
                 }
                 else if (g_strcmp0 ("d",(char *)prop -> name) == 0)
                 {
-                  ff_data -> atoms_id[j][3] = (int) atof((char *)xmlNodeGetContent(o_node));
+                  ff_data -> atoms_id[j][3] = (int) string_to_double ((gpointer)xmlNodeGetContent(o_node));
                 }
                 else if (g_strcmp0 ("z_a",(char *)prop -> name) == 0)
                 {
-                  ff_data -> atoms_z[j][0] = (int) atof((char *)xmlNodeGetContent(o_node));
+                  ff_data -> atoms_z[j][0] = (int) string_to_double ((gpointer)xmlNodeGetContent(o_node));
                 }
                 else if (g_strcmp0 ("z_b",(char *)prop -> name) == 0)
                 {
-                  ff_data -> atoms_z[j][1] = (int) atof((char *)xmlNodeGetContent(o_node));
+                  ff_data -> atoms_z[j][1] = (int) string_to_double ((gpointer)xmlNodeGetContent(o_node));
                 }
                 else if (g_strcmp0 ("z_c",(char *)prop -> name) == 0)
                 {
-                  ff_data -> atoms_z[j][2] = (int) atof((char *)xmlNodeGetContent(o_node));
+                  ff_data -> atoms_z[j][2] = (int) string_to_double ((gpointer)xmlNodeGetContent(o_node));
                 }
                 else if (g_strcmp0 ("z_d",(char *)prop -> name) == 0)
                 {
-                  ff_data -> atoms_z[j][3] = (int) atof((char *)xmlNodeGetContent(o_node));
+                  ff_data -> atoms_z[j][3] = (int) string_to_double ((gpointer)xmlNodeGetContent(o_node));
                 }
                 else if (i > 0 && g_strcmp0 ("info",(char *)prop -> name) == 0)
                 {
@@ -2692,27 +2692,27 @@ gchar * open_field_file (int field)
                     // Non-bonded: 12-6: E_i, R_i, E_14, R_14
                     if (g_strcmp0 ("Ei",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][0] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][0] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("Ri",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][1] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][1] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("Eii",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][2] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][2] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("Rii",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][3] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][3] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("A",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][0] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][0] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("B",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][1] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][1] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else
                     {
@@ -2733,47 +2733,47 @@ gchar * open_field_file (int field)
                     // Inversion: Harm: K, Phi_0
                     if (g_strcmp0 ("K",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][0] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][0] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("R_zero",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][1] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][1] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("Theta_zero",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][1] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][1] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("Phi_zero",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][1] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][1] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("KK",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][2] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][2] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("KKK",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][3] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][3] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("Kub",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][2] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][2] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("S_zero",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][3] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][3] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("n",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][2] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][2] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("D",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][0] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][0] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else if (g_strcmp0 ("Alpha",(char *)prop -> name) == 0)
                     {
-                      ff_data -> param[j][2] = atof((char *)xmlNodeGetContent(o_node));
+                      ff_data -> param[j][2] = string_to_double ((gpointer)xmlNodeGetContent(o_node));
                     }
                     else
                     {

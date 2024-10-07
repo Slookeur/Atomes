@@ -275,24 +275,24 @@ G_MODULE_EXPORT void set_slab_option (GtkComboBox * box, gpointer data)
   i = gtk_combo_box_get_active (box);
   for (j=0; j<6; j++)
   {
-    gtk_widget_hide (this_proj -> modelgl -> cell_win -> slab_box[j]);
+    hide_the_widgets (this_proj -> modelgl -> cell_win -> slab_box[j]);
   }
   switch (i)
   {
     case 0:
-      gtk_widget_show (this_proj -> modelgl -> cell_win -> slab_box[0]);
+      show_the_widgets (this_proj -> modelgl -> cell_win -> slab_box[0]);
       break;
     case 1:
-      gtk_widget_show (this_proj -> modelgl -> cell_win -> slab_box[1+this_proj -> modelgl -> cell_win -> slab_type]);
+      show_the_widgets (this_proj -> modelgl -> cell_win -> slab_box[1+this_proj -> modelgl -> cell_win -> slab_type]);
       break;
     default:
       if (this_proj -> modelgl -> cell_win -> slab_type)
       {
-        gtk_widget_show (this_proj -> modelgl -> cell_win -> slab_box[5]);
+        show_the_widgets (this_proj -> modelgl -> cell_win -> slab_box[5]);
       }
       else
       {
-        gtk_widget_show (this_proj -> modelgl -> cell_win -> slab_box[i+2]);
+        show_the_widgets (this_proj -> modelgl -> cell_win -> slab_box[i+2]);
       }
       break;
   }
@@ -334,9 +334,9 @@ G_MODULE_EXPORT void set_slab_type (GtkComboBox * box, gpointer data)
 {
   project * this_proj = (project *)data;
   int i;
-  for (i=0; i<3; i++) gtk_widget_hide (this_proj -> modelgl -> cell_win -> slab_hbox[i]);
+  for (i=0; i<3; i++) hide_the_widgets (this_proj -> modelgl -> cell_win -> slab_hbox[i]);
   this_proj -> modelgl -> cell_win -> slab_type = i = gtk_combo_box_get_active (box);
-  gtk_widget_show (this_proj -> modelgl -> cell_win -> slab_hbox[i]);
+  show_the_widgets (this_proj -> modelgl -> cell_win -> slab_hbox[i]);
   gtk_combo_box_set_active (GTK_COMBO_BOX(this_proj -> modelgl -> cell_win -> slab_param[i]), 0);
   set_slab_option (GTK_COMBO_BOX(this_proj -> modelgl -> cell_win -> slab_param[i]), this_proj);
   if (this_proj -> modelgl -> n_shaders[SLABS][0])

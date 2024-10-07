@@ -35,6 +35,6 @@ void correct_this_window_title (GtkWidget * win, gchar * str);
 G_MODULE_EXPORT void activate_project (GtkWidget * widg, gpointer data);
 G_MODULE_EXPORT void change_project_name (GtkWidget * wid, gpointer edata);
 void add_project_to_workspace ();
-void remove_project_from_workspace ();
+void remove_project_from_workspace (int id);
 extern char * work_menu_items[NITEMS-2];
 #endif

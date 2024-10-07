@@ -268,7 +268,7 @@ G_MODULE_EXPORT void update_cp2k_option (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   switch (i)
   {
     case CP2VDW:
@@ -553,7 +553,7 @@ G_MODULE_EXPORT void update_cp2k_parameter (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (tmp_cp2k -> opts[i] != v)
   {
     tmp_cp2k -> opts[i] = v;
@@ -1168,12 +1168,12 @@ gchar * page_name_cp2k (int p)
 */
 gboolean cp2k_with_motion ()
 {
-  if (GTK_IS_WIDGET(motion_box[0])) gtk_widget_hide (motion_box[0]);
-  if (GTK_IS_WIDGET(motion_box[1])) gtk_widget_hide (motion_box[1]);
+  if (GTK_IS_WIDGET(motion_box[0])) hide_the_widgets (motion_box[0]);
+  if (GTK_IS_WIDGET(motion_box[1])) hide_the_widgets (motion_box[1]);
   if (tmp_cp2k -> opts[CP2RUN] == 2.0 || tmp_cp2k -> opts[CP2RUN] == 3.0 || tmp_cp2k -> opts[CP2RUN] == 6.0)
   {
     int i = (tmp_cp2k -> opts[CP2RUN] == 2.0) ? 1 : 0;
-    if (GTK_IS_WIDGET(motion_box[i])) gtk_widget_show (motion_box[i]);
+    if (GTK_IS_WIDGET(motion_box[i])) show_the_widgets (motion_box[i]);
     return TRUE;
   }
   else

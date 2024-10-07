@@ -603,7 +603,7 @@ void fill_update_model (GtkTreeStore * store)
 */
 GtkTreeModel * global_render_tree ()
 {
-  int i, j;
+  int i;
   GtkTreeIter iter;
   GtkTreeStore * store;
   gchar * str;
@@ -612,13 +612,11 @@ GtkTreeModel * global_render_tree ()
   gtk_tree_store_set (store, & iter, 0, "Select ...", -1);
   for (i=0; i<9; i++)
   {
-    j  = 0;
     if (up_match[i])
     {
       other_match = up_match[i];
       while (other_match)
       {
-        j ++;
         str = g_strdup_printf ("%s", get_this_prop_string (i, other_match -> oid, other_match -> type, 1));
         gtk_tree_store_append (store, & iter, NULL);
         gtk_tree_store_set (store, & iter, 0, str, -1);
@@ -885,7 +883,7 @@ static gboolean update_rend (GtkTreeModel * model, GtkTreeIter * iter, gpointer 
     gtk_tree_path_free(path);
     if (g_strcmp0 (str, "0") == 0) return TRUE;
     vis = get_visible (FALSE, NULL);
-    int p = (int)atof(str);
+    int p = (int)string_to_double ((gpointer)str);
     g_free (str);
     if (p > vis.a && p < vis.a+vis.b+1) return TRUE;
   }

@@ -30,7 +30,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 *
 * List of functions:
 
-  void window_color (project * this_proj, glwin * view, int wc_cid);
+  void window_color (project * this_proj, glwin * view);
 
   G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpointer data);
   G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data);
@@ -52,6 +52,12 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glview.h"
 #include "color_box.h"
 
+/*
+  The object type for color change
+    -2    : background
+    -1    : box
+     > -1 : coordination
+*/
 int wc_cid;
 
 /*!
@@ -94,15 +100,14 @@ G_MODULE_EXPORT void run_window_color (GtkDialog * win, gint response_id, gpoint
 }
 
 /*!
-  \fn void window_color (project * this_proj, glwin * view, int wc_cid)
+  \fn void window_color (project * this_proj, glwin * view)
 
   \brief window color chooser - creating the dialog
 
   \param this_proj the target project
   \param view the target glwin
-  \param wc_cid the object to change color
 */
-void window_color (project * this_proj, glwin * view, int wc_cid)
+void window_color (project * this_proj, glwin * view)
 {
   gchar * str;
   GdkRGBA col;
@@ -143,7 +148,7 @@ void window_color (project * this_proj, glwin * view, int wc_cid)
   \brief to run background color selection window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_back_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -160,7 +165,8 @@ G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
 #endif
 {
   glwin * view = (glwin *) data;
-  window_color (get_project_by_id(view -> proj), view, -2);
+  wc_cid = -2;
+  window_color (get_project_by_id(view -> proj), view);
   update (view);
 }
 
@@ -171,7 +177,7 @@ G_MODULE_EXPORT void to_run_back_color_window (GtkWidget * widg, gpointer data)
   \brief to run box color selection window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_box_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -188,7 +194,8 @@ G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
 #endif
 {
   glwin * view = (glwin *) data;
-  window_color (get_project_by_id(view -> proj), view, -1);
+  wc_cid = -1;
+  window_color (get_project_by_id(view -> proj), view);
   view -> create_shaders[MDBOX] = TRUE;
   update (view);
 }
@@ -200,7 +207,7 @@ G_MODULE_EXPORT void to_run_box_color_window (GtkWidget * widg, gpointer data)
   \brief to run atom color selection window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_atom_color_window (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -219,7 +226,8 @@ G_MODULE_EXPORT void to_run_atom_color_window (GtkWidget * widg, gpointer data)
   tint * id = (tint *) data;
   // g_debug ("Atom color:: proj= %d, id -> b= %d, id -> c= %d", id -> a,  id -> b, id -> c);
   project * this_proj = get_project_by_id(id -> a);
-  window_color (this_proj, this_proj -> modelgl, id -> c);
+  wc_cid = id -> c;
+  window_color (this_proj, this_proj -> modelgl);
   int shaders[3] = {ATOMS, BONDS, SELEC};
   re_create_md_shaders (3, shaders, this_proj);
   this_proj -> modelgl -> create_shaders[LABEL] = TRUE;
@@ -261,7 +269,7 @@ G_MODULE_EXPORT void run_window_color_coord (GtkDialog * win, gint response_id, 
   \brief create a window to select a color callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data)

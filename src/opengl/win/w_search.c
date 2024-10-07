@@ -909,24 +909,24 @@ void fill_atom_model (atom_search * asearch, project * this_proj)
     {
       if (! is_the_widget_visible(asearch -> info[1]))
       {
-        gtk_widget_show (asearch -> info[1]);
+        show_the_widgets (asearch -> info[1]);
       }
       if (is_the_widget_visible (asearch -> id_box))
       {
-        gtk_widget_hide (asearch -> id_box);
+        hide_the_widgets (asearch -> id_box);
       }
     }
     else
     {
       if (is_the_widget_visible(asearch -> info[1]))
       {
-        gtk_widget_hide (asearch -> info[1]);
+        hide_the_widgets (asearch -> info[1]);
       }
       if (asearch -> mode)
       {
         if (is_the_widget_visible(asearch -> id_box))
         {
-          gtk_widget_hide (asearch -> id_box);
+          hide_the_widgets (asearch -> id_box);
         }
       }
       else
@@ -935,14 +935,14 @@ void fill_atom_model (atom_search * asearch, project * this_proj)
         {
           if (is_the_widget_visible (asearch -> id_box))
           {
-            gtk_widget_hide (asearch -> id_box);
+            hide_the_widgets (asearch -> id_box);
           }
         }
         else
         {
           if (! is_the_widget_visible (asearch -> id_box))
           {
-            gtk_widget_show (asearch -> id_box);
+            show_the_widgets (asearch -> id_box);
           }
         }
       }
@@ -1463,7 +1463,7 @@ gboolean remove_from_model (GtkTreeModel * model, GtkTreePath * path, GtkTreeIte
 G_MODULE_EXPORT void remove_atom (GtkButton * but, gpointer data)
 {
   atom_search * asearch = (atom_search *)data;
-  asearch -> int_b = (int )atof(entry_get_text (GTK_ENTRY(asearch -> entry_b)));
+  asearch -> int_b = (int )string_to_double ((gpointer)entry_get_text (GTK_ENTRY(asearch -> entry_b)));
   gtk_tree_model_foreach (GTK_TREE_MODEL(asearch -> atom_model), remove_from_model, asearch);
   clear_fields (asearch);
 }
@@ -1698,7 +1698,7 @@ G_MODULE_EXPORT void set_id (GtkEntry * entry, gpointer data)
 {
   atom_search * asearch = (atom_search *)data;
   project * this_proj = get_project_by_id(asearch -> proj);
-  asearch -> int_b = (int )atof(entry_get_text (GTK_ENTRY(asearch -> entry_b)));
+  asearch -> int_b = (int )string_to_double ((gpointer)entry_get_text (GTK_ENTRY(asearch -> entry_b)));
   if (asearch -> int_b > 0 && asearch -> int_b < this_proj -> natomes+1)
   {
     asearch -> was_selected = FALSE;
@@ -2728,7 +2728,7 @@ atom_search * csearch;
 G_MODULE_EXPORT void set_occupancy (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   atomic_object * object = (atomic_object *)data;
   if (v > 0.0 && v<= 1.0)
   {
@@ -2748,7 +2748,7 @@ G_MODULE_EXPORT void set_occupancy (GtkEntry * res, gpointer data)
 G_MODULE_EXPORT void set_i_coord (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   int ax = GPOINTER_TO_INT (data);
   project * this_proj = get_project_by_id (csearch -> proj);
   int oid = (csearch -> pointer[0].c == 5) ? 1 : 2;
@@ -2768,7 +2768,7 @@ G_MODULE_EXPORT void set_i_coord (GtkEntry * res, gpointer data)
 G_MODULE_EXPORT void set_max_msd (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   int ax = GPOINTER_TO_INT (data);
   project * this_proj = get_project_by_id (csearch -> proj);
   if (! (v < 0.0))
@@ -2854,7 +2854,7 @@ int max_random;
 G_MODULE_EXPORT void set_max_action (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
-  int v = (int)atof(m);
+  int v = (int)string_to_double ((gpointer)m);
   int ax = GPOINTER_TO_INT (data);
   if (v > -1 && v <= max_random)
   {
@@ -3277,7 +3277,7 @@ G_MODULE_EXPORT void markup_action_renderer (GtkCellRendererCombo * cell, GtkCel
 G_MODULE_EXPORT void set_max_msd_for_all (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   project * this_proj = get_project_by_id (csearch -> proj);
   int i, j;
   if (v <= 0.0)
@@ -3897,21 +3897,21 @@ G_MODULE_EXPORT void set_object_changed (GtkComboBox * box, gpointer data)
     if ((! asearch -> mode && (asearch -> object == 1 || asearch -> object == 3)) || (asearch -> mode && asearch -> object))
     {
       if (! asearch -> mode) asearch -> passivating = TRUE;
-      if (is_the_widget_visible(asearch -> id_box)) gtk_widget_hide (asearch -> id_box);
-      if (is_the_widget_visible(asearch -> info[1])) gtk_widget_hide (asearch -> info[1]);
+      if (is_the_widget_visible(asearch -> id_box)) hide_the_widgets (asearch -> id_box);
+      if (is_the_widget_visible(asearch -> info[1])) hide_the_widgets (asearch -> info[1]);
     }
     else
     {
       asearch -> passivating = FALSE;
       if (((! asearch -> mode && asearch -> object == 2) || (asearch -> mode && asearch -> object)) && filter > 2)
       {
-        if (is_the_widget_visible(asearch -> id_box)) gtk_widget_hide (asearch -> id_box);
-        if (is_the_widget_visible(asearch -> info[1])) gtk_widget_hide (asearch -> info[1]);
+        if (is_the_widget_visible(asearch -> id_box)) hide_the_widgets (asearch -> id_box);
+        if (is_the_widget_visible(asearch -> info[1])) hide_the_widgets (asearch -> info[1]);
       }
       else
       {
-        if (! is_the_widget_visible(asearch -> id_box)) gtk_widget_show (asearch -> id_box);
-        if (! is_the_widget_visible(asearch -> info[1])) gtk_widget_show (asearch -> info[1]);
+        if (! is_the_widget_visible(asearch -> id_box)) show_the_widgets (asearch -> id_box);
+        if (! is_the_widget_visible(asearch -> info[1])) show_the_widgets (asearch -> info[1]);
       }
     }
   }
@@ -3921,8 +3921,8 @@ G_MODULE_EXPORT void set_object_changed (GtkComboBox * box, gpointer data)
     asearch -> object = gtk_combo_box_get_active (box);
     filter = get_asearch_filter (asearch);
     object = (asearch -> object) ? 1 : 0;
-    if (is_the_widget_visible(asearch -> id_box)) gtk_widget_hide (asearch -> id_box);
-    if (is_the_widget_visible(asearch -> info[1])) gtk_widget_hide (asearch -> info[1]);
+    if (is_the_widget_visible(asearch -> id_box)) hide_the_widgets (asearch -> id_box);
+    if (is_the_widget_visible(asearch -> info[1])) hide_the_widgets (asearch -> info[1]);
   }
   if (was_object)
   {
@@ -4050,7 +4050,7 @@ G_MODULE_EXPORT void set_search_digit (GtkEntry * res, gpointer data)
 {
   atom_search * asearch = (atom_search *) data;
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   asearch -> search_digit = (int)v;
   if (asearch -> search_digit <= 0)
   {

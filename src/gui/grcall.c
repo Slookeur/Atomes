@@ -210,14 +210,14 @@ G_MODULE_EXPORT void on_calc_gr_released (GtkWidget * widg, gpointer data)
   prepostcalc (widg, TRUE, GR, i, 1.0);
   if (! i)
   {
-    remove_action (analyze_action_names[SQ]);
+    remove_action (analyze_acts[SQ].action_name);
     show_error ("The RDF's calculation has failed", 0, widg);
   }
   else
   {
     add_action (analyze_actions[SQ]);
     update_rdf_view (active_project, GR);
-    gtk_widget_show (curvetoolbox);
+    show_the_widgets (curvetoolbox);
   }
   fill_tool_model ();
   for (i=0; i<4; i=i+3) update_after_calc (i);
@@ -343,7 +343,7 @@ G_MODULE_EXPORT void on_calc_gq_released (GtkWidget * widg, gpointer data)
   else
   {
     update_rdf_view (active_project, GK);
-    gtk_widget_show (curvetoolbox);
+    show_the_widgets (curvetoolbox);
   }
   fill_tool_model ();
   for (i=0; i<4; i=i+3) update_after_calc (i);

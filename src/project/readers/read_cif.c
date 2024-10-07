@@ -69,7 +69,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "cbuild_edit.h"
 #include "readers.h"
 #include <ctype.h>
-#include <omp.h>
+#ifdef OPENMP
+#  include <omp.h>
+#endif
 
 extern int get_atom_id_from_periodic_table (atom_search * asearch);
 extern double get_z_from_periodic_table (gchar * lab);
@@ -213,7 +215,7 @@ float get_atom_coord (gchar * line, int mid)
   {
     co_word = strtok_r (NULL, " ", & line);
   }
-  double v = atof(get_cif_word(co_word));
+  double v = string_to_double ((gpointer)get_cif_word(co_word));
   co_line = NULL;
   co_word = NULL;
   return v;
@@ -1461,7 +1463,7 @@ gboolean cif_get_cell_data (int linec)
       g_free (str);
       return FALSE;
     }
-    this_reader -> lattice.box[0].param[0][i] = atof(str);
+    this_reader -> lattice.box[0].param[0][i] = string_to_double ((gpointer)str);
 #ifdef DEBUG
     g_debug ("CIF:: box[0][%d]= %f", i, this_reader -> lattice.box[0].param[0][i]);
 #endif
@@ -1472,7 +1474,7 @@ gboolean cif_get_cell_data (int linec)
       g_free (str);
       return FALSE;
     }
-    this_reader -> lattice.box[0].param[1][i] = atof(str);
+    this_reader -> lattice.box[0].param[1][i] = string_to_double ((gpointer)str);
 #ifdef DEBUG
     g_debug ("CIF:: box[1][%d]= %f", i, this_reader -> lattice.box[0].param[1][i]);
 #endif
@@ -1500,7 +1502,7 @@ int cif_get_space_group (int linec)
   {
     if (cif_get_value ("_symmetry", symkey[i], linec, 0, & str, TRUE, FALSE, FALSE))
     {
-      spg = (int)atof(str);
+      spg = (int)string_to_double ((gpointer)str);
       break;
     }
   }
@@ -1508,7 +1510,7 @@ int cif_get_space_group (int linec)
   {
     if (cif_get_value ("_space_group", "it_number", linec, 0, & str, TRUE, FALSE, FALSE))
     {
-      spg = (int)atof(str);
+      spg = (int)string_to_double ((gpointer)str);
     }
   }
   gchar * hmkey = NULL;
@@ -1578,12 +1580,12 @@ int cif_get_space_group (int linec)
             }
             if (str[0] == '-')
             {
-              k = (int) atof (g_strdup_printf ("%c", str[2]));
+              k = (int) string_to_double ((gpointer)g_strdup_printf ("%c", str[2]));
               str = g_strdup_printf ("%c%c", str[0], str[1]);
             }
             else
             {
-              k = (int) atof (g_strdup_printf ("%c", str[1]));
+              k = (int) string_to_double ((gpointer)g_strdup_printf ("%c", str[1]));
               str = g_strdup_printf ("%c", str[0]);
             }
             l = 0;
@@ -1611,7 +1613,7 @@ int cif_get_space_group (int linec)
             k = 0;
             if (str[0] == '1' || str[0]=='2')
             {
-              k = (int) atof(g_strdup_printf ("%c", str[0]));
+              k = (int) string_to_double ((gpointer)g_strdup_printf ("%c", str[0]));
               str = replace_markup (str, g_strdup_printf("%d", k), NULL);
             }
             l = 0;

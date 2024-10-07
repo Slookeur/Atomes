@@ -43,7 +43,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <ctype.h>
 #include "cbuild_edit.h"
 #include "readers.h"
-#include <omp.h>
+#ifdef OPENMP
+#  include <omp.h>
+#endif
 
 extern void check_for_species (double v, int ato);
 
@@ -69,21 +71,21 @@ int hist_get_data (int linec)
   this_line = g_strdup_printf ("%s", tail -> line);
 #endif // OPENMP
   this_word = strtok (this_line, " ");
-  this_reader -> traj = (int)atof(this_word);
+  this_reader -> traj = (int)string_to_double ((gpointer)this_word);
   this_word = strtok (NULL, " ");
   if (! this_word)
   {
     add_reader_info ("Wrong file format - record <b>ii</b> line is corrupted !", 0);
     return 0;
   }
-  this_reader -> lattice.pbc = (int)atof(this_word);
+  this_reader -> lattice.pbc = (int)string_to_double ((gpointer)this_word);
   this_word = strtok (NULL, " ");
   if (! this_word)
   {
     add_reader_info ("Wrong file format - record <b>ii</b> line is corrupted !", 0);
     return 0;
   }
-  this_reader -> natomes = (int)atof(this_word);
+  this_reader -> natomes = (int)string_to_double ((gpointer)this_word);
   i = linec - 2;
   if (i%(4 + (2+this_reader -> traj)*this_reader -> natomes)) return 0;
   this_reader -> steps = i/(4 + (2+this_reader -> traj)*this_reader -> natomes);
@@ -141,7 +143,7 @@ int hist_get_content ()
             format_error (i+1, -1, lil[l], k+j);
             return 0;
           }
-          this_reader -> lattice.box[i].vect[j][l] = atof(this_word);
+          this_reader -> lattice.box[i].vect[j][l] = string_to_double ((gpointer)this_word);
           this_word = strtok_r (NULL, " ", & saved_line);
         }
       }
@@ -163,7 +165,7 @@ int hist_get_content ()
           }
           if (l < 2) this_word = strtok_r (NULL, " ", & saved_line);
         }
-        v = atof (this_word);
+        v = string_to_double ((gpointer)this_word);
         if (v > 0.0)
         {
           if (! i)
@@ -181,7 +183,7 @@ int hist_get_content ()
             res = 0;
             goto enda;
           }
-          active_project -> atoms[i][j].x = atof(this_word);
+          active_project -> atoms[i][j].x = string_to_double ((gpointer)this_word);
           this_word = strtok_r (NULL, " ", & saved_line);
           if (! this_word)
           {
@@ -189,7 +191,7 @@ int hist_get_content ()
             res = 0;
             goto enda;
           }
-          active_project -> atoms[i][j].y = atof(this_word);
+          active_project -> atoms[i][j].y = string_to_double ((gpointer)this_word);
           this_word = strtok_r (NULL, " ", & saved_line);
           if (! this_word)
           {
@@ -197,7 +199,7 @@ int hist_get_content ()
             res = 0;
             goto enda;
           }
-          active_project -> atoms[i][j].z = atof(this_word);
+          active_project -> atoms[i][j].z = string_to_double ((gpointer)this_word);
         }
         else
         {
@@ -232,7 +234,7 @@ int hist_get_content ()
             res = 0;
             goto ends;
           }
-          this_reader -> lattice.box[i].vect[j][l] = atof(this_word);
+          this_reader -> lattice.box[i].vect[j][l] = string_to_double ((gpointer)this_word);
           this_word = strtok_r (NULL, " ", & saved_line);
         }
       }
@@ -252,7 +254,7 @@ int hist_get_content ()
           }
           if (l < 2) this_word = strtok_r (NULL, " ", & saved_line);
         }
-        v = atof (this_word);
+        v = string_to_double ((gpointer)this_word);
         if (v > 0.0)
         {
           if (! i) check_for_species (v, j);
@@ -266,7 +268,7 @@ int hist_get_content ()
             res = 0;
             goto ends;
           }
-          active_project -> atoms[i][j].x = atof(this_word);
+          active_project -> atoms[i][j].x = string_to_double ((gpointer)this_word);
           this_word = strtok_r (NULL, " ", & saved_line);
           if (! this_word)
           {
@@ -274,7 +276,7 @@ int hist_get_content ()
             res = 0;
             goto ends;
           }
-          active_project -> atoms[i][j].y = atof(this_word);
+          active_project -> atoms[i][j].y = string_to_double ((gpointer)this_word);
           this_word = strtok_r (NULL, " ", & saved_line);
           if (! this_word)
           {
@@ -282,7 +284,7 @@ int hist_get_content ()
             res = 0;
             goto ends;
           }
-          active_project -> atoms[i][j].z = atof(this_word);
+          active_project -> atoms[i][j].z = string_to_double ((gpointer)this_word);
         }
         else
         {
@@ -317,7 +319,7 @@ int hist_get_content ()
           format_error (i+1, -1, lil[l], k+j);
           return 0;
         }
-        this_reader -> lattice.box[i].vect[j][l] = atof(this_word);
+        this_reader -> lattice.box[i].vect[j][l] = string_to_double ((gpointer)this_word);
         this_word = strtok (NULL, " ");
       }
       tmp_line = tail;
@@ -338,7 +340,7 @@ int hist_get_content ()
         }
         if (l < 2) this_word = strtok (NULL, " ");
       }
-      v = atof (this_word);
+      v = string_to_double ((gpointer)this_word);
       if (v > 0.0)
       {
         if (! i) check_for_species (v, j);
@@ -352,21 +354,21 @@ int hist_get_content ()
           format_error (i+1, j+1, lil[0], k+2*j+1);
           return 0;
         }
-        active_project -> atoms[i][j].x = atof(this_word);
+        active_project -> atoms[i][j].x = string_to_double ((gpointer)this_word);
         this_word = strtok (NULL, " ");
         if (! this_word)
         {
           format_error (i+1, j+1, lil[1], k+2*j+1);
           return 0;
         }
-        active_project -> atoms[i][j].y = atof(this_word);
+        active_project -> atoms[i][j].y = string_to_double ((gpointer)this_word);
         this_word = strtok (NULL, " ");
         if (! this_word)
         {
           format_error (i+1, j+1, lil[2], k+2*j+1);
           return 0;
         }
-        active_project -> atoms[i][j].z = atof(this_word);
+        active_project -> atoms[i][j].z = string_to_double ((gpointer)this_word);
       }
       else
       {

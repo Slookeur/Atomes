@@ -133,7 +133,7 @@ GtkWidget * menu_clones (glwin * view, int id)
   \brief show/hide clones menu item callback
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_clones (GSimpleAction * action, GVariant * parameter, gpointer data)

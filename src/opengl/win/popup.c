@@ -171,6 +171,7 @@ extern GSimpleActionGroup * view_pop_actions;
 extern G_MODULE_EXPORT void window_color_coord (GSimpleAction * action, GVariant * parameter, gpointer data);
 extern GtkWidget * color_palette (glwin * view, int ideo, int spec, int geo);
 #endif
+extern G_MODULE_EXPORT void view_shortcuts (GSimpleAction * action, GVariant * parameter, gpointer data);
 atom_search * remove_search = NULL;
 atom_search * insert_search = NULL;
 
@@ -212,7 +213,7 @@ int get_to_be_selected (glwin * view)
   \brief set full screen callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void set_full_screen (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -232,13 +233,13 @@ G_MODULE_EXPORT void set_full_screen (GtkWidget * widg, gpointer data)
   if (! view -> fullscreen)
   {
     gtk_window_fullscreen (GTK_WINDOW(view -> win));
-    gtk_widget_hide (view -> menu_bar);
+    hide_the_widgets (view -> menu_bar);
     view -> fullscreen = TRUE;
   }
   else
   {
     gtk_window_unfullscreen (GTK_WINDOW(view -> win));
-    gtk_widget_show (view -> menu_bar);
+    show_the_widgets (view -> menu_bar);
     view -> fullscreen = FALSE;
   }
 }
@@ -256,7 +257,7 @@ int get_style (gchar * str)
   is_filled = NONE;
 #ifdef GTK4
   i = strlen (str);
-  return (int) atof ((const gchar *)g_strdup_printf ("%c", str[i-1]));
+  return (int) string_to_double ((gpointer)g_strdup_printf ("%c", str[i-1]));
 #else
   for (i=0; i<OGL_STYLES; i++)
   {
@@ -631,7 +632,7 @@ void remove_object ()
   \brief remove this atom callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void remove_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -696,7 +697,7 @@ gboolean insert_this_object;
   \brief add object call back GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void add_object (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -763,7 +764,7 @@ G_MODULE_EXPORT void add_object (GtkWidget * widg, gpointer data)
   \brief to add object callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_add_object (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -795,7 +796,7 @@ G_MODULE_EXPORT void to_add_object (GtkWidget * widg, gpointer data)
   \brief replace this atom callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void replace_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -825,7 +826,7 @@ G_MODULE_EXPORT void replace_this_atom (GtkWidget * widg, gpointer data)
   \brief copy this atom callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void copy_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1002,7 +1003,7 @@ void check_hidden_visible (project * this_proj)
   \brief show / hide this atom callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1111,7 +1112,7 @@ int check_label_numbers (project * this_proj, int types)
   \brief label / unlabel this atom callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void label_unlabel_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1160,7 +1161,7 @@ G_MODULE_EXPORT void label_unlabel_this_atom (GtkWidget * widg, gpointer data)
   \brief select / unselect this atom callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void select_unselect_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1239,7 +1240,7 @@ gboolean wait_for_style = FALSE;
   \brief change OpenGL rendering style for this atom callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void style_this_atom (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1280,7 +1281,7 @@ G_MODULE_EXPORT void style_this_atom (GtkWidget * widg, gpointer data)
   \brief remove selected atom(s) callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void remove_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1307,7 +1308,7 @@ G_MODULE_EXPORT void remove_the_atoms (GtkWidget * widg, gpointer data)
   \brief  replace selected atom(s) callback GTK3
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void replace_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1338,7 +1339,7 @@ G_MODULE_EXPORT void replace_the_atoms (GtkWidget * widg, gpointer data)
   \brief copy selected atom(s) callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void copy_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1396,7 +1397,7 @@ G_MODULE_EXPORT void copy_the_atoms (GtkWidget * widg, gpointer data)
   \brief show all hidden / hide all visible atom(s) callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_others (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1439,7 +1440,7 @@ G_MODULE_EXPORT void show_hide_others (GtkWidget * widg, gpointer data)
   \brief show / hide a type of atom(s) callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1486,7 +1487,7 @@ G_MODULE_EXPORT void show_hide_the_atoms (GtkWidget * widg, gpointer data)
   \brief label / unlabel a type of atom(s) callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void label_unlabel_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1534,7 +1535,7 @@ G_MODULE_EXPORT void label_unlabel_atoms (GtkWidget * widg, gpointer data)
   \brief select / unselect a type of atom(s) callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void select_unselect_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1600,7 +1601,7 @@ G_MODULE_EXPORT void select_unselect_atoms (GtkWidget * widg, gpointer data)
   \brief change the OpenGL rendering style of a type of atom(s) callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void style_the_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1651,7 +1652,7 @@ G_MODULE_EXPORT void style_the_atoms (GtkWidget * widg, gpointer data)
   \brief remove a type of coordination callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void remove_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1678,7 +1679,7 @@ G_MODULE_EXPORT void remove_the_coord (GtkWidget * widg, gpointer data)
   \brief replace a coordination callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void replace_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1708,7 +1709,7 @@ G_MODULE_EXPORT void replace_the_coord (GtkWidget * widg, gpointer data)
   \brief copy a coordination callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void copy_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1771,7 +1772,7 @@ G_MODULE_EXPORT void copy_the_coord (GtkWidget * widg, gpointer data)
   \brief show / hide a type of coordination callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1788,10 +1789,9 @@ G_MODULE_EXPORT void show_hide_the_coord (GtkWidget * widg, gpointer data)
 #endif
 {
   tint * sel = (tint * )data;
-  int i, j, k;
+  int i, j;
   for (i=0; i<opengl_project -> steps; i++)
   {
-    k = 0;
     for (j=0; j<opengl_project -> natomes; j++)
     {
       if (sel -> a < 2)
@@ -1808,7 +1808,6 @@ G_MODULE_EXPORT void show_hide_the_coord (GtkWidget * widg, gpointer data)
         {
           opengl_project -> atoms[i][j].show[0] = sel -> c;
           opengl_project -> atoms[i][j].show[1] = sel -> c;
-          k ++;
         }
       }
     }
@@ -1824,7 +1823,7 @@ G_MODULE_EXPORT void show_hide_the_coord (GtkWidget * widg, gpointer data)
   \brief label / unlabel a type of coordination callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void label_unlabel_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1900,7 +1899,7 @@ G_MODULE_EXPORT void label_unlabel_coord (GtkWidget * widg, gpointer data)
   \brief select / unselect a type of coordination callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void select_unselect_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -1992,7 +1991,7 @@ G_MODULE_EXPORT void select_unselect_coord (GtkWidget * widg, gpointer data)
   \brief change OpenGL rendering style for a type of coordination callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void style_the_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2177,7 +2176,7 @@ void create_new_project_using_data (atom_selection * selection)
   \brief create new project using selection callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void edit_in_new_project (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2260,7 +2259,7 @@ G_MODULE_EXPORT void edit_in_new_project (GtkWidget * widg, gpointer data)
   \brief create new project using coordination type and id callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void edit_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2327,7 +2326,7 @@ G_MODULE_EXPORT void edit_coord (GtkWidget * widg, gpointer data)
   \brief create new project using atomic species callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void edit_atoms (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2377,7 +2376,7 @@ G_MODULE_EXPORT void edit_atoms (GtkWidget * widg, gpointer data)
   \brief select action for all object(s) callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void select_action_for_all (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2584,7 +2583,7 @@ G_MODULE_EXPORT void select_action_for_all (GtkWidget * widg, gpointer data)
   \brief selection action for this bond callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void select_action_for_this_bond (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -2742,7 +2741,7 @@ G_MODULE_EXPORT void select_action_for_this_bond (GtkWidget * widg, gpointer dat
   \brief select action for all bonds based on menu item id callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void select_action_for_all_bonds (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -3899,7 +3898,7 @@ void popup_selection (glwin * view, double ptx, double pty, int spe, int mmod, i
   \brief reset coordinates menu item callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void reset_coords (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -3932,7 +3931,7 @@ G_MODULE_EXPORT void reset_coords (GtkWidget * widg, gpointer data)
   \brief rebuild menu items callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void turn_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -4158,6 +4157,7 @@ void popup_main_menu (glwin * view, double ptx, double pty)
   }
   g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_reset(view, 1));
   g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_fullscreen(view, 1));
+  g_menu_append_section (gmenu, NULL, (GMenuModel*)menu_shortcuts(view, 1));
 
   menu = gtk_popover_menu_new_from_model_full ((GMenuModel *)gmenu, GTK_POPOVER_MENU_NESTED);
   if (view -> mode == ANALYZE) analyze_menu_attach_color_palettes (view, menu);
@@ -4230,6 +4230,8 @@ void popup_main_menu (glwin * view, double ptx, double pty)
   {
     gtk3_menu_item (menu, "Exit Fullscreen", IMG_STOCK, (gpointer)FULLSCREEN, G_CALLBACK(set_full_screen), (gpointer)view, TRUE, GDK_KEY_Escape, 0, FALSE, FALSE, FALSE);
   }
+  add_menu_separator (menu);
+  gtk3_menu_item (menu, "Shortcuts", IMG_NONE, NULL, G_CALLBACK(view_shortcuts), (gpointer)view, FALSE, 0, 0, FALSE, FALSE, FALSE);
   pop_menu_at_pointer (menu, NULL);
 #endif
 }

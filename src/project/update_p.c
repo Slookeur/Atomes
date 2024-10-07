@@ -59,7 +59,7 @@ void prep_calc_actions ()
 {
   int i;
   // Depends on the number of calculations available
-  for (i=0; i<NCALCS-3; i++)
+  for (i=0; i<G_N_ELEMENTS(analyze_actions); i++)
   {
     if (i < AN)
     {
@@ -69,7 +69,7 @@ void prep_calc_actions ()
       }
       else
       {
-        remove_action (analyze_action_names[i]);
+        remove_action (analyze_acts[i].action_name);
       }
     }
     else
@@ -80,7 +80,7 @@ void prep_calc_actions ()
       }
       else
       {
-        remove_action (analyze_action_names[i]);
+        remove_action (analyze_acts[i].action_name);
       }
     }
   }
@@ -219,7 +219,7 @@ void active_project_changed (int id)
       add_action (edition_actions[0]);
       if (active_cell -> npt)
       {
-        remove_action (edition_action_names[1]);
+        remove_action (edition_acts[1].action_name);
       }
       else
       {

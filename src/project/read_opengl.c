@@ -80,6 +80,7 @@ int read_atom_b (FILE * fp, project * this_proj, int s, int a)
   if (fread (this_proj -> atoms[s][a].label, sizeof(gboolean), 2, fp) != 2) return ERROR_RW;
   if (fread (& this_proj -> atoms[s][a].style, sizeof(int), 1, fp) != 1) return ERROR_RW;
   int i, j, k, l, m;
+  int * rings_ij;
   if (this_proj -> modelgl -> rings)
   {
     for (i=0; i<5; i++)
@@ -89,26 +90,24 @@ int read_atom_b (FILE * fp, project * this_proj, int s, int a)
         this_proj -> atoms[s][a].rings[i] = g_malloc0 (this_proj -> rsparam[i][1]*sizeof*this_proj -> atoms[s][a].rings[i]);
         for (j=0; j<this_proj -> rsparam[i][1]; j++)
         {
+          rings_ij = allocint(this_proj -> modelgl -> num_rings[i][s][j]);
           m = 0;
           for (k=0; k<this_proj -> modelgl -> num_rings[i][s][j]; k++)
           {
-            for (l=0; l<j+1; l++) if (this_proj -> modelgl -> all_rings[i][s][j][k][l] == a) m ++;
-          }
-          this_proj -> atoms[s][a].rings[i][j] = allocint(m + 1);
-          this_proj -> atoms[s][a].rings[i][j][0] = m;
-          m = 1;
-          for (k=0; k<this_proj -> modelgl -> num_rings[i][s][j]; k++)
-          {
-            for (l=0; l<j; l++)
+            for (l=0; l<j+1; l++)
             {
               if (this_proj -> modelgl -> all_rings[i][s][j][k][l] == a)
               {
-                this_proj -> atoms[s][a].rings[i][j][m] = k;
+                rings_ij[m] = k;
                 m ++;
                 break;
               }
             }
           }
+          this_proj -> atoms[s][a].rings[i][j] = allocint(m+1);
+          this_proj -> atoms[s][a].rings[i][j][0] = m;
+          for (k=0; k<m; k++) this_proj -> atoms[s][a].rings[i][j][k+1] = rings_ij[k];
+          g_free (rings_ij);
         }
       }
     }
@@ -120,25 +119,24 @@ int read_atom_b (FILE * fp, project * this_proj, int s, int a)
       this_proj -> atoms[s][a].chain = g_malloc0 (this_proj -> csparam[5]*sizeof*this_proj -> atoms[s][a].chain);
       for (j=0; j<this_proj -> csparam[5]; j++)
       {
+        rings_ij = allocint(this_proj -> modelgl -> num_chains[s][j]);
         m = 0;
-        for (k=0; k<this_proj -> modelgl -> num_chains[s][j]; k++)
-        {
-          for (l=0; l<j; l++) if (this_proj -> modelgl -> all_chains[s][j][k][l] == a) m ++;
-        }
-        this_proj -> atoms[s][a].chain[j] = allocint(m + 1);
-        this_proj -> atoms[s][a].chain[j][0] = m;
-        m = 1;
         for (k=0; k<this_proj -> modelgl -> num_chains[s][j]; k++)
         {
           for (l=0; l<j; l++)
           {
             if (this_proj -> modelgl -> all_chains[s][j][k][l] == a)
             {
-              this_proj -> atoms[s][a].chain[j][m] = k;
               m ++;
+              rings_ij[m] = k;
+              break;
             }
           }
         }
+        this_proj -> atoms[s][a].chain[j] = allocint(m + 1);
+        this_proj -> atoms[s][a].chain[j][0] = m;
+        for (k=0; k<m; k++) this_proj -> atoms[s][a].chain[j][k+1] = rings_ij[k];
+        g_free (rings_ij);
       }
     }
   }
@@ -642,7 +640,6 @@ int read_opengl_image (FILE * fp, project * this_proj, image * img, int sid)
 #endif
   this_proj -> modelgl -> labelled = check_label_numbers (this_proj, 2);
 #ifdef GTK4
-  update_menu_bar (this_proj -> modelgl);
   for (i=0; i<2; i++)
   {
     for (j=0; j<sid; j++)
@@ -673,6 +670,7 @@ int read_opengl_image (FILE * fp, project * this_proj, image * img, int sid)
       }
     }
   }
+  update_menu_bar (this_proj -> modelgl);
 #endif
   return OK;
 }

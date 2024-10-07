@@ -424,7 +424,7 @@ G_MODULE_EXPORT gboolean leaving_question (GtkWidget * widget, GdkEvent * event,
   }
   else
   {
-    gtk_widget_show (MainWindow);
+    show_the_widgets (MainWindow);
   }
   return TRUE;
 }
@@ -493,7 +493,7 @@ G_MODULE_EXPORT void run_iask (GtkDialog * iask, gint response_id, gpointer data
     if (i == 0 || i > 3)
     {
       riask = entry_get_text (GTK_ENTRY(answer));
-      res_int = atof(riask);
+      res_int = string_to_double ((gpointer)riask);
       if (i > 4)
       {
         if (res_int > 0 && res_int < i+1)
@@ -655,10 +655,10 @@ gchar * cask (char * question,  char * lab, int id, char * old, GtkWidget * win)
 
   hboxa = create_hbox (0);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, dialog_ask, hboxa, TRUE, TRUE, 0);
-  gtk_widget_show(hboxa);
+  show_the_widgets (hboxa);
   quest = gtk_label_new (lab);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hboxa, quest, TRUE, TRUE, 0);
-  gtk_widget_show(quest);
+  show_the_widgets (quest);
   answer = gtk_entry_new ();
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hboxa, answer, TRUE, TRUE, 0);
   gtk_widget_set_size_request (answer, 50, -1);

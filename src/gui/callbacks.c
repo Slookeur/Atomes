@@ -670,7 +670,7 @@ void apply_project (gboolean showtools)
     initcutoffs (active_chem, active_project -> nspec);
   }
   prep_model (active_project -> id);
-  if (showtools) gtk_widget_show (curvetoolbox);
+  if (showtools) show_the_widgets (curvetoolbox);
 }
 
 /*!
@@ -761,7 +761,6 @@ G_MODULE_EXPORT void run_on_isaacs_port (GtkDialog * info, gint response_id, gpo
 #else
     destroy_this_dialog (info);
 #endif
-    if (osp.a == 0) to_close_this_project (osp.b, active_project);
   }
 }
 
@@ -954,7 +953,7 @@ G_MODULE_EXPORT void update_sa (GtkEntry * res, gpointer data)
   }
   else
   {
-    v= (int)atof(m);
+    v= (int)string_to_double ((gpointer)m);
     if (v > 0)
     {
       this_reader -> nsps[read_spec] = v;
@@ -1042,7 +1041,7 @@ G_MODULE_EXPORT void update_at_sp (GtkEntry * res, gpointer data)
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
   gboolean up = FALSE;
-  v = (int)atof(m);
+  v = (int)string_to_double ((gpointer)m);
   if (i == 0)
   {
     this_reader -> natomes = (v > 0) ? v : 0;
@@ -1520,6 +1519,9 @@ G_MODULE_EXPORT void run_on_coord_port (GtkDialog * info, gint response_id, gpoi
       while (tmp != filter[j]) j++;
       if (i == 0)
       {
+#ifdef OSX
+        j = NCFORMATS;
+#endif
         if (j == NCFORMATS)
         {
           j = iask ("Please select the file format of the atomic coordinates", "Select format :", 2, MainWindow);

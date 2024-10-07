@@ -184,7 +184,7 @@ G_MODULE_EXPORT void reset_view (GtkButton * but, gpointer data)
   \brief reset view callback - GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_reset_view (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -450,7 +450,7 @@ GtkWidget * menu_rep (glwin * view, int id)
   \brief change representation radio items callback - GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -494,7 +494,7 @@ G_MODULE_EXPORT void change_rep_radio (GSimpleAction * action, GVariant * parame
   \brief change representation callback - GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_rep_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -529,7 +529,7 @@ GMenu * menu_rep (glwin * view, int popm)
   \brief center molecule callback - GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_center_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)

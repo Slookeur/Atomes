@@ -412,7 +412,7 @@ G_MODULE_EXPORT void edit_cell (GtkCellRendererText * cell, gchar * path_string,
   project * this_proj = get_project_by_id (id -> a);
   curve_model = gtk_tree_view_get_model(GTK_TREE_VIEW(this_proj -> curves[id -> b][id -> c] -> datatree));
   gtk_tree_model_get_iter_from_string (curve_model, & row, path_string);
-  double val = atof(new_text);
+  double val = string_to_double ((gpointer)new_text);
   gtk_list_store_set (GTK_LIST_STORE(curve_model), & row, id -> d, val, -1);
 }
 
@@ -429,7 +429,7 @@ GtkWidget * col_entry;
 G_MODULE_EXPORT void adjust_value (GtkEntry * res, gpointer data)
 {
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   update_entry_double (res, v);
 }
 
@@ -447,7 +447,7 @@ G_MODULE_EXPORT void run_add_to_column (GtkDialog * wind, gint response_id, gpoi
   if (response_id == GTK_RESPONSE_APPLY)
   {
     const gchar * p = entry_get_text (GTK_ENTRY(col_entry));
-    double c = atof(p);
+    double c = string_to_double ((gpointer)p);
     update_entry_double (GTK_ENTRY(col_entry), c);
     add_to_last_col (c, data);
   }
@@ -500,7 +500,7 @@ G_MODULE_EXPORT void run_multiply_column (GtkDialog * wind, gint response_id, gp
   if (response_id == GTK_RESPONSE_APPLY)
   {
     const gchar * p = entry_get_text (GTK_ENTRY(col_entry));
-    double c = atof(p);
+    double c = string_to_double ((gpointer)p);
     update_entry_double (GTK_ENTRY(col_entry), c);
     multiply_last_col (c, data);
   }
@@ -648,7 +648,7 @@ GMenu * data_menu ()
   \brief curve data edition popup menu actions callbacks
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void data_pop_action (GSimpleAction * action, GVariant * parameter, gpointer data)

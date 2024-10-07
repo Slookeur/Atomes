@@ -117,7 +117,7 @@ void update_cutoffs (project * this_proj)
     }
     else
     {
-      update_project (this_proj -> id);
+      update_project ();
       on_calc_bonds_released (NULL, NULL);
     }
   }
@@ -136,7 +136,7 @@ G_MODULE_EXPORT void set_cut (GtkEntry * res, gpointer data)
   const gchar * m;
   int id = GPOINTER_TO_INT(data);
   m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (v >= 0.0)
   {
     tmpcut[id] = (v < 0.5) ? 0.5 : v;
@@ -256,7 +256,7 @@ G_MODULE_EXPORT void run_window_cuts (GtkDialog * win, gint response_id, gpointe
   \brief adjust bond cutoffs window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void window_cuts (GSimpleAction * action, GVariant * parameter, gpointer data)

@@ -447,7 +447,7 @@ void update_string_instances (glsl_program * glsl, object_3d * obj)
 */
 void glsl_bind_string (glsl_program * glsl, object_3d * obj)
 {
-  glActiveTexture(GL_TEXTURE0);
+  glActiveTexture (GL_TEXTURE0);
   glBindTexture (ogl_texture, obj -> texture);
   glsl -> uniform_loc[1] = glGetUniformLocation (glsl -> id, "tex");
   glUniform1i (glsl -> uniform_loc[1], 0);

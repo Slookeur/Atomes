@@ -2400,7 +2400,7 @@ G_MODULE_EXPORT void changed_field_key_renderer (GtkCellRendererCombo * combo, g
           for (n=1; n<o+1; n++)
           {
             gtk_tree_model_get (GTK_TREE_MODEL(field_model[i]), iter, n, & str, -1);
-            ids[n-1] = (int) atof(str) - 1;
+            ids[n-1] = (int) string_to_double ((gpointer)str) - 1;
           }
           adjust_field_prop (i-7, o, NULL, ids, l);
           gtk_tree_store_set (field_model[i], iter, field_v[i], parameters_info (i-6, l, vars, get_active_prop_using_atoms(tmp_fstr -> other, o, ids) -> val), -1);
@@ -2717,7 +2717,7 @@ gchar * pop_remove (int i)
   \brief create new field atom from field atom popup menu callback
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_select_atom_id_from_fied_molecule (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -3450,7 +3450,7 @@ G_MODULE_EXPORT void edit_field_cell (GtkCellRendererText * cell, gchar * path_s
   gtk_tree_model_get_iter (GTK_TREE_MODEL(field_model[j]), & iter, path);
   gtk_tree_model_get (GTK_TREE_MODEL(field_model[j]), & iter, 0, & k, -1);
   l = gtk_combo_box_get_active (GTK_COMBO_BOX(combo_mol[j-1]));
-  float val = atof(new_text);
+  float val = string_to_double ((gpointer)new_text);
   k --;
   if (i == 0) get_active_atom (l, k) -> mass = val;
   if (i == 1) get_active_atom (l, k) -> charge = val;
@@ -4084,10 +4084,10 @@ G_MODULE_EXPORT void on_assistant_prepare (GtkAssistant * assistant, GtkWidget *
   switch (i)
   {
     case 0:
-      // if (is_the_widget_visible(preview_but)) gtk_widget_hide (preview_but);
+      // if (is_the_widget_visible(preview_but)) hide_the_widgets (preview_but);
       break;
     case 1:
-      // if (! is_the_widget_visible(preview_but)) gtk_widget_show (preview_but);
+      // if (! is_the_widget_visible(preview_but)) show_the_widgets (preview_but);
       break;
     case MAXDATC+MAXDATA+2:
       break;
@@ -4182,7 +4182,7 @@ G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpoint
       widget_set_sensitive (field_i_prep[i], FALSE);
       field_i_obj[i] = destroy_this_widget (field_i_obj[i]);
       field_i_obj[i] = stock_image (CANCEL);
-      gtk_widget_show (field_i_obj[i]);
+      show_the_widgets (field_i_obj[i]);
       add_box_child_start (GTK_ORIENTATION_HORIZONTAL, field_i_box[i], field_i_obj[i], TRUE, TRUE, 25);
     }
     for (i=0; i<MAXDATC+MAXDATA+2; i++)
@@ -4195,7 +4195,7 @@ G_MODULE_EXPORT void run_clean_field (GtkDialog * dial, gint response_id, gpoint
         }
       }
     }
-    gtk_widget_hide (preview_but);
+    hide_the_widgets (preview_but);
     for (i=0; i<19; i++)
     {
 #ifdef GTK4
@@ -4335,13 +4335,14 @@ void add_classical_assistant_pages (int p)
   }
   i = MAXDATC+MAXDATA+1;
   fibox[i] = create_vbox (BSEP);
-  info = g_strdup_printf ("<b>   Finalize the creation of the DL-POLY input file(s) now !</b>");
+
+  info = g_strdup_printf ("<b>   Finalize the creation of the %s input file(s) now !</b>", (activef) ? "LAMMPS" : "DL-POLY");
   add_box_child_start (GTK_ORIENTATION_VERTICAL, fibox[i], markup_label(info, -1, -1, 0.5, 0.5), TRUE, TRUE, 100);
   g_free (info);
   add_box_child_start (GTK_ORIENTATION_VERTICAL, fibox[i], markup_label("\n \t<b>Note: </b>You can re-open this assistant later if required to adjust your choices\n", -1, -1, 0.0, 0.5),
                        FALSE, FALSE, 0);
   gtk_assistant_append_page (assist, fibox[i]);
-  gtk_assistant_set_page_title (assist, fibox[i], "Create the DL-POLY input file(s) now !");
+  gtk_assistant_set_page_title (assist, fibox[i], (activef) ? "Create the LAMMPS input file(s) now !" : "Create the DL-POLY input file(s) now !");
   gtk_assistant_set_page_type (assist, fibox[i], GTK_ASSISTANT_PAGE_CONFIRM);
   gtk_assistant_set_page_complete (assist, fibox[i], TRUE);
   gtk_assistant_update_buttons_state (assist);
@@ -4398,7 +4399,7 @@ void create_ff_structure (int ai, int type)
   gtk_assistant_set_page_complete (GTK_ASSISTANT (field_assistant),
                                    gtk_assistant_get_nth_page(GTK_ASSISTANT (field_assistant), 0), TRUE);
   show_the_widgets (field_assistant);
-  if (tmp_field -> md_opts[1] == 0.0) gtk_widget_hide (extra_vbox[1]);
+  if (tmp_field -> md_opts[1] == 0.0) hide_the_widgets (extra_vbox[1]);
   hide_show_this_pages (0, MAXDATC, tmp_field -> prepare_file[0], 0);
   hide_show_this_pages (MAXDATC-1, MAXDATC+MAXDATA, tmp_field -> prepare_file[1], 1);
   // return FALSE;
@@ -4429,7 +4430,7 @@ G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
           field_i_obj[0] = destroy_this_widget (field_i_obj[0]);
           field_i_obj[0] = stock_image (APPLY);
           add_box_child_start (GTK_ORIENTATION_HORIZONTAL, field_i_box[0], field_i_obj[0], TRUE, TRUE, 25);
-          gtk_widget_show (field_i_obj[0]);
+          show_the_widgets (field_i_obj[0]);
         }
         else
         {
@@ -4443,9 +4444,9 @@ G_MODULE_EXPORT void changed_init_box (GtkComboBox * box, gpointer data)
           widget_set_sensitive (field_i_combo[1], FALSE);
           field_i_obj[1] = destroy_this_widget (field_i_obj[1]);
           field_i_obj[1] = gtk_spinner_new ();
-          gtk_widget_show (field_i_obj[1]);
+          show_the_widgets (field_i_obj[1]);
           add_box_child_start (GTK_ORIENTATION_HORIZONTAL, field_i_box[1], field_i_obj[1], TRUE, TRUE, 25);
-          gtk_widget_show (field_i_obj[1]);
+          show_the_widgets (field_i_obj[1]);
           gtk_spinner_start (GTK_SPINNER(field_i_obj[1]));
           // gdk_threads_add_idle (create_ff_structure, GINT_TO_POINTER(j));
           create_ff_structure (j, tmp_field -> type);
@@ -4476,13 +4477,11 @@ G_MODULE_EXPORT void show_force_field_preview (GtkButton * but, gpointer data)
   GtkWidget * aview;
   gchar * ff_files[2][3] = {{"CONTROL", "FIELD" , "CONFIG"}, {"LAMMPS.IN", "LAMMPS.DATA", ""}};
   int num_files[2] = {3, 2};
-  int i, j;
-  j = -1;
+  int i;
   for (i=0; i<num_files[activef]; i++)
   {
     if ((i==0 && tmp_field -> prepare_file[0]) || (i > 0 && tmp_field -> prepare_file[1]))
     {
-      j ++;
       scrollsets = create_scroll (NULL, 700, 350, GTK_SHADOW_ETCHED_IN);
       aview = create_text_view (-1, -1, 0, 1, NULL, NULL, NULL);
       add_container_child (CONTAINER_SCR, scrollsets, aview);
@@ -4802,7 +4801,7 @@ void create_classical_force_field (int p, int f)
   else
   {
     show_the_widgets (field_assistant);
-    gtk_widget_hide (preview_but);
+    hide_the_widgets (preview_but);
   }
 
   gtk_assistant_set_forward_page_func (GTK_ASSISTANT (field_assistant), on_assistant_go_forward, NULL, NULL);

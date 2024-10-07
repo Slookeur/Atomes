@@ -143,9 +143,9 @@ G_MODULE_EXPORT void set_axis_min (GtkEntry * res, gpointer data)
   {
     const gchar * m;
     m = entry_get_text (res);
-    if (atof(m) < this_proj -> curves[b][c] -> axmax[i])
+    if (string_to_double ((gpointer)m) < this_proj -> curves[b][c] -> axmax[i])
     {
-      this_proj -> curves[b][c] -> axmin[i] = atof(m);
+      this_proj -> curves[b][c] -> axmin[i] = string_to_double ((gpointer)m);
     }
     else
     {
@@ -174,9 +174,9 @@ G_MODULE_EXPORT void set_axis_max (GtkEntry * res, gpointer data)
   int i = get_active_axis ();
   const gchar * m;
   m = entry_get_text (res);
-  if (atof(m) > this_proj -> curves[b][c] -> axmin[i])
+  if (string_to_double ((gpointer)m) > this_proj -> curves[b][c] -> axmin[i])
   {
-    this_proj -> curves[b][c] -> axmax[i] = atof(m);
+    this_proj -> curves[b][c] -> axmax[i] = string_to_double ((gpointer)m);
   }
   else
   {
@@ -205,7 +205,7 @@ G_MODULE_EXPORT void set_max_div (GtkEntry * maj, gpointer data)
   int i = get_active_axis ();
   const gchar * m;
   m = entry_get_text (maj);
-  tmp = atof(m);
+  tmp = string_to_double ((gpointer)m);
   if (tmp != 0.0)
   {
     this_proj -> curves[b][c] -> majt[i] = tmp;
@@ -778,23 +778,23 @@ G_MODULE_EXPORT void update_axis (GtkComboBox * widg, gpointer data)
     widget_set_sensitive (majt, ! this_proj -> curves[b][c] -> scale[i]);
     widget_set_sensitive (nmi[i], ! this_proj -> curves[b][c] -> scale[i]);
   }
-  gtk_widget_hide (nmi[! i]);
-  gtk_widget_hide (ndi[! i]);
-  gtk_widget_hide (mats[! i]);
-  gtk_widget_hide (mits[! i]);
-  gtk_widget_hide (nptx[! i]);
-  gtk_widget_hide (npty[! i]);
-  gtk_widget_hide (tptx[! i]);
-  gtk_widget_hide (tpty[! i]);
+  hide_the_widgets (nmi[! i]);
+  hide_the_widgets (ndi[! i]);
+  hide_the_widgets (mats[! i]);
+  hide_the_widgets (mits[! i]);
+  hide_the_widgets (nptx[! i]);
+  hide_the_widgets (npty[! i]);
+  hide_the_widgets (tptx[! i]);
+  hide_the_widgets (tpty[! i]);
 
-  gtk_widget_show (nmi[i]);
-  gtk_widget_show (ndi[i]);
-  gtk_widget_show (mats[i]);
-  gtk_widget_show (mits[i]);
-  gtk_widget_show (nptx[i]);
-  gtk_widget_show (npty[i]);
-  gtk_widget_show (tptx[i]);
-  gtk_widget_show (tpty[i]);
+  show_the_widgets (nmi[i]);
+  show_the_widgets (ndi[i]);
+  show_the_widgets (mats[i]);
+  show_the_widgets (mits[i]);
+  show_the_widgets (nptx[i]);
+  show_the_widgets (npty[i]);
+  show_the_widgets (tptx[i]);
+  show_the_widgets (tpty[i]);
 
 #ifdef GTK4
   gtk_check_button_set_active (GTK_CHECK_BUTTON(show_axis), this_proj -> curves[b][c] -> show_axis[i]);

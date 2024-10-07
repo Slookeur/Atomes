@@ -62,7 +62,7 @@ extern G_MODULE_EXPORT void turn_rebuild (GtkWidget * widg, gpointer data);
   \brief wrapp coordinates callback
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void wrapping_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -293,7 +293,7 @@ GMenu * menu_atom_edit (glwin * view, int popm)
   \brief Extract/Rebuild menu items callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_run_rebuild (GSimpleAction * action, GVariant * parameter, gpointer data)

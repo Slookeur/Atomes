@@ -76,7 +76,7 @@ G_MODULE_EXPORT void set_size (GtkEntry * val, gpointer data)
   text[0] = "X size must be > 0";
   text[1] = "Y size must be > 0";
   m = entry_get_text (val);
-  i = atof(m);
+  i = string_to_double ((gpointer)m);
   if (i > 0)
   {
     resol[j] = i;
@@ -371,8 +371,8 @@ void save_image (gpointer cdata)
   add_box_child_start (GTK_ORIENTATION_VERTICAL, vbox, hbox, TRUE, TRUE, 0);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, markup_label("Size: ", 100, -1, 0.0, 0.5), FALSE, TRUE, 0);
 
-  xlgt = gtk_widget_get_allocated_width (this_proj -> curves[b][c] -> plot);
-  ylgt = gtk_widget_get_allocated_height (this_proj -> curves[b][c] -> plot);
+  xlgt = get_widget_width (this_proj -> curves[b][c] -> plot);
+  ylgt = get_widget_height (this_proj -> curves[b][c] -> plot);
   x = create_entry (G_CALLBACK(set_size), 50, 15, FALSE, GINT_TO_POINTER(0));
   update_entry_int (GTK_ENTRY(x), xlgt);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, hbox, x, TRUE, TRUE, 0);

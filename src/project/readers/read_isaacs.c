@@ -633,7 +633,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    if ((int)active_chem -> chem_prop[CHEM_Z][res] != (int)atof((char *)data))
+    if ((int)active_chem -> chem_prop[CHEM_Z][res] != (int)string_to_double ((gpointer)data))
     {
       res=6;
       goto pend;
@@ -645,7 +645,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    active_chem -> chem_prop[CHEM_M][res] = atof((char *)data);
+    active_chem -> chem_prop[CHEM_M][res] = string_to_double ((gpointer)data);
     ptn = findnode(ptnode, "rad");
     if (ptn == NULL)
     {
@@ -653,7 +653,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    // val = atof((char *)data);
+    // val = string_to_double ((gpointer)data);
     ptn = findnode(ptnode, "radius");
     if (ptn == NULL)
     {
@@ -661,7 +661,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    active_chem -> chem_prop[CHEM_R][res] = atof((char *)data);
+    active_chem -> chem_prop[CHEM_R][res] = string_to_double ((gpointer)data);
     ptn = findnode(ptnode, "nscatt");
     if (ptn == NULL)
     {
@@ -669,7 +669,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    active_chem -> chem_prop[CHEM_N][res] = atof((char *)data);
+    active_chem -> chem_prop[CHEM_N][res] = string_to_double ((gpointer)data);
     ptn = findnode(ptnode, "xscatt");
     if (ptn == NULL)
     {
@@ -677,7 +677,7 @@ int setprop (xmlNodePtr pnode)
       goto pend;
     }
     data= xmlNodeGetContent(ptn);
-    active_chem -> chem_prop[CHEM_X][res] = atof((char *)data);
+    active_chem -> chem_prop[CHEM_X][res] = string_to_double ((gpointer)data);
     ptnode = ptnode -> parent;
     ptnode = ptnode -> next;
   }
@@ -786,7 +786,7 @@ int setchemistry (xmlNodePtr xsnode)
     goto xend;
   }
   data = xmlNodeGetContent(cs);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   ats = val;
   if (ats != active_project -> natomes)
   {
@@ -809,7 +809,7 @@ int setchemistry (xmlNodePtr xsnode)
     xspec = cs -> properties;
     idn = xspec -> children;
     data = xmlNodeGetContent(idn);
-    val = atof((char *)data);
+    val = string_to_double ((gpointer)data);
     ats = val;
     if (ats != active_project -> nspec)
     {
@@ -886,7 +886,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> param[0][0]= val;
   bb=findnode(ba, "b");
   if (bb == NULL)
@@ -895,7 +895,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> param[0][1]= val;
   bb=findnode(ba, "c");
   if (bb == NULL)
@@ -904,7 +904,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> param[0][2]= val;
   ba=findnode(bnode, "angles");
   if (ba == NULL)
@@ -920,7 +920,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> param[1][0] = val;
   bb=findnode(ba, "beta");
   if (bb == NULL)
@@ -929,7 +929,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> param[1][1]= val;
   bb=findnode(ba, "gamma");
   if (bb == NULL)
@@ -947,7 +947,7 @@ int setbox (xmlNodePtr boxnode)
     active_cell -> ltype = 0;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> param[1][2]= val;
   ba=findnode(bnode, "vectors");
   if (ba == NULL)
@@ -963,7 +963,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> vect[0][0]= val;
   bb=findnode(ba, "a.y");
   if (bb == NULL)
@@ -972,7 +972,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> vect[0][1]= val;
   bb=findnode(ba, "a.z");
   if (bb == NULL)
@@ -981,7 +981,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> vect[0][2]= val;
   bb=findnode(ba, "b.x");
   if (bb == NULL)
@@ -990,7 +990,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> vect[1][0]= val;
   bb=findnode(ba, "b.y");
   if (bb == NULL)
@@ -999,7 +999,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> vect[1][1]= val;
   bb=findnode(ba, "b.z");
   if (bb == NULL)
@@ -1008,7 +1008,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> vect[1][2]= val;
   bb=findnode(ba, "c.x");
   if (bb == NULL)
@@ -1017,7 +1017,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> vect[2][0]= val;
   bb=findnode(ba, "c.y");
   if (bb == NULL)
@@ -1026,7 +1026,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> vect[2][1]= val;
   bb=findnode(ba, "c.z");
   if (bb == NULL)
@@ -1035,7 +1035,7 @@ int setbox (xmlNodePtr boxnode)
     goto bend;
   }
   data =  xmlNodeGetContent(bb);
-  val = atof((char *)data);
+  val = string_to_double ((gpointer)data);
   active_box -> vect[2][2]= val;
 
   if (active_box -> vect[0][0] != 0.0 && active_box -> vect[0][1] != 0.0 && active_box -> vect[0][2] != 0.0
@@ -1094,7 +1094,7 @@ int setpbc (xmlNodePtr pbcnode)
       goto pend;
     }
     data = xmlNodeGetContent(bnode);
-    //val=atof((char *)data);
+    //val=string_to_double ((gpointer)data);
     //j = val;
     active_cell -> frac = 1;
   }
@@ -1129,7 +1129,7 @@ int setcutoffs (xmlNodePtr cutnode)
     goto cend;
   }
   data = xmlNodeGetContent(cn);
-  val=atof((char *)data);
+  val=string_to_double ((gpointer)data);
   active_chem -> grtotcutoff = val;
   cn = findnode(cnode, "partials");
   if (cn == NULL)
@@ -1155,7 +1155,7 @@ int setcutoffs (xmlNodePtr cutnode)
         goto cend;
       }
       data = xmlNodeGetContent(cn);
-      val=atof((char *)data);
+      val=string_to_double ((gpointer)data);
       active_chem -> cutoffs[i][j] = val;
       g_free (ncut);
       ncut=NULL;
@@ -1191,7 +1191,7 @@ int settime(xmlNodePtr timenode)
     goto tend;
   }
   data = xmlNodeGetContent(tn);
-  //val = atof((char *)data);
+  //val = string_to_double ((gpointer)data);
   //delta_t = val;
   tn = findnode(tnode, "unit");
   if (tn == NULL)
@@ -1218,7 +1218,7 @@ int settime(xmlNodePtr timenode)
   if (tn != NULL)
   {
     data = xmlNodeGetContent(tn);
-    //val = atof((char *)data);
+    //val = string_to_double ((gpointer)data);
     //ndtbs = val;
   }
   tps=0;

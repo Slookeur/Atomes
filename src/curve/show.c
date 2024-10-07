@@ -89,7 +89,7 @@ void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpo
   cid = cd -> c;
   activec = cid;
   activer = rid;
-  cairo_surface_t * surface;
+  cairo_surface_t * surface = NULL;
 
   project * this_proj = get_project_by_id(pid);
 
@@ -101,8 +101,8 @@ void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpo
   {
     alp=1.0;
 #ifdef GTK3
-    this_proj -> curves[rid][cid] -> wsize[0] = gtk_widget_get_allocated_width (grwdget);
-    this_proj -> curves[rid][cid] -> wsize[1] = gtk_widget_get_allocated_height (grwdget);
+    this_proj -> curves[rid][cid] -> wsize[0] = get_widget_width (grwdget);
+    this_proj -> curves[rid][cid] -> wsize[1] = get_widget_height (grwdget);
 #else
     this_proj -> curves[rid][cid] -> wsize[0] = width;
     this_proj -> curves[rid][cid] -> wsize[1] = height;
@@ -312,7 +312,7 @@ void show_curve (GtkDrawingArea * area, cairo_t * cr, int width, int height, gpo
 void hide_curve (gpointer data)
 {
   tint * idc = (tint *)data;
-  gtk_widget_hide (get_project_by_id(idc -> a) -> curves[idc -> b][idc -> c] -> window);
+  hide_the_widgets (get_project_by_id(idc -> a) -> curves[idc -> b][idc -> c] -> window);
   if (idc -> a == activep)
   {
     adjust_tool_model (idc -> b, idc -> c, get_project_by_id(idc -> a) -> curves[idc -> b][idc -> c] -> path);

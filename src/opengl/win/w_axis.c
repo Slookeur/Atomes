@@ -148,8 +148,8 @@ G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
   {
     case 0:
       view -> anim -> last -> img -> box_axis[1] = WIREFRAME;
-      if (is_the_widget_visible(radius_box)) gtk_widget_hide (radius_box);
-      if (! is_the_widget_visible(width_box)) gtk_widget_show (width_box);
+      if (is_the_widget_visible(radius_box)) hide_the_widgets (radius_box);
+      if (! is_the_widget_visible(width_box)) show_the_widgets (width_box);
 #ifdef GTK3
       // GTK3 Menu Action To Check
       gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_box_axis[1][1], TRUE);
@@ -157,8 +157,8 @@ G_MODULE_EXPORT void set_axis_combo_style (GtkComboBox * box, gpointer data)
       break;
     case 1:
       view -> anim -> last -> img -> box_axis[1] = CYLINDERS;
-      if (is_the_widget_visible(width_box)) gtk_widget_hide (width_box);
-      if (! is_the_widget_visible(radius_box)) gtk_widget_show (radius_box);
+      if (is_the_widget_visible(width_box)) hide_the_widgets (width_box);
+      if (! is_the_widget_visible(radius_box)) show_the_widgets (radius_box);
 #ifdef GTK3
       // GTK3 Menu Action To Check
       gtk_check_menu_item_set_active ((GtkCheckMenuItem *)view -> ogl_box_axis[1][2], TRUE);
@@ -481,7 +481,7 @@ G_MODULE_EXPORT void set_axis_title (GtkEntry * entry, gpointer data)
   \brief create the axis advanced parameters window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void axis_advanced (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -676,11 +676,11 @@ G_MODULE_EXPORT void axis_advanced (GtkWidget * widg, gpointer data)
   show_the_widgets (win);
   if (view -> anim -> last -> img -> box_axis[AXIS] == CYLINDERS)
   {
-    gtk_widget_hide (width_box);
+    hide_the_widgets (width_box);
   }
   else
   {
-    gtk_widget_hide (radius_box);
+    hide_the_widgets (radius_box);
   }
   dialog_id ++;
   Event_loop[dialog_id] = g_main_loop_new (NULL, FALSE);

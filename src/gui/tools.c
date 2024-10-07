@@ -267,7 +267,7 @@ G_MODULE_EXPORT void toggle_show_hide_curve (GtkCellRendererToggle * cell_render
   {
     if (active_project -> curves[i][j] -> window != NULL)
     {
-      gtk_widget_hide (active_project -> curves[i][j] -> window);
+      hide_the_widgets (active_project -> curves[i][j] -> window);
     }
   }
   gtk_tree_store_set (tool_model, & iter, 4, ! k, -1);

@@ -308,7 +308,7 @@ double molecular_volume (int nats, atom * ats_vol, double baryc[3], double * rvd
   paral[2][0] = 0.0;
   paral[2][1] = 0.0;
   paral[2][2] = vamax[2] - vamin[2];
-  ColRGBA null;
+  ColRGBA null; // Not used
   return draw_cuboid (FALSE, VOLMS, 0, m4_identity (), vec3(0.0,0.0,0.0), paral, null, 1.0);
 }
 
@@ -458,7 +458,7 @@ G_MODULE_EXPORT void molecular_volumes (GtkButton * but, gpointer data)
   g_free (str);
   if (this_proj -> modelgl -> comp_vol[dat -> b])
   {
-    gtk_widget_hide (this_proj -> modelgl -> volume_win -> compb[dat -> b]);
+    hide_the_widgets (this_proj -> modelgl -> volume_win -> compb[dat -> b]);
     show_the_widgets (this_proj -> modelgl -> volume_win -> hboxv[dat -> b]);
   }
   this_proj -> modelgl -> volumes = TRUE;
@@ -485,7 +485,7 @@ void adjust_vol_md_step (project * this_proj, int geo)
       {
         if (this_proj -> modelgl -> fm_comp_vol[geo-2][i][k][j])
         {
-          gtk_widget_hide (this_proj -> modelgl -> volume_win -> fm_compb[geo-2][i][j]);
+          hide_the_widgets (this_proj -> modelgl -> volume_win -> fm_compb[geo-2][i][j]);
           str = g_strdup_printf ("%15.3f", this_proj -> modelgl -> frag_mol_ppvolume[geo-2][i][k][j]);
           gtk_label_set_text  ((GtkLabel *)this_proj -> modelgl -> volume_win -> fm_lab_vol[geo-2][i][j], str);
           g_free (str);
@@ -494,7 +494,7 @@ void adjust_vol_md_step (project * this_proj, int geo)
         else
         {
           show_the_widgets (this_proj -> modelgl -> volume_win -> fm_compb[geo-2][i][j]);
-          gtk_widget_hide (this_proj -> modelgl -> volume_win -> fm_hboxv[geo-2][i][j]);
+          hide_the_widgets (this_proj -> modelgl -> volume_win -> fm_hboxv[geo-2][i][j]);
         }
       }
     }
@@ -508,7 +508,7 @@ void adjust_vol_md_step (project * this_proj, int geo)
         k =  this_proj -> modelgl -> volume_win -> geov_id[geo-2][j];
         if (this_proj -> modelgl -> fm_comp_vol[geo-2][i][0][k])
         {
-          gtk_widget_hide (this_proj -> modelgl -> volume_win -> fm_compb[geo-2][i][k]);
+          hide_the_widgets (this_proj -> modelgl -> volume_win -> fm_compb[geo-2][i][k]);
           str = g_strdup_printf ("%15.3f", this_proj -> modelgl -> frag_mol_ppvolume[geo-2][i][0][k]);
           gtk_label_set_text  ((GtkLabel *)this_proj -> modelgl -> volume_win -> fm_lab_vol[geo-2][i][k], str);
           g_free (str);
@@ -517,7 +517,7 @@ void adjust_vol_md_step (project * this_proj, int geo)
         else
         {
           show_the_widgets (this_proj -> modelgl -> volume_win -> fm_compb[geo-2][i][k]);
-          gtk_widget_hide (this_proj -> modelgl -> volume_win -> fm_hboxv[geo-2][i][k]);
+          hide_the_widgets (this_proj -> modelgl -> volume_win -> fm_hboxv[geo-2][i][k]);
         }
       }
     }
@@ -569,7 +569,7 @@ G_MODULE_EXPORT void fm_molecular_volumes (GtkButton * but, gpointer data)
   g_free (str);
   if (this_proj -> modelgl -> fm_comp_vol[dat -> b-2][dat -> d][sid][dat -> c])
   {
-    gtk_widget_hide (this_proj -> modelgl -> volume_win -> fm_compb[dat -> b-2][dat -> d][dat -> c]);
+    hide_the_widgets (this_proj -> modelgl -> volume_win -> fm_compb[dat -> b-2][dat -> d][dat -> c]);
     show_the_widgets (this_proj -> modelgl -> volume_win -> fm_hboxv[dat -> b-2][dat -> d][dat -> c]);
   }
   if (dat -> b == 3)
@@ -823,7 +823,7 @@ G_MODULE_EXPORT void update_vol_frag_mol_search (GtkEntry * res, gpointer data)
 {
   tint * dat = (tint * )data;
   const gchar * m = entry_get_text (res);
-  int v = (int)atof(m);
+  int v = (int)string_to_double ((gpointer)m);
   project * this_proj = get_project_by_id(dat -> a);
   int g = dat -> b;
   if (v > 0 && v <= this_proj -> coord -> totcoord[g])
@@ -1008,7 +1008,7 @@ G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
     for (i=0; i<FILLED_STYLES; i++)
     {
       show_the_widgets (view -> volume_win -> compb[i]);
-      gtk_widget_hide (view -> volume_win -> hboxv[i]);
+      hide_the_widgets (view -> volume_win -> hboxv[i]);
       view -> comp_vol[i] = FALSE;
       widget_set_sensitive (view -> volume_win -> hbvol[i], view -> comp_vol[i]);
       view -> anim -> last -> img -> show_vol[i] = FALSE;
@@ -1017,7 +1017,7 @@ G_MODULE_EXPORT void set_angular_precision (GtkComboBox * box, gpointer data)
         for (k=0; k<this_proj -> coord -> totcoord[j+2]; k++)
         {
           show_the_widgets (view -> volume_win -> fm_compb[j][i][k]);
-          gtk_widget_hide (view -> volume_win -> fm_hboxv[j][i][k]);
+          hide_the_widgets (view -> volume_win -> fm_hboxv[j][i][k]);
           view -> fm_comp_vol[j][i][0][k] = FALSE;
           widget_set_sensitive (view -> volume_win -> fm_hbvol[j][i][k], view -> fm_comp_vol[j][i][0][k]);
           view -> anim -> last -> img -> fm_show_vol[j][i][k] = FALSE;
@@ -1153,11 +1153,11 @@ G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data)
     {
       if (view -> comp_vol[i])
       {
-        gtk_widget_hide (view -> volume_win -> compb[i]);
+        hide_the_widgets (view -> volume_win -> compb[i]);
       }
       else
       {
-        gtk_widget_hide (view -> volume_win -> hboxv[i]);
+        hide_the_widgets (view -> volume_win -> hboxv[i]);
       }
     }
     if (view -> adv_bonding[0]) adjust_vol_md_step (this_proj, 2);
@@ -1165,6 +1165,6 @@ G_MODULE_EXPORT void window_volumes (GtkWidget * widg, gpointer data)
   }
   else
   {
-    gtk_widget_show (view -> volume_win -> win);
+    show_the_widgets (view -> volume_win -> win);
   }
 }

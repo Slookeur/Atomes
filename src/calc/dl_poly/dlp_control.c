@@ -203,7 +203,7 @@ G_MODULE_EXPORT void set_thermo_param (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i == 9)
   {
     if ((v == 0.0 || v >= 1.0) && v != tmp_field -> thermo_opts[i])
@@ -601,7 +601,7 @@ G_MODULE_EXPORT void set_md_param (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i == 14)
   {
     if (v >= 1.0 && v <= tmp_proj -> natomes)
@@ -943,7 +943,7 @@ G_MODULE_EXPORT void set_equi_param (GtkEntry * res, gpointer data)
   int i, j;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i == 10 || i == 14)
   {
     j = (i == 10) ? 9 : 13;
@@ -1140,7 +1140,7 @@ G_MODULE_EXPORT void set_out_param (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i == 3 || i == 7 || i == 23)
   {
     if (v >= 0.0 && v != tmp_field -> out_opts[i])
@@ -1421,7 +1421,7 @@ G_MODULE_EXPORT void set_ana_param (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (v >= 0.0 && v != tmp_field -> ana_opts[i])
   {
     tmp_field -> ana_opts[i] = v;
@@ -1581,7 +1581,7 @@ G_MODULE_EXPORT void set_io_param (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i < 2)
   {
     if (v >= 0.0 && v != tmp_field -> io_opts[2*i+1])
@@ -1885,7 +1885,7 @@ G_MODULE_EXPORT void set_elec_param (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i == 1)
   {
     if (v > 0.0 && v != tmp_field -> elec_opts[i])
@@ -2194,7 +2194,7 @@ G_MODULE_EXPORT void set_vdw_param (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i == 1)
   {
     if (v > 0.0 && v != tmp_field -> vdw_opts[i])
@@ -2380,7 +2380,7 @@ G_MODULE_EXPORT void set_sys_param (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i == 9)
   {
     if (v >= 1.0 && v != tmp_field -> sys_opts[i])

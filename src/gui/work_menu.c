@@ -251,8 +251,8 @@ GtkWidget * work_menu (int p, int c)
 #else
   GMenu * popup = create_workspace_menu ("pop", 1, p, c);
   menu = gtk_popover_menu_new_from_model_full (G_MENU_MODEL(popup), GTK_POPOVER_MENU_NESTED);
-  i = (nprojects) ? (p > -1) ? 235 : 80 : 0;
-  gtk_widget_set_size_request (menu, -1, 235 + i);
+  i = (nprojects) ? ((p > -1) ? 250 : 95) : 0;
+  gtk_widget_set_size_request (menu, -1, 310 + i);
 /* I need to use the ' gtk_popover_menu_new_from_model_full' command here,
    the menu created using the 'gtk_popover_menu_new_from_model' does not behave properly,
    that might be a bug, some items of the menu having the same name,

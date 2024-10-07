@@ -112,7 +112,7 @@ GtkWidget * create_css_label (gchar * str, int id)
   g_free (backcol);
   GtkWidget * lab = markup_label(str, 50, 50, 0.5, 0.5);
   gtk_widget_set_name (lab, (id) ? "icolor" : "color");
-  gtk_widget_show (lab);
+  show_the_widgets (lab);
   return lab;
 }
 
@@ -234,7 +234,7 @@ G_MODULE_EXPORT void set_pix (GtkEntry * res, gpointer data)
   int id = GPOINTER_TO_INT (data);
   project * this_proj = get_project_by_id (id);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   int p = (int)v;
   int n = this_proj-> pix[0] * this_proj -> pix[1] * this_proj -> pix[2];
   if (p > 0 && p <= n)

@@ -211,7 +211,7 @@ G_MODULE_EXPORT void on_calc_sq_released (GtkWidget * widg, gpointer data)
   else
   {
     update_sq_view (active_project, SQ);
-    gtk_widget_show (curvetoolbox);
+    show_the_widgets (curvetoolbox);
   }
   fill_tool_model ();
   for (i=1; i<3; i++) update_after_calc (i);
@@ -272,14 +272,14 @@ G_MODULE_EXPORT void on_calc_sk_released (GtkWidget * widg, gpointer data)
     prepostcalc (widg, TRUE, SK, j, 1.0);
     if (! j)
     {
-      remove_action (analyze_action_names[GK]);
+      remove_action (analyze_acts[GK].action_name);
       show_error ("The S(q) calculation has failed", 0, widg);
     }
     else
     {
       add_action (analyze_actions[GK]);
       update_sq_view (active_project, SK);
-      gtk_widget_show (curvetoolbox);
+      show_the_widgets (curvetoolbox);
     }
   }
   else

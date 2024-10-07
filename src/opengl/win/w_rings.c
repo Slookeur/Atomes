@@ -732,7 +732,7 @@ G_MODULE_EXPORT void update_rings_search (GtkEntry * res, gpointer data)
   int i, j, k, v;
   int rid;
   const gchar * m = entry_get_text (res);
-  v = (int)atof(m);
+  v = (int)string_to_double ((gpointer)m);
   project * this_proj = get_project_by_id(dat -> a);
   coord_edition * coord = this_proj -> modelgl -> coord_win;
   for (i=0; i<5; i++)

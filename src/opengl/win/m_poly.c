@@ -63,7 +63,7 @@ extern G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVarian
   \brief show / hide polyhedra callback - GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -165,7 +165,7 @@ G_MODULE_EXPORT void show_hide_poly (GtkWidget * widg, gpointer data)
   \brief cloned polyehdra callback - GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void cloned_poly (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -422,7 +422,7 @@ GMenu * menu_show_rings_poly (glwin * view, int popm, int id)
     for (i=0; i<this_proj -> coord -> totcoord[id]; i++)
     {
       stra = g_strdup_printf ("%d", this_proj -> coord -> geolist[id][0][i]);
-      strb = g_strdup_printf ("%s-p", stra);
+      strb = g_strdup_printf ("%d-%s-p", id, stra);
       append_opengl_item (view, menu, stra, strb, popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_poly), & view -> gcid[id][i][id],
                           TRUE, view -> anim -> last -> img -> show_poly[id][i], FALSE, TRUE);
       g_free (stra);

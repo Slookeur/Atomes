@@ -100,23 +100,23 @@ void update_menus (glwin * view)
   {
     for (j=0; j<6; j+=2)
     {
-      gtk_widget_hide (view -> ogl_bonds[j+8*i]);
-      if (j<4) gtk_widget_hide (view -> ogl_atoms[4*i+j]);
+      hide_the_widgets (view -> ogl_bonds[j+8*i]);
+      if (j<4) hide_the_widgets (view -> ogl_atoms[4*i+j]);
     }
   }
   switch (s)
   {
     case CYLINDERS:
-      for (i=0; i<2; i++) gtk_widget_show (view -> ogl_bonds[8*i]);
+      for (i=0; i<2; i++) show_the_widgets (view -> ogl_bonds[8*i]);
       break;
     case WIREFRAME:
       for (i=0; i<2; i++)
       {
-        gtk_widget_show (view -> ogl_bonds[4+8*i]);
+        show_the_widgets (view -> ogl_bonds[4+8*i]);
         str = label_atpts (get_project_by_id(view -> proj), view, 1+2*i);
         gtk_menu_item_set_label (GTK_MENU_ITEM(view -> ogl_atoms[4*i+1]), str);
         g_free (str);
-        gtk_widget_show (view -> ogl_atoms[4*i+2]);
+        show_the_widgets (view -> ogl_atoms[4*i+2]);
       }
       break;
     case SPACEFILL:
@@ -125,7 +125,7 @@ void update_menus (glwin * view)
         str = label_atpts (get_project_by_id(view -> proj), view, 4);
         gtk_menu_item_set_label (GTK_MENU_ITEM(view -> ogl_atoms[4*i+1]), str);
         g_free (str);
-        gtk_widget_show (view -> ogl_atoms[4*i]);
+        show_the_widgets (view -> ogl_atoms[4*i]);
       }
       break;
     case PUNT:
@@ -134,7 +134,7 @@ void update_menus (glwin * view)
         str = label_atpts (get_project_by_id(view -> proj), view, 2*i+1);
         gtk_menu_item_set_label (GTK_MENU_ITEM(view -> ogl_atoms[4*i+1]), str);
         g_free (str);
-        gtk_widget_show (view -> ogl_atoms[4*i+2]);
+        show_the_widgets (view -> ogl_atoms[4*i+2]);
       }
       break;
     case SPHERES:
@@ -143,17 +143,17 @@ void update_menus (glwin * view)
         str = label_atpts (get_project_by_id(view -> proj), view, 2*i);
         gtk_menu_item_set_label (GTK_MENU_ITEM(view -> ogl_atoms[4*i+1]), str);
         g_free (str);
-        gtk_widget_show (view -> ogl_atoms[4*i]);
+        show_the_widgets (view -> ogl_atoms[4*i]);
       }
       break;
     default:
       for (i=0; i<2; i++)
       {
-        gtk_widget_show (view -> ogl_bonds[2+8*i]);
+        show_the_widgets (view -> ogl_bonds[2+8*i]);
         str = label_atpts (get_project_by_id(view -> proj), view, 2*i);
         gtk_menu_item_set_label (GTK_MENU_ITEM(view -> ogl_atoms[4*i+1]), str);
         g_free (str);
-        gtk_widget_show (view -> ogl_atoms[4*i]);
+        show_the_widgets (view -> ogl_atoms[4*i]);
       }
       break;
   }
@@ -372,7 +372,7 @@ GtkWidget * menu_style (glwin * view, int id)
   \brief change style callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void change_style_radio (GSimpleAction * action, GVariant * parameter, gpointer data)

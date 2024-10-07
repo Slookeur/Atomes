@@ -314,7 +314,7 @@ G_MODULE_EXPORT void update_cpmd_parameter (GtkEntry * res, gpointer data)
   int i;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   tmp_cpmd -> default_opts[i] = v;
   if (i == DEFGC)
   {
@@ -581,7 +581,7 @@ G_MODULE_EXPORT void update_calc_parameter (GtkEntry * res, gpointer data)
   int i, j;
   i = GPOINTER_TO_INT(data);
   const gchar * m = entry_get_text (res);
-  double v = atof(m);
+  double v = string_to_double ((gpointer)m);
   if (i==STEPO || i==STEPG || i==STEPC || i==STEPB || i==KSUNO || i==NBAND)
   {
     j = (int) v;
@@ -755,16 +755,16 @@ G_MODULE_EXPORT void changed_calc_box (GtkComboBox * box, gpointer data)
   {
     gtk_label_set_text (GTK_LABEL(calc_label), g_strdup_printf ("<u>%s option(s)</u>", calc_ds[i]));
     gtk_label_set_use_markup (GTK_LABEL(calc_label), TRUE);
-    gtk_widget_hide (calc_box[tmp_cpmd -> calc_type]);
-    gtk_widget_show (calc_box[i]);
+    hide_the_widgets (calc_box[tmp_cpmd -> calc_type]);
+    show_the_widgets (calc_box[i]);
     tmp_cpmd -> calc_type = i;
     if (tmp_cpmd -> calc_type != 2)
     {
-      gtk_widget_hide (electron_box);
+      hide_the_widgets (electron_box);
     }
     else
     {
-      gtk_widget_show (electron_box);
+      show_the_widgets (electron_box);
     }
     for (i=1; i<4; i++) print_the_section (i, 0, qmbuffer[i]);
   }
@@ -1194,10 +1194,10 @@ G_MODULE_EXPORT void on_qm_assistant_prepare (GtkAssistant * assistant, GtkWidge
   switch (i)
   {
     case 0:
-      if (is_the_widget_visible(qm_preview_but)) gtk_widget_hide (qm_preview_but);
+      if (is_the_widget_visible(qm_preview_but)) hide_the_widgets (qm_preview_but);
       break;
     default:
-      if (! is_the_widget_visible(qm_preview_but)) gtk_widget_show (qm_preview_but);
+      if (! is_the_widget_visible(qm_preview_but)) show_the_widgets (qm_preview_but);
       break;
   }
 }
@@ -1230,7 +1230,7 @@ gboolean go_for_it (int i, int j, gboolean print[2])
 */
 G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
 {
-  int i, j, k, l, c;
+  int i, j, k, c;
   c = GPOINTER_TO_INT(data);
   gchar * ptitle[5] = {"CP2K input file", "forces.inc", "system.inc", "motion.inc", "coord.inc"};
   gchar * wtite[2] = {" input file preview", " input files preview"};
@@ -1238,13 +1238,13 @@ G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
   GtkWidget * scrollsets;
   GtkWidget * aview;
   GtkWidget * notebook;
-  l = 0;
+  k = 0;
   gboolean print[2];
   if (c)
   {
     j = 6;
     notebook = gtk_notebook_new ();
-    if (tmp_cp2k -> opts[CP2RUN] > 1.0 && tmp_cp2k -> opts[CP2RUN] < 4.0) l = 1;
+    if (tmp_cp2k -> opts[CP2RUN] > 1.0 && tmp_cp2k -> opts[CP2RUN] < 4.0) k = 1;
     if (tmp_cp2k -> input_type)
     {
       str = g_strdup_printf ("%s %s", co_type[c], wtite[1]);
@@ -1286,24 +1286,22 @@ G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
   {
     scrollsets = create_scroll (dialog_get_content_area(preview), 700, 350, GTK_SHADOW_ETCHED_IN);
   }
-  k = -1;
-  for (i=0; i<j+l; i++)
+  for (i=0; i<j+k; i++)
   {
-    if (! c || (c && go_for_it(i, j+l, print)))
+    if (! c || (c && go_for_it(i, j+k, print)))
     {
-      k ++;
       aview = create_text_view (-1, -1, 0, 1, NULL, NULL, NULL);
       if (c)
       {
         scrollsets = create_scroll (NULL, 700, 350, GTK_SHADOW_ETCHED_IN);
         add_container_child (CONTAINER_SCR, scrollsets, aview);
-        if (i > j+l-3)
+        if (i > j+k-3)
         {
-          str = g_strdup_printf ("%s", tmp_cp2k -> files[i-(j+l-3)]);
+          str = g_strdup_printf ("%s", tmp_cp2k -> files[i-(j+k-3)]);
         }
         else
         {
-          str = g_strdup_printf ("%s", ptitle[(i == j-3+l) ? 4 : i]);
+          str = g_strdup_printf ("%s", ptitle[(i == j-3+k) ? 4 : i]);
         }
         gtk_notebook_append_page (GTK_NOTEBOOK(notebook), scrollsets, gtk_label_new (str));
         g_free (str);
@@ -1315,9 +1313,9 @@ G_MODULE_EXPORT void show_qm_file_preview (GtkButton * but, gpointer data)
     }
     if (c)
     {
-      if (tmp_cp2k -> input_type || i != j+l-3)
+      if (tmp_cp2k -> input_type || i != j+k-3)
       {
-        print_cp2k ((i >= j+l-3) ? i+1-l: i, gtk_text_view_get_buffer(GTK_TEXT_VIEW(aview)));
+        print_cp2k ((i >= j+k-3) ? i+1-k: i, gtk_text_view_get_buffer(GTK_TEXT_VIEW(aview)));
       }
     }
     else
@@ -1713,10 +1711,10 @@ void create_qm_input_file (int c, int p, int s)
   show_the_widgets (qm_assistant);
   if (c == 0)
   {
-    for (i=0; i<NCPMDCALC; i++) gtk_widget_hide (calc_box[i]);
-    gtk_widget_show (calc_box[tmp_cpmd -> calc_type]);
-    if (tmp_cpmd -> calc_type != 2) gtk_widget_hide (electron_box);
+    for (i=0; i<NCPMDCALC; i++) hide_the_widgets (calc_box[i]);
+    show_the_widgets (calc_box[tmp_cpmd -> calc_type]);
+    if (tmp_cpmd -> calc_type != 2) hide_the_widgets (electron_box);
   }
-  gtk_widget_hide (qm_preview_but);
+  hide_the_widgets (qm_preview_but);
 }
 

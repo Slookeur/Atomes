@@ -208,7 +208,7 @@ GtkWidget * create_cell_edition_window (project * this_proj, gpointer data)
   \brief create the cell edition window callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void edition_win (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -248,8 +248,8 @@ G_MODULE_EXPORT void edition_win (GtkWidget * widg, gpointer data)
 
   for (i=1; i<6; i++)
   {
-    if (i < 3) gtk_widget_hide (this_proj -> modelgl -> cell_win -> slab_hbox[i]);
-    gtk_widget_hide (this_proj -> modelgl -> cell_win -> slab_box[i]);
+    if (i < 3) hide_the_widgets (this_proj -> modelgl -> cell_win -> slab_hbox[i]);
+    hide_the_widgets (this_proj -> modelgl -> cell_win -> slab_box[i]);
   }
   int page = id -> b;
   gtk_notebook_set_current_page (GTK_NOTEBOOK (this_proj -> modelgl -> cell_win -> notebook), page);

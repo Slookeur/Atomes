@@ -90,7 +90,7 @@ gboolean is_coord_in_menu (int id, project * this_proj)
   \brief show/hide coordination callback GTK4
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void show_hide_coord (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -551,7 +551,7 @@ GMenu * menu_show_coord (glwin * view, int popm, int id, int mid)
   \brief open advancedd coordination properties GTK4 callback
 
   \param action the GAction sending the signal
-  \param parameter GVariant parameter of the GAction
+  \param parameter GVariant parameter of the GAction, if any
   \param data the associated data pointer
 */
 G_MODULE_EXPORT void to_coord_properties (GSimpleAction * action, GVariant * parameter, gpointer data)
@@ -618,24 +618,24 @@ GMenu * menu_show_rings (glwin * view, int popm, int id, int mid)
     append_submenu (menu, (id < 9) ? "Atoms In Ring(s) of Size " : "Atoms In Chain(s) of Size ", menus);
   }
   project * this_proj = get_project_by_id (view -> proj);
-  gchar * rin = g_strdup_printf ("rcol-%d", id);
-  gchar * str;
+  gchar * stra, * strb;
   int i;
   for (i=0; i < this_proj -> coord -> totcoord[id]; i++)
   {
-    str = g_strdup_printf ("rshow-%d", this_proj -> coord -> geolist[id][0][i]);
+    stra = g_strdup_printf ("%d", this_proj -> coord -> geolist[id][0][i]);
+    strb = g_strdup_printf ("%d-%s-%s", id, stra, (mid) ? "color" : "coord");
     if (! mid)
     {
-      append_opengl_item (view, menus, str, str, popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_coord), & view -> gcid[id][i][id],
+      append_opengl_item (view, menus, stra, strb, popm, i, NULL, IMG_NONE, NULL, FALSE, G_CALLBACK(show_hide_coord), & view -> gcid[id][i][id],
                           TRUE, view -> anim -> last -> img -> show_coord[id][i], FALSE, TRUE);
     }
     else
     {
-      append_submenu (menu, str, color_item(view, rin, popm, i, G_CALLBACK(window_color_coord), & view -> gcid[id][i][id]));
+      append_submenu (menu, stra, color_item(view, "color", popm, i, G_CALLBACK(window_color_coord), & view -> gcid[id][i][id]));
     }
-    g_free (str);
+    g_free (stra);
+    g_free (strb);
   }
-  g_free (rin);
   if (! mid) g_object_unref (menus);
   return menu;
 }

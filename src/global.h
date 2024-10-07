@@ -45,6 +45,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <locale.h>
+#ifdef OSX
+#include <xlocale.h>
+#endif
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
@@ -54,6 +57,9 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include <math.h>
 
 #include <gtk/gtk.h>
+#ifndef GTK4
+#  include <gtk/gtkx.h>
+#endif
 #include <gdk/gdk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -74,10 +80,10 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #  define max(a,b) (a>=b?a:b)
 #  define min(a,b) (a<=b?a:b)
 #  include <epoxy/gl.h>
-#  ifdef __APPLE__
-#    include <OpenGL/glu.h>
+#  include <GL/glu.h>
+#  ifdef OSX
+#    include <GL/glx.h>
 #  else
-#    include <GL/glu.h>
 #    include <epoxy/glx.h>
 #  endif
 #endif
@@ -119,8 +125,33 @@ struct ColRGBA
   float alpha;
 };
 
+/*! \typedef shortcuts
+
+  \brief keyboard shortcuts information
+*/
+typedef struct shortcuts shortcuts;
+struct shortcuts
+{
+  gchar * description;                                       /*!< Shortcut description */
+  gchar * subtitle;                                          /*!< Shortcut subtitle */
+  gint key;                                                  /*!< Shortcut key */
+  gchar * accelerator;                                       /*!< Shortcut accelerator */
+};
+
+/*! \typedef atomes_action
+
+  \brief action information data structure
+*/
+typedef struct atomes_action atomes_action;
+struct atomes_action
+{
+  gchar * action_name;                                       /*!< The name of the action */
+  gpointer action_data;                                      /*!< The associated data pointer */
+};
+
 /*! \typedef coord_info
-  \brief Data structure to store coordination information
+
+  \brief coordination information data structure
 */
 typedef struct coord_info coord_info;
 struct coord_info
@@ -148,9 +179,6 @@ struct coord_info
 
 #include "glwin.h"
 
-#ifndef GTK4
-#  include <gtk/gtkx.h>
-#endif
 #define MEDIA_NEXT "media-skip-forward"
 #define MEDIA_PREV "media-skip-backward"
 #define MEDIA_LAST "go-last"
@@ -239,7 +267,7 @@ enum ImageFormats {
 #define IODEBUG FALSE
 
 /*! \def ATOM_LIMIT
-  \brief Atom number limit to compute fragment(s) and molecule(s) analysis automatically
+  \brief atom number limit to compute fragment(s) and molecule(s) analysis automatically
 */
 #define ATOM_LIMIT 100000
 
@@ -263,7 +291,7 @@ enum ImageFormats {
 #define ERROR_MOL    12
 
 /*!< \def CHEM_PARAMS
-  \brief Number of chemical parameters
+  \brief number of chemical parameters
 */
 #define CHEM_PARAMS 5
 #define CHEM_Z 0
@@ -275,17 +303,17 @@ enum ImageFormats {
 #define NDOTS 8
 
 /*!< \def NCALCS
-  \brief Number of analysis
+  \brief number of analysis
 */
 #define NCALCS 12
 
 /*!< \def NGRAPHS
-  \brief Number of analysis with results in curve window(s)
+  \brief number of analysis with results in curve window(s)
 */
 #define NGRAPHS 10
 
 /*!< \def NCFORMATS
-  \brief Number atomic coordinates file formats
+  \brief number atomic coordinates file formats
 */
 #define NCFORMATS 12
 
@@ -310,9 +338,9 @@ enum ImageFormats {
 
 #ifdef G_OS_WIN32
 extern gchar * PACKAGE_PREFIX;
+extern gchar * PACKAGE_LIBEXEC;
+#endif
 extern gchar * PACKAGE_LIB_DIR;
-extern gchar * PACKAGE_DATA_DIR;
-extern gchar * PACKAGE_LOCALE_DIR;
 extern gchar * PACKAGE_IMP;
 extern gchar * PACKAGE_CON;
 extern gchar * PACKAGE_IMG;
@@ -369,7 +397,6 @@ extern gchar * PACKAGE_SGOF;
 extern gchar * PACKAGE_SGMP;
 extern gchar * PACKAGE_SGMI;
 extern gchar * PACKAGE_SGTC;
-#endif
 extern gchar * ATOMES_CONFIG;
 extern gchar * ATOMES_URL;
 
@@ -433,6 +460,7 @@ extern GtkWidget * curvetoolbox;
 extern GtkWidget * progressbar;
 extern GtkWidget * MainScrol[2];
 extern GtkWidget * atomes_logo;
+extern GtkWidget * atomes_shortcuts;
 extern GtkWidget * calc_dialog;
 extern GtkWidget * register_button;
 
@@ -467,7 +495,8 @@ struct line_node
 };
 
 /*! \typedef coord_file
-  \brief Atomic coordinates file, data container
+
+  \brief atomic coordinates file, data container
 */
 typedef struct coord_file coord_file;
 struct coord_file
@@ -503,7 +532,8 @@ struct coord_file
 };
 
 /*! \typedef MouseState
-  \brief Data structure used for zoom in / out on curve widget
+
+  \brief data structure to store mouse information on curve widget
 */
 typedef struct MouseState MouseState;
 struct MouseState
@@ -515,7 +545,8 @@ struct MouseState
 };
 
 /*! \typedef CurveState
-  \brief Data structure used for zoom in / out on curve widget
+
+  \brief data structure used for zoom in / out on curve widget
 */
 typedef struct CurveState CurveState;
 struct CurveState
@@ -525,7 +556,8 @@ struct CurveState
 };
 
 /*! \typedef DataLayout
-  \brief Cruve layout information
+
+  \brief curve layout information
 */
 typedef struct DataLayout DataLayout;
 struct DataLayout
@@ -543,7 +575,8 @@ struct DataLayout
 };
 
 /*! \typedef CurveExtra
-  \brief Extra curve(s) data information
+
+  \brief extra curve(s) data information
 */
 typedef struct CurveExtra CurveExtra;
 struct CurveExtra
@@ -555,7 +588,8 @@ struct CurveExtra
 };
 
 /*! \typedef ExtraSets
-  \brief List of extra data sets for a curve
+
+  \brief list of extra data sets for a curve
 */
 typedef struct ExtraSets ExtraSets;
 struct ExtraSets
@@ -566,7 +600,8 @@ struct ExtraSets
 };
 
 /*! \typedef Curve
-  \brief The curve data structure
+
+  \brief curve data structure
 */
 typedef struct Curve Curve;
 struct Curve
@@ -583,6 +618,7 @@ struct Curve
   GtkWidget * curve_hbox;
   GtkWidget * window;            /*!< Widget for the window */
   GtkWidget * pos;               /*!< Mouse cursor position in graph */
+  GtkWidget * shortcuts;         /*!< Shortcuts window */
   int wsize[2];                  /*!< Curve window size */
   GtkWidget * datatree;          /*!< Widget for the selection tree */
   qint idcol[2];                 /*!< For navigation in the list view */
@@ -766,7 +802,10 @@ struct cp2k
   gchar * info;
 };
 
-/*! \typedef molecule */
+/*! \typedef molecule
+
+  \brief the molecule data structure
+*/
 typedef struct molecule molecule;
 struct molecule
 {
@@ -780,7 +819,8 @@ struct molecule
 };
 
 /*! \typedef model
-  \brief Data stucture to describe the topology
+
+  \brief data structure to describe the topology
 */
 typedef struct model model;
 struct model
@@ -790,6 +830,7 @@ struct model
 };
 
 /*! \typedef element_data
+
   \brief element description used for the periodic table defined in 'w_periodic.c'
 */
 typedef struct element_data element_data;
@@ -801,6 +842,10 @@ struct element_data
   float M;          /*!< Atomic mass */
 };
 
+/*! \typedef chemical_data
+
+  \brief a structure to store some chemical information
+*/
 typedef struct chemical_data chemical_data;
 struct chemical_data
 {
@@ -820,7 +865,8 @@ struct chemical_data
 };
 
 /*! \typedef insertion_menu
-  \brief Data structure for the insertion pop-up menu
+
+  \brief data structure for the insertion pop-up menu
 */
 typedef struct insertion_menu insertion_menu;
 struct insertion_menu
@@ -832,7 +878,8 @@ struct insertion_menu
 };
 
 /*! \typedef atom
-  \brief The data structure for an atom
+
+  \brief atom data structure
 */
 typedef struct atom atom;
 struct atom
@@ -882,7 +929,8 @@ struct atom
 };
 
 /*! \typedef project
-  \brief The data structure for the 'atomes' project
+
+  \brief data structure for the 'atomes' project
 */
 typedef struct project project;
 struct project
@@ -986,6 +1034,10 @@ struct project
   project * prev;
 };
 
+/*! \typedef workspace
+
+  \brief data structure for the 'atomes' workspace
+*/
 typedef struct workspace workspace;
 struct workspace
 {
@@ -993,8 +1045,8 @@ struct workspace
   project * last;
 };
 
-extern gchar * edition_action_names[3];
-extern gchar * analyze_action_names[9];
+extern atomes_action edition_acts[];
+extern atomes_action analyze_acts[];
 extern GSimpleAction * edition_actions[3];
 extern GSimpleAction * analyze_actions[9];
 extern void add_action (GSimpleAction * action);
@@ -1077,6 +1129,7 @@ extern void gtk_label_align (GtkWidget * lab, float ax, float ay);
 extern gchar * prepare_for_title (gchar * init);
 
 extern void show_the_widgets (GtkWidget * widg);
+extern void hide_the_widgets (GtkWidget * widg);
 extern gboolean is_the_widget_visible (GtkWidget * widg);
 extern void widget_set_sensitive (GtkWidget * widg, gboolean sensitive);
 
@@ -1234,8 +1287,12 @@ extern void file_chooser_set_current_folder (GtkFileChooser * chooser);
 extern GtkWidget * get_top_level (GtkWidget * widg);
 
 extern void provide_gtk_css (gchar * css);
+extern double string_to_double (gpointer string);
 extern double get_calc_time (struct timespec start, struct timespec stop);
 extern gchar * calculation_time (gboolean modelv, double ctime);
+
+extern int get_widget_width (GtkWidget * widg);
+extern int get_widget_height (GtkWidget * widg);
 
 typedef struct {
   GCallback handler;
