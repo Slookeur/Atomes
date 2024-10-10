@@ -164,7 +164,6 @@ Root: HKA; Subkey: "Software\Classes\AtomesAtomicCoord-HIST\shell\open\command";
 Root: HKA; Subkey: "Software\Classes\Applications\atomes.exe\SupportedTypes"; ValueType: string; ValueName: ".hist"; ValueData: ""; Flags: uninsdeletekey
 Root: HKLM; SubKey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment\"; ValueType: string; ValueName: "Path"; ValueData: "{reg:HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\,Path};{app}"
 
-
 [Code]
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 var
@@ -177,7 +176,7 @@ begin
       'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\',
       'Path', Path) then
     begin
-      AppDir := ExpandConstant('{app}\bin');
+      AppDir := ExpandConstant('{app}');
       Index := Pos(AppDir, Path);
       Delete(Path, Index-1, Length(AppDir)+1);
       RegWriteStringValue(HKEY_LOCAL_MACHINE,

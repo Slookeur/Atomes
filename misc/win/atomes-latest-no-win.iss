@@ -177,7 +177,7 @@ begin
       'SYSTEM\CurrentControlSet\Control\Session Manager\Environment\',
       'Path', Path) then
     begin
-      AppDir := ExpandConstant('{app}\bin');
+      AppDir := ExpandConstant('{app}');
       Index := Pos(AppDir, Path);
       Delete(Path, Index-1, Length(AppDir)+1);
       RegWriteStringValue(HKEY_LOCAL_MACHINE,
