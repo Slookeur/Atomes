@@ -458,9 +458,9 @@ int main (int argc, char * argv[])
   {
     GtkApplication * TestOpenGLApp;
 #if GLIB_MINOR_VERSION < 74
-    TestOpenGLApp = gtk_application_new (g_strdup_printf ("atomes.ogl-%d", (int)clock()), G_APPLICATION_FLAGS_NONE);
+    TestOpenGLApp = gtk_application_new (g_strdup_printf ("fr.ipcms.atomes.ogl-%d", (int)clock()), G_APPLICATION_FLAGS_NONE);
 #else
-    TestOpenGLApp = gtk_application_new (g_strdup_printf ("atomes.ogl-%d", (int)clock()), G_APPLICATION_DEFAULT_FLAGS);
+    TestOpenGLApp = gtk_application_new (g_strdup_printf ("fr.ipcms.atomes.ogl-%d", (int)clock()), G_APPLICATION_DEFAULT_FLAGS);
 #endif
     GError * error = NULL;
     g_application_register (G_APPLICATION(TestOpenGLApp), NULL, & error);
