@@ -233,13 +233,13 @@ G_MODULE_EXPORT void set_full_screen (GtkWidget * widg, gpointer data)
   if (! view -> fullscreen)
   {
     gtk_window_fullscreen (GTK_WINDOW(view -> win));
-    hide_the_widgets (view -> menu_bar);
+    hide_the_widgets (view -> menu_box);
     view -> fullscreen = TRUE;
   }
   else
   {
     gtk_window_unfullscreen (GTK_WINDOW(view -> win));
-    show_the_widgets (view -> menu_bar);
+    show_the_widgets (view -> menu_box);
     view -> fullscreen = FALSE;
   }
 }
