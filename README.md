@@ -95,7 +95,7 @@ The documenation is hosted on [GitHub][github] here: [Atomes documentation][atom
 
 Tutorial are regrouped and hosted on [GitHub][github] here: [Atomes tutorials][atomes-tuto]
 
-[openssf]:https://www.bestpractices.dev/en/projects/9146/badge
+[openssf]:https://www.bestpractices.dev/projects/9146/badge
 [license]:https://img.shields.io/badge/License-AGPL_v3%2B-blue
 [slr]:https://www.ipcms.fr/sebastien-le-roux/
 [cnrs]:https://www.cnrs.fr/
