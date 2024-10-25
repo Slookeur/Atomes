@@ -1,6 +1,7 @@
 # Atomes
 
 ![License][license]
+![Development Status][dev_status]
 
 [Atomes][atomes] is a Free (Open Source) cross-platform software licensed under the terms 
 of the Affero GPL v3+ license. 
@@ -95,6 +96,7 @@ The documenation is hosted on [GitHub][github] here: [Atomes documentation][atom
 Tutorial are regrouped and hosted on [GitHub][github] here: [Atomes tutorials][atomes-tuto]
 
 [license]:https://img.shields.io/badge/License-AGPL_v3%2B-blue
+[dev_status]:https://www.repostatus.org/badges/latest/active.svg
 [slr]:https://www.ipcms.fr/sebastien-le-roux/
 [cnrs]:https://www.cnrs.fr/
 [ipcms]:https://www.ipcms.fr/
