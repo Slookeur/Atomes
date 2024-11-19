@@ -645,9 +645,6 @@ int main (int argc, char *argv[])
   gboolean RUNC = FALSE;
 
 #ifdef G_OS_WIN32
-#ifndef DEBUG
-  FreeConsole ();
-#endif
   PACKAGE_PREFIX = g_win32_get_package_installation_directory_of_module (NULL);
   // g_win32_get_package_installation_directory (NULL, NULL);
 #endif
@@ -798,6 +795,11 @@ int main (int argc, char *argv[])
 
   if (RUNC)
   {
+#ifdef G_OS_WIN32
+#ifndef DEBUG
+    FreeConsole ();
+#endif
+#endif
     atomes_visual = check_opengl_rendering ();
     if (atomes_visual == 1)
     {

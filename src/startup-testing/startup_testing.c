@@ -315,7 +315,11 @@ G_MODULE_EXPORT void on_realize (GtkWidget * widg, gpointer data)
     opengl_visual = -1;
   }
 #ifdef GTK3
+#ifdef GTKGLAREA
+#ifndef G_OS_WIN32
   end:;
+#endif
+#endif
 #endif
 }
 

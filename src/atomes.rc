@@ -16,8 +16,8 @@ If not, see <https://www.gnu.org/licenses/> */
 ATOMES_ICON ICON "../misc/win/atomes.ico"
 
 VS_VERSION_INFO VERSIONINFO
-FILEVERSION    1.1.15
-PRODUCTVERSION 1.1.15
+FILEVERSION    1,1,15
+PRODUCTVERSION 1,1,15
 FILEOS         VOS_NT
 FILETYPE       VFT_APP
 BEGIN
@@ -25,7 +25,7 @@ BEGIN
 	BEGIN
 		BLOCK "040904b0"
 	BEGIN
-		VALUE "Comments", "@PACKAGE@"
+		VALUE "Comments", "atomes"
 		VALUE "CompanyName", "CNRS - IPCMS - DMO"
 		VALUE "FileDescription", "atomes 1.1.15"
 		VALUE "FileVersion", "1.1.15"
