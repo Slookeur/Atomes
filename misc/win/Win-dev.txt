@@ -8,17 +8,19 @@
 
         pacman -Su
 
-2) Install GTK3 and libs:
+2) Install GTK3/4 and libs:
 
-     https://www.gtk.org/download/windows.php
-
+    https://www.gtk.org/download/windows.php
     
     pacman -S mingw-w64-x86_64-gtk3
-    pacman -S mingw-w64-x86_64-toolchain base-devel
+    pacman -S mingw-w64-x86_64-gtk4
+    pacman -S mingw-w64-x86_64-toolchain
+    pacman -S base-devel
     pacman -S mingw-w64-x86_64-ffmpeg
     pacman -S mingw-w64-x86_64-libepoxy
     pacman -S mingw-w64-x86_64-cmake
     pacman -S mingw-w64-x86_64-eigen3
+    pacman -S mingw-w64-x86_64-gcc-fortran
     pacman -S getopt
     pacman -S vim
 
