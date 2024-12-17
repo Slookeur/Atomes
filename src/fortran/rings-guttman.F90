@@ -286,7 +286,7 @@ do i=1, NS
             RES_LIST(:) = 0
             INDTE(:) = 0
             INDTH(:) = 0
-            call INSIDE_RING (THE_RING, FOUND, i, m, 2, TAILLE, TAILLH, LORA, LORB, &
+            call INSIDE_RING (THE_RING, FOUND, i, m, 2, TAILLE, TAILLH, LORB, LORA, &
                               RPAT, SAVR, ORDR, TRING, INDTE, INDTH, RES_LIST, CPAT, VPAT)
             if (ALC) ALC_TAB="INSIDE_RING"
             if (TBR .or. ALC) goto 003
@@ -617,7 +617,7 @@ do i=1, NS
             RES_LIST(:) = 0
             INDTE(:) = 0
             INDTH(:) = 0
-            call INSIDE_RING (THE_RING, FOUND, i, m, 2, TAILLE, TAILLH, LORA, LORB, &
+            call INSIDE_RING (THE_RING, FOUND, i, m, 2, TAILLE, TAILLH, LORB, LORA, &
                               RPAT, SAVRING, ORDRING, TRING, INDTE, INDTH, RES_LIST, CPAT, VPAT)
             if (ALC) ALC_TAB="INSIDE_RING"
             if (TBR .or. ALC) goto 002
