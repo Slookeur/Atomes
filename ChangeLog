@@ -1,3 +1,9 @@
+2024-12-18 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+         Release of version 1.1.16
+         * Bug corrections:
+		Ring statistics correction for Guttman analysis with ABAB rings
+		X-rays g(r): 'CHEM_X' parameters default set to Z
+
 2024-04-10 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.15
          * Bug corrections:
@@ -9,7 +15,7 @@
 		GTK4 forward transition code wide
 		MacOS beta version
 
-2024-20-03 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+2024-03-20 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.14
          * Bug corrections:
 	 	X-rays g(r): 'CHEM_X' parameter was 0.0
@@ -22,7 +28,7 @@
 		overall code cleaning
 		atomes code is now entirely commented in Doxygen format
 
-2024-28-02 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+2024-02-28 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.13
          * Bug corrections:
 	 	Surface passivation: 'cell_cut.c' and 'atom_action.c'

@@ -650,7 +650,7 @@ void prep_box (int id)
 void test_chem ()
 {
   int i, j;
-  // gboolean res = FALSE;
+  gboolean upchem = FALSE;
   for (i=1; i<CHEM_PARAMS; i++)
   {
     for (j=0; j<active_project -> nspec; j++)
@@ -658,7 +658,7 @@ void test_chem ()
       if (tmp_chem[i-1][j] != active_chem -> chem_prop[i][j])
       {
         active_chem -> chem_prop[i][j] = tmp_chem[i-1][j];
-        // res = TRUE;
+        upchem = TRUE;
       }
     }
     g_free (tmp_chem[i-1]);
@@ -667,9 +667,13 @@ void test_chem ()
   if (tmp_xcor != active_project -> xcor)
   {
     active_project -> xcor = tmp_xcor;
-    // res = TRUE;
+    upchem = TRUE;
   }
-  // return res;
+  if (upchem)
+  {
+    read_chem_ (active_chem -> chem_prop[CHEM_M], active_chem -> chem_prop[CHEM_R],
+                active_chem -> chem_prop[CHEM_N], active_chem -> chem_prop[CHEM_X]);
+  }
 }
 
 /*!

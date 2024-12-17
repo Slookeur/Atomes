@@ -419,6 +419,7 @@ int open_coord_file (gchar * filename, int fti)
       reader_info (coord_files_ext[fti], "Number of species", active_project -> nspec);
       for (i=0; i<active_project -> nspec; i++)
       {
+        active_chem -> chem_prop[CHEM_Z][i] = this_reader -> z[i];
         j = (int)this_reader -> z[i];
         if (this_reader -> z[i] < 1.0)
         {
@@ -445,7 +446,6 @@ int open_coord_file (gchar * filename, int fti)
         }
         active_chem -> nsps[i] = this_reader -> nsps[i];
         g_print ("Reading coordinates [%s]:\t %s, nsps[%d]= %d\n", coord_files_ext[fti], active_chem -> label[i], i+1, active_chem -> nsps[i]);
-        active_chem -> chem_prop[CHEM_Z][i] = this_reader -> z[i];
       }
     }
     else
