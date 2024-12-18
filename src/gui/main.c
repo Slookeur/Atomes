@@ -579,8 +579,7 @@ int check_opengl_rendering ()
   proc_name = "atomes_startup_testing";
   proc_path = g_build_filename (PACKAGE_LIBEXEC, proc_name, NULL);
 #endif
-  g_print ("proc_dir= %s\n", proc_dir);
-  g_print ("proc_path= %s\n", proc_path);
+
 #ifdef CODEBLOCKS
   GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
 #else
@@ -592,7 +591,7 @@ int check_opengl_rendering ()
   GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
 #endif
 #endif
-  g_print ("subprocess: %p\n", proc);
+
   if (error)
   {
     g_print ("error: %s\n", error -> message);
