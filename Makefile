@@ -17,7 +17,7 @@ LINUX = 1
 WINDOWS = 0
 
 # The next line defines the GTK version !
-GTKV = 3
+GTKV = 4
 ifeq ($(GTKV),4)
   DGTK = -DGTK4 -DGTKGLAREA -DGDK_DISABLE_DEPRECATION_WARNINGS
   IGTK = `pkg-config --cflags gtk4 epoxy glu libxml-2.0 pangoft2 libavutil libavcodec libavformat libswscale`
@@ -83,7 +83,7 @@ ifeq ($(WINDOWS),1)
   LD = $(COMP)$(CPU)-w64-mingw32-gfortran $(DOMP)
 
   CPPFLAGS =
-  LDFLG = -static-libgcc -static-libgfortran -lz -liphlpapi
+  LDFLG = -lz -liphlpapi
 
   ifeq ($(GTKV), 4)
     IGTK = -pthread -mms-bitfields -IC:/msys64/mingw64/include/gtk-4.0 -IC:/msys64/mingw64/include/cairo \
@@ -136,11 +136,12 @@ ifeq ($(WINDOWS),1)
   ECHO = $(DEV)bin/echo
 
   WINDRES = $(COMP)windres
-  WINATOMES = $(OBJ)winatomes.o
+  WIN_ATOMES = $(OBJ)win_atomes.o
+  WIN_STARTUP = $(OBJ)win_startup.o
 
   EXT=".exe"
-  FCVER = 10.2.0
-  CVER = 10.2.0
+  FCVER = 14.2.0
+  CCVER = 14.2.0
 
 endif
 
@@ -433,7 +434,7 @@ OBJ_OGL = $(OBJ_WIN) $(OBJ_CBUILD) $(OBJ_CEDIT) $(OBJ_AEDIT) $(OBJ_DRAW) $(OBJ_G
 
 ifeq ($(WINDOWS),1)
 
-  OBJECTS = $(WINATOMES) $(OBJECTS_F90) $(OBJECTS_c)
+  OBJECTS = $(WIN_ATOMES) $(OBJECTS_F90) $(OBJECTS_c)
 
 else
 
@@ -463,7 +464,15 @@ SOURCES_h = \
 
 OGL_TEST_PROG = atomes_startup_testing
 
-OGL_TEST = $(OBJ)startup_testing.o
+ifeq ($(WINDOWS),1)
+
+  OGL_TEST = $(OBJ)startup_testing.o $(WIN_STARTUP)
+
+else
+
+  OGL_TEST = $(OBJ)startup_testing.o
+
+endif
 
 # The rule to build the executable
 
@@ -491,7 +500,19 @@ exe:$(OBJECTS)
 
 # Special targets
 
-cleangui:
+ifeq ($(WINDOWS),1)
+  cleangui: clean_gui clean_win
+  cleanc: clean_c clean_win
+  clean: clean_all clean_win
+  clear: clear_all clean_win
+else
+  cleangui: clean_gui
+  cleanc: clean_c
+  clean: clean_all
+  clear: clear_all
+endif
+
+clean_gui:
 	$(RM) $(RMFLAGS) $(OBJ_GUI) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleanwork:
@@ -524,7 +545,7 @@ cleanedit:
 cleanogl:
 	$(RM) $(RMFLAGS) $(OBJ_OGL) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
-cleanc:
+clean_c:
 	$(RM) $(RMFLAGS) $(OBJECTS_c) $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
 cleanf:
@@ -532,10 +553,14 @@ cleanf:
 	$(RM) $(RMFLAGS) *.mod
 	$(RM) $(RMFLAGS) $(OBJ)*.mod
 
-clean:
+clean_all:
 	$(RM) $(RMFLAGS) $(OBJECTS) *.mod $(OBJ)*.mod $(BIN)$(PROGRAM) $(OBJ)startup_testing.o $(BIN)$(OGL_TEST_PROG)
 
-clear:
+clean_win:
+	$(RM) $(RMFLAGS) $(OBJ)win_atomes.o
+	$(RM) $(RMFLAGS) $(OBJ)win_startup.o
+
+clear_all:
 	$(RM) $(RMFLAGS) $(OBJECTS) *.mod $(OBJ)*.mod
 
 TouchSource:
@@ -1003,5 +1028,8 @@ $(OBJ)ogl_draw.o:
 
 # Win file:
 
-$(OBJ)winatomes.o:
-	$(WINDRES) $(SRC)atomes.rc -o $(OBJ)winatomes.o
+$(OBJ)win_atomes.o:
+	$(WINDRES) $(SRC)atomes.rc -o $(OBJ)win_atomes.o
+
+$(OBJ)win_startup.o:
+	$(WINDRES) $(SRC)startup.rc -o $(OBJ)win_startup.o
