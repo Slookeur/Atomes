@@ -374,7 +374,7 @@ do i=1, NS
 
               call INSIDE_RING (THE_RING, FOUND, i, VPAT(j,m), 3, TAILLE, TAILLH, LORA, LORB, &
                                 RPAT, SAVR, ORDR, TRING, INDTE, INDTH, RES_LIST, CPAT, VPAT)
-              if (ALC) ALC_TAB="INSIDE_LIST"
+              if (ALC) ALC_TAB="INSIDE_RING"
               if (TBR .or. ALC) goto 003
 
               if (ALLRINGS) then

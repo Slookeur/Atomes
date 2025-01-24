@@ -87,7 +87,12 @@ double get_val_from_setting (gchar * pos, gchar * sval)
   }
   else
   {
-    if (g_strcmp0(sval, pos)==0) return 1.0;
+    if (! g_strcmp0(sval, pos))
+    {
+      g_free (tmp_pos);
+      tmp_pos = NULL;
+      return 1.0;
+    }
     gchar * sym[8]={"-1/3", "+1/3", "1/3", "-2/3", "+2/3", "2/3", "-", "+"};
     double vals[8]={-1.0/3.0, 1.0/3.0, 1.0/3.0, -2.0/3.0, 2.0/3.0, 2.0/3.0, -1.0, 1.0};
     gchar * ksym = NULL;
@@ -100,13 +105,22 @@ double get_val_from_setting (gchar * pos, gchar * sval)
         tmp_pos = g_strdup_printf ("%s", replace_markup (tmp_pos, ksym, NULL));
         g_free (ksym);
         ksym = NULL;
+        if (! strlen(tmp_pos))
+        {
+          g_free (tmp_pos);
+          tmp_pos = NULL;
+        }
         return vals[i];
       }
       g_free (ksym);
       ksym = NULL;
     }
-
     tmp_pos = g_strdup_printf ("%s", replace_markup (tmp_pos, pos, NULL));
+    if (! strlen(tmp_pos))
+    {
+      g_free (tmp_pos);
+      tmp_pos = NULL;
+    }
     return 1.0;
   }
 }
@@ -451,7 +465,12 @@ double get_val_from_wyckoff (gchar * pos, gchar * wval)
   }
   else
   {
-    if (g_strcmp0(wval, pos)==0) return 1.0;
+    if (! g_strcmp0(wval, pos))
+    {
+      g_free (tmp_pos);
+      tmp_pos = NULL;
+      return 1.0;
+    }
     gchar * sym[4]={"-2", "2", "-", "+"};
     double sval[4]={-2.0, 2.0, -1.0, 1.0};
     gchar * ksym = NULL;
@@ -464,12 +483,22 @@ double get_val_from_wyckoff (gchar * pos, gchar * wval)
         tmp_pos = g_strdup_printf ("%s", replace_markup (tmp_pos, ksym, NULL));
         g_free (ksym);
         ksym = NULL;
+        if (! strlen(tmp_pos))
+        {
+          g_free (tmp_pos);
+          tmp_pos = NULL;
+        }
         return sval[i];
       }
       g_free (ksym);
       ksym = NULL;
     }
     tmp_pos = g_strdup_printf ("%s", replace_markup (tmp_pos, pos, NULL));
+    if (! strlen(tmp_pos))
+    {
+      g_free (tmp_pos);
+      tmp_pos = NULL;
+    }
     return 1.0;
   }
 }
