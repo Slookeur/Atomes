@@ -1512,7 +1512,7 @@ G_MODULE_EXPORT void label_unlabel_atoms (GtkWidget * widg, gpointer data)
     {
       if (opengl_project -> atoms[i][j].sp == selected_aspec || selected_aspec == -1)
       {
-        if (sel -> a == 2 || (opengl_project -> atoms[i][j].pick[h] == is_selected || is_selected == -1))
+        if (opengl_project -> atoms[i][j].pick[h] == is_selected || is_selected == -1)
         {
           opengl_project -> atoms[i][j].label[0] = sel -> c;
           opengl_project -> atoms[i][j].label[1] = sel -> c;
@@ -2442,11 +2442,13 @@ G_MODULE_EXPORT void select_action_for_all (GtkWidget * widg, gpointer data)
       break;
     case CONTEXTACT+2:
       is_selected = -1;
-      label_unlabel_atoms (NULL, NULL, & atoid[0][0]);
+      label_unlabel_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[0][1]);
+      // label_unlabel_atoms (NULL, NULL, & atoid[0][0]);
       break;
     case CONTEXTACT+3:
       is_selected = -1;
-      label_unlabel_atoms (NULL, NULL, & atoid[1][0]);
+      label_unlabel_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      // label_unlabel_atoms (NULL, NULL, & atoid[1][0]);
       break;
     case CONTEXTACT+4:
       is_selected = -1;
@@ -2496,9 +2498,11 @@ G_MODULE_EXPORT void select_action_for_all (GtkWidget * widg, gpointer data)
       break;
     case 2:
       label_unlabel_atoms (NULL, & opengl_project -> modelgl -> colorp[0][1]);
+      // label_unlabel_atoms (NULL, & atoid[0][0]);
       break;
     case 3:
       label_unlabel_atoms (NULL, & opengl_project -> modelgl -> colorp[0][0]);
+      // label_unlabel_atoms (NULL, & atoid[1][1]);
       break;
     case 4:
       show_hide_the_atoms (NULL, & atoid[0][0]);
@@ -2530,11 +2534,13 @@ G_MODULE_EXPORT void select_action_for_all (GtkWidget * widg, gpointer data)
       break;
     case CONTEXTACT+2:
       is_selected = -1;
-      label_unlabel_atoms (NULL, & atoid[0][0]);
+      // label_unlabel_atoms (NULL, & atoid[0][0]);
+      label_unlabel_atoms (NULL, & opengl_project -> modelgl -> colorp[0][1]);
       break;
     case CONTEXTACT+3:
       is_selected = -1;
-      label_unlabel_atoms (NULL, & atoid[1][0]);
+      // label_unlabel_atoms (NULL, & atoid[1][0]);
+      label_unlabel_atoms (NULL, & opengl_project -> modelgl -> colorp[0][0]);
       break;
     case CONTEXTACT+4:
       is_selected = -1;

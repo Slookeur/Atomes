@@ -142,7 +142,6 @@ char * graph_name[NGRAPHS] = {"g(r)/G(r)",
                               "Mean Squared Displacement"};
 
 tint cut_sel;
-tint cut_lab;
 dint davect[9];
 ColRGBA std[6];
 
@@ -1285,7 +1284,6 @@ GtkWidget * create_main_window (GApplication * atomes)
   }
   cut_sel.a = cut_sel.b = 0;
   cut_sel.c = 1;
-  cut_lab.a = cut_lab.b = cut_lab.c = 0;
 
   return window;
 }

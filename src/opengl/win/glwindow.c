@@ -623,10 +623,10 @@ void prepare_opengl_menu_bar (glwin * view)
 
   if (this_proj -> nspec) update_all_menus (view, this_proj -> natomes);
   add_box_child_start (GTK_ORIENTATION_HORIZONTAL, view -> menu_box, view -> menu_bar, TRUE, TRUE, 0);
-  GtkWidget * menu = gtk_menu_bar_new ();
+  /* GtkWidget * menu = gtk_menu_bar_new ();
   gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Help", TRUE, menu_help(view, 0)));
   add_box_child_end (view -> menu_box, menu, FALSE, FALSE, 0);
-  show_the_widgets (menu);
+  show_the_widgets (menu);*/
   show_the_widgets (view -> menu_bar);
 #else
   update_menu_bar (view);
@@ -1090,17 +1090,17 @@ void glwin_key_pressed (guint keyval, GdkModifierType state, gpointer data)
         if (view -> labelled == opengl_project -> natomes*opengl_project -> steps)
         {
 #ifdef GTK4
-          label_unlabel_atoms (NULL, NULL, & cut_lab);
+           label_unlabel_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[0][0]);
 #else
-          label_unlabel_atoms (NULL, & cut_lab);
+           label_unlabel_atoms (NULL, & opengl_project -> modelgl -> colorp[0][0]);
 #endif
         }
         else
         {
 #ifdef GTK4
-          label_unlabel_atoms (NULL, NULL, & cut_sel);
+           label_unlabel_atoms (NULL, NULL, & opengl_project -> modelgl -> colorp[0][1]);
 #else
-          label_unlabel_atoms (NULL, & cut_sel);
+           label_unlabel_atoms (NULL, & opengl_project -> modelgl -> colorp[0][1]);
 #endif
         }
       }
@@ -1538,6 +1538,12 @@ void prep_model (int p)
       active_glwin -> ogl_box_axis[1] = g_malloc0 (OGL_AXIS*sizeof*active_glwin -> ogl_box_axis[1]);
 #endif
       prepare_opengl_menu_bar (active_glwin);
+#ifdef GTK3
+      GtkWidget * menu = gtk_menu_bar_new ();
+      gtk_menu_shell_append ((GtkMenuShell *)menu, menu_item_new_with_submenu ("Help", TRUE, menu_help(active_glwin, 0)));
+      add_box_child_end (active_glwin -> menu_box, menu, FALSE, FALSE, 0);
+      show_the_widgets (menu);
+#endif
       if (reading_input)
       {
         adv_bonding[0] = (active_project -> natomes > ATOM_LIMIT) ? 0 : tmp_adv_bonding[0];

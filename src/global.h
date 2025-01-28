@@ -478,9 +478,7 @@ extern GdkPixbuf * OGL;
 extern GdkPixbuf * OGLM;
 extern GdkPixbuf * OGLC;
 extern GdkPixbuf * RUN;
-
 extern tint cut_sel;
-extern tint cut_lab;
 
 // Data structures
 #define LINE_SIZE 160

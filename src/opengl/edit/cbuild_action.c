@@ -1610,6 +1610,7 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
     else
     {
       active_project -> run = TRUE;
+      active_image -> style = (active_project -> natomes <= 1000) ? BALL_AND_STICK : DEFAULT_STYLE;
       initcutoffs (active_chem, active_project -> nspec);
       init_curves_and_calc (active_project);
       initcwidgets ();
