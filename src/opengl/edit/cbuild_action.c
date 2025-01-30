@@ -268,11 +268,11 @@ void compute_lattice_properties (cell_info * cell)
   }
 
 #ifdef DEBUG
-  g_debug ("     a= %f,    b= %f,     c= %f", box -> param[0][0], box -> param[0][1], box -> param[0][2]);
-  g_debug (" alpha= %f, beta= %f, gamma= %f", box -> param[1][0], box -> param[1][1], box -> param[1][2]);
-  g_debug ("   a.x= %f, a.y= %f, a.z= %f", box -> vect[0][0], box -> vect[0][1], box -> vect[0][2]);
-  g_debug ("   b.x= %f, b.y= %f, b.z= %f", box -> vect[1][0], box -> vect[1][1], box -> vect[1][2]);
-  g_debug ("   c.x= %f, c.y= %f, c.z= %f", box -> vect[2][0], box -> vect[2][1], box -> vect[2][2]);
+  g_debug ("     a= %f,     b= %f,     c= %f", box -> param[0][0], box -> param[0][1], box -> param[0][2]);
+  g_debug (" alpha= %f,  beta= %f, gamma= %f", box -> param[1][0], box -> param[1][1], box -> param[1][2]);
+  g_debug ("   a.x= %f,   a.y= %f,   a.z= %f", box -> vect[0][0], box -> vect[0][1], box -> vect[0][2]);
+  g_debug ("   b.x= %f,   b.y= %f,   b.z= %f", box -> vect[1][0], box -> vect[1][1], box -> vect[1][2]);
+  g_debug ("   c.x= %f,   c.y= %f,   c.z= %f", box -> vect[2][0], box -> vect[2][1], box -> vect[2][2]);
 #endif
   box -> vol = (box -> vect[0][1]*box -> vect[1][2] - box -> vect[0][2]*box -> vect[1][1])*box -> vect[2][0];
   box -> vol += (box -> vect[0][2]*box -> vect[1][0] - box -> vect[0][0]*box -> vect[1][2])*box -> vect[2][1];

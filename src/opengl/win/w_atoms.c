@@ -59,6 +59,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "color_box.h"
 
 extern atom_search * allocate_atom_search (int proj, int action, int searchid, int tsize);
+extern void check_hidden_visible (project * this_proj);
 extern gchar * label_atpts (project * this_proj, glwin * view, int id);
 extern GtkWidget * labels_tab (glwin * view, int id);
 extern GtkWidget * selection_tab (atom_search * asearch, int nats);
@@ -280,6 +281,7 @@ G_MODULE_EXPORT void toggled_show_hide_atom (GtkToggleButton * but, gpointer dat
     }
   }
   this_proj -> modelgl -> anim -> last -> img -> show_atom[j][k] = show;
+  check_hidden_visible (this_proj);
   init_default_shaders (this_proj -> modelgl);
   update_menu_bar (this_proj -> modelgl);
 #else
