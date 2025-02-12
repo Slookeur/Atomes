@@ -1009,30 +1009,41 @@ void fill_atom_model (atom_search * asearch, project * this_proj)
           }
           break;
         default:
-          for (h=0; h<val; h++)
+          if (val >= 10000 && (obj == 1 || asearch -> object == 3))
           {
-            doit = TRUE;
-            for (i=0; i<this_proj -> natomes; i++)
+            // Improbable: more than 10 000 fragments or molecules
+            // Note: so far the selection and the test case functions are not ready yet
+            to_insert[0] = TRUE;
+            picked_names[0] = g_strdup_printf ("All %s(s)", (filter == 2) ? "fragment" : "molecule");
+            val = 1;
+          }
+          else
+          {
+            for (h=0; h<val; h++)
             {
-              if (asearch -> spec == 0 || asearch -> spec == this_proj -> atoms[0][i].sp + 1)
+              doit = TRUE;
+              for (i=0; i<this_proj -> natomes; i++)
               {
-                j = this_proj -> atoms[step][i].coord[filter - 1];
-                if (filter == 2)
+                if (asearch -> spec == 0 || asearch -> spec == this_proj -> atoms[0][i].sp + 1)
                 {
-                  for (k=0; k<this_proj -> atoms[0][i].sp; k++) j += this_proj -> coord -> ntg[filter - 1][k];
-                }
-                if (j == h)
-                {
-                  to_insert[h] = append (asearch, this_proj, i, this_proj -> atoms[0][i].sp);
-                  if (to_insert[h])
+                  j = this_proj -> atoms[step][i].coord[filter - 1];
+                  if (filter == 2)
                   {
-                    if (asearch -> action == REPLACE && asearch -> in_selection)
+                    for (k=0; k<this_proj -> atoms[0][i].sp; k++) j += this_proj -> coord -> ntg[filter - 1][k];
+                  }
+                  if (j == h)
+                  {
+                    to_insert[h] = append (asearch, this_proj, i, this_proj -> atoms[0][i].sp);
+                    if (to_insert[h])
                     {
-                      picked_names[h] = adjust_picked (picked_names[h],
-                                                       get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[n], (asearch -> mode) ? -(h+3) : (asearch -> passivating) ? h : i, 0),
-                                                       doit);
+                      if (asearch -> action == REPLACE && asearch -> in_selection)
+                      {
+                        picked_names[h] = adjust_picked (picked_names[h],
+                                                         get_atomic_object_by_origin (this_proj -> modelgl -> atom_win -> to_be_inserted[n], (asearch -> mode) ? -(h+3) : (asearch -> passivating) ? h : i, 0),
+                                                         doit);
+                      }
+                      if (asearch -> action != REPLACE || n || ! picked_names[h] || asearch -> mode) break;
                     }
-                    if (asearch -> action != REPLACE || n || ! picked_names[h] || asearch -> mode) break;
                   }
                 }
               }

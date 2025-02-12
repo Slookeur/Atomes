@@ -370,7 +370,7 @@ INTEGER :: POUT
 !
 LOGICAL :: IS_CLONE, dclo
 INTEGER, DIMENSION(3) :: pixpos
-DOUBLE PRECISION, DIMENSION(3) :: XYZ
+DOUBLE PRECISION, DIMENSION(3) :: XYZ, UVW
 INTEGER :: pid, cid, did, eid, fid, ai, bi, ci
 INTEGER :: init_a, end_a
 INTEGER :: init_b, end_b
@@ -527,7 +527,7 @@ if (DOATOMS) then
 
     !$OMP PARALLEL NUM_THREADS(NUMTH) DEFAULT (NONE) &
     !$OMP& PRIVATE(THREAD_NUM, THEPIX, ATPIX, ATOM_START, ATOM_END, pix, shift, &
-    !$OMP& RC, RD, RF, RG, RH, RI, RJ, RK, RL, RM, pixpos, XYZ, &
+    !$OMP& RC, RD, RF, RG, RH, RI, RJ, RK, RL, RM, pixpos, XYZ, UVW, &
     !$OMP& RN, RO, RP, RQ, RS, RT, RU, RV, RW, RX, RY, RZ, ERR, ai, bi, ci, &
     !$OMP& IS_CLONE, CALCMAT, Dij, Rij, Dik, BA, BB, CA, CB, XC, YC, ZC, &
     !$OMP& pid, cid, did, eid, fid, init_a, end_a, init_b, end_b, init_c, end_c, dclo) &
@@ -600,9 +600,9 @@ if (DOATOMS) then
           endif
         endif
         do RD=1, 3
-          pixpos(RD) = INT((XYZ(RD) - AnINT(XYZ(RD)) + 0.5d0)*isize(RD))
-          XYZ(RD) = XYZ(RD) - AnINT(XYZ(RD)) + 0.5d0
-          if (pixpos(RD) .eq. isize(RD)) pixpos(RD) = pixpos(RD)-1
+          UVW(RD) = XYZ(RD) - floor(XYZ(RD))
+          pixpos(RD) = INT(UVW(RD)*isize(RD))
+          ! if (pixpos(RD) .eq. isize(RD)) pixpos(RD) = pixpos(RD)-1
         enddo
       endif
       pix = pixpos(1) + pixpos(2)*isize(1) + pixpos(3)*ab + 1
@@ -614,7 +614,8 @@ if (DOATOMS) then
           write (6, '("at= ",i7,", pos(x)= ",f15.10,", pos(y)= ",f15.10,", pos(z)= ",f15.10)') RC, FULLPOS(RC,:,SAT)
         endif
         if (PBC) then
-          write (6, '("at= ",i7,", cor(x)= ",f15.10,", cor(y)= ",f15.10,", cor(z)= ",f15.10)') RC, XYZ
+          write (6, '("at= ",i7,", fra(x)= ",f15.10,", fra(y)= ",f15.10,", fra(z)= ",f15.10)') RC, XYZ
+          write (6, '("at= ",i7,", cor(x)= ",f15.10,", cor(y)= ",f15.10,", cor(z)= ",f15.10)') RC, UVW
         endif
         write (6, '("at= ",i7,", pixpos(x)= ",i4,", pixpos(y)= ",i4,", pixpos(z)= ",i4)') RC, pixpos
         write (6, '("at= ",i7,", pixpos= ",i10)') RC, pix
@@ -960,7 +961,7 @@ else
   ! OpemMP on MD steps
   DISTMTX=.true.
   !$OMP PARALLEL NUM_THREADS(NUMTH) DEFAULT (NONE) &
-  !$OMP& PRIVATE(THEPIX, SAT, pix, pixpos, XYZ, shift, ai, bi, ci, &
+  !$OMP& PRIVATE(THEPIX, SAT, pix, pixpos, XYZ, UVW, shift, ai, bi, ci, &
   !$OMP& RA, RB, RC, RD, RF, RG, RH, RI, RJ, RK, RL, RM, &
   !$OMP& RN, RO, RP, RQ, RS, RT, RU, RV, RW, RX, RY, RZ, ERR, &
   !$OMP& IS_CLONE, CALCMAT, Dij, Rij, Dik, BA, BB, CA, CB, XC, YC, ZC, POA, &
@@ -1076,9 +1077,9 @@ else
           endif
         endif
         do RB=1, 3
-          pixpos(RB) = INT((XYZ(RB) - AnINT(XYZ(RB)) + 0.5d0)*isize(RB))
-          XYZ(RB) = XYZ(RB) - AnINT(XYZ(RB)) + 0.5d0
-          if (pixpos(RB) .eq. isize(RB)) pixpos(RB) = pixpos(RB)-1
+          UVW(RD) = XYZ(RD) - floor(XYZ(RD))
+          pixpos(RD) = INT(UVW(RD)*isize(RD))
+          ! if (pixpos(RB) .eq. isize(RB)) pixpos(RB) = pixpos(RB)-1
         enddo
       endif
       pix = pixpos(1) + pixpos(2)*isize(1) + pixpos(3)*ab + 1
@@ -1094,7 +1095,8 @@ else
           write (6, '("at= ",i7,", pos(x)= ",f15.10,", pos(y)= ",f15.10,", pos(z)= ",f15.10)') RA, FULLPOS(RA,:,SAT)
         endif
         if (PBC) then
-          write (6, '("at= ",i7,", cor(x)= ",f15.10,", cor(y)= ",f15.10,", cor(z)= ",f15.10)') RA, XYZ
+          write (6, '("at= ",i7,", fra(x)= ",f15.10,", fra(y)= ",f15.10,", fra(z)= ",f15.10)') RA, XYZ
+          write (6, '("at= ",i7,", cor(x)= ",f15.10,", cor(y)= ",f15.10,", cor(z)= ",f15.10)') RA, UVW
         endif
         write (6, '("at= ",i7,", pixpos(x)= ",i4,", pixpos(y)= ",i4,", pixpos(z)= ",i4)') RA, pixpos
         write (6, '("at= ",i7,", pixpos= ",i10)') RA, pix

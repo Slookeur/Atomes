@@ -33,7 +33,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
   gboolean ** duplicate_geom_info (project * this_proj);
   gboolean ** duplicate_poly_info (project * this_proj);
 
-  void restore_coord_and_poly_info (project * proj, gboolean ** cshow, gboolean ** pshow);
+  void restore_coord_and_poly_info (project * proj, coord_info * ocoord, gboolean ** cshow, gboolean ** pshow);
   void sens_superbut (project * this_proj);
   void super_celling (glwin * view);
 
@@ -94,39 +94,73 @@ gboolean ** duplicate_poly_info (project * this_proj)
 }
 
 /*!
-  \fn void restore_coord_and_poly_info (project * proj, gboolean ** cshow, gboolean ** pshow)
+  \fn void restore_coord_and_poly_info (project * proj, coord_info * ocoord, gboolean ** cshow, gboolean ** pshow)
 
   \brief restore show status after
 
   \param proj the target project
+  \param ocoord the old coordination
   \param cshow the saved coordination show status
   \param pshow the saved polyhedra show status
 */
-void restore_coord_and_poly_info (project * proj, gboolean ** cshow, gboolean ** pshow)
+void restore_coord_and_poly_info (project * proj, coord_info * ocoord, gboolean ** cshow, gboolean ** pshow)
 {
   int i, j;
+  gboolean restore = TRUE;
   for (i=0; i<2; i++)
   {
-    for (j=0; j<active_coord -> totcoord[i]; j++)
+    if (ocoord -> totcoord[i] != active_coord -> totcoord[i])
     {
+      restore = FALSE;
+      break;
+    }
+    for (j=0; j< ocoord -> species; j++)
+    {
+      if (ocoord -> ntg[i][j] != active_coord -> ntg[i][j])
+      {
+        restore = FALSE;
+        break;
+      }
+    }
+    if (! restore) break;
+  }
+
+  if (restore)
+  {
+    for (i=0; i<2; i++)
+    {
+      for (j=0; j<active_coord -> totcoord[i]; j++)
+      {
 #ifdef GTK3
-      if (active_glwin -> ogl_geom[0][i][j] != NULL)
-      {
-        if (GTK_IS_WIDGET(active_glwin -> ogl_geom[0][i][j]))
+        if (active_glwin -> ogl_geom[0][i][j] != NULL)
         {
-          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_geom[0][i][j], cshow[i][j]);
-          if (cshow[i][j]) show_hide_coord (active_glwin -> ogl_geom[0][i][j], & active_glwin -> gcid[i][j][i]);
+          if (GTK_IS_WIDGET(active_glwin -> ogl_geom[0][i][j]))
+          {
+            gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_geom[0][i][j], cshow[i][j]);
+            show_hide_coord (active_glwin -> ogl_geom[0][i][j], & active_glwin -> gcid[i][j][i]);
+          }
         }
-      }
-      if (active_glwin -> ogl_poly[0][i][j] != NULL)
-      {
-        if (GTK_IS_WIDGET(active_glwin -> ogl_poly[0][i][j]))
+        if (active_glwin -> ogl_poly[0][i][j] != NULL)
         {
-          gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_poly[0][i][j], pshow[i][j]);
-          if (pshow[i][j]) show_hide_poly (active_glwin -> ogl_poly[0][i][j], & active_glwin -> gcid[i][j][i]);
+          if (GTK_IS_WIDGET(active_glwin -> ogl_poly[0][i][j]))
+          {
+            gtk_check_menu_item_set_active ((GtkCheckMenuItem *)active_glwin -> ogl_poly[0][i][j], pshow[i][j]);
+            show_hide_poly (active_glwin -> ogl_poly[0][i][j], & active_glwin -> gcid[i][j][i]);
+          }
         }
-      }
+#else
+       active_glwin -> anim -> last -> img -> show_coord[i][j] = cshow[i][j];
+       if (! cshow[i][j])
+       {
+         show_hide_coord (NULL, NULL, & active_glwin -> gcid[i][j][i]);
+       }
+       active_glwin -> anim -> last -> img -> show_poly[i][j] = pshow[i][j];
+       if (pshow[i][j])
+       {
+         show_hide_poly (NULL, NULL, & active_glwin -> gcid[i][j][i]);
+       }
 #endif
+      }
     }
   }
 }
@@ -255,6 +289,7 @@ void super_celling (glwin * view)
       mol_update = (frag_update) ? ((active_project -> steps > STEP_LIMIT) ? 0 : 1) : 0;
       gboolean ** cshow = duplicate_geom_info (active_project);
       gboolean ** pshow = duplicate_poly_info (active_project);
+      coord_info * ocoord = duplicate_coord_info (active_coord);
       if (view -> rings)
       {
         view -> rings = FALSE;
@@ -274,9 +309,10 @@ void super_celling (glwin * view)
 #endif
       }
       on_calc_bonds_released (NULL, NULL);
-      restore_coord_and_poly_info (active_project, cshow, pshow);
+      restore_coord_and_poly_info (active_project, ocoord, cshow, pshow);
       g_free (cshow);
       g_free (pshow);
+      g_free (ocoord);
       int shaders[1] = {POLYS};
       re_create_md_shaders (1, shaders, active_project);
       view -> create_shaders[PICKS] = TRUE;
@@ -294,7 +330,7 @@ void super_celling (glwin * view)
     if (k != view -> proj) active_project_changed (k);
   }
   update (view);
-#ifdef GTK
+#ifdef GTK4
   update_menu_bar (view);
 #endif
 }
