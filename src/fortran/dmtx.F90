@@ -49,17 +49,15 @@ endif
 
 END SUBROUTINE
 
-SUBROUTINE SET_SHIFT (shift, ai, bi, ci, npa, npb, npc)
+SUBROUTINE SET_SHIFT (shift, ai, bi, ci, npa, npb, npc, nab, abc)
 
   IMPLICIT NONE
 
   INTEGER, DIMENSION(3,3,3), INTENT(INOUT) :: shift
   INTEGER, INTENT(IN) :: ai, bi, ci
   INTEGER, INTENT(IN) :: npa, npb, npc
-  INTEGER :: nab, abc
+  INTEGER, INTENT(IN) :: nab, abc
 
-  nab = npa*npb
-  abc = nab*npc
   ! Standard pixel positions:
 
   ! Lower level
@@ -245,19 +243,20 @@ enddo
 END FUNCTION
 
 #ifdef DEBUG
-SUBROUTINE PRINT_PIXEL_GRID ()
+SUBROUTINE PRINT_PIXEL_GRID (ab, abc)
 
 USE PARAMETERS
 
 IMPLICIT NONE
 
+INTEGER, INTENT(IN) :: ab, abc
 INTEGER :: pix, pid, cid, did, eid, ai, bi, ci
 INTEGER :: init_a, end_a
 INTEGER :: init_b, end_b
 INTEGER :: init_c, end_c
 INTEGER, DIMENSION(3) :: dim
 INTEGER, DIMENSION(3,3,3) :: shift
-LOGICAL :: dclo
+LOGICAL :: boundary
 
 dim(1) = -1
 dim(2) = 0
@@ -273,12 +272,12 @@ do ci=1, isize(3)
     do ai=1, isize(1)
       shift(:,:,:) = 0
       if (PBC .and. .not.CALC_PRINGS) then
-        call SET_SHIFT (shift, ai, bi, ci, isize(1), isize(2), isize(3))
-        dclo=.false.
+        call SET_SHIFT (shift, ai, bi, ci, isize(1), isize(2), isize(3), ab, abc)
+        boundary=.false.
       else
-        if (ai.eq.1 .or. ai.eq.isize(1)) dclo=.true.
-        if (bi.eq.1 .or. bi.eq.isize(2)) dclo=.true.
-        if (ci.eq.1 .or. ci.eq.isize(3)) dclo=.true.
+        if (ai.eq.1 .or. ai.eq.isize(1)) boundary=.true.
+        if (bi.eq.1 .or. bi.eq.isize(2)) boundary=.true.
+        if (ci.eq.1 .or. ci.eq.isize(3)) boundary=.true.
       endif
       init_a = 1
       end_a = 3
@@ -303,9 +302,9 @@ do ci=1, isize(3)
         do did=init_b, end_b
           do eid=init_c, end_c
             pid = pid + 1
-            THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + dim(eid) * isize(1) * isize(2)
+            THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + dim(eid) * ab
             THEPIX(pix)%IDNEIGH(pid) = THEPIX(pix)%IDNEIGH(pid) + shift (cid,did,eid)
-            if (dclo) then
+            if (boundary) then
               if (ai.eq.1 .and. cid.eq.1) then
                 pid = pid - 1
               else if (ai.eq.isize(1) .and. cid.eq.3) then
@@ -368,7 +367,7 @@ INTEGER :: TOOI
 LOGICAL :: PIXR=.false.
 INTEGER :: POUT
 !
-LOGICAL :: IS_CLONE, dclo
+LOGICAL :: IS_CLONE, boundary, keep_it
 INTEGER, DIMENSION(3) :: pixpos
 DOUBLE PRECISION, DIMENSION(3) :: XYZ, UVW
 INTEGER :: pid, cid, did, eid, fid, ai, bi, ci
@@ -496,7 +495,7 @@ if (ALL_ATOMS) DOATOMS=.true.
 TOOM=.false.
 
 #ifdef DEBUG
-  call PRINT_PIXEL_GRID ()
+  call PRINT_PIXEL_GRID (ab, abc)
 #endif
 
 if (DOATOMS) then
@@ -522,40 +521,24 @@ if (DOATOMS) then
       endif
     endif
 
-    RA = 0
-    RB = 0
-
-    !$OMP PARALLEL NUM_THREADS(NUMTH) DEFAULT (NONE) &
-    !$OMP& PRIVATE(THREAD_NUM, THEPIX, ATPIX, ATOM_START, ATOM_END, pix, shift, &
-    !$OMP& RC, RD, RF, RG, RH, RI, RJ, RK, RL, RM, pixpos, XYZ, UVW, &
-    !$OMP& RN, RO, RP, RQ, RS, RT, RU, RV, RW, RX, RY, RZ, ERR, ai, bi, ci, &
-    !$OMP& IS_CLONE, CALCMAT, Dij, Rij, Dik, BA, BB, CA, CB, XC, YC, ZC, &
-    !$OMP& pid, cid, did, eid, fid, init_a, end_a, init_b, end_b, init_c, end_c, dclo) &
-    !$OMP& SHARED(NUMTH, SAT, NS, NA, NNA, NAN, LAN, NSP, LOOKNGB, UPNGB, DISTMTX, &
-    !$OMP& NBX, PBC, THE_BOX, NCELLS, isize, pmin, pmax, abc, ab, A_START, A_END, NOHP, MAXN, CUTF, &
-    !$OMP& POA, FULLPOS, Gr_TMP, CALC_PRINGS, MAXBD, MINBD, CONTJ, VOISJ, RA, RB, &
-    !$OMP& LA_COUNT, CORTA, CORNERA, EDGETA, EDGEA, DEFTA, DEFA, &
-    !$OMP& ALC, ALC_TAB, TOOM, TOOI, PIXR, POUT, dim)
-    THREAD_NUM = OMP_GET_THREAD_NUM ()
-    ATOM_START = GET_THREAD_START (NNA, NUMTH, THREAD_NUM)
-    ATOM_END = GET_THREAD_END (NNA, NUMTH, THREAD_NUM)
-
     if (allocated(THEPIX)) deallocate(THEPIX)
     allocate(THEPIX(abc), STAT=ERR)
     if (ERR .ne. 0) then
       ALC_TAB="THEPIX"
       ALC=.true.
       DISTMTX = .false.
-      goto 002
+      goto 001
     endif
+
     if (allocated(ATPIX)) deallocate(ATPIX)
-    allocate(ATPIX(ATOM_END-ATOM_START+1), STAT=ERR)
+    allocate(ATPIX(NNA), STAT=ERR)
     if (ERR .ne. 0) then
       ALC_TAB="ATPIX"
       ALC=.true.
       DISTMTX = .false.
-      goto 002
+      goto 001
     endif
+
     RC = INT(MAXN*2.5)
     ! 1) LOOK: "RA" is the number of atom(s) in one pixel
     ! with MAXN = 20, the '50' value seems high enough
@@ -573,7 +556,7 @@ if (DOATOMS) then
         ALC_TAB="THEPIX%ATOM_ID"
         ALC=.true.
         DISTMTX = .false.
-        goto 002
+        goto 001
       endif
       THEPIX(RD)%IDNEIGH(:) = 0
       THEPIX(RD)%ATOM_ID(:) = 0
@@ -622,7 +605,7 @@ if (DOATOMS) then
         PIXR=.true.
         POUT=pix
         DISTMTX=.false.
-        goto 002
+        goto 001
       else
         if ((PBC .and. RC.ge.A_START .and. RC.le.A_END) .or. .not.PBC) then
           if (.not.THEPIX(pix)%TOCHECK) then
@@ -631,13 +614,13 @@ if (DOATOMS) then
             ci = pixpos(3) + 1
             pid = 0
             shift(:,:,:) = 0
+            boundary=.false.
             if (PBC .and. .not.CALC_PRINGS) then
-              call SET_SHIFT (shift, ai, bi, ci, isize(1), isize(2), isize(3))
-              dclo=.false.
+              call SET_SHIFT (shift, ai, bi, ci, isize(1), isize(2), isize(3), ab, abc)
             else
-              if (ai.eq.1 .or. ai.eq.isize(1)) dclo=.true.
-              if (bi.eq.1 .or. bi.eq.isize(2)) dclo=.true.
-              if (ci.eq.1 .or. ci.eq.isize(3)) dclo=.true.
+              if (ai.eq.1 .or. ai.eq.isize(1)) boundary=.true.
+              if (bi.eq.1 .or. bi.eq.isize(2)) boundary=.true.
+              if (ci.eq.1 .or. ci.eq.isize(3)) boundary=.true.
             endif
             init_a = 1
             end_a = 3
@@ -663,23 +646,25 @@ if (DOATOMS) then
             do cid=init_a, end_a
               do did=init_b, end_b
                  do eid=init_c, end_c
-                   pid = pid + 1
-                   THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + dim(eid) * isize(1) * isize(2)
-                   THEPIX(pix)%IDNEIGH(pid) = THEPIX(pix)%IDNEIGH(pid) + shift (cid,did,eid)
-                   if (dclo) then
+                   keep_it=.true.
+                   if (boundary) then
                      if (ai.eq.1 .and. cid.eq.1) then
-                       pid = pid - 1
+                       keep_it=.false.
                      else if (ai.eq.isize(1) .and. cid.eq.3) then
-                       pid = pid - 1
+                       keep_it=.false.
                      else if (bi.eq.1 .and. did.eq.1) then
-                       pid = pid - 1
+                       keep_it=.false.
                      else if (bi.eq.isize(2) .and. did.eq.3) then
-                       pid = pid - 1
+                       keep_it=.false.
                      else if (ci.eq.1 .and. eid.eq.1) then
-                       pid = pid - 1
+                       keep_it=.false.
                      else if (ci.eq.isize(3) .and. eid.eq.3) then
-                       pid = pid - 1
+                       keep_it=.false.
                      endif
+                   endif
+                   if (keep_it) then
+                     pid = pid+1
+                     THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + dim(eid) * ab + shift (cid,did,eid)
                    endif
                 enddo
               enddo
@@ -691,11 +676,28 @@ if (DOATOMS) then
         THEPIX(pix)%ATOMS = THEPIX(pix)%ATOMS + 1
         THEPIX(pix)%ATOM_ID(THEPIX(pix)%ATOMS) = RC
       endif
-      if (RC.ge.ATOM_START .and. RC.le.ATOM_END) ATPIX(RC-ATOM_START+1) = pix
+      ATPIX(RC) = pix
     enddo
 
+    RA = 0
+    RB = 0
+
+    !$OMP PARALLEL NUM_THREADS(NUMTH) DEFAULT (NONE) &
+    !$OMP& PRIVATE(THREAD_NUM, ATOM_START, ATOM_END, &
+    !$OMP& RC, RD, RF, RG, RH, RI, RJ, RK, RL, RM, &
+    !$OMP& RN, RO, RP, RQ, RS, RT, RU, RV, RW, RX, RY, RZ, ERR, ai, bi, ci, &
+    !$OMP& IS_CLONE, CALCMAT, Dij, Rij, Dik, BA, BB, CA, CB, XC, YC, ZC) &
+    !$OMP& SHARED(NUMTH, SAT, NS, NA, NNA, NAN, LAN, NSP, LOOKNGB, UPNGB, DISTMTX, &
+    !$OMP& NBX, PBC, THE_BOX, NCELLS, A_START, A_END, NOHP, MAXN, CUTF, &
+    !$OMP& POA, FULLPOS, Gr_TMP, CALC_PRINGS, MAXBD, MINBD, CONTJ, VOISJ, RA, RB, &
+    !$OMP& LA_COUNT, CORTA, CORNERA, EDGETA, EDGEA, DEFTA, DEFA, &
+    !$OMP& ALC, ALC_TAB, TOOM, TOOI, THEPIX, ATPIX)
+    THREAD_NUM = OMP_GET_THREAD_NUM ()
+    ATOM_START = GET_THREAD_START (NNA, NUMTH, THREAD_NUM)
+    ATOM_END = GET_THREAD_END (NNA, NUMTH, THREAD_NUM)
+
     do RC=ATOM_START, ATOM_END
-      RD = ATPIX(RC-ATOM_START+1)
+      RD = ATPIX(RC)
       RF = RC - (RC/NAN)*NAN
       if (RF .eq. 0) RF=NAN
       RG = LAN(RF)
@@ -812,6 +814,7 @@ if (DOATOMS) then
                           !$OMP ATOMIC
                           DEFTA(RG,RO)=DEFTA(RG,RO)+1
                           if (NS .gt. 1) then
+                            !$OMP ATOMIC
                             CORNERA(RG,RO,SAT)=CORNERA(RG,RO,SAT)+1
                             !$OMP ATOMIC
                             EDGEA(RG,RO,SAT)=EDGEA(RG,RO,SAT)+1
@@ -831,9 +834,10 @@ if (DOATOMS) then
     enddo
 
     002 continue
+    !$OMP END PARALLEL
+
     if (allocated(THEPIX)) deallocate(THEPIX)
     if (allocated(ATPIX)) deallocate(ATPIX)
-    !$OMP END PARALLEL
     if (.not.DISTMTX) then
       goto 001
     endif
@@ -965,7 +969,7 @@ else
   !$OMP& RA, RB, RC, RD, RF, RG, RH, RI, RJ, RK, RL, RM, &
   !$OMP& RN, RO, RP, RQ, RS, RT, RU, RV, RW, RX, RY, RZ, ERR, &
   !$OMP& IS_CLONE, CALCMAT, Dij, Rij, Dik, BA, BB, CA, CB, XC, YC, ZC, POA, &
-  !$OMP& pid, cid, did, eid, fid, init_a, end_a, init_b, end_b, init_c, end_c, dclo) &
+  !$OMP& pid, cid, did, eid, fid, init_a, end_a, init_b, end_b, init_c, end_c, boundary, keep_it) &
   !$OMP& SHARED(NUMTH, NS, NA, NNA, NAN, LAN, NSP, LOOKNGB, UPNGB, DISTMTX, &
   !$OMP& NBX, PBC, THE_BOX, NCELLS, isize, pmin, pmax, abc, ab, A_START, A_END, NOHP, MAXN, CUTF, &
   !$OMP& FULLPOS, CONTJ, VOISJ, Gr_TMP, CALC_PRINGS, MAXBD, MINBD, &
@@ -1119,13 +1123,13 @@ else
             ci = pixpos(3) + 1
             pid = 0
             shift(:,:,:) = 0
+            boundary=.false.
             if (PBC .and. .not.CALC_PRINGS) then
-              call SET_SHIFT (shift, ai, bi, ci, isize(1), isize(2), isize(3))
-              dclo=.false.
+              call SET_SHIFT (shift, ai, bi, ci, isize(1), isize(2), isize(3), ab, abc)
             else
-              if (ai.eq.1 .or. ai.eq.isize(1)) dclo=.true.
-              if (bi.eq.1 .or. bi.eq.isize(2)) dclo=.true.
-              if (ci.eq.1 .or. ci.eq.isize(3)) dclo=.true.
+              if (ai.eq.1 .or. ai.eq.isize(1)) boundary=.true.
+              if (bi.eq.1 .or. bi.eq.isize(2)) boundary=.true.
+              if (ci.eq.1 .or. ci.eq.isize(3)) boundary=.true.
             endif
             init_a = 1
             end_a = 3
@@ -1151,23 +1155,25 @@ else
             do cid=init_a, end_a
               do did=init_b, end_b
                  do eid=init_c, end_c
-                   pid = pid+1
-                   fid = dim(eid) * isize(1) * isize(2)
-                   THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + fid + shift (cid,did,eid)
-                   if (dclo) then
+                   keep_it=.true.
+                   if (boundary) then
                      if (ai.eq.1 .and. cid.eq.1) then
-                       pid = pid - 1
+                       keep_it=.false.
                      else if (ai.eq.isize(1) .and. cid.eq.3) then
-                       pid = pid - 1
+                       keep_it=.false.
                      else if (bi.eq.1 .and. did.eq.1) then
-                       pid = pid - 1
+                       keep_it=.false.
                      else if (bi.eq.isize(2) .and. did.eq.3) then
-                       pid = pid - 1
+                       keep_it=.false.
                      else if (ci.eq.1 .and. eid.eq.1) then
-                       pid = pid - 1
+                       keep_it=.false.
                      else if (ci.eq.isize(3) .and. eid.eq.3) then
-                       pid = pid - 1
+                       keep_it=.false.
                      endif
+                   endif
+                   if (keep_it) then
+                     pid = pid+1
+                     THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + dim(eid) * ab + shift (cid,did,eid)
                    endif
                 enddo
               enddo
