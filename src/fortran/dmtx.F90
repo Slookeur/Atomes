@@ -243,20 +243,19 @@ enddo
 END FUNCTION
 
 #ifdef DEBUG
-SUBROUTINE PRINT_PIXEL_GRID (ab, abc)
+SUBROUTINE PRINT_PIXEL_GRID ()
 
 USE PARAMETERS
 
 IMPLICIT NONE
 
-INTEGER, INTENT(IN) :: ab, abc
 INTEGER :: pix, pid, cid, did, eid, ai, bi, ci
 INTEGER :: init_a, end_a
 INTEGER :: init_b, end_b
 INTEGER :: init_c, end_c
 INTEGER, DIMENSION(3) :: dim
 INTEGER, DIMENSION(3,3,3) :: shift
-LOGICAL :: boundary
+LOGICAL :: boundary, keep_it
 
 dim(1) = -1
 dim(2) = 0
@@ -301,23 +300,26 @@ do ci=1, isize(3)
       do cid=init_a, end_a
         do did=init_b, end_b
           do eid=init_c, end_c
-            pid = pid + 1
-            THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + dim(eid) * ab
-            THEPIX(pix)%IDNEIGH(pid) = THEPIX(pix)%IDNEIGH(pid) + shift (cid,did,eid)
+            keep_it=.true.
             if (boundary) then
               if (ai.eq.1 .and. cid.eq.1) then
-                pid = pid - 1
+                keep_it=.false.
               else if (ai.eq.isize(1) .and. cid.eq.3) then
-                pid = pid - 1
+                keep_it=.false.
               else if (bi.eq.1 .and. did.eq.1) then
-                pid = pid - 1
+                keep_it=.false.
               else if (bi.eq.isize(2) .and. did.eq.3) then
-                pid = pid - 1
+                keep_it=.false.
               else if (ci.eq.1 .and. eid.eq.1) then
-                pid = pid - 1
+                keep_it=.false.
               else if (ci.eq.isize(3) .and. eid.eq.3) then
-                pid = pid - 1
+                keep_it=.false.
               endif
+            endif
+            if (keep_it) then
+              pid = pid + 1
+              THEPIX(pix)%IDNEIGH(pid) = pix + dim(cid) + dim(did) * isize(1) + dim(eid) * ab
+              THEPIX(pix)%IDNEIGH(pid) = THEPIX(pix)%IDNEIGH(pid) + shift (cid,did,eid)
             endif
           enddo
         enddo
@@ -495,7 +497,7 @@ if (ALL_ATOMS) DOATOMS=.true.
 TOOM=.false.
 
 #ifdef DEBUG
-  call PRINT_PIXEL_GRID (ab, abc)
+  call PRINT_PIXEL_GRID ()
 #endif
 
 if (DOATOMS) then
@@ -539,52 +541,52 @@ if (DOATOMS) then
       goto 001
     endif
 
-    RC = INT(MAXN*2.5)
-    ! 1) LOOK: "RA" is the number of atom(s) in one pixel
+    RA = INT(MAXN*2.5)
+    ! 1) LOOKNGB: "RA" is the number of atom(s) in one pixel
     ! with MAXN = 20, the '50' value seems high enough
     ! to ensure to catch every atom in the pixel
     ! this is ok providing that no funny cutoff is used
-    ! 2) .not.LOOK: looking for tetrahedra, requires larger value:
-    if (.not.LOOKNGB) RC = MAXN*10
-    if (.not.LOOKNGB .or. abc .le. 5) RC = min(RC*5, NNA)
-    do RD=1, abc
-      THEPIX(RD)%ATOMS=0
-      THEPIX(RD)%TOCHECK=.false.
-      THEPIX(RD)%CHECKED=.false.
-      allocate(THEPIX(RD)%ATOM_ID(RC), STAT=ERR)
+    ! 2) .not.LOOKNGB: looking for tetrahedra, requires larger value:
+    if (.not.LOOKNGB) RA = MAXN*10
+    if (.not.LOOKNGB .or. abc .le. 5) RA = min(RA*5, NNA)
+    do RB=1, abc
+      THEPIX(RB)%ATOMS=0
+      THEPIX(RB)%TOCHECK=.false.
+      THEPIX(RB)%CHECKED=.false.
+      allocate(THEPIX(RB)%ATOM_ID(RA), STAT=ERR)
       if (ERR .ne. 0) then
         ALC_TAB="THEPIX%ATOM_ID"
         ALC=.true.
         DISTMTX = .false.
         goto 001
       endif
-      THEPIX(RD)%IDNEIGH(:) = 0
-      THEPIX(RD)%ATOM_ID(:) = 0
+      THEPIX(RB)%IDNEIGH(:) = 0
+      THEPIX(RB)%ATOM_ID(:) = 0
     enddo
 
-    do RC=1, NNA
+    do RA=1, NNA
       if (.not. PBC) then
-        do RD=1, 3
-          pixpos(RD) = INT((FULLPOS(RC,RD,SAT) - pmin(RD))*CUTF)
-          if (pixpos(RD) .eq. isize(RD)) pixpos(RD) = pixpos(RD)-1
+        do RB=1, 3
+          pixpos(RB) = INT((FULLPOS(RA,RB,SAT) - pmin(RB))*CUTF)
+          if (pixpos(RB) .eq. isize(RB)) pixpos(RB) = pixpos(RB)-1
         enddo
       else
         if (NBX .gt. 1) then
           if (NCELLS.gt.1) then
-            XYZ = MATMUL(POA(RC,:), THE_BOX(SAT)%carttofrac/NBX)
+            XYZ = MATMUL(POA(RA,:), THE_BOX(SAT)%carttofrac/NBX)
           else
-            XYZ = MATMUL(POA(RC,:), THE_BOX(1)%carttofrac/NBX)
+            XYZ = MATMUL(POA(RA,:), THE_BOX(1)%carttofrac/NBX)
           endif
         else
           if (NCELLS.gt.1) then
-            XYZ = MATMUL(FULLPOS(RC,:,SAT), THE_BOX(SAT)%carttofrac)
+            XYZ = MATMUL(FULLPOS(RA,:,SAT), THE_BOX(SAT)%carttofrac)
           else
-            XYZ = MATMUL(FULLPOS(RC,:,SAT), THE_BOX(1)%carttofrac)
+            XYZ = MATMUL(FULLPOS(RA,:,SAT), THE_BOX(1)%carttofrac)
           endif
         endif
-        do RD=1, 3
-          UVW(RD) = XYZ(RD) - floor(XYZ(RD))
-          pixpos(RD) = INT(UVW(RD)*isize(RD))
+        do RB=1, 3
+          UVW(RB) = XYZ(RB) - floor(XYZ(RB))
+          pixpos(RB) = INT(UVW(RB)*isize(RB))
           ! if (pixpos(RD) .eq. isize(RD)) pixpos(RD) = pixpos(RD)-1
         enddo
       endif
@@ -592,22 +594,22 @@ if (DOATOMS) then
       if (pix.gt.abc .or. pix.le.0) then
         write (6, '("Thread(id)= ",i4,", MD step= ",i8)') THREAD_NUM, SAT
         if (NBX .gt. 1) then
-          write (6, '("at= ",i7,", pos(x)= ",f15.10,", pos(y)= ",f15.10,", pos(z)= ",f15.10)') RC, POA(RC,:)
+          write (6, '("at= ",i7,", pos(x)= ",f15.10,", pos(y)= ",f15.10,", pos(z)= ",f15.10)') RA, POA(RA,:)
         else
-          write (6, '("at= ",i7,", pos(x)= ",f15.10,", pos(y)= ",f15.10,", pos(z)= ",f15.10)') RC, FULLPOS(RC,:,SAT)
+          write (6, '("at= ",i7,", pos(x)= ",f15.10,", pos(y)= ",f15.10,", pos(z)= ",f15.10)') RA, FULLPOS(RA,:,SAT)
         endif
         if (PBC) then
-          write (6, '("at= ",i7,", fra(x)= ",f15.10,", fra(y)= ",f15.10,", fra(z)= ",f15.10)') RC, XYZ
-          write (6, '("at= ",i7,", cor(x)= ",f15.10,", cor(y)= ",f15.10,", cor(z)= ",f15.10)') RC, UVW
+          write (6, '("at= ",i7,", fra(x)= ",f15.10,", fra(y)= ",f15.10,", fra(z)= ",f15.10)') RA, XYZ
+          write (6, '("at= ",i7,", cor(x)= ",f15.10,", cor(y)= ",f15.10,", cor(z)= ",f15.10)') RA, UVW
         endif
-        write (6, '("at= ",i7,", pixpos(x)= ",i4,", pixpos(y)= ",i4,", pixpos(z)= ",i4)') RC, pixpos
-        write (6, '("at= ",i7,", pixpos= ",i10)') RC, pix
+        write (6, '("at= ",i7,", pixpos(x)= ",i4,", pixpos(y)= ",i4,", pixpos(z)= ",i4)') RA, pixpos
+        write (6, '("at= ",i7,", pixpos= ",i10)') RA, pix
         PIXR=.true.
         POUT=pix
         DISTMTX=.false.
         goto 001
       else
-        if ((PBC .and. RC.ge.A_START .and. RC.le.A_END) .or. .not.PBC) then
+        if ((PBC .and. RA.ge.A_START .and. RA.le.A_END) .or. .not.PBC) then
           if (.not.THEPIX(pix)%TOCHECK) then
             ai = pixpos(1) + 1
             bi = pixpos(2) + 1
@@ -674,14 +676,13 @@ if (DOATOMS) then
           THEPIX(pix)%TOCHECK=.true.
         endif
         THEPIX(pix)%ATOMS = THEPIX(pix)%ATOMS + 1
-        THEPIX(pix)%ATOM_ID(THEPIX(pix)%ATOMS) = RC
+        THEPIX(pix)%ATOM_ID(THEPIX(pix)%ATOMS) = RA
       endif
-      ATPIX(RC) = pix
+      ATPIX(RA) = pix
     enddo
 
     RA = 0
     RB = 0
-
     !$OMP PARALLEL NUM_THREADS(NUMTH) DEFAULT (NONE) &
     !$OMP& PRIVATE(THREAD_NUM, ATOM_START, ATOM_END, &
     !$OMP& RC, RD, RF, RG, RH, RI, RJ, RK, RL, RM, &
@@ -991,11 +992,11 @@ else
   endif
 
   RA = INT(MAXN*2.5)
-  ! 1) LOOK: "RA" is the number of atom(s) in one pixel
+  ! 1) LOOKNGB: "RA" is the number of atom(s) in one pixel
   ! with MAXN = 20, the '50' value seems high enough
   ! to ensure to catch every atom in the pixel
   ! this is ok providing that no funny cutoff is used
-  ! 2) .not.LOOK: looking for tetrahedra, requires larger value:
+  ! 2) .not.LOOKNGB: looking for tetrahedra, requires larger value:
   if (.not.LOOKNGB) RA = MAXN*10
   if (.not.LOOKNGB .or. abc .le. 5) RA = min(RA*5, NNA)
   do RB=1, abc
@@ -1053,6 +1054,7 @@ else
       endif
     endif
 
+    ! Clean THEPIX for each and every MD step
     do RA=1, abc
       THEPIX(RA)%ATOMS=0
       THEPIX(RA)%TOCHECK=.false.
@@ -1081,8 +1083,8 @@ else
           endif
         endif
         do RB=1, 3
-          UVW(RD) = XYZ(RD) - floor(XYZ(RD))
-          pixpos(RD) = INT(UVW(RD)*isize(RD))
+          UVW(RB) = XYZ(RB) - floor(XYZ(RB))
+          pixpos(RB) = INT(UVW(RB)*isize(RB))
           ! if (pixpos(RB) .eq. isize(RB)) pixpos(RB) = pixpos(RB)-1
         enddo
       endif
