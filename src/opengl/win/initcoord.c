@@ -521,7 +521,6 @@ void init_menu_fragmol_ (int * id)
     i = 0;
     active_glwin -> oglmv[k][* id][0] = coord_view_setup (& i, * id, k);
     active_glwin -> oglmc[k][* id][0] = coord_color_setup (& i, * id, k);
-    if (! k) g_debug ("active_project -> name= %s, id= %d, totcoord[%d]= %d", active_project -> name, * id, * id, active_coord -> totcoord[* id]);
     for (i=0; i < active_coord -> totcoord[* id]; i++)
     {
       if (! k) active_image -> show_coord[* id][i] = TRUE;
