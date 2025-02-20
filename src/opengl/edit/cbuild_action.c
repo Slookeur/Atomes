@@ -11,7 +11,7 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with 'atomes'.
 If not, see <https://www.gnu.org/licenses/>
 
-Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+Copyright (C) 2022-2025 by CNRS and University of Strasbourg */
 
 /*!
 * @file cbuild_action.c
@@ -87,7 +87,12 @@ double get_val_from_setting (gchar * pos, gchar * sval)
   }
   else
   {
-    if (g_strcmp0(sval, pos)==0) return 1.0;
+    if (! g_strcmp0(sval, pos))
+    {
+      g_free (tmp_pos);
+      tmp_pos = NULL;
+      return 1.0;
+    }
     gchar * sym[8]={"-1/3", "+1/3", "1/3", "-2/3", "+2/3", "2/3", "-", "+"};
     double vals[8]={-1.0/3.0, 1.0/3.0, 1.0/3.0, -2.0/3.0, 2.0/3.0, 2.0/3.0, -1.0, 1.0};
     gchar * ksym = NULL;
@@ -100,13 +105,22 @@ double get_val_from_setting (gchar * pos, gchar * sval)
         tmp_pos = g_strdup_printf ("%s", replace_markup (tmp_pos, ksym, NULL));
         g_free (ksym);
         ksym = NULL;
+        if (! strlen(tmp_pos))
+        {
+          g_free (tmp_pos);
+          tmp_pos = NULL;
+        }
         return vals[i];
       }
       g_free (ksym);
       ksym = NULL;
     }
-
     tmp_pos = g_strdup_printf ("%s", replace_markup (tmp_pos, pos, NULL));
+    if (! strlen(tmp_pos))
+    {
+      g_free (tmp_pos);
+      tmp_pos = NULL;
+    }
     return 1.0;
   }
 }
@@ -254,11 +268,11 @@ void compute_lattice_properties (cell_info * cell)
   }
 
 #ifdef DEBUG
-  g_debug ("     a= %f,    b= %f,     c= %f", box -> param[0][0], box -> param[0][1], box -> param[0][2]);
-  g_debug (" alpha= %f, beta= %f, gamma= %f", box -> param[1][0], box -> param[1][1], box -> param[1][2]);
-  g_debug ("   a.x= %f, a.y= %f, a.z= %f", box -> vect[0][0], box -> vect[0][1], box -> vect[0][2]);
-  g_debug ("   b.x= %f, b.y= %f, b.z= %f", box -> vect[1][0], box -> vect[1][1], box -> vect[1][2]);
-  g_debug ("   c.x= %f, c.y= %f, c.z= %f", box -> vect[2][0], box -> vect[2][1], box -> vect[2][2]);
+  g_debug ("     a= %f,     b= %f,     c= %f", box -> param[0][0], box -> param[0][1], box -> param[0][2]);
+  g_debug (" alpha= %f,  beta= %f, gamma= %f", box -> param[1][0], box -> param[1][1], box -> param[1][2]);
+  g_debug ("   a.x= %f,   a.y= %f,   a.z= %f", box -> vect[0][0], box -> vect[0][1], box -> vect[0][2]);
+  g_debug ("   b.x= %f,   b.y= %f,   b.z= %f", box -> vect[1][0], box -> vect[1][1], box -> vect[1][2]);
+  g_debug ("   c.x= %f,   c.y= %f,   c.z= %f", box -> vect[2][0], box -> vect[2][1], box -> vect[2][2]);
 #endif
   box -> vol = (box -> vect[0][1]*box -> vect[1][2] - box -> vect[0][2]*box -> vect[1][1])*box -> vect[2][0];
   box -> vol += (box -> vect[0][2]*box -> vect[1][0] - box -> vect[0][0]*box -> vect[1][2])*box -> vect[2][1];
@@ -451,7 +465,12 @@ double get_val_from_wyckoff (gchar * pos, gchar * wval)
   }
   else
   {
-    if (g_strcmp0(wval, pos)==0) return 1.0;
+    if (! g_strcmp0(wval, pos))
+    {
+      g_free (tmp_pos);
+      tmp_pos = NULL;
+      return 1.0;
+    }
     gchar * sym[4]={"-2", "2", "-", "+"};
     double sval[4]={-2.0, 2.0, -1.0, 1.0};
     gchar * ksym = NULL;
@@ -464,12 +483,22 @@ double get_val_from_wyckoff (gchar * pos, gchar * wval)
         tmp_pos = g_strdup_printf ("%s", replace_markup (tmp_pos, ksym, NULL));
         g_free (ksym);
         ksym = NULL;
+        if (! strlen(tmp_pos))
+        {
+          g_free (tmp_pos);
+          tmp_pos = NULL;
+        }
         return sval[i];
       }
       g_free (ksym);
       ksym = NULL;
     }
     tmp_pos = g_strdup_printf ("%s", replace_markup (tmp_pos, pos, NULL));
+    if (! strlen(tmp_pos))
+    {
+      g_free (tmp_pos);
+      tmp_pos = NULL;
+    }
     return 1.0;
   }
 }
@@ -1581,6 +1610,7 @@ int build_crystal (gboolean visible, project * this_proj, gboolean to_wrap, gboo
     else
     {
       active_project -> run = TRUE;
+      active_image -> style = (active_project -> natomes <= 1000) ? BALL_AND_STICK : DEFAULT_STYLE;
       initcutoffs (active_chem, active_project -> nspec);
       init_curves_and_calc (active_project);
       initcwidgets ();

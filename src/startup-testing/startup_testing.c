@@ -11,7 +11,7 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with 'atomes'.
 If not, see <https://www.gnu.org/licenses/>
 
-Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+Copyright (C) 2022-2025 by CNRS and University of Strasbourg */
 
 /*!
 * @file startup_testing.c
@@ -471,6 +471,9 @@ int main (int argc, char * argv[])
     g_signal_connect (G_OBJECT(TestOpenGLApp), "activate", G_CALLBACK(run_opengl_test), NULL);
     int status = g_application_run (G_APPLICATION (TestOpenGLApp), 0, NULL);
     g_object_unref (TestOpenGLApp);
+#ifdef DEBUG
+    g_debug ("open_visual = %d, status= %d", opengl_visual, status);
+#endif
     switch (opengl_visual)
     {
       case 0:

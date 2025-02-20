@@ -24,19 +24,19 @@ BEGIN
 	BLOCK "StringFileInfo"
 	BEGIN
 		BLOCK "040904b0"
-	BEGIN
-		VALUE "Comments", "@PACKAGE@"
-		VALUE "CompanyName", "CNRS - IPCMS - DMO"
-		VALUE "FileDescription", "@PACKAGE_STRING@"
-		VALUE "FileVersion", "@PACKAGE_VERSION@"
-		VALUE "LegalCopyright", "\251 2024 S\351bastien Le Roux"
-		VALUE "OriginalFileName", "@PACKAGE@.exe"
-		VALUE "ProductName", "@PACKAGE_STRING@"
-		VALUE "ProductVersion", "@PACKAGE_VERSION@"
-	END
+		BEGIN
+			VALUE "Comments", "@PACKAGE@"
+			VALUE "CompanyName", "CNRS - IPCMS - DMO"
+			VALUE "FileDescription", "@PACKAGE_STRING@"
+			VALUE "FileVersion", "@PACKAGE_VERSION@"
+			VALUE "LegalCopyright", "\251 2025 S\351bastien Le Roux"
+			VALUE "OriginalFileName", "@PACKAGE@.exe"
+			VALUE "ProductName", "@PACKAGE_STRING@"
+			VALUE "ProductVersion", "@PACKAGE_VERSION@"
+		END
 	END
 	BLOCK "VarFileInfo"
 	BEGIN
 		VALUE "Translation", 0x0409, 1200
-		END
+	END
 END

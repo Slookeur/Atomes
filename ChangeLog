@@ -1,3 +1,14 @@
+2025-02-20 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
+         Release of version 1.1.17
+         * Bug corrections:
+	 	OpenGL window shortcuts bug correction 'glwindow.c'
+		OpenGL window, GTK3 menu bar fix 'glwindow.c', 'm_atoms.c'
+		OpenGL window contextual menu fix 'popup.c'
+		Crystal building, few minor bug corrections and code cleaning 'cbuild_action.c'
+		Supercell: bug fix to restore coordination and polyhedra data 'cell_super.c'
+         * Improvement:
+	 	Distance matrix calculation 'dmtx.F90' minor adjustments and improvements
+
 2024-12-18 Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>
          Release of version 1.1.16
          * Bug corrections:
@@ -23,7 +34,7 @@
 	 	Option to build model from CIF file using symmetry positions when available 'read_cif.c'
 		Object(s) can be used to fill CIF file unknown positions 'read_cif.c' and 'cbuild_action.c'
 		Distance matrix calculation 'dmtx.F90' minor adjustments and improvements
-		Imrpovement of the automatic evaluation of the OpenGL model depth 'bonds.F90'
+		Improvement of the automatic evaluation of the OpenGL model depth 'bonds.F90'
 		Pixel debug is now available in DEBUG mode
 		overall code cleaning
 		atomes code is now entirely commented in Doxygen format

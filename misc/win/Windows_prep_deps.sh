@@ -15,8 +15,13 @@ function prepare_deps
   done
 }
 
+# Win10
 ldd ./atomes | grep -v "Win" > no-win-deps.dat
 ldd ./atomes | grep "Win" > win-deps.dat
+# Win11
+# ldd ./atomes | grep -v "WIN" > no-win-deps.dat
+# ldd ./atomes | grep "WIN" > win-deps.dat
+
 ldd ./atomes > deps.dat
 rm -rf bin bin-no-win
 prepare_deps bin deps.dat

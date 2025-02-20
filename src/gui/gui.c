@@ -11,7 +11,7 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with 'atomes'.
 If not, see <https://www.gnu.org/licenses/>
 
-Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+Copyright (C) 2022-2025 by CNRS and University of Strasbourg */
 
 /*!
 * @file gui.c
@@ -142,7 +142,6 @@ char * graph_name[NGRAPHS] = {"g(r)/G(r)",
                               "Mean Squared Displacement"};
 
 tint cut_sel;
-tint cut_lab;
 dint davect[9];
 ColRGBA std[6];
 
@@ -1285,7 +1284,6 @@ GtkWidget * create_main_window (GApplication * atomes)
   }
   cut_sel.a = cut_sel.b = 0;
   cut_sel.c = 1;
-  cut_lab.a = cut_lab.b = cut_lab.c = 0;
 
   return window;
 }

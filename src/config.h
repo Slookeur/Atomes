@@ -11,7 +11,7 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with 'atomes'.
 If not, see <https://www.gnu.org/licenses/>
 
-Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+Copyright (C) 2022-2025 by CNRS and University of Strasbourg */
 
 /* config.h.  Generated from config.h.in by configure.  */
 /* config.h.in.  Generated from configure.ac by autoheader.  */
@@ -23,7 +23,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #define ATOMES_MINOR_VERSION 1
 
 /* Atomes patch version */
-#define ATOMES_PATCH_VERSION 16
+#define ATOMES_PATCH_VERSION 17
 
 /* Define to dummy `main' function (if any) required to link to the Fortran
    libraries. */
@@ -52,7 +52,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #define PACKAGE_NAME "atomes"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "atomes 1.1.16"
+#define PACKAGE_STRING "atomes 1.1.17"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "atomes"
@@ -61,7 +61,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #define PACKAGE_URL "https://atomes.ipcms.fr"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.1.16"
+#define PACKAGE_VERSION "1.1.17"
 
 /* Version number of package */
-#define VERSION "1.1.16"
+#define VERSION "1.1.17"

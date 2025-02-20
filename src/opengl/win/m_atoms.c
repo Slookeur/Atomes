@@ -11,7 +11,7 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with 'atomes'.
 If not, see <https://www.gnu.org/licenses/>
 
-Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+Copyright (C) 2022-2025 by CNRS and University of Strasbourg */
 
 /*!
 * @file m_atoms.c
@@ -58,6 +58,7 @@ Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
 #include "glwindow.h"
 #include "color_box.h"
 
+extern void check_hidden_visible (project * this_proj);
 extern G_MODULE_EXPORT void set_atom_parameter (GtkWidget * widg, gpointer data);
 
 /*!
@@ -144,6 +145,7 @@ G_MODULE_EXPORT void show_hide_atoms (GtkWidget * widg, gpointer data)
     }
   }
   this_proj -> modelgl -> anim -> last -> img -> show_atom[j][k] = v;
+  check_hidden_visible (this_proj);
   init_default_shaders (this_proj -> modelgl);
 }
 

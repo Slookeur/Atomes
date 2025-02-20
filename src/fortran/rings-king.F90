@@ -11,7 +11,7 @@
 ! You should have received a copy of the GNU Affero General Public License along with 'atomes'.
 ! If not, see <https://www.gnu.org/licenses/>
 !
-! Copyright (C) 2022-2024 by CNRS and University of Strasbourg
+! Copyright (C) 2022-2025 by CNRS and University of Strasbourg
 !
 !>
 !! @file rings-king.F90
@@ -374,7 +374,7 @@ do i=1, NS
 
               call INSIDE_RING (THE_RING, FOUND, i, VPAT(j,m), 3, TAILLE, TAILLH, LORA, LORB, &
                                 RPAT, SAVR, ORDR, TRING, INDTE, INDTH, RES_LIST, CPAT, VPAT)
-              if (ALC) ALC_TAB="INSIDE_LIST"
+              if (ALC) ALC_TAB="INSIDE_RING"
               if (TBR .or. ALC) goto 003
 
               if (ALLRINGS) then

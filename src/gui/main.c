@@ -11,7 +11,7 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with 'atomes'.
 If not, see <https://www.gnu.org/licenses/>
 
-Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+Copyright (C) 2022-2025 by CNRS and University of Strasbourg */
 
 /*!
 * @file main.c
@@ -579,6 +579,11 @@ int check_opengl_rendering ()
   proc_name = "atomes_startup_testing";
   proc_path = g_build_filename (PACKAGE_LIBEXEC, proc_name, NULL);
 #endif
+#ifdef DEBUG
+  g_print ("proc_dir= %s\n", proc_dir);
+  g_print ("proc_name= %s\n", proc_name);
+  g_print ("proc_path= %s\n", proc_path);
+#endif
 
 #ifdef CODEBLOCKS
   GSubprocess * proc = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, & error, proc_path, NULL);
@@ -599,6 +604,9 @@ int check_opengl_rendering ()
   }
   g_subprocess_wait (proc, NULL, & error);
   int res = g_subprocess_get_exit_status (proc);
+#ifdef DEBUG
+  g_debug ("Exit status of atomes_startup_testing = %d", res);
+#endif
   g_clear_object (& proc);
 #ifndef CODEBLOCKS
 #ifndef OSX
@@ -802,10 +810,16 @@ int main (int argc, char *argv[])
     atomes_visual = check_opengl_rendering ();
     if (atomes_visual == 1)
     {
-      // Fatal error, trying again adapting environment
+      // OpenGL initialization error, try adapting environment
       g_setenv ("GSK_RENDERER", "gl", TRUE);
       g_setenv ("GDK_DEBUG", "gl-prefer-gl", TRUE);
       atomes_visual = check_opengl_rendering ();
+      if (atomes_visual == 1)
+      {
+        // OpenGL initialization error, again try adapting environment
+        g_setenv ("GDK_RENDERER", "ngl", TRUE);
+        atomes_visual = check_opengl_rendering ();
+      }
     }
     if (atomes_visual > 0 || atomes_visual == -2)
     {
