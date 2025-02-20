@@ -11,7 +11,7 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with 'atomes'.
 If not, see <https://www.gnu.org/licenses/>
 
-Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+Copyright (C) 2022-2025 by CNRS and University of Strasbourg */
 
 /*!
 * @file cbuild_info.c
@@ -243,7 +243,6 @@ void get_wyck_names (space_group * spg, int i, int j)
     {
       spgpos[k][l] = get_val_from_wyckoff (vect_comp[l], spg -> wyckoff[i].pos[j][k]);
     }
-
     if (tmp_pos)
     {
       spgpos[k][3] = get_value_from_pos (tmp_pos);

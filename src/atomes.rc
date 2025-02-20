@@ -29,7 +29,7 @@ BEGIN
 			VALUE "CompanyName", "CNRS - IPCMS - DMO"
 			VALUE "FileDescription", "atomes 1.1.17"
 			VALUE "FileVersion", "1.1.17"
-			VALUE "LegalCopyright", "\251 2024 S\351bastien Le Roux"
+			VALUE "LegalCopyright", "\251 2025 S\351bastien Le Roux"
 			VALUE "OriginalFileName", "atomes.exe"
 			VALUE "ProductName", "atomes 1.1.17"
 			VALUE "ProductVersion", "1.1.17"

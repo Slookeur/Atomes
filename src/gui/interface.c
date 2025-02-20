@@ -11,7 +11,7 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU Affero General Public License along with 'atomes'.
 If not, see <https://www.gnu.org/licenses/>
 
-Copyright (C) 2022-2024 by CNRS and University of Strasbourg */
+Copyright (C) 2022-2025 by CNRS and University of Strasbourg */
 
 /*!
 * @file interface.c
@@ -183,7 +183,7 @@ G_MODULE_EXPORT void create_about_dialog (GtkWidget * widg, gpointer data)
   const gchar *authors[] = {"Dr. Sébastien Le Roux <sebastien.leroux@ipcms.unistra.fr>", "", NULL};
   const gchar * weblabel = "https://atomes.ipcms.fr";
   const gchar * comments = "Visualization, analyzis, creation/edition and post-processing of atomistic models !";
-  const gchar * copyrights = "Copyright © 2024 \nDr. Sébastien Le Roux";
+  const gchar * copyrights = "Copyright © 2025 \nDr. Sébastien Le Roux";
 
   // gtk_about_dialog_set_url_hook (about_dialog_handle_url, NULL, NULL);
   // gtk_about_dialog_set_email_hook (about_dialog_handle_url, NULL, NULL);
