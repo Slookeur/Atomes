@@ -16,27 +16,27 @@ If not, see <https://www.gnu.org/licenses/> */
 ATOMES_ICON ICON "../misc/win/atomes.ico"
 
 VS_VERSION_INFO VERSIONINFO
-FILEVERSION    1,1,16
-PRODUCTVERSION 1,1,16
+FILEVERSION    1,1,17
+PRODUCTVERSION 1,1,17
 FILEOS         VOS_NT
 FILETYPE       VFT_APP
 BEGIN
 	BLOCK "StringFileInfo"
 	BEGIN
 		BLOCK "040904b0"
-	BEGIN
-		VALUE "Comments", "atomes_startup_testing"
-		VALUE "CompanyName", "CNRS - IPCMS - DMO"
-		VALUE "FileDescription", "atomes_startup_testing 1.1.16"
-		VALUE "FileVersion", "1.1.16"
-		VALUE "LegalCopyright", "\251 2024 S\351bastien Le Roux"
-		VALUE "OriginalFileName", "atomes_startup_testing.exe"
-		VALUE "ProductName", "atomes_startup_testing 1.1.16"
-		VALUE "ProductVersion", "1.1.16"
-	END
+		BEGIN
+			VALUE "Comments", "atomes_startup_testing"
+			VALUE "CompanyName", "CNRS - IPCMS - DMO"
+			VALUE "FileDescription", "atomes_startup_testing 1.1.17"
+			VALUE "FileVersion", "1.1.17"
+			VALUE "LegalCopyright", "\251 2024 S\351bastien Le Roux"
+			VALUE "OriginalFileName", "atomes_startup_testing.exe"
+			VALUE "ProductName", "atomes_startup_testing 1.1.17"
+			VALUE "ProductVersion", "1.1.17"
+		END
 	END
 	BLOCK "VarFileInfo"
 	BEGIN
 		VALUE "Translation", 0x0409, 1200
-		END
+	END
 END
